@@ -844,7 +844,7 @@ export class StoryScene extends Phaser.Scene {
   private showLine(e: Extract<StoryEvent, { type: 'line' }>): void {
     this.currentLine = e;
     this.voiceBtn?.setVisible(this.stage?.hasVoice(e.lineId) ?? false);
-    void this.stage?.voice(e.lineId);
+    this.stage?.stopVoice();
     const narr = e.speaker === 'narration';
     const pause = this.cutscene ? cutscenePauseSeconds(this.prevSpeaker, e.speaker, this.data0.presentation?.speaker_pause_seconds ?? 1) : 0;
     this.prevSpeaker = e.speaker;
@@ -892,6 +892,7 @@ export class StoryScene extends Phaser.Scene {
 
   private startTyping(e: Extract<StoryEvent, { type: 'line' }>, narr: boolean, speakerEmotion = 'composed'): void {
     if (this.finished) return;
+    if (!this.skip) void this.stage?.voice(e.lineId);
     this.namePlate.setVisible(!narr);
     if (!narr) {
       const a = this.actors.get(e.speaker);
@@ -925,9 +926,13 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private finishTyping(): void {
+    const wasPausing = this.pausing;
     this.pausing = false;
     this.typing?.remove();
     this.typing = null;
+    if (wasPausing && !this.skip && this.currentLine) {
+      void this.stage?.voice(this.currentLine.lineId);
+    }
     this.bodyText.setText(this.fullText);
     this.lineDone = true;
     this.caret.setVisible(true);
@@ -941,11 +946,12 @@ export class StoryScene extends Phaser.Scene {
 
   private autoHoldMs(): number {
     const line = this.currentLine;
-    if (!this.cutscene) return (line?.holdSeconds ?? 2.4) * 1000 + this.fullText.length * 22;
+    const voiceHoldMs = line ? (this.stage?.voiceDuration(line.lineId) ?? 0) * 1000 + 350 : 0;
+    if (!this.cutscene) return Math.max(voiceHoldMs, (line?.holdSeconds ?? 2.4) * 1000 + this.fullText.length * 22);
     const last = line !== null && line.lineId === this.lastLineId;
-    return (
-      cutsceneHoldSeconds({ chars: this.fullText.length, ...(line?.holdSeconds !== undefined ? { holdSeconds: line.holdSeconds } : {}), last, ...(this.data0.closing_hold_seconds !== undefined ? { closingHoldSeconds: this.data0.closing_hold_seconds } : {}) }) * 1000
-    );
+    const textHoldMs =
+      cutsceneHoldSeconds({ chars: this.fullText.length, ...(line?.holdSeconds !== undefined ? { holdSeconds: line.holdSeconds } : {}), last, ...(this.data0.closing_hold_seconds !== undefined ? { closingHoldSeconds: this.data0.closing_hold_seconds } : {}) }) * 1000;
+    return Math.max(voiceHoldMs, textHoldMs);
   }
 
   private advance(): void {

@@ -1,0 +1,3497 @@
+{
+  "schema_version": 2,
+  "title": "Unaware of My Demise — Complete Vertical Slice Directed Japanese Voice Script (116 Lines)",
+  "cast_locked": {
+    "narrator": "Algieba (ja-JP-Chirp3-HD-Algieba)",
+    "fadyme": "Sulafat (ja-JP-Chirp3-HD-Sulafat)",
+    "mahmut": "Iapetus (ja-JP-Chirp3-HD-Iapetus)"
+  },
+  "total_lines": 116,
+  "counts_by_speaker": {
+    "narrator": 33,
+    "fadyme": 40,
+    "mahmut": 43
+  },
+  "lines": [
+    {
+      "order_index": 1,
+      "line_id": "entry_past_001",
+      "scene_id": "prologue_hours",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "chronicle_nostalgia",
+      "when_cue": "00:00–00:12 | Çan kulesi görseli (`prologue_village_hours`) belirdikten 320ms sonra, solo piyano ve çan tınısı üzerine.",
+      "subtext_tr": "Savaş öncesi Veyrhold'un huzurlu günlerini özlemle ama ağırbaşlı bir vakur tonla anlatır; '測っていた' sonrasında çan sesi yankılanırken hafifçe duraksar.",
+      "en": "Before the roads filled with ash, Veyrhold measured its days in bells. A sound from the tower meant another hour had passed.",
+      "ja": "道という道が灰に埋もれる前、ヴェアホルドの人々は鐘の音で日々を測っていた。塔から響くひと打ちは、またひとつの刻が過ぎたことを告げていた。",
+      "reading_kana": "ミチトイウミチガハイニウモレルマエ、ヴェアホルドノヒトビトハカネノオトデヒビヲハカッテイタ。トウカラヒビクヒトウチハ、マタヒトツノトキガスギタコトヲツゲテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deep, nostalgic, measured chronicle narrator; warm yet wistful tone, pausing gently between sentences as if listening to a distant bell."
+      },
+      "tts_text_gemini38": "<breath> 道という道が灰に埋もれる前、<short pause> ヴェアホルドの人々は鐘の音で日々を測っていた。<long pause> 塔から響くひと打ちは、<short pause> またひとつの刻が過ぎたことを告げていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">道という道が灰に埋もれる前、<break time=\"320ms\"/>ヴェアホルドの人々は鐘の音で日々を測っていた。<break time=\"680ms\"/>塔から響くひと打ちは、<break time=\"280ms\"/>またひとつの刻が過ぎたことを告げていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 9.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_001.ogg"
+    },
+    {
+      "order_index": 2,
+      "line_id": "entry_past_002",
+      "scene_id": "prologue_names",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "intimate_dignity",
+      "when_cue": "00:12–00:26 | Yol kenarı kayıt defteri (`prologue_village_names`) sahnesine geçişte, tüy kalem defterden kalkarken.",
+      "subtext_tr": "İnsanların unutulmamak için bıraktığı küçük izleri derin bir saygı ve mahremiyetle anlatır; '名声のためではない' cümlesini yumuşak ama net vurgular.",
+      "en": "People carved their names on doors and trees, and wrote them in roadside registers. Not for fame. So someone would remember that they had been here.",
+      "ja": "人々は扉や樹々に自らの名を刻み、道端の台帳にその名を書き残した。名声のためではない。確かにここに生きていたと、誰かが覚えていてくれるように。",
+      "reading_kana": "ヒトビトハトビラヤキギニミズカラノナヲキザミ、ミチバタノダイチョウニソノナヲカキノコシタ。メイセイノタメデハナイ。タシカニココニイキテイタト、ダレカガオボエテイテクレルヨウニ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Intimate, hushed dignity; gentle emphasis on 'not for fame', softening into tender reverence on the final clause."
+      },
+      "tts_text_gemini38": "人々は扉や樹々に自らの名を刻み、<short pause> 道端の台帳にその名を書き残した。<long pause> 名声のためではない。<short pause> 確かにここに生きていたと、<short pause> 誰かが覚えていてくれるように。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">人々は扉や樹々に自らの名を刻み、<break time=\"300ms\"/>道端の台帳にその名を書き残した。<break time=\"620ms\"/></prosody><prosody rate=\"88%\" pitch=\"-1.2st\">名声のためではない。<break time=\"480ms\"/>確かにここに生きていたと、<break time=\"260ms\"/>誰かが覚えていてくれるように。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 10.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_002.ogg"
+    },
+    {
+      "order_index": 3,
+      "line_id": "entry_past_003",
+      "scene_id": "prologue_ordinary_days",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "warm_to_foreboding",
+      "when_cue": "00:26–00:38 | Kasaba sokağında ekmek paylaşan insanlar (`prologue_village_ordinary_days`) görselinde.",
+      "subtext_tr": "İlk cümlede sıradan günlerin sıcaklığını hissettirir; 'それを失い始める日が来るまでは' kısmında ise sesi koyulaşır ve yaklaşan yıkımın gölgesini taşır.",
+      "en": "There were markets, journeys, and doors that opened to strangers. Small things, easily forgotten. Until the day people began to lose them.",
+      "ja": "市が立ち、旅人が行き交い、見知らぬ者にも扉は開かれていた。すぐに忘れ去られるような、ささやかな日常。……それを失い始める日が来るまでは。",
+      "reading_kana": "イチガタチ、タビビトガイキカイ、ミシラヌモノニモトビラハヒラカレテイタ。スグニワスレサラレルヨウナ、ササヤカナニチジョウ。ソレヲウシナイハジメルヒガクルマデハ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm and reflective at first, then slowing down and darkening with quiet foreboding on the final clause."
+      },
+      "tts_text_gemini38": "市が立ち、旅人が行き交い、<short pause> 見知らぬ者にも扉は開かれていた。<short pause> すぐに忘れ去られるような、ささやかな日常。<long pause> <exhales> それを失い始める日が来るまでは。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.5st\">市が立ち、旅人が行き交い、<break time=\"260ms\"/>見知らぬ者にも扉は開かれていた。<break time=\"450ms\"/>すぐに忘れ去られるような、ささやかな日常。</prosody><break time=\"750ms\"/><prosody rate=\"85%\" pitch=\"-1.8st\">それを失い始める日が来るまでは。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 9.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_003.ogg"
+    },
+    {
+      "order_index": 4,
+      "line_id": "entry_past_004",
+      "scene_id": "prologue_throne_wars",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "grave_chronicle",
+      "when_cue": "00:38–00:50 | Terk edilmiş tarlalar ve göç eden aileler (`prologue_crownfall_throne_wars`) sahnesinde, yaylılar gerilirken.",
+      "subtext_tr": "Taht Savaşları'nın ağırlığını kısa, keskin ve ciddi cümlelerle aktarır; panik yapmadan, tarihin kaçınılmaz akışı gibi tok bir sesle konuşur.",
+      "en": "The great houses fought over a throne. Fields emptied. Families took to the roads, carrying what they could. The war drew closer to the capital.",
+      "ja": "諸侯はひとつの玉座を巡って争った。畑からは人が消え、家族は持てるものだけを抱えて街道へと出た。戦火は、やがて王都へと迫っていった。",
+      "reading_kana": "ショコウハヒトツノギョクザヲメグッテアラソッタ。ハタケカラハヒトガキエ、カゾクハモテルモノダケヲカカエテカイドウヘトデタ。センカハ、ヤガテオウトヘトセマッテイッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Low, grave, steady chronicle pace; crisp pauses between short sentences, conveying the gathering weight of war."
+      },
+      "tts_text_gemini38": "諸侯はひとつの玉座を巡って争った。<short pause> 畑からは人が消え、<short pause> 家族は持てるものだけを抱えて街道へと出た。<long pause> 戦火は、<short pause> やがて王都へと迫っていった。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.4st\">諸侯はひとつの玉座を巡って争った。<break time=\"420ms\"/>畑からは人が消え、<break time=\"280ms\"/>家族は持てるものだけを抱えて街道へと出た。<break time=\"580ms\"/>戦火は、<break time=\"260ms\"/>やがて王都へと迫っていった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.4,
+        "duration_seconds": 9.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_004.ogg"
+    },
+    {
+      "order_index": 5,
+      "line_id": "entry_past_005",
+      "scene_id": "prologue_crownfall",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "solemn_tragedy",
+      "when_cue": "00:50–01:06 | Yıkık başkent kapısı ve dumanlar (`prologue_crownfall_crownfall`) sahnesinde, ağır cenaze çanı vuruşunun hemen ardından.",
+      "subtext_tr": "Prologue'un en ağır kırılma noktası (Crownfall). Melodram yapmadan, bastırılmış derin bir keder ve tarihi ağırlıkla konuşur.",
+      "en": "Then came Crownfall. The capital fell. The king died. By dawn, survivors were leaving behind streets they had once known by heart.",
+      "ja": "そして、『王冠落ち』の日が訪れた。王都は陥ち、王は斃れた。夜が明ける頃、生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
+      "reading_kana": "ソシテ、オウカンオチノヒガオトズレタ。オウトハオチ、オウハタオレタ。ヨルガアケルコロ、イキノコッタモノタチハ、カツテシリツクシテイタハズノガイロヲアトニシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Solemn, heavy bass resonance after a funeral bell; short, devastating clauses delivered with restrained grief and zero melodrama."
+      },
+      "tts_text_gemini38": "<breath> そして、<short pause> 『王冠落ち』の日が訪れた。<long pause> 王都は陥ち、<short pause> 王は斃れた。<long pause> 夜が明ける頃、<short pause> 生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
+      "ssml_chirp3": "<speak><prosody rate=\"86%\" pitch=\"-2.0st\">そして、<break time=\"340ms\"/>『王冠落ち』の日が訪れた。<break time=\"680ms\"/>王都は陥ち、<break time=\"380ms\"/>王は斃れた。<break time=\"720ms\"/>夜が明ける頃、<break time=\"300ms\"/>生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.86,
+        "pitch_semitones": -2.0,
+        "duration_seconds": 11.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_005.ogg"
+    },
+    {
+      "order_index": 6,
+      "line_id": "entry_past_006",
+      "scene_id": "prologue_roads",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "hushed_sorrow",
+      "when_cue": "01:06–01:22 | Sisli yolda sırtlarında battaniyelerle yürüyen sağ kalanlar (`prologue_crownfall_roads`) görselinde.",
+      "subtext_tr": "Kayıpların ardından kalan boşluğu fısıltıya yakın, duru bir hüzünle anlatır; '帰るべき家はもうなかった' cümlesi sessizliğe karışır.",
+      "en": "They carried blankets, tools, and the names of those who had not come with them. Beyond the walls, the roads were still there. Home was not.",
+      "ja": "彼らが背負ったのは、毛布と道具、そして共に来られなかった者たちの名だった。城壁の向こうに道はまだ続いていた。だが、帰るべき家はもうなかった。",
+      "reading_kana": "カレラガセオッタノハ、モウフトドウグ、ソシテトモニコラレナカッタモノタチノナダッタ。ジョウヘキノムコウニミチハマダツヅイテイタ。ダガ、カエルベキイエハモウナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, sparse sorrow; unhurried delivery that drops to a near-whisper on the final sentence 'Home was not'."
+      },
+      "tts_text_gemini38": "彼らが背負ったのは、<short pause> 毛布と道具、<short pause> そして共に来られなかった者たちの名だった。<long pause> 城壁の向こうに道はまだ続いていた。<long pause> <sigh> だが、<short pause> 帰るべき家はもうなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-1.5st\">彼らが背負ったのは、<break time=\"260ms\"/>毛布と道具、<break time=\"300ms\"/>そして共に来られなかった者たちの名だった。<break time=\"640ms\"/>城壁の向こうに道はまだ続いていた。<break time=\"680ms\"/></prosody><prosody rate=\"83%\" pitch=\"-2.2st\">だが、<break time=\"320ms\"/>帰るべき家はもうなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.87,
+        "pitch_semitones": -1.6,
+        "duration_seconds": 11.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_006.ogg"
+    },
+    {
+      "order_index": 7,
+      "line_id": "entry_past_007",
+      "scene_id": "prologue_search",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "resolute_warmth",
+      "when_cue": "01:22–01:36 | Kış hanında mum ışığında kayıt defterine bakan Mahmut (`prologue_village_search`) sahnesinde, yürüyen çello motifi başlarken.",
+      "subtext_tr": "Yıkımın içinden doğan sadakat ve arayış. Mahmut'un kışlar boyu süren sabırlı arayışını anlatırken sese dingin bir sıcaklık ve kararlılık gelir.",
+      "en": "Among the travelers was a knight who searched the village registers for one name. Village after village, winter after winter, he kept looking.",
+      "ja": "旅人たちのなかに、ただひとつの名を求めて村々の台帳を辿る騎士がいた。村から村へ、冬から冬へと、彼は探し続けた。",
+      "reading_kana": "タビビトタチノナカニ、タダヒトツノナヲモトメテムラムラノダイチョウヲタドルキシガイタ。ムラカラムラヘ、フユカラフユヘト、カレハサガシツヅケタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Steady, resolute baritone with quiet warmth entering the voice, matching the rhythm of a solitary knight walking through winter."
+      },
+      "tts_text_gemini38": "旅人たちのなかに、<short pause> ただひとつの名を求めて村々の台帳を辿る騎士がいた。<long pause> 村から村へ、<short pause> 冬から冬へと、<short pause> 彼は探し続けた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">旅人たちのなかに、<break time=\"300ms\"/>ただひとつの名を求めて村々の台帳を辿る騎士がいた。<break time=\"620ms\"/>村から村へ、<break time=\"320ms\"/>冬から冬へと、<break time=\"280ms\"/>彼は探し続けた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 9.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_007.ogg"
+    },
+    {
+      "order_index": 8,
+      "line_id": "entry_past_008",
+      "scene_id": "prologue_reunion",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "tender_relief",
+      "when_cue": "01:36–01:48 | Yamaç köyünde Fadyme ve Mahmut'un yeniden karşılaşması (`prologue_road_reunion`), gümüş çan ve piyano tınısı.",
+      "subtext_tr": "Uzun arayışın sonundaki sessiz kavuşma. Ses yumuşar, '彼は頷いた' kısmında derin bir huzur ve şefkat hissedilir.",
+      "en": "In a hill village, he found her. She asked him to stay. He did. The road ahead would no longer be hers alone.",
+      "ja": "ある丘の村で、彼はついに彼女を見つけた。傍にいてほしいと彼女は願い、彼は頷いた。その先の道は、もはや彼女ひとりのものではなくなった。",
+      "reading_kana": "アルオカノムラデ、カレハツイニカノジョヲミツケタ。ソバニイテホシイトカノジョハネガイ、カレハウナズイタ。ソノサキノミチハ、モハヤカノジョヒトリノモノデハナクナッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Gentle relief and understated tenderness; soft, warm pacing as the two companions reunite."
+      },
+      "tts_text_gemini38": "<breath> ある丘の村で、<short pause> 彼はついに彼女を見つけた。<long pause> 傍にいてほしいと彼女は願い、<short pause> 彼は頷いた。<long pause> その先の道は、<short pause> もはや彼女ひとりのものではなくなった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.6st\">ある丘の村で、<break time=\"280ms\"/>彼はついに彼女を見つけた。<break time=\"580ms\"/>傍にいてほしいと彼女は願い、<break time=\"360ms\"/>彼は頷いた。<break time=\"620ms\"/>その先の道は、<break time=\"280ms\"/>もはや彼女ひとりのものではなくなった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 9.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_008.ogg"
+    },
+    {
+      "order_index": 9,
+      "line_id": "entry_past_009",
+      "scene_id": "prologue_beginning",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "poised_threshold",
+      "when_cue": "01:48–02:00 | Fadyme ve Mahmut'un Fısıldayan Kül Ormanı'na birlikte yürüyüşü (`prologue_road_beginning`), müzik son akora doğru çözülürken.",
+      "subtext_tr": "Prologue'u oyunun ilk sahnesine bağlayan eşik. İkisinin birbirine henüz söylemediği sırları ima ederken gizemli, ağırbaşlı ve davetkâr bir kapanış yapar.",
+      "en": "Now Fadyme and Mahmut walk together. The bells still ring. Neither has told the other everything. This is where their story begins.",
+      "ja": "いま、ファディメとマフムトは共に歩いている。鐘はいまも鳴り響き、ふたりはまだ互いのすべてを語ってはいない。……ここから、ふたりの物語が始まる。",
+      "reading_kana": "イマ、ファディメトマフムトハトモニアルイテイル。カネハイマモナリヒビキ、フタリハマダタガイノスベテヲカタッテハイナイ。ココカラ、フタリノモノガタリガハジマル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Poised, lingering closing cadence; measured mystery on 'neither has told the other everything', then a resonant pause before the final line."
+      },
+      "tts_text_gemini38": "いま、<short pause> ファディメとマフムトは共に歩いている。<short pause> 鐘はいまも鳴り響き、<short pause> ふたりはまだ互いのすべてを語ってはいない。<long pause> <breath> ここから、<short pause> ふたりの物語が始まる。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">いま、<break time=\"240ms\"/>ファディメとマフムトは共に歩いている。<break time=\"480ms\"/>鐘はいまも鳴り響き、<break time=\"300ms\"/>ふたりはまだ互いのすべてを語ってはいない。<break time=\"820ms\"/></prosody><prosody rate=\"86%\" pitch=\"-1.2st\">ここから、<break time=\"320ms\"/>ふたりの物語が始まる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 10.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_009.ogg"
+    },
+    {
+      "order_index": 10,
+      "line_id": "tutorial_t1_before_001",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "watchful_atmosphere",
+      "when_cue": "Sahne T-1 Açılışı | Fısıldayan Kül Ormanı (`forest_whispering_ash`) ekrana gelir; Mahmut solda, Fadyme sağda.",
+      "subtext_tr": "Akşamüstü ağaçların arasındaki son ışığı ve ikilinin birbirine uyum sağlamaya başlayan ayak seslerini dingin bir kronik tonuyla anlatır.",
+      "en": "The last light lay between the trees. Their footsteps had almost found the same rhythm.",
+      "ja": "最後の光が木々のあいだに落ちていた。ふたりの足音は、ほとんど同じ歩調を見出しつつあった。",
+      "reading_kana": "サイゴノヒカリガキギノアイダニオチテイタ。フタリノアシオトハ、ホトンドオナジホチョウヲミイダシツツアッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Calm, atmospheric chronicle narration; hushed dusk stillness as two companions find a shared walking rhythm."
+      },
+      "tts_text_gemini38": "最後の光が木々のあいだに落ちていた。<long pause> ふたりの足音は、<short pause> ほとんど同じ歩調を見出しつつあった。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">最後の光が木々のあいだに落ちていた。<break time=\"520ms\"/>ふたりの足音は、<break time=\"260ms\"/>ほとんど同じ歩調を見出しつつあった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_001.ogg"
+    },
+    {
+      "order_index": 11,
+      "line_id": "tutorial_t1_before_002",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut'un oyundaki ilk repliği | Yolu kontrol ederek Fadyme'yi uyarır (`watchful` portresi).",
+      "subtext_tr": "Pratik ve dikkatli bir şövalye; çamurun derinleştiğini söyleyerek Fadyme'yi taşların üzerinden yürümeye yönlendirir.",
+      "en": "Keep to the stones. The mud gets deeper ahead.",
+      "ja": "敷石の上を歩け。この先は泥が深くなる。",
+      "reading_kana": "シキイシノウエヲアルケ。コノサキハドロガフカクナル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Low, watchful baritone; grounded, practical guidance spoken quietly while scanning the road ahead."
+      },
+      "tts_text_gemini38": "敷石の上を歩け。<short pause> この先は泥が深くなる。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.9st\">敷石の上を歩け。<break time=\"340ms\"/>この先は泥が深くなる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 3.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_002.ogg"
+    },
+    {
+      "order_index": 12,
+      "line_id": "tutorial_t1_before_003",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme'nin oyundaki ilk repliği | Taşların da pek güvenli olmadığını ince bir espriyle söyler (`dry_amusement`).",
+      "subtext_tr": "Yorgunluğunu belli etmeden, taşların zaten çizmesinin tekini çamura batırdığını zarif bir alayla dile getirir.",
+      "en": "The stones have already claimed one boot.",
+      "ja": "その石にも、もう靴を片方取られたわ。",
+      "reading_kana": "ソノイシニモ、モウクツヲカタホウトラレタワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, poised alto with dry, aristocratic amusement; gently teasing her companion without complaining."
+      },
+      "tts_text_gemini38": "<chuckle> その石にも、<short pause> もう靴を片方取られたわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">その石にも、<break time=\"240ms\"/>もう靴を片方取られたわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_003.ogg"
+    },
+    {
+      "order_index": 13,
+      "line_id": "tutorial_t1_before_004",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut Fadyme'nin çizmelerine kısa bir bakış atıp yarım ağız gülümser (`dry_humor`).",
+      "subtext_tr": "Fadyme'nin abartılı esprisine tam bir asker gerçekçiliğiyle karşılık verir: 'İki çizmen de hâlâ ayağında.'",
+      "en": "Both boots are still with us.",
+      "ja": "まだ両方とも、ちゃんと履いているだろう。",
+      "reading_kana": "マダリョウホウトモ、チャントハイテイルダロウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Deadpan, fond dry humor in a low baritone; a faint wry smile in the voice."
+      },
+      "tts_text_gemini38": "<exhales> まだ両方とも、<short pause> ちゃんと履いているだろう。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"-0.6st\">まだ両方とも、<break time=\"240ms\"/>ちゃんと履いているだろう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.95,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_004.ogg"
+    },
+    {
+      "order_index": 14,
+      "line_id": "tutorial_t1_before_005",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme yumuşak bir tebessümle karşılık verir (`soft_smile`).",
+      "subtext_tr": "Mahmut'un felaketleri sayarkenki sakin ve güven veren tavrını takdir eder.",
+      "en": "You have a comforting way of counting disasters.",
+      "ja": "災難を数えるのが、お上手ね。安心できる数え方だわ。",
+      "reading_kana": "サイナンヲカゾエルノガ、オジョウズネ。アンシンデキルカゾエカタダワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, wryly affectionate alto; unhurried pause between sentences with a soft smile."
+      },
+      "tts_text_gemini38": "災難を数えるのが、お上手ね。<short pause> 安心できる数え方だわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">災難を数えるのが、お上手ね。<break time=\"360ms\"/>安心できる数え方だわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_005.ogg"
+    },
+    {
+      "order_index": 15,
+      "line_id": "tutorial_t1_before_006",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Sahne Aksiyonu | Mahmut gevşek bir taşı fark edip elini Fadyme'ye uzatır (`MAHMUT EXTENDS HIS HAND ACROSS THE WET STONES`).",
+      "subtext_tr": "Gösterişsiz bir koruyuculukla gevşek taşı işaret eder ve elini uzatır.",
+      "en": "That one is loose. Give me your hand.",
+      "ja": "その石は緩んでいる。手を貸せ。",
+      "reading_kana": "ソノイシハユルンデイル。テヲカセ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Quiet, steady, protective baritone; simple and direct as he reaches out his hand."
+      },
+      "tts_text_gemini38": "その石は緩んでいる。<short pause> 手を貸せ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.8st\">その石は緩んでいる。<break time=\"300ms\"/>手を貸せ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 2.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_006.ogg"
+    },
+    {
+      "order_index": 16,
+      "line_id": "tutorial_t1_before_007",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme elini uzatmadan önce başını hafifçe yana eğer (`dry_amusement`).",
+      "subtext_tr": "Sadece bu taşı geçmek için mi yoksa bütün yolculuk boyunca mı elini tutmak istediğini sorarak tatlı bir imada bulunur.",
+      "en": "For the stone, or for the whole road?",
+      "ja": "その石を渡る間だけ？　それとも、この道の終わりまで？",
+      "reading_kana": "ソノイシヲワタルアイダダケ？　ソレトモ、コノミチノオワリマデ？",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, teasing alto with quiet intimacy; pausing between the two questions."
+      },
+      "tts_text_gemini38": "その石を渡る間だけ？ <short pause> それとも、<short pause> この道の終わりまで？",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.4st\">その石を渡る間だけ？<break time=\"380ms\"/>それとも、<break time=\"220ms\"/>この道の終わりまで？</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.4,
+        "duration_seconds": 4.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_007.ogg"
+    },
+    {
+      "order_index": 17,
+      "line_id": "tutorial_t1_before_008",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut elini indirmeden sakin ama anlamlı bir cevap verir (`dry_humor`).",
+      "subtext_tr": "'Önce bir taşı geçelim de' derken aslında yolun sonuna kadar yanında olacağını ima eder.",
+      "en": "The stone first.",
+      "ja": "まずは、その石からだ。",
+      "reading_kana": "マズハ、ソノイシカラダ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Low, warm baritone with understated dry humor; unhurried and quietly fond."
+      },
+      "tts_text_gemini38": "まずは、<short pause> その石からだ。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.7st\">まずは、<break time=\"240ms\"/>その石からだ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 2.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_008.ogg"
+    },
+    {
+      "order_index": 18,
+      "line_id": "tutorial_t1_before_009",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "intimate_lingering",
+      "when_cue": "Sahne Aksiyonu | Fadyme onun elini tutar (`HAND IN HAND ACROSS THE SLIPPERY CROSSING`).",
+      "subtext_tr": "Karşıya geçtiklerinde ikisinin de ellerini hemen bırakmadığını zarif ve sıcak bir gözlemle anlatır.",
+      "en": "She took his hand. On the other side, neither let go quite as promptly as the crossing required.",
+      "ja": "彼女は彼の手を取った。渡り終えた向こう側でも、ふたりとも、その場に必要なほどすぐには手を離さなかった。",
+      "reading_kana": "カノジョハカレノテヲトッタ。ワタリオエタムコウガワデモ、フタリトモ、ソノバニヒツヨウナホドスグニハテヲハナサナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Gentle, observant chronicle narration; warm and unhurried, letting the quiet closeness linger."
+      },
+      "tts_text_gemini38": "彼女は彼の手を取った。<long pause> 渡り終えた向こう側でも、<short pause> ふたりとも、その場に必要なほどすぐには手を離さなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女は彼の手を取った。<break time=\"520ms\"/>渡り終えた向こう側でも、<break time=\"260ms\"/>ふたりとも、その場に必要なほどすぐには手を離さなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_009.ogg"
+    },
+    {
+      "order_index": 19,
+      "line_id": "tutorial_t1_before_010",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme elini yavaşça çekerken gülümser (`dry_amusement`).",
+      "subtext_tr": "Aradaki duygusal yakınlığı zarif bir şakayla örter.",
+      "en": "There. An excellent rescue. Very little applause, unfortunately.",
+      "ja": "ほら、見事な救出だったわ。残念ながら、拍手はほとんどないけれど。",
+      "reading_kana": "ホラ、ミゴトナキュウシュツダッタワ。ザンネンナガラ、ハクシュハホトンドナイケレド。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, witty alto; covering a tender moment with charming dry humor."
+      },
+      "tts_text_gemini38": "ほら、見事な救出だったわ。<short pause> 残念ながら、<short pause> 拍手はほとんどないけれど。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">ほら、見事な救出だったわ。<break time=\"360ms\"/>残念ながら、<break time=\"220ms\"/>拍手はほとんどないけれど。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_010.ogg"
+    },
+    {
+      "order_index": 20,
+      "line_id": "tutorial_t1_before_011",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut hafifçe gülümser (`dry_humor`).",
+      "subtext_tr": "Alkışa ihtiyacı olmadığını sakin ve tok bir sesle söyler.",
+      "en": "We can live with that.",
+      "ja": "それくらいは、我慢できるさ。",
+      "reading_kana": "ソレクライハ、ガマンデキルサ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Relaxed, warm low baritone; dryly content."
+      },
+      "tts_text_gemini38": "それくらいは、<short pause> 我慢できるさ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.6st\">それくらいは、<break time=\"240ms\"/>我慢できるさ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 2.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_011.ogg"
+    },
+    {
+      "order_index": 21,
+      "line_id": "tutorial_t1_before_012",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "sudden_tension",
+      "when_cue": "Sahne Aksiyonu | İlerideki taşlardan sürtünme sesi gelir (`BELLBOUND DEAD APPROACH IN THE MIST`).",
+      "subtext_tr": "Sıcak sohbeti aniden kesen tehlike; Mahmut'un Fadyme daha cümlesini bitirmeden tehdide doğru dönüşünü anlatır.",
+      "en": "Something scraped across the stones ahead. Mahmut turned before she could make another remark.",
+      "ja": "前方の敷石の上で、何かが擦れる音がした。彼女が次の軽口を叩くより早く、マフムトは身を翻した。",
+      "reading_kana": "ゼンポウノシキイシノウエデ、ナニカガコスレルオトガシタ。カノジョガツギノカルグチヲタタクヨリハヤク、マフムトハミヲヒルガエシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Sudden shift to taut, alert chronicle narration; slightly faster pace on the second sentence as Mahmut turns."
+      },
+      "tts_text_gemini38": "前方の敷石の上で、<short pause> 何かが擦れる音がした。<long pause> 彼女が次の軽口を叩くより早く、<short pause> マフムトは身を翻した。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-1.3st\">前方の敷石の上で、<break time=\"260ms\"/>何かが擦れる音がした。<break time=\"480ms\"/>彼女が次の軽口を叩くより早く、<break time=\"240ms\"/>マフムトは身を翻した。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -1.3,
+        "duration_seconds": 6.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_012.ogg"
+    },
+    {
+      "order_index": 22,
+      "line_id": "tutorial_t1_before_013",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "protective",
+      "when_cue": "Mahmut kalkanını kaldırıp öne çıkar (`protective`).",
+      "subtext_tr": "Sesi anında savaş ciddiyetine bürünür; iki düşmanı saptar ve Fadyme'yi duvar kenarına yönlendirir.",
+      "en": "Two of them. Stay beside the wall.",
+      "ja": "二体いる。壁のそばを離れるな。",
+      "reading_kana": "ニタイイル。カベノソバヲハナレルナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Firm, protective combat baritone; low, urgent, and commanding without shouting."
+      },
+      "tts_text_gemini38": "二体いる。<short pause> 壁のそばを離れるな。",
+      "ssml_chirp3": "<speak><prosody rate=\"96%\" pitch=\"-1.1st\">二体いる。<break time=\"300ms\"/>壁のそばを離れるな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.96,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 3.1,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_013.ogg"
+    },
+    {
+      "order_index": 23,
+      "line_id": "tutorial_t1_before_014",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "determined",
+      "when_cue": "T-1 Savaşı Öncesi Son Replik | Fadyme Mahmut'un yanına yerleşir (`determined`, `STANDING SIDE BY SIDE`).",
+      "subtext_tr": "Mahmut'un 'arkamda saklan' demeyip 'duvarın yanında dur' demesini takdir eder; sırtının arkasında değil, omuz omuza savaşacağını vurgular.",
+      "en": "Beside it. Not behind you. I know the difference.",
+      "ja": "壁の横ね。あなたの後ろじゃなくて。その違いは分かっているわ。",
+      "reading_kana": "カベノヨコネ。アナタノウシロジャナクテ。ソノチガイハワカッテイルワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Clear, resolute alto with poised pride; crisp pauses between short sentences as she steps into battle beside him."
+      },
+      "tts_text_gemini38": "壁の横ね。<short pause> あなたの後ろじゃなくて。<short pause> その違いは分かっているわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"-0.2st\">壁の横ね。<break time=\"280ms\"/>あなたの後ろじゃなくて。<break time=\"320ms\"/>その違いは分かっているわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.95,
+        "pitch_semitones": -0.2,
+        "duration_seconds": 4.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_014.ogg"
+    },
+    {
+      "order_index": 24,
+      "line_id": "tutorial_t1_after_001",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "calm_aftermath",
+      "when_cue": "T-1 Savaşı Sonrası Açılış | Yol tekrar sessizleşir.",
+      "subtext_tr": "İlk çarpışmanın ardından çöken sessizliği ve ikilinin hareket etmeden önce etrafı dinleyişini anlatır.",
+      "en": "The road grew quiet again. This time they listened to the silence before moving.",
+      "ja": "街道に再び静けさが戻った。今度はふたりとも、動き出す前にその沈黙に耳を澄ませた。",
+      "reading_kana": "カイドウニフタタビシズケサガモドッタ。コンドハフタリトモ、ウゴキダスマエニソノチンモクニミミヲスマセタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, unhurried post-battle narration; letting the silence settle."
+      },
+      "tts_text_gemini38": "<breath> 街道に再び静けさが戻った。<long pause> 今度はふたりとも、<short pause> 動き出す前にその沈黙に耳を澄ませた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.0st\">街道に再び静けさが戻った。<break time=\"520ms\"/>今度はふたりとも、<break time=\"260ms\"/>動き出す前にその沈黙に耳を澄ませた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_001.ogg"
+    },
+    {
+      "order_index": 25,
+      "line_id": "tutorial_t1_after_002",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut hemen Fadyme'ye döner (`watchful`).",
+      "subtext_tr": "Savaş biter bitmez ilk düşüncesi Fadyme'nin yaralanıp yaralanmadığıdır.",
+      "en": "Are you hurt?",
+      "ja": "怪我はないか？",
+      "reading_kana": "ケガハナイカ？",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Immediate, quiet concern; low baritone asking simply and directly."
+      },
+      "tts_text_gemini38": "<breath> 怪我はないか？",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.7st\">怪我はないか？</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 1.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_002.ogg"
+    },
+    {
+      "order_index": 26,
+      "line_id": "tutorial_t1_after_003",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme sakin bir tebessümle karşılık verir (`dry_amusement`).",
+      "subtext_tr": "Yaralanmadığını, sadece bu berbat yola dair fikrinin yara aldığını söyleyerek Mahmut'u rahatlatır.",
+      "en": "Only my opinion of this road.",
+      "ja": "この道への評価だけ、傷ついたわ。",
+      "reading_kana": "コノミチヘノヒョウカダケ、キズツイタワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, dryly amused alto; reassuring him with effortless wit."
+      },
+      "tts_text_gemini38": "この道への評価だけ、<short pause> 傷ついたわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">この道への評価だけ、<break time=\"260ms\"/>傷ついたわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_003.ogg"
+    },
+    {
+      "order_index": 27,
+      "line_id": "tutorial_t1_after_004",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut dikkatle Fadyme'nin koluna bakar (`watchful`).",
+      "subtext_tr": "Fadyme'nin elbisesinin kolundaki izi fark eder; gözünden hiçbir şey kaçmaz.",
+      "en": "Your sleeve.",
+      "ja": "……袖が。",
+      "reading_kana": "ソデガ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Observant, low baritone; brief and attentive as he notices a tear or leaf on her sleeve."
+      },
+      "tts_text_gemini38": "<short pause> 袖が。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.9st\"><break time=\"200ms\"/>袖が。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 1.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_004.ogg"
+    },
+    {
+      "order_index": 28,
+      "line_id": "tutorial_t1_after_005",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme koluna bakıp zarifçe geçiştirir (`dry_amusement`).",
+      "subtext_tr": "Sadece bir dalın takıldığını, ağacın çok 'kaba' olduğunu söyleyerek konuyu hafifletir.",
+      "en": "A branch. It has dreadful manners.",
+      "ja": "枝よ。ひどく行儀の悪い枝だったわ。",
+      "reading_kana": "エダヨ。ヒドクギョウギノワルイエダダッタワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Poised, dryly humorous alto; speaking of a forest branch as if it were an impolite guest."
+      },
+      "tts_text_gemini38": "枝よ。<short pause> ひどく行儀の悪い枝だったわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">枝よ。<break time=\"300ms\"/>ひどく行儀の悪い枝だったわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_005.ogg"
+    },
+    {
+      "order_index": 29,
+      "line_id": "tutorial_t1_after_006",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "tender_gesture",
+      "when_cue": "Sahne Aksiyonu | Mahmut uzanıp onun omzundaki yırtık yaprağı alır (`HE BRUSHES A TORN ASH LEAF FROM HER SHOULDER`).",
+      "subtext_tr": "Mahmut'un şefkatli hareketini ve hemen ardından utangaçlığını gizlemek için kalkanını kontrol edişini anlatır.",
+      "en": "He brushed a torn leaf from her shoulder, then found a reason to check his shield.",
+      "ja": "彼は彼女の肩からちぎれた葉を払い、それから盾を確かめる口実を見つけた。",
+      "reading_kana": "カレハカノジョノカタカラチギレタハヲハライ、ソレカラタテヲタシカメルコウジツヲミツケタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, subtly perceptive chronicle narration; gentle and unhurried."
+      },
+      "tts_text_gemini38": "彼は彼女の肩からちぎれた葉を払い、<short pause> それから盾を確かめる口実を見つけた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.8st\">彼は彼女の肩からちぎれた葉を払い、<break time=\"340ms\"/>それから盾を確かめる口実を見つけた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 5.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_006.ogg"
+    },
+    {
+      "order_index": 30,
+      "line_id": "tutorial_t1_after_007",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut kalkanına bakarken sakin bir sesle teklif eder (`composed`).",
+      "subtext_tr": "Fadyme'nin yorulmuş olabileceğini düşünerek hemen orada mola vermeyi önerir.",
+      "en": "We can rest here.",
+      "ja": "ここで休んでいってもいい。",
+      "reading_kana": "ココデヤスンデイッテモイイ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Quiet, considerate low baritone; offering rest without pressing."
+      },
+      "tts_text_gemini38": "ここで休んでいってもいい。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.8st\">ここで休んでいってもいい。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 2.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_007.ogg"
+    },
+    {
+      "order_index": 31,
+      "line_id": "tutorial_t1_after_008",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme çamurlu yola bakıp gülümser (`dry_amusement`).",
+      "subtext_tr": "Çamurun ortasında dinlenme teklifini tatlı bir alayla geri çevirir.",
+      "en": "In the mud? I was hoping your invitation would improve.",
+      "ja": "泥の中で？　もう少し素敵なお誘いを期待していたのに。",
+      "reading_kana": "ドロノナカデ？　モウスコシステキナオサソイヲキタイシテイタノニ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, teasing alto; gentle lift on 'In the mud?', followed by warm dry wit."
+      },
+      "tts_text_gemini38": "泥の中で？ <short pause> <chuckle> もう少し素敵なお誘いを期待していたのに。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.4st\">泥の中で？<break time=\"340ms\"/>もう少し素敵なお誘いを期待していたのに。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.4,
+        "duration_seconds": 4.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_008.ogg"
+    },
+    {
+      "order_index": 32,
+      "line_id": "tutorial_t1_after_009",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut hafifçe gülümseyerek teklifini günceller (`dry_humor`).",
+      "subtext_tr": "Fadyme'nin şakasına ayak uydurur: 'Öyleyse kuru bir taş buluruz.'",
+      "en": "A dry stone, then.",
+      "ja": "なら、乾いた石の上だ。",
+      "reading_kana": "ナラ、カワイタイシノウエダ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Dry, warm baritone comeback; brief and fond."
+      },
+      "tts_text_gemini38": "なら、<short pause> 乾いた石の上だ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.6st\">なら、<break time=\"220ms\"/>乾いた石の上だ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 2.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_009.ogg"
+    },
+    {
+      "order_index": 33,
+      "line_id": "tutorial_t1_after_010",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme'nin gülümsemesi yumuşar (`soft_smile`).",
+      "subtext_tr": "Kuru bir taşın cazip olduğunu, üstüne bir de çatı olursa karşı konulmaz olacağını söyler.",
+      "en": "Tempting. A roof would make it irresistible.",
+      "ja": "魅力的ね。屋根まであれば、断れなくなりそう。",
+      "reading_kana": "ミリョクテキネ。ヤネマデアレバ、コトワレナクナリソウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, charming alto with a soft smile; light and unhurried."
+      },
+      "tts_text_gemini38": "魅力的ね。<short pause> 屋根まであれば、<short pause> 断れなくなりそう。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">魅力的ね。<break time=\"320ms\"/>屋根まであれば、<break time=\"220ms\"/>断れなくなりそう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_010.ogg"
+    },
+    {
+      "order_index": 34,
+      "line_id": "tutorial_t1_after_011",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut ilerideki yolu süzer (`watchful`).",
+      "subtext_tr": "İleride bir sığınak olacağını söyler ama Fadyme ihtiyaç duyarsa hemen duracaklarını vurgular.",
+      "en": "There should be shelter farther along. We stop if you need to.",
+      "ja": "もう少し進めば、雨風を凌げる場所があるはずだ。……だが、お前が休みたいならいつでも止まる。",
+      "reading_kana": "モウスコシススメバ、アマカゼヲシノゲルバショガアルハズダ。ダガ、オマエガヤスミタイナライツデモトマル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Steady, protective baritone; practical planning softened by attentive care for her stamina."
+      },
+      "tts_text_gemini38": "もう少し進めば、雨風を凌げる場所があるはずだ。<long pause> だが、<short pause> お前が休みたいならいつでも止まる。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.8st\">もう少し進めば、雨風を凌げる場所があるはずだ。<break time=\"480ms\"/>だが、<break time=\"240ms\"/>お前が休みたいならいつでも止まる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_011.ogg"
+    },
+    {
+      "order_index": 35,
+      "line_id": "tutorial_t1_after_012",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme sakin ama kararlı bir tonla düzeltir (`composed`).",
+      "subtext_tr": "Sadece kendisi için değil, ikisinden biri yorulursa duracaklarını hatırlatır; eşit yoldaşlık anlaşmaları budur.",
+      "en": "If either of us needs to. That is the arrangement.",
+      "ja": "どちらかが必要としたら、よ。そういう約束でしょう。",
+      "reading_kana": "ドチラカガヒツヨウトシタラ、ヨ。ソウイウヤクソクデショウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Poised, earnest alto; gentle firmness reminding him that they look after each other equally."
+      },
+      "tts_text_gemini38": "どちらかが必要としたら、よ。<short pause> そういう約束でしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"0.0st\">どちらかが必要としたら、よ。<break time=\"340ms\"/>そういう約束でしょう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.0,
+        "duration_seconds": 4.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_012.ogg"
+    },
+    {
+      "order_index": 36,
+      "line_id": "tutorial_t1_after_013",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut başıyla onaylar (`composed`).",
+      "subtext_tr": "Tek kelimelik, samimi ve ağırbaşlı bir kabul.",
+      "en": "Agreed.",
+      "ja": "……ああ、そうだな。",
+      "reading_kana": "アア、ソウダナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Soft, grounded baritone; quiet acceptance."
+      },
+      "tts_text_gemini38": "<short pause> ああ、そうだな。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.9st\"><break time=\"220ms\"/>ああ、そうだな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 2.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_013.ogg"
+    },
+    {
+      "order_index": 37,
+      "line_id": "tutorial_t1_after_014",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "warm_companionship",
+      "when_cue": "T-1 Sonu | Mahmut adımlarını kısaltır (`MATCHING STRIDES ALONG THE ASH ROAD`).",
+      "subtext_tr": "Mahmut'un Fadyme yorulmasın diye adımlarını kısalttığını ve Fadyme'nin bunu fark edip gururunu kırmamak için yüksek sesle teşekkür etmediğini anlatır.",
+      "en": "He shortened his stride. She noticed, and chose not to thank him for it aloud.",
+      "ja": "彼は歩幅を詰めた。彼女はそれに気づいたが、あえて口に出して礼を言わないでおいた。",
+      "reading_kana": "カレハホハバヲツメタ。カノジョハソレニキヅイタガ、アエテクチニダシテレイヲイワナイデオイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, intimate chronicle cadence; lingering tenderly on their unspoken understanding."
+      },
+      "tts_text_gemini38": "彼は歩幅を詰めた。<long pause> 彼女はそれに気づいたが、<short pause> あえて口に出して礼を言わないでおいた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼は歩幅を詰めた。<break time=\"480ms\"/>彼女はそれに気づいたが、<break time=\"260ms\"/>あえて口に出して礼を言わないでおいた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_014.ogg"
+    },
+    {
+      "order_index": 38,
+      "line_id": "tutorial_t2_before_001",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "somber_discovery",
+      "when_cue": "Sahne T-2 Açılışı | Unutulmuş Taş Kavşak (`forgotten_stone_crossing`); yalnız bir Hollow Pilgrim aşınmış taşların etrafında döner.",
+      "subtext_tr": "Yolun daraldığı yerde aynı taşların etrafında ayağını sürüyerek dönüp duran yalnız hacıyı hüzünlü ve tekinsiz bir dille betimler.",
+      "en": "Where the path narrowed, a lone pilgrim dragged one foot around the same worn stones.",
+      "ja": "道が細まる場所で、ひとりの巡礼者が同じ擦り減った石のまわりを、片足を引きずりながら巡っていた。",
+      "reading_kana": "ミチガホソマルバショデ、ヒトリノジュンレイシャガオナジスリヘッタイシノマワリヲ、カタアシヲヒキズリナガラメグッテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, somber chronicle narration; slow and eerie rhythm matching a dragging footstep."
+      },
+      "tts_text_gemini38": "道が細まる場所で、<short pause> ひとりの巡礼者が同じ擦り減った石のまわりを、<short pause> 片足を引きずりながら巡っていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.1st\">道が細まる場所で、<break time=\"280ms\"/>ひとりの巡礼者が同じ擦り減った石のまわりを、<break time=\"260ms\"/>片足を引きずりながら巡っていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 6.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_001.ogg"
+    },
+    {
+      "order_index": 39,
+      "line_id": "tutorial_t2_before_002",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut hacının hareketlerini izler (`watchful`).",
+      "subtext_tr": "Yaratığın aynı noktayı üç kez geçtiğini gözlemler; tehdit analizi yapar.",
+      "en": "It has crossed this patch three times.",
+      "ja": "同じ場所を、もう三度も横切っている。",
+      "reading_kana": "オナジバショヲ、モウサンドモヨコギッテイル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Low, observant baritone; quiet, analytical soldier's tone."
+      },
+      "tts_text_gemini38": "同じ場所を、<short pause> もう三度も横切っている。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-1.0st\">同じ場所を、<break time=\"260ms\"/>もう三度も横切っている。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_002.ogg"
+    },
+    {
+      "order_index": 40,
+      "line_id": "tutorial_t2_before_003",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme hacıyı sessizce izler (`composed`).",
+      "subtext_tr": "Belki de eskiden yolun burada bittiğini söyleyerek hacının takılıp kalmışlığına hüzünlü bir anlam verir.",
+      "en": "Perhaps the road used to end here.",
+      "ja": "昔は、ここが道の終わりだったのかもしれないわ。",
+      "reading_kana": "ムカシハ、ココガミチノオワリダッタノカモシレナイワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, contemplative alto; wistful and gently empathetic."
+      },
+      "tts_text_gemini38": "昔は、<short pause> ここが道の終わりだったのかもしれないわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.1st\">昔は、<break time=\"260ms\"/>ここが道の終わりだったのかもしれないわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -0.1,
+        "duration_seconds": 3.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_003.ogg"
+    },
+    {
+      "order_index": 41,
+      "line_id": "tutorial_t2_before_004",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut ileriye, devam eden yola bakar (`composed`).",
+      "subtext_tr": "Şimdi yolun burada bitmediğini ve geçmeleri gerektiğini sakin bir gerçekçilikle söyler.",
+      "en": "It does not end here now.",
+      "ja": "いまは、ここが終わりじゃない。",
+      "reading_kana": "イマハ、ココガオワリジャナイ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Steady, grounded low baritone; calm certainty."
+      },
+      "tts_text_gemini38": "いまは、<short pause> ここが終わりじゃない。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.9st\">いまは、<break time=\"240ms\"/>ここが終わりじゃない。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 2.7,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_004.ogg"
+    },
+    {
+      "order_index": 42,
+      "line_id": "tutorial_t2_before_005",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme hafif, buruk bir gülümsemeyle karşılık verir (`composed`).",
+      "subtext_tr": "'Birinin bunu ona söylemesi lazım' derken hem ince bir mizah hem de merhamet taşır.",
+      "en": "No. Someone ought to tell it.",
+      "ja": "ええ。誰かが教えてあげないと。",
+      "reading_kana": "エエ。ダレカガオシエテアゲナイト。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Quiet, wryly compassionate alto; understated and gentle."
+      },
+      "tts_text_gemini38": "ええ。<short pause> 誰かが教えてあげないと。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"0.0st\">ええ。<break time=\"300ms\"/>誰かが教えてあげないと。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": 0.0,
+        "duration_seconds": 2.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_005.ogg"
+    },
+    {
+      "order_index": 43,
+      "line_id": "tutorial_t2_before_006",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "patient_silence",
+      "when_cue": "Sahne Aksiyonu | Fadyme sessizce hacıyı izler (`WATCHING THE LONE HOLLOW PILGRIM`).",
+      "subtext_tr": "Fadyme'nin boşluğa hapsolmuş hacıyı izleyişini ve Mahmut'un onu hiç acele ettirmeyişini anlatır.",
+      "en": "For a moment she watched the empty movement without speaking. Mahmut did not hurry her.",
+      "ja": "しばらくのあいだ、彼女は言葉もなくその虚ろな足取りを見つめていた。マフムトは彼女を急かさなかった。",
+      "reading_kana": "シバラクノアイダ、カノジョハコトバモナクソノウツロナアシドリヲミツメテイタ。マフムトハカノジョヲセカサナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Unhurried, compassionate chronicle narration; respectful silence between clauses."
+      },
+      "tts_text_gemini38": "しばらくのあいだ、<short pause> 彼女は言葉もなくその虚ろな足取りを見つめていた。<long pause> マフムトは彼女を急かさなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.0st\">しばらくのあいだ、<break time=\"260ms\"/>彼女は言葉もなくその虚ろな足取りを見つめていた。<break time=\"540ms\"/>マフムトは彼女を急かさなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_006.ogg"
+    },
+    {
+      "order_index": 44,
+      "line_id": "tutorial_t2_before_007",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme alçak sesle Mahmut'a sorar (`composed`).",
+      "subtext_tr": "Bu kayıp ruhların hayattayken nereye gitmeye çalıştıklarını düşünüp düşünmediğini sorar.",
+      "en": "Do you ever wonder where they meant to go?",
+      "ja": "あの人たちは、どこへ行くつもりだったのかしら。あなたも考えることはある？",
+      "reading_kana": "アノヒトタチハ、ドコヘイクツモリダッタノカシラ。アナタモカンガエルコトハアル？",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Hushed, wistful alto; genuine curiosity tinged with quiet sorrow."
+      },
+      "tts_text_gemini38": "<sigh> あの人たちは、どこへ行くつもりだったのかしら。<long pause> あなたも考えることはある？",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.2st\">あの人たちは、どこへ行くつもりだったのかしら。<break time=\"480ms\"/>あなたも考えることはある？</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.2,
+        "duration_seconds": 5.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_007.ogg"
+    },
+    {
+      "order_index": 45,
+      "line_id": "tutorial_t2_before_008",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut dürüstçe cevap verir (`watchful`).",
+      "subtext_tr": "Sert bir asker gibi görünse de onun da bazen bunu düşündüğünü tek kelimeyle itiraf eder.",
+      "en": "Sometimes.",
+      "ja": "……ときどきな。",
+      "reading_kana": "トキドキナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Quiet, reflective low baritone after a brief pause; honest and unguarded."
+      },
+      "tts_text_gemini38": "<short pause> ときどきな。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.9st\"><break time=\"260ms\"/>ときどきな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 1.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_008.ogg"
+    },
+    {
+      "order_index": 46,
+      "line_id": "tutorial_t2_before_009",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme Mahmut'a dönüp yumuşakça gülümser (`soft_smile`).",
+      "subtext_tr": "Trajediden sıyrılıp çok insani bir dilekte bulunur: Sıradan bir yere varmak ve sıradan bir akşam yemeği yemek.",
+      "en": "I would rather we reached somewhere ordinary. With an especially ordinary supper.",
+      "ja": "私たちは、ありふれた場所に着ければいいわ。夕食も、とびきりありふれたもので。",
+      "reading_kana": "ワタシタチハ、アリフレタバショニツケレバイイワ。ユウショクモ、トビキリアリフレタモノデ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, wistfully smiling alto; gentle yearning for ordinary peace and supper."
+      },
+      "tts_text_gemini38": "私たちは、ありふれた場所に着ければいいわ。<short pause> 夕食も、<short pause> とびきりありふれたもので。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">私たちは、ありふれた場所に着ければいいわ。<break time=\"380ms\"/>夕食も、<break time=\"220ms\"/>とびきりありふれたもので。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 5.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_009.ogg"
+    },
+    {
+      "order_index": 47,
+      "line_id": "tutorial_t2_before_010",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut sıcak bir tebessümle söz verir (`dry_humor`).",
+      "subtext_tr": "Bu sade dileği gerçekleştirebileceğini sakin bir güvenle söyler.",
+      "en": "That can be arranged.",
+      "ja": "それなら、手配できるさ。",
+      "reading_kana": "ソレナラ、テハイデキルサ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Warm, dryly reassuring low baritone."
+      },
+      "tts_text_gemini38": "それなら、<short pause> 手配できるさ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.6st\">それなら、<break time=\"240ms\"/>手配できるさ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 2.7,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_010.ogg"
+    },
+    {
+      "order_index": 48,
+      "line_id": "tutorial_t2_before_011",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "tense_awakening",
+      "when_cue": "Sahne Aksiyonu | Hacı aniden durur ve başını onlara çevirir (`COMBAT STANCE AT THE FORGOTTEN STONE CROSSING`).",
+      "subtext_tr": "Sohbetin ortasında hacının durup onlara dönüşüyle gerilim bir anda yükselir.",
+      "en": "The pilgrim stopped. Its head turned toward them.",
+      "ja": "巡礼者が足を止めた。その首が、ふたりへと向けられる。",
+      "reading_kana": "ジュンレイシャガアシヲトメタ。ソノクビガ、フタリヘトムケラレル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Taut, ominous chronicle narration; crisp pause between the two short sentences."
+      },
+      "tts_text_gemini38": "巡礼者が足を止めた。<long pause> その首が、<short pause> ふたりへと向けられる。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-1.4st\">巡礼者が足を止めた。<break time=\"480ms\"/>その首が、<break time=\"240ms\"/>ふたりへと向けられる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -1.4,
+        "duration_seconds": 4.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_011.ogg"
+    },
+    {
+      "order_index": 49,
+      "line_id": "tutorial_t2_before_012",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "protective",
+      "when_cue": "Mahmut kalkanını kaldırıp öne çıkar (`protective`).",
+      "subtext_tr": "Fadyme'ye hareket alanı bırakmasını söyler.",
+      "en": "It has seen us. Keep room to move.",
+      "ja": "気づかれたな。動ける間合いを保て。",
+      "reading_kana": "キヅカレタナ。ウゴケルマアイヲタモテ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Sharp, focused vanguard baritone; immediate tactical readiness."
+      },
+      "tts_text_gemini38": "気づかれたな。<short pause> 動ける間合いを保て。",
+      "ssml_chirp3": "<speak><prosody rate=\"96%\" pitch=\"-1.1st\">気づかれたな。<break time=\"300ms\"/>動ける間合いを保て。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.96,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 3.3,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_012.ogg"
+    },
+    {
+      "order_index": 50,
+      "line_id": "tutorial_t2_before_013",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "determined",
+      "when_cue": "T-2 Savaşı Öncesi Son Replik | Fadyme gümüş çanını kaldırır (`determined`).",
+      "subtext_tr": "Mahmut'a kendisi için de yanında yer bırakmasını söyleyerek omuz omuza savaşa girer.",
+      "en": "And you keep room for me.",
+      "ja": "あなたも、私の分は空けておいて。",
+      "reading_kana": "アナタモ、ワタシノブンハアケテオイテ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Poised, resolute alto; confident partner stepping into battle."
+      },
+      "tts_text_gemini38": "あなたも、<short pause> 私の分は空けておいて。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"-0.1st\">あなたも、<break time=\"240ms\"/>私の分は空けておいて。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.95,
+        "pitch_semitones": -0.1,
+        "duration_seconds": 3.1,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_013.ogg"
+    },
+    {
+      "order_index": 51,
+      "line_id": "tutorial_t2_after_001",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "quiet_respite",
+      "when_cue": "T-2 Savaşı Sonrası Açılış | `roadside_rest` CG sahnesi; devrilmiş taş oturacak yer sunar.",
+      "subtext_tr": "Savaş bittikten sonra bile Mahmut'un oturmadan önce ağaçları kontrol etme alışkanlığını anlatır.",
+      "en": "Beyond the narrow path, a fallen stone offered a seat. Mahmut checked the trees before he sat.",
+      "ja": "細い道の先に、腰を下ろせそうな倒れ石があった。マフムトは木立を確かめてから、ようやく腰を下ろした。",
+      "reading_kana": "ホソイミチノサキニ、コシヲオロセソウナタオレイシガアッタ。マフムトハコダチヲタシカメテカラ、ヨウヤクコシヲオロシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Calm, restful chronicle narration; unhurried dusk pacing."
+      },
+      "tts_text_gemini38": "細い道の先に、<short pause> 腰を下ろせそうな倒れ石があった。<long pause> マフムトは木立を確かめてから、<short pause> ようやく腰を下ろした。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.9st\">細い道の先に、<break time=\"260ms\"/>腰を下ろせそうな倒れ石があった。<break time=\"520ms\"/>マフムトは木立を確かめてから、<break time=\"260ms\"/>ようやく腰を下ろした。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_001.ogg"
+    },
+    {
+      "order_index": 52,
+      "line_id": "tutorial_t2_after_002",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme taşın üzerinde otururken Mahmut'a takılır (`dry_amusement`).",
+      "subtext_tr": "Ağaçların onun teftişinden sağ çıktığını söyleyerek artık rahatça oturmasını ister.",
+      "en": "Sit. The trees have survived your inspection.",
+      "ja": "座って。木々も、あなたの見回りを無事に切り抜けたことだし。",
+      "reading_kana": "スワッテ。キギモ、アナタノミマワリヲブジニキリヌケタコトダシ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, dryly amused alto; gently teasing his relentless vigilance."
+      },
+      "tts_text_gemini38": "<chuckle> 座って。<short pause> 木々も、あなたの見回りを無事に切り抜けたことだし。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">座って。<break time=\"340ms\"/>木々も、あなたの見回りを無事に切り抜けたことだし。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_002.ogg"
+    },
+    {
+      "order_index": 53,
+      "line_id": "tutorial_t2_after_003",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut otururken kol zırhındaki gevşemiş kayışa bakar (`composed`).",
+      "subtext_tr": "Dövüşte gevşeyen kayışı sıkmaya çalışır.",
+      "en": "This strap needs tightening.",
+      "ja": "この革帯を締め直さないとな。",
+      "reading_kana": "コノカワオビヲシメナオサナイトナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Matter-of-fact low baritone; practical soldier checking his gear."
+      },
+      "tts_text_gemini38": "この革帯を締め直さないとな。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.8st\">この革帯を締め直さないとな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 2.7,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_003.ogg"
+    },
+    {
+      "order_index": 54,
+      "line_id": "tutorial_t2_after_004",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme elini uzatır (`dry_amusement`).",
+      "subtext_tr": "Zırhının bile dinlenmek istediğini söyleyerek kıpırdamamasını ister.",
+      "en": "Then hold still. Even your armour is asking for a rest.",
+      "ja": "それなら、じっとしていて。鎧まで休みたがっているわ。",
+      "reading_kana": "ソレナラ、ジットシテイテ。ヨロイマデヤスミタガッテイルワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Affectionate, lightly scolding alto; gentle warmth beneath dry wit."
+      },
+      "tts_text_gemini38": "それなら、じっとしていて。<short pause> 鎧まで休みたがっているわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.2st\">それなら、じっとしていて。<break time=\"340ms\"/>鎧まで休みたがっているわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.2,
+        "duration_seconds": 4.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_004.ogg"
+    },
+    {
+      "order_index": 55,
+      "line_id": "tutorial_t2_after_005",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "intimate_care",
+      "when_cue": "Sahne Aksiyonu | Fadyme Mahmut'un bileğini kendine çekip gevşek deri kayışı tokadan geçirir (`FADYME TIGHTENS THE LOOSE LEATHER STRAP ON HIS GAUNTLET`).",
+      "subtext_tr": "`roadside_rest` illüstrasyonunun tam karşılığı; Fadyme'nin özenli hareketini anlatır.",
+      "en": "She drew his wrist toward her and threaded the loose leather through its buckle.",
+      "ja": "彼女は彼の手首を引き寄せ、緩んだ革帯を留め金へと通した。",
+      "reading_kana": "カノジョハカレノテクビヲヒキヨセ、ユルンダカワオビヲトメガネヘトトオシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Intimate, hushed chronicle narration; gentle and unhurried."
+      },
+      "tts_text_gemini38": "彼女は彼の手首を引き寄せ、<short pause> 緩んだ革帯を留め金へと通した。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女は彼の手首を引き寄せ、<break time=\"300ms\"/>緩んだ革帯を留め金へと通した。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 4.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_005.ogg"
+    },
+    {
+      "order_index": 56,
+      "line_id": "tutorial_t2_after_006",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut biraz mahcup bir sesle konuşur (`composed`).",
+      "subtext_tr": "Fadyme'ye zahmet vermemek için kendisinin de yapabileceğini mırıldanır ama kolunu çekmez.",
+      "en": "I can do that.",
+      "ja": "自分でできる。",
+      "reading_kana": "ジブンデデキル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Soft, slightly sheepish low baritone; quiet protest without pulling his arm away."
+      },
+      "tts_text_gemini38": "自分でできる。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.7st\">自分でできる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 1.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_006.ogg"
+    },
+    {
+      "order_index": 57,
+      "line_id": "tutorial_t2_after_007",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme başını kaldırmadan sakin ve şefkatli bir sesle cevap verir (`composed`).",
+      "subtext_tr": "'Biliyorum. Bana bırakmayı da seçebilirsin' diyerek onun da bakılmayı hak ettiğini hatırlatır.",
+      "en": "I know. You can also let me.",
+      "ja": "知っているわ。私に任せることだって、できるでしょう。",
+      "reading_kana": "シッテイルワ。ワタシニマカセルコトダッテ、デキルデショウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Calm, tender alto; quiet intimacy that disarms his stoic habit."
+      },
+      "tts_text_gemini38": "知っているわ。<short pause> 私に任せることだって、<short pause> できるでしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"+0.1st\">知っているわ。<break time=\"320ms\"/>私に任せることだって、<break time=\"220ms\"/>できるでしょう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": 0.1,
+        "duration_seconds": 4.1,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_007.ogg"
+    },
+    {
+      "order_index": 58,
+      "line_id": "tutorial_t2_after_008",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "unspoken_tenderness",
+      "when_cue": "Sahne Aksiyonu | Mahmut ağaçlar yerine Fadyme'nin parmaklarını izler.",
+      "subtext_tr": "İkisinin de bu yakınlığın biraz daha sürmesini istediğini anlatan çok ince ve duygusal bir anlatıcı cümlesi.",
+      "en": "He watched her fingers instead of the trees. She kept her eyes on the strap a little longer than necessary.",
+      "ja": "彼は木々ではなく、彼女の指先を見つめていた。彼女もまた、必要な時間より少しだけ長く、革帯に視線を落としていた。",
+      "reading_kana": "カレハキギデハナク、カノジョノユビサキヲミツメテイタ。カノジョモマタ、ヒツヨウナジカンヨリスコシダケナガク、カワオビニシセンヲオトシテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, deeply intimate chronicle narration; slow and delicate pacing."
+      },
+      "tts_text_gemini38": "彼は木々ではなく、<short pause> 彼女の指先を見つめていた。<long pause> 彼女もまた、<short pause> 必要な時間より少しだけ長く、<short pause> 革帯に視線を落としていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-0.8st\">彼は木々ではなく、<break time=\"260ms\"/>彼女の指先を見つめていた。<break time=\"540ms\"/>彼女もまた、<break time=\"240ms\"/>必要な時間より少しだけ長く、<break time=\"260ms\"/>革帯に視線を落としていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 8.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_008.ogg"
+    },
+    {
+      "order_index": 59,
+      "line_id": "tutorial_t2_after_009",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut sessizliği bozmak için alçak sesle sorar (`watchful`).",
+      "subtext_tr": "Normalde Fadyme'nin sorması gereken soruyu dalgınlıkla kendisi sorar.",
+      "en": "Too tight?",
+      "ja": "きつすぎないか？",
+      "reading_kana": "キツスギナイカ？",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Hushed, slightly distracted low baritone spoken at close distance."
+      },
+      "tts_text_gemini38": "きつすぎないか？",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.7st\">きつすぎないか？</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 2.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_009.ogg"
+    },
+    {
+      "order_index": 60,
+      "line_id": "tutorial_t2_after_010",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme gülümseyerek başını kaldırır (`dry_amusement`).",
+      "subtext_tr": "Kayışın onun kolunda olduğunu, dolayısıyla cevabı onun vermesi gerektiğini söyleyerek takılır.",
+      "en": "You are supposed to answer that.",
+      "ja": "それは、あなたが答えるところでしょう。",
+      "reading_kana": "ソレハ、アナタガコタエルトコロデショウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, wryly amused alto; gentle teasing."
+      },
+      "tts_text_gemini38": "<chuckle> それは、<short pause> あなたが答えるところでしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">それは、<break time=\"240ms\"/>あなたが答えるところでしょう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_010.ogg"
+    },
+    {
+      "order_index": 61,
+      "line_id": "tutorial_t2_after_011",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut kısa ve net cevap verir (`dry_humor`).",
+      "subtext_tr": "Tam Mahmut usulü tek kelimelik rapor: 'Hayır (sıkı değil).'",
+      "en": "No.",
+      "ja": "……いや。",
+      "reading_kana": "イヤ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Deadpan, warm single-word reply in a low baritone."
+      },
+      "tts_text_gemini38": "<short pause> いや。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\"><break time=\"200ms\"/>いや。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 1.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_011.ogg"
+    },
+    {
+      "order_index": 62,
+      "line_id": "tutorial_t2_after_012",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme tatlı bir tebessümle iç çeker (`soft_smile`).",
+      "subtext_tr": "Mahmut'un tek kelimelik cevabına 'Ne kadar da ayrıntılı bir rapor' diyerek gülümser.",
+      "en": "A wonderfully detailed report.",
+      "ja": "なんて詳しい報告かしら。",
+      "reading_kana": "ナンテクワシイホウコクカシラ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Affectionate, lightly ironic alto with a soft smile."
+      },
+      "tts_text_gemini38": "なんて詳しい報告かしら。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.4st\">なんて詳しい報告かしら。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.4,
+        "duration_seconds": 2.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_012.ogg"
+    },
+    {
+      "order_index": 63,
+      "line_id": "tutorial_t2_after_013",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut Fadyme'yi memnun etmek için raporunu uzatır (`dry_humor`).",
+      "subtext_tr": "Ciddi bir zanaatkâr gibi tokayı ve işçiliği över.",
+      "en": "The buckle is sound. The work is good.",
+      "ja": "留め金はしっかりしている。手際もいい。",
+      "reading_kana": "トメガネハシッカリシテイル。テギワモイイ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Earnest yet dryly humorous low baritone; offering a genuine compliment in soldierly terms."
+      },
+      "tts_text_gemini38": "留め金はしっかりしている。<short pause> 手際もいい。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.7st\">留め金はしっかりしている。<break time=\"320ms\"/>手際もいい。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_013.ogg"
+    },
+    {
+      "order_index": 64,
+      "line_id": "tutorial_t2_after_014",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme gözlerini kısarak gülümser (`dry_amusement`).",
+      "subtext_tr": "'Dikkat et, bir cümle daha kurarsan iltifat sanacağım' diyerek şakalaşır.",
+      "en": "Careful. Another sentence and I might mistake that for a compliment.",
+      "ja": "気をつけて。もう一言続けたら、褒め言葉だと勘違いしてしまいそう。",
+      "reading_kana": "キヲツケテ。モウヒトコトツヅケタラ、ホメコトバダトカンチガイシテシマイソウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, witty alto; unhurried and charming."
+      },
+      "tts_text_gemini38": "気をつけて。<short pause> もう一言続けたら、<short pause> 褒め言葉だと勘違いしてしまいそう。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">気をつけて。<break time=\"300ms\"/>もう一言続けたら、<break time=\"240ms\"/>褒め言葉だと勘違いしてしまいそう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_014.ogg"
+    },
+    {
+      "order_index": 65,
+      "line_id": "tutorial_t2_after_015",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut şakayı bırakıp çok dürüst ve sakin bir sesle söyler (`composed`).",
+      "subtext_tr": "'Zaten iltifattı' diyerek Fadyme'yi hazırlıksız yakalar.",
+      "en": "It was one.",
+      "ja": "褒め言葉だ。",
+      "reading_kana": "ホメコトバダ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Simple, disarming sincerity in a warm low baritone."
+      },
+      "tts_text_gemini38": "褒め言葉だ。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.8st\">褒め言葉だ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 1.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_015.ogg"
+    },
+    {
+      "order_index": 66,
+      "line_id": "tutorial_t2_after_016",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "quiet_smile",
+      "when_cue": "Sahne Aksiyonu | Fadyme bitirdiği düğüme bakarak gülümser (`A QUIET SMILE OVER THE FINISHED BUCKLE`).",
+      "subtext_tr": "Fadyme'nin sessiz gülümseyişini ve Mahmut'un bakışlarını yavaşça kaçırışını anlatır.",
+      "en": "She smiled down at the finished knot. He looked away first, but not quickly.",
+      "ja": "彼女は締め終えた結び目に目を落として微笑んだ。先に視線を逸らしたのは彼だったが、すぐには逸らさなかった。",
+      "reading_kana": "カノジョハシメオエタムスビメニメヲオトシテホホエンダ。サキニシセンヲソラシタノハカレダッタガ、スグニハソラサナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Tender, lingering chronicle narration; warm and unhurried."
+      },
+      "tts_text_gemini38": "彼女は締め終えた結び目に目を落として微笑んだ。<long pause> 先に視線を逸らしたのは彼だったが、<short pause> すぐには逸らさなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女は締め終えた結び目に目を落として微笑んだ。<break time=\"520ms\"/>先に視線を逸らしたのは彼だったが、<break time=\"260ms\"/>すぐには逸らさなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 7.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_016.ogg"
+    },
+    {
+      "order_index": 67,
+      "line_id": "tutorial_t2_after_017",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme Mahmut'un kolunu hafifçe bırakır (`soft_smile`).",
+      "subtext_tr": "Hep koruyan taraf olan Mahmut'a, 'Şimdi sıra sende' diyerek şefkat gösterir.",
+      "en": "There. Your turn to be looked after.",
+      "ja": "ほら。今度は、あなたが気遣ってもらう番よ。",
+      "reading_kana": "ホラ。コンドハ、アナタガキヅカッテモラウバンヨ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Gentle, heartfelt alto; warm and satisfied."
+      },
+      "tts_text_gemini38": "<breath> ほら。<short pause> 今度は、あなたが気遣ってもらう番よ。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"+0.3st\">ほら。<break time=\"300ms\"/>今度は、あなたが気遣ってもらう番よ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 3.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_017.ogg"
+    },
+    {
+      "order_index": 68,
+      "line_id": "tutorial_t2_after_018",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "T-2 Sonu | Mahmut başını sallar (`composed`).",
+      "subtext_tr": "Birbirlerine göz kulak olma işini daha eşit paylaşmaları gerektiğini kabul eder.",
+      "en": "We should do that more evenly.",
+      "ja": "お互い、もう少し対等にやるべきだな。",
+      "reading_kana": "オタガイ、モウスコシタイトウニヤルベキダナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Warm, grounded low baritone; closing the scene on quiet mutual care."
+      },
+      "tts_text_gemini38": "お互い、<short pause> もう少し対等にやるべきだな。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.7st\">お互い、<break time=\"260ms\"/>もう少し対等にやるべきだな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_018.ogg"
+    },
+    {
+      "order_index": 69,
+      "line_id": "tutorial_t3_before_001",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "dusk_arrival",
+      "when_cue": "Sahne T-3 Açılışı | Dalların arasından kırık bir çatı görünür (`shelter_courtyard_dusk`).",
+      "subtext_tr": "Alacakaranlıkta görünen kırık çatının yine de kuru bir köşe vaat ettiğini dingin bir dille anlatır.",
+      "en": "A broken roof appeared through the branches. There was still enough of it to promise a dry corner.",
+      "ja": "枝々の向こうに、崩れかけた屋根が見えてきた。それでも、乾いた片隅を約束するには十分なだけ残っていた。",
+      "reading_kana": "エダエダノムコウニ、クズレカケタヤネガミエテキタ。ソレデモ、カワイタカタスミヲヤクソクスルニハジュウブンナダケノコッテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Calm, relieved chronicle narration as shelter appears at dusk."
+      },
+      "tts_text_gemini38": "枝々の向こうに、<short pause> 崩れかけた屋根が見えてきた。<long pause> それでも、<short pause> 乾いた片隅を約束するには十分なだけ残っていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.9st\">枝々の向こうに、<break time=\"260ms\"/>崩れかけた屋根が見えてきた。<break time=\"520ms\"/>それでも、<break time=\"240ms\"/>乾いた片隅を約束するには十分なだけ残っていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_001.ogg"
+    },
+    {
+      "order_index": 70,
+      "line_id": "tutorial_t3_before_002",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut çatıyı işaret eder (`watchful`).",
+      "subtext_tr": "Fadyme'nin istediği çatıyı bulmanın memnuniyetiyle orada duracaklarını söyler.",
+      "en": "A roof. We stop there.",
+      "ja": "屋根があるな。あそこで足を止めよう。",
+      "reading_kana": "ヤネガアルナ。アソコデアシヲトメヨウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Steady, quietly pleased low baritone."
+      },
+      "tts_text_gemini38": "屋根があるな。<short pause> あそこで足を止めよう。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.8st\">屋根があるな。<break time=\"300ms\"/>あそこで足を止めよう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_002.ogg"
+    },
+    {
+      "order_index": 71,
+      "line_id": "tutorial_t3_before_003",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme gülümseyerek Mahmut'a bakar (`dry_amusement`).",
+      "subtext_tr": "'Sanki önceden özel sipariş vermişsin gibi konuşuyorsun' diyerek takılır.",
+      "en": "You make it sound as though you ordered it specially.",
+      "ja": "わざわざ注文しておいたみたいな言い方ね。",
+      "reading_kana": "ワザワザチュウモンシテオイタミタイナイイカタネ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, teasing alto with dry aristocratic wit."
+      },
+      "tts_text_gemini38": "<chuckle> わざわざ注文しておいたみたいな言い方ね。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"+0.4st\">わざわざ注文しておいたみたいな言い方ね。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.95,
+        "pitch_semitones": 0.4,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_003.ogg"
+    },
+    {
+      "order_index": 72,
+      "line_id": "tutorial_t3_before_004",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut çatının deliklerine bakıp cevap verir (`dry_humor`).",
+      "subtext_tr": "'Ben sipariş etsem daha az delikli isterdim' diyerek espriye karşılık verir.",
+      "en": "I would have asked for fewer holes.",
+      "ja": "俺が注文したなら、もう少し穴を減らしてもらうさ。",
+      "reading_kana": "オレガチュウモンシタナラ、モウスコシアナヲヘラシテモラウサ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Dry, deadpan knightly humor in a warm low baritone."
+      },
+      "tts_text_gemini38": "俺が注文したなら、<short pause> もう少し穴を減らしてもらうさ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.6st\">俺が注文したなら、<break time=\"260ms\"/>もう少し穴を減らしてもらうさ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 4.1,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_004.ogg"
+    },
+    {
+      "order_index": 73,
+      "line_id": "tutorial_t3_before_005",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme başını kaldırıp gökyüzüne bakar (`soft_smile`).",
+      "subtext_tr": "'Yıldız manzarası yok mu? Büyük bir ihmal' diyerek şakalaşmayı sürdürür.",
+      "en": "No view of the stars? A severe oversight.",
+      "ja": "星の見えない屋根を？　それは重大な見落としね。",
+      "reading_kana": "ホシノミエナイヤネヲ？　ソレハジュウダイナミオトシネ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, warm alto with a soft smile; gentle pause between clauses."
+      },
+      "tts_text_gemini38": "星の見えない屋根を？ <short pause> それは重大な見落としね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.4st\">星の見えない屋根を？<break time=\"340ms\"/>それは重大な見落としね。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.4,
+        "duration_seconds": 3.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_005.ogg"
+    },
+    {
+      "order_index": 74,
+      "line_id": "tutorial_t3_before_006",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut yarım bir gülümsemeyle karşılık verir (`dry_humor`).",
+      "subtext_tr": "Yıldızları dışarıda da görebileceğini, yağmurun da dışarıda kalmasını tercih ettiğini söyler.",
+      "en": "I can see the stars outside. I would rather keep the rain there too.",
+      "ja": "星なら外で見られる。雨も一緒に外に置いておきたいからな。",
+      "reading_kana": "ホシナラソトデミラレル。アメモイッショニソトニオイテオキタイカラナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Warm, practical dry humor in a low baritone."
+      },
+      "tts_text_gemini38": "星なら外で見られる。<short pause> 雨も一緒に外に置いておきたいからな。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.6st\">星なら外で見られる。<break time=\"320ms\"/>雨も一緒に外に置いておきたいからな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 4.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_006.ogg"
+    },
+    {
+      "order_index": 75,
+      "line_id": "tutorial_t3_before_007",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "interrupted_warmth",
+      "when_cue": "Sahne Aksiyonu | Fadyme sessizce güler; tam o sırada saçakların altında bir gölge kıpırdar (`SHADOWS STIR BENEATH THE SHELTER EAVES`).",
+      "subtext_tr": "Fadyme'nin içten gülüşünü ve Mahmut'un saçak altındaki hareketi fark edişini anlatır.",
+      "en": "She laughed softly. He was still listening when a shape moved beneath the eaves.",
+      "ja": "彼女は小さく笑った。軒下で影が蠢いたときも、彼はまだ周囲に耳を澄ませていた。",
+      "reading_kana": "カノジョハチイサクワラッタ。ノキシタデカゲガウゴメイタトキモ、カレハマダシュウイニミミヲスマセテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Starts warm and soft, then tightens into quiet vigilance on the second sentence."
+      },
+      "tts_text_gemini38": "彼女は小さく笑った。<long pause> 軒下で影が蠢いたときも、<short pause> 彼はまだ周囲に耳を澄ませていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.7st\">彼女は小さく笑った。</prosody><break time=\"520ms\"/><prosody rate=\"90%\" pitch=\"-1.3st\">軒下で影が蠢いたときも、<break time=\"260ms\"/>彼はまだ周囲に耳を澄ませていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 5.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_007.ogg"
+    },
+    {
+      "order_index": 76,
+      "line_id": "tutorial_t3_before_008",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut hızla kapıyı ve basamakları işaret eder (`watchful`).",
+      "subtext_tr": "Sesi bir anda ciddileşir; kapıda ve basamaklarda bekleyen düşmanları bildirir.",
+      "en": "The doorway. Two more by the steps.",
+      "ja": "戸口だ。階段の脇にもあと二体いる。",
+      "reading_kana": "トグチダ。カイダンノワキニモアトニタイイル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Taut, low combat callout; immediate shift from banter to soldierly focus."
+      },
+      "tts_text_gemini38": "戸口だ。<short pause> 階段の脇にもあと二体いる。",
+      "ssml_chirp3": "<speak><prosody rate=\"96%\" pitch=\"-1.1st\">戸口だ。<break time=\"280ms\"/>階段の脇にもあと二体いる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.96,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_008.ogg"
+    },
+    {
+      "order_index": 77,
+      "line_id": "tutorial_t3_before_009",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme gümüş çanını kaldırır (`composed`).",
+      "subtext_tr": "'Önceki kiracılar pek çıkmaya niyetli görünmüyor' diyerek soğukkanlılığını korur.",
+      "en": "The previous tenants seem reluctant to leave.",
+      "ja": "前の住人たちは、出ていく気がないようね。",
+      "reading_kana": "マエノジュウニンタチハ、デテイクキガナイヨウネ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Cool, poised alto with dry composure in the face of danger."
+      },
+      "tts_text_gemini38": "前の住人たちは、<short pause> 出ていく気がないようね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"0.0st\">前の住人たちは、<break time=\"260ms\"/>出ていく気がないようね。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.0,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_009.ogg"
+    },
+    {
+      "order_index": 78,
+      "line_id": "tutorial_t3_before_010",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "protective",
+      "when_cue": "Mahmut kalkanını kaldırır (`protective`).",
+      "subtext_tr": "Düşmanların aralarına girmesine izin vermemelerini söyler.",
+      "en": "Wait for my shield. Do not let them separate us.",
+      "ja": "俺の盾に合わせろ。連中にふたりを分断させるな。",
+      "reading_kana": "オレノタテニアワセロ。レンチュウニフタリヲブンダンサセルナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Firm, protective vanguard baritone; commanding and resolute."
+      },
+      "tts_text_gemini38": "俺の盾に合わせろ。<short pause> 連中にふたりを分断させるな。",
+      "ssml_chirp3": "<speak><prosody rate=\"96%\" pitch=\"-1.1st\">俺の盾に合わせろ。<break time=\"320ms\"/>連中にふたりを分断させるな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.96,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 3.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_010.ogg"
+    },
+    {
+      "order_index": 79,
+      "line_id": "tutorial_t3_before_011",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme hafifçe gülümser (`dry_amusement`).",
+      "subtext_tr": "Mahmut'un 'bizi ayırmalarına izin verme' sözüne 'İkili olduğumuza ne çabuk karar verdin' diye takılır ama bundan memnundur.",
+      "en": "You were very quick to decide we are a pair.",
+      "ja": "私たちが二人組だと決めるの、ずいぶん早かったのね。",
+      "reading_kana": "ワタシタチガフタリグミダトキメルノ、ズイブンハヤカッタノネ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Wry, warmly amused alto even while readying for combat."
+      },
+      "tts_text_gemini38": "私たちが二人組だと決めるの、<short pause> ずいぶん早かったのね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">私たちが二人組だと決めるの、<break time=\"260ms\"/>ずいぶん早かったのね。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_011.ogg"
+    },
+    {
+      "order_index": 80,
+      "line_id": "tutorial_t3_before_012",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut sakin ve sarsılmaz bir sesle cevap verir (`composed`).",
+      "subtext_tr": "'Aynı yolu yürüyoruz' diyerek tartışmaya yer bırakmayan bir bağlılık gösterir.",
+      "en": "We have been walking the same road.",
+      "ja": "ずっと同じ道を歩いてきただろう。",
+      "reading_kana": "ズットオナジミチヲアルイテキタダロウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Steady, grounded low baritone; simple, undeniable truth."
+      },
+      "tts_text_gemini38": "ずっと同じ道を歩いてきただろう。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.8st\">ずっと同じ道を歩いてきただろう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 2.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_012.ogg"
+    },
+    {
+      "order_index": 81,
+      "line_id": "tutorial_t3_before_013",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "determined",
+      "when_cue": "Fadyme'nin bakışları keskinleşir (`determined`).",
+      "subtext_tr": "'Öyleyse sen yerini koru, ben de kendi yerimi koruyacağım' diyerek savaşa hazır olduğunu ilan eder.",
+      "en": "Then keep your place. I intend to keep mine.",
+      "ja": "それなら、自分の場所を守って。私は、私の場所を守るつもりよ。",
+      "reading_kana": "ソレナラ、ジブンノバショヲマモッテ。ワタシハ、ワタシノバショヲマモルツモリヨ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Clear, determined alto; proud and unyielding partner."
+      },
+      "tts_text_gemini38": "それなら、自分の場所を守って。<short pause> 私は、<short pause> 私の場所を守るつもりよ。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"-0.2st\">それなら、自分の場所を守って。<break time=\"340ms\"/>私は、<break time=\"220ms\"/>私の場所を守るつもりよ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.95,
+        "pitch_semitones": -0.2,
+        "duration_seconds": 4.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_013.ogg"
+    },
+    {
+      "order_index": 82,
+      "line_id": "tutorial_t3_before_014",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "battle_threshold",
+      "when_cue": "T-3 Savaşı Öncesi Son Replik | İkisi aynı anda ileri adım atar (`STEPPING FORWARD TOGETHER AS ONE`).",
+      "subtext_tr": "İlk savaştaki tereddüdün aksine, bu kez tam bir uyumla birlikte ileri adım atışlarını anlatır.",
+      "en": "This time they stepped forward together.",
+      "ja": "今度は、ふたり同時に前へと踏み出した。",
+      "reading_kana": "コンドハ、フタリドウジニマエヘトフミダシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Resolute, poised chronicle narration; a strong closing beat into battle."
+      },
+      "tts_text_gemini38": "今度は、<short pause> ふたり同時に前へと踏み出した。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">今度は、<break time=\"260ms\"/>ふたり同時に前へと踏み出した。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 3.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_014.ogg"
+    },
+    {
+      "order_index": 83,
+      "line_id": "tutorial_t3_after_001",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "evening_hush",
+      "when_cue": "T-3 Savaşı Sonrası Açılış | `shelter_evening` CG sahnesi; içeride rüzgar kirişlerde hafif bir sese dönüşür.",
+      "subtext_tr": "O akşam ilk kez ikisinin de yürümek zorunda olmadığı huzurlu sığınak atmosferini kurar.",
+      "en": "Inside, the wind softened to a sound in the rafters. For the first time that evening, neither of them had to walk.",
+      "ja": "屋内では、風は梁を撫でるかすかな音へと和らいでいた。その夜初めて、ふたりとも歩かなくてよくなった。",
+      "reading_kana": "オクナイデハ、カゼハハリヲナデルカスカナオトヘトヤワライデイタ。ソノヨルハジメテ、フタリトモアルカナクテヨクナッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deep, tranquil chronicle narration; a soothing exhale after a long day on the road."
+      },
+      "tts_text_gemini38": "<breath> 屋内では、風は梁を撫でるかすかな音へと和らいでいた。<long pause> その夜初めて、<short pause> ふたりとも歩かなくてよくなった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.0st\">屋内では、風は梁を撫でるかすかな音へと和らいでいた。<break time=\"540ms\"/>その夜初めて、<break time=\"260ms\"/>ふたりとも歩かなくてよくなった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_001.ogg"
+    },
+    {
+      "order_index": 84,
+      "line_id": "tutorial_t3_after_002",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut içeriyi hızla gözden geçirir (`watchful`).",
+      "subtext_tr": "En kuru ve korunaklı köşeyi Fadyme için seçer.",
+      "en": "Dry enough here. The far corner is better.",
+      "ja": "ここなら十分乾いている。奥の隅の方がいい。",
+      "reading_kana": "ココナラジュウブンカワイテイル。オクノスミノホウガイイ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Calm, attentive low baritone checking the shelter for her comfort."
+      },
+      "tts_text_gemini38": "ここなら十分乾いている。<short pause> 奥の隅の方がいい。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.8st\">ここなら十分乾いている。<break time=\"320ms\"/>奥の隅の方がいい。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 3.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_002.ogg"
+    },
+    {
+      "order_index": 85,
+      "line_id": "tutorial_t3_after_003",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme hafifçe gülümser (`dry_amusement`).",
+      "subtext_tr": "Mahmut'un tek nefeste bütün binayı teftiş etmesine takılır.",
+      "en": "You have inspected the entire house in one breath.",
+      "ja": "一息で、家じゅうを調べ終えたのね。",
+      "reading_kana": "ヒトイキデ、イエジュウヲシラベオエタノネ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, dryly amused alto; fond and relaxed."
+      },
+      "tts_text_gemini38": "<chuckle> 一息で、<short pause> 家じゅうを調べ終えたのね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">一息で、<break time=\"240ms\"/>家じゅうを調べ終えたのね。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_003.ogg"
+    },
+    {
+      "order_index": 86,
+      "line_id": "tutorial_t3_after_004",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut etrafa bakıp omuz silker (`dry_humor`).",
+      "subtext_tr": "'Pek büyük bir ev değil zaten' diyerek kuru bir espri yapar.",
+      "en": "It is not a large house.",
+      "ja": "それほど大きな家じゃないからな。",
+      "reading_kana": "ソレホドオオキナイエジャナイカラナ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Deadpan, warm low baritone."
+      },
+      "tts_text_gemini38": "それほど大きな家じゃないからな。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.6st\">それほど大きな家じゃないからな。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 2.7,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_004.ogg"
+    },
+    {
+      "order_index": 87,
+      "line_id": "tutorial_t3_after_005",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "chivalrous_warmth",
+      "when_cue": "Sahne Aksiyonu | Mahmut pelerinini soğuk taşın üzerine serer (`HIS OXBLOOD CLOAK SPREAD OVER THE COLD STONE BENCH`).",
+      "subtext_tr": "Mahmut'un pelerinini sermesini ve Fadyme'nin bir kenara oturup diğer yanı açıkça onun için boş bırakmasını anlatır.",
+      "en": "He laid his cloak over the cold stone. She sat on one edge and left the other unmistakably free.",
+      "ja": "彼は冷たい石の上に自身の外套を敷いた。彼女は片端に腰を下ろし、もう片方を誰の目にも明らかなほど空けておいた。",
+      "reading_kana": "カレハツメタイイシノウエニジシンノガイトウヲシイタ。カノジョハカタハシニコシヲオロシ、モウカタホウヲダレノメニモアキラカナホドアケテオイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, gently perceptive chronicle narration; unhurried and intimate."
+      },
+      "tts_text_gemini38": "彼は冷たい石の上に自身の外套を敷いた。<long pause> 彼女は片端に腰を下ろし、<short pause> もう片方を誰の目にも明らかなほど空けておいた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼は冷たい石の上に自身の外套を敷いた。<break time=\"520ms\"/>彼女は片端に腰を下ろし、<break time=\"260ms\"/>もう片方を誰の目にも明らかなほど空けておいた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 7.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_005.ogg"
+    },
+    {
+      "order_index": 88,
+      "line_id": "tutorial_t3_after_006",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme yanındaki boş yeri işaret eder (`soft_smile`).",
+      "subtext_tr": "Zarif ve dolaylı bir dille Mahmut'u yanına oturmaya davet eder.",
+      "en": "This seat appears to be available.",
+      "ja": "こちらの席は、空いているようだけれど。",
+      "reading_kana": "コチラノセキハ、アイテイルヨウダケレド。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, inviting alto disguised as polite formality; a soft smile in the voice."
+      },
+      "tts_text_gemini38": "こちらの席は、<short pause> 空いているようだけれど。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">こちらの席は、<break time=\"260ms\"/>空いているようだけれど。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_006.ogg"
+    },
+    {
+      "order_index": 89,
+      "line_id": "tutorial_t3_after_007",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut kapıya doğru bakar (`watchful`).",
+      "subtext_tr": "Oturmadan önce alışkanlıkla kapıyı bir kez daha kontrol etmek ister.",
+      "en": "I will check the doorway.",
+      "ja": "戸口を確かめてくる。",
+      "reading_kana": "トグチヲタシカメテクル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Dutiful, slightly hesitant low baritone."
+      },
+      "tts_text_gemini38": "戸口を確かめてくる。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.8st\">戸口を確かめてくる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 2.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_007.ogg"
+    },
+    {
+      "order_index": 90,
+      "line_id": "tutorial_t3_after_008",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme sakin bir sesle hatırlatır (`composed`).",
+      "subtext_tr": "İçeri girerken zaten kontrol ettiğini söyler.",
+      "en": "You checked it on the way in.",
+      "ja": "入るときに、もう調べたでしょう。",
+      "reading_kana": "ハイルトキニ、モウシラベタデショウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Calm, knowing alto; gently calling out his excuse."
+      },
+      "tts_text_gemini38": "入るときに、<short pause> もう調べたでしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.1st\">入るときに、<break time=\"240ms\"/>もう調べたでしょう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.1,
+        "duration_seconds": 2.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_008.ogg"
+    },
+    {
+      "order_index": 91,
+      "line_id": "tutorial_t3_after_009",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut ciddi bir yüzle bahane üretir (`dry_humor`).",
+      "subtext_tr": "'O dış taraftandı' diyerek kendini savunur.",
+      "en": "From the other side.",
+      "ja": "あれは外側からだ。",
+      "reading_kana": "アレハソトガワカラダ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Deadpan, slightly sheepish low baritone."
+      },
+      "tts_text_gemini38": "あれは外側からだ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"-0.6st\">あれは外側からだ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 2.1,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_009.ogg"
+    },
+    {
+      "order_index": 92,
+      "line_id": "tutorial_t3_after_010",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme gülümseyerek ısrar eder (`dry_amusement`).",
+      "subtext_tr": "'Önemli bir fark tabii. Üçüncü bir taraf keşfetmeden önce otur' diyerek onu yanına çeker.",
+      "en": "An important distinction. Sit before you discover a third side.",
+      "ja": "大切な違いね。三つ目の面を発見する前に、座って。",
+      "reading_kana": "タイセツナチガイネ。ミッツメノメンヲハッケンスルマエニ、スワッテ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, playful dry amusement in her alto voice; affectionate insistence on 'Sit'."
+      },
+      "tts_text_gemini38": "<chuckle> 大切な違いね。<short pause> 三つ目の面を発見する前に、<short pause> 座って。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">大切な違いね。<break time=\"340ms\"/>三つ目の面を発見する前に、<break time=\"240ms\"/>座って。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_010.ogg"
+    },
+    {
+      "order_index": 93,
+      "line_id": "tutorial_t3_after_011",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "seated_side_by_side",
+      "when_cue": "Sahne Aksiyonu | Mahmut oturur (`SEATED SIDE BY SIDE WITHIN THE WAYSIDE SHELTER`).",
+      "subtext_tr": "Kalkanının elinin altında, Fadyme'nin omzunun ise neredeyse omzuna değecek kadar yakın olduğunu anlatır.",
+      "en": "He sat. His shield rested within reach; her shoulder rested almost within reach of his.",
+      "ja": "彼は腰を下ろした。盾は手の届くところに置かれ、彼女の肩もまた、彼の肩にほとんど触れそうなほど近くにあった。",
+      "reading_kana": "カレハコシヲオロシタ。タテハテノトドクトコロニオカレ、カノジョノカタモマタ、カレノカタニホトンドフレソウナホドチカクニアッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Tender, intimate chronicle narration; warm and unhurried."
+      },
+      "tts_text_gemini38": "彼は腰を下ろした。<long pause> 盾は手の届くところに置かれ、<short pause> 彼女の肩もまた、彼の肩にほとんど触れそうなほど近くにあった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼は腰を下ろした。<break time=\"480ms\"/>盾は手の届くところに置かれ、<break time=\"280ms\"/>彼女の肩もまた、彼の肩にほとんど触れそうなほど近くにあった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 7.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_011.ogg"
+    },
+    {
+      "order_index": 94,
+      "line_id": "tutorial_t3_after_012",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut çantasına uzanır (`composed`).",
+      "subtext_tr": "Bu gece için yeterince ekmekleri olduğunu söyler.",
+      "en": "We have enough bread for tonight.",
+      "ja": "今夜の分のパンは足りる。",
+      "reading_kana": "コンヤノブンノパンハタリル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Calm, grounded low baritone; quiet domestic comfort."
+      },
+      "tts_text_gemini38": "今夜の分のパンは足りる。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.8st\">今夜の分のパンは足りる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 2.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_012.ogg"
+    },
+    {
+      "order_index": 95,
+      "line_id": "tutorial_t3_after_013",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme merakla bakar (`dry_amusement`).",
+      "subtext_tr": "'Gerçek ekmek mi, yoksa senin şu ihtimallerinden biri mi?' diye takılır.",
+      "en": "Actual bread, or another of your possibilities?",
+      "ja": "ちゃんとしたパン？　それとも、また「あるかもしれない」という話？",
+      "reading_kana": "チャントシタパン？　ソレトモ、マタアルカモシレナイトイウハナシ？",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, teasing alto; playful inflection on the first question."
+      },
+      "tts_text_gemini38": "ちゃんとしたパン？ <short pause> それとも、<short pause> また「あるかもしれない」という話？",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">ちゃんとしたパン？<break time=\"340ms\"/>それとも、<break time=\"220ms\"/>また「あるかもしれない」という話？</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_013.ogg"
+    },
+    {
+      "order_index": 96,
+      "line_id": "tutorial_t3_after_014",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "dry_humor",
+      "when_cue": "Mahmut somunu çıkarır (`dry_humor`).",
+      "subtext_tr": "'Gerçek ekmek' diyerek somunu gösterir.",
+      "en": "Actual bread.",
+      "ja": "ちゃんとしたパンだ。",
+      "reading_kana": "チャントシタパンダ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Warm, deadpan low baritone with a quiet smile."
+      },
+      "tts_text_gemini38": "ちゃんとしたパンだ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.6st\">ちゃんとしたパンだ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 2.1,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_014.ogg"
+    },
+    {
+      "order_index": 97,
+      "line_id": "tutorial_t3_after_015",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme içtenlikle gülümser (`soft_smile`).",
+      "subtext_tr": "T-2'de dilediği 'çatı ve sıradan akşam yemeği' gerçekleşmiştir; Mahmut'u tatlı bir dille över.",
+      "en": "A roof and a supper. You should announce your successes more often.",
+      "ja": "屋根と夕食。もっと頻繁に、成果を発表するべきだわ。",
+      "reading_kana": "ヤネトユウショク。モットヒンパンニ、セイカヲハッピョウスルベキダワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, genuinely delighted alto; soft gratitude wrapped in gentle wit."
+      },
+      "tts_text_gemini38": "屋根と夕食。<short pause> もっと頻繁に、<short pause> 成果を発表するべきだわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">屋根と夕食。<break time=\"320ms\"/>もっと頻繁に、<break time=\"220ms\"/>成果を発表するべきだわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_015.ogg"
+    },
+    {
+      "order_index": 98,
+      "line_id": "tutorial_t3_after_016",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "sharing_bread",
+      "when_cue": "Sahne Aksiyonu | Fadyme ekmeği ikiye böler, parçaları tartıp büyük olanı Mahmut'un eline verir (`SHARING A LOAF OF BREAD AT DUSK`).",
+      "subtext_tr": "`shelter_evening` illüstrasyonundaki ekmek paylaşımı: Fadyme'nin büyük parçayı Mahmut'a verişini anlatır.",
+      "en": "She broke the loaf in two, considered the pieces, and put the larger one in his hand.",
+      "ja": "彼女はパンを二つに割り、それぞれの大きさを見比べてから、大きい方を彼の手に握らせた。",
+      "reading_kana": "カノジョハパンヲフタツニワリ、ソレゾレノオオキサヲミクラベテカラ、オオキイホウヲカレノテニニギラセタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, observant chronicle narration; gentle and unhurried."
+      },
+      "tts_text_gemini38": "彼女はパンを二つに割り、<short pause> それぞれの大きさを見比べてから、<short pause> 大きい方を彼の手に握らせた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女はパンを二つに割り、<break time=\"280ms\"/>それぞれの大きさを見比べてから、<break time=\"280ms\"/>大きい方を彼の手に握らせた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_016.ogg"
+    },
+    {
+      "order_index": 99,
+      "line_id": "tutorial_t3_after_017",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut elindeki büyük parçaya bakar (`watchful`).",
+      "subtext_tr": "Kendisine daha büyük parça verildiğini hemen fark eder.",
+      "en": "You gave me more.",
+      "ja": "俺の方が大きいぞ。",
+      "reading_kana": "オレノホウガオオキイゾ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Gentle, observant low baritone; mild protest."
+      },
+      "tts_text_gemini38": "俺の方が大きいぞ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.7st\">俺の方が大きいぞ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.93,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 2.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_017.ogg"
+    },
+    {
+      "order_index": 100,
+      "line_id": "tutorial_t3_after_018",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "dry_amusement",
+      "when_cue": "Fadyme masum bir ifadeyle omuz silker (`dry_amusement`).",
+      "subtext_tr": "'Ekmeğin mimarisindeki bir kusur, benim elimde olan bir şey değil' diyerek zarif bir bahaneyle Mahmut'un daha çok yemesini sağlar.",
+      "en": "A flaw in the architecture of the loaf. Quite beyond my control.",
+      "ja": "パンの構造上の欠陥ね。私の手には負えなかったわ。",
+      "reading_kana": "パンノコウゾウジョウノケッカンネ。ワタシノテニハオエナカッタワ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Charming, deadpan aristocratic wit in a warm alto; pretending innocence."
+      },
+      "tts_text_gemini38": "<chuckle> パンの構造上の欠陥ね。<short pause> 私の手には負えなかったわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">パンの構造上の欠陥ね。<break time=\"340ms\"/>私の手には負えなかったわ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.94,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 4.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_018.ogg"
+    },
+    {
+      "order_index": 101,
+      "line_id": "tutorial_t3_after_019",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut ekmeğe bakıp hafifçe gülümser (`composed`).",
+      "subtext_tr": "İtiraz etmeyi bırakıp 'Yarın daha iyisini buluruz' der.",
+      "en": "Tomorrow we find a better one.",
+      "ja": "明日は、もう少し出来のいいパンを見つけよう。",
+      "reading_kana": "アシタハ、モウスコシデキノイイパンヲミツケヨウ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Warm, quiet low baritone; accepting her kindness."
+      },
+      "tts_text_gemini38": "明日は、<short pause> もう少し出来のいいパンを見つけよう。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.7st\">明日は、<break time=\"260ms\"/>もう少し出来のいいパンを見つけよう。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 3.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_019.ogg"
+    },
+    {
+      "order_index": 102,
+      "line_id": "tutorial_t3_after_020",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "wistful_pause",
+      "when_cue": "Sahne Aksiyonu | Fadyme kapıya doğru bakar (`GAZING OUT TOWARD THE DARKENING ROAD`).",
+      "subtext_tr": "'Yarın' kelimesi üzerine Fadyme'nin karanlık yola bakıp bir an sessizleşmesini anlatır.",
+      "en": "She looked toward the doorway. For a moment her answer did not come.",
+      "ja": "彼女は戸口の方へと視線を向けた。しばらくのあいだ、彼女の返事はなかった。",
+      "reading_kana": "カノジョハトグチノホウヘトシセンヲムケタ。シバラクノアイダ、カノジョノヘンジハナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, contemplative chronicle narration; slowing down as quiet weight enters the room."
+      },
+      "tts_text_gemini38": "彼女は戸口の方へと視線を向けた。<long pause> しばらくのあいだ、<short pause> 彼女の返事はなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-1.1st\">彼女は戸口の方へと視線を向けた。<break time=\"560ms\"/>しばらくのあいだ、<break time=\"260ms\"/>彼女の返事はなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 5.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_020.ogg"
+    },
+    {
+      "order_index": 103,
+      "line_id": "tutorial_t3_after_021",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme dalgınlığından sıyrılıp alçak sesle cevap verir (`composed`).",
+      "subtext_tr": "'Yarın... Evet' derken sesinde sakladığı ağır sırrın gölgesi vardır.",
+      "en": "Tomorrow. Yes.",
+      "ja": "明日。……ええ。",
+      "reading_kana": "アシタ。エエ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Hushed, wistful alto; a quiet pause between 'Tomorrow' and 'Yes'."
+      },
+      "tts_text_gemini38": "明日。<long pause> <breath> ええ。",
+      "ssml_chirp3": "<speak><prosody rate=\"87%\" pitch=\"-0.2st\">明日。<break time=\"540ms\"/>ええ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.87,
+        "pitch_semitones": -0.2,
+        "duration_seconds": 2.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_021.ogg"
+    },
+    {
+      "order_index": 104,
+      "line_id": "tutorial_t3_after_022",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "watchful",
+      "when_cue": "Mahmut Fadyme'deki durgunluğu anında fark eder (`watchful`).",
+      "subtext_tr": "Zorlamadan, yumuşak ve dikkatli bir sesle ne olduğunu sorar.",
+      "en": "What is it?",
+      "ja": "どうした？",
+      "reading_kana": "ドウシタ？",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Gentle, attentive low baritone; quiet concern."
+      },
+      "tts_text_gemini38": "どうした？",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.8st\">どうした？</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 1.7,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_022.ogg"
+    },
+    {
+      "order_index": 105,
+      "line_id": "tutorial_t3_after_023",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme sakin bir ifadeyle geçiştirmeye çalışır (`composed`).",
+      "subtext_tr": "'Bu gece çözülmesi gereken bir şey değil' diyerek yükünü paylaşmaktan çekinir.",
+      "en": "Nothing that needs solving tonight.",
+      "ja": "今夜、解決しなくてもいいことよ。",
+      "reading_kana": "コンヤ、カイケツシナクテモイイコトヨ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Guarded, gentle alto; trying to set her burden aside for the night."
+      },
+      "tts_text_gemini38": "今夜、<short pause> 解決しなくてもいいことよ。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.1st\">今夜、<break time=\"280ms\"/>解決しなくてもいいことよ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.1,
+        "duration_seconds": 3.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_023.ogg"
+    },
+    {
+      "order_index": 106,
+      "line_id": "tutorial_t3_after_024",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut çok sakin ama derin bir cümle kurar (`composed`).",
+      "subtext_tr": "'İlla çözülmesi gereken bir şey olması şart değil' diyerek sadece dinlemeye ve yanında olmaya hazır olduğunu belli eder.",
+      "en": "It does not have to need solving.",
+      "ja": "解決しなければならないことじゃなくてもいい。",
+      "reading_kana": "カイケツシナケレバナラナイコトジャナクテモイイ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Deeply patient, unhurried low baritone; offering unconditional presence without demanding answers."
+      },
+      "tts_text_gemini38": "解決しなければならないことじゃなくてもいい。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.9st\">解決しなければならないことじゃなくてもいい。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 3.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_024.ogg"
+    },
+    {
+      "order_index": 107,
+      "line_id": "tutorial_t3_after_025",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "unguarded_turn",
+      "when_cue": "Sahne Aksiyonu | Fadyme bu söz üzerine Mahmut'a döner.",
+      "subtext_tr": "Konuyu değiştirmek için hazırladığı küçük şakayı kullanmaktan vazgeçtiğini anlatır; aralarındaki duvarın indiği an.",
+      "en": "That made her turn back to him. The small joke she had prepared went unused.",
+      "ja": "その言葉に、彼女は彼の方へと向き直った。用意していた小さな冗談は、使われないままになった。",
+      "reading_kana": "ソノコトバニ、カノジョハカレノホウヘトムキナオッタ。ヨウイシテイタチイサナジョウダンハ、ツカワレナイママニナッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Intimate, deeply resonant chronicle narration; slow and emotionally grounded."
+      },
+      "tts_text_gemini38": "その言葉に、<short pause> 彼女は彼の方へと向き直った。<long pause> 用意していた小さな冗談は、<short pause> 使われないままになった。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-0.9st\">その言葉に、<break time=\"260ms\"/>彼女は彼の方へと向き直った。<break time=\"520ms\"/>用意していた小さな冗談は、<break time=\"260ms\"/>使われないままになった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_025.ogg"
+    },
+    {
+      "order_index": 108,
+      "line_id": "tutorial_t3_after_026",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "composed",
+      "when_cue": "Fadyme zırhını ve şakalarını bırakıp içtenlikle rica eder (`composed`).",
+      "subtext_tr": "Nöbete kalkmadan önce biraz daha yanında oturmasını ister.",
+      "en": "Stay a little while. Before you stand watch.",
+      "ja": "少しだけ、ここにいて。見張りに立つ前に。",
+      "reading_kana": "スコシダケ、ココニイテ。ミハリニタツマエニ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, unguarded, vulnerable alto; a quiet, earnest request."
+      },
+      "tts_text_gemini38": "<breath> 少しだけ、ここにいて。<long pause> 見張りに立つ前に。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"0.0st\">少しだけ、ここにいて。<break time=\"480ms\"/>見張りに立つ前に。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": 0.0,
+        "duration_seconds": 3.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_026.ogg"
+    },
+    {
+      "order_index": 109,
+      "line_id": "tutorial_t3_after_027",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut hiç kıpırdamadan, sarsılmaz bir huzurla cevap verir (`composed`).",
+      "subtext_tr": "'Buradayım.'",
+      "en": "I am here.",
+      "ja": "ここにいるさ。",
+      "reading_kana": "ココニイルサ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Warm, steady low baritone; quiet anchor."
+      },
+      "tts_text_gemini38": "ここにいるさ。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-0.9st\">ここにいるさ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 2.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_027.ogg"
+    },
+    {
+      "order_index": 110,
+      "line_id": "tutorial_t3_after_028",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme'nin yüzünde çok yumuşak, içten bir gülümseme belirir (`soft_smile`).",
+      "subtext_tr": "'Biliyorum. O yüzden istedim ya' diyerek ona olan güvenini dile getirir.",
+      "en": "I know. That was why I asked.",
+      "ja": "知っているわ。だから、お願いしたの。",
+      "reading_kana": "シッテイルワ。ダカラ、オネガイシタノ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Tender, heartfelt alto; soft warmth and quiet trust."
+      },
+      "tts_text_gemini38": "知っているわ。<short pause> だから、<short pause> お願いしたの。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"+0.2st\">知っているわ。<break time=\"340ms\"/>だから、<break time=\"220ms\"/>お願いしたの。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": 0.2,
+        "duration_seconds": 3.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_028.ogg"
+    },
+    {
+      "order_index": 111,
+      "line_id": "tutorial_t3_after_029",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "warm_silence",
+      "when_cue": "Sahne Aksiyonu | Dışarıda son ışık çekilirken içerideki sessizlik artık boş gelmez.",
+      "subtext_tr": "Yan yana oturdukları o sessizliğin içini dolduran huzuru anlatır.",
+      "en": "He stayed. Outside, the last light left the road; inside, the silence no longer felt empty.",
+      "ja": "彼はそこに留まった。外では街道から最後の光が消えていったが、屋内の沈黙は、もはや空虚には感じられなかった。",
+      "reading_kana": "カレハソコニトドマッタ。ソトデハカイドウカラサイゴノヒカリガキエテイッタガ、オクナイノチンモクハ、モハヤクウキョニハカンジラレナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deep, warm chronicle narration; unhurried and peaceful."
+      },
+      "tts_text_gemini38": "彼はそこに留まった。<long pause> 外では街道から最後の光が消えていったが、<short pause> 屋内の沈黙は、もはや空虚には感じられなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-0.9st\">彼はそこに留まった。<break time=\"520ms\"/>外では街道から最後の光が消えていったが、<break time=\"300ms\"/>屋内の沈黙は、もはや空虚には感じられなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 7.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_029.ogg"
+    },
+    {
+      "order_index": 112,
+      "line_id": "tutorial_t3_after_030",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut alçak, dingin bir sesle konuşur (`composed`).",
+      "subtext_tr": "Sabah gün ışıyınca acele etmeden yola çıkacaklarını söyler.",
+      "en": "We leave when there is light. No hurry.",
+      "ja": "明るくなってから発とう。急ぐ旅じゃない。",
+      "reading_kana": "アカルクナッテカラタトウ。イソグタビジャナイ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Gentle, unhurried low baritone; reassuring and calm."
+      },
+      "tts_text_gemini38": "明るくなってから発とう。<short pause> 急ぐ旅じゃない。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.8st\">明るくなってから発とう。<break time=\"340ms\"/>急ぐ旅じゃない。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 3.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_030.ogg"
+    },
+    {
+      "order_index": 113,
+      "line_id": "tutorial_t3_after_031",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme yumuşak bir tebessümle şart koşar (`soft_smile`).",
+      "subtext_tr": "'Ve iki adım önden yürümek de yok.'",
+      "en": "And no walking two steps ahead.",
+      "ja": "二歩先を歩くのも、なしね。",
+      "reading_kana": "ニホサキヲアルクノモ、ナシネ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Affectionate, softly smiling alto; gentle reminder to walk side by side."
+      },
+      "tts_text_gemini38": "二歩先を歩くのも、<short pause> なしね。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"+0.3st\">二歩先を歩くのも、<break time=\"260ms\"/>なしね。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": 0.3,
+        "duration_seconds": 2.9,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_031.ogg"
+    },
+    {
+      "order_index": 114,
+      "line_id": "tutorial_t3_after_032",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "mahmut",
+      "speaker_name": "Mahmut",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "emotion": "composed",
+      "when_cue": "Mahmut söz verir (`composed`).",
+      "subtext_tr": "'Öyleyse yanında.'",
+      "en": "Beside you, then.",
+      "ja": "なら、お前の隣だ。",
+      "reading_kana": "ナラ、オマエノトナリダ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Mahmut",
+        "style": "Warm, devoted low baritone; quiet promise."
+      },
+      "tts_text_gemini38": "なら、<short pause> お前の隣だ。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">なら、<break time=\"240ms\"/>お前の隣だ。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 2.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_032.ogg"
+    },
+    {
+      "order_index": 115,
+      "line_id": "tutorial_t3_after_033",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "fadyme",
+      "speaker_name": "Fadyme",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "emotion": "soft_smile",
+      "when_cue": "Fadyme'nin Tutorial'daki son sözü (`soft_smile`).",
+      "subtext_tr": "Mahmut'un 'yanında' sözünü huzurla kabul eder: '……ええ、そうして。'",
+      "en": "Then.",
+      "ja": "……ええ、そうして。",
+      "reading_kana": "エエ、ソウシテ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, lingering alto whisper filled with quiet peace and acceptance."
+      },
+      "tts_text_gemini38": "<breath> ええ、<short pause> そうして。",
+      "ssml_chirp3": "<speak><prosody rate=\"87%\" pitch=\"+0.2st\"><break time=\"240ms\"/>ええ、<break time=\"260ms\"/>そうして。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.87,
+        "pitch_semitones": 0.2,
+        "duration_seconds": 2.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_033.ogg"
+    },
+    {
+      "order_index": 116,
+      "line_id": "tutorial_t3_after_034",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "closing_peace",
+      "when_cue": "Tutorial T-3 Kapanış Cümlesi | `A DRY CORNER, HALF A LOAF, AND A PLACE BESIDE EACH OTHER`.",
+      "subtext_tr": "Tutorial üçlemesini kapatan son anlatıcı cümlesi: Bu gecelik kuru bir köşe, yarım somun ekmek ve birbirlerinin yanındaki yer yeterlidir.",
+      "en": "For tonight, a dry corner, half a loaf, and a place beside each other were enough.",
+      "ja": "今夜はただ、乾いた片隅と、半分ずつのパン、そして互いの隣にある居場所だけで十分だった。",
+      "reading_kana": "コンヤハタダ、カワイタカタスミト、ハンブンズツノパン、ソシテタガイノトナリニアルイバショダケデジュウブンダッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Poised, deeply comforting closing chronicle cadence; slowing gently at the end as the screen fades to black."
+      },
+      "tts_text_gemini38": "<breath> 今夜はただ、<short pause> 乾いた片隅と、<short pause> 半分ずつのパン、<long pause> そして互いの隣にある居場所だけで十分だった。",
+      "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-1.0st\">今夜はただ、<break time=\"260ms\"/>乾いた片隅と、<break time=\"280ms\"/>半分ずつのパン、<break time=\"520ms\"/>そして互いの隣にある居場所だけで十分だった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.88,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 7.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_034.ogg"
+    }
+  ]
+}

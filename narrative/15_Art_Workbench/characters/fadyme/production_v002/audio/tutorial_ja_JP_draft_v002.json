@@ -1,5 +1,5 @@
 {
-  "status": "DRAFT_NOT_NATIVE_APPROVED",
+  "status": "locked_cast_and_acting_prompts_v003",
   "line_count": 40,
   "context_source": "game/data/entry/tutorial_v001.json",
   "source_subtitles": "UNCHANGED_ENGLISH",
@@ -23,13 +23,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Light, poised alto with dry, aristocratic amusement; gently teasing her companion without complaining.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ソノイシニモ、モウクツヲカタホウトラレタワ。",
+      "when_cue": "Fadyme'nin oyundaki ilk repliği | Taşların da pek güvenli olmadığını ince bir espriyle söyler (`dry_amusement`).",
+      "subtext_tr": "Yorgunluğunu belli etmeden, taşların zaten çizmesinin tekini çamura batırdığını zarif bir alayla dile getirir.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, poised alto with dry, aristocratic amusement; gently teasing her companion without complaining."
+      },
+      "tts_text_gemini38": "<chuckle> その石にも、<short pause> もう靴を片方取られたわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">その石にも、<break time=\"240ms\"/>もう靴を片方取られたわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_before_005",
@@ -45,13 +56,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Warm, wryly affectionate alto; unhurried pause between sentences with a soft smile.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "サイナンヲカゾエルノガ、オジョウズネ。アンシンデキルカゾエカタダワ。",
+      "when_cue": "Fadyme yumuşak bir tebessümle karşılık verir (`soft_smile`).",
+      "subtext_tr": "Mahmut'un felaketleri sayarkenki sakin ve güven veren tavrını takdir eder.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, wryly affectionate alto; unhurried pause between sentences with a soft smile."
+      },
+      "tts_text_gemini38": "災難を数えるのが、お上手ね。<short pause> 安心できる数え方だわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">災難を数えるのが、お上手ね。<break time=\"360ms\"/>安心できる数え方だわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_before_007",
@@ -67,13 +89,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Playful, teasing alto with quiet intimacy; pausing between the two questions.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ソノイシヲワタルアイダダケ？　ソレトモ、コノミチノオワリマデ？",
+      "when_cue": "Fadyme elini uzatmadan önce başını hafifçe yana eğer (`dry_amusement`).",
+      "subtext_tr": "Sadece bu taşı geçmek için mi yoksa bütün yolculuk boyunca mı elini tutmak istediğini sorarak tatlı bir imada bulunur.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, teasing alto with quiet intimacy; pausing between the two questions."
+      },
+      "tts_text_gemini38": "その石を渡る間だけ？ <short pause> それとも、<short pause> この道の終わりまで？",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.4st\">その石を渡る間だけ？<break time=\"380ms\"/>それとも、<break time=\"220ms\"/>この道の終わりまで？</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_before_010",
@@ -89,13 +122,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Light, witty alto; covering a tender moment with charming dry humor.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ホラ、ミゴトナキュウシュツダッタワ。ザンネンナガラ、ハクシュハホトンドナイケレド。",
+      "when_cue": "Fadyme elini yavaşça çekerken gülümser (`dry_amusement`).",
+      "subtext_tr": "Aradaki duygusal yakınlığı zarif bir şakayla örter.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, witty alto; covering a tender moment with charming dry humor."
+      },
+      "tts_text_gemini38": "ほら、見事な救出だったわ。<short pause> 残念ながら、<short pause> 拍手はほとんどないけれど。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">ほら、見事な救出だったわ。<break time=\"360ms\"/>残念ながら、<break time=\"220ms\"/>拍手はほとんどないけれど。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_before_014",
@@ -111,13 +155,24 @@
       "expression": "resolve",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Clear, resolute alto with poised pride; crisp pauses between short sentences as she steps into battle beside him.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "カベノヨコネ。アナタノウシロジャナクテ。ソノチガイハワカッテイルワ。",
+      "when_cue": "T-1 Savaşı Öncesi Son Replik | Fadyme Mahmut'un yanına yerleşir (`determined`, `STANDING SIDE BY SIDE`).",
+      "subtext_tr": "Mahmut'un 'arkamda saklan' demeyip 'duvarın yanında dur' demesini takdir eder; sırtının arkasında değil, omuz omuza savaşacağını vurgular.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Clear, resolute alto with poised pride; crisp pauses between short sentences as she steps into battle beside him."
+      },
+      "tts_text_gemini38": "壁の横ね。<short pause> あなたの後ろじゃなくて。<short pause> その違いは分かっているわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"-0.2st\">壁の横ね。<break time=\"280ms\"/>あなたの後ろじゃなくて。<break time=\"320ms\"/>その違いは分かっているわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_after_003",
@@ -133,13 +188,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Light, dryly amused alto; reassuring him with effortless wit.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "コノミチヘノヒョウカダケ、キズツイタワ。",
+      "when_cue": "Fadyme sakin bir tebessümle karşılık verir (`dry_amusement`).",
+      "subtext_tr": "Yaralanmadığını, sadece bu berbat yola dair fikrinin yara aldığını söyleyerek Mahmut'u rahatlatır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, dryly amused alto; reassuring him with effortless wit."
+      },
+      "tts_text_gemini38": "この道への評価だけ、<short pause> 傷ついたわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">この道への評価だけ、<break time=\"260ms\"/>傷ついたわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_after_005",
@@ -155,13 +221,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Poised, dryly humorous alto; speaking of a forest branch as if it were an impolite guest.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "エダヨ。ヒドクギョウギノワルイエダダッタワ。",
+      "when_cue": "Fadyme koluna bakıp zarifçe geçiştirir (`dry_amusement`).",
+      "subtext_tr": "Sadece bir dalın takıldığını, ağacın çok 'kaba' olduğunu söyleyerek konuyu hafifletir.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Poised, dryly humorous alto; speaking of a forest branch as if it were an impolite guest."
+      },
+      "tts_text_gemini38": "枝よ。<short pause> ひどく行儀の悪い枝だったわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">枝よ。<break time=\"300ms\"/>ひどく行儀の悪い枝だったわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_after_008",
@@ -177,13 +254,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Playful, teasing alto; gentle lift on 'In the mud?', followed by warm dry wit.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ドロノナカデ？　モウスコシステキナオサソイヲキタイシテイタノニ。",
+      "when_cue": "Fadyme çamurlu yola bakıp gülümser (`dry_amusement`).",
+      "subtext_tr": "Çamurun ortasında dinlenme teklifini tatlı bir alayla geri çevirir.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, teasing alto; gentle lift on 'In the mud?', followed by warm dry wit."
+      },
+      "tts_text_gemini38": "泥の中で？ <short pause> <chuckle> もう少し素敵なお誘いを期待していたのに。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.4st\">泥の中で？<break time=\"340ms\"/>もう少し素敵なお誘いを期待していたのに。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_after_010",
@@ -199,13 +287,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Warm, charming alto with a soft smile; light and unhurried.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ミリョクテキネ。ヤネマデアレバ、コトワレナクナリソウ。",
+      "when_cue": "Fadyme'nin gülümsemesi yumuşar (`soft_smile`).",
+      "subtext_tr": "Kuru bir taşın cazip olduğunu, üstüne bir de çatı olursa karşı konulmaz olacağını söyler.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, charming alto with a soft smile; light and unhurried."
+      },
+      "tts_text_gemini38": "魅力的ね。<short pause> 屋根まであれば、<short pause> 断れなくなりそう。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">魅力的ね。<break time=\"320ms\"/>屋根まであれば、<break time=\"220ms\"/>断れなくなりそう。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t1_after_012",
@@ -221,13 +320,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Poised, earnest alto; gentle firmness reminding him that they look after each other equally.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ドチラカガヒツヨウトシタラ、ヨ。ソウイウヤクソクデショウ。",
+      "when_cue": "Fadyme sakin ama kararlı bir tonla düzeltir (`composed`).",
+      "subtext_tr": "Sadece kendisi için değil, ikisinden biri yorulursa duracaklarını hatırlatır; eşit yoldaşlık anlaşmaları budur.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Poised, earnest alto; gentle firmness reminding him that they look after each other equally."
+      },
+      "tts_text_gemini38": "どちらかが必要としたら、よ。<short pause> そういう約束でしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"0.0st\">どちらかが必要としたら、よ。<break time=\"340ms\"/>そういう約束でしょう。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_before_003",
@@ -243,13 +353,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Soft, contemplative alto; wistful and gently empathetic.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ムカシハ、ココガミチノオワリダッタノカモシレナイワ。",
+      "when_cue": "Fadyme hacıyı sessizce izler (`composed`).",
+      "subtext_tr": "Belki de eskiden yolun burada bittiğini söyleyerek hacının takılıp kalmışlığına hüzünlü bir anlam verir.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, contemplative alto; wistful and gently empathetic."
+      },
+      "tts_text_gemini38": "昔は、<short pause> ここが道の終わりだったのかもしれないわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.1st\">昔は、<break time=\"260ms\"/>ここが道の終わりだったのかもしれないわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_before_005",
@@ -265,13 +386,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Quiet, wryly compassionate alto; understated and gentle.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "エエ。ダレカガオシエテアゲナイト。",
+      "when_cue": "Fadyme hafif, buruk bir gülümsemeyle karşılık verir (`composed`).",
+      "subtext_tr": "'Birinin bunu ona söylemesi lazım' derken hem ince bir mizah hem de merhamet taşır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Quiet, wryly compassionate alto; understated and gentle."
+      },
+      "tts_text_gemini38": "ええ。<short pause> 誰かが教えてあげないと。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"0.0st\">ええ。<break time=\"300ms\"/>誰かが教えてあげないと。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_before_007",
@@ -287,13 +419,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Hushed, wistful alto; genuine curiosity tinged with quiet sorrow.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "アノヒトタチハ、ドコヘイクツモリダッタノカシラ。アナタモカンガエルコトハアル？",
+      "when_cue": "Fadyme alçak sesle Mahmut'a sorar (`composed`).",
+      "subtext_tr": "Bu kayıp ruhların hayattayken nereye gitmeye çalıştıklarını düşünüp düşünmediğini sorar.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Hushed, wistful alto; genuine curiosity tinged with quiet sorrow."
+      },
+      "tts_text_gemini38": "<sigh> あの人たちは、どこへ行くつもりだったのかしら。<long pause> あなたも考えることはある？",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.2st\">あの人たちは、どこへ行くつもりだったのかしら。<break time=\"480ms\"/>あなたも考えることはある？</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_before_009",
@@ -309,13 +452,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Warm, wistfully smiling alto; gentle yearning for ordinary peace and supper.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ワタシタチハ、アリフレタバショニツケレバイイワ。ユウショクモ、トビキリアリフレタモノデ。",
+      "when_cue": "Fadyme Mahmut'a dönüp yumuşakça gülümser (`soft_smile`).",
+      "subtext_tr": "Trajediden sıyrılıp çok insani bir dilekte bulunur: Sıradan bir yere varmak ve sıradan bir akşam yemeği yemek.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, wistfully smiling alto; gentle yearning for ordinary peace and supper."
+      },
+      "tts_text_gemini38": "私たちは、ありふれた場所に着ければいいわ。<short pause> 夕食も、<short pause> とびきりありふれたもので。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">私たちは、ありふれた場所に着ければいいわ。<break time=\"380ms\"/>夕食も、<break time=\"220ms\"/>とびきりありふれたもので。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_before_013",
@@ -331,13 +485,24 @@
       "expression": "resolve",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Poised, resolute alto; confident partner stepping into battle.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "アナタモ、ワタシノブンハアケテオイテ。",
+      "when_cue": "T-2 Savaşı Öncesi Son Replik | Fadyme gümüş çanını kaldırır (`determined`).",
+      "subtext_tr": "Mahmut'a kendisi için de yanında yer bırakmasını söyleyerek omuz omuza savaşa girer.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Poised, resolute alto; confident partner stepping into battle."
+      },
+      "tts_text_gemini38": "あなたも、<short pause> 私の分は空けておいて。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"-0.1st\">あなたも、<break time=\"240ms\"/>私の分は空けておいて。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_after_002",
@@ -353,13 +518,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Warm, dryly amused alto; gently teasing his relentless vigilance.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "スワッテ。キギモ、アナタノミマワリヲブジニキリヌケタコトダシ。",
+      "when_cue": "Fadyme taşın üzerinde otururken Mahmut'a takılır (`dry_amusement`).",
+      "subtext_tr": "Ağaçların onun teftişinden sağ çıktığını söyleyerek artık rahatça oturmasını ister.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, dryly amused alto; gently teasing his relentless vigilance."
+      },
+      "tts_text_gemini38": "<chuckle> 座って。<short pause> 木々も、あなたの見回りを無事に切り抜けたことだし。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">座って。<break time=\"340ms\"/>木々も、あなたの見回りを無事に切り抜けたことだし。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_after_004",
@@ -375,13 +551,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Affectionate, lightly scolding alto; gentle warmth beneath dry wit.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ソレナラ、ジットシテイテ。ヨロイマデヤスミタガッテイルワ。",
+      "when_cue": "Fadyme elini uzatır (`dry_amusement`).",
+      "subtext_tr": "Zırhının bile dinlenmek istediğini söyleyerek kıpırdamamasını ister.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Affectionate, lightly scolding alto; gentle warmth beneath dry wit."
+      },
+      "tts_text_gemini38": "それなら、じっとしていて。<short pause> 鎧まで休みたがっているわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.2st\">それなら、じっとしていて。<break time=\"340ms\"/>鎧まで休みたがっているわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_after_007",
@@ -397,13 +584,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Calm, tender alto; quiet intimacy that disarms his stoic habit.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "シッテイルワ。ワタシニマカセルコトダッテ、デキルデショウ。",
+      "when_cue": "Fadyme başını kaldırmadan sakin ve şefkatli bir sesle cevap verir (`composed`).",
+      "subtext_tr": "'Biliyorum. Bana bırakmayı da seçebilirsin' diyerek onun da bakılmayı hak ettiğini hatırlatır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Calm, tender alto; quiet intimacy that disarms his stoic habit."
+      },
+      "tts_text_gemini38": "知っているわ。<short pause> 私に任せることだって、<short pause> できるでしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"+0.1st\">知っているわ。<break time=\"320ms\"/>私に任せることだって、<break time=\"220ms\"/>できるでしょう。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_after_010",
@@ -419,13 +617,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Soft, wryly amused alto; gentle teasing.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ソレハ、アナタガコタエルトコロデショウ。",
+      "when_cue": "Fadyme gülümseyerek başını kaldırır (`dry_amusement`).",
+      "subtext_tr": "Kayışın onun kolunda olduğunu, dolayısıyla cevabı onun vermesi gerektiğini söyleyerek takılır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, wryly amused alto; gentle teasing."
+      },
+      "tts_text_gemini38": "<chuckle> それは、<short pause> あなたが答えるところでしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">それは、<break time=\"240ms\"/>あなたが答えるところでしょう。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_after_012",
@@ -441,13 +650,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Affectionate, lightly ironic alto with a soft smile.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ナンテクワシイホウコクカシラ。",
+      "when_cue": "Fadyme tatlı bir tebessümle iç çeker (`soft_smile`).",
+      "subtext_tr": "Mahmut'un tek kelimelik cevabına 'Ne kadar da ayrıntılı bir rapor' diyerek gülümser.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Affectionate, lightly ironic alto with a soft smile."
+      },
+      "tts_text_gemini38": "なんて詳しい報告かしら。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.4st\">なんて詳しい報告かしら。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_after_014",
@@ -463,13 +683,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Playful, witty alto; unhurried and charming.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "キヲツケテ。モウヒトコトツヅケタラ、ホメコトバダトカンチガイシテシマイソウ。",
+      "when_cue": "Fadyme gözlerini kısarak gülümser (`dry_amusement`).",
+      "subtext_tr": "'Dikkat et, bir cümle daha kurarsan iltifat sanacağım' diyerek şakalaşır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, witty alto; unhurried and charming."
+      },
+      "tts_text_gemini38": "気をつけて。<short pause> もう一言続けたら、<short pause> 褒め言葉だと勘違いしてしまいそう。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">気をつけて。<break time=\"300ms\"/>もう一言続けたら、<break time=\"240ms\"/>褒め言葉だと勘違いしてしまいそう。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t2_after_017",
@@ -485,13 +716,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Gentle, heartfelt alto; warm and satisfied.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ホラ。コンドハ、アナタガキヅカッテモラウバンヨ。",
+      "when_cue": "Fadyme Mahmut'un kolunu hafifçe bırakır (`soft_smile`).",
+      "subtext_tr": "Hep koruyan taraf olan Mahmut'a, 'Şimdi sıra sende' diyerek şefkat gösterir.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Gentle, heartfelt alto; warm and satisfied."
+      },
+      "tts_text_gemini38": "<breath> ほら。<short pause> 今度は、あなたが気遣ってもらう番よ。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"+0.3st\">ほら。<break time=\"300ms\"/>今度は、あなたが気遣ってもらう番よ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_before_003",
@@ -507,13 +749,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Light, teasing alto with dry aristocratic wit.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ワザワザチュウモンシテオイタミタイナイイカタネ。",
+      "when_cue": "Fadyme gülümseyerek Mahmut'a bakar (`dry_amusement`).",
+      "subtext_tr": "'Sanki önceden özel sipariş vermişsin gibi konuşuyorsun' diyerek takılır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, teasing alto with dry aristocratic wit."
+      },
+      "tts_text_gemini38": "<chuckle> わざわざ注文しておいたみたいな言い方ね。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"+0.4st\">わざわざ注文しておいたみたいな言い方ね。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_before_005",
@@ -529,13 +782,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Playful, warm alto with a soft smile; gentle pause between clauses.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ホシノミエナイヤネヲ？　ソレハジュウダイナミオトシネ。",
+      "when_cue": "Fadyme başını kaldırıp gökyüzüne bakar (`soft_smile`).",
+      "subtext_tr": "'Yıldız manzarası yok mu? Büyük bir ihmal' diyerek şakalaşmayı sürdürür.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Playful, warm alto with a soft smile; gentle pause between clauses."
+      },
+      "tts_text_gemini38": "星の見えない屋根を？ <short pause> それは重大な見落としね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.4st\">星の見えない屋根を？<break time=\"340ms\"/>それは重大な見落としね。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_before_009",
@@ -551,13 +815,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Cool, poised alto with dry composure in the face of danger.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "マエノジュウニンタチハ、デテイクキガナイヨウネ。",
+      "when_cue": "Fadyme gümüş çanını kaldırır (`composed`).",
+      "subtext_tr": "'Önceki kiracılar pek çıkmaya niyetli görünmüyor' diyerek soğukkanlılığını korur.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Cool, poised alto with dry composure in the face of danger."
+      },
+      "tts_text_gemini38": "前の住人たちは、<short pause> 出ていく気がないようね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"0.0st\">前の住人たちは、<break time=\"260ms\"/>出ていく気がないようね。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_before_011",
@@ -573,13 +848,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Wry, warmly amused alto even while readying for combat.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ワタシタチガフタリグミダトキメルノ、ズイブンハヤカッタノネ。",
+      "when_cue": "Fadyme hafifçe gülümser (`dry_amusement`).",
+      "subtext_tr": "Mahmut'un 'bizi ayırmalarına izin verme' sözüne 'İkili olduğumuza ne çabuk karar verdin' diye takılır ama bundan memnundur.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Wry, warmly amused alto even while readying for combat."
+      },
+      "tts_text_gemini38": "私たちが二人組だと決めるの、<short pause> ずいぶん早かったのね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">私たちが二人組だと決めるの、<break time=\"260ms\"/>ずいぶん早かったのね。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_before_013",
@@ -595,13 +881,24 @@
       "expression": "resolve",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Clear, determined alto; proud and unyielding partner.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ソレナラ、ジブンノバショヲマモッテ。ワタシハ、ワタシノバショヲマモルツモリヨ。",
+      "when_cue": "Fadyme'nin bakışları keskinleşir (`determined`).",
+      "subtext_tr": "'Öyleyse sen yerini koru, ben de kendi yerimi koruyacağım' diyerek savaşa hazır olduğunu ilan eder.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Clear, determined alto; proud and unyielding partner."
+      },
+      "tts_text_gemini38": "それなら、自分の場所を守って。<short pause> 私は、<short pause> 私の場所を守るつもりよ。",
+      "ssml_chirp3": "<speak><prosody rate=\"95%\" pitch=\"-0.2st\">それなら、自分の場所を守って。<break time=\"340ms\"/>私は、<break time=\"220ms\"/>私の場所を守るつもりよ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_003",
@@ -617,13 +914,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Light, dryly amused alto; fond and relaxed.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ヒトイキデ、イエジュウヲシラベオエタノネ。",
+      "when_cue": "Fadyme hafifçe gülümser (`dry_amusement`).",
+      "subtext_tr": "Mahmut'un tek nefeste bütün binayı teftiş etmesine takılır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, dryly amused alto; fond and relaxed."
+      },
+      "tts_text_gemini38": "<chuckle> 一息で、<short pause> 家じゅうを調べ終えたのね。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">一息で、<break time=\"240ms\"/>家じゅうを調べ終えたのね。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_006",
@@ -639,13 +947,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Warm, inviting alto disguised as polite formality; a soft smile in the voice.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "コチラノセキハ、アイテイルヨウダケレド。",
+      "when_cue": "Fadyme yanındaki boş yeri işaret eder (`soft_smile`).",
+      "subtext_tr": "Zarif ve dolaylı bir dille Mahmut'u yanına oturmaya davet eder.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, inviting alto disguised as polite formality; a soft smile in the voice."
+      },
+      "tts_text_gemini38": "こちらの席は、<short pause> 空いているようだけれど。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">こちらの席は、<break time=\"260ms\"/>空いているようだけれど。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_008",
@@ -661,13 +980,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Calm, knowing alto; gently calling out his excuse.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ハイルトキニ、モウシラベタデショウ。",
+      "when_cue": "Fadyme sakin bir sesle hatırlatır (`composed`).",
+      "subtext_tr": "İçeri girerken zaten kontrol ettiğini söyler.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Calm, knowing alto; gently calling out his excuse."
+      },
+      "tts_text_gemini38": "入るときに、<short pause> もう調べたでしょう。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.1st\">入るときに、<break time=\"240ms\"/>もう調べたでしょう。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_010",
@@ -683,13 +1013,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Warm, playful dry amusement in her alto voice; affectionate insistence on 'Sit'.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "タイセツナチガイネ。ミッツメノメンヲハッケンスルマエニ、スワッテ。",
+      "when_cue": "Fadyme gülümseyerek ısrar eder (`dry_amusement`).",
+      "subtext_tr": "'Önemli bir fark tabii. Üçüncü bir taraf keşfetmeden önce otur' diyerek onu yanına çeker.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, playful dry amusement in her alto voice; affectionate insistence on 'Sit'."
+      },
+      "tts_text_gemini38": "<chuckle> 大切な違いね。<short pause> 三つ目の面を発見する前に、<short pause> 座って。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">大切な違いね。<break time=\"340ms\"/>三つ目の面を発見する前に、<break time=\"240ms\"/>座って。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_013",
@@ -705,13 +1046,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Light, teasing alto; playful inflection on the first question.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "チャントシタパン？　ソレトモ、マタアルカモシレナイトイウハナシ？",
+      "when_cue": "Fadyme merakla bakar (`dry_amusement`).",
+      "subtext_tr": "'Gerçek ekmek mi, yoksa senin şu ihtimallerinden biri mi?' diye takılır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Light, teasing alto; playful inflection on the first question."
+      },
+      "tts_text_gemini38": "ちゃんとしたパン？ <short pause> それとも、<short pause> また「あるかもしれない」という話？",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">ちゃんとしたパン？<break time=\"340ms\"/>それとも、<break time=\"220ms\"/>また「あるかもしれない」という話？</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_015",
@@ -727,13 +1079,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Warm, genuinely delighted alto; soft gratitude wrapped in gentle wit.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ヤネトユウショク。モットヒンパンニ、セイカヲハッピョウスルベキダワ。",
+      "when_cue": "Fadyme içtenlikle gülümser (`soft_smile`).",
+      "subtext_tr": "T-2'de dilediği 'çatı ve sıradan akşam yemeği' gerçekleşmiştir; Mahmut'u tatlı bir dille över.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Warm, genuinely delighted alto; soft gratitude wrapped in gentle wit."
+      },
+      "tts_text_gemini38": "屋根と夕食。<short pause> もっと頻繁に、<short pause> 成果を発表するべきだわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"+0.3st\">屋根と夕食。<break time=\"320ms\"/>もっと頻繁に、<break time=\"220ms\"/>成果を発表するべきだわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_018",
@@ -749,13 +1112,24 @@
       "expression": "wry",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Charming, deadpan aristocratic wit in a warm alto; pretending innocence.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "パンノコウゾウジョウノケッカンネ。ワタシノテニハオエナカッタワ。",
+      "when_cue": "Fadyme masum bir ifadeyle omuz silker (`dry_amusement`).",
+      "subtext_tr": "'Ekmeğin mimarisindeki bir kusur, benim elimde olan bir şey değil' diyerek zarif bir bahaneyle Mahmut'un daha çok yemesini sağlar.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Charming, deadpan aristocratic wit in a warm alto; pretending innocence."
+      },
+      "tts_text_gemini38": "<chuckle> パンの構造上の欠陥ね。<short pause> 私の手には負えなかったわ。",
+      "ssml_chirp3": "<speak><prosody rate=\"94%\" pitch=\"+0.3st\">パンの構造上の欠陥ね。<break time=\"340ms\"/>私の手には負えなかったわ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_021",
@@ -771,13 +1145,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Hushed, wistful alto; a quiet pause between 'Tomorrow' and 'Yes'.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "アシタ。エエ。",
+      "when_cue": "Fadyme dalgınlığından sıyrılıp alçak sesle cevap verir (`composed`).",
+      "subtext_tr": "'Yarın... Evet' derken sesinde sakladığı ağır sırrın gölgesi vardır.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Hushed, wistful alto; a quiet pause between 'Tomorrow' and 'Yes'."
+      },
+      "tts_text_gemini38": "明日。<long pause> <breath> ええ。",
+      "ssml_chirp3": "<speak><prosody rate=\"87%\" pitch=\"-0.2st\">明日。<break time=\"540ms\"/>ええ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_023",
@@ -793,13 +1178,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Guarded, gentle alto; trying to set her burden aside for the night.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "コンヤ、カイケツシナクテモイイコトヨ。",
+      "when_cue": "Fadyme sakin bir ifadeyle geçiştirmeye çalışır (`composed`).",
+      "subtext_tr": "'Bu gece çözülmesi gereken bir şey değil' diyerek yükünü paylaşmaktan çekinir.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Guarded, gentle alto; trying to set her burden aside for the night."
+      },
+      "tts_text_gemini38": "今夜、<short pause> 解決しなくてもいいことよ。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.1st\">今夜、<break time=\"280ms\"/>解決しなくてもいいことよ。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_026",
@@ -815,13 +1211,24 @@
       "expression": "composed",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Soft, unguarded, vulnerable alto; a quiet, earnest request.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "スコシダケ、ココニイテ。ミハリニタツマエニ。",
+      "when_cue": "Fadyme zırhını ve şakalarını bırakıp içtenlikle rica eder (`composed`).",
+      "subtext_tr": "Nöbete kalkmadan önce biraz daha yanında oturmasını ister.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, unguarded, vulnerable alto; a quiet, earnest request."
+      },
+      "tts_text_gemini38": "<breath> 少しだけ、ここにいて。<long pause> 見張りに立つ前に。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"0.0st\">少しだけ、ここにいて。<break time=\"480ms\"/>見張りに立つ前に。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_028",
@@ -837,13 +1244,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Tender, heartfelt alto; soft warmth and quiet trust.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "シッテイルワ。ダカラ、オネガイシタノ。",
+      "when_cue": "Fadyme'nin yüzünde çok yumuşak, içten bir gülümseme belirir (`soft_smile`).",
+      "subtext_tr": "'Biliyorum. O yüzden istedim ya' diyerek ona olan güvenini dile getirir.",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Tender, heartfelt alto; soft warmth and quiet trust."
+      },
+      "tts_text_gemini38": "知っているわ。<short pause> だから、<short pause> お願いしたの。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"+0.2st\">知っているわ。<break time=\"340ms\"/>だから、<break time=\"220ms\"/>お願いしたの。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_031",
@@ -859,13 +1277,24 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Affectionate, softly smiling alto; gentle reminder to walk side by side.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "ニホサキヲアルクノモ、ナシネ。",
+      "when_cue": "Fadyme yumuşak bir tebessümle şart koşar (`soft_smile`).",
+      "subtext_tr": "'Ve iki adım önden yürümek de yok.'",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Affectionate, softly smiling alto; gentle reminder to walk side by side."
+      },
+      "tts_text_gemini38": "二歩先を歩くのも、<short pause> なしね。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"+0.3st\">二歩先を歩くのも、<break time=\"260ms\"/>なしね。</prosody></speak>"
     },
     {
       "line_id": "tutorial_t3_after_033",
@@ -881,13 +1310,26 @@
       "expression": "warm",
       "locale": "ja-JP",
       "provider_family": "Chirp3-HD",
-      "voice_id": null,
+      "voice_id": "ja-JP-Chirp3-HD-Sulafat",
       "text_status": "DRAFT_PENDING_NATIVE_JAPANESE_REVIEW",
       "translation_provenance": "Codex contextual Japanese adaptation 2026-10-09; no translation API",
       "recording_status": "NOT_GENERATED_NEW_TTS_RESET",
       "recording_path": null,
       "legacy_take_reuse": false,
-      "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
+      "delivery": "Soft, lingering alto whisper filled with quiet peace and acceptance.",
+      "gemini_voice": "Sulafat",
+      "reading_kana": "エエ、ソウシテ。",
+      "when_cue": "Fadyme'nin Tutorial'daki son sözü (`soft_smile`).",
+      "subtext_tr": "Mahmut'un 'yanında' sözünü huzurla kabul eder: '……ええ、そうして。'",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Fadyme",
+        "style": "Soft, lingering alto whisper filled with quiet peace and acceptance."
+      },
+      "tts_text_gemini38": "<breath> ええ、<short pause> そうして。",
+      "ssml_chirp3": "<speak><prosody rate=\"87%\" pitch=\"+0.2st\"><break time=\"240ms\"/>ええ、<break time=\"260ms\"/>そうして。</prosody></speak>"
     }
-  ]
+  ],
+  "voice_id": "ja-JP-Chirp3-HD-Sulafat",
+  "gemini_voice": "Sulafat"
 }

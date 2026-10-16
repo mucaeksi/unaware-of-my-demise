@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "project": "Unaware of My Demise",
+  "locked_at": "2026-10-16",
+  "tts_engines": {
+    "primary_expressive": {
+      "model": "gemini-3.8-flash-tts",
+      "capabilities": [
+        "turn-level speech_metadata.style acting prompts",
+        "point-in-time inline vocal tags (<short pause>, <long pause>, <breath>, <exhales>, <sigh>, <chuckle>, <whispers>)",
+        "2-speaker conversational dialogue mode for Mahmut + Fadyme scenes"
+      ],
+      "anti_robotic_rules": [
+        "NEVER pass stage directions inside plain transcript text; keep sustained emotional acting direction in speech_metadata.style.",
+        "NEVER batch an entire chapter of isolated lines into one flat prompt. Generate either in 2-speaker conversational exchanges or per-line with scene-specific speech_metadata.style.",
+        "Insert inline vocal tags (<short pause>, <long pause>, <breath>, <sigh>, <chuckle>, <exhales>) at natural Japanese clause boundaries so actors breathe and hesitate like living people.",
+        "Shift speaking rate, pitch contour, and warmth dynamically on every single line according to its narrative subtext."
+      ]
+    },
+    "secondary_deterministic_ssml": {
+      "model": "Chirp3-HD (Google Cloud Text-to-Speech v1)",
+      "capabilities": [
+        "clause-level <prosody rate pitch> envelopes",
+        "exact millisecond <break time/> pauses between clauses"
+      ]
+    }
+  },
+  "cast": {
+    "narrator": {
+      "speaker_id": "narrator",
+      "name_en": "Narrator",
+      "name_ja": "語り手",
+      "reading_kana": "カタリテ",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "fundamental_hz": 93.4,
+      "vocal_archetype": "Deep, resonant bass-baritone chronicle storyteller (93 Hz); weathered, intimate, unhurried, carrying the weight of memory without theatrical melodrama.",
+      "base_rate": 0.92,
+      "base_pitch_semitones": -1.0,
+      "default_style_prompt": "Deep, weathered Japanese chronicle narrator; unhurried, intimate, and resonant, letting quiet pauses settle like falling ash."
+    },
+    "fadyme": {
+      "speaker_id": "fadyme",
+      "name_en": "Fadyme",
+      "name_ja": "ファディメ",
+      "reading_kana": "ファディメ",
+      "gemini_voice": "Sulafat",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Sulafat",
+      "fundamental_hz": 252.6,
+      "vocal_archetype": "Adult woman (22), light controlled alto (253 Hz); poised gothic elegance, dry aristocratic wit, quiet underlying exhaustion, and tender warmth reserved only for Mahmut.",
+      "base_rate": 0.94,
+      "base_pitch_semitones": 0.0,
+      "default_style_prompt": "Poised young woman with a calm, luminous alto voice; unhurried cadence, subtle dry wit, and gentle warmth beneath composed restraint."
+    },
+    "mahmut": {
+      "speaker_id": "mahmut",
+      "name_en": "Mahmut",
+      "name_ja": "マフムト",
+      "reading_kana": "マフムト",
+      "gemini_voice": "Iapetus",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Iapetus",
+      "fundamental_hz": 144.6,
+      "vocal_archetype": "Adult weathered knight (28), grounded low-mid baritone (145 Hz); economical with words, practical, tiredly fond dry humor, and unyielding protective resolve when danger nears.",
+      "base_rate": 0.95,
+      "base_pitch_semitones": -0.8,
+      "default_style_prompt": "Grounded, travel-worn knight with a calm low baritone; economical phrasing, steady protective warmth, and understated dry humor."
+    }
+  }
+}

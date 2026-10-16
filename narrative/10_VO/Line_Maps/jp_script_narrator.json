@@ -1,0 +1,999 @@
+{
+  "schema_version": 2,
+  "speaker_id": "narrator",
+  "gemini_voice": "Algieba",
+  "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+  "direction_global": "Deep, weathered Japanese chronicle narrator; unhurried, intimate, and resonant, letting quiet pauses settle like falling ash.",
+  "lines": [
+    {
+      "order_index": 1,
+      "line_id": "entry_past_001",
+      "scene_id": "prologue_hours",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "chronicle_nostalgia",
+      "when_cue": "00:00–00:12 | Çan kulesi görseli (`prologue_village_hours`) belirdikten 320ms sonra, solo piyano ve çan tınısı üzerine.",
+      "subtext_tr": "Savaş öncesi Veyrhold'un huzurlu günlerini özlemle ama ağırbaşlı bir vakur tonla anlatır; '測っていた' sonrasında çan sesi yankılanırken hafifçe duraksar.",
+      "en": "Before the roads filled with ash, Veyrhold measured its days in bells. A sound from the tower meant another hour had passed.",
+      "ja": "道という道が灰に埋もれる前、ヴェアホルドの人々は鐘の音で日々を測っていた。塔から響くひと打ちは、またひとつの刻が過ぎたことを告げていた。",
+      "reading_kana": "ミチトイウミチガハイニウモレルマエ、ヴェアホルドノヒトビトハカネノオトデヒビヲハカッテイタ。トウカラヒビクヒトウチハ、マタヒトツノトキガスギタコトヲツゲテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deep, nostalgic, measured chronicle narrator; warm yet wistful tone, pausing gently between sentences as if listening to a distant bell."
+      },
+      "tts_text_gemini38": "<breath> 道という道が灰に埋もれる前、<short pause> ヴェアホルドの人々は鐘の音で日々を測っていた。<long pause> 塔から響くひと打ちは、<short pause> またひとつの刻が過ぎたことを告げていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">道という道が灰に埋もれる前、<break time=\"320ms\"/>ヴェアホルドの人々は鐘の音で日々を測っていた。<break time=\"680ms\"/>塔から響くひと打ちは、<break time=\"280ms\"/>またひとつの刻が過ぎたことを告げていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 9.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_001.ogg"
+    },
+    {
+      "order_index": 2,
+      "line_id": "entry_past_002",
+      "scene_id": "prologue_names",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "intimate_dignity",
+      "when_cue": "00:12–00:26 | Yol kenarı kayıt defteri (`prologue_village_names`) sahnesine geçişte, tüy kalem defterden kalkarken.",
+      "subtext_tr": "İnsanların unutulmamak için bıraktığı küçük izleri derin bir saygı ve mahremiyetle anlatır; '名声のためではない' cümlesini yumuşak ama net vurgular.",
+      "en": "People carved their names on doors and trees, and wrote them in roadside registers. Not for fame. So someone would remember that they had been here.",
+      "ja": "人々は扉や樹々に自らの名を刻み、道端の台帳にその名を書き残した。名声のためではない。確かにここに生きていたと、誰かが覚えていてくれるように。",
+      "reading_kana": "ヒトビトハトビラヤキギニミズカラノナヲキザミ、ミチバタノダイチョウニソノナヲカキノコシタ。メイセイノタメデハナイ。タシカニココニイキテイタト、ダレカガオボエテイテクレルヨウニ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Intimate, hushed dignity; gentle emphasis on 'not for fame', softening into tender reverence on the final clause."
+      },
+      "tts_text_gemini38": "人々は扉や樹々に自らの名を刻み、<short pause> 道端の台帳にその名を書き残した。<long pause> 名声のためではない。<short pause> 確かにここに生きていたと、<short pause> 誰かが覚えていてくれるように。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">人々は扉や樹々に自らの名を刻み、<break time=\"300ms\"/>道端の台帳にその名を書き残した。<break time=\"620ms\"/></prosody><prosody rate=\"88%\" pitch=\"-1.2st\">名声のためではない。<break time=\"480ms\"/>確かにここに生きていたと、<break time=\"260ms\"/>誰かが覚えていてくれるように。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 10.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_002.ogg"
+    },
+    {
+      "order_index": 3,
+      "line_id": "entry_past_003",
+      "scene_id": "prologue_ordinary_days",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "warm_to_foreboding",
+      "when_cue": "00:26–00:38 | Kasaba sokağında ekmek paylaşan insanlar (`prologue_village_ordinary_days`) görselinde.",
+      "subtext_tr": "İlk cümlede sıradan günlerin sıcaklığını hissettirir; 'それを失い始める日が来るまでは' kısmında ise sesi koyulaşır ve yaklaşan yıkımın gölgesini taşır.",
+      "en": "There were markets, journeys, and doors that opened to strangers. Small things, easily forgotten. Until the day people began to lose them.",
+      "ja": "市が立ち、旅人が行き交い、見知らぬ者にも扉は開かれていた。すぐに忘れ去られるような、ささやかな日常。……それを失い始める日が来るまでは。",
+      "reading_kana": "イチガタチ、タビビトガイキカイ、ミシラヌモノニモトビラハヒラカレテイタ。スグニワスレサラレルヨウナ、ササヤカナニチジョウ。ソレヲウシナイハジメルヒガクルマデハ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm and reflective at first, then slowing down and darkening with quiet foreboding on the final clause."
+      },
+      "tts_text_gemini38": "市が立ち、旅人が行き交い、<short pause> 見知らぬ者にも扉は開かれていた。<short pause> すぐに忘れ去られるような、ささやかな日常。<long pause> <exhales> それを失い始める日が来るまでは。",
+      "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.5st\">市が立ち、旅人が行き交い、<break time=\"260ms\"/>見知らぬ者にも扉は開かれていた。<break time=\"450ms\"/>すぐに忘れ去られるような、ささやかな日常。</prosody><break time=\"750ms\"/><prosody rate=\"85%\" pitch=\"-1.8st\">それを失い始める日が来るまでは。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 9.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_003.ogg"
+    },
+    {
+      "order_index": 4,
+      "line_id": "entry_past_004",
+      "scene_id": "prologue_throne_wars",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "grave_chronicle",
+      "when_cue": "00:38–00:50 | Terk edilmiş tarlalar ve göç eden aileler (`prologue_crownfall_throne_wars`) sahnesinde, yaylılar gerilirken.",
+      "subtext_tr": "Taht Savaşları'nın ağırlığını kısa, keskin ve ciddi cümlelerle aktarır; panik yapmadan, tarihin kaçınılmaz akışı gibi tok bir sesle konuşur.",
+      "en": "The great houses fought over a throne. Fields emptied. Families took to the roads, carrying what they could. The war drew closer to the capital.",
+      "ja": "諸侯はひとつの玉座を巡って争った。畑からは人が消え、家族は持てるものだけを抱えて街道へと出た。戦火は、やがて王都へと迫っていった。",
+      "reading_kana": "ショコウハヒトツノギョクザヲメグッテアラソッタ。ハタケカラハヒトガキエ、カゾクハモテルモノダケヲカカエテカイドウヘトデタ。センカハ、ヤガテオウトヘトセマッテイッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Low, grave, steady chronicle pace; crisp pauses between short sentences, conveying the gathering weight of war."
+      },
+      "tts_text_gemini38": "諸侯はひとつの玉座を巡って争った。<short pause> 畑からは人が消え、<short pause> 家族は持てるものだけを抱えて街道へと出た。<long pause> 戦火は、<short pause> やがて王都へと迫っていった。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.4st\">諸侯はひとつの玉座を巡って争った。<break time=\"420ms\"/>畑からは人が消え、<break time=\"280ms\"/>家族は持てるものだけを抱えて街道へと出た。<break time=\"580ms\"/>戦火は、<break time=\"260ms\"/>やがて王都へと迫っていった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.4,
+        "duration_seconds": 9.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_004.ogg"
+    },
+    {
+      "order_index": 5,
+      "line_id": "entry_past_005",
+      "scene_id": "prologue_crownfall",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "solemn_tragedy",
+      "when_cue": "00:50–01:06 | Yıkık başkent kapısı ve dumanlar (`prologue_crownfall_crownfall`) sahnesinde, ağır cenaze çanı vuruşunun hemen ardından.",
+      "subtext_tr": "Prologue'un en ağır kırılma noktası (Crownfall). Melodram yapmadan, bastırılmış derin bir keder ve tarihi ağırlıkla konuşur.",
+      "en": "Then came Crownfall. The capital fell. The king died. By dawn, survivors were leaving behind streets they had once known by heart.",
+      "ja": "そして、『王冠落ち』の日が訪れた。王都は陥ち、王は斃れた。夜が明ける頃、生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
+      "reading_kana": "ソシテ、オウカンオチノヒガオトズレタ。オウトハオチ、オウハタオレタ。ヨルガアケルコロ、イキノコッタモノタチハ、カツテシリツクシテイタハズノガイロヲアトニシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Solemn, heavy bass resonance after a funeral bell; short, devastating clauses delivered with restrained grief and zero melodrama."
+      },
+      "tts_text_gemini38": "<breath> そして、<short pause> 『王冠落ち』の日が訪れた。<long pause> 王都は陥ち、<short pause> 王は斃れた。<long pause> 夜が明ける頃、<short pause> 生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
+      "ssml_chirp3": "<speak><prosody rate=\"86%\" pitch=\"-2.0st\">そして、<break time=\"340ms\"/>『王冠落ち』の日が訪れた。<break time=\"680ms\"/>王都は陥ち、<break time=\"380ms\"/>王は斃れた。<break time=\"720ms\"/>夜が明ける頃、<break time=\"300ms\"/>生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.86,
+        "pitch_semitones": -2.0,
+        "duration_seconds": 11.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_005.ogg"
+    },
+    {
+      "order_index": 6,
+      "line_id": "entry_past_006",
+      "scene_id": "prologue_roads",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "hushed_sorrow",
+      "when_cue": "01:06–01:22 | Sisli yolda sırtlarında battaniyelerle yürüyen sağ kalanlar (`prologue_crownfall_roads`) görselinde.",
+      "subtext_tr": "Kayıpların ardından kalan boşluğu fısıltıya yakın, duru bir hüzünle anlatır; '帰るべき家はもうなかった' cümlesi sessizliğe karışır.",
+      "en": "They carried blankets, tools, and the names of those who had not come with them. Beyond the walls, the roads were still there. Home was not.",
+      "ja": "彼らが背負ったのは、毛布と道具、そして共に来られなかった者たちの名だった。城壁の向こうに道はまだ続いていた。だが、帰るべき家はもうなかった。",
+      "reading_kana": "カレラガセオッタノハ、モウフトドウグ、ソシテトモニコラレナカッタモノタチノナダッタ。ジョウヘキノムコウニミチハマダツヅイテイタ。ダガ、カエルベキイエハモウナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, sparse sorrow; unhurried delivery that drops to a near-whisper on the final sentence 'Home was not'."
+      },
+      "tts_text_gemini38": "彼らが背負ったのは、<short pause> 毛布と道具、<short pause> そして共に来られなかった者たちの名だった。<long pause> 城壁の向こうに道はまだ続いていた。<long pause> <sigh> だが、<short pause> 帰るべき家はもうなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-1.5st\">彼らが背負ったのは、<break time=\"260ms\"/>毛布と道具、<break time=\"300ms\"/>そして共に来られなかった者たちの名だった。<break time=\"640ms\"/>城壁の向こうに道はまだ続いていた。<break time=\"680ms\"/></prosody><prosody rate=\"83%\" pitch=\"-2.2st\">だが、<break time=\"320ms\"/>帰るべき家はもうなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.87,
+        "pitch_semitones": -1.6,
+        "duration_seconds": 11.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_006.ogg"
+    },
+    {
+      "order_index": 7,
+      "line_id": "entry_past_007",
+      "scene_id": "prologue_search",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "resolute_warmth",
+      "when_cue": "01:22–01:36 | Kış hanında mum ışığında kayıt defterine bakan Mahmut (`prologue_village_search`) sahnesinde, yürüyen çello motifi başlarken.",
+      "subtext_tr": "Yıkımın içinden doğan sadakat ve arayış. Mahmut'un kışlar boyu süren sabırlı arayışını anlatırken sese dingin bir sıcaklık ve kararlılık gelir.",
+      "en": "Among the travelers was a knight who searched the village registers for one name. Village after village, winter after winter, he kept looking.",
+      "ja": "旅人たちのなかに、ただひとつの名を求めて村々の台帳を辿る騎士がいた。村から村へ、冬から冬へと、彼は探し続けた。",
+      "reading_kana": "タビビトタチノナカニ、タダヒトツノナヲモトメテムラムラノダイチョウヲタドルキシガイタ。ムラカラムラヘ、フユカラフユヘト、カレハサガシツヅケタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Steady, resolute baritone with quiet warmth entering the voice, matching the rhythm of a solitary knight walking through winter."
+      },
+      "tts_text_gemini38": "旅人たちのなかに、<short pause> ただひとつの名を求めて村々の台帳を辿る騎士がいた。<long pause> 村から村へ、<short pause> 冬から冬へと、<short pause> 彼は探し続けた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">旅人たちのなかに、<break time=\"300ms\"/>ただひとつの名を求めて村々の台帳を辿る騎士がいた。<break time=\"620ms\"/>村から村へ、<break time=\"320ms\"/>冬から冬へと、<break time=\"280ms\"/>彼は探し続けた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 9.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_007.ogg"
+    },
+    {
+      "order_index": 8,
+      "line_id": "entry_past_008",
+      "scene_id": "prologue_reunion",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "tender_relief",
+      "when_cue": "01:36–01:48 | Yamaç köyünde Fadyme ve Mahmut'un yeniden karşılaşması (`prologue_road_reunion`), gümüş çan ve piyano tınısı.",
+      "subtext_tr": "Uzun arayışın sonundaki sessiz kavuşma. Ses yumuşar, '彼は頷いた' kısmında derin bir huzur ve şefkat hissedilir.",
+      "en": "In a hill village, he found her. She asked him to stay. He did. The road ahead would no longer be hers alone.",
+      "ja": "ある丘の村で、彼はついに彼女を見つけた。傍にいてほしいと彼女は願い、彼は頷いた。その先の道は、もはや彼女ひとりのものではなくなった。",
+      "reading_kana": "アルオカノムラデ、カレハツイニカノジョヲミツケタ。ソバニイテホシイトカノジョハネガイ、カレハウナズイタ。ソノサキノミチハ、モハヤカノジョヒトリノモノデハナクナッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Gentle relief and understated tenderness; soft, warm pacing as the two companions reunite."
+      },
+      "tts_text_gemini38": "<breath> ある丘の村で、<short pause> 彼はついに彼女を見つけた。<long pause> 傍にいてほしいと彼女は願い、<short pause> 彼は頷いた。<long pause> その先の道は、<short pause> もはや彼女ひとりのものではなくなった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.6st\">ある丘の村で、<break time=\"280ms\"/>彼はついに彼女を見つけた。<break time=\"580ms\"/>傍にいてほしいと彼女は願い、<break time=\"360ms\"/>彼は頷いた。<break time=\"620ms\"/>その先の道は、<break time=\"280ms\"/>もはや彼女ひとりのものではなくなった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.6,
+        "duration_seconds": 9.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_008.ogg"
+    },
+    {
+      "order_index": 9,
+      "line_id": "entry_past_009",
+      "scene_id": "prologue_beginning",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "poised_threshold",
+      "when_cue": "01:48–02:00 | Fadyme ve Mahmut'un Fısıldayan Kül Ormanı'na birlikte yürüyüşü (`prologue_road_beginning`), müzik son akora doğru çözülürken.",
+      "subtext_tr": "Prologue'u oyunun ilk sahnesine bağlayan eşik. İkisinin birbirine henüz söylemediği sırları ima ederken gizemli, ağırbaşlı ve davetkâr bir kapanış yapar.",
+      "en": "Now Fadyme and Mahmut walk together. The bells still ring. Neither has told the other everything. This is where their story begins.",
+      "ja": "いま、ファディメとマフムトは共に歩いている。鐘はいまも鳴り響き、ふたりはまだ互いのすべてを語ってはいない。……ここから、ふたりの物語が始まる。",
+      "reading_kana": "イマ、ファディメトマフムトハトモニアルイテイル。カネハイマモナリヒビキ、フタリハマダタガイノスベテヲカタッテハイナイ。ココカラ、フタリノモノガタリガハジマル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Poised, lingering closing cadence; measured mystery on 'neither has told the other everything', then a resonant pause before the final line."
+      },
+      "tts_text_gemini38": "いま、<short pause> ファディメとマフムトは共に歩いている。<short pause> 鐘はいまも鳴り響き、<short pause> ふたりはまだ互いのすべてを語ってはいない。<long pause> <breath> ここから、<short pause> ふたりの物語が始まる。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">いま、<break time=\"240ms\"/>ファディメとマフムトは共に歩いている。<break time=\"480ms\"/>鐘はいまも鳴り響き、<break time=\"300ms\"/>ふたりはまだ互いのすべてを語ってはいない。<break time=\"820ms\"/></prosody><prosody rate=\"86%\" pitch=\"-1.2st\">ここから、<break time=\"320ms\"/>ふたりの物語が始まる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 10.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/entry_past_009.ogg"
+    },
+    {
+      "order_index": 10,
+      "line_id": "tutorial_t1_before_001",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "watchful_atmosphere",
+      "when_cue": "Sahne T-1 Açılışı | Fısıldayan Kül Ormanı (`forest_whispering_ash`) ekrana gelir; Mahmut solda, Fadyme sağda.",
+      "subtext_tr": "Akşamüstü ağaçların arasındaki son ışığı ve ikilinin birbirine uyum sağlamaya başlayan ayak seslerini dingin bir kronik tonuyla anlatır.",
+      "en": "The last light lay between the trees. Their footsteps had almost found the same rhythm.",
+      "ja": "最後の光が木々のあいだに落ちていた。ふたりの足音は、ほとんど同じ歩調を見出しつつあった。",
+      "reading_kana": "サイゴノヒカリガキギノアイダニオチテイタ。フタリノアシオトハ、ホトンドオナジホチョウヲミイダシツツアッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Calm, atmospheric chronicle narration; hushed dusk stillness as two companions find a shared walking rhythm."
+      },
+      "tts_text_gemini38": "最後の光が木々のあいだに落ちていた。<long pause> ふたりの足音は、<short pause> ほとんど同じ歩調を見出しつつあった。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">最後の光が木々のあいだに落ちていた。<break time=\"520ms\"/>ふたりの足音は、<break time=\"260ms\"/>ほとんど同じ歩調を見出しつつあった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_001.ogg"
+    },
+    {
+      "order_index": 18,
+      "line_id": "tutorial_t1_before_009",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "intimate_lingering",
+      "when_cue": "Sahne Aksiyonu | Fadyme onun elini tutar (`HAND IN HAND ACROSS THE SLIPPERY CROSSING`).",
+      "subtext_tr": "Karşıya geçtiklerinde ikisinin de ellerini hemen bırakmadığını zarif ve sıcak bir gözlemle anlatır.",
+      "en": "She took his hand. On the other side, neither let go quite as promptly as the crossing required.",
+      "ja": "彼女は彼の手を取った。渡り終えた向こう側でも、ふたりとも、その場に必要なほどすぐには手を離さなかった。",
+      "reading_kana": "カノジョハカレノテヲトッタ。ワタリオエタムコウガワデモ、フタリトモ、ソノバニヒツヨウナホドスグニハテヲハナサナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Gentle, observant chronicle narration; warm and unhurried, letting the quiet closeness linger."
+      },
+      "tts_text_gemini38": "彼女は彼の手を取った。<long pause> 渡り終えた向こう側でも、<short pause> ふたりとも、その場に必要なほどすぐには手を離さなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女は彼の手を取った。<break time=\"520ms\"/>渡り終えた向こう側でも、<break time=\"260ms\"/>ふたりとも、その場に必要なほどすぐには手を離さなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_009.ogg"
+    },
+    {
+      "order_index": 21,
+      "line_id": "tutorial_t1_before_012",
+      "scene_id": "tutorial_t1_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "sudden_tension",
+      "when_cue": "Sahne Aksiyonu | İlerideki taşlardan sürtünme sesi gelir (`BELLBOUND DEAD APPROACH IN THE MIST`).",
+      "subtext_tr": "Sıcak sohbeti aniden kesen tehlike; Mahmut'un Fadyme daha cümlesini bitirmeden tehdide doğru dönüşünü anlatır.",
+      "en": "Something scraped across the stones ahead. Mahmut turned before she could make another remark.",
+      "ja": "前方の敷石の上で、何かが擦れる音がした。彼女が次の軽口を叩くより早く、マフムトは身を翻した。",
+      "reading_kana": "ゼンポウノシキイシノウエデ、ナニカガコスレルオトガシタ。カノジョガツギノカルグチヲタタクヨリハヤク、マフムトハミヲヒルガエシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Sudden shift to taut, alert chronicle narration; slightly faster pace on the second sentence as Mahmut turns."
+      },
+      "tts_text_gemini38": "前方の敷石の上で、<short pause> 何かが擦れる音がした。<long pause> 彼女が次の軽口を叩くより早く、<short pause> マフムトは身を翻した。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-1.3st\">前方の敷石の上で、<break time=\"260ms\"/>何かが擦れる音がした。<break time=\"480ms\"/>彼女が次の軽口を叩くより早く、<break time=\"240ms\"/>マフムトは身を翻した。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -1.3,
+        "duration_seconds": 6.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_before_012.ogg"
+    },
+    {
+      "order_index": 24,
+      "line_id": "tutorial_t1_after_001",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "calm_aftermath",
+      "when_cue": "T-1 Savaşı Sonrası Açılış | Yol tekrar sessizleşir.",
+      "subtext_tr": "İlk çarpışmanın ardından çöken sessizliği ve ikilinin hareket etmeden önce etrafı dinleyişini anlatır.",
+      "en": "The road grew quiet again. This time they listened to the silence before moving.",
+      "ja": "街道に再び静けさが戻った。今度はふたりとも、動き出す前にその沈黙に耳を澄ませた。",
+      "reading_kana": "カイドウニフタタビシズケサガモドッタ。コンドハフタリトモ、ウゴキダスマエニソノチンモクニミミヲスマセタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, unhurried post-battle narration; letting the silence settle."
+      },
+      "tts_text_gemini38": "<breath> 街道に再び静けさが戻った。<long pause> 今度はふたりとも、<short pause> 動き出す前にその沈黙に耳を澄ませた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.0st\">街道に再び静けさが戻った。<break time=\"520ms\"/>今度はふたりとも、<break time=\"260ms\"/>動き出す前にその沈黙に耳を澄ませた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_001.ogg"
+    },
+    {
+      "order_index": 29,
+      "line_id": "tutorial_t1_after_006",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "tender_gesture",
+      "when_cue": "Sahne Aksiyonu | Mahmut uzanıp onun omzundaki yırtık yaprağı alır (`HE BRUSHES A TORN ASH LEAF FROM HER SHOULDER`).",
+      "subtext_tr": "Mahmut'un şefkatli hareketini ve hemen ardından utangaçlığını gizlemek için kalkanını kontrol edişini anlatır.",
+      "en": "He brushed a torn leaf from her shoulder, then found a reason to check his shield.",
+      "ja": "彼は彼女の肩からちぎれた葉を払い、それから盾を確かめる口実を見つけた。",
+      "reading_kana": "カレハカノジョノカタカラチギレタハヲハライ、ソレカラタテヲタシカメルコウジツヲミツケタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, subtly perceptive chronicle narration; gentle and unhurried."
+      },
+      "tts_text_gemini38": "彼は彼女の肩からちぎれた葉を払い、<short pause> それから盾を確かめる口実を見つけた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.8st\">彼は彼女の肩からちぎれた葉を払い、<break time=\"340ms\"/>それから盾を確かめる口実を見つけた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 5.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_006.ogg"
+    },
+    {
+      "order_index": 37,
+      "line_id": "tutorial_t1_after_014",
+      "scene_id": "tutorial_t1_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "warm_companionship",
+      "when_cue": "T-1 Sonu | Mahmut adımlarını kısaltır (`MATCHING STRIDES ALONG THE ASH ROAD`).",
+      "subtext_tr": "Mahmut'un Fadyme yorulmasın diye adımlarını kısalttığını ve Fadyme'nin bunu fark edip gururunu kırmamak için yüksek sesle teşekkür etmediğini anlatır.",
+      "en": "He shortened his stride. She noticed, and chose not to thank him for it aloud.",
+      "ja": "彼は歩幅を詰めた。彼女はそれに気づいたが、あえて口に出して礼を言わないでおいた。",
+      "reading_kana": "カレハホハバヲツメタ。カノジョハソレニキヅイタガ、アエテクチニダシテレイヲイワナイデオイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, intimate chronicle cadence; lingering tenderly on their unspoken understanding."
+      },
+      "tts_text_gemini38": "彼は歩幅を詰めた。<long pause> 彼女はそれに気づいたが、<short pause> あえて口に出して礼を言わないでおいた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼は歩幅を詰めた。<break time=\"480ms\"/>彼女はそれに気づいたが、<break time=\"260ms\"/>あえて口に出して礼を言わないでおいた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t1_after_014.ogg"
+    },
+    {
+      "order_index": 38,
+      "line_id": "tutorial_t2_before_001",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "somber_discovery",
+      "when_cue": "Sahne T-2 Açılışı | Unutulmuş Taş Kavşak (`forgotten_stone_crossing`); yalnız bir Hollow Pilgrim aşınmış taşların etrafında döner.",
+      "subtext_tr": "Yolun daraldığı yerde aynı taşların etrafında ayağını sürüyerek dönüp duran yalnız hacıyı hüzünlü ve tekinsiz bir dille betimler.",
+      "en": "Where the path narrowed, a lone pilgrim dragged one foot around the same worn stones.",
+      "ja": "道が細まる場所で、ひとりの巡礼者が同じ擦り減った石のまわりを、片足を引きずりながら巡っていた。",
+      "reading_kana": "ミチガホソマルバショデ、ヒトリノジュンレイシャガオナジスリヘッタイシノマワリヲ、カタアシヲヒキズリナガラメグッテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, somber chronicle narration; slow and eerie rhythm matching a dragging footstep."
+      },
+      "tts_text_gemini38": "道が細まる場所で、<short pause> ひとりの巡礼者が同じ擦り減った石のまわりを、<short pause> 片足を引きずりながら巡っていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.1st\">道が細まる場所で、<break time=\"280ms\"/>ひとりの巡礼者が同じ擦り減った石のまわりを、<break time=\"260ms\"/>片足を引きずりながら巡っていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 6.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_001.ogg"
+    },
+    {
+      "order_index": 43,
+      "line_id": "tutorial_t2_before_006",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "patient_silence",
+      "when_cue": "Sahne Aksiyonu | Fadyme sessizce hacıyı izler (`WATCHING THE LONE HOLLOW PILGRIM`).",
+      "subtext_tr": "Fadyme'nin boşluğa hapsolmuş hacıyı izleyişini ve Mahmut'un onu hiç acele ettirmeyişini anlatır.",
+      "en": "For a moment she watched the empty movement without speaking. Mahmut did not hurry her.",
+      "ja": "しばらくのあいだ、彼女は言葉もなくその虚ろな足取りを見つめていた。マフムトは彼女を急かさなかった。",
+      "reading_kana": "シバラクノアイダ、カノジョハコトバモナクソノウツロナアシドリヲミツメテイタ。マフムトハカノジョヲセカサナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Unhurried, compassionate chronicle narration; respectful silence between clauses."
+      },
+      "tts_text_gemini38": "しばらくのあいだ、<short pause> 彼女は言葉もなくその虚ろな足取りを見つめていた。<long pause> マフムトは彼女を急かさなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.0st\">しばらくのあいだ、<break time=\"260ms\"/>彼女は言葉もなくその虚ろな足取りを見つめていた。<break time=\"540ms\"/>マフムトは彼女を急かさなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_006.ogg"
+    },
+    {
+      "order_index": 48,
+      "line_id": "tutorial_t2_before_011",
+      "scene_id": "tutorial_t2_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "tense_awakening",
+      "when_cue": "Sahne Aksiyonu | Hacı aniden durur ve başını onlara çevirir (`COMBAT STANCE AT THE FORGOTTEN STONE CROSSING`).",
+      "subtext_tr": "Sohbetin ortasında hacının durup onlara dönüşüyle gerilim bir anda yükselir.",
+      "en": "The pilgrim stopped. Its head turned toward them.",
+      "ja": "巡礼者が足を止めた。その首が、ふたりへと向けられる。",
+      "reading_kana": "ジュンレイシャガアシヲトメタ。ソノクビガ、フタリヘトムケラレル。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Taut, ominous chronicle narration; crisp pause between the two short sentences."
+      },
+      "tts_text_gemini38": "巡礼者が足を止めた。<long pause> その首が、<short pause> ふたりへと向けられる。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-1.4st\">巡礼者が足を止めた。<break time=\"480ms\"/>その首が、<break time=\"240ms\"/>ふたりへと向けられる。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -1.4,
+        "duration_seconds": 4.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_before_011.ogg"
+    },
+    {
+      "order_index": 51,
+      "line_id": "tutorial_t2_after_001",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "quiet_respite",
+      "when_cue": "T-2 Savaşı Sonrası Açılış | `roadside_rest` CG sahnesi; devrilmiş taş oturacak yer sunar.",
+      "subtext_tr": "Savaş bittikten sonra bile Mahmut'un oturmadan önce ağaçları kontrol etme alışkanlığını anlatır.",
+      "en": "Beyond the narrow path, a fallen stone offered a seat. Mahmut checked the trees before he sat.",
+      "ja": "細い道の先に、腰を下ろせそうな倒れ石があった。マフムトは木立を確かめてから、ようやく腰を下ろした。",
+      "reading_kana": "ホソイミチノサキニ、コシヲオロセソウナタオレイシガアッタ。マフムトハコダチヲタシカメテカラ、ヨウヤクコシヲオロシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Calm, restful chronicle narration; unhurried dusk pacing."
+      },
+      "tts_text_gemini38": "細い道の先に、<short pause> 腰を下ろせそうな倒れ石があった。<long pause> マフムトは木立を確かめてから、<short pause> ようやく腰を下ろした。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.9st\">細い道の先に、<break time=\"260ms\"/>腰を下ろせそうな倒れ石があった。<break time=\"520ms\"/>マフムトは木立を確かめてから、<break time=\"260ms\"/>ようやく腰を下ろした。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_001.ogg"
+    },
+    {
+      "order_index": 55,
+      "line_id": "tutorial_t2_after_005",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "intimate_care",
+      "when_cue": "Sahne Aksiyonu | Fadyme Mahmut'un bileğini kendine çekip gevşek deri kayışı tokadan geçirir (`FADYME TIGHTENS THE LOOSE LEATHER STRAP ON HIS GAUNTLET`).",
+      "subtext_tr": "`roadside_rest` illüstrasyonunun tam karşılığı; Fadyme'nin özenli hareketini anlatır.",
+      "en": "She drew his wrist toward her and threaded the loose leather through its buckle.",
+      "ja": "彼女は彼の手首を引き寄せ、緩んだ革帯を留め金へと通した。",
+      "reading_kana": "カノジョハカレノテクビヲヒキヨセ、ユルンダカワオビヲトメガネヘトトオシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Intimate, hushed chronicle narration; gentle and unhurried."
+      },
+      "tts_text_gemini38": "彼女は彼の手首を引き寄せ、<short pause> 緩んだ革帯を留め金へと通した。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女は彼の手首を引き寄せ、<break time=\"300ms\"/>緩んだ革帯を留め金へと通した。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 4.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_005.ogg"
+    },
+    {
+      "order_index": 58,
+      "line_id": "tutorial_t2_after_008",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "unspoken_tenderness",
+      "when_cue": "Sahne Aksiyonu | Mahmut ağaçlar yerine Fadyme'nin parmaklarını izler.",
+      "subtext_tr": "İkisinin de bu yakınlığın biraz daha sürmesini istediğini anlatan çok ince ve duygusal bir anlatıcı cümlesi.",
+      "en": "He watched her fingers instead of the trees. She kept her eyes on the strap a little longer than necessary.",
+      "ja": "彼は木々ではなく、彼女の指先を見つめていた。彼女もまた、必要な時間より少しだけ長く、革帯に視線を落としていた。",
+      "reading_kana": "カレハキギデハナク、カノジョノユビサキヲミツメテイタ。カノジョモマタ、ヒツヨウナジカンヨリスコシダケナガク、カワオビニシセンヲオトシテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, deeply intimate chronicle narration; slow and delicate pacing."
+      },
+      "tts_text_gemini38": "彼は木々ではなく、<short pause> 彼女の指先を見つめていた。<long pause> 彼女もまた、<short pause> 必要な時間より少しだけ長く、<short pause> 革帯に視線を落としていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-0.8st\">彼は木々ではなく、<break time=\"260ms\"/>彼女の指先を見つめていた。<break time=\"540ms\"/>彼女もまた、<break time=\"240ms\"/>必要な時間より少しだけ長く、<break time=\"260ms\"/>革帯に視線を落としていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 8.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_008.ogg"
+    },
+    {
+      "order_index": 66,
+      "line_id": "tutorial_t2_after_016",
+      "scene_id": "tutorial_t2_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "quiet_smile",
+      "when_cue": "Sahne Aksiyonu | Fadyme bitirdiği düğüme bakarak gülümser (`A QUIET SMILE OVER THE FINISHED BUCKLE`).",
+      "subtext_tr": "Fadyme'nin sessiz gülümseyişini ve Mahmut'un bakışlarını yavaşça kaçırışını anlatır.",
+      "en": "She smiled down at the finished knot. He looked away first, but not quickly.",
+      "ja": "彼女は締め終えた結び目に目を落として微笑んだ。先に視線を逸らしたのは彼だったが、すぐには逸らさなかった。",
+      "reading_kana": "カノジョハシメオエタムスビメニメヲオトシテホホエンダ。サキニシセンヲソラシタノハカレダッタガ、スグニハソラサナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Tender, lingering chronicle narration; warm and unhurried."
+      },
+      "tts_text_gemini38": "彼女は締め終えた結び目に目を落として微笑んだ。<long pause> 先に視線を逸らしたのは彼だったが、<short pause> すぐには逸らさなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女は締め終えた結び目に目を落として微笑んだ。<break time=\"520ms\"/>先に視線を逸らしたのは彼だったが、<break time=\"260ms\"/>すぐには逸らさなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 7.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t2_after_016.ogg"
+    },
+    {
+      "order_index": 69,
+      "line_id": "tutorial_t3_before_001",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "dusk_arrival",
+      "when_cue": "Sahne T-3 Açılışı | Dalların arasından kırık bir çatı görünür (`shelter_courtyard_dusk`).",
+      "subtext_tr": "Alacakaranlıkta görünen kırık çatının yine de kuru bir köşe vaat ettiğini dingin bir dille anlatır.",
+      "en": "A broken roof appeared through the branches. There was still enough of it to promise a dry corner.",
+      "ja": "枝々の向こうに、崩れかけた屋根が見えてきた。それでも、乾いた片隅を約束するには十分なだけ残っていた。",
+      "reading_kana": "エダエダノムコウニ、クズレカケタヤネガミエテキタ。ソレデモ、カワイタカタスミヲヤクソクスルニハジュウブンナダケノコッテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Calm, relieved chronicle narration as shelter appears at dusk."
+      },
+      "tts_text_gemini38": "枝々の向こうに、<short pause> 崩れかけた屋根が見えてきた。<long pause> それでも、<short pause> 乾いた片隅を約束するには十分なだけ残っていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-0.9st\">枝々の向こうに、<break time=\"260ms\"/>崩れかけた屋根が見えてきた。<break time=\"520ms\"/>それでも、<break time=\"240ms\"/>乾いた片隅を約束するには十分なだけ残っていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_001.ogg"
+    },
+    {
+      "order_index": 75,
+      "line_id": "tutorial_t3_before_007",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "interrupted_warmth",
+      "when_cue": "Sahne Aksiyonu | Fadyme sessizce güler; tam o sırada saçakların altında bir gölge kıpırdar (`SHADOWS STIR BENEATH THE SHELTER EAVES`).",
+      "subtext_tr": "Fadyme'nin içten gülüşünü ve Mahmut'un saçak altındaki hareketi fark edişini anlatır.",
+      "en": "She laughed softly. He was still listening when a shape moved beneath the eaves.",
+      "ja": "彼女は小さく笑った。軒下で影が蠢いたときも、彼はまだ周囲に耳を澄ませていた。",
+      "reading_kana": "カノジョハチイサクワラッタ。ノキシタデカゲガウゴメイタトキモ、カレハマダシュウイニミミヲスマセテイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Starts warm and soft, then tightens into quiet vigilance on the second sentence."
+      },
+      "tts_text_gemini38": "彼女は小さく笑った。<long pause> 軒下で影が蠢いたときも、<short pause> 彼はまだ周囲に耳を澄ませていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.7st\">彼女は小さく笑った。</prosody><break time=\"520ms\"/><prosody rate=\"90%\" pitch=\"-1.3st\">軒下で影が蠢いたときも、<break time=\"260ms\"/>彼はまだ周囲に耳を澄ませていた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 5.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_007.ogg"
+    },
+    {
+      "order_index": 82,
+      "line_id": "tutorial_t3_before_014",
+      "scene_id": "tutorial_t3_before",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "battle_threshold",
+      "when_cue": "T-3 Savaşı Öncesi Son Replik | İkisi aynı anda ileri adım atar (`STEPPING FORWARD TOGETHER AS ONE`).",
+      "subtext_tr": "İlk savaştaki tereddüdün aksine, bu kez tam bir uyumla birlikte ileri adım atışlarını anlatır.",
+      "en": "This time they stepped forward together.",
+      "ja": "今度は、ふたり同時に前へと踏み出した。",
+      "reading_kana": "コンドハ、フタリドウジニマエヘトフミダシタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Resolute, poised chronicle narration; a strong closing beat into battle."
+      },
+      "tts_text_gemini38": "今度は、<short pause> ふたり同時に前へと踏み出した。",
+      "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">今度は、<break time=\"260ms\"/>ふたり同時に前へと踏み出した。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.91,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 3.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_before_014.ogg"
+    },
+    {
+      "order_index": 83,
+      "line_id": "tutorial_t3_after_001",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "evening_hush",
+      "when_cue": "T-3 Savaşı Sonrası Açılış | `shelter_evening` CG sahnesi; içeride rüzgar kirişlerde hafif bir sese dönüşür.",
+      "subtext_tr": "O akşam ilk kez ikisinin de yürümek zorunda olmadığı huzurlu sığınak atmosferini kurar.",
+      "en": "Inside, the wind softened to a sound in the rafters. For the first time that evening, neither of them had to walk.",
+      "ja": "屋内では、風は梁を撫でるかすかな音へと和らいでいた。その夜初めて、ふたりとも歩かなくてよくなった。",
+      "reading_kana": "オクナイデハ、カゼハハリヲナデルカスカナオトヘトヤワライデイタ。ソノヨルハジメテ、フタリトモアルカナクテヨクナッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deep, tranquil chronicle narration; a soothing exhale after a long day on the road."
+      },
+      "tts_text_gemini38": "<breath> 屋内では、風は梁を撫でるかすかな音へと和らいでいた。<long pause> その夜初めて、<short pause> ふたりとも歩かなくてよくなった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.0st\">屋内では、風は梁を撫でるかすかな音へと和らいでいた。<break time=\"540ms\"/>その夜初めて、<break time=\"260ms\"/>ふたりとも歩かなくてよくなった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_001.ogg"
+    },
+    {
+      "order_index": 87,
+      "line_id": "tutorial_t3_after_005",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "chivalrous_warmth",
+      "when_cue": "Sahne Aksiyonu | Mahmut pelerinini soğuk taşın üzerine serer (`HIS OXBLOOD CLOAK SPREAD OVER THE COLD STONE BENCH`).",
+      "subtext_tr": "Mahmut'un pelerinini sermesini ve Fadyme'nin bir kenara oturup diğer yanı açıkça onun için boş bırakmasını anlatır.",
+      "en": "He laid his cloak over the cold stone. She sat on one edge and left the other unmistakably free.",
+      "ja": "彼は冷たい石の上に自身の外套を敷いた。彼女は片端に腰を下ろし、もう片方を誰の目にも明らかなほど空けておいた。",
+      "reading_kana": "カレハツメタイイシノウエニジシンノガイトウヲシイタ。カノジョハカタハシニコシヲオロシ、モウカタホウヲダレノメニモアキラカナホドアケテオイタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, gently perceptive chronicle narration; unhurried and intimate."
+      },
+      "tts_text_gemini38": "彼は冷たい石の上に自身の外套を敷いた。<long pause> 彼女は片端に腰を下ろし、<short pause> もう片方を誰の目にも明らかなほど空けておいた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼は冷たい石の上に自身の外套を敷いた。<break time=\"520ms\"/>彼女は片端に腰を下ろし、<break time=\"260ms\"/>もう片方を誰の目にも明らかなほど空けておいた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 7.2,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_005.ogg"
+    },
+    {
+      "order_index": 93,
+      "line_id": "tutorial_t3_after_011",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "seated_side_by_side",
+      "when_cue": "Sahne Aksiyonu | Mahmut oturur (`SEATED SIDE BY SIDE WITHIN THE WAYSIDE SHELTER`).",
+      "subtext_tr": "Kalkanının elinin altında, Fadyme'nin omzunun ise neredeyse omzuna değecek kadar yakın olduğunu anlatır.",
+      "en": "He sat. His shield rested within reach; her shoulder rested almost within reach of his.",
+      "ja": "彼は腰を下ろした。盾は手の届くところに置かれ、彼女の肩もまた、彼の肩にほとんど触れそうなほど近くにあった。",
+      "reading_kana": "カレハコシヲオロシタ。タテハテノトドクトコロニオカレ、カノジョノカタモマタ、カレノカタニホトンドフレソウナホドチカクニアッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Tender, intimate chronicle narration; warm and unhurried."
+      },
+      "tts_text_gemini38": "彼は腰を下ろした。<long pause> 盾は手の届くところに置かれ、<short pause> 彼女の肩もまた、彼の肩にほとんど触れそうなほど近くにあった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼は腰を下ろした。<break time=\"480ms\"/>盾は手の届くところに置かれ、<break time=\"280ms\"/>彼女の肩もまた、彼の肩にほとんど触れそうなほど近くにあった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 7.0,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_011.ogg"
+    },
+    {
+      "order_index": 98,
+      "line_id": "tutorial_t3_after_016",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "sharing_bread",
+      "when_cue": "Sahne Aksiyonu | Fadyme ekmeği ikiye böler, parçaları tartıp büyük olanı Mahmut'un eline verir (`SHARING A LOAF OF BREAD AT DUSK`).",
+      "subtext_tr": "`shelter_evening` illüstrasyonundaki ekmek paylaşımı: Fadyme'nin büyük parçayı Mahmut'a verişini anlatır.",
+      "en": "She broke the loaf in two, considered the pieces, and put the larger one in his hand.",
+      "ja": "彼女はパンを二つに割り、それぞれの大きさを見比べてから、大きい方を彼の手に握らせた。",
+      "reading_kana": "カノジョハパンヲフタツニワリ、ソレゾレノオオキサヲミクラベテカラ、オオキイホウヲカレノテニニギラセタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, observant chronicle narration; gentle and unhurried."
+      },
+      "tts_text_gemini38": "彼女はパンを二つに割り、<short pause> それぞれの大きさを見比べてから、<short pause> 大きい方を彼の手に握らせた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">彼女はパンを二つに割り、<break time=\"280ms\"/>それぞれの大きさを見比べてから、<break time=\"280ms\"/>大きい方を彼の手に握らせた。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.4,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_016.ogg"
+    },
+    {
+      "order_index": 102,
+      "line_id": "tutorial_t3_after_020",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "wistful_pause",
+      "when_cue": "Sahne Aksiyonu | Fadyme kapıya doğru bakar (`GAZING OUT TOWARD THE DARKENING ROAD`).",
+      "subtext_tr": "'Yarın' kelimesi üzerine Fadyme'nin karanlık yola bakıp bir an sessizleşmesini anlatır.",
+      "en": "She looked toward the doorway. For a moment her answer did not come.",
+      "ja": "彼女は戸口の方へと視線を向けた。しばらくのあいだ、彼女の返事はなかった。",
+      "reading_kana": "カノジョハトグチノホウヘトシセンヲムケタ。シバラクノアイダ、カノジョノヘンジハナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, contemplative chronicle narration; slowing down as quiet weight enters the room."
+      },
+      "tts_text_gemini38": "彼女は戸口の方へと視線を向けた。<long pause> しばらくのあいだ、<short pause> 彼女の返事はなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-1.1st\">彼女は戸口の方へと視線を向けた。<break time=\"560ms\"/>しばらくのあいだ、<break time=\"260ms\"/>彼女の返事はなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -1.1,
+        "duration_seconds": 5.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_020.ogg"
+    },
+    {
+      "order_index": 107,
+      "line_id": "tutorial_t3_after_025",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "unguarded_turn",
+      "when_cue": "Sahne Aksiyonu | Fadyme bu söz üzerine Mahmut'a döner.",
+      "subtext_tr": "Konuyu değiştirmek için hazırladığı küçük şakayı kullanmaktan vazgeçtiğini anlatır; aralarındaki duvarın indiği an.",
+      "en": "That made her turn back to him. The small joke she had prepared went unused.",
+      "ja": "その言葉に、彼女は彼の方へと向き直った。用意していた小さな冗談は、使われないままになった。",
+      "reading_kana": "ソノコトバニ、カノジョハカレノホウヘトムキナオッタ。ヨウイシテイタチイサナジョウダンハ、ツカワレナイママニナッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Intimate, deeply resonant chronicle narration; slow and emotionally grounded."
+      },
+      "tts_text_gemini38": "その言葉に、<short pause> 彼女は彼の方へと向き直った。<long pause> 用意していた小さな冗談は、<short pause> 使われないままになった。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-0.9st\">その言葉に、<break time=\"260ms\"/>彼女は彼の方へと向き直った。<break time=\"520ms\"/>用意していた小さな冗談は、<break time=\"260ms\"/>使われないままになった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 6.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_025.ogg"
+    },
+    {
+      "order_index": 111,
+      "line_id": "tutorial_t3_after_029",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "warm_silence",
+      "when_cue": "Sahne Aksiyonu | Dışarıda son ışık çekilirken içerideki sessizlik artık boş gelmez.",
+      "subtext_tr": "Yan yana oturdukları o sessizliğin içini dolduran huzuru anlatır.",
+      "en": "He stayed. Outside, the last light left the road; inside, the silence no longer felt empty.",
+      "ja": "彼はそこに留まった。外では街道から最後の光が消えていったが、屋内の沈黙は、もはや空虚には感じられなかった。",
+      "reading_kana": "カレハソコニトドマッタ。ソトデハカイドウカラサイゴノヒカリガキエテイッタガ、オクナイノチンモクハ、モハヤクウキョニハカンジラレナカッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deep, warm chronicle narration; unhurried and peaceful."
+      },
+      "tts_text_gemini38": "彼はそこに留まった。<long pause> 外では街道から最後の光が消えていったが、<short pause> 屋内の沈黙は、もはや空虚には感じられなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-0.9st\">彼はそこに留まった。<break time=\"520ms\"/>外では街道から最後の光が消えていったが、<break time=\"300ms\"/>屋内の沈黙は、もはや空虚には感じられなかった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 7.6,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_029.ogg"
+    },
+    {
+      "order_index": 116,
+      "line_id": "tutorial_t3_after_034",
+      "scene_id": "tutorial_t3_after",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "closing_peace",
+      "when_cue": "Tutorial T-3 Kapanış Cümlesi | `A DRY CORNER, HALF A LOAF, AND A PLACE BESIDE EACH OTHER`.",
+      "subtext_tr": "Tutorial üçlemesini kapatan son anlatıcı cümlesi: Bu gecelik kuru bir köşe, yarım somun ekmek ve birbirlerinin yanındaki yer yeterlidir.",
+      "en": "For tonight, a dry corner, half a loaf, and a place beside each other were enough.",
+      "ja": "今夜はただ、乾いた片隅と、半分ずつのパン、そして互いの隣にある居場所だけで十分だった。",
+      "reading_kana": "コンヤハタダ、カワイタカタスミト、ハンブンズツノパン、ソシテタガイノトナリニアルイバショダケデジュウブンダッタ。",
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Poised, deeply comforting closing chronicle cadence; slowing gently at the end as the screen fades to black."
+      },
+      "tts_text_gemini38": "<breath> 今夜はただ、<short pause> 乾いた片隅と、<short pause> 半分ずつのパン、<long pause> そして互いの隣にある居場所だけで十分だった。",
+      "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-1.0st\">今夜はただ、<break time=\"260ms\"/>乾いた片隅と、<break time=\"280ms\"/>半分ずつのパン、<break time=\"520ms\"/>そして互いの隣にある居場所だけで十分だった。</prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.88,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 7.8,
+        "duck_ratio": 0.25,
+        "target_lufs": -20.0
+      },
+      "output_ogg": "voices/tutorial_t3_after_034.ogg"
+    }
+  ]
+}

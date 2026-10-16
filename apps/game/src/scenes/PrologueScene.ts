@@ -202,6 +202,7 @@ export class PrologueScene extends Phaser.Scene {
     if (this.pausedByUser) this.tweens.pauseAll();
     else this.tweens.resumeAll();
     Music.setPaused(this.pausedByUser);
+    this.stage?.setPaused(this.pausedByUser);
     this.pauseBtn?.setLabel(this.pausedByUser ? 'RESUME' : 'PAUSE');
   }
 
@@ -209,6 +210,7 @@ export class PrologueScene extends Phaser.Scene {
     this.muted = !this.muted;
     this.sound.mute = this.muted;
     Music.setVolume(this.muted ? 0 : prefs().musicVolume);
+    this.stage?.setVoiceMuted(this.muted);
     this.muteBtn?.setLabel(this.muted ? 'UNMUTE' : 'MUTE');
   }
 

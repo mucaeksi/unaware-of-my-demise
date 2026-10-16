@@ -13,6 +13,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / 'narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json'
 JP_PROLOGUE_PATH = ROOT / 'narrative/10_VO/Line_Maps/jp_script_prologue.json'
+MASTER_SCRIPT_PATH = ROOT / 'narrative/10_VO/Line_Maps/jp_script_vertical_slice_master.json'
 OUT_DIR = ROOT / 'apps/game/public/content/audition'
 
 SCENE_STILLS = {
@@ -41,34 +42,34 @@ SCENE_SCORE_NOTES = {
 
 ROLE_NOTES = {
     'narrator': {
-        'Charon': (1, 'NARRATOR #1 · DERİN & KADİFEMSİ BARİTON', 'En sıcak ve kadifemsi koyu bariton tını (915 Hz centroid, 125.3 Hz F0, 7.49 sn sakin tempo). Karanlık gotik anime kronik anlatıcısı (Frieren / Lodoss / Dark Souls tarzı) için 1 numaralı aday.'),
-        'Umbriel': (2, 'NARRATOR #2 · EN AĞIRBAŞLI & DİNGİN TEMPO', 'Tüm erkek sesler arasında en sakin, acele etmeyen, dingin anlatım temposu (8.20 sn, 143.7 Hz F0). Hikâyeyi sindirerek okuyan bilge anlatıcı.'),
-        'Algieba': (3, 'NARRATOR #3 · EN DERİN BAS-BARİTON', 'Katalogdaki en pes/derin erkek sesi (93.4 Hz F0). Tarihsel yıkım ("Crownfall") ve eski krallık kayıtları için çok güçlü bir ağırlığa sahip.'),
-        'Alnilam': (4, 'NARRATOR #4 · NÖTR & DENGELİ BARİTON', 'Çok temiz, nötr, sıcak ve abartısız bariton (145.5 Hz F0, 947 Hz sıcak tını). Karakterlerin önüne geçmeden atmosfer kuran klasik Visual Novel anlatıcısı.'),
-        'Fenrir': (5, 'NARRATOR #5 · OLGUN & YAŞANMIŞLIK HİSSİ', 'Sakin ve ağırbaşlı tempo (7.75 sn, 150.0 Hz F0). Yıllar süren kış yolculuğunu anlatan olgun erkek sesi.'),
-        'Pulcherrima': (6, 'KADIN NARRATOR #1 · DERİN KONTRALTO', 'Kadın sesler arasındaki en pes, olgun ve sıcak kontralto tını (152.9 Hz F0, 1038 Hz sıcak tını). Kadın Narrator tercih edilirse Fadyme’den tamamen ayrışan en güçlü aday.'),
-        'Gacrux': (7, 'KADIN NARRATOR #2 · SAKİN & EDEBİ ALTO', 'Düşük perdeli, ağırbaşlı ve edebi kadın alto sesi (166.7 Hz F0, 7.63 sn sakin tempo). Masalsı ve melankolik bir kronik anlatımı sunar.'),
-        'Vindemiatrix': (8, 'KADIN NARRATOR #3 · YUMUŞAK & HÜZÜNLÜ', 'Çok yumuşak, karanlık-sıcak tınılı (1077 Hz centroid, 7.47 sn) dingin kadın anlatıcı adayı.'),
+        'Algieba': (1, '🔒 KİLİTLENEN RESMİ SES · NARRATOR (ALGIEBA)', 'Kanonik olarak kilitlenen resmi Narrator sesi (93.4 Hz F0). Katalogdaki en derin bas-bariton tını; "Crownfall" yıkımı ve karanlık gotik kronik anlatımı için seçildi.'),
+        'Charon': (2, 'NARRATOR ADAYI #2 · DERİN & KADİFEMSİ BARİTON', 'Sıcak ve kadifemsi koyu bariton tını (915 Hz centroid, 125.3 Hz F0, 7.49 sn sakin tempo).'),
+        'Umbriel': (3, 'NARRATOR ADAYI #3 · EN AĞIRBAŞLI & DİNGİN TEMPO', 'Erkek sesler arasında sakin, acele etmeyen anlatım temposu (8.20 sn, 143.7 Hz F0).'),
+        'Alnilam': (4, 'NARRATOR ADAYI #4 · NÖTR & DENGELİ BARİTON', 'Temiz, nötr, sıcak ve abartısız bariton (145.5 Hz F0, 947 Hz sıcak tını).'),
+        'Fenrir': (5, 'NARRATOR ADAYI #5 · OLGUN & YAŞANMIŞLIK HİSSİ', 'Sakin ve ağırbaşlı tempo (7.75 sn, 150.0 Hz F0).'),
+        'Pulcherrima': (6, 'KADIN NARRATOR #1 · DERİN KONTRALTO', 'Kadın sesler arasındaki en pes, olgun ve sıcak kontralto tını (152.9 Hz F0, 1038 Hz sıcak tını).'),
+        'Gacrux': (7, 'KADIN NARRATOR #2 · SAKİN & EDEBİ ALTO', 'Düşük perdeli, ağırbaşlı ve edebi kadın alto sesi (166.7 Hz F0, 7.63 sn sakin tempo).'),
+        'Vindemiatrix': (8, 'KADIN NARRATOR #3 · YUMUŞAK & HÜZÜNLÜ', 'Yumuşak, karanlık-sıcak tınılı (1077 Hz centroid, 7.47 sn) dingin kadın anlatıcı adayı.'),
     },
     'fadyme': {
-        'Sulafat': (1, 'FADYME #1 · KANONİK REFERANS SES', 'Kanonik ses planında (AUDIO_VO_PLAN_PART1.md) Fadyme için seçilen referans ses (252.6 Hz). Kibar, kontrollü, zarif alto; "Ben iyiyim" maskesini ve ince alaycılığı çok temiz taşır.'),
-        'Vindemiatrix': (2, 'FADYME #2 · SICAK & İÇTEN MASKE', '250.0 Hz perde ve 1077 Hz ile çok yumuşak, buğulu ve sıcak-karanlık tını. Fadyme’nin yorgunluğunu, şefkatini ve gizlediği hüznü çok duygusal verir.'),
-        'Aoede': (3, 'FADYME #3 · SAKİN & ARİSTOKRATİK NEZAKET', '247.4 Hz perde ve 8.20 sn ile en sakin, ölçülü ve zarif kadın performansı. Fadyme’nin hiç acele etmeyen kibar konuşma tarzına ("exact, courteous") birebir uyar.'),
-        'Despina': (4, 'FADYME #4 · DİNGİN & YUMUŞAK ALTO', '260.9 Hz perde, 8.00 sn ağırbaşlı tempo ve 1163 Hz kadifemsi tını. Özellikle akşam sığınak ("shelter_evening") gibi samimi sahneler için çok güçlü.'),
-        'Zephyr': (5, 'FADYME #5 · İNCE MİZAH ("WRY") & HAFİF TON', '260.9 Hz perde, 7.55 sn tempo ve 1124 Hz sıcak-berrak denge. Mahmut’a takıldığı kuru mizah ("wry") sahnelerinde çok doğal durur.'),
-        'Laomedeia': (6, 'FADYME #6 · ÖLÇÜLÜ & SESSİZ GÜÇ', '263.7 Hz perde, 7.72 sn sakin tempo ve 1137 Hz yumuşak gövde. Kontrollü kuudere/alto alternatifi.'),
-        'Autonoe': (7, 'FADYME #7 · NET & KARARLI ("RESOLVE")', '260.9 Hz perde, 7.17 sn tempo; çanını kaldırıp uyarı yaptığı "Resolve" anlarında berrak ve kararlı duruş.'),
-        'Gacrux': (8, 'FADYME #8 · DAHA OLGUN / PES ALTO', '166.7 Hz perde; Fadyme için daha pes, olgun ve ağırbaşlı bir ses rengi isterseniz (+1.5 st ton kaydırma ile de harika çalışır).'),
+        'Sulafat': (1, '🔒 KİLİTLENEN RESMİ SES · FADYME (SULAFAT)', 'Kanonik olarak kilitlenen resmi Fadyme sesi (252.6 Hz). Kibar, kontrollü, zarif gotik alto; "Ben iyiyim" maskesini, ince alaycılığı ("wry") ve gizli kırılganlığı taşır.'),
+        'Vindemiatrix': (2, 'FADYME ADAYI #2 · SICAK & İÇTEN MASKE', '250.0 Hz perde ve 1077 Hz ile çok yumuşak, buğulu ve sıcak-karanlık tını.'),
+        'Aoede': (3, 'FADYME ADAYI #3 · SAKİN & ARİSTOKRATİK NEZAKET', '247.4 Hz perde ve 8.20 sn ile sakin, ölçülü ve zarif kadın performansı.'),
+        'Despina': (4, 'FADYME ADAYI #4 · DİNGİN & YUMUŞAK ALTO', '260.9 Hz perde, 8.00 sn ağırbaşlı tempo ve 1163 Hz kadifemsi tını.'),
+        'Zephyr': (5, 'FADYME ADAYI #5 · İNCE MİZAH ("WRY") & HAFİF TON', '260.9 Hz perde, 7.55 sn tempo ve 1124 Hz sıcak-berrak denge.'),
+        'Laomedeia': (6, 'FADYME ADAYI #6 · ÖLÇÜLÜ & SESSİZ GÜÇ', '263.7 Hz perde, 7.72 sn sakin tempo ve 1137 Hz yumuşak gövde.'),
+        'Autonoe': (7, 'FADYME ADAYI #7 · NET & KARARLI ("RESOLVE")', '260.9 Hz perde, 7.17 sn tempo; çanını kaldırıp uyarı yaptığı "Resolve" anlarında berrak duruş.'),
+        'Gacrux': (8, 'FADYME ADAYI #8 · DAHA OLGUN / PES ALTO', '166.7 Hz perde; daha pes alto ses rengi.'),
     },
     'mahmut': {
-        'Iapetus': (1, 'MAHMUT #1 · DENGELİ ŞÖVALYE BARİTONU', '144.6 Hz perde, 7.10 sn net ve kısa cümle temposu. 28 yaşındaki yorgun ama dimdik duran muhafız şövalye profiline tam oturur; Narrator olarak Charon seçilirse ikisi birbirinden net ayrılır.'),
-        'Enceladus': (2, 'MAHMUT #2 · TOK & AZ KONUŞAN ("SHORT, PLAIN")', '133.3 Hz tok bariton perde, 979 Hz sıcak göğüs tınısı ve 6.88 sn doğrudan, lafı uzatmayan şövalye konuşma temposu.'),
-        'Sadachbia': (3, 'MAHMUT #3 · SAKİN, KORUYUCU & KURU MİZAH', '151.9 Hz perde, 7.06 sn kontrollü tempo. Hem savaş öncesi uyarıları hem de Fadyme’ye karşı sabırlı, kuru mizahlı ("dry humor") cevapları çok dengeli taşır.'),
-        'Sadaltager': (4, 'MAHMUT #4 · SICAK & YORGUN YOL ARKADAŞI', '156.9 Hz perde ve 964 Hz koyu/sıcak tını. Zırhının içindeki sadık ve şefkatli yol arkadaşı hissini öne çıkarır.'),
-        'Zubenelgenubi': (5, 'MAHMUT #5 · SERT & KISA CÜMLELİ MUHAFIZ', '154.8 Hz perde, 902 Hz çok tok/koyu gövde ve 6.78 sn keskin, kısa cümle temposu ("Protective Resolve" duruşu için ideal).'),
-        'Alnilam': (6, 'MAHMUT #6 · SAKİN & SARSILMAZ BARİTON', '145.5 Hz perde, 947 Hz sıcak tını. Eğer Narrator için kullanılmazsa Mahmut için en sağlam klasik baritonlardan biri.'),
-        'Orus': (7, 'MAHMUT #7 · GENÇ / DİNAMİK ŞÖVALYE (-1.5 st Önerilir)', '173.9 Hz daha genç/dinamik bariton-tenor; üstteki Ses Laboratuvarından Perdeyi -1.5 veya -2.0 st yaptığınızda çok karizmatik bir başrol şövalye sesine dönüşür.'),
-        'Charon': (8, 'MAHMUT #8 · DERİN BARİTON (Narrator Farklıysa)', '125.3 Hz kadifemsi derin bariton. Eğer Narrator için Umbriel veya Algieba seçerseniz, Charon Mahmut için de muazzam bir seçimdir.'),
+        'Iapetus': (1, '🔒 KİLİTLENEN RESMİ SES · MAHMUT (IAPETUS)', 'Kanonik olarak kilitlenen resmi Mahmut sesi (144.6 Hz perde, 7.10 sn net ve kısa cümle temposu). 28 yaşındaki yorgun ama sarsılmaz muhafız şövalye; Narrator (Algieba 93.4 Hz) ile kusursuz frekans ayrımına sahiptir.'),
+        'Enceladus': (2, 'MAHMUT ADAYI #2 · TOK & AZ KONUŞAN ("SHORT, PLAIN")', '133.3 Hz tok bariton perde, 979 Hz sıcak göğüs tınısı ve 6.88 sn doğrudan konuşma temposu.'),
+        'Sadachbia': (3, 'MAHMUT ADAYI #3 · SAKİN, KORUYUCU & KURU MİZAH', '151.9 Hz perde, 7.06 sn kontrollü tempo.'),
+        'Sadaltager': (4, 'MAHMUT ADAYI #4 · SICAK & YORGUN YOL ARKADAŞI', '156.9 Hz perde ve 964 Hz koyu/sıcak tını.'),
+        'Zubenelgenubi': (5, 'MAHMUT ADAYI #5 · SERT & KISA CÜMLELİ MUHAFIZ', '154.8 Hz perde, 902 Hz çok tok/koyu gövde ve 6.78 sn keskin, kısa cümle temposu.'),
+        'Alnilam': (6, 'MAHMUT ADAYI #6 · SAKİN & SARSILMAZ BARİTON', '145.5 Hz perde, 947 Hz sıcak tını.'),
+        'Orus': (7, 'MAHMUT ADAYI #7 · GENÇ / DİNAMİK ŞÖVALYE', '173.9 Hz daha genç/dinamik bariton-tenor.'),
+        'Charon': (8, 'MAHMUT ADAYI #8 · DERİN BARİTON', '125.3 Hz kadifemsi derin bariton.'),
     },
 }
 
@@ -189,6 +190,8 @@ def main() -> None:
             'roles': roles_meta,
         })
 
+    master_script = json.loads(MASTER_SCRIPT_PATH.read_text(encoding='utf-8'))
+
     scenes_data = []
     for line in jp_prologue['lines']:
         sid = line['scene_id']
@@ -203,6 +206,7 @@ def main() -> None:
         'scenes': scenes_data,
         'voices': voices_data,
         'fadyme_demos': fadyme_demos,
+        'script_lines': master_script['lines'],
     }, ensure_ascii=False)
 
     html = f"""<!doctype html>
@@ -699,6 +703,38 @@ def main() -> None:
   <div class="voices-grid" id="voices-grid"></div>
 </div>
 
+<!-- 116-LINE DIRECTED ACTING SCRIPT & PROMPT INSPECTOR -->
+<div class="card" id="acting-script-studio" style="border-color: rgba(123, 201, 166, 0.55); background: linear-gradient(145deg, rgba(16, 28, 28, 0.92), rgba(22, 14, 32, 0.94));">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:14px;">
+    <div>
+      <div style="font-size:19px;font-weight:700;color:var(--emerald);">🎬 Kilitlenen Resmi Ses Kadrosu & 116-Satırlık Oyunculuk / Duygu Prompt Masası (Non-Robotic Acting Script)</div>
+      <div class="sub">
+        <b>🔒 Kilitli Kadro:</b> <b>Narrator → Algieba</b> (93.4 Hz Derin Bas-Bariton · 33 Satır) &nbsp;|&nbsp;
+        <b>Fadyme → Sulafat</b> (252.6 Hz Kontrollü Gotik Alto · 40 Satır + 241 Part I) &nbsp;|&nbsp;
+        <b>Mahmut → Iapetus</b> (144.6 Hz Yorgun Şövalye Baritonu · 43 Satır)<br>
+        Her satır için <b>Ne Zaman (`when_cue`)</b>, <b>Hangi Duygu & Alt Metin (`subtext_tr`)</b>, <b>Gemini 3.8 Acting Style + Inline Nefes/Duraksama Etiketleri (`tts_text_gemini38`)</b> ve <b>Chirp 3 HD Clause-Level SSML (`ssml_chirp3`)</b> hazırlandı.
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;" id="script-speaker-filters">
+      <button class="preset-btn active" data-sp="ALL">Tümü (116)</button>
+      <button class="preset-btn" data-sp="narrator">📜 Narrator · Algieba (33)</button>
+      <button class="preset-btn" data-sp="fadyme">🔔 Fadyme · Sulafat (40)</button>
+      <button class="preset-btn" data-sp="mahmut">🛡️ Mahmut · Iapetus (43)</button>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;" id="script-scene-filters">
+    <button class="preset-btn active" data-sc="ALL">Tüm Sahneler (116)</button>
+    <button class="preset-btn" data-sc="prologue_">Prologue (9)</button>
+    <button class="preset-btn" data-sc="tutorial_t1_before">T-1 Öncesi (14)</button>
+    <button class="preset-btn" data-sc="tutorial_t1_after">T-1 Sonrası (14)</button>
+    <button class="preset-btn" data-sc="tutorial_t2_before">T-2 Öncesi (13)</button>
+    <button class="preset-btn" data-sc="tutorial_t2_after">T-2 Sonrası · Mola (18)</button>
+    <button class="preset-btn" data-sc="tutorial_t3_before">T-3 Öncesi (14)</button>
+    <button class="preset-btn" data-sc="tutorial_t3_after">T-3 Sonrası · Sığınak (34)</button>
+  </div>
+  <div id="script-lines-list" style="display:flex;flex-direction:column;gap:10px;max-height:620px;overflow-y:auto;padding-right:6px;"></div>
+</div>
+
 <script id="studio-data" type="application/json">{payload}</script>
 <script>
 const data = JSON.parse(document.getElementById('studio-data').textContent);
@@ -1076,12 +1112,79 @@ document.querySelectorAll('.role-tab').forEach(tab => {{
 }});
 
 renderRoleView();
+
+// 116-LINE DIRECTED ACTING SCRIPT INSPECTOR
+let activeScriptSpeaker = 'ALL';
+let activeScriptScene = 'ALL';
+const scriptLinesList = document.getElementById('script-lines-list');
+
+function renderScriptInspector() {{
+  const rows = (data.script_lines || []).filter(r => {{
+    if (activeScriptSpeaker !== 'ALL' && r.speaker_id !== activeScriptSpeaker) return false;
+    if (activeScriptScene !== 'ALL' && !r.scene_id.startsWith(activeScriptScene)) return false;
+    return true;
+  }});
+  scriptLinesList.replaceChildren();
+  for (const r of rows) {{
+    const card = document.createElement('div');
+    card.style.cssText = 'background:rgba(10,6,18,0.82);border:1px solid rgba(212,178,108,0.28);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;';
+    const spColor = r.speaker_id === 'fadyme' ? '#e2d2ff' : r.speaker_id === 'mahmut' ? '#e3c37d' : '#7bc9a6';
+    const top = document.createElement('div');
+    top.style.cssText = 'display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;';
+    top.innerHTML = `<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span style="font-weight:700;color:${{spColor}};font-size:13.5px;">#${{r.order_index}} · ${{r.speaker_name.toUpperCase()}} (${{r.gemini_voice}})</span>
+        <span class="voice-badge">${{r.emotion}}</span>
+        <code style="font-size:11.5px;color:var(--dim);">${{r.line_id}} · ${{r.scene_id}}</code>
+      </div>
+      <div style="font-size:11.5px;color:var(--lilac);">
+        Hız: ${{r.acoustic_profile.speaking_rate}}x · Perde: ${{r.acoustic_profile.pitch_semitones >= 0 ? '+' : ''}}${{r.acoustic_profile.pitch_semitones}}st · Süre: ~${{r.acoustic_profile.duration_seconds}}sn
+      </div>`;
+    const whenRow = document.createElement('div');
+    whenRow.style.cssText = 'font-size:12px;color:#b8e6d1;';
+    whenRow.innerHTML = `⏱️ <b>Ne Zaman:</b> ${{r.when_cue}}`;
+    const subRow = document.createElement('div');
+    subRow.style.cssText = 'font-size:12px;color:#e5d8f4;';
+    subRow.innerHTML = `🎭 <b>Duygu & Alt Metin:</b> ${{r.subtext_tr}}`;
+    const enRow = document.createElement('div');
+    enRow.style.cssText = 'font-size:13px;color:#fff;';
+    enRow.textContent = `"${{r.en}}"`;
+    const jaRow = document.createElement('div');
+    jaRow.style.cssText = 'font-size:13.5px;color:var(--gold);';
+    jaRow.lang = 'ja';
+    jaRow.textContent = r.ja;
+    const promptRow = document.createElement('div');
+    promptRow.style.cssText = 'font-size:11.5px;color:var(--dim);background:rgba(255,255,255,0.03);padding:7px 10px;border-radius:8px;font-family:monospace;white-space:pre-wrap;';
+    promptRow.textContent = `Prompt (style): ${{r.speech_metadata.style}}\nGemini-3.8 Tags: ${{r.tts_text_gemini38}}\nChirp3 SSML   : ${{r.ssml_chirp3}}`;
+    card.append(top, whenRow, subRow, enRow, jaRow, promptRow);
+    scriptLinesList.append(card);
+  }}
+}}
+
+document.querySelectorAll('#script-speaker-filters .preset-btn').forEach(btn => {{
+  btn.onclick = () => {{
+    document.querySelectorAll('#script-speaker-filters .preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeScriptSpeaker = btn.dataset.sp;
+    renderScriptInspector();
+  }};
+}});
+
+document.querySelectorAll('#script-scene-filters .preset-btn').forEach(btn => {{
+  btn.onclick = () => {{
+    document.querySelectorAll('#script-scene-filters .preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeScriptScene = btn.dataset.sc;
+    renderScriptInspector();
+  }};
+}});
+
+renderScriptInspector();
 </script>
 </body>
 </html>
 """
     (OUT_DIR / 'index.html').write_text(html, encoding='utf-8')
-    print(f'Audition studio updated at apps/game/public/content/audition/index.html with {len(voices_data)} voices and {len(fadyme_demos)} Fadyme demos.')
+    print(f'Audition studio updated at apps/game/public/content/audition/index.html with {len(voices_data)} voices, {len(fadyme_demos)} Fadyme demos, and {len(master_script["lines"])} directed acting lines.')
 
 
 if __name__ == '__main__':

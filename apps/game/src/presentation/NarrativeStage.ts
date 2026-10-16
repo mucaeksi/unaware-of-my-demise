@@ -19,6 +19,7 @@ export class NarrativeStage {
   private closeVideo: (() => void) | null = null;
   private videoPause: ((pause: boolean) => void) | null = null;
   private alive = true;
+  private voiceMuted = false;
   private audioSequence = 0;
   private readonly audioTickets = new Map<string, number>();
   constructor(private readonly scene: Phaser.Scene, private readonly content: ContentService, private readonly art: ArtManifest, readonly pack: PresentationPack, private readonly locale?: LocalePack) {
@@ -30,6 +31,14 @@ export class NarrativeStage {
   }
   text(id: string | undefined, fallback: string): string { return id && this.locale && Object.hasOwn(this.locale.strings, id) ? this.locale.strings[id]! : fallback; }
   hasVoice(lineId: string): boolean { return !!own(this.pack.voices, lineId); }
+  voiceDuration(lineId: string): number { return own(this.pack.voices, lineId)?.duration_s ?? 0; }
+  stopVoice(): void { this.stopAudio('voice'); }
+  setPaused(paused: boolean): void { this.pause(paused); }
+  setVoiceMuted(muted: boolean): void {
+    this.voiceMuted = muted;
+    const clip = this.audio.get('voice');
+    if (clip) clip.element.muted = muted;
+  }
 
   async voice(lineId: string): Promise<void> {
     this.stopAudio('voice'); const definition = own(this.pack.voices, lineId);
@@ -41,6 +50,7 @@ export class NarrativeStage {
     const owner = {}; const ref = await this.content.asset(path, owner);
     if (!this.alive || this.audioTickets.get(key) !== ticket) { this.content.releaseAssets(owner); return; }
     const element = new Audio(ref.url); element.preload = 'metadata'; element.volume = volume; element.loop = loop;
+    if (key === 'voice' && this.voiceMuted) element.muted = true;
     const clip: AudioClip = { element, owner, releaseDuck: duck ? Music.duck() : () => undefined, wasPlaying: false }; this.audio.set(key, clip);
     element.onloadedmetadata = () => { if (!Number.isFinite(element.duration) || element.duration > duration + 0.5) this.stopAudio(key); };
     element.ontimeupdate = () => { if (!loop && element.currentTime >= duration) this.stopAudio(key); };

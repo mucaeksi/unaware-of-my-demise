@@ -1,12 +1,12 @@
 {
-  "status": "READY_FOR_TEXT_REVIEW_NOT_FOR_BATCH_EXECUTION",
+  "status": "locked_cast_Sulafat_v003",
   "character_id": "fadyme",
   "lines_to_record": 241,
   "spoken": 206,
   "inner": 35,
   "locale": "ja-JP",
   "provider_family": "Chirp3-HD",
-  "voice_id": null,
+  "voice_id": "ja-JP-Chirp3-HD-Sulafat",
   "api_calls": 0,
   "audio_files_generated": 0,
   "legacy_take_reuse": false,
@@ -5315,5 +5315,6 @@
       "legacy_take_reuse": false,
       "delivery": "adult22, precise wry courtesy, pain restrained; no theatrical delivery"
     }
-  ]
+  ],
+  "gemini_voice": "Sulafat"
 }
