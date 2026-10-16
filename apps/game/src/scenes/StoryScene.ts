@@ -11,6 +11,7 @@ import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cu
 import { clearStoryCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
+import { buildSubtitleSchedule, resolveSubtitleProgress, type SubtitleSchedule } from '../ui/subtitles';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 
 export interface StoryInit {
@@ -52,7 +53,12 @@ export class StoryScene extends Phaser.Scene {
   private actionBadge!: Phaser.GameObjects.Text;
   private bodyText!: Phaser.GameObjects.Text;
   private caret!: Phaser.GameObjects.Text;
+  private lineShimmer!: Phaser.GameObjects.Rectangle;
+  private voiceSyncTrack!: Phaser.GameObjects.Rectangle;
+  private voiceSyncFill!: Phaser.GameObjects.Rectangle;
   private typing: Phaser.Time.TimerEvent | null = null;
+  private activeSchedule: SubtitleSchedule | null = null;
+  private typingStartedAt = 0;
   private fullText = '';
   private lineDone = true;
   private waiting = false;
@@ -92,6 +98,8 @@ export class StoryScene extends Phaser.Scene {
     this.currentLine = null;
     this.lineDone = true;
     this.typing = null;
+    this.activeSchedule = null;
+    this.typingStartedAt = 0;
     this.autoTimer = null;
     this.choiceLayer = null;
     this.logLayer = null;
@@ -224,6 +232,10 @@ export class StoryScene extends Phaser.Scene {
     lnFrame.lineBetween(-790, -104, 790, -104);
     lnFrame.lineBetween(-790, 104, 790, 104);
 
+    this.lineShimmer = this.add.rectangle(-640, -104, 240, 2, C.gold, 0).setOrigin(0.5);
+    this.voiceSyncTrack = this.add.rectangle(0, 104, 760, 2, 0xc9b6e4, 0.16).setOrigin(0.5);
+    this.voiceSyncFill = this.add.rectangle(-380, 104, 0, 2, C.gold, 0.88).setOrigin(0, 0.5);
+
     this.nameText = txt(this, 0, 0, '', {
       fontFamily: F.display,
       fontSize: '28px',
@@ -256,11 +268,20 @@ export class StoryScene extends Phaser.Scene {
       lineSpacing: 10,
       wordWrap: { width: 1560 },
       stroke: '#07040c',
-      strokeThickness: 3
-    });
+      strokeThickness: 3.5
+    }).setShadow(0, 4, '#050208', 10, true, true);
     this.caret = txt(this, 780, 88, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
     this.box = this.add
-      .container(REF_W / 2, 902 - insets.bottom, [panelBg, lnFrame, this.actionBadge, this.bodyText, this.caret])
+      .container(REF_W / 2, 902 - insets.bottom, [
+        panelBg,
+        lnFrame,
+        this.lineShimmer,
+        this.voiceSyncTrack,
+        this.voiceSyncFill,
+        this.actionBadge,
+        this.bodyText,
+        this.caret
+      ])
       .setDepth(DEPTH.hud);
 
     const topBtnY = 58 + insets.top;
@@ -831,16 +852,23 @@ export class StoryScene extends Phaser.Scene {
 
   private showLine(e: Extract<StoryEvent, { type: 'line' }>): void {
     this.currentLine = e;
-    this.voiceBtn?.setVisible(this.stage?.hasVoice(e.lineId) ?? false);
+    const hasVoiceLine = Boolean(this.stage?.hasVoice(e.lineId));
+    this.voiceBtn?.setVisible(hasVoiceLine);
     this.stage?.stopVoice();
     const narr = e.speaker === 'narration';
-    const pause = this.cutscene ? cutscenePauseSeconds(this.prevSpeaker, e.speaker, this.data0.presentation?.speaker_pause_seconds ?? 1) : 0;
+    const rawPause = this.cutscene ? cutscenePauseSeconds(this.prevSpeaker, e.speaker, this.data0.presentation?.speaker_pause_seconds ?? 1) : 0;
+    const speakerChanged = this.prevSpeaker !== null && this.prevSpeaker !== e.speaker;
+    const pause = hasVoiceLine ? Math.min(rawPause, speakerChanged ? 0.3 : 0.16) : rawPause;
     this.prevSpeaker = e.speaker;
 
     // Shape and animate character busts according to speaker emotion and script actions
     const { speakerEmotion, moodLabel } = this.applyLineChoreography(e);
     this.currentMoodLabel = moodLabel;
-    this.focusSpeaker(narr ? '' : e.speaker, speakerEmotion, pause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 320);
+    this.focusSpeaker(narr ? '' : e.speaker, speakerEmotion, rawPause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 320);
+
+    const accentColor = narr ? 0xc9b6e4 : e.speaker === 'fadyme' ? 0xe2d2ff : C.gold;
+    this.voiceSyncFill.setFillStyle(accentColor, 0.88).setSize(0, 2);
+    this.lineShimmer.setFillStyle(accentColor, 0);
 
     this.namePlate.setVisible(!narr);
     if (!narr) {
@@ -870,15 +898,20 @@ export class StoryScene extends Phaser.Scene {
       this.pausing = true;
       this.typing = this.time.delayedCall(pause * 1000, () => {
         this.pausing = false;
-        this.startTyping(e, narr, speakerEmotion);
+        this.startTyping(e, narr, speakerEmotion, speakerChanged);
       });
     } else {
       this.pausing = false;
-      this.startTyping(e, narr, speakerEmotion);
+      this.startTyping(e, narr, speakerEmotion, speakerChanged);
     }
   }
 
-  private startTyping(e: Extract<StoryEvent, { type: 'line' }>, narr: boolean, speakerEmotion = 'composed'): void {
+  private startTyping(
+    e: Extract<StoryEvent, { type: 'line' }>,
+    narr: boolean,
+    speakerEmotion = 'composed',
+    speakerChanged = false
+  ): void {
     if (this.finished) return;
     if (!this.skip) void this.stage?.voice(e.lineId);
     this.namePlate.setVisible(!narr);
@@ -888,8 +921,59 @@ export class StoryScene extends Phaser.Scene {
       const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
       this.nameText.setText(label);
       this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
-      this.namePlate.setPosition(left ? 365 : REF_W - 365, 756);
+      const targetX = left ? 365 : REF_W - 365;
+      this.namePlate.setPosition(targetX, 756);
+      if (speakerChanged && !prefs().reducedMotion && !this.skip) {
+        this.tweens.killTweensOf(this.namePlate);
+        this.namePlate.setY(764).setAlpha(0.5);
+        this.tweens.add({
+          targets: this.namePlate,
+          y: 756,
+          alpha: 1,
+          duration: 240,
+          ease: 'Cubic.easeOut'
+        });
+      } else {
+        this.namePlate.setAlpha(1);
+      }
     }
+
+    if (!prefs().reducedMotion && !this.skip) {
+      this.tweens.killTweensOf(this.bodyText);
+      this.bodyText.setY(-52).setAlpha(0.18);
+      this.tweens.add({
+        targets: this.bodyText,
+        y: -68,
+        alpha: 1,
+        duration: 280,
+        ease: 'Cubic.easeOut'
+      });
+
+      this.tweens.killTweensOf(this.lineShimmer);
+      this.lineShimmer.setPosition(-640, -104).setAlpha(0.75);
+      this.tweens.add({
+        targets: this.lineShimmer,
+        x: 640,
+        alpha: 0,
+        duration: 700,
+        ease: 'Cubic.easeOut'
+      });
+
+      if (this.actionBadge.text) {
+        this.tweens.killTweensOf(this.actionBadge);
+        this.actionBadge.setY(-90).setAlpha(0);
+        this.tweens.add({
+          targets: this.actionBadge,
+          y: -96,
+          alpha: 0.9,
+          duration: 320,
+          ease: 'Sine.easeOut'
+        });
+      }
+    } else {
+      this.bodyText.setY(-68).setAlpha(1);
+    }
+
     const baseCps = this.skip ? 400 : this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed];
     const cpsMult =
       speakerEmotion === 'protective' || speakerEmotion === 'determined'
@@ -900,16 +984,45 @@ export class StoryScene extends Phaser.Scene {
             ? 1.06
             : 1.0;
     const cps = baseCps * cpsMult;
-    let n = 0;
     const hasVoiceLine = Boolean(this.stage?.hasVoice(e.lineId));
+    const voiceDur = this.stage?.voiceDuration(e.lineId) ?? 0;
+    const schedule = buildSubtitleSchedule(this.fullText, this.skip ? 0 : voiceDur, cps);
+    this.activeSchedule = schedule;
+    this.typingStartedAt = this.time.now;
+
+    if (this.skip) {
+      let n = 0;
+      this.typing = this.time.addEvent({
+        delay: 12,
+        loop: true,
+        callback: () => {
+          n += 6;
+          this.bodyText.setText(this.fullText.slice(0, n));
+          if (n >= this.fullText.length) this.finishTyping();
+        }
+      });
+      return;
+    }
+
+    let shownCount = 0;
     this.typing = this.time.addEvent({
-      delay: 1000 / cps,
+      delay: 28,
       loop: true,
       callback: () => {
-        n += cps > 100 ? 4 : 1;
-        this.bodyText.setText(this.fullText.slice(0, n));
-        if (n % 3 === 0 && !narr && !hasVoiceLine) Sfx.tap();
-        if (n >= this.fullText.length) this.finishTyping();
+        const elapsedMs = Math.max(0, this.time.now - this.typingStartedAt);
+        const vp = this.stage?.voiceProgress(e.lineId);
+        const liveSec = vp && vp.playing ? vp.currentTime : undefined;
+        const { count, revealRatio, voiceRatio, done } = resolveSubtitleProgress(schedule, elapsedMs, liveSec);
+        if (count > shownCount) {
+          shownCount = count;
+          this.bodyText.setText(this.fullText.slice(0, shownCount));
+          if (shownCount % 3 === 0 && !narr && !hasVoiceLine) Sfx.tap();
+        }
+        const waveRatio = vp && vp.duration > 0 ? Math.max(voiceRatio, vp.ratio) : revealRatio;
+        this.voiceSyncFill.setSize(760 * Math.min(1, waveRatio), 2);
+        if (done || shownCount >= this.fullText.length) {
+          this.finishTyping();
+        }
       }
     });
   }
@@ -922,7 +1035,8 @@ export class StoryScene extends Phaser.Scene {
     if (wasPausing && !this.skip && this.currentLine) {
       void this.stage?.voice(this.currentLine.lineId);
     }
-    this.bodyText.setText(this.fullText);
+    this.bodyText.setText(this.fullText).setY(-68).setAlpha(1);
+    this.voiceSyncFill.setSize(760, 2);
     this.lineDone = true;
     this.caret.setVisible(true);
     if (this.currentLine) this.read.add(this.currentLine.lineId);
@@ -935,13 +1049,32 @@ export class StoryScene extends Phaser.Scene {
 
   private autoHoldMs(): number {
     const line = this.currentLine;
-    const revealSeconds = this.fullText.length / (this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed]);
     const voiceSeconds = line ? (this.stage?.voiceDuration(line.lineId) ?? 0) : 0;
+    const last = line !== null && line.lineId === this.lastLineId;
+    if (voiceSeconds > 0 && line) {
+      const vp = this.stage?.voiceProgress(line.lineId);
+      const elapsedSec =
+        this.typingStartedAt > 0
+          ? Math.max(0, (this.time.now - this.typingStartedAt) / 1000)
+          : (this.activeSchedule?.totalRevealMs ?? 1200) / 1000;
+      const spokenSec = vp && vp.currentTime > 0 ? Math.max(elapsedSec, vp.currentTime) : elapsedSec;
+      const remainingVoiceSec = Math.max(0, voiceSeconds - spokenSec);
+      const voiceSyncedHoldMs = Math.max(1050, (remainingVoiceSec + 0.72) * 1000);
+      if (last && this.data0.closing_hold_seconds !== undefined) {
+        return Math.max(voiceSyncedHoldMs, this.data0.closing_hold_seconds * 1000);
+      }
+      return voiceSyncedHoldMs;
+    }
+    const revealSeconds = this.fullText.length / (this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed]);
     const voiceHoldMs = voiceSeconds > 0 ? Math.max(950, (voiceSeconds - revealSeconds + 0.65) * 1000) : 0;
     if (!this.cutscene) return Math.max(voiceHoldMs, (line?.holdSeconds ?? 2.4) * 1000 + this.fullText.length * 22);
-    const last = line !== null && line.lineId === this.lastLineId;
     const textHoldMs =
-      cutsceneHoldSeconds({ chars: this.fullText.length, ...(line?.holdSeconds !== undefined ? { holdSeconds: line.holdSeconds } : {}), last, ...(this.data0.closing_hold_seconds !== undefined ? { closingHoldSeconds: this.data0.closing_hold_seconds } : {}) }) * 1000;
+      cutsceneHoldSeconds({
+        chars: this.fullText.length,
+        ...(line?.holdSeconds !== undefined ? { holdSeconds: line.holdSeconds } : {}),
+        last,
+        ...(this.data0.closing_hold_seconds !== undefined ? { closingHoldSeconds: this.data0.closing_hold_seconds } : {})
+      }) * 1000;
     return Math.max(voiceHoldMs, textHoldMs);
   }
 

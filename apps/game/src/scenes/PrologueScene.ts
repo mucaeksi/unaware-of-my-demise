@@ -14,9 +14,10 @@ import { ArtLibrary } from '../content/ArtLibrary';
 import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Services } from '../services';
 import { Button, txt } from '../ui/kit';
+import { buildSubtitleSchedule, resolveSubtitleProgress } from '../ui/subtitles';
 import { C, DEPTH, F, T } from '../ui/theme';
 
-/** Characters per second of the narration reveal (v006: no recording yet, so a fixed pace; the voice clock replaces it later). */
+/** Fallback characters per second when no voice recording is present. */
 export const REVEAL_CPS = 26;
 const CROSSFADE_MS = INTRO_FAST ? 60 : 1400;
 const TEXT_FADE_MS = INTRO_FAST ? 40 : 650;
@@ -26,7 +27,7 @@ export const sceneSeconds = (s: PrologueData): number => (INTRO_FAST ? 0.35 : s.
 
 /**
  * "Before the Road": the 120 s first-install interlude. Each scene is one plate with a slow camera move, a caption and one
- * narration line revealed at 26 characters per second. Pause/Mute controls are available on all runs, and Skip is available on replay;
+ * narration line revealed in sync with the Japanese voiceover (`Algieba`). Pause/Mute controls are available on all runs, and Skip is available on replay;
  * the download runs underneath. After the last scene the screen slowly fades to black, records the prologue as seen
  * and seamlessly enters tutorial T-1.
  */
@@ -37,7 +38,13 @@ export class PrologueScene extends Phaser.Scene {
   private current: Phaser.GameObjects.Image | null = null;
   private caption!: Phaser.GameObjects.Text;
   private captionRule!: Phaser.GameObjects.Graphics;
+  private subtitlePlaque!: Phaser.GameObjects.Graphics;
+  private subtitleShimmer!: Phaser.GameObjects.Rectangle;
+  private voiceWaveTrack!: Phaser.GameObjects.Rectangle;
+  private voiceWaveFill!: Phaser.GameObjects.Rectangle;
   private body!: Phaser.GameObjects.Text;
+  private baseCapY = 82;
+  private baseBodyY = REF_H - 292;
   private progressFill!: Phaser.GameObjects.Rectangle;
   private shade!: Phaser.GameObjects.Graphics;
   private typer: Phaser.Time.TimerEvent | null = null;
@@ -84,6 +91,7 @@ export class PrologueScene extends Phaser.Scene {
     this.shade.setAlpha(0);
 
     const capY = 82 + Math.round(insets.top * 0.5);
+    this.baseCapY = capY;
     this.caption = txt(this, REF_W / 2, capY, '', {
       fontFamily: F.display,
       fontSize: '34px',
@@ -92,33 +100,76 @@ export class PrologueScene extends Phaser.Scene {
       stroke: '#05030a',
       strokeThickness: 5
     }).setOrigin(0.5).setLetterSpacing(9).setDepth(DEPTH.hud).setAlpha(0);
+    this.caption.setShadow(0, 2, '#05030a', 8, true, true);
 
-    this.captionRule = this.add.graphics().setDepth(DEPTH.hud).setAlpha(0);
+    this.captionRule = this.add.graphics({ x: REF_W / 2, y: capY + 28 }).setDepth(DEPTH.hud).setAlpha(0);
     this.captionRule.lineStyle(1.2, C.gold, 0.48);
-    this.captionRule.lineBetween(REF_W / 2 - 220, capY + 28, REF_W / 2 - 14, capY + 28);
-    this.captionRule.lineBetween(REF_W / 2 + 14, capY + 28, REF_W / 2 + 220, capY + 28);
+    this.captionRule.lineBetween(-220, 0, -14, 0);
+    this.captionRule.lineBetween(14, 0, 220, 0);
     this.captionRule.fillStyle(C.goldHi, 0.85);
     this.captionRule.fillPoints(
       [
-        new Phaser.Math.Vector2(REF_W / 2, capY + 22),
-        new Phaser.Math.Vector2(REF_W / 2 + 6, capY + 28),
-        new Phaser.Math.Vector2(REF_W / 2, capY + 34),
-        new Phaser.Math.Vector2(REF_W / 2 - 6, capY + 28)
+        new Phaser.Math.Vector2(0, -6),
+        new Phaser.Math.Vector2(6, 0),
+        new Phaser.Math.Vector2(0, 6),
+        new Phaser.Math.Vector2(-6, 0)
       ],
       true
     );
 
-    this.body = txt(this, REF_W / 2, REF_H - 300 - insets.bottom, '', {
+    const bodyY = REF_H - 288 - insets.bottom;
+    this.baseBodyY = bodyY;
+    const plaqueW = 1580 - insets.left - insets.right;
+    const plaqueH = 210;
+    const plaqueTop = bodyY - 26;
+    this.subtitlePlaque = this.add.graphics().setDepth(DEPTH.hud - 2).setAlpha(0);
+    this.subtitlePlaque.fillStyle(0x0b0614, 0.48);
+    this.subtitlePlaque.fillRoundedRect(REF_W / 2 - plaqueW / 2, plaqueTop, plaqueW, plaqueH, 26);
+    this.subtitlePlaque.lineStyle(1, C.gold, 0.28);
+    this.subtitlePlaque.strokeRoundedRect(REF_W / 2 - plaqueW / 2, plaqueTop, plaqueW, plaqueH, 26);
+    this.subtitlePlaque.lineStyle(1.2, C.goldHi, 0.42);
+    this.subtitlePlaque.lineBetween(REF_W / 2 - 340, plaqueTop, REF_W / 2 - 12, plaqueTop);
+    this.subtitlePlaque.lineBetween(REF_W / 2 + 12, plaqueTop, REF_W / 2 + 340, plaqueTop);
+    this.subtitlePlaque.fillStyle(C.goldHi, 0.78);
+    this.subtitlePlaque.fillPoints(
+      [
+        new Phaser.Math.Vector2(REF_W / 2, plaqueTop - 5),
+        new Phaser.Math.Vector2(REF_W / 2 + 5, plaqueTop),
+        new Phaser.Math.Vector2(REF_W / 2, plaqueTop + 5),
+        new Phaser.Math.Vector2(REF_W / 2 - 5, plaqueTop)
+      ],
+      true
+    );
+
+    this.subtitleShimmer = this.add
+      .rectangle(REF_W / 2 - 340, plaqueTop, 120, 2, 0xf6e3b4, 0)
+      .setDepth(DEPTH.hud + 1);
+
+    const waveW = 560;
+    const waveY = plaqueTop + plaqueH - 12;
+    this.voiceWaveTrack = this.add
+      .rectangle(REF_W / 2, waveY, waveW, 2, C.plumHi, 0.35)
+      .setDepth(DEPTH.hud)
+      .setAlpha(0);
+    this.voiceWaveFill = this.add
+      .rectangle(REF_W / 2 - waveW / 2, waveY, 0, 2.5, C.goldHi, 0.88)
+      .setOrigin(0, 0.5)
+      .setDepth(DEPTH.hud + 1)
+      .setAlpha(0);
+
+    this.body = txt(this, REF_W / 2, bodyY, '', {
       fontFamily: F.body,
       fontSize: '46px',
       fontStyle: '500',
-      color: T.text,
+      color: '#f8f2e8',
       align: 'center',
-      wordWrap: { width: 1520 - insets.left - insets.right },
+      wordWrap: { width: 1490 - insets.left - insets.right },
       lineSpacing: 14,
       stroke: '#05030a',
       strokeThickness: 6
     }).setOrigin(0.5, 0).setDepth(DEPTH.hud);
+    this.body.setShadow(0, 3, '#05030a', 10, true, true);
+    void T;
 
     const barW = 440;
     const barY = capY + 46;
@@ -297,30 +348,121 @@ export class PrologueScene extends Phaser.Scene {
 
   private showText(scene: PrologueData): void {
     this.typer?.remove(false);
-    this.tweens.killTweensOf([this.body, this.caption, this.captionRule]);
-    this.caption.setText(scene.caption_en.toUpperCase()).setAlpha(0);
-    this.captionRule.setAlpha(0);
-    this.body.setText('').setAlpha(1);
-    this.tweens.add({ targets: [this.caption, this.captionRule], alpha: 1, duration: TEXT_FADE_MS * 2, delay: INTRO_FAST ? 15 : 260 });
+    this.tweens.killTweensOf([
+      this.body,
+      this.caption,
+      this.captionRule,
+      this.subtitlePlaque,
+      this.subtitleShimmer,
+      this.voiceWaveTrack,
+      this.voiceWaveFill
+    ]);
+    const calm = prefs().reducedMotion || INTRO_FAST;
+    this.caption.setText(scene.caption_en.toUpperCase()).setAlpha(0).setY(calm ? this.baseCapY : this.baseCapY - 12);
+    this.captionRule.setAlpha(0).setScale(calm ? 1 : 0.25, 1);
+    this.subtitlePlaque.setAlpha(0).setY(calm ? 0 : 16);
+    this.voiceWaveTrack.setAlpha(0);
+    this.voiceWaveFill.setAlpha(0).setSize(0, 2.5);
+    this.body.setText('').setAlpha(0).setY(calm ? this.baseBodyY : this.baseBodyY + 18);
+
+    this.tweens.add({
+      targets: this.caption,
+      alpha: 1,
+      y: this.baseCapY,
+      duration: TEXT_FADE_MS * 1.6,
+      delay: INTRO_FAST ? 15 : 180,
+      ease: 'Cubic.easeOut'
+    });
+    this.tweens.add({
+      targets: this.captionRule,
+      alpha: 1,
+      scaleX: 1,
+      duration: TEXT_FADE_MS * 1.8,
+      delay: INTRO_FAST ? 15 : 220,
+      ease: 'Back.easeOut'
+    });
+    this.tweens.add({
+      targets: [this.subtitlePlaque, this.voiceWaveTrack, this.voiceWaveFill],
+      alpha: 1,
+      y: (target: Phaser.GameObjects.GameObject) =>
+        target === this.subtitlePlaque ? 0 : (target as Phaser.GameObjects.Rectangle).y,
+      duration: INTRO_FAST ? 40 : 480,
+      ease: 'Cubic.easeOut'
+    });
+    this.tweens.add({
+      targets: this.body,
+      alpha: 1,
+      y: this.baseBodyY,
+      duration: INTRO_FAST ? 40 : 520,
+      ease: 'Cubic.easeOut'
+    });
+    if (!calm) {
+      this.subtitleShimmer.setX(REF_W / 2 - 340).setAlpha(0.85);
+      this.tweens.add({
+        targets: this.subtitleShimmer,
+        x: REF_W / 2 + 340,
+        alpha: 0,
+        duration: 1250,
+        ease: 'Sine.easeOut'
+      });
+    }
+
     const full = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
     void this.stage?.voice(scene.line_id);
-    const step = INTRO_FAST ? 3 : 1;
-    let n = 0;
+
+    if (INTRO_FAST) {
+      let n = 0;
+      this.typer = this.time.addEvent({
+        delay: 1000 / REVEAL_CPS,
+        loop: true,
+        callback: () => {
+          n += 3;
+          this.body.setText(full.slice(0, n));
+          if (n >= full.length) this.typer?.remove(false);
+        }
+      });
+      return;
+    }
+
+    const voiceDur = this.stage?.voiceDuration(scene.line_id) || Math.max(4, scene.duration_seconds - 1.4);
+    const schedule = buildSubtitleSchedule(full, voiceDur, REVEAL_CPS);
+    let elapsedMs = 0;
+    const tickMs = 28;
     this.typer = this.time.addEvent({
-      delay: 1000 / REVEAL_CPS,
+      delay: tickMs,
       loop: true,
       callback: () => {
-        n += step;
-        this.body.setText(full.slice(0, n));
-        if (n >= full.length) this.typer?.remove(false);
+        elapsedMs += tickMs;
+        const vp = this.stage?.voiceProgress(scene.line_id);
+        const prog = resolveSubtitleProgress(schedule, elapsedMs, vp?.playing ? vp.currentTime : undefined);
+        this.body.setText(full.slice(0, prog.count));
+        const waveRatio = vp?.playing ? vp.ratio : prog.voiceRatio;
+        this.voiceWaveFill.width = Math.round(560 * Math.min(1, waveRatio));
+        if (prog.done && waveRatio >= 0.99) {
+          this.typer?.remove(false);
+        }
       }
     });
   }
 
   private fadeText(done: () => void): void {
     this.typer?.remove(false);
-    this.tweens.killTweensOf([this.body, this.caption, this.captionRule]);
-    this.tweens.add({ targets: [this.body, this.caption, this.captionRule], alpha: 0, duration: TEXT_FADE_MS, onComplete: done });
+    this.tweens.killTweensOf([
+      this.body,
+      this.caption,
+      this.captionRule,
+      this.subtitlePlaque,
+      this.subtitleShimmer,
+      this.voiceWaveTrack,
+      this.voiceWaveFill
+    ]);
+    this.tweens.add({
+      targets: [this.body, this.caption, this.captionRule, this.subtitlePlaque, this.voiceWaveTrack, this.voiceWaveFill],
+      alpha: 0,
+      duration: TEXT_FADE_MS,
+      ease: 'Sine.easeInOut',
+      onComplete: done
+    });
   }
 
   private ending(): void {

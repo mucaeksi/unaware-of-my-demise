@@ -32,6 +32,25 @@ export class NarrativeStage {
   text(id: string | undefined, fallback: string): string { return id && this.locale && Object.hasOwn(this.locale.strings, id) ? this.locale.strings[id]! : fallback; }
   hasVoice(lineId: string): boolean { return !!own(this.pack.voices, lineId); }
   voiceDuration(lineId: string): number { return own(this.pack.voices, lineId)?.duration_s ?? 0; }
+  isVoicePlaying(): boolean {
+    const clip = this.audio.get('voice');
+    return Boolean(clip && !clip.element.paused && !clip.element.ended);
+  }
+  voiceProgress(lineId: string): { playing: boolean; currentTime: number; duration: number; ratio: number } {
+    const def = own(this.pack.voices, lineId);
+    const dur = def?.duration_s ?? 0;
+    const clip = this.audio.get('voice');
+    if (!clip || clip.element.paused || clip.element.ended || dur <= 0) {
+      return { playing: false, currentTime: clip?.element.currentTime ?? 0, duration: dur, ratio: 0 };
+    }
+    const ct = Math.max(0, clip.element.currentTime);
+    return {
+      playing: true,
+      currentTime: ct,
+      duration: dur,
+      ratio: Math.min(1, ct / Math.max(0.1, dur))
+    };
+  }
   stopVoice(): void { this.stopAudio('voice'); }
   setPaused(paused: boolean): void { this.pause(paused); }
   setVoiceMuted(muted: boolean): void {
