@@ -8,7 +8,7 @@ import { Services } from '../services';
 import { txt } from '../ui/kit';
 import { C, F, T } from '../ui/theme';
 
-const MAIN_THEME_CUE = 'bgm_ch1_ash_forest_calm';
+const MAIN_THEME_CUE = 'bgm_main_theme';
 const NAME_IN = INTRO_FAST ? 80 : 1700;
 const PRESENTS_AT = INTRO_FAST ? 60 : 1100;
 const HOLD = INTRO_FAST ? 80 : 2100;

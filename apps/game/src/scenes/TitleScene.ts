@@ -19,7 +19,7 @@ import { barFill } from '../patch/barFill';
 import { formatBytes } from '../ui/format';
 
 
-const TITLE_CUE = 'bgm_ch1_ash_forest_calm';
+const TITLE_CUE = 'bgm_main_theme';
 
 function describe(o: PatchOutcome | null): string {
   if (!o) return 'No check yet';

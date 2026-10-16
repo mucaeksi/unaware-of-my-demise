@@ -389,15 +389,10 @@
     "shelter_courtyard_dusk": "art/bg_shelter_courtyard_dusk.webp"
   },
   "music": {
-    "bgm_ch1_ash_forest_calm": {
-      "file": "audio/bgm_ch1_ash_forest_calm.ogg",
-      "loop_start_s": 24.011,
-      "duration_s": 100.371
-    },
-    "bgm_ch1_ash_forest_chaotic": {
-      "file": "audio/bgm_ch1_ash_forest_chaotic.ogg",
-      "loop_start_s": 19.9575,
-      "duration_s": 101.777
+    "bgm_main_theme": {
+      "file": "audio/bgm_main_theme.ogg",
+      "loop_start_s": 13.01,
+      "duration_s": 110.57
     },
     "bgm_prologue_before_the_road": {
       "file": "audio/bgm_prologue_before_the_road.ogg",
@@ -408,6 +403,56 @@
       "file": "audio/bgm_fadyme_theme.ogg",
       "loop_start_s": 25.232,
       "duration_s": 86.052
+    },
+    "bgm_ch1_ash_forest_calm": {
+      "file": "audio/bgm_ch1_ash_forest_calm.ogg",
+      "loop_start_s": 24.011,
+      "duration_s": 100.371
+    },
+    "bgm_ch1_ash_forest_uneasy": {
+      "file": "audio/bgm_ch1_ash_forest_uneasy.ogg",
+      "loop_start_s": 25.16,
+      "duration_s": 101.26
+    },
+    "bgm_ch1_ash_forest_chaotic": {
+      "file": "audio/bgm_ch1_ash_forest_chaotic.ogg",
+      "loop_start_s": 19.9575,
+      "duration_s": 101.777
+    },
+    "bgm_battle_field": {
+      "file": "audio/bgm_battle_field.ogg",
+      "loop_start_s": 16.7,
+      "duration_s": 79.93
+    },
+    "bgm_battle_stone_crossing": {
+      "file": "audio/bgm_battle_stone_crossing.ogg",
+      "loop_start_s": 16.7,
+      "duration_s": 79.93
+    },
+    "bgm_battle_shelter_climax": {
+      "file": "audio/bgm_battle_shelter_climax.ogg",
+      "loop_start_s": 16.7,
+      "duration_s": 79.93
+    },
+    "bgm_cutscene_ambush_tension": {
+      "file": "audio/bgm_cutscene_ambush_tension.ogg",
+      "loop_start_s": 10.91,
+      "duration_s": 65.45
+    },
+    "bgm_mahmut_road_march": {
+      "file": "audio/bgm_mahmut_road_march.ogg",
+      "loop_start_s": 13.01,
+      "duration_s": 71.54
+    },
+    "bgm_aftermath_quiet_relief": {
+      "file": "audio/bgm_aftermath_quiet_relief.ogg",
+      "loop_start_s": 14.55,
+      "duration_s": 72.73
+    },
+    "bgm_shelter_hearth_warmth": {
+      "file": "audio/bgm_shelter_hearth_warmth.ogg",
+      "loop_start_s": 13.01,
+      "duration_s": 78.05
     }
   },
   "ui": {

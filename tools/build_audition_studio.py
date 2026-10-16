@@ -579,13 +579,111 @@ def main() -> None:
 <body>
 <header>
   <div>
-    <h1>BEFORE THE ROAD · Prologue 2:00 Müzik & Japonca Ses (Narrator / Fadyme / Mahmut) Stüdyosu</h1>
-    <div class="sub">9 Sahneli Prologue Orkestral Müzik Tasarımı + Narrator, Fadyme ve Mahmut İçin Ses Adayları + Canlı Perde/Ton/Tını Değiştirme Laboratuvarı</div>
+    <h1>UNAWARE OF MY DEMISE · Lyria 3.5 Main Theme + Savaş, Ara Sahne & Prologue Müzik/Ses Stüdyosu</h1>
+    <div class="sub">🎸 Flagship Main Theme ("Unaware of My Demise" · Duman Ruhuyla Orijinal Gotik Rock-Orkestral Balad) + ⚔️ T-1/T-2/T-3 Savaş Müzikleri + 🎭 Duruma Göre Değişen Ara Sahne Müzikleri + 🎙️ Japonca Ses Kadrosu</div>
   </div>
   <div class="top-links">
-    <a href="/?scene=Prologue" target="_blank">▶ Oyunda Canlı Prologue'u Aç (?scene=Prologue)</a>
+    <a href="/?scene=Title" target="_blank">▶ Oyunu Aç (Main Theme İle Başlar)</a>
+    <a href="/?scene=Prologue" target="_blank" style="margin-left:8px;">▶ Prologue (2:00)</a>
   </div>
 </header>
+
+<!-- LYRIA 3.5 MAIN THEME + BATTLE & CUTSCENE SOUNDTRACK SUITE -->
+<div class="card" id="soundtrack-suite-card" style="border-color: rgba(227, 195, 125, 0.65); background: linear-gradient(145deg, rgba(30, 16, 38, 0.95), rgba(14, 10, 22, 0.96)); margin-bottom: 22px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:14px;">
+    <div>
+      <div style="font-size:20px;font-weight:700;color:var(--gold);">🎸 Lyria 3.5 Soundtrack Masası: Main Theme ("Unaware of My Demise") + Savaş & Ara Sahne Müzikleri</div>
+      <div class="sub">
+        <b>Model & Mimari:</b> Google'ın en üst müzik modeli <b><code>lyria-3.5</code></b> (44.1 kHz Stereo) harmonik yatakları üzerine, hikayenin leitmotif bütünlüğünü korumak için ağlayan <b>Clean/Overdrive Tüplü Elektro Gitar</b>, <b>Solo Çello</b>, <b>Perdesiz Bas (Fretless Bass)</b>, <b>Ağır Rock-Balad Davulu</b> ve <b>Fadyme/Veyrhold Çanları</b> katmanlandı.
+      </div>
+    </div>
+  </div>
+
+  <!-- FLAGSHIP MAIN THEME HIGHLIGHT -->
+  <div style="background: rgba(216, 108, 120, 0.12); border: 1.5px solid rgba(227, 195, 125, 0.72); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
+      <div>
+        <span style="background:var(--gold);color:#120a18;font-weight:800;font-size:11.5px;padding:3px 9px;border-radius:99px;margin-right:8px;">★ FLAGSHIP MAIN THEME</span>
+        <b style="font-size:17px;color:var(--gold);">bgm_main_theme — "Unaware of My Demise" (Haberin Yok Ölüyorum Ruhuyla Orijinal Ana Tema)</b>
+      </div>
+      <span style="font-size:12.5px;color:var(--lilac);">Re Minör (D minor) · 73.8 BPM · 1:50.6 (Loop: 0:13.0) · <code>lyria-3.5</code> + Weeping Tube Guitar & Solo Cello</span>
+    </div>
+    <div style="font-size:13px;color:var(--text);line-height:1.5;margin-bottom:10px;">
+      <b>Müzikal Kurgu:</b> <i>"Duman - Haberin Yok Ölüyorum"</i> şarkısının yalnız, içli, ağlayan gitar ruhunu (ve şarkı adının oyunumuzun adıyla <b>birebir aynı anlamı taşımasını</b> — Fadyme'nin eriyip gittiğini Mahmut'tan gülümseyerek saklamasını) tamamen <b>orijinal</b> bir karanlık gotik anime rock-orkestral balad olarak işler:<br>
+      • <b>0:00–0:24 (Intro):</b> Reverb içinde yalnız kırık elektro gitar arpejleri (<i>Dm9 – Dm/C – Bbmaj7 – A7b9</i>), sıcak perdesiz bas, keçe piyano ve uzaktan gelen gümüş hacı çanı.<br>
+      • <b>0:24–0:52 (Verse):</b> Ağır rock-balad davulu (derin kalp atışı kick + yankılı rimshot/snare) girerken, pes-orta oktavda mikro-bend'lerle ağlayan elektro gitar ve solo çello ana temayı fısıldar.<br>
+      • <b>0:52–1:32 (Chorus / Duygusal Zirve):</b> Tüplü overdrive lead elektro gitar ve solo çello üst oktavda (<i>D5 → F5 tam ses bend → E5 → A5</i>) <code>lyria-3.5</code> yaylı orkestrasının üzerinde birlikte haykırır.<br>
+      • <b>Kullanıldığı Yerler:</b> <b>1)</b> Oyun açılışı (<code>StudioScene</code> → <code>TitleScene</code> ana ekranı), <b>2)</b> <code>tutorial_t3_after</code> (Barınak sahnesinde Mahmut <i>"Yarın daha iyisini buluruz"</i> dediğinde Fadyme'nin kapıdaki sise bakıp sessiz kaldığı 20. satır — en kritik duygusal kırılma anı).
+    </div>
+    <audio controls preload="auto" style="width:100%;height:38px;" src="/content/base/audio/bgm_main_theme.ogg"></audio>
+  </div>
+
+  <!-- BATTLE & CUTSCENE TRACKS GRID -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;">
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--crimson);font-weight:700;">⚔️ SAVAŞ 1 (Stage T-1 Battle · The First Step)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_battle_field (79.9 sn · 129.2 BPM · C minor)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">İlk karşılaşma: Spiccato yaylılar, gergin savaş davulları, karanlık tahta nefesliler ve paslı bronz çan darbeleri.</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_battle_field.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--crimson);font-weight:700;">⚔️ SAVAŞ 2 (Stage T-2 Battle · A Road Forgotten)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_battle_stone_crossing (79.9 sn · 129.2 BPM · C minor)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Taş geçit çatışması: Senkoplu demir zincir ritimleri + Fadyme'nin gümüş koruma çanı ve solo çello taktiksel karşı-melodisi.</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_battle_stone_crossing.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--crimson);font-weight:700;">⚔️ SAVAŞ 3 FİNALİ (Stage T-3 Battle · A Roof Before Dawn)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_battle_shelter_climax (79.9 sn · 129.2 BPM · Cm/Dm)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Barınak önü son savaş: Savaş davulları ve orkestra üzerinde <b>Main Theme motifini</b> savaş temposunda çalan overdrive lead gitar & çello!</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_battle_shelter_climax.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--lilac);font-weight:700;">🌫️ T-1 SAVAŞ ÖNCESİ (Duruma Göre 2 Kademeli Geçiş)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">1) calm → 2) bgm_ch1_ash_forest_uneasy (Satır 012)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Taşlardan geçerken sakin başlar; 12. satırda ileriden sürtünme sesi gelip düşmanlar belirdiğinde anında <i>uneasy</i> katmanına geçer.</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_ch1_ash_forest_uneasy.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🍃 T-1 SAVAŞ SONRASI (Yatışma & Şefkat)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_aftermath_quiet_relief (72.7 sn · 66 BPM · Em → G)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Savaş sonrası sessizlik: Mahmut'un Fadyme'nin omzundaki yırtık yaprağı silkelemesi; sıcak akustik gitar ve solo çello.</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_aftermath_quiet_relief.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--lilac);font-weight:700;">🔔 T-2 SAVAŞ ÖNCESİ PUSU (Satır 011'de Devreye Girer)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_cutscene_ambush_tension (65.5 sn · 88 BPM · E minor)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Hollow Pilgrim durup başını onlara çevirdiğinde (Satır 011) giren kalp atışı davul, kemik-çan tınısı ve pusu gerilimi.</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_cutscene_ambush_tension.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🌸 T-2 SAVAŞ SONRASI CG (ill_roadside_rest)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_fadyme_theme (86.1 sn · 73.8 BPM · D minor)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Taş üstünde mola: Fadyme'nin Mahmut'un gevşeyen zırh kayışını kendi elleriyle sıkması; keçe piyano ve çello.</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_fadyme_theme.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--lilac);font-weight:700;">🛡️ T-3 SAVAŞ ÖNCESİ (1: Yürüyüş → 2: Satır 007 Tehdit)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_mahmut_road_march (71.5 sn · 73.8 BPM · D minor)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Alacakaranlıkta barınağa yürüyüş ve yıldızlar/yağmur şakalaşması; 7. satırda saçak altında gölge kıpırdadığında <i>chaotic</i> müziğe geçer.</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_mahmut_road_march.ogg"></audio>
+    </div>
+
+    <div style="background:rgba(16,10,24,0.85);border:1px solid var(--border);border-radius:10px;padding:11px 13px;">
+      <div style="font-size:11.5px;color:var(--emerald);font-weight:700;">🍞 T-3 SAVAŞ SONRASI CG (1: Sıcaklık → 2: Satır 020 Main Theme)</div>
+      <div style="font-weight:700;color:var(--gold);margin:2px 0;">bgm_shelter_hearth_warmth (78.1 sn · 73.8 BPM · F/Dm)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:7px;">Mahmut'un pelerinini soğuk taşa sermesi ve ekmeği bölüşmeleri (Satır 1–19); 20. satırda Fadyme kapıya baktığında <b>bgm_main_theme</b> girer!</div>
+      <audio controls preload="none" style="width:100%;height:32px;" src="/content/base/audio/bgm_shelter_hearth_warmth.ogg"></audio>
+    </div>
+  </div>
+</div>
 
 <div class="studio-grid">
   <div class="card" style="margin-bottom:0;">

@@ -16,7 +16,7 @@
     },
     {
       "op": "music",
-      "cue_id": "bgm_ch1_ash_forest_calm"
+      "cue_id": "bgm_shelter_hearth_warmth"
     },
     {
       "op": "fade",
@@ -191,6 +191,10 @@
       "text": "Tomorrow we find a better one.",
       "emotion": "composed",
       "hold_seconds": 3
+    },
+    {
+      "op": "music",
+      "cue_id": "bgm_main_theme"
     },
     {
       "op": "narrate",

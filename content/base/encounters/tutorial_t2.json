@@ -5,7 +5,7 @@
   "title_en": "A Road Forgotten",
   "location_id": "forgotten_stone_crossing",
   "seed": 81009,
-  "music_cue": "bgm_ch1_ash_forest_chaotic",
+  "music_cue": "bgm_battle_stone_crossing",
   "party": [
     {
       "unit_id": "mahmut",

@@ -126,6 +126,10 @@
       "hold_seconds": 3
     },
     {
+      "op": "music",
+      "cue_id": "bgm_ch1_ash_forest_uneasy"
+    },
+    {
       "op": "narrate",
       "line_id": "tutorial_t1_before_012",
       "text": "Something scraped across the stones ahead. Mahmut turned before she could make another remark.",
