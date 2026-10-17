@@ -329,7 +329,7 @@
     },
     {
       "path": "presentation/presentation.json",
-      "sha256": "636b1729cf68a64c37814a6641556aa072c97eff804d69c896aee2b97e9cac23",
+      "sha256": "9747f8da220e0088179d4159520817518cd968e4766fe5d87468375324f7b2b8",
       "bytes": 28739,
       "media_type": "application/json",
       "kind": "other_data"
@@ -385,813 +385,813 @@
     },
     {
       "path": "voices/entry_past_001.ogg",
-      "sha256": "679e92fce0d5322554bfe2e7c934b887eae9408aa7dbb1f9abed492df04e2268",
-      "bytes": 108870,
+      "sha256": "133d6a05e8eadb4964d44cee68c856d5219d5156cd126bbf1c98e1fed1cde673",
+      "bytes": 94803,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_002.ogg",
-      "sha256": "00dedfd11cad6f1f53f337dd6c86680f44d487fc618ee906080220dbf4e6f824",
-      "bytes": 121472,
+      "sha256": "94c5fd25c857e1faffbaa03f77ea6bbc06500939edcd772f7f2868a9c652e32f",
+      "bytes": 106449,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_003.ogg",
-      "sha256": "4b13a69ba19298a9ce35a3f1cf2d2105e7cc5922f3347bdaa35fa9dabbe88852",
-      "bytes": 108000,
+      "sha256": "80311747610489d877d00e9d79dc617e381e26004742a42379904f2866736cb4",
+      "bytes": 89119,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_004.ogg",
-      "sha256": "b9513605ff642aa6860d84214f2d715ee37aefe76e9bb9a8c42685c87327bd77",
-      "bytes": 117632,
+      "sha256": "8e9d7261660ea46d69ef66cad5a40e9cdb57beab218a0854c1d32934deead89e",
+      "bytes": 91217,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_005.ogg",
-      "sha256": "f87fb26745ba3c4b53e67c52999b8dff590ae4c47650652a951ee3a7d8f53e9f",
-      "bytes": 136665,
+      "sha256": "5fc1e2367605c1a3485d5aa07da8ded2b814fc0580f27aba68274b534ddc2aba",
+      "bytes": 91081,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_006.ogg",
-      "sha256": "5d5f0b09c8e2ba2477d2c2fc7e5cab1456328f1c143ea904183bb569bb904faa",
-      "bytes": 131769,
+      "sha256": "dd8e250232e2a5f0e2aac13b2582118ee7cd952006c9c6b61fffbb6c273d9904",
+      "bytes": 93868,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_007.ogg",
-      "sha256": "b4473c572e68deb675f037a4f55ab3ffe2054379d4cb3a279442fa2b1dfae222",
-      "bytes": 117379,
+      "sha256": "a3e55ba9c1a69aa832509ac4fa6750505963fa943dbee71d9859d43531e0a250",
+      "bytes": 90198,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_008.ogg",
-      "sha256": "99dcc532876fe19b0edb643c4c73d665989e521d7c74dde4113eb92cfdcb3938",
-      "bytes": 105074,
+      "sha256": "b94b25c3d542ff8d7f6863638d3a4f8fbdad99c44ab76db3dc8e73548eead0dd",
+      "bytes": 86567,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/entry_past_009.ogg",
-      "sha256": "db57b6bddf6f2e43b0cd6ec6584d832336de787b85ec49fc2be8ee528fa05377",
-      "bytes": 111478,
+      "sha256": "2a99e2e40d70bf07a87804eebb3c54f3cb0a9e7b7a6a44c5eb33bc83e6974355",
+      "bytes": 83173,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_001.ogg",
-      "sha256": "47c56a081c4b40702d46c6f475ff75fc619fbecbd3847ba8dafd2e60c2b92365",
-      "bytes": 103975,
+      "sha256": "290c248224d94b076f85d61d11ae308ad5e6bc5507c10efb6b5d68da034bd18a",
+      "bytes": 91836,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_002.ogg",
-      "sha256": "c176d98b11364b1b3dc2895e1a81c54e5240c18970c56117b876ed07e418f494",
-      "bytes": 12985,
+      "sha256": "91df7d5a8a80e5ca2621ad4f46b01966c9fac4426bbf3c3c3cab2ae9bde8d465",
+      "bytes": 12989,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_003.ogg",
-      "sha256": "82efd3448390d2956aad1b4752967819618c7abe70c371f027b5337d3966e91c",
-      "bytes": 32971,
+      "sha256": "625d31be012dd19f0375d415372e117b45ecbc8f19a7fab7f0c200dfd2882ee1",
+      "bytes": 32945,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_004.ogg",
-      "sha256": "4692bbb993e53edc462cb24466a58a27595d10813bba76f80a36a7bc32304488",
-      "bytes": 11694,
+      "sha256": "0703700e212c924d896ed4de3767671dae5da94c8d85a19d8111bcbf2b6a9a7f",
+      "bytes": 11698,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_005.ogg",
-      "sha256": "7740e6d81d8706f1306004d98c6102a2d9d4160a41e99147f13147a03fb60d3c",
-      "bytes": 37230,
+      "sha256": "be7138d0b61d8876947a0e50884a90a38e1e6d7eebe976dc15933044b1b2e48b",
+      "bytes": 37249,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_006.ogg",
-      "sha256": "2e6a8a2eb626a2f46baa6c5f76755987c885e3354f4f75063bc01d8626d06e8a",
-      "bytes": 78721,
+      "sha256": "4c75ada49387ae956cc1127c11959d9cd327703985798b84bc1c2d7791cda08f",
+      "bytes": 69420,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_007.ogg",
-      "sha256": "b2313af5f6aaab9a94b18ec12e803dfa40bf5ef3575fb011d6687d7fc4d3810e",
-      "bytes": 19910,
+      "sha256": "57a1c56e348b89337e8ea9d541c7b4848c298b6d44412cee3aea8e6a4b28d5d8",
+      "bytes": 19917,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_008.ogg",
-      "sha256": "43e0675f30ab633038af1dad23a999145cd656e8e1261b5f2e3cfb723fbedec1",
-      "bytes": 62182,
+      "sha256": "8a057aa0a38306f2aa0d952df7b2da3696dca43a7bbec24f3504ebcc31db7077",
+      "bytes": 62190,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_009.ogg",
-      "sha256": "71cca9e9cbbcedca294eb194476952508fb9369ed387884a610e3d9d365a22ba",
-      "bytes": 28288,
+      "sha256": "03e8744c9b980488ebf0f197ca7db59cc751a2c04041b96d474b0a56606d4818",
+      "bytes": 28275,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_010.ogg",
-      "sha256": "9853cf558705f05359b53bcf12faa6c63a6e9b1fbf87ba3ef1b733c51e95051e",
-      "bytes": 41259,
+      "sha256": "6875b6b562c3bcc7a43cd9ae355e3d0765f1fbc48d93d150375b8ceb8455eac2",
+      "bytes": 41246,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_011.ogg",
-      "sha256": "16f868e749bf2a31bdd85bbecdd97489262071fa1d60c2efd58907f75aba991e",
-      "bytes": 72947,
+      "sha256": "877a7dd35d78d169eb25ab6adfb04449bf78c6bfee1f29afa6fd655b524a92bc",
+      "bytes": 72943,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_012.ogg",
-      "sha256": "8fe7cc15928c4990e3b855a200720b94551b568b3d351bc411fed8535b11a14b",
-      "bytes": 37899,
+      "sha256": "a15f3045dfd09ac9813b2ff12a2a1df4eecd0f169f203620fbe178a5a2699626",
+      "bytes": 37900,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_013.ogg",
-      "sha256": "d27f28892a6dd60b4669e507d475436a9893eed7e3d9971b12cc7f625a59fa52",
-      "bytes": 20833,
+      "sha256": "e279eda94fb369d27925354506669f993db5a4a65e85df42aeed5da62d5f3a70",
+      "bytes": 20825,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_after_014.ogg",
-      "sha256": "5a8f07b571440b23012e848d0c3f9bd98472e1e41fe168f501d7d0af357e7fcf",
-      "bytes": 70067,
+      "sha256": "1e8e55ad8d656009ff07dd029f268563098f5e65ec79d1fd49956420e5e31dae",
+      "bytes": 60058,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_001.ogg",
-      "sha256": "1fcc3dbb3e2c78fe900060be372ad8a54815e3eb6ab939b08660923f8117d16e",
-      "bytes": 111480,
+      "sha256": "6e72f9ac67d146618bde94cc09cca8208229506859dcb98e483dcb566f046a7d",
+      "bytes": 100032,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_002.ogg",
-      "sha256": "9e7760e7d619943154f3ba5cc4e6beb46f2430b7ca819fba274b2715e5dda901",
-      "bytes": 42616,
+      "sha256": "32129ef84312ef2b942b7293f56fa494a2b803c1df1ae27c09ece04156e8388f",
+      "bytes": 42592,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_003.ogg",
-      "sha256": "8c2dd6f6e7e29b364dd2eb54bf49463e51ab1c07729293be44f35904e3446920",
-      "bytes": 46771,
+      "sha256": "514a87fda76bd53c8506f1e26cfd43f3857513f12a5946042a01561971a4d324",
+      "bytes": 46780,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_004.ogg",
-      "sha256": "d3e32183983b8e7191fa670b67e35fecac85db7b2bfc9e933182b1ac748dcfe2",
-      "bytes": 41889,
+      "sha256": "6d1b1e4555a65334bad23416a3aa9e130ae6b00c5bdd26bb647441646d61e71d",
+      "bytes": 41897,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_005.ogg",
-      "sha256": "e16f8ebcfe263284188fcd794d63ab647be8a644346eee0053e562bb8606c429",
-      "bytes": 55748,
+      "sha256": "0fb55638ee073fb7ce84f03f6ef611b88bca051fa161a191473ca909457edd99",
+      "bytes": 55741,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_006.ogg",
-      "sha256": "643a4e63d53bbf408bd6c4651076fdd0977671df8761ce8242d1d81174c5cdfb",
-      "bytes": 27294,
+      "sha256": "a42136f280f9094b14375fdcbc8a87fb4f7cea73dfc39e1689d4364f6339b5b4",
+      "bytes": 27361,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_007.ogg",
-      "sha256": "98746ae479cbc61de02681f64dbcbc44af28e35601f7199cddf247700a6d4e93",
-      "bytes": 52315,
+      "sha256": "0e94a7758cce79f7359a81a4d5c15806e7e05001525980bac9d9844521fa1ed7",
+      "bytes": 52309,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_008.ogg",
-      "sha256": "042d93ab32e2e36ef7093d4dde3ad88e6ba55c9acd0c255c93282b1b8aefb27a",
-      "bytes": 25008,
+      "sha256": "2414ba898e7463cc96b3b6e9ee30dec70d5b8c70d901bca05e5ae77545def324",
+      "bytes": 24997,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_009.ogg",
-      "sha256": "4a0beb635f04207a1e1556966d6a8754e41dfd65bf059db193a8335cf391767a",
-      "bytes": 110149,
+      "sha256": "c8e7ea262275f4504db7eafd181e53515c84e79352caea4b0b09a61bf5dd5c6c",
+      "bytes": 92851,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_010.ogg",
-      "sha256": "d87a1edab266d1736bd233f4a44c674ae933883d93f4e86290f260f5df6f6846",
-      "bytes": 62750,
+      "sha256": "c9d48527f77035b1e3b3382da25f5887871ab3747155dd20f7bfa52cf087302e",
+      "bytes": 62728,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_011.ogg",
-      "sha256": "c1b9d3c89cca91e2b6907511df8936876b5782f471123abb6bff76898472ece4",
-      "bytes": 25520,
+      "sha256": "3156b59f21d2f17ed88ee1dfd167fd827ad12e839b99e9f47a28d1c3c9660e21",
+      "bytes": 25521,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_012.ogg",
-      "sha256": "e40131ad064cc15389e3a52bb20daff6eba02ac8ad93cc497b96916fabe0560b",
-      "bytes": 75427,
+      "sha256": "245b0f3b39b119bfbedb89509880b198505de6660da7a40ca57e4099a1a7734d",
+      "bytes": 62172,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_013.ogg",
-      "sha256": "f7849d2c428a5da6aac2dc0bfd6ee3ba0cbd64f0730fa11ec590af5e11486734",
-      "bytes": 25465,
+      "sha256": "68dbd425f853a6f14253e8cce6c6bcc11b5a2529a5ae9cf72f5210cd9552a01f",
+      "bytes": 25475,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t1_before_014.ogg",
-      "sha256": "7ac4fc4b082eac2b9610c069d5fcc64d52cfe9e484325c4a735be528f6c3350a",
-      "bytes": 51245,
+      "sha256": "d11c044ace09f4bbf08a7e377abc768faae814fb470721072bdd65ebe36bb15e",
+      "bytes": 51239,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_001.ogg",
-      "sha256": "86c28342747dfc417a014302abfe01a5f154d6a620763025fd11a53f78bb8aaa",
-      "bytes": 102488,
+      "sha256": "c8bf567a43a517b854e8dee6215ea2d77a8acc9d353173ed9a9d9aac07131b3f",
+      "bytes": 89722,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_002.ogg",
-      "sha256": "d6a3bfb84346195675b9183f6de204a44c15529e0e72f522d56e8936079de03d",
-      "bytes": 61723,
+      "sha256": "b48448f1001fd77c2c0689cc28b2989e81a43c28b52657df6eba7b9ab8298fcb",
+      "bytes": 61738,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_003.ogg",
-      "sha256": "55dc835587a6ac4724b01531c767bd513e52dd3e69ffd2951c76ce0ef15a29fe",
-      "bytes": 24294,
+      "sha256": "34d74e6f80edce72186fac337b7214d3c7a1d2530520974474057e8e2789440b",
+      "bytes": 24303,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_004.ogg",
-      "sha256": "64c6f29c17521e3694c3d7498b7976d547eaab3eaa58df0bd62c83eb038d0c80",
-      "bytes": 50444,
+      "sha256": "76dbb662f4a67e52c5711f2beb5be623b65aa21c2c733df44729e50f06ca4b7e",
+      "bytes": 50419,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_005.ogg",
-      "sha256": "d00d4626e09c940e9dc7d26c72ff2ec98495412cd6f1d804cdc4f23aee56e3c8",
-      "bytes": 56456,
+      "sha256": "8ebf7fc4bdfed8265804010add8244e41f9b926d05612d8d71c19c73f3ec1ee9",
+      "bytes": 50634,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_006.ogg",
-      "sha256": "7a7ecd1d1311b8095c46d8d0805d4a896382a9d9b013347a91e6184d26eca1e9",
-      "bytes": 19010,
+      "sha256": "c43f0cd3ace15e125602355b8c23fc56ba13c295e04ab81b59b69bc806f16118",
+      "bytes": 19025,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_007.ogg",
-      "sha256": "fd7e15b1a0164bd85d96a9105690efa804b05c33396de1c49423eee41f93aa50",
-      "bytes": 40891,
+      "sha256": "24afaa87fbc79959078dad7397a70a831a1b1ee5d18e32a933d3083056a16991",
+      "bytes": 40863,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_008.ogg",
-      "sha256": "d736361a22f1161c5f47d557d463393935ac12c555e15c93a306fd1ad47c8d20",
-      "bytes": 122743,
+      "sha256": "93d2d06abd94a4dd97dc07b7314edc17ee27c96028cfa67e0ec8bc7f2063e238",
+      "bytes": 106463,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_009.ogg",
-      "sha256": "d8a58e26ef40a1ade7af9ebabe3bdb677abd932119b4be2dfb6afafe0671c915",
-      "bytes": 15349,
+      "sha256": "dc0ef55b59d600c5621b674be0e0ec62c59d476b93a5ba958356a0015807197f",
+      "bytes": 15336,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_010.ogg",
-      "sha256": "c7fd4770aad6dba76cd0dfa0ead1a6d73a763667e382d03d26344eccd3c678ac",
-      "bytes": 40781,
+      "sha256": "58cd858d02e088e87ab4e775b873b3ba1cf59c81c9662f85f0a1395144080b7a",
+      "bytes": 40775,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_011.ogg",
-      "sha256": "c79f1fd739d156b610f84a8cbea8f4a1e71f54ed72b25e54abb250ed2786def7",
-      "bytes": 10293,
+      "sha256": "33e2e1dab911ac3f02061293c0e471dbed195419a3a440cf545545c5564cd6fd",
+      "bytes": 10307,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_012.ogg",
-      "sha256": "ee2b2ad55b50677a31a91f5aae4956fcf097e809ce7f3b703193327e2c7618bd",
-      "bytes": 26049,
+      "sha256": "3afc6286d520bcea5a0d586f987fb26d753760b1c0d9907cde3d8050f2c32eb8",
+      "bytes": 26053,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_013.ogg",
-      "sha256": "adcbb9a32c7e11708579bafefbe456a2e5fb1584d271a76087a4c3910fba9b94",
-      "bytes": 30308,
+      "sha256": "54181bee85cdce75285b5c2e8c82dc9957a5d121df0e3568db77c4cbed84f036",
+      "bytes": 30301,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_014.ogg",
-      "sha256": "1de239fad797d1273d9d11c6b5d04ebda0bc2a9fc503bed8da76e0bbed15ad82",
-      "bytes": 60998,
+      "sha256": "94d493913c8c0ecadeb0f0c5a39424deabd201de8cfd6315bbd5bc158be51e66",
+      "bytes": 60984,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_015.ogg",
-      "sha256": "38068c180137a4840925a6aefd010726f8974cd8f4e46993ef10805fff5b6c80",
+      "sha256": "632d30d48dd6d53262d6f6a068a4eba2d6faf604eb09ab263a6d7fec58886b58",
       "bytes": 12715,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_016.ogg",
-      "sha256": "5a706d334f30b0dd9d4d118ddfe06594b0cfb6c16f02531011094c288e26701d",
-      "bytes": 109208,
+      "sha256": "4e23edb156332206af43b03618661e7388fce12e10f7a4a7fc85df12380d9109",
+      "bytes": 92608,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_017.ogg",
-      "sha256": "3c3f0dff39e142de2f6991eb898f764ee58636e7981108e54b899fd8e8978502",
-      "bytes": 34680,
+      "sha256": "c8c8660b082d541cd770aae3599e5c71ec1a192d0a6562292d90112d5a1def80",
+      "bytes": 34678,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_after_018.ogg",
-      "sha256": "834d36611e470ddb9a3d1bea03bcfe080d7606c7ea6abea952ef73b6253cd25f",
-      "bytes": 33325,
+      "sha256": "9badbed649399df96fcab8be12ac2681adcff83760ccb172770d008b3aea6af2",
+      "bytes": 33330,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_001.ogg",
-      "sha256": "586181f0d0463ed44bd2d4ea525f8b389a00d15952328d8681ce0b2cbec7b246",
-      "bytes": 101282,
+      "sha256": "56ed35cfbb6e2fe9e9ff397082c235d08422efe87dc3815d7b1a1481f4d7ebc6",
+      "bytes": 92578,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_002.ogg",
-      "sha256": "52e6c8d334ba0c95afeb0d058393458fbdce267ed749bad57943cbecc846fdd9",
-      "bytes": 34761,
+      "sha256": "3130fbdcaf9b819a1e71da8faa2228530c4fad160a74e0650f62763631872a6b",
+      "bytes": 34746,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_003.ogg",
-      "sha256": "ff3a5f130d2e0dd450fb71a5ebf5a72297662f0839f9438697432b050b7b825f",
-      "bytes": 40868,
+      "sha256": "75c20c5a33a6e6c816b93cca8bc205f4cc839e5c6fc941cc4416ec3c9d3abd33",
+      "bytes": 40866,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_004.ogg",
-      "sha256": "b11994813e06e4497f9be9430e801889dc85252a778b478ee522494fcc412aae",
-      "bytes": 25668,
+      "sha256": "39e7f5e09982771553d12c3845104b6eec1d55c0e1c3f49b0804e019b5bb331d",
+      "bytes": 25672,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_005.ogg",
-      "sha256": "c5bd0b866cbfcde5c10abc70a7cfaabb399f1cfd83b28c33cac9584e9e677ca9",
-      "bytes": 30550,
+      "sha256": "934123a35119d8ca14827a6a63ffbead4e0a6dd7c5a0030f2f9a065f9eefd33c",
+      "bytes": 30569,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_006.ogg",
-      "sha256": "786cc24e2fafcd0013d157d61998adca419076153c53171be36f4b3d8d5a9401",
-      "bytes": 96612,
+      "sha256": "286b0b3d8df194ca4ad3f6822dbeac6434010cb17827860c94ea93e73c9338ec",
+      "bytes": 82111,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_007.ogg",
-      "sha256": "df45de05e7c2cc12d43fb939874b7a5dc183918a516bd303bd8cecb669574040",
-      "bytes": 77270,
+      "sha256": "b5828d46be525e39ed3f7de8245a1d337865e6bb28e65ae71fc173b82bb92d0f",
+      "bytes": 77247,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_008.ogg",
-      "sha256": "e5cff09fb52c63fc4fbed04bf3dbc1d2cd945458479f33e342ebdf9e2069875b",
-      "bytes": 11577,
+      "sha256": "be133f20867887691e6f34a5c8c78b4fc01ef40b95f10b086485bb54ca291da9",
+      "bytes": 11586,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_009.ogg",
-      "sha256": "f648b4c8d8755b091fa67b9ce1047677b4f9507fb2a357b737cae515a95b9012",
-      "bytes": 69729,
+      "sha256": "f3f3c250efe7fa20ea3102e91c5f732ee41fd70cf6e6e719086504968d168fd6",
+      "bytes": 69696,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_010.ogg",
-      "sha256": "75eb8e7eedcb94642d18853de2ddb3a36a4f1ff2b293ad586927894d67f8acc1",
-      "bytes": 20790,
+      "sha256": "2ce4c54aadb627226307c6421af8d95ab98bb3683d70990f5385fae707ea27f7",
+      "bytes": 20784,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_011.ogg",
-      "sha256": "d976c5d0bd6284ae1f0b8ba7011e4f718e15da7f0a66fbea8300a9ad59c08fec",
-      "bytes": 56817,
+      "sha256": "0462a5c95104346b44845dd882ec39addf7e03cd8b358c476d6f7cb96c9c0be3",
+      "bytes": 50019,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_012.ogg",
-      "sha256": "9326a40f5e90979f6d244f63759294e4b9bfe7156370eb02f8cad8a657d10ccd",
-      "bytes": 28015,
+      "sha256": "e6355569c84d5646400d803c4ba9c6b5e6a1bcf85d236cef526bf3e15a970bc0",
+      "bytes": 27996,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t2_before_013.ogg",
-      "sha256": "de13ee8184b08ebbe807c4269ecd7036731244277aa9c79b1a0b60cea55b2d36",
-      "bytes": 28684,
+      "sha256": "2dbe58500770355c9c65d0df401d33a8ab631170e37d2b3f6117f1ae91f4f514",
+      "bytes": 28695,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_001.ogg",
-      "sha256": "a5b91c88bc11783ca671c56bed5327127daa5d906ba3fd7010ccf2ed8b552023",
-      "bytes": 104344,
+      "sha256": "27841d55832549ca5edf6306c5b997364ab0f3f7644995f4e30bfcbd24cc2a90",
+      "bytes": 87654,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_002.ogg",
-      "sha256": "d8373b195dba6118caabc5b3b4389515fbcbc843b4e0525887f7526dbf6b12f7",
-      "bytes": 38299,
+      "sha256": "a9ab925781f6d7b183b21d92794fae1369a9d54cb7592f62d9f82079d5a89064",
+      "bytes": 38291,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_003.ogg",
-      "sha256": "bab9f11ebfe60a4a54ec4ec814c815dba839d24adbce3bc0821973736d0db9ad",
-      "bytes": 38646,
+      "sha256": "e7095b75f37627c448e7674b5fdf5060af28746b73e2622135fc1e5e8495daf6",
+      "bytes": 38632,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_004.ogg",
-      "sha256": "0538c7f96ef28f43dea54107ccac43c5abf440abc7b142ff8afdae99fa66bdb0",
-      "bytes": 30990,
+      "sha256": "61bc051b260c2bfd99778320950c73bc42aa9d1e092e26626dc7fd92d0386230",
+      "bytes": 31002,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_005.ogg",
-      "sha256": "a1e8028a53d84706bf45cef60da8071623ee99561518c8e9d932b782aebfca26",
-      "bytes": 117428,
+      "sha256": "c6854f34975c8f7de8325c03405100a49a46eef71614cf37fdb2378a936a01d4",
+      "bytes": 102215,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_006.ogg",
-      "sha256": "7fe8469e1fd16fa18d70f3a6e74ec4045debaeaf379d9a4607c7117940ca61cf",
-      "bytes": 28164,
+      "sha256": "21484a94bd72ece76fd0f296a8488beaf19a2573a4ae697c0846912082022ab9",
+      "bytes": 28176,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_007.ogg",
-      "sha256": "b465db8af243111fcc503d71222a603389e7be554c3a37bc09d5d8441334f810",
-      "bytes": 19771,
+      "sha256": "9020029eb5976b67fb5e9c408eab138307f48370db24cccdba731cd56b47e4e0",
+      "bytes": 19772,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_008.ogg",
-      "sha256": "f53afd1264dacaa39e24a659701d1d58f04e0c568ce11368bbd78901da121e0a",
-      "bytes": 30348,
+      "sha256": "bcf7cfa828cca0469520a10b69c533741bdfb258e062c4558aa428089caac591",
+      "bytes": 30336,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_009.ogg",
-      "sha256": "38cede588469b1de723f6a1f2b5a3d692e0f1b533a736282e2f7f148e445937a",
-      "bytes": 19983,
+      "sha256": "1919fc49bb04744f637731af9f2177d9b3126c2090b7fda1ea5d4c76c047c574",
+      "bytes": 19993,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_010.ogg",
-      "sha256": "963ebe395c3bdb4b940605ba86eefe9dc5446bebb69e4f15f86a6b8c08bd29dc",
-      "bytes": 59940,
+      "sha256": "f55128adde87123ef608a2f82e3e45968c70fef62fbf47ab8354a23a1f65232a",
+      "bytes": 59941,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_011.ogg",
-      "sha256": "7864ded0eb534c42903c08fa8499e8be719f49620304114201ccafdb20dc703f",
-      "bytes": 101852,
+      "sha256": "c643ce610d5bba016288e7e651a2e9191990abac0cbafc6b501d9af960bf5c59",
+      "bytes": 88500,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_012.ogg",
-      "sha256": "66fbf54f2bdd93f1352b1c2fdf3c8b9b40e17481256d31ce1e6a2477eb684b37",
-      "bytes": 22240,
+      "sha256": "fc73502f0936584daedfd19f81167aba15b94e8eb69b94f3594fd457865eca97",
+      "bytes": 22226,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_013.ogg",
-      "sha256": "3f7fbf64eb28c93f3faa99bc5880a0e9d2ba226d57a2fba858f0bf9daa614a88",
-      "bytes": 46706,
+      "sha256": "faf0a5ea0f59a74919beb9982fe9c149ce5ccbe1199c73db9632fa9a4e6b3a74",
+      "bytes": 46738,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_014.ogg",
-      "sha256": "5b7228035d12c12e7fdd0e87ba179ae3be2fab22dc7fd53b7acdbe330ba04172",
-      "bytes": 19753,
+      "sha256": "4c694e688734d7ab852add32841fe95a639f431329ff5f6b4149737171477316",
+      "bytes": 19752,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_015.ogg",
-      "sha256": "8577ab7edaf7533f3f2fee253bd305035ba1c200012c957c5229445f80ca98a5",
-      "bytes": 45760,
+      "sha256": "c45fdb8f2322b42bb40df7498370e60b3a472ef9621de0a208186f6dcdeb74b7",
+      "bytes": 45726,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_016.ogg",
-      "sha256": "4490b97881afed7ced51a488d8e26154ed47b98456da04a813851a82c3b0a71f",
-      "bytes": 91039,
+      "sha256": "3f4a2f1c0a1734b436f568bbf8b76fdac17cc49bab7bc1a6e6555282057533b5",
+      "bytes": 80031,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_017.ogg",
-      "sha256": "deb964cd745df65232a88c2d22e99744cdd608435a6a30b27dfab6f5be2af963",
-      "bytes": 20972,
+      "sha256": "1cf18f9a44bf1ab2b5eac971c0932c7976e8d67dbd7c14d2938f5f63be46bbe0",
+      "bytes": 20982,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_018.ogg",
-      "sha256": "415f3e35c6fa69cb4b12015ffc7ec911ded66855aa4c45b218730d13dae3dcc1",
-      "bytes": 52642,
+      "sha256": "12a6cde2e41e747c9750b9b16d518a2a2e37f539b96ff58f15535b829e75cb93",
+      "bytes": 52599,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_019.ogg",
-      "sha256": "0761b7088255f76be2326ebf8b8d7f8968b652e010432dcfb25c6d7a77342ca1",
-      "bytes": 34152,
+      "sha256": "c477914bf6b0a0e9b7e44e4c4ef67e69e499ec21b038e06a8dd967cfb7a0d314",
+      "bytes": 34157,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_020.ogg",
-      "sha256": "982067ff91211fa345f8eca82765595cd71c7a3671cace7c11d09f281f662160",
-      "bytes": 74017,
+      "sha256": "57b24bdbef3a34e24063cfa900e80cc1edd34f2dd9f4507259d2fc5fcca1c068",
+      "bytes": 64856,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_021.ogg",
-      "sha256": "3b0dce6acb320730187e2a2c11c22462ccdfcf6b5a5272283bf5547c1954e8dc",
-      "bytes": 26933,
+      "sha256": "e25d26506a388121854b647c4cca9e3d14520cf886aa1e4006adab1797f08689",
+      "bytes": 26938,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_022.ogg",
-      "sha256": "b02147627fa3b7b867da100985e51db9d327a149fd83b85ecf3c47f1dc415877",
-      "bytes": 10372,
+      "sha256": "68b7213a1ef82dfe81c8d34fda20d507482239378ea768a2f9a0d73a092854a9",
+      "bytes": 10377,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_023.ogg",
-      "sha256": "ffc208d89dac9db0cba29537af078f61ec9c609aa11d505e87f20af069c799b4",
-      "bytes": 30089,
+      "sha256": "b94b9899c158d88e7f297c4bfc2d5c3fc36f9a4d0d70f30e17445223a8cb3965",
+      "bytes": 30100,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_024.ogg",
-      "sha256": "9bf3ec8e1a8dcf910ac30190a641c8d8420b28fb0fb23d6e781e79d10356760f",
-      "bytes": 38648,
+      "sha256": "37ac5a5a97651a5cd7ada417e6827a932e63c1c09f7fe3482a4a2b3d7b434242",
+      "bytes": 38632,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_025.ogg",
-      "sha256": "6508ef36080b4d1792ef138d8a894d9d5ec758d8878be92aa5b9db38518a86e5",
-      "bytes": 86440,
+      "sha256": "78cce37478c5db53644026ab20791c8e50bfb9b0f4250cac9e4ebdc155e5b213",
+      "bytes": 73254,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_026.ogg",
-      "sha256": "160e2a6d64c5ac529fe0645ffe6a486661bef08407df8e037b2d726f1a607f61",
-      "bytes": 40266,
+      "sha256": "06ef37b457ee0ae5dc7c3eecf6be0cedd965e78c21804b91d0f7ff1499bfbfcf",
+      "bytes": 40249,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_027.ogg",
-      "sha256": "be9a55986a1e11d459e70f7c93a3b776fb366cd2b00664e42dc76d1aa79f59d0",
-      "bytes": 13856,
+      "sha256": "2fa7e15f8717140617cc899f49f19ba845a9c75b525f97831e3cb2ac288e65d7",
+      "bytes": 13854,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_028.ogg",
-      "sha256": "cb45941a079ef6d195d0d4750ddeaea4dfdf3349f82221be2d83b2105b604684",
-      "bytes": 34733,
+      "sha256": "d2bdce9002e25b0905733e09696d2f738b11d3c3820f0d1a0040bd72552d9dd6",
+      "bytes": 34734,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_029.ogg",
-      "sha256": "8cdb6be8ae69475136b76bcca0a15384fd1f76da90ef8df9d952434e3b40844f",
-      "bytes": 117667,
+      "sha256": "7c935e9edc9cd62e0992a480c0f6217fc813b44e71fc4fc52fb16a223def7156",
+      "bytes": 100125,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_030.ogg",
-      "sha256": "14cf1c31aa210a63474e4ebfc7b619b2f5c9d1afb016706b1513db137ffa6582",
-      "bytes": 36371,
+      "sha256": "b5120feb7f6faafe0d1f24f773427b2dcab5a749d1da0cb6917eabd30f9877b7",
+      "bytes": 36365,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_031.ogg",
-      "sha256": "8b302975db5f2c7becb9964f4276e5ff6e4f7c28955504ea3a1d30b14a403991",
-      "bytes": 23141,
+      "sha256": "331b4a1ab1ea7844f7f14199e5674db74c96bed89aa564d7d4d1bca0b6b1de15",
+      "bytes": 23144,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_032.ogg",
-      "sha256": "ba2355af12dba0ffe86806a501dee8fb6874010a8b11a75c4829306c7173215c",
-      "bytes": 22249,
+      "sha256": "bd30dedc3775fc19561d107abe3084815946b8587d1215ae4f0dd0c535f13e99",
+      "bytes": 22274,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_033.ogg",
-      "sha256": "0cb77bc2880dc118bb66fa4f0b62e5ad5517afce884531f6fbb1cdc1852a219d",
-      "bytes": 17556,
+      "sha256": "0f80ff2afbbaf2b5556807147c1bee84373f1c8f7e6e8bf881620c6e5aa6bd28",
+      "bytes": 17545,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_after_034.ogg",
-      "sha256": "684eb3398cb519c090f2d45216774fcfd9d65097b21d9e76f022f4ed49c0df12",
-      "bytes": 97682,
+      "sha256": "d88bddbe0d68153535d27b007e5825d608f5422b6c0dac78f6be0a04fee9157f",
+      "bytes": 82860,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_001.ogg",
-      "sha256": "25e84e62d9dc33c165b3edf160676dee0ba0196071f6aa2d1c8bd5f3ed39dd32",
-      "bytes": 97457,
+      "sha256": "aeb9215322dab209caa61636b6f6a6167616c6f236a4a6113dd43948a270eb6b",
+      "bytes": 82910,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_002.ogg",
-      "sha256": "5967cf98f380cbc373ce213cb696b7742decb9347d77b1a60e4267ac88378c7f",
-      "bytes": 31027,
+      "sha256": "ce003f4288d9cec0cbd1830b149b14b18ddf88b0aaab2e4719edf94395685e47",
+      "bytes": 31025,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_003.ogg",
-      "sha256": "705f8806f64f02458ae6c81b437fe38e1c81c8fcc39402a90a1165d474de80e9",
-      "bytes": 43394,
+      "sha256": "841da567c974341aa1b6ac512d68f04b925e2f04e88f57f8fcfe9c4cb329b2b9",
+      "bytes": 43396,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_004.ogg",
-      "sha256": "ba523497f591596afa4eabaf1868b62c9ab1e0579cf35eacfa0e2c51c9e7ed61",
-      "bytes": 44757,
+      "sha256": "79ab93889745cd22ff786ac80f90a5f9ce142a48efd5952533c747465fd640e5",
+      "bytes": 44896,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_005.ogg",
-      "sha256": "04c7708d73bdab5fe29bba767ef64098e265a9f5fd6cd2da2a5f384f4f783888",
-      "bytes": 45486,
+      "sha256": "e29285c8ae27c17cf69db6e8c569f247f27833f57bf8d1090d108c0df258b37d",
+      "bytes": 45469,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_006.ogg",
-      "sha256": "0450f7470bb286c588abadfbd1d68102f0c518dfc05f691ae45ebb8e82b0c9fc",
-      "bytes": 49119,
+      "sha256": "8499c27b065116a7d7be68ee6d4a7eb667ca3c591bd0ae09a19dc45bc15ddec5",
+      "bytes": 49130,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_007.ogg",
-      "sha256": "30b79c30def46bd9ea8e602e2072762fdfb73a9503553b40184c5edfa3722506",
-      "bytes": 72677,
+      "sha256": "40f08eac1187812a8078c59e8545442f3cca2e0c86f9a218dde435a0d928940e",
+      "bytes": 62390,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_008.ogg",
-      "sha256": "e0c290c9b8b9b43850ba61beaa06a5f256168b21c87bac7db4dbf7c98f8561aa",
-      "bytes": 28392,
+      "sha256": "517fa5e29b4abd8e9fa65cf381b82813f57c8f406a0dd1d037bd17e96bebed48",
+      "bytes": 28376,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_009.ogg",
-      "sha256": "90bfe6e6af0b55847055318856feaba7af398a37ceb02d3532d680de221cc0f1",
-      "bytes": 34692,
+      "sha256": "b6f0c21fc2df1a7a49f6066b7896c4accbd79332e3ca9247889bc866be00ce0d",
+      "bytes": 34675,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_010.ogg",
-      "sha256": "bf01852b3a02b052ca7eb9352f3b071d5b3489a448bed12f8fde4fba00c731b6",
-      "bytes": 40282,
+      "sha256": "42cedaa3df57dcf8819731716c31c87cd2b0f0ec437a031a063b9a37e056af33",
+      "bytes": 40271,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_011.ogg",
-      "sha256": "0a72725de9dc4b2365dfa8b1f0c74ad813f6dc49efb0f0b45186418d5467e02b",
-      "bytes": 39881,
+      "sha256": "4b38185632305dbdd5e658b977f7d2c1b150ba507098ebe84d96d2aafd9d14b4",
+      "bytes": 39912,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_012.ogg",
-      "sha256": "55f5d9c63bd2d8d6c9a71630ebd6f5bda64cd93079b039831682701e57df27bd",
-      "bytes": 29755,
+      "sha256": "51db577cb6273a3a8d3866b7f7be7c925a04bb220bdba4a09052443ed6c24d2e",
+      "bytes": 29741,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_013.ogg",
-      "sha256": "b30d3ccc4b67ea475df4702ec38060a24d7b33df8dd6e5de2a961709061bfaf8",
-      "bytes": 56945,
+      "sha256": "9742fd29edb185c23d133b4dd8b5e6bb5918ab30e498bc14107ea9434f682505",
+      "bytes": 56941,
       "media_type": "audio/ogg",
       "kind": "other_data"
     },
     {
       "path": "voices/tutorial_t3_before_014.ogg",
-      "sha256": "66ee476c2359e6446533716d2cd585e13d75b484808f2d80168acfeef31b1256",
-      "bytes": 36901,
+      "sha256": "9dfe36308aae90169283a1172d455bbd4ad4131556d7a105fbffeb62e3c63d01",
+      "bytes": 31665,
       "media_type": "audio/ogg",
       "kind": "other_data"
     }

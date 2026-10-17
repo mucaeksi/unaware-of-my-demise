@@ -1,12 +1,64 @@
 # Unaware of My Demise — Unified Development Master Prompt
 
-**Gothic anime gacha RPG · Android / Google Play first · Phaser 4 · updated 2026-10-14**
+**Gothic anime gacha RPG · Android / Google Play first · Phaser 4 · updated 2026-10-17**
 
-> Read this entire README before substantial work. It is the engineering and creative execution brief. [narrative/](narrative/) remains authoritative for fiction, dialogue, characters, chronology and spoilers. Supporting records hold implementation details and evidence; current owner instructions override older agent/model assignments.
+> Read this entire README before substantial work. It is the sole engineering and creative execution brief. [narrative/](narrative/) remains authoritative for fiction, dialogue, characters, chronology and spoilers. Supporting records hold implementation details and evidence; current owner instructions override older agent/model assignments.
 
-**Current checkpoint: R08 source complete and locally verified; R09 has not started.** The owner requested two deliveries: finish and push R08, then update the complete README/handoff and push once more. This Codex session stops here. **Argon 4, through Antigravity, owns subsequent development, game/UX/art design, image generation, animation, integration, testing, documentation and GitHub delivery.** R09 is its first implementation package when that work is started in Antigravity. No Argon session, model access, image endpoint or deployment is established by this document.
+**Current checkpoint (2026-10-17): Core engine packages R00–R17 are locally implemented and verified (`1,069` automated tests green); Phase 1 (Initial AAB / Vertical Slice Completion) is actively in its final polish pass.** **Argon 4, through Antigravity, owns all development, game/UX/art design, image generation, music/voice production, animation, combat math/VFX tuning, integration, testing, documentation and GitHub delivery.**
 
-The game has working client, service, content and admin foundations. Preserve them, complete the remaining systems below and turn the provisional presentation into a coherent finished game. Source completion and local browser proof do not establish store, deployed-Worker or physical Android acceptance.
+---
+
+## 0. Master Execution Roadmap — Step-by-Step Project Progression (4 Phases)
+
+Every new session or agent joining this project must follow this strict **four-phase sequential execution order**. Do not skip ahead to later phases before the active phase is polished, verified, and approved by the owner:
+
+### PHASE 1 — Complete & Perfect the Initial AAB (Base Binary / Vertical Slice) *(CURRENT ACTIVE FOCUS)*
+The top priority is finishing the **Initial Store AAB** (`StudioScene` → `TitleScene` → 9-shot `PrologueScene` → `Tutorial T-1 / T-2 / T-3` pre/post story scenes & battles → `FinishScene`) to 100% production quality:
+1. **End-to-End Flow & Visual Revisions:**
+   - Ensure `http://127.0.0.1:5173/` (and `?fresh=1`) always plays the complete initial AAB experience from the very beginning (`Studio` → `Title` → `BEGIN` → `Prologue` → `T-1` → `T-2` → `T-3` → `Finish`) without ever skipping straight into a battle or mid-tutorial state.
+   - Maintain canonical character locks (`content/specs/character_locks/`) across all 16:9 plates, CGs (`roadside_rest`, `shelter_evening`), knee-up (`boydan`) Light Novel portraits (4 distinct expressions + body-language poses per character), and true 2-head Super-Deformed (SD) Chibi battle sprites.
+2. **Music Design & Scene-by-Scene Placement (Google Lyria 3.5):**
+   - **Main Theme (`bgm_main_theme.ogg`):** Completed and locked (Candidate 3 — 68 BPM, 2:46 Anatolian gothic melancholic rock ballad motif inspired by the emotional spirit of *Duman — Haberin Yok Ölüyorum*, active in `StudioScene` and `TitleScene`).
+   - **Scene & Battle Soundtrack Placement:** Design and place the remaining tracks **one by one** with the owner using Google Lyria 3.5 (`/v1beta/interactions`, model `lyria-3.5`). Do **not** clutter every scene with a different chaotic track; reuse a cohesive, curated set of emotional motifs at smart intervals (Prologue, calm/wistful story scenes, pre-battle tension, and tactical combat) so tracks feel memorable without becoming repetitive.
+3. **Voiceovers (Gemini 3.8 TTS), Subtitles & Sound Effects (SFX):**
+   - **Locked Cast (116 Vertical Slice Lines):**
+     - **Narrator (`Algieba`):** Locked to a single, serene, spiritual/ethereal (*ruhani*) 96.0 Hz voice tone and sacred-hall acoustic profile across all 9 Prologue scenes and 24 Tutorial narration lines so every narration sounds 100% uniform.
+     - **Fadyme (`Sulafat`) & Mahmut (`Iapetus`):** Directed with per-line emotional `speech_metadata.style` prompts and natural inline vocal tags (`<chuckle>`, `<sigh>`, `<breath>`, `<exhales>`).
+   - **Synchronized Cinematic Subtitles:** Subtitles (`apps/game/src/ui/subtitles.ts`) reveal in real-time lockstep with the active voiceover audio clock, pausing naturally on punctuation (`—`, `…`, `.`, `,`) with smooth rise/fade/shimmer and a golden voice-resonance bar.
+   - **Combat & UI SFX:** Polish bell chimes, footsteps, blade/shield impacts, warding bell casts, and UI feedback.
+4. **Combat Mechanics, Mathematics & Visual Effects (VFX):**
+   - **Combat Math & Tactical Depth:** Audit and polish the 5v5 turn-based tactical combat math (`@uomd/combat`): damage/defense curves, shield absorption, Focus generation & Ultimate pacing, turn-order/speed readability, status effect durations, element/effect resistances (`element_res`, `effect_res`), and enemy telegraph/intent clarity.
+   - **Combat VFX & Juice:** Upgrade skill and ultimate visual effects (slash arcs, warding bell ripples, elemental particles, hit-stop freeze frames, directional camera shake, floating damage/status typography, and smooth SD Chibi attack/hit/cast animations).
+
+---
+
+### PHASE 2 — Full World Design & Construction (Delivered via Signed Content/Media Patches)
+Once the Initial AAB is 100% locked and approved:
+1. **World & Chapter Architecture:** Design and build the complete game world across all chapters (Chapters 1–8+, regions, routes, sanctuaries, ruined capitals, cathedrals, and corridors) as declarative patch packages (`content/campaign/` & signed release snapshots).
+2. **Environmental Art & Atmosphere:** Produce wide-angle 16:9 panoramic battlefields, VN story backgrounds, chapter event CGs, world-map/node navigation visuals, and regional background music themes that evolve with the narrative journey.
+3. **World Lore & Codex Integration:** Wire regional histories, roadside registers, bell towers, and faction records into the gated Archive/Codex with spoiler-safe progression gates.
+
+---
+
+### PHASE 3 — All Good & Evil Characters (Playable Heroes, Enemies & Bosses)
+After the world foundations and stages are established:
+1. **Playable Heroes & Companions (Good Characters):**
+   - Establish canonical visual identity locks (`character_locks`) for every playable hero and story companion.
+   - Generate their knee-up (`boydan`) Light Novel dialogue sprites (multiple distinct emotional expressions and hand/body poses), true 2-head SD Chibi battle sprite sheets (`idle`, `attack`, `skill/ultimate`, `hit/defeat`), summon reveal art, and signature weapon/emblem visuals.
+   - Author and tune each hero's complete combat kit: active skills, Focus ultimate, passive hooks, role identity (Vanguard, Warder, Arcanist, Striker, Support), stat growth curves, ascension gates, loan loadouts, and directed Japanese voice lines.
+2. **Enemy Factions, Elites & Multi-Phase Bosses (Evil / Opposing Characters):**
+   - Design and integrate the full enemy roster and major Boss encounters (47+ entity backlog) with distinct silhouettes, corrupted/hollow motifs, SD Chibi/Boss sprite sheets, and multi-wave formations.
+   - Configure boss phase transitions (`battle_start`, HP-threshold/fresh-bar phases), destructible boss objectives, signature telegraph attacks, status immunities/resistances, and sequential campaign difficulty balance (ensuring the entire main story remains clearable with zero gacha pulls).
+
+---
+
+### PHASE 4 — Events, LiveOps Modes & Final Polish
+In the final phase before and alongside store rollout:
+1. **Events & Seasonal Content:** Design and wire seasonal story events, limited-time event stages, event shops, wish/banner schedules, daily/weekly task chains, and achievement milestones.
+2. **Side Modes & End-Game Polish:** Finalize stage content and reward tables for AFK Idle Patrol, Stage Sweep, Async Arena, Endless Corridor, and Companion Bond Stories.
+3. **Final QA, Control Center & Store Acceptance (R18):** Perform full end-to-end visual/audio/balance polish, Control Center LiveOps publication drills, and physical Android device / signed unchanged-AAB acceptance testing for Google Play release.
+
+---
 
 ## 1. Authority, scope and working agreement
 

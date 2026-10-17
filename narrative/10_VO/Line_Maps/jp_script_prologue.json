@@ -23,19 +23,19 @@
       "speaker_id": "narrator",
       "en": "Before the roads filled with ash, Veyrhold measured its days in bells. A sound from the tower meant another hour had passed.",
       "ja": "道という道が灰に埋もれる前、ヴェアホルドの人々は鐘の音で日々を測っていた。塔から響くひと打ちは、またひとつの刻が過ぎたことを告げていた。",
-      "direction": "Deep, nostalgic, measured chronicle narrator; warm yet wistful tone, pausing gently between sentences as if listening to a distant bell.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "chronicle_nostalgia",
+      "emotion": "spiritual_chronicle",
       "when_cue": "00:00–00:12 | Çan kulesi görseli (`prologue_village_hours`) belirdikten 320ms sonra, solo piyano ve çan tınısı üzerine.",
       "subtext_tr": "Savaş öncesi Veyrhold'un huzurlu günlerini özlemle ama ağırbaşlı bir vakur tonla anlatır; '測っていた' sonrasında çan sesi yankılanırken hafifçe duraksar.",
       "reading_kana": "ミチトイウミチガハイニウモレルマエ、ヴェアホルドノヒトビトハカネノオトデヒビヲハカッテイタ。トウカラヒビクヒトウチハ、マタヒトツノトキガスギタコトヲツゲテイタ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Deep, nostalgic, measured chronicle narrator; warm yet wistful tone, pausing gently between sentences as if listening to a distant bell."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
-      "tts_text_gemini38": "<breath> 道という道が灰に埋もれる前、<short pause> ヴェアホルドの人々は鐘の音で日々を測っていた。<long pause> 塔から響くひと打ちは、<short pause> またひとつの刻が過ぎたことを告げていた。",
+      "tts_text_gemini38": "道という道が灰に埋もれる前、<short pause> ヴェアホルドの人々は鐘の音で日々を測っていた。<long pause> 塔から響くひと打ちは、<short pause> またひとつの刻が過ぎたことを告げていた。",
       "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">道という道が灰に埋もれる前、<break time=\"320ms\"/>ヴェアホルドの人々は鐘の音で日々を測っていた。<break time=\"680ms\"/>塔から響くひと打ちは、<break time=\"280ms\"/>またひとつの刻が過ぎたことを告げていた。</prosody></speak>"
     },
     {
@@ -49,17 +49,17 @@
       "speaker_id": "narrator",
       "en": "People carved their names on doors and trees, and wrote them in roadside registers. Not for fame. So someone would remember that they had been here.",
       "ja": "人々は扉や樹々に自らの名を刻み、道端の台帳にその名を書き残した。名声のためではない。確かにここに生きていたと、誰かが覚えていてくれるように。",
-      "direction": "Intimate, hushed dignity; gentle emphasis on 'not for fame', softening into tender reverence on the final clause.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "intimate_dignity",
+      "emotion": "spiritual_chronicle",
       "when_cue": "00:12–00:26 | Yol kenarı kayıt defteri (`prologue_village_names`) sahnesine geçişte, tüy kalem defterden kalkarken.",
       "subtext_tr": "İnsanların unutulmamak için bıraktığı küçük izleri derin bir saygı ve mahremiyetle anlatır; '名声のためではない' cümlesini yumuşak ama net vurgular.",
       "reading_kana": "ヒトビトハトビラヤキギニミズカラノナヲキザミ、ミチバタノダイチョウニソノナヲカキノコシタ。メイセイノタメデハナイ。タシカニココニイキテイタト、ダレカガオボエテイテクレルヨウニ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Intimate, hushed dignity; gentle emphasis on 'not for fame', softening into tender reverence on the final clause."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
       "tts_text_gemini38": "人々は扉や樹々に自らの名を刻み、<short pause> 道端の台帳にその名を書き残した。<long pause> 名声のためではない。<short pause> 確かにここに生きていたと、<short pause> 誰かが覚えていてくれるように。",
       "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">人々は扉や樹々に自らの名を刻み、<break time=\"300ms\"/>道端の台帳にその名を書き残した。<break time=\"620ms\"/></prosody><prosody rate=\"88%\" pitch=\"-1.2st\">名声のためではない。<break time=\"480ms\"/>確かにここに生きていたと、<break time=\"260ms\"/>誰かが覚えていてくれるように。</prosody></speak>"
@@ -75,19 +75,19 @@
       "speaker_id": "narrator",
       "en": "There were markets, journeys, and doors that opened to strangers. Small things, easily forgotten. Until the day people began to lose them.",
       "ja": "市が立ち、旅人が行き交い、見知らぬ者にも扉は開かれていた。すぐに忘れ去られるような、ささやかな日常。……それを失い始める日が来るまでは。",
-      "direction": "Warm and reflective at first, then slowing down and darkening with quiet foreboding on the final clause.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "warm_to_foreboding",
+      "emotion": "spiritual_chronicle",
       "when_cue": "00:26–00:38 | Kasaba sokağında ekmek paylaşan insanlar (`prologue_village_ordinary_days`) görselinde.",
       "subtext_tr": "İlk cümlede sıradan günlerin sıcaklığını hissettirir; 'それを失い始める日が来るまでは' kısmında ise sesi koyulaşır ve yaklaşan yıkımın gölgesini taşır.",
       "reading_kana": "イチガタチ、タビビトガイキカイ、ミシラヌモノニモトビラハヒラカレテイタ。スグニワスレサラレルヨウナ、ササヤカナニチジョウ。ソレヲウシナイハジメルヒガクルマデハ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Warm and reflective at first, then slowing down and darkening with quiet foreboding on the final clause."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
-      "tts_text_gemini38": "市が立ち、旅人が行き交い、<short pause> 見知らぬ者にも扉は開かれていた。<short pause> すぐに忘れ去られるような、ささやかな日常。<long pause> <exhales> それを失い始める日が来るまでは。",
+      "tts_text_gemini38": "市が立ち、旅人が行き交い、<short pause> 見知らぬ者にも扉は開かれていた。<short pause> すぐに忘れ去られるような、ささやかな日常。<long pause>  それを失い始める日が来るまでは。",
       "ssml_chirp3": "<speak><prosody rate=\"93%\" pitch=\"-0.5st\">市が立ち、旅人が行き交い、<break time=\"260ms\"/>見知らぬ者にも扉は開かれていた。<break time=\"450ms\"/>すぐに忘れ去られるような、ささやかな日常。</prosody><break time=\"750ms\"/><prosody rate=\"85%\" pitch=\"-1.8st\">それを失い始める日が来るまでは。</prosody></speak>"
     },
     {
@@ -101,17 +101,17 @@
       "speaker_id": "narrator",
       "en": "The great houses fought over a throne. Fields emptied. Families took to the roads, carrying what they could. The war drew closer to the capital.",
       "ja": "諸侯はひとつの玉座を巡って争った。畑からは人が消え、家族は持てるものだけを抱えて街道へと出た。戦火は、やがて王都へと迫っていった。",
-      "direction": "Low, grave, steady chronicle pace; crisp pauses between short sentences, conveying the gathering weight of war.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "grave_chronicle",
+      "emotion": "spiritual_chronicle",
       "when_cue": "00:38–00:50 | Terk edilmiş tarlalar ve göç eden aileler (`prologue_crownfall_throne_wars`) sahnesinde, yaylılar gerilirken.",
       "subtext_tr": "Taht Savaşları'nın ağırlığını kısa, keskin ve ciddi cümlelerle aktarır; panik yapmadan, tarihin kaçınılmaz akışı gibi tok bir sesle konuşur.",
       "reading_kana": "ショコウハヒトツノギョクザヲメグッテアラソッタ。ハタケカラハヒトガキエ、カゾクハモテルモノダケヲカカエテカイドウヘトデタ。センカハ、ヤガテオウトヘトセマッテイッタ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Low, grave, steady chronicle pace; crisp pauses between short sentences, conveying the gathering weight of war."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
       "tts_text_gemini38": "諸侯はひとつの玉座を巡って争った。<short pause> 畑からは人が消え、<short pause> 家族は持てるものだけを抱えて街道へと出た。<long pause> 戦火は、<short pause> やがて王都へと迫っていった。",
       "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.4st\">諸侯はひとつの玉座を巡って争った。<break time=\"420ms\"/>畑からは人が消え、<break time=\"280ms\"/>家族は持てるものだけを抱えて街道へと出た。<break time=\"580ms\"/>戦火は、<break time=\"260ms\"/>やがて王都へと迫っていった。</prosody></speak>"
@@ -127,19 +127,19 @@
       "speaker_id": "narrator",
       "en": "Then came Crownfall. The capital fell. The king died. By dawn, survivors were leaving behind streets they had once known by heart.",
       "ja": "そして、『王冠落ち』の日が訪れた。王都は陥ち、王は斃れた。夜が明ける頃、生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
-      "direction": "Solemn, heavy bass resonance after a funeral bell; short, devastating clauses delivered with restrained grief and zero melodrama.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "solemn_tragedy",
+      "emotion": "spiritual_chronicle",
       "when_cue": "00:50–01:06 | Yıkık başkent kapısı ve dumanlar (`prologue_crownfall_crownfall`) sahnesinde, ağır cenaze çanı vuruşunun hemen ardından.",
       "subtext_tr": "Prologue'un en ağır kırılma noktası (Crownfall). Melodram yapmadan, bastırılmış derin bir keder ve tarihi ağırlıkla konuşur.",
       "reading_kana": "ソシテ、オウカンオチノヒガオトズレタ。オウトハオチ、オウハタオレタ。ヨルガアケルコロ、イキノコッタモノタチハ、カツテシリツクシテイタハズノガイロヲアトニシタ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Solemn, heavy bass resonance after a funeral bell; short, devastating clauses delivered with restrained grief and zero melodrama."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
-      "tts_text_gemini38": "<breath> そして、<short pause> 『王冠落ち』の日が訪れた。<long pause> 王都は陥ち、<short pause> 王は斃れた。<long pause> 夜が明ける頃、<short pause> 生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
+      "tts_text_gemini38": "そして、<short pause> 『王冠落ち』の日が訪れた。<long pause> 王都は陥ち、<short pause> 王は斃れた。<long pause> 夜が明ける頃、<short pause> 生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。",
       "ssml_chirp3": "<speak><prosody rate=\"86%\" pitch=\"-2.0st\">そして、<break time=\"340ms\"/>『王冠落ち』の日が訪れた。<break time=\"680ms\"/>王都は陥ち、<break time=\"380ms\"/>王は斃れた。<break time=\"720ms\"/>夜が明ける頃、<break time=\"300ms\"/>生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。</prosody></speak>"
     },
     {
@@ -153,19 +153,19 @@
       "speaker_id": "narrator",
       "en": "They carried blankets, tools, and the names of those who had not come with them. Beyond the walls, the roads were still there. Home was not.",
       "ja": "彼らが背負ったのは、毛布と道具、そして共に来られなかった者たちの名だった。城壁の向こうに道はまだ続いていた。だが、帰るべき家はもうなかった。",
-      "direction": "Hushed, sparse sorrow; unhurried delivery that drops to a near-whisper on the final sentence 'Home was not'.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "hushed_sorrow",
+      "emotion": "spiritual_chronicle",
       "when_cue": "01:06–01:22 | Sisli yolda sırtlarında battaniyelerle yürüyen sağ kalanlar (`prologue_crownfall_roads`) görselinde.",
       "subtext_tr": "Kayıpların ardından kalan boşluğu fısıltıya yakın, duru bir hüzünle anlatır; '帰るべき家はもうなかった' cümlesi sessizliğe karışır.",
       "reading_kana": "カレラガセオッタノハ、モウフトドウグ、ソシテトモニコラレナカッタモノタチノナダッタ。ジョウヘキノムコウニミチハマダツヅイテイタ。ダガ、カエルベキイエハモウナカッタ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Hushed, sparse sorrow; unhurried delivery that drops to a near-whisper on the final sentence 'Home was not'."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
-      "tts_text_gemini38": "彼らが背負ったのは、<short pause> 毛布と道具、<short pause> そして共に来られなかった者たちの名だった。<long pause> 城壁の向こうに道はまだ続いていた。<long pause> <sigh> だが、<short pause> 帰るべき家はもうなかった。",
+      "tts_text_gemini38": "彼らが背負ったのは、<short pause> 毛布と道具、<short pause> そして共に来られなかった者たちの名だった。<long pause> 城壁の向こうに道はまだ続いていた。<long pause>  だが、<short pause> 帰るべき家はもうなかった。",
       "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-1.5st\">彼らが背負ったのは、<break time=\"260ms\"/>毛布と道具、<break time=\"300ms\"/>そして共に来られなかった者たちの名だった。<break time=\"640ms\"/>城壁の向こうに道はまだ続いていた。<break time=\"680ms\"/></prosody><prosody rate=\"83%\" pitch=\"-2.2st\">だが、<break time=\"320ms\"/>帰るべき家はもうなかった。</prosody></speak>"
     },
     {
@@ -179,17 +179,17 @@
       "speaker_id": "narrator",
       "en": "Among the travelers was a knight who searched the village registers for one name. Village after village, winter after winter, he kept looking.",
       "ja": "旅人たちのなかに、ただひとつの名を求めて村々の台帳を辿る騎士がいた。村から村へ、冬から冬へと、彼は探し続けた。",
-      "direction": "Steady, resolute baritone with quiet warmth entering the voice, matching the rhythm of a solitary knight walking through winter.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "resolute_warmth",
+      "emotion": "spiritual_chronicle",
       "when_cue": "01:22–01:36 | Kış hanında mum ışığında kayıt defterine bakan Mahmut (`prologue_village_search`) sahnesinde, yürüyen çello motifi başlarken.",
       "subtext_tr": "Yıkımın içinden doğan sadakat ve arayış. Mahmut'un kışlar boyu süren sabırlı arayışını anlatırken sese dingin bir sıcaklık ve kararlılık gelir.",
       "reading_kana": "タビビトタチノナカニ、タダヒトツノナヲモトメテムラムラノダイチョウヲタドルキシガイタ。ムラカラムラヘ、フユカラフユヘト、カレハサガシツヅケタ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Steady, resolute baritone with quiet warmth entering the voice, matching the rhythm of a solitary knight walking through winter."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
       "tts_text_gemini38": "旅人たちのなかに、<short pause> ただひとつの名を求めて村々の台帳を辿る騎士がいた。<long pause> 村から村へ、<short pause> 冬から冬へと、<short pause> 彼は探し続けた。",
       "ssml_chirp3": "<speak><prosody rate=\"91%\" pitch=\"-1.0st\">旅人たちのなかに、<break time=\"300ms\"/>ただひとつの名を求めて村々の台帳を辿る騎士がいた。<break time=\"620ms\"/>村から村へ、<break time=\"320ms\"/>冬から冬へと、<break time=\"280ms\"/>彼は探し続けた。</prosody></speak>"
@@ -205,19 +205,19 @@
       "speaker_id": "narrator",
       "en": "In a hill village, he found her. She asked him to stay. He did. The road ahead would no longer be hers alone.",
       "ja": "ある丘の村で、彼はついに彼女を見つけた。傍にいてほしいと彼女は願い、彼は頷いた。その先の道は、もはや彼女ひとりのものではなくなった。",
-      "direction": "Gentle relief and understated tenderness; soft, warm pacing as the two companions reunite.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "tender_relief",
+      "emotion": "spiritual_chronicle",
       "when_cue": "01:36–01:48 | Yamaç köyünde Fadyme ve Mahmut'un yeniden karşılaşması (`prologue_road_reunion`), gümüş çan ve piyano tınısı.",
       "subtext_tr": "Uzun arayışın sonundaki sessiz kavuşma. Ses yumuşar, '彼は頷いた' kısmında derin bir huzur ve şefkat hissedilir.",
       "reading_kana": "アルオカノムラデ、カレハツイニカノジョヲミツケタ。ソバニイテホシイトカノジョハネガイ、カレハウナズイタ。ソノサキノミチハ、モハヤカノジョヒトリノモノデハナクナッタ。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Gentle relief and understated tenderness; soft, warm pacing as the two companions reunite."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
-      "tts_text_gemini38": "<breath> ある丘の村で、<short pause> 彼はついに彼女を見つけた。<long pause> 傍にいてほしいと彼女は願い、<short pause> 彼は頷いた。<long pause> その先の道は、<short pause> もはや彼女ひとりのものではなくなった。",
+      "tts_text_gemini38": "ある丘の村で、<short pause> 彼はついに彼女を見つけた。<long pause> 傍にいてほしいと彼女は願い、<short pause> 彼は頷いた。<long pause> その先の道は、<short pause> もはや彼女ひとりのものではなくなった。",
       "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.6st\">ある丘の村で、<break time=\"280ms\"/>彼はついに彼女を見つけた。<break time=\"580ms\"/>傍にいてほしいと彼女は願い、<break time=\"360ms\"/>彼は頷いた。<break time=\"620ms\"/>その先の道は、<break time=\"280ms\"/>もはや彼女ひとりのものではなくなった。</prosody></speak>"
     },
     {
@@ -231,19 +231,19 @@
       "speaker_id": "narrator",
       "en": "Now Fadyme and Mahmut walk together. The bells still ring. Neither has told the other everything. This is where their story begins.",
       "ja": "いま、ファディメとマフムトは共に歩いている。鐘はいまも鳴り響き、ふたりはまだ互いのすべてを語ってはいない。……ここから、ふたりの物語が始まる。",
-      "direction": "Poised, lingering closing cadence; measured mystery on 'neither has told the other everything', then a resonant pause before the final line.",
+      "direction": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph.",
       "voice_id": "ja-JP-Chirp3-HD-Algieba",
       "gemini_voice": "Algieba",
-      "emotion": "poised_threshold",
+      "emotion": "spiritual_chronicle",
       "when_cue": "01:48–02:00 | Fadyme ve Mahmut'un Fısıldayan Kül Ormanı'na birlikte yürüyüşü (`prologue_road_beginning`), müzik son akora doğru çözülürken.",
       "subtext_tr": "Prologue'u oyunun ilk sahnesine bağlayan eşik. İkisinin birbirine henüz söylemediği sırları ima ederken gizemli, ağırbaşlı ve davetkâr bir kapanış yapar.",
       "reading_kana": "イマ、ファディメトマフムトハトモニアルイテイル。カネハイマモナリヒビキ、フタリハマダタガイノスベテヲカタッテハイナイ。ココカラ、フタリノモノガタリガハジマル。",
       "speech_metadata": {
         "type": "speech_metadata",
         "speaker": "Narrator",
-        "style": "Poised, lingering closing cadence; measured mystery on 'neither has told the other everything', then a resonant pause before the final line."
+        "style": "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and completely uniform pitch, warmth, and timbre across every paragraph."
       },
-      "tts_text_gemini38": "いま、<short pause> ファディメとマフムトは共に歩いている。<short pause> 鐘はいまも鳴り響き、<short pause> ふたりはまだ互いのすべてを語ってはいない。<long pause> <breath> ここから、<short pause> ふたりの物語が始まる。",
+      "tts_text_gemini38": "いま、<short pause> ファディメとマフムトは共に歩いている。<short pause> 鐘はいまも鳴り響き、<short pause> ふたりはまだ互いのすべてを語ってはいない。<long pause>  ここから、<short pause> ふたりの物語が始まる。",
       "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.8st\">いま、<break time=\"240ms\"/>ファディメとマフムトは共に歩いている。<break time=\"480ms\"/>鐘はいまも鳴り響き、<break time=\"300ms\"/>ふたりはまだ互いのすべてを語ってはいない。<break time=\"820ms\"/></prosody><prosody rate=\"86%\" pitch=\"-1.2st\">ここから、<break time=\"320ms\"/>ふたりの物語が始まる。</prosody></speak>"
     }
   ],

@@ -309,14 +309,39 @@ def tighten_internal_silences_if_needed(pcm: np.ndarray, target_max_s: float) ->
     return pcm[keep]
 
 
+def estimate_median_f0(pcm: np.ndarray) -> float:
+    f0s: list[float] = []
+    step = int(SR * 0.02)
+    win = int(SR * 0.04)
+    min_lag = int(SR / 240.0)
+    max_lag = int(SR / 65.0)
+    for start in range(0, len(pcm) - win, step):
+        seg = pcm[start : start + win]
+        if float(np.sqrt(np.mean(seg**2))) < 0.025:
+            continue
+        seg = seg - float(np.mean(seg))
+        corr = np.correlate(seg, seg, mode="full")[win - 1 :]
+        if corr[0] <= 1e-9:
+            continue
+        lag = min_lag + int(np.argmax(corr[min_lag:max_lag]))
+        if corr[lag] > 0.35 * corr[0]:
+            f0s.append(float(SR) / float(lag))
+    return float(np.median(f0s)) if f0s else 96.0
+
+
 def master_gemini38_to_ogg(
     pcm: np.ndarray,
     out_ogg_path: Path,
     max_duration_s: float | None = None,
+    speaker_id: str = "",
+    is_prologue: bool = False,
 ) -> float:
     """
-    Normalizes active speech loudness to -18.5 dBFS with zero pitch-shifting,
-    and encodes to 24kHz mono Vorbis `.ogg`.
+    Normalizes active speech loudness to -18.5 dBFS.
+    For the Narrator (`narrator`), applies the Locked Spiritual Narrator Acoustic Chain:
+      - Locks median fundamental frequency (F0) to 96.0 Hz with formant preservation
+      - Applies uniform cadence across the Prologue
+      - Adds a serene, ethereal sacred-hall acoustic halo (`aecho` + warm low-mid EQ)
     Returns the exact decoded duration in seconds of the final `.ogg`.
     """
     GEMINI_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -350,11 +375,33 @@ def master_gemini38_to_ogg(
         w.writeframes(pcm16.tobytes())
 
     raw_dur = len(pcm16) / SR
-    af_filters: list[str] = ["highpass=f=50"]
-    if max_duration_s is not None and raw_dur > max_duration_s:
-        tempo_mult = min(1.35, (raw_dur / max_duration_s) * 1.02)
-        if tempo_mult > 1.005:
-            af_filters.append(f"atempo={tempo_mult:.4f}")
+    af_filters: list[str] = ["highpass=f=55"]
+
+    if speaker_id == "narrator":
+        med_f0 = estimate_median_f0(pcm)
+        target_f0 = 96.0
+        pitch_ratio = max(0.88, min(1.12, target_f0 / max(65.0, med_f0)))
+        # Uniform spiritual cadence: fixed base tempo across Prologue, only rising gently if budget requires
+        base_tempo = 1.20 if is_prologue else 1.02
+        if max_duration_s is not None and (raw_dur / base_tempo) > (max_duration_s - 0.18):
+            base_tempo = min(1.38, (raw_dur / (max_duration_s - 0.18)) * 1.01)
+        af_filters.append(f"rubberband=pitch={pitch_ratio:.4f}:formant=preserved:tempo={base_tempo:.4f}")
+        af_filters.extend(
+            [
+                "equalizer=f=125:t=q:w=1.1:g=2.4",
+                "equalizer=f=380:t=q:w=1.2:g=1.0",
+                "equalizer=f=2800:t=q:w=1.2:g=-2.0",
+                "equalizer=f=6200:t=q:w=1.0:g=1.4",
+                "lowpass=f=7600",
+                "aecho=0.88:0.86:48|96|144:0.17|0.10|0.05",
+                "alimiter=limit=0.88",
+            ]
+        )
+    else:
+        if max_duration_s is not None and raw_dur > max_duration_s:
+            tempo_mult = min(1.35, (raw_dur / max_duration_s) * 1.02)
+            if tempo_mult > 1.005:
+                af_filters.append(f"atempo={tempo_mult:.4f}")
 
     out_ogg_path.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
@@ -409,6 +456,8 @@ async def process_line(
         pcm=pcm,
         out_ogg_path=out_ogg,
         max_duration_s=max_dur,
+        speaker_id=line.get("speaker_id", ""),
+        is_prologue=(shot_budget is not None),
     )
 
     declared_dur = round(actual_dur + 0.06, 2)

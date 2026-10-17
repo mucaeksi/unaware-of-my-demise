@@ -1656,6 +1656,22 @@ def main() -> None:
         ) = row
         cast_info = CASTING_BIBLE["cast"][speaker_id]
         speaker_label = cast_info["name_en"]
+        if speaker_id == "narrator":
+            style_prompt_en = (
+                "Speak in a serene, spiritual, otherworldly, and timeless mystical narrator voice. "
+                "Maintain a single, unwavering, deeply calm, ethereal, and reverent tone from beginning to end—"
+                "like an ancient spirit speaking quietly from beyond time, with steady, unhurried pacing and "
+                "completely uniform pitch, warmth, and timbre across every paragraph."
+            )
+            emotion = "spiritual_chronicle"
+            rate = 0.90
+            pitch_st = -1.0
+            tts_text_gemini38 = (
+                tts_text_gemini38.replace("<exhales>", "")
+                .replace("<sigh>", "")
+                .replace("<breath>", "")
+                .strip()
+            )
         item = {
             "order_index": idx,
             "line_id": line_id,
