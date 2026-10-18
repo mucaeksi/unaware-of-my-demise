@@ -13,7 +13,7 @@ Example requests:
 ```text
 $uomd-codex-workflow Implement the assigned change on current main.
 $ponytail-review Review the patch without editing files.
-$phaser4-mobile-qa Check Android landscape input and lifecycle.
+$uomd-mobile-qa Check Android landscape input and lifecycle.
 $uomd-monitoring Verify the latest SSV result and deployed version, read-only.
 $uomd-monetization Add a regression test for duplicate callbacks.
 $uomd-workers-review Review API handlers and binding configuration, read-only.
@@ -35,9 +35,10 @@ Each listed name has `.agents/skills/<name>/SKILL.md` linked to `.claude/skills/
 | Graph and browser | `graphify`, `chrome-devtools` | Existing pinned runtimes; real tool schemas; rg/Playwright fallback reported when the MCP is absent |
 | UI guidance | `ui-ux-pro-max` | Resolve CLAUDE_SKILL_DIR to the canonical scripts/data; preserve established Gothic tokens and architecture |
 | Backend, security, media | `cloudflare-d1-liveops`, `security-audit`, `google-anime-media` | Actual connector access; D1-only staging builds; audit isolation retained; Google-only approved media/budgets |
-| Project PixiJS v8 + DOM UI workflows (D-23) | `phaser4-engine`, `phaser4-battle`, `phaser4-anime-ui`, `phaser4-chibi-animation`, `phaser4-mobile-qa`, `phaser4-narrative-cinematics` | Hybrid PixiJS v8 2D Stage + Modular Gothic DOM/CSS UI (`#uomd-ui-layer`) under compatibility skill names; narrative/asset provenance; browser evidence distinguished from Android acceptance |
+| Project PixiJS v8 workflows (D-23a) | `uomd-pixi-engine`, `uomd-battle`, `uomd-anime-ui`, `uomd-chibi-animation`, `uomd-mobile-qa`, `uomd-narrative-cinematics` | The real engine in `apps/game/src/engine` (PIXI stage behind a Phaser-style scene API); narrative/asset provenance; browser evidence distinguished from Android acceptance. Replaced the `phaser4-*` aliases on 2026-10-18 |
+| Official PixiJS v8 skills | `pixijs` (router) + 25 `pixijs-*` topic skills | Mirrored from the installed `pixi.js` package by `python tools/install_pixijs_skills.py` (version = package-lock); `--check` verifies; never edit the copies |
 
-The 28 upstream Phaser topic skills were retired in Decision D-23 (2026-10-17). Archive pins/licenses for the remaining third-party skills stay in `.claude/skills-lock.json` and `.claude/third-party-licenses/`. Graphify is 0.9.84, Chrome DevTools MCP 1.10.1, Ponytail 5.1.0 and UI/UX Pro Max 2.15.0 according to the existing source inventory. Skill instructions mentioning newer upstream tool options are checked against the actual pinned runtime before use.
+The 28 upstream Phaser topic skills were retired in Decision D-23 (2026-10-17); the six `phaser4-*` compatibility aliases followed on 2026-10-18. There is no official PixiJS MCP server: the project MCP `uomd-pixi-live` (`tools/mcp_pixi_live.ts`) serves the PixiJS/project skills and inspects the live game. Archive pins/licenses for the remaining third-party skills stay in `.claude/skills-lock.json` and `.claude/third-party-licenses/`. Graphify is 0.9.84, Chrome DevTools MCP 1.10.1, Ponytail 5.1.0 and UI/UX Pro Max 2.15.0 according to the existing source inventory. Skill instructions mentioning newer upstream tool options are checked against the actual pinned runtime before use.
 
 ## Additional skills and recommendations
 
