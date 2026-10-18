@@ -1,0 +1,799 @@
+{
+  "schema_version": 1,
+  "palettes": {
+    "Veil": {
+      "primary": 12160767,
+      "secondary": 15031178,
+      "core": 16050431
+    },
+    "Stone": {
+      "primary": 15254648,
+      "secondary": 12093762,
+      "core": 16774097
+    },
+    "Ember": {
+      "primary": 16739133,
+      "secondary": 16758861,
+      "core": 16773314
+    },
+    "Tide": {
+      "primary": 5424383,
+      "secondary": 3897599,
+      "core": 14743551
+    },
+    "Gale": {
+      "primary": 7271096,
+      "secondary": 3064978,
+      "core": 15269877
+    },
+    "Dawn": {
+      "primary": 16770191,
+      "secondary": 16754885,
+      "core": 16777215
+    }
+  },
+  "presets": {
+    "cast_sigil": {
+      "elements": [
+        {
+          "kind": "sprite",
+          "texture": "ring",
+          "tint": "primary",
+          "blend": "add",
+          "layer": "ground",
+          "depth": 0,
+          "from": {
+            "y": 6,
+            "scale_x": 0.2,
+            "scale_y": 0.09,
+            "alpha": 0.95
+          },
+          "to": {
+            "scale_x": 1.15,
+            "scale_y": 0.48,
+            "angle": 140,
+            "alpha": 0
+          },
+          "duration_ms": 680,
+          "ease": "cubic.out"
+        },
+        {
+          "kind": "sprite",
+          "texture": "ring",
+          "tint": "core",
+          "blend": "add",
+          "layer": "ground",
+          "depth": 1,
+          "from": {
+            "y": 6,
+            "scale_x": 0.12,
+            "scale_y": 0.055,
+            "alpha": 0.9
+          },
+          "to": {
+            "scale_x": 0.78,
+            "scale_y": 0.32,
+            "angle": -180,
+            "alpha": 0
+          },
+          "duration_ms": 612,
+          "ease": "cubic.out"
+        },
+        {
+          "kind": "burst",
+          "texture": "star",
+          "count": 14,
+          "speed": [
+            90,
+            220
+          ],
+          "angle": [
+            -112,
+            -68
+          ],
+          "offset_x": [
+            -75,
+            75
+          ],
+          "offset_y": [
+            -16,
+            16
+          ],
+          "scale": {
+            "start": 0.36,
+            "end": 0
+          },
+          "alpha": {
+            "start": 0.95,
+            "end": 0
+          },
+          "lifespan_ms": 540,
+          "tints": [
+            "primary",
+            "secondary",
+            "core"
+          ]
+        }
+      ]
+    },
+    "silver_bell_ripple": {
+      "elements": [
+        {
+          "kind": "sprite",
+          "texture": "ring",
+          "tint": "#f4e8ff",
+          "blend": "add",
+          "depth": 16,
+          "from": {
+            "scale": 0.18,
+            "alpha": 0.92
+          },
+          "to": {
+            "scale": 0.95,
+            "angle": 90,
+            "alpha": 0
+          },
+          "duration_ms": 560,
+          "ease": "cubic.out",
+          "repeat": {
+            "count": 3,
+            "every_ms": 65,
+            "scale_step": 0.28,
+            "mirror_angle": true,
+            "tints": [
+              "#f4e8ff",
+              "#d7b8ff",
+              "#9b72f2"
+            ]
+          }
+        },
+        {
+          "kind": "burst",
+          "texture": "star",
+          "count": 14,
+          "speed": [
+            70,
+            210
+          ],
+          "scale": {
+            "start": 0.42,
+            "end": 0
+          },
+          "alpha": {
+            "start": 0.95,
+            "end": 0
+          },
+          "lifespan_ms": 580,
+          "tints": [
+            "#f4e8ff",
+            "#d7b8ff",
+            "#e3c37d"
+          ],
+          "depth": 20
+        }
+      ]
+    },
+    "iron_bulwark_wave": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "crest",
+          "size": 76,
+          "count": 8,
+          "thickness": 3,
+          "tint": "#b83b4a",
+          "tint2": "#e8c478",
+          "depth": 18,
+          "from": {
+            "scale": 0.35
+          },
+          "to": {
+            "scale": 1.25,
+            "angle": 22.5,
+            "alpha": 0
+          },
+          "duration_ms": 460,
+          "ease": "back.out"
+        }
+      ]
+    },
+    "slash_single": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "crescent",
+          "size": 130,
+          "bow": -50,
+          "count": 16,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 32,
+          "from": {
+            "angle": -28,
+            "scale": 0.45
+          },
+          "to": {
+            "angle": -8,
+            "scale_x": 1.12,
+            "scale_y": 1.15
+          },
+          "duration_ms": 280,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 190,
+            "duration_ms": 180,
+            "ease": "quad.in"
+          }
+        },
+        {
+          "kind": "shape",
+          "shape": "star_flare",
+          "size": 82,
+          "thickness": 28,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 40,
+          "from": {
+            "scale": 0.35
+          },
+          "to": {
+            "scale": 1.05,
+            "angle": 45
+          },
+          "duration_ms": 240,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 170,
+            "duration_ms": 170,
+            "ease": "quad.in"
+          }
+        }
+      ]
+    },
+    "slash_cross": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "crescent",
+          "size": 148,
+          "bow": -50,
+          "count": 16,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 32,
+          "from": {
+            "angle": -32,
+            "scale": 0.45
+          },
+          "to": {
+            "angle": -12,
+            "scale_x": 1.25,
+            "scale_y": 1.15
+          },
+          "duration_ms": 280,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 190,
+            "duration_ms": 180,
+            "ease": "quad.in"
+          },
+          "repeat": {
+            "count": 2,
+            "every_ms": 45,
+            "mirror_angle": true,
+            "tints": [
+              "primary",
+              "secondary"
+            ]
+          }
+        },
+        {
+          "kind": "shape",
+          "shape": "star_flare",
+          "size": 82,
+          "thickness": 28,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 40,
+          "from": {
+            "scale": 0.35
+          },
+          "to": {
+            "scale": 1.05,
+            "angle": 45
+          },
+          "duration_ms": 240,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 170,
+            "duration_ms": 170,
+            "ease": "quad.in"
+          }
+        }
+      ]
+    },
+    "slash_heavy": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "crescent",
+          "size": 175,
+          "bow": -64,
+          "count": 16,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 32,
+          "from": {
+            "angle": -24,
+            "scale": 0.45
+          },
+          "to": {
+            "angle": -4,
+            "scale_x": 1.45,
+            "scale_y": 1.35
+          },
+          "duration_ms": 280,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 190,
+            "duration_ms": 180,
+            "ease": "quad.in"
+          },
+          "repeat": {
+            "count": 3,
+            "every_ms": 45,
+            "mirror_angle": true,
+            "tints": [
+              "primary",
+              "secondary"
+            ]
+          }
+        },
+        {
+          "kind": "shape",
+          "shape": "star_flare",
+          "size": 115,
+          "thickness": 42,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 40,
+          "from": {
+            "scale": 0.35
+          },
+          "to": {
+            "scale": 1.35,
+            "angle": 45
+          },
+          "duration_ms": 240,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 170,
+            "duration_ms": 170,
+            "ease": "quad.in"
+          }
+        }
+      ]
+    },
+    "pillar_eruption": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "bars",
+          "size": 560,
+          "count": 3,
+          "thickness": 144,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 14,
+          "from": {
+            "y": 18,
+            "scale_x": 0.25,
+            "scale_y": 0.35
+          },
+          "to": {
+            "scale_x": 1.15,
+            "scale_y": 1.15
+          },
+          "duration_ms": 240,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 260,
+            "duration_ms": 280,
+            "ease": "quad.in"
+          }
+        },
+        {
+          "kind": "sprite",
+          "texture": "ring",
+          "tint": "primary",
+          "blend": "add",
+          "layer": "ground",
+          "depth": 0,
+          "from": {
+            "y": 6,
+            "scale_x": 0.25,
+            "scale_y": 0.11,
+            "alpha": 0.95
+          },
+          "to": {
+            "scale_x": 1.44,
+            "scale_y": 0.6,
+            "angle": 140,
+            "alpha": 0
+          },
+          "duration_ms": 620,
+          "ease": "cubic.out"
+        },
+        {
+          "kind": "sprite",
+          "texture": "ring",
+          "tint": "core",
+          "blend": "add",
+          "layer": "ground",
+          "depth": 1,
+          "from": {
+            "y": 6,
+            "scale_x": 0.15,
+            "scale_y": 0.07,
+            "alpha": 0.9
+          },
+          "to": {
+            "scale_x": 0.98,
+            "scale_y": 0.4,
+            "angle": -180,
+            "alpha": 0
+          },
+          "duration_ms": 558,
+          "ease": "cubic.out"
+        },
+        {
+          "kind": "burst",
+          "texture": "star",
+          "count": 14,
+          "speed": [
+            110,
+            275
+          ],
+          "angle": [
+            -112,
+            -68
+          ],
+          "offset_x": [
+            -94,
+            94
+          ],
+          "offset_y": [
+            -16,
+            16
+          ],
+          "scale": {
+            "start": 0.45,
+            "end": 0
+          },
+          "alpha": {
+            "start": 0.95,
+            "end": 0
+          },
+          "lifespan_ms": 540,
+          "tints": [
+            "primary",
+            "secondary",
+            "core"
+          ]
+        }
+      ]
+    },
+    "hit_impact": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "rings",
+          "size": 72,
+          "thickness": 5,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 22,
+          "from": {
+            "scale": 0.25
+          },
+          "to": {
+            "scale": 1.15
+          },
+          "duration_ms": 280,
+          "ease": "cubic.out",
+          "fade": {
+            "delay_ms": 160,
+            "duration_ms": 200,
+            "ease": "quad.in"
+          }
+        },
+        {
+          "kind": "burst",
+          "texture": "spark",
+          "count": 12,
+          "speed": [
+            120,
+            340
+          ],
+          "scale": {
+            "start": 0.52,
+            "end": 0
+          },
+          "lifespan_ms": 480,
+          "tints": [
+            "primary",
+            "secondary",
+            "core"
+          ],
+          "depth": 24
+        },
+        {
+          "kind": "burst",
+          "texture": "shard",
+          "count": 8,
+          "speed": [
+            90,
+            260
+          ],
+          "spin": true,
+          "gravity_y": 260,
+          "scale": {
+            "start": 0.38,
+            "end": 0
+          },
+          "alpha": {
+            "start": 0.95,
+            "end": 0
+          },
+          "lifespan_ms": 520,
+          "tints": [
+            "primary",
+            "core"
+          ],
+          "depth": 25
+        }
+      ]
+    },
+    "hit_heavy": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "rings",
+          "size": 72,
+          "thickness": 5,
+          "tint": "primary",
+          "tint2": "core",
+          "depth": 22,
+          "from": {
+            "scale": 0.25
+          },
+          "to": {
+            "scale": 1.45
+          },
+          "duration_ms": 280,
+          "ease": "cubic.out",
+          "fade": {
+            "delay_ms": 160,
+            "duration_ms": 200,
+            "ease": "quad.in"
+          }
+        },
+        {
+          "kind": "shape",
+          "shape": "spikes",
+          "size": 102,
+          "count": 8,
+          "tint": "core",
+          "tint2": "primary",
+          "depth": 25,
+          "from": {
+            "scale": 0.5
+          },
+          "to": {
+            "scale": 1.35
+          },
+          "duration_ms": 240,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 170,
+            "duration_ms": 180,
+            "ease": "quad.in"
+          }
+        },
+        {
+          "kind": "burst",
+          "texture": "spark",
+          "count": 18,
+          "speed": [
+            120,
+            340
+          ],
+          "scale": {
+            "start": 0.52,
+            "end": 0
+          },
+          "lifespan_ms": 480,
+          "tints": [
+            "primary",
+            "secondary",
+            "core"
+          ],
+          "depth": 24
+        },
+        {
+          "kind": "burst",
+          "texture": "shard",
+          "count": 12,
+          "speed": [
+            90,
+            260
+          ],
+          "spin": true,
+          "gravity_y": 260,
+          "scale": {
+            "start": 0.38,
+            "end": 0
+          },
+          "alpha": {
+            "start": 0.95,
+            "end": 0
+          },
+          "lifespan_ms": 520,
+          "tints": [
+            "primary",
+            "core"
+          ],
+          "depth": 25
+        }
+      ]
+    },
+    "hit_crit": {
+      "elements": [
+        {
+          "kind": "shape",
+          "shape": "rings",
+          "size": 72,
+          "thickness": 7,
+          "tint": "crit",
+          "tint2": "core",
+          "depth": 22,
+          "from": {
+            "scale": 0.25
+          },
+          "to": {
+            "scale": 1.85
+          },
+          "duration_ms": 360,
+          "ease": "cubic.out",
+          "fade": {
+            "delay_ms": 160,
+            "duration_ms": 200,
+            "ease": "quad.in"
+          }
+        },
+        {
+          "kind": "shape",
+          "shape": "spikes",
+          "size": 165,
+          "count": 12,
+          "tint": "core",
+          "tint2": "primary",
+          "depth": 25,
+          "from": {
+            "scale": 0.5
+          },
+          "to": {
+            "scale": 1.35
+          },
+          "duration_ms": 240,
+          "ease": "back.out",
+          "fade": {
+            "delay_ms": 170,
+            "duration_ms": 180,
+            "ease": "quad.in"
+          }
+        },
+        {
+          "kind": "burst",
+          "texture": "spark",
+          "count": 26,
+          "speed": [
+            120,
+            460
+          ],
+          "scale": {
+            "start": 0.68,
+            "end": 0
+          },
+          "lifespan_ms": 480,
+          "tints": [
+            "primary",
+            "secondary",
+            "core"
+          ],
+          "depth": 24
+        },
+        {
+          "kind": "burst",
+          "texture": "shard",
+          "count": 17,
+          "speed": [
+            90,
+            380
+          ],
+          "spin": true,
+          "gravity_y": 260,
+          "scale": {
+            "start": 0.52,
+            "end": 0
+          },
+          "alpha": {
+            "start": 0.95,
+            "end": 0
+          },
+          "lifespan_ms": 520,
+          "tints": [
+            "primary",
+            "core"
+          ],
+          "depth": 25
+        }
+      ]
+    },
+    "projectile": {
+      "elements": [
+        {
+          "kind": "projectile",
+          "texture": "star",
+          "halo": "spark",
+          "tint": "core",
+          "halo_tint": "primary",
+          "scale": 0.65,
+          "arc_height": 65,
+          "spin_turns": 1.5,
+          "duration_ms": 195,
+          "ease": "quad.in",
+          "trail": {
+            "texture": "shard",
+            "every_ms": 16,
+            "lifespan_ms": 260,
+            "scale": 0.34,
+            "tints": [
+              "primary",
+              "secondary",
+              "core"
+            ]
+          }
+        }
+      ]
+    },
+    "projectile_heavy": {
+      "elements": [
+        {
+          "kind": "projectile",
+          "texture": "star",
+          "halo": "spark",
+          "tint": "core",
+          "halo_tint": "primary",
+          "scale": 0.88,
+          "arc_height": 110,
+          "spin_turns": 1.5,
+          "duration_ms": 250,
+          "ease": "quad.in",
+          "trail": {
+            "texture": "shard",
+            "every_ms": 16,
+            "lifespan_ms": 260,
+            "scale": 0.46,
+            "tints": [
+              "primary",
+              "secondary",
+              "core"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "skills": {}
+}

@@ -3,6 +3,8 @@ import {
   CONTENT_CAPABILITIES,
   PRESENTATION_PATH,
   PresentationPack,
+  VFX_PATH,
+  VfxPack,
   LocalePack,
   ArtManifest,
   ChapterIndex,
@@ -207,6 +209,8 @@ export class ContentService {
     const state = await this.patch.state();
     return (state.active?.manifest.files.some((f) => f.path === path) ?? false) || (!state.active || !!state.active.manifest.depends_on || await this.isStaleBasePatch()) && Object.hasOwn(this.base.files, path);
   }
+  /** combat VFX presets (base content, overridable by patches); null when the active content predates vfx_v1 */
+  async vfx(): Promise<VfxPack | null> { return await this.has(VFX_PATH) ? this.json(VFX_PATH, VfxPack) : null; }
   async presentation(): Promise<PresentationPack> { return await this.has(PRESENTATION_PATH) ? this.json(PRESENTATION_PATH, PresentationPack) : PresentationPack.parse({ schema_version: 1 }); }
   async locale(locale = prefs().locale): Promise<LocalePack | undefined> {
     const profile = await this.presentation();

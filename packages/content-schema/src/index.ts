@@ -12,3 +12,4 @@ export * from './library';
 export * from './catalog';
 
 export * from './presentation';
+export * from './vfx';

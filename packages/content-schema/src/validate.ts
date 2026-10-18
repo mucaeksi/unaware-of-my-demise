@@ -1,4 +1,5 @@
 import { PRESENTATION_PATH, PresentationPack, PresentationCommand, LocalePack, EventSchedule, ShopSchedule } from './presentation';
+import { VFX_PATH, VfxPack } from './vfx';
 import { MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES } from './primitives';
 import { CATALOG_PATH, MAX_CATALOG_BYTES, EconomyCatalog, catalogContentProblems } from './catalog';
 import { ArtManifest } from './art';
@@ -421,6 +422,11 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     for (const event of schedule?.events ?? []) if (!library?.entries.some((e) => e.entry_id === event.entry_id && e.kind === 'event')) problems.push(`event schedule: unknown event entry ${event.entry_id}`);
   }
   if (files.has('schedules/shop.json')) { const schedule = parse('schedules/shop.json', ShopSchedule); unique('shop schedule', schedule?.offers.map((e) => e.product_id) ?? []); }
+  if (files.has(VFX_PATH)) {
+    const vfx = parse(VFX_PATH, VfxPack);
+    const skills = new Set([...units.values()].flatMap((u) => u.skills.map((skill) => skill.skill_id)));
+    for (const skill of Object.keys(vfx?.skills ?? {})) if (!skills.has(skill)) problems.push(`vfx: unknown skill ${skill}`);
+  }
   // Every admitted JSON document gets a closed grammar, including unlinked resources.
   for (const path of files.keys()) if (path.endsWith('.json') && !parsedPaths.has(path)) {
     if (path.startsWith('story/')) checkScene(path);

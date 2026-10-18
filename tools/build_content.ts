@@ -130,7 +130,7 @@ const MUSIC: Record<string, { file: string; meta: string }> = {
 };
 
 const PRESENTATION = 'content/base/presentation/presentation.json';
-const AUTHORED_DIRS = ['voices', 'presentation'];
+const AUTHORED_DIRS = ['voices', 'presentation', 'vfx'];
 
 /** music cues the base manifest declares beyond MUSIC whose file is still on disk (Lyria tracks written in place) */
 function readAuthoredMusic(): { authored: ArtManifest['music']; order: string[] } {
@@ -173,8 +173,9 @@ async function main(): Promise<void> {
   const strictArt = process.argv.includes('--strict-art');
   const requireApproved = process.argv.includes('--require-approved') || strictArt;
   const approvedEntries = loadApprovedArtEntries(ROOT, requireApproved);
-  // voices/, presentation/ and the Lyria tracks are authored in place by the media tools (record_game_vo.py,
-  // build_all_voiceovers.py, generate_*_lyria35.py) and have no other source: keep them, regenerate the rest.
+  // voices/, presentation/ and the Lyria tracks are written in place by the media tools (record_game_vo.py,
+  // build_all_voiceovers.py, generate_*_lyria35.py) and vfx/ presets are hand-authored; none has another source,
+  // so keep them and regenerate the rest.
   const { authored: authoredMusic, order: previousMusicOrder } = readAuthoredMusic();
   for (const dir of ['art', 'story', 'encounters', 'units', 'chapters', 'entry']) rmSync(join(ROOT, 'content/base', dir), { recursive: true, force: true });
   for (const cue of Object.keys(MUSIC)) rmSync(join(ROOT, `content/base/audio/${cue}.ogg`), { force: true });

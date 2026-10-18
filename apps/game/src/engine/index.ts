@@ -2963,6 +2963,30 @@ export namespace GameObjects {
     }
   }
 
+  /**
+   * Bridge for pure-PIXI code during the D-25 migration: places a caller-owned PIXI container in the scene's depth
+   * order (camera, alpha and visibility still apply) and forwards the frame step scaled by the scene's tween
+   * timeScale, so hit-stop and pause reach it too. Destroying it destroys the container and its children.
+   */
+  export class External extends GameObject {
+    readonly container: PIXI.Container;
+    onStep?: (dtMs: number) => void;
+
+    constructor(scene: Scene, container: PIXI.Container, onStep?: (dtMs: number) => void) {
+      super(scene, 'External');
+      this.container = container;
+      this.onStep = onStep;
+      this.originX = 0;
+      this.originY = 0;
+    }
+
+    override releasePixi(): void {
+      if (!this.container.destroyed) this.container.destroy({ children: true });
+      this._px = null;
+      super.releasePixi();
+    }
+  }
+
   export namespace Particles {
     interface LiveParticle {
       x: number;
@@ -3199,6 +3223,10 @@ export class GameObjectFactory {
 
   zone(x = 0, y = 0, width = 1, height = 1): GameObjects.Zone {
     return this.register(new GameObjects.Zone(this.scene, x, y, width, height));
+  }
+
+  pixi(container: PIXI.Container, onStep?: (dtMs: number) => void): GameObjects.External {
+    return this.register(new GameObjects.External(this.scene, container, onStep));
   }
 
   particles(x = 0, y = 0, textureKey = 'fx_spark', config?: Record<string, any>): GameObjects.Particles.ParticleEmitter {
@@ -3900,6 +3928,8 @@ export class Game {
       for (const child of sc.children.list) {
         if (child instanceof GameObjects.Particles.ParticleEmitter) {
           child.step(dt);
+        } else if (child instanceof GameObjects.External) {
+          child.onStep?.(dt * sc.tweens.timeScale);
         }
       }
       try {
@@ -4056,6 +4086,7 @@ export class Game {
   }
 
   private createNode(obj: GameObjects.GameObject): PIXI.Container {
+    if (obj instanceof GameObjects.External) return obj.container;
     if (obj instanceof GameObjects.Image) return new PIXI.Sprite(PIXI.Texture.EMPTY);
     if (obj instanceof GameObjects.Text) return new PIXI.Text({ text: '' });
     if (obj instanceof GameObjects.Graphics || obj instanceof GameObjects.Rectangle || obj instanceof GameObjects.Ellipse || obj instanceof GameObjects.Arc) return new PIXI.Graphics();
@@ -4090,6 +4121,8 @@ export class Game {
     } else if (obj instanceof GameObjects.Particles.ParticleEmitter) {
       this.syncParticles(obj, node);
     }
+    // an External's container belongs to its owner, filters included
+    if (obj instanceof GameObjects.External) return node;
     const tintFill = obj instanceof GameObjects.Image ? this.tintFillFilter(obj) : null;
     const wanted = tintFill ? [...effects, tintFill] : effects;
     const current = node.filters ?? [];

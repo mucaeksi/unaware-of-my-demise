@@ -855,21 +855,38 @@ export class BattleScene extends Phaser.Scene {
             spriteFrame: String(poseSpr.frame.name),
           });
           v.playCast(true);
-          if (actorUnit.def.unit_id === 'fadyme') {
-            BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, 1.4);
-          } else if (actorUnit.def.unit_id === 'mahmut') {
-            BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, 1.35);
-          }
-          for (const tid of e.targets) {
-            const tv = this.views.get(tid);
-            if (!tv) continue;
-            if (tv.side !== v.side) BattleVfx.pillarEruption(this, tv.x, tv.y, element);
-            else BattleVfx.castSigil(this, tv.x, tv.y - 12, element, 1.3);
+          // a content patch may assign its own preset to this skill (vfx/vfx_presets.json `skills`)
+          const customUlt = BattleVfx.skillPreset(this, e.skill);
+          if (customUlt) {
+            for (const tid of e.targets) {
+              const tv = this.views.get(tid);
+              if (tv) void BattleVfx.playPreset(this, customUlt, { x: tv.x, y: tv.y, element, dir: v.side === 'player' ? 1 : -1 });
+            }
+          } else {
+            if (actorUnit.def.unit_id === 'fadyme') {
+              BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, 1.4);
+            } else if (actorUnit.def.unit_id === 'mahmut') {
+              BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, 1.35);
+            }
+            for (const tid of e.targets) {
+              const tv = this.views.get(tid);
+              if (!tv) continue;
+              if (tv.side !== v.side) BattleVfx.pillarEruption(this, tv.x, tv.y, element);
+              else BattleVfx.castSigil(this, tv.x, tv.y - 12, element, 1.3);
+            }
           }
           this.lunged = { view: v, dim };
           await this.wait(320);
         } else {
           void this.banner(def?.name_en ?? e.skill, false);
+          const customSkill = BattleVfx.skillPreset(this, e.skill);
+          if (customSkill) {
+            if (opp && !isCaster) await v.playDashTo(opp.x + (v.side === 'player' ? -135 : 135), opp.y);
+            else v.playCast(false);
+            this.lunged = { view: v, dim: null };
+            await BattleVfx.playPreset(this, customSkill, { x: v.x, y: v.hitPoint.y, element, dir: v.side === 'player' ? 1 : -1, ...(opp ? { target: { x: opp.hitPoint.x, y: opp.hitPoint.y } } : {}) });
+            break;
+          }
           if (v.side === 'player' && actorUnit.def.unit_id === 'fadyme') {
             Sfx.cast();
             BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, e.skillType === 'active' ? 1.15 : 0.9);

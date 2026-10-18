@@ -10,7 +10,8 @@
   "compat": {
     "min_client": "0.1.2",
     "required_capabilities": [
-      "presentation_v1"
+      "presentation_v1",
+      "vfx_v1"
     ],
     "content_schema": 1
   },
@@ -382,6 +383,13 @@
       "bytes": 21654,
       "media_type": "application/json",
       "kind": "unit_pack"
+    },
+    {
+      "path": "vfx/vfx_presets.json",
+      "sha256": "f72967c51d400d4de76d306d692bcc6645ae8debe50cbf0bdf0737b5fe3ee146",
+      "bytes": 17205,
+      "media_type": "application/json",
+      "kind": "other_data"
     },
     {
       "path": "voices/entry_past_001.ogg",

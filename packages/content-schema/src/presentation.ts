@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { Id, LineId, SafeAssetPath, Sha256Hex } from './primitives';
+import { VFX_PATH } from './vfx';
 
 export const PRESENTATION_PATH = 'presentation/presentation.json';
 export const LocaleId = z.string().regex(/^[a-z]{2}(?:-[A-Za-z0-9]{2,8}){0,2}$/);
@@ -50,7 +51,7 @@ export const PresentationCommand = z.discriminatedUnion('op', [
   z.object({ op: z.literal('panel'), panel_id: Id }).strict()
 ]);
 export type PresentationCommand = z.infer<typeof PresentationCommand>;
-export const CONTENT_CAPABILITIES = ['calendar_v1', 'catalog_v1', 'presentation_v1', 'locale_v1', 'sprite_animation_v1', 'story_flags_v1', 'snapshot_v1'] as const;
+export const CONTENT_CAPABILITIES = ['calendar_v1', 'catalog_v1', 'presentation_v1', 'locale_v1', 'sprite_animation_v1', 'story_flags_v1', 'snapshot_v1', 'vfx_v1'] as const;
 export const ContentCapability = z.enum(CONTENT_CAPABILITIES);
 
 /** Required primitives are declared by the publisher; old binaries reject unknown capabilities before downloading. */
@@ -59,6 +60,7 @@ export function requiredContentCapabilities(files: ReadonlyMap<string, Uint8Arra
   if (files.has('schedules/events.json') || files.has('schedules/shop.json')) required.add('calendar_v1');
   if (files.has('catalog/economy.json')) required.add('catalog_v1');
   if (files.has(PRESENTATION_PATH)) required.add('presentation_v1');
+  if (files.has(VFX_PATH)) required.add('vfx_v1');
   if ([...files.keys()].some((p) => p.startsWith('locales/'))) required.add('locale_v1');
   const presentationOps = new Set(PresentationCommand.options.map((c) => c.shape.op.value as string));
   for (const [path, bytes] of files) if (path.endsWith('.json')) {
