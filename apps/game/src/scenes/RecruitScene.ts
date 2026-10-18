@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { RecruitSelectionResult, RecruitSelectorView } from '../net/api';
 import { Services } from '../services';
 import { HubScreen } from '../ui/hubScreen';
@@ -96,4 +95,3 @@ export class RecruitScene extends HubScreen {
   }
 }
 
-export const RecruitHost = hosted('Recruit', () => new RecruitScene());

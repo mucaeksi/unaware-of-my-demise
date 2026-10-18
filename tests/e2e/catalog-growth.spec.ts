@@ -17,9 +17,9 @@ test('character growth pins the selected release and recovers a committed respon
   const release = await page.evaluate(async () => (window as any).__UOMD__.services.content.activeReleaseId());
   const scopedReads: string[] = [];
   page.on('request', (req) => { if (req.method() === 'GET' && /\/api\/v1\/(catalog|characters(?:\/mine|\/mahmut\/stats)?)\?/.test(req.url())) scopedReads.push(req.url()); });
-  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').scene.start('Character', { id: 'mahmut' }));
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').nav.start('Character', { id: 'mahmut' }));
   await waitScene(page, 'Character');
-  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').body.list.some((object: any) => object.text?.startsWith('Level 1 /')))).toBe(true);
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').texts().some((t: string) => t.startsWith('Level 1 /')))).toBe(true);
   expect(scopedReads).toHaveLength(4); expect(scopedReads.every((url) => new URL(url).searchParams.get('releaseId') === release)).toBe(true);
   let original = ''; let committed = false;
   await page.route('**/api/v1/characters/mahmut/level-up', async (route) => {
@@ -37,9 +37,9 @@ test('character growth pins the selected release and recovers a committed respon
   const recovered = await page.evaluate(async (id) => (window as any).__UOMD__.services.api.retryOperation(id), original);
   expect(recovered).toMatchObject({ releaseId: release, character: 'mahmut', level: 3 }); expect(posts).toBe(0);
   await page.unroute('**/api/v1/characters/mahmut/level-up');
-  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').scene.start('Character', { id: 'mahmut' }));
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').nav.start('Character', { id: 'mahmut' }));
   await waitScene(page, 'Character');
-  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').body.list.some((object: any) => object.text?.startsWith('Level 3 /')))).toBe(true);
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').texts().some((t: string) => t.startsWith('Level 3 /')))).toBe(true);
   await page.waitForTimeout(500); await page.screenshot({ path: `${SHOTS}/${info.project.name}-catalog-growth-recovered.png` });
   expect(await page.evaluate(async () => (await (window as any).__UOMD__.services.api.stacks()).find((s: any) => s.item_id === 'bound_chronicle')?.qty ?? 0)).toBe(0);
   expect(problems.filter((problem) => !problem.includes('favicon') && !problem.includes('/api/v1/characters/mahmut/level-up'))).toEqual([]);

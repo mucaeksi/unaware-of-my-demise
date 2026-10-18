@@ -1,6 +1,5 @@
 import { RATION_COST, type ChapterIndex } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
-import { hosted } from '../core/host';
 import { loadEntry } from '../entry/state';
 import { playNode } from '../flow';
 import { Progress, Services } from '../services';
@@ -94,7 +93,7 @@ export class ChaptersScene extends HubScreen {
     const sub = locked ? 'Finish the previous story step first' : node.kind === 'battle' ? battleLabel : 'Story';
     const stars = done ? done.stars : 0;
     const card = this.card(REF_W / 2, y, 1300, 138, locked ? 'dim' : 'normal', sc);
-    if (!locked) card.onTap(() => void playNode(this.host, node), `${label}. ${sub}.${done ? ` ${stars} of 3 stars.` : ''}`);
+    if (!locked) card.onTap(() => void playNode(this, node), `${label}. ${sub}.${done ? ` ${stars} of 3 stars.` : ''}`);
     this.text(REF_W / 2 - 600, y - 20, label.toUpperCase(), titleStyle(38, locked ? T.dim : T.text), sc).setOrigin(0, 0.5);
     this.text(REF_W / 2 - 600, y + 28, sub, { fontSize: 28, color: T.dim }, sc);
     if (patchedBy) {
@@ -122,4 +121,3 @@ export class ChaptersScene extends HubScreen {
   }
 }
 
-export const ChaptersHost = hosted('Chapters', () => new ChaptersScene());

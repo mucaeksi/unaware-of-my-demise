@@ -1,11 +1,9 @@
 import * as PIXI from 'pixi.js';
-import type Phaser from '../engine';
 import type { Prologue, PrologueScene as PrologueData } from '@uomd/content-schema';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import type { Handle } from '../core/anim';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { advance } from '../entry/flow';
 import { S } from '../entry/strings';
@@ -23,6 +21,8 @@ import { buildSubtitleSchedule, resolveSubtitleProgress } from '../ui/subtitles'
 import { C, DEPTH, F } from '../ui/theme';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
+import { app } from '../core/app';
+import { audio } from '../core/assets';
 
 /** Fallback characters per second when no voice recording is present. */
 export const REVEAL_CPS = 26;
@@ -82,8 +82,8 @@ export class PrologueScene extends PixiScene {
   }
 
   create(): void {
-    this.muted = this.host.sound.mute;
-    const insets = safeInsets(this.host);
+    this.muted = audio.mute;
+    const insets = safeInsets();
     this.shade = this.add(new PIXI.Container(), DEPTH.hud - 100);
     this.shade.addChild(
       verticalShade(0, REF_H - 470, REF_W, 470, 0x000000, 0, 0.9),
@@ -161,10 +161,10 @@ export class PrologueScene extends PixiScene {
   }
 
   private buildControls(): void {
-    const insets = safeInsets(this.host);
-    const canvas = this.host.game.canvas;
+    const insets = safeInsets();
+    const canvas = app().canvas;
     const onPointer = (): void => {
-      const ctx = this.host.sound.context;
+      const ctx = audio.context;
       if (ctx?.state === 'suspended' && !this.pausedByUser) void ctx.resume().then(() => this.ensurePrologueMusic()).catch(() => undefined);
       else this.ensurePrologueMusic();
     };
@@ -182,7 +182,7 @@ export class PrologueScene extends PixiScene {
     const onContextLost = (): void => {
       if (!this.done && this.index >= 0) savePrologueCheckpoint(Services.flowKey(), this.index);
     };
-    const game = this.host.game;
+    const game = app();
     document.addEventListener('visibilitychange', onVisibility);
     game.events.on('webgl:contextlost', onContextLost);
     this.onClose(() => {
@@ -204,7 +204,7 @@ export class PrologueScene extends PixiScene {
 
   private toggleMute(): void {
     this.muted = !this.muted;
-    this.host.sound.mute = this.muted;
+    audio.mute = this.muted;
     Music.setVolume(this.muted ? 0 : prefs().musicVolume);
     this.stage?.setVoiceMuted(this.muted);
     this.muteBtn?.setLabel(this.muted ? 'UNMUTE' : 'MUTE');
@@ -214,7 +214,7 @@ export class PrologueScene extends PixiScene {
     if (this.done) return;
     try {
       const m = Services.art?.music('bgm_prologue_before_the_road');
-      if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, 2.2, forceOffset ?? 0);
+      if (m) Music.play(m.key, m.loopStart, m.duration, 2.2, forceOffset ?? 0);
     } catch {
       /* music is optional */
     }
@@ -238,11 +238,11 @@ export class PrologueScene extends PixiScene {
       const firstScene = this.data0.scenes[0];
       const initialIds = !INTRO_FAST && firstScene ? ArtLibrary.plateIds(firstScene.id, firstScene.visual) : allIds;
       await Promise.all([
-        Services.art?.loadStills(this.host, initialIds).catch((e: unknown) => console.warn('prologue plates unavailable', e)),
-        Services.art?.loadMusic(this.host, 'bgm_prologue_before_the_road').catch(() => undefined)
+        Services.art?.loadStills(this, initialIds).catch((e: unknown) => console.warn('prologue plates unavailable', e)),
+        Services.art?.loadMusic(this, 'bgm_prologue_before_the_road').catch(() => undefined)
       ]);
       if (!current()) return;
-      if (!INTRO_FAST && allIds.length > initialIds.length) void Services.art?.loadStills(this.host, allIds).catch((e: unknown) => console.warn('prologue background plates unavailable', e));
+      if (!INTRO_FAST && allIds.length > initialIds.length) void Services.art?.loadStills(this, allIds).catch((e: unknown) => console.warn('prologue background plates unavailable', e));
     } catch (e) {
       // the road must still open, but a mandatory opening is never marked seen behind the player's back (R09)
       console.error('prologue unavailable', e);
@@ -411,7 +411,7 @@ export class PrologueScene extends PixiScene {
     Music.setPaused(false);
     clearPrologueCheckpoint(Services.flowKey());
     recordEntry(Services.api, (s) => markPrologueSeen(s));
-    advance(this.host);
+    advance(this);
   }
 
   /** a few slow ash motes over every plate */
@@ -422,5 +422,3 @@ export class PrologueScene extends PixiScene {
   }
 }
 
-/** engine registration under the 'Prologue' key every flow already starts */
-export const PrologueHost: new () => Phaser.Scene = hosted('Prologue', () => new PrologueScene());

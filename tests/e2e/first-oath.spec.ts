@@ -4,14 +4,14 @@ import { publishCampaign } from './stack';
 
 const goto = (page: Page, key: string) => page.evaluate((key) => {
   const game = (window as any).__UOMD__.game;
-  game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.sys.settings.key)); game.scene.start(key);
+  game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.key)); game.scene.start(key);
 }, key);
 const play = (page: Page, nodeId: string) => page.evaluate(async (nodeId) => {
   const u = (window as any).__UOMD__; const index = await u.services.content.chapters();
   await u.playNode(u.game.scene.getScene('Chapters'), index.chapters.flatMap((chapter: any) => chapter.nodes).find((node: any) => node.node_id === nodeId));
 }, nodeId);
 const settledRecruit = async (page: Page) => {
-  await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Recruit').cameras.main.fadeEffect.isRunning)).toBe(true);
+  await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Recruit').fading)).toBe(true);
   await page.waitForTimeout(100); // allow the next input pre-update to register newly drawn buttons
 };
 
@@ -58,8 +58,8 @@ test('First Oath: an earned seven-choice invitation survives response loss/reloa
       expect(done, nodeId).toBe(true);
       expect(await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').battle.result.winner), nodeId).toBe('player');
       await expect.poll(() => claimed(nodeId), { timeout: 45_000 }).toBe(true);
-      await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').children.list.some((object: any) => object.list?.some((child: any) => child.text === 'CONTINUE')))).toBe(true);
-      await tap(page, info, 710, 760); await waitScene(page, 'Story'); await skipStory(page, info, 'Chapters');
+      await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').texts().includes('CONTINUE'))).toBe(true);
+      await tap(page, info, 1170 - 230, 760); await waitScene(page, 'Story'); await skipStory(page, info, 'Chapters');
     };
     await battle('stage_1_1', false); await battle('stage_1_2', false);
     expect(await page.evaluate(async () => (await (window as any).__UOMD__.services.api.inventory()).some((item: any) => item.item_id === 'brin_alder'))).toBe(true);
@@ -76,7 +76,7 @@ test('First Oath: an earned seven-choice invitation survives response loss/reloa
       expect((await route.fetch()).status()).toBe(200); committed = true; await route.abort('failed');
     });
     await tap(page, info, 960, 680); await expect.poll(() => committed).toBe(true);
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Recruit').body.list.some((object: any) => object.list?.some((child: any) => child.text === 'CONFIRM SAVE')))).toBe(true);
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Recruit').texts().includes('CONFIRM SAVE'))).toBe(true);
     await page.unroute('**/api/v1/recruitment/first_oath_invitation'); await page.reload();
     await page.waitForFunction(() => (window as any).__UOMD__?.game.scene.isActive('Title') && (window as any).__UOMD__.services.api.signedIn);
     await goto(page, 'Roster'); await waitScene(page, 'Roster'); await page.waitForTimeout(500);
@@ -86,7 +86,7 @@ test('First Oath: an earned seven-choice invitation survives response loss/reloa
     let posts = 0;
     await page.route('**/api/v1/recruitment/first_oath_invitation', async (route) => { posts++; await route.abort('failed'); });
     await tap(page, info, 960, 570);
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Recruit').body.list.some((object: any) => object.text === '1 invitation used. Your company is saved.'))).toBe(true);
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Recruit').texts().includes('1 invitation used. Your company is saved.'))).toBe(true);
     expect(posts).toBe(0); await page.unroute('**/api/v1/recruitment/first_oath_invitation');
     await settledRecruit(page);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-first-oath-recovered.png` });
@@ -105,7 +105,7 @@ test('First Oath: an earned seven-choice invitation survives response loss/reloa
     await signInDev(page, `first-oath-new-account-${info.project.name}`);
     await expect.poll(() => page.evaluate(() => {
       const scene = (window as any).__UOMD__.game.scene.getScene('Recruit');
-      return scene.selectors.length === 0 && scene.selected === null && scene.pendingId === null && scene.body.list.some((object: any) => object.text === 'No invitation is ready. Continue the main story.');
+      return scene.selectors.length === 0 && scene.selected === null && scene.pendingId === null && scene.texts().includes('No invitation is ready. Continue the main story.');
     })).toBe(true);
     expect(problems.filter((problem) => !problem.includes('favicon') && !problem.includes('/api/v1/recruitment/first_oath_invitation'))).toEqual([]);
   } finally {

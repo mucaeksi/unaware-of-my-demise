@@ -7,7 +7,6 @@ import { qualityProfile } from '../platform/graphics';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
 import { Services } from '../services';
-import { sanitizeEnText, toEnUpper } from './kit';
 import { C, DEPTH, F, SIZE, T } from './theme';
 
 /**
@@ -126,7 +125,32 @@ export function panel(x: number, y: number, w: number, h: number, variant: Panel
   return s;
 }
 
-/** Phaser-style text options, the vocabulary every scene already uses */
+/** Strips Turkish-specific letters into their English ASCII equivalents (English UI text). */
+export function sanitizeEnText(raw: string): string {
+  return raw
+    .replace(/İ/g, 'I')
+    .replace(/ı/g, 'i')
+    .replace(/Ş/g, 'S')
+    .replace(/ş/g, 's')
+    .replace(/Ğ/g, 'G')
+    .replace(/ğ/g, 'g')
+    .replace(/Ü/g, 'U')
+    .replace(/ü/g, 'u')
+    .replace(/Ö/g, 'O')
+    .replace(/ö/g, 'o')
+    .replace(/Ç/g, 'C')
+    .replace(/ç/g, 'c');
+}
+
+/**
+ * ASCII uppercase for Cinzel (`F.display`) text: Cinzel draws a lowercase `i` with a dot, so English display text is
+ * converted to true uppercase (`FİRST` never appears).
+ */
+export function toEnUpper(raw: string): string {
+  return sanitizeEnText(raw).replace(/i/g, 'I').toUpperCase();
+}
+
+/** Text options in the vocabulary every scene uses (Phaser-era names: fontStyle, strokeThickness, wordWrap) */
 export interface TextOptions {
   fontFamily?: string;
   fontSize?: number | string;
@@ -421,7 +445,7 @@ export function sceneFadeIn(scene: PixiScene, ms = 450): void {
 
 export function toast(scene: PixiScene, message: string, ms = 2600): void {
   announce(message);
-  const insets = safeInsets(scene.host);
+  const insets = safeInsets();
   const w = Math.min(1500, 120 + message.length * 17);
   const box = new PIXI.Container();
   box.addChild(panel(0, 0, w, 96, 'hot'), txt(0, 0, message, { fontSize: SIZE.small, color: T.text, align: 'center', wordWrap: { width: w - 60 } }, 0.5));
@@ -478,7 +502,7 @@ export async function backdrop(scene: PixiScene, location: string, depth = -20):
   const art = Services.art;
   if (!art) return null;
   try {
-    await art.loadBackground(scene.host, location);
+    await art.loadBackground(scene, location);
     if (!scene.live) return null;
     const img = scene.add(new PIXI.Sprite(scene.tex(art.background(location))), depth);
     img.anchor.set(0.5);
@@ -488,4 +512,10 @@ export async function backdrop(scene: PixiScene, location: string, depth = -20):
   } catch {
     return null;
   }
+}
+
+/** a short notice on whatever screen is showing: HTML screens use their own toast, PIXI scenes this kit's */
+export function notify(scene: PixiScene, message: string, ms = 2600): void {
+  if (scene.notify) scene.notify(message, ms);
+  else toast(scene, message, ms);
 }

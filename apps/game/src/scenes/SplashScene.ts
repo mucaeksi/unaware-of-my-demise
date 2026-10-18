@@ -1,13 +1,13 @@
 import * as PIXI from 'pixi.js';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { S } from '../entry/strings';
 import { prefs } from '../platform/prefs';
 import { txt } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
 import { vfxTextures } from '../vfx/textures';
+import { app } from '../core/app';
 
 export interface SplashInit {
   /** resolves true when fonts, base content and menu art are loaded; false when the load failed (the boot code already reported it) */
@@ -60,7 +60,7 @@ export class SplashScene extends PixiScene<SplashInit> {
 
     // the chime, and once more on the first tap when the browser blocked autoplay
     Sfx.phaserLogo();
-    const canvas = this.host.game.canvas;
+    const canvas = app().canvas;
     const replay = (): void => Sfx.phaserLogo();
     canvas.addEventListener('pointerdown', replay, { once: true });
     this.onClose(() => canvas.removeEventListener('pointerdown', replay));
@@ -93,4 +93,3 @@ export class SplashScene extends PixiScene<SplashInit> {
   }
 }
 
-export const SplashHost = hosted<SplashInit>('Splash', () => new SplashScene());

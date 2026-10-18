@@ -1,5 +1,4 @@
 import { REF_H, REF_W } from '../config';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { S } from '../entry/strings';
 import { loadEntry } from '../entry/state';
@@ -11,6 +10,7 @@ import type { PatchStatus } from '../patch/PatchService';
 import { DomStage, type DomBox, type DomButton, type DomGroup, type DomText } from '../ui/domKit';
 import { formatBytes } from '../ui/format';
 import { C, F, T } from '../ui/theme';
+import { app } from '../core/app';
 
 const BAR_H = 10;
 const STRIP_H = 110;
@@ -36,7 +36,8 @@ export class PatchBarScene extends PixiScene {
 
   create(): void {
     // above every screen's own HTML layer
-    this.ui = new DomStage(this.host.game.uiLayer, 50);
+    this.ui = new DomStage(app().uiLayer, 50);
+    this.attachDom(this.ui.root);
     this.onClose(() => this.ui.destroy());
     const g = (this.strip = this.ui.group());
     g.el.style.transition = 'opacity .35s ease-in-out';
@@ -113,4 +114,3 @@ export class PatchBarScene extends PixiScene {
   }
 }
 
-export const PatchBarHost = hosted('PatchBar', () => new PatchBarScene());

@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import { Services } from '../services';
 import { HubScreen } from '../ui/hubScreen';
 import { T } from '../ui/theme';
@@ -40,4 +39,3 @@ export class HomeScene extends HubScreen {
   }
 }
 
-export const HomeHost = hosted('Home', () => new HomeScene());

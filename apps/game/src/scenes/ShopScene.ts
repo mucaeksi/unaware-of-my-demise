@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { Product } from '../net/api';
 import {
   buyProduct,
@@ -212,4 +211,3 @@ export class ShopScene extends HubScreen {
   }
 }
 
-export const ShopHost = hosted('Shop', () => new ShopScene());

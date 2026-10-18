@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { MailItem } from '../net/api';
 import { Services } from '../services';
 import { errText, HubScreen } from '../ui/hubScreen';
@@ -67,4 +66,3 @@ export class MailScene extends HubScreen {
   }
 }
 
-export const MailHost = hosted('Mail', () => new MailScene());

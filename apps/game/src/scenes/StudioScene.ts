@@ -2,7 +2,6 @@ import * as PIXI from 'pixi.js';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { S } from '../entry/strings';
 import { prefs } from '../platform/prefs';
@@ -29,10 +28,10 @@ export class StudioScene extends PixiScene {
 
   async create(): Promise<void> {
     const { art } = Services.ready();
-    await Promise.all([art.loadUi(this.host), art.loadMusic(this.host, 'bgm_main_theme').catch(() => undefined)]);
+    await Promise.all([art.loadUi(this), art.loadMusic(this, 'bgm_main_theme').catch(() => undefined)]);
     if (!this.live) return;
     const m = art.music('bgm_main_theme');
-    if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, 1.8);
+    if (m) Music.play(m.key, m.loopStart, m.duration, 1.8);
     const calm = prefs().reducedMotion;
     const cx = REF_W / 2;
     const cy = REF_H / 2;
@@ -141,4 +140,3 @@ export class StudioScene extends PixiScene {
   }
 }
 
-export const StudioHost = hosted('Studio', () => new StudioScene());

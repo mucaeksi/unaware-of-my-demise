@@ -4,10 +4,10 @@ import { publishCampaign, seedLibraryFixture } from './stack';
 
 const goto = (page: Page, key: string) => page.evaluate((key) => {
   const game = (window as any).__UOMD__.game;
-  game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.sys.settings.key)); game.scene.start(key);
+  game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.key)); game.scene.start(key);
 }, key);
 const settled = async (page: Page, key: string) => {
-  await expect.poll(() => page.evaluate((key) => !(window as any).__UOMD__.game.scene.getScene(key).cameras.main.fadeEffect.isRunning, key)).toBe(true);
+  await expect.poll(() => page.evaluate((key) => !(window as any).__UOMD__.game.scene.getScene(key).fading, key)).toBe(true);
   await page.waitForTimeout(100);
 };
 const parts = (page: Page) => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Library').cards.filter((card: any) => card.kind === 'companion').map((card: any) => card.entry_id));
@@ -57,8 +57,8 @@ test('library: authoritative spoiler/ownership/order gates, canonical readers, l
     await tap(page, info, 1360, 435); await waitScene(page, 'Story');
     for (let i = 0; i < 80 && !committed; i++) { await tap(page, info, 960, 420); await page.waitForTimeout(220); }
     await expect.poll(() => committed).toBe(true);
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').children.list.some((object: any) => object.list?.some((child: any) => child.text === 'RETRY SAVE')))).toBe(true);
-    expect(await page.evaluate(() => { const scene = (window as any).__UOMD__.game.scene.getScene('Story'); const retry = scene.children.list.find((object: any) => object.list?.some((child: any) => child.text === 'RETRY SAVE')); return retry.depth > scene.box.depth; })).toBe(true);
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').texts().includes('RETRY SAVE'))).toBe(true);
+    expect(await page.evaluate(() => { const scene = (window as any).__UOMD__.game.scene.getScene('Story'); return scene.saveBar && !scene.saveBar.destroyed && scene.saveBar.zIndex > 1600; })).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-library-save-retry.png` });
     await page.waitForTimeout(100); await tap(page, info, 720, 1000); await waitScene(page, 'Library');
     await page.unroute('**/api/v1/progress/story'); await page.reload();

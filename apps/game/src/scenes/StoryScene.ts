@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js';
-import type Phaser from '../engine';
 import { StoryRunner, type StoryEvent } from '@uomd/story';
 import type { StoryCommand, StoryScene as StoryData } from '@uomd/content-schema';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
@@ -8,7 +7,6 @@ import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import type { Handle } from '../core/anim';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
@@ -21,13 +19,14 @@ import { buildSubtitleSchedule, resolveSubtitleProgress, type SubtitleSchedule }
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
+import { app } from '../core/app';
 
 export interface StoryInit {
   path: string;
   data?: StoryData;
   authRevision?: number;
-  onDone: (scene: Phaser.Scene) => void;
-  onBack?: (scene: Phaser.Scene) => void;
+  onDone: (scene: PixiScene<unknown>) => void;
+  onBack?: (scene: PixiScene<unknown>) => void;
 }
 
 const CPS = { slow: 26, normal: 46, fast: 95 } as const;
@@ -106,7 +105,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     const current = (): boolean => this.live && (this.init0.authRevision === undefined || this.init0.authRevision === Services.api.authRevision);
     this.currentView = current;
     const accountChanged = (): void => {
-      if (!current() && (this.host.sys.isActive() || this.host.sys.isPaused())) this.init0.onBack?.(this.host);
+      if (!current() && (this.live || this.nav.isPaused(this.key))) this.init0.onBack?.(this);
     };
     if (this.init0.authRevision !== undefined) Services.api.addEventListener('auth', accountChanged);
     this.onClose(() => {
@@ -149,10 +148,10 @@ export class StoryScene extends PixiScene<StoryInit> {
       }
       // every emotion portrait and scene music cue loads up front so speaker, listener and soundtrack react at once
       await Promise.all([
-        ...[...locations].map((id) => art.loadBackground(this.host, id)),
-        ...(this.data0.illustration_id ? [art.loadStills(this.host, [this.data0.illustration_id])] : []),
-        art.loadPortraits(this.host, [...chars], charEmotions),
-        ...[...musicCues].map((cue) => art.loadMusic(this.host, cue).catch(() => undefined))
+        ...[...locations].map((id) => art.loadBackground(this, id)),
+        ...(this.data0.illustration_id ? [art.loadStills(this, [this.data0.illustration_id])] : []),
+        art.loadPortraits(this, [...chars], charEmotions),
+        ...[...musicCues].map((cue) => art.loadMusic(this, cue).catch(() => undefined))
       ]);
     } catch (e) {
       if (!current()) return;
@@ -175,7 +174,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.stopTyping?.();
     this.add(title(REF_W / 2, REF_H / 2 - 40, 'This scene could not be loaded', SIZE.h2, T.crimson), DEPTH.modal);
     this.add(txt(REF_W / 2, REF_H / 2 + 30, String(e instanceof Error ? e.message : e), { fontSize: SIZE.small, color: T.dim, align: 'center', wordWrap: { width: 1400 } }, 0.5), DEPTH.modal);
-    this.add(new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => (this.init0.onBack ? this.init0.onBack(this.host) : this.nav.start('Title')) }), DEPTH.modal);
+    this.add(new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => (this.init0.onBack ? this.init0.onBack(this) : this.nav.start('Title')) }), DEPTH.modal);
   }
 
   // ------------------------------------------------------------------ layout
@@ -225,12 +224,12 @@ export class StoryScene extends PixiScene<StoryInit> {
     zone.eventMode = 'static';
     zone.on('pointerup', () => this.advance());
     const onKey = (ev: KeyboardEvent): void => {
-      if ((ev.key === ' ' || ev.key === 'Enter') && this.host.sys.isActive() && !(ev.target instanceof HTMLButtonElement)) this.advance();
+      if ((ev.key === ' ' || ev.key === 'Enter') && this.live && !(ev.target instanceof HTMLButtonElement)) this.advance();
     };
     window.addEventListener('keydown', onKey);
     this.onClose(() => window.removeEventListener('keydown', onKey));
 
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     // light-novel reader box with its ornamental inner rules
     const box = new PIXI.Container();
     box.position.set(REF_W / 2, 886 - insets.bottom);
@@ -269,7 +268,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.voiceBtn.visible = false;
     const heading = this.add(title(60 + insets.left, topBtnY, this.data0.title_en, 30, T.dim), top);
     heading.anchor.set(0, 0.5);
-    if (this.init0.authRevision !== undefined && this.init0.onBack) this.add(new Button(this, 220 + insets.left, 210 + insets.top, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this.host) }), top);
+    if (this.init0.authRevision !== undefined && this.init0.onBack) this.add(new Button(this, 220 + insets.left, 210 + insets.top, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this) }), top);
     this.anim.to(this.caret, { alpha: 0.2 }, { duration: 600, yoyo: true, repeat: -1 });
 
     const onContextLost = (): void => {
@@ -277,7 +276,7 @@ export class StoryScene extends PixiScene<StoryInit> {
       saveStoryCheckpoint(Services.flowKey(), { path: this.init0.path, sceneId: this.data0.scene_id, sceneHash: this.sceneHash, checkpointId: this.currentLine?.lineId, state: this.runner.saveAtCurrentEvent() });
       saveReadLines(Services.api.accountKey, this.read);
     };
-    const game = this.host.game;
+    const game = app();
     game.events.on('webgl:contextlost', onContextLost);
     // a WebView may start with audio suspended until the first touch
     const resumeAudio = (): void => {
@@ -317,7 +316,7 @@ export class StoryScene extends PixiScene<StoryInit> {
   private playSceneMusic(cueId: string, fade = 1.6): void {
     this.activeMusicCue = cueId;
     const m = Services.ready().art.music(cueId);
-    if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, fade);
+    if (m) Music.play(m.key, m.loopStart, m.duration, fade);
   }
 
   /** Applies reconstructed visual/audio state when resuming from a mid-scene checkpoint. */
@@ -419,7 +418,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.autoTimer?.stop();
     const holdOutMs = this.data0.scene_id === 'tutorial_t3_after' ? 2200 : 1200;
     void this.fadeOut(holdOutMs);
-    this.anim.after(holdOutMs, () => this.init0.onDone(this.host));
+    this.anim.after(holdOutMs, () => this.init0.onDone(this));
   }
 
   // ------------------------------------------------------------------ actors & bust choreography
@@ -1132,10 +1131,7 @@ export class StoryScene extends PixiScene<StoryInit> {
  * A save after a story's end failed (campaign node or archive reading): the scene fades back in, says so and offers
  * RETRY SAVE / BACK instead of leaving the player on a black screen.
  */
-export function storySaveFailed(host: Phaser.Scene, message: string, retry: () => void, back: () => void): void {
-  const s = (host as Phaser.Scene & { pixiScene?: unknown }).pixiScene;
-  if (s instanceof StoryScene && s.live) s.saveFailed(message, retry, back);
+export function storySaveFailed(scene: PixiScene<unknown>, message: string, retry: () => void, back: () => void): void {
+  if (scene instanceof StoryScene && scene.live) scene.saveFailed(message, retry, back);
 }
 
-/** engine registration under the 'Story' key every flow already starts */
-export const StoryHost = hosted<StoryInit>('Story', () => new StoryScene());

@@ -1,6 +1,5 @@
 import { Music } from '../audio/Music';
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { advance } from '../entry/flow';
 import { RANDOM_GAME_QUOTES, S } from '../entry/strings';
@@ -15,6 +14,7 @@ import { formatBytes } from '../ui/format';
 import { errText, titleStyle } from '../ui/hubScreen';
 import { backdrop, sceneFadeIn } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
+import { app } from '../core/app';
 
 const MAIN_THEME_CUE = 'bgm_main_theme';
 
@@ -42,21 +42,21 @@ export class FinishScene extends PixiScene {
   async create(): Promise<void> {
     const entry = loadEntry();
     if (!entry.prologue || entry.tutorials < 3) {
-      advance(this.host, nextStep(entry));
+      advance(this, nextStep(entry));
       return;
     }
     const { art } = Services.ready();
-    await Promise.all([art.ensureBoot(this.host).catch(() => undefined), art.loadMusic(this.host, MAIN_THEME_CUE).catch(() => undefined)]);
+    await Promise.all([art.ensureBoot(this).catch(() => undefined), art.loadMusic(this, MAIN_THEME_CUE).catch(() => undefined)]);
     if (!this.live) return;
 
     // the Main Theme plays while the patch downloads (again on the first touch when autoplay was blocked)
     const playTheme = (): void => {
       Music.resume();
       const m = art.music(MAIN_THEME_CUE);
-      if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, 2.0);
+      if (m) Music.play(m.key, m.loopStart, m.duration, 2.0);
     };
     playTheme();
-    const canvas = this.host.game.canvas;
+    const canvas = app().canvas;
     canvas.addEventListener('pointerdown', playTheme);
     this.onClose(() => canvas.removeEventListener('pointerdown', playTheme));
     void backdrop(this, 'forest_whispering_ash').then((bg) => {
@@ -65,7 +65,7 @@ export class FinishScene extends PixiScene {
       bg.scale.set(bg.scale.x * 1.04);
     });
 
-    this.ui = new DomStage(this.host.game.uiLayer);
+    this.ui = new DomStage(app().uiLayer);
     this.attachDom(this.ui.root);
     this.onClose(() => {
       this.quoteTimer?.stop();
@@ -107,6 +107,10 @@ export class FinishScene extends PixiScene {
     this.onClose(watchEntrySaveState((st) => this.renderSave(st)));
     if (Services.api.signedIn) void syncEntry(Services.api);
     sceneFadeIn(this, 1300);
+  }
+
+  override notify(message: string, ms = 2600): void {
+    if (this.live) this.ui.toast(message, ms);
   }
 
   private renderSave(st: EntrySaveState): void {
@@ -217,4 +221,3 @@ export class FinishScene extends PixiScene {
   }
 }
 
-export const FinishHost = hosted('Finish', () => new FinishScene());

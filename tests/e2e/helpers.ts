@@ -40,7 +40,11 @@ export async function openGame(page: Page, path = '/', opts: OpenOptions = {}): 
     if (m.type() === 'error') problems.push(`console.error: ${m.text()}`);
   });
   page.on('pageerror', (e) => problems.push(`pageerror: ${e.message}`));
-  page.on('requestfailed', (r) => problems.push(`requestfailed: ${r.url()} ${r.failure()?.errorText}`));
+  page.on('requestfailed', (r) => {
+    // a voice line skipped while it is still loading is cancelled on purpose (NarrativeStage.stopAudio)
+    if (r.url().includes('/voices/') && r.failure()?.errorText === 'net::ERR_ABORTED') return;
+    problems.push(`requestfailed: ${r.url()} ${r.failure()?.errorText}`);
+  });
   page.on('response', (r) => {
     if (r.status() >= 400 && !r.url().includes('/api/v1/content/channels/')) problems.push(`HTTP ${r.status()}: ${r.url()}`);
   });
@@ -53,7 +57,7 @@ export async function openGame(page: Page, path = '/', opts: OpenOptions = {}): 
 }
 
 /** Reference (1920x1080) -> viewport coordinates, accounting for FIT letterboxing. */
-async function toScreen(page: Page, x: number, y: number): Promise<[number, number]> {
+export async function toScreen(page: Page, x: number, y: number): Promise<[number, number]> {
   const r = await page.evaluate(() => {
     const c = document.querySelector('canvas') as HTMLCanvasElement;
     const b = c.getBoundingClientRect();
@@ -69,7 +73,7 @@ export async function tap(page: Page, info: TestInfo, x: number, y: number): Pro
 }
 
 export const activeScene = (page: Page): Promise<string> =>
-  page.evaluate(() => (window as any).__UOMD__.game.scene.getScenes(true).map((s: any) => s.sys.settings.key).join(','));
+  page.evaluate(() => (window as any).__UOMD__.game.scene.getScenes(true).map((s: any) => s.key).join(','));
 
 export async function waitScene(page: Page, key: string, timeout = 60_000): Promise<void> {
   await expect.poll(() => activeScene(page), { timeout, intervals: [250] }).toContain(key);
@@ -81,7 +85,7 @@ export async function skipStory(page: Page, info: TestInfo, target: string, maxT
   for (let i = 0; i < maxTaps; i++) {
     const { now, finished } = await page.evaluate(() => {
       const g = (window as any).__UOMD__.game;
-      return { now: g.scene.getScenes(true).map((s: any) => s.sys.settings.key).join(','), finished: Boolean(g.scene.getScene('Story')?.finished) };
+      return { now: g.scene.getScenes(true).map((s: any) => s.key).join(','), finished: Boolean(g.scene.getScene('Story')?.finished) };
     });
     if (now !== last) console.log(`[${info.project.name}] scene -> ${now} (tap ${i})`);
     last = now;
@@ -120,7 +124,7 @@ export async function manualTurn(page: Page, info: TestInfo, skillIndex = 0): Pr
     });
   // The engine already holds the next prompt while the previous turn's animations are still playing, and the skill buttons
   // appear only afterwards; a tap in between would be ignored, as it would be for a player. Animation time stretches on slow
-  // CI GPUs (Phaser caps the frame delta), so this wait is generous and logs how long it really took.
+  // CI GPUs (the frame delta is capped), so this wait is generous and logs how long it really took.
   const waitStart = Date.now();
   await expect.poll(async () => (await battle()).panel, { timeout: 120_000 }).toBe(true);
   console.log(`[${info.project.name}] skill panel ready ${Date.now() - waitStart} ms after the engine prompt`);
@@ -144,7 +148,7 @@ export async function serverVerification(page: Page, timeout = 45_000): Promise<
       async () => {
         text = await page.evaluate(() => {
           const s = (window as any).__UOMD__.game.scene.getScene('Battle');
-          return s.children.list.map((c: any) => c.text ?? '').find((t: string) => t.startsWith('Server verification')) ?? '';
+          return s.texts().find((t: string) => t.startsWith('Server verification')) ?? '';
         });
         return text !== '' && !text.endsWith('checking…');
       },

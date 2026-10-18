@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { SHOTS, activeScene, finishBattleWithPolicy, manualTurn, openGame, probeBattle, skipStory, tap, waitScene } from './helpers';
+import { SHOTS, activeScene, finishBattleWithPolicy, manualTurn, openGame, probeBattle, skipStory, tap, toScreen, waitScene } from './helpers';
 import { publishCampaign } from './stack';
 
 const jwt = (): string => process.env.E2E_ADMIN_JWT as string;
@@ -46,19 +46,8 @@ async function skipUntilLeaves(page: Page, info: Parameters<typeof tap>[1], path
 }
 
 const textsOf = (page: Page, scene: string): Promise<string[]> =>
-  page.evaluate((k) => {
-    const s = (window as any).__UOMD__.game.scene.getScene(k);
-    const out: string[] = [];
-    const walk = (list: any[]): void => {
-      for (const c of list) {
-        if (c.visible === false) continue; // hidden objects (e.g. the restart button while the download runs) are not on screen
-        if (typeof c.text === 'string') out.push(c.text);
-        if (Array.isArray(c.list)) walk(c.list);
-      }
-    };
-    walk(s.children.list);
-    return out;
-  }, scene);
+  // visible texts only (hidden objects, e.g. the restart button while the download runs, are not on screen)
+  page.evaluate((k) => (window as any).__UOMD__.game.scene.getScene(k)?.texts() ?? [], scene);
 
 async function enterFromMenu(page: Page, info: Parameters<typeof tap>[1]): Promise<void> {
   await tap(page, info, 500, 640); // the first-run main door (PREVIEW BUILD in a browser)
@@ -79,28 +68,39 @@ test('prologue timing: nine scenes, 120 s, no skip, narration revealed at 26 cha
   await openGame(page, '/', { fresh: true, realIntro: true, until: 'Title' });
   await enterFromMenu(page, info);
   await waitScene(page, 'Prologue', 30_000);
+  // the clock starts with the first shot, not the scene: loading the plates takes seconds on a software-GL runner
+  await expect.poll(() => sceneState(page, 'Prologue', (s) => s.index), { timeout: 30_000, intervals: [100] }).toBe(0);
   const t0 = Date.now();
-  await page.waitForTimeout(3000);
-  await page.screenshot({ path: `${SHOTS}/${info.project.name}-f7-01a-prologue-scene1.png` });
-  expect(await sceneState(page, 'Prologue', (s) => s.index)).toBe(0);
   // tapping must not skip anything
   await tap(page, info, REF_W / 2, REF_H / 2);
   await tap(page, info, REF_W - 150, 70);
   await page.waitForTimeout(300);
   expect(await sceneState(page, 'Prologue', (s) => s.index)).toBe(0);
+  // no screenshot inside the timed window: on a software-GL runner it freezes the page for seconds, and the frame clock caps a frozen frame at 2 s
   // scene 1 lasts 12 s, scene 2 starts at 12 s
-  await expect.poll(() => sceneState(page, 'Prologue', (s) => s.index), { timeout: 20_000 }).toBe(1);
+  await expect.poll(() => sceneState(page, 'Prologue', (s) => s.index), { timeout: 20_000, intervals: [100] }).toBe(1);
   const switched = (Date.now() - t0) / 1000;
   expect(switched).toBeGreaterThan(10.5);
   expect(switched).toBeLessThan(14.5);
   expect(await sceneState(page, 'Prologue', (s) => s.body.alpha)).toBe(1);
-  // the narration is revealed at 26 characters per second: sample one second of an ongoing reveal
-  const len = (): Promise<number> => sceneState(page, 'Prologue', (s) => (s.body.text as string).length);
-  const l1 = await len();
-  await page.waitForTimeout(1000);
-  const l2 = await len();
-  expect(l2 - l1).toBeGreaterThanOrEqual(16);
-  expect(l2 - l1).toBeLessThanOrEqual(36);
+  // the narration is revealed at 26 characters per second of game time: sample one game-clock second of an ongoing reveal
+  // (the frame clock, not the wall clock: uploading the next plate can freeze a software-GL runner for a while)
+  await page.evaluate(() => {
+    const g = (window as any).__UOMD__.game;
+    const step = g.step.bind(g);
+    g.__clock = 0;
+    g.step = (dt: number) => { g.__clock += dt; step(dt); };
+  });
+  const sample = (): Promise<{ n: number; t: number }> => page.evaluate(() => {
+    const g = (window as any).__UOMD__.game;
+    return { n: (g.scene.getScene('Prologue').body.text as string).length, t: g.__clock as number };
+  });
+  const s1 = await sample();
+  await expect.poll(async () => (await sample()).t - s1.t, { timeout: 30_000, intervals: [100] }).toBeGreaterThanOrEqual(1000);
+  const s2 = await sample();
+  const cps = (s2.n - s1.n) / ((s2.t - s1.t) / 1000);
+  expect(cps).toBeGreaterThanOrEqual(16);
+  expect(cps).toBeLessThanOrEqual(36);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-f7-01b-prologue-scene2.png` });
 });
 
@@ -150,7 +150,7 @@ test('first install: gate -> prologue -> T-1..T-3 (manual battles, cutscene rule
     expect(panel.some((t) => t.startsWith('Server verification'))).toBe(false); // nothing is claimed in the tutorial
     expect(panel).not.toContain('LEAVE');
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-f7-06-t${n}-victory.png` });
-    await tap(page, info, REF_W / 2, 760); // CONTINUE (centred when there is no LEAVE)
+    await tap(page, info, 1170, 760); // CONTINUE (centred on the victory card when there is no LEAVE)
     await waitScene(page, 'Story', 60_000);
     if (n === 3) {
       // the shelter illustration is not shipped yet: the scene must still run on its portraits
@@ -173,9 +173,9 @@ test('first install: gate -> prologue -> T-1..T-3 (manual battles, cutscene rule
 
   let loads = 0;
   page.on('load', () => loads++);
-  await tap(page, info, REF_W / 2, 700);
-  await tap(page, info, REF_W / 2, 700);
-  await tap(page, info, REF_W / 2, 700);
+  // three quick presses on one spot (the restart reloads the page about half a second after the first one)
+  const [rx, ry] = await toScreen(page, REF_W / 2, 700);
+  for (let i = 0; i < 3; i++) await page.mouse.click(rx, ry);
   await page.waitForFunction(() => (window as any).__UOMD__?.game.scene.isActive('Title'), null, { timeout: 90_000 });
   await page.waitForTimeout(1500);
   expect(loads).toBe(1); // three presses, one restart

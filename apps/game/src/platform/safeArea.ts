@@ -1,4 +1,3 @@
-import type Phaser from '../engine';
 import { REF_H, REF_W } from '../config';
 
 export interface Insets {
@@ -66,8 +65,9 @@ export function readSafeInsets(canvas?: HTMLCanvasElement | null): Insets {
   return clampInsets({ top: css.top * k, right: css.right * k, bottom: css.bottom * k, left: css.left * k });
 }
 
-export function safeInsets(scene?: Phaser.Scene): Insets {
-  return readSafeInsets(scene?.game?.canvas ?? null);
+/** the device's safe-area insets in reference px (notches, rounded corners, gesture bars) */
+export function safeInsets(): Insets {
+  return readSafeInsets(null);
 }
 
 export function safeBounds(insets: Insets): { left: number; right: number; top: number; bottom: number; width: number; height: number; centerX: number; centerY: number } {

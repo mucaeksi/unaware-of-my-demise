@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import { currency } from '../net/currency';
 import { Services } from '../services';
 import { planAscension, planLevelUp, planSkillUpgrade } from '../ui/growth';
@@ -220,4 +219,3 @@ export class CharacterScene extends HubScreen {
   }
 }
 
-export const CharacterHost = hosted('Character', () => new CharacterScene());

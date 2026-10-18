@@ -21,13 +21,13 @@ test('canonical story: signed patch, saved opening and both Construct phase inte
     });
     await waitScene(page, 'Story');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').bodyText?.text.length)).toBeGreaterThan(10);
-    await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Story').cameras.main.fadeEffect.isRunning)).toBe(true);
+    await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Story').fading)).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-canonical-opening.png` });
     await skipStory(page, info, 'Chapters');
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Chapters').children.list.some((object: any) => object.text === 'LOCKED STORY'))).toBe(true);
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Chapters').texts().includes('LOCKED STORY'))).toBe(true);
     expect(await page.evaluate(async () => {
       const u = (window as any).__UOMD__; const index = await u.services.content.chapters();
-      const text = u.game.scene.getScene('Chapters').children.list.map((object: any) => object.text ?? '').join('\n');
+      const text = u.game.scene.getScene('Chapters').texts().join('\n');
       return index.chapters.flatMap((chapter: any) => chapter.nodes).filter((node: any) => ['part1_emotional_confession', 'part1_clockless_reveal'].includes(node.node_id)).some((node: any) => text.includes(node.title_en.toUpperCase()));
     })).toBe(false);
     expect(await page.evaluate(async () => (await (window as any).__UOMD__.services.api.progress()).nodes.find((node: any) => node.node_id === 'opening_sad_scene'))).toMatchObject({ stars: 0, clears: 1 });
@@ -39,10 +39,10 @@ test('canonical story: signed patch, saved opening and both Construct phase inte
     // Stats belong only to this local fixture; release data and the engine remain unchanged.
     await page.evaluate(() => {
       const u = (window as any).__UOMD__;
-      u.game.scene.getScenes(true).forEach((scene: any) => u.game.scene.stop(scene.sys.settings.key));
+      u.game.scene.getScenes(true).forEach((scene: any) => u.game.scene.stop(scene.key));
       u.game.scene.start('Battle', { encounterPath: 'encounters/stage_7_5.json',
         party: [{ unit_id: 'mahmut', level: 20, slot: 0, row: 'front', stats: { hp: 100000, atk: 6000, def: 50, spd: 20 } }],
-        onDone: (scene: any) => scene.scene.start('Title'), onBack: (scene: any) => scene.scene.start('Title') });
+        onDone: (scene: any) => scene.nav.start('Title'), onBack: (scene: any) => scene.nav.start('Title') });
     });
     await waitScene(page, 'Battle');
     const expectedPaths = ['story/vn_7_5_phase_1_break.json', 'story/vn_7_5_phase_2_ward.json'];
@@ -58,10 +58,10 @@ test('canonical story: signed patch, saved opening and both Construct phase inte
       if (state && !seen.includes(state.path)) {
         expect(state.path).toBe(expectedPaths[seen.length]); expect(state.paused).toBe(true); seen.push(state.path);
         expect(await page.evaluate(() => {
-          const keys = (window as any).__UOMD__.game.scene.getScenes(false).map((scene: any) => scene.sys.settings.key);
+          const keys = (window as any).__UOMD__.game.scene.getScenes(false).map((scene: any) => scene.key);
           return keys.indexOf('Story') > keys.indexOf('Battle');
         })).toBe(true);
-        await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Story').cameras.main.fadeEffect.isRunning)).toBe(true);
+        await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Story').fading)).toBe(true);
         const before = await page.evaluate(() => { const battle = (window as any).__UOMD__.game.scene.getScene('Battle'); return { log: battle.battle.log.length, actions: battle.recorded.length }; });
         await page.waitForTimeout(500);
         expect(await page.evaluate(() => { const battle = (window as any).__UOMD__.game.scene.getScene('Battle'); return { log: battle.battle.log.length, actions: battle.recorded.length }; })).toEqual(before);

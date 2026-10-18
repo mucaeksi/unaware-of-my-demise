@@ -1,6 +1,6 @@
 ---
 name: uomd-pixi-engine
-description: "Codex/UOMD adaptation. Implement, review or debug the Unaware of My Demise game client on PixiJS v8 — the retained PIXI stage in apps/game/src/engine, scenes, sprites/text/graphics, textures, cameras, tweens, input, quality tiers and context loss. Use for any apps/game rendering or engine work; pair with the official `pixijs` skills for raw PixiJS API questions."
+description: "Codex/UOMD adaptation. Implement, review or debug the Unaware of My Demise game client on pure PixiJS v8 — the app shell and scene manager in apps/game/src/core, PixiScene scenes, the PIXI and HTML UI kits, textures/audio assets, tweens, input, quality tiers and context loss. Use for any apps/game rendering or engine work; pair with the official `pixijs` skills for raw PixiJS API questions."
 ---
 # uomd-pixi-engine — Codex adaptation
 

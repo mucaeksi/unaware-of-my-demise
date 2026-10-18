@@ -1,6 +1,5 @@
 import type { PresentationPack } from '@uomd/content-schema';
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import { prefs } from '../platform/prefs';
 import { Services } from '../services';
 import { HubScreen } from '../ui/hubScreen';
@@ -65,7 +64,7 @@ export class ContentPanelScene extends HubScreen<PanelInit> {
     }
     this.text(REF_W / 2, 195, label(panel.title), { fontSize: 44, color: T.gold, align: 'center', wordWrap: { width: 1600 } }).setOrigin(0.5);
     if (panel.image_id) {
-      await art.loadStills(this.host, [panel.image_id]);
+      await art.loadStills(this, [panel.image_id]);
       if (!this.isCurrentView()) return;
       const key = art.still(panel.image_id);
       const tex = key ? this.tex(key) : null;
@@ -114,4 +113,3 @@ export class ContentPanelScene extends HubScreen<PanelInit> {
   }
 }
 
-export const ContentPanelHost = hosted<PanelInit>('ContentPanel', () => new ContentPanelScene());

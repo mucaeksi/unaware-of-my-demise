@@ -1,4 +1,3 @@
-import type Phaser from './engine';
 import { ArtLibrary } from './content/ArtLibrary';
 import { type ContentService } from './content/ContentService';
 import { noteRelease } from './entry/continuity';
@@ -33,10 +32,6 @@ export const Services = {
     noteRelease(await this.content.activeReleaseId().catch(() => null));
     this.art = new ArtLibrary(this.content, await this.content.art());
     return this.art;
-  },
-
-  emit(game: Phaser.Game, event: string): void {
-    game.events.emit(event);
   }
 };
 

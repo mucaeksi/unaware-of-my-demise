@@ -26,13 +26,13 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     // Locale is selected through the compiled settings controls.
     await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').openSettings());
     await expect.poll(() => page.evaluate(() => !!(window as any).__UOMD__.game.scene.getScene('Title').overlay)).toBe(true);
-    await page.waitForTimeout(250); // Allow Phaser's next input-list update before the first tap.
+    await page.waitForTimeout(250); // let the settings modal settle before the first tap
     await tap(page, info, 1310, 570);
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').overlay.list.some((o: any) => o.text === 'TR'))).toBe(true);
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').texts().includes('TR'))).toBe(true);
     await tap(page, info, 1210, 940);
     await page.evaluate(({ releaseId }) => {
       const u = (window as any).__UOMD__;
-      u.game.scene.getScene('Title').scene.start('Story', { path: 'story/r08_probe.json', authRevision: u.services.api.authRevision, onDone: async (scene: any) => { await u.services.api.completeStory(releaseId, 'r08_probe_choice'); scene.scene.start('Title'); }, onBack: (scene: any) => scene.scene.start('Title') });
+      u.game.scene.getScene('Title').nav.start('Story', { path: 'story/r08_probe.json', authRevision: u.services.api.authRevision, onDone: async (scene: any) => { await u.services.api.completeStory(releaseId, 'r08_probe_choice'); scene.nav.start('Title'); }, onBack: (scene: any) => scene.nav.start('Title') });
     }, { releaseId });
     await waitScene(page, 'Story');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').bodyText?.text)).toBe('Sentetik aktarım altyazısı.');
@@ -51,15 +51,15 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-video-paused.png` });
     await dialog.getByRole('button', { name: 'PLAY', exact: true }).click(); await expect(dialog).not.toBeVisible({ timeout: 20_000 });
     await waitScene(page, 'ContentPanel');
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('ContentPanel').body.list.some((o: any) => o.text === 'Yalnızca sentetik çalışma testi.'))).toBe(true);
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('ContentPanel').texts().includes('Yalnızca sentetik çalışma testi.'))).toBe(true);
     expect(await page.evaluate(() => { const scene = (window as any).__UOMD__.game.scene; return scene.getIndex('ContentPanel') > scene.getIndex('Story'); })).toBe(true);
     await page.waitForTimeout(450); await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-notice.png` });
     await tap(page, info, 960, 820); await waitScene(page, 'Title');
     const recruited = await page.evaluate(async ({ releaseId, invitation, hero }) => (window as any).__UOMD__.services.api.selectRecruit(releaseId, invitation, hero), { releaseId, invitation: INVITATION, hero: HERO });
     expect(recruited).toMatchObject({ releaseId, characterId: HERO, consumed: 1 });
-    await page.evaluate((hero) => (window as any).__UOMD__.game.scene.getScene('Title').scene.start('Character', { id: hero }), HERO); await waitScene(page, 'Character');
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').body.list.some((o: any) => o.text?.startsWith('Level 1 /')))).toBe(true);
-    await tap(page, info, 340, 600); await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').body.list.some((o: any) => o.text?.startsWith('Level 3 /')))).toBe(true);
+    await page.evaluate((hero) => (window as any).__UOMD__.game.scene.getScene('Title').nav.start('Character', { id: hero }), HERO); await waitScene(page, 'Character');
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').texts().some((t: string) => t.startsWith('Level 1 /')))).toBe(true);
+    await tap(page, info, 340, 600); await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').texts().some((t: string) => t.startsWith('Level 3 /')))).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-new-hero-growth.png` });
     await page.evaluate(async ({ releaseId, hero, heroFive, armor, banner }) => {
       const api = (window as any).__UOMD__.services.api; const instance = (await api.gear(releaseId)).find((g: any) => g.gearId === armor);
@@ -70,7 +70,7 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     }, { releaseId, hero: HERO, heroFive: HERO_FIVE, armor: ARMOR, banner: BANNER });
     await page.evaluate(async ({ releaseId, node }) => {
       const u = (window as any).__UOMD__; const started = await u.services.api.startBattle(releaseId, node);
-      u.game.scene.getScene('Character').scene.start('Battle', { encounterPath: 'encounters/r08_probe.json', nodeId: node, releaseId, party: started.party, sessionId: started.sessionId, onBack: (s: any) => s.scene.start('Title'), onDone: (s: any) => s.scene.start('Title') });
+      u.game.scene.getScene('Character').nav.start('Battle', { encounterPath: 'encounters/r08_probe.json', nodeId: node, releaseId, party: started.party, sessionId: started.sessionId, onBack: (s: any) => s.nav.start('Title'), onDone: (s: any) => s.nav.start('Title') });
     }, { releaseId, node: NODE });
     await waitScene(page, 'Battle');
     await expect.poll(() => page.evaluate(() => [...(window as any).__UOMD__.game.scene.getScene('Battle').views.values()].some((v: any) => v.unitName === 'Synthetic R08 Probe' && v.sprite.anims.isPlaying))).toBe(true);
@@ -78,17 +78,17 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     const claim = page.waitForResponse((response) => response.url().endsWith('/api/v1/progress/battle') && response.request().method() === 'POST');
     await finishBattleWithPolicy(page); const verified = await claim; expect(verified.status()).toBe(200); expect(await verified.json()).toMatchObject({ stars: 3, ration: { spent: 0 }, repeatRewardsAllowed: false });
     // Scene shutdown must release HTML media, layers, Blob owners and this patch's atlas animations safely.
-    await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').scene.start('Title')); await waitScene(page, 'Title');
+    await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').nav.start('Title')); await waitScene(page, 'Title');
     expect(await page.locator('.uomd-video-dialog').count()).toBe(0);
     const resources = await page.evaluate(() => { const c = (window as any).__UOMD__.services.content; return { assets: c.assets.size, owners: [...c.assets.values()].map((v: any) => v.owners.size) }; });
     expect(resources.assets).toBeLessThan(30); expect(resources.owners.every((n: number) => n > 0)).toBe(true);
-    await page.evaluate(() => { const u = (window as any).__UOMD__; u.game.scene.getScene('Title').scene.start('Story', { path: 'story/r08_failure.json', onDone: (s: any) => s.scene.start('Title'), onBack: (s: any) => s.scene.start('Title') }); });
+    await page.evaluate(() => { const u = (window as any).__UOMD__; u.game.scene.getScene('Title').nav.start('Story', { path: 'story/r08_failure.json', onDone: (s: any) => s.nav.start('Title'), onBack: (s: any) => s.nav.start('Title') }); });
     const failedVideo = page.getByRole('dialog', { name: 'Story video' }); await expect(failedVideo).toBeVisible(); await expect(failedVideo.getByRole('button', { name: 'CONTINUE', exact: true })).toBeVisible();
     await expect(failedVideo.locator('.uomd-video-caption')).toContainText('Sentetik aktarım altyazısı.'); await failedVideo.getByRole('button', { name: 'CONTINUE', exact: true }).click();
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').bodyText.text)).toBe('English fallback remains readable.');
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-media-fallback.png` });
-    await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').scene.start('Title')); await waitScene(page, 'Title');
-    await page.evaluate(() => { const u = (window as any).__UOMD__; u.game.scene.getScene('Title').scene.start('Story', { path: 'story/r08_failure.json', authRevision: u.services.api.authRevision, onDone: (s: any) => s.scene.start('Title'), onBack: (s: any) => s.scene.start('Title') }); });
+    await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').nav.start('Title')); await waitScene(page, 'Title');
+    await page.evaluate(() => { const u = (window as any).__UOMD__; u.game.scene.getScene('Title').nav.start('Story', { path: 'story/r08_failure.json', authRevision: u.services.api.authRevision, onDone: (s: any) => s.nav.start('Title'), onBack: (s: any) => s.nav.start('Title') }); });
     await expect(failedVideo).toBeVisible(); await page.evaluate(async () => (window as any).__UOMD__.services.api.signOut()); await waitScene(page, 'Title'); await expect(failedVideo).not.toBeVisible();
     expect(problems.filter((p) => !p.includes('favicon'))).toEqual([]);
   } finally {

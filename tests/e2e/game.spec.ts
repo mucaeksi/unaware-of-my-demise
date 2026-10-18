@@ -49,7 +49,7 @@ test('plays tutorial T-1 from the title: story -> turn-based battle -> victory -
   expect(label).toContain('✓ replay matches');
 
   // continue -> post-battle story -> back to chapters
-  await tap(page, info, REF_W / 2 - 250, 760);
+  await tap(page, info, 1170 - 230, 760); // CONTINUE on the victory card (BattleScene: cardX 1170, primary button at cardX - 230)
   await waitScene(page, 'Story');
   await skipStory(page, info, 'Chapters', 400);
   const sys = await request.get(`${ADMIN}/admin/api/system`, { headers: { 'Cf-Access-Jwt-Assertion': jwt() } });

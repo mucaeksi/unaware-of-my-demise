@@ -1,7 +1,8 @@
 import * as PIXI from 'pixi.js';
-import type Phaser from '../engine';
 import { REF_H, REF_W } from '../config';
 import { Animator } from './anim';
+import { Assets } from './assets';
+import type { SceneNav } from './scenes';
 
 /** something the scene re-syncs a few times a second (ARIA mirrors follow containers that move or hide) */
 export interface Syncable {
@@ -12,18 +13,22 @@ const A11Y_SYNC_MS = 200;
 
 /**
  * A scene drawn directly with PIXI (D-25). `root` is what the camera moves (zoom/shake); the background sits under it
- * and the fade veil over it. Children sort by zIndex (the DEPTH bands of ui/theme).
- *
- * Transitional: until the Phaser-style engine is deleted (D-25 step 4) a scene runs inside a host engine scene
- * (see core/host.ts), which still owns loading, textures, audio and scene switching.
+ * and the fade veil over it. Children sort by zIndex (the DEPTH bands of ui/theme). Scenes are created and run by the
+ * SceneManager (core/scenes.ts), which hands each one its key and `nav`.
  */
 export abstract class PixiScene<D = unknown> {
   readonly view = new PIXI.Container();
   readonly root = new PIXI.Container({ sortableChildren: true });
   readonly anim = new Animator();
-  host!: Phaser.Scene;
+  /** 'pause' / 'resume' from the scene manager */
+  readonly events = new PIXI.EventEmitter();
+  key = '';
+  /** scene switching: start/launch/stop/pause/resume/restart/bringToTop (this scene by default) */
+  nav!: SceneNav;
+  /** what the scene was started with (a context-loss recovery restarts it with the same) */
   data!: D;
   closed = false;
+  #active: () => boolean = () => false;
   readonly #bg = new PIXI.Graphics();
   readonly #veil = new PIXI.Graphics();
   readonly #flashVeil = new PIXI.Graphics();
@@ -68,22 +73,58 @@ export abstract class PixiScene<D = unknown> {
     return child;
   }
 
-  /** a frame of a texture the host engine loaded (EMPTY when it is missing) */
+  /** called by the scene manager before create() */
+  attach(key: string, nav: SceneNav, active: () => boolean): void {
+    this.key = key;
+    this.nav = nav;
+    this.#active = active;
+  }
+
+  /** a loaded image or one of its frames (EMPTY when it is missing) */
   tex(key: string, frame?: string | number): PIXI.Texture {
-    if (!this.host.textures.exists(key)) return PIXI.Texture.EMPTY;
-    const t = this.host.textures.get(key);
-    return t.pixiFrame(t.get(frame)) ?? PIXI.Texture.EMPTY;
+    return Assets.texture(key, frame);
   }
 
-  /** scene switching (start/launch/stop/pause/resume/restart/bringToTop) */
-  get nav(): Phaser.ScenePlugin {
-    return this.host.scene;
-  }
-
-  /** still running: not closed and not stopped by the scene manager */
+  /** still running: not closed, stopped or paused */
   get live(): boolean {
-    return !this.closed && this.host.sys.isActive();
+    return !this.closed && this.#active();
   }
+
+  /** shown or hidden with its HTML layers (a paused scene is hidden) */
+  setShown(on: boolean): void {
+    this.view.visible = on;
+    for (const el of this.#dom) el.style.visibility = on ? '' : 'hidden';
+  }
+
+  /** moves this scene's HTML layers above the other scenes' (bringToTop) */
+  raiseDom(): void {
+    for (const el of this.#dom) el.parentElement?.appendChild(el);
+  }
+
+  /** true while a scene fade (in or out) is running: screens are settled when it is false */
+  get fading(): boolean {
+    return this.#veil.visible && this.#veil.alpha > 0 && this.#veil.alpha < 1;
+  }
+
+  /** every visible text the scene shows, canvas and HTML (inspection: tests, the live MCP, diagnostics) */
+  texts(): string[] {
+    const out: string[] = [];
+    const walk = (n: PIXI.Container): void => {
+      if (!n.visible || n.alpha <= 0) return;
+      if (n instanceof PIXI.Text && n.text) out.push(n.text);
+      for (const c of n.children) walk(c);
+    };
+    walk(this.view);
+    for (const el of this.#dom) {
+      for (const t of el.querySelectorAll<HTMLElement>('.uomd-text, .uomd-btn .label, .uomd-btn .sub')) {
+        if (t.textContent && t.closest('[hidden]') === null) out.push(t.textContent);
+      }
+    }
+    return out;
+  }
+
+  /** optional on-screen notice for flows that do not know the scene type (HTML screens show a toast) */
+  notify?(message: string, ms?: number): void;
 
   onClose(fn: () => void): void {
     this.#cleanups.push(fn);
@@ -155,7 +196,7 @@ export abstract class PixiScene<D = unknown> {
     this.anim.to(this.root.scale, { x: zoom, y: zoom }, { duration: ms, ease: 'sine.inout', onUpdate: () => (this.#zoom = this.root.scale.x) });
   }
 
-  /** called by the host every frame */
+  /** called by the scene manager every frame */
   tick(dtMs: number): void {
     if (this.closed) return;
     this.anim.update(dtMs);

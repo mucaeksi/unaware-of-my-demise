@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { OperationRecord } from '../net/operations';
 import { Services } from '../services';
 import { errText, HubScreen } from '../ui/hubScreen';
@@ -73,4 +72,3 @@ export class OperationsScene extends HubScreen {
   }
 }
 
-export const OperationsHost = hosted('Operations', () => new OperationsScene());

@@ -5,7 +5,7 @@ test('title content chip ignores late reads after shutdown and restart', async (
   const problems = await openGame(page);
   for (const restart of [false, true]) {
     if (restart) {
-      await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Home').scene.start('Title'));
+      await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Home').nav.start('Title'));
       await waitScene(page, 'Title');
     }
     await expect.poll(() => page.evaluate(() => !!(window as any).__UOMD__.game.scene.getScene('Title').chipText?.active)).toBe(true);
@@ -18,7 +18,7 @@ test('title content chip ignores late reads after shutdown and restart', async (
       (window as any).__TITLE_LATE__ = late;
       void title.refreshChip().then(() => { late.settled = true; }, (error: Error) => { late.error = error.message; late.settled = true; });
       content.activeReleaseId = original;
-      if (restart) title.scene.restart(); else title.scene.start('Home');
+      if (restart) title.nav.restart(); else title.nav.start('Home');
     }, restart);
     await waitScene(page, restart ? 'Title' : 'Home');
     await expect.poll(() => page.evaluate(() => !(window as any).__TITLE_LATE__.chip.active)).toBe(true);

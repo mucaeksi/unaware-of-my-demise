@@ -1,5 +1,4 @@
 import { REF_H, REF_W } from '../config';
-import { hosted } from '../core/host';
 import { prefs } from '../platform/prefs';
 import type { BannerInfo, PullResponse } from '../net/api';
 import { currency } from '../net/currency';
@@ -171,4 +170,3 @@ export class SummonScene extends HubScreen {
   }
 }
 
-export const SummonHost = hosted('Summon', () => new SummonScene());

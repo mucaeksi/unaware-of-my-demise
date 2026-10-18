@@ -1,4 +1,5 @@
-import type Phaser from '../engine';
+import { Assets } from '../core/assets';
+import type { PixiScene } from '../core/PixiScene';
 import type { ArtManifest, UnitAnimState } from '@uomd/content-schema';
 import type { ContentService } from './ContentService';
 
@@ -30,8 +31,9 @@ export interface UnitFrames {
 }
 
 /**
- * Resolves art-manifest entries to Phaser textures, loading only what a screen needs and only once.
- * Keys embed the content hash (see ContentService.asset), so patched art never reuses a stale texture.
+ * Resolves art-manifest entries to loaded textures and audio, loading only what a screen needs and only once. Each
+ * load is owned by the scene that asked for it and released when that scene closes. Keys embed the content hash (see
+ * ContentService.asset), so patched art never reuses a stale texture.
  */
 export class ArtLibrary {
   private readonly unitCache = new Map<string, UnitFrames>();
@@ -40,63 +42,37 @@ export class ArtLibrary {
   private readonly musicKeys = new Map<string, { key: string; loopStart: number; duration: number }>();
   private readonly uiKeys = new Map<string, string>();
   private readonly stillKeys = new Map<string, string>();
-  private readonly inflight = new Map<string, Promise<void>>();
 
   constructor(private readonly content: ContentService, readonly art: ArtManifest) {}
 
-  private async asset(scene: Phaser.Scene, path: string, decodedBytes = 0) {
-    this.content.watchAssetOwner(scene, (release) => scene.events.once('shutdown', release));
+  private async asset(scene: PixiScene<unknown>, path: string, decodedBytes = 0) {
+    this.content.watchAssetOwner(scene, (release) => scene.onClose(release));
     const ref = await this.content.asset(path, scene, decodedBytes);
-    if (!scene.sys.isActive()) { this.content.releaseAssets(scene); throw new Error('scene closed while loading media'); }
+    if (!scene.live) {
+      this.content.releaseAssets(scene);
+      throw new Error('scene closed while loading media');
+    }
     return ref;
   }
 
-  private async run(scene: Phaser.Scene, queue: Queued[]): Promise<void> {
-    for (const item of queue) this.content.retainAsset(item.key, scene, () => {
-      if (item.type === 'image' && scene.textures.exists(item.key)) scene.textures.remove(item.key);
-      if (item.type === 'audio' && scene.cache.audio.exists(item.key)) scene.cache.audio.remove(item.key);
-    });
-    const waiting: Promise<void>[] = [];
+  private async run(scene: PixiScene<unknown>, queue: Queued[]): Promise<void> {
+    for (const item of queue)
+      this.content.retainAsset(item.key, scene, () => (item.type === 'image' ? Assets.removeImage(item.key) : Assets.removeAudio(item.key)));
     const seen = new Set<string>();
-    const todo: Queued[] = [];
-    for (const q of queue) {
-      if (seen.has(q.key)) continue;
+    const loads = queue.flatMap((q) => {
+      if (seen.has(q.key)) return [];
       seen.add(q.key);
-      const exists = q.type === 'image' ? scene.textures.exists(q.key) : scene.cache.audio.exists(q.key);
-      if (exists) continue;
-      const pending = this.inflight.get(q.key);
-      if (pending) {
-        waiting.push(pending);
-      } else {
-        todo.push(q);
-      }
+      return [q.type === 'image' ? Assets.loadImage(q.key, q.url) : Assets.loadAudio(q.key, q.url)];
+    });
+    try {
+      await Promise.all(loads);
+    } catch (e) {
+      throw new Error(`failed to load media: ${e instanceof Error ? e.message : String(e)}`, { cause: e });
     }
-    if (todo.length > 0) {
-      const batch = new Promise<void>((resolve, reject) => {
-        const loader = scene.load;
-        const cleanup = () => {
-          loader.off('complete', complete);
-          loader.off('loaderror', failed);
-          scene.events.off('shutdown', closed);
-          for (const q of todo) this.inflight.delete(q.key);
-        };
-        const complete = () => { cleanup(); resolve(); };
-        const failed = (file: Phaser.Loader.File) => { if (todo.some((q) => q.key === file.key)) { cleanup(); reject(new Error(`failed to load ${file.key}`)); } };
-        const closed = () => { cleanup(); reject(new Error('scene closed while loading media')); };
-        loader.once('complete', complete); loader.on('loaderror', failed); scene.events.once('shutdown', closed);
-        for (const q of todo) {
-          if (q.type === 'image') loader.image(q.key, q.url);
-          else loader.audio(q.key, q.url);
-        }
-        loader.start();
-      });
-      for (const q of todo) this.inflight.set(q.key, batch);
-      waiting.push(batch);
-    }
-    if (waiting.length > 0) await Promise.all(waiting);
+    if (!scene.live) throw new Error('scene closed while loading media');
   }
 
-  async loadUnits(scene: Phaser.Scene, artKeys: readonly string[]): Promise<void> {
+  async loadUnits(scene: PixiScene<unknown>, artKeys: readonly string[]): Promise<void> {
     const queue: Queued[] = [];
     const want = [...new Set(artKeys)];
     for (const k of want) {
@@ -113,8 +89,7 @@ export class ArtLibrary {
       const atlas = u && this.art.atlases[u.atlas];
       if (!u || !atlas) continue;
       const ref = await this.asset(scene,atlas.image);
-      const tex = scene.textures.get(ref.key);
-      for (const [name, [x, y, w, h]] of Object.entries(atlas.frames)) if (!tex.has(name)) tex.add(name, 0, x, y, w, h);
+      for (const [name, [x, y, w, h]] of Object.entries(atlas.frames)) Assets.addFrame(ref.key, name, x, y, w, h);
       const states: UnitFrames['states'] = {};
       for (const [st, s] of Object.entries(u.states)) {
         states[st] = { frame: s.frame, scale: s.scale, footY: s.foot_y, pivotX: s.pivot_x, ...(s.animation ? { animation: { frames: s.animation.frames, fps: s.animation.fps, loop: s.animation.loop } } : {}) };
@@ -136,7 +111,7 @@ export class ArtLibrary {
     return { key: u.textureKey, ...s };
   }
 
-  async loadPortraits(scene: Phaser.Scene, characters: readonly string[], emotions?: ReadonlyMap<string, ReadonlySet<string>>): Promise<void> {
+  async loadPortraits(scene: PixiScene<unknown>, characters: readonly string[], emotions?: ReadonlyMap<string, ReadonlySet<string>>): Promise<void> {
     const queue: Queued[] = [];
     for (const c of characters) {
       const p = this.art.portraits[c];
@@ -162,29 +137,12 @@ export class ArtLibrary {
     return img ? (this.portraitKeys.get(`${character}/${img}`) ?? null) : null;
   }
 
-  async loadBackground(scene: Phaser.Scene, location: string): Promise<void> {
+  async loadBackground(scene: PixiScene<unknown>, location: string): Promise<void> {
     const path = this.art.backgrounds[location];
     if (!path) throw new Error(`no background for ${location}`);
     const ref = await this.asset(scene,path);
     this.bgKeys.set(location, ref.key);
     await this.run(scene, [{ type: 'image', key: ref.key, url: ref.url }]);
-  }
-
-  /**
-   * Adds a full-screen backdrop behind a scene. The art library is rebuilt after every content patch, so a scene must not assume an
-   * earlier scene already loaded the image: this loads it (a no-op when the texture exists) and never throws, so a missing or failed
-   * background leaves the plain dark backdrop instead of crashing the screen.
-   */
-  async addBackdrop(scene: Phaser.Scene, location: string, depth = -20): Promise<Phaser.GameObjects.Image | null> {
-    try {
-      await this.loadBackground(scene, location);
-      if (!scene.sys.isActive()) return null;
-      const img = scene.add.image(1920 / 2, 1080 / 2, this.background(location)).setDepth(depth);
-      img.setScale(Math.max(1920 / img.width, 1080 / img.height));
-      return img;
-    } catch {
-      return null;
-    }
   }
 
   background(location: string): string {
@@ -193,16 +151,21 @@ export class ArtLibrary {
     return k;
   }
 
-  async loadMusic(scene: Phaser.Scene, cue: string): Promise<void> {
+  async loadMusic(scene: PixiScene<unknown>, cue: string): Promise<void> {
     const m = this.art.music[cue];
     if (!m) return;
     const ref = await this.asset(scene,m.file, Math.ceil(m.duration_s * 48_000 * 2 * 4));
     this.musicKeys.set(cue, { key: ref.key, loopStart: m.loop_start_s, duration: m.duration_s });
     await this.run(scene, [{ type: 'audio', key: ref.key, url: ref.url }]);
-    const buffer = scene.cache.audio.get(ref.key) as AudioBuffer | undefined;
-    if (buffer && typeof buffer.getChannelData === 'function') {
-      try { if (buffer.duration > m.duration_s + 0.5 || buffer.numberOfChannels > 2 || buffer.sampleRate > 96_000) throw new Error('Music decoding differs from its declared resource budget'); this.content.accountDecodedAsset(ref.key, buffer.length * buffer.numberOfChannels * 4); }
-      catch (error) { scene.cache.audio.remove(ref.key); throw error; }
+    const buffer = Assets.audio(ref.key);
+    if (buffer) {
+      try {
+        if (buffer.duration > m.duration_s + 0.5 || buffer.numberOfChannels > 2 || buffer.sampleRate > 96_000) throw new Error('Music decoding differs from its declared resource budget');
+        this.content.accountDecodedAsset(ref.key, buffer.length * buffer.numberOfChannels * 4);
+      } catch (error) {
+        Assets.removeAudio(ref.key);
+        throw error;
+      }
     }
   }
 
@@ -215,12 +178,12 @@ export class ArtLibrary {
    * cards are still playing. Menu-level scenes therefore call this first: it (re)loads the boot images and the title backdrop for THIS library
    * (textures that already exist are skipped), so a scene never meets an art library that has not loaded what it draws.
    */
-  async ensureBoot(scene: Phaser.Scene): Promise<void> {
+  async ensureBoot(scene: PixiScene<unknown>): Promise<void> {
     await this.loadUi(scene);
     await this.loadBackground(scene, 'forest_whispering_ash');
   }
 
-  async loadUi(scene: Phaser.Scene): Promise<void> {
+  async loadUi(scene: PixiScene<unknown>): Promise<void> {
     const entries = Object.entries(this.art.ui);
     const refs = await Promise.all(entries.map(async ([name, path]) => ({ name, ref: await this.asset(scene, path) })));
     const queue: Queued[] = refs.map(({ name, ref }) => {
@@ -231,7 +194,7 @@ export class ArtLibrary {
   }
 
   /** Loads full-frame stills (prologue plates, event illustrations) on demand; ids the manifest does not ship are skipped without error. */
-  async loadStills(scene: Phaser.Scene, ids: readonly string[]): Promise<void> {
+  async loadStills(scene: PixiScene<unknown>, ids: readonly string[]): Promise<void> {
     const valid = ids.flatMap((id) => {
       const path = this.art.stills[id];
       return path ? [{ id, path }] : [];

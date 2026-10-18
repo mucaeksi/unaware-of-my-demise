@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js';
-import type Phaser from '../engine';
 import { Battle, type BattleEvent, type PlayerAction, type SkillOption, type TurnPrompt } from '@uomd/combat';
 import type { BattleParty, Encounter, SkillDef, UnitPack } from '@uomd/content-schema';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
@@ -9,7 +8,6 @@ import { Sfx } from '../audio/Sfx';
 import { activeBattleLayout, battleLayoutSpec, spotFor, type BattleLayoutPreset } from '../battle/formation';
 import { BattleVfx } from '../battle/BattleVfx';
 import { UnitView } from '../battle/UnitView';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { announce } from '../platform/a11y';
 import { qualityProfile } from '../platform/graphics';
@@ -21,6 +19,7 @@ import { blocker, Button, panel, sceneFadeIn, title, toast, txt, verticalShade, 
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
+import { app } from '../core/app';
 
 export interface BattleOutcome {
   won: boolean;
@@ -32,15 +31,15 @@ export interface BattleInit {
   nodeId?: string;
   /** Invoked as soon as a battle win is confirmed (after server claim when signed in, or immediately in preview/tutorial). */
   onClaimed?: (stars: number) => void;
-  onDone: (scene: Phaser.Scene, outcome: BattleOutcome) => void;
-  onBack: (scene: Phaser.Scene) => void;
+  onDone: (scene: PixiScene<unknown>, outcome: BattleOutcome) => void;
+  onBack: (scene: PixiScene<unknown>) => void;
   /** Owned stages use the frozen party; all signed-in stages use a frozen release session. */
   party?: BattleParty;
   sessionId?: string;
   /** Financial submission stays bound to the release used when the battle started. */
   releaseId?: string;
   /** a lost owned-hero battle needs a fresh server session, so retrying goes back through the flow */
-  onRetry?: (scene: Phaser.Scene) => void;
+  onRetry?: (scene: PixiScene<unknown>) => void;
   /** opening tutorial: no stars, no server verification line, retreat goes back to the story before the fight */
   tutorial?: boolean;
   /** optional layout preset override (A: current, B: arena_lite, C: afk_faithful) */
@@ -103,16 +102,16 @@ export class BattleScene extends PixiScene<BattleInit> {
       const cutInEmotions = new Map(playerUnitIds.map((id) => [id, new Set(['neutral', 'composed', 'determined', 'protective'])]));
       const musicCue = this.encounter.music_cue ?? 'bgm_battle_field';
       await Promise.all([
-        art.loadBackground(this.host, this.encounter.location_id),
-        art.loadUnits(this.host, artKeys),
-        art.loadPortraits(this.host, playerUnitIds, cutInEmotions).catch(() => undefined),
-        art.loadMusic(this.host, musicCue).catch(() => undefined)
+        art.loadBackground(this, this.encounter.location_id),
+        art.loadUnits(this, artKeys),
+        art.loadPortraits(this, playerUnitIds, cutInEmotions).catch(() => undefined),
+        art.loadMusic(this, musicCue).catch(() => undefined)
       ]);
     } catch (e) {
       if (!this.live) return;
       this.add(title(REF_W / 2, REF_H / 2 - 40, 'This battle could not be loaded', SIZE.h2, T.crimson));
       this.add(txt(REF_W / 2, REF_H / 2 + 30, String(e instanceof Error ? e.message : e), { fontSize: 30, color: T.dim, wordWrap: { width: 1400 }, align: 'center' }, 0.5));
-      this.add(new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => this.cfg.onBack(this.host) }));
+      this.add(new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => this.cfg.onBack(this) }));
       return;
     }
     if (!this.live) return;
@@ -122,7 +121,7 @@ export class BattleScene extends PixiScene<BattleInit> {
     sceneFadeIn(this, 1200);
     const playBattleMusic = (fade = 1.2): void => {
       const m = art.music(this.encounter.music_cue ?? 'bgm_battle_field');
-      if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, fade);
+      if (m) Music.play(m.key, m.loopStart, m.duration, fade);
     };
     playBattleMusic(1.2);
     // a WebView may start with audio suspended until the first touch
@@ -130,7 +129,7 @@ export class BattleScene extends PixiScene<BattleInit> {
       Sfx.resume();
       playBattleMusic(0.8);
     };
-    const canvas = this.host.game.canvas;
+    const canvas = app().canvas;
     canvas.addEventListener('pointerdown', resumeAudio);
     this.onClose(() => canvas.removeEventListener('pointerdown', resumeAudio));
     await this.wait(650);
@@ -150,7 +149,7 @@ export class BattleScene extends PixiScene<BattleInit> {
     BattleVfx.ensureTextures(this);
     const q = qualityProfile();
     const reduced = prefs().reducedMotion;
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const insetX = Math.max(insets.left, insets.right);
     const bg = this.add(new PIXI.Sprite(this.tex(art.background(this.encounter.location_id))), DEPTH.bg);
     bg.anchor.set(0.5);
@@ -294,7 +293,7 @@ export class BattleScene extends PixiScene<BattleInit> {
   // ------------------------------------------------------------------ HUD
 
   private buildHud(): void {
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const spec = battleLayoutSpec(this.layoutPreset);
     // top-left: stage title; the circular portrait turn order sits right below it
     const head = this.add(title(60 + insets.left, 54 + insets.top, `${this.encounter.stage_id}  ·  ${this.encounter.title_en}`, 32, T.gold), DEPTH.hud);
@@ -341,7 +340,7 @@ export class BattleScene extends PixiScene<BattleInit> {
 
   private refreshHud(): void {
     if (this.dead) return;
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const spec = battleLayoutSpec(this.layoutPreset);
     const order = this.battle.result ? [] : this.battle.previewOrder(8);
     for (const c of this.chipLayer.removeChildren()) c.destroy({ children: true });
@@ -408,7 +407,7 @@ export class BattleScene extends PixiScene<BattleInit> {
         onClick: () => {
           this.closeMenu();
           this.dead = true;
-          this.cfg.onBack(this.host);
+          this.cfg.onBack(this);
         }
       })
     );
@@ -469,11 +468,11 @@ export class BattleScene extends PixiScene<BattleInit> {
           settled = true;
           this.nav.stop('Story');
           this.nav.resume();
-          if (back) this.cfg.onBack(this.host);
+          if (back) this.cfg.onBack(this);
           else {
             const { art } = Services.ready();
             const music = this.encounter.music_cue ? art.music(this.encounter.music_cue) : null;
-            if (music) Music.play(this.host.cache.audio, music.key, music.loopStart, music.duration);
+            if (music) Music.play(music.key, music.loopStart, music.duration);
           }
           resolve();
         };
@@ -507,7 +506,7 @@ export class BattleScene extends PixiScene<BattleInit> {
     this.clearSkillPanel();
     this.submit = submit;
     this.selected = null;
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const spec = battleLayoutSpec(this.layoutPreset);
     const actor = this.battle.unit(prompt.actor);
     const layer = new PIXI.Container();
@@ -579,11 +578,11 @@ export class BattleScene extends PixiScene<BattleInit> {
   /** Reinforcements called mid-battle: load their art, add a view and spread the enemy side again. */
   private async addSummoned(id: string): Promise<void> {
     const { art } = Services.ready();
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const c = this.battle.unit(id);
     const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
     const artKey = defs.get(c.def.unit_id)?.art_key ?? c.def.art_key;
-    await art.loadUnits(this.host, [artKey]);
+    await art.loadUnits(this, [artKey]);
     if (this.dead) return;
     const v = this.addView(c, artKey, spotFor(c.side, c.row, 0, 1, this.layoutPreset, Math.max(insets.left, insets.right)));
     this.relayout(c.side);
@@ -593,7 +592,7 @@ export class BattleScene extends PixiScene<BattleInit> {
   }
 
   private relayout(side: 'player' | 'enemy'): void {
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const insetX = Math.max(insets.left, insets.right);
     for (const { c, visualRow, indexInRow, countInRow } of this.visualFormationForSide(side)) {
       const v = this.views.get(c.id);
@@ -1077,13 +1076,13 @@ export class BattleScene extends PixiScene<BattleInit> {
         variant: won ? 'hot' : 'normal',
         onClick: () => {
           if (won) return void this.onContinue(result.stars);
-          if (this.cfg.onRetry) this.cfg.onRetry(this.host);
+          if (this.cfg.onRetry) this.cfg.onRetry(this);
           else this.nav.restart(this.cfg);
         }
       })
     );
     if (!(tutorial && won)) {
-      card.addChild(new Button(this, cardX + 230, btnY, { label: tutorial ? 'BACK TO STORY' : 'LEAVE', w: 410, h: 96, fontSize: 30, onClick: () => this.cfg.onBack(this.host) }));
+      card.addChild(new Button(this, cardX + 230, btnY, { label: tutorial ? 'BACK TO STORY' : 'LEAVE', w: 410, h: 96, fontSize: 30, onClick: () => this.cfg.onBack(this) }));
     }
   }
 
@@ -1097,7 +1096,7 @@ export class BattleScene extends PixiScene<BattleInit> {
       this.claimPromise = this.claimProgress(stars);
       if (!(await this.claimPromise)) return;
     }
-    if (!this.dead) this.cfg.onDone(this.host, { won: true, stars });
+    if (!this.dead) this.cfg.onDone(this, { won: true, stars });
   }
 
   /** Signed-in players: the server re-simulates the win again, pays Ration and grants the stage rewards. */
@@ -1167,5 +1166,3 @@ export class BattleScene extends PixiScene<BattleInit> {
   }
 }
 
-/** engine registration under the 'Battle' key every flow already starts */
-export const BattleHost = hosted<BattleInit>('Battle', () => new BattleScene());

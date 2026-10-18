@@ -1,9 +1,8 @@
-import type Phaser from '../engine';
+import type { PixiScene } from '../core/PixiScene';
 import { PREVIEW_FLOW_ENABLED } from '../config';
-import { fadeOutScene } from '../core/host';
 import { errText } from '../ui/hubScreen';
 import { Services } from '../services';
-import { toast } from '../ui/kit';
+import { notify } from '../ui/pixiKit';
 import { S } from './strings';
 import { endReplay, isReplaying, loadEntry, nextStep, type EntryStep } from './state';
 import { playTutorialStage } from './tutorial';
@@ -13,7 +12,7 @@ import { syncEntry } from './sync';
 export type SignInResult = 'ok' | 'unavailable' | 'failed';
 
 /** Google sign-in (Android Credential Manager or Web Google Identity Services) -> the Worker verifies the ID token. */
-export async function signInWithGoogle(scene: Phaser.Scene): Promise<SignInResult> {
+export async function signInWithGoogle(scene: PixiScene<unknown>): Promise<SignInResult> {
   const identity = Services.identity;
   if (!identity || (identity.kind !== 'native' && identity.kind !== 'web')) return 'unavailable';
   try {
@@ -21,7 +20,7 @@ export async function signInWithGoogle(scene: Phaser.Scene): Promise<SignInResul
     await Services.api.signInWithIdToken(token);
     return 'ok';
   } catch (e) {
-    toast(scene, `${S.menu.signInFailed} ${errText(e)}`, 4200);
+    notify(scene, `${S.menu.signInFailed} ${errText(e)}`, 4200);
     return 'failed';
   }
 }
@@ -30,31 +29,31 @@ export async function signInWithGoogle(scene: Phaser.Scene): Promise<SignInResul
 export const mayContinue = (): boolean => Services.api.signedIn || PREVIEW_FLOW_ENABLED;
 
 /** Routes the player to the first unfinished entry step (fades out slowly, then starts the step's scene or runner). */
-export function advance(scene: Phaser.Scene, step: EntryStep = nextStep(loadEntry())): void {
+export function advance(scene: PixiScene<unknown>, step: EntryStep = nextStep(loadEntry())): void {
   const dur = 1100;
-  fadeOutScene(scene, dur);
-  scene.time.delayedCall(dur + 40, () => {
+  void scene.fadeOut(dur, 0x000000);
+  scene.anim.after(dur + 40, () => {
     switch (step.kind) {
       case 'prologue':
-        scene.scene.start('Prologue');
+        scene.nav.start('Prologue');
         return;
       case 'tutorial':
         void playTutorialStage(scene, step.index).catch((e: unknown) => {
-          toast(scene, `The tutorial could not start: ${errText(e)}`, 4200);
-          scene.scene.start('Title');
+          notify(scene, `The tutorial could not start: ${errText(e)}`, 4200);
+          scene.nav.start('Title');
         });
         return;
       case 'finish':
         // a title replay of the opening ends where it began, not on the first-install restart page
         if (isReplaying()) {
           endReplay();
-          scene.scene.start('Title');
+          scene.nav.start('Title');
           return;
         }
-        scene.scene.start('Finish');
+        scene.nav.start('Finish');
         return;
       case 'menu':
-        scene.scene.start('Title');
+        scene.nav.start('Title');
         return;
     }
   });
@@ -64,11 +63,11 @@ export function advance(scene: Phaser.Scene, step: EntryStep = nextStep(loadEntr
  * First-run door (after Google sign-in, or Continue): reconcile with the account checkpoint, start the background patch download with
  * its bottom bar, then go to the first unfinished step. The download never blocks the story.
  */
-export async function beginEntry(scene: Phaser.Scene): Promise<void> {
+export async function beginEntry(scene: PixiScene<unknown>): Promise<void> {
   const { state } = await syncEntry(Services.api);
   await syncContinuityNow();
   if (state.phase !== 'completed') {
-    if (!scene.scene.isActive('PatchBar')) scene.scene.launch('PatchBar');
+    if (!scene.nav.isActive('PatchBar')) scene.nav.launch('PatchBar');
     void Services.patches.start();
   }
   advance(scene, nextStep(state));

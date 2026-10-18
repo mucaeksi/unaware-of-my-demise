@@ -1,16 +1,13 @@
 import { expect, test, type Page } from '@playwright/test';
 import { ADMIN, SHOTS, openGame, signInDev, tap, waitScene } from './helpers';
 
-const labels = (page: Page, key: string): Promise<string[]> => page.evaluate((scene) => {
-  const body = (window as any).__UOMD__.game.scene.getScene(scene).body;
-  return (body?.list ?? []).flatMap((object: any) => [object.text, ...(object.list ?? []).map((child: any) => child.text)]).filter(Boolean);
-}, key);
+const labels = (page: Page, key: string): Promise<string[]> => page.evaluate((scene) => (window as any).__UOMD__.game.scene.getScene(scene)?.texts() ?? [], key);
 const go = (page: Page, key: string) => page.evaluate((scene) => {
-  const game = (window as any).__UOMD__.game; game.scene.getScenes(true).forEach((active: any) => game.scene.stop(active.sys.settings.key)); game.scene.start(scene);
+  const game = (window as any).__UOMD__.game; game.scene.getScenes(true).forEach((active: any) => game.scene.stop(active.key)); game.scene.start(scene);
 }, key);
 async function visible(page: Page, scene: string): Promise<void> {
   await waitScene(page, scene);
-  await page.waitForFunction((key) => !(window as any).__UOMD__.game.scene.getScene(key).cameras.main.fadeEffect.isRunning, scene);
+  await page.waitForFunction((key) => !(window as any).__UOMD__.game.scene.getScene(key).fading, scene);
 }
 async function readyTap(page: Page, info: Parameters<typeof tap>[1], x: number, y: number): Promise<void> {
   await page.evaluate(() => new Promise<void>((resolve) => (window as any).__UOMD__.game.events.once('postrender', () => resolve())));
@@ -50,8 +47,7 @@ test('saved actions show an offline pending result, recover through the UI and i
   await readyTap(page, info, 1270, 270);
   await expect.poll(() => labels(page, 'Operations')).toContain('Wish ×1');
   expect((await labels(page, 'Operations')).join(' ')).toContain('Last known: confirmed');
-  await page.waitForFunction(() => !(window as any).__UOMD__.game.scene.getScene('Operations').children.list.some((object: any) =>
-    (object.list ?? []).some((child: any) => typeof child.text === 'string' && child.text.startsWith('Result confirmed.'))));
+  await page.waitForFunction(() => !(window as any).__UOMD__.game.scene.getScene('Operations').texts().some((t: string) => t.startsWith('Result confirmed.')));
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-actions-confirmed.png` });
   const next = await signInDev(page, `ui-other-${info.project.name}`); expect(next.id).not.toBe(player.id);
   await expect.poll(() => labels(page, 'Operations')).toContain('No saved results yet.');
@@ -65,7 +61,7 @@ test('account deletion confirmation belongs to the displayed player', async ({ p
   await readyTap(page, info, 960, 880);
   await expect.poll(() => labels(page, 'Account')).toContain('TAP AGAIN TO DELETE FOREVER');
   // Keep the expiry timer still so account-switch invalidation, rather than elapsed time, is proved.
-  await page.evaluate(() => { (window as any).__UOMD__.game.scene.getScene('Account').time.paused = true; });
+  await page.evaluate(() => { (window as any).__UOMD__.game.scene.getScene('Account').anim.timeScale = 0; });
   const selected = await signInDev(page, `delete-selected-${info.project.name}`);
   await expect.poll(() => labels(page, 'Account')).toContain('DELETE ACCOUNT');
   expect((await labels(page, 'Account')).join(' ')).not.toContain('TAP AGAIN TO DELETE FOREVER');

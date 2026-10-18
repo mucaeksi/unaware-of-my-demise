@@ -2,10 +2,9 @@ import { expect, test, type Page } from '@playwright/test';
 import { SHOTS, openGame, signInDev, tap, waitScene } from './helpers';
 
 const go = (page: Page, key: string) => page.evaluate((target) => {
-  const game = (window as any).__UOMD__.game; game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.sys.settings.key)); game.scene.start(target);
+  const game = (window as any).__UOMD__.game; game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.key)); game.scene.start(target);
 }, key);
-const labels = (page: Page, key: string) => page.evaluate((scene) => ((window as any).__UOMD__.game.scene.getScene(scene).body?.list ?? []).flatMap((object: any) =>
-  [object.text, ...(object.list ?? []).map((child: any) => child.text)]).filter(Boolean).join(' '), key);
+const labels = (page: Page, key: string) => page.evaluate((scene) => ((window as any).__UOMD__.game.scene.getScene(scene)?.texts() ?? []).join(' '), key);
 
 // Response fixtures exercise rendering/reload; real D1 delivery/ownership is tested in purchase-history.test.ts.
 test('purchase history distinguishes delivery/refund/review, reloads without payment and clears on account change', async ({ page }, info) => {
@@ -26,7 +25,7 @@ test('purchase history distinguishes delivery/refund/review, reloads without pay
   await expect.poll(() => labels(page, 'Purchases')).toContain('Delivery recorded · Last observed: on_hold');
   expect(await labels(page, 'Purchases')).toContain('Refund recorded');
   expect(await labels(page, 'Purchases')).toContain('Needs payment review');
-  await page.waitForFunction(() => !(window as any).__UOMD__.game.scene.getScene('Purchases').cameras.main.fadeEffect.isRunning);
+  await page.waitForFunction(() => !(window as any).__UOMD__.game.scene.getScene('Purchases').fading);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-purchase-history-fixture.png` });
   await page.reload(); await waitScene(page, 'Title'); await go(page, 'Purchases');
   await expect.poll(() => labels(page, 'Purchases')).toContain('Delivery recorded');

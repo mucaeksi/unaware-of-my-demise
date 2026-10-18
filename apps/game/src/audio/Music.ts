@@ -1,10 +1,10 @@
-import type Phaser from '../engine';
+import { Assets, audio } from '../core/assets';
 import { prefs } from '../platform/prefs';
 
 /**
  * Seamless music with an intro and a loop region (Lyria loops ship with loop_start metadata).
- * Uses the Web Audio buffer Phaser decoded, so loopStart/loopEnd are sample accurate and tracks can
- * be cross-faded. Without Web Audio (HTML5 fallback) music is simply skipped.
+ * Plays decoded Web Audio buffers (core/assets), so loopStart/loopEnd are sample accurate and tracks can be
+ * cross-faded. Without Web Audio music is simply skipped.
  */
 export class MusicPlayer {
   /** Cohesive Lyria 3.5 soundtrack suite for Phase 1 (Main Theme, Prologue, Calm/Intimate Story, Pre-Battle Tension, Battle). */
@@ -36,13 +36,11 @@ export class MusicPlayer {
     };
   }
 
-  init(sound: Phaser.Sound.BaseSoundManager): void {
-    const wa = sound as Phaser.Sound.WebAudioSoundManager;
-    if (!wa.context) return;
-    this.ctx = wa.context;
+  init(): void {
+    this.ctx = audio.context;
     this.out = this.ctx.createGain();
     this.out.gain.value = prefs().musicVolume;
-    this.out.connect(wa.masterVolumeNode ?? this.ctx.destination);
+    this.out.connect(audio.master);
     if (typeof window !== 'undefined') {
       const unlock = (): void => {
         if (this.ctx && this.ctx.state === 'suspended' && !this.userPaused) {
@@ -75,7 +73,7 @@ export class MusicPlayer {
     }
   }
 
-  play(cache: Phaser.Cache.BaseCache, cacheKey: string, loopStart: number, duration: number, fade = 1.4, startOffset = 0): void {
+  play(cacheKey: string, loopStart: number, duration: number, fade = 1.4, startOffset = 0): void {
     if (!this.enabled || !this.allowedPrefixes.some((p) => cacheKey.startsWith(p))) {
       this.stop(0.1);
       return;
@@ -87,7 +85,7 @@ export class MusicPlayer {
       void ctx.resume().catch(() => undefined);
     }
     if (this.current?.key === cacheKey && startOffset === 0) return;
-    const buffer = cache.get(cacheKey) as AudioBuffer | undefined;
+    const buffer = Assets.audio(cacheKey);
     if (!buffer || typeof buffer.getChannelData !== 'function') return;
     this.stop(fade);
     const src = ctx.createBufferSource();

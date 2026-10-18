@@ -1,6 +1,5 @@
-import type Phaser from '../engine';
+import type { PixiScene } from '../core/PixiScene';
 import type { Encounter } from '@uomd/content-schema';
-import { fadeOutScene } from '../core/host';
 import { restartGame } from '../platform/native';
 import { Services } from '../services';
 import { advance } from './flow';
@@ -14,7 +13,7 @@ import { confirmEntryComplete, recordEntry } from './sync';
  * When stage 3 finishes: if the background patch is already ready, the screen fades slowly to black and restarts the client directly;
  * if the patch is still downloading, it opens the FinishScene patch screen with Main Theme music and rotating game quotes.
  */
-export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, forceRestart = false): Promise<void> {
+export async function playTutorialStage(scene: PixiScene<unknown>, index: 1 | 2 | 3, forceRestart = false): Promise<void> {
   const { content } = Services.ready();
   const entry = await content.entryIndex();
   const stage = entry.tutorial[index - 1];
@@ -22,21 +21,21 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
   const enc: Encounter = await content.encounter(stage.encounter);
   const accountKey = Services.flowKey();
 
-  const finishStage = (s: Phaser.Scene): void => {
+  const finishStage = (s: PixiScene<unknown>): void => {
     clearFlowCheckpoint(accountKey);
     if (enc.pre_story) clearStoryCheckpoint(accountKey, enc.pre_story);
     if (enc.post_story) clearStoryCheckpoint(accountKey, enc.post_story);
     recordEntry(Services.api, (st) => markTutorialDone(st, index));
     if (index === 3 && !isReplaying() && Services.patches.get().kind === 'ready' && isInteractiveBrowser()) {
       // Background patch already completed during the tutorial: fade to black and restart immediately
-      fadeOutScene(s, 1600);
-      s.time.delayedCall(1650, () => {
+      void s.fadeOut(1600, 0x000000);
+      s.anim.after(1650, () => {
         void (async () => {
           try {
             await confirmEntryComplete(Services.api);
             await restartGame();
           } catch {
-            s.scene.start('Finish');
+            s.nav.start('Finish');
           }
         })();
       });
@@ -44,21 +43,21 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
     }
     advance(s);
   };
-  const afterBattle = (b: Phaser.Scene): void => {
+  const afterBattle = (b: PixiScene<unknown>): void => {
     if (enc.post_story) {
       if (forceRestart || isForceFreshEntry()) clearStoryCheckpoint(accountKey, enc.post_story);
       saveFlowCheckpoint(accountKey, { kind: 'tutorial', index, step: 'post_story' });
-      b.scene.start('Story', { path: enc.post_story, onDone: finishStage });
+      b.nav.start('Story', { path: enc.post_story, onDone: finishStage });
     } else {
       finishStage(b);
     }
   };
-  const battle = (s: Phaser.Scene): void => {
+  const battle = (s: PixiScene<unknown>): void => {
     saveFlowCheckpoint(accountKey, { kind: 'tutorial', index, step: 'battle' });
-    void s.scene.start('Battle', {
+    void s.nav.start('Battle', {
       encounterPath: stage.encounter,
       tutorial: true,
-      onBack: (b: Phaser.Scene) => {
+      onBack: (b: PixiScene<unknown>) => {
         if (enc.pre_story) clearStoryCheckpoint(Services.flowKey(), enc.pre_story);
         void playTutorialStage(b, index, true);
       },
@@ -81,7 +80,7 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
   if (enc.pre_story) {
     if (forceRestart || isForceFreshEntry()) clearStoryCheckpoint(accountKey, enc.pre_story);
     saveFlowCheckpoint(accountKey, { kind: 'tutorial', index, step: 'pre_story' });
-    scene.scene.start('Story', { path: enc.pre_story, onDone: battle });
+    scene.nav.start('Story', { path: enc.pre_story, onDone: battle });
   } else {
     battle(scene);
   }

@@ -30,7 +30,7 @@ const play = (page: Page, nodeId: string) =>
 const goto = (page: Page, key: string) =>
   page.evaluate((k) => {
     const g = (window as any).__UOMD__.game;
-    g.scene.getScenes(true).forEach((s: any) => g.scene.stop(s.sys.settings.key));
+    g.scene.getScenes(true).forEach((s: any) => g.scene.stop(s.key));
     g.scene.start(k);
   }, key);
 
@@ -71,7 +71,7 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
     try {
       await expect.poll(async () => (await probeBattle(page)).prompt?.actor, { timeout: 45_000 }).toBeTruthy();
     } catch (e) {
-      const texts = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').children.list.map((c: any) => c.text).filter(Boolean).join(' | '));
+      const texts = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').texts().join(' | '));
       throw new Error(`battle never prompted; problems: ${problems.join(' | ')}; on screen: ${texts}`, { cause: e });
     }
     await tap(page, info, REF_W - 150, 70); // x2
@@ -124,12 +124,12 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
   await page.evaluate(async () => {
     const u = (window as any).__UOMD__;
     const strong = (id: string, slot: number, row: string) => ({ unit_id: id, level: 12, slot, row, stats: { hp: 400, atk: 3, def: 4, spd: 5 + (slot % 2) } });
-    u.game.scene.getScenes(true).forEach((s: any) => u.game.scene.stop(s.sys.settings.key));
+    u.game.scene.getScenes(true).forEach((s: any) => u.game.scene.stop(s.key));
     u.game.scene.start('Battle', {
       encounterPath: 'encounters/stage_1_5.json',
       party: [strong('mahmut', 0, 'front'), strong('brin_alder', 1, 'front'), strong('fadyme', 2, 'rear'), strong('nixie_vale', 3, 'rear'), strong('kera_voss', 4, 'rear')],
-      onBack: (s: any) => s.scene.start('Title'),
-      onDone: (s: any) => s.scene.start('Title')
+      onBack: (s: any) => s.nav.start('Title'),
+      onDone: (s: any) => s.nav.start('Title')
     });
   });
   await waitScene(page, 'Battle');

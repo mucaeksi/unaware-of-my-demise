@@ -1,5 +1,4 @@
 import { API_BASE, REF_W } from '../config';
-import { hosted } from '../core/host';
 import { prefs } from '../platform/prefs';
 import { errText, HubScreen } from '../ui/hubScreen';
 import { Progress, Services } from '../services';
@@ -154,4 +153,3 @@ export class AccountScene extends HubScreen {
   }
 }
 
-export const AccountHost = hosted('Account', () => new AccountScene());

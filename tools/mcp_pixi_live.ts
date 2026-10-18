@@ -212,7 +212,7 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
         const u = (window as unknown as {
           __UOMD__?: {
             services?: { content?: unknown; art?: unknown };
-            game?: { scene?: { getScenes(active: boolean): { sys: { settings: { key: string } } }[] } };
+            game?: { scene?: { getScenes(active?: boolean): { key: string }[] } };
           };
         }).__UOMD__;
         return Boolean(u?.services?.content && u?.services?.art && (u?.game?.scene?.getScenes(true).length ?? 0) > 0);
@@ -227,15 +227,13 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
           __UOMD__?: {
             game?: {
               scene: {
-                getScenes(active: boolean): { sys: { settings: { key: string } }; scene: { start(k: string): void } }[];
+                getScenes(active?: boolean): { key: string; nav: { start(k: string): void } }[];
               };
             };
           };
         }).__UOMD__?.game;
-        const active = g?.scene.getScenes(true).find((s) => s.sys.settings.key !== 'Boot');
-        if (active && active.sys.settings.key !== target) {
-          active.scene.start(target);
-        }
+        const active = [...(g?.scene.getScenes(true) ?? [])].reverse().find((s) => s.key !== 'Boot' && s.key !== 'PatchBar');
+        if (active && active.key !== target) active.nav.start(target);
       }, targetScene);
     }
 
@@ -245,12 +243,12 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
           __UOMD__?: {
             game?: {
               scene?: {
-                getScenes(active: boolean): { sys: { settings: { key: string } }; index?: number }[];
+                getScenes(active?: boolean): { key: string; index?: number }[];
               };
             };
           };
         }).__UOMD__?.game;
-        const sc = g?.scene?.getScenes(true).find((s) => s.sys.settings.key === target);
+        const sc = g?.scene?.getScenes(true).find((s) => s.key === target);
         if (!sc) return false;
         if (target === 'Prologue') return typeof sc.index === 'number' && sc.index >= 0;
         return true;
@@ -286,61 +284,51 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
     }
 
     const state = await page.evaluate(() => {
+      interface Node {
+        constructor: { name: string };
+        label?: string;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        alpha: number;
+        visible: boolean;
+        zIndex: number;
+        text?: string;
+        children?: Node[];
+      }
       const g = (window as unknown as {
         __UOMD__?: {
           game?: {
             renderer?: { name?: string; type?: number; pixi?: { resolution?: number } | null };
-            stage?: { children: unknown[] };
-            scene: {
-              getScenes(active: boolean): {
-                sys: { settings: { key: string } };
-                children: {
-                  list: {
-                    type: string;
-                    x?: number;
-                    y?: number;
-                    width?: number;
-                    height?: number;
-                    alpha?: number;
-                    visible?: boolean;
-                    depth?: number;
-                    text?: string;
-                    texture?: { key?: string };
-                    list?: { type: string; text?: string; x?: number; y?: number }[];
-                  }[];
-                };
-              }[];
-            };
+            stage?: Node;
+            scene: { getScenes(active?: boolean): { key: string; root: Node }[] };
           };
         };
       }).__UOMD__?.game;
       if (!g) return { renderer: { name: 'none' }, pixiNodes: 0, activeScenes: [], objects: [], domControls: [] };
-      const countNodes = (n: { children?: unknown[] }): number => 1 + (n.children ?? []).reduce<number>((a, c) => a + countNodes(c as { children?: unknown[] }), 0);
+      const countNodes = (n: Node): number => 1 + (n.children ?? []).reduce<number>((a, c) => a + countNodes(c), 0);
       const scenes = g.scene.getScenes(true);
-      const activeScenes = scenes.map((s) => s.sys.settings.key);
-      const main = scenes.find((s) => s.sys.settings.key !== 'Boot') ?? scenes[0];
-      const objects = (main?.children?.list ?? []).slice(0, 80).map((c) => ({
-        type: c.type,
-        x: typeof c.x === 'number' ? Math.round(c.x) : undefined,
-        y: typeof c.y === 'number' ? Math.round(c.y) : undefined,
-        w: typeof c.width === 'number' ? Math.round(c.width) : undefined,
-        h: typeof c.height === 'number' ? Math.round(c.height) : undefined,
-        alpha: typeof c.alpha === 'number' ? Number(c.alpha.toFixed(2)) : undefined,
-        depth: c.depth,
+      const activeScenes = scenes.map((s) => s.key);
+      const main = [...scenes].reverse().find((s) => s.key !== 'Boot' && s.key !== 'PatchBar') ?? scenes[0];
+      const texts = (n: Node): string[] => [...(typeof n.text === 'string' && n.text ? [n.text] : []), ...(n.children ?? []).flatMap(texts)];
+      const objects = (main?.root.children ?? []).slice(0, 80).map((c) => ({
+        type: c.constructor.name.replace(/^_/, ''),
+        label: c.label || undefined,
+        x: Math.round(c.x),
+        y: Math.round(c.y),
+        w: Math.round(c.width),
+        h: Math.round(c.height),
+        alpha: Number(c.alpha.toFixed(2)),
+        depth: c.zIndex,
         visible: c.visible,
-        text: c.text,
-        texture: c.texture?.key,
-        childrenTexts: Array.isArray(c.list) ? c.list.map((ch) => ch.text).filter(Boolean) : undefined
+        texts: texts(c).slice(0, 8)
       }));
-      const domLayer = document.getElementById('uomd-ui-layer') ?? document.getElementById('uomd-a11y-layer');
+      const domLayer = document.getElementById('uomd-ui-layer');
       const domControls = domLayer
         ? Array.from(domLayer.querySelectorAll('[role], button, [aria-label]'))
-            .slice(0, 40)
-            .map((el) => ({
-              tag: el.tagName.toLowerCase(),
-              role: el.getAttribute('role') ?? undefined,
-              label: el.getAttribute('aria-label') ?? el.textContent?.trim() ?? undefined
-            }))
+            .slice(0, 60)
+            .map((el) => ({ tag: el.tagName.toLowerCase(), role: el.getAttribute('role') ?? undefined, label: el.getAttribute('aria-label') ?? el.textContent?.trim() ?? undefined }))
         : [];
       return {
         renderer: { name: g.renderer?.name ?? 'unknown', type: g.renderer?.type, resolution: g.renderer?.pixi?.resolution },

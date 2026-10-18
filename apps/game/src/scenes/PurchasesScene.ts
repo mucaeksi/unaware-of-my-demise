@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { PurchaseRecord } from '../net/api';
 import { Services } from '../services';
 import { HubScreen } from '../ui/hubScreen';
@@ -45,4 +44,3 @@ export class PurchasesScene extends HubScreen {
   }
 }
 
-export const PurchasesHost = hosted('Purchases', () => new PurchasesScene());

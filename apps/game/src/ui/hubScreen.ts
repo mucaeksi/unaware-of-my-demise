@@ -10,6 +10,7 @@ import { Services } from '../services';
 import { type DomBar, type DomBox, type DomButton, type DomGroup, type DomPanel, type DomScroll, DomStage, type DomText, type DomButtonOptions } from './domKit';
 import { backdrop, sceneFadeIn, type PanelVariant, type TextOptions } from './pixiKit';
 import { DEPTH, F, SIZE, T } from './theme';
+import { app } from '../core/app';
 
 export const errText = (e: unknown): string => (e instanceof ApiError ? (e.code === 'feature_disabled' ? 'This feature is switched off for now.' : `${e.message} (${e.code})`) : e instanceof Error ? e.message : String(e));
 
@@ -39,11 +40,11 @@ export abstract class HubScreen<D = unknown> extends PixiScene<D> {
   create(_data?: D): void {
     void backdrop(this, 'forest_whispering_ash');
     this.add(new PIXI.Graphics().rect(0, 0, REF_W, REF_H).fill({ color: 0x0a0610, alpha: 0.88 }), -10);
-    this.ui = new DomStage(this.host.game.uiLayer);
+    this.ui = new DomStage(app().uiLayer);
     this.attachDom(this.ui.root);
     sceneFadeIn(this, 350);
     this.onClose(() => this.ui.destroy());
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const headY = 70 + Math.round(insets.top * 0.5);
     this.ui.text(REF_W / 2, headY, this.heading, titleStyle(60, T.gold)).setOrigin(0.5);
     this.ui.button(190 + insets.left, REF_H - 80 - insets.bottom, { label: S.hub.back, w: 300, h: 110, escape: true, onClick: () => this.goBack() });
@@ -117,6 +118,10 @@ export abstract class HubScreen<D = unknown> extends PixiScene<D> {
   }
 
   protected abstract build(): Promise<void> | void;
+
+  override notify(message: string, ms = 3400): void {
+    if (this.live) this.ui.toast(message, ms);
+  }
 
   protected say(message: string): void {
     if (this.isCurrentView()) this.ui.toast(message, 3400);

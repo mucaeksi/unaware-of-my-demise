@@ -18,11 +18,11 @@ test('R10: notched safe areas, accessibility DOM bridge, settings controls, sign
   await expect(page.locator('#a11y-live')).toHaveCount(1);
 
   // Navigate to Account while signed out and verify PRIVACY OPTIONS (ADS) and SETTINGS are reachable without sign-in
-  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').scene.start('Account'));
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').nav.start('Account'));
   await waitScene(page, 'Account');
   const accountLabels = await page.evaluate(() => {
     const sc: any = (window as any).__UOMD__.game.scene.getScene('Account');
-    return sc.body.list.filter((o: any) => o.list).flatMap((c: any) => c.list.map((x: any) => x.text).filter(Boolean));
+    return sc.texts();
   });
   expect(accountLabels).toContain('PRIVACY OPTIONS (ADS)');
   expect(accountLabels).toContain('SETTINGS');
@@ -74,12 +74,12 @@ test('R10: companion growth screen shows pre-action costs, resulting level/cap/r
   const sent = await mail.json();
   await page.evaluate(async (id) => (window as any).__UOMD__.services.api.claimMail(id), sent.id);
 
-  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').scene.start('Character', { id: 'mahmut' }));
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').nav.start('Character', { id: 'mahmut' }));
   await waitScene(page, 'Character');
   await expect.poll(() =>
     page.evaluate(() => {
       const sc: any = (window as any).__UOMD__.game.scene.getScene('Character');
-      return sc.body.list.map((o: any) => o.text).filter(Boolean);
+      return sc.texts();
     })
   ).toEqual(
     expect.arrayContaining([
@@ -95,7 +95,7 @@ test('R10: companion growth screen shows pre-action costs, resulting level/cap/r
   await expect.poll(() =>
     page.evaluate(() => {
       const sc: any = (window as any).__UOMD__.game.scene.getScene('Character');
-      return sc.body.list.map((o: any) => o.text).filter(Boolean);
+      return sc.texts();
     })
   ).toEqual(
     expect.arrayContaining([

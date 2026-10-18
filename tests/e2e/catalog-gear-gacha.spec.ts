@@ -16,13 +16,13 @@ test('armory and summon pin the installed release and recover one committed pull
   const reads: string[] = []; let equipped = false;
   page.on('request', (req) => { if (req.method() === 'GET' && /\/api\/v1\/(gear|banners|catalog|characters)\?/.test(req.url())) reads.push(req.url()); });
   await page.route('**/api/v1/gear/*/equip', async (route) => { expect(route.request().postDataJSON()).toMatchObject({ releaseId: release, characterId: 'mahmut' }); const response = await route.fetch(); expect(response.status()).toBe(200); equipped = true; await route.fulfill({ response }); });
-  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').scene.start('Gear', { characterId: 'mahmut', slot: 'weapon' }));
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').nav.start('Gear', { characterId: 'mahmut', slot: 'weapon' }));
   await waitScene(page, 'Gear'); await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').list.length)).toBe(1);
   await page.waitForTimeout(500); await tap(page, info, 1670, 260);
   await expect.poll(() => equipped).toBe(true); await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').list[0]?.equippedBy)).toBe('mahmut');
   await page.waitForTimeout(500); await page.screenshot({ path: `${SHOTS}/${info.project.name}-catalog-equipped.png` });
   await page.unroute('**/api/v1/gear/*/equip');
-  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').scene.start('Summon'));
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').nav.start('Summon'));
   await waitScene(page, 'Summon'); await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Summon').banners.length)).toBeGreaterThan(0);
   expect(reads.length).toBeGreaterThanOrEqual(5); expect(reads.every((url) => new URL(url).searchParams.get('releaseId') === release)).toBe(true);
   let original = ''; let committed = false; let recordedPulls: unknown[] = [];
@@ -40,10 +40,10 @@ test('armory and summon pin the installed release and recover one committed pull
   expect(recovered).toMatchObject({ releaseId: release, pulls: recordedPulls, cost: { amount: 160 } }); expect(posts).toBe(0);
   expect(await page.evaluate(async () => (await (window as any).__UOMD__.services.api.history()).length)).toBe(1);
   await page.unroute('**/api/v1/gacha/pull');
-  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').scene.start('Summon')); await waitScene(page, 'Summon');
+  await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Title').nav.start('Summon')); await waitScene(page, 'Summon');
   await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Summon').banners.length)).toBeGreaterThan(0);
   await page.waitForTimeout(500); await tap(page, info, 1180, 1026);
-  await expect.poll(() => page.evaluate(() => Boolean((window as any).__UOMD__.game.scene.getScene('Summon').overlay))).toBe(true);
+  await expect.poll(() => page.evaluate(() => Boolean(document.querySelector('.uomd-stage [role=dialog]')))).toBe(true);
   await page.waitForTimeout(500); await page.screenshot({ path: `${SHOTS}/${info.project.name}-catalog-summon-recovered.png` });
   expect(problems.filter((problem) => !problem.includes('favicon') && !problem.includes('/api/v1/gacha/pull'))).toEqual([]);
 });

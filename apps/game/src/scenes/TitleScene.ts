@@ -1,7 +1,6 @@
 import * as PIXI from 'pixi.js';
 import type { PatchOutcome } from '@uomd/patch';
 import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
-import { hosted } from '../core/host';
 import { PixiScene } from '../core/PixiScene';
 import { syncContinuityNow } from '../entry/cloudSync';
 import { advance, beginEntry, signInWithGoogle } from '../entry/flow';
@@ -23,6 +22,7 @@ import { sceneFadeIn, verticalShade } from '../ui/pixiKit';
 import { C, DEPTH, F, T } from '../ui/theme';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
+import { app } from '../core/app';
 
 function describe(o: PatchOutcome | null): string {
   if (!o) return 'No check yet';
@@ -66,8 +66,8 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     this.firstRun = loadEntry().phase !== 'completed';
     const { art, content } = Services.ready();
     void content.locale().then((loc) => setActiveLocaleStrings(loc?.strings)).catch(() => undefined);
-    const insets = safeInsets(this.host);
-    this.ui = new DomStage(this.host.game.uiLayer);
+    const insets = safeInsets();
+    this.ui = new DomStage(app().uiLayer);
     this.attachDom(this.ui.root);
     this.onClose(() => {
       this.quoteTimer?.stop();
@@ -80,7 +80,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     void this.refreshChip();
     if (data?.openSettings) void this.openSettings();
     // a patch can have replaced the art library while the splash played: make sure it has loaded what this screen draws
-    await art.ensureBoot(this.host).catch((e: unknown) => console.warn('menu art unavailable', e));
+    await art.ensureBoot(this).catch((e: unknown) => console.warn('menu art unavailable', e));
     if (!this.live) return;
     const notice = content.storageNotice;
     if (notice) this.ui.toast(notice, 8000);
@@ -96,7 +96,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
       });
     }
 
-    const game = this.host.game;
+    const game = app();
     const changed = (out: PatchOutcome): void => this.onContentChanged(out);
     const checked = (): void => void this.refreshChip();
     game.events.on('content:changed', changed);
@@ -109,6 +109,10 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
       game.canvas.removeEventListener('pointerdown', firstTouch);
     });
     sceneFadeIn(this, 1200);
+  }
+
+  override notify(message: string, ms = 2600): void {
+    if (this.live) this.ui.toast(message, ms);
   }
 
   private buildArt(insetLeft: number): void {
@@ -161,7 +165,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
 
   /** online realm and Google Play Games status badge (top left) */
   private buildServerBadge(): void {
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const x = 60 + insets.left;
     const y = 58 + insets.top;
     const pill = this.ui.box(x, y - 24, 490, 48, 0x120a18, 0.48).setDepth(DEPTH.hud + 1);
@@ -175,7 +179,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
 
   /** first-run / returning doors, the TAP TO START banner and the top-right utility pills */
   private buildTitleStartMenu(): void {
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const mx = 500 + insets.left;
     this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn, () => void this.onTapToStart());
     const top = DEPTH.hud + 2;
@@ -190,7 +194,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
         // a replay of the opening, separate from the account's own entry progress (R09)
         startReplay();
         void this.startAudio();
-        advance(this.host, { kind: 'prologue' });
+        advance(this, { kind: 'prologue' });
       }
     }).setDepth(top);
     this.ui.button(REF_W - 145 - insets.right, 58 + insets.top, { label: S.menu.settings, w: 190, h: 62, fontSize: 21, onClick: () => void this.openSettings() }).setDepth(top);
@@ -224,7 +228,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
 
   /** tap anywhere to start (canvas zone), plus the blinking gothic prompt; the prompt is also a focusable button */
   private buildTapToContinueBanner(modeBadge: string, subLine: string, onTap: () => void): void {
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     const cx = this.firstRun ? REF_W / 2 : 1220;
     const cy = REF_H - 148 - insets.bottom;
     const zone = this.add(new PIXI.Container(), DEPTH.hud - 2);
@@ -270,12 +274,12 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
 
     if (!isInteractiveBrowser()) {
       const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
-      if (!Services.api.signedIn && canSignIn && (await signInWithGoogle(this.host)) !== 'ok') {
+      if (!Services.api.signedIn && canSignIn && (await signInWithGoogle(this)) !== 'ok') {
         this.busy = false;
         return;
       }
       if (this.firstRun) {
-        await beginEntry(this.host);
+        await beginEntry(this);
       } else {
         this.busy = false;
         await this.begin();
@@ -283,7 +287,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
       return;
     }
 
-    const insets = safeInsets(this.host);
+    const insets = safeInsets();
     this.setBannerVisible(false);
     const cx = REF_W / 2;
     const cy = REF_H - 180 - insets.bottom;
@@ -333,7 +337,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     // step 1: Google Play Games sign-in
     const canRealSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
     if (!Services.api.signedIn && canRealSignIn) {
-      const res = await signInWithGoogle(this.host);
+      const res = await signInWithGoogle(this);
       if (!this.live) return;
       if (res !== 'ok' && !PREVIEW_FLOW_ENABLED) {
         this.quoteTimer?.stop();
@@ -373,7 +377,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
       patchSub.setText('Background patch active · Entering Before the Road…');
       await this.anim.wait(420);
       if (!this.live) return;
-      await beginEntry(this.host);
+      await beginEntry(this);
       return;
     }
 
@@ -399,10 +403,10 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
 
   private async ensureMainTheme(): Promise<void> {
     const { art } = Services.ready();
-    if (!art.music('bgm_main_theme')) await art.loadMusic(this.host, 'bgm_main_theme').catch(() => undefined);
+    if (!art.music('bgm_main_theme')) await art.loadMusic(this, 'bgm_main_theme').catch(() => undefined);
     if (!this.live) return;
     const m = art.music('bgm_main_theme');
-    if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, 1.6);
+    if (m) Music.play(m.key, m.loopStart, m.duration, 1.6);
   }
 
   private async startAudio(): Promise<void> {
@@ -449,7 +453,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
       const next = resolveNextCampaignNode(idx, progress, Services.api.accountKey);
       if (next) {
         if (isInteractiveBrowser()) await this.fadeOut(600);
-        await playNode(this.host, next);
+        await playNode(this, next);
       }
     } finally {
       this.busy = false;
@@ -637,4 +641,3 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
   }
 }
 
-export const TitleHost = hosted<{ openSettings?: boolean }>('Title', () => new TitleScene());

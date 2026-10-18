@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import { Services } from '../services';
 import { stars } from '../ui/format';
 import { HubScreen } from '../ui/hubScreen';
@@ -49,4 +48,3 @@ export class RosterScene extends HubScreen {
   }
 }
 
-export const RosterHost = hosted('Roster', () => new RosterScene());

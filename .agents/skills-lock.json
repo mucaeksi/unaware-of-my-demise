@@ -479,12 +479,12 @@
     },
     "uomd-anime-ui": {
       "adapter": ".agents/skills/uomd-anime-ui/SKILL.md",
-      "adapter_sha256": "f4d305770ae379a21a80d758fa159eaaa592de70621ffd06a1f749d3c2b751b9",
+      "adapter_sha256": "f357470a7ee9bcc951f245b54f9026ed9eaf9b135e2dabd4b60ef193372fed42",
       "source": ".claude/skills/uomd-anime-ui/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-anime-ui/SKILL.md": "76c489e755fb3c10e8b8667acfd3d207a0c05ac935e7ddc01d18c25be3fb642e"
+        ".claude/skills/uomd-anime-ui/SKILL.md": "a9ae6b1f5481dbc1eb38de4107905d1c8f00391cf54174f262945c6a8f0017fb"
       },
-      "source_sha256": "76c489e755fb3c10e8b8667acfd3d207a0c05ac935e7ddc01d18c25be3fb642e"
+      "source_sha256": "a9ae6b1f5481dbc1eb38de4107905d1c8f00391cf54174f262945c6a8f0017fb"
     },
     "uomd-battle": {
       "adapter": ".agents/skills/uomd-battle/SKILL.md",
@@ -524,15 +524,15 @@
     },
     "uomd-pixi-engine": {
       "adapter": ".agents/skills/uomd-pixi-engine/SKILL.md",
-      "adapter_sha256": "de9bb5afa27834c5054203fda402c3c7107d5dd87a8d36e72d64c1a5f98d3c6b",
+      "adapter_sha256": "dec38d90cf8bff99ecdcb10754898f20681f1fdee2586f442e138c70add7d521",
       "source": ".claude/skills/uomd-pixi-engine/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-pixi-engine/SKILL.md": "7ea9317df276f4554ff29310bfe58077d199480a6d8c58b8963aa8e329765ee8"
+        ".claude/skills/uomd-pixi-engine/SKILL.md": "bf739ee4cc33db9d72d3b8744afa644271dbbeae8fb60f16505f3af7c56780ec"
       },
-      "source_sha256": "7ea9317df276f4554ff29310bfe58077d199480a6d8c58b8963aa8e329765ee8"
+      "source_sha256": "bf739ee4cc33db9d72d3b8744afa644271dbbeae8fb60f16505f3af7c56780ec"
     }
   },
-  "canonicalLockSha256": "4f1333cce433e9838caa2db6a4aa3e25f92490327011c528fdecd786543edaa5",
+  "canonicalLockSha256": "6ccb3e8ef3460444d0beeb4269f6d53d650f014ec5584c035002dbfe633cb880",
   "executableHooksEnabled": false,
   "generatedBy": "tools/sync_codex_skills.py",
   "schemaVersion": 1

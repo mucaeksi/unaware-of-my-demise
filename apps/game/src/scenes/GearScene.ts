@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { GearView } from '../net/api';
 import { Services } from '../services';
 import { errText, HubScreen } from '../ui/hubScreen';
@@ -72,4 +71,3 @@ export class GearScene extends HubScreen {
   }
 }
 
-export const GearHost = hosted('Gear', () => new GearScene());

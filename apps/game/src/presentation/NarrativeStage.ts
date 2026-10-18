@@ -1,10 +1,10 @@
 import * as PIXI from 'pixi.js';
-import type Phaser from '../engine';
 import type { ArtManifest, LocalePack, PresentationCommand, PresentationPack } from '@uomd/content-schema';
 import type { ContentService } from '../content/ContentService';
 import { Music } from '../audio/Music';
 import { prefs } from '../platform/prefs';
 import { REF_H, REF_W } from '../config';
+import { Assets } from '../core/assets';
 import type { PixiScene } from '../core/PixiScene';
 import { DEPTH } from '../ui/theme';
 
@@ -30,14 +30,11 @@ export class NarrativeStage {
   private readonly audioTickets = new Map<string, number>();
   constructor(private readonly scene: PixiScene, private readonly content: ContentService, private readonly art: ArtManifest, readonly pack: PresentationPack, private readonly locale?: LocalePack) {
     scene.add(this.root, DEPTH.world + 30);
-    const host = scene.host;
     const pause = () => this.pause(true); const resume = () => this.pause(false);
-    const visibility = () => this.pause(document.hidden || !host.sys.isActive());
-    host.events.on('pause', pause); host.events.on('resume', resume); document.addEventListener('visibilitychange', visibility);
-    scene.onClose(() => { host.events.off('pause', pause); host.events.off('resume', resume); document.removeEventListener('visibilitychange', visibility); this.destroy(); });
+    const visibility = () => this.pause(document.hidden || !scene.live);
+    scene.events.on('pause', pause); scene.events.on('resume', resume); document.addEventListener('visibilitychange', visibility);
+    scene.onClose(() => { scene.events.off('pause', pause); scene.events.off('resume', resume); document.removeEventListener('visibilitychange', visibility); this.destroy(); });
   }
-  /** the host engine scene that loads images and owns scene switching (transitional, D-25) */
-  private get host(): Phaser.Scene { return this.scene.host; }
   text(id: string | undefined, fallback: string): string { return id && this.locale && Object.hasOwn(this.locale.strings, id) ? this.locale.strings[id]! : fallback; }
   hasVoice(lineId: string): boolean { return !!own(this.pack.voices, lineId); }
   voiceDuration(lineId: string): number { return own(this.pack.voices, lineId)?.duration_s ?? 0; }
@@ -130,16 +127,9 @@ export class NarrativeStage {
         const owner = {}; const ref = await this.content.asset(path, owner);
         if (!this.alive) { this.content.releaseAssets(owner); return; }
         try {
-          const host = this.host;
-          if (!host.textures.exists(ref.key)) await new Promise<void>((resolve, reject) => {
-            const event = `filecomplete-image-${ref.key}`;
-            const clean = () => { host.load.off(event, complete); host.load.off('loaderror', failed); this.controller.signal.removeEventListener('abort', aborted); };
-            const complete = () => { clean(); resolve(); }; const failed = (file: Phaser.Loader.File) => { if (file.key === ref.key) { clean(); reject(new Error('This illustration could not be loaded')); } }; const aborted = () => { clean(); reject(new Error('scene closed')); };
-            host.load.once(event, complete); host.load.on('loaderror', failed); this.controller.signal.addEventListener('abort', aborted, { once: true });
-            host.load.image(ref.key, ref.url); host.load.start();
-          });
+          await Assets.loadImage(ref.key, ref.url).catch(() => { throw new Error('This illustration could not be loaded'); });
           if (!this.alive) { this.content.releaseAssets(owner); return; }
-          this.content.retainAsset(ref.key, owner, () => { if (host.textures.exists(ref.key)) host.textures.remove(ref.key); });
+          this.content.retainAsset(ref.key, owner, () => Assets.removeImage(ref.key));
           this.removeLayer(command.layer_id);
           const image = new PIXI.Sprite(this.scene.tex(ref.key));
           image.anchor.set(0.5); image.position.set(command.x, command.y); image.width = command.width; image.height = command.height; image.alpha = command.alpha; image.zIndex = command.depth;
@@ -197,7 +187,7 @@ export class NarrativeStage {
       const controls = document.createElement('div'); Object.assign(controls.style, { position: 'absolute', bottom: 'max(16px, env(safe-area-inset-bottom))', display: 'flex', gap: '12px' });
       const button = (label: string, action: () => void) => { const b = document.createElement('button'); b.textContent = label; Object.assign(b.style, { minWidth: '120px', minHeight: '48px', color: '#f1e6cf', background: '#190f25', border: '1px solid #bda26b', font: '20px serif' }); b.onclick = action; controls.append(b); return b; };
       const unduck = Music.duck(); let closed = false; let wasPlaying = false; let lastProgress = performance.now(); let lastTime = 0;
-      const watchdog = window.setInterval(() => { if (closed || unavailable || document.hidden || video.paused || !this.host.sys.isActive()) { lastProgress = performance.now(); return; } if (video.currentTime !== lastTime) { lastTime = video.currentTime; lastProgress = performance.now(); } else if (performance.now() - lastProgress > 15000) fallback(); }, 1000);
+      const watchdog = window.setInterval(() => { if (closed || unavailable || document.hidden || video.paused || !this.scene.live) { lastProgress = performance.now(); return; } if (video.currentTime !== lastTime) { lastTime = video.currentTime; lastProgress = performance.now(); } else if (performance.now() - lastProgress > 15000) fallback(); }, 1000);
       let mounted = false;
       const mount = () => { if (closed || mounted) return; mounted = true; document.body.append(root); play.focus(); };
       const close = () => { if (closed) return; closed = true; video.onerror = video.onended = video.onloadedmetadata = video.ontimeupdate = null; window.clearInterval(watchdog); video.pause(); if (!unavailable) { video.removeAttribute('src'); video.load(); } root.remove(); unduck(); this.content.releaseAssets(owner); this.closeVideo = null; this.videoPause = null; if (previousFocus instanceof HTMLElement && previousFocus.isConnected) previousFocus.focus(); resolve(); };
@@ -215,8 +205,8 @@ export class NarrativeStage {
   }
   destroy(): void {
     if (!this.alive) return; this.alive = false;
-    const child = this.scene.nav.get('ContentPanel') as Phaser.Scene & { pixiScene?: { owner?: object } | null };
-    if (child?.pixiScene?.owner === this) this.scene.nav.stop('ContentPanel');
+    const panel = this.scene.nav.get('ContentPanel') as (PixiScene<unknown> & { owner?: object }) | undefined;
+    if (panel?.owner === this) this.scene.nav.stop('ContentPanel');
     this.controller.abort(); this.closeVideo?.();
     for (const key of [...this.audio.keys()]) this.stopAudio(key);
     for (const id of [...this.layers.keys()]) this.removeLayer(id);

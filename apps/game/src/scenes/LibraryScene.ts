@@ -1,11 +1,10 @@
-import type Phaser from '../engine';
-import { hosted } from '../core/host';
 import type { LibraryCard, LibraryEntry } from '@uomd/content-schema';
 import { REF_W } from '../config';
 import { Services } from '../services';
 import { storySaveFailed, type StoryInit } from './StoryScene';
 import { HubScreen } from '../ui/hubScreen';
 import { T } from '../ui/theme';
+import type { PixiScene } from '../core/PixiScene';
 
 export class LibraryScene extends HubScreen {
   protected readonly heading = 'THE ARCHIVE';
@@ -71,17 +70,17 @@ export class LibraryScene extends HubScreen {
   }
   private reading(entry: LibraryEntry, i: number, releaseId: string, revision: number): StoryInit {
     let saving = false; let closed = false;
-    const leave = (scene: Phaser.Scene): void => { scene.scene.start('Library'); };
-    const finish = async (scene: Phaser.Scene): Promise<void> => {
-      if (saving || closed || !scene.sys.isActive() || Services.api.authRevision !== revision) return;
-      if (i + 1 < entry.scenes.length) { scene.scene.restart(this.reading(entry, i + 1, releaseId, revision)); return; }
+    const leave = (scene: PixiScene<unknown>): void => { scene.nav.start('Library'); };
+    const finish = async (scene: PixiScene<unknown>): Promise<void> => {
+      if (saving || closed || !scene.live || Services.api.authRevision !== revision) return;
+      if (i + 1 < entry.scenes.length) { scene.nav.restart(this.reading(entry, i + 1, releaseId, revision)); return; }
       saving = true;
-      scene.events.once('shutdown', () => { closed = true; });
+      scene.onClose(() => { closed = true; });
       try {
         await Services.api.completeStory(releaseId, entry.entry_id, revision);
-        if (!closed && scene.sys.isActive() && Services.api.authRevision === revision) leave(scene);
+        if (!closed && scene.live && Services.api.authRevision === revision) leave(scene);
       } catch (error) {
-        if (closed || !scene.sys.isActive() || Services.api.authRevision !== revision) return;
+        if (closed || !scene.live || Services.api.authRevision !== revision) return;
         storySaveFailed(scene, `Reading progress is not confirmed. ${error instanceof Error ? error.message : String(error)}`, () => void finish(scene), () => leave(scene));
       } finally { saving = false; }
     };
@@ -89,4 +88,3 @@ export class LibraryScene extends HubScreen {
   }
 }
 
-export const LibraryHost = hosted('Library', () => new LibraryScene());

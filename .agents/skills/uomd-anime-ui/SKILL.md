@@ -1,6 +1,6 @@
 ---
 name: uomd-anime-ui
-description: "Codex/UOMD adaptation. Design and review Gothic anime game UI for Unaware of My Demise (mobile landscape; PixiJS v8 stage today, DOM/CSS + ARIA layer planned in R10) and the React Control Center. Use for UI screens, typography, layout, safe areas, accessibility and UX audits."
+description: "Codex/UOMD adaptation. Design and review Gothic anime game UI for Unaware of My Demise (mobile landscape; PixiJS v8 stage for battle and story, HTML/CSS + ARIA layer for menus) and the React Control Center. Use for UI screens, typography, layout, safe areas, accessibility and UX audits."
 ---
 # uomd-anime-ui — Codex adaptation
 

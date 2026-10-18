@@ -11,7 +11,7 @@ const recordScenes = (page: Page): Promise<void> =>
     setInterval(() => {
       const g = (window as any).__UOMD__?.game;
       if (!g) return;
-      const now = g.scene.getScenes(true).map((s: any) => s.sys.settings.key).filter((k: string) => k !== 'Boot').join(',');
+      const now = g.scene.getScenes(true).map((s: any) => s.key).filter((k: string) => k !== 'Boot').join(',');
       if (now && seq[seq.length - 1] !== now) seq.push(now);
     }, 40);
   });
@@ -36,8 +36,7 @@ test('F1: a fresh install shows the engine credit, the studio card, then the fir
 
   // first-run menu: no Chapters / Company doors yet
   const labels = await page.evaluate(() => {
-    const s = (window as any).__UOMD__.game.scene.getScene('Title');
-    return s.children.list.flatMap((c: any) => (c.list ?? []).map((x: any) => x.text).filter(Boolean));
+    return (window as any).__UOMD__.game.scene.getScene('Title').texts();
   });
   expect(labels.join('|')).toContain('PREVIEW BUILD'); // browser build: no native Google identity
   expect(labels.join('|')).toContain('SETTINGS');
@@ -54,8 +53,7 @@ test('F1: a fresh install shows the engine credit, the studio card, then the fir
 test('F1: a returning player (entry completed) goes splash -> studio -> the full menu', async ({ page }, info) => {
   const problems = await openGame(page); // default: completed entry, fast intro
   const labels = await page.evaluate(() => {
-    const s = (window as any).__UOMD__.game.scene.getScene('Title');
-    return s.children.list.flatMap((c: any) => (c.list ?? []).map((x: any) => x.text).filter(Boolean));
+    return (window as any).__UOMD__.game.scene.getScene('Title').texts();
   });
   expect(labels.join('|')).toContain('CHAPTERS');
   expect(labels.join('|')).toContain('COMPANY');

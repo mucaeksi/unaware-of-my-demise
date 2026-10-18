@@ -37,7 +37,7 @@ async function admin(request: APIRequestContext, path: string, body: unknown): P
 const goto = (page: Page, key: string) =>
   page.evaluate((k) => {
     const g = (window as any).__UOMD__.game;
-    g.scene.getScenes(true).forEach((s: any) => g.scene.stop(s.sys.settings.key));
+    g.scene.getScenes(true).forEach((s: any) => g.scene.stop(s.key));
     g.scene.start(k);
   }, key);
 
@@ -106,7 +106,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   // companion detail: tap a roster card, see level / skills / stats / gear slots; level up with an XP item the server grants as mail
   await tap(page, info, 340, 330); // first card
   await waitScene(page, 'Character');
-  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character').body?.length ?? 0), { timeout: 20_000 }).toBeGreaterThan(5);
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Character')?.texts().length ?? 0), { timeout: 20_000 }).toBeGreaterThan(5);
   await page.waitForTimeout(2500);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-15-character.png` });
   const mine = await call(page, '/api/v1/characters/mine');
@@ -116,7 +116,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   // errands: the server-side 12-hour window is visible
   await goto(page, 'Tasks');
   await waitScene(page, 'Tasks');
-  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Tasks').body?.length ?? 0), { timeout: 20_000 }).toBeGreaterThan(5);
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Tasks')?.texts().length ?? 0), { timeout: 20_000 }).toBeGreaterThan(5);
   await page.waitForTimeout(2500);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-16-errands.png` });
   const tasks = await call(page, '/api/v1/tasks');
@@ -142,7 +142,7 @@ test('armory: unsupported signature is disclosed and disabled while ordinary gea
   await call(page, `/api/v1/mail/${sent.id}/claim`, { method: 'POST', body: {} });
   await page.evaluate(() => {
     const game = (window as any).__UOMD__.game;
-    game.scene.getScenes(true).forEach((s: any) => game.scene.stop(s.sys.settings.key));
+    game.scene.getScenes(true).forEach((s: any) => game.scene.stop(s.key));
     game.scene.start('Gear', { characterId: 'mahmut', slot: 'weapon' });
   });
   await waitScene(page, 'Gear');
@@ -150,7 +150,7 @@ test('armory: unsupported signature is disclosed and disabled while ordinary gea
   await page.evaluate(() => new Promise<void>((resolve) => (window as any).__UOMD__.game.events.once('postrender', resolve)));
   let equips = 0;
   page.on('request', (r) => { if (/\/gear\/\d+\/equip$/.test(r.url())) equips++; });
-  const disclosure = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').body.list.filter((o: any) => typeof o.text === 'string').map((o: any) => o.text).join('\n'));
+  const disclosure = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').texts().join('\n'));
   expect(disclosure).toContain('Passive not available yet');
   await tap(page, info, REF_W - 250, 260);
   expect(equips).toBe(0);
@@ -158,8 +158,8 @@ test('armory: unsupported signature is disclosed and disabled while ordinary gea
   await expect.poll(async () => (await call(page, '/api/v1/gear')).gear.find((g: any) => g.gearId === 'weapon_arming_sword_3_01')?.equippedBy).toBe('mahmut');
   expect(equips).toBe(1);
   await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').busy)).toBe(true);
-  await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').cameras.main.fadeEffect.isRunning)).toBe(true);
-  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').children.list.some((o: any) => o.list?.some((c: any) => c.text === 'Equipped')))).toBe(false);
+  await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').fading)).toBe(true);
+  await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').texts().includes('Equipped'))).toBe(false);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-gear-passive-unavailable.png` });
   expect(problems.filter((p) => !p.includes('favicon'))).toEqual([]);
 });

@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { TaskView } from '../net/api';
 import { Services } from '../services';
 import { errText, HubScreen } from '../ui/hubScreen';
@@ -119,4 +118,3 @@ export class TasksScene extends HubScreen {
   }
 }
 
-export const TasksHost = hosted('Tasks', () => new TasksScene());

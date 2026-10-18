@@ -23,16 +23,15 @@ test('Shop distinguishes SDK pending receipts from failed server confirmation', 
   });
   await page.evaluate(() => {
     const game = (window as any).__UOMD__.game;
-    game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.sys.settings.key)); game.scene.start('Shop');
+    game.scene.getScenes(true).forEach((scene: any) => game.scene.stop(scene.key)); game.scene.start('Shop');
   });
   await waitScene(page, 'Shop');
-  const messages = () => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Shop').children.list.flatMap((object: any) =>
-    [object.text, ...(object.list ?? []).map((child: any) => child.text)]).filter(Boolean).join(' '));
+  const messages = () => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Shop').texts().join(' '));
   await expect.poll(messages).toContain('1 payment(s) pending.');
   await expect.poll(messages).toContain('1 purchase(s) still need confirmation. Reopen Shop to retry.');
   expect(submitted).toEqual(['fixture_pending', 'fixture_uncertain']);
   expect(await messages()).not.toContain('sdk-pending-receipt');
   expect(await messages()).not.toContain('sdk-uncertain-receipt');
-  await page.waitForFunction(() => !(window as any).__UOMD__.game.scene.getScene('Shop').cameras.main.fadeEffect.isRunning);
+  await page.waitForFunction(() => !(window as any).__UOMD__.game.scene.getScene('Shop').fading);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-shop-recovery-fixture.png` });
 });

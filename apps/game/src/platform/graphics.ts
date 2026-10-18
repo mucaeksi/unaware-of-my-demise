@@ -1,4 +1,5 @@
-import type Phaser from '../engine';
+import type { App } from '../core/app';
+import type { PixiScene } from '../core/PixiScene';
 import { Music } from '../audio/Music';
 import { prefs, type QualityTierPref } from './prefs';
 
@@ -64,21 +65,21 @@ export interface ContextRecoveryHandle {
 }
 
 /**
- * Installs checkpoint-safe WebGL context loss and restoration handlers on the Phaser canvas.
+ * Installs checkpoint-safe WebGL context loss and restoration handlers on the game canvas.
  * Instead of trapping the player on a dead fatal screen, active scenes flush their durable checkpoints
  * and resume cleanly when the context restores (or via the recovery action button).
  */
 export function installContextRecovery(
-  game: Phaser.Game,
+  game: App,
   refreshArt: () => Promise<void>
 ): ContextRecoveryHandle {
   let lost = false;
   let interruptedScene: string | null = null;
   let interruptedData: Record<string, unknown> | undefined;
 
-  const findPrimaryScene = (): Phaser.Scene | null => {
+  const findPrimaryScene = (): PixiScene<unknown> | null => {
     const active = game.scene.getScenes(true);
-    return active.find((s) => s.scene.key !== 'PatchBar' && s.scene.key !== 'Boot') ?? active[0] ?? null;
+    return [...active].reverse().find((s) => s.key !== 'PatchBar' && s.key !== 'Boot') ?? active[0] ?? null;
   };
 
   const renderBanner = (message: string, showReloadButton: boolean): void => {
@@ -117,8 +118,8 @@ export function installContextRecovery(
     e?.preventDefault();
     lost = true;
     const primary = findPrimaryScene();
-    interruptedScene = primary?.scene.key ?? null;
-    interruptedData = (primary as unknown as { cfg?: Record<string, unknown> })?.cfg;
+    interruptedScene = primary?.key ?? null;
+    interruptedData = primary?.data as Record<string, unknown> | undefined;
     try {
       game.events.emit('webgl:contextlost', { sceneKey: interruptedScene });
     } catch {
@@ -150,17 +151,12 @@ export function installContextRecovery(
     const targetData = interruptedData;
     interruptedScene = null;
     interruptedData = undefined;
-    if (targetKey) {
-      const sc = game.scene.getScene(targetKey);
-      if (sc) {
-        sc.scene.restart(targetData);
-      }
-    }
+    if (targetKey && game.scene.getScene(targetKey)) game.scene.restart(targetKey, targetData);
     game.events.emit('webgl:contextrestored', { sceneKey: targetKey });
   };
 
-  game.canvas?.addEventListener('webglcontextlost', onLost);
-  game.canvas?.addEventListener('webglcontextrestored', () => {
+  game.canvas.addEventListener('webglcontextlost', onLost);
+  game.canvas.addEventListener('webglcontextrestored', () => {
     void onRestored();
   });
 

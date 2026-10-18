@@ -1,5 +1,4 @@
 import { REF_W } from '../config';
-import { hosted } from '../core/host';
 import type { TeamMember, TeamPreset } from '../net/api';
 import { Services } from '../services';
 import { HubScreen } from '../ui/hubScreen';
@@ -143,4 +142,3 @@ export class TeamScene extends HubScreen {
   }
 }
 
-export const TeamHost = hosted('Team', () => new TeamScene());

@@ -1,25 +1,24 @@
 ---
 name: uomd-pixi-engine
-description: Implement, review or debug the Unaware of My Demise game client on PixiJS v8 — the retained PIXI stage in apps/game/src/engine, scenes, sprites/text/graphics, textures, cameras, tweens, input, quality tiers and context loss. Use for any apps/game rendering or engine work; pair with the official `pixijs` skills for raw PixiJS API questions.
+description: Implement, review or debug the Unaware of My Demise game client on pure PixiJS v8 — the app shell and scene manager in apps/game/src/core, PixiScene scenes, the PIXI and HTML UI kits, textures/audio assets, tweens, input, quality tiers and context loss. Use for any apps/game rendering or engine work; pair with the official `pixijs` skills for raw PixiJS API questions.
 ---
-# UOMD PixiJS v8 engine (Decision D-23 / D-23a)
+# UOMD on pure PixiJS v8 (Decisions D-23a, D-25)
 
 ## What exists today
-- `apps/game/src/engine/index.ts` keeps a **Phaser-style scene API** (`Scene`, `this.add.*`, `tweens`, `time`, `cameras.main`, `input`, `load`) as project code, but **all drawing is PIXI v8**: `Game.syncStage()` mirrors every GameObject into a retained PIXI node each frame (`_px`), then `renderer.render(stage)`.
-  - Image/Sprite → `PIXI.Sprite` (frame sub-textures cached by `Texture.pixiFrame`), tint, tint-fill (ColorMatrixFilter), flip, blend modes.
-  - Text → `PIXI.Text`; wrapping/metrics stay in the engine because layout code reads `obj.width/height`.
-  - Graphics → recorded data ops (`DrawOp`) replayed into `PIXI.Graphics` only when `version` changes; `generateTexture` bakes the same ops to a canvas.
-  - Particles, rectangle masks, camera scroll/zoom/shake (per-root wrapper), fade/flash overlays, camera `Vignette` (radial `FillGradient`).
-- Renderer: `PIXI.autoDetectRenderer` with preference WebGL → WebGPU → canvas; backing store = device pixels capped by the quality tier (`platform/graphics.ts`). `game.renderer.name/type` are real values.
-- HUD/menus are still drawn on the stage. A DOM/CSS UI with ARIA semantics is R10 work, not delivered.
-- Migration direction: new code may be written as plain PIXI `Container` subclasses; scenes move off the Phaser-style API one by one (see README §0 / docs/DECISIONS.md D-25).
+- `core/app.ts` — the shell: one canvas with `PIXI.autoDetectRenderer` (WebGL → WebGPU → canvas), backing store = device pixels capped by the quality tier, an HTML layer (`#uomd-ui-layer`) fitted to the same letterboxed 1920×1080 rectangle, the frame loop (30 FPS tier honoured), `app().events`. `window.__UOMD__.game` is the App (`renderer.name/type`, `scene`, `step(dt)`).
+- `core/scenes.ts` — SceneManager: `register/launch/start/stop/pause/resume/restart/bringToTop/getScene/getScenes`. Several scenes run at once (PatchBar overlay, Story over a paused Battle); a paused scene is hidden and not ticked.
+- `core/PixiScene.ts` — every scene: `view` (background, camera `root` with zoom/shake, flash and fade veils), `anim` (core/anim.ts Animator: property tweens, yoyo/repeat, `after`, `wait`, `killOf`, timeScale for speed-up, hit-stop and pause), `nav`, `onClose`, `onTick`, `tex(key, frame)`, `attachDom` (fades include HTML layers), `texts()`/`fading` for inspection.
+- `core/assets.ts` — images as PIXI textures with named atlas frames, decoded audio, the one Web Audio graph. `ArtLibrary` loads per owning scene and releases on close.
+- UI: `ui/pixiKit.ts` (canvas text/panels/Button with ARIA mirror/Bar/toast — battle and story HUD) and `ui/domKit.ts` (the same look as HTML in reference px: real buttons, modals with `inert`, native scrolling, Escape; menus, title, finish). `ui/hubScreen.ts` is the frame of the account screens.
+- Combat VFX are data (`content/base/vfx/vfx_presets.json`, capability `vfx_v1`) played by `vfx/VfxStage.ts`.
 
 ## Rules
-1. New rendering code may use PIXI directly (Containers, filters, meshes) but must be owned by a GameObject or a scene-shutdown hook so it is destroyed with the scene; never leave PIXI objects outside the `Game.stage` sync.
-2. Before using a PIXI API, read the installed types (`node_modules/pixi.js/lib`) or the official skills (`pixijs` router → specialised `pixijs-*`). Never write v7 code (`new Application({...})`, `beginFill`, `PIXI.Loader`).
-3. Destroy what you create: textures via `TextureManager.remove`, filters, render textures, listeners, tweens and timers on scene `SHUTDOWN`.
-4. Performance budget: the sync runs every frame — keep node counts and per-frame allocations low, prefer atlases, avoid `new` in hot loops, measure on real devices.
-5. Rendering never decides combat or economy results (`@uomd/combat`, server).
+1. Scenes extend `PixiScene` and are registered in `main.ts`. Draw with PIXI directly; put interactive menus in the DOM kit. Never reintroduce a Phaser-style wrapper.
+2. Read the installed types (`node_modules/pixi.js/lib`) or the official skills before using a PIXI API. Never write v7 code (`new Application({...})`, `beginFill`, `PIXI.Loader`).
+3. Destroy what you create: everything under `view` goes with the scene; anything else (listeners, DOM, textures you own) needs `onClose`. Loads go through `ArtLibrary`/`Assets` with the scene as owner.
+4. Time-based behaviour uses the scene's `anim` (so speed, hit-stop and pause apply), not `setTimeout`.
+5. Performance: keep node counts and per-frame allocations low, prefer atlases and `ParticleContainer`-style pooling (`vfx/sparks.ts`), measure on real devices.
+6. Rendering never decides combat or economy results (`@uomd/combat`, server).
 
 ## Verify
-`npm run typecheck`, `npm test -w @uomd/game` (engine tests in `src/engine/engine.test.ts`), `npm run dev` + browser smoke (`?preview_scene=title|story_t1|battle_t1|hub`), check `window.__UOMD__.game.renderer.name`, console errors and FPS; the `uomd-pixi-live` MCP automates this. E2E `tests/e2e/game.spec.ts` asserts a GPU renderer.
+`npm run typecheck`, `npm test -w @uomd/game` (`core/*.test.ts`, `vfx/*.test.ts`), `npm run dev` + browser smoke (`?preview_scene=title|prologue|story_t1|battle_t2|hub`), `window.__UOMD__.game.renderer.name`, console errors and FPS; when the pane is hidden drive frames with `__UOMD__.game.step(16)`. The `uomd-pixi-live` MCP automates inspection; `npm run e2e` runs the Playwright suite against the local stack.

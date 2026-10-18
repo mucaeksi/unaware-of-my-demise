@@ -33,7 +33,7 @@ test('story progress: real reader completion survives response loss and reload w
     });
     await waitScene(page, 'Story');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').bodyText?.text)).toBe('We keep the same road.');
-    await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Story').cameras.main.fadeEffect.isRunning)).toBe(true);
+    await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Story').fading)).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-story-reader.png` });
     let originalId = ''; let committed = false;
     await page.route('**/api/v1/progress/story', async (route) => {
@@ -42,7 +42,7 @@ test('story progress: real reader completion survives response loss and reload w
     });
     await tap(page, info, 960, 420);
     await expect.poll(() => committed).toBe(true);
-    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').children.list.some((object: any) => object.list?.some((child: any) => child.text === 'RETRY SAVE')))).toBe(true);
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').texts().includes('RETRY SAVE'))).toBe(true);
     await page.unroute('**/api/v1/progress/story'); await page.reload();
     await page.waitForFunction(() => (window as any).__UOMD__?.services.api.signedIn);
     let writes = 0;
