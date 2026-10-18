@@ -151,6 +151,27 @@
       }
     },
     {
+      "output": "content/base/audio/bgm_main_theme.ogg",
+      "sha256": "52b6943f7d111396773892c03459b0bdf43739ae02529943f582111ca3a1313b",
+      "sources": {
+        "authored": "content/base/audio/bgm_main_theme.ogg"
+      }
+    },
+    {
+      "output": "content/base/audio/bgm_ch1_ash_forest_uneasy.ogg",
+      "sha256": "7f3e7124121ec4eeb7fa419d6284320feb6b7b31a5ec2f7cba4141dd3be12b45",
+      "sources": {
+        "authored": "content/base/audio/bgm_ch1_ash_forest_uneasy.ogg"
+      }
+    },
+    {
+      "output": "content/base/audio/bgm_battle_field.ogg",
+      "sha256": "548830e74e7d40f0515653b11b9b20314177dc7c1ee55ae10017453a0adb26f7",
+      "sources": {
+        "authored": "content/base/audio/bgm_battle_field.ogg"
+      }
+    },
+    {
       "output": "content/base/art/ui_logo.webp",
       "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
       "sources": {
@@ -270,7 +291,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "a4287a3d53142bf912c358395100193fa5f80e00ff7c5f15f34cc1e23650935d",
+      "sha256": "762d1346e95c1ca902da9da5a6bf7ae93e5763002a430c1685f18091e563b44d",
       "sources": {}
     },
     {
@@ -282,63 +303,63 @@
     },
     {
       "output": "content/base/story/tutorial_t1_before.json",
-      "sha256": "b92e7aaeb04ffe2aa79df752680a88fbbff3adc949a32926b42c225222f5e604",
+      "sha256": "08831080a11732f51b1f2333388b7747582d412fd7f9283d93eb7e8e7978ad3d",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1.before"
       }
     },
     {
       "output": "content/base/story/tutorial_t1_after.json",
-      "sha256": "d4c047d6507858739d4dcc54be7041f9d8e445a46eff24e8a802d538e8b4c166",
+      "sha256": "5c332ce4b0e23534572c681b3f92032fb209232f06bdb4e25f071aeb516da0d4",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1.after"
       }
     },
     {
       "output": "content/base/story/tutorial_t2_before.json",
-      "sha256": "2e9d982752cb3832b0e9911e87d04f2d967d4d465d176aaa8bf929a14d09bb9f",
+      "sha256": "abe241417b6252053fb9dc1945db8ff8b91aca552c2d09a4cc688c4caae05e9f",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.before"
       }
     },
     {
       "output": "content/base/story/tutorial_t2_after.json",
-      "sha256": "19f148d02a957b1949e799d5bbb77c3b9faac2144c557c663e8d6cf18a1123b6",
+      "sha256": "8e2b8d9cda1d68254900b6a3194750cc868f3580aa5a46e869b93dae8ca9f232",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2.after"
       }
     },
     {
       "output": "content/base/story/tutorial_t3_before.json",
-      "sha256": "c7079456265ada059a2be246588d142f51a17037275ad874244170685afa894c",
+      "sha256": "c2c938ab984987f847795c5a344fc7df1c16ff902b8171bba93c3e42597f8189",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3.before"
       }
     },
     {
       "output": "content/base/story/tutorial_t3_after.json",
-      "sha256": "177c70075dc4466f46dcca3d6bde6ce984038aee6802029d7cd06d90b23e2028",
+      "sha256": "a848b9db0d05914b98436946eb76aaa38175acad88a4375549793ef0280607d1",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3.after"
       }
     },
     {
       "output": "content/base/encounters/tutorial_t1.json",
-      "sha256": "cde1ae522c77b9de2212d5bfef64dda0835e60b204e8c06aaf254befad838ca2",
+      "sha256": "0e0a3e2b80d71f106bb2d6412c4aaa7e31c549289cfee6e01bfab8a8bcd6d7bb",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-1"
       }
     },
     {
       "output": "content/base/encounters/tutorial_t2.json",
-      "sha256": "fa8028bfbb183584252f2ac995a2418b83ee4a882e502d3f32a694d0f37dd886",
+      "sha256": "93395cc73b0b3fc58de9728d572b1645664a8bccefee7aa1b53b26f02bf23afc",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2"
       }
     },
     {
       "output": "content/base/encounters/tutorial_t3.json",
-      "sha256": "f71028713e798d8a3cfdbe6f1067163207a05537425bc0049f2cfcbc8052b40d",
+      "sha256": "a6b88584304b486566780a9e2bf8504caf9d4f0987f8a88d1e664b1b1b0586c2",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-3"
       }
@@ -349,8 +370,827 @@
       "sources": {}
     },
     {
+      "output": "content/base/voices/entry_past_001.ogg",
+      "sha256": "133d6a05e8eadb4964d44cee68c856d5219d5156cd126bbf1c98e1fed1cde673",
+      "sources": {
+        "authored": "content/base/voices/entry_past_001.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_002.ogg",
+      "sha256": "94c5fd25c857e1faffbaa03f77ea6bbc06500939edcd772f7f2868a9c652e32f",
+      "sources": {
+        "authored": "content/base/voices/entry_past_002.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_003.ogg",
+      "sha256": "80311747610489d877d00e9d79dc617e381e26004742a42379904f2866736cb4",
+      "sources": {
+        "authored": "content/base/voices/entry_past_003.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_004.ogg",
+      "sha256": "8e9d7261660ea46d69ef66cad5a40e9cdb57beab218a0854c1d32934deead89e",
+      "sources": {
+        "authored": "content/base/voices/entry_past_004.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_005.ogg",
+      "sha256": "5fc1e2367605c1a3485d5aa07da8ded2b814fc0580f27aba68274b534ddc2aba",
+      "sources": {
+        "authored": "content/base/voices/entry_past_005.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_006.ogg",
+      "sha256": "dd8e250232e2a5f0e2aac13b2582118ee7cd952006c9c6b61fffbb6c273d9904",
+      "sources": {
+        "authored": "content/base/voices/entry_past_006.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_007.ogg",
+      "sha256": "a3e55ba9c1a69aa832509ac4fa6750505963fa943dbee71d9859d43531e0a250",
+      "sources": {
+        "authored": "content/base/voices/entry_past_007.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_008.ogg",
+      "sha256": "b94b25c3d542ff8d7f6863638d3a4f8fbdad99c44ab76db3dc8e73548eead0dd",
+      "sources": {
+        "authored": "content/base/voices/entry_past_008.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/entry_past_009.ogg",
+      "sha256": "2a99e2e40d70bf07a87804eebb3c54f3cb0a9e7b7a6a44c5eb33bc83e6974355",
+      "sources": {
+        "authored": "content/base/voices/entry_past_009.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_001.ogg",
+      "sha256": "290c248224d94b076f85d61d11ae308ad5e6bc5507c10efb6b5d68da034bd18a",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_001.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_002.ogg",
+      "sha256": "91df7d5a8a80e5ca2621ad4f46b01966c9fac4426bbf3c3c3cab2ae9bde8d465",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_002.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_003.ogg",
+      "sha256": "625d31be012dd19f0375d415372e117b45ecbc8f19a7fab7f0c200dfd2882ee1",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_003.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_004.ogg",
+      "sha256": "0703700e212c924d896ed4de3767671dae5da94c8d85a19d8111bcbf2b6a9a7f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_004.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_005.ogg",
+      "sha256": "be7138d0b61d8876947a0e50884a90a38e1e6d7eebe976dc15933044b1b2e48b",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_005.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_006.ogg",
+      "sha256": "4c75ada49387ae956cc1127c11959d9cd327703985798b84bc1c2d7791cda08f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_006.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_007.ogg",
+      "sha256": "57a1c56e348b89337e8ea9d541c7b4848c298b6d44412cee3aea8e6a4b28d5d8",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_007.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_008.ogg",
+      "sha256": "8a057aa0a38306f2aa0d952df7b2da3696dca43a7bbec24f3504ebcc31db7077",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_008.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_009.ogg",
+      "sha256": "03e8744c9b980488ebf0f197ca7db59cc751a2c04041b96d474b0a56606d4818",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_009.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_010.ogg",
+      "sha256": "6875b6b562c3bcc7a43cd9ae355e3d0765f1fbc48d93d150375b8ceb8455eac2",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_010.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_011.ogg",
+      "sha256": "877a7dd35d78d169eb25ab6adfb04449bf78c6bfee1f29afa6fd655b524a92bc",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_011.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_012.ogg",
+      "sha256": "a15f3045dfd09ac9813b2ff12a2a1df4eecd0f169f203620fbe178a5a2699626",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_012.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_013.ogg",
+      "sha256": "e279eda94fb369d27925354506669f993db5a4a65e85df42aeed5da62d5f3a70",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_013.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_after_014.ogg",
+      "sha256": "1e8e55ad8d656009ff07dd029f268563098f5e65ec79d1fd49956420e5e31dae",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_after_014.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_001.ogg",
+      "sha256": "6e72f9ac67d146618bde94cc09cca8208229506859dcb98e483dcb566f046a7d",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_001.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_002.ogg",
+      "sha256": "32129ef84312ef2b942b7293f56fa494a2b803c1df1ae27c09ece04156e8388f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_002.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_003.ogg",
+      "sha256": "514a87fda76bd53c8506f1e26cfd43f3857513f12a5946042a01561971a4d324",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_003.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_004.ogg",
+      "sha256": "6d1b1e4555a65334bad23416a3aa9e130ae6b00c5bdd26bb647441646d61e71d",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_004.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_005.ogg",
+      "sha256": "0fb55638ee073fb7ce84f03f6ef611b88bca051fa161a191473ca909457edd99",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_005.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_006.ogg",
+      "sha256": "a42136f280f9094b14375fdcbc8a87fb4f7cea73dfc39e1689d4364f6339b5b4",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_006.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_007.ogg",
+      "sha256": "0e94a7758cce79f7359a81a4d5c15806e7e05001525980bac9d9844521fa1ed7",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_007.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_008.ogg",
+      "sha256": "2414ba898e7463cc96b3b6e9ee30dec70d5b8c70d901bca05e5ae77545def324",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_008.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_009.ogg",
+      "sha256": "c8e7ea262275f4504db7eafd181e53515c84e79352caea4b0b09a61bf5dd5c6c",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_009.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_010.ogg",
+      "sha256": "c9d48527f77035b1e3b3382da25f5887871ab3747155dd20f7bfa52cf087302e",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_010.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_011.ogg",
+      "sha256": "3156b59f21d2f17ed88ee1dfd167fd827ad12e839b99e9f47a28d1c3c9660e21",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_011.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_012.ogg",
+      "sha256": "245b0f3b39b119bfbedb89509880b198505de6660da7a40ca57e4099a1a7734d",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_012.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_013.ogg",
+      "sha256": "68dbd425f853a6f14253e8cce6c6bcc11b5a2529a5ae9cf72f5210cd9552a01f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_013.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t1_before_014.ogg",
+      "sha256": "d11c044ace09f4bbf08a7e377abc768faae814fb470721072bdd65ebe36bb15e",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t1_before_014.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_001.ogg",
+      "sha256": "c8bf567a43a517b854e8dee6215ea2d77a8acc9d353173ed9a9d9aac07131b3f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_001.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_002.ogg",
+      "sha256": "b48448f1001fd77c2c0689cc28b2989e81a43c28b52657df6eba7b9ab8298fcb",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_002.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_003.ogg",
+      "sha256": "34d74e6f80edce72186fac337b7214d3c7a1d2530520974474057e8e2789440b",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_003.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_004.ogg",
+      "sha256": "76dbb662f4a67e52c5711f2beb5be623b65aa21c2c733df44729e50f06ca4b7e",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_004.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_005.ogg",
+      "sha256": "8ebf7fc4bdfed8265804010add8244e41f9b926d05612d8d71c19c73f3ec1ee9",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_005.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_006.ogg",
+      "sha256": "c43f0cd3ace15e125602355b8c23fc56ba13c295e04ab81b59b69bc806f16118",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_006.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_007.ogg",
+      "sha256": "24afaa87fbc79959078dad7397a70a831a1b1ee5d18e32a933d3083056a16991",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_007.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_008.ogg",
+      "sha256": "93d2d06abd94a4dd97dc07b7314edc17ee27c96028cfa67e0ec8bc7f2063e238",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_008.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_009.ogg",
+      "sha256": "dc0ef55b59d600c5621b674be0e0ec62c59d476b93a5ba958356a0015807197f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_009.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_010.ogg",
+      "sha256": "58cd858d02e088e87ab4e775b873b3ba1cf59c81c9662f85f0a1395144080b7a",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_010.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_011.ogg",
+      "sha256": "33e2e1dab911ac3f02061293c0e471dbed195419a3a440cf545545c5564cd6fd",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_011.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_012.ogg",
+      "sha256": "3afc6286d520bcea5a0d586f987fb26d753760b1c0d9907cde3d8050f2c32eb8",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_012.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_013.ogg",
+      "sha256": "54181bee85cdce75285b5c2e8c82dc9957a5d121df0e3568db77c4cbed84f036",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_013.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_014.ogg",
+      "sha256": "94d493913c8c0ecadeb0f0c5a39424deabd201de8cfd6315bbd5bc158be51e66",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_014.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_015.ogg",
+      "sha256": "632d30d48dd6d53262d6f6a068a4eba2d6faf604eb09ab263a6d7fec58886b58",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_015.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_016.ogg",
+      "sha256": "4e23edb156332206af43b03618661e7388fce12e10f7a4a7fc85df12380d9109",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_016.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_017.ogg",
+      "sha256": "c8c8660b082d541cd770aae3599e5c71ec1a192d0a6562292d90112d5a1def80",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_017.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_after_018.ogg",
+      "sha256": "9badbed649399df96fcab8be12ac2681adcff83760ccb172770d008b3aea6af2",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_after_018.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_001.ogg",
+      "sha256": "56ed35cfbb6e2fe9e9ff397082c235d08422efe87dc3815d7b1a1481f4d7ebc6",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_001.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_002.ogg",
+      "sha256": "3130fbdcaf9b819a1e71da8faa2228530c4fad160a74e0650f62763631872a6b",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_002.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_003.ogg",
+      "sha256": "75c20c5a33a6e6c816b93cca8bc205f4cc839e5c6fc941cc4416ec3c9d3abd33",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_003.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_004.ogg",
+      "sha256": "39e7f5e09982771553d12c3845104b6eec1d55c0e1c3f49b0804e019b5bb331d",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_004.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_005.ogg",
+      "sha256": "934123a35119d8ca14827a6a63ffbead4e0a6dd7c5a0030f2f9a065f9eefd33c",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_005.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_006.ogg",
+      "sha256": "286b0b3d8df194ca4ad3f6822dbeac6434010cb17827860c94ea93e73c9338ec",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_006.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_007.ogg",
+      "sha256": "b5828d46be525e39ed3f7de8245a1d337865e6bb28e65ae71fc173b82bb92d0f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_007.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_008.ogg",
+      "sha256": "be133f20867887691e6f34a5c8c78b4fc01ef40b95f10b086485bb54ca291da9",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_008.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_009.ogg",
+      "sha256": "f3f3c250efe7fa20ea3102e91c5f732ee41fd70cf6e6e719086504968d168fd6",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_009.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_010.ogg",
+      "sha256": "2ce4c54aadb627226307c6421af8d95ab98bb3683d70990f5385fae707ea27f7",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_010.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_011.ogg",
+      "sha256": "0462a5c95104346b44845dd882ec39addf7e03cd8b358c476d6f7cb96c9c0be3",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_011.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_012.ogg",
+      "sha256": "e6355569c84d5646400d803c4ba9c6b5e6a1bcf85d236cef526bf3e15a970bc0",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_012.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t2_before_013.ogg",
+      "sha256": "2dbe58500770355c9c65d0df401d33a8ab631170e37d2b3f6117f1ae91f4f514",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t2_before_013.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_001.ogg",
+      "sha256": "27841d55832549ca5edf6306c5b997364ab0f3f7644995f4e30bfcbd24cc2a90",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_001.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_002.ogg",
+      "sha256": "a9ab925781f6d7b183b21d92794fae1369a9d54cb7592f62d9f82079d5a89064",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_002.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_003.ogg",
+      "sha256": "e7095b75f37627c448e7674b5fdf5060af28746b73e2622135fc1e5e8495daf6",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_003.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_004.ogg",
+      "sha256": "61bc051b260c2bfd99778320950c73bc42aa9d1e092e26626dc7fd92d0386230",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_004.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_005.ogg",
+      "sha256": "c6854f34975c8f7de8325c03405100a49a46eef71614cf37fdb2378a936a01d4",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_005.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_006.ogg",
+      "sha256": "21484a94bd72ece76fd0f296a8488beaf19a2573a4ae697c0846912082022ab9",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_006.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_007.ogg",
+      "sha256": "9020029eb5976b67fb5e9c408eab138307f48370db24cccdba731cd56b47e4e0",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_007.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_008.ogg",
+      "sha256": "bcf7cfa828cca0469520a10b69c533741bdfb258e062c4558aa428089caac591",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_008.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_009.ogg",
+      "sha256": "1919fc49bb04744f637731af9f2177d9b3126c2090b7fda1ea5d4c76c047c574",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_009.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_010.ogg",
+      "sha256": "f55128adde87123ef608a2f82e3e45968c70fef62fbf47ab8354a23a1f65232a",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_010.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_011.ogg",
+      "sha256": "c643ce610d5bba016288e7e651a2e9191990abac0cbafc6b501d9af960bf5c59",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_011.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_012.ogg",
+      "sha256": "fc73502f0936584daedfd19f81167aba15b94e8eb69b94f3594fd457865eca97",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_012.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_013.ogg",
+      "sha256": "faf0a5ea0f59a74919beb9982fe9c149ce5ccbe1199c73db9632fa9a4e6b3a74",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_013.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_014.ogg",
+      "sha256": "4c694e688734d7ab852add32841fe95a639f431329ff5f6b4149737171477316",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_014.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_015.ogg",
+      "sha256": "c45fdb8f2322b42bb40df7498370e60b3a472ef9621de0a208186f6dcdeb74b7",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_015.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_016.ogg",
+      "sha256": "3f4a2f1c0a1734b436f568bbf8b76fdac17cc49bab7bc1a6e6555282057533b5",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_016.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_017.ogg",
+      "sha256": "1cf18f9a44bf1ab2b5eac971c0932c7976e8d67dbd7c14d2938f5f63be46bbe0",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_017.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_018.ogg",
+      "sha256": "12a6cde2e41e747c9750b9b16d518a2a2e37f539b96ff58f15535b829e75cb93",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_018.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_019.ogg",
+      "sha256": "c477914bf6b0a0e9b7e44e4c4ef67e69e499ec21b038e06a8dd967cfb7a0d314",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_019.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_020.ogg",
+      "sha256": "57b24bdbef3a34e24063cfa900e80cc1edd34f2dd9f4507259d2fc5fcca1c068",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_020.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_021.ogg",
+      "sha256": "e25d26506a388121854b647c4cca9e3d14520cf886aa1e4006adab1797f08689",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_021.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_022.ogg",
+      "sha256": "68b7213a1ef82dfe81c8d34fda20d507482239378ea768a2f9a0d73a092854a9",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_022.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_023.ogg",
+      "sha256": "b94b9899c158d88e7f297c4bfc2d5c3fc36f9a4d0d70f30e17445223a8cb3965",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_023.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_024.ogg",
+      "sha256": "37ac5a5a97651a5cd7ada417e6827a932e63c1c09f7fe3482a4a2b3d7b434242",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_024.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_025.ogg",
+      "sha256": "78cce37478c5db53644026ab20791c8e50bfb9b0f4250cac9e4ebdc155e5b213",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_025.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_026.ogg",
+      "sha256": "06ef37b457ee0ae5dc7c3eecf6be0cedd965e78c21804b91d0f7ff1499bfbfcf",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_026.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_027.ogg",
+      "sha256": "2fa7e15f8717140617cc899f49f19ba845a9c75b525f97831e3cb2ac288e65d7",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_027.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_028.ogg",
+      "sha256": "d2bdce9002e25b0905733e09696d2f738b11d3c3820f0d1a0040bd72552d9dd6",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_028.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_029.ogg",
+      "sha256": "7c935e9edc9cd62e0992a480c0f6217fc813b44e71fc4fc52fb16a223def7156",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_029.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_030.ogg",
+      "sha256": "b5120feb7f6faafe0d1f24f773427b2dcab5a749d1da0cb6917eabd30f9877b7",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_030.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_031.ogg",
+      "sha256": "331b4a1ab1ea7844f7f14199e5674db74c96bed89aa564d7d4d1bca0b6b1de15",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_031.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_032.ogg",
+      "sha256": "bd30dedc3775fc19561d107abe3084815946b8587d1215ae4f0dd0c535f13e99",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_032.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_033.ogg",
+      "sha256": "0f80ff2afbbaf2b5556807147c1bee84373f1c8f7e6e8bf881620c6e5aa6bd28",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_033.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_after_034.ogg",
+      "sha256": "d88bddbe0d68153535d27b007e5825d608f5422b6c0dac78f6be0a04fee9157f",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_after_034.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_001.ogg",
+      "sha256": "aeb9215322dab209caa61636b6f6a6167616c6f236a4a6113dd43948a270eb6b",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_001.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_002.ogg",
+      "sha256": "ce003f4288d9cec0cbd1830b149b14b18ddf88b0aaab2e4719edf94395685e47",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_002.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_003.ogg",
+      "sha256": "841da567c974341aa1b6ac512d68f04b925e2f04e88f57f8fcfe9c4cb329b2b9",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_003.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_004.ogg",
+      "sha256": "79ab93889745cd22ff786ac80f90a5f9ce142a48efd5952533c747465fd640e5",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_004.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_005.ogg",
+      "sha256": "e29285c8ae27c17cf69db6e8c569f247f27833f57bf8d1090d108c0df258b37d",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_005.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_006.ogg",
+      "sha256": "8499c27b065116a7d7be68ee6d4a7eb667ca3c591bd0ae09a19dc45bc15ddec5",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_006.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_007.ogg",
+      "sha256": "40f08eac1187812a8078c59e8545442f3cca2e0c86f9a218dde435a0d928940e",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_007.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_008.ogg",
+      "sha256": "517fa5e29b4abd8e9fa65cf381b82813f57c8f406a0dd1d037bd17e96bebed48",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_008.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_009.ogg",
+      "sha256": "b6f0c21fc2df1a7a49f6066b7896c4accbd79332e3ca9247889bc866be00ce0d",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_009.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_010.ogg",
+      "sha256": "42cedaa3df57dcf8819731716c31c87cd2b0f0ec437a031a063b9a37e056af33",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_010.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_011.ogg",
+      "sha256": "4b38185632305dbdd5e658b977f7d2c1b150ba507098ebe84d96d2aafd9d14b4",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_011.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_012.ogg",
+      "sha256": "51db577cb6273a3a8d3866b7f7be7c925a04bb220bdba4a09052443ed6c24d2e",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_012.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_013.ogg",
+      "sha256": "9742fd29edb185c23d133b4dd8b5e6bb5918ab30e498bc14107ea9434f682505",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_013.ogg"
+      }
+    },
+    {
+      "output": "content/base/voices/tutorial_t3_before_014.ogg",
+      "sha256": "9dfe36308aae90169283a1172d455bbd4ad4131556d7a105fbffeb62e3c63d01",
+      "sources": {
+        "authored": "content/base/voices/tutorial_t3_before_014.ogg"
+      }
+    },
+    {
+      "output": "content/base/presentation/presentation.json",
+      "sha256": "4fff132a8591dae2dcc8e606049c8278e565b7b810a3220803508df707e8743a",
+      "sources": {
+        "authored": "content/base/presentation/presentation.json"
+      }
+    },
+    {
       "output": "content/base/entry/prologue.json",
-      "sha256": "47f8acec3fb91a6c2a75ed54fb3806339ebab136ccf72d307fd141f070996631",
+      "sha256": "52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/prologue_v001.json"
       }

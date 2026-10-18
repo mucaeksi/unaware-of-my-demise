@@ -10,7 +10,14 @@ const walk = (dir: string, rel = ''): string[] =>
     const r = rel ? `${rel}/${n}` : n;
     return statSync(join(dir, r)).isDirectory() ? walk(dir, r) : [r];
   });
-const load = (dir: string): Map<string, Uint8Array> => new Map(walk(dir).filter((p) => p !== 'release.json').map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))]));
+// read each tree from disk once (content/base carries ~23 MB of voice/music; re-reading it per test timed out on a
+// synced Drive folder) and hand every test fresh copies so in-place edits cannot leak between tests
+const disk = new Map<string, [string, Uint8Array][]>();
+const load = (dir: string): Map<string, Uint8Array> => {
+  let files = disk.get(dir);
+  if (!files) disk.set(dir, (files = walk(dir).filter((p) => p !== 'release.json').map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))])));
+  return new Map(files.map(([p, bytes]) => [p, new Uint8Array(bytes)]));
+};
 
 /** the base release alone: the first-install flow (prologue + tutorials T-1..T-3) */
 const overlay = (): Map<string, Uint8Array> => load(join(ROOT, 'base'));

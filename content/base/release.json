@@ -21,8 +21,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "4265cf3e641ab41c7077603d4c3fb332da9aee9ee70ce47768afcaa69f731fb0",
-      "bytes": 10316,
+      "sha256": "762d1346e95c1ca902da9da5a6bf7ae93e5763002a430c1685f18091e563b44d",
+      "bytes": 9869,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -294,22 +294,22 @@
     },
     {
       "path": "encounters/tutorial_t1.json",
-      "sha256": "9a828af2db27f54379ca3035c1a2db98e4b0b6fcd8940df7d9247150b966834d",
-      "bytes": 1009,
+      "sha256": "0e0a3e2b80d71f106bb2d6412c4aaa7e31c549289cfee6e01bfab8a8bcd6d7bb",
+      "bytes": 963,
       "media_type": "application/json",
       "kind": "encounter"
     },
     {
       "path": "encounters/tutorial_t2.json",
-      "sha256": "fb15638e480163f5d96c5ccfffaee1b88dbf4cf82dc59edf05bf1fab55c1249d",
-      "bytes": 904,
+      "sha256": "93395cc73b0b3fc58de9728d572b1645664a8bccefee7aa1b53b26f02bf23afc",
+      "bytes": 864,
       "media_type": "application/json",
       "kind": "encounter"
     },
     {
       "path": "encounters/tutorial_t3.json",
-      "sha256": "5c3b9c51fa53bc70f163e6341524b35830953a7f5a34dfec153445c4661eca55",
-      "bytes": 1124,
+      "sha256": "a6b88584304b486566780a9e2bf8504caf9d4f0987f8a88d1e664b1b1b0586c2",
+      "bytes": 1072,
       "media_type": "application/json",
       "kind": "encounter"
     },
@@ -322,57 +322,57 @@
     },
     {
       "path": "entry/prologue.json",
-      "sha256": "40e0b490dddd60c80de89f13edfb5da8c178e097d209120a65e83c50af072fab",
-      "bytes": 5250,
+      "sha256": "52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d",
+      "bytes": 5142,
       "media_type": "application/json",
       "kind": "other_data"
     },
     {
       "path": "presentation/presentation.json",
-      "sha256": "9747f8da220e0088179d4159520817518cd968e4766fe5d87468375324f7b2b8",
-      "bytes": 28739,
+      "sha256": "4fff132a8591dae2dcc8e606049c8278e565b7b810a3220803508df707e8743a",
+      "bytes": 28034,
       "media_type": "application/json",
       "kind": "other_data"
     },
     {
       "path": "story/tutorial_t1_after.json",
-      "sha256": "1d434e1383acf28fa7d9b18682eebb6ea1c8ab912fb3a6758b1aaf9804325e30",
-      "bytes": 4464,
+      "sha256": "5c332ce4b0e23534572c681b3f92032fb209232f06bdb4e25f071aeb516da0d4",
+      "bytes": 4295,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t1_before.json",
-      "sha256": "3851dd5d6216199149a84db9452383b33735af179c4d75da04a4d41f750bb193",
-      "bytes": 4606,
+      "sha256": "08831080a11732f51b1f2333388b7747582d412fd7f9283d93eb7e8e7978ad3d",
+      "bytes": 4437,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t2_after.json",
-      "sha256": "b7102e514cadacbff2a5e853ab9ebcfdd715dbe5a8ed042a2bf8c82db89a00bf",
-      "bytes": 5497,
+      "sha256": "8e2b8d9cda1d68254900b6a3194750cc868f3580aa5a46e869b93dae8ca9f232",
+      "bytes": 5294,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t2_before.json",
-      "sha256": "50a9ba5d9040136f2b47525b20faa53b095ec9ca2e6b4454f355dd96db93d1ad",
-      "bytes": 4240,
+      "sha256": "abe241417b6252053fb9dc1945db8ff8b91aca552c2d09a4cc688c4caae05e9f",
+      "bytes": 4080,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t3_after.json",
-      "sha256": "e8d7b078e7f8cab869acda6d825626f8bd6e6763f3aaa91767e10b8684fee13d",
-      "bytes": 9338,
+      "sha256": "a848b9db0d05914b98436946eb76aaa38175acad88a4375549793ef0280607d1",
+      "bytes": 9003,
       "media_type": "application/json",
       "kind": "story_scene"
     },
     {
       "path": "story/tutorial_t3_before.json",
-      "sha256": "5c36154e3cd21ab885a1d14cc4e59b24cfc2bf4139656e2a16d41ba7e2644e9f",
-      "bytes": 4594,
+      "sha256": "c2c938ab984987f847795c5a344fc7df1c16ff902b8171bba93c3e42597f8189",
+      "bytes": 4425,
       "media_type": "application/json",
       "kind": "story_scene"
     },

@@ -4,8 +4,8 @@
  * Everything after the first restart is a data-only patch published through R2 (content/patches/*, e.g. tools/build_campaign.ts).
  * Run: npm run build:content   (add --contact-sheet to also render .cache/contact_sheet.png)
  */
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { join, relative } from 'node:path';
 import sharp from 'sharp';
 import { ChapterIndex, type ArtManifest, type StoryScene, type UnitAnimState } from '../packages/content-schema/src/index';
 import { buildEncounter, buildScene, buildUnitPack, emotionsUsed, tutorialChapter } from './lib/data';
@@ -129,6 +129,25 @@ const MUSIC: Record<string, { file: string; meta: string }> = {
   bgm_fadyme_theme: { file: `${FADYME_MUSIC_SRC}/bgm_fadyme_theme_v001_loop.ogg`, meta: `${FADYME_MUSIC_SRC}/bgm_fadyme_theme_v001_loop.json` }
 };
 
+const PRESENTATION = 'content/base/presentation/presentation.json';
+const AUTHORED_DIRS = ['voices', 'presentation'];
+
+/** music cues the base manifest declares beyond MUSIC whose file is still on disk (Lyria tracks written in place) */
+function readAuthoredMusic(): { authored: ArtManifest['music']; order: string[] } {
+  const path = 'content/base/art/art_manifest.json';
+  if (!existsSync(join(ROOT, path))) return { authored: {}, order: [] };
+  const music = ((readJson(path) as Partial<ArtManifest>).music ?? {}) as ArtManifest['music'];
+  const authored = Object.fromEntries(Object.entries(music).filter(([cue, m]) => !MUSIC[cue] && existsSync(join(ROOT, 'content/base', m.file))));
+  return { authored, order: Object.keys(music) };
+}
+
+function authoredFiles(): string[] {
+  return AUTHORED_DIRS.flatMap((dir) => {
+    const abs = join(ROOT, 'content/base', dir);
+    return existsSync(abs) ? readdirSync(abs, { recursive: true, withFileTypes: true }).filter((d) => d.isFile()).map((d) => relative(join(ROOT, 'content/base'), join(d.parentPath, d.name)).replaceAll('\\', '/')) : [];
+  });
+}
+
 interface Provenance {
   output: string;
   sha256: string;
@@ -154,7 +173,11 @@ async function main(): Promise<void> {
   const strictArt = process.argv.includes('--strict-art');
   const requireApproved = process.argv.includes('--require-approved') || strictArt;
   const approvedEntries = loadApprovedArtEntries(ROOT, requireApproved);
-  rmSync(join(ROOT, 'content/base'), { recursive: true, force: true });
+  // voices/, presentation/ and the Lyria tracks are authored in place by the media tools (record_game_vo.py,
+  // build_all_voiceovers.py, generate_*_lyria35.py) and have no other source: keep them, regenerate the rest.
+  const { authored: authoredMusic, order: previousMusicOrder } = readAuthoredMusic();
+  for (const dir of ['art', 'story', 'encounters', 'units', 'chapters', 'entry']) rmSync(join(ROOT, 'content/base', dir), { recursive: true, force: true });
+  for (const cue of Object.keys(MUSIC)) rmSync(join(ROOT, `content/base/audio/${cue}.ogg`), { force: true });
 
   const legacyPortraits = JSON.parse(legacyBlob('game/data/presentation/battle_art_v001.json').toString('utf8')).portraits as Record<string, { emotions: Record<string, string> }>;
 
@@ -167,13 +190,16 @@ async function main(): Promise<void> {
   const t3 = tutorialChapter('T-3');
   t3.before.location_id = 'shelter_courtyard_dusk';
   t3.after.location_id = 'shelter_courtyard_dusk';
+  // owner decision (7ad4b2a8): tutorial cutscenes play without background music so the directed VO carries them
+  const STORY_MUSIC = 'stop';
+  const BATTLE_MUSIC = undefined;
   const scenes = {
-    t1_before: buildScene(t1.before, 'T-1', 'before', 'bgm_ch1_ash_forest_calm', party),
-    t1_after: buildScene(t1.after, 'T-1', 'after', 'bgm_ch1_ash_forest_calm', party),
-    t2_before: buildScene(t2.before, 'T-2', 'before', 'bgm_ch1_ash_forest_calm', party),
-    t2_after: buildScene(t2.after, 'T-2', 'after', 'bgm_ch1_ash_forest_calm', party),
-    t3_before: buildScene(t3.before, 'T-3', 'before', 'bgm_ch1_ash_forest_calm', party),
-    t3_after: buildScene(t3.after, 'T-3', 'after', 'bgm_ch1_ash_forest_calm', party)
+    t1_before: buildScene(t1.before, 'T-1', 'before', STORY_MUSIC, party),
+    t1_after: buildScene(t1.after, 'T-1', 'after', STORY_MUSIC, party),
+    t2_before: buildScene(t2.before, 'T-2', 'before', STORY_MUSIC, party),
+    t2_after: buildScene(t2.after, 'T-2', 'after', STORY_MUSIC, party),
+    t3_before: buildScene(t3.before, 'T-3', 'before', STORY_MUSIC, party),
+    t3_after: buildScene(t3.after, 'T-3', 'after', STORY_MUSIC, party)
   };
   // v006: "the final scene holds its closing line for 5 seconds" (the script JSON carries the 3.5 s default for every scene)
   scenes.t3_after.closing_hold_seconds = Math.max(scenes.t3_after.closing_hold_seconds ?? 0, 5);
@@ -181,9 +207,9 @@ async function main(): Promise<void> {
     { unit_id: 'mahmut', row: 'front' as const },
     { unit_id: 'fadyme', row: 'rear' as const }
   ];
-  const enc1 = buildEncounter('T-1', 'tutorial_t1', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t1', TUTORIAL_UI);
-  const enc2 = { ...buildEncounter('T-2', 'tutorial_t2', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t2', TUTORIAL_UI), location_id: 'forgotten_stone_crossing' };
-  const enc3 = { ...buildEncounter('T-3', 'tutorial_t3', partyDefs, 'bgm_ch1_ash_forest_chaotic', 'tutorial_t3', TUTORIAL_UI), location_id: 'shelter_courtyard_dusk' };
+  const enc1 = buildEncounter('T-1', 'tutorial_t1', partyDefs, BATTLE_MUSIC, 'tutorial_t1', TUTORIAL_UI);
+  const enc2 = { ...buildEncounter('T-2', 'tutorial_t2', partyDefs, BATTLE_MUSIC, 'tutorial_t2', TUTORIAL_UI), location_id: 'forgotten_stone_crossing' };
+  const enc3 = { ...buildEncounter('T-3', 'tutorial_t3', partyDefs, BATTLE_MUSIC, 'tutorial_t3', TUTORIAL_UI), location_id: 'shelter_courtyard_dusk' };
 
   // ---- art (approved_art first, legacy fallback only for uncovered keys) ----------------------
   const approvedUnits = new Map<string, ApprovedArtEntry>();
@@ -305,6 +331,13 @@ async function main(): Promise<void> {
       provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(bytes), sources: { [m.file]: sha256(bytes) } });
       music[cue] = { file: rel, loop_start_s: meta.engine_loop.loop_offset_s, duration_s: meta.file_length_s };
     }
+    for (const [cue, m] of Object.entries(authoredMusic)) {
+      provenance.push({ output: `${outDir}/${m.file}`, sha256: sha256(fileBytes(`${outDir}/${m.file}`)), sources: { authored: `${outDir}/${m.file}` } });
+      music[cue] = m;
+    }
+    // keep the previous manifest's cue order so a rebuild does not reshuffle the file
+    const order = [...previousMusicOrder, ...Object.keys(music)];
+    const orderedMusic = Object.fromEntries([...new Set(order)].filter((cue) => music[cue]).map((cue) => [cue, music[cue]!]));
     const ui: ArtManifest['ui'] = {};
     if (approvedUi.has('logo')) {
       const e = approvedUi.get('logo')!;
@@ -339,7 +372,7 @@ async function main(): Promise<void> {
         stills[stKey] = appSt.targets.stills[stKey]!;
       }
     }
-    return validateArt({ schema_version: 1, atlases, units, portraits, backgrounds, music, ui, stills });
+    return validateArt({ schema_version: 1, atlases, units, portraits, backgrounds, music: orderedMusic, ui, stills });
   }
 
   const putJson = (outDir: string, rel: string, value: unknown, sources: Record<string, string>): void => {
@@ -378,6 +411,10 @@ async function main(): Promise<void> {
   );
   // the first-install interlude, copied verbatim from the narrative source and checked against its schema
   const prologue = Prologue.parse(readJson('narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/prologue_v001.json'));
+  // the narrative snapshot predates the VO session: it is "recorded" exactly when every line has an authored voice
+  const voices = existsSync(join(ROOT, PRESENTATION)) ? (readJson(PRESENTATION) as { voices?: Record<string, unknown> }).voices ?? {} : {};
+  prologue.voice_status = prologue.scenes.every((s) => Object.hasOwn(voices, s.line_id)) ? 'recorded' : 'unrecorded';
+  for (const rel of authoredFiles()) provenance.push({ output: `${BASE}/${rel}`, sha256: sha256(fileBytes(`${BASE}/${rel}`)), sources: { authored: `${BASE}/${rel}` } });
   putJson(BASE, 'entry/prologue.json', prologue, { narrative: 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/prologue_v001.json' });
   putJson(
     BASE,

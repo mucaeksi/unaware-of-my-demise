@@ -301,7 +301,7 @@ export function buildEncounter(
   stageId: string,
   encounterId: string,
   party: { unit_id: string; row: 'front' | 'rear' }[],
-  musicCue: string,
+  musicCue: string | undefined,
   storyBase: string,
   ui?: { speed: boolean; auto: boolean }
 ): Encounter {
