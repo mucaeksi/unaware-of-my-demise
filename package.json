@@ -17,8 +17,11 @@
     "test:tools": "vitest run --root tools",
     "lint": "eslint .",
     "build:content": "tsx tools/build_content.ts && tsx tools/make_release.ts --dir content/base --id rel_0001 --generation 1 --channel staging --notes \"Base content shipped inside the app: first-install flow (prologue + tutorials T-1..T-3)\" --created-at 2026-10-10T00:00:00.000Z --out content/base/release.json",
+    "check:content": "tsx tools/check_content.ts",
+    "verify": "npm run lint && npm run typecheck && npm test && npm run check:content",
     "build:campaign": "tsx tools/build_campaign.ts",
-    "build": "npm run build:content && npm run build -w @uomd/game && npm run build -w @uomd/admin",
+    "build": "npm run build -w @uomd/game && npm run build -w @uomd/admin",
+    "deploy:cloudflare": "npm run verify && tsx tools/seed_assets.ts && npm run build && tsx tools/deploy_from_drive.ts",
     "e2e": "playwright test -c tests/e2e/playwright.config.ts",
     "e2e:remote": "playwright test -c tests/e2e/playwright.remote.config.ts"
   },

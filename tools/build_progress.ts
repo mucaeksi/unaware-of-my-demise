@@ -51,18 +51,21 @@ const screens = existsSync(evDir)
       })
   : [];
 
-// Copy Base AAB & Approved Art media into /dev/media/ so the Control Center Assets & Development pages can render inline previews
-for (const sub of ['art', 'audio']) {
-  mkdirSync(join(OUT, 'media', sub), { recursive: true });
-  const baseSub = join(ROOT, 'content/base', sub);
-  if (existsSync(baseSub)) {
-    for (const f of readdirSync(baseSub).filter((n) => n.endsWith('.webp') || n.endsWith('.ogg'))) {
-      copyFileSync(join(baseSub, f), join(OUT, 'media', sub, f));
-    }
+// Copy Base AAB & Approved Art media + JSON data into /dev/media/ so Control Center pages can preview/edit all game files
+function copyTree(srcDir: string, destDir: string): void {
+  if (!existsSync(srcDir)) return;
+  mkdirSync(destDir, { recursive: true });
+  for (const entry of readdirSync(srcDir, { withFileTypes: true })) {
+    const s = join(srcDir, entry.name);
+    const d = join(destDir, entry.name);
+    if (entry.isDirectory()) copyTree(s, d);
+    else if (entry.isFile() && /\.(webp|png|ogg|json)$/i.test(entry.name)) copyFileSync(s, d);
   }
 }
+copyTree(join(ROOT, 'content/base'), join(OUT, 'media'));
 const appArtDir = join(ROOT, 'content/approved_art/art');
 if (existsSync(appArtDir)) {
+  mkdirSync(join(OUT, 'media', 'art'), { recursive: true });
   for (const f of readdirSync(appArtDir).filter((n) => n.endsWith('.webp'))) {
     copyFileSync(join(appArtDir, f), join(OUT, 'media', 'art', f));
   }
@@ -107,7 +110,8 @@ const baseRelease = {
   fileCount: baseRel.files.length,
   totalBytes: baseRel.files.reduce((sum, x) => sum + x.bytes, 0),
   approvedArtCount: approvedEntries.length,
-  approvedEntries
+  approvedEntries,
+  files: baseRel.files
 };
 
 const count = (needle: string): number => roadmap.filter((r) => r.status.includes(needle)).length;

@@ -16,3 +16,4 @@ apps/game/public/content/
 .wrangler/
 *.tsbuildinfo
 apps/admin/public/dev/
+apps/game/public/audition/
