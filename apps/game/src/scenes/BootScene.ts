@@ -124,7 +124,7 @@ export class BootScene extends Phaser.Scene {
         this.scene.start('Battle', { encounterPath: 'encounters/tutorial_t3.json', tutorial: true, onDone: (s: Phaser.Scene) => s.scene.start('Title'), onBack: (s: Phaser.Scene) => s.scene.start('Title') });
         break;
       case 'story_t3_after':
-        this.scene.start('Story', { path: 'story/tutorial_t3_after.json', onDone: () => this.scene.start('Finish') });
+        this.scene.start('Story', { path: 'story/tutorial_t3_after.json', onDone: (s: Phaser.Scene) => s.scene.start('Finish') });
         break;
       case 'finish_wait':
         saveEntry({ phase: 'in_progress', prologue: true, tutorials: 3, updatedAt: new Date().toISOString() });

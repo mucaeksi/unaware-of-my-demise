@@ -1,19 +1,25 @@
-import Phaser from '../engine';
+import * as PIXI from 'pixi.js';
+import type Phaser from '../engine';
 import { StoryRunner, type StoryEvent } from '@uomd/story';
 import type { StoryCommand, StoryScene as StoryData } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
 import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
+import type { Handle } from '../core/anim';
+import { hosted } from '../core/host';
+import { PixiScene } from '../core/PixiScene';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
 import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cutscene';
 import { isDevServer } from '../entry/state';
 import { clearStoryCheckpoint, loadFlowCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
-import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
+import { blocker, Button, panel, sceneFadeIn, title, txt, verticalShade, type UiText } from '../ui/pixiKit';
 import { buildSubtitleSchedule, resolveSubtitleProgress, type SubtitleSchedule } from '../ui/subtitles';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
+import { Sparks } from '../vfx/sparks';
+import { vfxTextures } from '../vfx/textures';
 
 export interface StoryInit {
   path: string;
@@ -25,9 +31,12 @@ export interface StoryInit {
 
 const CPS = { slow: 26, normal: 46, fast: 95 } as const;
 
+/** a portrait bust: `image` carries the choreography (offset, tilt, scale); the sprite inside it only mirrors */
 interface Actor {
   side: 'left' | 'right';
-  image: Phaser.GameObjects.Image;
+  image: PIXI.Container;
+  sprite: PIXI.Sprite;
+  key: string;
   emotion: string;
   baseX: number;
   baseY: number;
@@ -35,32 +44,32 @@ interface Actor {
   offsetY: number;
   tiltDeg: number;
   scaleMult: number;
-  breatheTween: Phaser.Tweens.Tween | null;
+  breathe: Handle | null;
 }
 
-export class StoryScene extends Phaser.Scene {
-  private generation = 0;
+/** Visual-novel reader for story scenes, drawn with PIXI (D-25). Story logic lives in @uomd/story's StoryRunner. */
+export class StoryScene extends PixiScene<StoryInit> {
   private stage: NarrativeStage | null = null;
   private voiceBtn: Button | null = null;
   private currentView: () => boolean = () => false;
   private init0!: StoryInit;
   private data0!: StoryData;
   private runner!: StoryRunner;
-  private bg!: Phaser.GameObjects.Image;
-  private cgImage: Phaser.GameObjects.Image | null = null;
+  private bg!: PIXI.Sprite;
+  private bgKey = '';
+  private cgImage: PIXI.Sprite | null = null;
   private cgActive = false;
-  get illustration(): Phaser.GameObjects.Image | null { return this.cgImage; }
   private actors = new Map<string, Actor>();
-  private box!: Phaser.GameObjects.Container;
-  private nameText!: Phaser.GameObjects.Text;
-  private namePlate!: Phaser.GameObjects.Container;
-  private actionBadge!: Phaser.GameObjects.Text;
-  private bodyText!: Phaser.GameObjects.Text;
-  private caret!: Phaser.GameObjects.Text;
-  private lineShimmer!: Phaser.GameObjects.Rectangle;
-  private voiceSyncTrack!: Phaser.GameObjects.Rectangle;
-  private voiceSyncFill!: Phaser.GameObjects.Rectangle;
-  private typing: Phaser.Time.TimerEvent | null = null;
+  private nameText!: UiText;
+  private namePlate!: PIXI.Container;
+  private actionBadge!: UiText;
+  private bodyText!: UiText;
+  private caret!: UiText;
+  private lineShimmer = new PIXI.Graphics();
+  private voiceSyncFill = new PIXI.Graphics();
+  private syncColor: number = C.gold;
+  private typing: Handle | null = null;
+  private stopTyping: (() => void) | null = null;
   private activeSchedule: SubtitleSchedule | null = null;
   private typingStartedAt = 0;
   private fullText = '';
@@ -68,12 +77,12 @@ export class StoryScene extends Phaser.Scene {
   private waiting = false;
   private auto = false;
   private skip = false;
-  private autoTimer: Phaser.Time.TimerEvent | null = null;
+  private autoTimer: Handle | null = null;
   private read = new Set<string>();
   private currentLine: Extract<StoryEvent, { type: 'line' }> | null = null;
   private finished = false;
-  private choiceLayer: Phaser.GameObjects.Container | null = null;
-  private logLayer: Phaser.GameObjects.Container | null = null;
+  private choiceLayer: PIXI.Container | null = null;
+  private logLayer: PIXI.Container | null = null;
   private autoBtn!: Button;
   private skipBtn: Button | null = null;
   /** first-install cutscene rules (scene data carries a `presentation` block) */
@@ -81,56 +90,32 @@ export class StoryScene extends Phaser.Scene {
   private pausing = false;
   private prevSpeaker: string | null = null;
   private lastLineId: string | null = null;
+  private activeMusicCue = '';
+  private currentMoodLabel = '';
 
-  constructor() {
-    super('Story');
+  get illustration(): PIXI.Sprite | null {
+    return this.cgImage;
   }
 
-  init(data: StoryInit): void {
-    this.generation++;
-    this.stage = null;
-    this.voiceBtn = null;
+  async create(data: StoryInit): Promise<void> {
     this.init0 = data;
-    this.cgImage = null;
-    this.cgActive = false;
-    this.actors = new Map();
-    this.finished = false;
-    this.waiting = false;
-    this.auto = false;
-    this.skip = false;
-    this.cutscene = false;
-    this.pausing = false;
-    this.prevSpeaker = null;
-    this.currentLine = null;
-    this.lineDone = true;
-    this.typing = null;
-    this.activeSchedule = null;
-    this.typingStartedAt = 0;
-    this.autoTimer = null;
-    this.choiceLayer = null;
-    this.logLayer = null;
     this.read = loadReadLines(Services.api.accountKey);
-  }
-
-  async create(): Promise<void> {
-    const generation = this.generation;
-    const current = (): boolean => generation === this.generation && (this.init0.authRevision === undefined || this.init0.authRevision === Services.api.authRevision);
+    const current = (): boolean => this.live && (this.init0.authRevision === undefined || this.init0.authRevision === Services.api.authRevision);
     this.currentView = current;
-    const accountChanged = (): void => { if (!current() && (this.sys.isActive() || this.sys.isPaused())) this.init0.onBack?.(this); };
+    const accountChanged = (): void => {
+      if (!current() && (this.host.sys.isActive() || this.host.sys.isPaused())) this.init0.onBack?.(this.host);
+    };
     if (this.init0.authRevision !== undefined) Services.api.addEventListener('auth', accountChanged);
-    this.events.once('shutdown', () => {
-      this.generation++;
+    this.onClose(() => {
+      this.stopTyping?.();
       Services.api.removeEventListener('auth', accountChanged);
-      if (!loadFlowCheckpoint(Services.api.accountKey)) {
-        clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
-      }
+      if (!loadFlowCheckpoint(Services.api.accountKey)) clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
     });
     const { content, art } = Services.ready();
-    this.cameras.main.setBackgroundColor(0x0a0610);
     try {
-      const data = this.init0.data ?? await content.story(this.init0.path);
+      const story = this.init0.data ?? (await content.story(this.init0.path));
       if (!current()) return;
-      this.data0 = data;
+      this.data0 = story;
       this.cutscene = Boolean(this.data0.presentation);
       this.auto = this.data0.presentation?.auto ?? false;
       const lastLine = [...this.data0.commands].reverse().find((c): c is Extract<StoryCommand, { op: 'say' | 'narrate' }> => c.op === 'say' || c.op === 'narrate');
@@ -144,13 +129,7 @@ export class StoryScene extends Phaser.Scene {
         chars.add(ch);
         let set = charEmotions.get(ch);
         if (!set) {
-          set = new Set(
-            ch === 'fadyme'
-              ? ['composed', 'dry_amusement', 'soft_smile', 'determined']
-              : ch === 'mahmut'
-                ? ['composed', 'watchful', 'dry_humor', 'protective']
-                : ['composed'],
-          );
+          set = new Set(ch === 'fadyme' ? ['composed', 'dry_amusement', 'soft_smile', 'determined'] : ch === 'mahmut' ? ['composed', 'watchful', 'dry_humor', 'protective'] : ['composed']);
           charEmotions.set(ch, set);
         }
         set.add(em);
@@ -163,12 +142,12 @@ export class StoryScene extends Phaser.Scene {
         if (c.op === 'say') addEmotion(c.speaker, c.emotion ?? 'composed');
         if (c.op === 'music' && c.cue_id && c.cue_id !== 'stop') musicCues.add(c.cue_id);
       }
-      // Always load all character emotion portraits and scene music cues so both speaker/listener and soundtrack react dynamically
+      // every emotion portrait and scene music cue loads up front so speaker, listener and soundtrack react at once
       await Promise.all([
-        ...[...locations].map((id) => art.loadBackground(this, id)),
-        ...(this.data0.illustration_id ? [art.loadStills(this, [this.data0.illustration_id])] : []),
-        art.loadPortraits(this, [...chars], charEmotions),
-        ...[...musicCues].map((cue) => art.loadMusic(this, cue).catch(() => undefined))
+        ...[...locations].map((id) => art.loadBackground(this.host, id)),
+        ...(this.data0.illustration_id ? [art.loadStills(this.host, [this.data0.illustration_id])] : []),
+        art.loadPortraits(this.host, [...chars], charEmotions),
+        ...[...musicCues].map((cue) => art.loadMusic(this.host, cue).catch(() => undefined))
       ]);
     } catch (e) {
       if (!current()) return;
@@ -176,9 +155,7 @@ export class StoryScene extends Phaser.Scene {
       return;
     }
     if (!current()) return;
-    const savedCp = loadFlowCheckpoint(Services.api.accountKey)
-      ? loadStoryCheckpoint(Services.api.accountKey, this.init0.path, this.data0.scene_id)
-      : null;
+    const savedCp = loadFlowCheckpoint(Services.api.accountKey) ? loadStoryCheckpoint(Services.api.accountKey, this.init0.path, this.data0.scene_id) : null;
     this.runner = new StoryRunner(this.data0, savedCp?.state);
     this.build();
     this.restoreFromRunner();
@@ -187,172 +164,132 @@ export class StoryScene extends Phaser.Scene {
   }
 
   private fail(e: unknown): void {
-    this.finished = true; this.stage?.destroy(); this.autoTimer?.remove(); this.typing?.remove();
-    title(this, REF_W / 2, REF_H / 2 - 40, 'This scene could not be loaded', SIZE.h2, T.crimson);
-    txt(this, REF_W / 2, REF_H / 2 + 30, String(e instanceof Error ? e.message : e), { fontSize: `${SIZE.small}px`, color: T.dim, align: 'center', wordWrap: { width: 1400 } }).setOrigin(0.5);
-    new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => this.init0.onBack ? this.init0.onBack(this) : this.scene.start('Title') });
+    this.finished = true;
+    this.stage?.destroy();
+    this.autoTimer?.stop();
+    this.stopTyping?.();
+    this.add(title(REF_W / 2, REF_H / 2 - 40, 'This scene could not be loaded', SIZE.h2, T.crimson), DEPTH.modal);
+    this.add(txt(REF_W / 2, REF_H / 2 + 30, String(e instanceof Error ? e.message : e), { fontSize: SIZE.small, color: T.dim, align: 'center', wordWrap: { width: 1400 } }, 0.5), DEPTH.modal);
+    this.add(new Button(this, REF_W / 2, REF_H / 2 + 200, { label: 'BACK', w: 360, onClick: () => (this.init0.onBack ? this.init0.onBack(this.host) : this.nav.start('Title')) }), DEPTH.modal);
   }
 
   // ------------------------------------------------------------------ layout
 
+  private setBackground(key: string): void {
+    if (this.bgKey === key) return;
+    this.bgKey = key;
+    this.bg.texture = this.tex(key);
+  }
+
   private build(): void {
     const { art } = Services.ready();
-    this.bg = this.add.image(REF_W / 2, REF_H / 2, art.background(this.data0.location_id)).setDepth(DEPTH.bg);
-    const cover = Math.max(REF_W / this.bg.width, REF_H / this.bg.height);
-    this.bg.setScale(cover * 1.04);
-    if (!prefs().reducedMotion) {
-      this.tweens.add({
-        targets: this.bg,
-        scale: cover * 1.09,
-        x: REF_W / 2 - 18,
-        duration: 36000,
-        ease: 'Sine.easeInOut',
-        yoyo: true,
-        repeat: -1
-      });
-    }
+    const reduced = prefs().reducedMotion;
+    this.bg = this.add(new PIXI.Sprite(), DEPTH.bg);
+    this.bg.anchor.set(0.5);
+    this.bg.position.set(REF_W / 2, REF_H / 2);
+    this.setBackground(art.background(this.data0.location_id));
+    const cover = Math.max(REF_W / (this.bg.texture.width || REF_W), REF_H / (this.bg.texture.height || REF_H));
+    this.bg.scale.set(cover * 1.04);
+    if (!reduced) this.anim.to(this.bg, { scale: cover * 1.09, x: REF_W / 2 - 18 }, { duration: 36000, ease: 'sine.inout', yoyo: true, repeat: -1 });
 
     if (this.data0.illustration_id) {
       const stillKey = art.still(this.data0.illustration_id);
       if (stillKey) {
-        this.cgImage = this.add.image(REF_W / 2, REF_H / 2, stillKey).setDepth(DEPTH.world + 4).setAlpha(0);
-        const cgCover = Math.max(REF_W / this.cgImage.width, REF_H / this.cgImage.height);
-        this.cgImage.setScale(cgCover * 1.02);
+        const cg = this.add(new PIXI.Sprite(this.tex(stillKey)), DEPTH.world + 4);
+        cg.anchor.set(0.5);
+        cg.position.set(REF_W / 2, REF_H / 2);
+        cg.alpha = 0;
+        cg.scale.set(Math.max(REF_W / (cg.texture.width || REF_W), REF_H / (cg.texture.height || REF_H)) * 1.02);
+        this.cgImage = cg;
       }
     }
 
-    // Subtle atmospheric ash & ember motes behind the character busts
-    if (!prefs().reducedMotion && this.textures.exists('fx_spark')) {
-      this.add
-        .particles(0, 0, 'fx_spark', {
-          x: { min: 0, max: REF_W },
-          y: REF_H - 180,
-          lifespan: 9500,
-          speedY: { min: -42, max: -16 },
-          speedX: { min: -14, max: 14 },
-          scale: { min: 0.04, max: 0.13 },
-          alpha: { start: 0.28, end: 0 },
-          frequency: 420,
-          tint: [0xc9b6e4, 0xe3c37d, 0xefe8f5],
-          blendMode: 'ADD'
-        })
-        .setDepth(DEPTH.bg + 2);
+    // atmospheric ash and ember motes behind the busts
+    if (!reduced) {
+      const motes = this.add(new Sparks(vfxTextures().spark), DEPTH.bg + 2);
+      motes.ambient({ every: 420, area: { x: [0, REF_W], y: [REF_H - 180, REF_H - 180] }, vx: [-14, 14], vy: [-42, -16], look: { lifespan: 9500, scale: [0.04, 0.13], randomScale: true, alpha: [0.28, 0], tint: [0xc9b6e4, 0xe3c37d, 0xefe8f5] } });
+      this.onTick((dt) => motes.update(dt));
     }
 
-    // Grade the world below the HUD so Light Novel dialogue and original character busts keep rich contrast.
-    const shade = this.add.graphics().setDepth(DEPTH.bg + 5);
-    shade.fillGradientStyle(0x0a0610, 0x0a0610, 0x0a0610, 0x0a0610, 0.08, 0.08, 0.76, 0.76);
-    shade.fillRect(0, 0, REF_W, REF_H);
+    // grade the world below the HUD so the dialogue and the busts keep their contrast
+    this.add(verticalShade(0, 0, REF_W, REF_H, 0x0a0610, 0.08, 0.76), DEPTH.bg + 5);
 
     // tap anywhere to advance; buttons sit above this zone
-    const zone = this.add.zone(REF_W / 2, REF_H / 2, REF_W, REF_H).setDepth(DEPTH.hud - 10).setInteractive();
+    const zone = this.add(new PIXI.Container(), DEPTH.hud - 10);
+    zone.hitArea = new PIXI.Rectangle(0, 0, REF_W, REF_H);
+    zone.eventMode = 'static';
     zone.on('pointerup', () => this.advance());
-    this.input.keyboard?.on('keydown-SPACE', () => this.advance());
-    this.input.keyboard?.on('keydown-ENTER', () => this.advance());
+    const onKey = (ev: KeyboardEvent): void => {
+      if ((ev.key === ' ' || ev.key === 'Enter') && this.host.sys.isActive() && !(ev.target instanceof HTMLButtonElement)) this.advance();
+    };
+    window.addEventListener('keydown', onKey);
+    this.onClose(() => window.removeEventListener('keydown', onKey));
 
-    const insets = safeInsets(this);
-    const panelBg = panel(this, 0, 0, 1680, 248, 'normal');
-    // Light Novel ornamental inner rule inside the reader box
-    const lnFrame = this.add.graphics();
-    lnFrame.lineStyle(1, C.gold, 0.32);
-    lnFrame.lineBetween(-790, -96, 790, -96);
-    lnFrame.lineBetween(-790, 96, 790, 96);
-
-    this.lineShimmer = this.add.rectangle(-640, -96, 240, 2, C.gold, 0).setOrigin(0.5);
-    this.voiceSyncTrack = this.add.rectangle(0, 96, 760, 2, 0xc9b6e4, 0.16).setOrigin(0.5);
-    this.voiceSyncFill = this.add.rectangle(-380, 96, 0, 2, C.gold, 0.88).setOrigin(0, 0.5);
-
-    this.nameText = txt(this, 0, 0, '', {
-      fontFamily: F.display,
-      fontSize: '28px',
-      fontStyle: '700',
-      color: T.gold,
-      stroke: '#0a0610',
-      strokeThickness: 4
-    })
-      .setOrigin(0.5)
-      .setLetterSpacing(2);
-    const plateBg = panel(this, 0, 0, 490, 68, 'hot');
-    this.namePlate = this.add.container(0, 0, [plateBg, this.nameText]).setDepth(DEPTH.hud + 2).setVisible(false);
-
-    this.actionBadge = txt(this, 0, -88, '', {
-      fontFamily: F.display,
-      fontSize: '20px',
-      fontStyle: '600',
-      color: '#e3c37d',
-      stroke: '#0a0610',
-      strokeThickness: 3
-    })
-      .setOrigin(0.5)
-      .setLetterSpacing(4)
-      .setAlpha(0.88);
-
-    this.bodyText = txt(this, -780, -64, '', {
-      fontFamily: F.body,
-      fontSize: '41px',
-      color: T.text,
-      lineSpacing: 10,
-      wordWrap: { width: 1560 },
-      stroke: '#07040c',
-      strokeThickness: 3.5
-    }).setShadow(0, 4, '#050208', 10, true, true);
-    this.caret = txt(this, 780, 78, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
-    this.box = this.add
-      .container(REF_W / 2, 886 - insets.bottom, [
-        panelBg,
-        lnFrame,
-        this.lineShimmer,
-        this.voiceSyncTrack,
-        this.voiceSyncFill,
-        this.actionBadge,
-        this.bodyText,
-        this.caret
-      ])
-      .setDepth(DEPTH.hud);
+    const insets = safeInsets(this.host);
+    // light-novel reader box with its ornamental inner rules
+    const box = new PIXI.Container();
+    box.position.set(REF_W / 2, 886 - insets.bottom);
+    const rules = new PIXI.Graphics().moveTo(-790, -96).lineTo(790, -96).moveTo(-790, 96).lineTo(790, 96).stroke({ width: 1, color: C.gold, alpha: 0.32 });
+    const syncTrack = new PIXI.Graphics().rect(-380, 95, 760, 2).fill({ color: 0xc9b6e4, alpha: 0.16 });
+    this.voiceSyncFill.position.set(-380, 95);
+    this.lineShimmer.rect(-120, -1, 240, 2).fill(0xffffff);
+    this.lineShimmer.position.set(-640, -96);
+    this.lineShimmer.alpha = 0;
+    this.nameText = txt(0, 0, '', { fontFamily: F.display, fontSize: 28, fontStyle: '700', color: T.gold, stroke: '#0a0610', strokeThickness: 4, letterSpacing: 2 }, 0.5);
+    this.namePlate = this.add(new PIXI.Container(), DEPTH.hud + 2);
+    this.namePlate.addChild(panel(0, 0, 490, 68, 'hot'), this.nameText);
+    this.namePlate.visible = false;
+    this.actionBadge = txt(0, -88, '', { fontFamily: F.display, fontSize: 20, fontStyle: '600', color: '#e3c37d', stroke: '#0a0610', strokeThickness: 3, letterSpacing: 4 }, 0.5);
+    this.actionBadge.alpha = 0.88;
+    this.bodyText = txt(-780, -64, '', { fontFamily: F.body, fontSize: 41, color: T.text, lineSpacing: 10, wordWrap: { width: 1560 }, stroke: '#07040c', strokeThickness: 3.5, shadow: { x: 0, y: 4, color: '#050208', blur: 10 } });
+    this.caret = txt(780, 78, '▼', { fontSize: 32, color: T.gold }, [1, 0.5]);
+    this.caret.visible = false;
+    box.addChild(panel(0, 0, 1680, 248, 'normal'), rules, this.lineShimmer, syncTrack, this.voiceSyncFill, this.actionBadge, this.bodyText, this.caret);
+    this.add(box, DEPTH.hud);
 
     const topBtnY = 58 + insets.top;
     const btnW = 148;
     const btnH = 62;
     const btnGap = 14;
     const showSkip = !this.cutscene || isDevServer();
-    const rightMostX = REF_W - 104 - insets.right;
-    const skipX = rightMostX;
-    const autoX = showSkip ? skipX - (btnW + btnGap) : rightMostX;
+    const skipX = REF_W - 104 - insets.right;
+    const autoX = showSkip ? skipX - (btnW + btnGap) : skipX;
     const logX = autoX - (btnW + btnGap);
     const voiceX = logX - (btnW + btnGap);
-    if (showSkip) {
-      this.skipBtn = new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
-    }
-    this.autoBtn = new Button(this, autoX, topBtnY, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
-    new Button(this, logX, topBtnY, { label: 'LOG', w: btnW, h: btnH, fontSize: 21, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
-    this.voiceBtn = new Button(this, voiceX, topBtnY, { label: 'VOICE', w: btnW, h: btnH, fontSize: 20, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
-    title(this, 60 + insets.left, topBtnY, this.data0.title_en, 30, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5);
-    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 220 + insets.left, 210 + insets.top, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
-    this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
+    const top = DEPTH.hud + 3;
+    if (showSkip) this.skipBtn = this.add(new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }), top);
+    this.autoBtn = this.add(new Button(this, autoX, topBtnY, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }), top);
+    this.add(new Button(this, logX, topBtnY, { label: 'LOG', w: btnW, h: btnH, fontSize: 21, onClick: () => this.showLog() }), top);
+    this.voiceBtn = this.add(new Button(this, voiceX, topBtnY, { label: 'VOICE', w: btnW, h: btnH, fontSize: 20, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }), top);
+    this.voiceBtn.visible = false;
+    const heading = this.add(title(60 + insets.left, topBtnY, this.data0.title_en, 30, T.dim), top);
+    heading.anchor.set(0, 0.5);
+    if (this.init0.authRevision !== undefined && this.init0.onBack) this.add(new Button(this, 220 + insets.left, 210 + insets.top, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this.host) }), top);
+    this.anim.to(this.caret, { alpha: 0.2 }, { duration: 600, yoyo: true, repeat: -1 });
+
     const onContextLost = (): void => {
-      if (!this.finished && this.data0 && this.runner) {
-        saveStoryCheckpoint(Services.api.accountKey, {
-          path: this.init0.path,
-          sceneId: this.data0.scene_id,
-          checkpointId: this.currentLine?.lineId,
-          state: this.runner.saveAtCurrentEvent()
-        });
-        saveReadLines(Services.api.accountKey, this.read);
-      }
+      if (this.finished || !this.data0 || !this.runner) return;
+      saveStoryCheckpoint(Services.api.accountKey, { path: this.init0.path, sceneId: this.data0.scene_id, checkpointId: this.currentLine?.lineId, state: this.runner.saveAtCurrentEvent() });
+      saveReadLines(Services.api.accountKey, this.read);
     };
-    this.game.events.on('webgl:contextlost', onContextLost);
-    const onPointerResumeAudio = (): void => {
+    const game = this.host.game;
+    game.events.on('webgl:contextlost', onContextLost);
+    // a WebView may start with audio suspended until the first touch
+    const resumeAudio = (): void => {
       Sfx.resume();
       if (this.activeMusicCue) this.playSceneMusic(this.activeMusicCue, 0.8);
     };
-    this.input.on('pointerdown', onPointerResumeAudio);
-    this.events.once('shutdown', () => {
-      this.game.events.off('webgl:contextlost', onContextLost);
-      this.input.off('pointerdown', onPointerResumeAudio);
+    game.canvas.addEventListener('pointerdown', resumeAudio);
+    this.onClose(() => {
+      game.events.off('webgl:contextlost', onContextLost);
+      game.canvas.removeEventListener('pointerdown', resumeAudio);
     });
   }
 
-  private activeMusicCue = '';
+  private drawSyncFill(ratio: number): void {
+    this.voiceSyncFill.clear();
+    if (ratio > 0) this.voiceSyncFill.rect(0, 0, 760 * Math.min(1, ratio), 2).fill({ color: this.syncColor, alpha: 0.88 });
+  }
 
   private sceneMusicCuesFor(sceneId: string): string[] {
     switch (sceneId) {
@@ -374,25 +311,19 @@ export class StoryScene extends Phaser.Scene {
 
   private playSceneMusic(cueId: string, fade = 1.6): void {
     this.activeMusicCue = cueId;
-    const { art } = Services.ready();
-    const m = art.music(cueId);
-    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, fade);
+    const m = Services.ready().art.music(cueId);
+    if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, fade);
   }
 
   /** Applies reconstructed visual/audio state when resuming from a mid-scene checkpoint. */
   private restoreFromRunner(): void {
     const { art } = Services.ready();
     const r = this.runner.restored;
-    const bgKey = art.background(r.locationId);
-    if (this.bg.texture.key !== bgKey) this.bg.setTexture(bgKey);
-    const initialCue = r.musicCueId && r.musicCueId !== 'stop' ? r.musicCueId : this.defaultMusicCueForScene();
-    this.playSceneMusic(initialCue, 1.5);
-    for (const [character, a] of r.actors) {
-      this.showActor(character, a.side, a.emotion, true);
-    }
+    this.setBackground(art.background(r.locationId));
+    this.playSceneMusic(r.musicCueId && r.musicCueId !== 'stop' ? r.musicCueId : this.defaultMusicCueForScene(), 1.5);
+    for (const [character, a] of r.actors) this.showActor(character, a.side, a.emotion, true);
     this.prevSpeaker = r.prevSpeaker;
   }
-
 
   // ------------------------------------------------------------------ program flow
 
@@ -408,39 +339,45 @@ export class StoryScene extends Phaser.Scene {
     }
   }
 
+  private checkpoint(checkpointId?: string, atCurrentEvent = true): void {
+    saveStoryCheckpoint(Services.api.accountKey, {
+      path: this.init0.path,
+      sceneId: this.data0.scene_id,
+      ...(checkpointId !== undefined ? { checkpointId } : {}),
+      state: atCurrentEvent ? this.runner.saveAtCurrentEvent() : this.runner.save()
+    });
+  }
+
   /** Applies an event; returns true when the story must pause for input. */
   private apply(e: StoryEvent): boolean {
     const { art } = Services.ready();
     switch (e.type) {
       case 'presentation': {
-        const generation = this.generation;
         this.waiting = false;
-        void this.stage?.execute(e.command).then(() => { if (generation === this.generation && this.currentView()) this.pump(); }).catch((error: unknown) => { if (generation === this.generation && this.currentView()) this.fail(error); });
+        void this.stage
+          ?.execute(e.command)
+          .then(() => {
+            if (this.currentView()) this.pump();
+          })
+          .catch((error: unknown) => {
+            if (this.currentView()) this.fail(error);
+          });
         return true;
       }
-      case 'background': {
-        const key = art.background(e.locationId);
-        if (this.bg.texture.key !== key) this.bg.setTexture(key);
+      case 'background':
+        this.setBackground(art.background(e.locationId));
         return false;
-      }
-      case 'music': {
-        if (e.cueId && e.cueId !== 'stop') {
-          this.playSceneMusic(e.cueId, 1.5);
-        }
+      case 'music':
+        if (e.cueId && e.cueId !== 'stop') this.playSceneMusic(e.cueId, 1.5);
         return false;
-      }
       case 'fade':
-        if (e.direction === 'out') {
-          const isFinalTutorialScene = this.data0.scene_id === 'tutorial_t3_after';
-          const fadeMs = isFinalTutorialScene ? 2200 : Math.max(1200, e.seconds * 1000);
-          this.cameras.main.fadeOut(fadeMs, 10, 6, 16);
-        }
+        if (e.direction === 'out') void this.fadeOut(this.data0.scene_id === 'tutorial_t3_after' ? 2200 : Math.max(1200, e.seconds * 1000));
         return false;
       case 'flash':
-        if (!prefs().reducedMotion) this.cameras.main.flash(e.seconds * 1000, 255, 255, 255);
+        if (!prefs().reducedMotion) this.flash(e.seconds * 1000);
         return false;
       case 'shake':
-        if (!prefs().reducedMotion) this.cameras.main.shake(e.seconds * 1000, 0.006 * e.intensity);
+        if (!prefs().reducedMotion) this.shake(e.seconds * 1000, 0.006 * e.intensity);
         return false;
       case 'show':
         this.showActor(e.character, e.side);
@@ -449,31 +386,17 @@ export class StoryScene extends Phaser.Scene {
         this.hideActor(e.character);
         return false;
       case 'checkpoint':
-        saveStoryCheckpoint(Services.api.accountKey, {
-          path: this.init0.path,
-          sceneId: this.data0.scene_id,
-          checkpointId: e.checkpointId,
-          state: this.runner.save()
-        });
+        this.checkpoint(e.checkpointId, false);
         return false;
       case 'wait':
-        this.time.delayedCall(e.seconds * 1000, () => this.pump());
+        this.anim.after(e.seconds * 1000, () => this.pump());
         return true;
       case 'line':
-        saveStoryCheckpoint(Services.api.accountKey, {
-          path: this.init0.path,
-          sceneId: this.data0.scene_id,
-          checkpointId: e.lineId,
-          state: this.runner.saveAtCurrentEvent()
-        });
+        this.checkpoint(e.lineId);
         this.showLine(e);
         return true;
       case 'choice':
-        saveStoryCheckpoint(Services.api.accountKey, {
-          path: this.init0.path,
-          sceneId: this.data0.scene_id,
-          state: this.runner.saveAtCurrentEvent()
-        });
+        this.checkpoint();
         this.showChoices(e);
         return true;
       case 'end':
@@ -487,11 +410,10 @@ export class StoryScene extends Phaser.Scene {
     this.finished = true;
     clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
     saveReadLines(Services.api.accountKey, this.read);
-    this.autoTimer?.remove();
-    const isFinalTutorialScene = this.data0.scene_id === 'tutorial_t3_after';
-    const holdOutMs = isFinalTutorialScene ? 2200 : 1200;
-    this.cameras.main.fadeOut(holdOutMs, 10, 6, 16);
-    this.time.delayedCall(holdOutMs, () => this.init0.onDone(this));
+    this.autoTimer?.stop();
+    const holdOutMs = this.data0.scene_id === 'tutorial_t3_after' ? 2200 : 1200;
+    void this.fadeOut(holdOutMs);
+    this.anim.after(holdOutMs, () => this.init0.onDone(this.host));
   }
 
   // ------------------------------------------------------------------ actors & bust choreography
@@ -500,37 +422,21 @@ export class StoryScene extends Phaser.Scene {
     return character === 'fadyme' ? 1150 : 1040;
   }
 
+  private bustScale(character: string, a: Actor): number {
+    return this.targetBustHeight(character) / (a.sprite.texture.height || 1);
+  }
+
   private activateCg(immediate = false): void {
-    if (!this.cgImage || this.cgActive) return;
+    const cg = this.cgImage;
+    if (!cg || this.cgActive) return;
     this.cgActive = true;
-    const cover = Math.max(REF_W / this.cgImage.width, REF_H / this.cgImage.height);
+    const cover = Math.max(REF_W / (cg.texture.width || REF_W), REF_H / (cg.texture.height || REF_H));
     const ms = immediate || prefs().reducedMotion ? 1 : 1100;
-    this.tweens.add({
-      targets: this.cgImage,
-      alpha: 1,
-      duration: ms,
-      ease: 'Sine.easeInOut'
-    });
-    if (!prefs().reducedMotion) {
-      this.tweens.add({
-        targets: this.cgImage,
-        scaleX: cover * 1.065,
-        scaleY: cover * 1.065,
-        y: REF_H / 2 - 12,
-        duration: 28000,
-        yoyo: true,
-        repeat: -1,
-        ease: 'Sine.easeInOut'
-      });
-    }
+    this.anim.to(cg, { alpha: 1 }, { duration: ms, ease: 'sine.inout' });
+    if (!prefs().reducedMotion) this.anim.to(cg, { scaleX: cover * 1.065, scaleY: cover * 1.065, y: REF_H / 2 - 12 }, { duration: 28000, yoyo: true, repeat: -1, ease: 'sine.inout' });
     for (const [, a] of this.actors) {
-      this.tweens.killTweensOf(a.image);
-      this.tweens.add({
-        targets: a.image,
-        alpha: 0,
-        duration: Math.min(650, ms),
-        ease: 'Sine.easeOut'
-      });
+      this.anim.killOf(a.image);
+      this.anim.to(a.image, { alpha: 0 }, { duration: Math.min(650, ms), ease: 'sine.out' });
     }
   }
 
@@ -540,108 +446,78 @@ export class StoryScene extends Phaser.Scene {
     if (!key) return;
     const existing = this.actors.get(character);
     if (existing) {
-      existing.breatheTween?.stop();
-      existing.image.destroy();
+      existing.breathe?.stop();
+      this.anim.killOf(existing.image);
+      existing.image.destroy({ children: true });
       this.actors.delete(character);
     }
     const baseX = side === 'left' ? 460 : REF_W - 460;
     const baseY = REF_H + 18;
-    const img = this.add
-      .image(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY, key)
-      .setOrigin(0.5, 1)
-      .setDepth(DEPTH.world)
-      .setAlpha(this.cgActive ? 0 : immediate ? 0.86 : 0);
-    const k = this.targetBustHeight(character) / img.height;
-    img.setScale(k);
-    // Fadyme's knee-up sprites natively face left; Mahmut's natively face right. Flip only if needed to face inward.
+    const image = this.add(new PIXI.Container(), DEPTH.world);
+    const sprite = new PIXI.Sprite(this.tex(key));
+    sprite.anchor.set(0.5, 1);
+    // Fadyme's knee-up art faces left and Mahmut's faces right: mirror so each looks inward
     const nativeFacing = character === 'fadyme' ? 'left' : 'right';
-    const desiredFacing = side === 'left' ? 'right' : 'left';
-    img.setFlipX(nativeFacing !== desiredFacing);
-
-    let breatheTween: Phaser.Tweens.Tween | null = null;
-    if (!prefs().reducedMotion) {
-      breatheTween = this.tweens.add({
-        targets: img,
-        scaleY: k * 1.012,
-        duration: side === 'left' ? 2800 : 2500,
-        yoyo: true,
-        repeat: -1,
-        ease: 'Sine.easeInOut'
-      });
-    }
-
-    const actor: Actor = {
-      side,
-      image: img,
-      emotion,
-      baseX,
-      baseY,
-      offsetX: 0,
-      offsetY: 0,
-      tiltDeg: 0,
-      scaleMult: 1,
-      breatheTween
-    };
+    sprite.scale.x = nativeFacing !== (side === 'left' ? 'right' : 'left') ? -1 : 1;
+    image.addChild(sprite);
+    image.position.set(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY);
+    image.alpha = this.cgActive ? 0 : immediate ? 0.86 : 0;
+    const actor: Actor = { side, image, sprite, key, emotion, baseX, baseY, offsetX: 0, offsetY: 0, tiltDeg: 0, scaleMult: 1, breathe: null };
+    const k = this.bustScale(character, actor);
+    image.scale.set(k);
+    if (!prefs().reducedMotion) actor.breathe = this.anim.to(image, { scaleY: k * 1.012 }, { duration: side === 'left' ? 2800 : 2500, yoyo: true, repeat: -1, ease: 'sine.inout' });
     this.actors.set(character, actor);
-    if (!immediate && !this.cgActive) {
-      this.tweens.add({ targets: img, x: baseX, alpha: 0.86, duration: prefs().reducedMotion ? 1 : 950, ease: 'Cubic.easeOut' });
-    }
+    if (!immediate && !this.cgActive) this.anim.to(image, { x: baseX, alpha: 0.86 }, { duration: prefs().reducedMotion ? 1 : 950, ease: 'cubic.out' });
   }
 
   private hideActor(character: string): void {
     const a = this.actors.get(character);
     if (!a) return;
-    a.breatheTween?.stop();
+    a.breathe?.stop();
     this.actors.delete(character);
-    this.tweens.add({ targets: a.image, alpha: 0, duration: 450, onComplete: () => a.image.destroy() });
+    this.anim.to(a.image, { alpha: 0 }, { duration: 450, onComplete: () => a.image.destroy({ children: true }) });
   }
 
-  /** Smoothly crossfades a character's portrait texture to `newEmotion` and plays a physical reaction impulse. */
+  /** Smoothly crossfades a character's portrait to `newEmotion` and plays a physical reaction impulse. */
   private setActorEmotion(character: string, newEmotion: string, reactionImpulse = true): void {
     const a = this.actors.get(character);
     if (!a) return;
     const { art } = Services.ready();
     const key = art.portrait(character, newEmotion) ?? art.portrait(character, 'composed');
     if (!key) return;
-    const changed = a.emotion !== newEmotion || a.image.texture.key !== key;
+    const changed = a.emotion !== newEmotion || a.key !== key;
     a.emotion = newEmotion;
     if (!changed) return;
-
+    const prev = a.sprite.texture;
+    a.key = key;
+    a.sprite.texture = this.tex(key);
+    const sc = this.bustScale(character, a) * a.scaleMult;
     if (this.cgActive) {
-      const sc = (this.targetBustHeight(character) / a.image.height) * a.scaleMult;
-      a.image.setTexture(key).setScale(sc).setAlpha(0);
+      a.image.scale.set(sc);
+      a.image.alpha = 0;
       return;
     }
-
-    const prevKey = a.image.texture.key;
-    const ghost = this.add
-      .image(a.image.x, a.image.y, prevKey)
-      .setOrigin(0.5, 1)
-      .setScale(a.image.scaleX, a.image.scaleY)
-      .setFlipX(a.image.flipX)
-      .setAngle(a.image.angle)
-      .setTint(a.image.tintTopLeft)
-      .setAlpha(a.image.alpha)
-      .setDepth(a.image.depth);
-
-    const sc = (this.targetBustHeight(character) / a.image.height) * a.scaleMult;
-    a.image.setTexture(key).setScale(sc);
-
-    this.tweens.add({
-      targets: ghost,
-      alpha: 0,
-      duration: prefs().reducedMotion ? 1 : 220,
-      ease: 'Quad.easeOut',
-      onComplete: () => ghost.destroy()
-    });
+    const ghost = new PIXI.Container();
+    const gs = new PIXI.Sprite(prev);
+    gs.anchor.set(0.5, 1);
+    gs.scale.x = a.sprite.scale.x;
+    gs.tint = a.sprite.tint;
+    ghost.addChild(gs);
+    ghost.position.copyFrom(a.image.position);
+    ghost.scale.copyFrom(a.image.scale);
+    ghost.angle = a.image.angle;
+    ghost.alpha = a.image.alpha;
+    this.add(ghost, a.image.zIndex);
+    a.image.scale.set(sc);
+    this.anim.to(ghost, { alpha: 0 }, { duration: prefs().reducedMotion ? 1 : 220, ease: 'quad.out', onComplete: () => ghost.destroy({ children: true }) });
 
     if (reactionImpulse && !prefs().reducedMotion) {
       if (newEmotion === 'dry_amusement' || newEmotion === 'dry_humor') {
-        this.tweens.add({ targets: a.image, y: Math.max(REF_H + 4, a.image.y - 10), duration: 130, yoyo: true, ease: 'Sine.easeInOut' });
+        this.anim.to(a.image, { y: Math.max(REF_H + 4, a.image.y - 10) }, { duration: 130, yoyo: true, ease: 'sine.inout' });
       } else if (newEmotion === 'protective' || newEmotion === 'determined') {
-        this.tweens.add({ targets: a.image, scaleX: sc * 1.035, scaleY: sc * 1.035, duration: 150, yoyo: true, ease: 'Back.easeOut' });
+        this.anim.to(a.image, { scaleX: sc * 1.035, scaleY: sc * 1.035 }, { duration: 150, yoyo: true, ease: 'back.out' });
       } else if (newEmotion === 'soft_smile') {
-        this.tweens.add({ targets: a.image, y: a.image.y + 8, duration: 180, yoyo: true, ease: 'Sine.easeInOut' });
+        this.anim.to(a.image, { y: a.image.y + 8 }, { duration: 180, yoyo: true, ease: 'sine.inout' });
       }
     }
   }
@@ -773,6 +649,7 @@ export class StoryScene extends Phaser.Scene {
     }
 
     // 2. Scene & line-specific narrative action choreography
+    // 2. Scene & line-specific narrative action choreography
     switch (id) {
       case 'tutorial_t1_before_006':
         if (m) { m.offsetX = 75; m.tiltDeg = 2.2; }
@@ -792,7 +669,7 @@ export class StoryScene extends Phaser.Scene {
         if (m) { m.offsetX = 115; m.offsetY = -12; m.scaleMult = 1.055; m.tiltDeg = 2.5; }
         if (f) { f.offsetX = -35; }
         if (!prefs().reducedMotion && id === 'tutorial_t1_before_012') {
-          this.cameras.main.shake(260, 0.003);
+          this.shake(260, 0.003);
         }
         stageCue = 'BELLBOUND DEAD APPROACH IN THE MIST';
         break;
@@ -811,8 +688,8 @@ export class StoryScene extends Phaser.Scene {
         if (m) { m.offsetX = 125; m.tiltDeg = 3.0; }
         if (f) { f.offsetX = -85; f.tiltDeg = -1.6; }
         stageCue = 'HE BRUSHES A TORN ASH LEAF FROM HER SHOULDER';
-        this.time.delayedCall(1800, () => {
-          if (!this.sys.isActive() || !m) return;
+        this.anim.after(1800, () => {
+          if (!this.live || !m) return;
           m.offsetX = 35;
           m.tiltDeg = -1.5;
           this.animateActorTransform('mahmut', m, 650);
@@ -864,7 +741,7 @@ export class StoryScene extends Phaser.Scene {
 
       case 'tutorial_t3_before_007':
         if (f && !prefs().reducedMotion) {
-          this.tweens.add({ targets: f.image, y: Math.max(REF_H + 4, f.image.y - 14), duration: 160, yoyo: true, repeat: 1, ease: 'Sine.easeInOut' });
+          this.anim.to(f.image, { y: Math.max(REF_H + 4, f.image.y - 14) }, { duration: 160, yoyo: true, repeat: 1, ease: 'sine.inout' });
         }
         if (m) { m.tiltDeg = 2.0; m.offsetX = 60; }
         break;
@@ -921,7 +798,7 @@ export class StoryScene extends Phaser.Scene {
         break;
     }
 
-    this.actionBadge.setText(stageCue);
+    this.actionBadge.text = stageCue;
     const MOOD_LABELS: Record<string, string> = {
       watchful: 'WATCHFUL',
       composed: 'CALM',
@@ -929,64 +806,47 @@ export class StoryScene extends Phaser.Scene {
       dry_amusement: 'WRY WIT',
       soft_smile: 'WARMTH',
       protective: 'GUARDIAN',
-      determined: 'RESOLVE',
+      determined: 'RESOLVE'
     };
-    return {
-      speakerEmotion: resolvedEmotion,
-      moodLabel: MOOD_LABELS[resolvedEmotion] ?? 'COMPOSED',
-    };
+    return { speakerEmotion: resolvedEmotion, moodLabel: MOOD_LABELS[resolvedEmotion] ?? 'COMPOSED' };
   }
 
   private animateActorTransform(character: string, a: Actor, ms = 420): void {
-    const baseScale = this.targetBustHeight(character) / a.image.height;
-    const targetScale = baseScale * a.scaleMult;
-    const active = this.currentLine?.speaker === character;
-    const liftY = active ? -14 : 6;
-    const targetY = Math.max(REF_H + 4, a.baseY + a.offsetY + liftY);
-    this.tweens.add({
-      targets: a.image,
-      x: a.baseX + a.offsetX,
-      y: targetY,
-      angle: prefs().reducedMotion ? 0 : a.tiltDeg,
-      scaleX: targetScale,
-      scaleY: targetScale,
-      duration: prefs().reducedMotion ? 1 : ms,
-      ease: 'Cubic.easeOut'
-    });
+    const targetScale = this.bustScale(character, a) * a.scaleMult;
+    const liftY = this.currentLine?.speaker === character ? -14 : 6;
+    this.anim.to(a.image, { x: a.baseX + a.offsetX, y: Math.max(REF_H + 4, a.baseY + a.offsetY + liftY), angle: prefs().reducedMotion ? 0 : a.tiltDeg, scaleX: targetScale, scaleY: targetScale }, { duration: prefs().reducedMotion ? 1 : ms, ease: 'cubic.out' });
   }
 
   private focusSpeaker(speaker: string, emotion?: string, ms = 280): void {
-    if (speaker && emotion) {
-      this.setActorEmotion(speaker, emotion, false);
-    }
+    if (speaker && emotion) this.setActorEmotion(speaker, emotion, false);
     if (this.cgActive) {
-      for (const [, a] of this.actors) {
-        a.image.setAlpha(0);
-      }
+      for (const [, a] of this.actors) a.image.alpha = 0;
       return;
     }
     for (const [id, a] of this.actors) {
       const active = id === speaker;
       const isNarr = speaker === '';
-      a.image.setDepth(active ? DEPTH.world + 2 : DEPTH.world);
-      this.tweens.add({
-        targets: a.image,
-        alpha: active ? 1 : isNarr ? 0.9 : 0.72,
-        duration: ms
-      });
-      a.image.setTint(active ? 0xffffff : isNarr ? 0xe8e0f2 : 0xb0a4c2);
+      a.image.zIndex = active ? DEPTH.world + 2 : DEPTH.world;
+      this.anim.to(a.image, { alpha: active ? 1 : isNarr ? 0.9 : 0.72 }, { duration: ms });
+      a.sprite.tint = active ? 0xffffff : isNarr ? 0xe8e0f2 : 0xb0a4c2;
       this.animateActorTransform(id, a, Math.max(360, ms));
     }
   }
 
   // ------------------------------------------------------------------ dialogue
 
-  private currentMoodLabel = '';
+  private placeNamePlate(e: Extract<StoryEvent, { type: 'line' }>): void {
+    const a = this.actors.get(e.speaker);
+    const left = this.cgActive ? e.speaker === 'fadyme' : !a || a.side === 'left';
+    this.nameText.text = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
+    this.nameText.style.fill = e.speaker === 'fadyme' ? '#e2d2ff' : T.gold;
+    this.namePlate.position.set(left ? 365 : REF_W - 365, 746);
+  }
 
   private showLine(e: Extract<StoryEvent, { type: 'line' }>): void {
     this.currentLine = e;
     const hasVoiceLine = Boolean(this.stage?.hasVoice(e.lineId));
-    this.voiceBtn?.setVisible(hasVoiceLine);
+    if (this.voiceBtn) this.voiceBtn.visible = hasVoiceLine;
     this.stage?.stopVoice();
     const narr = e.speaker === 'narration';
     const rawPause = this.cutscene ? cutscenePauseSeconds(this.prevSpeaker, e.speaker, this.data0.presentation?.speaker_pause_seconds ?? 1) : 0;
@@ -994,41 +854,35 @@ export class StoryScene extends Phaser.Scene {
     const pause = hasVoiceLine ? Math.min(rawPause, speakerChanged ? 0.3 : 0.16) : rawPause;
     this.prevSpeaker = e.speaker;
 
-    // Shape and animate character busts according to speaker emotion and script actions
+    // shape and animate the busts from the speaker's emotion and the script's actions
     const { speakerEmotion, moodLabel } = this.applyLineChoreography(e);
     this.currentMoodLabel = moodLabel;
     this.focusSpeaker(narr ? '' : e.speaker, speakerEmotion, rawPause > CUTSCENE.sameSpeakerPauseSeconds ? CUTSCENE.dissolveSeconds * 1000 : 320);
 
     const accentColor = narr ? 0xc9b6e4 : e.speaker === 'fadyme' ? 0xe2d2ff : C.gold;
-    this.voiceSyncFill.setFillStyle(accentColor, 0.88).setSize(0, 2);
-    this.lineShimmer.setFillStyle(accentColor, 0);
+    this.syncColor = accentColor;
+    this.drawSyncFill(0);
+    this.lineShimmer.tint = accentColor;
+    this.lineShimmer.alpha = 0;
 
-    this.namePlate.setVisible(!narr);
-    if (!narr) {
-      const a = this.actors.get(e.speaker);
-      const left = this.cgActive ? e.speaker === 'fadyme' : !a || a.side === 'left';
-      const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
-      this.nameText.setText(label);
-      this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
-      this.namePlate.setPosition(left ? 365 : REF_W - 365, 746);
-    }
-    const isProtectiveOrResolve = speakerEmotion === 'protective' || speakerEmotion === 'determined';
-    const isWarm = speakerEmotion === 'soft_smile';
-    this.bodyText.setStyle({
-      fontStyle: narr ? 'italic 500' : isProtectiveOrResolve ? '600' : '500',
-      color: narr ? '#dfd4ee' : isWarm ? '#fff6ea' : isProtectiveOrResolve ? '#f7ecf9' : T.text
-    });
+    this.namePlate.visible = !narr;
+    if (!narr) this.placeNamePlate(e);
+    const resolve = speakerEmotion === 'protective' || speakerEmotion === 'determined';
+    const warm = speakerEmotion === 'soft_smile';
+    this.bodyText.setFontStyle(narr ? 'italic 500' : resolve ? '600' : '500');
+    this.bodyText.style.fill = narr ? '#dfd4ee' : warm ? '#fff6ea' : resolve ? '#f7ecf9' : T.text;
     const rawLine = this.stage?.text(e.lineId, e.text) ?? e.text;
-    this.fullText = this.bodyText.getWrappedText(rawLine).join('\n');
-    this.bodyText.setText('');
-    this.caret.setVisible(false);
+    this.fullText = this.bodyText.wrap(rawLine).join('\n');
+    this.bodyText.text = '';
+    this.caret.visible = false;
     this.lineDone = false;
     this.waiting = true;
-    this.typing?.remove();
-    this.autoTimer?.remove();
+    this.typing?.stop();
+    this.stopTyping?.();
+    this.autoTimer?.stop();
     if (pause > 0 && !this.skip) {
       this.pausing = true;
-      this.typing = this.time.delayedCall(pause * 1000, () => {
+      this.typing = this.anim.after(pause * 1000, () => {
         this.pausing = false;
         this.startTyping(e, narr, speakerEmotion, speakerChanged);
       });
@@ -1038,145 +892,99 @@ export class StoryScene extends Phaser.Scene {
     }
   }
 
-  private startTyping(
-    e: Extract<StoryEvent, { type: 'line' }>,
-    narr: boolean,
-    speakerEmotion = 'composed',
-    speakerChanged = false
-  ): void {
+  private startTyping(e: Extract<StoryEvent, { type: 'line' }>, narr: boolean, speakerEmotion = 'composed', speakerChanged = false): void {
     if (this.finished) return;
     if (!this.skip) void this.stage?.voice(e.lineId);
-    this.namePlate.setVisible(!narr);
+    this.namePlate.visible = !narr;
+    const reduced = prefs().reducedMotion;
     if (!narr) {
-      const a = this.actors.get(e.speaker);
-      const left = this.cgActive ? e.speaker === 'fadyme' : !a || a.side === 'left';
-      const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
-      this.nameText.setText(label);
-      this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
-      const targetX = left ? 365 : REF_W - 365;
-      this.namePlate.setPosition(targetX, 746);
-      if (speakerChanged && !prefs().reducedMotion && !this.skip) {
-        this.tweens.killTweensOf(this.namePlate);
-        this.namePlate.setY(754).setAlpha(0.5);
-        this.tweens.add({
-          targets: this.namePlate,
-          y: 746,
-          alpha: 1,
-          duration: 240,
-          ease: 'Cubic.easeOut'
-        });
+      this.placeNamePlate(e);
+      this.anim.killOf(this.namePlate);
+      if (speakerChanged && !reduced && !this.skip) {
+        this.namePlate.y = 754;
+        this.namePlate.alpha = 0.5;
+        this.anim.to(this.namePlate, { y: 746, alpha: 1 }, { duration: 240, ease: 'cubic.out' });
       } else {
-        this.namePlate.setAlpha(1);
+        this.namePlate.alpha = 1;
       }
     }
 
-    if (!prefs().reducedMotion && !this.skip) {
-      this.tweens.killTweensOf(this.bodyText);
-      this.bodyText.setY(-50).setAlpha(0.18);
-      this.tweens.add({
-        targets: this.bodyText,
-        y: -64,
-        alpha: 1,
-        duration: 280,
-        ease: 'Cubic.easeOut'
-      });
-
-      this.tweens.killTweensOf(this.lineShimmer);
-      this.lineShimmer.setPosition(-640, -96).setAlpha(0.75);
-      this.tweens.add({
-        targets: this.lineShimmer,
-        x: 640,
-        alpha: 0,
-        duration: 700,
-        ease: 'Cubic.easeOut'
-      });
-
+    this.anim.killOf(this.bodyText);
+    if (!reduced && !this.skip) {
+      this.bodyText.y = -50;
+      this.bodyText.alpha = 0.18;
+      this.anim.to(this.bodyText, { y: -64, alpha: 1 }, { duration: 280, ease: 'cubic.out' });
+      this.anim.killOf(this.lineShimmer);
+      this.lineShimmer.position.set(-640, -96);
+      this.lineShimmer.alpha = 0.75;
+      this.anim.to(this.lineShimmer, { x: 640, alpha: 0 }, { duration: 700, ease: 'cubic.out' });
       if (this.actionBadge.text) {
-        this.tweens.killTweensOf(this.actionBadge);
-        this.actionBadge.setY(-82).setAlpha(0);
-        this.tweens.add({
-          targets: this.actionBadge,
-          y: -88,
-          alpha: 0.9,
-          duration: 320,
-          ease: 'Sine.easeOut'
-        });
+        this.anim.killOf(this.actionBadge);
+        this.actionBadge.y = -82;
+        this.actionBadge.alpha = 0;
+        this.anim.to(this.actionBadge, { y: -88, alpha: 0.9 }, { duration: 320, ease: 'sine.out' });
       }
     } else {
-      this.bodyText.setY(-64).setAlpha(1);
+      this.bodyText.y = -64;
+      this.bodyText.alpha = 1;
     }
 
     const baseCps = this.skip ? 400 : this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed];
-    const cpsMult =
-      speakerEmotion === 'protective' || speakerEmotion === 'determined'
-        ? 1.18
-        : speakerEmotion === 'soft_smile'
-          ? 0.9
-          : speakerEmotion === 'dry_amusement' || speakerEmotion === 'dry_humor'
-            ? 1.06
-            : 1.0;
-    const cps = baseCps * cpsMult;
+    const cpsMult = speakerEmotion === 'protective' || speakerEmotion === 'determined' ? 1.18 : speakerEmotion === 'soft_smile' ? 0.9 : speakerEmotion === 'dry_amusement' || speakerEmotion === 'dry_humor' ? 1.06 : 1.0;
     const hasVoiceLine = Boolean(this.stage?.hasVoice(e.lineId));
     const voiceDur = this.stage?.voiceDuration(e.lineId) ?? 0;
-    const schedule = buildSubtitleSchedule(this.fullText, this.skip ? 0 : voiceDur, cps);
+    const schedule = buildSubtitleSchedule(this.fullText, this.skip ? 0 : voiceDur, baseCps * cpsMult);
     this.activeSchedule = schedule;
-    this.typingStartedAt = this.time.now;
+    this.typingStartedAt = performance.now();
 
     if (this.skip) {
       let n = 0;
-      this.typing = this.time.addEvent({
-        delay: 12,
-        loop: true,
-        callback: () => {
+      let acc = 0;
+      this.stopTyping = this.onTick((dt) => {
+        acc += dt;
+        while (acc >= 12) {
+          acc -= 12;
           n += 6;
-          this.bodyText.setText(this.fullText.slice(0, n));
-          if (n >= this.fullText.length) this.finishTyping();
         }
+        this.bodyText.text = this.fullText.slice(0, n);
+        if (n >= this.fullText.length) this.finishTyping();
       });
       return;
     }
 
     let shownCount = 0;
-    this.typing = this.time.addEvent({
-      delay: 28,
-      loop: true,
-      callback: () => {
-        const elapsedMs = Math.max(0, this.time.now - this.typingStartedAt);
-        const vp = this.stage?.voiceProgress(e.lineId);
-        const liveSec = vp && vp.playing ? vp.currentTime : undefined;
-        const { count, revealRatio, voiceRatio, done } = resolveSubtitleProgress(schedule, elapsedMs, liveSec);
-        if (count > shownCount) {
-          shownCount = count;
-          this.bodyText.setText(this.fullText.slice(0, shownCount));
-          if (shownCount % 3 === 0 && !narr && !hasVoiceLine) Sfx.tap();
-        }
-        const waveRatio = vp && vp.duration > 0 ? Math.max(voiceRatio, vp.ratio) : revealRatio;
-        this.voiceSyncFill.setSize(760 * Math.min(1, waveRatio), 2);
-        if (done || shownCount >= this.fullText.length) {
-          this.finishTyping();
-        }
+    this.stopTyping = this.onTick(() => {
+      const elapsedMs = Math.max(0, performance.now() - this.typingStartedAt);
+      const vp = this.stage?.voiceProgress(e.lineId);
+      const { count, revealRatio, voiceRatio, done } = resolveSubtitleProgress(schedule, elapsedMs, vp && vp.playing ? vp.currentTime : undefined);
+      if (count > shownCount) {
+        shownCount = count;
+        this.bodyText.text = this.fullText.slice(0, shownCount);
+        if (shownCount % 3 === 0 && !narr && !hasVoiceLine) Sfx.tap();
       }
+      this.drawSyncFill(vp && vp.duration > 0 ? Math.max(voiceRatio, vp.ratio) : revealRatio);
+      if (done || shownCount >= this.fullText.length) this.finishTyping();
     });
   }
 
   private finishTyping(): void {
     const wasPausing = this.pausing;
     this.pausing = false;
-    this.typing?.remove();
+    this.typing?.stop();
     this.typing = null;
-    if (wasPausing && !this.skip && this.currentLine) {
-      void this.stage?.voice(this.currentLine.lineId);
-    }
-    this.bodyText.setText(this.fullText).setY(-64).setAlpha(1);
-    this.voiceSyncFill.setSize(760, 2);
+    this.stopTyping?.();
+    this.stopTyping = null;
+    if (wasPausing && !this.skip && this.currentLine) void this.stage?.voice(this.currentLine.lineId);
+    this.anim.killOf(this.bodyText);
+    this.bodyText.text = this.fullText;
+    this.bodyText.y = -64;
+    this.bodyText.alpha = 1;
+    this.drawSyncFill(1);
     this.lineDone = true;
-    this.caret.setVisible(true);
+    this.caret.visible = true;
     if (this.currentLine) this.read.add(this.currentLine.lineId);
-    if (this.skip) {
-      this.autoTimer = this.time.delayedCall(90, () => this.advance());
-    } else if (this.auto) {
-      this.autoTimer = this.time.delayedCall(this.autoHoldMs(), () => this.advance());
-    }
+    if (this.skip) this.autoTimer = this.anim.after(90, () => this.advance());
+    else if (this.auto) this.autoTimer = this.anim.after(this.autoHoldMs(), () => this.advance());
   }
 
   private autoHoldMs(): number {
@@ -1185,16 +993,10 @@ export class StoryScene extends Phaser.Scene {
     const last = line !== null && line.lineId === this.lastLineId;
     if (voiceSeconds > 0 && line) {
       const vp = this.stage?.voiceProgress(line.lineId);
-      const elapsedSec =
-        this.typingStartedAt > 0
-          ? Math.max(0, (this.time.now - this.typingStartedAt) / 1000)
-          : (this.activeSchedule?.totalRevealMs ?? 1200) / 1000;
+      const elapsedSec = this.typingStartedAt > 0 ? Math.max(0, (performance.now() - this.typingStartedAt) / 1000) : (this.activeSchedule?.totalRevealMs ?? 1200) / 1000;
       const spokenSec = vp && vp.currentTime > 0 ? Math.max(elapsedSec, vp.currentTime) : elapsedSec;
-      const remainingVoiceSec = Math.max(0, voiceSeconds - spokenSec);
-      const voiceSyncedHoldMs = Math.max(1050, (remainingVoiceSec + 0.72) * 1000);
-      if (last && this.data0.closing_hold_seconds !== undefined) {
-        return Math.max(voiceSyncedHoldMs, this.data0.closing_hold_seconds * 1000);
-      }
+      const voiceSyncedHoldMs = Math.max(1050, (Math.max(0, voiceSeconds - spokenSec) + 0.72) * 1000);
+      if (last && this.data0.closing_hold_seconds !== undefined) return Math.max(voiceSyncedHoldMs, this.data0.closing_hold_seconds * 1000);
       return voiceSyncedHoldMs;
     }
     const revealSeconds = this.fullText.length / (this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed]);
@@ -1212,7 +1014,7 @@ export class StoryScene extends Phaser.Scene {
 
   private advance(): void {
     if (this.finished || this.choiceLayer || this.logLayer) return;
-    this.autoTimer?.remove();
+    this.autoTimer?.stop();
     if (!this.waiting) return;
     if (this.pausing || !this.lineDone) {
       this.finishTyping();
@@ -1227,8 +1029,8 @@ export class StoryScene extends Phaser.Scene {
     this.autoBtn.setLabel(this.auto ? 'AUTO ✓' : 'AUTO');
     if (this.cutscene) {
       // one on/off switch: turning it off keeps the current line on screen, turning it on resumes the normal reading hold
-      this.autoTimer?.remove();
-      if (this.auto && this.lineDone && this.waiting && !this.pausing) this.autoTimer = this.time.delayedCall(this.autoHoldMs(), () => this.advance());
+      this.autoTimer?.stop();
+      if (this.auto && this.lineDone && this.waiting && !this.pausing) this.autoTimer = this.anim.after(this.autoHoldMs(), () => this.advance());
       return;
     }
     if (this.auto && this.lineDone && this.waiting) this.advance();
@@ -1240,8 +1042,9 @@ export class StoryScene extends Phaser.Scene {
     if (this.cutscene || !hasChoices) {
       this.skip = true;
       this.skipBtn?.setLabel('SKIP ✓');
-      this.typing?.remove();
-      this.autoTimer?.remove();
+      this.typing?.stop();
+      this.stopTyping?.();
+      this.autoTimer?.stop();
       this.complete();
       return;
     }
@@ -1256,19 +1059,20 @@ export class StoryScene extends Phaser.Scene {
   // ------------------------------------------------------------------ overlays
 
   private showChoices(e: Extract<StoryEvent, { type: 'choice' }>): void {
-    this.caret.setVisible(false);
-    const items: Phaser.GameObjects.GameObject[] = [this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x000000, 0.55).setInteractive()];
+    this.caret.visible = false;
+    const layer = new PIXI.Container();
+    layer.addChild(blocker(0x000000, 0.55));
     const gap = 150;
     const top = REF_H / 2 - ((e.options.length - 1) * gap) / 2;
-    if (e.prompt) items.push(title(this, REF_W / 2, top - 130, e.prompt, 40, T.gold));
+    if (e.prompt) layer.addChild(title(REF_W / 2, top - 130, e.prompt, 40, T.gold));
     e.options.forEach((o, i) => {
-      items.push(
+      layer.addChild(
         new Button(this, REF_W / 2, top + i * gap, {
           label: o.text,
           w: 1100,
           fontSize: 34,
           onClick: () => {
-            this.choiceLayer?.destroy();
+            this.choiceLayer?.destroy({ children: true });
             this.choiceLayer = null;
             this.runner.choose(o.id);
             this.waiting = false;
@@ -1277,24 +1081,32 @@ export class StoryScene extends Phaser.Scene {
         })
       );
     });
-    this.choiceLayer = this.add.container(0, 0, items).setDepth(DEPTH.modal);
+    this.choiceLayer = this.add(layer, DEPTH.modal);
   }
 
   private showLog(): void {
     if (this.logLayer) return;
-    const lines = this.runner.history.slice(-7);
-    const dim = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x000000, 0.7).setInteractive();
-    const bg = panel(this, REF_W / 2, REF_H / 2, 1500, 860, 'normal');
-    const items: Phaser.GameObjects.GameObject[] = [dim, bg, title(this, REF_W / 2, 190, 'BACKLOG', 44, T.gold)];
+    const layer = new PIXI.Container();
+    layer.addChild(blocker(0x000000, 0.7), panel(REF_W / 2, REF_H / 2, 1500, 860, 'normal'), title(REF_W / 2, 190, 'BACKLOG', 44, T.gold));
     let y = 270;
-    for (const l of lines) {
+    for (const l of this.runner.history.slice(-7)) {
       const who = l.speaker === 'narration' ? '' : `${l.speakerDisplay.toUpperCase()}  `;
-      const t = txt(this, 290, y, `${who}${this.stage?.text(l.lineId, l.text) ?? l.text}`, { fontSize: '32px', color: l.speaker === 'narration' ? '#b9aecb' : T.text, wordWrap: { width: 1340 } });
-      items.push(t);
+      const t = layer.addChild(txt(290, y, `${who}${this.stage?.text(l.lineId, l.text) ?? l.text}`, { fontSize: 32, color: l.speaker === 'narration' ? '#b9aecb' : T.text, wordWrap: { width: 1340 } }));
       y += t.height + 22;
     }
-    items.push(new Button(this, REF_W / 2, 910, { label: 'CLOSE', w: 360, onClick: () => { this.logLayer?.destroy(); this.logLayer = null; } }));
-    this.logLayer = this.add.container(0, 0, items).setDepth(DEPTH.modal);
-    void C;
+    layer.addChild(
+      new Button(this, REF_W / 2, 910, {
+        label: 'CLOSE',
+        w: 360,
+        onClick: () => {
+          this.logLayer?.destroy({ children: true });
+          this.logLayer = null;
+        }
+      })
+    );
+    this.logLayer = this.add(layer, DEPTH.modal);
   }
 }
+
+/** engine registration under the 'Story' key every flow already starts */
+export const StoryHost = hosted<StoryInit>('Story', () => new StoryScene());

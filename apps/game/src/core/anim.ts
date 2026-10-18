@@ -88,6 +88,8 @@ function prop(target: Record<string, unknown>, key: string): Prop {
 export class Animator {
   timeScale = 1;
   private jobs: Job[] = [];
+  /** the jobs an update is iterating (callbacks may kill them) */
+  private batch: Job[] = [];
 
   /** k runs 0→1 through `ease` over `duration` ms after `delay` ms */
   tween(opts: { delay?: number; duration: number; ease?: Ease; onStart?: () => void; onUpdate?: (k: number) => void; onComplete?: () => void }): Handle {
@@ -130,8 +132,9 @@ export class Animator {
     return new Promise((resolve) => this.to(target, props, { ...o, onComplete: () => (o.onComplete?.(), resolve()) }));
   }
 
+  /** runs `fn` on the first update at which `ms` (scaled) have passed */
   after(ms: number, fn: () => void): Handle {
-    return this.tween({ delay: ms, duration: 1, onComplete: fn });
+    return this.tween({ delay: Math.max(0, ms - 1), duration: 1, onComplete: fn });
   }
 
   wait(ms: number): Promise<void> {
@@ -140,6 +143,7 @@ export class Animator {
 
   /** stops every tween animating `target` without finishing it */
   killOf(target: object): void {
+    for (const j of this.batch) if (j.target === target) j.stopped = true;
     for (const j of this.jobs) if (j.target === target) j.stopped = true;
   }
 
@@ -152,7 +156,7 @@ export class Animator {
   update(dtMs: number): void {
     const dt = dtMs * this.timeScale;
     // callbacks may add jobs; iterate over the current batch only
-    const batch = this.jobs;
+    const batch = (this.batch = this.jobs);
     this.jobs = [];
     const keep: Job[] = [];
     for (const j of batch) {
@@ -186,6 +190,7 @@ export class Animator {
       if (done) j.onComplete?.();
       else keep.push(j);
     }
+    this.batch = [];
     this.jobs = keep.concat(this.jobs);
   }
 
@@ -194,6 +199,7 @@ export class Animator {
   }
 
   clear(): void {
+    for (const j of this.batch) j.stopped = true;
     this.jobs = [];
   }
 }

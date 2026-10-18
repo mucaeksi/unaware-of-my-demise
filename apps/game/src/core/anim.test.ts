@@ -34,6 +34,26 @@ describe('Animator', () => {
     expect(o).toEqual({ x: 110, alpha: 0.5, scale: { x: 1, y: 3 } });
   });
 
+  it('a fade cancelled at a shot boundary never overwrites the next shot (R09 prologue caption lifecycle)', () => {
+    // prologue: the caption fades out over the last 650 ms of a 1000 ms hold; the next shot resets it at 1000 ms
+    for (const resetFirst of [true, false]) {
+      const a = new Animator();
+      const body = { alpha: 1 };
+      const nextShot = (): void => {
+        a.killOf(body);
+        body.alpha = 1;
+      };
+      if (resetFirst) a.after(1000, nextShot);
+      a.after(350, () => a.to(body, { alpha: 0 }, { duration: 650 }));
+      if (!resetFirst) a.after(1000, nextShot);
+      a.update(350);
+      a.update(650); // the fade's last frame and the boundary land in the same update
+      expect(body.alpha).toBe(1);
+      a.update(100);
+      expect(body.alpha).toBe(1);
+    }
+  });
+
   it('yoyos, repeats, loops until killed, and resolves toAsync', async () => {
     const a = new Animator();
     const o = { y: 0 };

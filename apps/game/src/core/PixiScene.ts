@@ -24,25 +24,28 @@ export abstract class PixiScene<D = unknown> {
   host!: Phaser.Scene;
   data!: D;
   closed = false;
-  private readonly bg = new PIXI.Graphics();
-  private readonly veil = new PIXI.Graphics();
-  private readonly cleanups: (() => void)[] = [];
-  private readonly tickers: ((dtMs: number) => void)[] = [];
-  private readonly mirrors = new Set<Syncable>();
-  private sinceSync = 0;
-  private zoom = 1;
-  private shakeLeft = 0;
-  private shakeAmp = 0;
+  readonly #bg = new PIXI.Graphics();
+  readonly #veil = new PIXI.Graphics();
+  readonly #flashVeil = new PIXI.Graphics();
+  readonly #cleanups: (() => void)[] = [];
+  readonly #tickers: ((dtMs: number) => void)[] = [];
+  readonly #mirrors = new Set<Syncable>();
+  #sinceSync = 0;
+  #zoom = 1;
+  #shakeLeft = 0;
+  #shakeAmp = 0;
 
   constructor(background = 0x0a0610) {
-    this.bg.rect(0, 0, REF_W, REF_H).fill(0xffffff);
-    this.bg.tint = background;
-    this.veil.rect(0, 0, REF_W, REF_H).fill(0xffffff);
-    this.veil.alpha = 0;
-    this.veil.visible = false;
+    this.#bg.rect(0, 0, REF_W, REF_H).fill(0xffffff);
+    this.#bg.tint = background;
+    this.#veil.rect(0, 0, REF_W, REF_H).fill(0xffffff);
+    this.#veil.alpha = 0;
+    this.#veil.visible = false;
+    this.#flashVeil.rect(0, 0, REF_W, REF_H).fill(0xffffff);
+    this.#flashVeil.visible = false;
     this.root.position.set(REF_W / 2, REF_H / 2);
     this.root.pivot.set(REF_W / 2, REF_H / 2);
-    this.view.addChild(this.bg, this.root, this.veil);
+    this.view.addChild(this.#bg, this.root, this.#flashVeil, this.#veil);
   }
 
   abstract create(data: D): void | Promise<void>;
@@ -51,7 +54,7 @@ export abstract class PixiScene<D = unknown> {
   update?(dtMs: number): void;
 
   set background(color: number) {
-    this.bg.tint = color;
+    this.#bg.tint = color;
   }
 
   /** adds to the camera root at a DEPTH band */
@@ -79,41 +82,54 @@ export abstract class PixiScene<D = unknown> {
   }
 
   onClose(fn: () => void): void {
-    this.cleanups.push(fn);
+    this.#cleanups.push(fn);
   }
 
-  /** runs every frame with the animator-scaled dt (speed-up and hit-stop apply) */
-  onTick(fn: (dtMs: number) => void): void {
-    this.tickers.push(fn);
+  /** runs every frame with the animator-scaled dt (speed-up and hit-stop apply); returns the remover */
+  onTick(fn: (dtMs: number) => void): () => void {
+    this.#tickers.push(fn);
+    return () => {
+      const i = this.#tickers.indexOf(fn);
+      if (i >= 0) this.#tickers.splice(i, 1);
+    };
   }
 
   mirror(m: Syncable): () => void {
-    this.mirrors.add(m);
-    return () => this.mirrors.delete(m);
+    this.#mirrors.add(m);
+    return () => this.#mirrors.delete(m);
   }
 
   fadeIn(ms: number, color = 0x0a0610): void {
-    this.veil.tint = color;
-    this.veil.alpha = 1;
-    this.veil.visible = true;
-    this.anim.to(this.veil, { alpha: 0 }, { duration: ms, onComplete: () => (this.veil.visible = false) });
+    this.#veil.tint = color;
+    this.#veil.alpha = 1;
+    this.#veil.visible = true;
+    this.anim.to(this.#veil, { alpha: 0 }, { duration: ms, onComplete: () => (this.#veil.visible = false) });
   }
 
   fadeOut(ms: number, color = 0x0a0610): Promise<void> {
-    this.veil.tint = color;
-    this.veil.visible = true;
-    return this.anim.toAsync(this.veil, { alpha: 1 }, { duration: ms });
+    this.#veil.tint = color;
+    this.#veil.visible = true;
+    return this.anim.toAsync(this.#veil, { alpha: 1 }, { duration: ms });
+  }
+
+  /** a full-screen flash of `color` that fades out over `ms` */
+  flash(ms: number, color = 0xffffff): void {
+    this.anim.killOf(this.#flashVeil);
+    this.#flashVeil.tint = color;
+    this.#flashVeil.alpha = 1;
+    this.#flashVeil.visible = true;
+    this.anim.to(this.#flashVeil, { alpha: 0 }, { duration: ms, onComplete: () => (this.#flashVeil.visible = false) });
   }
 
   /** `intensity` is a fraction of the stage width, as in the previous camera */
   shake(ms: number, intensity: number): void {
-    this.shakeLeft = Math.max(this.shakeLeft, ms);
-    this.shakeAmp = intensity * REF_W;
+    this.#shakeLeft = Math.max(this.#shakeLeft, ms);
+    this.#shakeAmp = intensity * REF_W;
   }
 
   zoomTo(zoom: number, ms: number): void {
     this.anim.killOf(this.root.scale);
-    this.anim.to(this.root.scale, { x: zoom, y: zoom }, { duration: ms, ease: 'sine.inout', onUpdate: () => (this.zoom = this.root.scale.x) });
+    this.anim.to(this.root.scale, { x: zoom, y: zoom }, { duration: ms, ease: 'sine.inout', onUpdate: () => (this.#zoom = this.root.scale.x) });
   }
 
   /** called by the host every frame */
@@ -121,22 +137,22 @@ export abstract class PixiScene<D = unknown> {
     if (this.closed) return;
     this.anim.update(dtMs);
     const scaled = dtMs * this.anim.timeScale;
-    for (const fn of this.tickers) fn(scaled);
+    for (const fn of [...this.#tickers]) fn(scaled);
     this.update?.(dtMs);
     if (this.closed) return;
     let sx = 0;
     let sy = 0;
-    if (this.shakeLeft > 0) {
-      this.shakeLeft -= scaled;
-      sx = (Math.random() * 2 - 1) * this.shakeAmp;
-      sy = (Math.random() * 2 - 1) * this.shakeAmp;
+    if (this.#shakeLeft > 0) {
+      this.#shakeLeft -= scaled;
+      sx = (Math.random() * 2 - 1) * this.#shakeAmp;
+      sy = (Math.random() * 2 - 1) * this.#shakeAmp;
     }
     this.root.position.set(REF_W / 2 + sx, REF_H / 2 + sy);
-    this.root.scale.set(this.zoom);
-    this.sinceSync += dtMs;
-    if (this.sinceSync >= A11Y_SYNC_MS) {
-      this.sinceSync = 0;
-      for (const m of this.mirrors) m.sync();
+    this.root.scale.set(this.#zoom);
+    this.#sinceSync += dtMs;
+    if (this.#sinceSync >= A11Y_SYNC_MS) {
+      this.#sinceSync = 0;
+      for (const m of this.#mirrors) m.sync();
     }
   }
 
@@ -144,14 +160,14 @@ export abstract class PixiScene<D = unknown> {
     if (this.closed) return;
     this.closed = true;
     this.anim.clear();
-    for (const fn of this.cleanups.splice(0)) {
+    for (const fn of this.#cleanups.splice(0)) {
       try {
         fn();
       } catch (e) {
         console.error('scene cleanup failed', e);
       }
     }
-    this.mirrors.clear();
+    this.#mirrors.clear();
     this.view.destroy({ children: true });
   }
 }

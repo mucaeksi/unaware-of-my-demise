@@ -17,7 +17,7 @@ import { MailScene } from './scenes/MailScene';
 import { OperationsScene } from './scenes/OperationsScene';
 import { PurchasesScene } from './scenes/PurchasesScene';
 import { PatchBarScene } from './scenes/PatchBarScene';
-import { PrologueScene } from './scenes/PrologueScene';
+import { PrologueHost } from './scenes/PrologueScene';
 import { RosterScene } from './scenes/RosterScene';
 import { RecruitScene } from './scenes/RecruitScene';
 import { LibraryScene } from './scenes/LibraryScene';
@@ -25,7 +25,7 @@ import { ShopScene } from './scenes/ShopScene';
 import { SplashScene } from './scenes/SplashScene';
 import { StudioScene } from './scenes/StudioScene';
 import { ContentPanelScene } from './scenes/ContentPanelScene';
-import { StoryScene } from './scenes/StoryScene';
+import { StoryHost } from './scenes/StoryScene';
 import { SummonScene } from './scenes/SummonScene';
 import { TasksScene } from './scenes/TasksScene';
 import { TeamScene } from './scenes/TeamScene';
@@ -65,7 +65,7 @@ try {
     fps: { target: qp.targetFps },
     input: { touch: { capture: true }, activePointers: 2 },
     banner: false,
-    scene: [BootScene, ContentPanelScene, SplashScene, StudioScene, TitleScene, PrologueScene, FinishScene, ChaptersScene, StoryScene, BattleHost, HomeScene, SummonScene, RosterScene, RecruitScene, LibraryScene, MailScene, ShopScene, AccountScene, OperationsScene, PurchasesScene, CharacterScene, GearScene, TasksScene, TeamScene, PatchBarScene]
+    scene: [BootScene, ContentPanelScene, SplashScene, StudioScene, TitleScene, PrologueHost, FinishScene, ChaptersScene, StoryHost, BattleHost, HomeScene, SummonScene, RosterScene, RecruitScene, LibraryScene, MailScene, ShopScene, AccountScene, OperationsScene, PurchasesScene, CharacterScene, GearScene, TasksScene, TeamScene, PatchBarScene]
   });
   game.ready.catch((e: unknown) => fatal(`This device cannot run the game: no WebGL, WebGPU or canvas renderer (${e instanceof Error ? e.message : String(e)})`));
   const contextRecovery = installContextRecovery(game, () => Services.refreshArt().then(() => undefined));

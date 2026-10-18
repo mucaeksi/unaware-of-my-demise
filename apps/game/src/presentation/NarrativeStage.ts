@@ -1,18 +1,24 @@
+import * as PIXI from 'pixi.js';
 import type Phaser from '../engine';
 import type { ArtManifest, LocalePack, PresentationCommand, PresentationPack } from '@uomd/content-schema';
 import type { ContentService } from '../content/ContentService';
 import { Music } from '../audio/Music';
 import { prefs } from '../platform/prefs';
 import { REF_H, REF_W } from '../config';
+import type { PixiScene } from '../core/PixiScene';
 import { DEPTH } from '../ui/theme';
 
 const own = <T>(rows: Record<string, T>, id: string): T | undefined => Object.hasOwn(rows, id) ? rows[id] : undefined;
-interface Layer { image: Phaser.GameObjects.Image; owner: object; mask?: Phaser.GameObjects.Graphics; filter?: Phaser.Filters.Mask }
+interface Layer { image: PIXI.Sprite; owner: object; mask?: PIXI.Graphics }
+const EASE = { linear: 'linear', sine: 'sine.inout', quad: 'quad.inout' } as const;
 interface AudioClip { element: HTMLAudioElement; owner: object; releaseDuck: () => void; wasPlaying: boolean }
 
-/** The only renderer for the finite presentation commands. All URLs come from the verified local content service. */
+/**
+ * The only renderer for the finite presentation commands, drawn with PIXI (D-25). All URLs come from the verified
+ * local content service; images still load through the host engine scene until the engine is removed.
+ */
 export class NarrativeStage {
-  private readonly root: Phaser.GameObjects.Container;
+  private readonly root = new PIXI.Container({ sortableChildren: true });
   private readonly layers = new Map<string, Layer>();
   private readonly audio = new Map<string, AudioClip>();
   private readonly controller = new AbortController();
@@ -22,13 +28,16 @@ export class NarrativeStage {
   private voiceMuted = false;
   private audioSequence = 0;
   private readonly audioTickets = new Map<string, number>();
-  constructor(private readonly scene: Phaser.Scene, private readonly content: ContentService, private readonly art: ArtManifest, readonly pack: PresentationPack, private readonly locale?: LocalePack) {
-    this.root = scene.add.container(0, 0).setDepth(DEPTH.world + 30);
+  constructor(private readonly scene: PixiScene, private readonly content: ContentService, private readonly art: ArtManifest, readonly pack: PresentationPack, private readonly locale?: LocalePack) {
+    scene.add(this.root, DEPTH.world + 30);
+    const host = scene.host;
     const pause = () => this.pause(true); const resume = () => this.pause(false);
-    const visibility = () => this.pause(document.hidden || !scene.sys.isActive());
-    scene.events.on('pause', pause); scene.events.on('resume', resume); document.addEventListener('visibilitychange', visibility);
-    scene.events.once('shutdown', () => { scene.events.off('pause', pause); scene.events.off('resume', resume); document.removeEventListener('visibilitychange', visibility); this.destroy(); });
+    const visibility = () => this.pause(document.hidden || !host.sys.isActive());
+    host.events.on('pause', pause); host.events.on('resume', resume); document.addEventListener('visibilitychange', visibility);
+    scene.onClose(() => { host.events.off('pause', pause); host.events.off('resume', resume); document.removeEventListener('visibilitychange', visibility); this.destroy(); });
   }
+  /** the host engine scene that loads images and owns scene switching (transitional, D-25) */
+  private get host(): Phaser.Scene { return this.scene.host; }
   text(id: string | undefined, fallback: string): string { return id && this.locale && Object.hasOwn(this.locale.strings, id) ? this.locale.strings[id]! : fallback; }
   hasVoice(lineId: string): boolean { return !!own(this.pack.voices, lineId); }
   voiceDuration(lineId: string): number { return own(this.pack.voices, lineId)?.duration_s ?? 0; }
@@ -121,18 +130,20 @@ export class NarrativeStage {
         const owner = {}; const ref = await this.content.asset(path, owner);
         if (!this.alive) { this.content.releaseAssets(owner); return; }
         try {
-          if (!this.scene.textures.exists(ref.key)) await new Promise<void>((resolve, reject) => {
+          const host = this.host;
+          if (!host.textures.exists(ref.key)) await new Promise<void>((resolve, reject) => {
             const event = `filecomplete-image-${ref.key}`;
-            const clean = () => { this.scene.load.off(event, complete); this.scene.load.off('loaderror', failed); this.controller.signal.removeEventListener('abort', aborted); };
+            const clean = () => { host.load.off(event, complete); host.load.off('loaderror', failed); this.controller.signal.removeEventListener('abort', aborted); };
             const complete = () => { clean(); resolve(); }; const failed = (file: Phaser.Loader.File) => { if (file.key === ref.key) { clean(); reject(new Error('This illustration could not be loaded')); } }; const aborted = () => { clean(); reject(new Error('scene closed')); };
-            this.scene.load.once(event, complete); this.scene.load.on('loaderror', failed); this.controller.signal.addEventListener('abort', aborted, { once: true });
-            this.scene.load.image(ref.key, ref.url); this.scene.load.start();
+            host.load.once(event, complete); host.load.on('loaderror', failed); this.controller.signal.addEventListener('abort', aborted, { once: true });
+            host.load.image(ref.key, ref.url); host.load.start();
           });
           if (!this.alive) { this.content.releaseAssets(owner); return; }
-          this.content.retainAsset(ref.key, owner, () => { if (this.scene.textures.exists(ref.key)) this.scene.textures.remove(ref.key); });
+          this.content.retainAsset(ref.key, owner, () => { if (host.textures.exists(ref.key)) host.textures.remove(ref.key); });
           this.removeLayer(command.layer_id);
-          const image = this.scene.add.image(command.x, command.y, ref.key).setDisplaySize(command.width, command.height).setAlpha(command.alpha).setDepth(command.depth);
-          this.root.add(image); this.root.sort('depth'); this.layers.set(command.layer_id, { image, owner });
+          const image = new PIXI.Sprite(this.scene.tex(ref.key));
+          image.anchor.set(0.5); image.position.set(command.x, command.y); image.width = command.width; image.height = command.height; image.alpha = command.alpha; image.zIndex = command.depth;
+          this.root.addChild(image); this.layers.set(command.layer_id, { image, owner });
         } catch (error) { this.content.releaseAssets(owner); throw error; }
         return;
       }
@@ -140,36 +151,37 @@ export class NarrativeStage {
       case 'animate': {
         const layer = this.layers.get(command.layer_id); if (!layer) throw new Error('This stage layer is unavailable');
         const duration = prefs().reducedMotion ? 0 : command.seconds * 1000;
-        const ease = { linear: 'Linear', sine: 'Sine.easeInOut', quad: 'Quad.easeInOut' }[command.ease];
-        if (!duration) { if (command.to.x !== undefined) layer.image.setX(command.to.x); if (command.to.y !== undefined) layer.image.setY(command.to.y); if (command.to.alpha !== undefined) layer.image.setAlpha(command.to.alpha); if (command.to.scale !== undefined) layer.image.setScale(command.to.scale); if (command.to.angle !== undefined) layer.image.setAngle(command.to.angle); return; }
+        const to: Record<string, number> = {};
+        for (const [k, v] of Object.entries(command.to)) if (v !== undefined) to[k] = v;
         const done = new Promise<void>((resolve) => {
           const finish = () => { this.controller.signal.removeEventListener('abort', finish); resolve(); };
           this.controller.signal.addEventListener('abort', finish, { once: true });
-          this.scene.tweens.add({ targets: layer.image, ...command.to, duration, ease, onComplete: finish, onStop: finish });
+          void this.scene.anim.toAsync(layer.image, to, { duration, ease: EASE[command.ease], skip: !duration }).then(finish);
         });
         if (command.wait) await done; return;
       }
       case 'camera': {
-        this.scene.tweens.add({ targets: this.root, x: REF_W / 2 - command.x * command.zoom, y: REF_H / 2 - command.y * command.zoom, scale: command.zoom, duration: prefs().reducedMotion ? 0 : command.seconds * 1000, ease: 'Sine.easeInOut' }); return;
+        this.scene.anim.killOf(this.root);
+        void this.scene.anim.toAsync(this.root, { x: REF_W / 2 - command.x * command.zoom, y: REF_H / 2 - command.y * command.zoom, scale: command.zoom }, { duration: command.seconds * 1000, ease: 'sine.inout', skip: prefs().reducedMotion }); return;
       }
       case 'mask': {
         const layer = this.layers.get(command.layer_id); if (!layer) throw new Error('This stage layer is unavailable');
-        if (layer.filter) layer.image.filters?.external.remove(layer.filter, true); layer.mask?.destroy(); delete layer.mask; delete layer.filter;
+        layer.image.mask = null; layer.mask?.destroy(); delete layer.mask;
         if (command.shape === 'none') return;
         if ([...this.layers.values()].filter((l) => l.mask).length >= 2) throw new Error('This scene exceeds its mask framebuffer budget');
-        const mask = this.scene.make.graphics({ x: 0, y: 0 }, false); mask.fillStyle(0xffffff); mask.parentContainer = this.root;
-        if (command.shape === 'rectangle') mask.fillRect(command.x, command.y, command.width, command.height); else mask.fillEllipse(command.x, command.y, command.width, command.height);
-        layer.image.enableFilters(); layer.filter = layer.image.filters!.external.addMask(mask, false, this.scene.cameras.main, 'world'); layer.mask = mask; return;
+        const mask = new PIXI.Graphics();
+        if (command.shape === 'rectangle') mask.rect(command.x, command.y, command.width, command.height); else mask.ellipse(command.x, command.y, command.width / 2, command.height / 2);
+        mask.fill(0xffffff); this.root.addChild(mask); layer.image.mask = mask; layer.mask = mask; return;
       }
 
       case 'panel': return new Promise<void>((resolve) => {
-        const finish = () => { this.controller.signal.removeEventListener('abort', finish); if (this.alive) this.scene.scene.resume(); resolve(); };
+        const finish = () => { this.controller.signal.removeEventListener('abort', finish); if (this.alive) this.scene.nav.resume(); resolve(); };
         this.controller.signal.addEventListener('abort', finish, { once: true });
-        this.scene.scene.launch('ContentPanel', { panelId: command.panel_id, owner: this, onClose: finish }); this.scene.scene.pause();
+        this.scene.nav.launch('ContentPanel', { panelId: command.panel_id, owner: this, onClose: finish }); this.scene.nav.pause();
       });
     }
   }
-  private removeLayer(id: string): void { const layer = this.layers.get(id); if (!layer) return; this.scene.tweens.killTweensOf(layer.image); if (layer.filter) layer.image.filters?.external.remove(layer.filter, true); layer.mask?.destroy(); layer.image.destroy(); this.content.releaseAssets(layer.owner); this.layers.delete(id); }
+  private removeLayer(id: string): void { const layer = this.layers.get(id); if (!layer) return; this.scene.anim.killOf(layer.image); layer.image.mask = null; layer.mask?.destroy(); layer.image.destroy(); this.content.releaseAssets(layer.owner); this.layers.delete(id); }
 
   async video(id: string, skippable: boolean): Promise<void> {
     const definition = own(this.pack.videos, id); if (!definition) throw new Error('This video is unavailable');
@@ -185,7 +197,7 @@ export class NarrativeStage {
       const controls = document.createElement('div'); Object.assign(controls.style, { position: 'absolute', bottom: 'max(16px, env(safe-area-inset-bottom))', display: 'flex', gap: '12px' });
       const button = (label: string, action: () => void) => { const b = document.createElement('button'); b.textContent = label; Object.assign(b.style, { minWidth: '120px', minHeight: '48px', color: '#f1e6cf', background: '#190f25', border: '1px solid #bda26b', font: '20px serif' }); b.onclick = action; controls.append(b); return b; };
       const unduck = Music.duck(); let closed = false; let wasPlaying = false; let lastProgress = performance.now(); let lastTime = 0;
-      const watchdog = window.setInterval(() => { if (closed || unavailable || document.hidden || video.paused || !this.scene.sys.isActive()) { lastProgress = performance.now(); return; } if (video.currentTime !== lastTime) { lastTime = video.currentTime; lastProgress = performance.now(); } else if (performance.now() - lastProgress > 15000) fallback(); }, 1000);
+      const watchdog = window.setInterval(() => { if (closed || unavailable || document.hidden || video.paused || !this.host.sys.isActive()) { lastProgress = performance.now(); return; } if (video.currentTime !== lastTime) { lastTime = video.currentTime; lastProgress = performance.now(); } else if (performance.now() - lastProgress > 15000) fallback(); }, 1000);
       let mounted = false;
       const mount = () => { if (closed || mounted) return; mounted = true; document.body.append(root); play.focus(); };
       const close = () => { if (closed) return; closed = true; video.onerror = video.onended = video.onloadedmetadata = video.ontimeupdate = null; window.clearInterval(watchdog); video.pause(); if (!unavailable) { video.removeAttribute('src'); video.load(); } root.remove(); unduck(); this.content.releaseAssets(owner); this.closeVideo = null; this.videoPause = null; if (previousFocus instanceof HTMLElement && previousFocus.isConnected) previousFocus.focus(); resolve(); };
@@ -203,11 +215,11 @@ export class NarrativeStage {
   }
   destroy(): void {
     if (!this.alive) return; this.alive = false;
-    const child = this.scene.scene.get('ContentPanel') as Phaser.Scene & { owner?: object };
-    if (child?.owner === this) this.scene.scene.stop('ContentPanel');
+    const child = this.scene.nav.get('ContentPanel') as Phaser.Scene & { owner?: object };
+    if (child?.owner === this) this.scene.nav.stop('ContentPanel');
     this.controller.abort(); this.closeVideo?.();
     for (const key of [...this.audio.keys()]) this.stopAudio(key);
     for (const id of [...this.layers.keys()]) this.removeLayer(id);
-    this.scene.tweens.killTweensOf(this.root); this.root.destroy();
+    this.scene.anim.killOf(this.root); if (!this.root.destroyed) this.root.destroy({ children: true });
   }
 }

@@ -126,6 +126,8 @@ export interface TextOptions {
   wordWrap?: { width: number };
   lineSpacing?: number;
   letterSpacing?: number;
+  /** drop shadow: offset (x, y), colour and blur */
+  shadow?: { x: number; y: number; color: string; blur: number };
 }
 
 export function parseFontStyle(raw: string | undefined): { fontStyle: 'normal' | 'italic' | 'oblique'; fontWeight: PIXI.TextStyleFontWeight } {
@@ -165,6 +167,23 @@ export class UiText extends PIXI.Text {
     return super.text;
   }
 
+  /** the string this text would display for `v` (for measuring before assigning) */
+  format(v: string): string {
+    return this.fmt ? this.fmt(v) : v;
+  }
+
+  /** lines after word wrap, as the text would lay out `v` */
+  wrap(v: string): string[] {
+    return PIXI.CanvasTextMetrics.measureText(this.format(v), this.style, undefined, this.style.wordWrap).lines;
+  }
+
+  /** Phaser-style font style ('italic 500', '600') */
+  setFontStyle(raw: string): void {
+    const { fontStyle, fontWeight } = parseFontStyle(raw);
+    this.style.fontStyle = fontStyle;
+    this.style.fontWeight = fontWeight;
+  }
+
   override set text(v: PIXI.TextString) {
     super.text = this.fmt ? this.fmt(String(v)) : String(v);
   }
@@ -186,7 +205,8 @@ export function txt(x: number, y: number, text: string, o: TextOptions = {}, ori
     letterSpacing: o.letterSpacing ?? 0,
     lineHeight: size * 1.2 + (o.lineSpacing ?? 0),
     ...(o.wordWrap ? { wordWrap: true, wordWrapWidth: o.wordWrap.width } : {}),
-    ...(thick > 0 ? { stroke: { color: o.stroke ?? '#050208', width: thick, join: 'round' as const } } : {})
+    ...(thick > 0 ? { stroke: { color: o.stroke ?? '#050208', width: thick, join: 'round' as const } } : {}),
+    ...(o.shadow ? { dropShadow: { color: o.shadow.color, blur: o.shadow.blur, distance: Math.hypot(o.shadow.x, o.shadow.y), angle: Math.atan2(o.shadow.y, o.shadow.x), alpha: 1 } } : {})
   };
   const t = new UiText(text, style, qualityProfile().textResolution, formatter(o.fontFamily === F.display));
   const [ax, ay] = typeof origin === 'number' ? [origin, origin] : origin;
