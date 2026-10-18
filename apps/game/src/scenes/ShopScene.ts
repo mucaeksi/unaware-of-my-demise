@@ -1,4 +1,5 @@
 import { REF_W } from '../config';
+import { hosted } from '../core/host';
 import type { Product } from '../net/api';
 import {
   buyProduct,
@@ -9,19 +10,14 @@ import {
 } from '../net/store';
 import { isNative, type StoreProduct } from '../platform/native';
 import { Services } from '../services';
-import { errText, HubScene } from '../ui/hub';
+import { errText, HubScreen } from '../ui/hubScreen';
 import { currencyLabel } from '../ui/format';
-import { Button, txt } from '../ui/kit';
 import { F, T } from '../ui/theme';
 
 /** Offers and rewarded ads. Purchases and ads run through the Android shell; the browser build only shows what exists. */
-export class ShopScene extends HubScene {
+export class ShopScene extends HubScreen {
   protected readonly heading = 'SHOP';
   private selectedOfferByProduct = new Map<string, number>();
-
-  constructor() {
-    super('Shop');
-  }
 
   protected async build(): Promise<void> {
     const api = Services.api;
@@ -48,58 +44,44 @@ export class ShopScene extends HubScene {
     const storeCatalog = await loadStoreCatalog(products);
     if (!this.isCurrentView()) return;
 
-    this.add_(
-      txt(
-        this,
-        REF_W / 2 - (native ? 140 : 0),
+      this.text(REF_W / 2 - (native ? 140 : 0),
         160,
         native
           ? 'Payments handled by Google Play · Subscriptions auto-renew until cancelled in Google Play.'
           : 'Purchases and rewarded ads run inside the Android app.',
         { fontSize: '28px', color: T.dim }
-      ).setOrigin(0.5)
-    );
+      ).setOrigin(0.5);
     if (native) {
-      this.add_(
-        new Button(this, REF_W - 310, 160, {
+        this.button(REF_W - 310, 160, {
           label: 'RESTORE',
           w: 260,
           h: 72,
           fontSize: 24,
           onClick: () => void this.manualRestore()
-        })
-      );
+        });
     }
     if (products.length === 0)
-      this.add_(txt(this, REF_W / 2, 420, 'No offers are on sale yet.', { fontSize: '44px' }).setOrigin(0.5));
+      this.text(REF_W / 2, 420, 'No offers are on sale yet.', { fontSize: '44px' }).setOrigin(0.5);
     products.slice(0, 4).forEach((p, i) => this.row(p, storeCatalog.get(p.productId) ?? null, 290 + i * 150, native));
     if (ads) {
       this.card(REF_W / 2, 940, 1400, 130, 'normal');
-      this.add_(
-        txt(this, 300, 915, 'Watch a memory', { fontFamily: F.display, fontSize: '34px', fontStyle: '600' }).setOrigin(
+        this.text(300, 915, 'Watch a memory', { fontFamily: F.display, fontSize: '34px', fontStyle: '600' }).setOrigin(
           0,
           0.5
-        )
-      );
-      this.add_(
-        txt(
-          this,
-          300,
+        );
+        this.text(300,
           965,
           `${ads.reward} ${currencyLabel()} per view · ${ads.perWindow - ads.windowViews} of ${ads.perWindow} left in the last 12 hours`,
           { fontSize: '26px', color: T.dim }
-        ).setOrigin(0, 0.5)
-      );
-      this.add_(
-        new Button(this, REF_W - 330, 940, {
+        ).setOrigin(0, 0.5);
+        this.button(REF_W - 330, 940, {
           label: 'WATCH',
           w: 300,
           h: 100,
           fontSize: 32,
           variant: 'hot',
           onClick: () => void this.watch()
-        }).setEnabled(native && ads.windowViews < ads.perWindow)
-      );
+        }).setEnabled(native && ads.windowViews < ads.perWindow);
     }
   }
 
@@ -107,27 +89,24 @@ export class ShopScene extends HubScene {
     const selectedIdx = this.selectedOfferByProduct.get(p.productId);
     const terms = formatOfferTerms(p, storeProduct, selectedIdx);
     this.card(REF_W / 2, y, 1400, 136);
-    this.add_(
-      txt(this, 290, y - 34, `${p.title}  ·  ${terms.priceLabel}`, {
+      this.text(290, y - 34, `${p.title}  ·  ${terms.priceLabel}`, {
         fontFamily: F.display,
         fontSize: '30px',
         fontStyle: '600'
-      }).setOrigin(0, 0.5)
-    );
+      }).setOrigin(0, 0.5);
     const what = p.subscription
       ? `${p.subscription.duration_days}-day blessing · ${terms.offerLabel ?? ''} · ${terms.phasesLabel ?? ''}`
       : p.grants
           .map((g) => (g.type === 'currency' ? `${g.amount} ${currencyLabel(g.currency)}` : (g.itemId ?? '')))
           .join(' · ');
-    this.add_(txt(this, 290, y + 6, what, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
+    this.text(290, y + 6, what, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5);
     if (terms.cancellationLabel) {
-      this.add_(txt(this, 290, y + 38, terms.cancellationLabel, { fontSize: '18px', color: T.dim }).setOrigin(0, 0.5));
+      this.text(290, y + 38, terms.cancellationLabel, { fontSize: '18px', color: T.dim }).setOrigin(0, 0.5);
     }
     if (terms.offers.length > 1) {
       const idx = selectedIdx !== undefined ? selectedIdx : -1;
       const offerBtnLabel = idx >= 0 ? `PLAN ${idx + 1}/${terms.offers.length}` : `PICK PLAN (${terms.offers.length})`;
-      this.add_(
-        new Button(this, REF_W - 620, y, {
+        this.button(REF_W - 620, y, {
           label: offerBtnLabel,
           w: 240,
           h: 88,
@@ -137,11 +116,9 @@ export class ShopScene extends HubScene {
             this.selectedOfferByProduct.set(p.productId, nextIdx);
             void this.refresh();
           }
-        })
-      );
+        });
     }
-    this.add_(
-      new Button(this, REF_W - 330, y, {
+      this.button(REF_W - 330, y, {
         label: terms.requiresOfferSelection ? 'SELECT PLAN' : 'BUY',
         sub: storeProduct?.formattedPrice ?? undefined,
         w: 300,
@@ -149,8 +126,7 @@ export class ShopScene extends HubScene {
         fontSize: 28,
         variant: terms.requiresOfferSelection ? 'dim' : 'hot',
         onClick: () => void this.buy(p, storeProduct, terms.selectedOffer?.offerToken, terms.selectedOffer?.basePlanId)
-      }).setEnabled(native && !terms.requiresOfferSelection)
-    );
+      }).setEnabled(native && !terms.requiresOfferSelection);
   }
 
   private busy = false;
@@ -235,3 +211,5 @@ export class ShopScene extends HubScene {
     }
   }
 }
+
+export const ShopHost = hosted('Shop', () => new ShopScene());

@@ -8,9 +8,9 @@ import {
   type CampaignNode
 } from './entry/resume';
 import { committedClaim } from './entry/claims';
-import { errText } from './ui/hub';
-import { Button, toast } from './ui/kit';
-import { REF_H, REF_W } from './config';
+import { errText } from './ui/hubScreen';
+import { toast } from './ui/kit';
+import { storySaveFailed } from './scenes/StoryScene';
 import { Progress, Services } from './services';
 
 export { resolveNextCampaignNode, type CampaignNode };
@@ -91,12 +91,10 @@ export async function playNode(scene: Phaser.Scene, node: CampaignNode, forceRes
     const signedIn = api.signedIn;
     const releaseId = await content.activeReleaseId();
     let saving = false;
-    let retry: Button | null = null;
-    let back: Button | null = null;
     saveFlowCheckpoint(accountKey, { kind: 'campaign', nodeId: node.node_id, step: 'pre_story' });
     const finish = async (s: Phaser.Scene): Promise<void> => {
       if (saving) return;
-      saving = true; retry?.destroy(); retry = null;
+      saving = true;
       try {
         if (signedIn) await api.completeStory(releaseId, node.node_id, revision);
         if (!s.scene.isActive('Story')) return;
@@ -110,9 +108,7 @@ export async function playNode(scene: Phaser.Scene, node: CampaignNode, forceRes
         s.scene.start('Chapters');
       } catch (error) {
         if (!s.scene.isActive('Story')) return;
-        toast(s, `Story progress is not confirmed. ${errText(error)}`, 5000);
-        retry = new Button(s, REF_W / 2 + 220, REF_H - 80, { label: 'RETRY SAVE', w: 380, onClick: () => void finish(s) });
-        back ??= new Button(s, REF_W / 2 - 220, REF_H - 80, { label: 'BACK', w: 380, onClick: () => s.scene.start('Chapters') });
+        storySaveFailed(s, `Story progress is not confirmed. ${errText(error)}`, () => void finish(s), () => s.scene.start('Chapters'));
       } finally { saving = false; }
     };
     scene.scene.start('Story', {

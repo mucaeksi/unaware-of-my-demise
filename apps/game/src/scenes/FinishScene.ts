@@ -1,6 +1,7 @@
-import Phaser from '../engine';
 import { Music } from '../audio/Music';
-import { REF_H, REF_W } from '../config';
+import { REF_W } from '../config';
+import { hosted } from '../core/host';
+import { PixiScene } from '../core/PixiScene';
 import { advance } from '../entry/flow';
 import { RANDOM_GAME_QUOTES, S } from '../entry/strings';
 import { isInteractiveBrowser, loadEntry, nextStep } from '../entry/state';
@@ -9,145 +10,102 @@ import { restartGame } from '../platform/native';
 import { barFill } from '../patch/barFill';
 import type { PatchStatus } from '../patch/PatchService';
 import { Services } from '../services';
+import { DomStage, type DomBar, type DomButton, type DomGroup, type DomText } from '../ui/domKit';
 import { formatBytes } from '../ui/format';
-import { errText } from '../ui/hub';
-import { Bar, Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
+import { errText, titleStyle } from '../ui/hubScreen';
+import { backdrop, sceneFadeIn } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
 
 const MAIN_THEME_CUE = 'bgm_main_theme';
 
 /**
- * Post-tutorial Patch Screen. Opens when the background patch is still downloading/verifying after the 3-part tutorial finishes.
- * Plays the Main Theme music, displays a rotating carousel of iconic game quotes beneath the progress box so the player is never bored,
- * and automatically fades to black and restarts the client the moment the patch completes.
+ * Post-tutorial patch screen: opens when the background patch is still downloading/verifying after the third tutorial.
+ * Plays the Main Theme, rotates canon quotes under the progress box, and restarts the client once the patch is ready.
+ * Says truthfully where the entry progress is saved (R09).
  */
-export class FinishScene extends Phaser.Scene {
-  private unsub: (() => void) | null = null;
-  private quoteTimer: Phaser.Time.TimerEvent | null = null;
+export class FinishScene extends PixiScene {
+  private ui!: DomStage;
+  private quoteTimer: { stop(): void } | null = null;
   private quoteIdx = 0;
   private restarting = false;
-  private head!: Phaser.GameObjects.Text;
-  private note!: Phaser.GameObjects.Text;
-  private figures!: Phaser.GameObjects.Text;
-  private saveLine!: Phaser.GameObjects.Text;
-  private quoteText!: Phaser.GameObjects.Text;
-  private quoteSpeaker!: Phaser.GameObjects.Text;
-  private bar!: Bar;
-  private action!: Button;
+  private head!: DomText;
+  private note!: DomText;
+  private figures!: DomText;
+  private saveLine!: DomText;
+  private quote!: DomGroup;
+  private quoteText!: DomText;
+  private quoteSpeaker!: DomText;
+  private bar!: DomBar;
+  private action!: DomButton;
   private shown: 'waiting' | 'ready' | 'failed' | null = null;
 
-  constructor() {
-    super('Finish');
-  }
-
   async create(): Promise<void> {
-    this.restarting = false;
-    this.shown = null;
     const entry = loadEntry();
     if (!entry.prologue || entry.tutorials < 3) {
-      advance(this, nextStep(entry));
+      advance(this.host, nextStep(entry));
       return;
     }
     const { art } = Services.ready();
-    await Promise.all([
-      art.ensureBoot(this).catch(() => undefined),
-      art.loadMusic(this, MAIN_THEME_CUE).catch(() => undefined)
-    ]);
-    if (!this.sys.isActive()) return;
-    this.cameras.main.setBackgroundColor(0x0a0610);
+    await Promise.all([art.ensureBoot(this.host).catch(() => undefined), art.loadMusic(this.host, MAIN_THEME_CUE).catch(() => undefined)]);
+    if (!this.live) return;
 
-    // Play the Main Theme while the patch downloads
+    // the Main Theme plays while the patch downloads (again on the first touch when autoplay was blocked)
     const playTheme = (): void => {
       Music.resume();
       const m = art.music(MAIN_THEME_CUE);
-      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 2.0);
+      if (m) Music.play(this.host.cache.audio, m.key, m.loopStart, m.duration, 2.0);
     };
     playTheme();
-    this.input.on('pointerdown', playTheme);
-
-    try {
-      const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash')).setAlpha(0.38);
-      bg.setScale(Math.max(REF_W / bg.width, REF_H / bg.height) * 1.04);
-    } catch {
-      /* the backdrop is decoration only */
-    }
-
-    // Center Patch Box
-    panel(this, REF_W / 2, 488, 1460, 584, 'hot');
-    this.head = title(this, REF_W / 2, 265, '', 50, T.gold);
-    this.note = txt(this, REF_W / 2, 340, '', {
-      fontSize: '34px',
-      color: T.text,
-      align: 'center',
-      wordWrap: { width: 1200 },
-      lineSpacing: 8
-    }).setOrigin(0.5, 0);
-    this.bar = new Bar(this, REF_W / 2, 516, 1080, 28, () => C.goldHi);
-    this.figures = txt(this, REF_W / 2, 558, '', { fontSize: '28px', color: T.dim }).setOrigin(0.5, 0);
-    this.saveLine = txt(this, REF_W / 2, 604, '', { fontSize: '24px', color: T.dim }).setOrigin(0.5, 0);
-    this.action = new Button(this, REF_W / 2, 700, {
-      label: S.finish.restart,
-      w: 700,
-      h: 112,
-      fontSize: 34,
-      variant: 'hot',
-      onClick: () => void this.onAction()
+    const canvas = this.host.game.canvas;
+    canvas.addEventListener('pointerdown', playTheme);
+    this.onClose(() => canvas.removeEventListener('pointerdown', playTheme));
+    void backdrop(this, 'forest_whispering_ash').then((bg) => {
+      if (!bg) return;
+      bg.alpha = 0.38;
+      bg.scale.set(bg.scale.x * 1.04);
     });
-    this.action.setVisible(false);
 
-    // Rotating random game quotes beneath the Patch Box
-    const quoteRule = this.add.graphics();
-    quoteRule.lineStyle(1.5, C.gold, 0.45);
-    quoteRule.lineBetween(REF_W / 2 - 420, 816, REF_W / 2 - 18, 816);
-    quoteRule.lineBetween(REF_W / 2 + 18, 816, REF_W / 2 + 420, 816);
-    quoteRule.fillStyle(C.goldHi, 0.85);
-    quoteRule.fillPoints(
-      [
-        new Phaser.Math.Vector2(REF_W / 2, 809),
-        new Phaser.Math.Vector2(REF_W / 2 + 7, 816),
-        new Phaser.Math.Vector2(REF_W / 2, 823),
-        new Phaser.Math.Vector2(REF_W / 2 - 7, 816)
-      ],
-      true
-    );
+    this.ui = new DomStage(this.host.game.uiLayer);
+    this.attachDom(this.ui.root);
+    this.onClose(() => {
+      this.quoteTimer?.stop();
+      this.ui.destroy();
+    });
+    const cx = REF_W / 2;
+    this.ui.panel(cx, 488, 1460, 584, 'hot');
+    this.head = this.ui.text(cx, 265, '', titleStyle(50, T.gold)).setOrigin(0.5);
+    this.note = this.ui.text(cx, 340, '', { fontSize: 34, color: T.text, align: 'center', wordWrap: { width: 1200 }, lineSpacing: 8 }).setOrigin(0.5, 0);
+    this.note.el.setAttribute('aria-live', 'polite');
+    this.bar = this.ui.bar(cx, 516, 1080, 28, () => C.goldHi);
+    this.figures = this.ui.text(cx, 558, '', { fontSize: 28, color: T.dim }).setOrigin(0.5, 0);
+    this.saveLine = this.ui.text(cx, 604, '', { fontSize: 24, color: T.dim }).setOrigin(0.5, 0);
+    this.saveLine.el.setAttribute('aria-live', 'polite');
+    this.action = this.ui.button(cx, 700, { label: S.finish.restart, w: 700, h: 112, fontSize: 34, variant: 'hot', onClick: () => void this.onAction() }).setVisible(false);
 
+    // canon quotes under the box
+    const rule = this.ui.group();
+    this.ui.box(cx - 420, 815, 402, 1.5, C.gold, 0.45, rule);
+    this.ui.box(cx + 18, 815, 402, 1.5, C.gold, 0.45, rule);
+    this.ui.box(cx - 7, 809, 14, 14, C.goldHi, 0.85, rule).el.style.rotate = '45deg';
+    this.quote = this.ui.group();
+    this.quote.el.style.transition = 'opacity .42s ease-in-out';
     this.quoteIdx = Math.floor(Math.random() * RANDOM_GAME_QUOTES.length);
-    const firstQ = RANDOM_GAME_QUOTES[this.quoteIdx]!;
-    this.quoteText = txt(this, REF_W / 2, 842, firstQ.quote, {
-      fontFamily: F.body,
-      fontSize: '36px',
-      fontStyle: 'italic 500',
-      color: '#efe8f5',
-      align: 'center',
-      wordWrap: { width: 1420 },
-      stroke: '#05030a',
-      strokeThickness: 4
-    }).setOrigin(0.5, 0);
-    this.quoteSpeaker = txt(this, REF_W / 2, 932, `—  ${firstQ.speaker}`, {
-      fontFamily: F.display,
-      fontSize: '22px',
-      fontStyle: '600',
-      color: T.gold
-    })
-      .setOrigin(0.5, 0)
-      .setLetterSpacing(3);
-
-    this.quoteTimer = this.time.addEvent({
-      delay: 4200,
-      loop: true,
-      callback: () => this.cycleQuote()
-    });
+    const first = RANDOM_GAME_QUOTES[this.quoteIdx]!;
+    this.quoteText = this.ui.text(cx, 842, first.quote, { fontFamily: F.body, fontSize: 36, fontStyle: 'italic 500', color: '#efe8f5', align: 'center', wordWrap: { width: 1420 }, stroke: '#05030a', strokeThickness: 4 }, this.quote).setOrigin(0.5, 0);
+    this.quoteSpeaker = this.ui.text(cx, 932, `—  ${first.speaker}`, { fontFamily: F.display, fontSize: 22, fontStyle: '600', color: T.gold, letterSpacing: 3 }, this.quote).setOrigin(0.5, 0);
+    const rotate = (): void => {
+      this.quoteTimer = this.anim.after(4200, () => {
+        this.cycleQuote();
+        rotate();
+      });
+    };
+    rotate();
 
     if (Services.patches.get().kind === 'idle') void Services.patches.start();
-    this.unsub = Services.patches.subscribe((s) => this.render(s));
+    this.onClose(Services.patches.subscribe((s) => this.render(s)));
     // R09: say truthfully where the entry progress is saved; re-push anything a tutorial step could not send
-    const unwatch = watchEntrySaveState((st) => this.renderSave(st));
+    this.onClose(watchEntrySaveState((st) => this.renderSave(st)));
     if (Services.api.signedIn) void syncEntry(Services.api);
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      unwatch();
-      this.unsub?.();
-      this.quoteTimer?.remove(false);
-    });
     sceneFadeIn(this, 1300);
   }
 
@@ -164,60 +122,41 @@ export class FinishScene extends Phaser.Scene {
   }
 
   private cycleQuote(): void {
-    if (!this.quoteText?.active || !this.quoteSpeaker?.active) return;
+    if (!this.quoteText?.active) return;
     this.quoteIdx = (this.quoteIdx + 1) % RANDOM_GAME_QUOTES.length;
-    const nextQ = RANDOM_GAME_QUOTES[this.quoteIdx]!;
-    this.tweens.add({
-      targets: [this.quoteText, this.quoteSpeaker],
-      alpha: 0,
-      duration: 420,
-      ease: 'Sine.easeInOut',
-      onComplete: () => {
-        if (!this.quoteText?.active) return;
-        this.quoteText.setText(nextQ.quote);
-        this.quoteSpeaker.setText(`—  ${nextQ.speaker}`);
-        this.tweens.add({
-          targets: [this.quoteText, this.quoteSpeaker],
-          alpha: 1,
-          duration: 520,
-          ease: 'Sine.easeInOut'
-        });
-      }
+    const next = RANDOM_GAME_QUOTES[this.quoteIdx]!;
+    this.quote.setAlpha(0);
+    this.anim.after(420, () => {
+      if (!this.quoteText.active) return;
+      this.quoteText.setText(next.quote);
+      this.quoteSpeaker.setText(`—  ${next.speaker}`);
+      this.quote.setAlpha(1);
     });
   }
 
   private render(s: PatchStatus): void {
-    if (this.restarting || !this.head.active) return;
-    const isPreviewHold =
-      typeof window !== 'undefined' &&
-      new URLSearchParams(window.location.search).get('preview_scene') === 'finish_wait';
+    if (this.restarting || !this.head?.active) return;
+    const previewHold = new URLSearchParams(window.location.search).get('preview_scene') === 'finish_wait';
     if (s.kind === 'ready') {
-      if (this.shown !== 'ready') {
-        this.shown = 'ready';
-        this.head.setText(S.finish.readyTitle);
-        this.note.setText(S.finish.readyBody);
-        this.bar.set(1);
-        this.bar.setVisible(true);
-        this.figures.setText('100 %   ·   READY');
-        if (isInteractiveBrowser() && !isPreviewHold) {
-          this.action.setVisible(true).setLabel(S.finish.restarting).setEnabled(false);
-          void this.triggerAutoRestart();
-        } else {
-          this.action.setVisible(true).setLabel(S.finish.restart).setEnabled(true);
-        }
+      if (this.shown === 'ready') return;
+      this.shown = 'ready';
+      this.head.setText(S.finish.readyTitle);
+      this.note.setText(S.finish.readyBody);
+      this.bar.set(1);
+      this.bar.setVisible(true);
+      this.figures.setText('100 %   ·   READY');
+      if (isInteractiveBrowser() && !previewHold) {
+        this.action.setVisible(true).setLabel(S.finish.restarting).setEnabled(false);
+        void this.triggerAutoRestart();
+      } else {
+        this.action.setVisible(true).setLabel(S.finish.restart).setEnabled(true);
       }
       return;
     }
     if (s.kind === 'failed') {
       this.shown = 'failed';
       this.head.setText(S.finish.waitingTitle);
-      this.note.setText(
-        s.updateRequired
-          ? S.patch.updateRequired
-          : s.requiresNetworkApproval
-            ? 'Downloads are paused on this data-saving connection.'
-            : `${S.finish.failedBody}\n${s.detail.slice(0, 180)}`
-      );
+      this.note.setText(s.updateRequired ? S.patch.updateRequired : s.requiresNetworkApproval ? 'Downloads are paused on this data-saving connection.' : `${S.finish.failedBody}\n${s.detail.slice(0, 180)}`);
       this.bar.setVisible(false);
       this.figures.setText('');
       this.action.setVisible(!s.updateRequired).setLabel(s.requiresNetworkApproval ? 'USE MOBILE DATA' : S.finish.retry).setEnabled(true);
@@ -231,13 +170,7 @@ export class FinishScene extends Phaser.Scene {
     const frac = barFill(s);
     this.bar.set(frac ?? 0);
     const p = s.kind === 'running' ? s.progress : null;
-    this.figures.setText(
-      p && p.bytesTotal > 0 && p.phase === 'downloading'
-        ? `${Math.floor((frac ?? 0) * 100)} %   ·   ${formatBytes(p.bytesDone)} / ${formatBytes(p.bytesTotal)}`
-        : p
-          ? S.patch[p.phase]
-          : S.patch.checking
-    );
+    this.figures.setText(p && p.bytesTotal > 0 && p.phase === 'downloading' ? `${Math.floor((frac ?? 0) * 100)} %   ·   ${formatBytes(p.bytesDone)} / ${formatBytes(p.bytesTotal)}` : p ? S.patch[p.phase] : S.patch.checking);
   }
 
   private async triggerAutoRestart(): Promise<void> {
@@ -247,27 +180,23 @@ export class FinishScene extends Phaser.Scene {
     try {
       await confirmEntryComplete(Services.api);
     } catch (e) {
-      if (!this.sys.isActive()) return;
+      if (!this.live) return;
       this.restarting = false;
       this.note.setText(`${S.finish.readyBody}\n\nCould not confirm your entry checkpoint on the server: ${errText(e)}`);
       this.action.setVisible(true).setLabel('RETRY SAVE & RESTART').setEnabled(true);
       return;
     }
-    if (!this.sys.isActive()) return;
+    if (!this.live) return;
     this.note.setText(S.finish.readyBody);
     this.action.setLabel(S.finish.restarting).setEnabled(false);
-    if (isInteractiveBrowser()) {
-      this.cameras.main.fadeOut(1300, 0, 0, 0);
-      await new Promise<void>((r) => this.time.delayedCall(1350, () => r()));
-    } else {
-      await new Promise<void>((r) => this.time.delayedCall(450, () => r()));
-    }
+    if (isInteractiveBrowser()) await this.fadeOut(1300, 0x000000);
+    else await this.anim.wait(450);
     try {
       await restartGame();
     } catch (e) {
-      if (!this.sys.isActive()) return;
+      if (!this.live) return;
       this.restarting = false;
-      if (isInteractiveBrowser()) this.cameras.main.fadeIn(400, 0, 0, 0);
+      if (isInteractiveBrowser()) this.fadeIn(400, 0x000000);
       this.note.setText(`${S.finish.readyBody}\n\nCheckpoint saved, but the automatic restart could not complete: ${errText(e)}`);
       this.action.setVisible(true).setLabel('RETRY RESTART').setEnabled(true);
     }
@@ -284,9 +213,8 @@ export class FinishScene extends Phaser.Scene {
       void Services.patches.retry(state.kind === 'failed' && state.requiresNetworkApproval ? { allowMetered: true } : {});
       return;
     }
-    if (this.shown !== 'ready') return;
-    await this.triggerAutoRestart();
+    if (this.shown === 'ready') await this.triggerAutoRestart();
   }
 }
 
-
+export const FinishHost = hosted('Finish', () => new FinishScene());

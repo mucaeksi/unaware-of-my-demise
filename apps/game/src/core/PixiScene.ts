@@ -30,14 +30,18 @@ export abstract class PixiScene<D = unknown> {
   readonly #cleanups: (() => void)[] = [];
   readonly #tickers: ((dtMs: number) => void)[] = [];
   readonly #mirrors = new Set<Syncable>();
+  /** HTML layers of this scene: scene fades reach them too (they sit above the canvas) */
+  readonly #dom: HTMLElement[] = [];
   #sinceSync = 0;
   #zoom = 1;
   #shakeLeft = 0;
   #shakeAmp = 0;
 
-  constructor(background = 0x0a0610) {
+  /** `background` null keeps the scene transparent (an overlay over the scenes below it) */
+  constructor(background: number | null = 0x0a0610) {
     this.#bg.rect(0, 0, REF_W, REF_H).fill(0xffffff);
-    this.#bg.tint = background;
+    this.#bg.tint = background ?? 0;
+    this.#bg.visible = background !== null;
     this.#veil.rect(0, 0, REF_W, REF_H).fill(0xffffff);
     this.#veil.alpha = 0;
     this.#veil.visible = false;
@@ -99,16 +103,35 @@ export abstract class PixiScene<D = unknown> {
     return () => this.#mirrors.delete(m);
   }
 
+  /** registers an HTML layer (a DomStage root) so scene fades include it */
+  attachDom(el: HTMLElement): void {
+    this.#dom.push(el);
+  }
+
+  #fadeDom(ms: number, to: number, from?: number): void {
+    for (const el of this.#dom) {
+      if (from !== undefined) {
+        el.style.transition = 'none';
+        el.style.opacity = String(from);
+        void el.offsetWidth; // commit the start value before transitioning
+      }
+      el.style.transition = `opacity ${ms}ms ease`;
+      el.style.opacity = String(to);
+    }
+  }
+
   fadeIn(ms: number, color = 0x0a0610): void {
     this.#veil.tint = color;
     this.#veil.alpha = 1;
     this.#veil.visible = true;
     this.anim.to(this.#veil, { alpha: 0 }, { duration: ms, onComplete: () => (this.#veil.visible = false) });
+    this.#fadeDom(ms, 1, 0);
   }
 
   fadeOut(ms: number, color = 0x0a0610): Promise<void> {
     this.#veil.tint = color;
     this.#veil.visible = true;
+    this.#fadeDom(ms, 0);
     return this.anim.toAsync(this.#veil, { alpha: 1 }, { duration: ms });
   }
 

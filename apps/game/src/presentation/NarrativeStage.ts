@@ -215,8 +215,8 @@ export class NarrativeStage {
   }
   destroy(): void {
     if (!this.alive) return; this.alive = false;
-    const child = this.scene.nav.get('ContentPanel') as Phaser.Scene & { owner?: object };
-    if (child?.owner === this) this.scene.nav.stop('ContentPanel');
+    const child = this.scene.nav.get('ContentPanel') as Phaser.Scene & { pixiScene?: { owner?: object } | null };
+    if (child?.pixiScene?.owner === this) this.scene.nav.stop('ContentPanel');
     this.controller.abort(); this.closeVideo?.();
     for (const key of [...this.audio.keys()]) this.stopAudio(key);
     for (const id of [...this.layers.keys()]) this.removeLayer(id);

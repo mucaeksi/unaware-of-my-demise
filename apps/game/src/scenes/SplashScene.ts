@@ -1,10 +1,13 @@
-import Phaser from '../engine';
+import * as PIXI from 'pixi.js';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
+import { hosted } from '../core/host';
+import { PixiScene } from '../core/PixiScene';
 import { S } from '../entry/strings';
 import { prefs } from '../platform/prefs';
-import { txt } from '../ui/kit';
+import { txt } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
+import { vfxTextures } from '../vfx/textures';
 
 export interface SplashInit {
   /** resolves true when fonts, base content and menu art are loaded; false when the load failed (the boot code already reported it) */
@@ -15,128 +18,79 @@ const FADE_IN = INTRO_FAST ? 80 : 1400;
 const HOLD = INTRO_FAST ? 80 : 2000;
 const FADE_OUT = INTRO_FAST ? 80 : 1400;
 
-/**
- * The engine credit. Slow fade-in on black, official Phaser wordmark + iconic diagonal prism laser beam & planetary ring,
- * accompanied by the Phaser retro-synth arpeggio chime (`Sfx.phaserLogo()`).
- */
-export class SplashScene extends Phaser.Scene {
-  private ready!: Promise<boolean>;
-
+/** The engine credit: a slow fade-in on black, the PixiJS wordmark over a ring and a four-colour prism beam, with a synth chime. */
+export class SplashScene extends PixiScene<SplashInit> {
   constructor() {
-    super('Splash');
+    super(0x030208);
   }
 
-  init(data: SplashInit): void {
-    this.ready = data.ready;
-  }
-
-  create(): void {
-    this.cameras.main.setBackgroundColor(0x030208);
+  create(data: SplashInit): void {
     document.getElementById('boot')?.classList.add('done');
-
     const cx = REF_W / 2;
     const cy = REF_H / 2;
-    const calm = prefs().reducedMotion;
+    const spark = vfxTextures().spark;
 
-    // Iconic Phaser planetary ring & diagonal neon prism laser beam behind the official wordmark
-    const emblem = this.add.graphics();
-    // Outer soft aura ring
-    emblem.lineStyle(2, 0x00e5ff, 0.28);
-    emblem.strokeEllipse(cx, cy + 6, 680, 170);
-    emblem.lineStyle(1.5, 0xff2a85, 0.32);
-    emblem.strokeEllipse(cx, cy + 6, 560, 132);
-    // Diagonal 4-color prism laser beam (Phaser signature motif)
-    const beamColors = [0x00e5ff, 0x9b4dff, 0xff2a85, 0xffe066];
-    beamColors.forEach((col, i) => {
-      const offset = (i - 1.5) * 9;
-      emblem.lineStyle(5, col, 0.78);
-      emblem.lineBetween(cx - 320 + offset, cy + 128, cx + 320 + offset, cy - 118);
+    // aura ellipses and the diagonal prism beam behind the wordmark
+    const emblem = new PIXI.Graphics()
+      .ellipse(cx, cy + 6, 340, 85)
+      .stroke({ width: 2, color: 0x00e5ff, alpha: 0.28 })
+      .ellipse(cx, cy + 6, 280, 66)
+      .stroke({ width: 1.5, color: 0xff2a85, alpha: 0.32 });
+    [0x00e5ff, 0x9b4dff, 0xff2a85, 0xffe066].forEach((col, i) => {
+      const o = (i - 1.5) * 9;
+      emblem.moveTo(cx - 320 + o, cy + 128).lineTo(cx + 320 + o, cy - 118).stroke({ width: 5, color: col, alpha: 0.78 });
     });
-
-    const glow = this.textures.exists('fx_spark')
-      ? this.add.image(cx, cy + 6, 'fx_spark').setScale(7.5, 3.2).setTint(0x9b4dff).setBlendMode(Phaser.BlendModes.ADD).setAlpha(0)
-      : null;
-
-    const made = txt(this, cx, cy - 134, S.splash.made, {
-      fontFamily: F.body,
-      fontSize: '34px',
-      fontStyle: '500',
-      color: T.dim
-    })
-      .setOrigin(0.5)
-      .setLetterSpacing(16);
-
-    // Official pixel-art Phaser logo at whole-number scale (4x = 832 x 200)
-    const word: Phaser.GameObjects.Text = txt(this, cx, cy + 4, S.splash.engine, {
-      fontFamily: F.display,
-      fontSize: '112px',
-      fontStyle: '700',
-      color: '#f1ece4'
-    })
-      .setOrigin(0.5)
-      .setLetterSpacing(22);
-
-    const sub = txt(this, cx, cy + 148, 'WEBGL2  ·  GOTHIC DOM UI  ·  v8.0', {
-      fontFamily: F.display,
-      fontSize: '20px',
-      fontStyle: '600',
-      color: '#9ecfff'
-    })
-      .setOrigin(0.5)
-      .setLetterSpacing(8);
-
-    const rule = this.add.rectangle(cx, cy + 112, 580, 3, C.silver, 0.78).setScale(0.02, 1);
-    const all: Phaser.GameObjects.GameObject[] = [emblem, made, word, sub, rule];
-    if (glow) all.push(glow);
-    all.forEach((o) => {
-      if ('setAlpha' in o && typeof o.setAlpha === 'function') o.setAlpha(0);
-    });
-
-    // Play the Phaser retro-synth arpeggio & laser chime (and unlock audio on first tap if browser blocked autoplay)
-    Sfx.phaserLogo();
-    this.input.once('pointerdown', () => Sfx.phaserLogo());
-
-    this.tweens.add({ targets: [emblem, made, word, sub, rule], alpha: 1, duration: FADE_IN, ease: 'Sine.easeInOut' });
-    if (glow) {
-      this.tweens.add({ targets: glow, alpha: 0.42, duration: FADE_IN, ease: 'Sine.easeOut' });
+    const glow = new PIXI.Sprite(spark);
+    glow.anchor.set(0.5);
+    glow.position.set(cx, cy + 6);
+    glow.scale.set(7.5, 3.2);
+    glow.tint = 0x9b4dff;
+    glow.blendMode = 'add';
+    const made = txt(cx, cy - 134, S.splash.made, { fontFamily: F.body, fontSize: 34, fontStyle: '500', color: T.dim, letterSpacing: 16 }, 0.5);
+    const word = txt(cx, cy + 4, S.splash.engine, { fontFamily: F.display, fontSize: 112, fontStyle: '700', color: '#f1ece4', letterSpacing: 22 }, 0.5);
+    const sub = txt(cx, cy + 148, 'WEBGL2  ·  GOTHIC DOM UI  ·  v8.0', { fontFamily: F.display, fontSize: 20, fontStyle: '600', color: '#9ecfff', letterSpacing: 8 }, 0.5);
+    const rule = new PIXI.Graphics().rect(-290, -1.5, 580, 3).fill({ color: C.silver, alpha: 0.78 });
+    rule.position.set(cx, cy + 112);
+    rule.scale.x = 0.02;
+    const all = [emblem, made, word, sub, rule, glow];
+    for (const o of all) {
+      o.alpha = 0;
+      this.add(o);
     }
-    this.tweens.add({ targets: rule, scaleX: 1, duration: FADE_IN + HOLD * 0.75, ease: 'Cubic.easeInOut' });
 
-    if (!calm && this.textures.exists('fx_spark')) {
-      const glint = this.add
-        .image(cx - 380, cy + 4, 'fx_spark')
-        .setScale(2.4, 0.9)
-        .setTint(0x00e5ff)
-        .setBlendMode(Phaser.BlendModes.ADD)
-        .setAlpha(0);
-      this.tweens.add({
-        targets: glint,
-        x: cx + 380,
-        alpha: { from: 0.85, to: 0 },
-        duration: 1650,
-        delay: Math.round(FADE_IN * 0.55),
-        ease: 'Cubic.easeOut',
-        onComplete: () => glint.destroy()
-      });
+    // the chime, and once more on the first tap when the browser blocked autoplay
+    Sfx.phaserLogo();
+    const canvas = this.host.game.canvas;
+    const replay = (): void => Sfx.phaserLogo();
+    canvas.addEventListener('pointerdown', replay, { once: true });
+    this.onClose(() => canvas.removeEventListener('pointerdown', replay));
+
+    for (const o of [emblem, made, word, sub, rule]) this.anim.to(o, { alpha: 1 }, { duration: FADE_IN, ease: 'sine.inout' });
+    this.anim.to(glow, { alpha: 0.42 }, { duration: FADE_IN, ease: 'sine.out' });
+    this.anim.to(rule, { scaleX: 1 }, { duration: FADE_IN + HOLD * 0.75, ease: 'cubic.inout' });
+    if (!prefs().reducedMotion) {
+      const glint = this.add(new PIXI.Sprite(spark));
+      glint.anchor.set(0.5);
+      glint.position.set(cx - 380, cy + 4);
+      glint.scale.set(2.4, 0.9);
+      glint.tint = 0x00e5ff;
+      glint.blendMode = 'add';
+      glint.alpha = 0;
+      this.anim.to(glint, { x: cx + 380, alpha: { from: 0.85, to: 0 } }, { duration: 1650, delay: Math.round(FADE_IN * 0.55), ease: 'cubic.out', onComplete: () => glint.destroy() });
     }
 
     const animation = new Promise<void>((resolve) => {
-      this.time.delayedCall(FADE_IN + HOLD, () => {
-        this.tweens.add({
-          targets: all,
-          alpha: 0,
-          duration: FADE_OUT,
-          ease: 'Sine.easeInOut',
-          onComplete: () => {
-            this.time.delayedCall(INTRO_FAST ? 20 : 350, () => resolve());
-          }
-        });
+      this.anim.after(FADE_IN + HOLD, () => {
+        for (const o of all) this.anim.to(o, { alpha: 0 }, { duration: FADE_OUT, ease: 'sine.inout' });
+        this.anim.after(FADE_OUT + (INTRO_FAST ? 20 : 350), resolve);
       });
     });
-    void Promise.all([animation, this.ready]).then(([, ok]) => {
-      if (!ok) return;
-      this.scene.stop('Boot');
-      this.scene.start('Studio');
+    void Promise.all([animation, data.ready]).then(([, ok]) => {
+      if (!ok || !this.live) return;
+      this.nav.stop('Boot');
+      this.nav.start('Studio');
     });
   }
 }
+
+export const SplashHost = hosted<SplashInit>('Splash', () => new SplashScene());

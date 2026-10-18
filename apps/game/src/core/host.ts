@@ -31,3 +31,13 @@ export function hosted<D>(key: string, make: () => PixiScene<D>): new () => Phas
     }
   };
 }
+
+/**
+ * Fades a scene to its void colour: the PIXI scene a host carries (canvas and HTML layers), or the engine camera of a
+ * scene not yet moved (D-25 transition helper).
+ */
+export function fadeOutScene(scene: Phaser.Scene, ms: number, color = 0x000000): void {
+  const pixi = (scene as Phaser.Scene & { pixiScene?: PixiScene<unknown> | null }).pixiScene;
+  if (pixi) void pixi.fadeOut(ms, color);
+  else scene.cameras.main.fadeOut(ms, (color >> 16) & 255, (color >> 8) & 255, color & 255);
+}

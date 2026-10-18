@@ -1,5 +1,6 @@
 import type Phaser from '../engine';
 import type { Encounter } from '@uomd/content-schema';
+import { fadeOutScene } from '../core/host';
 import { restartGame } from '../platform/native';
 import { Services } from '../services';
 import { advance } from './flow';
@@ -28,7 +29,7 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
     recordEntry(Services.api, (st) => markTutorialDone(st, index));
     if (index === 3 && !isReplaying() && Services.patches.get().kind === 'ready' && isInteractiveBrowser()) {
       // Background patch already completed during the tutorial: fade to black and restart immediately
-      s.cameras.main.fadeOut(1600, 0, 0, 0);
+      fadeOutScene(s, 1600);
       s.time.delayedCall(1650, () => {
         void (async () => {
           try {

@@ -7,29 +7,29 @@ import { REF_H, REF_W } from './config';
 import { playNode } from './flow';
 import { BattleHost } from './scenes/BattleScene';
 import { BootScene } from './scenes/BootScene';
-import { AccountScene } from './scenes/AccountScene';
-import { CharacterScene } from './scenes/CharacterScene';
-import { ChaptersScene } from './scenes/ChaptersScene';
-import { FinishScene } from './scenes/FinishScene';
-import { GearScene } from './scenes/GearScene';
-import { HomeScene } from './scenes/HomeScene';
-import { MailScene } from './scenes/MailScene';
-import { OperationsScene } from './scenes/OperationsScene';
-import { PurchasesScene } from './scenes/PurchasesScene';
-import { PatchBarScene } from './scenes/PatchBarScene';
+import { AccountHost } from './scenes/AccountScene';
+import { CharacterHost } from './scenes/CharacterScene';
+import { ChaptersHost } from './scenes/ChaptersScene';
+import { FinishHost } from './scenes/FinishScene';
+import { GearHost } from './scenes/GearScene';
+import { HomeHost } from './scenes/HomeScene';
+import { MailHost } from './scenes/MailScene';
+import { OperationsHost } from './scenes/OperationsScene';
+import { PurchasesHost } from './scenes/PurchasesScene';
+import { PatchBarHost } from './scenes/PatchBarScene';
 import { PrologueHost } from './scenes/PrologueScene';
-import { RosterScene } from './scenes/RosterScene';
-import { RecruitScene } from './scenes/RecruitScene';
-import { LibraryScene } from './scenes/LibraryScene';
-import { ShopScene } from './scenes/ShopScene';
-import { SplashScene } from './scenes/SplashScene';
-import { StudioScene } from './scenes/StudioScene';
-import { ContentPanelScene } from './scenes/ContentPanelScene';
+import { RosterHost } from './scenes/RosterScene';
+import { RecruitHost } from './scenes/RecruitScene';
+import { LibraryHost } from './scenes/LibraryScene';
+import { ShopHost } from './scenes/ShopScene';
+import { SplashHost } from './scenes/SplashScene';
+import { StudioHost } from './scenes/StudioScene';
+import { ContentPanelHost } from './scenes/ContentPanelScene';
 import { StoryHost } from './scenes/StoryScene';
-import { SummonScene } from './scenes/SummonScene';
-import { TasksScene } from './scenes/TasksScene';
-import { TeamScene } from './scenes/TeamScene';
-import { TitleScene } from './scenes/TitleScene';
+import { SummonHost } from './scenes/SummonScene';
+import { TasksHost } from './scenes/TasksScene';
+import { TeamHost } from './scenes/TeamScene';
+import { TitleHost } from './scenes/TitleScene';
 import { installContinuitySync } from './entry/cloudSync';
 import { installContextRecovery, qualityProfile } from './platform/graphics';
 import { Services } from './services';
@@ -66,7 +66,7 @@ try {
     fps: { target: qp.targetFps },
     input: { touch: { capture: true }, activePointers: 2 },
     banner: false,
-    scene: [BootScene, ContentPanelScene, SplashScene, StudioScene, TitleScene, PrologueHost, FinishScene, ChaptersScene, StoryHost, BattleHost, HomeScene, SummonScene, RosterScene, RecruitScene, LibraryScene, MailScene, ShopScene, AccountScene, OperationsScene, PurchasesScene, CharacterScene, GearScene, TasksScene, TeamScene, PatchBarScene]
+    scene: [BootScene, ContentPanelHost, SplashHost, StudioHost, TitleHost, PrologueHost, FinishHost, ChaptersHost, StoryHost, BattleHost, HomeHost, SummonHost, RosterHost, RecruitHost, LibraryHost, MailHost, ShopHost, AccountHost, OperationsHost, PurchasesHost, CharacterHost, GearHost, TasksHost, TeamHost, PatchBarHost]
   });
   game.ready.catch((e: unknown) => fatal(`This device cannot run the game: no WebGL, WebGPU or canvas renderer (${e instanceof Error ? e.message : String(e)})`));
   const contextRecovery = installContextRecovery(game, () => Services.refreshArt().then(() => undefined));

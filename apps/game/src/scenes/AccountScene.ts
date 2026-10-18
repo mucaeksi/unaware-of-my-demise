@@ -1,30 +1,26 @@
 import { API_BASE, REF_W } from '../config';
+import { hosted } from '../core/host';
 import { prefs } from '../platform/prefs';
-import { errText, HubScene } from '../ui/hub';
+import { errText, HubScreen } from '../ui/hubScreen';
 import { Progress, Services } from '../services';
-import { Button, txt } from '../ui/kit';
 import { T } from '../ui/theme';
 import { ApiError } from '../net/api';
 import { consentState, showPrivacyOptions, subscribeConsent } from '../net/store';
 
-export class AccountScene extends HubScene {
+export class AccountScene extends HubScreen {
   protected readonly heading = 'ACCOUNT';
   protected override readonly needsSignIn = false;
 
   private confirmDeleteFor: string | null = null;
   private confirmDeleteRevision = -1;
 
-  constructor() {
-    super('Account');
-  }
-
   override create(): void {
     this.confirmDeleteFor = null;
     this.confirmDeleteRevision = -1;
     const unsub = subscribeConsent(() => {
-      if (this.sys.isActive()) void this.refresh();
+      if (this.live) void this.refresh();
     });
-    this.events.once('shutdown', unsub);
+    this.onClose(unsub);
     super.create();
   }
 
@@ -49,31 +45,31 @@ export class AccountScene extends HubScene {
       this.say('Privacy notice & web deletion portal opened');
     };
     if (!api.signedIn) {
-      this.add_(txt(this, REF_W / 2, 330, 'Your account is a Google account. Progress, rolls and purchases are bound to it and survive a reinstall.', { fontSize: '36px', wordWrap: { width: 1400 }, align: 'center' }).setOrigin(0.5));
+      this.text(REF_W / 2, 330, 'Your account is a Google account. Progress, rolls and purchases are bound to it and survive a reinstall.', { fontSize: '36px', wordWrap: { width: 1400 }, align: 'center' }).setOrigin(0.5);
       const canSignIn = identity?.kind === 'native' || identity?.kind === 'web';
-      this.add_(new Button(this, REF_W / 2, 520, { label: 'SIGN IN WITH GOOGLE', w: 760, h: 140, variant: canSignIn ? 'hot' : 'dim', onClick: () => void this.signIn() }).setEnabled(canSignIn));
-      if (!canSignIn) this.add_(txt(this, REF_W / 2, 650, 'Google sign-in requires the Android app or configured Google Web Client ID.', { fontSize: '32px', color: T.dim }).setOrigin(0.5));
-      this.add_(new Button(this, REF_W / 2 - 480, 790, { label: consentTag, w: 460, h: 110, fontSize: 24, onClick: openPrivacy }));
-      this.add_(new Button(this, REF_W / 2, 790, { label: 'PRIVACY & DELETE URL', w: 460, h: 110, fontSize: 24, onClick: openPrivacyPolicy }));
-      this.add_(new Button(this, REF_W / 2 + 480, 790, { label: 'SETTINGS', w: 460, h: 110, fontSize: 28, onClick: () => this.scene.start('Title', { openSettings: true }) }));
+      this.button(REF_W / 2, 520, { label: 'SIGN IN WITH GOOGLE', w: 760, h: 140, variant: canSignIn ? 'hot' : 'dim', onClick: () => void this.signIn() }).setEnabled(canSignIn);
+      if (!canSignIn) this.text(REF_W / 2, 650, 'Google sign-in requires the Android app or configured Google Web Client ID.', { fontSize: '32px', color: T.dim }).setOrigin(0.5);
+      this.button(REF_W / 2 - 480, 790, { label: consentTag, w: 460, h: 110, fontSize: 24, onClick: openPrivacy });
+      this.button(REF_W / 2, 790, { label: 'PRIVACY & DELETE URL', w: 460, h: 110, fontSize: 24, onClick: openPrivacyPolicy });
+      this.button(REF_W / 2 + 480, 790, { label: 'SETTINGS', w: 460, h: 110, fontSize: 28, onClick: () => this.nav.start('Title', { openSettings: true }) });
       return;
     }
     const me = await api.me();
-    this.add_(new Button(this, 300, 195, { label: 'PURCHASES', w: 460, h: 100, onClick: () => this.scene.start('Purchases') }));
-    this.add_(new Button(this, REF_W - 300, 195, { label: 'SAVED ACTIONS', w: 460, h: 100, onClick: () => this.scene.start('Operations') }));
-    this.add_(txt(this, REF_W / 2, 280, me.displayName ?? 'Wayfarer', { fontSize: '52px', color: T.gold }).setOrigin(0.5));
-    this.add_(txt(this, REF_W / 2, 350, `Player ${me.id}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));
+    this.button(300, 195, { label: 'PURCHASES', w: 460, h: 100, onClick: () => this.nav.start('Purchases') });
+    this.button(REF_W - 300, 195, { label: 'SAVED ACTIONS', w: 460, h: 100, onClick: () => this.nav.start('Operations') });
+    this.text(REF_W / 2, 280, me.displayName ?? 'Wayfarer', { fontSize: '52px', color: T.gold }).setOrigin(0.5);
+    this.text(REF_W / 2, 350, `Player ${me.id}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5);
     const save = await api.readSave();
-    this.add_(txt(this, REF_W / 2, 470, save.version === 0 ? 'No cloud save yet.' : `Cloud save v${save.version} · ${save.updatedAt ?? ''}`, { fontSize: '34px' }).setOrigin(0.5));
-    this.add_(new Button(this, REF_W / 2 - 330, 590, { label: 'UPLOAD SAVE', w: 600, onClick: () => void this.upload(save.version, save.data) }));
-    this.add_(new Button(this, REF_W / 2 + 330, 590, { label: 'DOWNLOAD SAVE', w: 600, onClick: () => void this.download() }).setEnabled(save.version > 0));
-    this.add_(new Button(this, REF_W / 2 - 330, 730, { label: 'EXPORT MY DATA', w: 600, onClick: () => void this.exportData() }));
-    this.add_(new Button(this, REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() }));
-    this.add_(new Button(this, REF_W / 2 - 460, 1010, { label: consentTag, w: 430, h: 96, fontSize: 22, onClick: openPrivacy }));
-    this.add_(new Button(this, REF_W / 2, 1010, { label: 'PRIVACY NOTICE', w: 430, h: 96, fontSize: 22, onClick: openPrivacyPolicy }));
-    this.add_(new Button(this, REF_W / 2 + 460, 1010, { label: 'SETTINGS', w: 430, h: 96, fontSize: 24, onClick: () => this.scene.start('Title', { openSettings: true }) }));
+    this.text(REF_W / 2, 470, save.version === 0 ? 'No cloud save yet.' : `Cloud save v${save.version} · ${save.updatedAt ?? ''}`, { fontSize: '34px' }).setOrigin(0.5);
+    this.button(REF_W / 2 - 330, 590, { label: 'UPLOAD SAVE', w: 600, onClick: () => void this.upload(save.version, save.data) });
+    this.button(REF_W / 2 + 330, 590, { label: 'DOWNLOAD SAVE', w: 600, onClick: () => void this.download() }).setEnabled(save.version > 0);
+    this.button(REF_W / 2 - 330, 730, { label: 'EXPORT MY DATA', w: 600, onClick: () => void this.exportData() });
+    this.button(REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() });
+    this.button(REF_W / 2 - 460, 1010, { label: consentTag, w: 430, h: 96, fontSize: 22, onClick: openPrivacy });
+    this.button(REF_W / 2, 1010, { label: 'PRIVACY NOTICE', w: 430, h: 96, fontSize: 22, onClick: openPrivacyPolicy });
+    this.button(REF_W / 2 + 460, 1010, { label: 'SETTINGS', w: 430, h: 96, fontSize: 24, onClick: () => this.nav.start('Title', { openSettings: true }) });
     const confirming = this.confirmDeleteFor === me.id && this.confirmDeleteRevision === api.authRevision;
-    this.add_(new Button(this, REF_W / 2, 880, { label: confirming ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: confirming ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount(me.id) }));
+    this.button(REF_W / 2, 880, { label: confirming ? 'TAP AGAIN TO DELETE FOREVER' : 'DELETE ACCOUNT', sub: confirming ? 'progress, wallet and roster cannot be restored' : undefined, w: 900, h: 130, variant: 'danger', onClick: () => void this.deleteAccount(me.id) });
   }
 
   private async signIn(): Promise<void> {
@@ -111,7 +107,7 @@ export class AccountScene extends HubScene {
       if (this.confirmDeleteFor !== expectedPlayer || this.confirmDeleteRevision !== revision) {
         this.confirmDeleteFor = expectedPlayer;
         this.confirmDeleteRevision = revision;
-        this.time.delayedCall(6000, () => { if (this.confirmDeleteFor === expectedPlayer && this.confirmDeleteRevision === revision) { this.confirmDeleteFor = null; void this.refresh(); } });
+        this.anim.after(6000, () => { if (this.confirmDeleteFor === expectedPlayer && this.confirmDeleteRevision === revision) { this.confirmDeleteFor = null; void this.refresh(); } });
         await this.refresh(); return;
       }
       await api.deleteAccount(revision);
@@ -157,3 +153,5 @@ export class AccountScene extends HubScene {
     }
   }
 }
+
+export const AccountHost = hosted('Account', () => new AccountScene());

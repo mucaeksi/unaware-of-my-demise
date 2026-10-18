@@ -1,9 +1,9 @@
 import { REF_W } from '../config';
+import { hosted } from '../core/host';
 import type { TaskView } from '../net/api';
 import { Services } from '../services';
-import { errText, HubScene } from '../ui/hub';
+import { errText, HubScreen } from '../ui/hubScreen';
 import { describeAttachments } from '../ui/format';
-import { Button, txt } from '../ui/kit';
 import { F, T } from '../ui/theme';
 
 const left = (ms: number): string => {
@@ -12,14 +12,10 @@ const left = (ms: number): string => {
 };
 
 /** The 12-hour window tasks and the weekly cycle. Progress is counted by the server; the client only shows and claims. */
-export class TasksScene extends HubScene {
+export class TasksScene extends HubScreen {
   protected readonly heading = 'ERRANDS';
   private busy = false;
   private releaseId: string | undefined;
-
-  constructor() {
-    super('Tasks');
-  }
 
   protected async build(): Promise<void> {
     this.releaseId = await Services.ready().content.activeReleaseId();
@@ -35,9 +31,9 @@ export class TasksScene extends HubScene {
         ? `Claimed for today · Next supply in ${left(sup.endsAtMs - t.serverTimeMs)}`
         : `+${sup.amount} Bell's Remains · Unconditional daily recovery floor`;
       this.card(REF_W / 2 - 100, y, 1500, 100, sup.claimed ? 'dim' : 'hot');
-      this.add_(txt(this, 190, y - 22, 'DAILY SUPPLIES (RECOVERY FLOOR)', { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: sup.claimed ? T.dim : T.gold }).setOrigin(0, 0.5));
-      this.add_(txt(this, 190, y + 20, nextText, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
-      this.add_(new Button(this, REF_W - 250, y, { label: sup.claimed ? 'CLAIMED' : 'SUPPLIES', w: 280, h: 86, fontSize: 26, variant: sup.claimed ? 'dim' : 'hot', onClick: () => void this.claimSupplies() }).setEnabled(!sup.claimed));
+      this.text(190, y - 22, 'DAILY SUPPLIES (RECOVERY FLOOR)', { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: sup.claimed ? T.dim : T.gold }).setOrigin(0, 0.5);
+      this.text(190, y + 20, nextText, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5);
+      this.button(REF_W - 250, y, { label: sup.claimed ? 'CLAIMED' : 'SUPPLIES', w: 280, h: 86, fontSize: 26, variant: sup.claimed ? 'dim' : 'hot', onClick: () => void this.claimSupplies() }).setEnabled(!sup.claimed);
       y += 120;
     }
     if (afk) {
@@ -47,31 +43,31 @@ export class TasksScene extends HubScene {
         ? describeAttachments(afk.rewards, names) || 'Accumulating supplies…'
         : 'Clear Chapter I · 2 to unlock AFK Patrol';
       this.card(REF_W / 2 - 100, y, 1500, 108, afk.claimable ? 'hot' : 'normal');
-      this.add_(txt(this, 190, y - 24, `AFK PATROL   (${elapsedMin}m / ${capMin}m cap)`, { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: T.gold }).setOrigin(0, 0.5));
-      this.add_(txt(this, 190, y + 22, rewardPreview, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
-      this.add_(new Button(this, REF_W - 250, y, { label: afk.claimable ? 'COLLECT' : 'PATROL', w: 280, h: 90, fontSize: 26, variant: afk.claimable ? 'hot' : 'dim', onClick: () => void this.claimAfkPatrol() }).setEnabled(afk.claimable));
+      this.text(190, y - 24, `AFK PATROL   (${elapsedMin}m / ${capMin}m cap)`, { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: T.gold }).setOrigin(0, 0.5);
+      this.text(190, y + 22, rewardPreview, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5);
+      this.button(REF_W - 250, y, { label: afk.claimable ? 'COLLECT' : 'PATROL', w: 280, h: 90, fontSize: 26, variant: afk.claimable ? 'hot' : 'dim', onClick: () => void this.claimAfkPatrol() }).setEnabled(afk.claimable);
       y += 135;
     }
     const row = (v: TaskView, periodKey: string, note?: string): void => {
       this.card(REF_W / 2 - 100, y, 1500, 108, v.claimed ? 'dim' : v.done ? 'hot' : 'normal');
-      this.add_(txt(this, 190, y - 24, `${v.title}   ${v.progress}/${v.objective.count}`, { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: v.claimed ? T.dim : T.text }).setOrigin(0, 0.5));
-      this.add_(txt(this, 190, y + 22, `${describeAttachments(v.rewards, new Map([...names, ...Object.entries(v.rewardNames ?? {})]))}${note ? `   ·   ${note}` : ''}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5));
-      this.add_(new Button(this, REF_W - 250, y, { label: v.claimed ? 'CLAIMED' : 'CLAIM', w: 280, h: 90, fontSize: 28, variant: v.done && !v.claimed ? 'hot' : 'dim', onClick: () => void this.claim(periodKey, v.id) }).setEnabled(v.done && !v.claimed));
+      this.text(190, y - 24, `${v.title}   ${v.progress}/${v.objective.count}`, { fontFamily: F.display, fontSize: '28px', fontStyle: '600', color: v.claimed ? T.dim : T.text }).setOrigin(0, 0.5);
+      this.text(190, y + 22, `${describeAttachments(v.rewards, new Map([...names, ...Object.entries(v.rewardNames ?? {})]))}${note ? `   ·   ${note}` : ''}`, { fontSize: '22px', color: T.dim }).setOrigin(0, 0.5);
+      this.button(REF_W - 250, y, { label: v.claimed ? 'CLAIMED' : 'CLAIM', w: 280, h: 90, fontSize: 28, variant: v.done && !v.claimed ? 'hot' : 'dim', onClick: () => void this.claim(periodKey, v.id) }).setEnabled(v.done && !v.claimed);
       y += 120;
     };
     const d = t.daily;
     if (d) {
-      this.add_(txt(this, 190, y - 40, `THIS WINDOW · ends in ${left(d.endsAtMs - t.serverTimeMs)}`, { fontFamily: F.display, fontSize: '28px', color: T.gold }).setOrigin(0, 0.5));
+      this.text(190, y - 40, `THIS WINDOW · ends in ${left(d.endsAtMs - t.serverTimeMs)}`, { fontFamily: F.display, fontSize: '28px', color: T.gold }).setOrigin(0, 0.5);
       y += 10;
       d.tasks.forEach((v) => row(v, d.periodKey));
       row({ id: '_window_complete', title: 'Window complete', objective: { type: 'bonus', count: 1 }, progress: d.completion.ready ? 1 : 0, done: d.completion.ready, claimed: d.completion.claimed, rewards: d.completion.rewards, rewardNames: d.completion.rewardNames }, d.periodKey);
     }
     if (t.weekly.length) {
-      this.add_(txt(this, 190, y - 40, 'THIS WEEK', { fontFamily: F.display, fontSize: '28px', color: T.gold }).setOrigin(0, 0.5));
+      this.text(190, y - 40, 'THIS WEEK', { fontFamily: F.display, fontSize: '28px', color: T.gold }).setOrigin(0, 0.5);
       y += 10;
       t.weekly.forEach((w) => row(w, w.periodKey, w.running ? `ends in ${left(w.endsAtMs - t.serverTimeMs)}` : 'claim before it expires'));
     }
-    if (!d && t.weekly.length === 0) this.add_(txt(this, REF_W / 2, 400, 'No errands right now.', { fontSize: '40px' }).setOrigin(0.5));
+    if (!d && t.weekly.length === 0) this.text(REF_W / 2, 400, 'No errands right now.', { fontSize: '40px' }).setOrigin(0.5);
   }
 
   private async claimSupplies(): Promise<void> {
@@ -122,3 +118,5 @@ export class TasksScene extends HubScene {
     }
   }
 }
+
+export const TasksHost = hosted('Tasks', () => new TasksScene());

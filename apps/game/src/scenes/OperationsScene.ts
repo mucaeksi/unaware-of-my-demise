@@ -1,8 +1,8 @@
 import { REF_W } from '../config';
+import { hosted } from '../core/host';
 import type { OperationRecord } from '../net/operations';
 import { Services } from '../services';
-import { errText, HubScene } from '../ui/hub';
-import { Button, txt } from '../ui/kit';
+import { errText, HubScreen } from '../ui/hubScreen';
 import { T } from '../ui/theme';
 
 const PER_PAGE = 4;
@@ -18,15 +18,13 @@ const caption = (record: OperationRecord): string => {
   return record.path === '/api/v1/entry' ? 'Opening checkpoint' : 'Cloud save';
 };
 
-export class OperationsScene extends HubScene {
+export class OperationsScene extends HubScreen {
   protected readonly heading = 'SAVED ACTIONS';
   protected override readonly usesWallet = false;
   private records: OperationRecord[] = [];
   private page = 0;
   private filter: 'pending' | 'history' = 'pending';
   private busy = false;
-
-  constructor() { super('Operations'); }
 
   protected async build(): Promise<void> {
     const records = await Services.api.operations();
@@ -37,30 +35,30 @@ export class OperationsScene extends HubScene {
 
   private draw(): void {
     if (!this.isCurrentView()) return;
-    this.body.removeAll(true);
-    this.add_(txt(this, REF_W / 2, 175, 'Pending actions keep your original choices. History shows the last known result.', { fontSize: '30px', color: T.dim, align: 'center', wordWrap: { width: 1600 } }).setOrigin(0.5));
+    this.body.removeAll();
+    this.text(REF_W / 2, 175, 'Pending actions keep your original choices. History shows the last known result.', { fontSize: '30px', color: T.dim, align: 'center', wordWrap: { width: 1600 } }).setOrigin(0.5);
     const pending = this.records.filter((r) => r.state === 'pending').length;
     for (const [index, tab] of [{ key: 'pending' as const, label: `PENDING (${pending})` }, { key: 'history' as const, label: 'HISTORY' }].entries()) {
-      this.add_(new Button(this, REF_W / 2 - 310 + index * 620, 270, { label: tab.label, w: 560, h: 100, variant: this.filter === tab.key ? 'hot' : 'normal',
-        onClick: () => { this.filter = tab.key; this.page = 0; this.draw(); } }).setEnabled(!this.busy));
+      this.button(REF_W / 2 - 310 + index * 620, 270, { label: tab.label, w: 560, h: 100, variant: this.filter === tab.key ? 'hot' : 'normal',
+        onClick: () => { this.filter = tab.key; this.page = 0; this.draw(); } }).setEnabled(!this.busy);
     }
     const records = this.records.filter((r) => this.filter === 'pending' ? r.state === 'pending' : r.state !== 'pending');
     const pages = Math.max(1, Math.ceil(records.length / PER_PAGE)); this.page = Math.min(this.page, pages - 1);
-    if (!records.length) this.add_(txt(this, REF_W / 2, 520, this.filter === 'pending' ? 'No actions are waiting for confirmation.' : 'No saved results yet.', { fontSize: '38px', color: T.dim }).setOrigin(0.5));
+    if (!records.length) this.text(REF_W / 2, 520, this.filter === 'pending' ? 'No actions are waiting for confirmation.' : 'No saved results yet.', { fontSize: '38px', color: T.dim }).setOrigin(0.5);
     records.slice(this.page * PER_PAGE, (this.page + 1) * PER_PAGE).forEach((record, index) => {
       const y = 380 + index * 145;
       this.card(REF_W / 2 - 70, y, 1490, 124, record.state === 'pending' ? 'normal' : 'dim');
-      this.add_(txt(this, 245, y - 24, caption(record), { fontSize: '36px', fontStyle: '600', color: T.text }).setOrigin(0, 0.5));
+      this.text(245, y - 24, caption(record), { fontSize: '36px', fontStyle: '600', color: T.text }).setOrigin(0, 0.5);
       const state = record.state === 'pending' ? 'Waiting for confirmation' : record.state === 'confirmed' ? 'Last known: confirmed' : 'Last known: not completed';
-      this.add_(txt(this, 245, y + 27, `${state} · ${new Date(record.at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, { fontSize: '28px', color: T.dim }).setOrigin(0, 0.5));
-      this.add_(new Button(this, REF_W - 260, y, { label: record.state === 'pending' ? 'RETRY ACTION' : 'VERIFY', w: 340, h: 100, fontSize: 28,
-        variant: record.state === 'pending' ? 'hot' : 'normal', onClick: () => void this.recover(record) }).setEnabled(!this.busy && record.state !== 'rejected'));
+      this.text(245, y + 27, `${state} · ${new Date(record.at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, { fontSize: '28px', color: T.dim }).setOrigin(0, 0.5);
+      this.button(REF_W - 260, y, { label: record.state === 'pending' ? 'RETRY ACTION' : 'VERIFY', w: 340, h: 100, fontSize: 28,
+        variant: record.state === 'pending' ? 'hot' : 'normal', onClick: () => void this.recover(record) }).setEnabled(!this.busy && record.state !== 'rejected');
     });
-    this.add_(new Button(this, REF_W - 260, 980, { label: 'REFRESH', w: 340, h: 100, onClick: () => void this.refresh() }).setEnabled(!this.busy));
+    this.button(REF_W - 260, 980, { label: 'REFRESH', w: 340, h: 100, onClick: () => void this.refresh() }).setEnabled(!this.busy);
     if (pages > 1) {
-      this.add_(new Button(this, REF_W / 2 - 220, 980, { label: '‹', w: 160, h: 100, fontSize: 56, onClick: () => { this.page = (this.page + pages - 1) % pages; this.draw(); } }).setEnabled(!this.busy));
-      this.add_(txt(this, REF_W / 2, 980, `${this.page + 1} / ${pages}`, { fontSize: '36px' }).setOrigin(0.5));
-      this.add_(new Button(this, REF_W / 2 + 220, 980, { label: '›', w: 160, h: 100, fontSize: 56, onClick: () => { this.page = (this.page + 1) % pages; this.draw(); } }).setEnabled(!this.busy));
+      this.button(REF_W / 2 - 220, 980, { label: '‹', ariaLabel: 'Previous page', w: 160, h: 100, fontSize: 56, onClick: () => { this.page = (this.page + pages - 1) % pages; this.draw(); } }).setEnabled(!this.busy);
+      this.text(REF_W / 2, 980, `${this.page + 1} / ${pages}`, { fontSize: '36px' }).setOrigin(0.5);
+      this.button(REF_W / 2 + 220, 980, { label: '›', ariaLabel: 'Next page', w: 160, h: 100, fontSize: 56, onClick: () => { this.page = (this.page + 1) % pages; this.draw(); } }).setEnabled(!this.busy);
     }
   }
 
@@ -74,3 +72,5 @@ export class OperationsScene extends HubScene {
     finally { this.busy = false; if (this.isCurrentView()) await this.refresh(); }
   }
 }
+
+export const OperationsHost = hosted('Operations', () => new OperationsScene());

@@ -16,7 +16,7 @@ import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cu
 import { isDevServer } from '../entry/state';
 import { clearStoryCheckpoint, loadFlowCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
-import { blocker, Button, panel, sceneFadeIn, title, txt, verticalShade, type UiText } from '../ui/pixiKit';
+import { blocker, Button, panel, sceneFadeIn, title, toast, txt, verticalShade, type UiText } from '../ui/pixiKit';
 import { buildSubtitleSchedule, resolveSubtitleProgress, type SubtitleSchedule } from '../ui/subtitles';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
 import { Sparks } from '../vfx/sparks';
@@ -1064,6 +1064,20 @@ export class StoryScene extends PixiScene<StoryInit> {
 
   // ------------------------------------------------------------------ overlays
 
+  private saveBar: PIXI.Container | null = null;
+
+  saveFailed(message: string, retry: () => void, back: () => void): void {
+    this.saveBar?.destroy({ children: true });
+    this.fadeIn(300);
+    toast(this, message, 5000);
+    const bar = new PIXI.Container();
+    bar.addChild(
+      new Button(this, REF_W / 2 + 240, REF_H - 80, { label: 'RETRY SAVE', w: 420, variant: 'hot', onClick: () => { this.saveBar?.destroy({ children: true }); this.saveBar = null; retry(); } }),
+      new Button(this, REF_W / 2 - 240, REF_H - 80, { label: 'BACK', w: 420, onClick: back })
+    );
+    this.saveBar = this.add(bar, DEPTH.modal + 10);
+  }
+
   private showChoices(e: Extract<StoryEvent, { type: 'choice' }>): void {
     this.caret.visible = false;
     const layer = new PIXI.Container();
@@ -1112,6 +1126,15 @@ export class StoryScene extends PixiScene<StoryInit> {
     );
     this.logLayer = this.add(layer, DEPTH.modal);
   }
+}
+
+/**
+ * A save after a story's end failed (campaign node or archive reading): the scene fades back in, says so and offers
+ * RETRY SAVE / BACK instead of leaving the player on a black screen.
+ */
+export function storySaveFailed(host: Phaser.Scene, message: string, retry: () => void, back: () => void): void {
+  const s = (host as Phaser.Scene & { pixiScene?: unknown }).pixiScene;
+  if (s instanceof StoryScene && s.live) s.saveFailed(message, retry, back);
 }
 
 /** engine registration under the 'Story' key every flow already starts */

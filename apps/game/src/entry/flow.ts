@@ -1,6 +1,7 @@
 import type Phaser from '../engine';
 import { PREVIEW_FLOW_ENABLED } from '../config';
-import { errText } from '../ui/hub';
+import { fadeOutScene } from '../core/host';
+import { errText } from '../ui/hubScreen';
 import { Services } from '../services';
 import { toast } from '../ui/kit';
 import { S } from './strings';
@@ -31,7 +32,7 @@ export const mayContinue = (): boolean => Services.api.signedIn || PREVIEW_FLOW_
 /** Routes the player to the first unfinished entry step (fades out slowly, then starts the step's scene or runner). */
 export function advance(scene: Phaser.Scene, step: EntryStep = nextStep(loadEntry())): void {
   const dur = 1100;
-  scene.cameras.main.fadeOut(dur, 0, 0, 0);
+  fadeOutScene(scene, dur);
   scene.time.delayedCall(dur + 40, () => {
     switch (step.kind) {
       case 'prologue':

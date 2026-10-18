@@ -6,6 +6,7 @@ import { announce, registerA11yButton } from '../platform/a11y';
 import { qualityProfile } from '../platform/graphics';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
+import { Services } from '../services';
 import { sanitizeEnText, toEnUpper } from './kit';
 import { C, DEPTH, F, SIZE, T } from './theme';
 
@@ -53,16 +54,29 @@ function diamond(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: numbe
   ctx.fill();
 }
 
+const panelCanvases = new Map<string, HTMLCanvasElement>();
 const panels = new Map<string, PIXI.Texture>();
+
+const panelKey = (w: number, h: number, variant: PanelVariant): string => `${variant}|${prefs().highContrast ? 1 : 0}|${Math.round(w)}x${Math.round(h)}`;
 
 /** baked glass-gothic panel (pill for buttons, soft-cornered card otherwise), cached per size + variant + contrast */
 export function panelTexture(w: number, h: number, variant: PanelVariant = 'normal'): PIXI.Texture {
+  const key = panelKey(w, h, variant);
+  const hit = panels.get(key);
+  if (hit && !hit.destroyed) return hit;
+  const tex = PIXI.Texture.from(panelCanvas(w, h, variant));
+  panels.set(key, tex);
+  return tex;
+}
+
+/** the panel drawing itself, shared by the PIXI kit and the DOM kit (CSS background) */
+export function panelCanvas(w: number, h: number, variant: PanelVariant = 'normal'): HTMLCanvasElement {
+  const key = panelKey(w, h, variant);
+  const cached = panelCanvases.get(key);
+  if (cached) return cached;
   const hc = prefs().highContrast;
   w = Math.round(w);
   h = Math.round(h);
-  const key = `${variant}|${hc ? 1 : 0}|${w}x${h}`;
-  const hit = panels.get(key);
-  if (hit && !hit.destroyed) return hit;
   const p = (hc ? PALETTE_HC : PALETTE)[variant];
   const canvas = document.createElement('canvas');
   canvas.width = w;
@@ -101,9 +115,8 @@ export function panelTexture(w: number, h: number, variant: PanelVariant = 'norm
       for (const [cx, cy] of [[c, c], [w - c, c], [c, h - c], [w - c, h - c]] as const) diamond(ctx, cx, cy, 5);
     }
   }
-  const tex = PIXI.Texture.from(canvas);
-  panels.set(key, tex);
-  return tex;
+  panelCanvases.set(key, canvas);
+  return canvas;
 }
 
 export function panel(x: number, y: number, w: number, h: number, variant: PanelVariant = 'normal'): PIXI.Sprite {
@@ -141,14 +154,14 @@ export function parseFontStyle(raw: string | undefined): { fontStyle: 'normal' |
   return { fontStyle, fontWeight };
 }
 
-function fontPx(raw: number | string | undefined): number {
+export function fontPx(raw: number | string | undefined): number {
   const base = typeof raw === 'number' ? raw : raw ? Number.parseFloat(raw) || SIZE.body : SIZE.body;
   // body/small text grows for readability; large display headers keep their size
   return base <= 44 && prefs().textSize === 'large' ? Math.round(base * 1.12) : base;
 }
 
 /** display (Cinzel) text is ASCII uppercase in English so the font never draws a dotted capital I */
-function formatter(display: boolean): (v: string) => string {
+export function formatter(display: boolean): (v: string) => string {
   const en = prefs().locale === 'en';
   if (display) return (v) => (en ? toEnUpper(v) : v.toUpperCase());
   return (v) => (en ? sanitizeEnText(v) : v);
@@ -455,4 +468,24 @@ export function verticalShade(x: number, y: number, w: number, h: number, color:
   const c = (a: number): string => rgba(color, a);
   const gradient = new PIXI.FillGradient({ type: 'linear', start: { x: 0, y: 0 }, end: { x: 0, y: 1 }, textureSpace: 'local', colorStops: [{ offset: 0, color: c(alphaTop) }, { offset: 1, color: c(alphaBottom) }] });
   return new PIXI.Graphics().rect(x, y, w, h).fill(gradient);
+}
+
+/**
+ * Full-screen backdrop art behind a scene. The art library is rebuilt after every content patch, so it loads the image
+ * itself (a no-op when loaded) and never throws: a missing or failed background leaves the scene's plain dark fill.
+ */
+export async function backdrop(scene: PixiScene, location: string, depth = -20): Promise<PIXI.Sprite | null> {
+  const art = Services.art;
+  if (!art) return null;
+  try {
+    await art.loadBackground(scene.host, location);
+    if (!scene.live) return null;
+    const img = scene.add(new PIXI.Sprite(scene.tex(art.background(location))), depth);
+    img.anchor.set(0.5);
+    img.position.set(REF_W / 2, REF_H / 2);
+    img.scale.set(Math.max(REF_W / (img.texture.width || REF_W), REF_H / (img.texture.height || REF_H)));
+    return img;
+  } catch {
+    return null;
+  }
 }

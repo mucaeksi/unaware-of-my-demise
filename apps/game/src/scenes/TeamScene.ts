@@ -1,8 +1,8 @@
 import { REF_W } from '../config';
+import { hosted } from '../core/host';
 import type { TeamMember, TeamPreset } from '../net/api';
 import { Services } from '../services';
-import { HubScene } from '../ui/hub';
-import { Button, txt } from '../ui/kit';
+import { HubScreen } from '../ui/hubScreen';
 import { F, T } from '../ui/theme';
 
 interface Hero {
@@ -25,7 +25,7 @@ const PER_PAGE = 8;
  * Team builder (functional skeleton, panel design is done together): five presets, a two-front / three-rear formation, owned heroes only.
  * The active preset is what the server uses to compose the party of every owned-hero stage.
  */
-export class TeamScene extends HubScene {
+export class TeamScene extends HubScreen {
   protected readonly heading = 'TEAM';
   protected override readonly backTo = 'Home';
   private heroes: Hero[] = [];
@@ -36,10 +36,6 @@ export class TeamScene extends HubScene {
   private page = 0;
   private dirty = false;
   private releaseId: string | undefined;
-
-  constructor() {
-    super('Team');
-  }
 
   protected async build(): Promise<void> {
     const api = Services.api;
@@ -62,24 +58,25 @@ export class TeamScene extends HubScene {
   }
 
   private draw(): void {
-    this.body.removeAll(true);
+    this.closeModal();
+    this.body.removeAll();
     for (let s = 1; s <= 5; s++) {
       const p = this.presets.get(s);
-      this.add_(new Button(this, 330 + (s - 1) * 300, 175, { label: `${p?.active ? '★ ' : ''}TEAM ${s}`, sub: p ? `${p.members.length} heroes` : 'empty', w: 270, h: 96, fontSize: 30, variant: s === this.slot ? 'hot' : 'normal', onClick: () => { this.slot = s; this.loadPreset(); this.draw(); } }));
+      this.button(330 + (s - 1) * 300, 175, { label: `${p?.active ? '★ ' : ''}TEAM ${s}`, sub: p ? `${p.members.length} heroes` : 'empty', w: 270, h: 96, fontSize: 30, variant: s === this.slot ? 'hot' : 'normal', onClick: () => { this.slot = s; this.loadPreset(); this.draw(); } });
     }
     POSITIONS.forEach((pos, i) => {
       const id = this.cells[i];
       const hero = this.heroes.find((h) => h.id === id);
-      this.card(pos.x, pos.y, 400, 150, hero ? 'normal' : 'dim').setInteractive({ useHandCursor: true }).on('pointerup', () => { this.picking = i; this.page = 0; this.draw(); });
-      this.add_(txt(this, pos.x, pos.y - 46, pos.label, { fontFamily: F.display, fontSize: '22px', color: T.dim }).setOrigin(0.5));
-      this.add_(txt(this, pos.x, pos.y - 6, hero ? hero.name : 'Empty — tap to choose', { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: hero ? T.text : T.dim }).setOrigin(0.5));
-      if (hero) this.add_(txt(this, pos.x, pos.y + 40, `Lv ${hero.level} · ${hero.role}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));
+      this.card(pos.x, pos.y, 400, 150, hero ? 'normal' : 'dim').onTap(() => { this.picking = i; this.page = 0; this.draw(); }, `${pos.label}: ${hero ? hero.name : 'empty'}. Choose a hero`);
+      this.text(pos.x, pos.y - 46, pos.label, { fontFamily: F.display, fontSize: '22px', color: T.dim }).setOrigin(0.5);
+      this.text(pos.x, pos.y - 6, hero ? hero.name : 'Empty — tap to choose', { fontFamily: F.display, fontSize: '34px', fontStyle: '600', color: hero ? T.text : T.dim }).setOrigin(0.5);
+      if (hero) this.text(pos.x, pos.y + 40, `Lv ${hero.level} · ${hero.role}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5);
     });
     const count = this.cells.filter(Boolean).length;
-    this.add_(txt(this, REF_W / 2, 790, count === 0 ? 'Without a saved team the server picks your strongest heroes.' : `${count} of 5 slots filled${this.dirty ? ' · unsaved changes' : ''}`, { fontSize: '30px', color: T.dim }).setOrigin(0.5));
-    this.add_(new Button(this, 640, 900, { label: 'SAVE', w: 340, h: 110, variant: 'hot', onClick: () => void this.save() }));
-    this.add_(new Button(this, 1010, 900, { label: 'SET ACTIVE', w: 380, h: 110, onClick: () => void this.activate() }));
-    this.add_(new Button(this, 1380, 900, { label: 'CLEAR', w: 340, h: 110, variant: 'danger', onClick: () => void this.clear() }));
+    this.text(REF_W / 2, 790, count === 0 ? 'Without a saved team the server picks your strongest heroes.' : `${count} of 5 slots filled${this.dirty ? ' · unsaved changes' : ''}`, { fontSize: '30px', color: T.dim }).setOrigin(0.5);
+    this.button(640, 900, { label: 'SAVE', w: 340, h: 110, variant: 'hot', onClick: () => void this.save() });
+    this.button(1010, 900, { label: 'SET ACTIVE', w: 380, h: 110, onClick: () => void this.activate() });
+    this.button(1380, 900, { label: 'CLEAR', w: 340, h: 110, variant: 'danger', onClick: () => void this.clear() });
     if (this.picking !== null) this.drawPicker();
   }
 
@@ -87,24 +84,23 @@ export class TeamScene extends HubScene {
     const at = this.picking as number;
     const used = new Set(this.cells.filter((c, i): c is string => Boolean(c) && i !== at));
     const free = this.heroes.filter((h) => !used.has(h.id));
-    this.add_(this.add.rectangle(REF_W / 2, 540, REF_W, 1080, 0x07040c, 0.86).setInteractive().setDepth(10));
+    const m = this.openModal(0.86, 0x07040c);
     const pageItems = free.slice(this.page * PER_PAGE, (this.page + 1) * PER_PAGE);
-    this.add_(txt(this, REF_W / 2, 150, `${POSITIONS[at]?.label ?? ''} SLOT — CHOOSE A HERO`, { fontFamily: F.display, fontSize: '44px', fontStyle: '600', color: T.gold }).setOrigin(0.5).setDepth(11));
+    this.text(REF_W / 2, 150, `${POSITIONS[at]?.label ?? ''} SLOT — CHOOSE A HERO`, { fontFamily: F.display, fontSize: '44px', fontStyle: '600', color: T.gold }, m).setOrigin(0.5);
     pageItems.forEach((h, i) => {
       const x = 400 + (i % 4) * 370;
       const y = 330 + Math.floor(i / 4) * 210;
-      const c = this.card(x, y, 340, 180, 'normal').setDepth(11).setInteractive({ useHandCursor: true });
-      c.on('pointerup', () => { this.cells[at] = h.id; this.dirty = true; this.picking = null; this.draw(); });
-      this.add_(txt(this, x, y - 30, h.name, { fontFamily: F.display, fontSize: '30px', fontStyle: '600', color: T.text }).setOrigin(0.5).setDepth(12));
-      this.add_(txt(this, x, y + 20, `Lv ${h.level} · ${h.role}`, { fontSize: '24px', color: T.dim }).setOrigin(0.5).setDepth(12));
+      this.card(x, y, 340, 180, 'normal', m).onTap(() => { this.cells[at] = h.id; this.dirty = true; this.picking = null; this.draw(); }, `${h.name}, level ${h.level} ${h.role}`);
+      this.text(x, y - 30, h.name, { fontFamily: F.display, fontSize: '30px', fontStyle: '600', color: T.text }, m).setOrigin(0.5);
+      this.text(x, y + 20, `Lv ${h.level} · ${h.role}`, { fontSize: '24px', color: T.dim }, m).setOrigin(0.5);
     });
     const pages = Math.max(1, Math.ceil(free.length / PER_PAGE));
     if (pages > 1) {
-      this.add_(new Button(this, REF_W / 2 - 220, 800, { label: '‹', w: 150, h: 96, fontSize: 52, onClick: () => { this.page = (this.page + pages - 1) % pages; this.draw(); } }).setDepth(12));
-      this.add_(new Button(this, REF_W / 2 + 220, 800, { label: '›', w: 150, h: 96, fontSize: 52, onClick: () => { this.page = (this.page + 1) % pages; this.draw(); } }).setDepth(12));
+      this.button(REF_W / 2 - 220, 800, { label: '‹', ariaLabel: 'Previous page', w: 150, h: 96, fontSize: 52, onClick: () => { this.page = (this.page + pages - 1) % pages; this.draw(); } }, m);
+      this.button(REF_W / 2 + 220, 800, { label: '›', ariaLabel: 'Next page', w: 150, h: 96, fontSize: 52, onClick: () => { this.page = (this.page + 1) % pages; this.draw(); } }, m);
     }
-    this.add_(new Button(this, REF_W / 2 - 280, 930, { label: 'EMPTY SLOT', w: 420, h: 100, onClick: () => { this.cells[at] = null; this.dirty = true; this.picking = null; this.draw(); } }).setDepth(12));
-    this.add_(new Button(this, REF_W / 2 + 280, 930, { label: 'CANCEL', w: 420, h: 100, onClick: () => { this.picking = null; this.draw(); } }).setDepth(12));
+    this.button(REF_W / 2 - 280, 930, { label: 'EMPTY SLOT', w: 420, h: 100, onClick: () => { this.cells[at] = null; this.dirty = true; this.picking = null; this.draw(); } }, m);
+    this.button(REF_W / 2 + 280, 930, { label: 'CANCEL', w: 420, h: 100, escape: true, onClick: () => { this.picking = null; this.draw(); } }, m);
   }
 
   private members(): TeamMember[] {
@@ -146,3 +142,5 @@ export class TeamScene extends HubScene {
     }
   }
 }
+
+export const TeamHost = hosted('Team', () => new TeamScene());
