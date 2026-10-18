@@ -61,6 +61,11 @@ function handleGlobalKeyDown(e: KeyboardEvent): void {
   }
 }
 
+/** creates the control mirror and the live region at boot: a live region added at the moment of an announcement is often not read */
+export function installA11y(): void {
+  ensureDom();
+}
+
 export function announce(message: string): void {
   const { live } = ensureDom();
   if (!live || !message.trim()) return;

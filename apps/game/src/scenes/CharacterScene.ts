@@ -18,7 +18,7 @@ export class CharacterScene extends HubScreen {
   private lastOutcome = '';
   private expression = 'composed';
 
-  init(data: { id?: string }): void {
+  protected override init(data: { id?: string }): void {
     const nextId = data.id ?? '';
     if (nextId !== this.id) {
       this.lastOutcome = '';

@@ -19,7 +19,7 @@ test('composed snapshots survive base-identical reads and reload; admin rollback
     const snapshot = await current();
     expect(snapshot.depends_on).toBeUndefined();
     expect(snapshot.files).toEqual(original.files);
-    expect(snapshot.compat).toEqual({ min_client: '0.1.1', max_client: '0.9.0', content_schema: 1 });
+    expect(snapshot.compat).toEqual({ min_client: '0.1.2', max_client: '0.9.0', content_schema: 1, required_capabilities: ['presentation_v1', 'vfx_v1'] });
     const apply = () => page.evaluate(async () => (window as any).__UOMD__.services.content.checkForUpdates());
     expect(await apply()).toMatchObject({ status: 'applied', releaseId: second });
     const active = () => page.evaluate(async () => (await (window as any).__UOMD__.services.content.state()).active?.releaseId ?? null);
@@ -37,7 +37,7 @@ test('composed snapshots survive base-identical reads and reload; admin rollback
     await admin.goto(ADMIN);
     await admin.getByRole('button', { name: 'Patches', exact: true }).click();
     const row = (id: string) => admin.locator('tbody tr').filter({ has: admin.locator('code', { hasText: new RegExp(`^${id}$`) }) });
-    await expect(row(second)).toContainText('Client 0.1.1–0.9.0');
+    await expect(row(second)).toContainText('Client 0.1.2–0.9.0');
     await expect(row(second)).toContainText('Schema 1');
     await expect(row(second).locator('.badge.ok', { hasText: 'current' })).toBeVisible();
     expect(await admin.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

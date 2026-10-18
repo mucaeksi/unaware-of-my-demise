@@ -34,7 +34,8 @@ test('library: authoritative spoiler/ownership/order gates, canonical readers, l
     await tap(page, info, 560, 435); await waitScene(page, 'Story');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').bodyText?.text.length ?? 0)).toBeGreaterThan(20);
     await settled(page, 'Story');
-    if (!await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').lineDone)) await tap(page, info, 960, 420);
+    // wait for the reveal instead of tapping it: a tap that lands just after the line finished would end the reading
+    await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').lineDone)).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-library-codex.png` });
     await tap(page, info, 220, 210); await waitScene(page, 'Library');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Library').cards.find((card: any) => card.entry_id === 'codex_law_of_hours')?.completed)).toBe(false);
@@ -81,7 +82,8 @@ test('library: authoritative spoiler/ownership/order gates, canonical readers, l
       for (let tapCount = 0; tapCount < 60; tapCount++) {
         const changed = await page.evaluate((sceneId) => { const game = (window as any).__UOMD__.game; return !game.scene.isActive('Story') || game.scene.getScene('Story').data0?.scene_id !== sceneId; }, sceneId);
         if (changed) break;
-        if (!await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').finished)) await tap(page, info, 960, 420);
+        // the reading may have ended (and its scene closed) since the check above
+        if (!await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story')?.finished ?? true)) await tap(page, info, 960, 420);
         await page.waitForTimeout(220);
       }
     }

@@ -88,6 +88,7 @@ export class App {
   step(dtMs: number): void {
     this.scene.update(dtMs);
     this.renderer.pixi?.render(this.stage);
+    this.events.emit('postrender');
   }
 
   /** backing-store scale so the reference stage maps 1:1 onto device pixels (capped by the quality tier) */

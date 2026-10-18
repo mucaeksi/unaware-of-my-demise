@@ -18,7 +18,7 @@ export class GearScene extends HubScreen {
   private busy = false;
   private releaseId: string | undefined;
 
-  init(data: { characterId?: string; slot?: GearView['slot'] }): void {
+  protected override init(data: { characterId?: string; slot?: GearView['slot'] }): void {
     this.characterId = data.characterId ?? null;
     this.slot = data.slot ?? null;
     this.page = 0;

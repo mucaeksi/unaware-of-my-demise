@@ -15,7 +15,8 @@ import { SignJWT, exportJWK, generateKeyPair } from 'jose';
 import { generateSigningKeyPair } from '../../packages/shared/src/index';
 
 export const ROOT = fileURLToPath(new URL('../../', import.meta.url)).replace(/[\\/]$/, '');
-export const STATE = process.platform === 'win32' ? join(tmpdir(), `uomd-e2e-state-${process.pid}`) : join(ROOT, '.cache/e2e-state');
+// test workers are other processes (another pid): they inherit the runner's env and so reuse its state directory
+export const STATE = (process.env.UOMD_E2E_STATE ??= process.platform === 'win32' ? join(tmpdir(), `uomd-e2e-state-${process.pid}`) : join(ROOT, '.cache/e2e-state'));
 export const PORTS = { game: 8787, admin: 8788, jwks: 8799 };
 export const TEAM = 'e2e-team.local';
 export const AUD = 'e2e-audience';

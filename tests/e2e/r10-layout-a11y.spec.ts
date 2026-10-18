@@ -13,7 +13,8 @@ test('R10: notched safe areas, accessibility DOM bridge, settings controls, sign
   expect(chipPos.y).toBeLessThanOrEqual(1080 - 36 - 36);
 
   // Verify TalkBack / keyboard DOM accessibility layer has focusable buttons and live region
-  const a11yCount = await page.locator('#a11y-layer button:not([disabled])').count();
+  // (menus are real HTML buttons in the UI layer; canvas controls are mirrored into #a11y-layer)
+  const a11yCount = await page.locator('#uomd-ui-layer button:not([disabled]), #a11y-layer button:not([disabled])').count();
   expect(a11yCount).toBeGreaterThanOrEqual(2);
   await expect(page.locator('#a11y-live')).toHaveCount(1);
 

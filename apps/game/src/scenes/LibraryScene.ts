@@ -15,9 +15,14 @@ export class LibraryScene extends HubScreen {
   private releaseId = '';
   private busy = false;
   private generation = 0;
-  override create(): void {
+  /** a reading returns with the shelf and page it was opened from (every start is a fresh scene) */
+  protected override init(data: { category?: LibraryCard['kind']; page?: number }): void {
+    if (data.category) this.category = data.category;
+    if (Number.isSafeInteger(data.page) && data.page! >= 0) this.page = data.page!;
+  }
+  override create(data?: { category?: LibraryCard['kind']; page?: number }): void {
     this.generation++; this.busy = false; this.cards = [];
-    super.create();
+    super.create(data);
     this.onClose(() => this.generation++);
   }
   protected async build(): Promise<void> {
@@ -70,7 +75,8 @@ export class LibraryScene extends HubScreen {
   }
   private reading(entry: LibraryEntry, i: number, releaseId: string, revision: number): StoryInit {
     let saving = false; let closed = false;
-    const leave = (scene: PixiScene<unknown>): void => { scene.nav.start('Library'); };
+    const shelf = { category: this.category, page: this.page };
+    const leave = (scene: PixiScene<unknown>): void => { scene.nav.start('Library', shelf); };
     const finish = async (scene: PixiScene<unknown>): Promise<void> => {
       if (saving || closed || !scene.live || Services.api.authRevision !== revision) return;
       if (i + 1 < entry.scenes.length) { scene.nav.restart(this.reading(entry, i + 1, releaseId, revision)); return; }

@@ -33,6 +33,7 @@ import { SummonScene } from './scenes/SummonScene';
 import { TasksScene } from './scenes/TasksScene';
 import { TeamScene } from './scenes/TeamScene';
 import { TitleScene } from './scenes/TitleScene';
+import { installA11y } from './platform/a11y';
 import { Services } from './services';
 
 function fatal(message: string): void {
@@ -100,6 +101,7 @@ try {
   );
   const contextRecovery = installContextRecovery(app, () => Services.refreshArt().then(() => undefined));
   installContinuitySync();
+  installA11y();
   // test/debug hook (read-only handles; no privileged state is exposed)
   (window as unknown as { __UOMD__: unknown }).__UOMD__ = { game: app, services: Services, playNode, contextRecovery };
 } catch (e) {
