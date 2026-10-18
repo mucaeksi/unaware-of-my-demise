@@ -34,6 +34,8 @@ export default defineConfig({
       output: { manualChunks: { pixi: ['pixi.js'] } }
     }
   },
+  // workspace packages are live source: pre-bundling them freezes a stale copy in .vite/deps until a forced re-optimize
+  optimizeDeps: { exclude: ['@uomd/combat', '@uomd/content-schema', '@uomd/economy', '@uomd/patch', '@uomd/shared', '@uomd/story'] },
   server: { host: '127.0.0.1', port: 5173, proxy: { '/api': 'http://127.0.0.1:8787' } },
   // node_modules/@uomd/* are re-export stubs on Google Drive (no symlinks, see tools/link_workspaces.mjs); vitest must
   // transform them like source instead of handing them to Node, which cannot load the extensionless .ts imports

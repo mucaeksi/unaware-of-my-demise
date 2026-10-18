@@ -1189,6 +1189,13 @@
       }
     },
     {
+      "output": "content/base/vfx/vfx_presets.json",
+      "sha256": "f72967c51d400d4de76d306d692bcc6645ae8debe50cbf0bdf0737b5fe3ee146",
+      "sources": {
+        "authored": "content/base/vfx/vfx_presets.json"
+      }
+    },
+    {
       "output": "content/base/entry/prologue.json",
       "sha256": "52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d",
       "sources": {
