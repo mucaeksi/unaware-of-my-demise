@@ -20,7 +20,8 @@ test('library: authoritative spoiler/ownership/order gates, canonical readers, l
   const problems: string[] = [];
   page.on('console', (message) => { if (message.type() === 'error') problems.push(`console: ${message.location().url} ${message.text()}`); });
   page.on('pageerror', (error) => problems.push(`pageerror: ${error.message}`));
-  page.on('requestfailed', (request) => problems.push(`requestfailed: ${request.url()}`));
+  // the reload below cancels whatever was still loading (net::ERR_ABORTED); real failures carry other errors
+  page.on('requestfailed', (request) => { if (request.failure()?.errorText !== 'net::ERR_ABORTED') problems.push(`requestfailed: ${request.url()} ${request.failure()?.errorText}`); });
   page.on('response', (response) => { if (response.status() >= 400 && !response.url().includes('/api/v1/content/channels/')) problems.push(`HTTP ${response.status()}: ${response.url()}`); });
   try {
     await openGame(page); const actor = await signInDev(page, `library-${info.project.name}`);
