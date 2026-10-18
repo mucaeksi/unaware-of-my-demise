@@ -1,0 +1,21 @@
+# One line ending everywhere: content hashes (release.json, seed/assets.sql) are taken over the exact bytes,
+# so a Windows/Drive checkout must not turn JSON into CRLF.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.ogg binary
+*.mp3 binary
+*.wav binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary
+*.webm binary
+*.zip binary
+*.jar binary
+*.keystore binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
