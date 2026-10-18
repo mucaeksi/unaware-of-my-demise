@@ -1,6 +1,8 @@
 import type Phaser from './engine';
 import { ArtLibrary } from './content/ArtLibrary';
 import { type ContentService } from './content/ContentService';
+import { noteRelease } from './entry/continuity';
+import { isReplaying } from './entry/state';
 import { GameApi } from './net/api';
 import { type IdentityProvider } from './net/identity';
 import { PatchService } from './patch/PatchService';
@@ -14,6 +16,11 @@ export const Services = {
   /** first-install background download (stages the release; the restart switches it on) */
   patches: null as unknown as PatchService,
 
+  /** key for entry-flow and story checkpoints: a title replay of the opening keeps its own, so it never moves the account's (R09) */
+  flowKey(): string {
+    return isReplaying() ? `${this.api.accountKey}#replay` : this.api.accountKey;
+  },
+
   ready(): { content: ContentService; art: ArtLibrary } {
     if (!this.content || !this.art) throw new Error('services not initialised');
     return { content: this.content, art: this.art };
@@ -22,6 +29,8 @@ export const Services = {
   /** Rebuilds the art library from the active art manifest (after boot and after every patch). */
   async refreshArt(): Promise<ArtLibrary> {
     if (!this.content) throw new Error('content service missing');
+    // continuity records name the release they were written against (R09)
+    noteRelease(await this.content.activeReleaseId().catch(() => null));
     this.art = new ArtLibrary(this.content, await this.content.art());
     return this.art;
   },

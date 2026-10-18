@@ -1,5 +1,5 @@
 import type { EntryCheckpoint } from '../net/api';
-import { freshEntry, isForceFreshEntry, loadEntry, markCompleted, mergeEntry, saveEntry, type EntryState } from './state';
+import { freshEntry, isForceFreshEntry, isReplaying, loadEntry, markCompleted, mergeEntry, saveEntry, type EntryState } from './state';
 
 /** The slice of the API client the sync needs (a fake in tests). */
 export interface EntryApi {
@@ -9,6 +9,27 @@ export interface EntryApi {
 }
 
 const OWNER_KEY = 'uomd.entry.owner.v1';
+
+/** Where the entry checkpoint stands (R09): only on this device, being saved to the account, a failed save, or confirmed. */
+export type EntrySaveState = 'local' | 'pending' | 'failed' | 'confirmed';
+let saveState: EntrySaveState = 'local';
+const watchers = new Set<(s: EntrySaveState) => void>();
+
+function setSaveState(s: EntrySaveState): void {
+  saveState = s;
+  for (const w of watchers) w(s);
+}
+
+export function entrySaveState(): EntrySaveState {
+  return saveState;
+}
+
+/** calls `fn` now and on every change; returns the unsubscribe */
+export function watchEntrySaveState(fn: (s: EntrySaveState) => void): () => void {
+  watchers.add(fn);
+  fn(saveState);
+  return () => watchers.delete(fn);
+}
 
 const readOwner = (): string | null => {
   try {
@@ -38,7 +59,8 @@ const sameProgress = (a: EntryState, b: EntryState): boolean => a.phase === b.ph
  */
 export async function syncEntry(api: EntryApi): Promise<{ state: EntryState; synced: boolean }> {
   const local = loadEntry();
-  if (!api.signedIn || isForceFreshEntry()) return { state: local, synced: false };
+  if (!api.signedIn || isForceFreshEntry() || isReplaying()) return { state: local, synced: false };
+  setSaveState('pending');
   try {
     const remote = await api.entry();
     const owner = readOwner();
@@ -48,8 +70,10 @@ export async function syncEntry(api: EntryApi): Promise<{ state: EntryState; syn
     const merged = mergeEntry(base, remoteState);
     saveEntry(merged);
     if (!sameProgress(merged, remoteState)) await api.putEntry(body(merged));
+    setSaveState('confirmed');
     return { state: merged, synced: true };
   } catch {
+    setSaveState('failed');
     return { state: local, synced: false };
   }
 }
@@ -57,7 +81,17 @@ export async function syncEntry(api: EntryApi): Promise<{ state: EntryState; syn
 /** Applies one forward step locally (instant, offline safe) and pushes it to the account in the background when signed in. */
 export function recordEntry(api: EntryApi, step: (s: EntryState) => EntryState): EntryState {
   const next = saveEntry(step(loadEntry()));
-  if (api.signedIn) void api.putEntry(body(next)).catch(() => undefined); // the next syncEntry repairs a missed push
+  if (isReplaying()) return next; // a replay never touches the account checkpoint
+  if (!api.signedIn) {
+    setSaveState('local');
+    return next;
+  }
+  setSaveState('pending');
+  // a missed push is repaired by the next syncEntry
+  void api.putEntry(body(next)).then(
+    () => setSaveState('confirmed'),
+    () => setSaveState('failed')
+  );
   return next;
 }
 
@@ -71,9 +105,17 @@ export async function confirmEntryComplete(api: EntryApi): Promise<{ state: Entr
     throw new Error('Entry prerequisites not met (prologue and all 3 tutorials required).');
   }
   if (api.signedIn) {
-    const remote = await api.putEntry({ prologue: true, tutorials: 3, completed: true });
+    setSaveState('pending');
+    let remote: EntryCheckpoint;
+    try {
+      remote = await api.putEntry({ prologue: true, tutorials: 3, completed: true });
+    } catch (e) {
+      setSaveState('failed');
+      throw e;
+    }
     writeOwner(remote.playerId);
     const next = saveEntry(fromServer(remote));
+    setSaveState('confirmed');
     return { state: next, remoteConfirmed: true };
   }
   const next = saveEntry(markCompleted(cur));

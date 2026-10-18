@@ -4,7 +4,7 @@ import { REF_H, REF_W } from '../config';
 import { advance } from '../entry/flow';
 import { RANDOM_GAME_QUOTES, S } from '../entry/strings';
 import { isInteractiveBrowser, loadEntry, nextStep } from '../entry/state';
-import { confirmEntryComplete } from '../entry/sync';
+import { confirmEntryComplete, syncEntry, watchEntrySaveState, type EntrySaveState } from '../entry/sync';
 import { restartGame } from '../platform/native';
 import { barFill } from '../patch/barFill';
 import type { PatchStatus } from '../patch/PatchService';
@@ -29,6 +29,7 @@ export class FinishScene extends Phaser.Scene {
   private head!: Phaser.GameObjects.Text;
   private note!: Phaser.GameObjects.Text;
   private figures!: Phaser.GameObjects.Text;
+  private saveLine!: Phaser.GameObjects.Text;
   private quoteText!: Phaser.GameObjects.Text;
   private quoteSpeaker!: Phaser.GameObjects.Text;
   private bar!: Bar;
@@ -83,6 +84,7 @@ export class FinishScene extends Phaser.Scene {
     }).setOrigin(0.5, 0);
     this.bar = new Bar(this, REF_W / 2, 516, 1080, 28, () => C.goldHi);
     this.figures = txt(this, REF_W / 2, 558, '', { fontSize: '28px', color: T.dim }).setOrigin(0.5, 0);
+    this.saveLine = txt(this, REF_W / 2, 604, '', { fontSize: '24px', color: T.dim }).setOrigin(0.5, 0);
     this.action = new Button(this, REF_W / 2, 700, {
       label: S.finish.restart,
       w: 700,
@@ -138,11 +140,27 @@ export class FinishScene extends Phaser.Scene {
 
     if (Services.patches.get().kind === 'idle') void Services.patches.start();
     this.unsub = Services.patches.subscribe((s) => this.render(s));
+    // R09: say truthfully where the entry progress is saved; re-push anything a tutorial step could not send
+    const unwatch = watchEntrySaveState((st) => this.renderSave(st));
+    if (Services.api.signedIn) void syncEntry(Services.api);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      unwatch();
       this.unsub?.();
       this.quoteTimer?.remove(false);
     });
     sceneFadeIn(this, 1300);
+  }
+
+  private renderSave(st: EntrySaveState): void {
+    if (!this.saveLine?.active) return;
+    const [text, color] = !Services.api.signedIn
+      ? ['Progress is saved on this device only. Sign in to keep it on your account.', T.dim]
+      : st === 'confirmed'
+        ? ['✓ Progress saved to your account', T.heal]
+        : st === 'failed'
+          ? ['Not saved to your account yet — it is kept on this device and will be sent again', T.crimson]
+          : ['Saving progress to your account…', T.dim];
+    this.saveLine.setText(text).setColor(color);
   }
 
   private cycleQuote(): void {

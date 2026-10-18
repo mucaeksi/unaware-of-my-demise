@@ -65,7 +65,7 @@ export class AccountScene extends HubScene {
     this.add_(txt(this, REF_W / 2, 350, `Player ${me.id}`, { fontSize: '26px', color: T.dim }).setOrigin(0.5));
     const save = await api.readSave();
     this.add_(txt(this, REF_W / 2, 470, save.version === 0 ? 'No cloud save yet.' : `Cloud save v${save.version} · ${save.updatedAt ?? ''}`, { fontSize: '34px' }).setOrigin(0.5));
-    this.add_(new Button(this, REF_W / 2 - 330, 590, { label: 'UPLOAD SAVE', w: 600, onClick: () => void this.upload(save.version) }));
+    this.add_(new Button(this, REF_W / 2 - 330, 590, { label: 'UPLOAD SAVE', w: 600, onClick: () => void this.upload(save.version, save.data) }));
     this.add_(new Button(this, REF_W / 2 + 330, 590, { label: 'DOWNLOAD SAVE', w: 600, onClick: () => void this.download() }).setEnabled(save.version > 0));
     this.add_(new Button(this, REF_W / 2 - 330, 730, { label: 'EXPORT MY DATA', w: 600, onClick: () => void this.exportData() }));
     this.add_(new Button(this, REF_W / 2 + 330, 730, { label: 'SIGN OUT', w: 600, onClick: () => void this.signOut() }));
@@ -135,9 +135,10 @@ export class AccountScene extends HubScene {
     } catch (error) { this.say(errText(error)); }
   }
 
-  private async upload(version: number): Promise<void> {
+  private async upload(version: number, cloud: Record<string, unknown>): Promise<void> {
     try {
-      await Services.api.writeSave(version, { progress: Progress.load(), prefs: prefs() });
+      // other keys of the cloud save (story continuity) belong to other features and are kept
+      await Services.api.writeSave(version, { ...cloud, progress: Progress.load(), prefs: prefs() });
       this.say('Saved to the cloud');
     } catch (e) {
       this.say(e instanceof ApiError && e.code === 'save_conflict' ? 'The cloud save changed on another device. Download it first.' : errText(e));

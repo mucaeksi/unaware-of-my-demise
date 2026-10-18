@@ -1,28 +1,15 @@
 import type { ChapterIndex } from '@uomd/content-schema';
 import type { StorySave } from '@uomd/story';
+import { changeContinuity, loadContinuity, type Cursor, type CursorInput, type StoryMark } from './continuity';
 
 const READ_PREFIX = 'uomd.read.v1:';
 const PROLOGUE_PREFIX = 'uomd.prologue.checkpoint.v1:';
-const STORY_PREFIX = 'uomd.story.checkpoint.v1:';
-const FLOW_PREFIX = 'uomd.flow.checkpoint.v1:';
 
 export type CampaignNode = ChapterIndex['chapters'][number]['nodes'][number];
-
-export interface StoryCheckpointRecord {
-  path: string;
-  sceneId: string;
-  checkpointId?: string;
-  state: StorySave;
-  updatedAt: string;
-}
-
-export type FlowCheckpoint =
-  | { kind: 'tutorial'; index: 1 | 2 | 3; step: 'pre_story' | 'battle' | 'post_story'; updatedAt: string }
-  | { kind: 'campaign'; nodeId: string; step: 'pre_story' | 'battle' | 'post_story'; stars?: number; updatedAt: string };
-
-export type FlowCheckpointInput =
-  | { kind: 'tutorial'; index: 1 | 2 | 3; step: 'pre_story' | 'battle' | 'post_story' }
-  | { kind: 'campaign'; nodeId: string; step: 'pre_story' | 'battle' | 'post_story'; stars?: number };
+export type StoryCheckpointRecord = StoryMark;
+/** the flow step to resume (R09 continuity cursor) */
+export type FlowCheckpoint = Cursor;
+export type FlowCheckpointInput = CursorInput;
 
 export function loadReadLines(accountKey: string): Set<string> {
   try {
@@ -72,125 +59,68 @@ export function clearPrologueCheckpoint(accountKey: string): void {
   }
 }
 
-function loadStoryMap(accountKey: string): Record<string, StoryCheckpointRecord> {
-  try {
-    const raw = localStorage.getItem(`${STORY_PREFIX}${accountKey}`);
-    if (!raw) return {};
-    const o = JSON.parse(raw) as unknown;
-    return typeof o === 'object' && o !== null && !Array.isArray(o) ? (o as Record<string, StoryCheckpointRecord>) : {};
-  } catch {
-    return {};
-  }
-}
-
-export function loadStoryCheckpoint(accountKey: string, path: string, sceneId: string): StoryCheckpointRecord | null {
-  const map = loadStoryMap(accountKey);
-  const rec = map[path];
-  if (!rec || typeof rec !== 'object' || rec.sceneId !== sceneId || !rec.state || rec.state.sceneId !== sceneId) return null;
-  if (typeof rec.state.index !== 'number' || !Array.isArray(rec.state.choices)) return null;
-  return rec;
+/** A mid-scene mark for this scene, or null when there is none or the installed scene changed since (it restarts). */
+export function loadStoryCheckpoint(accountKey: string, path: string, sceneId: string, sceneHash?: string): StoryCheckpointRecord | null {
+  const m = loadContinuity(accountKey).stories[path];
+  if (!m || m.sceneId !== sceneId) return null;
+  if (sceneHash && m.sceneHash && m.sceneHash !== sceneHash) return null;
+  return m;
 }
 
 export function saveStoryCheckpoint(
   accountKey: string,
-  input: { path: string; sceneId: string; checkpointId?: string; state: StorySave },
+  input: { path: string; sceneId: string; sceneHash?: string; checkpointId?: string; state: StorySave },
   now = new Date().toISOString()
 ): void {
-  try {
-    const map = loadStoryMap(accountKey);
-    const rec: StoryCheckpointRecord = {
-      path: input.path,
-      sceneId: input.sceneId,
-      ...(input.checkpointId !== undefined ? { checkpointId: input.checkpointId } : {}),
-      state: input.state,
-      updatedAt: now
-    };
-    map[input.path] = rec;
-    localStorage.setItem(`${STORY_PREFIX}${accountKey}`, JSON.stringify(map));
-    if (typeof sessionStorage !== 'undefined') {
-      sessionStorage.setItem('uomd.story.checkpoint.v1', JSON.stringify({ accountKey, ...rec }));
-    }
-  } catch {
-    /* ignore */
-  }
+  const mark: StoryMark = {
+    path: input.path,
+    sceneId: input.sceneId,
+    ...(input.sceneHash ? { sceneHash: input.sceneHash } : {}),
+    ...(input.checkpointId !== undefined ? { checkpointId: input.checkpointId } : {}),
+    state: input.state,
+    updatedAt: now
+  };
+  changeContinuity(accountKey, (c) => ({ cursor: c.cursor, stories: { ...c.stories, [input.path]: mark } }), false, now);
 }
 
 export function clearStoryCheckpoint(accountKey: string, path: string): void {
-  try {
-    const map = loadStoryMap(accountKey);
-    if (!(path in map)) return;
-    delete map[path];
-    localStorage.setItem(`${STORY_PREFIX}${accountKey}`, JSON.stringify(map));
-  } catch {
-    /* ignore */
-  }
+  if (!(path in loadContinuity(accountKey).stories)) return;
+  changeContinuity(accountKey, (c) => {
+    const { [path]: _gone, ...stories } = c.stories;
+    return { cursor: c.cursor, stories };
+  });
 }
 
 export function loadFlowCheckpoint(accountKey: string): FlowCheckpoint | null {
-  try {
-    const raw = localStorage.getItem(`${FLOW_PREFIX}${accountKey}`);
-    if (!raw) return null;
-    const o = JSON.parse(raw) as Record<string, unknown>;
-    if (typeof o !== 'object' || o === null) return null;
-    const step = o.step;
-    if (step !== 'pre_story' && step !== 'battle' && step !== 'post_story') return null;
-    const updatedAt = typeof o.updatedAt === 'string' ? o.updatedAt : new Date(0).toISOString();
-    if (o.kind === 'tutorial' && (o.index === 1 || o.index === 2 || o.index === 3)) {
-      return { kind: 'tutorial', index: o.index, step, updatedAt };
-    }
-    if (o.kind === 'campaign' && typeof o.nodeId === 'string' && o.nodeId.length > 0) {
-      return {
-        kind: 'campaign',
-        nodeId: o.nodeId,
-        step,
-        ...(typeof o.stars === 'number' ? { stars: o.stars } : {}),
-        updatedAt
-      };
-    }
-    return null;
-  } catch {
-    return null;
-  }
+  return loadContinuity(accountKey).cursor;
 }
 
 export function saveFlowCheckpoint(accountKey: string, input: FlowCheckpointInput, now = new Date().toISOString()): FlowCheckpoint {
-  const cp: FlowCheckpoint = { ...input, updatedAt: now };
-  try {
-    localStorage.setItem(`${FLOW_PREFIX}${accountKey}`, JSON.stringify(cp));
-  } catch {
-    /* ignore */
-  }
-  return cp;
+  const cursor: Cursor = { ...input, updatedAt: now };
+  changeContinuity(accountKey, (c) => ({ cursor, stories: c.stories }), true, now);
+  return cursor;
 }
 
 export function clearFlowCheckpoint(accountKey: string): void {
-  try {
-    localStorage.removeItem(`${FLOW_PREFIX}${accountKey}`);
-  } catch {
-    /* ignore */
-  }
+  if (!loadContinuity(accountKey).cursor) return;
+  changeContinuity(accountKey, (c) => ({ cursor: null, stories: c.stories }), true);
 }
 
 /**
- * Resolves the next playable campaign node from authoritative progress and any active mid-node FlowCheckpoint.
- * Excludes the entry tutorial chapter whenever main campaign chapters are installed so post-restart Continue enters Part I.
+ * The node Continue resumes: the cursor's node while it still exists in the installed content (whatever step it was at;
+ * playNode reconciles a battle or story that was already committed on the server), else the first unfinished playable
+ * node. The entry tutorial chapter is skipped whenever main campaign chapters are installed, so after the first restart
+ * Continue enters Part I and tutorial replay stays a separate action.
  */
-export function resolveNextCampaignNode(
-  index: ChapterIndex,
-  progress: Record<string, { stars: number }>,
-  accountKey = 'guest'
-): CampaignNode | null {
+export function resolveNextCampaignNode(index: ChapterIndex, progress: Record<string, { stars: number }>, accountKey = 'guest'): CampaignNode | null {
   const allNodes = index.chapters.flatMap((ch) => ch.nodes);
   const cp = loadFlowCheckpoint(accountKey);
   if (cp?.kind === 'campaign') {
     const resumed = allNodes.find((n) => n.node_id === cp.nodeId);
-    if (resumed && (cp.step === 'post_story' || !progress[resumed.node_id])) {
-      return resumed;
-    }
+    if (resumed) return resumed;
   }
   const campaignChapters = index.chapters.filter((ch) => ch.chapter_id !== 'tutorial');
   const pool = (campaignChapters.length > 0 ? campaignChapters : index.chapters).flatMap((ch) => ch.nodes);
   const nextUnfinished = pool.find((n) => !progress[n.node_id] && (!n.requires || Boolean(progress[n.requires])));
   return nextUnfinished ?? pool[0] ?? null;
 }
-

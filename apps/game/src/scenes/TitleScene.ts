@@ -1,9 +1,10 @@
 import Phaser from '../engine';
 import type { PatchOutcome } from '@uomd/patch';
 import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
-import { beginEntry, signInWithGoogle } from '../entry/flow';
+import { syncContinuityNow } from '../entry/cloudSync';
+import { advance, beginEntry, signInWithGoogle } from '../entry/flow';
 import { syncEntry } from '../entry/sync';
-import { forceResetEntry, isDevServer, isForceFreshEntry, isInteractiveBrowser, loadEntry } from '../entry/state';
+import { forceResetEntry, isDevServer, isForceFreshEntry, isInteractiveBrowser, loadEntry, startReplay } from '../entry/state';
 import { S, setActiveLocaleStrings } from '../entry/strings';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
@@ -247,9 +248,12 @@ export class TitleScene extends Phaser.Scene {
       h: 62,
       fontSize: 19,
       onClick: () => {
-        forceResetEntry();
-        this.firstRun = true;
-        void this.onTapToStart();
+        if (this.busy) return;
+        this.busy = true;
+        // a replay of the opening, separate from the account's own entry progress (R09)
+        startReplay();
+        void this.startAudio();
+        advance(this, { kind: 'prologue' });
       }
     }).setDepth(DEPTH.hud + 2);
     new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
@@ -623,6 +627,9 @@ export class TitleScene extends Phaser.Scene {
         return;
       }
 
+      // the cloud copy of where this account stopped may be newer than this device's (another device, reinstall)
+      await syncContinuityNow();
+      if (!this.sys.isActive()) return;
       const next = resolveNextCampaignNode(idx, progress, Services.api.accountKey);
       if (next) {
         if (isInteractiveBrowser()) {

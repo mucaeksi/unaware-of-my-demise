@@ -2,7 +2,7 @@ import Phaser from '../engine';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { ContentService } from '../content/ContentService';
-import { forceResetEntry, isForceFreshEntry, isDevServer, loadEntry, saveEntry } from '../entry/state';
+import { endReplay, forceResetEntry, isForceFreshEntry, isDevServer, loadEntry, saveEntry } from '../entry/state';
 import { prefs } from '../platform/prefs';
 import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
@@ -43,6 +43,8 @@ export class BootScene extends Phaser.Scene {
     void initConsent(); // Android: UMP consent form where the region requires it, then the ads SDK
     initStoreReconciliation(); // Startup, resume, auth-switch, and async Play purchase reconciliation
     void loadCurrencyName(API_BASE);
+    // a replay of the opening is session-only: a reload returns to the account's own state
+    endReplay();
     const params = new URLSearchParams(window.location.search);
     const previewScene = params.get('preview_scene');
     let isPostT3Restart = false;

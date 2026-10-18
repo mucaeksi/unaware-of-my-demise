@@ -4,7 +4,7 @@ import { restartGame } from '../platform/native';
 import { Services } from '../services';
 import { advance } from './flow';
 import { clearFlowCheckpoint, clearStoryCheckpoint, loadFlowCheckpoint, saveFlowCheckpoint } from './resume';
-import { isForceFreshEntry, isInteractiveBrowser, markTutorialDone } from './state';
+import { isForceFreshEntry, isInteractiveBrowser, isReplaying, markTutorialDone } from './state';
 import { confirmEntryComplete, recordEntry } from './sync';
 
 /**
@@ -19,14 +19,14 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
   const stage = entry.tutorial[index - 1];
   if (!stage) throw new Error(`entry index has no tutorial stage ${index}`);
   const enc: Encounter = await content.encounter(stage.encounter);
-  const accountKey = Services.api.accountKey;
+  const accountKey = Services.flowKey();
 
   const finishStage = (s: Phaser.Scene): void => {
     clearFlowCheckpoint(accountKey);
     if (enc.pre_story) clearStoryCheckpoint(accountKey, enc.pre_story);
     if (enc.post_story) clearStoryCheckpoint(accountKey, enc.post_story);
     recordEntry(Services.api, (st) => markTutorialDone(st, index));
-    if (index === 3 && Services.patches.get().kind === 'ready' && isInteractiveBrowser()) {
+    if (index === 3 && !isReplaying() && Services.patches.get().kind === 'ready' && isInteractiveBrowser()) {
       // Background patch already completed during the tutorial: fade to black and restart immediately
       s.cameras.main.fadeOut(1600, 0, 0, 0);
       s.time.delayedCall(1650, () => {
@@ -58,7 +58,7 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
       encounterPath: stage.encounter,
       tutorial: true,
       onBack: (b: Phaser.Scene) => {
-        if (enc.pre_story) clearStoryCheckpoint(Services.api.accountKey, enc.pre_story);
+        if (enc.pre_story) clearStoryCheckpoint(Services.flowKey(), enc.pre_story);
         void playTutorialStage(b, index, true);
       },
       onDone: afterBattle

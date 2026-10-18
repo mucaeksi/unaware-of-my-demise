@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import type Phaser from '../engine';
 import { StoryRunner, type StoryEvent } from '@uomd/story';
 import type { StoryCommand, StoryScene as StoryData } from '@uomd/content-schema';
+import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { REF_H, REF_W } from '../config';
 import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Music } from '../audio/Music';
@@ -92,6 +93,8 @@ export class StoryScene extends PixiScene<StoryInit> {
   private lastLineId: string | null = null;
   private activeMusicCue = '';
   private currentMoodLabel = '';
+  /** content hash of this scene: a saved mark only resumes the exact scene it was written in */
+  private sceneHash = '';
 
   get illustration(): PIXI.Sprite | null {
     return this.cgImage;
@@ -109,13 +112,15 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.onClose(() => {
       this.stopTyping?.();
       Services.api.removeEventListener('auth', accountChanged);
-      if (!loadFlowCheckpoint(Services.api.accountKey)) clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
+      if (!loadFlowCheckpoint(Services.flowKey())) clearStoryCheckpoint(Services.flowKey(), this.init0.path);
     });
     const { content, art } = Services.ready();
     try {
       const story = this.init0.data ?? (await content.story(this.init0.path));
       if (!current()) return;
       this.data0 = story;
+      this.sceneHash = await sha256Hex(canonicalJson(story));
+      if (!current()) return;
       this.cutscene = Boolean(this.data0.presentation);
       this.auto = this.data0.presentation?.auto ?? false;
       const lastLine = [...this.data0.commands].reverse().find((c): c is Extract<StoryCommand, { op: 'say' | 'narrate' }> => c.op === 'say' || c.op === 'narrate');
@@ -155,7 +160,7 @@ export class StoryScene extends PixiScene<StoryInit> {
       return;
     }
     if (!current()) return;
-    const savedCp = loadFlowCheckpoint(Services.api.accountKey) ? loadStoryCheckpoint(Services.api.accountKey, this.init0.path, this.data0.scene_id) : null;
+    const savedCp = loadFlowCheckpoint(Services.flowKey()) ? loadStoryCheckpoint(Services.flowKey(), this.init0.path, this.data0.scene_id, this.sceneHash) : null;
     this.runner = new StoryRunner(this.data0, savedCp?.state);
     this.build();
     this.restoreFromRunner();
@@ -269,7 +274,7 @@ export class StoryScene extends PixiScene<StoryInit> {
 
     const onContextLost = (): void => {
       if (this.finished || !this.data0 || !this.runner) return;
-      saveStoryCheckpoint(Services.api.accountKey, { path: this.init0.path, sceneId: this.data0.scene_id, checkpointId: this.currentLine?.lineId, state: this.runner.saveAtCurrentEvent() });
+      saveStoryCheckpoint(Services.flowKey(), { path: this.init0.path, sceneId: this.data0.scene_id, sceneHash: this.sceneHash, checkpointId: this.currentLine?.lineId, state: this.runner.saveAtCurrentEvent() });
       saveReadLines(Services.api.accountKey, this.read);
     };
     const game = this.host.game;
@@ -340,9 +345,10 @@ export class StoryScene extends PixiScene<StoryInit> {
   }
 
   private checkpoint(checkpointId?: string, atCurrentEvent = true): void {
-    saveStoryCheckpoint(Services.api.accountKey, {
+    saveStoryCheckpoint(Services.flowKey(), {
       path: this.init0.path,
       sceneId: this.data0.scene_id,
+      sceneHash: this.sceneHash,
       ...(checkpointId !== undefined ? { checkpointId } : {}),
       state: atCurrentEvent ? this.runner.saveAtCurrentEvent() : this.runner.save()
     });
@@ -408,7 +414,7 @@ export class StoryScene extends PixiScene<StoryInit> {
   private complete(): void {
     if (this.finished) return;
     this.finished = true;
-    clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
+    clearStoryCheckpoint(Services.flowKey(), this.init0.path);
     saveReadLines(Services.api.accountKey, this.read);
     this.autoTimer?.stop();
     const holdOutMs = this.data0.scene_id === 'tutorial_t3_after' ? 2200 : 1200;

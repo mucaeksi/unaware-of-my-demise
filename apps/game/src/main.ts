@@ -30,6 +30,7 @@ import { SummonScene } from './scenes/SummonScene';
 import { TasksScene } from './scenes/TasksScene';
 import { TeamScene } from './scenes/TeamScene';
 import { TitleScene } from './scenes/TitleScene';
+import { installContinuitySync } from './entry/cloudSync';
 import { installContextRecovery, qualityProfile } from './platform/graphics';
 import { Services } from './services';
 
@@ -69,6 +70,7 @@ try {
   });
   game.ready.catch((e: unknown) => fatal(`This device cannot run the game: no WebGL, WebGPU or canvas renderer (${e instanceof Error ? e.message : String(e)})`));
   const contextRecovery = installContextRecovery(game, () => Services.refreshArt().then(() => undefined));
+  installContinuitySync();
   // test/debug hook (read-only handles; no privileged state is exposed)
   (window as unknown as { __UOMD__: unknown }).__UOMD__ = { game, services: Services, playNode, contextRecovery };
 } catch (e) {

@@ -4,8 +4,9 @@ import { errText } from '../ui/hub';
 import { Services } from '../services';
 import { toast } from '../ui/kit';
 import { S } from './strings';
-import { loadEntry, nextStep, type EntryStep } from './state';
+import { endReplay, isReplaying, loadEntry, nextStep, type EntryStep } from './state';
 import { playTutorialStage } from './tutorial';
+import { syncContinuityNow } from './cloudSync';
 import { syncEntry } from './sync';
 
 export type SignInResult = 'ok' | 'unavailable' | 'failed';
@@ -43,6 +44,12 @@ export function advance(scene: Phaser.Scene, step: EntryStep = nextStep(loadEntr
         });
         return;
       case 'finish':
+        // a title replay of the opening ends where it began, not on the first-install restart page
+        if (isReplaying()) {
+          endReplay();
+          scene.scene.start('Title');
+          return;
+        }
         scene.scene.start('Finish');
         return;
       case 'menu':
@@ -58,6 +65,7 @@ export function advance(scene: Phaser.Scene, step: EntryStep = nextStep(loadEntr
  */
 export async function beginEntry(scene: Phaser.Scene): Promise<void> {
   const { state } = await syncEntry(Services.api);
+  await syncContinuityNow();
   if (state.phase !== 'completed') {
     if (!scene.scene.isActive('PatchBar')) scene.scene.launch('PatchBar');
     void Services.patches.start();

@@ -79,6 +79,7 @@ function clearCheckpointKeys(): void {
       if (
         k &&
         (k.startsWith('uomd.flow') ||
+          k.startsWith('uomd.continuity') ||
           k.startsWith('uomd.story') ||
           k.startsWith('uomd.prologue') ||
           k.startsWith('uomd.battle') ||
@@ -168,8 +169,46 @@ export function forceResetEntry(): EntryState {
   return saveEntry(freshEntry());
 }
 
+const REPLAY_KEY = 'uomd.entry.replay.v1';
+
+function readReplay(): EntryState | null {
+  try {
+    const raw = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem(REPLAY_KEY) : null;
+    return raw ? parseEntry(JSON.parse(raw)) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Replaying the opening (prologue + tutorials) from the title is its own session-only record: it never reads or
+ * changes the account's entry checkpoint, its flow checkpoints live under a separate key, and it ends at the title
+ * instead of the restart page. A reload ends it.
+ */
+export function startReplay(): void {
+  try {
+    sessionStorage.setItem(REPLAY_KEY, JSON.stringify(freshEntry()));
+  } catch {
+    /* without session storage there is no replay */
+  }
+}
+
+export function isReplaying(): boolean {
+  return readReplay() !== null;
+}
+
+export function endReplay(): void {
+  try {
+    sessionStorage.removeItem(REPLAY_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
 export function loadEntry(): EntryState {
   ensureV012EntryReset();
+  const replay = readReplay();
+  if (replay) return replay;
   if (cache) return cache;
   try {
     const raw = localStorage.getItem(KEY);
@@ -181,6 +220,14 @@ export function loadEntry(): EntryState {
 }
 
 export function saveEntry(s: EntryState): EntryState {
+  if (isReplaying()) {
+    try {
+      sessionStorage.setItem(REPLAY_KEY, JSON.stringify(s));
+    } catch {
+      /* ignore */
+    }
+    return s;
+  }
   cache = s;
   try {
     localStorage.setItem(KEY, JSON.stringify(s));

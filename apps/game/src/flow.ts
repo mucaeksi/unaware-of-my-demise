@@ -7,12 +7,15 @@ import {
   saveFlowCheckpoint,
   type CampaignNode
 } from './entry/resume';
+import { committedClaim } from './entry/claims';
 import { errText } from './ui/hub';
 import { Button, toast } from './ui/kit';
 import { REF_H, REF_W } from './config';
 import { Progress, Services } from './services';
 
 export { resolveNextCampaignNode, type CampaignNode };
+
+const UNCONFIRMED = 'Your last result is still being confirmed with the server. Try again when you are online.';
 
 
 /**
@@ -70,7 +73,19 @@ export async function launchBattle(scene: Phaser.Scene, node: CampaignNode, enc:
 export async function playNode(scene: Phaser.Scene, node: CampaignNode, forceRestart = false): Promise<void> {
   const { content } = Services.ready();
   const accountKey = Services.api.accountKey;
+  const cp = !forceRestart ? loadFlowCheckpoint(accountKey) : null;
+  const resuming = cp?.kind === 'campaign' && cp.nodeId === node.node_id ? cp : null;
   if (node.kind === 'story' && node.story) {
+    if (resuming) {
+      const claim = await committedClaim(Services.api, '/api/v1/progress/story', node.node_id, resuming.updatedAt);
+      if (claim === 'unconfirmed') return void toast(scene, UNCONFIRMED, 4200);
+      if (claim) {
+        clearFlowCheckpoint(accountKey);
+        Progress.complete(node.node_id, 0);
+        scene.scene.start('Chapters');
+        return;
+      }
+    }
     const api = Services.api;
     const revision = api.authRevision;
     const signedIn = api.signedIn;
@@ -120,13 +135,20 @@ export async function playNode(scene: Phaser.Scene, node: CampaignNode, forceRes
       toChapters(b);
     }
   };
-  const cp = !forceRestart ? loadFlowCheckpoint(accountKey) : null;
-  if (cp?.kind === 'campaign' && cp.nodeId === node.node_id) {
-    if (cp.step === 'post_story' && enc.post_story) {
+  if (resuming) {
+    if (resuming.step === 'post_story' && enc.post_story) {
       afterBattle(scene);
       return;
     }
-    if (cp.step === 'battle') {
+    if (resuming.step === 'battle') {
+      const claim = await committedClaim(Services.api, '/api/v1/progress/battle', node.node_id, resuming.updatedAt);
+      if (claim === 'unconfirmed') return void toast(scene, UNCONFIRMED, 4200);
+      if (claim) {
+        // the win was committed: go to its post-scene (or on) without fighting again
+        Progress.complete(node.node_id, claim.stars);
+        afterBattle(scene);
+        return;
+      }
       await launchBattle(scene, node, enc, afterBattle);
       return;
     }

@@ -31,8 +31,8 @@ The top priority is finishing the **Initial Store AAB** (`StudioScene` → `Titl
    - **Combat VFX & Juice:** Upgrade skill and ultimate visual effects (slash arcs, warding bell ripples, elemental particles, hit-stop freeze frames, directional camera shake, floating damage/status typography, and smooth SD Chibi attack/hit/cast animations).
 
 5. **Engine track — pure PixiJS v8 (owner-approved order, D-25, 2026-10-18):** the stage already renders with PIXI; the remaining Phaser-style scene API (`apps/game/src/engine`) is removed scene by scene, never in one rewrite:
-   1. Battle first: `BattleScene`/`UnitView`/`BattleVfx` become plain PIXI containers; VFX are **data-driven presets** (JSON compiled to a closed set of primitives: sprites/atlas frames, `ParticleContainer` bursts, `pixi-filters`, tweens, camera cues) so new effects ship in signed data patches without code.
-   2. Story/Prologue (`NarrativeStage`, subtitles, plates), with R09 durable resume.
+   1. Battle first: `BattleScene`/`UnitView`/`BattleVfx` become plain PIXI containers; VFX are **data-driven presets** (JSON compiled to a closed set of primitives: sprites/atlas frames, `ParticleContainer` bursts, `pixi-filters`, tweens, camera cues) so new effects ship in signed data patches without code. **Done 2026-10-18** (`core/PixiScene` + `core/host` bridge, `ui/pixiKit`, `vfx/vfx_presets.json` with capability `vfx_v1`).
+   2. Story/Prologue (`NarrativeStage`, subtitles, plates), with R09 durable resume. **Done 2026-10-18** (R09 items 1-5, D-26).
    3. Menus/hub with the R10 DOM/CSS + ARIA layer.
    4. Delete the compatibility API when its last caller is gone.
 
@@ -245,7 +245,7 @@ Limits: 512 files, 25 MiB/object, 200 MiB signed/retained budget, 1 MiB/JSON and
 
 ### R09 — Entry, narrative continuity and returning-player flow
 
-**Next package; implementation deliberately not started in this handoff. Argon 4 resumes here through Antigravity.**
+**Status 2026-10-18: items 1-5 implemented at local scope (D-26); item 6 reviewed in code (scene background preload, fade-then-start, team save before activation, error texts) without a reproduced gap; physical-device and deployed acceptance remain open.** Item 1: per-node tweens and an Animator that cancels the outgoing fade at the shot boundary (regression test, browser check of all nine shots, authored 120 s). Item 2: continuity contract v1 (device + cloud save, seq merge, scene-hash binding, release stamp, legacy migration, account isolation). Item 3: journal reconciliation of committed battles/stories before any replay. Item 4: Continue resolves the cursor or next campaign node (tutorial chapter excluded), title replay is a separate session-only mode. Item 5: Finish shows device-only / saving / not saved / saved states and re-pushes on open; a missing prologue shows TRY AGAIN / CONTINUE WITHOUT IT instead of silently marking it seen.
 
 1. Reproduce and fix the nine-shot prologue's outgoing-caption tween lifecycle: the original Chromium audit saw second-shot body alpha 0. Measure visibility on every shot and actual whole-opening time. Authored holds total 120 seconds; historical overlap subtraction estimated 112.8 seconds. Define the overlap contract without shortening the intended experience. R08's optional whole-video path does not prove the plate path is fixed.
 2. Design and implement durable **account + content/release + scene/line/choice** continuity with a versioned checkpoint contract. StoryRunner has save/load; R08 handles flags/branches/checkpoints and stores one bounded session snapshot. This is not a secure authoritative account-scoped resume system. Specify migration/incompatible release behavior, storage loss, pause/force-stop/offline, choices, read/skip state and stale-account isolation; keep rewards server-authoritative.

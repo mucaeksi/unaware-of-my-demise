@@ -24,7 +24,11 @@ export const S = {
   },
   prologue: {
     endTitle: 'BEFORE THE ROAD',
-    continue: 'CONTINUE'
+    continue: 'CONTINUE',
+    unavailableTitle: 'THE OPENING COULD NOT BE LOADED',
+    unavailableBody: 'The story opening "Before the Road" did not load on this device. Try again, or continue without it — you can replay it later from the title screen.',
+    retry: 'TRY AGAIN',
+    continueWithout: 'CONTINUE WITHOUT IT'
   },
   finish: {
     waitingTitle: 'THE ROAD IS BEING PREPARED',

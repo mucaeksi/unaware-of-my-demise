@@ -631,6 +631,10 @@ export class GameApi extends EventTarget {
   writeSave(expectedVersion: number, data: Record<string, unknown>): Promise<{ version: number }> {
     return this.mutate('/api/v1/save', { expectedVersion, data }, 'PUT');
   }
+  /** compare-and-set write outside the operations journal, for frequent non-authoritative state (story continuity) */
+  writeSaveDirect(expectedVersion: number, data: Record<string, unknown>): Promise<{ version: number }> {
+    return this.call('PUT', '/api/v1/save', { expectedVersion, data });
+  }
   characters(releaseId?: string): Promise<{ account: { level: number; xp: number }; characters: CharacterView[]; unavailable?: { id: string; reason: string }[] }> {
     return this.call('GET', `/api/v1/characters/mine${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }

@@ -10,7 +10,7 @@ import { PixiScene } from '../core/PixiScene';
 import { advance } from '../entry/flow';
 import { S } from '../entry/strings';
 import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
-import { isDevServer, isForceFreshEntry, isInteractiveBrowser, loadEntry, markPrologueSeen } from '../entry/state';
+import { isDevServer, isForceFreshEntry, isInteractiveBrowser, isReplaying, loadEntry, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateTexture } from '../entry/plates';
 import { prefs } from '../platform/prefs';
@@ -65,6 +65,7 @@ export class PrologueScene extends PixiScene {
   private advanceTimer: Handle | null = null;
   private pauseBtn: Button | null = null;
   private muteBtn: Button | null = null;
+  private skipBtn: Button | null = null;
   private pausedByUser = false;
   private hidden = false;
   private muted = false;
@@ -172,14 +173,14 @@ export class PrologueScene extends PixiScene {
     this.pauseBtn = this.add(new Button(this, 108 + insets.left, 56 + insets.top, { label: 'PAUSE', w: 148, h: 62, fontSize: 21, onClick: () => this.togglePause() }), top);
     this.muteBtn = this.add(new Button(this, 270 + insets.left, 56 + insets.top, { label: this.muted ? 'UNMUTE' : 'MUTE', w: 148, h: 62, fontSize: 21, onClick: () => this.toggleMute() }), top);
     // entry contract: no Skip on a first viewing (the dev server keeps it for the owner's review loop)
-    if (loadEntry().phase === 'completed' || isDevServer()) this.add(new Button(this, REF_W - 108 - insets.right, 56 + insets.top, { label: 'SKIP', w: 148, h: 62, fontSize: 21, onClick: () => this.finish() }), top);
+    if (loadEntry().phase === 'completed' || isReplaying() || isDevServer()) this.skipBtn = this.add(new Button(this, REF_W - 108 - insets.right, 56 + insets.top, { label: 'SKIP', w: 148, h: 62, fontSize: 21, onClick: () => this.finish() }), top);
     const onVisibility = (): void => {
       if (!this.live || this.done) return;
       this.hidden = document.hidden;
       this.syncPause();
     };
     const onContextLost = (): void => {
-      if (!this.done && this.index >= 0) savePrologueCheckpoint(Services.api.accountKey, this.index);
+      if (!this.done && this.index >= 0) savePrologueCheckpoint(Services.flowKey(), this.index);
     };
     const game = this.host.game;
     document.addEventListener('visibilitychange', onVisibility);
@@ -243,13 +244,13 @@ export class PrologueScene extends PixiScene {
       if (!current()) return;
       if (!INTRO_FAST && allIds.length > initialIds.length) void Services.art?.loadStills(this.host, allIds).catch((e: unknown) => console.warn('prologue background plates unavailable', e));
     } catch (e) {
-      // the prologue is a presentation: if it cannot load, the road must still open
+      // the road must still open, but a mandatory opening is never marked seen behind the player's back (R09)
       console.error('prologue unavailable', e);
-      if (current()) this.finish();
+      if (current()) this.unavailable();
       return;
     }
     if (!current()) return;
-    const savedIndex = isForceFreshEntry() ? null : loadPrologueCheckpoint(Services.api.accountKey, this.data0.scenes.length);
+    const savedIndex = isForceFreshEntry() ? null : loadPrologueCheckpoint(Services.flowKey(), this.data0.scenes.length);
     if (savedIndex !== null && savedIndex > 0) this.index = savedIndex - 1;
     this.ensurePrologueMusic();
     this.anim.to(this.shade, { alpha: 1 }, { duration: 1100 });
@@ -265,7 +266,7 @@ export class PrologueScene extends PixiScene {
       this.ending();
       return;
     }
-    savePrologueCheckpoint(Services.api.accountKey, this.index);
+    savePrologueCheckpoint(Services.flowKey(), this.index);
     const first = this.index === 0;
     const holdMs = sceneSeconds(scene) * 1000;
     const total = Math.max(1, data.scenes.length);
@@ -392,11 +393,23 @@ export class PrologueScene extends PixiScene {
     for (const n of [t, btn]) this.anim.to(n, { alpha: 1 }, { duration: INTRO_FAST ? 60 : 800, ease: 'sine.inout' });
   }
 
-  /** The prologue counts as seen once the player moves on (or when it cannot be shown at all). */
+  /** the opening could not load: say so, offer a retry, and only move on when the player chooses to */
+  private unavailable(): void {
+    this.done = true;
+    Music.stop(0.4);
+    for (const b of [this.pauseBtn, this.muteBtn, this.skipBtn]) if (b) b.visible = false;
+    this.add(new PIXI.Graphics().rect(0, 0, REF_W, REF_H).fill({ color: 0x05030a, alpha: 0.9 }), DEPTH.modal);
+    this.add(title(REF_W / 2, REF_H / 2 - 170, S.prologue.unavailableTitle, 46, '#e3c37d'), DEPTH.modal + 1);
+    this.add(txt(REF_W / 2, REF_H / 2 - 90, S.prologue.unavailableBody, { fontSize: 32, color: '#efe8f5', align: 'center', wordWrap: { width: 1300 } }, [0.5, 0]), DEPTH.modal + 1);
+    this.add(new Button(this, REF_W / 2 - 280, REF_H / 2 + 140, { label: S.prologue.retry, w: 480, h: 110, fontSize: 32, variant: 'hot', onClick: () => this.nav.restart() }), DEPTH.modal + 1);
+    this.add(new Button(this, REF_W / 2 + 280, REF_H / 2 + 140, { label: S.prologue.continueWithout, w: 480, h: 110, fontSize: 28, onClick: () => this.finish() }), DEPTH.modal + 1);
+  }
+
+  /** The prologue counts as seen once the player moves on (from its end, Skip on replay, or an explicit continue). */
   private finish(): void {
     this.anim.timeScale = 1;
     Music.setPaused(false);
-    clearPrologueCheckpoint(Services.api.accountKey);
+    clearPrologueCheckpoint(Services.flowKey());
     recordEntry(Services.api, (s) => markPrologueSeen(s));
     advance(this.host);
   }
