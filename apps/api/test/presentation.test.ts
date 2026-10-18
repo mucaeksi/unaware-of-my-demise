@@ -9,11 +9,14 @@ let files: TestFile[]; let event: NarrativeLibrary['entries'][number];
 const jsonFile = async (path: string, value: unknown): Promise<TestFile> => { const bytes = new TextEncoder().encode(JSON.stringify(value)); return { path, bytes, sha256: await sha256Hex(bytes), mediaType: 'application/json' }; };
 const post = (body: unknown, auth: Record<string, string> = {}) => ({ method: 'POST', headers: { ...auth, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
 beforeAll(async () => {
-  files = await campaignFiles(); const library = NarrativeLibrary.parse(JSON.parse(new TextDecoder().decode(files.find((f) => f.path === 'library/library_index.json')!.bytes)));
+  const all = await campaignFiles();
+  const basePres = JSON.parse(new TextDecoder().decode(all.find((f) => f.path === 'presentation/presentation.json')!.bytes)) as Record<string, unknown>;
+  files = all.filter((f) => f.path !== 'presentation/presentation.json');
+  const library = NarrativeLibrary.parse(JSON.parse(new TextDecoder().decode(files.find((f) => f.path === 'library/library_index.json')!.bytes)));
   event = library.entries.find((e) => e.kind === 'event')!;
   const closed = { starts_at: '2000-01-01T00:00:00Z', ends_at: '2000-01-02T00:00:00Z' };
   const notice = { title: { text_en: 'Synthetic notice' }, body: [{ text_en: 'Test only' }], buttons: [{ label: { text_en: 'Close' }, action: { type: 'close' } }] };
-  files.push(await jsonFile('presentation/presentation.json', { schema_version: 1, panels: { open_notice: notice, gated_notice: { ...notice, after_node: 'stage_1_1' }, expired_notice: { ...notice, window: closed } } }),
+  files.push(await jsonFile('presentation/presentation.json', { ...basePres, panels: { open_notice: notice, gated_notice: { ...notice, after_node: 'stage_1_1' }, expired_notice: { ...notice, window: closed } } }),
     await jsonFile('schedules/events.json', { schema_version: 1, events: [{ entry_id: event.entry_id, window: closed }] }),
     await jsonFile('schedules/shop.json', { schema_version: 1, offers: [{ product_id: 'schedule_probe', window: closed }] }));
 });

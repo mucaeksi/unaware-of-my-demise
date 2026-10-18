@@ -44,9 +44,10 @@ type Tab = (typeof TABS)[number];
 const AREAS = ['General', 'Splash & Studio', 'Title', 'Prologue (120s)', 'Story', 'Battle', 'Patch Wait & Restart', 'Company hub', 'Summon', 'Roster', 'Mail', 'Shop', 'Account', 'Chapters', 'Control Center', 'Economy', 'Art direction'];
 
 /** Where the browser build of the game lives: the sibling Worker of this admin, or the local dev server. */
-function gameUrl(scene = ''): string {
+function gameUrl(scene = '', target: 'worker' | 'vite' = 'worker'): string {
   const h = window.location.hostname;
-  const base = h === '127.0.0.1' || h === 'localhost' ? 'http://127.0.0.1:8787/' : `${window.location.protocol}//${h.replace(/^uomd-admin/, 'uomd-game')}/`;
+  const port = target === 'vite' ? '5173' : '8787';
+  const base = h === '127.0.0.1' || h === 'localhost' ? `http://127.0.0.1:${port}/` : `${window.location.protocol}//${h.replace(/^uomd-admin/, 'uomd-game')}/`;
   return scene ? `${base}?preview_scene=${encodeURIComponent(scene)}` : base;
 }
 
@@ -134,26 +135,40 @@ const SCENE_PRESETS: { id: string; label: string }[] = [
   { id: 'studio', label: '2. SovTaym Studios' },
   { id: 'title_fresh', label: '3. Title (Tap to Start → Prologue)' },
   { id: 'prologue', label: '4. 120s Prologue' },
-  { id: 'story_t1', label: '5. Tutorial LN Story (Busts)' },
+  { id: 'story_t1', label: '5. LN T-1 Before' },
   { id: 'battle_t1', label: '6. Battle T-1 (Whispering Ash)' },
-  { id: 'battle_t2', label: '7. Battle T-2 (Stone Crossing)' },
-  { id: 'battle_t3', label: '8. Battle T-3 (Shelter Courtyard)' },
-  { id: 'story_t3_after', label: '9. Tutorial T-3 Finale LN' },
-  { id: 'finish_wait', label: '10. Patch Wait (Quotes)' },
-  { id: 'hub', label: '11. Company Hub' }
+  { id: 'story_t1_after', label: '7. LN T-1 After' },
+  { id: 'story_t2_before', label: '8. LN T-2 Before' },
+  { id: 'battle_t2', label: '9. Battle T-2 (Stone Crossing)' },
+  { id: 'story_t2_after', label: '10. LN T-2 After' },
+  { id: 'story_t3_before', label: '11. LN T-3 Before' },
+  { id: 'battle_t3', label: '12. Battle T-3 (Shelter Courtyard)' },
+  { id: 'story_t3_after', label: '13. LN T-3 Finale' },
+  { id: 'finish_wait', label: '14. Patch Wait (Quotes)' },
+  { id: 'hub', label: '15. Company Hub' }
 ];
 
 function Preview(): ReactNode {
   const [f, setF] = useState(0);
   const [scene, setScene] = useState('fresh_flow');
+  const isLocal = typeof window !== 'undefined' && (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost');
+  const [target, setTarget] = useState<'worker' | 'vite'>(isLocal ? 'vite' : 'worker');
   const [nonce, setNonce] = useState(0);
   const frame = FRAMES[f] as (typeof FRAMES)[number];
-  const url = gameUrl(scene);
+  const url = gameUrl(scene, target);
   return (
     <>
-      <p>The game as deployed on this environment (the last push to main). Jump directly to any scene in the v0.1.2 Base AAB flow below, or test the full entry sequence from the Phaser Splash.</p>
+      <p>The game as deployed on Cloudflare (or live dev server when local). Jump directly to any scene in the v0.1.2 Base AAB flow below, or test the full entry sequence from the Splash.</p>
       <div className="row" style={{ marginBottom: 8 }}>
         {FRAMES.map((x, i) => <button key={x.label} className={`btn${i === f ? ' primary' : ''}`} onClick={() => setF(i)}>{x.label}</button>)}
+        {isLocal ? (
+          <>
+            <button className={`btn${target === 'vite' ? ' primary' : ''}`} onClick={() => setTarget('vite')}>Vite Dev (:5173)</button>
+            <button className={`btn${target === 'worker' ? ' primary' : ''}`} onClick={() => setTarget('worker')}>Game Worker (:8787)</button>
+          </>
+        ) : (
+          <span className="badge ok">Cloudflare Live Worker</span>
+        )}
         <button className="btn" onClick={() => setNonce(nonce + 1)}>Reload</button>
         <a className="btn" href={url} target="_blank" rel="noreferrer">Open in a new tab</a>
       </div>
@@ -165,7 +180,7 @@ function Preview(): ReactNode {
         ))}
       </div>
       <div style={{ maxWidth: '100%', overflow: 'auto', marginTop: 12 }}>
-        <iframe key={`${f}-${scene}-${nonce}`} title="Game preview" src={url} width={frame.w} height={frame.h} style={{ border: '1px solid var(--edge, #444)', borderRadius: 8, background: '#0a0610', maxWidth: '100%' }} allow="autoplay; fullscreen" />
+        <iframe key={`${f}-${scene}-${target}-${nonce}`} title="Game preview" src={url} width={frame.w} height={frame.h} style={{ border: '1px solid var(--edge, #444)', borderRadius: 8, background: '#0a0610', maxWidth: '100%' }} allow="autoplay; fullscreen" />
       </div>
     </>
   );

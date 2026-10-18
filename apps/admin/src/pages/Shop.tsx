@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { api, ApiError, downloadJson, newRequestId, type Me } from '../api';
 import { ErrorNotice } from '../App';
 
@@ -25,6 +25,15 @@ export function Shop({ me, say }: { me: Me; say: (m: string) => void }): ReactNo
   const [jobs, setJobs] = useState<BillingJob[]>([]);
   const [ads, setAds] = useState<AdDay[]>([]);
   const [err, setErr] = useState<unknown>(null);
+  const [prodEditor, setProdEditor] = useState<{
+    product_id: string;
+    kind: 'consumable' | 'subscription';
+    title_en: string;
+    grantsText: string;
+    subConfigText: string;
+    active: boolean;
+    expectedVersion: number;
+  } | null>(null);
   const canOperate = me.role !== 'viewer';
 
   const buildPurchasesQuery = useCallback((cursor?: string | null): string => {
@@ -125,6 +134,44 @@ export function Shop({ me, say }: { me: Me; say: (m: string) => void }): ReactNo
     } catch (x) { say(x instanceof ApiError ? `${x.code}: ${x.message}` : String((x as Error).message)); load(); }
   };
 
+  const openProdEditor = (p?: Product): void => {
+    setProdEditor({
+      product_id: p?.product_id ?? 'tokens_pack_new',
+      kind: (p?.kind === 'subscription' ? 'subscription' : 'consumable'),
+      title_en: p?.title_en ?? 'New Eclipse Token Pack',
+      grantsText: p ? JSON.stringify(JSON.parse(p.grants), null, 2) : JSON.stringify([{ type: 'currency', currency: 'eclipse_token', amount: 1600 }], null, 2),
+      subConfigText: p?.sub_config ? JSON.stringify(JSON.parse(p.sub_config), null, 2) : '',
+      active: p ? p.active === 1 : false,
+      expectedVersion: p ? p.version : 0
+    });
+  };
+
+  const saveProdEditor = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    if (!prodEditor) return;
+    try {
+      const grants = prodEditor.grantsText.trim() ? JSON.parse(prodEditor.grantsText) : [];
+      const sub_config = prodEditor.kind === 'subscription' && prodEditor.subConfigText.trim() ? JSON.parse(prodEditor.subConfigText) : undefined;
+      await api(`/products/${encodeURIComponent(prodEditor.product_id.trim())}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          kind: prodEditor.kind,
+          title_en: prodEditor.title_en.trim(),
+          grants,
+          ...(sub_config ? { sub_config } : {}),
+          active: prodEditor.active,
+          expectedVersion: prodEditor.expectedVersion,
+          requestId: newRequestId('prod')
+        })
+      });
+      say(`${prodEditor.product_id} saved`);
+      setProdEditor(null);
+      load();
+    } catch (x) {
+      say(x instanceof ApiError ? `${x.code}: ${x.message}` : String((x as Error).message));
+    }
+  };
+
   if (err) return <ErrorNotice error={err} />;
   if (!products) return <p>Loading shop…</p>;
   return (
@@ -132,16 +179,61 @@ export function Shop({ me, say }: { me: Me; say: (m: string) => void }): ReactNo
       <header className="page">
         <h2>Shop &amp; ads</h2>
         {refundsWithUnrecovered > 0 ? <span className="badge warn">{refundsWithUnrecovered} refunds with unrecovered currency</span> : null}
+        {me.role === 'owner' ? (
+          <button className="btn primary" type="button" onClick={() => openProdEditor()}>
+            + New product
+          </button>
+        ) : null}
         <button className="btn" type="button" onClick={() => downloadJson('purchases.json', purchases)}>Export purchases JSON</button>
       </header>
       <p>Prices live in Google Play Console; here a product id is mapped to what the server grants. Product writes use optimistic concurrency (version CAS); only owners can change products.</p>
+
+      {prodEditor ? (
+        <form className="card" onSubmit={(e) => void saveProdEditor(e)} aria-label="Product editor" style={{ marginBottom: 14 }}>
+          <div className="row" style={{ justifyContent: 'space-between' }}>
+            <h3 style={{ margin: 0 }}>{prodEditor.expectedVersion === 0 ? 'Create shop product' : `Edit product: ${prodEditor.product_id}`}</h3>
+            <span className="badge">{prodEditor.expectedVersion === 0 ? 'new' : `v${prodEditor.expectedVersion}`}</span>
+          </div>
+          <div className="row" style={{ marginTop: 10 }}>
+            <label>Product ID <input value={prodEditor.product_id} disabled={prodEditor.expectedVersion > 0} onChange={(e) => setProdEditor({ ...prodEditor, product_id: e.target.value })} required /></label>
+            <label>Kind
+              <select value={prodEditor.kind} disabled={prodEditor.expectedVersion > 0} onChange={(e) => setProdEditor({ ...prodEditor, kind: e.target.value as 'consumable' | 'subscription' })}>
+                <option value="consumable">consumable</option>
+                <option value="subscription">subscription</option>
+              </select>
+            </label>
+            <label style={{ flex: 1 }}>Title (EN) <input style={{ width: '100%' }} value={prodEditor.title_en} onChange={(e) => setProdEditor({ ...prodEditor, title_en: e.target.value })} required /></label>
+            <label className="row" style={{ gap: 6 }}>
+              <input type="checkbox" checked={prodEditor.active} onChange={(e) => setProdEditor({ ...prodEditor, active: e.target.checked })} /> Active
+            </label>
+          </div>
+          <label style={{ display: 'block', marginTop: 10 }}>
+            Grants JSON (RewardAttachment array)
+            <textarea className="code-editor" style={{ minHeight: 110, marginTop: 4 }} value={prodEditor.grantsText} onChange={(e) => setProdEditor({ ...prodEditor, grantsText: e.target.value })} />
+          </label>
+          {prodEditor.kind === 'subscription' ? (
+            <label style={{ display: 'block', marginTop: 10 }}>
+              Subscription Config JSON
+              <textarea className="code-editor" style={{ minHeight: 130, marginTop: 4 }} value={prodEditor.subConfigText} onChange={(e) => setProdEditor({ ...prodEditor, subConfigText: e.target.value })} />
+            </label>
+          ) : null}
+          <div className="row" style={{ marginTop: 10 }}>
+            <button className="btn primary" type="submit">Save product</button>
+            <button className="btn" type="button" onClick={() => setProdEditor(null)}>Cancel</button>
+          </div>
+        </form>
+      ) : null}
+
       <table>
         <thead><tr><th>Product</th><th>Kind</th><th>Title</th><th>Grants</th><th>v</th><th>Active</th><th /></tr></thead>
         <tbody>{products.map((p) => (
           <tr key={p.product_id}><td><code>{p.product_id}</code></td><td>{p.kind}</td><td>{p.title_en}</td><td className="mono">{p.sub_config ? 'see subscription config' : p.grants}</td>
             <td>{p.version}</td>
             <td><span className={`badge ${p.active ? 'ok' : 'warn'}`}>{p.active ? 'on' : 'off'}</span></td>
-            <td>{me.role === 'owner' ? <button className="btn" onClick={() => void toggle(p)}>{p.active ? 'Deactivate' : 'Activate'}</button> : null}</td></tr>
+            <td className="row">
+              {me.role === 'owner' ? <button className="btn" onClick={() => openProdEditor(p)}>Edit</button> : null}
+              {me.role === 'owner' ? <button className="btn" onClick={() => void toggle(p)}>{p.active ? 'Deactivate' : 'Activate'}</button> : null}
+            </td></tr>
         ))}</tbody>
       </table>
       <h3>Recent purchases</h3>

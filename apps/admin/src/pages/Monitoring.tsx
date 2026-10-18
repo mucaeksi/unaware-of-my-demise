@@ -1,10 +1,14 @@
 import { useCallback, useState, type ReactNode } from 'react';
-import { api } from '../api';
-import { ErrorNotice } from '../App';
+import { api, ApiError, downloadJson } from '../api';
+import { ErrorNotice, type Page } from '../App';
 import { usePolling } from '../usePolling';
 
 interface Version { id: string; tag?: string; timestamp?: string }
 interface Operation { id: number; at: string; kind: string; ok: number; detail: { version?: Version | null; checks?: { name: string; ok: boolean; detail: string }[] } }
+interface BattleRow { id: number; at: string; release_id: string; encounter: string; valid: number; complete: number; winner: string | null; stars: number | null; turns: number | null; log_hash: string; client_match: number }
+interface LedgerRow { id: number; at: string; currency: string; delta: number; reason: string }
+interface PullRow { id: number; at: string; banner_id: string; pull_number: number; rarity: number; item_id: string; outcome: string; duplicate: number }
+interface AuditRow { id?: number; at: string; actor?: string; action: string; target: string | null; detail?: string }
 interface Snapshot {
   updatedAt: string; windowStart: string; retentionDays: number; maxEvents: number; environment: string;
   freshness?: { source: string; generatedAt: string; windowStart: string; newestEventAt: string | null; lastHealthAt: string | null; lastBackupAt: string | null; lastGoodBackupAt: string | null; healthStale: boolean; backupStale: boolean };
@@ -16,11 +20,13 @@ interface Snapshot {
   counts: { category: string; severity: string; count: number }[];
   operations: Operation[];
   development: { status: string; count: number }[];
-  audit: { at: string; action: string; target: string | null }[];
+  audit: AuditRow[];
+  recentBattles?: BattleRow[];
+  recentLedger?: LedgerRow[];
+  recentPulls?: PullRow[];
   versions: { admin: Version | null; game: { available: boolean; ok?: boolean; status?: number; reason?: string; time?: string; version?: Version | null } };
 }
 interface Progress { generatedAt: string; summary: { done: number; partial: number; missing: number }; commits: { sha: string; subject: string }[] }
-type Destination = 'Dashboard' | 'Development' | 'Players' | 'Economy' | 'Shop' | 'Flags' | 'Catalog' | 'Patches' | 'Audit';
 const when = (at?: string): string => at ? new Date(at).toLocaleString() : 'No data yet';
 const number = (n?: number | null): string => (n ?? 0).toLocaleString();
 function Status({ at, ok, maxAge }: { at?: string; ok?: boolean; maxAge: number }): ReactNode {
@@ -28,8 +34,17 @@ function Status({ at, ok, maxAge }: { at?: string; ok?: boolean; maxAge: number 
   return <span className={`badge ${!at || !fresh ? 'warn' : ok ? 'ok' : 'bad'}`}>{!at ? 'No data' : !fresh ? 'Stale' : ok ? 'Healthy' : 'Attention'}</span>;
 }
 
-export function Monitoring({ navigate }: { navigate: (page: Destination) => void }): ReactNode {
+const STREAM_TABS = ['Admin Audit', 'Combat & Battles', 'Economy Ledger', 'Gacha Summons'] as const;
+type StreamTab = (typeof STREAM_TABS)[number];
+
+export function Monitoring({ navigate, say }: { navigate: (page: Page) => void; say?: (m: string) => void }): ReactNode {
   const [category, setCategory] = useState('all');
+  const [severityFilter, setSeverityFilter] = useState('all');
+  const [serviceFilter, setServiceFilter] = useState('all');
+  const [searchQ, setSearchQ] = useState('');
+  const [streamTab, setStreamTab] = useState<StreamTab>('Admin Audit');
+  const [probing, setProbing] = useState(false);
+
   const read = useCallback((signal: AbortSignal) => api<Snapshot>(`/monitoring?category=${category}`, { signal }), [category]);
   const { data: s, error, loading, refresh } = usePolling(read);
   const progressRead = useCallback(async (signal: AbortSignal): Promise<Progress> => {
@@ -38,12 +53,44 @@ export function Monitoring({ navigate }: { navigate: (page: Destination) => void
     return r.json() as Promise<Progress>;
   }, []);
   const progress = usePolling(progressRead);
+
+  const triggerProbe = async (): Promise<void> => {
+    setProbing(true);
+    try {
+      const r = await api<{ ok: boolean; checks: { name: string; ok: boolean; detail: string }[] }>('/monitoring/probe', { method: 'POST', body: '{}' });
+      say?.(`Probe ${r.ok ? 'OK' : 'WARN'}: ${r.checks.map((c) => `${c.name}=${c.detail}`).join(' · ')}`);
+      refresh();
+    } catch (x) {
+      say?.(x instanceof ApiError ? `${x.code}: ${x.message}` : String((x as Error).message));
+    } finally {
+      setProbing(false);
+    }
+  };
+
   const health = s?.operations.find((o) => o.kind === 'health');
   const backup = s?.operations.find((o) => o.kind === 'backup');
   const goodBackup = s?.operations.find((o) => o.kind === 'backup' && o.ok === 1);
   const errors = s?.counts.filter((c) => c.severity !== 'info').reduce((sum, c) => sum + c.count, 0) ?? 0;
+
+  const filteredEvents = (s?.events ?? []).filter((e) => {
+    if (severityFilter !== 'all' && e.severity !== severityFilter) return false;
+    if (serviceFilter !== 'all' && e.service !== serviceFilter) return false;
+    if (searchQ.trim()) {
+      const needle = searchQ.trim().toLowerCase();
+      const hay = `${e.event} ${e.reason} ${e.route} ${e.method} ${e.ray_id ?? ''} ${e.status}`.toLowerCase();
+      if (!hay.includes(needle)) return false;
+    }
+    return true;
+  });
+
   return <div className="monitor-page">
-    <header className="page"><h2>Monitoring</h2><button className="btn" disabled={loading} onClick={() => { refresh(); progress.refresh(); }}>Refresh</button></header>
+    <header className="page">
+      <h2>Monitoring</h2>
+      <span className="badge info">Auto-polling 30s</span>
+      <button className="btn" disabled={loading} onClick={() => { refresh(); progress.refresh(); }}>Refresh</button>
+      <button className="btn primary" disabled={probing} onClick={() => void triggerProbe()}>{probing ? 'Probing…' : 'Run live probe'}</button>
+      {s ? <button className="btn" type="button" onClick={() => downloadJson('monitoring-snapshot.json', s)}>Export snapshot JSON</button> : null}
+    </header>
     <p className="muted">Updates every 30 seconds while this page is visible. Last successful update: <time dateTime={s?.updatedAt}>{when(s?.updatedAt)}</time>. Statistics cover the rolling 24 hours since {when(s?.windowStart)}.</p>
     <ErrorNotice error={error} />
     {error && s ? <div className="notice bad">Refresh failed. The values below are from the last successful update.</div> : null}
@@ -75,17 +122,105 @@ export function Monitoring({ navigate }: { navigate: (page: Destination) => void
           <VersionRow name="Ops" version={s.operations[0]?.detail.version ?? null} />
         </section>
       </div>
-      <section className="card"><div className="row"><h3>SSV, billing & API events</h3><label>Event category <select value={category} onChange={(e) => setCategory(e.target.value)}><option value="all">All</option><option value="ads">SSV / ads</option><option value="billing">Billing / RTDN</option><option value="api">API errors</option></select></label></div>
-        <p className="muted">Latest 100 matching events. Retained for {s.retentionDays} days, up to {number(s.maxEvents)} events. Signatures, callback URLs and tokens are excluded. “ad_unit_not_ours” acknowledges AdMob’s check without granting a reward.</p>
-        <div className="monitor-table"><table><thead><tr><th>Time</th><th>Event / service</th><th>HTTP</th><th>Reason</th><th>Route</th><th>Version / Ray</th></tr></thead><tbody>{s.events.map((e) => <tr key={e.id}><td>{when(e.at)}<div className="muted">{e.duration_ms === null ? 'Duration unknown' : `${e.duration_ms} ms`}</div></td><td>{e.event}<div className="muted">{e.service}</div></td><td><span className={`badge ${e.severity === 'error' ? 'bad' : e.severity === 'warning' ? 'warn' : 'ok'}`}>{e.status}</span></td><td>{e.reason}</td><td className="mono">{e.method} {e.route}</td><td className="mono"><span title={e.version_id ?? ''}>{e.version_id?.slice(0, 8) ?? 'Unknown version'}</span><div>{e.ray_id ?? '—'}</div></td></tr>)}{!s.events.length ? <tr><td colSpan={6}>No recorded events in this category.</td></tr> : null}</tbody></table></div>
+      <section className="card">
+        <div className="row" style={{ justifyContent: 'space-between' }}>
+          <h3>SSV, billing & API events</h3>
+          <div className="row" style={{ margin: 0 }}>
+            <label>Event category <select value={category} onChange={(e) => setCategory(e.target.value)}><option value="all">All</option><option value="ads">SSV / ads</option><option value="billing">Billing / RTDN</option><option value="api">API errors</option></select></label>
+            <label>Severity <select value={severityFilter} onChange={(e) => setSeverityFilter(e.target.value)}><option value="all">All</option><option value="error">Error</option><option value="warning">Warning</option><option value="info">Info</option></select></label>
+            <label>Service <select value={serviceFilter} onChange={(e) => setServiceFilter(e.target.value)}><option value="all">All</option><option value="game">game</option><option value="admin">admin</option></select></label>
+            <label>Filter logs <input placeholder="route, reason, event…" value={searchQ} onChange={(e) => setSearchQ(e.target.value)} /></label>
+          </div>
+        </div>
+        <p className="muted">Latest 100 matching events (showing {filteredEvents.length}). Retained for {s.retentionDays} days, up to {number(s.maxEvents)} events. Signatures, callback URLs and tokens are excluded. “ad_unit_not_ours” acknowledges AdMob’s check without granting a reward.</p>
+        <div className="monitor-table"><table><thead><tr><th>Time</th><th>Event / service</th><th>HTTP</th><th>Reason</th><th>Route</th><th>Version / Ray</th></tr></thead><tbody>{filteredEvents.map((e) => <tr key={e.id}><td>{when(e.at)}<div className="muted">{e.duration_ms === null ? 'Duration unknown' : `${e.duration_ms} ms`}</div></td><td>{e.event}<div className="muted">{e.service}</div></td><td><span className={`badge ${e.severity === 'error' ? 'bad' : e.severity === 'warning' ? 'warn' : 'ok'}`}>{e.status}</span></td><td>{e.reason}</td><td className="mono">{e.method} {e.route}</td><td className="mono"><span title={e.version_id ?? ''}>{e.version_id?.slice(0, 8) ?? 'Unknown version'}</span><div>{e.ray_id ?? '—'}</div></td></tr>)}{!filteredEvents.length ? <tr><td colSpan={6}>No recorded events in this category.</td></tr> : null}</tbody></table></div>
+      </section>
+      <section className="card">
+        <div className="row" style={{ justifyContent: 'space-between' }}>
+          <h3>Live game &amp; admin activity logs</h3>
+          <div className="row" style={{ margin: 0 }}>
+            {STREAM_TABS.map((t) => (
+              <button key={t} type="button" className={`btn${streamTab === t ? ' primary' : ''}`} onClick={() => setStreamTab(t)}>{t}</button>
+            ))}
+          </div>
+        </div>
+        {streamTab === 'Admin Audit' ? (
+          <table>
+            <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Target</th><th>Detail</th></tr></thead>
+            <tbody>
+              {s.audit.map((a, i) => (
+                <tr key={a.id ?? i}>
+                  <td className="mono">{when(a.at)}</td>
+                  <td>{a.actor ?? 'admin'}</td>
+                  <td><code>{a.action}</code></td>
+                  <td>{a.target ?? '—'}</td>
+                  <td className="mono">{a.detail ?? '{}'}</td>
+                </tr>
+              ))}
+              {!s.audit.length ? <tr><td colSpan={5}>No admin audit records yet.</td></tr> : null}
+            </tbody>
+          </table>
+        ) : null}
+        {streamTab === 'Combat & Battles' ? (
+          <table>
+            <thead><tr><th>When</th><th>Release</th><th>Encounter</th><th>Outcome</th><th>Stars / Turns</th><th>Replay Hash</th></tr></thead>
+            <tbody>
+              {(s.recentBattles ?? []).map((b) => (
+                <tr key={b.id}>
+                  <td className="mono">{when(b.at)}</td>
+                  <td><code>{b.release_id}</code></td>
+                  <td><code>{b.encounter}</code></td>
+                  <td><span className={`badge ${b.valid && b.client_match ? 'ok' : 'bad'}`}>{b.winner ?? (b.complete ? 'done' : 'incomplete')}</span></td>
+                  <td>{b.stars ? '★'.repeat(b.stars) : '—'} · {b.turns ?? 0} turns</td>
+                  <td className="mono">{b.log_hash.slice(0, 16)}…</td>
+                </tr>
+              ))}
+              {!(s.recentBattles ?? []).length ? <tr><td colSpan={6}>No verified battles recorded yet.</td></tr> : null}
+            </tbody>
+          </table>
+        ) : null}
+        {streamTab === 'Economy Ledger' ? (
+          <table>
+            <thead><tr><th>When</th><th>Currency</th><th>Delta</th><th>Reason</th></tr></thead>
+            <tbody>
+              {(s.recentLedger ?? []).map((l) => (
+                <tr key={l.id}>
+                  <td className="mono">{when(l.at)}</td>
+                  <td>{l.currency === 'eclipse_token' ? 'Bell’s Remains' : l.currency}</td>
+                  <td><span className={`badge ${l.delta > 0 ? 'ok' : 'warn'}`}>{l.delta > 0 ? `+${l.delta}` : l.delta}</span></td>
+                  <td className="mono">{l.reason}</td>
+                </tr>
+              ))}
+              {!(s.recentLedger ?? []).length ? <tr><td colSpan={4}>No ledger entries recorded yet.</td></tr> : null}
+            </tbody>
+          </table>
+        ) : null}
+        {streamTab === 'Gacha Summons' ? (
+          <table>
+            <thead><tr><th>When</th><th>Banner</th><th>Pull #</th><th>Rarity</th><th>Item</th><th>Outcome</th></tr></thead>
+            <tbody>
+              {(s.recentPulls ?? []).map((p) => (
+                <tr key={p.id}>
+                  <td className="mono">{when(p.at)}</td>
+                  <td><code>{p.banner_id}</code></td>
+                  <td>#{p.pull_number}</td>
+                  <td><span className={`badge ${p.rarity === 5 ? 'ok' : p.rarity === 4 ? 'info' : ''}`}>{p.rarity}★</span></td>
+                  <td><code>{p.item_id}</code></td>
+                  <td>{p.outcome}{p.duplicate ? ' (dup)' : ''}</td>
+                </tr>
+              ))}
+              {!(s.recentPulls ?? []).length ? <tr><td colSpan={6}>No gacha summons recorded yet.</td></tr> : null}
+            </tbody>
+          </table>
+        ) : null}
       </section>
       <section className="card"><h3>Development & coverage</h3><ErrorNotice error={progress.error} />
         <p>Development snapshot built: {when(progress.data?.generatedAt)}. It updates when the admin deployment completes.</p>
         {progress.data ? <p>{progress.data.summary.done} done · {progress.data.summary.partial} partial · {progress.data.summary.missing} missing. Latest source commit: <code>{progress.data.commits[0]?.sha.slice(0, 8) ?? 'Unknown'}</code></p> : null}
         <p>Feedback: {s.development.map((n) => `${n.count} ${n.status}`).join(' · ') || 'No feedback yet'}</p>
-        <div className="row">{(['Players', 'Economy', 'Shop', 'Flags', 'Catalog', 'Patches', 'Audit', 'Development'] as Destination[]).map((page) => <button className="btn" key={page} onClick={() => navigate(page)}>{page}</button>)}</div>
+        <div className="row">{(['Players', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit', 'Development'] as Page[]).map((page) => <button className="btn" key={page} onClick={() => navigate(page)}>{page}</button>)}</div>
         <p className="muted">This screen follows SSV callbacks, API failures, purchase verification / RTDN, player activity, currency flow, gacha, health, backups, running versions and development feedback. Platform-wide Cloudflare usage and Android crash reports are not connected.</p>
-        <h4>Recent admin activity</h4>{s.audit.map((a, i) => <p key={i}>{when(a.at)} · {a.action} · {a.target ?? '—'}</p>)}
+        <h4>Recent admin activity</h4>{s.audit.slice(0, 10).map((a, i) => <p key={i}>{when(a.at)} · {a.action} · {a.target ?? '—'}</p>)}
       </section>
     </>}
   </div>;

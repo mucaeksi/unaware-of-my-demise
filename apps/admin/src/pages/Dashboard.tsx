@@ -1,16 +1,31 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import { api, type Health, type SystemStatus } from '../api';
-import { ErrorNotice } from '../App';
+import { api, ApiError, type Health, type SystemStatus } from '../api';
+import { ErrorNotice, type Page } from '../App';
 
 const mb = (n: number): string => `${(n / 1024 / 1024).toFixed(2)} MB`;
 
 interface OpsRun { id: number; ok: boolean; at: string; detail: { key?: string; bytes?: number; error?: string; checks?: { name: string; ok: boolean; detail: string }[] } }
 interface OpsStatus { lastGoodBackupAt: string | null; backups: OpsRun[]; health: OpsRun[] }
 
-function Operations(): ReactNode {
+const COUNT_DEST: Record<string, Page> = {
+  characters: 'Characters',
+  assets: 'Assets',
+  content_objects: 'Patches',
+  content_releases: 'Patches',
+  release_files: 'Patches',
+  battle_audit: 'Monitoring',
+  audit_log: 'Audit',
+  admin_users: 'Audit',
+  players: 'Players',
+  ledger: 'Monitoring',
+  gacha_pulls: 'Banners',
+  banners: 'Banners'
+};
+
+function Operations({ reloadKey }: { reloadKey: number }): ReactNode {
   const [o, setO] = useState<OpsStatus | null>(null);
   const [err, setErr] = useState<unknown>(null);
-  useEffect(() => { api<OpsStatus>('/ops').then(setO).catch(setErr); }, []);
+  useEffect(() => { api<OpsStatus>('/ops').then(setO).catch(setErr); }, [reloadKey]);
   if (err) return <ErrorNotice error={err} />;
   if (!o) return null;
   const h = o.health[0];
@@ -19,8 +34,16 @@ function Operations(): ReactNode {
     <>
       <h3 style={{ margin: '22px 0 8px' }}>Operations (Cloudflare cron Worker)</h3>
       <div className="grid">
-        <div className="card"><h3>Last good backup</h3><div className="big">{ageH === null ? 'none yet' : `${ageH.toFixed(1)} h ago`}</div><div className="mono">{o.lastGoodBackupAt ?? 'the first nightly run is 03:17 UTC'} · age-encrypted in R2 uomd-db-backups</div></div>
-        <div className="card"><h3>Health probe (every 15 min)</h3><div className="big"><span className={`badge ${h?.ok ? 'ok' : 'bad'}`}>{h ? (h.ok ? 'healthy' : 'attention') : 'waiting'}</span></div><div className="mono">{h ? `${h.at} · ${(h.detail.checks ?? []).map((c) => `${c.name}: ${c.ok ? 'ok' : c.detail}`).join(' · ')}` : 'no probe has run yet'}</div></div>
+        <div className="card">
+          <h3>Last good backup</h3>
+          <div className="big">{ageH === null ? 'none yet' : `${ageH.toFixed(1)} h ago`}</div>
+          <div className="mono">{o.lastGoodBackupAt ?? 'the first nightly run is 03:17 UTC'} · age-encrypted in R2 uomd-db-backups</div>
+        </div>
+        <div className="card">
+          <h3>Health probe (every 15 min)</h3>
+          <div className="big"><span className={`badge ${h?.ok ? 'ok' : 'bad'}`}>{h ? (h.ok ? 'healthy' : 'attention') : 'waiting'}</span></div>
+          <div className="mono">{h ? `${h.at} · ${(h.detail.checks ?? []).map((c) => `${c.name}: ${c.ok ? 'ok' : c.detail}`).join(' · ')}` : 'no probe has run yet'}</div>
+        </div>
       </div>
       {o.backups.length > 0 ? (
         <table>
@@ -32,13 +55,29 @@ function Operations(): ReactNode {
   );
 }
 
-export function Dashboard({ health }: { health: Health | null }): ReactNode {
+export function Dashboard({ health, navigate, say }: { health: Health | null; navigate?: (p: Page) => void; say?: (m: string) => void }): ReactNode {
   const [s, setS] = useState<SystemStatus | null>(null);
   const [err, setErr] = useState<unknown>(null);
+  const [probing, setProbing] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
+
   const load = (): void => {
-    api<SystemStatus>('/system').then(setS).catch(setErr);
+    api<SystemStatus>('/system').then((res) => { setS(res); setReloadKey((k) => k + 1); }).catch(setErr);
   };
   useEffect(load, []);
+
+  const runProbe = async (): Promise<void> => {
+    setProbing(true);
+    try {
+      const r = await api<{ ok: boolean; checks: { name: string; ok: boolean; detail: string }[] }>('/monitoring/probe', { method: 'POST', body: '{}' });
+      say?.(`Live probe ${r.ok ? 'healthy' : 'attention'}: ${r.checks.map((c) => `${c.name}=${c.detail}`).join(', ')}`);
+      load();
+    } catch (x) {
+      say?.(x instanceof ApiError ? `${x.code}: ${x.message}` : String((x as Error).message));
+    } finally {
+      setProbing(false);
+    }
+  };
 
   if (err) return <ErrorNotice error={err} />;
   if (!s) return <p>Loading system status…</p>;
@@ -48,6 +87,14 @@ export function Dashboard({ health }: { health: Health | null }): ReactNode {
         <h2>System health</h2>
         <span className={`badge ${s.d1.ok && s.r2.ok ? 'ok' : 'bad'}`}>{s.d1.ok && s.r2.ok ? 'operational' : 'degraded'}</span>
         <button className="btn" onClick={load}>Refresh</button>
+        <button className="btn primary" disabled={probing} onClick={() => void runProbe()}>{probing ? 'Probing…' : 'Run live probe'}</button>
+        {navigate ? (
+          <>
+            <button className="btn" onClick={() => navigate('Monitoring')}>Live Logs &amp; Telemetry</button>
+            <button className="btn" onClick={() => navigate('Catalog')}>Game Content &amp; Catalog</button>
+            <button className="btn" onClick={() => navigate('Assets')}>Art &amp; Audio Studio</button>
+          </>
+        ) : null}
       </header>
       {!s.auth.signing_configured ? <div className="notice">Content signing key is not configured — releases can be drafted but not published.</div> : null}
       <div className="grid">
@@ -65,10 +112,24 @@ export function Dashboard({ health }: { health: Health | null }): ReactNode {
           ))}
         </tbody>
       </table>
-      <Operations />
-      <h3 style={{ margin: '22px 0 8px' }}>Table row counts</h3>
+      <Operations reloadKey={reloadKey} />
+      <h3 style={{ margin: '22px 0 8px' }}>Table row counts (click a card to open module)</h3>
       <div className="grid">
-        {Object.entries(s.d1.counts).map(([k, v]) => (<div className="card" key={k}><h3>{k}</h3><div className="big">{v}</div></div>))}
+        {Object.entries(s.d1.counts).map(([k, v]) => {
+          const target = COUNT_DEST[k];
+          return (
+            <div
+              className="card"
+              key={k}
+              style={target && navigate ? { cursor: 'pointer' } : undefined}
+              onClick={() => target && navigate?.(target)}
+            >
+              <h3>{k}</h3>
+              <div className="big">{v}</div>
+              {target ? <div className="mono">Open {target} →</div> : null}
+            </div>
+          );
+        })}
       </div>
     </>
   );

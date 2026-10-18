@@ -340,7 +340,7 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
       .all();
     return c.json({ gear: results });
   });
-  const ItemPatch = z.object({ expectedVersion: z.number().int().min(1), name_en: z.string().min(1).max(80).optional(), status: z.enum(['active', 'hidden', 'retired']).optional(), xp_value: z.number().int().min(0).max(10_000_000).nullable().optional() }).strict();
+  const ItemPatch = z.object({ expectedVersion: z.number().int().min(1), name_en: z.string().min(1).max(80).optional(), status: z.enum(['active', 'hidden', 'retired']).optional(), xp_value: z.number().int().min(0).max(10_000_000).nullable().optional(), stack_cap: z.number().int().min(1).max(999_999).optional() }).strict();
   app.patch('/admin/api/catalog/items/:id', need('operator'), async (c) => {
     const id = c.req.param('id');
     const p = await body(c, ItemPatch);
@@ -348,12 +348,41 @@ export function registerOps(app: Hono<Ctx>, need: Guard): void {
     const db = c.env.DB;
     const res = await db.batch([
       db
-        .prepare("UPDATE item_defs SET name_en = COALESCE(?3, name_en), status = COALESCE(?4, status), xp_value = CASE WHEN ?5 = 1 THEN ?6 ELSE xp_value END, version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?7 WHERE item_id = ?1 AND version = ?2")
-        .bind(id, p.expectedVersion, p.name_en ?? null, p.status ?? null, p.xp_value !== undefined ? 1 : 0, p.xp_value ?? null, who),
+        .prepare("UPDATE item_defs SET name_en = COALESCE(?3, name_en), status = COALESCE(?4, status), xp_value = CASE WHEN ?5 = 1 THEN ?6 ELSE xp_value END, stack_cap = COALESCE(?7, stack_cap), version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?8 WHERE item_id = ?1 AND version = ?2")
+        .bind(id, p.expectedVersion, p.name_en ?? null, p.status ?? null, p.xp_value !== undefined ? 1 : 0, p.xp_value ?? null, p.stack_cap ?? null, who),
       auditIfChanged(db, who, 'catalog.item', id, { ...p })
     ]);
     if (res[0]?.meta.changes !== 1) throw new HttpError(409, 'version_conflict', 'item not found or changed since you loaded it');
     return c.json({ item_id: id });
+  });
+
+  const ItemCreate = z.object({ item_id: z.string().regex(/^[a-z][a-z0-9_]{1,63}$/), name_en: z.string().min(1).max(80), kind: z.string().min(1).max(40), rarity: z.number().int().min(1).max(5).nullable().default(null), stack_cap: z.number().int().min(1).max(999_999).default(9999), xp_value: z.number().int().min(0).max(10_000_000).nullable().default(null), status: z.enum(['active', 'hidden', 'retired']).default('active') }).strict();
+  app.post('/admin/api/catalog/items', need('operator'), async (c) => {
+    const p = await body(c, ItemCreate);
+    const who = c.get('admin').identity;
+    const db = c.env.DB;
+    const res = await db.batch([
+      db.prepare('INSERT INTO item_defs (item_id, name_en, kind, rarity, stack_cap, xp_value, status, updated_by) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8) ON CONFLICT (item_id) DO NOTHING').bind(p.item_id, p.name_en, p.kind, p.rarity, p.stack_cap, p.xp_value, p.status, who),
+      auditIfChanged(db, who, 'catalog.item.create', p.item_id, { name_en: p.name_en, kind: p.kind })
+    ]);
+    if (res[0]?.meta.changes !== 1) throw new HttpError(409, 'exists', `item ${p.item_id} already exists`);
+    return c.json({ item_id: p.item_id }, 201);
+  });
+
+  const GearPatch = z.object({ expectedVersion: z.number().int().min(1), name_en: z.string().min(1).max(80).optional(), status: z.enum(['active', 'hidden', 'retired']).optional(), level_cap: z.number().int().min(1).max(100).optional() }).strict();
+  app.patch('/admin/api/catalog/gear/:id', need('operator'), async (c) => {
+    const id = c.req.param('id');
+    const p = await body(c, GearPatch);
+    const who = c.get('admin').identity;
+    const db = c.env.DB;
+    const res = await db.batch([
+      db
+        .prepare("UPDATE gear_defs SET name_en = COALESCE(?3, name_en), status = COALESCE(?4, status), level_cap = COALESCE(?5, level_cap), version = version + 1, updated_at = strftime('%Y-%m-%dT%H:%M:%fZ','now'), updated_by = ?6 WHERE gear_id = ?1 AND version = ?2")
+        .bind(id, p.expectedVersion, p.name_en ?? null, p.status ?? null, p.level_cap ?? null, who),
+      auditIfChanged(db, who, 'catalog.gear', id, { ...p })
+    ]);
+    if (res[0]?.meta.changes !== 1) throw new HttpError(409, 'version_conflict', 'gear template not found or changed since you loaded it');
+    return c.json({ gear_id: id });
   });
 
   /** every concrete item / gear id a drop table names must exist and not be retired (pools are resolved at roll time) */

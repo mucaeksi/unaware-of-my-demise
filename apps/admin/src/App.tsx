@@ -14,8 +14,8 @@ import { Players } from './pages/Players';
 import { Releases } from './pages/Releases';
 import { Shop } from './pages/Shop';
 
-const PAGES = ['Dashboard', 'Monitoring', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
-type Page = (typeof PAGES)[number];
+export const PAGES = ['Dashboard', 'Monitoring', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
+export type Page = (typeof PAGES)[number];
 
 export function useToast(): { toast: string | null; say: (m: string) => void } {
   const [toast, setToast] = useState<string | null>(null);
@@ -67,14 +67,17 @@ export function App(): ReactNode {
           </button>
         ))}
         <div className="who">
-          {health ? <span className="badge">{health.environment}</span> : null}
+          <div className="row" style={{ margin: 0, gap: 6 }}>
+            {health ? <span className="badge ok">{health.environment}</span> : null}
+            {me?.role ? <span className="badge info">{me.role}</span> : null}
+          </div>
           <div>{me ? `${me.identity} · ${me.role}` : 'not signed in'}</div>
         </div>
       </nav>
       <main>
         {!me ? <ErrorNotice error={err} /> : null}
-        {me && page === 'Monitoring' ? <Monitoring navigate={setPage} /> : null}
-        {me && page === 'Dashboard' ? <Dashboard health={health} /> : null}
+        {me && page === 'Monitoring' ? <Monitoring navigate={setPage} say={say} /> : null}
+        {me && page === 'Dashboard' ? <Dashboard health={health} navigate={setPage} say={say} /> : null}
         {me && page === 'Development' ? <Development me={me} say={say} /> : null}
         {me && page === 'Players' ? <Players me={me} say={say} /> : null}
         {me && page === 'Banners' ? <Banners me={me} say={say} /> : null}

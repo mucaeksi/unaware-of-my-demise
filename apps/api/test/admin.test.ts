@@ -121,7 +121,7 @@ describe('character management', () => {
 
 describe('asset catalog, system status, audit trail', () => {
   it('registers assets with provenance and upserts by path', async () => {
-    const body = { path: 'art/atlas_fadyme.webp', sha256: 'a'.repeat(64), bytes: 1234, media_type: 'image/webp', kind: 'atlas_image', source: 'git:25dc0b2:game/assets/characters/fadyme/chibi_poses_v003.png', license: 'project-owned', status: 'approved' };
+    const body = { path: 'art/atlas_fadyme.webp', sha256: 'a'.repeat(64), bytes: 1234, media_type: 'image/webp', kind: 'atlas_image', source: 'git:25dc0b2:game/assets/characters/fadyme/chibi_poses_v003.png', license: 'project-owned', status: 'candidate' };
     expect((await admin('/admin/api/assets', { method: 'POST', ...json(body) })).status).toBe(201);
     expect((await admin('/admin/api/assets', { method: 'POST', ...json({ ...body, status: 'retired' }) })).status).toBe(201);
     const list = (await (await admin('/admin/api/assets')).json()) as { assets: { path: string; status: string }[] };
@@ -523,25 +523,36 @@ describe('R13 bounded cursor pagination for admin collections', () => {
     expect(withMfa.status).toBe(200);
     expect(await withMfa.json()).toEqual({ identity: 'owner@example.com', role: 'owner', mfaVerified: true });
 
-    // Operator cannot directly mark an asset approved
+    // Nobody (not even the owner) can mark an asset approved without the R2-verifying /approve route
     const assetPath = `art/r13_prov_${tag()}.webp`;
     const bytes = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8]);
     const buf = await crypto.subtle.digest('SHA-256', bytes);
     const sha256 = [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
     const opApproveAttempt = await admin('/admin/api/assets', send('POST', { path: assetPath, sha256, bytes: bytes.byteLength, media_type: 'image/webp', kind: 'portrait', source: 'model:imagen-3:prompt-hash', license: 'project-owned', status: 'approved' }, OPERATOR));
-    expect([opApproveAttempt.status, await errorOf(opApproveAttempt)]).toEqual([403, 'insufficient_role']);
+    expect([opApproveAttempt.status, await errorOf(opApproveAttempt)]).toEqual([409, 'approve_via_r2']);
+    const ownerApproveAttempt = await admin('/admin/api/assets', send('POST', { path: assetPath, sha256, bytes: bytes.byteLength, media_type: 'image/webp', kind: 'portrait', source: 'model:imagen-3:prompt-hash', license: 'project-owned', status: 'approved' }));
+    expect([ownerApproveAttempt.status, await errorOf(ownerApproveAttempt)]).toEqual([409, 'approve_via_r2']);
 
     // Operator registers candidate; owner cannot approve until R2 object is uploaded
     const cand = await admin('/admin/api/assets', send('POST', { path: assetPath, sha256, bytes: bytes.byteLength, media_type: 'image/webp', kind: 'portrait', source: 'model:imagen-3:prompt-hash', license: 'project-owned', status: 'candidate' }, OPERATOR));
     expect(cand.status).toBe(201);
     const assetList = (await (await admin(`/admin/api/assets?q=${encodeURIComponent(assetPath)}`)).json()) as { assets: { id: number }[] };
     const assetId = assetList.assets[0]!.id;
+    const patchApprove = await admin(`/admin/api/assets/${assetId}`, send('PATCH', { status: 'approved' }));
+    expect([patchApprove.status, await errorOf(patchApprove)]).toEqual([409, 'approve_via_r2']);
+    const relabel = await admin(`/admin/api/assets/${assetId}`, send('PATCH', { license: 'project-owned-v2' }));
+    expect(relabel.status).toBe(200);
+    // metadata edits keep the original author (provenance), the editor is recorded in the audit log
+    expect(((await relabel.json()) as { asset: { created_by: string; license: string } }).asset).toMatchObject({ license: 'project-owned-v2', created_by: expect.stringContaining('operator') });
     const beforeUpload = await admin(`/admin/api/assets/${assetId}/approve`, send('POST', {}));
     expect([beforeUpload.status, await errorOf(beforeUpload)]).toEqual([409, 'object_not_stored']);
 
     // Upload the actual object to R2, then owner approves
     const putObj = await admin(`/admin/api/objects/${sha256}`, { method: 'PUT', body: bytes, headers: { 'Content-Type': 'image/webp' } });
     expect([200, 201]).toContain(putObj.status);
+    const served = await admin(`/admin/api/objects/${sha256}`);
+    expect(served.headers.get('x-content-type-options')).toBe('nosniff');
+    expect(served.headers.get('content-security-policy')).toContain('sandbox');
     const approved = await admin(`/admin/api/assets/${assetId}/approve`, send('POST', {}));
     expect(approved.status).toBe(200);
     expect(await approved.json()).toMatchObject({ id: assetId, path: assetPath, status: 'approved', verifiedSha256: sha256 });

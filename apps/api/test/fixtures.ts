@@ -36,13 +36,18 @@ async function build(json: Record<string, string>, marker: string, binaryPaths: 
 
 export async function baseFiles(): Promise<TestFile[]> {
   const art = JSON.parse(Object.entries(baseJson).find(([k]) => k.endsWith('base/art/art_manifest.json'))?.[1] as string);
+  const presRaw = Object.entries(baseJson).find(([k]) => k.endsWith('base/presentation/presentation.json'))?.[1];
+  const pres = presRaw ? JSON.parse(presRaw) : undefined;
   const bin = new Set<string>([
     ...Object.values<{ image: string }>(art.atlases).map((a) => a.image),
     ...(Object.values(art.backgrounds) as string[]),
     ...Object.values<{ file: string }>(art.music).map((m) => m.file),
     ...(Object.values(art.ui) as string[]),
     ...(Object.values(art.stills ?? {}) as string[]),
-    ...Object.values<{ images: Record<string, string> }>(art.portraits).flatMap((p) => Object.values(p.images))
+    ...Object.values<{ images: Record<string, string> }>(art.portraits).flatMap((p) => Object.values(p.images)),
+    ...Object.values<{ file: string }>(pres?.voices ?? {}).map((v) => v.file),
+    ...Object.values<{ file: string }>(pres?.sounds ?? {}).map((s) => s.file),
+    ...Object.values<{ file: string }>(pres?.videos ?? {}).map((v) => v.file)
   ]);
   return build(baseJson, '/content/base/', [...bin]);
 }

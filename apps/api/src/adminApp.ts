@@ -25,10 +25,31 @@ const CharacterPatch = z
     name_en: z.string().min(1).max(60).optional(),
     status: z.enum(['active', 'hidden', 'retired']).optional(),
     rarity: z.number().int().min(1).max(5).optional(),
+    element: z.string().min(1).max(40).optional(),
+    role: z.string().min(1).max(40).optional(),
+    age: z.number().int().min(0).max(9999).optional(),
+    acquisition: z.string().min(1).max(40).optional(),
     base_hp: z.number().positive().max(100000).optional(),
     base_atk: z.number().min(0).max(100000).optional(),
     base_def: z.number().min(0).max(100000).optional(),
     base_spd: z.number().positive().max(1000).optional()
+  })
+  .strict();
+const CharacterCreate = z
+  .object({
+    id: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/),
+    name_en: z.string().min(1).max(60),
+    rarity: z.number().int().min(1).max(5).default(5),
+    element: z.string().min(1).max(40).default('Veil'),
+    role: z.string().min(1).max(40).default('dps'),
+    // no default: a character's (adult) age is canon/provenance, never something the API may invent
+    age: z.number().int().min(0).max(9999),
+    acquisition: z.string().min(1).max(40).default('gacha'),
+    base_hp: z.number().positive().max(100000),
+    base_atk: z.number().min(0).max(100000),
+    base_def: z.number().min(0).max(100000),
+    base_spd: z.number().positive().max(1000),
+    status: z.enum(['active', 'hidden', 'retired']).default('active')
   })
   .strict();
 const AssetBody = z
@@ -41,6 +62,14 @@ const AssetBody = z
     source: z.string().min(3).max(300),
     license: z.string().min(2).max(100).default('project-owned'),
     status: z.enum(['candidate', 'approved', 'retired']).default('candidate')
+  })
+  .strict();
+const AssetPatch = z
+  .object({
+    kind: z.string().min(2).max(40).optional(),
+    source: z.string().min(3).max(300).optional(),
+    license: z.string().min(2).max(100).optional(),
+    status: z.enum(['candidate', 'approved', 'retired']).optional()
   })
   .strict();
 const DraftBody = z
@@ -189,6 +218,24 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     return c.json(row);
   });
 
+  app.post('/admin/api/characters', need('operator'), async (c) => {
+    const ch = await json(c, CharacterCreate);
+    const who = c.get('admin').identity;
+    const res = await c.env.DB.batch([
+      c.env.DB
+        .prepare(
+          `INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd, status, updated_by)
+           VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)
+           ON CONFLICT (id) DO NOTHING`
+        )
+        .bind(ch.id, ch.name_en, ch.rarity, ch.element, ch.role, ch.age, ch.acquisition, ch.base_hp, ch.base_atk, ch.base_def, ch.base_spd, ch.status, who),
+      auditIfChanged(c.env.DB, who, 'character.create', ch.id, { name_en: ch.name_en, rarity: ch.rarity, role: ch.role })
+    ]);
+    if ((res[0]?.meta.changes ?? 0) !== 1) throw new HttpError(409, 'exists', `character ${ch.id} already exists`);
+    const row = await c.env.DB.prepare('SELECT * FROM characters WHERE id = ?1').bind(ch.id).first();
+    return c.json(row, 201);
+  });
+
   // ------------------------------------------------------------------ asset catalog
   app.get('/admin/api/assets', need('viewer'), async (c) => {
     const kind = filter(c.req.query('kind'), z.string().min(2).max(40), 'kind');
@@ -220,10 +267,9 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
 
   app.post('/admin/api/assets', need('operator'), async (c) => {
     const a = await json(c, AssetBody);
-    const { identity: who, role } = c.get('admin');
-    if (a.status === 'approved' && !atLeast(role, 'owner')) {
-      throw new AuthError(403, 'insufficient_role', 'only an owner may mark an asset approved');
-    }
+    const who = c.get('admin').identity;
+    // approval is only granted by POST /assets/:id/approve, which verifies the exact R2 object first
+    if (a.status === 'approved') throw new HttpError(409, 'approve_via_r2', 'register the asset as a candidate, upload its object, then approve it');
     await c.env.DB.batch([
       c.env.DB
         .prepare(
@@ -234,6 +280,27 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
       auditStatement(c.env.DB, who, 'asset.upsert', a.path, { sha256: a.sha256, status: a.status })
     ]);
     return c.json({ ok: true, path: a.path }, 201);
+  });
+
+  app.patch('/admin/api/assets/:id{[0-9]{1,15}}', need('operator'), async (c) => {
+    const id = Number(c.req.param('id'));
+    const patch = await json(c, AssetPatch);
+    const keys = Object.keys(patch) as (keyof typeof patch)[];
+    if (keys.length === 0) throw new HttpError(400, 'no_changes', 'nothing to update');
+    const who = c.get('admin').identity;
+    const existing = await c.env.DB.prepare('SELECT id, path, status FROM assets WHERE id = ?1').bind(id).first<{ id: number; path: string; status: string }>();
+    if (!existing) throw new HttpError(404, 'no_such_asset', 'asset not found');
+    if (patch.status === 'approved' && existing.status !== 'approved') {
+      throw new HttpError(409, 'approve_via_r2', 'use POST /admin/api/assets/:id/approve so the stored R2 object is verified');
+    }
+    // keys come from the strict zod schema above, never from the request text; created_by keeps the original author
+    const sets = keys.map((k, i) => `${k} = ?${i + 2}`).join(', ');
+    await c.env.DB.batch([
+      c.env.DB.prepare(`UPDATE assets SET ${sets} WHERE id = ?1`).bind(id, ...keys.map((k) => patch[k] as string)),
+      auditStatement(c.env.DB, who, 'asset.update', existing.path, { id, ...patch })
+    ]);
+    const updated = await c.env.DB.prepare('SELECT * FROM assets WHERE id = ?1').bind(id).first();
+    return c.json({ asset: updated });
   });
 
   app.post('/admin/api/assets/:id{[0-9]{1,15}}/approve', need('owner'), async (c) => {
@@ -253,7 +320,7 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     }
     const who = c.get('admin').identity;
     await c.env.DB.batch([
-      c.env.DB.prepare("UPDATE assets SET status = 'approved', created_by = ?2 WHERE id = ?1").bind(id, who),
+      c.env.DB.prepare("UPDATE assets SET status = 'approved' WHERE id = ?1").bind(id),
       auditStatement(c.env.DB, who, 'asset.approve', asset.path, { id, sha256: asset.sha256, bytes: asset.bytes, media_type: asset.media_type, source: asset.source, license: asset.license })
     ]);
     return c.json({ id, path: asset.path, status: 'approved', verifiedSha256: asset.sha256, verifiedBytes: asset.bytes });
@@ -331,6 +398,22 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     return c.json({ ok: true });
   });
 
+  app.get('/admin/api/objects/:sha256', need('viewer'), async (c) => {
+    const sha = Sha.safeParse(c.req.param('sha256'));
+    if (!sha.success) throw new HttpError(400, 'bad_hash', 'sha256 must be 64 lowercase hex characters');
+    const obj = await c.env.CONTENT.get(ContentStore.objectKey(sha.data));
+    if (!obj) throw new HttpError(404, 'no_such_object', 'object not stored in R2');
+    // preview only: never let stored bytes run as a document on the admin origin
+    return new Response(obj.body, {
+      headers: {
+        'Content-Type': obj.httpMetadata?.contentType ?? 'application/octet-stream',
+        'X-Content-Type-Options': 'nosniff',
+        'Content-Security-Policy': "default-src 'none'; sandbox",
+        'Cache-Control': 'private, max-age=300'
+      }
+    });
+  });
+
   app.put('/admin/api/objects/:sha256', need('operator'), async (c) => {
     const sha = Sha.safeParse(c.req.param('sha256'));
     if (!sha.success) throw new HttpError(400, 'bad_hash', 'sha256 must be 64 lowercase hex characters');
@@ -351,7 +434,9 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
 
   app.post('/admin/api/releases/:id/publish', need('operator'), async (c) => {
     const who = c.get('admin');
-    await requireGameRuntime(c.env, await store(c.env).getRelease(c.req.param('id')));
+    const rel = await store(c.env).getRelease(c.req.param('id'));
+    if (rel?.channel === 'production' && who.role !== 'owner') throw new HttpError(403, 'owner_required', 'publishing to production needs the owner role');
+    await requireGameRuntime(c.env, rel);
     const signer = await loadSigner(c.env.CONTENT_SIGNING_KEY, c.env.CONTENT_SIGNING_KID);
     const row = await store(c.env).publish(c.req.param('id'), who.identity, who.role === 'owner' ? 'owner' : 'operator', signer);
     return c.json({ id: row.id, generation: row.generation, channel: row.channel, state: row.state, published_at: row.published_at });
@@ -364,6 +449,8 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
       if (!channel.success) throw new HttpError(400, 'bad_channel', 'unknown channel');
       const body = await json(c, Source);
       const who = c.get('admin');
+      // same bar as publish: only the owner moves the production pointer (rollback) or kills it
+      if (channel.data === 'production' && who.role !== 'owner') throw new HttpError(403, 'owner_required', `${mode} on production needs the owner role`);
       if (mode === 'rollback') await requireGameRuntime(c.env, await store(c.env).getRelease(body.releaseId));
       const signer = await loadSigner(c.env.CONTENT_SIGNING_KEY, c.env.CONTENT_SIGNING_KID);
       const row = await store(c.env).republish({ channel: channel.data, sourceId: body.releaseId, mode, actor: who.identity, role: who.role === 'owner' ? 'owner' : 'operator', signer });
