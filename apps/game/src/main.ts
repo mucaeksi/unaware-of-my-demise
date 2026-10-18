@@ -41,6 +41,17 @@ function fatal(message: string): void {
   }
 }
 
+// #boot sits above the stage; once marked done it must leave the screen and the accessibility tree even when the
+// CSS fade never runs (paused/throttled WebViews freeze the transition and left the title over every scene)
+const bootEl = document.getElementById('boot');
+if (bootEl) {
+  new MutationObserver((_, obs) => {
+    if (!bootEl.classList.contains('done')) return;
+    obs.disconnect();
+    setTimeout(() => (bootEl.style.display = 'none'), 700);
+  }).observe(bootEl, { attributes: true, attributeFilter: ['class'] });
+}
+
 try {
   const qp = qualityProfile();
   const game = new Phaser.Game({
@@ -50,12 +61,13 @@ try {
     width: REF_W,
     height: REF_H,
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-    render: { antialias: qp.tier !== 'low', powerPreference: qp.tier === 'low' ? 'low-power' : 'high-performance', roundPixels: false },
+    render: { antialias: qp.tier !== 'low', powerPreference: qp.tier === 'low' ? 'low-power' : 'high-performance', roundPixels: false, resolution: qp.textResolution },
     fps: { target: qp.targetFps },
     input: { touch: { capture: true }, activePointers: 2 },
     banner: false,
     scene: [BootScene, ContentPanelScene, SplashScene, StudioScene, TitleScene, PrologueScene, FinishScene, ChaptersScene, StoryScene, BattleScene, HomeScene, SummonScene, RosterScene, RecruitScene, LibraryScene, MailScene, ShopScene, AccountScene, OperationsScene, PurchasesScene, CharacterScene, GearScene, TasksScene, TeamScene, PatchBarScene]
   });
+  game.ready.catch((e: unknown) => fatal(`This device cannot run the game: no WebGL, WebGPU or canvas renderer (${e instanceof Error ? e.message : String(e)})`));
   const contextRecovery = installContextRecovery(game, () => Services.refreshArt().then(() => undefined));
   // test/debug hook (read-only handles; no privileged state is exposed)
   (window as unknown as { __UOMD__: unknown }).__UOMD__ = { game, services: Services, playNode, contextRecovery };

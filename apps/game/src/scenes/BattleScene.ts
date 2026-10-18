@@ -60,6 +60,8 @@ export class BattleScene extends Phaser.Scene {
   private chips: Phaser.GameObjects.Container[] = [];
   private chipLayer!: Phaser.GameObjects.Container;
   private skillLayer: Phaser.GameObjects.Container | null = null;
+  private descBg: Phaser.GameObjects.Graphics | null = null;
+  private hintBg: Phaser.GameObjects.Graphics | null = null;
   private descText!: Phaser.GameObjects.Text;
   private hintText!: Phaser.GameObjects.Text;
   private telegraphText!: Phaser.GameObjects.Text;
@@ -87,6 +89,8 @@ export class BattleScene extends Phaser.Scene {
     this.lunged = null;
     this.chips = [];
     this.skillLayer = null;
+    this.descBg = null;
+    this.hintBg = null;
     this.pendingResolve = null;
     this.bannerBox = null;
     this.menuLayer = null;
@@ -113,12 +117,12 @@ export class BattleScene extends Phaser.Scene {
       // breakable objectives are combatants too: their art keys come from the battle itself
       const artKeys = this.battle.combatants.map((c) => defs.get(c.def.unit_id)?.art_key ?? c.def.art_key);
       const playerUnitIds = this.battle.combatants.filter((c) => c.side === 'player').map((c) => c.def.unit_id);
-      const neutralEmotions = new Map(playerUnitIds.map((id) => [id, new Set(['neutral'])]));
+      const cutInEmotions = new Map(playerUnitIds.map((id) => [id, new Set(['neutral', 'composed', 'determined', 'protective'])]));
       const musicCue = this.encounter.music_cue ?? 'bgm_battle_field';
       await Promise.all([
         art.loadBackground(this, this.encounter.location_id),
         art.loadUnits(this, artKeys),
-        art.loadPortraits(this, playerUnitIds, neutralEmotions).catch(() => undefined),
+        art.loadPortraits(this, playerUnitIds, cutInEmotions).catch(() => undefined),
         art.loadMusic(this, musicCue).catch(() => undefined)
       ]);
     } catch (e) {
@@ -131,10 +135,19 @@ export class BattleScene extends Phaser.Scene {
     this.buildWorld();
     this.buildHud();
     sceneFadeIn(this, 1200);
-    const battleMusic = art.music(this.encounter.music_cue ?? 'bgm_battle_field');
-    if (battleMusic) {
-      Music.play(this.cache.audio, battleMusic.key, battleMusic.loopStart, battleMusic.duration, 1.2);
-    }
+    const playBattleMusic = (fade = 1.2): void => {
+      const m = art.music(this.encounter.music_cue ?? 'bgm_battle_field');
+      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, fade);
+    };
+    playBattleMusic(1.2);
+    const onPointerResumeAudio = (): void => {
+      Sfx.resume();
+      playBattleMusic(0.8);
+    };
+    this.input.on('pointerdown', onPointerResumeAudio);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.input.off('pointerdown', onPointerResumeAudio);
+    });
     await this.wait(650);
     for (const event of this.battle.log) if (event.type === 'phase_change') await this.phaseStory(event.unit, event.phase);
     if (this.dead) return;
@@ -379,10 +392,43 @@ export class BattleScene extends Phaser.Scene {
     new Button(this, edge, btnY, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
 
     // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
-    this.descText = txt(this, REF_W / 2, spec.descY - insets.bottom, '', { fontSize: '24px', color: T.text, align: 'center', lineSpacing: 4, wordWrap: { width: Math.min(1080, 1480 - insets.left - insets.right) }, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5).setDepth(DEPTH.hud);
-    this.hintText = txt(this, 830, 54 + insets.top, '', { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.hintBg = this.add.graphics().setDepth(DEPTH.hud - 1);
+    this.descBg = this.add.graphics().setDepth(DEPTH.hud - 1);
+    this.descText = txt(this, REF_W / 2, spec.descY - 18 - insets.bottom, '', { fontSize: '21px', color: T.text, align: 'center', lineSpacing: 3, wordWrap: { width: Math.min(1360, 1560 - insets.left - insets.right) }, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.hintText = txt(this, REF_W / 2, 54 + insets.top, '', { fontFamily: F.display, fontSize: '25px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
     this.telegraphText = txt(this, REF_W - 60 - insets.right, 136 + insets.top, '', { fontFamily: F.display, fontSize: '26px', fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.refreshHud();
+  }
+
+  private updateHudPills(): void {
+    if (this.hintBg) {
+      this.hintBg.clear();
+      const ht = this.hintText?.text?.trim();
+      if (ht) {
+        const w = Math.max(280, Math.min(720, this.hintText.width + 56));
+        const h = 44;
+        const x = this.hintText.x - w / 2;
+        const y = this.hintText.y - h / 2;
+        this.hintBg.fillStyle(0x0c0714, 0.82);
+        this.hintBg.lineStyle(1.5, C.gold, 0.52);
+        this.hintBg.fillRoundedRect(x, y, w, h, 22);
+        this.hintBg.strokeRoundedRect(x, y, w, h, 22);
+      }
+    }
+    if (this.descBg) {
+      this.descBg.clear();
+      const dt = this.descText?.text?.trim();
+      if (dt) {
+        const w = Math.max(420, Math.min(1440, this.descText.width + 48));
+        const h = Math.max(38, this.descText.height + 14);
+        const x = this.descText.x - w / 2;
+        const y = this.descText.y - h / 2;
+        this.descBg.fillStyle(0x0c0714, 0.78);
+        this.descBg.lineStyle(1, C.gold, 0.35);
+        this.descBg.fillRoundedRect(x, y, w, h, Math.min(20, Math.floor(h / 2)));
+        this.descBg.strokeRoundedRect(x, y, w, h, Math.min(20, Math.floor(h / 2)));
+      }
+    }
   }
 
   private refreshHud(): void {
@@ -577,7 +623,8 @@ export class BattleScene extends Phaser.Scene {
     this.hintText.setText(turnBanner);
     announce(turnBanner);
     this.descText.setText(passive ? `Passive — ${passive.name_en}: ${passive.description_en}` : '');
-    this.descText.setColor(T.dim);
+    this.descText.setColor('#dfd6ec');
+    this.updateHudPills();
     prompt.options.forEach((o, i) => {
       const label = o.type === 'ultimate' ? 'ULTIMATE' : o.type === 'basic' ? 'BASIC' : 'SKILL';
       const sub = !o.available ? (o.reason === 'cooldown' ? `Cooldown ${o.cooldownLeft}` : `Focus ${actor.focus}/${o.def.focus_cost}`) : label;
@@ -595,6 +642,7 @@ export class BattleScene extends Phaser.Scene {
     for (const v of this.views.values()) v.setSelectable(false);
     this.hintText.setText('');
     this.descText.setText('');
+    this.updateHudPills();
   }
 
   private onSkillTapped(o: SkillOption, _b: Button): void {
@@ -616,6 +664,7 @@ export class BattleScene extends Phaser.Scene {
     } else {
       this.hintText.setText('TAP AGAIN TO CAST');
     }
+    this.updateHudPills();
   }
 
   private onUnitTapped(v: UnitView): void {
@@ -782,7 +831,14 @@ export class BattleScene extends Phaser.Scene {
           }
           let portraitKey: string | null = null;
           try {
-            const pk = Services.ready().art.portrait(actorUnit.def.unit_id, 'neutral');
+            const artLib = Services.ready().art;
+            const preferredEmotion =
+              actorUnit.def.unit_id === 'fadyme'
+                ? 'determined'
+                : actorUnit.def.unit_id === 'mahmut'
+                  ? 'protective'
+                  : 'neutral';
+            const pk = artLib.portrait(actorUnit.def.unit_id, preferredEmotion) ?? artLib.portrait(actorUnit.def.unit_id, 'composed');
             if (pk && this.textures.exists(pk)) portraitKey = pk;
           } catch {
             /* fallback to chibi sprite frame */
@@ -794,6 +850,7 @@ export class BattleScene extends Phaser.Scene {
             element,
             side: v.side,
             portraitKey,
+            flipPortrait: v.side === 'player' ? actorUnit.def.unit_id === 'fadyme' : actorUnit.def.unit_id !== 'fadyme',
             spriteKey: poseSpr.texture.key,
             spriteFrame: String(poseSpr.frame.name),
           });
@@ -1045,9 +1102,9 @@ export class BattleScene extends Phaser.Scene {
     const dim = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x07040c, 0).setDepth(DEPTH.modal).setInteractive();
     this.tweens.add({ targets: dim, alpha: won ? 0.14 : 0.42, duration: 360 });
 
-    const cardX = REF_W / 2;
+    const cardX = won ? 1170 : REF_W / 2;
     const cardY = 536;
-    const cardW = 980;
+    const cardW = won ? 920 : 980;
     const cardH = 560;
     const box = panel(this, cardX, cardY, cardW, cardH, won ? 'hot' : 'danger').setDepth(DEPTH.modal + 1);
 
@@ -1152,9 +1209,9 @@ export class BattleScene extends Phaser.Scene {
     }
 
     const btnY = 760;
-    const primary = new Button(this, tutorial && won ? REF_W / 2 : REF_W / 2 - 250, btnY, {
+    const primary = new Button(this, tutorial && won ? cardX : cardX - 230, btnY, {
       label: won ? 'CONTINUE' : 'RETRY',
-      w: 440,
+      w: 410,
       h: 96,
       fontSize: 30,
       variant: won ? 'hot' : 'normal',
@@ -1169,9 +1226,9 @@ export class BattleScene extends Phaser.Scene {
     }).setDepth(DEPTH.modal + 2);
     this.primaryBtn = primary;
     if (!(tutorial && won)) {
-      new Button(this, REF_W / 2 + 250, btnY, {
+      new Button(this, cardX + 230, btnY, {
         label: tutorial ? 'BACK TO STORY' : 'LEAVE',
-        w: 440,
+        w: 410,
         h: 96,
         fontSize: 30,
         onClick: () => this.cfg.onBack(this)

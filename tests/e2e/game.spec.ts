@@ -9,11 +9,13 @@ test.describe.configure({ mode: 'serial' });
 test('boots to a rendered title screen with embedded base content and no errors', async ({ page }, info) => {
   const problems = await openGame(page);
   const gl = await page.evaluate(() => {
-    const c = document.querySelector('canvas') as HTMLCanvasElement;
-    const g = window as unknown as { __UOMD__: { game: { renderer: { type: number } } } };
-    return { renderer: g.__UOMD__.game.renderer.type, w: c.width, h: c.height };
+    const g = window as unknown as { __UOMD__: { game: { renderer: { type: number; name: string; pixi: { screen: { width: number; height: number } } } } } };
+    const r = g.__UOMD__.game.renderer;
+    return { renderer: r.type, name: r.name, w: r.pixi.screen.width, h: r.pixi.screen.height };
   });
-  expect(gl.renderer).toBe(2); // Phaser.WEBGL
+  // a real PIXI v8 GPU renderer (the canvas backing store scales with the device, the stage stays 1920x1080)
+  expect(gl.renderer).toBe(2);
+  expect(['webgl', 'webgpu']).toContain(gl.name);
   expect(gl.w).toBe(REF_W);
   expect(gl.h).toBe(REF_H);
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-01-title.png` });

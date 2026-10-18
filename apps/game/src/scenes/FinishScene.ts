@@ -56,8 +56,13 @@ export class FinishScene extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x0a0610);
 
     // Play the Main Theme while the patch downloads
-    const m = art.music(MAIN_THEME_CUE);
-    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 2.0);
+    const playTheme = (): void => {
+      Music.resume();
+      const m = art.music(MAIN_THEME_CUE);
+      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 2.0);
+    };
+    playTheme();
+    this.input.on('pointerdown', playTheme);
 
     try {
       const bg = this.add.image(REF_W / 2, REF_H / 2, art.background('forest_whispering_ash')).setAlpha(0.38);
@@ -67,7 +72,7 @@ export class FinishScene extends Phaser.Scene {
     }
 
     // Center Patch Box
-    panel(this, REF_W / 2, 480, 1460, 560, 'hot');
+    panel(this, REF_W / 2, 488, 1460, 584, 'hot');
     this.head = title(this, REF_W / 2, 265, '', 50, T.gold);
     this.note = txt(this, REF_W / 2, 340, '', {
       fontSize: '34px',
@@ -76,8 +81,8 @@ export class FinishScene extends Phaser.Scene {
       wordWrap: { width: 1200 },
       lineSpacing: 8
     }).setOrigin(0.5, 0);
-    this.bar = new Bar(this, REF_W / 2, 520, 1080, 28, () => C.goldHi);
-    this.figures = txt(this, REF_W / 2, 560, '', { fontSize: '28px', color: T.dim }).setOrigin(0.5, 0);
+    this.bar = new Bar(this, REF_W / 2, 516, 1080, 28, () => C.goldHi);
+    this.figures = txt(this, REF_W / 2, 558, '', { fontSize: '28px', color: T.dim }).setOrigin(0.5, 0);
     this.action = new Button(this, REF_W / 2, 700, {
       label: S.finish.restart,
       w: 700,
@@ -91,22 +96,22 @@ export class FinishScene extends Phaser.Scene {
     // Rotating random game quotes beneath the Patch Box
     const quoteRule = this.add.graphics();
     quoteRule.lineStyle(1.5, C.gold, 0.45);
-    quoteRule.lineBetween(REF_W / 2 - 420, 800, REF_W / 2 - 18, 800);
-    quoteRule.lineBetween(REF_W / 2 + 18, 800, REF_W / 2 + 420, 800);
+    quoteRule.lineBetween(REF_W / 2 - 420, 816, REF_W / 2 - 18, 816);
+    quoteRule.lineBetween(REF_W / 2 + 18, 816, REF_W / 2 + 420, 816);
     quoteRule.fillStyle(C.goldHi, 0.85);
     quoteRule.fillPoints(
       [
-        new Phaser.Math.Vector2(REF_W / 2, 793),
-        new Phaser.Math.Vector2(REF_W / 2 + 7, 800),
-        new Phaser.Math.Vector2(REF_W / 2, 807),
-        new Phaser.Math.Vector2(REF_W / 2 - 7, 800)
+        new Phaser.Math.Vector2(REF_W / 2, 809),
+        new Phaser.Math.Vector2(REF_W / 2 + 7, 816),
+        new Phaser.Math.Vector2(REF_W / 2, 823),
+        new Phaser.Math.Vector2(REF_W / 2 - 7, 816)
       ],
       true
     );
 
     this.quoteIdx = Math.floor(Math.random() * RANDOM_GAME_QUOTES.length);
     const firstQ = RANDOM_GAME_QUOTES[this.quoteIdx]!;
-    this.quoteText = txt(this, REF_W / 2, 830, firstQ.quote, {
+    this.quoteText = txt(this, REF_W / 2, 842, firstQ.quote, {
       fontFamily: F.body,
       fontSize: '36px',
       fontStyle: 'italic 500',
@@ -116,7 +121,7 @@ export class FinishScene extends Phaser.Scene {
       stroke: '#05030a',
       strokeThickness: 4
     }).setOrigin(0.5, 0);
-    this.quoteSpeaker = txt(this, REF_W / 2, 920, `—  ${firstQ.speaker}`, {
+    this.quoteSpeaker = txt(this, REF_W / 2, 932, `—  ${firstQ.speaker}`, {
       fontFamily: F.display,
       fontSize: '22px',
       fontStyle: '600',
@@ -165,6 +170,9 @@ export class FinishScene extends Phaser.Scene {
 
   private render(s: PatchStatus): void {
     if (this.restarting || !this.head.active) return;
+    const isPreviewHold =
+      typeof window !== 'undefined' &&
+      new URLSearchParams(window.location.search).get('preview_scene') === 'finish_wait';
     if (s.kind === 'ready') {
       if (this.shown !== 'ready') {
         this.shown = 'ready';
@@ -173,7 +181,7 @@ export class FinishScene extends Phaser.Scene {
         this.bar.set(1);
         this.bar.setVisible(true);
         this.figures.setText('100 %   ·   READY');
-        if (isInteractiveBrowser()) {
+        if (isInteractiveBrowser() && !isPreviewHold) {
           this.action.setVisible(true).setLabel(S.finish.restarting).setEnabled(false);
           void this.triggerAutoRestart();
         } else {

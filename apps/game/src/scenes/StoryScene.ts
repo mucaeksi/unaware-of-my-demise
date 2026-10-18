@@ -8,7 +8,7 @@ import { Sfx } from '../audio/Sfx';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
 import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cutscene';
-import { isInteractiveBrowser } from '../entry/state';
+import { isDevServer } from '../entry/state';
 import { clearStoryCheckpoint, loadFlowCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
@@ -156,16 +156,19 @@ export class StoryScene extends Phaser.Scene {
         set.add(em);
       };
       const locations = new Set([this.data0.location_id]);
+      const musicCues = new Set<string>(this.sceneMusicCuesFor(this.data0.scene_id));
       for (const c of this.data0.commands) {
         if (c.op === 'background') locations.add(c.location_id);
         if (c.op === 'show') addEmotion(c.character);
         if (c.op === 'say') addEmotion(c.speaker, c.emotion ?? 'composed');
+        if (c.op === 'music' && c.cue_id && c.cue_id !== 'stop') musicCues.add(c.cue_id);
       }
-      // Always load all character emotion portraits so both speaker and listener react dynamically
+      // Always load all character emotion portraits and scene music cues so both speaker/listener and soundtrack react dynamically
       await Promise.all([
         ...[...locations].map((id) => art.loadBackground(this, id)),
         ...(this.data0.illustration_id ? [art.loadStills(this, [this.data0.illustration_id])] : []),
-        art.loadPortraits(this, [...chars], charEmotions)
+        art.loadPortraits(this, [...chars], charEmotions),
+        ...[...musicCues].map((cue) => art.loadMusic(this, cue).catch(() => undefined))
       ]);
     } catch (e) {
       if (!current()) return;
@@ -248,16 +251,16 @@ export class StoryScene extends Phaser.Scene {
     this.input.keyboard?.on('keydown-ENTER', () => this.advance());
 
     const insets = safeInsets(this);
-    const panelBg = panel(this, 0, 0, 1680, 264, 'normal');
+    const panelBg = panel(this, 0, 0, 1680, 248, 'normal');
     // Light Novel ornamental inner rule inside the reader box
     const lnFrame = this.add.graphics();
     lnFrame.lineStyle(1, C.gold, 0.32);
-    lnFrame.lineBetween(-790, -104, 790, -104);
-    lnFrame.lineBetween(-790, 104, 790, 104);
+    lnFrame.lineBetween(-790, -96, 790, -96);
+    lnFrame.lineBetween(-790, 96, 790, 96);
 
-    this.lineShimmer = this.add.rectangle(-640, -104, 240, 2, C.gold, 0).setOrigin(0.5);
-    this.voiceSyncTrack = this.add.rectangle(0, 104, 760, 2, 0xc9b6e4, 0.16).setOrigin(0.5);
-    this.voiceSyncFill = this.add.rectangle(-380, 104, 0, 2, C.gold, 0.88).setOrigin(0, 0.5);
+    this.lineShimmer = this.add.rectangle(-640, -96, 240, 2, C.gold, 0).setOrigin(0.5);
+    this.voiceSyncTrack = this.add.rectangle(0, 96, 760, 2, 0xc9b6e4, 0.16).setOrigin(0.5);
+    this.voiceSyncFill = this.add.rectangle(-380, 96, 0, 2, C.gold, 0.88).setOrigin(0, 0.5);
 
     this.nameText = txt(this, 0, 0, '', {
       fontFamily: F.display,
@@ -272,7 +275,7 @@ export class StoryScene extends Phaser.Scene {
     const plateBg = panel(this, 0, 0, 490, 68, 'hot');
     this.namePlate = this.add.container(0, 0, [plateBg, this.nameText]).setDepth(DEPTH.hud + 2).setVisible(false);
 
-    this.actionBadge = txt(this, 0, -96, '', {
+    this.actionBadge = txt(this, 0, -88, '', {
       fontFamily: F.display,
       fontSize: '20px',
       fontStyle: '600',
@@ -284,7 +287,7 @@ export class StoryScene extends Phaser.Scene {
       .setLetterSpacing(4)
       .setAlpha(0.88);
 
-    this.bodyText = txt(this, -780, -68, '', {
+    this.bodyText = txt(this, -780, -64, '', {
       fontFamily: F.body,
       fontSize: '41px',
       color: T.text,
@@ -293,9 +296,9 @@ export class StoryScene extends Phaser.Scene {
       stroke: '#07040c',
       strokeThickness: 3.5
     }).setShadow(0, 4, '#050208', 10, true, true);
-    this.caret = txt(this, 780, 88, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
+    this.caret = txt(this, 780, 78, '▼', { fontSize: '32px', color: T.gold }).setOrigin(1, 0.5).setVisible(false);
     this.box = this.add
-      .container(REF_W / 2, 902 - insets.bottom, [
+      .container(REF_W / 2, 886 - insets.bottom, [
         panelBg,
         lnFrame,
         this.lineShimmer,
@@ -311,11 +314,13 @@ export class StoryScene extends Phaser.Scene {
     const btnW = 148;
     const btnH = 62;
     const btnGap = 14;
-    const skipX = REF_W - 104 - insets.right;
-    const autoX = skipX - (btnW + btnGap);
+    const showSkip = !this.cutscene || isDevServer();
+    const rightMostX = REF_W - 104 - insets.right;
+    const skipX = rightMostX;
+    const autoX = showSkip ? skipX - (btnW + btnGap) : rightMostX;
     const logX = autoX - (btnW + btnGap);
     const voiceX = logX - (btnW + btnGap);
-    if (!this.cutscene || isInteractiveBrowser()) {
+    if (showSkip) {
       this.skipBtn = new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
     }
     this.autoBtn = new Button(this, autoX, topBtnY, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
@@ -336,17 +341,39 @@ export class StoryScene extends Phaser.Scene {
       }
     };
     this.game.events.on('webgl:contextlost', onContextLost);
+    const onPointerResumeAudio = (): void => {
+      Sfx.resume();
+      if (this.activeMusicCue) this.playSceneMusic(this.activeMusicCue, 0.8);
+    };
+    this.input.on('pointerdown', onPointerResumeAudio);
     this.events.once('shutdown', () => {
       this.game.events.off('webgl:contextlost', onContextLost);
+      this.input.off('pointerdown', onPointerResumeAudio);
     });
   }
 
+  private activeMusicCue = '';
+
+  private sceneMusicCuesFor(sceneId: string): string[] {
+    switch (sceneId) {
+      case 'tutorial_t1_before':
+        return ['bgm_ch1_ash_forest_calm', 'bgm_ch1_ash_forest_uneasy'];
+      case 'tutorial_t1_after':
+        return ['bgm_ch1_ash_forest_calm', 'bgm_fadyme_theme'];
+      case 'tutorial_t2_before':
+      case 'tutorial_t3_before':
+        return ['bgm_ch1_ash_forest_uneasy', 'bgm_ch1_ash_forest_chaotic'];
+      default:
+        return ['bgm_fadyme_theme'];
+    }
+  }
+
   private defaultMusicCueForScene(): string {
-    if (this.data0.scene_id === 'tutorial_t2_before') return 'bgm_ch1_ash_forest_uneasy';
-    return 'bgm_fadyme_theme';
+    return this.sceneMusicCuesFor(this.data0.scene_id)[0] ?? 'bgm_fadyme_theme';
   }
 
   private playSceneMusic(cueId: string, fade = 1.6): void {
+    this.activeMusicCue = cueId;
     const { art } = Services.ready();
     const m = art.music(cueId);
     if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, fade);
@@ -470,7 +497,7 @@ export class StoryScene extends Phaser.Scene {
   // ------------------------------------------------------------------ actors & bust choreography
 
   private targetBustHeight(character: string): number {
-    return character === 'fadyme' ? 980 : 1040;
+    return character === 'fadyme' ? 1150 : 1040;
   }
 
   private activateCg(immediate = false): void {
@@ -780,6 +807,7 @@ export class StoryScene extends Phaser.Scene {
         if (f) { f.tiltDeg = -2.2; }
         break;
       case 'tutorial_t1_after_006':
+        this.playSceneMusic('bgm_fadyme_theme', 1.8);
         if (m) { m.offsetX = 125; m.tiltDeg = 3.0; }
         if (f) { f.offsetX = -85; f.tiltDeg = -1.6; }
         stageCue = 'HE BRUSHES A TORN ASH LEAF FROM HER SHOULDER';
@@ -803,6 +831,7 @@ export class StoryScene extends Phaser.Scene {
       case 'tutorial_t2_before_011':
       case 'tutorial_t2_before_012':
       case 'tutorial_t2_before_013':
+        this.playSceneMusic('bgm_ch1_ash_forest_chaotic', 1.4);
         if (m) { m.offsetX = 95; m.offsetY = -10; m.scaleMult = 1.05; m.tiltDeg = 2.2; }
         if (f) { f.offsetX = -80; f.offsetY = -8; f.scaleMult = 1.04; f.tiltDeg = -1.8; }
         stageCue = 'COMBAT STANCE AT THE FORGOTTEN STONE CROSSING';
@@ -840,12 +869,17 @@ export class StoryScene extends Phaser.Scene {
         if (m) { m.tiltDeg = 2.0; m.offsetX = 60; }
         break;
       case 'tutorial_t3_before_008':
-      case 'tutorial_t3_before_010':
         this.playSceneMusic('bgm_ch1_ash_forest_uneasy', 1.4);
         if (m) { m.offsetX = 95; m.offsetY = -10; m.scaleMult = 1.05; m.tiltDeg = 2.2; }
         stageCue = 'SHADOWS STIR BENEATH THE SHELTER EAVES';
         break;
+      case 'tutorial_t3_before_010':
+        this.playSceneMusic('bgm_ch1_ash_forest_chaotic', 1.4);
+        if (m) { m.offsetX = 95; m.offsetY = -10; m.scaleMult = 1.05; m.tiltDeg = 2.2; }
+        stageCue = 'SHADOWS STIR BENEATH THE SHELTER EAVES';
+        break;
       case 'tutorial_t3_before_014':
+        this.playSceneMusic('bgm_ch1_ash_forest_chaotic', 1.2);
         if (m) { m.offsetX = 115; m.offsetY = -14; m.scaleMult = 1.06; m.tiltDeg = 2.0; }
         if (f) { f.offsetX = -115; f.offsetY = -14; f.scaleMult = 1.06; f.tiltDeg = -2.0; }
         stageCue = 'STEPPING FORWARD TOGETHER AS ONE';
@@ -976,7 +1010,7 @@ export class StoryScene extends Phaser.Scene {
       const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
       this.nameText.setText(label);
       this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
-      this.namePlate.setPosition(left ? 365 : REF_W - 365, 756);
+      this.namePlate.setPosition(left ? 365 : REF_W - 365, 746);
     }
     const isProtectiveOrResolve = speakerEmotion === 'protective' || speakerEmotion === 'determined';
     const isWarm = speakerEmotion === 'soft_smile';
@@ -1020,13 +1054,13 @@ export class StoryScene extends Phaser.Scene {
       this.nameText.setText(label);
       this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
       const targetX = left ? 365 : REF_W - 365;
-      this.namePlate.setPosition(targetX, 756);
+      this.namePlate.setPosition(targetX, 746);
       if (speakerChanged && !prefs().reducedMotion && !this.skip) {
         this.tweens.killTweensOf(this.namePlate);
-        this.namePlate.setY(764).setAlpha(0.5);
+        this.namePlate.setY(754).setAlpha(0.5);
         this.tweens.add({
           targets: this.namePlate,
-          y: 756,
+          y: 746,
           alpha: 1,
           duration: 240,
           ease: 'Cubic.easeOut'
@@ -1038,17 +1072,17 @@ export class StoryScene extends Phaser.Scene {
 
     if (!prefs().reducedMotion && !this.skip) {
       this.tweens.killTweensOf(this.bodyText);
-      this.bodyText.setY(-52).setAlpha(0.18);
+      this.bodyText.setY(-50).setAlpha(0.18);
       this.tweens.add({
         targets: this.bodyText,
-        y: -68,
+        y: -64,
         alpha: 1,
         duration: 280,
         ease: 'Cubic.easeOut'
       });
 
       this.tweens.killTweensOf(this.lineShimmer);
-      this.lineShimmer.setPosition(-640, -104).setAlpha(0.75);
+      this.lineShimmer.setPosition(-640, -96).setAlpha(0.75);
       this.tweens.add({
         targets: this.lineShimmer,
         x: 640,
@@ -1059,17 +1093,17 @@ export class StoryScene extends Phaser.Scene {
 
       if (this.actionBadge.text) {
         this.tweens.killTweensOf(this.actionBadge);
-        this.actionBadge.setY(-90).setAlpha(0);
+        this.actionBadge.setY(-82).setAlpha(0);
         this.tweens.add({
           targets: this.actionBadge,
-          y: -96,
+          y: -88,
           alpha: 0.9,
           duration: 320,
           ease: 'Sine.easeOut'
         });
       }
     } else {
-      this.bodyText.setY(-68).setAlpha(1);
+      this.bodyText.setY(-64).setAlpha(1);
     }
 
     const baseCps = this.skip ? 400 : this.cutscene ? CUTSCENE.cps : CPS[prefs().textSpeed];
@@ -1133,7 +1167,7 @@ export class StoryScene extends Phaser.Scene {
     if (wasPausing && !this.skip && this.currentLine) {
       void this.stage?.voice(this.currentLine.lineId);
     }
-    this.bodyText.setText(this.fullText).setY(-68).setAlpha(1);
+    this.bodyText.setText(this.fullText).setY(-64).setAlpha(1);
     this.voiceSyncFill.setSize(760, 2);
     this.lineDone = true;
     this.caret.setVisible(true);

@@ -15,11 +15,13 @@ export class MusicPlayer {
     'audio/bgm_fadyme_theme.ogg',
     'audio/bgm_ch1_ash_forest_calm.ogg',
     'audio/bgm_ch1_ash_forest_uneasy.ogg',
+    'audio/bgm_ch1_ash_forest_chaotic.ogg',
     'audio/bgm_battle_field.ogg'
   ];
   private ctx: AudioContext | null = null;
   private out: GainNode | null = null;
   private current: { key: string; src: AudioBufferSourceNode; gain: GainNode; release: () => void } | null = null;
+  private userPaused = false;
 
   private acquire: ((key: string, owner: object) => () => void) | null = null;
   private readonly ducks = new Set<object>();
@@ -41,10 +43,25 @@ export class MusicPlayer {
     this.out = this.ctx.createGain();
     this.out.gain.value = prefs().musicVolume;
     this.out.connect(wa.masterVolumeNode ?? this.ctx.destination);
+    if (typeof window !== 'undefined') {
+      const unlock = (): void => {
+        if (this.ctx && this.ctx.state === 'suspended' && !this.userPaused) {
+          void this.ctx.resume().catch(() => undefined);
+        }
+      };
+      window.addEventListener('pointerdown', unlock, { passive: true });
+      window.addEventListener('keydown', unlock, { passive: true });
+    }
   }
 
   get currentKey(): string | null {
     return this.current?.key ?? null;
+  }
+
+  resume(): void {
+    if (this.ctx && this.ctx.state === 'suspended' && !this.userPaused) {
+      void this.ctx.resume().catch(() => undefined);
+    }
   }
 
   setVolume(v: number): void {
@@ -66,10 +83,12 @@ export class MusicPlayer {
     const ctx = this.ctx;
     const out = this.out;
     if (!ctx || !out) return;
+    if (ctx.state === 'suspended' && !this.userPaused) {
+      void ctx.resume().catch(() => undefined);
+    }
     if (this.current?.key === cacheKey && startOffset === 0) return;
     const buffer = cache.get(cacheKey) as AudioBuffer | undefined;
     if (!buffer || typeof buffer.getChannelData !== 'function') return;
-    if (ctx.state === 'suspended') void ctx.resume().catch(() => undefined);
     this.stop(fade);
     const src = ctx.createBufferSource();
     src.buffer = buffer;
@@ -88,6 +107,7 @@ export class MusicPlayer {
   }
 
   setPaused(paused: boolean): void {
+    this.userPaused = paused;
     const ctx = this.ctx;
     if (!ctx) return;
     if (paused && ctx.state === 'running') void ctx.suspend().catch(() => undefined);

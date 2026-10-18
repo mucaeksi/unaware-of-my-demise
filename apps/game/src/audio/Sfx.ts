@@ -63,6 +63,11 @@ export const Sfx = {
   setVolume(v: number): void {
     if (out) out.gain.value = v;
   },
+  resume(): void {
+    if (ctx && ctx.state === 'suspended') {
+      void ctx.resume().catch(() => undefined);
+    }
+  },
   tap(): void {
     const c = ready();
     if (c) tone(720, 'triangle', c.currentTime, 0.004, 0.18, 0.07, 980);

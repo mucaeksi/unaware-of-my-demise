@@ -3,7 +3,7 @@ import type { PatchOutcome } from '@uomd/patch';
 import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
 import { beginEntry, signInWithGoogle } from '../entry/flow';
 import { syncEntry } from '../entry/sync';
-import { forceResetEntry, isForceFreshEntry, isInteractiveBrowser, loadEntry } from '../entry/state';
+import { forceResetEntry, isDevServer, isForceFreshEntry, isInteractiveBrowser, loadEntry } from '../entry/state';
 import { S, setActiveLocaleStrings } from '../entry/strings';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
@@ -136,12 +136,12 @@ export class TitleScene extends Phaser.Scene {
       this.addTitleAtmosphere();
     }
 
-    const logoX = 520 + insets.left;
-    const logoY = 262;
+    const logoX = 500 + insets.left;
+    const logoY = 278;
     if (this.textures.exists('fx_spark')) {
       this.add
         .image(logoX, logoY, 'fx_spark')
-        .setScale(9.5, 4.2)
+        .setScale(9.2, 4.0)
         .setTint(C.plumHi)
         .setBlendMode(Phaser.BlendModes.ADD)
         .setAlpha(0.32);
@@ -149,15 +149,15 @@ export class TitleScene extends Phaser.Scene {
     const logoKey = art.ui('logo');
     if (logoKey) {
       const logo = this.add.image(logoX, logoY + 12, logoKey).setAlpha(0);
-      logo.setScale(820 / logo.width);
+      logo.setScale(760 / logo.width);
       this.tweens.add({ targets: logo, alpha: 1, y: logoY, duration: 1500, ease: 'Cubic.easeOut' });
       if (!prefs().reducedMotion) {
-        this.tweens.add({ targets: logo, y: logoY + 8, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1500 });
+        this.tweens.add({ targets: logo, y: logoY + 7, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut', delay: 1500 });
       }
     }
-    txt(this, logoX, 462, S.menu.tagline, {
+    txt(this, logoX, 490, S.menu.tagline, {
       fontFamily: F.display,
-      fontSize: '28px',
+      fontSize: '27px',
       fontStyle: '600',
       color: '#e3c37d',
       stroke: '#0a0610',
@@ -240,62 +240,51 @@ export class TitleScene extends Phaser.Scene {
     const subLine = this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn;
     this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', subLine, true, () => void this.onTapToStart());
 
+    // Consistent top-right utility pills across both first-run and returning states
+    new Button(this, REF_W - 360 - insets.right, 58 + insets.top, {
+      label: 'REPLAY INTRO',
+      w: 210,
+      h: 62,
+      fontSize: 19,
+      onClick: () => {
+        forceResetEntry();
+        this.firstRun = true;
+        void this.onTapToStart();
+      }
+    }).setDepth(DEPTH.hud + 2);
+    new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
+      label: S.menu.settings,
+      w: 190,
+      h: 62,
+      fontSize: 21,
+      onClick: () => void this.openSettings()
+    }).setDepth(DEPTH.hud + 2);
+
     if (this.firstRun) {
       const signedIn = Services.api.signedIn;
       const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
       if (signedIn) {
-        new Button(this, mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
+        new Button(this, mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 540, h: 120, fontSize: 40, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
       } else if (canSignIn) {
-        new Button(this, mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 640, h: 128, fontSize: 38, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
+        new Button(this, mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 580, h: 120, fontSize: 36, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
       } else if (PREVIEW_FLOW_ENABLED) {
-        new Button(this, mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 640, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
+        new Button(this, mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 580, h: 120, fontSize: 38, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
       } else {
-        new Button(this, mx, 640, { label: S.menu.signIn, w: 640, h: 128, fontSize: 38, variant: 'dim', onClick: () => undefined }).setEnabled(false).setDepth(DEPTH.hud + 2);
-        txt(this, mx, 730, S.menu.webNote, { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.hud + 2);
+        new Button(this, mx, 640, { label: S.menu.signIn, w: 580, h: 120, fontSize: 36, variant: 'dim', onClick: () => undefined }).setEnabled(false).setDepth(DEPTH.hud + 2);
+        txt(this, mx, 730, S.menu.webNote, { fontSize: '28px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.hud + 2);
       }
-      new Button(this, mx, 800, { label: S.menu.settings, w: 560, h: 120, onClick: () => void this.openSettings() }).setDepth(DEPTH.hud + 2);
-      new Button(this, REF_W - 360 - insets.right, 58 + insets.top, {
-        label: 'REPLAY INTRO',
-        w: 210,
-        h: 62,
-        fontSize: 19,
-        onClick: () => {
-          forceResetEntry();
-          this.firstRun = true;
-          void this.onTapToStart();
-        }
-      }).setDepth(DEPTH.hud + 2);
-      new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
-        label: S.menu.settings,
-        w: 190,
-        h: 62,
-        fontSize: 21,
-        onClick: () => void this.openSettings()
-      }).setDepth(DEPTH.hud + 2);
     } else {
-      new Button(this, mx, 640, { label: 'CONTINUE', sub: 'Enter the Road', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() }).setDepth(DEPTH.hud + 2);
-      new Button(this, mx, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') }).setDepth(DEPTH.hud + 2);
-      new Button(this, mx, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => void this.openSettings() }).setDepth(DEPTH.hud + 2);
-      new Button(this, REF_W - 200 - insets.right, 80 + insets.top, { label: 'COMPANY', w: 340, h: 100, fontSize: 30, onClick: () => this.go('Home') }).setDepth(DEPTH.hud + 2);
-      new Button(this, REF_W - 500 - insets.right, 80 + insets.top, {
-        label: 'REPLAY INTRO',
-        w: 210,
-        h: 62,
-        fontSize: 19,
-        onClick: () => {
-          forceResetEntry();
-          this.firstRun = true;
-          void this.onTapToStart();
-        }
-      }).setDepth(DEPTH.hud + 2);
+      new Button(this, mx, 620, { label: 'CONTINUE', sub: 'Enter the Road', w: 540, h: 112, fontSize: 40, variant: 'hot', onClick: () => void this.begin() }).setDepth(DEPTH.hud + 2);
+      new Button(this, mx, 748, { label: 'CHAPTERS', w: 540, h: 98, fontSize: 32, onClick: () => this.go('Chapters') }).setDepth(DEPTH.hud + 2);
+      new Button(this, mx, 864, { label: 'COMPANY', w: 540, h: 98, fontSize: 32, onClick: () => this.go('Home') }).setDepth(DEPTH.hud + 2);
     }
   }
 
   /** Shared full-screen tap-to-start zone and blinking gothic prompt banner at the bottom center. */
   private buildTapToContinueBanner(modeBadge: string, subLine: string, enabled: boolean, onTap: () => void): void {
     const insets = safeInsets(this);
-    const cx = REF_W / 2;
-    const cy = REF_H - 165 - insets.bottom;
+    const cx = this.firstRun ? REF_W / 2 : 1220;
+    const cy = REF_H - 148 - insets.bottom;
 
     if (enabled) {
       const tapZone = this.add
@@ -311,19 +300,19 @@ export class TitleScene extends Phaser.Scene {
 
     const wings = this.add.graphics();
     wings.lineStyle(2, C.goldHi, 0.85);
-    wings.lineBetween(-540, 0, -350, 0);
-    wings.lineBetween(350, 0, 540, 0);
+    wings.lineBetween(-370, 0, -250, 0);
+    wings.lineBetween(250, 0, 370, 0);
     wings.lineStyle(1, C.silver, 0.45);
-    wings.lineBetween(-470, 6, -360, 6);
-    wings.lineBetween(360, 6, 470, 6);
+    wings.lineBetween(-330, 6, -260, 6);
+    wings.lineBetween(260, 6, 330, 6);
     wings.fillStyle(C.goldHi, 0.95);
-    for (const dx of [-336, 336]) {
+    for (const dx of [-236, 236]) {
       wings.fillPoints(
         [
-          new Phaser.Math.Vector2(dx, -8),
-          new Phaser.Math.Vector2(dx + 8, 0),
-          new Phaser.Math.Vector2(dx, 8),
-          new Phaser.Math.Vector2(dx - 8, 0)
+          new Phaser.Math.Vector2(dx, -7),
+          new Phaser.Math.Vector2(dx + 7, 0),
+          new Phaser.Math.Vector2(dx, 7),
+          new Phaser.Math.Vector2(dx - 7, 0)
         ],
         true
       );
@@ -537,7 +526,8 @@ export class TitleScene extends Phaser.Scene {
     void this.refreshChip();
 
     if (this.firstRun) {
-      if (isInteractiveBrowser()) {
+      // a returning player who quit mid-tutorial keeps their checkpoints; only the dev server starts over
+      if (isDevServer()) {
         forceResetEntry();
       }
       // First-time player: keep patch running in background and transition slowly into Prologue / Tutorial

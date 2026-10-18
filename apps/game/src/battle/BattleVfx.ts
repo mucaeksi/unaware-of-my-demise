@@ -695,6 +695,7 @@ export class BattleVfx {
       element?: string;
       side: 'player' | 'enemy';
       portraitKey: string | null;
+      flipPortrait?: boolean;
       spriteKey: string;
       spriteFrame: string;
     },
@@ -717,9 +718,9 @@ export class BattleVfx {
       slashStrip.fillStyle(pal.primary, 0.24);
       slashStrip.fillRect(-halfW, -bandH / 2 + 12, halfW * 2, bandH - 24);
       slashStrip.lineStyle(5, pal.core, 0.95);
-      slashStrip.strokeRect(-halfW, -bandH / 2, halfW * 2, bandH);
+      slashStrip.lineBetween(-halfW, -bandH / 2, halfW, -bandH / 2);
       slashStrip.lineStyle(2, pal.primary, 0.85);
-      slashStrip.strokeRect(-halfW, -bandH / 2 + 10, halfW * 2, bandH - 20);
+      slashStrip.lineBetween(-halfW, -bandH / 2 + 10, halfW, -bandH / 2 + 10);
 
       // High-speed anime action lines inside the strip
       for (let i = 0; i < 22; i++) {
@@ -730,21 +731,30 @@ export class BattleVfx {
         slashStrip.fillRect(lx, ly, lw, i % 3 === 0 ? 4 : 2);
       }
 
-      const band = scene.add.container(REF_W / 2, bandY, [slashStrip]).setAngle(isPlayer ? -3.5 : 3.5);
-      band.setScale(1, 0.05);
-      root.add(band);
+      // Character visual (waist-up bust crop if portraitKey is available, otherwise Chibi sprite with echo)
+      // Placed inside `band` so the bottom edge is 100% flush with the slanted bottom border!
+      const localStartX = isPlayer ? -REF_W / 2 - 320 : REF_W / 2 + 320;
+      const localTargetX = isPlayer ? -REF_W / 2 + 430 : REF_W / 2 - 430;
+      const localBottomY = bandH / 2 - 2;
 
-      // Character visual (portrait if available, otherwise Chibi sprite with echo)
-      const startX = isPlayer ? -320 : REF_W + 320;
-      const targetX = isPlayer ? 430 : REF_W - 430;
+      let portraitFrame: string | undefined;
+      if (opts.portraitKey && scene.textures.exists(opts.portraitKey)) {
+        const pTex = scene.textures.get(opts.portraitKey);
+        const baseFrame = pTex.get();
+        if (baseFrame && !pTex.has('cutin_bust')) {
+          pTex.add('cutin_bust', 0, 0, 0, baseFrame.width, Math.round(baseFrame.height * 0.68));
+        }
+        if (pTex.has('cutin_bust')) portraitFrame = 'cutin_bust';
+      }
+
       const echo = opts.portraitKey
-        ? scene.add.image(startX, bandY + 180, opts.portraitKey).setOrigin(0.5, 1)
-        : scene.add.image(startX, bandY + 130, opts.spriteKey, opts.spriteFrame).setOrigin(0.5, 1);
+        ? scene.add.image(localStartX, localBottomY, opts.portraitKey, portraitFrame).setOrigin(0.5, 1)
+        : scene.add.image(localStartX, localBottomY, opts.spriteKey, opts.spriteFrame).setOrigin(0.5, 1);
       const mainArt = opts.portraitKey
-        ? scene.add.image(startX, bandY + 180, opts.portraitKey).setOrigin(0.5, 1)
-        : scene.add.image(startX, bandY + 130, opts.spriteKey, opts.spriteFrame).setOrigin(0.5, 1);
+        ? scene.add.image(localStartX, localBottomY, opts.portraitKey, portraitFrame).setOrigin(0.5, 1)
+        : scene.add.image(localStartX, localBottomY, opts.spriteKey, opts.spriteFrame).setOrigin(0.5, 1);
 
-      const artScale = opts.portraitKey ? 680 / Math.max(1, mainArt.height) : 420 / Math.max(1, mainArt.height);
+      const artScale = opts.portraitKey ? 450 / Math.max(1, mainArt.height) : 340 / Math.max(1, mainArt.height);
       echo
         .setScale(artScale * 1.08)
         .setTint(pal.primary)
@@ -752,10 +762,22 @@ export class BattleVfx {
         .setBlendMode(Phaser.BlendModes.ADD)
         .setAlpha(0.55);
       mainArt.setScale(artScale);
-      if (!isPlayer && opts.portraitKey) {
+      const shouldFlip = opts.flipPortrait ?? (!isPlayer && Boolean(opts.portraitKey));
+      if (shouldFlip) {
         echo.setFlipX(true);
         mainArt.setFlipX(true);
       }
+
+      // Bottom border rule drawn OVER the bottom edge of the bust so it frames the character cleanly
+      const bottomRule = scene.add.graphics();
+      bottomRule.lineStyle(2, pal.primary, 0.85);
+      bottomRule.lineBetween(-halfW, bandH / 2 - 10, halfW, bandH / 2 - 10);
+      bottomRule.lineStyle(5, pal.core, 0.95);
+      bottomRule.lineBetween(-halfW, bandH / 2, halfW, bandH / 2);
+
+      const band = scene.add.container(REF_W / 2, bandY, [slashStrip, echo, mainArt, bottomRule]).setAngle(isPlayer ? -3.5 : 3.5);
+      band.setScale(1, 0.05);
+      root.add(band);
 
       // Typography slam + ornate gothic star sigil behind text
       const textX = isPlayer ? 1140 : 780;
@@ -791,7 +813,7 @@ export class BattleVfx {
         .setScale(1.8)
         .setAlpha(0);
 
-      root.add([echo, mainArt, sigil, nameTag, skillTitle]);
+      root.add([sigil, nameTag, skillTitle]);
 
       scene.tweens.add({
         targets: band,
@@ -801,13 +823,13 @@ export class BattleVfx {
       });
       scene.tweens.add({
         targets: mainArt,
-        x: targetX,
+        x: localTargetX,
         duration: 210,
         ease: 'Cubic.easeOut',
       });
       scene.tweens.add({
         targets: echo,
-        x: targetX + (isPlayer ? -28 : 28),
+        x: localTargetX + (isPlayer ? -28 : 28),
         alpha: 0,
         duration: 380,
         ease: 'Cubic.easeOut',

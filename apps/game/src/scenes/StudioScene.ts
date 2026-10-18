@@ -33,7 +33,7 @@ export class StudioScene extends Phaser.Scene {
     const calm = prefs().reducedMotion;
     const cx = REF_W / 2;
     const cy = REF_H / 2;
-    const markY = cy - 142;
+    const markY = cy - 156;
 
     const parts: (Phaser.GameObjects.Image | Phaser.GameObjects.Text | Phaser.GameObjects.Container)[] = [];
 
@@ -78,8 +78,8 @@ export class StudioScene extends Phaser.Scene {
       }
     }
 
-    const divider = this.ornament(cx, cy - 2, calm);
-    const name = txt(this, cx, cy + 56, S.studio.name.toUpperCase(), {
+    const divider = this.ornament(cx, cy + 28, calm);
+    const name = txt(this, cx, cy + 92, S.studio.name.toUpperCase(), {
       fontFamily: F.display,
       fontSize: '78px',
       fontStyle: '600',
@@ -89,7 +89,7 @@ export class StudioScene extends Phaser.Scene {
     })
       .setOrigin(0.5)
       .setLetterSpacing(10);
-    const presents = txt(this, cx, cy + 138, S.studio.presents, {
+    const presents = txt(this, cx, cy + 168, S.studio.presents, {
       fontFamily: F.body,
       fontSize: '36px',
       fontStyle: 'italic 500',
@@ -106,7 +106,7 @@ export class StudioScene extends Phaser.Scene {
     this.tweens.add({ targets: parts, alpha: 1, duration: NAME_IN, ease: 'Sine.easeInOut' });
     this.tweens.add({ targets: presents, alpha: 1, duration: NAME_IN, delay: PRESENTS_AT, ease: 'Sine.easeInOut' });
     if (!calm) {
-      this.tweens.add({ targets: name, y: cy + 50, duration: NAME_IN + PRESENTS_AT + HOLD + OUT, ease: 'Sine.easeInOut' });
+      this.tweens.add({ targets: name, y: cy + 86, duration: NAME_IN + PRESENTS_AT + HOLD + OUT, ease: 'Sine.easeInOut' });
     }
     if (!calm && !INTRO_FAST && this.textures.exists('fx_spark')) this.addAsh();
 

@@ -20,6 +20,7 @@
     "@uomd/patch": "*",
     "@uomd/shared": "*",
     "@uomd/story": "*",
+    "pixi-filters": "6.1.5",
     "pixi.js": "^8.8.0"
   },
   "devDependencies": {

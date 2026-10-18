@@ -6,7 +6,7 @@ import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { advance } from '../entry/flow';
 import { S } from '../entry/strings';
 import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
-import { isForceFreshEntry, isInteractiveBrowser, loadEntry, markPrologueSeen } from '../entry/state';
+import { isDevServer, isForceFreshEntry, isInteractiveBrowser, loadEntry, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateKey } from '../entry/plates';
 import { prefs } from '../platform/prefs';
@@ -118,11 +118,11 @@ export class PrologueScene extends Phaser.Scene {
       true
     );
 
-    const bodyY = REF_H - 288 - insets.bottom;
+    const plaqueTop = REF_H - 314 - insets.bottom;
+    const bodyY = plaqueTop + 44;
     this.baseBodyY = bodyY;
     const plaqueW = 1580 - insets.left - insets.right;
     const plaqueH = 210;
-    const plaqueTop = bodyY - 26;
     this.subtitlePlaque = this.add.graphics().setDepth(DEPTH.hud - 2).setAlpha(0);
     this.subtitlePlaque.fillStyle(0x0b0614, 0.48);
     this.subtitlePlaque.fillRoundedRect(REF_W / 2 - plaqueW / 2, plaqueTop, plaqueW, plaqueH, 26);
@@ -208,7 +208,8 @@ export class PrologueScene extends Phaser.Scene {
       fontSize: 21,
       onClick: () => this.toggleMute()
     }).setDepth(DEPTH.hud + 3);
-    if (loadEntry().phase === 'completed' || isInteractiveBrowser()) {
+    // entry contract: no Skip on a first viewing (the dev server keeps it for the owner's review loop)
+    if (loadEntry().phase === 'completed' || isDevServer()) {
       new Button(this, REF_W - 108 - insets.right, 56 + insets.top, {
         label: 'SKIP',
         w: 148,
@@ -283,12 +284,17 @@ export class PrologueScene extends Phaser.Scene {
       if (!current()) return;
       this.stage = new NarrativeStage(this, content, Services.ready().art.art, pack, locale);
       if (this.data0.video_id) { await this.stage.video(this.data0.video_id, false); if (current()) this.ending(); return; }
-      const ids = this.data0.scenes.flatMap((sc) => ArtLibrary.plateIds(sc.id, sc.visual));
+      const allIds = this.data0.scenes.flatMap((sc) => ArtLibrary.plateIds(sc.id, sc.visual));
+      const firstScene = this.data0.scenes[0];
+      const initialIds = !INTRO_FAST && firstScene ? ArtLibrary.plateIds(firstScene.id, firstScene.visual) : allIds;
       await Promise.all([
-        Services.art?.loadStills(this, ids).catch((e: unknown) => console.warn('prologue plates unavailable', e)),
+        Services.art?.loadStills(this, initialIds).catch((e: unknown) => console.warn('prologue plates unavailable', e)),
         Services.art?.loadMusic(this, 'bgm_prologue_before_the_road').catch(() => undefined)
       ]);
       if (!current()) return;
+      if (!INTRO_FAST && allIds.length > initialIds.length) {
+        void Services.art?.loadStills(this, allIds).catch((e: unknown) => console.warn('prologue background plates unavailable', e));
+      }
     } catch (e) {
       // the prologue is a presentation: if it cannot load, the road must still open
       console.error('prologue unavailable', e);

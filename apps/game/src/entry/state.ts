@@ -97,8 +97,16 @@ function clearCheckpointKeys(): void {
 }
 
 /**
- * True on the local Vite dev server (port 5173) or any non-WebDriver browser session.
- * Automated E2E tests run on port 8787 under WebDriver.
+ * True on the local Vite dev server only (`npm run dev`, port 5173). Gates owner conveniences that must never reach
+ * a player: a fresh entry on every boot and Skip on entry cutscenes. Built bundles (AAB/WebView, staging) are false.
+ */
+export function isDevServer(): boolean {
+  return import.meta.env.DEV === true && !(typeof navigator !== 'undefined' && navigator.webdriver);
+}
+
+/**
+ * True for a human-driven session (anything but WebDriver), plus the Vite dev server even under automation.
+ * Only selects presentation pacing (fades, typed reveal, the staged title panel); never resets progress.
  */
 export function isInteractiveBrowser(): boolean {
   try {

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace, @typescript-eslint/no-explicit-any */
 import * as PIXI from 'pixi.js';
+import { GlowFilter } from 'pixi-filters/glow';
 
 export { PIXI };
 
@@ -321,23 +322,25 @@ export namespace Loader {
                   if (!res.ok) throw new Error(`HTTP ${res.status}`);
                   const buf = await res.arrayBuffer();
                   const ctx = this.scene.sound.context;
-                  if (typeof navigator !== 'undefined' && navigator.webdriver) {
-                    const sampleRate = 44100;
-                    const length = 4410;
-                    if (ctx && typeof ctx.createBuffer === 'function') {
-                      this.scene.cache.audio.add(item.key, ctx.createBuffer(1, length, sampleRate));
-                    } else {
-                      this.scene.cache.audio.add(item.key, {
-                        duration: 0.1,
-                        length,
-                        sampleRate,
-                        numberOfChannels: 1,
-                        getChannelData: () => new Float32Array(length)
-                      });
+                  if (ctx && typeof ctx.decodeAudioData === 'function') {
+                    try {
+                      const decoded = await ctx.decodeAudioData(buf.slice(0));
+                      this.scene.cache.audio.add(item.key, decoded);
+                    } catch {
+                      const sampleRate = 44100;
+                      const length = 4410;
+                      if (typeof ctx.createBuffer === 'function') {
+                        this.scene.cache.audio.add(item.key, ctx.createBuffer(1, length, sampleRate));
+                      } else {
+                        this.scene.cache.audio.add(item.key, {
+                          duration: 0.1,
+                          length,
+                          sampleRate,
+                          numberOfChannels: 1,
+                          getChannelData: () => new Float32Array(length)
+                        });
+                      }
                     }
-                  } else if (ctx && typeof ctx.decodeAudioData === 'function') {
-                    const decoded = await ctx.decodeAudioData(buf.slice(0));
-                    this.scene.cache.audio.add(item.key, decoded);
                   } else {
                     this.scene.cache.audio.add(item.key, { duration: 1, length: buf.byteLength });
                   }
@@ -431,7 +434,10 @@ export namespace Textures {
     source: Array<{ image: HTMLImageElement | HTMLCanvasElement | null; width: number; height: number }>;
     frames = new Map<string | number, Frame>();
     frameTotal = 1;
+    /** GPU-side base texture, created on first draw (never through PIXI's global cache, so removal frees it) */
     pixiTexture: PIXI.Texture | null = null;
+    destroyed = false;
+    private pixiFrames = new Map<string, PIXI.Texture>();
 
     constructor(key: string, sourceImg: HTMLImageElement | HTMLCanvasElement | null, width = 64, height = 64) {
       this.key = key;
@@ -441,13 +447,38 @@ export namespace Textures {
       this.source = [src];
       this.frames.set('__BASE', new Frame('__BASE', 0, 0, w, h, src));
       this.frames.set(0, new Frame(0, 0, 0, w, h, src));
-      try {
-        if (sourceImg && typeof PIXI.Texture?.from === 'function') {
-          this.pixiTexture = PIXI.Texture.from(sourceImg);
-        }
-      } catch {
-        this.pixiTexture = null;
+    }
+
+    /** PIXI texture for a frame's cut rectangle, or null when there is nothing drawable */
+    pixiFrame(frame: Frame): PIXI.Texture | null {
+      const img = this.source[0]?.image;
+      if (this.destroyed || !img || frame.width <= 0 || frame.height <= 0) return null;
+      const sw = img.width;
+      const sh = img.height;
+      if (sw <= 0 || sh <= 0) return null;
+      if (!this.pixiTexture) {
+        const source = img instanceof HTMLCanvasElement ? new PIXI.CanvasSource({ resource: img }) : new PIXI.ImageSource({ resource: img });
+        this.pixiTexture = new PIXI.Texture({ source });
       }
+      const x = Math.Clamp(frame.cutX, 0, sw - 1);
+      const y = Math.Clamp(frame.cutY, 0, sh - 1);
+      const w = globalThis.Math.min(frame.width, sw - x);
+      const h = globalThis.Math.min(frame.height, sh - y);
+      const key = `${x},${y},${w},${h}`;
+      let tex = this.pixiFrames.get(key);
+      if (!tex) {
+        tex = x === 0 && y === 0 && w === sw && h === sh ? this.pixiTexture : new PIXI.Texture({ source: this.pixiTexture.source, frame: new PIXI.Rectangle(x, y, w, h) });
+        this.pixiFrames.set(key, tex);
+      }
+      return tex;
+    }
+
+    /** drop GPU textures (the source image stays); the next draw re-uploads */
+    protected releasePixi(): void {
+      for (const t of this.pixiFrames.values()) if (t !== this.pixiTexture) t.destroy(false);
+      this.pixiFrames.clear();
+      this.pixiTexture?.destroy(true);
+      this.pixiTexture = null;
     }
 
     has(name: string | number): boolean {
@@ -476,12 +507,8 @@ export namespace Textures {
     }
 
     destroy(): void {
-      try {
-        this.pixiTexture?.destroy(false);
-      } catch {
-        /* ignore */
-      }
-      this.pixiTexture = null;
+      this.destroyed = true;
+      this.releasePixi();
       this.frames.clear();
     }
   }
@@ -505,13 +532,12 @@ export namespace Textures {
     }
 
     refresh(): this {
+      const resized = this.source[0]?.width !== this.canvas.width || this.source[0]?.height !== this.canvas.height;
       this.source[0] = { image: this.canvas, width: this.canvas.width, height: this.canvas.height };
-      this.frames.set('__BASE', new Frame('__BASE', 0, 0, this.canvas.width, this.canvas.height));
-      try {
-        this.pixiTexture?.source?.update();
-      } catch {
-        /* ignore */
-      }
+      this.frames.set('__BASE', new Frame('__BASE', 0, 0, this.canvas.width, this.canvas.height, this.source[0]));
+      // same size: re-upload the pixels in place; new size: the GPU texture and every sub-frame must be rebuilt
+      if (resized) this.releasePixi();
+      else this.pixiTexture?.source.update();
       return this;
     }
   }
@@ -687,8 +713,14 @@ export namespace Sound {
   }
 
   export class BaseSoundManager extends EventEmitter {
-    mute = false;
+    protected _mute = false;
     volume = 1;
+    get mute(): boolean {
+      return this._mute;
+    }
+    set mute(v: boolean) {
+      this._mute = Boolean(v);
+    }
   }
 
   export class WebAudioSoundManager extends BaseSoundManager {
@@ -710,6 +742,33 @@ export namespace Sound {
         this.context = createMockAudioContext();
       }
       this.masterVolumeNode = this.context.createGain();
+      try {
+        this.masterVolumeNode.connect(this.context.destination);
+      } catch {
+        /* ignore in mock context */
+      }
+      if (typeof window !== 'undefined') {
+        const unlock = (): void => {
+          if (this.context.state === 'suspended') {
+            void this.context.resume().catch(() => undefined);
+          }
+        };
+        window.addEventListener('pointerdown', unlock, { passive: true });
+        window.addEventListener('keydown', unlock, { passive: true });
+      }
+    }
+
+    override get mute(): boolean {
+      return this._mute;
+    }
+
+    override set mute(v: boolean) {
+      this._mute = Boolean(v);
+      try {
+        this.masterVolumeNode.gain.value = this._mute ? 0 : this.volume;
+      } catch {
+        /* ignore */
+      }
     }
 
     add(key: string): BaseSound {
@@ -1245,6 +1304,9 @@ export namespace Display {
   }
 }
 
+/** colour-matrix calls that a PIXI.ColorMatrixFilter replays in order */
+type ColorMatrixOp = ['saturate' | 'brightness' | 'contrast' | 'night', number, boolean] | ['sepia' | 'lsd', boolean] | ['setValues', number[]];
+
 export class FilterController {
   type: string;
   active = true;
@@ -1258,10 +1320,19 @@ export class FilterController {
     0, 0, 0, 1, 0
   ];
   colorMatrix: FilterController;
+  /** recorded ColorMatrix operations; `version` changes whenever they do so the stage rebuilds the PIXI filter */
+  ops: ColorMatrixOp[] = [];
+  version = 0;
 
   constructor(type: string) {
     this.type = type;
     this.colorMatrix = this;
+  }
+
+  private record(op: ColorMatrixOp): this {
+    this.ops.push(op);
+    this.version++;
+    return this;
   }
 
   reset(): this {
@@ -1271,45 +1342,38 @@ export class FilterController {
       0, 0, 1, 0, 0,
       0, 0, 0, 1, 0
     ];
+    this.ops.length = 0;
+    this.version++;
     return this;
   }
 
-  saturate(amount = 0, _multiply = false): this {
-    void amount;
-    return this;
+  saturate(amount = 0, multiply = false): this {
+    return this.record(['saturate', amount, multiply]);
   }
 
   brightness(amount = 1, multiply = false): this {
-    void amount;
-    void multiply;
-    return this;
+    return this.record(['brightness', amount, multiply]);
   }
 
   contrast(amount = 0, multiply = false): this {
-    void amount;
-    void multiply;
-    return this;
+    return this.record(['contrast', amount, multiply]);
   }
 
   sepia(multiply = false): this {
-    void multiply;
-    return this;
+    return this.record(['sepia', multiply]);
   }
 
   night(intensity = 0.1, multiply = false): this {
-    void intensity;
-    void multiply;
-    return this;
+    return this.record(['night', intensity, multiply]);
   }
 
   lsd(multiply = false): this {
-    void multiply;
-    return this;
+    return this.record(['lsd', multiply]);
   }
 
   setValues(values: number[]): this {
     this.matrix = [...values];
-    return this;
+    return this.record(['setValues', [...values]]);
   }
 
   destroy(): void {
@@ -1715,6 +1779,11 @@ export namespace GameObjects {
       draggable?: boolean;
     } | null = null;
     domElement: HTMLElement | null = null;
+    /** retained PIXI display node mirroring this object (owned by the Game's stage sync) */
+    _px: PIXI.Container | null = null;
+    /** camera wrapper for a scene-root object; the rectangle node when this object masks another */
+    _pxWrap: PIXI.Container | null = null;
+    _pxMask: PIXI.Graphics | null = null;
     private _data = new Map<string, any>();
 
     constructor(scene: Scene, type: string) {
@@ -1918,7 +1987,10 @@ export namespace GameObjects {
     }
 
     destroy(_fromScene?: boolean): void {
-      if (!this.active) return;
+      if (!this.active) {
+        this.releasePixi();
+        return;
+      }
       this.active = false;
       this.visible = false;
       if (this.domElement) {
@@ -1933,6 +2005,17 @@ export namespace GameObjects {
       }
       this.emit('destroy', this);
       this.removeAllListeners();
+      this.releasePixi();
+    }
+
+    releasePixi(): void {
+      // children are released by their own GameObject; destroying them here would double-free
+      this._px?.destroy({ children: false });
+      this._pxWrap?.destroy({ children: false });
+      this._pxMask?.destroy();
+      this._px = null;
+      this._pxWrap = null;
+      this._pxMask = null;
     }
   }
 
@@ -2392,7 +2475,14 @@ export namespace GameObjects {
       if (sharedMeasureCtx) {
         try {
           sharedMeasureCtx.font = `${this.style.fontStyle} ${fontPx}px ${this.style.fontFamily}`;
-          const m = sharedMeasureCtx.measureText(line);
+          const ctx2d = sharedMeasureCtx as CanvasRenderingContext2D & { letterSpacing?: string };
+          if (typeof ctx2d.letterSpacing === 'string') {
+            ctx2d.letterSpacing = `${this.letterSpacing}px`;
+            const m = ctx2d.measureText(line);
+            ctx2d.letterSpacing = '0px';
+            return globalThis.Math.max(0, m.width - (line.length > 0 && this.letterSpacing > 0 ? this.letterSpacing : 0));
+          }
+          const m = ctx2d.measureText(line);
           return m.width + globalThis.Math.max(0, line.length - 1) * this.letterSpacing;
         } catch {
           /* fallback below */
@@ -2411,8 +2501,10 @@ export namespace GameObjects {
         if (w > maxW) maxW = w;
       }
       const lineH = fontPx * 1.2 + this.lineSpacing;
+      const rawH = lines.length * (fontPx * 1.2) + globalThis.Math.max(0, lines.length - 1) * this.lineSpacing;
+      void lineH;
       this.width = globalThis.Math.ceil(maxW + this.padding.left + this.padding.right);
-      this.height = globalThis.Math.ceil(lines.length * lineH + this.padding.top + this.padding.bottom);
+      this.height = globalThis.Math.ceil(rawH + this.padding.top + this.padding.bottom);
     }
   }
 
@@ -2511,16 +2603,208 @@ export namespace GameObjects {
     }
   }
 
-  type DrawCmd = (ctx: CanvasRenderingContext2D) => void;
+  /** resolved paint for one draw op (captured when the op is recorded, like Phaser's command buffer) */
+  export interface FillSpec {
+    color: number;
+    alpha: number;
+    /** vertical gradient (Phaser fillGradientStyle top-left → bottom-left) */
+    grad?: { top: number; topAlpha: number; bottom: number; bottomAlpha: number };
+  }
+  export interface LineSpec {
+    width: number;
+    color: number;
+    alpha: number;
+  }
+  type Pt = { x: number; y: number };
+  export type DrawOp =
+    | { k: 'rect'; x: number; y: number; w: number; h: number; r: number; fill?: FillSpec; line?: LineSpec }
+    | { k: 'circle'; x: number; y: number; r: number; fill?: FillSpec; line?: LineSpec }
+    | { k: 'ellipse'; x: number; y: number; rx: number; ry: number; fill?: FillSpec; line?: LineSpec }
+    | { k: 'poly'; pts: Pt[]; close: boolean; fill?: FillSpec; line?: LineSpec }
+    | { k: 'begin' }
+    | { k: 'moveTo'; x: number; y: number }
+    | { k: 'lineTo'; x: number; y: number }
+    | { k: 'arc'; x: number; y: number; r: number; a0: number; a1: number; ccw: boolean }
+    | { k: 'slice'; x: number; y: number; r: number; a0: number; a1: number; ccw: boolean }
+    | { k: 'close' }
+    | { k: 'fillPath'; fill: FillSpec }
+    | { k: 'strokePath'; line: LineSpec };
+
+  function pixiFill(f: FillSpec): PIXI.FillInput {
+    if (!f.grad) return { color: f.color, alpha: f.alpha };
+    return new PIXI.FillGradient({
+      type: 'linear',
+      start: { x: 0, y: 0 },
+      end: { x: 0, y: 1 },
+      textureSpace: 'local',
+      colorStops: [
+        { offset: 0, color: hexToRgba(f.grad.top, f.grad.topAlpha) },
+        { offset: 1, color: hexToRgba(f.grad.bottom, f.grad.bottomAlpha) }
+      ]
+    });
+  }
+
+  function pixiStroke(l: LineSpec): PIXI.StrokeInput {
+    return { width: l.width, color: l.color, alpha: l.alpha, join: 'round' };
+  }
+
+  /** replays recorded ops into a PIXI.Graphics (local coordinates) */
+  export function drawOpsToPixi(g: PIXI.Graphics, ops: readonly DrawOp[]): void {
+    g.clear();
+    const paint = (fill?: FillSpec, line?: LineSpec): void => {
+      if (fill && fill.alpha > 0) g.fill(pixiFill(fill));
+      if (line && line.width > 0 && line.alpha > 0) g.stroke(pixiStroke(line));
+    };
+    for (const op of ops) {
+      switch (op.k) {
+        case 'rect':
+          g.beginPath();
+          if (op.r > 0) g.roundRect(op.x, op.y, op.w, op.h, globalThis.Math.min(op.r, globalThis.Math.abs(op.w) / 2, globalThis.Math.abs(op.h) / 2));
+          else g.rect(op.x, op.y, op.w, op.h);
+          paint(op.fill, op.line);
+          break;
+        case 'circle':
+          g.beginPath();
+          g.circle(op.x, op.y, globalThis.Math.max(0, op.r));
+          paint(op.fill, op.line);
+          break;
+        case 'ellipse':
+          g.beginPath();
+          g.ellipse(op.x, op.y, globalThis.Math.max(0, op.rx), globalThis.Math.max(0, op.ry));
+          paint(op.fill, op.line);
+          break;
+        case 'poly':
+          if (op.pts.length < 2) break;
+          g.beginPath();
+          g.poly(op.pts.flatMap((p) => [p.x, p.y]), op.close || Boolean(op.fill));
+          paint(op.fill, op.line);
+          break;
+        case 'begin':
+          g.beginPath();
+          break;
+        case 'moveTo':
+          g.moveTo(op.x, op.y);
+          break;
+        case 'lineTo':
+          g.lineTo(op.x, op.y);
+          break;
+        case 'arc':
+          g.arc(op.x, op.y, globalThis.Math.max(0, op.r), op.a0, op.a1, op.ccw);
+          break;
+        case 'slice':
+          g.beginPath();
+          g.moveTo(op.x, op.y);
+          g.arc(op.x, op.y, globalThis.Math.max(0, op.r), op.a0, op.a1, op.ccw);
+          g.closePath();
+          break;
+        case 'close':
+          g.closePath();
+          break;
+        case 'fillPath':
+          if (op.fill.alpha > 0) g.fill(pixiFill(op.fill));
+          break;
+        case 'strokePath':
+          if (op.line.width > 0 && op.line.alpha > 0) g.stroke(pixiStroke(op.line));
+          break;
+      }
+    }
+  }
+
+  function canvasFill(ctx: CanvasRenderingContext2D, f: FillSpec, y: number, h: number): void {
+    if (!f.grad) {
+      ctx.fillStyle = hexToRgba(f.color, f.alpha);
+      return;
+    }
+    const g = ctx.createLinearGradient(0, y, 0, y + h);
+    g.addColorStop(0, hexToRgba(f.grad.top, f.grad.topAlpha));
+    g.addColorStop(1, hexToRgba(f.grad.bottom, f.grad.bottomAlpha));
+    ctx.fillStyle = g;
+  }
+
+  /** the same ops onto a 2D canvas: only used to bake generateTexture() into a CanvasTexture */
+  export function drawOpsToCanvas(ctx: CanvasRenderingContext2D, ops: readonly DrawOp[]): void {
+    const paint = (fill: FillSpec | undefined, line: LineSpec | undefined, y: number, h: number): void => {
+      if (fill) {
+        canvasFill(ctx, fill, y, h);
+        ctx.fill();
+      }
+      if (line && line.width > 0) {
+        ctx.lineWidth = line.width;
+        ctx.strokeStyle = hexToRgba(line.color, line.alpha);
+        ctx.stroke();
+      }
+    };
+    for (const op of ops) {
+      switch (op.k) {
+        case 'rect':
+          drawRoundRectPath(ctx, op.x, op.y, op.w, op.h, op.r);
+          paint(op.fill, op.line, op.y, op.h);
+          break;
+        case 'circle':
+          ctx.beginPath();
+          ctx.arc(op.x, op.y, globalThis.Math.max(0, op.r), 0, globalThis.Math.PI * 2);
+          paint(op.fill, op.line, op.y - op.r, op.r * 2);
+          break;
+        case 'ellipse':
+          ctx.beginPath();
+          ctx.ellipse(op.x, op.y, globalThis.Math.max(0, op.rx), globalThis.Math.max(0, op.ry), 0, 0, globalThis.Math.PI * 2);
+          paint(op.fill, op.line, op.y - op.ry, op.ry * 2);
+          break;
+        case 'poly': {
+          if (op.pts.length < 2) break;
+          ctx.beginPath();
+          ctx.moveTo(op.pts[0]!.x, op.pts[0]!.y);
+          for (let i = 1; i < op.pts.length; i++) ctx.lineTo(op.pts[i]!.x, op.pts[i]!.y);
+          if (op.close) ctx.closePath();
+          const ys = op.pts.map((p) => p.y);
+          const top = globalThis.Math.min(...ys);
+          paint(op.fill, op.line, top, globalThis.Math.max(...ys) - top);
+          break;
+        }
+        case 'begin':
+          ctx.beginPath();
+          break;
+        case 'moveTo':
+          ctx.moveTo(op.x, op.y);
+          break;
+        case 'lineTo':
+          ctx.lineTo(op.x, op.y);
+          break;
+        case 'arc':
+          ctx.arc(op.x, op.y, globalThis.Math.max(0, op.r), op.a0, op.a1, op.ccw);
+          break;
+        case 'slice':
+          ctx.beginPath();
+          ctx.moveTo(op.x, op.y);
+          ctx.arc(op.x, op.y, globalThis.Math.max(0, op.r), op.a0, op.a1, op.ccw);
+          ctx.closePath();
+          break;
+        case 'close':
+          ctx.closePath();
+          break;
+        case 'fillPath':
+          canvasFill(ctx, op.fill, 0, ctx.canvas.height);
+          ctx.fill();
+          break;
+        case 'strokePath':
+          ctx.lineWidth = op.line.width;
+          ctx.strokeStyle = hexToRgba(op.line.color, op.line.alpha);
+          ctx.stroke();
+          break;
+      }
+    }
+  }
 
   export class Graphics extends GameObject {
-    commands: DrawCmd[] = [];
+    ops: DrawOp[] = [];
+    /** bumped on every recorded change so the stage sync rebuilds the PIXI geometry only when needed */
+    version = 0;
     private curFillColor = 0xffffff;
     private curFillAlpha = 1;
     private curLineWidth = 1;
     private curLineColor = 0xffffff;
     private curLineAlpha = 1;
-    private curGradient: { tl: number; tr: number; bl: number; br: number; aTL: number; aTR: number; aBL: number; aBR: number } | null = null;
+    private curGradient: FillSpec['grad'] | null = null;
 
     constructor(scene: Scene, options?: { x?: number; y?: number }) {
       super(scene, 'Graphics');
@@ -2530,9 +2814,29 @@ export namespace GameObjects {
       this.originY = 0;
     }
 
+    private push(op: DrawOp): this {
+      this.ops.push(op);
+      this.version++;
+      return this;
+    }
+
+    private fill(): FillSpec {
+      return this.curGradient ? { color: this.curFillColor, alpha: this.curFillAlpha, grad: { ...this.curGradient } } : { color: this.curFillColor, alpha: this.curFillAlpha };
+    }
+
+    /** gradients apply to rectangles only, as in Phaser */
+    private solidFill(): FillSpec {
+      return { color: this.curFillColor, alpha: this.curFillAlpha };
+    }
+
+    private line(): LineSpec {
+      return { width: this.curLineWidth, color: this.curLineColor, alpha: this.curLineAlpha };
+    }
+
     clear(): this {
-      this.commands.length = 0;
+      this.ops.length = 0;
       this.curGradient = null;
+      this.version++;
       return this;
     }
 
@@ -2540,33 +2844,20 @@ export namespace GameObjects {
       this.curFillColor = color;
       this.curFillAlpha = alpha;
       this.curGradient = null;
-      const rgba = hexToRgba(color, alpha);
-      this.commands.push((ctx) => {
-        ctx.fillStyle = rgba;
-      });
       return this;
     }
 
     fillGradientStyle(
       topLeft: number,
-      topRight: number,
+      _topRight: number,
       bottomLeft: number,
-      bottomRight: number,
+      _bottomRight: number,
       alphaTopLeft = 1,
-      alphaTopRight = alphaTopLeft,
+      _alphaTopRight = alphaTopLeft,
       alphaBottomLeft = alphaTopLeft,
-      alphaBottomRight = alphaTopLeft
+      _alphaBottomRight = alphaTopLeft
     ): this {
-      this.curGradient = {
-        tl: topLeft,
-        tr: topRight,
-        bl: bottomLeft,
-        br: bottomRight,
-        aTL: alphaTopLeft,
-        aTR: alphaTopRight,
-        aBL: alphaBottomLeft,
-        aBR: alphaBottomRight
-      };
+      this.curGradient = { top: topLeft, topAlpha: alphaTopLeft, bottom: bottomLeft, bottomAlpha: alphaBottomLeft };
       return this;
     }
 
@@ -2574,251 +2865,91 @@ export namespace GameObjects {
       this.curLineWidth = lineWidth;
       this.curLineColor = color;
       this.curLineAlpha = alpha;
-      const rgba = hexToRgba(color, alpha);
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = rgba;
-      });
       return this;
     }
 
     fillRect(x: number, y: number, w: number, h: number): this {
-      const grad = this.curGradient ? { ...this.curGradient } : null;
-      const rgba = hexToRgba(this.curFillColor, this.curFillAlpha);
-      this.commands.push((ctx) => {
-        if (grad) {
-          const g = ctx.createLinearGradient(x, y, x, y + h);
-          g.addColorStop(0, hexToRgba(grad.tl, grad.aTL));
-          g.addColorStop(1, hexToRgba(grad.bl, grad.aBL));
-          ctx.fillStyle = g;
-        } else {
-          ctx.fillStyle = rgba;
-        }
-        ctx.fillRect(x, y, w, h);
-      });
-      return this;
+      return this.push({ k: 'rect', x, y, w, h, r: 0, fill: this.fill() });
     }
 
     strokeRect(x: number, y: number, w: number, h: number): this {
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        ctx.strokeRect(x, y, w, h);
-      });
-      return this;
+      return this.push({ k: 'rect', x, y, w, h, r: 0, line: this.line() });
     }
 
     fillRoundedRect(x: number, y: number, w: number, h: number, radius = 0): this {
-      const grad = this.curGradient ? { ...this.curGradient } : null;
-      const rgba = hexToRgba(this.curFillColor, this.curFillAlpha);
-      const r = typeof radius === 'number' ? radius : 8;
-      this.commands.push((ctx) => {
-        if (grad) {
-          const g = ctx.createLinearGradient(x, y, x, y + h);
-          g.addColorStop(0, hexToRgba(grad.tl, grad.aTL));
-          g.addColorStop(1, hexToRgba(grad.bl, grad.aBL));
-          ctx.fillStyle = g;
-        } else {
-          ctx.fillStyle = rgba;
-        }
-        drawRoundRectPath(ctx, x, y, w, h, r);
-        ctx.fill();
-      });
-      return this;
+      return this.push({ k: 'rect', x, y, w, h, r: typeof radius === 'number' ? radius : 8, fill: this.fill() });
     }
 
     strokeRoundedRect(x: number, y: number, w: number, h: number, radius = 0): this {
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      const r = typeof radius === 'number' ? radius : 8;
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        drawRoundRectPath(ctx, x, y, w, h, r);
-        ctx.stroke();
-      });
-      return this;
+      return this.push({ k: 'rect', x, y, w, h, r: typeof radius === 'number' ? radius : 8, line: this.line() });
     }
 
     fillCircle(x: number, y: number, r: number): this {
-      const rgba = hexToRgba(this.curFillColor, this.curFillAlpha);
-      this.commands.push((ctx) => {
-        ctx.fillStyle = rgba;
-        ctx.beginPath();
-        ctx.arc(x, y, globalThis.Math.max(0, r), 0, globalThis.Math.PI * 2);
-        ctx.fill();
-      });
-      return this;
+      return this.push({ k: 'circle', x, y, r, fill: this.solidFill() });
     }
 
     strokeCircle(x: number, y: number, r: number): this {
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        ctx.beginPath();
-        ctx.arc(x, y, globalThis.Math.max(0, r), 0, globalThis.Math.PI * 2);
-        ctx.stroke();
-      });
-      return this;
+      return this.push({ k: 'circle', x, y, r, line: this.line() });
     }
 
     fillEllipse(x: number, y: number, w: number, h: number): this {
-      const rgba = hexToRgba(this.curFillColor, this.curFillAlpha);
-      this.commands.push((ctx) => {
-        ctx.fillStyle = rgba;
-        ctx.beginPath();
-        ctx.ellipse(x, y, globalThis.Math.max(0, w / 2), globalThis.Math.max(0, h / 2), 0, 0, globalThis.Math.PI * 2);
-        ctx.fill();
-      });
-      return this;
+      return this.push({ k: 'ellipse', x, y, rx: w / 2, ry: h / 2, fill: this.solidFill() });
     }
 
     strokeEllipse(x: number, y: number, w: number, h: number): this {
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        ctx.beginPath();
-        ctx.ellipse(x, y, globalThis.Math.max(0, w / 2), globalThis.Math.max(0, h / 2), 0, 0, globalThis.Math.PI * 2);
-        ctx.stroke();
-      });
-      return this;
+      return this.push({ k: 'ellipse', x, y, rx: w / 2, ry: h / 2, line: this.line() });
     }
 
     fillTriangle(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number): this {
-      const rgba = hexToRgba(this.curFillColor, this.curFillAlpha);
-      this.commands.push((ctx) => {
-        ctx.fillStyle = rgba;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.lineTo(x3, y3);
-        ctx.closePath();
-        ctx.fill();
-      });
-      return this;
+      return this.push({ k: 'poly', pts: [{ x: x1, y: y1 }, { x: x2, y: y2 }, { x: x3, y: y3 }], close: true, fill: this.solidFill() });
     }
 
     strokeTriangle(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number): this {
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.lineTo(x3, y3);
-        ctx.closePath();
-        ctx.stroke();
-      });
-      return this;
+      return this.push({ k: 'poly', pts: [{ x: x1, y: y1 }, { x: x2, y: y2 }, { x: x3, y: y3 }], close: true, line: this.line() });
     }
 
     lineBetween(x1: number, y1: number, x2: number, y2: number): this {
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-      });
-      return this;
+      return this.push({ k: 'poly', pts: [{ x: x1, y: y1 }, { x: x2, y: y2 }], close: false, line: this.line() });
     }
 
     beginPath(): this {
-      this.commands.push((ctx) => ctx.beginPath());
-      return this;
+      return this.push({ k: 'begin' });
     }
 
     moveTo(x: number, y: number): this {
-      this.commands.push((ctx) => ctx.moveTo(x, y));
-      return this;
+      return this.push({ k: 'moveTo', x, y });
     }
 
     lineTo(x: number, y: number): this {
-      this.commands.push((ctx) => ctx.lineTo(x, y));
-      return this;
+      return this.push({ k: 'lineTo', x, y });
     }
 
     arc(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise = false): this {
-      this.commands.push((ctx) => ctx.arc(x, y, globalThis.Math.max(0, r), startAngle, endAngle, anticlockwise));
-      return this;
+      return this.push({ k: 'arc', x, y, r, a0: startAngle, a1: endAngle, ccw: anticlockwise });
     }
 
     slice(x: number, y: number, r: number, startAngle: number, endAngle: number, anticlockwise = false): this {
-      this.commands.push((ctx) => {
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.arc(x, y, globalThis.Math.max(0, r), startAngle, endAngle, anticlockwise);
-        ctx.closePath();
-      });
-      return this;
+      return this.push({ k: 'slice', x, y, r, a0: startAngle, a1: endAngle, ccw: anticlockwise });
     }
 
     closePath(): this {
-      this.commands.push((ctx) => ctx.closePath());
-      return this;
+      return this.push({ k: 'close' });
     }
 
     fillPath(): this {
-      const rgba = hexToRgba(this.curFillColor, this.curFillAlpha);
-      this.commands.push((ctx) => {
-        ctx.fillStyle = rgba;
-        ctx.fill();
-      });
-      return this;
+      return this.push({ k: 'fillPath', fill: this.solidFill() });
     }
 
     strokePath(): this {
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      this.commands.push((ctx) => {
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        ctx.stroke();
-      });
-      return this;
+      return this.push({ k: 'strokePath', line: this.line() });
     }
 
     fillPoints(points: Array<{ x: number; y: number }>, closeShape = false): this {
-      const pts = points.map((p) => ({ x: p.x, y: p.y }));
-      const rgba = hexToRgba(this.curFillColor, this.curFillAlpha);
-      this.commands.push((ctx) => {
-        if (pts.length === 0) return;
-        ctx.fillStyle = rgba;
-        ctx.beginPath();
-        ctx.moveTo(pts[0]!.x, pts[0]!.y);
-        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i]!.x, pts[i]!.y);
-        if (closeShape) ctx.closePath();
-        ctx.fill();
-      });
-      return this;
+      return this.push({ k: 'poly', pts: points.map((p) => ({ x: p.x, y: p.y })), close: closeShape, fill: this.solidFill() });
     }
 
     strokePoints(points: Array<{ x: number; y: number }>, closeShape = false): this {
-      const pts = points.map((p) => ({ x: p.x, y: p.y }));
-      const lw = this.curLineWidth;
-      const rgba = hexToRgba(this.curLineColor, this.curLineAlpha);
-      this.commands.push((ctx) => {
-        if (pts.length === 0) return;
-        ctx.lineWidth = lw;
-        ctx.strokeStyle = rgba;
-        ctx.beginPath();
-        ctx.moveTo(pts[0]!.x, pts[0]!.y);
-        for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i]!.x, pts[i]!.y);
-        if (closeShape) ctx.closePath();
-        ctx.stroke();
-      });
-      return this;
+      return this.push({ k: 'poly', pts: points.map((p) => ({ x: p.x, y: p.y })), close: closeShape, line: this.line() });
     }
 
     generateTexture(key: string, width = 64, height = 64): this {
@@ -2826,9 +2957,7 @@ export namespace GameObjects {
       canvas.width = globalThis.Math.max(1, width);
       canvas.height = globalThis.Math.max(1, height);
       const ctx = canvas.getContext('2d');
-      if (ctx) {
-        for (const cmd of this.commands) cmd(ctx);
-      }
+      if (ctx) drawOpsToCanvas(ctx, this.ops);
       this.scene.textures.addCanvas(key, canvas);
       return this;
     }
@@ -3367,16 +3496,71 @@ export interface GameConfig {
     antialias?: boolean;
     powerPreference?: string;
     roundPixels?: boolean;
+    /** upper bound for the backing-store resolution (quality tier) */
+    resolution?: number;
   };
   input?: Record<string, any>;
   banner?: boolean;
   scene?: Array<new () => Scene>;
 }
 
+/** per-scene retained PIXI layer: background, objects (sorted by depth) and the camera overlays */
+interface SceneLayer {
+  root: PIXI.Container;
+  bg: PIXI.Graphics;
+  vignette: PIXI.Graphics;
+  flash: PIXI.Graphics;
+  fade: PIXI.Graphics;
+  bgKey: string;
+  vignetteKey: string;
+}
+
+export type RendererName = 'pending' | 'webgl' | 'webgpu' | 'canvas' | 'failed';
+
+function pixiBlend(mode: number | string): PIXI.BLEND_MODES {
+  if (mode === BlendModes.ADD || mode === 'ADD') return 'add';
+  if (mode === BlendModes.MULTIPLY || mode === 'MULTIPLY') return 'multiply';
+  if (mode === BlendModes.SCREEN || mode === 'SCREEN') return 'screen';
+  return 'normal';
+}
+
+/** Phaser fontStyle strings ('700', 'italic 500', 'bold') → PIXI fontStyle + fontWeight */
+export function parseFontStyle(raw: string | undefined): { fontStyle: 'normal' | 'italic' | 'oblique'; fontWeight: PIXI.TextStyleFontWeight } {
+  let fontStyle: 'normal' | 'italic' | 'oblique' = 'normal';
+  let fontWeight: PIXI.TextStyleFontWeight = 'normal';
+  for (const token of String(raw ?? '').trim().split(/\s+/)) {
+    if (token === 'italic' || token === 'oblique') fontStyle = token;
+    else if (token === 'bold' || token === 'bolder' || token === 'lighter') fontWeight = token;
+    else if (/^[1-9]00$/.test(token)) fontWeight = token as PIXI.TextStyleFontWeight;
+  }
+  return { fontStyle, fontWeight };
+}
+
+function setChildren(parent: PIXI.Container, desired: PIXI.Container[]): void {
+  const cur = parent.children;
+  if (cur.length === desired.length && desired.every((c, i) => cur[i] === c)) return;
+  parent.removeChildren();
+  if (desired.length > 0) parent.addChild(...desired);
+}
+
+/** constant-colour silhouette for setTintFill (PIXI tint only multiplies) */
+function fillTintFilter(color: number): PIXI.ColorMatrixFilter {
+  const f = new PIXI.ColorMatrixFilter();
+  const r = ((color >> 16) & 0xff) / 255;
+  const g = ((color >> 8) & 0xff) / 255;
+  const b = (color & 0xff) / 255;
+  f.matrix = [0, 0, 0, 0, r, 0, 0, 0, 0, g, 0, 0, 0, 0, b, 0, 0, 0, 1, 0];
+  return f;
+}
+
 export class Game {
   canvas: HTMLCanvasElement;
+  /** DOM overlay host above the stage (video dialog, accessibility mirrors); sized to the fitted canvas */
   uiLayer: HTMLDivElement;
-  renderer: { type: number; gl: WebGLRenderingContext | WebGL2RenderingContext | null; pixiVersion: string };
+  /** Phaser-compatible descriptor filled from the live PIXI renderer: type 2 = GPU (WebGL/WebGPU), 1 = canvas fallback */
+  renderer: { type: number; name: RendererName; gl: WebGLRenderingContext | WebGL2RenderingContext | null; pixiVersion: string; pixi: PIXI.Renderer | null };
+  /** resolves once PIXI picked and initialised a renderer; rejects when the device has none */
+  ready: Promise<void>;
   events = new EventEmitter();
   textures = new Textures.TextureManager();
   anims: AnimationManager;
@@ -3384,7 +3568,15 @@ export class Game {
   cache = { audio: new AudioCache() };
   scale: Scale.ScaleManager;
   scene: SceneManager;
-  private offscreenCtx: CanvasRenderingContext2D;
+  private stage = new PIXI.Container();
+  private layers = new Map<Scene, SceneLayer>();
+  private nodeKeys = new WeakMap<PIXI.Container, string | number>();
+  private tintFilters = new WeakMap<GameObjects.GameObject, { color: number; filter: PIXI.ColorMatrixFilter }>();
+  // shortcut: filters of destroyed objects are left to GC (programs are shared/cached by PIXI); add explicit
+  // destroy if profiling shows GPU memory growth on long sessions
+  private pixiFilters = new WeakMap<FilterController, { type: string; version: number; filter: PIXI.Filter }>();
+  private maxResolution: number;
+  private frameIntervalMs: number;
   private rafId = 0;
   private lastTime = 0;
   private draggedObj: GameObjects.GameObject | null = null;
@@ -3395,6 +3587,10 @@ export class Game {
     const h = config.scale?.height ?? config.height ?? 1080;
     this.scale = new Scale.ScaleManager(w, h);
     this.anims = new AnimationManager(this.textures);
+    this.maxResolution = globalThis.Math.max(0.5, config.render?.resolution ?? 2);
+    const target = config.fps?.target ?? 60;
+    // a 30 FPS tier renders every other display frame; 60+ follows requestAnimationFrame untouched
+    this.frameIntervalMs = target > 0 && target < 55 ? 1000 / target : 0;
 
     const parentEl =
       typeof config.parent === 'string'
@@ -3410,25 +3606,42 @@ export class Game {
     this.uiLayer = document.createElement('div');
     this.uiLayer.id = 'uomd-ui-layer';
     this.uiLayer.className = 'uomd-ui-layer';
-    this.uiLayer.setAttribute('data-engine', `pixi-${PIXI.VERSION}`);
     this.uiLayer.style.cssText =
       'position:fixed;pointer-events:none;overflow:hidden;z-index:2;user-select:none;-webkit-user-select:none;';
     parentEl.appendChild(this.uiLayer);
-
-    this.offscreenCtx =
-      this.canvas.getContext('2d') ??
-      document.createElement('canvas').getContext('2d')!;
 
     this.canvas.addEventListener('webglcontextlost', (ev) => {
       ev.preventDefault();
       this.events.emit(Core.Events.CONTEXT_LOST);
     });
 
-    this.renderer = {
-      type: 2, // WEBGL (compatible with E2E assertions)
-      gl: null,
-      pixiVersion: PIXI.VERSION
-    };
+    this.renderer = { type: 0, name: 'pending', gl: null, pixiVersion: PIXI.VERSION, pixi: null };
+    this.ready = PIXI.autoDetectRenderer({
+      canvas: this.canvas,
+      width: w,
+      height: h,
+      resolution: this.displayResolution(),
+      autoDensity: false,
+      antialias: config.render?.antialias ?? true,
+      roundPixels: config.render?.roundPixels ?? false,
+      powerPreference: config.render?.powerPreference === 'low-power' ? 'low-power' : 'high-performance',
+      background: 0x05030a,
+      // WebGL first: it is the most mature path on Android System WebView; WebGPU and canvas are fallbacks
+      preference: ['webgl', 'webgpu', 'canvas']
+    }).then(
+      (r) => {
+        this.renderer.pixi = r;
+        this.renderer.name = r.name as RendererName;
+        this.renderer.type = r.name === 'canvas' ? CANVAS : WEBGL;
+        this.renderer.gl = (r as unknown as { gl?: WebGL2RenderingContext }).gl ?? null;
+        this.uiLayer.setAttribute('data-engine', `pixi-${PIXI.VERSION}-${r.name}`);
+        this.updateFitLayout();
+      },
+      (err: unknown) => {
+        this.renderer.name = 'failed';
+        throw err instanceof Error ? err : new Error(String(err));
+      }
+    );
 
     this.updateFitLayout();
     window.addEventListener('resize', () => this.updateFitLayout());
@@ -3443,12 +3656,22 @@ export class Game {
 
     this.lastTime = performance.now();
     const tick = (now: number): void => {
+      this.rafId = requestAnimationFrame(tick);
+      if (this.frameIntervalMs > 0 && now - this.lastTime < this.frameIntervalMs - 2) return;
       const dt = Math.Clamp(now - this.lastTime, 1, 2000);
       this.lastTime = now;
       this.step(now, dt);
-      this.rafId = requestAnimationFrame(tick);
     };
     this.rafId = requestAnimationFrame(tick);
+  }
+
+  /** backing-store scale so the 1920×1080 stage maps 1:1 onto device pixels (capped by the quality tier) */
+  private displayResolution(): number {
+    const vw = window.innerWidth || this.scale.width;
+    const vh = window.innerHeight || this.scale.height;
+    const cssScale = globalThis.Math.min(vw / this.scale.width, vh / this.scale.height);
+    const dpr = window.devicePixelRatio || 1;
+    return Math.Clamp(cssScale * dpr, 0.5, this.maxResolution);
   }
 
   private updateFitLayout(): void {
@@ -3459,10 +3682,11 @@ export class Game {
     const ch = globalThis.Math.round(this.scale.height * scale);
     const left = globalThis.Math.round((vw - cw) / 2);
     const top = globalThis.Math.round((vh - ch) / 2);
+    this.renderer?.pixi?.resize(this.scale.width, this.scale.height, this.displayResolution());
     this.canvas.style.width = `${cw}px`;
     this.canvas.style.height = `${ch}px`;
-    this.canvas.style.marginLeft = '0px';
-    this.canvas.style.marginTop = '0px';
+    this.canvas.style.marginLeft = `${left}px`;
+    this.canvas.style.marginTop = `${top}px`;
     this.uiLayer.style.left = `${left}px`;
     this.uiLayer.style.top = `${top}px`;
     this.uiLayer.style.width = `${cw}px`;
@@ -3651,8 +3875,12 @@ export class Game {
     );
 
     window.addEventListener('keydown', (ev) => {
-      const keyUpper = ev.key.length === 1 ? ev.key.toUpperCase() : ev.key.toUpperCase();
-      const codeName = ev.code.startsWith('Key') ? ev.code.slice(3).toUpperCase() : keyUpper;
+      const keyUpper = ev.key === ' ' ? 'SPACE' : ev.key.toUpperCase();
+      const codeName = ev.code.startsWith('Key')
+        ? ev.code.slice(3).toUpperCase()
+        : ev.code.startsWith('Digit')
+          ? ev.code.slice(5).toUpperCase()
+          : ev.code.toUpperCase();
       for (const sc of this.scene.getScenes(true)) {
         sc.input.keyboard.emit('keydown', ev);
         sc.input.keyboard.emit(`keydown-${codeName}`, ev);
@@ -3681,213 +3909,326 @@ export class Game {
       }
     }
     this.events.emit(Core.Events.PRE_RENDER);
-    this.renderScenes(active);
+    const r = this.renderer.pixi;
+    if (r) {
+      this.syncStage(active);
+      r.render(this.stage);
+    }
     this.events.emit(Core.Events.POST_RENDER);
   }
 
-  private renderScenes(activeScenes: Scene[]): void {
-    const ctx = this.offscreenCtx;
-    const W = this.scale.width;
-    const H = this.scale.height;
-    ctx.save();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.fillStyle = '#05030a';
-    ctx.fillRect(0, 0, W, H);
+  // ------------------------------------------------------------------ retained PIXI stage sync
 
-    for (let sIdx = 0; sIdx < activeScenes.length; sIdx++) {
-      const sc = activeScenes[sIdx]!;
-      const cam = sc.cameras.main;
-      if (sIdx === 0 || sc.sys.settings.key !== 'PatchBar') {
-        ctx.fillStyle = hexToRgba(cam.backgroundColor, 1);
-        ctx.fillRect(0, 0, W, H);
-      }
-      const sorted = [...sc.children.list]
-        .map((item, idx) => ({ item, idx }))
-        .sort((a, b) => a.item.depth - b.item.depth || a.idx - b.idx);
-
-      for (const { item } of sorted) {
-        this.renderObject(ctx, item, cam, 1);
-      }
-
-      if (cam.flashEffect.isRunning && cam.flashEffect.alpha > 0) {
-        ctx.fillStyle = `rgba(${cam.flashEffect.r},${cam.flashEffect.g},${cam.flashEffect.b},${Math.Clamp(cam.flashEffect.alpha, 0, 1)})`;
-        ctx.fillRect(0, 0, W, H);
-      }
-      if (cam.fadeEffect.isRunning || cam.fadeEffect.alpha > 0) {
-        ctx.fillStyle = `rgba(${cam.fadeEffect.r},${cam.fadeEffect.g},${cam.fadeEffect.b},${Math.Clamp(cam.fadeEffect.alpha, 0, 1)})`;
-        ctx.fillRect(0, 0, W, H);
-      }
+  private layerFor(sc: Scene): SceneLayer {
+    let l = this.layers.get(sc);
+    if (!l) {
+      l = { root: new PIXI.Container(), bg: new PIXI.Graphics(), vignette: new PIXI.Graphics(), flash: new PIXI.Graphics(), fade: new PIXI.Graphics(), bgKey: '', vignetteKey: '' };
+      const W = this.scale.width;
+      const H = this.scale.height;
+      // flash/fade are white quads recoloured through tint, so they never re-tessellate
+      l.flash.rect(0, 0, W, H).fill(0xffffff);
+      l.fade.rect(0, 0, W, H).fill(0xffffff);
+      this.layers.set(sc, l);
     }
-
-    ctx.restore();
+    return l;
   }
 
-  private renderObject(ctx: CanvasRenderingContext2D, obj: GameObjects.GameObject, cam: Cameras.Scene2D.Camera, parentAlpha: number): void {
-    if (!obj.active || !obj.visible) return;
-    const alpha = Math.Clamp(obj.alpha * parentAlpha, 0, 1);
-    if (alpha <= 0) return;
+  private syncStage(active: Scene[]): void {
+    const W = this.scale.width;
+    const H = this.scale.height;
+    const roots: PIXI.Container[] = [];
+    for (let i = 0; i < active.length; i++) {
+      const sc = active[i]!;
+      const l = this.layerFor(sc);
+      roots.push(l.root);
+      const cam = sc.cameras.main;
 
-    ctx.save();
-    if (!obj.parentContainer) {
-      const sx = cam.scrollX * obj.scrollFactorX - cam.shakeEffect.offsetX * obj.scrollFactorX;
-      const sy = cam.scrollY * obj.scrollFactorY - cam.shakeEffect.offsetY * obj.scrollFactorY;
-      if (cam.zoom !== 1 && obj.scrollFactorX !== 0) {
-        ctx.translate(cam.width / 2, cam.height / 2);
-        ctx.scale(cam.zoom, cam.zoom);
-        ctx.translate(-cam.width / 2 - sx, -cam.height / 2 - sy);
-      } else {
-        ctx.translate(-sx, -sy);
+      // every scene but the PatchBar overlay paints its camera background (an opaque screen, as before)
+      const paintBg = i === 0 || sc.sys.settings.key !== 'PatchBar';
+      l.bg.visible = paintBg;
+      const bgKey = `${cam.backgroundColor}`;
+      if (paintBg && l.bgKey !== bgKey) {
+        l.bg.clear().rect(0, 0, W, H).fill(cam.backgroundColor);
+        l.bgKey = bgKey;
+      }
+
+      const kids: PIXI.Container[] = [l.bg];
+      const sorted = sc.children.list.map((item, idx) => ({ item, idx })).sort((a, b) => a.item.depth - b.item.depth || a.idx - b.idx);
+      for (const { item } of sorted) {
+        const wrap = this.syncRoot(item, cam);
+        if (wrap) kids.push(wrap);
+      }
+
+      const vig = cam.filters.external.list.find((f) => f.type === 'Vignette' && f.active);
+      l.vignette.visible = Boolean(vig);
+      if (vig) {
+        const key = `${vig.radius}|${vig.strength}`;
+        if (l.vignetteKey !== key) {
+          const gradient = new PIXI.FillGradient({
+            type: 'radial',
+            center: { x: 0.5, y: 0.5 },
+            innerRadius: Math.Clamp(vig.radius * 0.6, 0, 1) * 0.5,
+            outerCenter: { x: 0.5, y: 0.5 },
+            outerRadius: 0.75,
+            textureSpace: 'local',
+            colorStops: [
+              { offset: 0, color: 'rgba(0,0,0,0)' },
+              { offset: 1, color: `rgba(0,0,0,${Math.Clamp(vig.strength * 1.25, 0, 1)})` }
+            ]
+          });
+          l.vignette.clear().rect(0, 0, W, H).fill(gradient);
+          l.vignetteKey = key;
+        }
+        kids.push(l.vignette);
+      }
+
+      l.flash.visible = cam.flashEffect.isRunning && cam.flashEffect.alpha > 0;
+      if (l.flash.visible) {
+        l.flash.tint = Display.Color.GetColor(cam.flashEffect.r, cam.flashEffect.g, cam.flashEffect.b);
+        l.flash.alpha = Math.Clamp(cam.flashEffect.alpha, 0, 1);
+      }
+      l.fade.visible = cam.fadeEffect.isRunning || cam.fadeEffect.alpha > 0;
+      if (l.fade.visible) {
+        l.fade.tint = Display.Color.GetColor(cam.fadeEffect.r, cam.fadeEffect.g, cam.fadeEffect.b);
+        l.fade.alpha = Math.Clamp(cam.fadeEffect.alpha, 0, 1);
+      }
+      kids.push(l.flash, l.fade);
+      setChildren(l.root, kids);
+    }
+    setChildren(this.stage, roots);
+    for (const [sc, l] of this.layers) {
+      if (!sc.sys.settings.active) {
+        l.root.destroy({ children: false });
+        l.bg.destroy();
+        l.vignette.destroy();
+        l.flash.destroy();
+        l.fade.destroy();
+        this.layers.delete(sc);
       }
     }
+  }
 
-    if (obj.maskObj && !obj.invertMask && obj.maskObj instanceof GameObjects.Shape) {
+  /** a scene-root object sits in a wrapper that carries the camera scroll/zoom/shake for its scroll factor */
+  private syncRoot(obj: GameObjects.GameObject, cam: Cameras.Scene2D.Camera): PIXI.Container | null {
+    if (!obj.active || (!obj.visible && !obj._pxWrap)) return null;
+    const wrap = (obj._pxWrap ??= new PIXI.Container());
+    wrap.visible = obj.visible;
+    if (!obj.visible) return wrap;
+    const sx = (cam.scrollX - cam.shakeEffect.offsetX) * obj.scrollFactorX;
+    const sy = (cam.scrollY - cam.shakeEffect.offsetY) * obj.scrollFactorY;
+    if (cam.zoom !== 1 && obj.scrollFactorX !== 0) {
+      wrap.position.set(cam.width / 2, cam.height / 2);
+      wrap.scale.set(cam.zoom);
+      wrap.pivot.set(cam.width / 2 + sx, cam.height / 2 + sy);
+    } else {
+      wrap.position.set(0, 0);
+      wrap.scale.set(1);
+      wrap.pivot.set(sx, sy);
+    }
+    this.syncChildren(wrap, [obj]);
+    return wrap;
+  }
+
+  /** syncs objects into parent in list order; a rectangle mask becomes a sibling node in the same space */
+  private syncChildren(parent: PIXI.Container, objs: readonly GameObjects.GameObject[]): void {
+    const out: PIXI.Container[] = [];
+    for (const obj of objs) {
+      const node = this.syncObject(obj);
+      if (!node) continue;
       const m = obj.maskObj;
-      const mw = m.width * m.scaleX;
-      const mh = m.height * m.scaleY;
-      ctx.beginPath();
-      ctx.rect(m.x - mw * m.originX, m.y - mh * m.originY, mw, mh);
-      ctx.clip();
+      if (m && !obj.invertMask && m instanceof GameObjects.Shape) {
+        const g = (obj._pxMask ??= new PIXI.Graphics());
+        const mw = m.width * m.scaleX;
+        const mh = m.height * m.scaleY;
+        const key = `${m.x}|${m.y}|${mw}|${mh}|${m.originX}|${m.originY}`;
+        if (this.nodeKeys.get(g) !== key) {
+          g.clear().rect(m.x - mw * m.originX, m.y - mh * m.originY, mw, mh).fill(0xffffff);
+          this.nodeKeys.set(g, key);
+        }
+        if (node.mask !== g) node.mask = g;
+        out.push(g);
+      } else if (node.mask) {
+        node.mask = null;
+      }
+      out.push(node);
     }
+    setChildren(parent, out);
+  }
 
-    ctx.translate(obj.x, obj.y);
-    if (obj.rotation !== 0) ctx.rotate(obj.rotation);
-    if (obj.scaleX !== 1 || obj.scaleY !== 1) ctx.scale(obj.scaleX, obj.scaleY);
-    ctx.globalAlpha = alpha;
-    if (obj.blendMode === BlendModes.ADD || obj.blendMode === 'ADD') {
-      ctx.globalCompositeOperation = 'lighter';
-    } else if (obj.blendMode === BlendModes.MULTIPLY || obj.blendMode === 'MULTIPLY') {
-      ctx.globalCompositeOperation = 'multiply';
-    } else if (obj.blendMode === BlendModes.SCREEN || obj.blendMode === 'SCREEN') {
-      ctx.globalCompositeOperation = 'screen';
-    }
+  private createNode(obj: GameObjects.GameObject): PIXI.Container {
+    if (obj instanceof GameObjects.Image) return new PIXI.Sprite(PIXI.Texture.EMPTY);
+    if (obj instanceof GameObjects.Text) return new PIXI.Text({ text: '' });
+    if (obj instanceof GameObjects.Graphics || obj instanceof GameObjects.Rectangle || obj instanceof GameObjects.Ellipse || obj instanceof GameObjects.Arc) return new PIXI.Graphics();
+    return new PIXI.Container();
+  }
+
+  private syncObject(obj: GameObjects.GameObject): PIXI.Container | null {
+    if (!obj.active || (!obj.visible && !obj._px)) return null;
+    const node = (obj._px ??= this.createNode(obj));
+    node.visible = obj.visible && obj.alpha > 0;
+    if (!node.visible) return node;
+    node.alpha = Math.Clamp(obj.alpha, 0, 1);
+    node.position.set(obj.x, obj.y);
+    node.rotation = obj.rotation;
+    node.scale.set(obj.scaleX, obj.scaleY);
+    node.blendMode = pixiBlend(obj.blendMode);
+    const effects = this.filtersFor([...obj.filters.internal.list, ...obj.filters.external.list]);
 
     if (obj instanceof GameObjects.Container) {
-      for (const child of obj.list) {
-        this.renderObject(ctx, child, cam, alpha);
-      }
+      this.syncChildren(node, obj.list);
     } else if (obj instanceof GameObjects.Image) {
-      const img = obj.texture.getSourceImage();
-      const f = obj.frame;
-      if (img && f.width > 0 && f.height > 0) {
-        ctx.save();
-        if (obj.flipX || obj.flipY) {
-          ctx.scale(obj.flipX ? -1 : 1, obj.flipY ? -1 : 1);
-        }
-        const dx = -f.width * obj.originX;
-        const dy = -f.height * obj.originY;
-        try {
-          ctx.drawImage(img, f.cutX, f.cutY, f.width, f.height, dx, dy, f.width, f.height);
-        } catch {
-          /* ignore broken image */
-        }
-        ctx.restore();
-      }
+      this.syncSprite(obj, node as PIXI.Sprite);
     } else if (obj instanceof GameObjects.Text) {
-      if (obj.text) {
-        const fontPx = obj.getFontSizePx();
-        ctx.font = `${obj.style.fontStyle} ${fontPx}px ${obj.style.fontFamily}`;
-        ctx.textBaseline = 'top';
-        const lines = obj.getWrappedLines();
-        const lineH = fontPx * 1.2 + obj.lineSpacing;
-        const startX = -obj.width * obj.originX + obj.padding.left;
-        const startY = -obj.height * obj.originY + obj.padding.top;
-        if (obj.style.backgroundColor) {
-          ctx.fillStyle = obj.style.backgroundColor;
-          ctx.fillRect(-obj.width * obj.originX, -obj.height * obj.originY, obj.width, obj.height);
-        }
-        for (let i = 0; i < lines.length; i++) {
-          const line = lines[i]!;
-          let lx = startX;
-          if (obj.style.align === 'center') {
-            const lw = ctx.measureText(line).width;
-            lx = -lw * 0.5 + (0.5 - obj.originX) * obj.width;
-          } else if (obj.style.align === 'right') {
-            const lw = ctx.measureText(line).width;
-            lx = obj.width * (1 - obj.originX) - lw - obj.padding.right;
-          }
-          const ly = startY + i * lineH;
-          if (obj.style.strokeThickness > 0) {
-            ctx.lineWidth = obj.style.strokeThickness;
-            ctx.strokeStyle = obj.style.stroke;
-            ctx.strokeText(line, lx, ly);
-          }
-          ctx.fillStyle = obj.style.color;
-          ctx.fillText(line, lx, ly);
-        }
-      }
+      this.syncText(obj, node as PIXI.Text);
     } else if (obj instanceof GameObjects.Graphics) {
-      for (const cmd of obj.commands) {
-        cmd(ctx);
+      if (this.nodeKeys.get(node) !== obj.version) {
+        GameObjects.drawOpsToPixi(node as PIXI.Graphics, obj.ops);
+        this.nodeKeys.set(node, obj.version);
       }
-    } else if (obj instanceof GameObjects.Rectangle) {
-      const rx = -obj.width * obj.originX;
-      const ry = -obj.height * obj.originY;
-      if (obj.isFilled && obj.fillAlpha > 0) {
-        ctx.fillStyle = hexToRgba(obj.fillColor, obj.fillAlpha * alpha);
-        ctx.fillRect(rx, ry, obj.width, obj.height);
-      }
-      if (obj.isStroked && obj.lineWidth > 0 && obj.strokeAlpha > 0) {
-        ctx.lineWidth = obj.lineWidth;
-        ctx.strokeStyle = hexToRgba(obj.strokeColor, obj.strokeAlpha * alpha);
-        ctx.strokeRect(rx, ry, obj.width, obj.height);
-      }
-    } else if (obj instanceof GameObjects.Ellipse) {
-      if (obj.isFilled && obj.fillAlpha > 0) {
-        ctx.fillStyle = hexToRgba(obj.fillColor, obj.fillAlpha * alpha);
-        ctx.beginPath();
-        ctx.ellipse(0, 0, globalThis.Math.max(0, obj.width / 2), globalThis.Math.max(0, obj.height / 2), 0, 0, globalThis.Math.PI * 2);
-        ctx.fill();
-      }
-      if (obj.isStroked && obj.lineWidth > 0 && obj.strokeAlpha > 0) {
-        ctx.lineWidth = obj.lineWidth;
-        ctx.strokeStyle = hexToRgba(obj.strokeColor, obj.strokeAlpha * alpha);
-        ctx.beginPath();
-        ctx.ellipse(0, 0, globalThis.Math.max(0, obj.width / 2), globalThis.Math.max(0, obj.height / 2), 0, 0, globalThis.Math.PI * 2);
-        ctx.stroke();
-      }
-    } else if (obj instanceof GameObjects.Arc) {
-      if (obj.isFilled && obj.fillAlpha > 0) {
-        ctx.fillStyle = hexToRgba(obj.fillColor, obj.fillAlpha * alpha);
-        ctx.beginPath();
-        ctx.arc(0, 0, globalThis.Math.max(0, obj.radius), 0, globalThis.Math.PI * 2);
-        ctx.fill();
-      }
-      if (obj.isStroked && obj.lineWidth > 0 && obj.strokeAlpha > 0) {
-        ctx.lineWidth = obj.lineWidth;
-        ctx.strokeStyle = hexToRgba(obj.strokeColor, obj.strokeAlpha * alpha);
-        ctx.beginPath();
-        ctx.arc(0, 0, globalThis.Math.max(0, obj.radius), 0, globalThis.Math.PI * 2);
-        ctx.stroke();
-      }
+    } else if (obj instanceof GameObjects.Rectangle || obj instanceof GameObjects.Ellipse || obj instanceof GameObjects.Arc) {
+      this.syncShape(obj, node as PIXI.Graphics);
     } else if (obj instanceof GameObjects.Particles.ParticleEmitter) {
-      const tex = obj.scene.textures.get(obj.textureKey);
-      const img = tex.getSourceImage();
-      for (const p of obj.particles) {
-        const t = Math.Clamp(p.age / p.life, 0, 1);
-        const pa = p.alphaStart + (p.alphaEnd - p.alphaStart) * t;
-        const ps = p.scaleStart + (p.scaleEnd - p.scaleStart) * t;
-        if (pa <= 0 || ps <= 0) continue;
-        ctx.save();
-        ctx.globalAlpha = Math.Clamp(pa * alpha, 0, 1);
-        if (img) {
-          const rw = img.width * ps;
-          const rh = img.height * ps;
-          ctx.drawImage(img, p.x - rw / 2, p.y - rh / 2, rw, rh);
-        } else {
-          ctx.fillStyle = hexToRgba(p.tint, 1);
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, globalThis.Math.max(2, 16 * ps), 0, globalThis.Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      }
+      this.syncParticles(obj, node);
     }
+    const tintFill = obj instanceof GameObjects.Image ? this.tintFillFilter(obj) : null;
+    const wanted = tintFill ? [...effects, tintFill] : effects;
+    const current = node.filters ?? [];
+    if (wanted.length !== current.length || wanted.some((f, i) => current[i] !== f)) node.filters = wanted.length ? wanted : null;
+    return node;
+  }
 
-    ctx.restore();
+  /** ColorMatrix / Blur / Glow controllers → live PIXI filters (masks and the camera vignette are handled elsewhere) */
+  private filtersFor(list: readonly FilterController[]): PIXI.Filter[] {
+    const out: PIXI.Filter[] = [];
+    for (const f of list) {
+      if (!f.active || (f.type !== 'ColorMatrix' && f.type !== 'Blur' && f.type !== 'Glow')) continue;
+      let e = this.pixiFilters.get(f);
+      if (!e || e.type !== f.type) {
+        const filter = f.type === 'ColorMatrix' ? new PIXI.ColorMatrixFilter() : f.type === 'Blur' ? new PIXI.BlurFilter() : new GlowFilter({ quality: 0.2 });
+        e = { type: f.type, version: -1, filter };
+        this.pixiFilters.set(f, e);
+      }
+      if (e.filter instanceof PIXI.ColorMatrixFilter && e.version !== f.version) {
+        const cm = e.filter;
+        cm.reset();
+        for (const op of f.ops) {
+          switch (op[0]) {
+            case 'setValues':
+              cm.matrix = op[1] as PIXI.ColorMatrix;
+              break;
+            case 'sepia':
+            case 'lsd':
+              cm[op[0]](op[1]);
+              break;
+            default:
+              cm[op[0]](op[1], op[2]);
+          }
+        }
+        e.version = f.version;
+      } else if (e.filter instanceof PIXI.BlurFilter) {
+        e.filter.strength = f.strength;
+      } else if (e.filter instanceof GlowFilter) {
+        e.filter.outerStrength = f.strength;
+        e.filter.color = f.color;
+      }
+      out.push(e.filter);
+    }
+    return out;
+  }
+
+  private syncSprite(obj: GameObjects.Image, s: PIXI.Sprite): void {
+    const tex = obj.texture.pixiFrame(obj.frame) ?? PIXI.Texture.EMPTY;
+    if (s.texture !== tex) s.texture = tex;
+    s.anchor.set(obj.originX, obj.originY);
+    s.scale.set(obj.scaleX * (obj.flipX ? -1 : 1), obj.scaleY * (obj.flipY ? -1 : 1));
+    s.tint = obj.tintFill ? 0xffffff : obj.tintTopLeft;
+  }
+
+  private tintFillFilter(obj: GameObjects.Image): PIXI.ColorMatrixFilter | null {
+    if (!obj.tintFill) return null;
+    let entry = this.tintFilters.get(obj);
+    if (!entry || entry.color !== obj.tintTopLeft) {
+      entry?.filter.destroy();
+      entry = { color: obj.tintTopLeft, filter: fillTintFilter(obj.tintTopLeft) };
+      this.tintFilters.set(obj, entry);
+    }
+    return entry.filter;
+  }
+
+  private syncText(obj: GameObjects.Text, t: PIXI.Text): void {
+    const st = obj.style;
+    const fontPx = obj.getFontSizePx();
+    const stroke = st.strokeThickness > 0 ? st.strokeThickness : 0;
+    const sh = obj.shadow;
+    const hasShadow = sh && (sh.blur > 0 || sh.x !== 0 || sh.y !== 0);
+    const key = [st.fontFamily, fontPx, st.fontStyle, st.color, stroke, st.stroke, st.align, obj.letterSpacing, obj.lineSpacing, hasShadow ? `${sh.x},${sh.y},${sh.color},${sh.blur}` : ''].join('|');
+    if (this.nodeKeys.get(t) !== key) {
+      const { fontStyle, fontWeight } = parseFontStyle(st.fontStyle);
+      t.style = new PIXI.TextStyle({
+        fontFamily: st.fontFamily,
+        fontSize: fontPx,
+        fontStyle,
+        fontWeight,
+        fill: st.color,
+        align: (st.align === 'center' || st.align === 'right' ? st.align : 'left') as 'left' | 'center' | 'right',
+        letterSpacing: obj.letterSpacing,
+        lineHeight: fontPx * 1.2 + obj.lineSpacing,
+        ...(stroke > 0 ? { stroke: { color: st.stroke, width: stroke, join: 'round' as const } } : {}),
+        ...(hasShadow ? { dropShadow: { color: sh.color, blur: sh.blur, distance: globalThis.Math.hypot(sh.x, sh.y), angle: globalThis.Math.atan2(sh.y, sh.x), alpha: 1 } } : {})
+      });
+      this.nodeKeys.set(t, key);
+    }
+    // the shim wraps and measures (layout code reads obj.width/height); PIXI only rasterises the result
+    const text = obj.text ? obj.getWrappedLines().join('\n') : '';
+    if (t.text !== text) t.text = text;
+    t.pivot.set(obj.width * obj.originX - obj.padding.left + stroke / 2, obj.height * obj.originY - obj.padding.top + stroke / 2);
+  }
+
+  private syncShape(obj: GameObjects.Rectangle | GameObjects.Ellipse | GameObjects.Arc, g: PIXI.Graphics): void {
+    const key = [obj.type, obj.width, obj.height, obj instanceof GameObjects.Arc ? obj.radius : 0, obj.originX, obj.originY, obj.isFilled, obj.fillColor, obj.fillAlpha, obj.isStroked, obj.lineWidth, obj.strokeColor, obj.strokeAlpha].join('|');
+    if (this.nodeKeys.get(g) === key) return;
+    this.nodeKeys.set(g, key);
+    const fill = obj.isFilled ? { color: obj.fillColor, alpha: obj.fillAlpha } : undefined;
+    const line = obj.isStroked && obj.lineWidth > 0 ? { width: obj.lineWidth, color: obj.strokeColor, alpha: obj.strokeAlpha } : undefined;
+    // ellipses and arcs stay centred on their position (the previous renderer ignored their origin)
+    const op: GameObjects.DrawOp =
+      obj instanceof GameObjects.Rectangle
+        ? { k: 'rect', x: -obj.width * obj.originX, y: -obj.height * obj.originY, w: obj.width, h: obj.height, r: 0, fill, line }
+        : obj instanceof GameObjects.Arc
+          ? { k: 'circle', x: 0, y: 0, r: obj.radius, fill, line }
+          : { k: 'ellipse', x: 0, y: 0, rx: obj.width / 2, ry: obj.height / 2, fill, line };
+    GameObjects.drawOpsToPixi(g, [op]);
+  }
+
+  private syncParticles(obj: GameObjects.Particles.ParticleEmitter, node: PIXI.Container): void {
+    const tex = obj.scene.textures.get(obj.textureKey);
+    const base = tex.pixiFrame(tex.get()) ?? PIXI.Texture.WHITE;
+    const pool = node.children as PIXI.Sprite[];
+    while (pool.length < obj.particles.length) {
+      const s = new PIXI.Sprite(base);
+      s.anchor.set(0.5);
+      node.addChild(s);
+    }
+    while (pool.length > obj.particles.length) pool[pool.length - 1]!.destroy();
+    for (let i = 0; i < obj.particles.length; i++) {
+      const p = obj.particles[i]!;
+      const s = pool[i]!;
+      const t = Math.Clamp(p.age / p.life, 0, 1);
+      const a = p.alphaStart + (p.alphaEnd - p.alphaStart) * t;
+      const sc = p.scaleStart + (p.scaleEnd - p.scaleStart) * t;
+      if (s.texture !== base) s.texture = base;
+      s.visible = a > 0 && sc > 0;
+      s.position.set(p.x, p.y);
+      s.scale.set(sc);
+      s.alpha = Math.Clamp(a, 0, 1);
+      s.tint = p.tint;
+    }
   }
 
   destroy(removeCanvas = false): void {
     cancelAnimationFrame(this.rafId);
+    this.renderer.pixi?.destroy({ removeView: removeCanvas });
+    this.renderer.pixi = null;
     if (removeCanvas) {
       this.canvas.remove();
       this.uiLayer.remove();
