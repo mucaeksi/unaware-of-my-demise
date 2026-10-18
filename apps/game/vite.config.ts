@@ -17,6 +17,15 @@ const DEV_ONLY_PUBLIC = ['audition', 'content/audition'];
 export default defineConfig({
   plugins: [
     {
+      // Google Drive's virtual FS answers lstat on a just-deleted file with EINVAL; unhandled, that watcher error kills
+      // the dev server, so it is logged instead
+      name: 'uomd-drive-watch-errors',
+      apply: 'serve',
+      configureServer(server) {
+        server.watcher.on('error', (e) => server.config.logger.warn(`file watcher: ${String(e)} (restart the dev server if edits stop reloading)`));
+      }
+    },
+    {
       name: 'uomd-drop-dev-only-public',
       apply: 'build',
       closeBundle() {

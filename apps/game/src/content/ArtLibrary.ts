@@ -8,11 +8,25 @@ interface Queued {
   url: string;
 }
 
+export interface UnitAnimation {
+  frames: readonly string[];
+  fps: number;
+  loop: boolean;
+}
+
+export interface UnitState {
+  frame: string;
+  scale: number;
+  footY: number;
+  pivotX: number;
+  animation?: UnitAnimation;
+}
+
 export interface UnitFrames {
   textureKey: string;
   facing: 'left' | 'right';
   heightPx: number;
-  states: Record<string, { frame: string; scale: number; footY: number; pivotX: number; animationKey?: string }>;
+  states: Record<string, UnitState>;
 }
 
 /**
@@ -41,7 +55,6 @@ export class ArtLibrary {
     for (const item of queue) this.content.retainAsset(item.key, scene, () => {
       if (item.type === 'image' && scene.textures.exists(item.key)) scene.textures.remove(item.key);
       if (item.type === 'audio' && scene.cache.audio.exists(item.key)) scene.cache.audio.remove(item.key);
-      for (const key of scene.anims.getAnimsFromTexture(item.key)) if (key.startsWith(`${item.key}:`)) scene.anims.remove(key);
     });
     const waiting: Promise<void>[] = [];
     const seen = new Set<string>();
@@ -104,9 +117,7 @@ export class ArtLibrary {
       for (const [name, [x, y, w, h]] of Object.entries(atlas.frames)) if (!tex.has(name)) tex.add(name, 0, x, y, w, h);
       const states: UnitFrames['states'] = {};
       for (const [st, s] of Object.entries(u.states)) {
-        const animationKey = s.animation ? `${ref.key}:${k}:${st}` : undefined;
-        if (animationKey && s.animation && !scene.anims.exists(animationKey)) scene.anims.create({ key: animationKey, frames: s.animation.frames.map((frame) => ({ key: ref.key, frame })), frameRate: s.animation.fps, repeat: s.animation.loop ? -1 : 0 });
-        states[st] = { frame: s.frame, scale: s.scale, footY: s.foot_y, pivotX: s.pivot_x, ...(animationKey ? { animationKey } : {}) };
+        states[st] = { frame: s.frame, scale: s.scale, footY: s.foot_y, pivotX: s.pivot_x, ...(s.animation ? { animation: { frames: s.animation.frames, fps: s.animation.fps, loop: s.animation.loop } } : {}) };
       }
       this.unitCache.set(k, { textureKey: ref.key, facing: u.facing, heightPx: u.height_px, states });
     }
@@ -118,11 +129,11 @@ export class ArtLibrary {
     return u;
   }
 
-  frameFor(artKey: string, state: UnitAnimState): { key: string; frame: string; scale: number; footY: number; pivotX: number; animationKey?: string } {
+  frameFor(artKey: string, state: UnitAnimState): UnitState & { key: string } {
     const u = this.unit(artKey);
     const s = u.states[state] ?? u.states.idle;
     if (!s) throw new Error(`unit ${artKey} has no idle state`);
-    return { key: u.textureKey, frame: s.frame, scale: s.scale, footY: s.footY, pivotX: s.pivotX, ...(s.animationKey ? { animationKey: s.animationKey } : {}) };
+    return { key: u.textureKey, ...s };
   }
 
   async loadPortraits(scene: Phaser.Scene, characters: readonly string[], emotions?: ReadonlyMap<string, ReadonlySet<string>>): Promise<void> {

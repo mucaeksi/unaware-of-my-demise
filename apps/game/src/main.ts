@@ -5,7 +5,7 @@ import '@fontsource/cormorant-garamond/latin-500-italic.css';
 import Phaser from './engine';
 import { REF_H, REF_W } from './config';
 import { playNode } from './flow';
-import { BattleScene } from './scenes/BattleScene';
+import { BattleHost } from './scenes/BattleScene';
 import { BootScene } from './scenes/BootScene';
 import { AccountScene } from './scenes/AccountScene';
 import { CharacterScene } from './scenes/CharacterScene';
@@ -65,7 +65,7 @@ try {
     fps: { target: qp.targetFps },
     input: { touch: { capture: true }, activePointers: 2 },
     banner: false,
-    scene: [BootScene, ContentPanelScene, SplashScene, StudioScene, TitleScene, PrologueScene, FinishScene, ChaptersScene, StoryScene, BattleScene, HomeScene, SummonScene, RosterScene, RecruitScene, LibraryScene, MailScene, ShopScene, AccountScene, OperationsScene, PurchasesScene, CharacterScene, GearScene, TasksScene, TeamScene, PatchBarScene]
+    scene: [BootScene, ContentPanelScene, SplashScene, StudioScene, TitleScene, PrologueScene, FinishScene, ChaptersScene, StoryScene, BattleHost, HomeScene, SummonScene, RosterScene, RecruitScene, LibraryScene, MailScene, ShopScene, AccountScene, OperationsScene, PurchasesScene, CharacterScene, GearScene, TasksScene, TeamScene, PatchBarScene]
   });
   game.ready.catch((e: unknown) => fatal(`This device cannot run the game: no WebGL, WebGPU or canvas renderer (${e instanceof Error ? e.message : String(e)})`));
   const contextRecovery = installContextRecovery(game, () => Services.refreshArt().then(() => undefined));

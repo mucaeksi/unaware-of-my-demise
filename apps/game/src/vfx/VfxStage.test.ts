@@ -4,7 +4,6 @@ import * as PIXI from 'pixi.js';
 import { describe, expect, it } from 'vitest';
 import { VfxPack } from '@uomd/content-schema';
 import { VfxStage, type VfxEnvironment } from './VfxStage';
-import { Animator, EASES } from './tween';
 
 const pack = VfxPack.parse(JSON.parse(readFileSync(new URL('../../../../content/base/vfx/vfx_presets.json', import.meta.url), 'utf8')));
 const tex = PIXI.Texture.EMPTY;
@@ -14,24 +13,6 @@ const kids = (s: VfxStage) => s.layers.ground.children.length + s.layers.fx.chil
 const run = (s: VfxStage, ms: number, step = 16) => {
   for (let t = 0; t < ms; t += step) s.update(step);
 };
-
-describe('Animator', () => {
-  it('runs delayed tweens to completion and honours timeScale', () => {
-    const a = new Animator();
-    const seen: number[] = [];
-    let done = false;
-    a.tween({ delay: 50, duration: 100, onUpdate: (k) => seen.push(k), onComplete: () => (done = true) });
-    a.update(40);
-    expect(seen).toEqual([]);
-    a.timeScale = 0.5;
-    a.update(100); // 50 effective: 10 into the tween
-    expect(seen.at(-1)).toBeCloseTo(0.4, 5);
-    a.timeScale = 1;
-    a.update(100);
-    expect(done).toBe(true);
-    expect(EASES['back.out'](1)).toBeCloseTo(1, 6);
-  });
-});
 
 describe('VfxStage', () => {
   it('compiles a preset into PIXI nodes on the right layers and cleans up after it finishes', async () => {

@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import type { VfxElement, VfxPack, VfxPreset, VfxProps } from '@uomd/content-schema';
-import { Animator, EASES } from './tween';
+import { Animator, EASES } from '../core/anim';
 import { vfxTextures } from './textures';
 
 type LayerName = 'ground' | 'fx' | 'overlay';

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { type Animator, EASES } from './tween';
+import { type Animator, EASES } from '../core/anim';
 
 export interface CutInOptions {
   unitName: string;
