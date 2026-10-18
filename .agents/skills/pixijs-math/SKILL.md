@@ -1,0 +1,19 @@
+---
+name: pixijs-math
+description: "Codex/UOMD adaptation. Use this skill when working with coordinates, vectors, matrices, shapes, hit testing, or layout rectangles in PixiJS v8. Covers Point/ObservablePoint, Matrix (2D affine, decompose (including mirrored/negative-scale matrices), apply, applyInverse), shapes (Rectangle, Circle, Ellipse, Polygon, RoundedRectangle, Triangle), Rectangle layout helpers (pad, fit, enlarge, ceil, scale, getBounds), strokeContains hit tests, Polygon isClockwise/containsPolygon, toGlobal/toLocal, PointData/PointLike/Size types, DEG_TO_RAD, and pixi.js/math-extras vector and intersection helpers. Triggers on: Point, ObservablePoint, Matrix, Rectangle, Circle, Polygon, Triangle, RoundedRectangle, toGlobal, toLocal, hitArea, strokeContains, pad, fit, enlarge, ceil, getBounds, containsRect, intersects, isClockwise, math-extras, lineIntersection, segmentIntersection, DEG_TO_RAD, PointData, decompose, mirror, flip, negative scale, setFromMatrix."
+license: "MIT"
+---
+# pixijs-math — Codex adaptation
+
+Read the [canonical skill](../../../.claude/skills/pixijs-math/SKILL.md) in full before applying its workflow. Its source directory is `.claude/skills/pixijs-math/`: resolve every relative reference, script and data path against that directory. This adapter deliberately reuses the pinned content instead of making another drifting copy.
+
+Read root README and AGENTS.md. User/session instructions and runtime permissions take precedence. Treat Bash/Read/Write/Task names as generic capabilities and use actual Codex shell, file, connector and delegation tools; never assume Claude's MCP names, environment variables, hooks or authentication exist here.
+
+Write reports in the user's language, adapting source-specific English labels when helpful without changing the requested review structure.
+
+## Host adaptations
+
+- Official PixiJS skill mirrored from the installed `pixi.js` package by `tools/install_pixijs_skills.py`; it matches the version in package-lock.json. Do not edit the copy: upgrade pixi.js and re-run the installer.
+- Its llms.txt fallback (`https://pixijs.download/release/docs/llms.txt`) documents the newest release; confirm any API it suggests against `node_modules/pixi.js/lib` before using it here.
+
+If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

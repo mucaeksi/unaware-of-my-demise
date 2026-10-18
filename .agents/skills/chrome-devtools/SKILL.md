@@ -12,7 +12,7 @@ Write reports in the user's language, adapting source-specific English labels wh
 
 ## Host adaptations
 
-- Use the pinned `tools/mcp_chrome_devtools.sh` launcher (chrome-devtools-mcp@1.10.1), not upstream @latest examples.
+- Use the pinned cross-platform `tools/mcp_chrome_devtools.mjs` launcher (chrome-devtools-mcp@1.10.1; finds Chrome or the Playwright Chromium), not upstream @latest examples.
 - Inspect the live tool schemas: optional pageId/extension tools in newer documentation may be absent in the pinned runtime. Use only callable tools and actual parameters.
 - When no DevTools MCP is connected, use the existing Playwright tests/browser tooling if available and name the fallback. A config file is not a successful browser call.
 

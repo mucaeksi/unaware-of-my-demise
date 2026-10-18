@@ -1,19 +1,19 @@
 ---
 name: uomd-ai-ultra-studio
-description: Orchestrate PixiJS v8 + DOM UI live visual inspection (`uomd-phaser-live` MCP) and Google AI Ultra creative/research tools (`uomd-ai-ultra` MCP: Google Flow / Veo 3.1, Project Genie / Genie 3, Gemini Notebook / NotebookLM Plus, Whisk Animate, Lyria, Chirp 3 HD) for Unaware of My Demise without unauthorized credit spend.
+description: Orchestrate PixiJS v8 + DOM UI live visual inspection (`uomd-pixi-live` MCP) and Google AI Ultra creative/research tools (`uomd-ai-ultra` MCP: Google Flow / Veo 3.1, Project Genie / Genie 3, Gemini Notebook / NotebookLM Plus, Whisk Animate, Lyria, Chirp 3 HD) for Unaware of My Demise without unauthorized credit spend.
 ---
 
 # UOMD Live Engine MCP & Google AI Ultra Studio Integration
 
 Use this skill whenever inspecting live PixiJS v8 + DOM UI scene changes or preparing/integrating **Google AI Ultra** workflows (**Google Flow**, **Project Genie**, **Gemini Notebook / NotebookLM Plus**, **Whisk Animate**, **Veo 3.1**, **Lyria**, **Chirp 3 HD**) for *Unaware of My Demise*.
 
-## 1. Live PixiJS v8 + DOM UI Inspection (`uomd-phaser-live` MCP)
+## 1. Live PixiJS v8 + DOM UI Inspection (`uomd-pixi-live` MCP)
 
-Implemented in [`tools/mcp_phaser_live.ts`](../../../tools/mcp_phaser_live.ts) and registered in `~/.gemini/config/mcp_config.json`.
+Implemented in [`tools/mcp_pixi_live.ts`](../../../tools/mcp_pixi_live.ts) and registered in `~/.gemini/config/mcp_config.json`.
 
-- **`phaser_inspect_scene`**: Launches the `@uomd/game` Vite server and headless Chromium (1920×1080), waits for `Services.ready()`, jumps to any scene (`Splash`, `Studio`, `Title`, `Prologue`, `Story`, `Battle`, `Home`, `Summon`, `Roster`, `Character`, `Team`, `Gear`, `Chapters`, `Modes`), optionally clicks `(tapX, tapY)`, dumps the live PixiJS v8 display list (`scene.children.list`) and `#uomd-ui-layer` DOM elements, reports console/WebGL errors, and saves a 1920×1080 PNG screenshot in `.cache/mcp-phaser-shots/`.
-- **`phaser_search_docs` & `phaser_get_skill_doc`**: Searches and reads the 6 canonical project engine skills in `.claude/skills/`.
-- **`phaser_list_game_assets`**: Lists all compiled and approved assets in `content/base/art/art_manifest.json` and `content/approved_art/`.
+- **`pixi_inspect_scene`**: Launches the `@uomd/game` Vite server and headless Chromium (1920×1080), waits for `Services.ready()`, jumps to any scene (`Splash`, `Studio`, `Title`, `Prologue`, `Story`, `Battle`, `Home`, `Summon`, `Roster`, `Character`, `Team`, `Gear`, `Chapters`, `Modes`), optionally clicks `(tapX, tapY)`, dumps the live PixiJS v8 display list (`scene.children.list`) and `#uomd-ui-layer` DOM elements, reports console/WebGL errors, and saves a 1920×1080 PNG screenshot in `.cache/mcp-pixi-shots/`.
+- **`pixi_search_docs` & `pixi_get_skill_doc`**: Searches and reads the 6 canonical project engine skills in `.claude/skills/`.
+- **`pixi_list_game_assets`**: Lists all compiled and approved assets in `content/base/art/art_manifest.json` and `content/approved_art/`.
 
 Always view the captured screenshot (`view_file`) after modifying UI, layout, typography, or animations so visual regressions are caught immediately.
 

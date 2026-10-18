@@ -14,7 +14,7 @@ Write reports in the user's language, adapting source-specific English labels wh
 ## Host adaptations
 
 - Prefer available Cloudflare connector/plugin tools and current official docs. CLI credential availability and connector access are separate; verify the specific capability instead of asking for secret values.
-- Use Workers Builds for this repository's staging deployment. One build deploys one Worker via tools/deploy_staging.sh; the game job owns D1 migrations. Keep the existing server-authoritative economy and Access/RBAC checks.
+- Staging deploys go from the Google Drive working copy through `npm run deploy:cloudflare` (D-24): the `npm run verify` gate, then tools/deploy_from_drive.ts (game owns D1 migrations/seeds). Workers Builds and GitHub Actions are retired. Keep the existing server-authoritative economy and Access/RBAC checks.
 - Use uomd-monitoring for safe operational data and uomd-monetization for SSV/Play/RTDN changes. Do not interpret a skill's general infrastructure recipes as authorization to provision production or paid services.
 
 If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

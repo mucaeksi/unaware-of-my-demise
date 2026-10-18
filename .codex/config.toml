@@ -4,13 +4,19 @@
 # Claude continues to use .mcp.json unchanged.
 
 [mcp_servers.chrome-devtools]
-command = "bash"
-args = ["tools/mcp_chrome_devtools.sh"]
+command = "node"
+args = ["tools/mcp_chrome_devtools.mjs"]
 enabled = true
 startup_timeout_sec = 60
 
 [mcp_servers.graphify]
 command = "uv"
 args = ["run", "--offline", "--no-project", "--with", "graphifyy[mcp]==0.9.84", "python", "-m", "graphify.serve", "graphify-out/graph.json"]
+enabled = true
+startup_timeout_sec = 60
+
+[mcp_servers.uomd-pixi-live]
+command = "node"
+args = ["node_modules/tsx/dist/cli.mjs", "tools/mcp_pixi_live.ts"]
 enabled = true
 startup_timeout_sec = 60

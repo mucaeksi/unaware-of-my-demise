@@ -58,7 +58,7 @@ def adaptation(name: str) -> str:
 - Use the established Gothic tokens and PixiJS v8 + DOM/CSS and React architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
 """
     if name == "chrome-devtools":
-        return """- Use the pinned `tools/mcp_chrome_devtools.sh` launcher (chrome-devtools-mcp@1.10.1), not upstream @latest examples.
+        return """- Use the pinned cross-platform `tools/mcp_chrome_devtools.mjs` launcher (chrome-devtools-mcp@1.10.1; finds Chrome or the Playwright Chromium), not upstream @latest examples.
 - Inspect the live tool schemas: optional pageId/extension tools in newer documentation may be absent in the pinned runtime. Use only callable tools and actual parameters.
 - When no DevTools MCP is connected, use the existing Playwright tests/browser tooling if available and name the fallback. A config file is not a successful browser call.
 """
@@ -75,7 +75,7 @@ def adaptation(name: str) -> str:
 """
     if name == "cloudflare-d1-liveops":
         return """- Prefer available Cloudflare connector/plugin tools and current official docs. CLI credential availability and connector access are separate; verify the specific capability instead of asking for secret values.
-- Use Workers Builds for this repository's staging deployment. One build deploys one Worker via tools/deploy_staging.sh; the game job owns D1 migrations. Keep the existing server-authoritative economy and Access/RBAC checks.
+- Staging deploys go from the Google Drive working copy through `npm run deploy:cloudflare` (D-24): the `npm run verify` gate, then tools/deploy_from_drive.ts (game owns D1 migrations/seeds). Workers Builds and GitHub Actions are retired. Keep the existing server-authoritative economy and Access/RBAC checks.
 - Use uomd-monitoring for safe operational data and uomd-monetization for SSV/Play/RTDN changes. Do not interpret a skill's general infrastructure recipes as authorization to provision production or paid services.
 """
     if name == "google-anime-media":
@@ -83,9 +83,13 @@ def adaptation(name: str) -> str:
 - Read the current budget file and existing generation approvals. Session authorization governs permitted jobs; loading or adapting this skill does not authorize spending or a new API credential.
 - Research availability and prepare prompts/provenance without starting paid jobs when no applicable generation approval exists.
 """
-    if name.startswith("phaser4-"):
-        return """- Verify installed PixiJS v8 and DOM/CSS UI architecture (Decision D-23) and existing package versions. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
-- Preserve narrative canon, approved Google asset provenance, data-only signed patches and server-authoritative gameplay. Use the existing local browser tests rather than assuming Claude's old runtime state is current.
+    if name.startswith("uomd-"):
+        return """- Verify the installed pixi.js version and the real engine in `apps/game/src/engine` (Decision D-23a) before changing rendering code. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
+- Preserve narrative canon, approved Google asset provenance, data-only signed patches and server-authoritative gameplay. Use the `uomd-pixi-live` MCP or the local browser/E2E tests rather than assuming an old runtime state is current.
+"""
+    if name.startswith("pixijs"):
+        return """- Official PixiJS skill mirrored from the installed `pixi.js` package by `tools/install_pixijs_skills.py`; it matches the version in package-lock.json. Do not edit the copy: upgrade pixi.js and re-run the installer.
+- Its llms.txt fallback (`https://pixijs.download/release/docs/llms.txt`) documents the newest release; confirm any API it suggests against `node_modules/pixi.js/lib` before using it here.
 """
     return """- Preserve the canonical workflow and resolve its resources against the source directory. Review new source/version changes before using new runtimes or instructions.
 - Use current project constraints and actual host capabilities; do not infer permission to install, delegate, spend or deploy from generic examples.
@@ -95,7 +99,8 @@ def adaptation(name: str) -> str:
 def render(name: str, fields: dict[str, str]) -> str:
     description = f"Codex/UOMD adaptation. {fields['description']}"
     if len(description) > 1024:
-        raise ValueError(f"Description too long: {name}")
+        # Codex caps descriptions at 1024 chars; upstream trigger lists (official PixiJS skills) can be longer
+        description = description[:1020].rstrip() + " …"
     header = f"---\nname: {name}\ndescription: {json.dumps(description, ensure_ascii=False)}\n"
     if fields.get("license"):
         header += f"license: {json.dumps(fields['license'])}\n"

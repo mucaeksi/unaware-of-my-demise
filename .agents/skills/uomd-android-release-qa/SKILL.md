@@ -4,7 +4,7 @@ description: Assess and verify UOMD Android/Google Play readiness with physical-
 ---
 # UOMD Android release QA
 
-Read README, [Android acceptance plan](../../../docs/QA_ANDROID.md), [phaser4-mobile-qa](../phaser4-mobile-qa/SKILL.md) and its canonical source. Inspect current native bridges, SDK/config/build files under apps/android, client platform adapters and matching Worker code/tests. Historical QA plans are requirements/evidence maps, not executed acceptance results; verify every previously stated source limit against current main.
+Read README, [Android acceptance plan](../../../docs/QA_ANDROID.md), [uomd-mobile-qa](../uomd-mobile-qa/SKILL.md) and its canonical source. Inspect current native bridges, SDK/config/build files under apps/android, client platform adapters and matching Worker code/tests. Historical QA plans are requirements/evidence maps, not executed acceptance results; verify every previously stated source limit against current main.
 
 Build an acceptance matrix with requirement, current implementation, test route, PASS/FAIL/BLOCKED/NOT RUN, source evidence and device/build evidence. Keep browser, emulator, physical device, local backend, live staging and Play sandbox results separate. Record commit/AAB hash/versionCode, device/Android/WebView versions, environment, patch generation and actual test timestamp.
 

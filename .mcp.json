@@ -1,9 +1,9 @@
 {
   "mcpServers": {
     "chrome-devtools": {
-      "command": "bash",
+      "command": "node",
       "args": [
-        "tools/mcp_chrome_devtools.sh"
+        "tools/mcp_chrome_devtools.mjs"
       ]
     },
     "graphify": {
@@ -17,6 +17,13 @@
         "-m",
         "graphify.serve",
         "graphify-out/graph.json"
+      ]
+    },
+    "uomd-pixi-live": {
+      "command": "node",
+      "args": [
+        "node_modules/tsx/dist/cli.mjs",
+        "tools/mcp_pixi_live.ts"
       ]
     }
   }

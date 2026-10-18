@@ -4,7 +4,7 @@ description: Verify UOMD PixiJS v8 + DOM UI game and React Control Center UI beh
 ---
 # UOMD visual and browser regression
 
-Read README, [phaser4-mobile-qa](../phaser4-mobile-qa/SKILL.md), [phaser4-anime-ui](../phaser4-anime-ui/SKILL.md) and their canonical sources. Use ui-ux-pro-max for focused local guidance while preserving existing Gothic tokens/art direction. Inspect current tests/e2e configs, fixtures and screenshots before adding coverage.
+Read README, [uomd-mobile-qa](../uomd-mobile-qa/SKILL.md), [uomd-anime-ui](../uomd-anime-ui/SKILL.md) and their canonical sources. Use ui-ux-pro-max for focused local guidance while preserving existing Gothic tokens/art direction. Inspect current tests/e2e configs, fixtures and screenshots before adding coverage.
 
 1. Select the affected flow and a deterministic state: content release, test account/seed, viewport, locale, fonts, motion state and navigation step. Reuse existing Playwright test flows and the local test stack; do not disable live authentication or inject financial state into a shared staging player to make a screenshot.
 2. Exercise desktop landscape and narrow/wide phone landscape with touch/safe-area handling. Check clipped text, readable contrast, button/target sizes, dialog focus, reduced motion, loading, empty/unavailable, failed refresh and navigation cancellation. Verify both the PixiJS v8 2D stage (`window.__UOMD__.game`) and `#uomd-ui-layer` DOM accessibility overlays.

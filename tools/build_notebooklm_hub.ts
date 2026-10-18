@@ -166,7 +166,7 @@ ${safeRead('docs/NEXT_STEPS.md')}
     '06_AI_Ultra_Whisk_Flow_Genie_and_Phaser_MCP.md': `# 06 — Google AI Ultra Ecosystem Integration (NotebookLM Plus, Whisk, Flow, Project Genie) & Phaser 4 Live MCP
 
 ## 1. Overview of Active MCP Servers & Workflows
-1. **\`uomd-phaser-live\` (\`tools/mcp_phaser_live.ts\`):**
+1. **\`uomd-pixi-live\` (\`tools/mcp_pixi_live.ts\`):**
    - Automatically syncs \`content/base\` into \`apps/game/public/content/base\`, boots a headless Chromium viewport at \`1920x1080\` against the Vite dev server, jumps directly to any Phaser 4 scene (\`Splash\`, \`Studio\`, \`Title\`, \`Prologue\`, \`Story\`, \`Battle\`, \`Finish\`, \`Home\`), captures live PNG screenshots, and returns scene state + console/page error diagnostics.
 2. **\`uomd-ai-ultra\` (\`tools/mcp_ai_ultra_bridge.ts\`):**
    - \`ai_ultra_export_notebooklm_bundle\`: Builds and syncs this 6-part NotebookLM Plus Knowledge Hub in \`docs/notebooklm/\` and \`UOMD_NotebookLM_Hub\`.

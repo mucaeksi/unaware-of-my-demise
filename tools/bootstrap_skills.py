@@ -20,7 +20,8 @@ PINNED = {
     "ponytail-5.1.0.zip": "8fa83a6a1f5f0ca980445f789d3a747ee9999959bbc4176ea6f73e4f3dbcb8bd",
     "ui-ux-pro-max-skill-2.15.0.zip": "99cadc867d71f4c77d29441ad15e5b47490e5998c0f926e5d16da185fb4eb455"
 }
-# Paths inside the pinned toolkit ZIP that must never be installed: obsolete (Neon) or retired by the owner (Context7, Phaser 4 raw templates overwritten by D-23 PixiJS v8 skills).
+# Paths inside the pinned toolkit ZIP that must never be installed: obsolete (Neon) or retired by the owner (Context7, the
+# Phaser 4 skills replaced by the in-repo uomd-* skills and the official PixiJS skills from tools/install_pixijs_skills.py).
 EXCLUDED = (
     ".claude/skills/cloudflare-neon-liveops/",
     ".claude/skills/context7-mcp/",
@@ -101,7 +102,7 @@ def main():
     parser.add_argument("--verify", action="store_true", help="Validate already installed skills only")
     args = parser.parse_args()
     if args.verify:
-        expected = ["ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "phaser4-battle", "phaser4-anime-ui", "security-audit"]
+        expected = ["ponytail", "graphify", "ui-ux-pro-max", "uomd-pixi-engine", "uomd-battle", "uomd-anime-ui", "pixijs", "security-audit"]
         missing = [name for name in expected if not (TARGET / name / "SKILL.md").is_file()]
         print("Installed skill files:", len(list(TARGET.glob("*/SKILL.md"))))
         if missing: raise SystemExit("Missing skills: " + ", ".join(missing))
@@ -124,14 +125,18 @@ def main():
         copied += install_cloudflare_security_skill(supplied["Cloudflare_Security_Audit_Skill_2026-10-10.zip"])
     lock = {
         "installed_by": "tools/bootstrap_skills.py",
-        "official_phaser_skills": 0,
-        "pinned_archive_sha256": {p.name: PINNED[p.name] for p in archives},
+                "pinned_archive_sha256": {p.name: PINNED[p.name] for p in archives},
         "skill_file_sha256": {p.parent.name: sha256(p.read_bytes()) for p in sorted(TARGET.glob("*/SKILL.md"))},
         "executable_hooks_enabled": False,
     }
+    previous = ROOT / ".claude" / "skills-lock.json"
+    if previous.is_file():
+        # keep the official PixiJS mirror record written by tools/install_pixijs_skills.py
+        kept = json.loads(previous.read_text(encoding="utf-8")).get("pixijs_skills")
+        if kept: lock["pixijs_skills"] = kept
     write_safe(ROOT / ".claude" / "skills-lock.json", (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode())
     print("PASS: copied", copied, "archive files; installed", len(lock["skill_file_sha256"]), "skills.")
-    main_verify = [name for name in ("ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "security-audit") if not (TARGET / name / "SKILL.md").exists()]
+    main_verify = [name for name in ("ponytail", "graphify", "ui-ux-pro-max", "uomd-pixi-engine", "security-audit") if not (TARGET / name / "SKILL.md").exists()]
     if main_verify: raise SystemExit("Unexpected missing skills: " + ", ".join(main_verify))
 
 if __name__ == "__main__":
