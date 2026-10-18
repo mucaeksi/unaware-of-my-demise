@@ -1,4 +1,4 @@
-# Architecture (implemented state, 2026-10-10)
+# Architecture (implemented state, 2026-10-17 — Decision D-23)
 
 ```
 narrative/  ──(tools/build_content.ts)──►  content/base      (release rel_0001, embedded in the app)
@@ -9,19 +9,19 @@ packages/content-schema ── zod grammar: effects, units, story commands, enco
 packages/combat ── deterministic 5v5 engine + replayBattle()      packages/story ── declarative story VM
 packages/patch ── PatchManager (device) + manifest builder/signer (publisher)
                                                 │
-apps/game  (Phaser 4.2.1, Vite)  ◄── /content/base (static) + /api/v1/content/* (signed patches)
+apps/game  (PixiJS v8 + DOM/CSS UI, Vite)  ◄── /content/base (static) + /api/v1/content/* (signed patches)
 apps/api   (Hono on Workers): game Worker  = static client + /api/v1/*   │  D1 `DB`  (authoritative SQL)
                               admin Worker = static SPA + /admin/api/*   │  R2 `CONTENT` (objects/<sha256>)
 apps/admin (React 19)  UOMD Control Center — behind Cloudflare Access
 ```
 
 ## Game client (`apps/game`)
-- Phaser 4.2.1 **WebGL** renderer (not Canvas, no Vulkan claim), 1920×1080 reference, `Scale.FIT` with themed letterbox,
-  portrait-rotation overlay, safe-area helper, reduced-motion preference, 2 active pointers. Scenes: Boot → Title →
-  Chapters → Story → Battle. Everything the scenes show comes from `ContentService` (patch overlay over the embedded base).
+- **Hybrid PixiJS v8 (`pixi.js` ^8.8.0) WebGL2/WebGPU 2D Stage + Modular TypeScript DOM/CSS UI Architecture (`#uomd-ui-layer`)** (Decision D-23), 1920×1080 reference, `Scale.FIT` with themed letterbox,
+  portrait-rotation overlay, safe-area helper, reduced-motion preference, 2 active pointers. Scenes: Boot → Splash → Studio → Title →
+  Prologue → Story → Battle → Finish → Home/Chapters/Roster/Growth/Gear/Teams/Summon/Recruit/Shop/Tasks/Mail/Library/Account/Operations/Purchases. Everything the scenes show comes from `ContentService` (patch overlay over the embedded base).
 - Battle presentation consumes the engine's typed event log (no gameplay logic in scenes); actions are recorded and sent to
   `/api/v1/battles/verify`; the result screen shows whether the server's replay hash matched.
-- Audio: Web Audio music with intro + sample-accurate loop region (Lyria loop metadata), procedural interim SFX.
+- Audio: Web Audio music with intro + sample-accurate loop region (Lyria loop metadata), procedural & voiced SFX.
 
 ## Backend (`apps/api`)
 - **Game Worker** — `GET /api/v1/health` (D1 + R2 probes), `/content/channels/:channel/manifest` (signed, ETag),

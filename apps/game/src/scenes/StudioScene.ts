@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';

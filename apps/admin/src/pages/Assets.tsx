@@ -85,36 +85,36 @@ export function Assets({ me, say }: { me: Me; say: (m: string) => void }): React
       </header>
       <p style={{ color: 'var(--dim)' }}>Every asset needs provenance (source) and a license note. Store releases require owner approval bound to a verified R2 object hash and byte size.</p>
       <div className="row" role="search" aria-label="Filter assets">
-        <input aria-label="Search asset path" placeholder="path filter" value={q} onChange={(e) => setQ(e.target.value)} maxLength={120} />
-        <input aria-label="Filter asset kind" placeholder="kind (e.g. atlas_image)" value={kindFilter} onChange={(e) => setKindFilter(e.target.value)} maxLength={40} />
-        <select aria-label="Filter asset status" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+        <input aria-label="Search assets" placeholder="path filter" value={q} onChange={(e) => setQ(e.target.value)} maxLength={120} />
+        <input aria-label="Filter by category" placeholder="kind (e.g. atlas_image)" value={kindFilter} onChange={(e) => setKindFilter(e.target.value)} maxLength={40} />
+        <select aria-label="Filter by approval state" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
           <option value="">All statuses</option>
           <option value="candidate">candidate</option>
           <option value="approved">approved</option>
           <option value="retired">retired</option>
         </select>
       </div>
+      {me.role !== 'viewer' ? (
+        <form className="row" onSubmit={add}>
+          <label>Path<input name="path" required placeholder="art/atlas_x.webp" /></label>
+          <label>SHA-256<input name="sha256" required pattern="[0-9a-f]{64}" size={30} /></label>
+          <label>Bytes<input name="bytes" type="number" min="1" required /></label>
+          <label>Media type<select name="media_type"><option>image/webp</option><option>image/png</option><option>audio/ogg</option><option>application/json</option></select></label>
+          <label>Kind<input name="kind" required placeholder="atlas_image" /></label>
+          <label>Source / provenance<input name="source" required size={30} /></label>
+          <label>License<input name="license" defaultValue="project-owned" /></label>
+          <label>Status<select name="status"><option>candidate</option>{me.role === 'owner' ? <option>approved</option> : null}<option>retired</option></select></label>
+          <button className="btn primary" type="submit">Register</button>
+        </form>
+      ) : null}
       <table>
         <thead><tr><th>Path</th><th>Kind</th><th>Size</th><th>Status</th><th>License</th><th>Source</th><th /></tr></thead>
         <tbody>
           {rows.length === 0 ? <tr><td colSpan={7}>No assets registered yet.</td></tr> : rows.map((a) => (
             <tr key={a.id}>
               <td>
-                <div className="row" style={{ gap: 10 }}>
-                  {a.path.endsWith('.webp') ? (
-                    <img
-                      src={`/dev/media/${a.path}`}
-                      alt=""
-                      loading="lazy"
-                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-                      style={{ width: 56, height: 36, objectFit: 'cover', borderRadius: 4, border: '1px solid var(--edge, #444)', background: '#0a0610' }}
-                    />
-                  ) : null}
-                  <div>
-                    <code>{a.path}</code>
-                    <div className="mono">{a.sha256.slice(0, 16)}…</div>
-                  </div>
-                </div>
+                <code>{a.path}</code>
+                <div className="mono">{a.sha256.slice(0, 16)}…</div>
               </td>
               <td>{a.kind}</td>
               <td>{(a.bytes / 1024).toFixed(0)} KB</td>
@@ -158,19 +158,6 @@ export function Assets({ me, say }: { me: Me; say: (m: string) => void }): React
             </div>
           ) : null}
         </section>
-      ) : null}
-      {me.role !== 'viewer' ? (
-        <form className="row" onSubmit={add}>
-          <label>Path<input name="path" required placeholder="art/atlas_x.webp" /></label>
-          <label>SHA-256<input name="sha256" required pattern="[0-9a-f]{64}" size={30} /></label>
-          <label>Bytes<input name="bytes" type="number" min="1" required /></label>
-          <label>Media type<select name="media_type"><option>image/webp</option><option>image/png</option><option>audio/ogg</option><option>application/json</option></select></label>
-          <label>Kind<input name="kind" required placeholder="atlas_image" /></label>
-          <label>Source / provenance<input name="source" required size={30} /></label>
-          <label>License<input name="license" defaultValue="project-owned" /></label>
-          <label>Status<select name="status"><option>candidate</option>{me.role === 'owner' ? <option>approved</option> : null}<option>retired</option></select></label>
-          <button className="btn primary" type="submit">Register</button>
-        </form>
       ) : null}
     </>
   );

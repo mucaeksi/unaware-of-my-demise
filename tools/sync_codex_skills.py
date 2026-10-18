@@ -10,12 +10,6 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
-PHASER_TOPICS = frozenset("""actions-and-utilities animations audio-and-sound cameras
-curves-and-paths data-manager events-system filters-and-postfx game-object-components
-game-setup-and-config geometry-and-math graphics-and-shapes groups-and-containers
-input-keyboard-mouse-touch loading-assets particles physics-arcade physics-matter
-render-textures scale-and-responsive scenes sprites-and-images text-and-bitmaptext
-tilemaps time-and-timers tweens v3-to-v4-migration v4-new-features""".split())
 
 
 def digest(data: bytes) -> str:
@@ -23,6 +17,7 @@ def digest(data: bytes) -> str:
 
 
 def metadata(text: str) -> dict[str, str]:
+    text = text.replace("\r\n", "\n")
     if not text.startswith("---\n") or "\n---" not in text[4:]:
         raise ValueError("Missing skill frontmatter")
     header = text.split("---", 2)[1]
@@ -60,7 +55,7 @@ def adaptation(name: str) -> str:
     if name == "ui-ux-pro-max":
         return """- Replace `${CLAUDE_SKILL_DIR}` with the absolute canonical directory `.claude/skills/ui-ux-pro-max/`; resolve scripts/data there, not beside this adapter.
 - Local example from repository root: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"analytics dashboard accessibility\" --stack react`.
-- Use the established Gothic tokens and Phaser/React architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
+- Use the established Gothic tokens and PixiJS v8 + DOM/CSS and React architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
 """
     if name == "chrome-devtools":
         return """- Use the pinned `tools/mcp_chrome_devtools.sh` launcher (chrome-devtools-mcp@1.10.1), not upstream @latest examples.
@@ -89,12 +84,8 @@ def adaptation(name: str) -> str:
 - Research availability and prepare prompts/provenance without starting paid jobs when no applicable generation approval exists.
 """
     if name.startswith("phaser4-"):
-        return """- Verify installed Phaser 4 APIs and existing package versions; use the linked official topic skills as needed. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
+        return """- Verify installed PixiJS v8 and DOM/CSS UI architecture (Decision D-23) and existing package versions. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
 - Preserve narrative canon, approved Google asset provenance, data-only signed patches and server-authoritative gameplay. Use the existing local browser tests rather than assuming Claude's old runtime state is current.
-"""
-    if name in PHASER_TOPICS:
-        return """- Treat the canonical Phaser guidance as topic documentation. Verify API examples against the installed Phaser types and package version before changes.
-- Keep project architecture and Android-first constraints from README. This topic does not authorize a Phaser upgrade, another engine, production rollout or new dependency by itself.
 """
     return """- Preserve the canonical workflow and resolve its resources against the source directory. Review new source/version changes before using new runtimes or instructions.
 - Use current project constraints and actual host capabilities; do not infer permission to install, delegate, spend or deploy from generic examples.

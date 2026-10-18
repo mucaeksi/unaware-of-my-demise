@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { REF_W } from '../config';
 import { qualityProfile } from '../platform/graphics';
 import { prefs } from '../platform/prefs';
@@ -254,6 +254,92 @@ export class BattleVfx {
       em.explode(Math.max(6, Math.round(14 * q.particleDensity)));
       scene.time.delayedCall(620, () => em.destroy());
     }
+  }
+
+  /** Fadyme's signature Silver Warding Bell acoustic wave: concentric silver-violet ripple rings + floating bell star motes. */
+  static silverBellRipple(scene: Phaser.Scene, x: number, y: number, scale = 1): void {
+    if (prefs().reducedMotion || prefs().reduceFlash) return;
+    this.ensureTextures(scene);
+    const colors = [0xf4e8ff, 0xd7b8ff, 0x9b72f2];
+    colors.forEach((col, idx) => {
+      scene.time.delayedCall(idx * 65, () => {
+        const ring = scene.add
+          .image(x, y, 'fx_ring')
+          .setTint(col)
+          .setBlendMode(Phaser.BlendModes.ADD)
+          .setDepth(DEPTH.fx + 16 + idx)
+          .setScale(0.18 * scale)
+          .setAlpha(0.92);
+        scene.tweens.add({
+          targets: ring,
+          scale: (0.95 + idx * 0.28) * scale,
+          angle: idx % 2 === 0 ? 90 : -90,
+          alpha: 0,
+          duration: 520 + idx * 60,
+          ease: 'Cubic.easeOut',
+          onComplete: () => ring.destroy(),
+        });
+      });
+    });
+
+    const q = qualityProfile();
+    if (q.particles && q.particleDensity > 0) {
+      const notes = scene.add
+        .particles(x, y, 'fx_star', {
+          speed: { min: 70, max: 210 * scale },
+          angle: { min: 0, max: 360 },
+          scale: { start: 0.42 * scale, end: 0 },
+          alpha: { start: 0.95, end: 0 },
+          lifespan: 580,
+          tint: [0xf4e8ff, 0xd7b8ff, 0xe3c37d],
+          blendMode: 'ADD',
+          emitting: false,
+        })
+        .setDepth(DEPTH.fx + 20);
+      notes.explode(Math.max(6, Math.round(14 * q.particleDensity)));
+      scene.time.delayedCall(640, () => notes.destroy());
+    }
+  }
+
+  /** Mahmut's signature Crown Guard Iron Bulwark crest: oxblood-and-gold 8-point geometric shield burst & ground shockwave. */
+  static ironBulwarkWave(scene: Phaser.Scene, x: number, y: number, scale = 1): void {
+    if (prefs().reducedMotion || prefs().reduceFlash) return;
+    this.ensureTextures(scene);
+    const crest = scene.add.graphics().setPosition(x, y).setDepth(DEPTH.fx + 18);
+    crest.lineStyle(5, 0xe8c478, 0.95);
+    crest.strokeCircle(0, 0, 56 * scale);
+    crest.lineStyle(3, 0xb83b4a, 0.88);
+    for (let k = 0; k < 8; k++) {
+      const a = (k * Math.PI) / 4;
+      crest.lineBetween(
+        Math.cos(a) * 26 * scale,
+        Math.sin(a) * 26 * scale,
+        Math.cos(a) * 76 * scale,
+        Math.sin(a) * 76 * scale,
+      );
+    }
+    crest.setScale(0.35);
+    scene.tweens.add({
+      targets: crest,
+      scale: 1.25 * scale,
+      angle: 22.5,
+      alpha: 0,
+      duration: 460,
+      ease: 'Back.easeOut',
+      onComplete: () => crest.destroy(),
+    });
+  }
+
+  /** Brief anime hit-stop freeze on heavy/critical/ultimate impacts to give tactile weight to blows. */
+  static hitStop(scene: Phaser.Scene, durationMs = 55): void {
+    if (prefs().reducedMotion) return;
+    const baseScale = scene.time.timeScale || 1;
+    scene.tweens.timeScale = 0.06;
+    window.setTimeout(() => {
+      if (scene.sys?.isActive()) {
+        scene.tweens.timeScale = scene.time.timeScale || baseScale;
+      }
+    }, durationMs);
   }
 
   /** Fires a glowing elemental projectile with a curved arc and particle contrail from caster to target. */

@@ -1,3 +1,5 @@
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { defineConfig } from '@playwright/test';
 
 const GL = ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'];
@@ -12,7 +14,7 @@ export default defineConfig({
   workers: 1,
   fullyParallel: false,
   reporter: [['list']],
-  outputDir: '../../.cache/e2e-results',
+  outputDir: process.platform === 'win32' ? join(tmpdir(), 'uomd-e2e-results') : '../../.cache/e2e-results',
   use: { launchOptions: { args: GL, ...(process.env.UOMD_CHROMIUM_PATH ? { executablePath: process.env.UOMD_CHROMIUM_PATH } : {}) }, trace: 'retain-on-failure' },
   projects: [
     { name: 'landscape-desktop', use: { viewport: { width: 1280, height: 720 } } },

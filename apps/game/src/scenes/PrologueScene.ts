@@ -1,9 +1,10 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import type { Prologue, PrologueScene as PrologueData } from '@uomd/content-schema';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { advance } from '../entry/flow';
+import { S } from '../entry/strings';
 import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
 import { isForceFreshEntry, isInteractiveBrowser, loadEntry, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
@@ -13,7 +14,7 @@ import { safeInsets } from '../platform/safeArea';
 import { ArtLibrary } from '../content/ArtLibrary';
 import { NarrativeStage } from '../presentation/NarrativeStage';
 import { Services } from '../services';
-import { Button, txt } from '../ui/kit';
+import { Button, title, txt } from '../ui/kit';
 import { buildSubtitleSchedule, resolveSubtitleProgress } from '../ui/subtitles';
 import { C, DEPTH, F, T } from '../ui/theme';
 
@@ -260,8 +261,14 @@ export class PrologueScene extends Phaser.Scene {
     this.muteBtn?.setLabel(this.muted ? 'UNMUTE' : 'MUTE');
   }
 
-  private ensurePrologueMusic(_forceOffset?: number): void {
-    Music.stop(0.1);
+  private ensurePrologueMusic(forceOffset?: number): void {
+    if (this.done) return;
+    try {
+      const m = Services.art?.music('bgm_prologue_before_the_road');
+      if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, 2.2, forceOffset ?? 0);
+    } catch {
+      /* ignore if music unavailable */
+    }
   }
 
   private async loadScript(): Promise<void> {
@@ -277,7 +284,11 @@ export class PrologueScene extends Phaser.Scene {
       this.stage = new NarrativeStage(this, content, Services.ready().art.art, pack, locale);
       if (this.data0.video_id) { await this.stage.video(this.data0.video_id, false); if (current()) this.ending(); return; }
       const ids = this.data0.scenes.flatMap((sc) => ArtLibrary.plateIds(sc.id, sc.visual));
-      await Services.art?.loadStills(this, ids).catch((e: unknown) => console.warn('prologue plates unavailable', e));
+      await Promise.all([
+        Services.art?.loadStills(this, ids).catch((e: unknown) => console.warn('prologue plates unavailable', e)),
+        Services.art?.loadMusic(this, 'bgm_prologue_before_the_road').catch(() => undefined)
+      ]);
+      if (!current()) return;
     } catch (e) {
       // the prologue is a presentation: if it cannot load, the road must still open
       console.error('prologue unavailable', e);
@@ -363,7 +374,7 @@ export class PrologueScene extends Phaser.Scene {
     this.subtitlePlaque.setAlpha(0).setY(calm ? 0 : 16);
     this.voiceWaveTrack.setAlpha(0);
     this.voiceWaveFill.setAlpha(0).setSize(0, 2.5);
-    this.body.setText('').setAlpha(0).setY(calm ? this.baseBodyY : this.baseBodyY + 18);
+    this.body.setText('').setAlpha(1).setY(calm ? this.baseBodyY : this.baseBodyY + 18);
 
     this.tweens.add({
       targets: this.caption,
@@ -391,7 +402,6 @@ export class PrologueScene extends Phaser.Scene {
     });
     this.tweens.add({
       targets: this.body,
-      alpha: 1,
       y: this.baseBodyY,
       duration: INTRO_FAST ? 40 : 520,
       ease: 'Cubic.easeOut'
@@ -410,14 +420,16 @@ export class PrologueScene extends Phaser.Scene {
     const full = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
     void this.stage?.voice(scene.line_id);
 
-    if (INTRO_FAST) {
+    if (INTRO_FAST || !isInteractiveBrowser()) {
+      const step = INTRO_FAST ? 3 : 1;
       let n = 0;
       this.typer = this.time.addEvent({
         delay: 1000 / REVEAL_CPS,
         loop: true,
         callback: () => {
-          n += 3;
+          n += step;
           this.body.setText(full.slice(0, n));
+          this.voiceWaveFill.width = Math.round(560 * Math.min(1, n / Math.max(1, full.length)));
           if (n >= full.length) this.typer?.remove(false);
         }
       });
@@ -475,15 +487,25 @@ export class PrologueScene extends Phaser.Scene {
     }
     Music.setPaused(false);
     Music.stop(INTRO_FAST ? 0.1 : 1.8);
-    const black = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x000000, 1).setDepth(DEPTH.modal).setAlpha(0);
+    this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x05030a, 0.86).setDepth(DEPTH.modal);
+    const t = title(this, REF_W / 2, REF_H / 2 - 110, S.prologue.endTitle, 52, T.gold)
+      .setDepth(DEPTH.modal + 1)
+      .setAlpha(0);
+    const btn = new Button(this, REF_W / 2, REF_H / 2 + 40, {
+      label: S.prologue.continue,
+      w: 500,
+      h: 112,
+      fontSize: 34,
+      variant: 'hot',
+      onClick: () => this.finish()
+    })
+      .setDepth(DEPTH.modal + 1)
+      .setAlpha(0);
     this.tweens.add({
-      targets: black,
+      targets: [t, btn],
       alpha: 1,
-      duration: INTRO_FAST ? 60 : 2000,
-      ease: 'Sine.easeInOut',
-      onComplete: () => {
-        this.time.delayedCall(INTRO_FAST ? 30 : 400, () => this.finish());
-      }
+      duration: INTRO_FAST ? 60 : 800,
+      ease: 'Sine.easeInOut'
     });
   }
 

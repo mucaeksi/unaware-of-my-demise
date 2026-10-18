@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from '../engine';
 import type { LibraryCard, LibraryEntry } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
 import { Services } from '../services';

@@ -1,6 +1,6 @@
 ---
 name: phaser4-anime-ui
-description: "Codex/UOMD adaptation. Design and review Gothic anime game UI in Phaser 4 for mobile landscape and the React administration control center. Use on UI screens, typography, responsive behavior or UX audits."
+description: "Codex/UOMD adaptation. Design and review Gothic anime game UI using the Hybrid PixiJS v8 Stage + Modular HTML/CSS DOM UI Architecture (D-23) for mobile landscape and the React administration control center. Use on UI screens, typography, responsive behavior or UX audits."
 ---
 # phaser4-anime-ui — Codex adaptation
 
@@ -12,7 +12,7 @@ Write reports in the user's language, adapting source-specific English labels wh
 
 ## Host adaptations
 
-- Verify installed Phaser 4 APIs and existing package versions; use the linked official topic skills as needed. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
+- Verify installed PixiJS v8 and DOM/CSS UI architecture (Decision D-23) and existing package versions. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
 - Preserve narrative canon, approved Google asset provenance, data-only signed patches and server-authoritative gameplay. Use the existing local browser tests rather than assuming Claude's old runtime state is current.
 
 If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

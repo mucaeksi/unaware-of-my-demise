@@ -4,9 +4,34 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import sync_codex_skills as skills
+
+
+def _symlink_or_mock(link_path: Path, target: Path, target_is_directory: bool = False):
+    try:
+        link_path.symlink_to(target, target_is_directory=target_is_directory)
+        return None
+    except OSError as exc:
+        if getattr(exc, "winerror", None) != 1314:
+            raise
+        if not target_is_directory:
+            link_path.write_text("simulated symlink", encoding="utf-8")
+        else:
+            link_path.mkdir(parents=True, exist_ok=True)
+        orig_is_symlink = Path.is_symlink
+        resolved_link = str(link_path)
+
+        def fake_is_symlink(self: Path) -> bool:
+            if str(self) == resolved_link:
+                return True
+            return orig_is_symlink(self)
+
+        patcher = patch.object(Path, "is_symlink", fake_is_symlink)
+        patcher.start()
+        return patcher
 
 
 class AdapterTests(unittest.TestCase):
@@ -58,8 +83,10 @@ class AdapterTests(unittest.TestCase):
     def test_destination_symlink_refused_before_any_writes(self):
         dest = self.root / ".agents/skills/sample/SKILL.md"
         dest.parent.mkdir(parents=True)
-        dest.symlink_to(self.skill)
         before = self.skill.read_bytes()
+        patcher = _symlink_or_mock(dest, self.skill)
+        if patcher:
+            self.addCleanup(patcher.stop)
         with self.assertRaisesRegex(ValueError, "symlink destination"):
             skills.sync(self.root, False)
         self.assertEqual(self.skill.read_bytes(), before)
@@ -72,13 +99,18 @@ class AdapterTests(unittest.TestCase):
         self.assertFalse((self.root / ".agents/skills/sample").exists())
 
     def test_canonical_resource_symlink_refused(self):
-        (self.source / "link.txt").symlink_to(self.source / "data.txt")
+        patcher = _symlink_or_mock(self.source / "link.txt", self.source / "data.txt")
+        if patcher:
+            self.addCleanup(patcher.stop)
         with self.assertRaisesRegex(ValueError, "canonical symlink"):
             skills.sync(self.root, False)
 
     def test_canonical_directory_symlink_refused(self):
         self.source.rename(self.root / "elsewhere")
-        self.source.symlink_to(self.root / "elsewhere", target_is_directory=True)
+        patcher = _symlink_or_mock(self.source, self.root / "elsewhere", target_is_directory=True)
+        if patcher:
+            self.addCleanup(patcher.stop)
+            (self.source / "SKILL.md").write_bytes((self.root / "elsewhere/SKILL.md").read_bytes())
         with self.assertRaisesRegex(ValueError, "Unsafe canonical"):
             skills.sync(self.root, False)
 

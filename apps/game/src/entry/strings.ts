@@ -1,6 +1,6 @@
 /** Every line of text the game screens show, mapped by stable English keys (localisation maps these keys). */
 export const S = {
-  splash: { made: 'MADE WITH', engine: 'PHASER' },
+  splash: { made: 'MADE WITH', engine: 'PIXIJS 8' },
   studio: { name: 'SovTaym Studios', presents: 'PRESENTS' },
   menu: {
     tagline: 'PART I  ·  UNAWARE, I FADE',
@@ -10,17 +10,21 @@ export const S = {
     serverOnline: '● SANCTUM-01  ·  ONLINE',
     signIn: 'SIGN IN WITH GOOGLE PLAY',
     signInSub: 'Your journey is saved to your Google Play account',
-    cont: 'TAP TO START',
+    cont: 'CONTINUE',
     contSub: 'Resume the road',
     enterRoad: 'Enter the Road',
     chapters: 'CHAPTERS',
     company: 'COMPANY',
-    preview: 'GOOGLE PLAY GAMES',
-    previewSub: 'Connect & check for updates',
+    preview: 'PREVIEW BUILD',
+    previewSub: 'Play without Google sign-in',
     settings: 'SETTINGS',
     webNote: 'Google sign-in runs inside the Android app.',
     offline: 'The first start needs a connection to download the road. Check your network and try again.',
     signInFailed: 'Sign-in did not complete. Nothing was changed.'
+  },
+  prologue: {
+    endTitle: 'BEFORE THE ROAD',
+    continue: 'CONTINUE'
   },
   finish: {
     waitingTitle: 'THE ROAD IS BEING PREPARED',

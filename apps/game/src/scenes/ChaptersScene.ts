@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { RATION_COST, type ChapterIndex } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
 import { loadEntry } from '../entry/state';
@@ -168,7 +168,7 @@ export class ChaptersScene extends Phaser.Scene {
     const label = locked ? node.kind === 'story' ? 'Locked story' : 'Locked battle' : node.title_en;
     const name = title(this, 0, 0, label.toUpperCase(), 38, locked ? T.dim : T.text).setOrigin(0, 0.5).setPosition(REF_W / 2 - 600, y - 20);
     const cost = node.ration_class ? RATION_COST[node.ration_class] : 0;
-    const battleLabel = tutorialReplay ? 'Tutorial replay · no Ration cost' : cost === 0 ? 'Free practice · one-time rewards only' : `Story and battle · ${cost} Ration`;
+    const battleLabel = cost === 0 ? 'Free practice · one-time rewards only' : `Story and battle · ${cost} Ration`;
     const sub = txt(this, REF_W / 2 - 600, y + 28, locked ? 'Finish the previous story step first' : node.kind === 'battle' ? battleLabel : 'Story', { fontSize: '28px', color: T.dim });
 
     if (patchedBy) {

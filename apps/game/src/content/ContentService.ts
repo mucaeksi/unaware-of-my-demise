@@ -39,6 +39,7 @@ async function loadBase(): Promise<BaseContent> {
   const manifest = ContentManifest.parse(await res.json());
   const files: Record<string, string> = {};
   for (const f of manifest.files) files[f.path] = f.sha256;
+  const cache = new Map<string, Uint8Array>();
   return {
     releaseId: manifest.release.id,
     generation: manifest.release.generation,
@@ -46,10 +47,13 @@ async function loadBase(): Promise<BaseContent> {
     async read(path: string): Promise<Uint8Array> {
       const expected = files[path];
       if (!expected) throw new Error(`base content has no ${path}`);
+      const cached = cache.get(path);
+      if (cached) return cached;
       const r = await fetch(`${BASE_CONTENT_URL}/${path}`);
       if (!r.ok) throw new Error(`base file ${path}: HTTP ${r.status}`);
       const bytes = new Uint8Array(await r.arrayBuffer());
       if ((await sha256Hex(bytes)) !== expected) throw new Error(`base file ${path} failed its integrity check`);
+      cache.set(path, bytes);
       return bytes;
     }
   };

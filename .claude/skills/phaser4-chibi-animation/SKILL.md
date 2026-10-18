@@ -1,12 +1,11 @@
 ---
 name: phaser4-chibi-animation
-description: Produce or integrate anime chibi characters, Spine and Live2D assets, layered portraits, skill cut-ins and combat VFX for Phaser 4.
+description: Produce or integrate anime chibi characters, knee-up boydan Light Novel portraits, skill cut-ins and GPU combat VFX for the PixiJS v8 stage engine (D-23).
 ---
-# Character media pipeline
-- Canon character identity is defined in `narrative/`. Every asset has stable character ID and visual reference manifest.
-- Google AI may generate drawings, layers and references; a flat PNG is not an automatically rigged Spine or Live2D model.
-- Verify Spine editor/runtime version, binary format licensing and Phaser 4 compatibility before selecting a production rig format.
-- Validate Live2D Cubism licensing, web SDK support, renderer mixing, alpha compositing and Android/iOS WebView performance.
-- Prefer atlases and sprite sheets where they meet quality/performance targets; avoid requiring both Spine and Live2D for every asset.
-- Standard states: idle, enter, attack, skill, hit, buff, defeat, victory and narrative expression transitions.
-- Asset acceptance: consistent face, costume, proportions, alpha fringe, pivot positions, correct animation events and frame time.
+# Character Media & PixiJS v8 Animation Pipeline
+- Canon character identity is defined in `narrative/` and `content/specs/character_locks/`. Every asset has a stable character ID and visual reference manifest.
+- Google AI generates drawings, multi-expression knee-up (`boydan`) portraits, and 2-head SD Chibi sprite sheets; a flat PNG is not an automatically rigged Spine or Live2D model.
+- Use PixiJS v8 `Container`, `Sprite`, `Graphics`, texture frame swaps, procedural breathing/speaking tweens, and multi-layer GPU VFX (`BattleVfx`) for responsive 60fps mobile playback.
+- Prefer atlases and sprite sheets where they meet quality/performance targets; avoid requiring Spine or Live2D unless explicitly reviewed and licensed.
+- Standard chibi states: `idle`, `attack`, `skill`, `hit`, `defeat`, `victory` and narrative `boydan` expression transitions (`neutral`, `warm`, `sorrow`, `determined`, `alert`, `stern`, `weary`).
+- Asset acceptance: consistent face, costume, 2-head SD Chibi proportions (`0.72x` battle scale), clean alpha edges, accurate pivot positions, and deterministic tween/frame timing.

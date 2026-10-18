@@ -36,7 +36,7 @@ export class ShopScene extends HubScene {
         const messages = [
           restored.granted ? `${restored.granted} purchase(s) restored.` : '',
           restored.pending ? `${restored.pending} payment(s) pending.` : '',
-          restored.unconfirmed ? `${restored.unconfirmed} purchase(s) still need confirmation. Tap Restore to retry.` : '',
+          restored.unconfirmed ? `${restored.unconfirmed} purchase(s) still need confirmation. Reopen Shop to retry.` : '',
           restored.notEntitled ? `${restored.notEntitled} purchase(s) have no current benefits.` : ''
         ].filter(Boolean);
         this.say(messages.join(' '));

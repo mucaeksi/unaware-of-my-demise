@@ -74,52 +74,73 @@ export const Sfx = {
     tone(780, 'triangle', c.currentTime + 0.07, 0.004, 0.2, 0.14);
   },
   /** Bell strike: inharmonic partials with long decay (the game's sonic motif). */
-  bell(freq = 440, gain = 0.32, long = 1.8): void {
+  bell(freq = 440, gain = 0.28, long = 1.8): void {
     const c = ready();
     if (!c) return;
-    [1, 2.76, 5.4, 8.93].forEach((r, i) => tone(freq * r, 'sine', c.currentTime, 0.003, gain / (1 + i * 1.6), long / (1 + i * 0.7)));
+    [1, 2.76, 5.4, 8.93].forEach((r, i) => tone(freq * r, 'sine', c.currentTime, 0.004, gain / (1 + i * 1.6), long / (1 + i * 0.7)));
+  },
+  /** Fadyme's signature silver warding bell: crystalline D-minor harmonic shimmer with gentle stereo-like detuned overtones. */
+  silverBell(freq = 587.33, gain = 0.24): void {
+    const c = ready();
+    if (!c) return;
+    const t0 = c.currentTime;
+    [1, 2.0, 2.756, 4.08, 5.404].forEach((r, i) => {
+      tone(freq * r, 'sine', t0, 0.003, gain / (1 + i * 1.45), 1.65 / (1 + i * 0.55));
+      tone(freq * r * 1.0018, 'sine', t0 + 0.008, 0.005, (gain * 0.55) / (1 + i * 1.5), 1.8 / (1 + i * 0.6));
+    });
+  },
+  /** Mahmut's iron shield & broadsword bulwark resonance: low metallic thud + warm brass-iron ring. */
+  shieldBash(): void {
+    const c = ready();
+    if (!c) return;
+    const t0 = c.currentTime;
+    noise(t0, 0.14, 0.28, 1600);
+    tone(146.83, 'triangle', t0, 0.003, 0.36, 0.28, 73.42);
+    tone(440, 'sine', t0 + 0.01, 0.003, 0.14, 0.38);
+    tone(659.25, 'triangle', t0 + 0.02, 0.004, 0.1, 0.45);
   },
   hit(heavy = false): void {
     const c = ready();
     if (!c) return;
-    noise(c.currentTime, heavy ? 0.22 : 0.12, heavy ? 0.5 : 0.32, heavy ? 1800 : 2800);
-    tone(heavy ? 130 : 180, 'sine', c.currentTime, 0.002, heavy ? 0.55 : 0.4, 0.16, 48);
+    noise(c.currentTime, heavy ? 0.22 : 0.12, heavy ? 0.44 : 0.28, heavy ? 1900 : 2900);
+    tone(heavy ? 130 : 185, 'sine', c.currentTime, 0.002, heavy ? 0.48 : 0.35, 0.16, 48);
+    if (heavy) tone(293.66, 'triangle', c.currentTime, 0.003, 0.22, 0.14, 98);
   },
   guard(): void {
     const c = ready();
     if (!c) return;
-    tone(1250, 'square', c.currentTime, 0.002, 0.08, 0.06);
-    tone(1880, 'triangle', c.currentTime + 0.02, 0.002, 0.1, 0.18);
+    tone(1174.66, 'triangle', c.currentTime, 0.002, 0.11, 0.08);
+    tone(1760, 'sine', c.currentTime + 0.02, 0.003, 0.12, 0.22);
   },
   heal(): void {
     const c = ready();
     if (!c) return;
-    [523, 659, 784].forEach((f, i) => tone(f, 'sine', c.currentTime + i * 0.08, 0.01, 0.16, 0.35));
+    [523.25, 659.25, 783.99].forEach((f, i) => tone(f, 'sine', c.currentTime + i * 0.08, 0.01, 0.16, 0.38));
   },
   defeat(): void {
     const c = ready();
     if (!c) return;
-    tone(240, 'sawtooth', c.currentTime, 0.01, 0.2, 0.55, 55);
-    noise(c.currentTime, 0.3, 0.25, 900);
+    tone(220, 'sawtooth', c.currentTime, 0.01, 0.18, 0.55, 55);
+    noise(c.currentTime, 0.28, 0.22, 900);
   },
   cast(): void {
     const c = ready();
     if (!c) return;
-    tone(300, 'sine', c.currentTime, 0.04, 0.16, 0.5, 900);
-    Sfx.bell(660, 0.14, 1.2);
+    tone(293.66, 'sine', c.currentTime, 0.035, 0.14, 0.48, 880);
+    Sfx.silverBell(587.33, 0.2);
   },
   ultimate(): void {
     const c = ready();
     if (!c) return;
-    tone(110, 'sawtooth', c.currentTime, 0.1, 0.18, 1.1, 660);
-    Sfx.bell(220, 0.4, 2.6);
-    window.setTimeout(() => Sfx.bell(330, 0.26, 2.2), 180);
+    tone(110, 'sawtooth', c.currentTime, 0.08, 0.16, 1.0, 587.33);
+    Sfx.bell(220, 0.34, 2.4);
+    window.setTimeout(() => Sfx.silverBell(587.33, 0.26), 160);
   },
   victory(): void {
-    [392, 494, 587, 784].forEach((f, i) => window.setTimeout(() => Sfx.bell(f, 0.2, 1.6), i * 140));
+    [293.66, 349.23, 440.0, 587.33].forEach((f, i) => window.setTimeout(() => Sfx.bell(f, 0.2, 1.7), i * 140));
   },
   lose(): void {
-    Sfx.bell(98, 0.4, 3);
+    Sfx.bell(98, 0.36, 3);
   },
   /** Phaser engine splash chime: retro-futuristic ascending prism synth arpeggio + laser sweep + warm bass pad. */
   phaserLogo(): void {

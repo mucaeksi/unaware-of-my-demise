@@ -3,7 +3,7 @@ import type { OperationRecord } from '../net/operations';
 import { Services } from '../services';
 import { errText, HubScene } from '../ui/hub';
 import { Button, txt } from '../ui/kit';
-import { F, T } from '../ui/theme';
+import { T } from '../ui/theme';
 
 const PER_PAGE = 4;
 const caption = (record: OperationRecord): string => {
@@ -50,7 +50,7 @@ export class OperationsScene extends HubScene {
     records.slice(this.page * PER_PAGE, (this.page + 1) * PER_PAGE).forEach((record, index) => {
       const y = 380 + index * 145;
       this.card(REF_W / 2 - 70, y, 1490, 124, record.state === 'pending' ? 'normal' : 'dim');
-      this.add_(txt(this, 245, y - 24, caption(record), { fontFamily: F.display, fontSize: '36px', color: T.text }).setOrigin(0, 0.5));
+      this.add_(txt(this, 245, y - 24, caption(record), { fontSize: '36px', fontStyle: '600', color: T.text }).setOrigin(0, 0.5));
       const state = record.state === 'pending' ? 'Waiting for confirmation' : record.state === 'confirmed' ? 'Last known: confirmed' : 'Last known: not completed';
       this.add_(txt(this, 245, y + 27, `${state} · ${new Date(record.at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, { fontSize: '28px', color: T.dim }).setOrigin(0, 0.5));
       this.add_(new Button(this, REF_W - 260, y, { label: record.state === 'pending' ? 'RETRY ACTION' : 'VERIFY', w: 340, h: 100, fontSize: 28,

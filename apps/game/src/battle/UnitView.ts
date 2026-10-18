@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import type { Combatant } from '@uomd/combat';
 import type { UnitAnimState } from '@uomd/content-schema';
 import type { ArtLibrary } from '../content/ArtLibrary';
@@ -73,9 +73,9 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.applyState('idle');
 
     // sleek compact oval translucent plate under the feet
-    const plateY = 20;
-    const plateCenterY = init.side === 'player' ? 18 : 20;
-    const plateH = init.side === 'player' ? 50 : 54;
+    const plateY = 18;
+    const plateCenterY = init.side === 'player' ? 18 : 16;
+    const plateH = init.side === 'player' ? 50 : 46;
     const plateBg = scene.add.graphics();
     plateBg.fillStyle(0x0a0610, 0.46);
     plateBg.lineStyle(1.4, init.side === 'player' ? C.player : C.enemy, 0.52);
@@ -94,10 +94,10 @@ export class UnitView extends Phaser.GameObjects.Container {
     this.focusBar = init.side === 'player' ? new Bar(scene, 0, 32, 154, 6, () => C.focus) : null;
     this.focusBar?.set(0, false);
     this.shieldText = txt(scene, 82, 19, '', { fontSize: '16px', color: T.shield, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0, 0.5);
-    this.statusText = txt(scene, 0, init.side === 'player' ? 48 : 36, '', { fontSize: '15px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
-    this.intentText = txt(scene, 0, init.side === 'player' ? 48 : 38, '', {
+    this.statusText = txt(scene, 0, init.side === 'player' ? 48 : 50, '', { fontSize: '14px', color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5);
+    this.intentText = txt(scene, 0, init.side === 'player' ? 64 : 34, '', {
       fontFamily: F.display,
-      fontSize: '15px',
+      fontSize: '14px',
       fontStyle: '600',
       color: '#ffb3c4',
       stroke: '#0a0610',

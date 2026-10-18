@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { Battle, type BattleEvent, type PlayerAction, type SkillOption, type TurnPrompt } from '@uomd/combat';
 import type { BattleParty, Encounter, SkillDef, UnitPack } from '@uomd/content-schema';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
@@ -114,10 +114,12 @@ export class BattleScene extends Phaser.Scene {
       const artKeys = this.battle.combatants.map((c) => defs.get(c.def.unit_id)?.art_key ?? c.def.art_key);
       const playerUnitIds = this.battle.combatants.filter((c) => c.side === 'player').map((c) => c.def.unit_id);
       const neutralEmotions = new Map(playerUnitIds.map((id) => [id, new Set(['neutral'])]));
+      const musicCue = this.encounter.music_cue ?? 'bgm_battle_field';
       await Promise.all([
         art.loadBackground(this, this.encounter.location_id),
         art.loadUnits(this, artKeys),
-        art.loadPortraits(this, playerUnitIds, neutralEmotions).catch(() => undefined)
+        art.loadPortraits(this, playerUnitIds, neutralEmotions).catch(() => undefined),
+        art.loadMusic(this, musicCue).catch(() => undefined)
       ]);
     } catch (e) {
       title(this, REF_W / 2, REF_H / 2 - 40, 'This battle could not be loaded', SIZE.h2, T.crimson);
@@ -129,7 +131,10 @@ export class BattleScene extends Phaser.Scene {
     this.buildWorld();
     this.buildHud();
     sceneFadeIn(this, 1200);
-    Music.stop(0.1);
+    const battleMusic = art.music(this.encounter.music_cue ?? 'bgm_battle_field');
+    if (battleMusic) {
+      Music.play(this.cache.audio, battleMusic.key, battleMusic.loopStart, battleMusic.duration, 1.2);
+    }
     await this.wait(650);
     for (const event of this.battle.log) if (event.type === 'phase_change') await this.phaseStory(event.unit, event.phase);
     if (this.dead) return;
@@ -361,23 +366,20 @@ export class BattleScene extends Phaser.Scene {
 
     // the encounter's ui block can hide the speed and Auto buttons (the opening tutorials are manual, one turn at a time)
     const ui = this.encounter.ui ?? { speed: true, auto: true };
-    let edge = REF_W - 104 - insets.right;
-    const btnY = 56 + insets.top;
-    const btnW = 148;
-    const btnH = 62;
-    const btnStep = btnW + 14;
+    let edge = REF_W - 150 - insets.right;
+    const btnY = 70 + insets.top;
     if (ui.speed) {
-      this.speedBtn = new Button(this, edge, btnY, { label: '×1', w: btnW, h: btnH, fontSize: 22, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
-      edge -= btnStep;
+      this.speedBtn = new Button(this, edge, btnY, { label: '×1', w: 190, h: 100, fontSize: 36, onClick: () => this.toggleSpeed() }).setDepth(DEPTH.hud);
+      edge -= 215;
     }
     if (ui.auto) {
-      this.autoBtn = new Button(this, edge, btnY, { label: 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
-      edge -= btnStep;
+      this.autoBtn = new Button(this, edge, btnY, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud);
+      edge -= 220;
     }
-    new Button(this, edge, btnY, { label: 'MENU', w: btnW, h: btnH, fontSize: 21, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
+    new Button(this, edge, btnY, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }).setDepth(DEPTH.hud);
 
     // between the title block and the speed/auto/menu buttons there is free room at the top: the turn hint lives there
-    this.descText = txt(this, REF_W / 2, spec.descY - insets.bottom, '', { fontSize: '26px', color: T.text, align: 'center', wordWrap: { width: 1640 - insets.left - insets.right } }).setOrigin(0.5).setDepth(DEPTH.hud);
+    this.descText = txt(this, REF_W / 2, spec.descY - insets.bottom, '', { fontSize: '24px', color: T.text, align: 'center', lineSpacing: 4, wordWrap: { width: Math.min(1080, 1480 - insets.left - insets.right) }, stroke: '#0a0610', strokeThickness: 3 }).setOrigin(0.5).setDepth(DEPTH.hud);
     this.hintText = txt(this, 830, 54 + insets.top, '', { fontFamily: F.display, fontSize: '26px', fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }).setOrigin(0.5).setDepth(DEPTH.hud);
     this.telegraphText = txt(this, REF_W - 60 - insets.right, 136 + insets.top, '', { fontFamily: F.display, fontSize: '26px', fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.refreshHud();
@@ -796,6 +798,11 @@ export class BattleScene extends Phaser.Scene {
             spriteFrame: String(poseSpr.frame.name),
           });
           v.playCast(true);
+          if (actorUnit.def.unit_id === 'fadyme') {
+            BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, 1.4);
+          } else if (actorUnit.def.unit_id === 'mahmut') {
+            BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, 1.35);
+          }
           for (const tid of e.targets) {
             const tv = this.views.get(tid);
             if (!tv) continue;
@@ -806,7 +813,13 @@ export class BattleScene extends Phaser.Scene {
           await this.wait(320);
         } else {
           void this.banner(def?.name_en ?? e.skill, false);
-          if (v.side === 'player' && actorUnit.def.unit_id === 'fadyme') Sfx.cast();
+          if (v.side === 'player' && actorUnit.def.unit_id === 'fadyme') {
+            Sfx.cast();
+            BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, e.skillType === 'active' ? 1.15 : 0.9);
+          } else if (v.side === 'player' && actorUnit.def.unit_id === 'mahmut') {
+            if (e.skillType === 'active') Sfx.shieldBash();
+            BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, e.skillType === 'active' ? 1.15 : 0.85);
+          }
           this.lunged = { view: v, dim: null };
           if (opp && !isCaster) {
             const strikeX = opp.x + (v.side === 'player' ? -135 : 135);
@@ -836,6 +849,9 @@ export class BattleScene extends Phaser.Scene {
         const slashStyle = e.crit || this.activeSkillType === 'ultimate' ? 'heavy' : this.activeSkillType === 'active' ? 'cross' : 'single';
         BattleVfx.slashImpact(this, t.hitPoint.x, t.hitPoint.y, element, slashStyle, (src?.x ?? 0) <= t.x);
         BattleVfx.hitImpact(this, t.hitPoint.x, t.hitPoint.y, element, e.crit, heavy);
+        if (heavy && e.amount > 0) {
+          BattleVfx.hitStop(this, e.crit ? 65 : 48);
+        }
         Sfx.hit(heavy);
         if (e.counter) this.float(t, 'COUNTER', T.gold, 30, -60);
         if (e.redirectedFrom) this.float(t, 'INTERCEPT', T.gold, 28, 70);
@@ -1029,10 +1045,10 @@ export class BattleScene extends Phaser.Scene {
     const dim = this.add.rectangle(REF_W / 2, REF_H / 2, REF_W, REF_H, 0x07040c, 0).setDepth(DEPTH.modal).setInteractive();
     this.tweens.add({ targets: dim, alpha: won ? 0.14 : 0.42, duration: 360 });
 
-    const cardX = won ? 1330 : REF_W / 2;
+    const cardX = REF_W / 2;
     const cardY = 536;
-    const cardW = 840;
-    const cardH = 520;
+    const cardW = 980;
+    const cardH = 560;
     const box = panel(this, cardX, cardY, cardW, cardH, won ? 'hot' : 'danger').setDepth(DEPTH.modal + 1);
 
     title(this, cardX, cardY - 196, won ? 'VICTORY' : 'DEFEAT', 66, won ? T.gold : T.crimson).setDepth(DEPTH.modal + 2);
@@ -1135,12 +1151,12 @@ export class BattleScene extends Phaser.Scene {
       this.cfg.onClaimed?.(result.stars);
     }
 
-    const btnY = cardY + 198;
-    const primary = new Button(this, tutorial && won ? cardX : cardX - 185, btnY, {
+    const btnY = 760;
+    const primary = new Button(this, tutorial && won ? REF_W / 2 : REF_W / 2 - 250, btnY, {
       label: won ? 'CONTINUE' : 'RETRY',
-      w: 340,
-      h: 76,
-      fontSize: 26,
+      w: 440,
+      h: 96,
+      fontSize: 30,
       variant: won ? 'hot' : 'normal',
       onClick: () => {
         if (!won) {
@@ -1153,11 +1169,11 @@ export class BattleScene extends Phaser.Scene {
     }).setDepth(DEPTH.modal + 2);
     this.primaryBtn = primary;
     if (!(tutorial && won)) {
-      new Button(this, cardX + 185, btnY, {
+      new Button(this, REF_W / 2 + 250, btnY, {
         label: tutorial ? 'BACK TO STORY' : 'LEAVE',
-        w: 340,
-        h: 76,
-        fontSize: 26,
+        w: 440,
+        h: 96,
+        fontSize: 30,
         onClick: () => this.cfg.onBack(this)
       }).setDepth(DEPTH.modal + 2);
     }

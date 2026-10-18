@@ -1,8 +1,8 @@
 # Codex skills alongside Claude
 
-The owner authorized Codex development alongside Claude on 2026-10-11. Root README remains the sole engineering master prompt; narrative/ remains the canon. `AGENTS.md` is the Codex entry point and does not replace either source.
+The owner authorized Codex development alongside Claude on 2026-10-11, and under **Decision D-23 (2026-10-17)** retired the 28 official Phaser topic skills and migrated the 6 project engine skills to the **Hybrid PixiJS v8 + Modular Gothic DOM/CSS UI Architecture**. Root README remains the sole engineering master prompt; narrative/ remains the canon. `AGENTS.md` is the Codex entry point and does not replace either source.
 
-Codex has **54 repository skills**: adapters for all **46** pinned skills on main, plus eight project-specific skills. Claude continues to use its original `.claude/skills/`, `CLAUDE.md`, `.mcp.json`, bootstrap, lock file, scripts/data and licenses. Those files are unchanged by this adaptation. The Codex adapters reference canonical content rather than duplicating it; read the linked source in full when applying a skill and resolve its relative resources against the canonical directory.
+Codex has **26 repository skills**: adapters for all **18** pinned canonical skills on main, plus eight project-specific skills. Claude continues to use its original `.claude/skills/`, `CLAUDE.md`, `.mcp.json`, bootstrap, lock file, scripts/data and licenses. The Codex adapters reference canonical content rather than duplicating it; read the linked source in full when applying a skill and resolve its relative resources against the canonical directory.
 
 ## Usage and parallel development
 
@@ -35,13 +35,9 @@ Each listed name has `.agents/skills/<name>/SKILL.md` linked to `.claude/skills/
 | Graph and browser | `graphify`, `chrome-devtools` | Existing pinned runtimes; real tool schemas; rg/Playwright fallback reported when the MCP is absent |
 | UI guidance | `ui-ux-pro-max` | Resolve CLAUDE_SKILL_DIR to the canonical scripts/data; preserve established Gothic tokens and architecture |
 | Backend, security, media | `cloudflare-d1-liveops`, `security-audit`, `google-anime-media` | Actual connector access; D1-only staging builds; audit isolation retained; Google-only approved media/budgets |
-| Project Phaser workflows | `phaser4-engine`, `phaser4-battle`, `phaser4-anime-ui`, `phaser4-chibi-animation`, `phaser4-mobile-qa`, `phaser4-narrative-cinematics` | Installed Phaser 4 APIs; narrative/asset provenance; browser evidence distinguished from Android acceptance |
-| Official Phaser: configuration / state | `game-setup-and-config`, `scenes`, `events-system`, `data-manager`, `time-and-timers`, `loading-assets` | Canonical technical content reused; installed types checked before implementation |
-| Official Phaser: objects / drawing | `sprites-and-images`, `game-object-components`, `groups-and-containers`, `graphics-and-shapes`, `text-and-bitmaptext`, `geometry-and-math`, `curves-and-paths` | Same canonical resources and version pin |
-| Official Phaser: animation / rendering | `animations`, `tweens`, `particles`, `cameras`, `filters-and-postfx`, `render-textures`, `scale-and-responsive` | Same canonical resources and version pin |
-| Official Phaser: interaction / other | `input-keyboard-mouse-touch`, `audio-and-sound`, `physics-arcade`, `physics-matter`, `tilemaps`, `actions-and-utilities`, `v3-to-v4-migration`, `v4-new-features` | Same canonical resources and version pin; no implied engine upgrade |
+| Project PixiJS v8 + DOM UI workflows (D-23) | `phaser4-engine`, `phaser4-battle`, `phaser4-anime-ui`, `phaser4-chibi-animation`, `phaser4-mobile-qa`, `phaser4-narrative-cinematics` | Hybrid PixiJS v8 2D Stage + Modular Gothic DOM/CSS UI (`#uomd-ui-layer`) under compatibility skill names; narrative/asset provenance; browser evidence distinguished from Android acceptance |
 
-The 28 official Phaser topics remain pinned to phaserjs/phaser revision `02d8931b626d9764c133cbb3fbf99966c03c757c`. Archive pins/licenses remain in `.claude/skills-lock.json` and `.claude/third-party-licenses/`. Graphify is 0.9.84, Chrome DevTools MCP 1.10.1, Ponytail 5.1.0 and UI/UX Pro Max 2.15.0 according to the existing source inventory. Skill instructions mentioning newer upstream tool options are checked against the actual pinned runtime before use.
+The 28 upstream Phaser topic skills were retired in Decision D-23 (2026-10-17). Archive pins/licenses for the remaining third-party skills stay in `.claude/skills-lock.json` and `.claude/third-party-licenses/`. Graphify is 0.9.84, Chrome DevTools MCP 1.10.1, Ponytail 5.1.0 and UI/UX Pro Max 2.15.0 according to the existing source inventory. Skill instructions mentioning newer upstream tool options are checked against the actual pinned runtime before use.
 
 ## Additional skills and recommendations
 

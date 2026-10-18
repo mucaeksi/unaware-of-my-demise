@@ -1,23 +1,27 @@
 {
   "schemaVersion": 1,
   "sourceCommit": "99ca5ae2",
-  "reviewedAt": "2026-10-15",
+  "reviewedAt": "2026-10-17",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "R17",
+    "id": "D-23",
     "status": "LOCAL_TESTED",
     "nextProposed": "Part I OTA Patch Preparation & R18 First Store AAB Acceptance",
-    "workflow": "Argon 4 / Antigravity delivered Base AAB v0.1.2 (Opening, Google Play Sign-In, Background Patch, 120s Prologue, 3-Stage Tutorial with LN reactive busts, 2-head SD Chibi combat, 3 wide panoramic battlefields, random-quote Patch Wait & auto client restart) plus R06 and R09–R17 on main."
+    "workflow": "Argon 4 / Antigravity completed Decision D-23 (Full Engine Migration of @uomd/game from Phaser 4.2.1 to Hybrid PixiJS v8 2D Stage + Modular TypeScript DOM/CSS UI Architecture #uomd-ui-layer), Base AAB v0.1.2 (Opening, Google Play Sign-In, Background Patch, 120s Prologue, 3-Stage Tutorial with LN reactive busts, 2-head SD Chibi combat, 3 wide panoramic battlefields, random-quote Patch Wait & auto client restart) plus R06 and R09–R17 on main."
   },
   "now": [
     {
+      "title": "Decision D-23: Hybrid PixiJS v8 + Modular Gothic DOM/CSS UI Migration complete",
+      "detail": "Retired phaser: 4.2.1 across @uomd/game in favor of PixiJS v8 (WebGL2/WebGPU 2D stage for Splash, Studio, Prologue, Story/NarrativeStage, and Battle/UnitView/BattleVfx) + synchronized #uomd-ui-layer DOM/CSS overlay for crisp Gothic typography (@fontsource/cinzel & @fontsource/cormorant-garamond), accessible HUD/menus, and deterministic Playwright E2E compatibility. Retired 28 upstream Phaser topic skills and updated the 6 project engine skills."
+    },
+    {
       "title": "Base AAB v0.1.2 & Online Gacha Entry Flow complete and pushed to main",
-      "detail": "Phaser Splash (retro-synth arpeggio + prism laser beam) -> ŞovTaym Studios (celestial astrolabe emblem + immediate Main Theme start) -> Tap-to-Start Title -> Google Play Sign-In -> Background Patch download -> 120s 9-scene Prologue (clean plates, no top counters) -> 3-Stage Tutorial with 6 Light Novel cutscenes (reactive character busts & motion expressions), 2-head SD Chibi combat (0.72x scale, multi-layer canvas VFX, Ultimate cut-ins) and 3 wide panoramic battlefields (forest_whispering_ash, forgotten_stone_crossing, shelter_courtyard_dusk) -> random-quote Patch Wait screen (14 cycling canon quotes) or immediate client restart into Part I Beginning / Company Hub."
+      "detail": "PixiJS Splash (retro-synth arpeggio + prism laser beam) -> ŞovTaym Studios (celestial astrolabe emblem + immediate Main Theme start) -> Tap-to-Start Title -> Google Play Sign-In -> Background Patch download -> 120s 9-scene Prologue (clean plates, no top counters) -> 3-Stage Tutorial with 6 Light Novel cutscenes (reactive character busts & motion expressions), 2-head SD Chibi combat (0.72x scale, multi-layer canvas VFX, Ultimate cut-ins) and 3 wide panoramic battlefields (forest_whispering_ash, forgotten_stone_crossing, shelter_courtyard_dusk) -> random-quote Patch Wait screen (14 cycling canon quotes) or immediate client restart into Part I Beginning / Company Hub."
     },
     {
       "title": "Control Center (Admin Panel) & Asset Pipeline synchronized to v0.1.2",
-      "detail": "Added D1 assets.sql seeding (47 approved & Base AAB assets), inline visual/audio preview in Asset Catalog, interactive Live Preview scene jump presets (?preview_scene=), updated 2026-10-15 browser evidence gallery, and ContentService stale-patch base guard so older IndexedDB/R2 patches never overwrite new Base AAB v0.1.2 assets."
+      "detail": "Added D1 assets.sql seeding (47 approved & Base AAB assets), inline visual/audio preview in Asset Catalog, interactive Live Preview scene jump presets (?preview_scene=), updated browser evidence gallery, and ContentService stale-patch base guard so older IndexedDB/R2 patches never overwrite new Base AAB v0.1.2 assets."
     }
   ],
   "next": [
@@ -63,8 +67,14 @@
   "ideas": [
     {
       "from": "owner",
+      "date": "2026-10-17",
+      "text": "Complete Engine Migration from Phaser 4 (4.2.1) to Hybrid PixiJS v8 (WebGL2/WebGPU 2D Stage) + Modular Gothic DOM/CSS UI Architecture (Decision D-23).",
+      "status": "done: D-23 (PixiJS v8 + DOM/CSS UI runtime, 28 Phaser topic skills retired, E2E & unit suites green)"
+    },
+    {
+      "from": "owner",
       "date": "2026-10-15",
-      "text": "Base AAB v0.1.2 flow: slow transitions, Phaser logo + SFX -> ŞovTaym Studios + Main Theme -> Tap to Start -> Google Play Sign-In -> background patch -> 120s Prologue -> 3-stage Tutorial with Light Novel reactive busts, smaller 2-head SD Chibis & wider/varied battlefields -> random-quote Patch Wait / auto client restart -> Part I via OTA Patch.",
+      "text": "Base AAB v0.1.2 flow: slow transitions, engine logo + SFX -> ŞovTaym Studios + Main Theme -> Tap to Start -> Google Play Sign-In -> background patch -> 120s Prologue -> 3-stage Tutorial with Light Novel reactive busts, smaller 2-head SD Chibis & wider/varied battlefields -> random-quote Patch Wait / auto client restart -> Part I via OTA Patch.",
       "status": "done: D-22 (v0.1.2 delivered & verified)"
     },
     {

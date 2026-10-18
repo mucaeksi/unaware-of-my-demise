@@ -17,7 +17,7 @@ export default defineConfig({
     sourcemap: process.env.UOMD_SOURCEMAP === "1",
     chunkSizeWarningLimit: 1800,
     rollupOptions: {
-      output: { manualChunks: { phaser: ['phaser'] } }
+      output: { manualChunks: { pixi: ['pixi.js'] } }
     }
   },
   server: { host: '127.0.0.1', port: 5173, proxy: { '/api': 'http://127.0.0.1:8787' } }

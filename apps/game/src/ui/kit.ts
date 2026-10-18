@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { Sfx } from '../audio/Sfx';
 import { announce, registerA11yButton } from '../platform/a11y';
 import { qualityProfile } from '../platform/graphics';
@@ -151,8 +151,9 @@ export function txt(scene: Phaser.Scene, x: number, y: number, text: string, sty
   const resolvedColor = hc && baseColor === T.dim ? '#dfd6ec' : baseColor;
   const isDisplay = style.fontFamily === F.display;
   const formatText = (val: string | string[]): string | string[] => {
-    if (Array.isArray(val)) return val.map((item) => (isDisplay ? toEnUpper(String(item)) : sanitizeEnText(String(item))));
-    return isDisplay ? toEnUpper(String(val)) : sanitizeEnText(String(val));
+    const nonEn = prefs().locale !== 'en';
+    if (Array.isArray(val)) return val.map((item) => (isDisplay ? (nonEn ? String(item).toUpperCase() : toEnUpper(String(item))) : (nonEn ? String(item) : sanitizeEnText(String(item)))));
+    return isDisplay ? (nonEn ? String(val).toUpperCase() : toEnUpper(String(val))) : (nonEn ? String(val) : sanitizeEnText(String(val)));
   };
   const t = scene.add.text(x, y, formatText(text), {
     fontFamily: F.body,

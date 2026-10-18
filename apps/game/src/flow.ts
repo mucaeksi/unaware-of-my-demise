@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from './engine';
 import type { Encounter } from '@uomd/content-schema';
 import {
   clearFlowCheckpoint,

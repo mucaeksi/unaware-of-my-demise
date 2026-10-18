@@ -86,7 +86,7 @@ export class PatchManager {
     const controller = new AbortController(); const owner = crypto.randomUUID();
     const abort = () => controller.abort(new Reject('cancelled', 'download cancelled; verified content is retained'));
     if (opts.signal?.aborted) abort(); else opts.signal?.addEventListener('abort', abort, { once: true });
-    const timer = setTimeout(() => controller.abort(new Reject('download_timeout', 'download deadline reached; completed files and partial bytes are retained')), this.env.downloadTimeoutMs ?? 90_000);
+    const timer = setTimeout(() => controller.abort(new Reject('download_timeout', 'download deadline reached; completed files and partial bytes are retained')), this.env.downloadTimeoutMs ?? 240_000);
     try { return await interrupted(this.check({ ...opts, signal: controller.signal }, owner), controller.signal); }
     catch (error) {
       if (error instanceof Reject) return { status: 'rejected', reason: error.reason, detail: error.message };
@@ -210,6 +210,7 @@ export class PatchManager {
     };
     // 1. what is missing locally? (base-identical files and already-stored objects are free)
     const missing: ManifestFile[] = []; const seen = new Set<string>();
+    const verifiedObjects = new Map<string, Uint8Array>();
     for (const f of m.files) {
       checkAbort(opts.signal);
       if (this.base.files[f.path] === f.sha256 || seen.has(f.sha256)) continue;
@@ -218,6 +219,9 @@ export class PatchManager {
       if (!stored || stored.byteLength !== f.bytes || await sha256Hex(stored) !== f.sha256) {
         if (stored) { await this.storage.deleteObject(f.sha256); throw new Reject('hash_mismatch', `stored object for ${f.path} is damaged; retry to download a clean copy`); }
         missing.push(f);
+      } else {
+        this.checkObject(f, stored);
+        verifiedObjects.set(f.sha256, f.path.endsWith('.json') ? stored : new Uint8Array(0));
       }
     }
     await this.collect(new Set(m.files.map((f) => f.sha256)));
@@ -249,6 +253,8 @@ export class PatchManager {
       const bytes = await this.download(f, owner, opts.signal, (received) => emit('downloading', { filesDone: i, filesTotal: missing.length, bytesDone: downloaded + received, bytesTotal: addBytes }));
       checkAbort(opts.signal);
       await this.storage.putObject(f.sha256, bytes, owner);
+      this.checkObject(f, bytes);
+      verifiedObjects.set(f.sha256, f.path.endsWith('.json') ? bytes : new Uint8Array(0));
       downloaded += bytes.byteLength;
       emit('downloading', { filesDone: i + 1, filesTotal: missing.length, bytesDone: downloaded, bytesTotal: addBytes });
     }
@@ -257,7 +263,28 @@ export class PatchManager {
     emit('verifying', { filesDone: missing.length, filesTotal: missing.length, bytesDone: downloaded, bytesTotal: addBytes });
     const files = new Map<string, Uint8Array>();
     for (const f of m.files) {
-      const bytes = this.base.files[f.path] === f.sha256 ? await this.base.read(f.path) : await this.storage.getObject(f.sha256);
+      if (this.base.files[f.path] === f.sha256) {
+        if (f.path.endsWith('.json')) {
+          const bytes = await this.base.read(f.path);
+          if (!bytes) throw new Reject('download_failed', `object for ${f.path} vanished from storage`);
+          if (bytes.byteLength !== f.bytes || (await sha256Hex(bytes)) !== f.sha256) throw new Reject('hash_mismatch', `stored object for ${f.path} is damaged`);
+          this.checkObject(f, bytes);
+          files.set(f.path, bytes);
+        } else {
+          files.set(f.path, new Uint8Array(0));
+        }
+        continue;
+      }
+      const cached = verifiedObjects.get(f.sha256);
+      if (cached !== undefined && !f.path.endsWith('.json')) {
+        files.set(f.path, cached);
+        continue;
+      }
+      if (cached !== undefined && f.path.endsWith('.json') && cached.byteLength === f.bytes) {
+        files.set(f.path, cached);
+        continue;
+      }
+      const bytes = await this.storage.getObject(f.sha256);
       if (!bytes) throw new Reject('download_failed', `object for ${f.path} vanished from storage`);
       if (bytes.byteLength !== f.bytes || (await sha256Hex(bytes)) !== f.sha256) throw new Reject('hash_mismatch', `stored object for ${f.path} is damaged`);
       this.checkObject(f, bytes);
@@ -315,10 +342,14 @@ export class PatchManager {
       if (m.release.generation <= currentGen || state.denied.includes(m.release.id)) throw new Reject('stale_generation', 'staged release is no longer newer than the active one');
       const files = new Map<string, Uint8Array>();
       for (const f of m.files) {
+        if (this.base.files[f.path] === f.sha256 && !f.path.endsWith('.json')) {
+          files.set(f.path, new Uint8Array(0));
+          continue;
+        }
         const bytes = this.base.files[f.path] === f.sha256 ? await this.base.read(f.path) : await this.storage.getObject(f.sha256);
         if (!bytes || bytes.byteLength !== f.bytes || (await sha256Hex(bytes)) !== f.sha256) throw new Reject('download_failed', `staged object for ${f.path} is missing or damaged`);
         this.checkObject(f, bytes);
-      files.set(f.path, f.path.endsWith('.json') ? bytes : new Uint8Array(0));
+        files.set(f.path, f.path.endsWith('.json') ? bytes : new Uint8Array(0));
       }
       await this.env.validate(files, m, this.base);
       checkAbort(signal);

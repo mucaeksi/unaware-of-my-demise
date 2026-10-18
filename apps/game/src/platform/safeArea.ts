@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from '../engine';
 import { REF_H, REF_W } from '../config';
 
 export interface Insets {

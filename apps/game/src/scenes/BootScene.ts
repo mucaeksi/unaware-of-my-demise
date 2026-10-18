@@ -1,8 +1,8 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { Music } from '../audio/Music';
 import { Sfx } from '../audio/Sfx';
 import { ContentService } from '../content/ContentService';
-import { forceResetEntry, isForceFreshEntry, isInteractiveBrowser, loadEntry } from '../entry/state';
+import { forceResetEntry, isForceFreshEntry, isInteractiveBrowser, loadEntry, saveEntry } from '../entry/state';
 import { prefs } from '../platform/prefs';
 import { API_BASE } from '../config';
 import { loadCurrencyName } from '../net/currency';
@@ -12,7 +12,10 @@ import phaserLogoUrl from '../assets/phaser-pixel-large-shaded.png';
 import { Services } from '../services';
 import type { SplashInit } from './SplashScene';
 
+const UPDATE_TIMEOUT_MS = 25000;
+
 export class BootScene extends Phaser.Scene {
+  private backgroundUpdate = false;
   constructor() {
     super('Boot');
   }
@@ -72,6 +75,10 @@ export class BootScene extends Phaser.Scene {
     this.scene.launch('Splash', { ready } satisfies SplashInit); // Boot stays alive: its loader serves the loads above until Splash ends it
     void ready.then((ok) => {
       if (ok) {
+        if (this.backgroundUpdate && loadEntry().phase === 'completed') {
+          this.scene.launch('PatchBar');
+          void Services.patches.start();
+        }
         void prefs();
       }
     });
@@ -101,10 +108,14 @@ export class BootScene extends Phaser.Scene {
       case 'battle_t3':
         this.scene.start('Battle', { encounterPath: 'encounters/tutorial_t3.json', tutorial: true, onDone: () => this.scene.start('Title'), onBack: () => this.scene.start('Title') });
         break;
+      case 'story_t2_after':
+        this.scene.start('Story', { path: 'story/tutorial_t2_after.json', onDone: () => this.scene.start('Title') });
+        break;
       case 'story_t3_after':
         this.scene.start('Story', { path: 'story/tutorial_t3_after.json', onDone: () => this.scene.start('Finish') });
         break;
       case 'finish_wait':
+        saveEntry({ phase: 'in_progress', prologue: true, tutorials: 3, updatedAt: new Date().toISOString() });
         this.scene.start('Finish');
         break;
       case 'hub':
@@ -121,8 +132,17 @@ export class BootScene extends Phaser.Scene {
     try {
       Services.content = await ContentService.create();
       // after the first-install flow the downloaded release is switched on here, before any art is loaded (no network involved)
+      this.backgroundUpdate = false;
       if (loadEntry().phase === 'completed') {
         await Services.content.activateStaged();
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), UPDATE_TIMEOUT_MS);
+        try {
+          const outcome = await Services.content.checkForUpdates({ signal: controller.signal });
+          this.backgroundUpdate = outcome.status === 'offline' || outcome.status === 'rejected';
+        } finally {
+          clearTimeout(timer);
+        }
       } else if (isForceFreshEntry()) {
         await Services.content.rollback().catch(() => undefined);
       }

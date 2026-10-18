@@ -1,6 +1,6 @@
 ---
 name: phaser4-narrative-cinematics
-description: "Codex/UOMD adaptation. Implement the visual novel and cinematic engine for Part I, including the 120-second Google-generated anime opening and three-part tutorial."
+description: "Codex/UOMD adaptation. Implement the visual novel and cinematic engine (`PrologueScene`, `StoryScene`, `NarrativeStage`, `SubtitleOverlay`) on PixiJS v8 + DOM UI for Part I, including the 120-second anime opening and three-part tutorial."
 ---
 # phaser4-narrative-cinematics — Codex adaptation
 
@@ -12,7 +12,7 @@ Write reports in the user's language, adapting source-specific English labels wh
 
 ## Host adaptations
 
-- Verify installed Phaser 4 APIs and existing package versions; use the linked official topic skills as needed. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
+- Verify installed PixiJS v8 and DOM/CSS UI architecture (Decision D-23) and existing package versions. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
 - Preserve narrative canon, approved Google asset provenance, data-only signed patches and server-authoritative gameplay. Use the existing local browser tests rather than assuming Claude's old runtime state is current.
 
 If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

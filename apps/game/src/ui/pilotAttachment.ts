@@ -199,11 +199,18 @@ export interface ThirdPartyCreditEntry {
 /** Preserves approved third-party engine/runtime credits strictly separate from generated or authored project art provenance. */
 export const THIRD_PARTY_ENGINE_CREDITS: readonly ThirdPartyCreditEntry[] = [
   {
-    id: 'phaser4',
-    name: 'Phaser 4',
+    id: 'pixijs8',
+    name: 'PixiJS v8 + Gothic DOM/CSS UI',
     category: 'engine_runtime',
     license: 'MIT',
-    attributionNote: '2D WebGL/Canvas game runtime; separate from UOMD generated/authored art assets.'
+    attributionNote: '2D WebGL2/WebGPU stage renderer + native DOM/CSS UI overlay (D-23); separate from UOMD generated/authored art assets.'
+  },
+  {
+    id: 'phaser4',
+    name: 'Phaser 4 (Legacy D-02 Runtime)',
+    category: 'engine_runtime',
+    license: 'MIT',
+    attributionNote: 'Historical 2D WebGL/Canvas game runtime superseded by PixiJS v8 in D-23; separate from UOMD generated/authored art assets.'
   },
   {
     id: 'capacitor',

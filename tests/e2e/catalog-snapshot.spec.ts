@@ -38,7 +38,8 @@ test('exports a validated catalog after retry, stages it through the CLI and pub
   const id = `rel_catalog_${info.project.name.startsWith('phone') ? 'phone' : 'desktop'}`;
   const cli = ['tsx', 'tools/publish_release.ts', '--admin', ADMIN, '--dir', 'content/patches/rel_0003_part1_campaign', '--id', id, '--channel', 'dev', '--depends', pointer.release.id, '--catalog-snapshot'];
   const options = { cwd: new URL('../../', import.meta.url), env: { ...process.env, UOMD_ADMIN_JWT: process.env.E2E_ADMIN_JWT! }, timeout: 90_000 };
-  await run('npx', cli, options);
+  if (process.platform === 'win32') await run(process.execPath, ['node_modules/tsx/dist/cli.mjs', ...cli.slice(1)], options);
+  else await run('npx', cli, options);
   const row = await (await request.get(`${ADMIN}/admin/api/releases/${id}`, { headers })).json();
   const manifest = JSON.parse(row.manifest_json);
   expect(row.state).toBe('draft');

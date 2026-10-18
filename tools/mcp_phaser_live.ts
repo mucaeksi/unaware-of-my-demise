@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 /**
- * UOMD Phaser 4 Live Inspector & Documentation MCP Server (stdio).
+ * UOMD PixiJS v8 + DOM UI Live Inspector & Documentation MCP Server (stdio).
  *
  * Exposes tools for:
- *  1. Searching and reading the 28 pinned official Phaser 4 skills in `.claude/skills/`.
+ *  1. Searching and reading the 6 canonical UOMD PixiJS v8 + DOM UI engine skills in `.claude/skills/`.
  *  2. Listing compiled and approved game assets (`content/base/art/art_manifest.json`).
- *  3. Inspecting the live Phaser 4 game in headless Chromium via Playwright (`window.__UOMD__.game`),
- *     jumping to any scene, tapping coordinates, reading the live display list (`scene.children.list`),
- *     checking console/WebGL errors, and capturing a 1920x1080 screenshot so the agent can visually
- *     verify every UI/scene/animation change it makes.
+ *  3. Inspecting the live PixiJS v8 + DOM UI game in headless Chromium via Playwright (`window.__UOMD__.game`),
+ *     jumping to any scene, tapping coordinates, reading the live display list (`scene.children.list`)
+ *     and DOM overlay (`#uomd-ui-layer`), checking console/WebGL errors, and capturing a 1920x1080 screenshot.
  */
 
 import { existsSync, readdirSync, readFileSync, mkdirSync } from 'node:fs';
@@ -21,41 +20,13 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SKILLS_DIR = join(ROOT, '.claude', 'skills');
 const SHOTS_DIR = join(ROOT, '.cache', 'mcp-phaser-shots');
 
-const PHASER_SKILL_NAMES = [
+const ENGINE_SKILL_NAMES = [
   'phaser4-engine',
   'phaser4-battle',
   'phaser4-anime-ui',
   'phaser4-chibi-animation',
   'phaser4-mobile-qa',
-  'phaser4-narrative-cinematics',
-  'game-setup-and-config',
-  'scenes',
-  'events-system',
-  'data-manager',
-  'time-and-timers',
-  'loading-assets',
-  'sprites-and-images',
-  'game-object-components',
-  'groups-and-containers',
-  'graphics-and-shapes',
-  'text-and-bitmaptext',
-  'geometry-and-math',
-  'curves-and-paths',
-  'animations',
-  'tweens',
-  'particles',
-  'cameras',
-  'filters-and-postfx',
-  'render-textures',
-  'scale-and-responsive',
-  'input-keyboard-mouse-touch',
-  'audio-and-sound',
-  'physics-arcade',
-  'physics-matter',
-  'tilemaps',
-  'actions-and-utilities',
-  'v3-to-v4-migration',
-  'v4-new-features'
+  'phaser4-narrative-cinematics'
 ] as const;
 
 interface JsonRpcRequest {
@@ -65,7 +36,7 @@ interface JsonRpcRequest {
   params?: Record<string, unknown>;
 }
 
-function searchPhaserDocs(query: string, limit = 8): { skill: string; path: string; excerpt: string }[] {
+function searchEngineDocs(query: string, limit = 8): { skill: string; path: string; excerpt: string }[] {
   const terms = query
     .toLowerCase()
     .split(/\s+/)
@@ -73,7 +44,7 @@ function searchPhaserDocs(query: string, limit = 8): { skill: string; path: stri
     .filter(Boolean);
   const scored: { skill: string; path: string; score: number; excerpt: string }[] = [];
 
-  for (const skill of PHASER_SKILL_NAMES) {
+  for (const skill of ENGINE_SKILL_NAMES) {
     const skillFile = join(SKILLS_DIR, skill, 'SKILL.md');
     if (!existsSync(skillFile)) continue;
     const content = readFileSync(skillFile, 'utf8');
@@ -87,22 +58,22 @@ function searchPhaserDocs(query: string, limit = 8): { skill: string; path: stri
         idx = lower.indexOf(t, idx + t.length);
       }
     }
-    if (score > 0) {
+    if (score > 0 || terms.length === 0) {
       const firstTerm = terms[0] ?? '';
-      const pos = firstTerm ? Math.max(0, lower.indexOf(firstTerm) - 120) : 0;
+      const pos = firstTerm && lower.includes(firstTerm) ? Math.max(0, lower.indexOf(firstTerm) - 120) : 0;
       const excerpt = content.slice(pos, pos + 600).replace(/\r?\n/g, ' ').trim();
-      scored.push({ skill, path: skillFile, score, excerpt });
+      scored.push({ skill, path: skillFile, score: Math.max(1, score), excerpt });
     }
   }
   scored.sort((a, b) => b.score - a.score);
   return scored.slice(0, limit).map(({ skill, path, excerpt }) => ({ skill, path, excerpt }));
 }
 
-function getPhaserDoc(skill: string): string {
+function getEngineDoc(skill: string): string {
   const clean = skill.replace(/[^a-z0-9-_]/gi, '');
   const skillFile = join(SKILLS_DIR, clean, 'SKILL.md');
   if (!existsSync(skillFile)) {
-    return `Skill '${clean}' not found. Available Phaser skills: ${PHASER_SKILL_NAMES.join(', ')}`;
+    return `Skill '${clean}' not found. Available PixiJS v8 + DOM UI project skills: ${ENGINE_SKILL_NAMES.join(', ')}`;
   }
   return readFileSync(skillFile, 'utf8');
 }
@@ -211,7 +182,27 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
       }, opts.prologueSceneIndex);
     }
 
-    const query = opts.fastIntro === true ? '?fastintro=1' : '';
+    const previewTargets: Record<string, string> = {
+      studio: 'Studio',
+      title: 'Title',
+      title_fresh: 'Title',
+      prologue: 'Prologue',
+      story_t1: 'Story',
+      battle_t1: 'Battle',
+      battle_t2: 'Battle',
+      battle_t3: 'Battle',
+      story_t3_after: 'Story',
+      finish_wait: 'Finish',
+      hub: 'Home'
+    };
+    const rawScene = opts.scene ?? 'Title';
+    const previewKey = previewTargets[rawScene] ? rawScene : undefined;
+    const targetScene = previewTargets[rawScene] ?? rawScene;
+
+    const params = new URLSearchParams();
+    if (opts.fastIntro === true) params.set('fastintro', '1');
+    if (previewKey) params.set('preview_scene', previewKey);
+    const query = params.toString() ? `?${params.toString()}` : '';
     await page.goto(`${url}/${query}`, { waitUntil: 'domcontentloaded' });
 
     await page.waitForFunction(
@@ -228,22 +219,23 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
       { timeout: 15000 }
     );
 
-    const targetScene = opts.scene ?? 'Title';
-    await page.evaluate((target) => {
-      const g = (window as unknown as {
-        __UOMD__?: {
-          game?: {
-            scene: {
-              getScenes(active: boolean): { sys: { settings: { key: string } }; scene: { start(k: string): void } }[];
+    if (!previewKey) {
+      await page.evaluate((target) => {
+        const g = (window as unknown as {
+          __UOMD__?: {
+            game?: {
+              scene: {
+                getScenes(active: boolean): { sys: { settings: { key: string } }; scene: { start(k: string): void } }[];
+              };
             };
           };
-        };
-      }).__UOMD__?.game;
-      const active = g?.scene.getScenes(true).find((s) => s.sys.settings.key !== 'Boot');
-      if (active && active.sys.settings.key !== target) {
-        active.scene.start(target);
-      }
-    }, targetScene);
+        }).__UOMD__?.game;
+        const active = g?.scene.getScenes(true).find((s) => s.sys.settings.key !== 'Boot');
+        if (active && active.sys.settings.key !== target) {
+          active.scene.start(target);
+        }
+      }, targetScene);
+    }
 
     await page.waitForFunction(
       (target) => {
@@ -295,6 +287,7 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
       const g = (window as unknown as {
         __UOMD__?: {
           game?: {
+            rendererType?: string;
             scene: {
               getScenes(active: boolean): {
                 sys: { settings: { key: string } };
@@ -318,7 +311,7 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
           };
         };
       }).__UOMD__?.game;
-      if (!g) return { activeScenes: [], objects: [] };
+      if (!g) return { renderer: 'none', activeScenes: [], objects: [], domControls: [] };
       const scenes = g.scene.getScenes(true);
       const activeScenes = scenes.map((s) => s.sys.settings.key);
       const main = scenes.find((s) => s.sys.settings.key !== 'Boot') ?? scenes[0];
@@ -335,7 +328,22 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
         texture: c.texture?.key,
         childrenTexts: Array.isArray(c.list) ? c.list.map((ch) => ch.text).filter(Boolean) : undefined
       }));
-      return { activeScenes, objects };
+      const domLayer = document.getElementById('uomd-ui-layer') ?? document.getElementById('uomd-a11y-layer');
+      const domControls = domLayer
+        ? Array.from(domLayer.querySelectorAll('[role], button, [aria-label]'))
+            .slice(0, 40)
+            .map((el) => ({
+              tag: el.tagName.toLowerCase(),
+              role: el.getAttribute('role') ?? undefined,
+              label: el.getAttribute('aria-label') ?? el.textContent?.trim() ?? undefined
+            }))
+        : [];
+      return {
+        renderer: g.rendererType ?? 'pixi-v8',
+        activeScenes,
+        objects,
+        domControls
+      };
     });
 
     const shotFile = join(SHOTS_DIR, `${(opts.screenshotName ?? opts.scene ?? 'live').replace(/[^a-z0-9-_]/gi, '_')}.png`);
@@ -343,9 +351,12 @@ async function inspectLiveScene(opts: InspectOptions): Promise<Record<string, un
 
     return {
       screenshotPath: shotFile,
+      renderer: state.renderer,
       activeScenes: state.activeScenes,
       objectCount: state.objects.length,
       objects: state.objects,
+      domControlCount: state.domControls.length,
+      domControls: state.domControls,
       errors: errors.filter((e) => !e.includes('favicon'))
     };
   } finally {
@@ -358,11 +369,11 @@ const TOOLS = [
   {
     name: 'phaser_search_docs',
     description:
-      'Search across the 34 pinned Phaser 4 skills and UOMD Phaser architecture docs (scenes, sprites, tweens, animations, particles, cameras, filters, battle, UI, etc.).',
+      'Search across the 6 canonical UOMD PixiJS v8 + Modular Gothic DOM/CSS UI architecture skills (engine, battle, anime-ui, chibi-animation, mobile-qa, narrative-cinematics).',
     inputSchema: {
       type: 'object',
       properties: {
-        query: { type: 'string', description: 'Search terms (e.g., "particles blendMode", "tween yoyo", "camera vignette").' },
+        query: { type: 'string', description: 'Search terms (e.g., "PixiJS stage", "DOM overlay", "chibi scale").' },
         limit: { type: 'number', description: 'Max results to return (default 8).' }
       },
       required: ['query']
@@ -370,13 +381,13 @@ const TOOLS = [
   },
   {
     name: 'phaser_get_skill_doc',
-    description: 'Read the complete SKILL.md for a specific Phaser 4 skill.',
+    description: 'Read the complete SKILL.md for a specific UOMD PixiJS v8 + DOM UI project skill.',
     inputSchema: {
       type: 'object',
       properties: {
         skill: {
           type: 'string',
-          description: `Skill name, one of: ${PHASER_SKILL_NAMES.join(', ')}`
+          description: `Skill name, one of: ${ENGINE_SKILL_NAMES.join(', ')}`
         }
       },
       required: ['skill']
@@ -393,13 +404,13 @@ const TOOLS = [
   {
     name: 'phaser_inspect_scene',
     description:
-      'Launch the live UOMD Phaser 4 game in headless Chromium (1920x1080), optionally start a specific scene or tap coordinates, inspect the live Phaser display list (children, text, textures, bounds), check for console/WebGL errors, and save a PNG screenshot.',
+      'Launch the live UOMD PixiJS v8 + DOM UI game in headless Chromium (1920x1080), optionally start a specific scene or tap coordinates, inspect the live display list and DOM UI overlay, check for console/WebGL errors, and save a PNG screenshot.',
     inputSchema: {
       type: 'object',
       properties: {
         scene: {
           type: 'string',
-          description: 'Optional Phaser scene key to jump to (e.g., "Studio", "Title", "Prologue", "Home", "Summon", "Roster").'
+          description: 'Optional scene key to jump to (e.g., "Studio", "Title", "Prologue", "Home", "Summon", "Roster").'
         },
         freshInstall: {
           type: 'boolean',
@@ -418,7 +429,7 @@ const TOOLS = [
   }
 ];
 
-async function handleRequest(req: JsonRpcRequest): Promise< Record<string, unknown> | null> {
+async function handleRequest(req: JsonRpcRequest): Promise<Record<string, unknown> | null> {
   if (req.method === 'notifications/initialized' || req.id === undefined) {
     return null;
   }
@@ -430,7 +441,7 @@ async function handleRequest(req: JsonRpcRequest): Promise< Record<string, unkno
         result: {
           protocolVersion: '2024-11-05',
           capabilities: { tools: {} },
-          serverInfo: { name: 'uomd-phaser-live', version: '1.0.0' }
+          serverInfo: { name: 'uomd-phaser-live', version: '2.0.0' }
         }
       };
     }
@@ -446,9 +457,9 @@ async function handleRequest(req: JsonRpcRequest): Promise< Record<string, unkno
       const args = (req.params?.arguments ?? {}) as Record<string, unknown>;
       let payload: unknown;
       if (name === 'phaser_search_docs') {
-        payload = searchPhaserDocs(String(args.query ?? ''), typeof args.limit === 'number' ? args.limit : 8);
+        payload = searchEngineDocs(String(args.query ?? ''), typeof args.limit === 'number' ? args.limit : 8);
       } else if (name === 'phaser_get_skill_doc') {
-        payload = getPhaserDoc(String(args.skill ?? ''));
+        payload = getEngineDoc(String(args.skill ?? ''));
       } else if (name === 'phaser_list_game_assets') {
         payload = listGameAssets();
       } else if (name === 'phaser_inspect_scene') {

@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from '../engine';
 import type { ArtManifest, UnitAnimState } from '@uomd/content-schema';
 import type { ContentService } from './ContentService';
 
@@ -26,6 +26,7 @@ export class ArtLibrary {
   private readonly musicKeys = new Map<string, { key: string; loopStart: number; duration: number }>();
   private readonly uiKeys = new Map<string, string>();
   private readonly stillKeys = new Map<string, string>();
+  private readonly inflight = new Map<string, Promise<void>>();
 
   constructor(private readonly content: ContentService, readonly art: ArtManifest) {}
 
@@ -42,21 +43,44 @@ export class ArtLibrary {
       if (item.type === 'audio' && scene.cache.audio.exists(item.key)) scene.cache.audio.remove(item.key);
       for (const key of scene.anims.getAnimsFromTexture(item.key)) if (key.startsWith(`${item.key}:`)) scene.anims.remove(key);
     });
-    const todo = queue.filter((q) => (q.type === 'image' ? !scene.textures.exists(q.key) : !scene.cache.audio.exists(q.key)));
-    if (todo.length === 0) return;
-    await new Promise<void>((resolve, reject) => {
-      const loader = scene.load;
-      const cleanup = () => { loader.off('complete', complete); loader.off('loaderror', failed); scene.events.off('shutdown', closed); };
-      const complete = () => { cleanup(); resolve(); };
-      const failed = (file: Phaser.Loader.File) => { if (todo.some((q) => q.key === file.key)) { cleanup(); reject(new Error(`failed to load ${file.key}`)); } };
-      const closed = () => { cleanup(); reject(new Error('scene closed while loading media')); };
-      loader.once('complete', complete); loader.on('loaderror', failed); scene.events.once('shutdown', closed);
-      for (const q of todo) {
-        if (q.type === 'image') loader.image(q.key, q.url);
-        else loader.audio(q.key, q.url);
+    const waiting: Promise<void>[] = [];
+    const seen = new Set<string>();
+    const todo: Queued[] = [];
+    for (const q of queue) {
+      if (seen.has(q.key)) continue;
+      seen.add(q.key);
+      const exists = q.type === 'image' ? scene.textures.exists(q.key) : scene.cache.audio.exists(q.key);
+      if (exists) continue;
+      const pending = this.inflight.get(q.key);
+      if (pending) {
+        waiting.push(pending);
+      } else {
+        todo.push(q);
       }
-      loader.start();
-    });
+    }
+    if (todo.length > 0) {
+      const batch = new Promise<void>((resolve, reject) => {
+        const loader = scene.load;
+        const cleanup = () => {
+          loader.off('complete', complete);
+          loader.off('loaderror', failed);
+          scene.events.off('shutdown', closed);
+          for (const q of todo) this.inflight.delete(q.key);
+        };
+        const complete = () => { cleanup(); resolve(); };
+        const failed = (file: Phaser.Loader.File) => { if (todo.some((q) => q.key === file.key)) { cleanup(); reject(new Error(`failed to load ${file.key}`)); } };
+        const closed = () => { cleanup(); reject(new Error('scene closed while loading media')); };
+        loader.once('complete', complete); loader.on('loaderror', failed); scene.events.once('shutdown', closed);
+        for (const q of todo) {
+          if (q.type === 'image') loader.image(q.key, q.url);
+          else loader.audio(q.key, q.url);
+        }
+        loader.start();
+      });
+      for (const q of todo) this.inflight.set(q.key, batch);
+      waiting.push(batch);
+    }
+    if (waiting.length > 0) await Promise.all(waiting);
   }
 
   async loadUnits(scene: Phaser.Scene, artKeys: readonly string[]): Promise<void> {
@@ -186,25 +210,26 @@ export class ArtLibrary {
   }
 
   async loadUi(scene: Phaser.Scene): Promise<void> {
-    const queue: Queued[] = [];
-    for (const [name, path] of Object.entries(this.art.ui)) {
-      const ref = await this.asset(scene,path);
+    const entries = Object.entries(this.art.ui);
+    const refs = await Promise.all(entries.map(async ([name, path]) => ({ name, ref: await this.asset(scene, path) })));
+    const queue: Queued[] = refs.map(({ name, ref }) => {
       this.uiKeys.set(name, ref.key);
-      queue.push({ type: 'image', key: ref.key, url: ref.url });
-    }
+      return { type: 'image', key: ref.key, url: ref.url };
+    });
     await this.run(scene, queue);
   }
 
   /** Loads full-frame stills (prologue plates, event illustrations) on demand; ids the manifest does not ship are skipped without error. */
   async loadStills(scene: Phaser.Scene, ids: readonly string[]): Promise<void> {
-    const queue: Queued[] = [];
-    for (const id of ids) {
+    const valid = ids.flatMap((id) => {
       const path = this.art.stills[id];
-      if (!path) continue;
-      const ref = await this.asset(scene,path);
+      return path ? [{ id, path }] : [];
+    });
+    const refs = await Promise.all(valid.map(async ({ id, path }) => ({ id, ref: await this.asset(scene, path) })));
+    const queue: Queued[] = refs.map(({ id, ref }) => {
       this.stillKeys.set(id, ref.key);
-      queue.push({ type: 'image', key: ref.key, url: ref.url });
-    }
+      return { type: 'image', key: ref.key, url: ref.url };
+    });
     await this.run(scene, queue);
   }
 

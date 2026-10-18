@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from './engine';
 import { ArtLibrary } from './content/ArtLibrary';
 import { type ContentService } from './content/ContentService';
 import { GameApi } from './net/api';

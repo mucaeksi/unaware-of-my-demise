@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
-import fcntl
 import hashlib
 import json
 import os
@@ -14,6 +13,30 @@ import subprocess
 import signal
 import time
 import uuid
+
+try:
+    import fcntl
+except ImportError:  # Windows fallback for cross-platform unit tests
+    import msvcrt
+
+    class _FcntlShim:
+        LOCK_EX = 2
+        LOCK_NB = 4
+        _locked_paths: set[str] = set()
+
+        @classmethod
+        def flock(cls, file_obj, flags: int) -> None:
+            name = str(Path(file_obj.name).resolve()) if getattr(file_obj, "name", None) else str(id(file_obj))
+            if name in cls._locked_paths:
+                raise BlockingIOError("Resource temporarily unavailable")
+            try:
+                file_obj.seek(0)
+                msvcrt.locking(file_obj.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError as exc:
+                raise BlockingIOError("Resource temporarily unavailable") from exc
+            cls._locked_paths.add(name)
+
+    fcntl = _FcntlShim()  # type: ignore[assignment]
 
 INTERVAL = 5 * 60 * 60
 ROOT = Path(__file__).resolve().parents[1]
@@ -110,6 +133,23 @@ def startup_state(output) -> str:
     return 'failed' if terminal else 'waiting'
 
 
+def _terminate_process_group(process: subprocess.Popen, force: bool = False) -> None:
+    if hasattr(os, "killpg"):
+        sig = getattr(signal, "SIGKILL", signal.SIGTERM) if force else signal.SIGTERM
+        try:
+            os.killpg(process.pid, sig)
+        except ProcessLookupError:
+            pass
+    else:
+        try:
+            if force:
+                process.kill()
+            else:
+                process.terminate()
+        except OSError:
+            pass
+
+
 def run_model(command: list[str], output, timeout: float = INTERVAL - 60, prompt: str = PROMPT) -> subprocess.CompletedProcess:
     with subprocess.Popen(command, stdin=subprocess.PIPE, stdout=output, stderr=subprocess.STDOUT, text=True, start_new_session=True) as process:
         deadline = time.monotonic() + timeout
@@ -126,22 +166,46 @@ def run_model(command: list[str], output, timeout: float = INTERVAL - 60, prompt
                 startup_failed = state == 'failed'
                 if not startup_failed and time.monotonic() < deadline:
                     continue
-                try:
-                    os.killpg(process.pid, signal.SIGTERM)
-                except ProcessLookupError:
-                    pass
+                _terminate_process_group(process, force=False)
                 try:
                     process.communicate(timeout=10)
                 except subprocess.TimeoutExpired:
-                    os.killpg(process.pid, signal.SIGKILL)
+                    _terminate_process_group(process, force=True)
                     process.communicate()
                 return subprocess.CompletedProcess(command, 75 if startup_failed else 124)
+
+
+class _FileLockContext:
+    def __init__(self, path: Path):
+        self.path = path
+        self.handle = None
+        self.locked = False
+
+    def __enter__(self):
+        self.handle = self.path.open("a")
+        return self.handle
+
+    def __exit__(self, exc_type, exc, tb):
+        if self.handle is not None:
+            if hasattr(fcntl, "_locked_paths"):
+                try:
+                    name = str(self.path.resolve())
+                    fcntl._locked_paths.discard(name)
+                except OSError:
+                    pass
+                try:
+                    import msvcrt
+                    self.handle.seek(0)
+                    msvcrt.locking(self.handle.fileno(), msvcrt.LK_UNLCK, 1)
+                except OSError:
+                    pass
+            self.handle.close()
 
 
 def run_once(root: Path, *, dry_run: bool = False, primary_root: Path | None = None) -> str:
     cache = root / ".cache" / "infrastructure-resume"
     cache.mkdir(parents=True, exist_ok=True)
-    with (cache / "session.lock").open("a") as lock:
+    with _FileLockContext(cache / "session.lock") as lock:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
@@ -216,7 +280,7 @@ def run_isolated(root: Path, *, dry_run: bool = False) -> str:
     root = root.resolve()
     cache = root / '.cache' / 'infrastructure-resume'
     cache.mkdir(parents=True, exist_ok=True)
-    with (cache / 'session.lock').open('a') as lock:
+    with _FileLockContext(cache / 'session.lock') as lock:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
@@ -239,9 +303,14 @@ def run_isolated(root: Path, *, dry_run: bool = False) -> str:
                 if workspace.is_symlink() or info.get('primary') != str(root) or info.get('workspace') != str(workspace) or info.get('fingerprint') != workspace_fingerprint(workspace):
                     raise ValueError('continuation changed outside its recorded run')
                 registered = subprocess.check_output(['git', 'worktree', 'list', '--porcelain'], cwd=root, text=True).splitlines()
-                if f'worktree {workspace}' not in registered:
+                registered_paths = {
+                    Path(line.removeprefix('worktree ')).resolve()
+                    for line in registered
+                    if line.startswith('worktree ')
+                }
+                if workspace.resolve() not in registered_paths:
                     raise ValueError('continuation is not a registered worktree')
-            common = lambda cwd: subprocess.check_output(['git', 'rev-parse', '--path-format=absolute', '--git-common-dir'], cwd=cwd, text=True).strip()
+            common = lambda cwd: Path(subprocess.check_output(['git', 'rev-parse', '--path-format=absolute', '--git-common-dir'], cwd=cwd, text=True).strip()).resolve()
             if common(workspace) != common(root):
                 raise ValueError('continuation belongs to another repository')
             # Record ownership before starting a model; a missing record never authorizes adoption.
@@ -270,7 +339,7 @@ def main() -> None:
         return
     cache = ROOT / ".cache" / "infrastructure-resume"
     cache.mkdir(parents=True, exist_ok=True)
-    with (cache / "scheduler.lock").open("a") as scheduler:
+    with _FileLockContext(cache / "scheduler.lock") as scheduler:
         try:
             fcntl.flock(scheduler, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:

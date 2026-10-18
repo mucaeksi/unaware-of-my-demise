@@ -83,6 +83,7 @@ describe('R15 visual pilot, character attachment, and provenance contract', () =
   it('resolves the studio mark decision and keeps third-party engine credits separate from project art', () => {
     expect(STUDIO_MARK_DECISION.activeMode).toBe('hairline_diamond_ornament');
     expect(STUDIO_MARK_DECISION.rules.some((r) => r.includes('Never borrow the game logo motifs'))).toBe(true);
+    expect(THIRD_PARTY_ENGINE_CREDITS.map((c) => c.id)).toContain('pixijs8');
     expect(THIRD_PARTY_ENGINE_CREDITS.map((c) => c.id)).toContain('phaser4');
     expect(THIRD_PARTY_ENGINE_CREDITS.every((c) => c.attributionNote.length > 10)).toBe(true);
   });

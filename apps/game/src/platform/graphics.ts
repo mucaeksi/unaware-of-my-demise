@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from '../engine';
 import { Music } from '../audio/Music';
 import { prefs, type QualityTierPref } from './prefs';
 

@@ -5,16 +5,17 @@
  */
 import { spawn, spawnSync, type ChildProcess } from 'node:child_process';
 import { createServer, request as proxyRequest, type Server } from 'node:http';
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { buildSync } from 'esbuild';
 import { SignJWT, exportJWK, generateKeyPair } from 'jose';
 import { generateSigningKeyPair } from '../../packages/shared/src/index';
 
 export const ROOT = fileURLToPath(new URL('../../', import.meta.url)).replace(/[\\/]$/, '');
-export const STATE = process.platform === 'win32' ? join(tmpdir(), 'uomd-e2e-state') : join(ROOT, '.cache/e2e-state');
+export const STATE = process.platform === 'win32' ? join(tmpdir(), `uomd-e2e-state-${process.pid}`) : join(ROOT, '.cache/e2e-state');
 export const PORTS = { game: 8787, admin: 8788, jwks: 8799 };
 export const TEAM = 'e2e-team.local';
 export const AUD = 'e2e-audience';
@@ -112,7 +113,10 @@ async function killAll(): Promise<void> {
 
 
 async function boot(): Promise<Stack> {
-  rmSync(STATE, { recursive: true, force: true });
+  if (process.platform === 'win32') {
+    spawnSync('taskkill', ['/IM', 'workerd.exe', '/F'], { stdio: 'ignore' });
+  }
+  rmSync(STATE, { recursive: true, force: true, maxRetries: 10, retryDelay: 300 });
   mkdirSync(STATE, { recursive: true });
 
   // test-only identities and keys (never reused anywhere else)
@@ -149,6 +153,33 @@ async function boot(): Promise<Stack> {
   // Two independent workerd processes opening the same SQLite database intermittently fail
   // with SQLITE_BUSY. Service-bind the unmodified Workers inside a single runtime instead.
   // Generated private configs contain only ephemeral fixture keys; deployment configs stay intact.
+  const copyDirSync = (srcDir: string, destDir: string): void => {
+    mkdirSync(destDir, { recursive: true });
+    for (const entry of readdirSync(srcDir, { withFileTypes: true })) {
+      const s = join(srcDir, entry.name);
+      const d = join(destDir, entry.name);
+      if (entry.isDirectory()) copyDirSync(s, d);
+      else if (entry.isFile()) writeFileSync(d, readFileSync(s));
+    }
+  };
+  const bundleEntry = (entryPath: string, outName: string): string => {
+    if (process.platform !== 'win32') return entryPath;
+    const outFile = join(STATE, outName);
+    buildSync({
+      entryPoints: [entryPath],
+      outfile: outFile,
+      bundle: true,
+      format: 'esm',
+      target: 'es2022',
+      platform: 'neutral',
+      mainFields: ['module', 'main'],
+      conditions: ['workerd', 'worker', 'browser'],
+      external: ['cloudflare:*', 'node:*']
+    });
+    return outFile;
+  };
+  const migrationsDir = process.platform === 'win32' ? join(STATE, 'migrations') : join(api, 'migrations');
+  if (process.platform === 'win32') copyDirSync(join(api, 'migrations'), migrationsDir);
   const fixtureConfig = (kind: 'game' | 'admin', vars: Record<string, string>): string => {
     const file = join(api, `wrangler.${kind}.jsonc`);
     const parsed = ts.parseConfigFileTextToJson(file, readFileSync(file, 'utf8'));
@@ -156,10 +187,14 @@ async function boot(): Promise<Stack> {
     const config = parsed.config;
     const { env: _env, $schema: _schema, account_id: _account, ...base } = config;
     const dev = config.env.dev;
+    const srcAssetsDir = join(api, dev.assets.directory);
+    const assetsDir = process.platform === 'win32' ? join(STATE, `assets-${kind}`) : srcAssetsDir;
+    if (process.platform === 'win32') copyDirSync(srcAssetsDir, assetsDir);
+    const mainFile = bundleEntry(join(api, config.main), `${kind}.mjs`);
     const target = join(STATE, `${kind}.json`);
-    writeFileSync(target, JSON.stringify({ ...base, ...dev, main: join(api, config.main),
-      assets: { ...dev.assets, directory: join(api, dev.assets.directory) },
-      d1_databases: dev.d1_databases.map((db: Record<string, string>) => ({ ...db, migrations_dir: join(api, db.migrations_dir) })),
+    writeFileSync(target, JSON.stringify({ ...base, ...dev, main: mainFile,
+      assets: { ...dev.assets, directory: assetsDir },
+      d1_databases: dev.d1_databases.map((db: Record<string, string>) => ({ ...db, migrations_dir: migrationsDir })),
       ...(kind === 'admin' ? { services: [{ binding: 'GAME', service: 'uomd-game-dev' }] } : {}),
       vars: { ...dev.vars, ...vars }
     }), { mode: 0o600 });
@@ -169,13 +204,14 @@ async function boot(): Promise<Stack> {
   const adminConfig = fixtureConfig('admin', { ACCESS_TEAM_DOMAIN: TEAM, ACCESS_AUD: AUD,
     ACCESS_JWKS_URL: `http://127.0.0.1:${PORTS.jwks}/jwks.json`, ADMIN_BOOTSTRAP_OWNERS: OWNER,
     CONTENT_SIGNING_KEY: JSON.stringify({ ...signing.privateJwk, kid }), CONTENT_SIGNING_KID: kid });
+  const gatewayMain = bundleEntry(join(ROOT, 'tests/e2e/gateway.ts'), 'gateway.mjs');
   const gatewayConfig = join(STATE, 'gateway.json');
   writeFileSync(gatewayConfig, JSON.stringify({ name: 'uomd-e2e-gateway',
-    main: join(ROOT, 'tests/e2e/gateway.ts'), compatibility_date: '2026-10-01',
+    main: gatewayMain, compatibility_date: '2026-10-01',
     services: [{ binding: 'GAME', service: 'uomd-game-dev' }, { binding: 'ADMIN', service: 'uomd-admin-dev' }]
   }), { mode: 0o600 });
   start('stack', ['dev', '-c', gatewayConfig, '-c', gameConfig, '-c', adminConfig,
-    '--port', String(PORTS.game), '--inspector-port', '9302', ...persist], api);
+    '--port', String(PORTS.game), '--inspector-port', '9302', ...persist], process.platform === 'win32' ? STATE : api);
   // Preserve the separate admin browser origin without starting another database runtime.
   adminProxy = createServer((req, res) => {
     const upstream = proxyRequest({ hostname: '127.0.0.1', port: PORTS.game,

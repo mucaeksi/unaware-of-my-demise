@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { StoryRunner, type StoryEvent } from '@uomd/story';
 import type { StoryCommand, StoryScene as StoryData } from '@uomd/content-schema';
 import { REF_H, REF_W } from '../config';
@@ -8,7 +8,8 @@ import { Sfx } from '../audio/Sfx';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
 import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cutscene';
-import { clearStoryCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
+import { isInteractiveBrowser } from '../entry/state';
+import { clearStoryCheckpoint, loadFlowCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
 import { Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
 import { buildSubtitleSchedule, resolveSubtitleProgress, type SubtitleSchedule } from '../ui/subtitles';
@@ -46,6 +47,9 @@ export class StoryScene extends Phaser.Scene {
   private data0!: StoryData;
   private runner!: StoryRunner;
   private bg!: Phaser.GameObjects.Image;
+  private cgImage: Phaser.GameObjects.Image | null = null;
+  private cgActive = false;
+  get illustration(): Phaser.GameObjects.Image | null { return this.cgImage; }
   private actors = new Map<string, Actor>();
   private box!: Phaser.GameObjects.Container;
   private nameText!: Phaser.GameObjects.Text;
@@ -87,6 +91,8 @@ export class StoryScene extends Phaser.Scene {
     this.stage = null;
     this.voiceBtn = null;
     this.init0 = data;
+    this.cgImage = null;
+    this.cgActive = false;
     this.actors = new Map();
     this.finished = false;
     this.waiting = false;
@@ -112,7 +118,13 @@ export class StoryScene extends Phaser.Scene {
     this.currentView = current;
     const accountChanged = (): void => { if (!current() && (this.sys.isActive() || this.sys.isPaused())) this.init0.onBack?.(this); };
     if (this.init0.authRevision !== undefined) Services.api.addEventListener('auth', accountChanged);
-    this.events.once('shutdown', () => { this.generation++; Services.api.removeEventListener('auth', accountChanged); });
+    this.events.once('shutdown', () => {
+      this.generation++;
+      Services.api.removeEventListener('auth', accountChanged);
+      if (!loadFlowCheckpoint(Services.api.accountKey)) {
+        clearStoryCheckpoint(Services.api.accountKey, this.init0.path);
+      }
+    });
     const { content, art } = Services.ready();
     this.cameras.main.setBackgroundColor(0x0a0610);
     try {
@@ -161,7 +173,9 @@ export class StoryScene extends Phaser.Scene {
       return;
     }
     if (!current()) return;
-    const savedCp = loadStoryCheckpoint(Services.api.accountKey, this.init0.path, this.data0.scene_id);
+    const savedCp = loadFlowCheckpoint(Services.api.accountKey)
+      ? loadStoryCheckpoint(Services.api.accountKey, this.init0.path, this.data0.scene_id)
+      : null;
     this.runner = new StoryRunner(this.data0, savedCp?.state);
     this.build();
     this.restoreFromRunner();
@@ -193,6 +207,15 @@ export class StoryScene extends Phaser.Scene {
         yoyo: true,
         repeat: -1
       });
+    }
+
+    if (this.data0.illustration_id) {
+      const stillKey = art.still(this.data0.illustration_id);
+      if (stillKey) {
+        this.cgImage = this.add.image(REF_W / 2, REF_H / 2, stillKey).setDepth(DEPTH.world + 4).setAlpha(0);
+        const cgCover = Math.max(REF_W / this.cgImage.width, REF_H / this.cgImage.height);
+        this.cgImage.setScale(cgCover * 1.02);
+      }
     }
 
     // Subtle atmospheric ash & ember motes behind the character busts
@@ -292,12 +315,14 @@ export class StoryScene extends Phaser.Scene {
     const autoX = skipX - (btnW + btnGap);
     const logX = autoX - (btnW + btnGap);
     const voiceX = logX - (btnW + btnGap);
-    this.skipBtn = new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
+    if (!this.cutscene || isInteractiveBrowser()) {
+      this.skipBtn = new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }).setDepth(DEPTH.hud + 3);
+    }
     this.autoBtn = new Button(this, autoX, topBtnY, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }).setDepth(DEPTH.hud + 3);
     new Button(this, logX, topBtnY, { label: 'LOG', w: btnW, h: btnH, fontSize: 21, onClick: () => this.showLog() }).setDepth(DEPTH.hud + 3);
     this.voiceBtn = new Button(this, voiceX, topBtnY, { label: 'VOICE', w: btnW, h: btnH, fontSize: 20, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }).setDepth(DEPTH.hud + 3).setVisible(false);
     title(this, 60 + insets.left, topBtnY, this.data0.title_en, 30, T.dim).setDepth(DEPTH.hud + 3).setOrigin(0, 0.5);
-    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 160 + insets.left, topBtnY + 76, { label: 'ARCHIVE', w: 200, h: 62, fontSize: 21, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
+    if (this.init0.authRevision !== undefined && this.init0.onBack) new Button(this, 220 + insets.left, 210 + insets.top, { label: 'ARCHIVE', w: 340, h: 110, onClick: () => this.init0.onBack?.(this) }).setDepth(DEPTH.hud + 3);
     this.tweens.add({ targets: this.caret, alpha: 0.2, duration: 600, yoyo: true, repeat: -1 });
     const onContextLost = (): void => {
       if (!this.finished && this.data0 && this.runner) {
@@ -316,13 +341,25 @@ export class StoryScene extends Phaser.Scene {
     });
   }
 
+  private defaultMusicCueForScene(): string {
+    if (this.data0.scene_id === 'tutorial_t2_before') return 'bgm_ch1_ash_forest_uneasy';
+    return 'bgm_fadyme_theme';
+  }
+
+  private playSceneMusic(cueId: string, fade = 1.6): void {
+    const { art } = Services.ready();
+    const m = art.music(cueId);
+    if (m) Music.play(this.cache.audio, m.key, m.loopStart, m.duration, fade);
+  }
+
   /** Applies reconstructed visual/audio state when resuming from a mid-scene checkpoint. */
   private restoreFromRunner(): void {
     const { art } = Services.ready();
     const r = this.runner.restored;
     const bgKey = art.background(r.locationId);
     if (this.bg.texture.key !== bgKey) this.bg.setTexture(bgKey);
-    Music.stop(0.1);
+    const initialCue = r.musicCueId && r.musicCueId !== 'stop' ? r.musicCueId : this.defaultMusicCueForScene();
+    this.playSceneMusic(initialCue, 1.5);
     for (const [character, a] of r.actors) {
       this.showActor(character, a.side, a.emotion, true);
     }
@@ -360,7 +397,9 @@ export class StoryScene extends Phaser.Scene {
         return false;
       }
       case 'music': {
-        Music.stop(0.1);
+        if (e.cueId && e.cueId !== 'stop') {
+          this.playSceneMusic(e.cueId, 1.5);
+        }
         return false;
       }
       case 'fade':
@@ -431,7 +470,41 @@ export class StoryScene extends Phaser.Scene {
   // ------------------------------------------------------------------ actors & bust choreography
 
   private targetBustHeight(character: string): number {
-    return character === 'fadyme' ? 895 : 955;
+    return character === 'fadyme' ? 980 : 1040;
+  }
+
+  private activateCg(immediate = false): void {
+    if (!this.cgImage || this.cgActive) return;
+    this.cgActive = true;
+    const cover = Math.max(REF_W / this.cgImage.width, REF_H / this.cgImage.height);
+    const ms = immediate || prefs().reducedMotion ? 1 : 1100;
+    this.tweens.add({
+      targets: this.cgImage,
+      alpha: 1,
+      duration: ms,
+      ease: 'Sine.easeInOut'
+    });
+    if (!prefs().reducedMotion) {
+      this.tweens.add({
+        targets: this.cgImage,
+        scaleX: cover * 1.065,
+        scaleY: cover * 1.065,
+        y: REF_H / 2 - 12,
+        duration: 28000,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut'
+      });
+    }
+    for (const [, a] of this.actors) {
+      this.tweens.killTweensOf(a.image);
+      this.tweens.add({
+        targets: a.image,
+        alpha: 0,
+        duration: Math.min(650, ms),
+        ease: 'Sine.easeOut'
+      });
+    }
   }
 
   private showActor(character: string, side: 'left' | 'right', emotion = 'composed', immediate = false): void {
@@ -445,12 +518,12 @@ export class StoryScene extends Phaser.Scene {
       this.actors.delete(character);
     }
     const baseX = side === 'left' ? 460 : REF_W - 460;
-    const baseY = 955;
+    const baseY = REF_H + 18;
     const img = this.add
       .image(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY, key)
       .setOrigin(0.5, 1)
       .setDepth(DEPTH.world)
-      .setAlpha(immediate ? 0.86 : 0);
+      .setAlpha(this.cgActive ? 0 : immediate ? 0.86 : 0);
     const k = this.targetBustHeight(character) / img.height;
     img.setScale(k);
     // Fadyme's knee-up sprites natively face left; Mahmut's natively face right. Flip only if needed to face inward.
@@ -483,7 +556,7 @@ export class StoryScene extends Phaser.Scene {
       breatheTween
     };
     this.actors.set(character, actor);
-    if (!immediate) {
+    if (!immediate && !this.cgActive) {
       this.tweens.add({ targets: img, x: baseX, alpha: 0.86, duration: prefs().reducedMotion ? 1 : 950, ease: 'Cubic.easeOut' });
     }
   }
@@ -506,6 +579,12 @@ export class StoryScene extends Phaser.Scene {
     const changed = a.emotion !== newEmotion || a.image.texture.key !== key;
     a.emotion = newEmotion;
     if (!changed) return;
+
+    if (this.cgActive) {
+      const sc = (this.targetBustHeight(character) / a.image.height) * a.scaleMult;
+      a.image.setTexture(key).setScale(sc).setAlpha(0);
+      return;
+    }
 
     const prevKey = a.image.texture.key;
     const ghost = this.add
@@ -531,7 +610,7 @@ export class StoryScene extends Phaser.Scene {
 
     if (reactionImpulse && !prefs().reducedMotion) {
       if (newEmotion === 'dry_amusement' || newEmotion === 'dry_humor') {
-        this.tweens.add({ targets: a.image, y: a.image.y - 10, duration: 130, yoyo: true, ease: 'Sine.easeInOut' });
+        this.tweens.add({ targets: a.image, y: Math.max(REF_H + 4, a.image.y - 10), duration: 130, yoyo: true, ease: 'Sine.easeInOut' });
       } else if (newEmotion === 'protective' || newEmotion === 'determined') {
         this.tweens.add({ targets: a.image, scaleX: sc * 1.035, scaleY: sc * 1.035, duration: 150, yoyo: true, ease: 'Back.easeOut' });
       } else if (newEmotion === 'soft_smile') {
@@ -549,6 +628,14 @@ export class StoryScene extends Phaser.Scene {
     const m = this.actors.get('mahmut');
     const f = this.actors.get('fadyme');
     let stageCue = '';
+
+    // Activate full-screen Event CG illustration when the seated vignette begins
+    if (
+      (this.data0.illustration_id === 'roadside_rest' && id >= 'tutorial_t2_after_005') ||
+      (this.data0.illustration_id === 'shelter_evening' && id >= 'tutorial_t3_after_011')
+    ) {
+      this.activateCg();
+    }
 
     // Context-aware emotion overrides for lines where the base script used repeated 'composed' tags
     const EMOTION_OVERRIDES: Record<string, { speaker?: string; listener?: { char: string; emotion: string } }> = {
@@ -669,8 +756,12 @@ export class StoryScene extends Phaser.Scene {
         if (f) { f.offsetX = -95; f.tiltDeg = -2.2; }
         stageCue = 'HAND IN HAND ACROSS THE SLIPPERY CROSSING';
         break;
+      case 'tutorial_t1_before_011':
+        this.playSceneMusic('bgm_ch1_ash_forest_uneasy', 1.4);
+        break;
       case 'tutorial_t1_before_012':
       case 'tutorial_t1_before_013':
+        this.playSceneMusic('bgm_ch1_ash_forest_uneasy', 1.4);
         if (m) { m.offsetX = 115; m.offsetY = -12; m.scaleMult = 1.055; m.tiltDeg = 2.5; }
         if (f) { f.offsetX = -35; }
         if (!prefs().reducedMotion && id === 'tutorial_t1_before_012') {
@@ -744,12 +835,13 @@ export class StoryScene extends Phaser.Scene {
 
       case 'tutorial_t3_before_007':
         if (f && !prefs().reducedMotion) {
-          this.tweens.add({ targets: f.image, y: f.image.y - 14, duration: 160, yoyo: true, repeat: 1, ease: 'Sine.easeInOut' });
+          this.tweens.add({ targets: f.image, y: Math.max(REF_H + 4, f.image.y - 14), duration: 160, yoyo: true, repeat: 1, ease: 'Sine.easeInOut' });
         }
         if (m) { m.tiltDeg = 2.0; m.offsetX = 60; }
         break;
       case 'tutorial_t3_before_008':
       case 'tutorial_t3_before_010':
+        this.playSceneMusic('bgm_ch1_ash_forest_uneasy', 1.4);
         if (m) { m.offsetX = 95; m.offsetY = -10; m.scaleMult = 1.05; m.tiltDeg = 2.2; }
         stageCue = 'SHADOWS STIR BENEATH THE SHELTER EAVES';
         break;
@@ -815,11 +907,12 @@ export class StoryScene extends Phaser.Scene {
     const baseScale = this.targetBustHeight(character) / a.image.height;
     const targetScale = baseScale * a.scaleMult;
     const active = this.currentLine?.speaker === character;
-    const liftY = active ? -16 : 6;
+    const liftY = active ? -14 : 6;
+    const targetY = Math.max(REF_H + 4, a.baseY + a.offsetY + liftY);
     this.tweens.add({
       targets: a.image,
       x: a.baseX + a.offsetX,
-      y: a.baseY + a.offsetY + liftY,
+      y: targetY,
       angle: prefs().reducedMotion ? 0 : a.tiltDeg,
       scaleX: targetScale,
       scaleY: targetScale,
@@ -831,6 +924,12 @@ export class StoryScene extends Phaser.Scene {
   private focusSpeaker(speaker: string, emotion?: string, ms = 280): void {
     if (speaker && emotion) {
       this.setActorEmotion(speaker, emotion, false);
+    }
+    if (this.cgActive) {
+      for (const [, a] of this.actors) {
+        a.image.setAlpha(0);
+      }
+      return;
     }
     for (const [id, a] of this.actors) {
       const active = id === speaker;
@@ -873,7 +972,7 @@ export class StoryScene extends Phaser.Scene {
     this.namePlate.setVisible(!narr);
     if (!narr) {
       const a = this.actors.get(e.speaker);
-      const left = !a || a.side === 'left';
+      const left = this.cgActive ? e.speaker === 'fadyme' : !a || a.side === 'left';
       const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
       this.nameText.setText(label);
       this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);
@@ -886,8 +985,7 @@ export class StoryScene extends Phaser.Scene {
       color: narr ? '#dfd4ee' : isWarm ? '#fff6ea' : isProtectiveOrResolve ? '#f7ecf9' : T.text
     });
     const rawLine = this.stage?.text(e.lineId, e.text) ?? e.text;
-    const formattedLine = narr ? `— ${rawLine}` : `“${rawLine}”`;
-    this.fullText = this.bodyText.getWrappedText(formattedLine).join('\n');
+    this.fullText = this.bodyText.getWrappedText(rawLine).join('\n');
     this.bodyText.setText('');
     this.caret.setVisible(false);
     this.lineDone = false;
@@ -917,7 +1015,7 @@ export class StoryScene extends Phaser.Scene {
     this.namePlate.setVisible(!narr);
     if (!narr) {
       const a = this.actors.get(e.speaker);
-      const left = !a || a.side === 'left';
+      const left = this.cgActive ? e.speaker === 'fadyme' : !a || a.side === 'left';
       const label = this.currentMoodLabel ? `${e.speakerDisplay.toUpperCase()}  ·  ${this.currentMoodLabel}` : e.speakerDisplay.toUpperCase();
       this.nameText.setText(label);
       this.nameText.setColor(e.speaker === 'fadyme' ? '#e2d2ff' : T.gold);

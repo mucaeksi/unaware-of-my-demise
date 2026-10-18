@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { Sfx } from '../audio/Sfx';
 import { INTRO_FAST, REF_H, REF_W } from '../config';
 import { S } from '../entry/strings';
@@ -67,18 +67,16 @@ export class SplashScene extends Phaser.Scene {
       .setLetterSpacing(16);
 
     // Official pixel-art Phaser logo at whole-number scale (4x = 832 x 200)
-    const word: Phaser.GameObjects.Image | Phaser.GameObjects.Text = this.textures.exists('phaser_logo')
-      ? this.add.image(cx, cy + 4, 'phaser_logo').setScale(4)
-      : txt(this, cx, cy + 4, S.splash.engine, {
-          fontFamily: F.display,
-          fontSize: '128px',
-          fontStyle: '700',
-          color: '#f1ece4'
-        })
-          .setOrigin(0.5)
-          .setLetterSpacing(22);
+    const word: Phaser.GameObjects.Text = txt(this, cx, cy + 4, S.splash.engine, {
+      fontFamily: F.display,
+      fontSize: '112px',
+      fontStyle: '700',
+      color: '#f1ece4'
+    })
+      .setOrigin(0.5)
+      .setLetterSpacing(22);
 
-    const sub = txt(this, cx, cy + 148, 'HTML5 GAME FRAMEWORK  ·  v4.0', {
+    const sub = txt(this, cx, cy + 148, 'WEBGL2  ·  GOTHIC DOM UI  ·  v8.0', {
       fontFamily: F.display,
       fontSize: '20px',
       fontStyle: '600',

@@ -52,6 +52,7 @@ test('R10: notched safe areas, accessibility DOM bridge, settings controls, sign
 
 test('R10: companion growth screen shows pre-action costs, resulting level/cap/rank, wallet remainder, XP waste, and post-action outcome', async ({ page, request }, info) => {
   await openGame(page);
+  await page.evaluate(async () => (window as any).__UOMD__.services.content.checkForUpdates());
   const player = await signInDev(page, `r10-growth-${info.project.name}`);
   const headers = { 'Cf-Access-Jwt-Assertion': process.env.E2E_ADMIN_JWT! };
   const mail = await request.post(`${ADMIN}/admin/api/players/${player.id}/mail`, {

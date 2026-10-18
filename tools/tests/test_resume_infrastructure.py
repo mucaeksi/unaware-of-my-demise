@@ -1,6 +1,6 @@
-import fcntl
 import importlib.util
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -11,6 +11,7 @@ from unittest.mock import patch
 spec = importlib.util.spec_from_file_location("resume", Path(__file__).parents[1] / "resume_infrastructure.py")
 runner = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
+fcntl = runner.fcntl
 
 
 class ResumeGuards(unittest.TestCase):
@@ -20,6 +21,13 @@ class ResumeGuards(unittest.TestCase):
         self.root = Path(self.temp.name)
         self.cache = self.root / ".cache" / "infrastructure-resume"
 
+    def _assert_private_mode(self, path: Path):
+        mode = path.stat().st_mode & 0o777
+        if os.name == "nt":
+            self.assertEqual(mode & 0o600, 0o600)
+        else:
+            self.assertEqual(mode, 0o600)
+
     def test_dirty_worktree_never_invokes_model(self):
         with patch.object(runner.subprocess, "check_output", return_value=" M README.md\n"), patch.object(runner, "run_model") as run:
             self.assertEqual(runner.run_once(self.root), "DIRTY_WORKTREE")
@@ -27,7 +35,7 @@ class ResumeGuards(unittest.TestCase):
 
     def test_competing_session_is_skipped_without_touching_state(self):
         self.cache.mkdir(parents=True)
-        with (self.cache / "session.lock").open("a") as lock:
+        with runner._FileLockContext(self.cache / "session.lock") as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             with patch.object(runner.subprocess, "check_output") as git:
                 self.assertEqual(runner.run_once(self.root), "BUSY")
@@ -46,7 +54,7 @@ class ResumeGuards(unittest.TestCase):
             self.assertEqual(run.call_args.args[0][-1], '-')
         state = json.loads((self.cache / "resume-status.json").read_text())
         self.assertEqual(state["exitCode"], 1)
-        self.assertEqual((self.cache / state["log"]).stat().st_mode & 0o777, 0o600)
+        self._assert_private_mode(self.cache / state["log"])
 
     def test_missing_cli_is_recorded_without_false_success(self):
         with patch.object(runner.subprocess, "check_output", return_value=""), patch.object(runner, "run_model", side_effect=FileNotFoundError()):
@@ -70,7 +78,7 @@ class ResumeGuards(unittest.TestCase):
         with patch.object(runner, 'run_model', return_value=subprocess.CompletedProcess([], 0)) as model:
             self.assertEqual(runner.run_once(self.root), 'FINISHED')
             self.assertEqual(model.call_args.args[0][-3:], ['resume', 'owned_test_thread', '-'])
-        self.assertEqual((self.cache / 'last-message.txt').stat().st_mode & 0o777, 0o600)
+        self._assert_private_mode(self.cache / 'last-message.txt')
 
     def test_foreign_edit_after_interruption_prevents_resume(self):
         self.init_repo()
@@ -142,7 +150,7 @@ class ResumeGuards(unittest.TestCase):
         worktree = self.cache / 'checkout'
         self.assertEqual((worktree / 'source.ts').read_text(), 'export const original = 1;\n')
         self.assertFalse((worktree / 'primary-note.md').exists())
-        self.assertEqual((self.cache / 'worktree-owner.json').stat().st_mode & 0o777, 0o600)
+        self._assert_private_mode(self.cache / 'worktree-owner.json')
 
     def test_isolated_interrupt_resumes_own_exact_thread_without_editing_primary(self):
         self.init_repo()
@@ -187,7 +195,7 @@ class ResumeGuards(unittest.TestCase):
 
     def test_isolated_mode_respects_parent_session_lock(self):
         self.cache.mkdir(parents=True)
-        with (self.cache / 'session.lock').open('a') as lock:
+        with runner._FileLockContext(self.cache / 'session.lock') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             self.assertEqual(runner.run_isolated(self.root, dry_run=True), 'BUSY')
         self.assertFalse((self.cache / 'checkout').exists())

@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from '../engine';
 import type { ArtManifest, LocalePack, PresentationCommand, PresentationPack } from '@uomd/content-schema';
 import type { ContentService } from '../content/ContentService';
 import { Music } from '../audio/Music';
@@ -68,9 +68,16 @@ export class NarrativeStage {
     this.stopAudio(key); const ticket = ++this.audioSequence; this.audioTickets.set(key, ticket); if (this.audio.size >= 8) throw new Error('This scene has too many simultaneous audio cues');
     const owner = {}; const ref = await this.content.asset(path, owner);
     if (!this.alive || this.audioTickets.get(key) !== ticket) { this.content.releaseAssets(owner); return; }
-    const element = new Audio(ref.url); element.preload = 'metadata'; element.volume = volume; element.loop = loop;
+    const element = new Audio(ref.url); element.preload = 'auto'; element.volume = volume; element.loop = loop;
     if (key === 'voice' && this.voiceMuted) element.muted = true;
     const clip: AudioClip = { element, owner, releaseDuck: duck ? Music.duck() : () => undefined, wasPlaying: false }; this.audio.set(key, clip);
+    await new Promise<void>((resolve) => {
+      const done = () => { window.clearTimeout(timer); resolve(); };
+      const timer = window.setTimeout(done, 80);
+      element.addEventListener('loadeddata', done, { once: true });
+      element.addEventListener('error', done, { once: true });
+    });
+    if (!this.alive || this.audio.get(key) !== clip) return;
     element.onloadedmetadata = () => { if (!Number.isFinite(element.duration) || element.duration > duration + 0.5) this.stopAudio(key); };
     element.ontimeupdate = () => { if (!loop && element.currentTime >= duration) this.stopAudio(key); };
     element.onended = element.onerror = () => { if (this.audio.get(key) === clip) this.stopAudio(key); };
@@ -179,17 +186,19 @@ export class NarrativeStage {
       const button = (label: string, action: () => void) => { const b = document.createElement('button'); b.textContent = label; Object.assign(b.style, { minWidth: '120px', minHeight: '48px', color: '#f1e6cf', background: '#190f25', border: '1px solid #bda26b', font: '20px serif' }); b.onclick = action; controls.append(b); return b; };
       const unduck = Music.duck(); let closed = false; let wasPlaying = false; let lastProgress = performance.now(); let lastTime = 0;
       const watchdog = window.setInterval(() => { if (closed || unavailable || document.hidden || video.paused || !this.scene.sys.isActive()) { lastProgress = performance.now(); return; } if (video.currentTime !== lastTime) { lastTime = video.currentTime; lastProgress = performance.now(); } else if (performance.now() - lastProgress > 15000) fallback(); }, 1000);
-      const close = () => { if (closed) return; closed = true; video.onerror = video.onended = video.onloadedmetadata = video.ontimeupdate = null; window.clearInterval(watchdog); video.pause(); video.removeAttribute('src'); video.load(); root.remove(); unduck(); this.content.releaseAssets(owner); this.closeVideo = null; this.videoPause = null; if (previousFocus instanceof HTMLElement && previousFocus.isConnected) previousFocus.focus(); resolve(); };
+      let mounted = false;
+      const mount = () => { if (closed || mounted) return; mounted = true; document.body.append(root); play.focus(); };
+      const close = () => { if (closed) return; closed = true; video.onerror = video.onended = video.onloadedmetadata = video.ontimeupdate = null; window.clearInterval(watchdog); video.pause(); if (!unavailable) { video.removeAttribute('src'); video.load(); } root.remove(); unduck(); this.content.releaseAssets(owner); this.closeVideo = null; this.videoPause = null; if (previousFocus instanceof HTMLElement && previousFocus.isConnected) previousFocus.focus(); resolve(); };
       const play = button('PLAY', () => { if (closed) return; if (unavailable) { close(); return; } if (video.paused) void video.play().then(() => { if (!closed && !unavailable) play.textContent = 'PAUSE'; }).catch(() => { if (!closed && !unavailable) play.textContent = 'PLAY'; }); else { video.pause(); play.textContent = 'PLAY'; } });
       if (skippable) button('SKIP', close);
-      const fallback = () => { if (closed) return; unavailable = true; caption.tabIndex = 0; caption.setAttribute('aria-label', 'Subtitle transcript'); video.pause(); caption.textContent = definition.captions.map((c) => this.text(c.line_id, c.text_en)).join('\n'); play.textContent = 'CONTINUE'; };
+      const fallback = () => { if (closed) return; unavailable = true; caption.tabIndex = 0; caption.setAttribute('aria-label', 'Subtitle transcript'); video.pause(); caption.textContent = definition.captions.map((c) => this.text(c.line_id, c.text_en)).join('\n'); play.textContent = 'CONTINUE'; mount(); };
       video.onerror = fallback; video.onended = close;
-      video.onloadedmetadata = () => { if (!Number.isFinite(video.duration) || Math.abs(video.duration - definition.duration_s) > 0.5) fallback(); };
+      video.onloadedmetadata = () => { if (!Number.isFinite(video.duration) || Math.abs(video.duration - definition.duration_s) > 0.5) fallback(); else mount(); };
       video.ontimeupdate = () => { if (closed || unavailable) return; const cue = definition.captions.find((c) => c.start_s <= video.currentTime && c.end_s > video.currentTime); caption.textContent = cue ? this.text(cue.line_id, cue.text_en) : ''; if (video.currentTime >= definition.duration_s) close(); };
       root.onkeydown = (event) => { if (event.key === 'Escape' && skippable) close(); if (event.key === 'Tab') { const buttons: HTMLElement[] = [...controls.querySelectorAll('button'), ...(unavailable ? [caption] : [])]; const at = buttons.indexOf(document.activeElement as HTMLElement); event.preventDefault(); buttons[(at + (event.shiftKey ? -1 : 1) + buttons.length) % buttons.length]?.focus(); } };
-      root.append(video, caption, controls); document.body.append(root); play.focus(); this.closeVideo = close;
+      root.append(video, caption, controls); this.closeVideo = close;
       this.videoPause = (pause) => { if (pause) { wasPlaying = !video.paused; video.pause(); } else if (wasPlaying && !unavailable) { wasPlaying = false; void video.play().catch(() => { if (!closed && !unavailable) play.textContent = 'PLAY'; }); } };
-      if (unavailable || !url) fallback(); else { video.src = url; void video.play().then(() => { if (!closed && !unavailable) play.textContent = 'PAUSE'; }).catch(() => { if (!closed && !unavailable) play.textContent = 'PLAY'; }); }
+      if (unavailable || !url) { fallback(); } else { window.setTimeout(mount, 120); video.src = url; void video.play().then(() => { if (!closed && !unavailable) { play.textContent = 'PAUSE'; mount(); } }).catch(() => { if (!closed && !unavailable) play.textContent = 'PLAY'; }); }
     });
   }
   destroy(): void {

@@ -1,9 +1,9 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { Music } from '../audio/Music';
 import { REF_H, REF_W } from '../config';
 import { advance } from '../entry/flow';
 import { RANDOM_GAME_QUOTES, S } from '../entry/strings';
-import { loadEntry, nextStep } from '../entry/state';
+import { isInteractiveBrowser, loadEntry, nextStep } from '../entry/state';
 import { confirmEntryComplete } from '../entry/sync';
 import { restartGame } from '../platform/native';
 import { barFill } from '../patch/barFill';
@@ -14,7 +14,7 @@ import { errText } from '../ui/hub';
 import { Bar, Button, panel, sceneFadeIn, title, txt } from '../ui/kit';
 import { C, F, T } from '../ui/theme';
 
-const MAIN_THEME_CUE = 'bgm_ch1_ash_forest_calm';
+const MAIN_THEME_CUE = 'bgm_main_theme';
 
 /**
  * Post-tutorial Patch Screen. Opens when the background patch is still downloading/verifying after the 3-part tutorial finishes.
@@ -67,22 +67,22 @@ export class FinishScene extends Phaser.Scene {
     }
 
     // Center Patch Box
-    panel(this, REF_W / 2, 430, 1380, 480, 'hot');
+    panel(this, REF_W / 2, 480, 1460, 560, 'hot');
     this.head = title(this, REF_W / 2, 265, '', 50, T.gold);
     this.note = txt(this, REF_W / 2, 340, '', {
       fontSize: '34px',
       color: T.text,
       align: 'center',
-      wordWrap: { width: 1160 },
+      wordWrap: { width: 1200 },
       lineSpacing: 8
     }).setOrigin(0.5, 0);
-    this.bar = new Bar(this, REF_W / 2, 485, 1020, 26, () => C.goldHi);
-    this.figures = txt(this, REF_W / 2, 530, '', { fontSize: '30px', color: T.dim }).setOrigin(0.5, 0);
-    this.action = new Button(this, REF_W / 2, 605, {
+    this.bar = new Bar(this, REF_W / 2, 520, 1080, 28, () => C.goldHi);
+    this.figures = txt(this, REF_W / 2, 560, '', { fontSize: '28px', color: T.dim }).setOrigin(0.5, 0);
+    this.action = new Button(this, REF_W / 2, 700, {
       label: S.finish.restart,
-      w: 620,
-      h: 96,
-      fontSize: 32,
+      w: 700,
+      h: 112,
+      fontSize: 34,
       variant: 'hot',
       onClick: () => void this.onAction()
     });
@@ -91,24 +91,24 @@ export class FinishScene extends Phaser.Scene {
     // Rotating random game quotes beneath the Patch Box
     const quoteRule = this.add.graphics();
     quoteRule.lineStyle(1.5, C.gold, 0.45);
-    quoteRule.lineBetween(REF_W / 2 - 420, 728, REF_W / 2 - 18, 728);
-    quoteRule.lineBetween(REF_W / 2 + 18, 728, REF_W / 2 + 420, 728);
+    quoteRule.lineBetween(REF_W / 2 - 420, 800, REF_W / 2 - 18, 800);
+    quoteRule.lineBetween(REF_W / 2 + 18, 800, REF_W / 2 + 420, 800);
     quoteRule.fillStyle(C.goldHi, 0.85);
     quoteRule.fillPoints(
       [
-        new Phaser.Math.Vector2(REF_W / 2, 721),
-        new Phaser.Math.Vector2(REF_W / 2 + 7, 728),
-        new Phaser.Math.Vector2(REF_W / 2, 735),
-        new Phaser.Math.Vector2(REF_W / 2 - 7, 728)
+        new Phaser.Math.Vector2(REF_W / 2, 793),
+        new Phaser.Math.Vector2(REF_W / 2 + 7, 800),
+        new Phaser.Math.Vector2(REF_W / 2, 807),
+        new Phaser.Math.Vector2(REF_W / 2 - 7, 800)
       ],
       true
     );
 
     this.quoteIdx = Math.floor(Math.random() * RANDOM_GAME_QUOTES.length);
     const firstQ = RANDOM_GAME_QUOTES[this.quoteIdx]!;
-    this.quoteText = txt(this, REF_W / 2, 768, firstQ.quote, {
+    this.quoteText = txt(this, REF_W / 2, 830, firstQ.quote, {
       fontFamily: F.body,
-      fontSize: '38px',
+      fontSize: '36px',
       fontStyle: 'italic 500',
       color: '#efe8f5',
       align: 'center',
@@ -116,7 +116,7 @@ export class FinishScene extends Phaser.Scene {
       stroke: '#05030a',
       strokeThickness: 4
     }).setOrigin(0.5, 0);
-    this.quoteSpeaker = txt(this, REF_W / 2, 868, `—  ${firstQ.speaker}`, {
+    this.quoteSpeaker = txt(this, REF_W / 2, 920, `—  ${firstQ.speaker}`, {
       fontFamily: F.display,
       fontSize: '22px',
       fontStyle: '600',
@@ -173,9 +173,12 @@ export class FinishScene extends Phaser.Scene {
         this.bar.set(1);
         this.bar.setVisible(true);
         this.figures.setText('100 %   ·   READY');
-        this.action.setVisible(true).setLabel(S.finish.restarting).setEnabled(false);
-        // Automatically confirm and restart client once patch completes
-        void this.triggerAutoRestart();
+        if (isInteractiveBrowser()) {
+          this.action.setVisible(true).setLabel(S.finish.restarting).setEnabled(false);
+          void this.triggerAutoRestart();
+        } else {
+          this.action.setVisible(true).setLabel(S.finish.restart).setEnabled(true);
+        }
       }
       return;
     }
@@ -227,14 +230,18 @@ export class FinishScene extends Phaser.Scene {
     if (!this.sys.isActive()) return;
     this.note.setText(S.finish.readyBody);
     this.action.setLabel(S.finish.restarting).setEnabled(false);
-    this.cameras.main.fadeOut(1300, 0, 0, 0);
-    await new Promise<void>((r) => this.time.delayedCall(1350, () => r()));
+    if (isInteractiveBrowser()) {
+      this.cameras.main.fadeOut(1300, 0, 0, 0);
+      await new Promise<void>((r) => this.time.delayedCall(1350, () => r()));
+    } else {
+      await new Promise<void>((r) => this.time.delayedCall(450, () => r()));
+    }
     try {
       await restartGame();
     } catch (e) {
       if (!this.sys.isActive()) return;
       this.restarting = false;
-      this.cameras.main.fadeIn(400, 0, 0, 0);
+      if (isInteractiveBrowser()) this.cameras.main.fadeIn(400, 0, 0, 0);
       this.note.setText(`${S.finish.readyBody}\n\nCheckpoint saved, but the automatic restart could not complete: ${errText(e)}`);
       this.action.setVisible(true).setLabel('RETRY RESTART').setEnabled(true);
     }

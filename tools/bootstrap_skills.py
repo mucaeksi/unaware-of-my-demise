@@ -5,9 +5,6 @@ import argparse
 import hashlib
 import json
 from pathlib import Path, PurePosixPath
-import re
-import shutil
-import sys
 from urllib.request import Request, urlopen
 from zipfile import ZipFile
 
@@ -15,7 +12,6 @@ ROOT = Path(__file__).resolve().parents[1]
 INBOX = ROOT / "skill-sources"
 TARGET = ROOT / ".claude" / "skills"
 LICENSES = ROOT / ".claude" / "third-party-licenses"
-PHASER_SHA = "02d8931b626d9764c133cbb3fbf99966c03c757c"
 PINNED = {
     "Cloudflare_Security_Audit_Skill_2026-10-10.zip": "f62b7cbc0c9a8358f68bf486e9d68220d9897c573f5f099d61ff4a9063f0ef01",
     "UOMD_Claude_Phaser_Toolkit_2026-10-10.zip": "b0d0143222a5040371ce763398ebc60d592631929eef284f1a750ca65973e0b0",
@@ -24,9 +20,18 @@ PINNED = {
     "ponytail-5.1.0.zip": "8fa83a6a1f5f0ca980445f789d3a747ee9999959bbc4176ea6f73e4f3dbcb8bd",
     "ui-ux-pro-max-skill-2.15.0.zip": "99cadc867d71f4c77d29441ad15e5b47490e5998c0f926e5d16da185fb4eb455"
 }
-# Paths inside the pinned toolkit ZIP that must never be installed: obsolete (Neon) or retired by the owner (Context7).
-EXCLUDED = (".claude/skills/cloudflare-neon-liveops/", ".claude/skills/context7-mcp/", ".claude/third-party-licenses/context7/")
-PHASER = ("actions-and-utilities", "animations", "audio-and-sound", "cameras", "curves-and-paths", "data-manager", "events-system", "filters-and-postfx", "game-object-components", "game-setup-and-config", "geometry-and-math", "graphics-and-shapes", "groups-and-containers", "input-keyboard-mouse-touch", "loading-assets", "particles", "physics-arcade", "physics-matter", "render-textures", "scale-and-responsive", "scenes", "sprites-and-images", "text-and-bitmaptext", "tilemaps", "time-and-timers", "tweens", "v3-to-v4-migration", "v4-new-features")
+# Paths inside the pinned toolkit ZIP that must never be installed: obsolete (Neon) or retired by the owner (Context7, Phaser 4 raw templates overwritten by D-23 PixiJS v8 skills).
+EXCLUDED = (
+    ".claude/skills/cloudflare-neon-liveops/",
+    ".claude/skills/context7-mcp/",
+    ".claude/third-party-licenses/context7/",
+    ".claude/skills/phaser4-engine/",
+    ".claude/skills/phaser4-battle/",
+    ".claude/skills/phaser4-anime-ui/",
+    ".claude/skills/phaser4-chibi-animation/",
+    ".claude/skills/phaser4-mobile-qa/",
+    ".claude/skills/phaser4-narrative-cinematics/",
+)
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -92,11 +97,11 @@ def install_cloudflare_security_skill(archive: Path) -> int:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--offline", action="store_true", help="Do not fetch official Phaser skills")
+    parser.add_argument("--offline", action="store_true", help="Do not fetch remote skills")
     parser.add_argument("--verify", action="store_true", help="Validate already installed skills only")
     args = parser.parse_args()
     if args.verify:
-        expected = ["ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "phaser4-battle", "sprites-and-images", "scenes", "security-audit"]
+        expected = ["ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "phaser4-battle", "phaser4-anime-ui", "security-audit"]
         missing = [name for name in expected if not (TARGET / name / "SKILL.md").is_file()]
         print("Installed skill files:", len(list(TARGET.glob("*/SKILL.md"))))
         if missing: raise SystemExit("Missing skills: " + ", ".join(missing))
@@ -115,31 +120,18 @@ def main():
     if any(k not in supplied for k in need):
         raise SystemExit("Missing required ZIP: " + ", ".join(k for k in need if k not in supplied))
     copied = copy_entries(supplied[need[0]], lambda p: p if p.startswith((".claude/skills/", ".claude/third-party-licenses/")) and not p.startswith(EXCLUDED) else None)
-    if "Cloudflare_Security_Audit_Skill_2026-10-10.zip" in supplied:
+    if "Cloudflare_Security_Audit_Skill_2026-10-10.zip" in supplied and not args.offline:
         copied += install_cloudflare_security_skill(supplied["Cloudflare_Security_Audit_Skill_2026-10-10.zip"])
-    downloaded = 0
-    if not args.offline:
-        for name in PHASER:
-            url = "https://raw.githubusercontent.com/phaserjs/phaser/" + PHASER_SHA + "/skills/" + name + "/SKILL.md"
-            with urlopen(Request(url, headers={"User-Agent": "UOMD-pinned-skill-bootstrap"}), timeout=25) as response:
-                data = response.read(250_001)
-            if not data.startswith(b"---") or b"name:" not in data[:700]:
-                raise RuntimeError("Unexpected official Phaser skill: " + name)
-            write_safe(TARGET / name / "SKILL.md", data)
-            downloaded += 1
     lock = {
         "installed_by": "tools/bootstrap_skills.py",
-        "phaser_repository": "https://github.com/phaserjs/phaser",
-        "phaser_commit": PHASER_SHA,
-        "official_phaser_skills": downloaded,
+        "official_phaser_skills": 0,
         "pinned_archive_sha256": {p.name: PINNED[p.name] for p in archives},
         "skill_file_sha256": {p.parent.name: sha256(p.read_bytes()) for p in sorted(TARGET.glob("*/SKILL.md"))},
         "executable_hooks_enabled": False,
     }
     write_safe(ROOT / ".claude" / "skills-lock.json", (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode())
-    print("PASS: copied", copied, "archive files; downloaded", downloaded, "official Phaser skills; installed", len(lock["skill_file_sha256"]), "skills.")
-    if not args.offline: main_verify = [name for name in ("ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "sprites-and-images", "security-audit") if not (TARGET / name / "SKILL.md").exists()]
-    else: main_verify = []
+    print("PASS: copied", copied, "archive files; installed", len(lock["skill_file_sha256"]), "skills.")
+    main_verify = [name for name in ("ponytail", "graphify", "ui-ux-pro-max", "phaser4-engine", "security-audit") if not (TARGET / name / "SKILL.md").exists()]
     if main_verify: raise SystemExit("Unexpected missing skills: " + ", ".join(main_verify))
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import type Phaser from '../engine';
 import { PREVIEW_FLOW_ENABLED } from '../config';
 import { errText } from '../ui/hub';
 import { Services } from '../services';

@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import { REF_H, REF_W } from '../config';
 import { S } from '../entry/strings';
 import { ApiError, type Wallets } from '../net/api';

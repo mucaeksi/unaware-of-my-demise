@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Unaware of My Demise - monorepo (Phaser 4 game, Cloudflare Worker API, React Control Center)",
+  "description": "Unaware of My Demise - monorepo (PixiJS v8 + DOM UI game, Cloudflare Worker API, React Control Center)",
   "workspaces": [
     "apps/*",
     "packages/*"

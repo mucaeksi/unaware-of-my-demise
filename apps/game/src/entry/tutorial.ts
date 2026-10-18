@@ -1,10 +1,10 @@
-import type Phaser from 'phaser';
+import type Phaser from '../engine';
 import type { Encounter } from '@uomd/content-schema';
 import { restartGame } from '../platform/native';
 import { Services } from '../services';
 import { advance } from './flow';
 import { clearFlowCheckpoint, clearStoryCheckpoint, loadFlowCheckpoint, saveFlowCheckpoint } from './resume';
-import { isForceFreshEntry, markTutorialDone } from './state';
+import { isForceFreshEntry, isInteractiveBrowser, markTutorialDone } from './state';
 import { confirmEntryComplete, recordEntry } from './sync';
 
 /**
@@ -26,7 +26,7 @@ export async function playTutorialStage(scene: Phaser.Scene, index: 1 | 2 | 3, f
     if (enc.pre_story) clearStoryCheckpoint(accountKey, enc.pre_story);
     if (enc.post_story) clearStoryCheckpoint(accountKey, enc.post_story);
     recordEntry(Services.api, (st) => markTutorialDone(st, index));
-    if (index === 3 && Services.patches.get().kind === 'ready') {
+    if (index === 3 && Services.patches.get().kind === 'ready' && isInteractiveBrowser()) {
       // Background patch already completed during the tutorial: fade to black and restart immediately
       s.cameras.main.fadeOut(1600, 0, 0, 0);
       s.time.delayedCall(1650, () => {

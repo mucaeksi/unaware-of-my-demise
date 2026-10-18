@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from '../engine';
 import type { PatchOutcome } from '@uomd/patch';
 import { CHANNEL, CLIENT_VERSION, PATCH_LAB_ENABLED, PREVIEW_FLOW_ENABLED, REF_H, REF_W } from '../config';
 import { beginEntry, signInWithGoogle } from '../entry/flow';
@@ -75,10 +75,22 @@ export class TitleScene extends Phaser.Scene {
     this.firstRun = loadEntry().phase !== 'completed';
     const { art, content } = Services.ready();
     void content.locale().then((loc) => setActiveLocaleStrings(loc?.strings)).catch(() => undefined);
+    const insets = safeInsets(this);
+    this.cameras.main.setBackgroundColor(0x0a0610);
+    this.buildServerBadge();
+    this.buildTitleStartMenu();
+    this.chipText = txt(this, 60 + insets.left, REF_H - 36 - insets.bottom, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud + 2);
+    if (PATCH_LAB_ENABLED) {
+      this.chipText.setInteractive({ useHandCursor: true }).on('pointerup', () => this.openPatchLab());
+    }
+    void this.refreshChip();
+    if (this.autoOpenSettings) {
+      this.autoOpenSettings = false;
+      void this.openSettings();
+    }
     // a patch can have replaced the art library while the splash played: make sure it has loaded what this screen draws
     await art.ensureBoot(this).catch((e: unknown) => console.warn('menu art unavailable', e));
     if (!this.sys.isActive()) return;
-    this.cameras.main.setBackgroundColor(0x0a0610);
     const notice = Services.ready().content.storageNotice;
     if (notice) toast(this, notice, 8000);
 
@@ -124,7 +136,6 @@ export class TitleScene extends Phaser.Scene {
       this.addTitleAtmosphere();
     }
 
-    const insets = safeInsets(this);
     const logoX = 520 + insets.left;
     const logoY = 262;
     if (this.textures.exists('fx_spark')) {
@@ -155,9 +166,6 @@ export class TitleScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setLetterSpacing(5);
 
-    this.buildServerBadge();
-    this.buildTitleStartMenu();
-
     // a reinstall or a second device: the account may already be past the entry flow
     if (this.firstRun && Services.api.signedIn && !isForceFreshEntry()) {
       void syncEntry(Services.api).then(({ state }) => {
@@ -167,10 +175,6 @@ export class TitleScene extends Phaser.Scene {
       });
     }
 
-    this.chipText = txt(this, 60 + insets.left, REF_H - 36 - insets.bottom, '', { fontSize: '24px', color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud + 2);
-    if (PATCH_LAB_ENABLED) {
-      this.chipText.setInteractive({ useHandCursor: true }).on('pointerup', () => this.openPatchLab());
-    }
     void this.refreshChip();
     this.game.events.on('content:changed', this.onContentChanged, this);
     this.game.events.on('content:checked', this.onChecked, this);
@@ -180,10 +184,6 @@ export class TitleScene extends Phaser.Scene {
     });
     this.input.once('pointerdown', () => void this.startAudio());
     sceneFadeIn(this, 1200);
-    if (this.autoOpenSettings) {
-      this.autoOpenSettings = false;
-      void this.openSettings();
-    }
   }
 
   /** Online gacha server & Google Play Games account status badge in the top-left corner. */
@@ -233,29 +233,62 @@ export class TitleScene extends Phaser.Scene {
       .setDepth(DEPTH.world);
   }
 
-  /** Clean Title Screen menu: blinking TAP TO START banner + discrete top-right SETTINGS & REPLAY INTRO utility pills. */
+  /** Clean Title Screen menu: first-run / returning menu doors + blinking TAP TO START banner + top-right utility pills. */
   private buildTitleStartMenu(): void {
     const insets = safeInsets(this);
+    const mx = 500 + insets.left;
     const subLine = this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn;
     this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', subLine, true, () => void this.onTapToStart());
-    new Button(this, REF_W - 340 - insets.right, 58 + insets.top, {
-      label: 'REPLAY INTRO',
-      w: 224,
-      h: 62,
-      fontSize: 20,
-      onClick: () => {
-        forceResetEntry();
-        this.firstRun = true;
-        void this.onTapToStart();
+
+    if (this.firstRun) {
+      const signedIn = Services.api.signedIn;
+      const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
+      if (signedIn) {
+        new Button(this, mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
+      } else if (canSignIn) {
+        new Button(this, mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 640, h: 128, fontSize: 38, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
+      } else if (PREVIEW_FLOW_ENABLED) {
+        new Button(this, mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 640, h: 128, fontSize: 40, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(DEPTH.hud + 2);
+      } else {
+        new Button(this, mx, 640, { label: S.menu.signIn, w: 640, h: 128, fontSize: 38, variant: 'dim', onClick: () => undefined }).setEnabled(false).setDepth(DEPTH.hud + 2);
+        txt(this, mx, 730, S.menu.webNote, { fontSize: '30px', color: T.dim }).setOrigin(0.5).setDepth(DEPTH.hud + 2);
       }
-    }).setDepth(DEPTH.hud + 2);
-    new Button(this, REF_W - 126 - insets.right, 58 + insets.top, {
-      label: S.menu.settings,
-      w: 176,
-      h: 62,
-      fontSize: 21,
-      onClick: () => void this.openSettings()
-    }).setDepth(DEPTH.hud + 2);
+      new Button(this, mx, 800, { label: S.menu.settings, w: 560, h: 120, onClick: () => void this.openSettings() }).setDepth(DEPTH.hud + 2);
+      new Button(this, REF_W - 360 - insets.right, 58 + insets.top, {
+        label: 'REPLAY INTRO',
+        w: 210,
+        h: 62,
+        fontSize: 19,
+        onClick: () => {
+          forceResetEntry();
+          this.firstRun = true;
+          void this.onTapToStart();
+        }
+      }).setDepth(DEPTH.hud + 2);
+      new Button(this, REF_W - 145 - insets.right, 58 + insets.top, {
+        label: S.menu.settings,
+        w: 190,
+        h: 62,
+        fontSize: 21,
+        onClick: () => void this.openSettings()
+      }).setDepth(DEPTH.hud + 2);
+    } else {
+      new Button(this, mx, 640, { label: 'CONTINUE', sub: 'Enter the Road', w: 560, h: 128, fontSize: 44, variant: 'hot', onClick: () => void this.begin() }).setDepth(DEPTH.hud + 2);
+      new Button(this, mx, 786, { label: 'CHAPTERS', w: 560, h: 120, onClick: () => this.go('Chapters') }).setDepth(DEPTH.hud + 2);
+      new Button(this, mx, 920, { label: 'SETTINGS', w: 560, h: 120, onClick: () => void this.openSettings() }).setDepth(DEPTH.hud + 2);
+      new Button(this, REF_W - 200 - insets.right, 80 + insets.top, { label: 'COMPANY', w: 340, h: 100, fontSize: 30, onClick: () => this.go('Home') }).setDepth(DEPTH.hud + 2);
+      new Button(this, REF_W - 500 - insets.right, 80 + insets.top, {
+        label: 'REPLAY INTRO',
+        w: 210,
+        h: 62,
+        fontSize: 19,
+        onClick: () => {
+          forceResetEntry();
+          this.firstRun = true;
+          void this.onTapToStart();
+        }
+      }).setDepth(DEPTH.hud + 2);
+    }
   }
 
   /** Shared full-screen tap-to-start zone and blinking gothic prompt banner at the bottom center. */
@@ -354,6 +387,23 @@ export class TitleScene extends Phaser.Scene {
     if (this.busy) return;
     this.busy = true;
     void this.startAudio();
+
+    if (!isInteractiveBrowser()) {
+      const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
+      if (!Services.api.signedIn && canSignIn) {
+        if ((await signInWithGoogle(this)) !== 'ok') {
+          this.busy = false;
+          return;
+        }
+      }
+      if (this.firstRun) {
+        await beginEntry(this);
+      } else {
+        this.busy = false;
+        await this.begin();
+      }
+      return;
+    }
 
     const insets = safeInsets(this);
     if (this.tapBanner) {
@@ -521,6 +571,7 @@ export class TitleScene extends Phaser.Scene {
     patchSub.setText('Content up to date · Entering the road…');
     await this.waitMs(480);
     if (!this.sys.isActive()) return;
+    this.busy = false;
     await this.begin();
   }
 
@@ -550,26 +601,19 @@ export class TitleScene extends Phaser.Scene {
 
   private go(scene: string): void {
     void this.startAudio();
-    this.cameras.main.fadeOut(900, 10, 6, 16);
-    this.time.delayedCall(900, () => this.scene.start(scene));
+    const fadeMs = isInteractiveBrowser() ? 600 : 260;
+    this.cameras.main.fadeOut(fadeMs, 10, 6, 16);
+    this.time.delayedCall(fadeMs, () => this.scene.start(scene));
   }
 
   private async begin(): Promise<void> {
+    if (this.busy) return;
+    this.busy = true;
+    void this.startAudio();
     try {
       const { content } = Services.ready();
       const idx = await content.chapters();
       const campaignChapters = idx.chapters.filter((ch) => ch.chapter_id !== 'tutorial');
-
-      // If only the base AAB tutorial is installed (Part I patch not yet applied),
-      // show the Part I Beginning screen instead of looping back into Tutorial T-1!
-      if (campaignChapters.length === 0) {
-        this.quoteTimer?.remove(false);
-        this.stagingBox?.destroy();
-        this.stagingBox = null;
-        this.openPartOneBeginningModal();
-        this.busy = false;
-        return;
-      }
 
       let progress = Progress.load();
       if (Services.api.signedIn) {
@@ -580,10 +624,21 @@ export class TitleScene extends Phaser.Scene {
           /* fall back to local progress when offline */
         }
       }
+
+      if (isInteractiveBrowser() && campaignChapters.length === 0 && Boolean(progress['t3'])) {
+        this.quoteTimer?.remove(false);
+        this.stagingBox?.destroy();
+        this.stagingBox = null;
+        this.openPartOneBeginningModal();
+        return;
+      }
+
       const next = resolveNextCampaignNode(idx, progress, Services.api.accountKey);
       if (next) {
-        this.cameras.main.fadeOut(1100, 10, 6, 16);
-        await this.waitMs(1100);
+        if (isInteractiveBrowser()) {
+          this.cameras.main.fadeOut(600, 10, 6, 16);
+          await this.waitMs(600);
+        }
         await playNode(this, next);
       }
     } finally {

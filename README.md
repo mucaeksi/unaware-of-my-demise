@@ -1,10 +1,10 @@
 # Unaware of My Demise — Unified Development Master Prompt
 
-**Gothic anime gacha RPG · Android / Google Play first · Phaser 4 · updated 2026-10-17**
+**Gothic anime gacha RPG · Android / Google Play first · PixiJS v8 + Gothic DOM/CSS UI (D-23) · updated 2026-10-17**
 
 > Read this entire README before substantial work. It is the sole engineering and creative execution brief. [narrative/](narrative/) remains authoritative for fiction, dialogue, characters, chronology and spoilers. Supporting records hold implementation details and evidence; current owner instructions override older agent/model assignments.
 
-**Current checkpoint (2026-10-17): Core engine packages R00–R17 are locally implemented and verified (`1,069` automated tests green); Phase 1 (Initial AAB / Vertical Slice Completion) is actively in its final polish pass.** **Argon 4, through Antigravity, owns all development, game/UX/art design, image generation, music/voice production, animation, combat math/VFX tuning, integration, testing, documentation and GitHub delivery.**
+**Current checkpoint (2026-10-17): Core engine packages R00–R17 and Decision D-23 (complete migration from Phaser 4 to Hybrid PixiJS v8 2D Stage + Modular Gothic DOM/CSS UI) are locally implemented and verified (`1,069+` automated tests green); Phase 1 (Initial AAB / Vertical Slice Completion) is actively in its final polish pass.** **Argon 4, through Antigravity, owns all development, game/UX/art design, image generation, music/voice production, animation, combat math/VFX tuning, integration, testing, documentation and GitHub delivery.**
 
 ---
 
@@ -97,8 +97,8 @@ Deliver new chapters, characters, encounters, events, seasons and media as valid
 
 | Area | Approved implementation |
 | --- | --- |
-| Game | Phaser **4.2.1**, TypeScript strict, Vite, modular scene/input/asset/audio/content managers. Use pinned installed types and current official APIs. |
-| Renderer | Phaser **WebGL** on Android WebView/browser. Phaser has no native Vulkan renderer. Use modern Phaser 4 render nodes, batching/atlases, animations, tweens, cameras, particles, geometry, masks, render textures and optimized filters; profile quality tiers/context recovery. Canvas fallback only where compatible and necessary. |
+| Game | **Hybrid PixiJS v8 (`pixi.js` ^8.x) 2D Stage + Modular TypeScript DOM/CSS UI (`#uomd-ui-layer`)** (Decision D-23, retiring Phaser 4.2.1), TypeScript strict, Vite, modular scene/input/asset/audio/content managers. Use pinned installed types and current official APIs. |
+| Renderer | **PixiJS v8 WebGL2/WebGPU 2D Stage** on Android WebView/browser + hardware-accelerated native HTML/CSS DOM UI overlay (`#uomd-ui-layer`) for crisp `@fontsource/cinzel` & `@fontsource/cormorant-garamond` typography, Flexbox/Grid scrolling, safe-area insets and ARIA semantics. Profile quality tiers (`high`/`medium`/`low`) and WebGL context recovery. |
 | Mobile | Capacitor **8** family; current shell is 8.5.3. Android Credential Manager, Play Billing, AdMob/UMP, secure storage, lifecycle/networking/crash reporting and reproducible native builds. Spine/Live2D only after runtime binding, SDK/license/editor/export/mobile/performance review; a flat generated image is not a rig. |
 | Backend | Cloudflare Workers + Hono. **D1/SQLite is the sole SQL database**, with DB bindings, parameterized SQL, migrations and typed models. Any Drizzle usage must use the D1/SQLite driver. No Neon/PostgreSQL/Hyperdrive/Firebase/Supabase game database. |
 | Assets/services | R2 for versioned assets/media/patches, Queues/Cron where justified, Access for admin, appropriate WAF/rate limiting/Turnstile and monitoring. R2 is not a financial database. |

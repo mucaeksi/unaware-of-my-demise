@@ -2,7 +2,7 @@ import '@fontsource/cinzel/latin-600.css';
 import '@fontsource/cinzel/latin-700.css';
 import '@fontsource/cormorant-garamond/latin-500.css';
 import '@fontsource/cormorant-garamond/latin-500-italic.css';
-import Phaser from 'phaser';
+import Phaser from './engine';
 import { REF_H, REF_W } from './config';
 import { playNode } from './flow';
 import { BattleScene } from './scenes/BattleScene';

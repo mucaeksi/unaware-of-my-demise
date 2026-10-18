@@ -55,10 +55,12 @@ if (process.argv.includes('--catalog-snapshot')) {
   console.log(`catalog snapshot: ${snapshot.sha256} (${bytes.byteLength} bytes)`);
 }
 let created = 0;
-for (const f of files) {
-  const res = await call(`/objects/${f.sha256}`, { method: 'PUT', body: f.bytes as BodyInit, headers: { 'Content-Type': f.type as string } });
-  if (!res.ok) throw new Error(`upload ${f.path}: HTTP ${res.status} ${await res.text()}`);
-  if (res.status === 201) created++;
+for (let i = 0; i < files.length; i += 8) {
+  await Promise.all(files.slice(i, i + 8).map(async (f) => {
+    const res = await call(`/objects/${f.sha256}`, { method: 'PUT', body: f.bytes as BodyInit, headers: { 'Content-Type': f.type as string } });
+    if (!res.ok) throw new Error(`upload ${f.path}: HTTP ${res.status} ${await res.text()}`);
+    if (res.status === 201) created++;
+  }));
 }
 console.log(`objects: ${files.length} (${created} new)`);
 

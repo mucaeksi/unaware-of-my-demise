@@ -243,7 +243,7 @@ export async function restorePurchases(): Promise<RestoreOutcome> {
   for (const p of purchases) {
     requireAccount(revision);
     try {
-      const r = await verifyWithRetry(p.productId, p.purchaseToken, revision);
+      const r = await Services.api.verifyPurchase(p.productId, p.purchaseToken, revision);
       if (r.status === 'granted') outcome.granted++;
       else if (r.status === 'already_granted') outcome.alreadyGranted++;
       else if (r.status === 'pending') outcome.pending++;
@@ -294,14 +294,10 @@ export function subscribeStoreReconciliation(listener: (outcome: RestoreOutcome)
   return () => reconcileListeners.delete(listener);
 }
 
-/** Wires automatic startup, resume, auth-switch, and native async Billing purchase reconciliation. */
+/** Wires automatic startup, resume, and native async Billing purchase reconciliation. */
 export function initStoreReconciliation(): void {
   if (reconciliationInitialized) return;
   reconciliationInitialized = true;
-
-  Services.api.addEventListener('auth', () => {
-    if (Services.api.signedIn) void triggerStoreReconciliation();
-  });
 
   if (typeof document !== 'undefined') {
     document.addEventListener('visibilitychange', () => {
