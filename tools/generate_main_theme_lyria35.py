@@ -41,6 +41,10 @@ ART_MANIFEST_PATH = ROOT / "content" / "base" / "art" / "art_manifest.json"
 RELEASE_JSON_PATH = ROOT / "content" / "base" / "release.json"
 
 
+# every paid request is reserved/settled in content/budget/media_budget.json (README R14)
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from media_budget import paid_call  # noqa: E402
+
 def load_api_key() -> str:
     for key_name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):
         val = os.environ.get(key_name, "").strip()
@@ -120,7 +124,7 @@ CANDIDATE_PROMPTS = [
 ]
 
 
-def call_lyria(api_key: str, prompt_text: str, use_image: bool) -> bytes:
+def _call_lyria_unmetered(api_key: str, prompt_text: str, use_image: bool) -> bytes:
     url = "https://generativelanguage.googleapis.com/v1beta/interactions"
     if use_image and TITLE_ART_PATH.exists():
         img_b64 = base64.b64encode(TITLE_ART_PATH.read_bytes()).decode("ascii")
@@ -324,6 +328,11 @@ def main() -> None:
     print("\n=== LYRIA 3.5 MAIN THEME INSTALLED TO content/base/audio/bgm_main_theme.ogg ===")
     print(json.dumps(results, indent=2, ensure_ascii=False))
 
+
+
+def call_lyria(api_key: str, prompt_text: str, use_image: bool) -> bytes:
+    with paid_call("LYRIA", "main theme candidate", "lyria-3.5", prompt=prompt_text):
+        return _call_lyria_unmetered(api_key, prompt_text, use_image)
 
 if __name__ == "__main__":
     main()

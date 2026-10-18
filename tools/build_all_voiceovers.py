@@ -51,6 +51,10 @@ GEMINI_CACHE_DIR = ROOT / ".cache" / "vo_gemini38_v1"
 SR = 24000
 
 
+# every paid request is reserved/settled in content/budget/media_budget.json (README R14)
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from media_budget import paid_call  # noqa: E402
+
 def load_api_key() -> str:
     key = os.environ.get("GEMINI_API_KEY", "").strip() or os.environ.get("GOOGLE_API_KEY", "").strip()
     if key:
@@ -90,7 +94,7 @@ def find_existing_cached_wav(line_id: str) -> Path | None:
     return None
 
 
-def call_gemini38_tts_sync(
+def _call_gemini38_tts_sync_unmetered(
     api_key: str,
     model_name: str,
     voice_name: str,
@@ -565,6 +569,11 @@ async def main() -> None:
 
     print(f"\nWrote {len(voices_manifest)} Gemini 3.8 TTS voice entries to {PRESENTATION_JSON_PATH}", flush=True)
 
+
+
+def call_gemini38_tts_sync(api_key: str, model_name: str, voice_name: str, style_prompt: str, tts_text: str) -> bytes:
+    with paid_call("TTS", "VO line (" + voice_name + ")", model_name, prompt=tts_text):
+        return _call_gemini38_tts_sync_unmetered(api_key, model_name, voice_name, style_prompt, tts_text)
 
 if __name__ == "__main__":
     asyncio.run(main())

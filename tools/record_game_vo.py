@@ -39,6 +39,10 @@ PRESENTATION_PATH = ROOT / "content" / "base" / "presentation" / "presentation.j
 VO_OUT_ROOT = ROOT / "content" / "base" / "voices"
 
 
+# every paid request is reserved/settled in content/budget/media_budget.json (README R14)
+sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
+from media_budget import paid_call  # noqa: E402
+
 def load_env_key() -> str:
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if key:
@@ -98,7 +102,7 @@ def normalize_inline_tags(tts_text: str) -> str:
     return tts_text.replace("<soft chuckle>", "<chuckle>")
 
 
-def synthesize_gemini38(entry: dict[str, Any], api_key: str) -> bytes:
+def _synthesize_gemini38_unmetered(entry: dict[str, Any], api_key: str) -> bytes:
     """
     Calls the official Gemini 3.8 Flash TTS Interactions API (`v1beta/interactions`)
     with turn-level `speech_metadata.style` acting direction and inline `<...>` vocal tags.
@@ -160,7 +164,7 @@ def synthesize_gemini38(entry: dict[str, Any], api_key: str) -> bytes:
     return base64.b64decode(b64)
 
 
-def synthesize_chirp3_ssml(entry: dict[str, Any], token: str, project_id: str) -> bytes:
+def _synthesize_chirp3_ssml_unmetered(entry: dict[str, Any], token: str, project_id: str) -> bytes:
     """Calls Google Cloud Text-to-Speech Chirp3-HD with clause-level SSML prosody and breaks."""
     url = "https://texttospeech.googleapis.com/v1/text:synthesize"
     payload = {
@@ -283,6 +287,16 @@ def main() -> None:
     MASTER_SCRIPT_PATH.write_text(json.dumps(master, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     sync_presentation_manifest(master["lines"])
 
+
+
+def synthesize_gemini38(entry: dict[str, Any], api_key: str) -> bytes:
+    with paid_call("TTS", "VO line " + str(entry.get("line_id", "?")), "gemini-3.8-flash-tts", prompt=str(entry.get("ja", ""))):
+        return _synthesize_gemini38_unmetered(entry, api_key)
+
+
+def synthesize_chirp3_ssml(entry: dict[str, Any], token: str, project_id: str) -> bytes:
+    with paid_call("TTS", "VO line " + str(entry.get("line_id", "?")), "chirp3-hd", prompt=str(entry.get("ja", ""))):
+        return _synthesize_chirp3_ssml_unmetered(entry, token, project_id)
 
 if __name__ == "__main__":
     main()
