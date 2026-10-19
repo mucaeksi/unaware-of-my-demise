@@ -36,7 +36,22 @@ interface Progress {
   next: Item[];
   blockedOnOwner: Item[];
   ideas: { from: string; date: string; text: string; status: string }[];
+  // docs/DEV_TRACKER.json (spread into progress.json by tools/build_progress.ts)
+  reviewedAt?: string;
+  sourceCommit?: string;
+  currentAssignment?: { id: string; status: string; nextProposed: string; workflow: string };
+  flow?: string;
+  phases?: { n: number; title: string; status: string; done: string[]; remaining: string[] }[];
+  capabilities?: { id: string; title: string; taskStatus: string; implementationStatus: string; implemented: string; evidenceIds: string[]; blockerIds: string[] }[];
+  evidence?: { id: string; level: string; result: string; verifiedAt: string | null }[];
+  blockers?: { id: string; level: string; title: string; detail: string }[];
+  media?: { kind: string; drawn: string; inGame: string; missing: string }[];
+  checks?: { date: string; commit: string; items: { name: string; result: string; detail: string }[] };
 }
+
+/** package code status -> badge class; acceptance stays separate (open blockers) */
+const codeBadge = (s: string): string => (s === 'COMPLETE' ? 'ok' : s === 'PARTIAL' ? 'warn' : 'bad');
+const checkBadge = (r: string): string => (r === 'pass' ? 'ok' : r === 'partial' ? 'warn' : r === 'fail' ? 'bad' : 'info');
 interface Note { id: number; area: string; kind: string; body: string; status: string; resolution: string; created_by: string; created_at: string; updated_by: string | null }
 
 const TABS = ['Overview', 'Live preview', 'Screens', 'Feedback'] as const;
@@ -64,7 +79,7 @@ export function Development({ me, say }: { me: Me; say: (m: string) => void }): 
   if (!p) return <p>Loading development data…</p>;
   return (
     <>
-      <header className="page"><h2>Development</h2><span className="badge">{p.summary.done} done · {p.summary.partial} partial · {p.summary.missing} missing</span></header>
+      <header className="page"><h2>Development</h2><span className="badge">{packageSummary(p)}</span></header>
       <div className="row" role="tablist">
         {TABS.map((t) => <button key={t} role="tab" aria-selected={t === tab} className={`btn${t === tab ? ' primary' : ''}`} onClick={() => setTab(t)}>{t}</button>)}
       </div>
@@ -76,6 +91,14 @@ export function Development({ me, say }: { me: Me; say: (m: string) => void }): 
   );
 }
 
+function packageSummary(p: Progress): string {
+  const caps = p.capabilities ?? [];
+  if (!caps.length) return `${p.summary.done} done · ${p.summary.partial} partial · ${p.summary.missing} missing`;
+  const n = (s: string): number => caps.filter((c) => c.implementationStatus === s).length;
+  const accepted = caps.filter((c) => c.implementationStatus === 'COMPLETE' && c.blockerIds.length === 0).length;
+  return `R00–R18 · code ${n('COMPLETE')} complete, ${n('PARTIAL')} partial · ${accepted} with no open acceptance gate`;
+}
+
 const List = ({ title, items }: { title: string; items: Item[] }): ReactNode => (
   <section className="card"><h3>{title}</h3><ul>{items.map((i) => <li key={i.title}><strong>{i.title}</strong>{i.detail ? ` — ${i.detail}` : ''}</li>)}</ul></section>
 );
@@ -83,26 +106,98 @@ const List = ({ title, items }: { title: string; items: Item[] }): ReactNode => 
 function Overview({ p }: { p: Progress }): ReactNode {
   return (
     <>
-      <p className="mono">Generated {p.generatedAt} from the repository (roadmap, decisions, git history, Base AAB v0.1.2 manifest).</p>
+      <p className="mono">Generated {p.generatedAt} from the repository (docs/DEV_TRACKER.json reviewed {p.reviewedAt ?? '—'} at {p.sourceCommit ?? '—'}, roadmap, decisions, git history, base release manifest).</p>
+      {p.currentAssignment ? (
+        <section className="card" style={{ marginBottom: 14 }}>
+          <div className="row">
+            <h3 style={{ margin: 0 }}>Current assignment {p.currentAssignment.id}</h3>
+            <span className="badge ok">{p.currentAssignment.status}</span>
+          </div>
+          <p style={{ margin: '8px 0 0' }}>{p.currentAssignment.workflow}</p>
+          <p style={{ margin: '6px 0 0', color: 'var(--dim)' }}><strong>Proposed next:</strong> {p.currentAssignment.nextProposed}</p>
+        </section>
+      ) : null}
       {p.baseRelease ? (
         <section className="card" style={{ marginBottom: 14 }}>
           <div className="row">
-            <h3 style={{ margin: 0 }}>Base AAB v0.1.2 &amp; Online Gacha Entry Pipeline</h3>
+            <h3 style={{ margin: 0 }}>Base release (initial AAB content)</h3>
             <span className="badge ok">{p.baseRelease.id} · gen {p.baseRelease.generation}</span>
+            <span className="badge ok">client ≥ {p.baseRelease.minClient}</span>
             <span className="badge ok">{p.baseRelease.fileCount} base files ({(p.baseRelease.totalBytes / (1024 * 1024)).toFixed(2)} MB)</span>
             <span className="badge ok">{p.baseRelease.approvedArtCount} approved art entries</span>
           </div>
-          <p style={{ margin: '8px 0 0', color: 'var(--dim)' }}>
-            <strong>Flow:</strong> Phaser Splash (retro-synth chime + prism laser) → SovTaym Studios (celestial astrolabe + Main Theme) → Title (Tap to Start → Google Play Sign-In → Background Patch) → 120s 9-Shot Prologue → 3-Stage Tutorial (6 Light Novel cutscenes with reactive busts, 2-head SD Chibis at 0.72x scale, 3 wide panoramic battlefields) → Random-Quote Patch Wait / Client Restart → Part I Beginning / Company Hub.
-          </p>
+          {p.flow ? <p style={{ margin: '8px 0 0', color: 'var(--dim)' }}><strong>Flow:</strong> {p.flow}</p> : null}
         </section>
+      ) : null}
+      {p.checks ? (
+        <>
+          <h3>Latest checks ({p.checks.date}, {p.checks.commit})</h3>
+          <table>
+            <tbody>{p.checks.items.map((c) => <tr key={c.name}><td>{c.name}</td><td><span className={`badge ${checkBadge(c.result)}`}>{c.result}</span></td><td>{c.detail}</td></tr>)}</tbody>
+          </table>
+        </>
       ) : null}
       <div className="grid">
         <List title="Working on now" items={p.now} />
         <List title="Next" items={p.next} />
         <List title="Waiting for you" items={p.blockedOnOwner} />
       </div>
-      <h3>Infrastructure roadmap</h3>
+      {p.phases?.length ? (
+        <>
+          <h3>Phases (README section 0)</h3>
+          <div className="grid">
+            {p.phases.map((ph) => (
+              <section key={ph.n} className="card">
+                <div className="row"><h3 style={{ margin: 0 }}>Phase {ph.n} — {ph.title}</h3><span className={`badge ${ph.status === 'active' ? 'ok' : 'warn'}`}>{ph.status}</span></div>
+                <p style={{ margin: '8px 0 2px' }}><strong>Done</strong></p>
+                <ul>{ph.done.map((x) => <li key={x}>{x}</li>)}</ul>
+                <p style={{ margin: '8px 0 2px' }}><strong>Remaining</strong></p>
+                <ul>{ph.remaining.map((x) => <li key={x}>{x}</li>)}</ul>
+              </section>
+            ))}
+          </div>
+        </>
+      ) : null}
+      {p.capabilities?.length ? (
+        <>
+          <h3>Work packages R00–R18</h3>
+          <p style={{ color: 'var(--dim)' }}>Code is the local source state. Acceptance stays open while a gate is listed (device, live accounts, art, owner decisions). The latest evidence shows who verified what and when.</p>
+          <table>
+            <thead><tr><th>ID</th><th>Package</th><th>Code</th><th>Open acceptance gates</th><th>Latest evidence</th></tr></thead>
+            <tbody>{p.capabilities.map((c) => {
+              const ev = (p.evidence ?? []).filter((e) => c.evidenceIds.includes(e.id) && e.verifiedAt).sort((x, y) => String(y.verifiedAt).localeCompare(String(x.verifiedAt)))[0];
+              return (
+                <tr key={c.id}>
+                  <td style={{ whiteSpace: 'nowrap' }}>{c.id}</td>
+                  <td style={{ minWidth: 280 }}>{c.title}<div className="mono" style={{ whiteSpace: 'normal' }}>{c.implemented}</div></td>
+                  <td style={{ whiteSpace: 'nowrap' }}><span className={`badge ${codeBadge(c.implementationStatus)}`}>{c.implementationStatus}</span></td>
+                  <td style={{ minWidth: 180 }}><div className="row" style={{ gap: 4, margin: 0 }}>{c.blockerIds.length ? c.blockerIds.map((b) => <span key={b} className="badge warn" style={{ whiteSpace: 'nowrap' }} title={(p.blockers ?? []).find((x) => x.id === b)?.title}>{b}</span>) : <span className="badge ok">none</span>}</div></td>
+                  <td style={{ whiteSpace: 'nowrap' }}>{ev ? <><div>{ev.level}</div><div className="mono">{String(ev.verifiedAt).slice(0, 10)} · <span title={ev.id}>{ev.id.length > 22 ? `${ev.id.slice(0, 21)}…` : ev.id}</span></div></> : '—'}</td>
+                </tr>
+              );
+            })}</tbody>
+          </table>
+        </>
+      ) : null}
+      {p.media?.length ? (
+        <>
+          <h3>Art integration (Argon workbench to game)</h3>
+          <table>
+            <thead><tr><th>Kind</th><th>Drawn</th><th>In the game</th><th>Missing</th></tr></thead>
+            <tbody>{p.media.map((m) => <tr key={m.kind}><td>{m.kind}</td><td>{m.drawn}</td><td>{m.inGame}</td><td>{m.missing}</td></tr>)}</tbody>
+          </table>
+        </>
+      ) : null}
+      {p.blockers?.length ? (
+        <>
+          <h3>Acceptance gates</h3>
+          <table>
+            <thead><tr><th>ID</th><th>State</th><th>Gate</th></tr></thead>
+            <tbody>{p.blockers.map((b) => <tr key={b.id}><td>{b.id}</td><td><span className={`badge ${b.level === 'OWNER_BLOCKED' ? 'bad' : 'warn'}`}>{b.level}</span></td><td><strong>{b.title}</strong><div className="mono">{b.detail}</div></td></tr>)}</tbody>
+          </table>
+        </>
+      ) : null}
+      <h3>Infrastructure matrix (docs/INFRA_ROADMAP.md)</h3>
       <table>
         <thead><tr><th>#</th><th>Area</th><th>Status</th><th>Detail</th></tr></thead>
         <tbody>{p.roadmap.map((r) => <tr key={r.n}><td>{r.n}</td><td>{r.area}</td><td>{r.status}</td><td>{r.detail}</td></tr>)}</tbody>
@@ -117,7 +212,7 @@ function Overview({ p }: { p: Progress }): ReactNode {
         <thead><tr><th>ID</th><th>When / who</th><th>Decision</th></tr></thead>
         <tbody>{p.decisions.slice().reverse().map((d) => <tr key={d.id}><td>{d.id}</td><td>{d.when}</td><td>{d.what}</td></tr>)}</tbody>
       </table>
-      <h3>Recent commits (every one is pushed to main)</h3>
+      <h3>Recent commits (local Git on Drive; GitHub retired, D-24)</h3>
       <table>
         <tbody>{p.commits.map((c) => <tr key={c.sha}><td><code>{c.sha}</code></td><td>{c.at.slice(0, 16).replace('T', ' ')}</td><td>{c.subject}</td></tr>)}</tbody>
       </table>
@@ -158,7 +253,7 @@ function Preview(): ReactNode {
   const url = gameUrl(scene, target);
   return (
     <>
-      <p>The game as deployed on Cloudflare (or live dev server when local). Jump directly to any scene in the v0.1.2 Base AAB flow below, or test the full entry sequence from the Splash.</p>
+      <p>The game as deployed on Cloudflare (or the dev server when local). Jump to any scene of the initial AAB flow below, or play the full entry sequence from the splash.</p>
       <div className="row" style={{ marginBottom: 8 }}>
         {FRAMES.map((x, i) => <button key={x.label} className={`btn${i === f ? ' primary' : ''}`} onClick={() => setF(i)}>{x.label}</button>)}
         {isLocal ? (

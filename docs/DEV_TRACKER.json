@@ -1,40 +1,56 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "99ca5ae2",
-  "reviewedAt": "2026-10-17",
+  "sourceCommit": "45c641e2",
+  "reviewedAt": "2026-10-19",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "D-23",
+    "id": "D-25",
     "status": "LOCAL_TESTED",
-    "nextProposed": "Part I OTA Patch Preparation & R18 First Store AAB Acceptance",
-    "workflow": "Argon 4 / Antigravity completed Decision D-23 (Full Engine Migration of @uomd/game from Phaser 4.2.1 to Hybrid PixiJS v8 2D Stage + Modular TypeScript DOM/CSS UI Architecture #uomd-ui-layer), Base AAB v0.1.2 (Opening, Google Play Sign-In, Background Patch, 120s Prologue, 3-Stage Tutorial with LN reactive busts, 2-head SD Chibi combat, 3 wide panoramic battlefields, random-quote Patch Wait & auto client restart) plus R06 and R09–R17 on main."
+    "nextProposed": "Phase 1 polish (music placement, SFX, combat math/VFX) and the Argon art-integration pilot (Kera Voss)",
+    "workflow": "Claude Code completed D-25 (pure PixiJS v8: own app shell, scene manager and asset store; data-driven VFX; HTML/ARIA menu layer; Phaser-style engine deleted) and D-26 (R09 durable story continuity), then repaired the Playwright suite on Windows. Argon 4 / Antigravity produces the art and animation; integration follows the Argon delivery brief."
   },
   "now": [
     {
-      "title": "Decision D-23: Hybrid PixiJS v8 + Modular Gothic DOM/CSS UI Migration complete",
-      "detail": "Retired phaser: 4.2.1 across @uomd/game in favor of PixiJS v8 (WebGL2/WebGPU 2D stage for Splash, Studio, Prologue, Story/NarrativeStage, and Battle/UnitView/BattleVfx) + synchronized #uomd-ui-layer DOM/CSS overlay for crisp Gothic typography (@fontsource/cinzel & @fontsource/cormorant-garamond), accessible HUD/menus, and deterministic Playwright E2E compatibility. Retired 28 upstream Phaser topic skills and updated the 6 project engine skills."
+      "title": "D-25 complete: the game client is pure PixiJS v8",
+      "detail": "core/app (renderer, fit, frame loop), core/scenes (scene manager), core/assets (textures, atlas frames, audio); battle with data-driven VFX presets (vfx_v1); story/prologue on PIXI; menus, title, finish and account screens as an HTML/ARIA layer. Commits 25212cfa, 8f55a9d8, cf3a9a27, ea68484d."
     },
     {
-      "title": "Base AAB v0.1.2 & Online Gacha Entry Flow complete and pushed to main",
-      "detail": "PixiJS Splash (retro-synth arpeggio + prism laser beam) -> ŞovTaym Studios (celestial astrolabe emblem + immediate Main Theme start) -> Tap-to-Start Title -> Google Play Sign-In -> Background Patch download -> 120s 9-scene Prologue (clean plates, no top counters) -> 3-Stage Tutorial with 6 Light Novel cutscenes (reactive character busts & motion expressions), 2-head SD Chibi combat (0.72x scale, multi-layer canvas VFX, Ultimate cut-ins) and 3 wide panoramic battlefields (forest_whispering_ash, forgotten_stone_crossing, shelter_courtyard_dusk) -> random-quote Patch Wait screen (14 cycling canon quotes) or immediate client restart into Part I Beginning / Company Hub."
+      "title": "D-26: R09 durable story continuity",
+      "detail": "Per-account continuity record (local + cloud save key, sequence merge, scene-hash binding), replay mode, committed-claim reconciliation. Commit feb1eaea; local scope only."
     },
     {
-      "title": "Control Center (Admin Panel) & Asset Pipeline synchronized to v0.1.2",
-      "detail": "Added D1 assets.sql seeding (47 approved & Base AAB assets), inline visual/audio preview in Asset Catalog, interactive Live Preview scene jump presets (?preview_scene=), updated browser evidence gallery, and ContentService stale-patch base guard so older IndexedDB/R2 patches never overwrite new Base AAB v0.1.2 assets."
+      "title": "Regressions from the engine swap fixed; e2e repaired on Windows",
+      "detail": "Character/Gear start data (init), archive shelf/page on return, postrender event, a11y live region at boot; e2e worker D1 state dir, stale coordinates and capability lists. Commits 25aae616, 45c641e2. landscape-desktop: 39 of 40 pass (see Latest checks)."
     }
   ],
   "next": [
     {
-      "title": "First AAB Playtest & Part I OTA Patch Authoring",
-      "detail": "Owner playtest of the v0.1.2 Base AAB flow on staging/device, iterative polish of fine details, and authoring/packaging of Part I Beginning onwards as signed OTA patches."
+      "title": "Argon art integration pilot: Kera Voss",
+      "detail": "Four expressions, an eight-state chibi sheet and summon art through tools/ingest_art.ts, checked in game, then owner approval; the template then covers the other 22 characters. Delivery rules: Argon brief (https://claude.ai/artifact/Qobho5vJKwE9gYA5ra2Wqx)."
     },
     {
-      "title": "R18 — Physical Android device, live staging, and first store AAB acceptance",
-      "detail": "Requires owner-held upload keystore, live Cloudflare/Google/Play/AdMob credentials, age private key for live encrypted restore drill, and physical Android device execution of the 24 QA cases in docs/QA_ANDROID.md."
+      "title": "Stale-patch guard ignores legitimate presentation overrides",
+      "detail": "ContentService.isStaleBasePatch (b5774562) serves base presentation.json/art for any patch that overrides them, so a patch locale (TR) never shows; r08-complete.spec fails. A separate session is working on it."
+    },
+    {
+      "title": "Phase 1 polish",
+      "detail": "Scene-by-scene music placement, a real SFX set (sounds are synthesized today), combat math and VFX polish, R10 layout comparison."
+    },
+    {
+      "title": "Paged screens open on page 1 again",
+      "detail": "Roster, Mail, Team, Purchases, Operations, Recruit used to keep their page across visits (the old engine reused scene instances). Restore through start data where it matters."
+    },
+    {
+      "title": "R18 — physical Android device, live staging, first store AAB acceptance",
+      "detail": "Needs the owner-held upload keystore, live Cloudflare/Google/Play/AdMob settings, the restore key and a physical device for the cases in docs/QA_ANDROID.md."
     }
   ],
   "blockedOnOwner": [
+    {
+      "title": "B-ART-DECISIONS — Art delivery decisions",
+      "detail": "Commercial-use terms of Whisk/Veo output; approval of the Kera Voss pilot; role, element and rarity for the five drawn characters missing from the unit pack (cassian_thorne, corbin_locke, dorian_kesk, garrick_cinder, rowan_reed); order of regional music and the other characters' Japanese voice."
+    },
     {
       "title": "B-SIGNING — Owner-held upload key and approved signed test binary",
       "detail": "Use the existing key through secure UOMD_KEYSTORE_FILE/PASSWORD/KEY_ALIAS and explicit versionCode/environment; never recreate the key or print its values. Needed for signed-device/store acceptance, not local source work."
@@ -65,6 +81,24 @@
     }
   ],
   "ideas": [
+    {
+      "from": "owner",
+      "date": "2026-10-18",
+      "text": "Drop Phaser completely and move the game to pure PixiJS, step by step (battle, story, menus, then delete the compatibility API).",
+      "status": "done: D-25 (ea68484d)"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-19",
+      "text": "Prepare a page to share with Argon listing what is missing and how to deliver it.",
+      "status": "done: Argon delivery brief (https://claude.ai/artifact/Qobho5vJKwE9gYA5ra2Wqx)"
+    },
+    {
+      "from": "owner",
+      "date": "2026-10-19",
+      "text": "Bring the Control Center fully up to date so done and remaining work is visible there.",
+      "status": "done: Development page shows phases, R00–R18 with acceptance blockers, art integration and latest checks"
+    },
     {
       "from": "owner",
       "date": "2026-10-17",
@@ -1262,6 +1296,38 @@
       "buildId": null,
       "deploymentId": null,
       "deviceId": null
+    },
+    {
+      "id": "E-R09-D26-20261018",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "feb1eaea",
+      "verifiedAt": "2026-10-18",
+      "scope": "D-26 continuity contract v1: per-account local + cloud continuity record, sequence merge, scene-hash binding, legacy key migration, replay mode and committed-claim reconciliation; unit tests and browser checks (mid-scene resume, replay, prologue failure notice). No device or deployed proof.",
+      "testIds": [
+        "apps/game vitest",
+        "browser: prologue resume, replay"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
+    {
+      "id": "E-D25-LOCAL-20261019",
+      "level": "LOCAL_TESTED",
+      "result": "PARTIAL",
+      "commit": "45c641e2",
+      "verifiedAt": "2026-10-19",
+      "scope": "Pure-PixiJS client after D-25: root typecheck and lint clean, apps/game 149 unit tests pass, game build; Playwright landscape-desktop against the local Worker stack: 38/40 in the full run, library.spec then passed alone; r08-complete.spec fails on the stale-patch guard (not D-25). Phone/tablet projects and physical devices not run.",
+      "testIds": [
+        "npm run typecheck",
+        "npm run lint",
+        "apps/game vitest (149)",
+        "playwright landscape-desktop"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
     }
   ],
   "blockers": [
@@ -1840,7 +1906,9 @@
         "E-SOURCE-R00",
         "E-AUDIT-ENTRY",
         "E-EXTERNAL",
-        "E-R09-R17-LOCAL-20261015"
+        "E-R09-R17-LOCAL-20261015",
+        "E-R09-D26-20261018",
+        "E-D25-LOCAL-20261019"
       ],
       "blockerIds": [
         "B-DEVICE"
@@ -1870,7 +1938,8 @@
         "E-SOURCE-R00",
         "E-AUDIT-BASELINE",
         "E-EXTERNAL",
-        "E-R09-R17-LOCAL-20261015"
+        "E-R09-R17-LOCAL-20261015",
+        "E-D25-LOCAL-20261019"
       ],
       "blockerIds": [
         "B-ART",
@@ -2145,5 +2214,149 @@
       ],
       "dependencyNote": "Also requires every applicable earlier first-binary acceptance gate; direct dependency list follows README route."
     }
-  ]
+  ],
+  "flow": "Pixel engine splash -> ŞovTaym Studios + Main Theme -> Title (Tap to Start -> Google Play Sign-In -> background patch) -> 120 s nine-shot Prologue -> T-1/T-2/T-3 story + manual battles -> Finish (patch wait, one restart) -> full menu.",
+  "phases": [
+    {
+      "n": 1,
+      "title": "Initial AAB (vertical slice)",
+      "status": "active",
+      "done": [
+        "Full entry flow Studio → Title → Prologue → T-1..T-3 → Finish",
+        "Main theme locked; 7 BGM tracks in base",
+        "116 Japanese voice lines with synced subtitles",
+        "Pure PixiJS client, data-driven combat VFX (D-25)",
+        "Durable story continuity (D-26)"
+      ],
+      "remaining": [
+        "Scene-by-scene music placement",
+        "Real SFX set (sounds are synthesized)",
+        "Combat math and VFX polish",
+        "R10 layout comparison and device readability",
+        "Physical device and signed AAB (R18)"
+      ]
+    },
+    {
+      "n": 2,
+      "title": "World and chapters (patches)",
+      "status": "content drawn, integration open",
+      "done": [
+        "Part I campaign patch: 8 chapters, 54 nodes, 35 encounters, 88 story scenes",
+        "50 locations drawn by Argon"
+      ],
+      "remaining": [
+        "Export and ingest of 47 location backgrounds",
+        "World map and node visuals",
+        "Regional music themes"
+      ]
+    },
+    {
+      "n": 3,
+      "title": "All characters, enemies and bosses",
+      "status": "drawn, mostly not in game",
+      "done": [
+        "25 playable and 28 enemy/boss designs drawn",
+        "Fadyme and Mahmut fully integrated (4 expressions, chibi sheet)"
+      ],
+      "remaining": [
+        "3 more expressions for 23 characters",
+        "Eight-state chibi sheets with transparency",
+        "Combat kits for 5 characters missing from the unit pack",
+        "Japanese voice for the other characters"
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Events, LiveOps, final polish",
+      "status": "not started",
+      "done": [
+        "Mode foundations reported locally (R12)"
+      ],
+      "remaining": [
+        "Seasonal events and banner schedules",
+        "Mode content and reward tables",
+        "Store acceptance (R18)"
+      ]
+    }
+  ],
+  "media": [
+    {
+      "kind": "Playable characters",
+      "drawn": "25",
+      "inGame": "Fadyme, Mahmut (4 expressions + chibi sheet)",
+      "missing": "23 characters have 1 sheet, 1 portrait and 1 chibi design as JPG without transparency"
+    },
+    {
+      "kind": "Enemies and bosses",
+      "drawn": "28",
+      "inGame": "3 chibi sheets",
+      "missing": "25 units need eight-state battle sheets"
+    },
+    {
+      "kind": "Locations",
+      "drawn": "50",
+      "inGame": "3 backgrounds (base)",
+      "missing": "47 need 1920×1080 WebP export and ingest"
+    },
+    {
+      "kind": "Story CGs",
+      "drawn": "15",
+      "inGame": "2 illustrations + 9 prologue plates",
+      "missing": "Export and subtitle-band check"
+    },
+    {
+      "kind": "UI and brand screens",
+      "drawn": "8",
+      "inGame": "—",
+      "missing": "Full-screen JPG mockups; the game needs separate layers (9-slice frames, button states)"
+    },
+    {
+      "kind": "Gacha banners",
+      "drawn": "11",
+      "inGame": "—",
+      "missing": "Layered versions without baked text"
+    },
+    {
+      "kind": "UI icons",
+      "drawn": "96",
+      "inGame": "—",
+      "missing": "Transparent PNG on an even grid"
+    }
+  ],
+  "checks": {
+    "date": "2026-10-19",
+    "commit": "45c641e2",
+    "items": [
+      {
+        "name": "Typecheck (root)",
+        "result": "pass",
+        "detail": ""
+      },
+      {
+        "name": "Lint (root)",
+        "result": "pass",
+        "detail": ""
+      },
+      {
+        "name": "Game unit tests",
+        "result": "pass",
+        "detail": "149 / 149"
+      },
+      {
+        "name": "Playwright landscape-desktop",
+        "result": "partial",
+        "detail": "39 / 40 — r08-complete fails on the stale-patch guard"
+      },
+      {
+        "name": "Playwright phone / tablet",
+        "result": "not run",
+        "detail": ""
+      },
+      {
+        "name": "Physical Android, signed AAB",
+        "result": "not run",
+        "detail": "R18"
+      }
+    ]
+  }
 }

@@ -1,6 +1,13 @@
 # Argon 4 / Antigravity Continuation & Master Execution Plan
 
-Updated **2026-10-17**. [README](../README.md) is the complete execution brief and master prompt; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status.
+Updated **2026-10-19**. [README](../README.md) is the complete execution brief and master prompt; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status.
+
+## Status 2026-10-19
+
+- **Done:** D-25 (pure PixiJS v8 client: `core/app`, `core/scenes`, `core/assets`; data-driven VFX; HTML/ARIA menus; Phaser-style engine deleted) and D-26 (R09 durable story continuity). Regressions from the swap fixed (Character/Gear start data, archive shelf on return). Checks at `45c641e2`: typecheck, lint, 149 game unit tests; Playwright landscape-desktop 39/40.
+- **Open now:** the stale-patch guard (`ContentService.isStaleBasePatch`) serves base `presentation.json`/art for any patch that overrides them (r08-complete fails); paged screens reopen on page 1; phone/tablet e2e and physical devices not run.
+- **Art:** the Argon workbench (25 characters, 28 enemies, 50 locations, 8 UI screens, 11 banners, 96 icons, 15 CGs) is drawn but mostly not ingested; delivery rules are in the Argon brief (https://claude.ai/artifact/Qobho5vJKwE9gYA5ra2Wqx). Next: Kera Voss pilot through `tools/ingest_art.ts`.
+- Live view of phases, R00–R18 code status, acceptance gates and latest checks: Control Center → Development.
 
 ## Master 4-Phase Execution Order (Owner Direction — 2026-10-17)
 

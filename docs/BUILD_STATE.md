@@ -2,6 +2,13 @@
 
 Reconciled **2026-10-14** for R08 completion working tree based on `0f2f3f11403942ef4b58f8691f2f06e8699d4a03`. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) records exact scope/evidence. R08 is source complete and locally verified; R09 is deliberately not started. R08 was pushed as `a181a92248beacadf6bfb0444032943b057adea0`; the enclosing documentation commit completes the handoff. Subsequent implementation and all creative production pass to Argon 4 through Antigravity.
 
+## Current state 2026-10-19 (supersedes the inventory dates below where they differ)
+
+- **Done:** D-25 (pure PixiJS v8 client: `core/app`, `core/scenes`, `core/assets`; data-driven VFX; HTML/ARIA menus; Phaser-style engine deleted) and D-26 (R09 durable story continuity). Regressions from the swap fixed (Character/Gear start data, archive shelf on return). Checks at `45c641e2`: typecheck, lint, 149 game unit tests; Playwright landscape-desktop 39/40.
+- **Open now:** the stale-patch guard (`ContentService.isStaleBasePatch`) serves base `presentation.json`/art for any patch that overrides them (r08-complete fails); paged screens reopen on page 1; phone/tablet e2e and physical devices not run.
+- **Art:** the Argon workbench (25 characters, 28 enemies, 50 locations, 8 UI screens, 11 banners, 96 icons, 15 CGs) is drawn but mostly not ingested; delivery rules are in the Argon brief (https://claude.ai/artifact/Qobho5vJKwE9gYA5ra2Wqx). Next: Kera Voss pilot through `tools/ingest_art.ts`.
+- Live view of phases, R00–R18 code status, acceptance gates and latest checks: Control Center → Development.
+
 ## Evidence contract
 
 Implementation state and acceptance evidence are separate. A capability may have working foundations and unresolved correctness or release gates.
