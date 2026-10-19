@@ -125,7 +125,7 @@ describe('PatchManager', () => {
     const manifest = await signedPatch({ dependsOn: undefined }, files);
     const storage = new MemoryStorage();
     const remote = new FakeRemote(manifest, await objectsOf(files));
-    const pm = new PatchManager(env({ clientVersion: '0.1.2', supportedCapabilities: ['presentation_v1'] }), storage, remote, base);
+    const pm = new PatchManager(env({ clientVersion: '0.1.2', supportedCapabilities: ['presentation_v1', 'vfx_v1'] }), storage, remote, base);
     expect((await pm.checkAndApply()).status).toBe('applied');
     const path = 'audio/bgm_ch1_ash_forest_calm.ogg';
     expect(remote.fetched).not.toContain(path);
