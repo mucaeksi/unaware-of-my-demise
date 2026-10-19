@@ -17,12 +17,15 @@ const CSS = `
 .uomd-node{position:absolute;margin:0}
 .uomd-text{white-space:pre;pointer-events:none;paint-order:stroke fill;user-select:none;-webkit-user-select:none}
 .uomd-text.wrap{white-space:pre-wrap;overflow-wrap:anywhere}
-.uomd-btn{pointer-events:auto;border:0;padding:0;background:transparent center/100% 100% no-repeat;color:${T.text};cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:inherit;transition:transform .08s ease-out;outline:none;border-radius:999px}
-.uomd-btn:active:not(:disabled){transform:var(--uomd-t) scale(.97)!important}
+.uomd-btn{pointer-events:auto;border:0;padding:0;background:transparent center/100% 100% no-repeat;color:${T.text};cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:inherit;transition:transform .12s cubic-bezier(.34,1.56,.64,1),filter .15s ease-out;outline:none;border-radius:999px;overflow:hidden}
+.uomd-btn:hover:not(:disabled){transform:var(--uomd-t) scale(1.022);filter:drop-shadow(0 0 12px rgba(227,195,125,.28))}
+.uomd-btn:active:not(:disabled){transform:var(--uomd-t) scale(.965)!important}
 .uomd-btn:focus-visible{box-shadow:0 0 0 4px ${'#' + C.goldHi.toString(16)}}
 .uomd-btn:disabled{cursor:default}
-.uomd-btn .label{font-family:${F.display};font-weight:600;letter-spacing:.02em;white-space:nowrap;line-height:1.1}
-.uomd-btn .sub{color:${T.dim};white-space:nowrap;line-height:1.1}
+.uomd-btn.hot::after{content:'';position:absolute;inset:0;background:linear-gradient(112deg,transparent 30%,rgba(255,244,212,.22) 48%,rgba(227,195,125,.35) 52%,transparent 68%);transform:translateX(-130%);animation:uomd-sheen 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes uomd-sheen{0%,28%{transform:translateX(-130%)}68%,100%{transform:translateX(130%)}}
+.uomd-btn .label{font-family:${F.display};font-weight:600;letter-spacing:.02em;white-space:nowrap;line-height:1.1;position:relative;z-index:1}
+.uomd-btn .sub{color:${T.dim};white-space:nowrap;line-height:1.1;position:relative;z-index:1}
 .uomd-btn:disabled .label,.uomd-btn:disabled .sub{opacity:.45}
 .uomd-panel{pointer-events:none;background:center/100% 100% no-repeat}
 .uomd-panel.tap{pointer-events:auto;cursor:pointer;outline:none;border-radius:28px}
@@ -34,7 +37,7 @@ const CSS = `
 .uomd-btn.bare .label,.uomd-btn.bare .sub{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .uomd-blink{animation:uomd-blink 2.3s ease-in-out infinite}
 @keyframes uomd-blink{0%,100%{opacity:1;scale:1.02}50%{opacity:.24;scale:.98}}
-@media (prefers-reduced-motion: reduce){.uomd-btn{transition:none}.uomd-blink{animation:none}}
+@media (prefers-reduced-motion: reduce){.uomd-btn{transition:none}.uomd-btn.hot::after,.uomd-blink{animation:none}}
 `;
 
 function ensureCss(): void {
@@ -246,6 +249,7 @@ export class DomButton extends DomNode<HTMLButtonElement> {
     b.style.borderRadius = this.bh <= 140 ? '999px' : '28px';
     if (opts.escape) b.dataset.escape = '1';
     if (opts.bare) b.classList.add('bare');
+    if (this.variant === 'hot' && !opts.bare) b.classList.add('hot');
     if (opts.ariaLabel) b.setAttribute('aria-label', opts.ariaLabel);
     this.label = document.createElement('span');
     this.label.className = 'label';
@@ -386,7 +390,9 @@ export class DomBar extends DomNode<HTMLDivElement> {
     const r = Math.min(1, Math.max(0, ratio));
     this.fill.style.width = `${r * 100}%`;
     const c = this.colorFn(r);
-    this.fill.style.background = `#${c.toString(16).padStart(6, '0')}`;
+    const hex = `#${c.toString(16).padStart(6, '0')}`;
+    this.fill.style.background = `linear-gradient(180deg, rgba(255,255,255,.32) 0%, ${hex} 48%, ${hex} 100%)`;
+    this.fill.style.boxShadow = r > 0.02 ? `0 0 12px ${hex}88` : 'none';
     this.el.setAttribute('aria-valuenow', String(Math.round(r * 100)));
   }
 }

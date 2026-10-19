@@ -19,6 +19,7 @@ import { Services } from '../services';
 import { Button, title, txt, verticalShade, type UiText } from '../ui/pixiKit';
 import { buildSubtitleSchedule, resolveSubtitleProgress } from '../ui/subtitles';
 import { C, DEPTH, F } from '../ui/theme';
+import { createSwingingBellEmblem, type SwingingBellHandle } from '../vfx/gothicUiVfx';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
@@ -51,6 +52,7 @@ export class PrologueScene extends PixiScene {
   private current: PIXI.Sprite | null = null;
   private caption!: UiText;
   private captionRule!: PIXI.Graphics;
+  private captionBell: SwingingBellHandle | null = null;
   private subtitlePlaque!: PIXI.Graphics;
   private subtitleShimmer!: PIXI.Graphics;
   private voiceWaveTrack!: PIXI.Graphics;
@@ -104,6 +106,7 @@ export class PrologueScene extends PixiScene {
     );
     this.captionRule.position.set(REF_W / 2, capY + 28);
     this.captionRule.alpha = 0;
+    this.captionBell = createSwingingBellEmblem(this, REF_W / 2, capY + 24, 0.54, DEPTH.hud + 1, 0);
 
     const plaqueTop = REF_H - 314 - insets.bottom;
     const bodyY = plaqueTop + 44;
@@ -274,6 +277,7 @@ export class PrologueScene extends PixiScene {
     this.progressFill.scale.x = BAR_W * (this.index / total);
     this.anim.to(this.progressFill.scale, { x: BAR_W * ((this.index + 1) / total) }, { duration: holdMs });
     if (!this.muted && !INTRO_FAST && !this.stage?.hasVoice(scene.line_id)) Sfx.bell(this.index === 4 ? 220 : 330 + (this.index % 3) * 55, 0.08, 1.5);
+    this.captionBell?.pulseRing(this.index === 4 ? C.crimsonHi : C.goldHi);
     this.showPlate(scene, first, holdMs);
     this.showText(scene);
     this.fadeTimer?.stop();

@@ -6,7 +6,7 @@ export type ApprovalStatus = 'pending' | 'approved' | 'revision' | 'pulled_to_ga
 export interface AnimationEntry {
   id: string;
   title: string;
-  category: 'UI_STEP1' | 'UI_KIT_V001' | 'CHARACTER_KERA_VOSS';
+  category: 'FIRST_AAB_FLOW' | 'UI_STEP1' | 'UI_KIT_V001' | 'CHARACTER_KERA_VOSS';
   categoryLabel: string;
   gifUrl: string;
   targetScreen: string;
@@ -14,6 +14,7 @@ export interface AnimationEntry {
   framesInfo: string;
   description: string;
   defaultBg: 'cathedral' | 'checker' | 'stage';
+  previewSceneId?: string;
 }
 
 export interface ApprovalRecord {
@@ -22,9 +23,285 @@ export interface ApprovalRecord {
   updatedAt: string;
 }
 
-const STORAGE_KEY = 'uomd_admin_animation_approvals_v001';
+const STORAGE_KEY = 'uomd_admin_animation_approvals_v002';
+
+export interface AabSceneStep {
+  index: number;
+  id: string;
+  shortLabel: string;
+  title: string;
+  gifId: string;
+  animations: string[];
+}
+
+export const AAB_15_SCENES: AabSceneStep[] = [
+  {
+    index: 1,
+    id: 'fresh_flow',
+    shortLabel: '1. Tam Akış (Splash → Hub)',
+    title: 'Sahne 1: Splash Engine Credit & Tam İlk AAB Akışı',
+    gifId: '10_aab_splash_studio_intro',
+    animations: [
+      'PixiJS v8.0 Wordmark & 4 Renk Prizma Işını',
+      '#1 Dönen Kara Güneş Tutulma Koronası & Astronomik Rün Halkası',
+      'Genişleyen Gümüş Cetvel & Cyan Glint Süpürmesi'
+    ]
+  },
+  {
+    index: 2,
+    id: 'studio',
+    shortLabel: '2. SovTaym Studios',
+    title: 'Sahne 2: SovTaym Studios Presents (Kronometre & Çan)',
+    gifId: '10_aab_splash_studio_intro',
+    animations: [
+      'Çift Yönlü Dönen Altın/Gümüş Kronometre Halkaları (studio_mark)',
+      '#1 Tutulma Koronası Arka Plan Hale Nabzı',
+      '#2 Sallanan Çatlak Çan & Dışa Yayılan Akustik Şok Halkası (330Hz Çan Sesi)'
+    ]
+  },
+  {
+    index: 3,
+    id: 'title_fresh',
+    shortLabel: '3. Ana Menü (Title)',
+    title: 'Sahne 3: Ana Menü (TitleScene — Korona + Çan + Mühürlü Başlat)',
+    gifId: '11_aab_title_screen_full',
+    animations: [
+      '#1 Logo Arkasında Dönen Kara Güneş Tutulma Koronası & Yükselen Kül/Kor Akışı',
+      '#2 Logo Tacında Sallanan Çatlak Sığınak Çanı & Akustik Rezonans Halkaları',
+      '#3 "TAP TO START" Kızıl/Altın Balmumu Mühür Kırılması & Kor Patlaması',
+      '#5 Katmanlı Gotik Buton Üzerinde Metalik Işık Süpürmesi (Sheen Sweep)'
+    ]
+  },
+  {
+    index: 4,
+    id: 'prologue',
+    shortLabel: '4. 120sn 9-Sahne Prolog',
+    title: 'Sahne 4: "Before the Road" 120sn 9 Sahneli Prolog',
+    gifId: '12_aab_prologue_9scenes_flow',
+    animations: [
+      '9 Prolog İllüstrasyonunda (Crownfall → Search) Ken Burns Kamera Pan/Zoom',
+      '#2 Üst Başlık Cetvelinde Sallanan Minyatür Çan & Her Sahne Geçişinde Akustik Şok Halkası',
+      'Gotik Altyazı Plakası Üzerinde Altın Işık Süpürmesi & Canlı Ses Dalga Boyu Çubuğu'
+    ]
+  },
+  {
+    index: 5,
+    id: 'story_t1',
+    shortLabel: '5. LN T-1 Öncesi',
+    title: 'Sahne 5: Tutorial T-1 Öncesi Görsel Roman (Whispering Ash)',
+    gifId: '13_aab_tutorial_vn_mahmut_fadyme',
+    animations: [
+      'Mahmut & Fadyme Boydan Portre Nefes Alma & Mikro-Duruş Koreografisi',
+      '4 Duygu İfadesi Yumuşak Crossfade & Fiziksel Tepki İvmesi',
+      '#2 Diyalog Kutusu Üst Cetvelinde Sallanan Sığınak Çanı & Ses Senkron Çubuğu'
+    ]
+  },
+  {
+    index: 6,
+    id: 'battle_t1',
+    shortLabel: '6. Savaş T-1 (Whispering Ash)',
+    title: 'Sahne 6: Savaş T-1 — Whispering Ash (Mahmut & Fadyme vs Bellbound Dead)',
+    gifId: '14_aab_tutorial_battles_t1_t2_t3',
+    animations: [
+      '8 Savaş Durumu (Idle Nefes/Aura, Walk Adım Sekmesi, Basic Hamle, Active Çan Mührü, Ultimate, Hit, Defeat, Victory)',
+      '#6 Gecikmeli Hasar İzi (Ghost Bar) + Sıvı Parıltılı HP Barı & %100 Focus Ultimate Nabzı',
+      'Tur Sırası Portre Madalyonları & Gotik Yetenek Kartları'
+    ]
+  },
+  {
+    index: 7,
+    id: 'story_t1_after',
+    shortLabel: '7. LN T-1 Sonrası',
+    title: 'Sahne 7: Tutorial T-1 Sonrası Görsel Roman',
+    gifId: '13_aab_tutorial_vn_mahmut_fadyme',
+    animations: [
+      'Savaş Sonrası Mahmut & Fadyme Yakınlaşma Koreografisi (Omuzdan Kül Yaprağı Silkeleme)',
+      'Duygu Geçişleri (Dry Humor ↔ Soft Smile / Warm) & Yükselen Kül Parçacıkları'
+    ]
+  },
+  {
+    index: 8,
+    id: 'story_t2_before',
+    shortLabel: '8. LN T-2 Öncesi',
+    title: 'Sahne 8: Tutorial T-2 Öncesi Görsel Roman (Forgotten Stone Crossing)',
+    gifId: '13_aab_tutorial_vn_mahmut_fadyme',
+    animations: [
+      'Hollow Pilgrim Karşılaşması — Kalkan Arkası Savunma Duruşu Koreografisi',
+      'Gotik Diyalog Çerçevesi & Sallanan Çan Ayıracı'
+    ]
+  },
+  {
+    index: 9,
+    id: 'battle_t2',
+    shortLabel: '9. Savaş T-2 (Stone Crossing)',
+    title: 'Sahne 9: Savaş T-2 — Forgotten Stone Crossing (Koruma & Taunt Savaşı)',
+    gifId: '14_aab_tutorial_battles_t1_t2_t3',
+    animations: [
+      'Hollow Pilgrim & Bellbound Dead Karşısında Kalkan/Taunt & Odak (Focus) Mekanikleri',
+      '#6 Canlı HP Ghost-Drain & Focus Dolum Animasyonları'
+    ]
+  },
+  {
+    index: 10,
+    id: 'story_t2_after',
+    shortLabel: '10. LN T-2 Sonrası + CG',
+    title: 'Sahne 10: Tutorial T-2 Sonrası + Özel Event CG (Roadside Rest)',
+    gifId: '13_aab_tutorial_vn_mahmut_fadyme',
+    animations: [
+      'Özel Tam Ekran Event CG Açılışı (still_roadside_rest — Zırh Kayışı Sıkma Sahnesi)',
+      'CG Üzerinde Yumuşak Kamera Nefes Hareketi & Yükselen Kor/Kül Parçacıkları'
+    ]
+  },
+  {
+    index: 11,
+    id: 'story_t3_before',
+    shortLabel: '11. LN T-3 Öncesi',
+    title: 'Sahne 11: Tutorial T-3 Öncesi Görsel Roman (Shelter Courtyard Dusk)',
+    gifId: '13_aab_tutorial_vn_mahmut_fadyme',
+    animations: [
+      'Sığınak Avlusu Alacakaranlık Atmosferi & Son Savunma Hazırlığı Koreografisi',
+      'Müzik & Konuşmacı Odak Geçişleri'
+    ]
+  },
+  {
+    index: 12,
+    id: 'battle_t3',
+    shortLabel: '12. Savaş T-3 (Shelter Courtyard)',
+    title: 'Sahne 12: Savaş T-3 — Shelter Courtyard Dusk (Ultimate & Final Dalgası)',
+    gifId: '14_aab_tutorial_battles_t1_t2_t3',
+    animations: [
+      '%100 Focus Tamamlandığında Parlayan Altın-Mor Ultimate Çerçevesi & Portre Cut-In',
+      'Zafer (Victory) Zıplama Döngüsü & Element İzi (Afterimage Ghost)'
+    ]
+  },
+  {
+    index: 13,
+    id: 'story_t3_after',
+    shortLabel: '13. LN T-3 Final + CG',
+    title: 'Sahne 13: Tutorial T-3 Finali + Özel Event CG (Shelter Evening)',
+    gifId: '13_aab_tutorial_vn_mahmut_fadyme',
+    animations: [
+      'Özel Tam Ekran Event CG Açılışı (still_shelter_evening — Kamp Ateşi Başında Gece Nöbeti)',
+      'Duygusal Final Diyalog Akışı & Yavaş Kararma Geçişi'
+    ]
+  },
+  {
+    index: 14,
+    id: 'finish_wait',
+    shortLabel: '14. Patch Wait (Cep Saati & Çan)',
+    title: 'Sahne 14: Patch Wait ("While the Road Opens" — Kırık Cep Saati & Çan Çarkı)',
+    gifId: '15_aab_patch_wait_and_hub',
+    animations: [
+      '#4 Dönen Kırık Cep Saati Akrep/Yelkovanı, Çatlak Cam Parıltısı & Sallanan Minyatür Çan Sarkacı',
+      '#1 Arka Planda Dönen Tutulma Koronası & Sıvı Altın Yama İlerleme Çubuğu',
+      'Dönüşümlü Kanon Alıntı Kartları & Hesap Kayıt Doğrulama Rozeti'
+    ]
+  },
+  {
+    index: 15,
+    id: 'hub',
+    shortLabel: '15. Company Hub (Lobi)',
+    title: 'Sahne 15: The Company Hub (9 Animasyonlu Gotik Menü Karosu)',
+    gifId: '15_aab_patch_wait_and_hub',
+    animations: [
+      '#1 & #2 "THE COMPANY" Başlığında Dönen Tutulma Koronası ve Çift Sallanan Sığınak Çanı',
+      '#5 9 Lobi Karosunda (SUMMON, ROSTER, TEAM vb.) Hover Büyüme, Işık Süpürmesi & Tıklamada Mühür Patlaması'
+    ]
+  }
+];
+
+function liveGameUrl(sceneId: string, fastIntro: boolean): string {
+  const h = typeof window !== 'undefined' ? window.location.hostname : 'uomd-admin-staging.muratcaneksiii.workers.dev';
+  const base =
+    h === '127.0.0.1' || h === 'localhost'
+      ? 'https://uomd-game-staging.muratcaneksiii.workers.dev/'
+      : `${window.location.protocol}//${h.replace(/^uomd-admin/, 'uomd-game')}/`;
+  const params = new URLSearchParams();
+  if (sceneId) params.set('preview_scene', sceneId);
+  if (fastIntro) params.set('fastintro', '1');
+  const qs = params.toString();
+  return qs ? `${base}?${qs}` : base;
+}
 
 export const ANIMATION_CATALOG: AnimationEntry[] = [
+  {
+    id: '10_aab_splash_studio_intro',
+    title: 'İlk AAB (Sahneler 1–2): Splash Engine & SovTaym Studios Giriş Sekansı',
+    category: 'FIRST_AAB_FLOW',
+    categoryLabel: 'İlk AAB Tam Akış · Sahneler 1–2',
+    gifUrl: '/dev/animations/10_aab_splash_studio_intro.gif',
+    targetScreen: 'SplashScene → StudioScene (İlk AAB Açılış)',
+    targetEnginePath: 'apps/game/src/scenes/SplashScene.ts & StudioScene.ts',
+    framesInfo: '16 Kare GIF · Prizma Işını + Çift Kronometre Halkası + Çan Akustik Dalgası',
+    description: 'İlk AAB açılışındaki PixiJS v8 prizma/korona sekansı ve SovTaym Studios amblemi etrafında dönen altın/gümüş kronometre halkaları ile çan akustik şok dalgası.',
+    defaultBg: 'cathedral',
+    previewSceneId: 'studio'
+  },
+  {
+    id: '11_aab_title_screen_full',
+    title: 'İlk AAB (Sahne 3): Ana Menü (TitleScene) Tam Entegre Görünüm',
+    category: 'FIRST_AAB_FLOW',
+    categoryLabel: 'İlk AAB Tam Akış · Sahne 3',
+    gifUrl: '/dev/animations/11_aab_title_screen_full.gif',
+    targetScreen: 'TitleScene (Ana Menü — Korona + Çan + Mühürlü Başlat)',
+    targetEnginePath: 'apps/game/src/scenes/TitleScene.ts',
+    framesInfo: '16 Kare GIF · Dönen Korona + Sallanan Çan + Balmumu Mühür Patlaması',
+    description: 'Gerçek İlk AAB Ana Menüsü üzerinde dönen Kara Güneş Tutulma Koronası, logo üstünde sallanan çatlak çan, metalik parıltılı başlat butonu ve tıklandığında patlayan kızıl balmumu mühür.',
+    defaultBg: 'cathedral',
+    previewSceneId: 'title_fresh'
+  },
+  {
+    id: '12_aab_prologue_9scenes_flow',
+    title: 'İlk AAB (Sahne 4): 120sn 9 Sahneli Prolog ("Before the Road") Akışı',
+    category: 'FIRST_AAB_FLOW',
+    categoryLabel: 'İlk AAB Tam Akış · Sahne 4',
+    gifUrl: '/dev/animations/12_aab_prologue_9scenes_flow.gif',
+    targetScreen: 'PrologueScene (9 Sahneli Sinematik Açılış)',
+    targetEnginePath: 'apps/game/src/scenes/PrologueScene.ts',
+    framesInfo: '15 Kare GIF · 9 Prolog İllüstrasyonu + Çan Akustik Halkası + Ses Dalga Boyu',
+    description: 'İlk AAB içindeki 9 prolog sahnesinin (Crownfall, Ash Roads, Throne Wars, Reunion, Search) Ken Burns kamera hareketi, üst çan ayıracından yayılan akustik halkalar ve altyazı ses senkronu.',
+    defaultBg: 'cathedral',
+    previewSceneId: 'prologue'
+  },
+  {
+    id: '13_aab_tutorial_vn_mahmut_fadyme',
+    title: 'İlk AAB (Sahneler 5, 7, 8, 10, 11, 13): Mahmut & Fadyme VN Diyalogları + 2 Özel Event CG',
+    category: 'FIRST_AAB_FLOW',
+    categoryLabel: 'İlk AAB Tam Akış · Sahneler 5–13 (VN & CG)',
+    gifUrl: '/dev/animations/13_aab_tutorial_vn_mahmut_fadyme.gif',
+    targetScreen: 'StoryScene (T-1, T-2, T-3 Hikâye Sahneleri + Roadside Rest & Shelter Evening CG)',
+    targetEnginePath: 'apps/game/src/scenes/StoryScene.ts',
+    framesInfo: '15 Kare GIF · 4 Duygu Geçişi + Mikro-Duruş Koreografisi + 2 Tam Ekran CG',
+    description: 'İlk AAB öğretici hikâye bölümlerinde Mahmut ve Fadyme portrelerinin nefes, eğilme, duygu geçişleri, sallanan çan ayıraçlı diyalog kutusu ve 2 özel Event CG (Roadside Rest & Shelter Evening) sahnesi.',
+    defaultBg: 'stage',
+    previewSceneId: 'story_t2_after'
+  },
+  {
+    id: '14_aab_tutorial_battles_t1_t2_t3',
+    title: 'İlk AAB (Sahneler 6, 9, 12): T-1, T-2 & T-3 Taktiksel Savaş Animasyonları',
+    category: 'FIRST_AAB_FLOW',
+    categoryLabel: 'İlk AAB Tam Akış · Sahneler 6, 9, 12 (Savaş)',
+    gifUrl: '/dev/animations/14_aab_tutorial_battles_t1_t2_t3.gif',
+    targetScreen: 'BattleScene & UnitView (Whispering Ash, Stone Crossing, Shelter Courtyard)',
+    targetEnginePath: 'apps/game/src/scenes/BattleScene.ts & battle/UnitView.ts',
+    framesInfo: '15 Kare GIF · 3 Savaş Meydanı × (Idle/Walk → Basic → Active → Ultimate → Victory)',
+    description: 'İlk AAB savaşlarında Mahmut ve Fadyme’nin Bellbound Dead ve Hollow Pilgrim karşısında 8 durumlu aksiyonları, gecikmeli hasar izli (ghost trail) HP barları ve %100 Focus Ultimate patlaması.',
+    defaultBg: 'stage',
+    previewSceneId: 'battle_t1'
+  },
+  {
+    id: '15_aab_patch_wait_and_hub',
+    title: 'İlk AAB (Sahneler 14–15): Patch Wait (Kırık Cep Saati & Çan) → Company Hub (9 Menü Karosu)',
+    category: 'FIRST_AAB_FLOW',
+    categoryLabel: 'İlk AAB Tam Akış · Sahneler 14–15',
+    gifUrl: '/dev/animations/15_aab_patch_wait_and_hub.gif',
+    targetScreen: 'FinishScene (Patch Wait) & HomeScene (The Company Hub)',
+    targetEnginePath: 'apps/game/src/scenes/FinishScene.ts & HomeScene.ts',
+    framesInfo: '16 Kare GIF · Kırık Cep Saati Çarkı + Sıvı Altın Bar + 9 Lobi Karosu',
+    description: 'T-3 sonrası açılan Patch Wait ekranında dönen Kırık Cep Saati ve sallanan çan sarkacı, ardından girilen Company Hub ekranındaki korona/çan başlığı ve 9 Gotik menü karosu.',
+    defaultBg: 'cathedral',
+    previewSceneId: 'finish_wait'
+  },
   {
     id: '01_ui_eclipse_corona_loop',
     title: '1. Tutulma Koronası & Kül Akışı (Eclipse Corona Loop)',
@@ -32,10 +309,11 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     categoryLabel: 'Adım 1 · Ana Menü & Yükleme',
     gifUrl: '/dev/animations/01_ui_eclipse_corona_loop.gif',
     targetScreen: 'TitleScene (Ana Menü Gökyüzü Katmanı)',
-    targetEnginePath: 'apps/game/src/scenes/TitleScene.ts → coronaSprite',
-    framesInfo: '16 Kare Döngüsel GIF · 12.5 FPS + Canlı CSS/Pixi Katmanı',
+    targetEnginePath: 'apps/game/src/scenes/TitleScene.ts → createEclipseCorona()',
+    framesInfo: '16 Kare Döngüsel GIF · 12.5 FPS + Canlı PixiJS Katmanı',
     description: 'Ana Menüdeki kara güneş tutulması halkasının saat yönünde ağır dönüşü, altın korona parlaması ve yükselen kor/kül parçacıkları.',
-    defaultBg: 'cathedral'
+    defaultBg: 'cathedral',
+    previewSceneId: 'title_fresh'
   },
   {
     id: '02_ui_bell_resonance_pulse',
@@ -43,11 +321,12 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     category: 'UI_STEP1',
     categoryLabel: 'Adım 1 · Ana Menü & Yükleme',
     gifUrl: '/dev/animations/02_ui_bell_resonance_pulse.gif',
-    targetScreen: 'TitleScene & SummonScene (Merkez Çan Amblemi)',
-    targetEnginePath: 'apps/game/src/scenes/TitleScene.ts → bellEmblem',
+    targetScreen: 'TitleScene, PrologueScene & StoryScene (Merkez Çan Amblemi)',
+    targetEnginePath: 'apps/game/src/vfx/gothicUiVfx.ts → createSwingingBellEmblem()',
     framesInfo: '16 Kare Döngüsel GIF · 12.5 FPS + Sarkaç Salınımı',
     description: 'Kırık bronz çan ambleminin ağır sarkaç salınımı, çatlaklarından sızan kehribar ateş ve dışa yayılan altın akustik şok halkaları.',
-    defaultBg: 'cathedral'
+    defaultBg: 'cathedral',
+    previewSceneId: 'title_fresh'
   },
   {
     id: '03_ui_title_cta_wax_seal',
@@ -56,10 +335,11 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     categoryLabel: 'Adım 1 · Ana Menü & Yükleme',
     gifUrl: '/dev/animations/03_ui_title_cta_wax_seal.gif',
     targetScreen: 'TitleScene ("Dokun ve Başla" / Tap to Start CTA)',
-    targetEnginePath: 'apps/game/src/scenes/TitleScene.ts → startButton',
+    targetEnginePath: 'apps/game/src/vfx/gothicUiVfx.ts → triggerWaxSealBurst()',
     framesInfo: '16 Kare Döngüsel GIF · Normal → Hover → Seal Crack → Burst',
     description: 'Gotik demir/altın ana menü butonunun üzerinde gezen ışık süpürmesi ve tıklandığında kızıl balmumu mührün çatlayarak kor saçması.',
-    defaultBg: 'cathedral'
+    defaultBg: 'cathedral',
+    previewSceneId: 'title_fresh'
   },
   {
     id: '04_ui_loading_watch_bell',
@@ -67,11 +347,12 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     category: 'UI_STEP1',
     categoryLabel: 'Adım 1 · Ana Menü & Yükleme',
     gifUrl: '/dev/animations/04_ui_loading_watch_bell.gif',
-    targetScreen: 'PatchWaitScene & Sahne Geçiş Yükleme Ekranı',
-    targetEnginePath: 'apps/game/src/scenes/BootScene.ts → loadingSpinner',
+    targetScreen: 'FinishScene (Patch Wait) & Sahne Geçiş Yükleme Ekranı',
+    targetEnginePath: 'apps/game/src/vfx/gothicUiVfx.ts → createCrackedWatchSpinner()',
     framesInfo: '16 Kare Döngüsel GIF · 12.5 FPS Kesintisiz Döngü',
     description: 'Aldric’in çatlak cep saati akrep/yelkovan dönüşü, altındaki minyatür sığınak çanının salınımı ve rün halkası nabzı.',
-    defaultBg: 'cathedral'
+    defaultBg: 'cathedral',
+    previewSceneId: 'finish_wait'
   },
   {
     id: '05_ui_kit_button_4state_cycle',
@@ -79,11 +360,12 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     category: 'UI_KIT_V001',
     categoryLabel: 'Öncelik #1A · Katmanlı RGBA UI Kit',
     gifUrl: '/dev/animations/05_ui_kit_button_4state_cycle.gif',
-    targetScreen: 'Tüm Oyun & Lobi Menü Butonları (Yazısız Şeffaf RGBA)',
-    targetEnginePath: 'narrative/15_Art_Workbench/ui_screens/production_v001/ui_kit/button_primary_*',
+    targetScreen: 'Tüm Oyun & Lobi Menü Butonları (pixiKit.ts & domKit.ts)',
+    targetEnginePath: 'apps/game/src/ui/pixiKit.ts & domKit.ts',
     framesInfo: '16 Kare GIF · 4 Durum (Normal, Hover, Pressed, Disabled)',
     description: '#00FF00 yeşil zeminden kesilmiş şeffaf RGBA buton çerçevelerinin üzerinde metin olmadan 4 etkileşim durumu geçişi.',
-    defaultBg: 'checker'
+    defaultBg: 'checker',
+    previewSceneId: 'hub'
   },
   {
     id: '06_ui_kit_hp_focus_bars_live',
@@ -91,11 +373,12 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     category: 'UI_KIT_V001',
     categoryLabel: 'Öncelik #1A · Katmanlı RGBA UI Kit',
     gifUrl: '/dev/animations/06_ui_kit_hp_focus_bars_live.gif',
-    targetScreen: 'BattleScene HUD & Karakter Durum Çubukları',
-    targetEnginePath: 'narrative/15_Art_Workbench/ui_screens/production_v001/ui_kit/bar_*',
-    framesInfo: '18 Kare GIF · Hasar, İyileşme ve %100 Focus Ultimate Hazır Efekti',
-    description: 'Boş metal bar çerçevesi (bar_frame_empty) içinde akan kızıl HP sıvısı ve %100 olduğunda parlayan altın-mor Focus göstergesi.',
-    defaultBg: 'cathedral'
+    targetScreen: 'BattleScene HUD & Karakter Durum Çubukları (Bar)',
+    targetEnginePath: 'apps/game/src/ui/pixiKit.ts → Bar',
+    framesInfo: '18 Kare GIF · Hasar Ghost-Trail, İyileşme ve %100 Focus Ultimate Hazır Efekti',
+    description: 'Boş metal bar çerçevesi içinde gecikmeli hasar izi (ghost bar), akan kızıl HP sıvısı ve %100 olduğunda parlayan altın-mor Focus göstergesi.',
+    defaultBg: 'cathedral',
+    previewSceneId: 'battle_t1'
   },
   {
     id: '07_kera_voss_chibi_all_8_states',
@@ -107,7 +390,8 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     targetEnginePath: 'narrative/15_Art_Workbench/characters/kera_voss/production_v001/animation/states/*',
     framesInfo: '24 Kare GIF · 8 Durum × 3 Prosedürel Tween Karesi · 512×512 RGBA Pivot (0.5, 0.875)',
     description: 'Kera Voss 2-Head SD Chibi birim spritelarının 8 zorunlu savaş durumunun tamamı, ayak hizası sabitlenmiş ve nefes/hamle tweenleriyle hareketlendirilmiş döngüsü.',
-    defaultBg: 'stage'
+    defaultBg: 'stage',
+    previewSceneId: 'battle_t3'
   },
   {
     id: '08_kera_voss_chibi_combat_combo',
@@ -116,10 +400,11 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     categoryLabel: 'Öncelik #2 · Pilot Karakter: Kera Voss',
     gifUrl: '/dev/animations/08_kera_voss_chibi_combat_combo.gif',
     targetScreen: 'BattleScene — Canlı Tur Sırası Kombo Gösterimi',
-    targetEnginePath: 'apps/game/src/scenes/BattleScene.ts → UnitView.playState()',
+    targetEnginePath: 'apps/game/src/battle/UnitView.ts → applyState()',
     framesInfo: '13 Kare Hızlı Savaş Kombo GIF · 10.5 FPS',
     description: 'Kera Voss’un gerçek bir savaş turunda ileri adım atıp havan darbesi (Basic), simya şişesi (Active) ve Tutulma Ateşi (Ultimate) kullandıktan sonra zafer pozuna geçişi.',
-    defaultBg: 'stage'
+    defaultBg: 'stage',
+    previewSceneId: 'battle_t3'
   },
   {
     id: '09_kera_voss_vn_expressions_live',
@@ -131,7 +416,8 @@ export const ANIMATION_CATALOG: AnimationEntry[] = [
     targetEnginePath: 'narrative/15_Art_Workbench/characters/kera_voss/production_v001/vn/*',
     framesInfo: '16 Kare GIF · 4 İfade (Composed, Focused, Proud Smile, Defiant) · 768×1152 RGBA',
     description: 'Beden, şapka ve kadraj %100 sabit tutularak üretilen 4 farklı yüz ifadesinin VN diyalog kutusu ve hafif nefes hareketiyle yerinde görünümü.',
-    defaultBg: 'stage'
+    defaultBg: 'stage',
+    previewSceneId: 'story_t1'
   }
 ];
 
@@ -173,8 +459,23 @@ const VN_EXPRESSIONS = [
   }
 ] as const;
 
+const DEFAULT_APPROVED_IDS = [
+  '01_ui_eclipse_corona_loop',
+  '02_ui_bell_resonance_pulse',
+  '03_ui_title_cta_wax_seal',
+  '04_ui_loading_watch_bell',
+  '05_ui_kit_button_4state_cycle',
+  '06_ui_kit_hp_focus_bars_live',
+  '07_kera_voss_chibi_all_8_states',
+  '08_kera_voss_chibi_combat_combo',
+  '09_kera_voss_vn_expressions_live'
+];
+
 export function Animations({ me, say }: { me: Me | null; say: (m: string) => void }): ReactNode {
-  const [activeTab, setActiveTab] = useState<'in_context' | 'gif_gallery'>('in_context');
+  const [activeTab, setActiveTab] = useState<'first_aab' | 'in_context' | 'gif_gallery'>('first_aab');
+  const [aabStepIdx, setAabStepIdx] = useState<number>(2); // Default to Scene 3 (Title Screen) or Scene 1
+  const [fastIntro, setFastIntro] = useState<boolean>(false);
+  const [iframeNonce, setIframeNonce] = useState<number>(0);
   const [stageScene, setStageScene] = useState<'title' | 'battle' | 'vn' | 'uikit'>('battle');
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL');
   const [bgMode, setBgMode] = useState<'cathedral' | 'checker' | 'green'>('cathedral');
@@ -192,14 +493,23 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
   // Interactive Title Stage button state
   const [titleBtnState, setTitleBtnState] = useState<'normal' | 'hover' | 'pressed' | 'disabled'>('normal');
 
-  // Approval state persisted in localStorage
+  // Approval state persisted in localStorage (with 01..09 pre-marked as pulled_to_game)
   const [approvals, setApprovals] = useState<Record<string, ApprovalRecord>>(() => {
+    const initial: Record<string, ApprovalRecord> = {};
+    const now = new Date().toISOString();
+    for (const id of DEFAULT_APPROVED_IDS) {
+      initial[id] = { status: 'pulled_to_game', note: 'Onaylandı ve İlk AAB sahnelerine entegre edildi.', updatedAt: now };
+    }
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
-      return raw ? (JSON.parse(raw) as Record<string, ApprovalRecord>) : {};
+      if (raw) {
+        const parsed = JSON.parse(raw) as Record<string, ApprovalRecord>;
+        return { ...initial, ...parsed };
+      }
     } catch {
-      return {};
+      /* ignore */
     }
+    return initial;
   });
 
   useEffect(() => {
@@ -357,29 +667,36 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
       `}</style>
 
       <header className="page" style={{ flexWrap: 'wrap', gap: 10 }}>
-        <h2 style={{ margin: 0 }}>Animasyon Stüdyosu &amp; Onay Merkezi (GIF + Yerinde Sahne)</h2>
+        <h2 style={{ margin: 0 }}>Animasyon Stüdyosu &amp; İlk AAB Tam Akış İnceleme Merkezi</h2>
         <span className="badge ok">{approvedCount} / {ANIMATION_CATALOG.length} Onaylı</span>
-        <span className="badge info">{pulledCount} Oyuna Çekildi</span>
-        <div className="row" style={{ marginLeft: 'auto', margin: 0, gap: 8 }}>
+        <span className="badge info">{pulledCount} Oyuna Entegre</span>
+        <div className="row" style={{ marginLeft: 'auto', margin: 0, gap: 8, flexWrap: 'wrap' }}>
+          <button
+            type="button"
+            className={`btn${activeTab === 'first_aab' ? ' primary' : ''}`}
+            onClick={() => setActiveTab('first_aab')}
+          >
+            🚀 1. İlk AAB (Base AAB) Tam Akış İnceleme (15 Sahne Canlı + 6 Akış GIF)
+          </button>
           <button
             type="button"
             className={`btn${activeTab === 'in_context' ? ' primary' : ''}`}
             onClick={() => setActiveTab('in_context')}
           >
-            🎬 1. Yerinde Canlı Sahne Simülatörü (In-Context)
+            🎬 2. Bireysel Sahne Labı (In-Context)
           </button>
           <button
             type="button"
             className={`btn${activeTab === 'gif_gallery' ? ' primary' : ''}`}
             onClick={() => setActiveTab('gif_gallery')}
           >
-            🎞️ 2. Tüm Hareketli GIF Galerisi &amp; Onay Kutusu ({ANIMATION_CATALOG.length} GIF)
+            🎞️ 3. Tüm Hareketli GIF Galerisi ({ANIMATION_CATALOG.length} GIF)
           </button>
           <button
             type="button"
             className="btn"
             onClick={() =>
-              downloadJson('uomd_animation_approvals_v001.json', {
+              downloadJson('uomd_animation_approvals_v002.json', {
                 exportedAt: new Date().toISOString(),
                 exportedBy: me?.identity ?? 'local-owner',
                 approvals
@@ -392,10 +709,300 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
       </header>
 
       <p style={{ color: 'var(--dim)', marginTop: 4 }}>
-        Burada statik PNG yerine tüm UI ve karakter animasyonlarını <strong>gerçek döngüsel GIF</strong> olarak veya{' '}
-        <strong>oyun sahnelerinin içinde yerinde (Ana Menü, 5v5 Savaş, Görsel Roman Diyaloğu ve UI Kit)</strong> canlı görebilirsiniz.
-        Beğendiklerinizi <strong>Onayla</strong> veya <strong>Oyuna Çek</strong> olarak işaretleyin.
+        Onayladığınız 9 temel UI/Karakter animasyonu <strong>İlk AAB (Base AAB) sürümünün tamamındaki 15 sahneye</strong>{' '}
+        (Splash → SovTaym Studios → Ana Menü → 9 Sahneli Prolog → Tutorial T-1/T-2/T-3 Görsel Roman, Event CG ve 5v5 Savaşlar → Patch Wait → Company Hub)
+        doğrudan entegre edildi. Aşağıdan hem <strong>canlı oyun sahneleri arasında tek tıkla geçiş yaparak</strong> hem de{' '}
+        <strong>6 uçtan uca İlk AAB sahne GIF&apos;i</strong> üzerinden tüm akışı inceleyebilirsiniz.
       </p>
+
+      {/* ==================== TAB 0: FIRST AAB FULL 15-SCENE FLOW INSPECTOR ==================== */}
+      {activeTab === 'first_aab' ? (
+        <section className="card" style={{ marginBottom: 18, padding: 16 }}>
+          {(() => {
+            const currentStep = AAB_15_SCENES[aabStepIdx] ?? AAB_15_SCENES[0]!;
+            const currentUrl = `${liveGameUrl(currentStep.id, fastIntro)}${liveGameUrl(currentStep.id, fastIntro).includes('?') ? '&' : '?'}r=${iframeNonce}`;
+            const aabFlowGifs = ANIMATION_CATALOG.filter((item) => item.category === 'FIRST_AAB_FLOW');
+            return (
+              <div>
+                <div
+                  className="row"
+                  style={{
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: 10,
+                    marginTop: 0,
+                    marginBottom: 12
+                  }}
+                >
+                  <div>
+                    <span className="badge ok" style={{ marginRight: 8 }}>
+                      CANLI İLK AAB SAHNE {currentStep.index} / 15
+                    </span>
+                    <strong style={{ fontSize: 16, color: '#fff3d6' }}>{currentStep.title}</strong>
+                  </div>
+                  <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
+                    <button
+                      type="button"
+                      className="btn"
+                      disabled={aabStepIdx <= 0}
+                      onClick={() => setAabStepIdx((i) => Math.max(0, i - 1))}
+                    >
+                      ◀ Önceki Sahne
+                    </button>
+                    <button
+                      type="button"
+                      className="btn primary"
+                      disabled={aabStepIdx >= AAB_15_SCENES.length - 1}
+                      onClick={() => setAabStepIdx((i) => Math.min(AAB_15_SCENES.length - 1, i + 1))}
+                    >
+                      Sonraki Sahne ▶
+                    </button>
+                    <button
+                      type="button"
+                      className={`btn${fastIntro ? ' primary' : ''}`}
+                      onClick={() => setFastIntro((v) => !v)}
+                    >
+                      {fastIntro ? '⚡ Hızlı Geçiş Açık (fastintro=1)' : '⏱️ Normal Sinematik Süre'}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn"
+                      onClick={() => setIframeNonce((n) => n + 1)}
+                    >
+                      🔄 Sahneyi Yeniden Başlat
+                    </button>
+                    <a
+                      href={liveGameUrl(currentStep.id, fastIntro)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      ↗ Tam Ekranda Aç
+                    </a>
+                  </div>
+                </div>
+
+                {/* 15-Scene Stepper Bar */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(175px, 1fr))',
+                    gap: 6,
+                    marginBottom: 14,
+                    padding: 10,
+                    borderRadius: 10,
+                    background: 'rgba(10, 7, 16, 0.72)',
+                    border: '1px solid rgba(242, 184, 75, 0.22)'
+                  }}
+                >
+                  {AAB_15_SCENES.map((step, idx) => {
+                    const active = idx === aabStepIdx;
+                    return (
+                      <button
+                        key={step.id}
+                        type="button"
+                        className={`btn${active ? ' primary' : ''}`}
+                        onClick={() => setAabStepIdx(idx)}
+                        style={{
+                          textAlign: 'left',
+                          fontSize: 12,
+                          padding: '7px 10px',
+                          borderColor: active ? '#f2b84b' : 'rgba(255,255,255,0.12)',
+                          boxShadow: active ? '0 0 12px rgba(242, 184, 75, 0.35)' : 'none'
+                        }}
+                      >
+                        {step.shortLabel}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Live Game Staging Iframe + Active Scene Animation Checklist */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(0, 2.15fr) minmax(300px, 1fr)',
+                    gap: 14,
+                    alignItems: 'stretch',
+                    marginBottom: 18
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'relative',
+                      width: '100%',
+                      aspectRatio: '16 / 9',
+                      borderRadius: 12,
+                      overflow: 'hidden',
+                      border: '2px solid #d8a93c',
+                      boxShadow: '0 14px 38px rgba(0,0,0,0.72)',
+                      background: '#08050d'
+                    }}
+                  >
+                    <iframe
+                      key={`${currentStep.id}-${fastIntro}-${iframeNonce}`}
+                      src={currentUrl}
+                      title={currentStep.title}
+                      style={{ width: '100%', height: '100%', border: 0, display: 'block' }}
+                      allow="autoplay; fullscreen"
+                    />
+                  </div>
+
+                  <div
+                    className="card"
+                    style={{
+                      margin: 0,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      background: 'rgba(14, 10, 22, 0.92)',
+                      border: '1px solid rgba(216, 169, 60, 0.35)'
+                    }}
+                  >
+                    <div>
+                      <div className="row" style={{ marginTop: 0, gap: 6, flexWrap: 'wrap' }}>
+                        <span className="badge info">Sahne Kodu: ?preview_scene={currentStep.id}</span>
+                        <span className="badge ok">PixiJS v8 Canlı Motor</span>
+                      </div>
+                      <h4 style={{ margin: '10px 0 8px', color: '#ffdf9a' }}>
+                        Bu Sahnede Devrede Olan Onaylı Animasyonlar:
+                      </h4>
+                      <ul style={{ margin: 0, paddingLeft: 18, color: '#e6d8f2', fontSize: 13, lineHeight: 1.6 }}>
+                        {currentStep.animations.map((anim, i) => (
+                          <li key={i} style={{ marginBottom: 6 }}>
+                            {anim}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div style={{ marginTop: 14, borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 10 }}>
+                      <div style={{ fontSize: 12, color: 'var(--dim)', marginBottom: 6 }}>
+                        İlgili Sahne Akış GIF Önizlemesi ({currentStep.gifId}.gif):
+                      </div>
+                      <img
+                        src={`/dev/animations/${currentStep.gifId}.gif`}
+                        alt={currentStep.title}
+                        style={{
+                          width: '100%',
+                          borderRadius: 8,
+                          border: '1px solid rgba(242, 184, 75, 0.3)'
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* 6 End-to-End First AAB Animated GIF Showcase Cards */}
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.12)', paddingTop: 14 }}>
+                  <div className="row" style={{ justifyContent: 'space-between', marginTop: 0, marginBottom: 10 }}>
+                    <h3 style={{ margin: 0, color: '#ffdf9a' }}>
+                      🎞️ İlk AAB Tam Akış Hareketli GIF Özeti (6 Sahne Grubu — Sahneler 1..15)
+                    </h3>
+                    <button
+                      type="button"
+                      className="btn primary"
+                      onClick={() => approveAllVisible(aabFlowGifs)}
+                    >
+                      ✅ İlk AAB Akışının Tümünü Onayla ({aabFlowGifs.length} Sahne Grubu)
+                    </button>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))',
+                      gap: 14
+                    }}
+                  >
+                    {aabFlowGifs.map((item) => {
+                      const rec = approvals[item.id] ?? { status: 'pending', note: '', updatedAt: '' };
+                      const badgeClass =
+                        rec.status === 'approved' || rec.status === 'pulled_to_game'
+                          ? 'ok'
+                          : rec.status === 'revision'
+                            ? 'bad'
+                            : 'warn';
+                      const badgeText =
+                        rec.status === 'pulled_to_game'
+                          ? 'OYUNA ENTEGRE EDİLDİ'
+                          : rec.status === 'approved'
+                            ? 'ONAYLANDI'
+                            : rec.status === 'revision'
+                              ? 'REVİZE'
+                              : 'İNCELEMEDE';
+                      return (
+                        <div key={item.id} className="card" style={{ margin: 0 }}>
+                          <div className="row" style={{ justifyContent: 'space-between', marginTop: 0 }}>
+                            <span className="badge info">{item.categoryLabel}</span>
+                            <span className={`badge ${badgeClass}`}>{badgeText}</span>
+                          </div>
+                          <h4 style={{ margin: '8px 0 6px' }}>{item.title}</h4>
+                          <div
+                            style={{
+                              borderRadius: 10,
+                              overflow: 'hidden',
+                              border: '1px solid rgba(242, 184, 75, 0.28)',
+                              background: '#09060f',
+                              marginBottom: 8
+                            }}
+                          >
+                            <img
+                              src={item.gifUrl}
+                              alt={item.title}
+                              style={{ width: '100%', display: 'block' }}
+                              loading="lazy"
+                            />
+                          </div>
+                          <p style={{ fontSize: 12.5, color: 'var(--dim)', margin: '0 0 10px' }}>{item.description}</p>
+                          <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
+                            <button
+                              type="button"
+                              className={`btn${rec.status === 'approved' ? ' primary' : ''}`}
+                              onClick={() => setStatus(item.id, 'approved')}
+                            >
+                              ✅ Onayla
+                            </button>
+                            <button
+                              type="button"
+                              className={`btn${rec.status === 'pulled_to_game' ? ' primary' : ''}`}
+                              onClick={() => setStatus(item.id, 'pulled_to_game')}
+                            >
+                              🚀 Oyunda Kalıcı Tut
+                            </button>
+                            <button
+                              type="button"
+                              className="btn"
+                              onClick={() => setStatus(item.id, 'revision')}
+                            >
+                              ✏️ Revize
+                            </button>
+                            {item.previewSceneId ? (
+                              <button
+                                type="button"
+                                className="btn"
+                                onClick={() => {
+                                  const foundIdx = AAB_15_SCENES.findIndex((s) => s.id === item.previewSceneId);
+                                  if (foundIdx >= 0) setAabStepIdx(foundIdx);
+                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
+                              >
+                                🎮 Yukarıda Canlı Sahnede Aç
+                              </button>
+                            ) : null}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+        </section>
+      ) : null}
 
       {/* ==================== TAB 1: IN-CONTEXT LIVE STAGE SIMULATOR ==================== */}
       {activeTab === 'in_context' ? (
@@ -1091,6 +1698,13 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
             onClick={() => setCategoryFilter('ALL')}
           >
             Tümü ({ANIMATION_CATALOG.length})
+          </button>
+          <button
+            type="button"
+            className={`btn${categoryFilter === 'FIRST_AAB_FLOW' ? ' primary' : ''}`}
+            onClick={() => setCategoryFilter('FIRST_AAB_FLOW')}
+          >
+            İlk AAB Tam Akış (6 GIF)
           </button>
           <button
             type="button"

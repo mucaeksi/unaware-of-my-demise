@@ -168,8 +168,9 @@ export class UnitView extends PIXI.Container {
     this.pose.position.set(0, 0);
     const period = 860 + (this.spot.y % 9) * 38;
     // y stays 0 so the boots stay planted on the shadow while the torso breathes through scale
-    this.loops.push(this.scene.anim.to(this.pose, { scaleY: base * 1.036, scaleX: base * 0.974 }, { duration: period, yoyo: true, repeat: -1, ease: 'sine.inout' }));
-    this.loops.push(this.scene.anim.to(this.pose, { angle: { from: -1.1, to: 1.1 } }, { duration: period * 2, yoyo: true, repeat: -1, ease: 'sine.inout' }));
+    this.loops.push(this.scene.anim.to(this.pose, { scaleY: base * 1.038, scaleX: base * 0.972 }, { duration: period, yoyo: true, repeat: -1, ease: 'sine.inout' }));
+    this.loops.push(this.scene.anim.to(this.pose, { angle: { from: -1.2, to: 1.2 } }, { duration: period * 2, yoyo: true, repeat: -1, ease: 'sine.inout' }));
+    this.loops.push(this.scene.anim.to(this.auraRing, { alpha: { from: 0.22, to: 0.46 } }, { duration: period * 1.5, yoyo: true, repeat: -1, ease: 'sine.inout' }));
   }
 
   private playFrames(a: UnitAnimation, key: string): void {
@@ -204,10 +205,19 @@ export class UnitView extends PIXI.Container {
     if (this.reduced) return;
     if (state === 'idle' && this.alive) {
       this.startBreathing();
+    } else if (state === 'walk' && this.alive) {
+      const dir = this.side === 'player' ? 1 : -1;
+      this.loops.push(this.scene.anim.to(this.pose, { y: -14, scaleY: sc * 1.045, scaleX: sc * 0.96 }, { duration: 190, yoyo: true, repeat: -1, ease: 'quad.out' }));
+      this.loops.push(this.scene.anim.to(this.pose, { angle: { from: -3.2 * dir, to: 3.8 * dir } }, { duration: 380, yoyo: true, repeat: -1, ease: 'sine.inout' }));
     } else if (state === 'basic' || state === 'active' || state === 'ultimate') {
-      // chibi action pop (overshoot squash-stretch)
-      this.pose.scale.set(sc * 0.86, sc * 1.16);
-      this.scene.anim.to(this.pose, { scaleX: sc * 1.08, scaleY: sc * 0.96 }, { duration: 120, yoyo: true, ease: 'back.out', onComplete: () => this.pose.scale.set(sc) });
+      // chibi action pop (overshoot squash-stretch + elemental ghost on active/ultimate)
+      const mult = state === 'ultimate' ? 1.14 : state === 'active' ? 1.11 : 1.08;
+      if (state === 'active' || state === 'ultimate') this.spawnGhost();
+      this.pose.scale.set(sc * 0.85, sc * 1.17);
+      this.scene.anim.to(this.pose, { scaleX: sc * mult, scaleY: sc * 0.95 }, { duration: 135, yoyo: true, ease: 'back.out', onComplete: () => this.pose.scale.set(sc) });
+    } else if (state === 'defeat') {
+      const fallDir = this.side === 'player' ? -1 : 1;
+      this.scene.anim.to(this.pose, { angle: fallDir * 11, y: 6, scaleY: sc * 0.9, scaleX: sc * 1.04 }, { duration: 280, ease: 'cubic.out' });
     } else if (state === 'victory') {
       this.loops.push(this.scene.anim.to(this.pose, { y: -18, scaleY: sc * 1.06, scaleX: sc * 0.95 }, { duration: 380, yoyo: true, repeat: -1, ease: 'quad.out' }));
     }

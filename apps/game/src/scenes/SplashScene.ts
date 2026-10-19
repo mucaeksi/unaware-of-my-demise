@@ -6,6 +6,7 @@ import { S } from '../entry/strings';
 import { prefs } from '../platform/prefs';
 import { txt } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
+import { createEclipseCorona } from '../vfx/gothicUiVfx';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
 
@@ -29,6 +30,8 @@ export class SplashScene extends PixiScene<SplashInit> {
     const cx = REF_W / 2;
     const cy = REF_H / 2;
     const spark = vfxTextures().spark;
+    const corona = createEclipseCorona(this, cx, cy + 6, 178, -1, false);
+    corona.alpha = 0;
 
     // aura ellipses and the diagonal prism beam behind the wordmark
     const emblem = new PIXI.Graphics()
@@ -52,11 +55,12 @@ export class SplashScene extends PixiScene<SplashInit> {
     const rule = new PIXI.Graphics().rect(-290, -1.5, 580, 3).fill({ color: C.silver, alpha: 0.78 });
     rule.position.set(cx, cy + 112);
     rule.scale.x = 0.02;
-    const all = [emblem, made, word, sub, rule, glow];
+    const all: PIXI.Container[] = [emblem, made, word, sub, rule, glow];
     for (const o of all) {
       o.alpha = 0;
       this.add(o);
     }
+    all.push(corona);
 
     // the chime, and once more on the first tap when the browser blocked autoplay
     Sfx.phaserLogo();
@@ -65,7 +69,7 @@ export class SplashScene extends PixiScene<SplashInit> {
     canvas.addEventListener('pointerdown', replay, { once: true });
     this.onClose(() => canvas.removeEventListener('pointerdown', replay));
 
-    for (const o of [emblem, made, word, sub, rule]) this.anim.to(o, { alpha: 1 }, { duration: FADE_IN, ease: 'sine.inout' });
+    for (const o of [emblem, made, word, sub, rule, corona]) this.anim.to(o, { alpha: 1 }, { duration: FADE_IN, ease: 'sine.inout' });
     this.anim.to(glow, { alpha: 0.42 }, { duration: FADE_IN, ease: 'sine.out' });
     this.anim.to(rule, { scaleX: 1 }, { duration: FADE_IN + HOLD * 0.75, ease: 'cubic.inout' });
     if (!prefs().reducedMotion) {

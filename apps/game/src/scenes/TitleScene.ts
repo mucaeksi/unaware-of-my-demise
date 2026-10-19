@@ -20,6 +20,7 @@ import { formatBytes } from '../ui/format';
 import { titleStyle } from '../ui/hubScreen';
 import { sceneFadeIn, verticalShade } from '../ui/pixiKit';
 import { C, DEPTH, F, T } from '../ui/theme';
+import { createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } from '../vfx/gothicUiVfx';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
@@ -143,6 +144,13 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     }
     const logoX = 500 + insetLeft;
     const logoY = 278;
+    // #1 Approved UI Animation: Rotating Black-Sun Eclipse Corona & Rune Ring behind the emblem
+    const corona = createEclipseCorona(this, logoX, logoY - 8, 188, 3, false);
+    corona.alpha = 0.82;
+    // #2 Approved UI Animation: Swinging Fractured Sanctuary Bell & Acoustic Shockwave Rings
+    const bell = createSwingingBellEmblem(this, logoX, logoY - 176, 1.05, 5, 2900);
+    bell.container.alpha = 0;
+    this.anim.to(bell.container, { alpha: 1 }, { duration: 1400, delay: 300, ease: 'sine.out' });
     const glow = this.add(new PIXI.Sprite(vfxTextures().spark), 3);
     glow.anchor.set(0.5);
     glow.position.set(logoX, logoY);
@@ -231,15 +239,18 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     const insets = safeInsets();
     const cx = this.firstRun ? REF_W / 2 : 1220;
     const cy = REF_H - 148 - insets.bottom;
+    const fireTap = (): void => {
+      if (this.overlay || this.busy) return;
+      Sfx.confirm();
+      // #3 Approved UI Animation: Wax-Seal CTA Ignition Burst
+      triggerWaxSealBurst(this, cx, cy, DEPTH.hud + 6);
+      onTap();
+    };
     const zone = this.add(new PIXI.Container(), DEPTH.hud - 2);
     zone.hitArea = new PIXI.Rectangle(0, 0, REF_W, REF_H);
     zone.eventMode = 'static';
     zone.cursor = 'pointer';
-    zone.on('pointerup', () => {
-      if (this.overlay || this.busy) return;
-      Sfx.confirm();
-      onTap();
-    });
+    zone.on('pointerup', fireTap);
 
     const g = this.ui.group().setDepth(DEPTH.hud);
     this.rule(g, cx - 370, cy, 120, 2, C.goldHi, 0.85);
@@ -247,11 +258,16 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     this.rule(g, cx - 330, cy + 6, 70, 1, C.silver, 0.45);
     this.rule(g, cx + 260, cy + 6, 70, 1, C.silver, 0.45);
     for (const dx of [-236, 236]) this.diamond(g, cx + dx, cy, 5, C.goldHi, 0.95);
+    // Crimson & Gold Wax Seal emblem beside the prompt
+    const seal = this.ui.box(cx + 216, cy - 18, 36, 36, 0x9e1b34, 0.95, g);
+    seal.el.style.borderRadius = '50%';
+    seal.el.style.border = `2px solid ${rgba(C.goldHi, 0.92)}`;
+    seal.el.style.boxShadow = '0 0 14px rgba(212,50,92,.65)';
     const prompt = this.ui.text(cx, cy, S.menu.tapToContinue, { fontFamily: F.display, fontSize: 44, fontStyle: '700', color: '#f1ece4', stroke: '#0a0610', strokeThickness: 6, letterSpacing: 10 }, g).setOrigin(0.5);
     if (!prefs().reducedMotion) prompt.el.classList.add('uomd-blink');
     this.ui.text(cx, cy + 50, modeBadge, { fontFamily: F.display, fontSize: 21, fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4, letterSpacing: 4 }, g).setOrigin(0.5);
     this.ui.text(cx, cy + 82, subLine, { fontFamily: F.body, fontSize: 26, fontStyle: 'italic 500', color: T.dim, stroke: '#0a0610', strokeThickness: 3 }, g).setOrigin(0.5);
-    this.ui.button(cx, cy + 30, { label: S.menu.tapToContinue, ariaLabel: `${S.menu.tapToContinue}. ${subLine}`, bare: true, w: 760, h: 150, onClick: () => { if (!this.overlay && !this.busy) onTap(); } }, g);
+    this.ui.button(cx, cy + 30, { label: S.menu.tapToContinue, ariaLabel: `${S.menu.tapToContinue}. ${subLine}`, bare: true, w: 760, h: 150, onClick: fireTap }, g);
     this.tapBanner = g;
   }
 
