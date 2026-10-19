@@ -54,7 +54,7 @@ async function enterFromMenu(page: Page, info: Parameters<typeof tap>[1]): Promi
 }
 
 async function waitProloguePlayed(page: Page, info: Parameters<typeof tap>[1]): Promise<void> {
-  await waitScene(page, 'Prologue', 30_000);
+  await waitScene(page, 'Prologue', 60_000);
   await expect.poll(() => sceneState(page, 'Prologue', (s) => s.done === true), { timeout: 60_000 }).toBe(true);
   await page.waitForTimeout(900); // the CONTINUE button fades in after the black
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-f7-02-prologue-continue.png` });
@@ -67,9 +67,9 @@ test('prologue timing: nine scenes, 120 s, no skip, narration revealed at 26 cha
   await ensurePatchPublished();
   await openGame(page, '/', { fresh: true, realIntro: true, until: 'Title' });
   await enterFromMenu(page, info);
-  await waitScene(page, 'Prologue', 30_000);
+  await waitScene(page, 'Prologue', 60_000);
   // the clock starts with the first shot, not the scene: loading the plates takes seconds on a software-GL runner
-  await expect.poll(() => sceneState(page, 'Prologue', (s) => s.index), { timeout: 30_000, intervals: [100] }).toBe(0);
+  await expect.poll(() => sceneState(page, 'Prologue', (s) => s.index), { timeout: 60_000, intervals: [100] }).toBe(0);
   const t0 = Date.now();
   // tapping must not skip anything
   await tap(page, info, REF_W / 2, REF_H / 2);

@@ -49,7 +49,7 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     await dialog.getByRole('button', { name: 'PAUSE', exact: true }).click(); const pausedAt = await dialog.locator('video').evaluate((v: HTMLVideoElement) => v.currentTime);
     await page.waitForTimeout(300); expect(await dialog.locator('video').evaluate((v: HTMLVideoElement) => v.currentTime)).toBeCloseTo(pausedAt, 1);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-video-paused.png` });
-    await dialog.getByRole('button', { name: 'PLAY', exact: true }).click(); await expect(dialog).not.toBeVisible({ timeout: 20_000 });
+    await dialog.getByRole('button', { name: 'PLAY', exact: true }).click(); await expect(dialog).not.toBeVisible({ timeout: 40_000 }); // 7.5 s of software-decoded video plus a loaded runner
     await waitScene(page, 'ContentPanel');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('ContentPanel').texts().includes('Yalnızca sentetik çalışma testi.'))).toBe(true);
     expect(await page.evaluate(() => { const scene = (window as any).__UOMD__.game.scene; const order = scene.getScenes(false); const story = order.indexOf(scene.getScene('Story')); return story >= 0 && order.indexOf(scene.getScene('ContentPanel')) > story; })).toBe(true);
@@ -92,6 +92,7 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     await expect(failedVideo).toBeVisible(); await page.evaluate(async () => (window as any).__UOMD__.services.api.signOut()); await waitScene(page, 'Title'); await expect(failedVideo).not.toBeVisible();
     expect(problems.filter((p) => !p.includes('favicon'))).toEqual([]);
   } finally {
-    expect((await request.post(`${ADMIN}/admin/api/channels/dev/rollback`, { headers, data: { releaseId: original.release.id } })).status()).toBe(200);
+    // soft: a failed cleanup must not hide the failure that led here
+    expect.soft((await request.post(`${ADMIN}/admin/api/channels/dev/rollback`, { headers, data: { releaseId: original.release.id } })).status()).toBe(200);
   }
 });

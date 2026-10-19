@@ -88,9 +88,9 @@ test.describe('UOMD Control Center (admin SPA + API, local stack with a test-onl
     await expect(page.getByRole('cell', { name: 'dev', exact: true })).toBeVisible();
     await page.screenshot({ path: `${SHOTS}/admin-${info.project.name}-dashboard.png`, fullPage: true });
 
-    // characters: 20 rows seeded from the narrative runtime data; edit one
+    // characters: 25 rows seeded from the narrative runtime data; edit one
     await page.getByRole('button', { name: 'Characters' }).click();
-    await expect(page.getByRole('row')).toHaveCount(21);
+    await expect(page.getByRole('row')).toHaveCount(26);
     const fadyme = page.getByRole('row').filter({ hasText: 'fadyme' });
     // columns: id, name, ★, element, role, power, STR, INT, VIT, AGI, status, version
     const version = async (): Promise<number> => Number(await fadyme.locator('td').nth(11).textContent());
