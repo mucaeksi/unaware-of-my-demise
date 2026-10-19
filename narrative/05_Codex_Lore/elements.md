@@ -4,12 +4,12 @@ Approved 2026-09-29 (world foundation W4, decision C31). The six combat elements
 
 | Element | Manner | What it does to an hour | Status (gameplay) | Feels like | Roster |
 |---|---|---|---|---|---|
-| **Ember** | to burn | Spends hours fast and bright | Burn | Forge, kiln, alchemy, recklessness | Kera, Rikka, Jori |
+| **Ember** | to burn | Spends hours fast and bright | Burn | Forge, kiln, alchemy, recklessness | Kera, Rikka, Jori, Garrick |
 | **Gale** | to carry | Moves hours along: roads, songs, seeds, rhythm | Gust (delay) | Travel, messages, seasons | Nixie, Pippa, Thistle, Marek |
 | **Stone** | to hold | Keeps hours in place; stands between | Fracture | Walls, gates, oaths, bracing | Mahmut, Brin, Nara, Hana |
-| **Tide** | to return | Brings hours back: healing, tracking, homecoming | Soaked | Rivers, harbors, the lost found | Tilda, Odelia, Iona |
-| **Dawn** | to witness | Names and records hours so they count | Sanctuary | Candles, prayers, written names | Aveline, Mirel |
-| **Veil** | to hide | Keeps hours out of sight, borrowed or unspoken | Dread | Secrets, erasure, the curse, the dead without names | Fadyme, Sable, Clem, Vespera |
+| **Tide** | to return | Brings hours back: healing, tracking, homecoming | Soaked | Rivers, harbors, the lost found | Tilda, Odelia, Iona, Corbin |
+| **Dawn** | to witness | Names and records hours so they count | Sanctuary | Candles, prayers, written names | Aveline, Mirel, Cassian, Rowan |
+| **Veil** | to hide | Keeps hours out of sight, borrowed or unspoken | Dread | Secrets, erasure, the curse, the dead without names | Fadyme, Sable, Clem, Vespera, Dorian |
 
 ## The cycle
 

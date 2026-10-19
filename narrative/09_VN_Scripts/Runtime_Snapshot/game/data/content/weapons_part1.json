@@ -525,6 +525,131 @@
       "balance_status": "draft_v1_needs_battle_simulation"
     },
     {
+      "weapon_id": "weapon_garrick_cinder_signature",
+      "name_en": "The Sixty-First Minute",
+      "rarity": 5,
+      "weapon_type": "glaive_shield",
+      "brand_mark_id": "mark_weapon_garrick_cinder_signature",
+      "owner_character_id": "garrick_cinder",
+      "acquisition": "weapon_banner_only",
+      "level_cap": 20,
+      "base_stats_level_1": {
+        "atk": 2,
+        "secondary_stat": "role_stat",
+        "secondary_value": 0.08
+      },
+      "growth_per_level": {
+        "atk": 0.1
+      },
+      "passive_name_en": "The Sixty-First Minute — Oath Echo",
+      "passive_effect_en": "When Garrick Cinder uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_id": "signature_echo_garrick_cinder",
+      "dismantle_xp": 0,
+      "dismantle_output": [],
+      "dismantle_allowed": false,
+      "balance_status": "draft_v1_needs_battle_simulation"
+    },
+    {
+      "weapon_id": "weapon_corbin_locke_signature",
+      "name_en": "Seventh Sluice Anchor",
+      "rarity": 5,
+      "weapon_type": "spear",
+      "brand_mark_id": "mark_weapon_corbin_locke_signature",
+      "owner_character_id": "corbin_locke",
+      "acquisition": "weapon_banner_only",
+      "level_cap": 20,
+      "base_stats_level_1": {
+        "atk": 2,
+        "secondary_stat": "role_stat",
+        "secondary_value": 0.08
+      },
+      "growth_per_level": {
+        "atk": 0.1
+      },
+      "passive_name_en": "Seventh Sluice Anchor — Oath Echo",
+      "passive_effect_en": "When Corbin Locke uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_id": "signature_echo_corbin_locke",
+      "dismantle_xp": 0,
+      "dismantle_output": [],
+      "dismantle_allowed": false,
+      "balance_status": "draft_v1_needs_battle_simulation"
+    },
+    {
+      "weapon_id": "weapon_cassian_thorne_signature",
+      "name_en": "Clapperless Verdict",
+      "rarity": 5,
+      "weapon_type": "arming_sword",
+      "brand_mark_id": "mark_weapon_cassian_thorne_signature",
+      "owner_character_id": "cassian_thorne",
+      "acquisition": "weapon_banner_only",
+      "level_cap": 20,
+      "base_stats_level_1": {
+        "atk": 2,
+        "secondary_stat": "role_stat",
+        "secondary_value": 0.08
+      },
+      "growth_per_level": {
+        "atk": 0.1
+      },
+      "passive_name_en": "Clapperless Verdict — Oath Echo",
+      "passive_effect_en": "When Cassian Thorne uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_id": "signature_echo_cassian_thorne",
+      "dismantle_xp": 0,
+      "dismantle_output": [],
+      "dismantle_allowed": false,
+      "balance_status": "draft_v1_needs_battle_simulation"
+    },
+    {
+      "weapon_id": "weapon_dorian_kesk_signature",
+      "name_en": "Seven-Notch Seal-Iron",
+      "rarity": 5,
+      "weapon_type": "twin_daggers",
+      "brand_mark_id": "mark_weapon_dorian_kesk_signature",
+      "owner_character_id": "dorian_kesk",
+      "acquisition": "weapon_banner_only",
+      "level_cap": 20,
+      "base_stats_level_1": {
+        "atk": 2,
+        "secondary_stat": "role_stat",
+        "secondary_value": 0.08
+      },
+      "growth_per_level": {
+        "atk": 0.1
+      },
+      "passive_name_en": "Seven-Notch Seal-Iron — Oath Echo",
+      "passive_effect_en": "When Dorian Kesk uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_id": "signature_echo_dorian_kesk",
+      "dismantle_xp": 0,
+      "dismantle_output": [],
+      "dismantle_allowed": false,
+      "balance_status": "draft_v1_needs_battle_simulation"
+    },
+    {
+      "weapon_id": "weapon_rowan_reed_signature",
+      "name_en": "Wayshrine's Last Wick",
+      "rarity": 5,
+      "weapon_type": "ritual_lantern",
+      "brand_mark_id": "mark_weapon_rowan_reed_signature",
+      "owner_character_id": "rowan_reed",
+      "acquisition": "weapon_banner_only",
+      "level_cap": 20,
+      "base_stats_level_1": {
+        "atk": 2,
+        "secondary_stat": "role_stat",
+        "secondary_value": 0.08
+      },
+      "growth_per_level": {
+        "atk": 0.1
+      },
+      "passive_name_en": "Wayshrine's Last Wick — Oath Echo",
+      "passive_effect_en": "When Rowan Reed uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_id": "signature_echo_rowan_reed",
+      "dismantle_xp": 0,
+      "dismantle_output": [],
+      "dismantle_allowed": false,
+      "balance_status": "draft_v1_needs_battle_simulation"
+    },
+    {
       "weapon_id": "weapon_arming_sword_3_01",
       "name_en": "Wayfarer's Arming Sword",
       "rarity": 3,

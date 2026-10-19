@@ -1553,6 +1553,281 @@
         }
       }
     },
+    "garrick_cinder": {
+      "atlas": "atlas_mahmut",
+      "facing": "right",
+      "height_px": 258,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.49
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.49
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.525
+        },
+        "active": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.525
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.475
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.492
+        },
+        "defeat": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.492
+        },
+        "victory": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.475
+        }
+      }
+    },
+    "corbin_locke": {
+      "atlas": "atlas_mahmut",
+      "facing": "right",
+      "height_px": 258,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.49
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.49
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.525
+        },
+        "active": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.525
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.475
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.492
+        },
+        "defeat": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.492
+        },
+        "victory": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.475
+        }
+      }
+    },
+    "cassian_thorne": {
+      "atlas": "atlas_mahmut",
+      "facing": "right",
+      "height_px": 258,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.49
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.49
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.525
+        },
+        "active": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.525
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.475
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.492
+        },
+        "defeat": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.492
+        },
+        "victory": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.475
+        }
+      }
+    },
+    "dorian_kesk": {
+      "atlas": "atlas_hero_arcanist",
+      "facing": "right",
+      "height_px": 248,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.414
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.414
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.267
+        },
+        "active": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.267
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.429
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.422
+        },
+        "defeat": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.422
+        },
+        "victory": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.429
+        }
+      }
+    },
+    "rowan_reed": {
+      "atlas": "atlas_hero_arcanist",
+      "facing": "right",
+      "height_px": 248,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.414
+        },
+        "walk": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.414
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.267
+        },
+        "active": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.267
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.429
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.422
+        },
+        "defeat": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.422
+        },
+        "victory": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.429
+        }
+      }
+    },
     "ash_wolf": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
@@ -3728,15 +4003,10 @@
     "salt_road_coast": "art/bg_salt_road_coast.webp"
   },
   "music": {
-    "bgm_ch1_ash_forest_calm": {
-      "file": "audio/bgm_ch1_ash_forest_calm.ogg",
-      "loop_start_s": 24.011,
-      "duration_s": 100.371
-    },
-    "bgm_ch1_ash_forest_chaotic": {
-      "file": "audio/bgm_ch1_ash_forest_chaotic.ogg",
-      "loop_start_s": 19.9575,
-      "duration_s": 101.777
+    "bgm_main_theme": {
+      "file": "audio/bgm_main_theme.ogg",
+      "loop_start_s": 17.5,
+      "duration_s": 166.45
     },
     "bgm_prologue_before_the_road": {
       "file": "audio/bgm_prologue_before_the_road.ogg",
@@ -3747,6 +4017,26 @@
       "file": "audio/bgm_fadyme_theme.ogg",
       "loop_start_s": 25.232,
       "duration_s": 86.052
+    },
+    "bgm_ch1_ash_forest_calm": {
+      "file": "audio/bgm_ch1_ash_forest_calm.ogg",
+      "loop_start_s": 24.011,
+      "duration_s": 100.371
+    },
+    "bgm_ch1_ash_forest_uneasy": {
+      "file": "audio/bgm_ch1_ash_forest_uneasy.ogg",
+      "loop_start_s": 25.16,
+      "duration_s": 101.26
+    },
+    "bgm_ch1_ash_forest_chaotic": {
+      "file": "audio/bgm_ch1_ash_forest_chaotic.ogg",
+      "loop_start_s": 19.9575,
+      "duration_s": 101.777
+    },
+    "bgm_battle_field": {
+      "file": "audio/bgm_battle_field.ogg",
+      "loop_start_s": 16.7,
+      "duration_s": 79.93
     }
   },
   "ui": {

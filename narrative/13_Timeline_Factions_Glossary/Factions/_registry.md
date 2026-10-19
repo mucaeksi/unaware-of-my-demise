@@ -49,6 +49,11 @@ Approved 2026-09-29 (world foundation W4, C32). **Data IDs are canonical** (the 
 | Iona Mist | River lantern keepers of Glassford |
 | Jori Flint | Flint forge, Oakhaven |
 | Marek Vane | Ex-Crown herald |
+| Garrick Cinder | Ex-Royal Siege Corps pyre-lancer; Oakhaven & eastern hills watch |
+| Corbin Locke | Ex-Glassford sluice-warden; Undercity clinic protector |
+| Cassian Thorne | Church of Saint Luthos, former Ropeless Bell tower warden |
+| Dorian Kesk | Ex-Royal Inquisition novice seal-cutter; Undercity pass-forger |
+| Rowan Reed | Church of Saint Luthos, Whispering Ash wayshrine apprentice |
 | Yseldra Vale | Former Royal Inquisition |
 | Cael Veyr | House Veyr by birth; Clockless Court |
 | Marshal Oren | Crown Guard remnant (paid by the Council) |

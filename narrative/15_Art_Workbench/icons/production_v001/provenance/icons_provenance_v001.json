@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "uomd_icons_production_v001",
+  "round_compliance": "R14_PROVENANCE_AND_COMMERCIAL_TERMS",
+  "generated_at": "2026-10-19T07:40:00+03:00",
+  "commercial_terms_urls": [
+    "https://ai.google.dev/gemini-api/terms",
+    "https://policies.google.com/terms",
+    "https://labs.google/fx/terms"
+  ],
+  "core_16_sheet_green": "icons_core_01_sheet_green_v001.png",
+  "core_16_sheet_rgba": "icons_core_01_sheet_rgba_v001.png",
+  "core_16_count": 16,
+  "semantic_96_count": 96,
+  "icon_resolution": "256x256 RGBA PNG"
+}

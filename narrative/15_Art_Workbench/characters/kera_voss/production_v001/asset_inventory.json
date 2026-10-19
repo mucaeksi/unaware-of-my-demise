@@ -1,0 +1,72 @@
+{
+  "character_id": "kera_voss",
+  "display_name": "Kera Voss",
+  "title": "Field Alchemist of Oakhaven",
+  "rarity": 4,
+  "element": "Ember",
+  "role": "Controller / Debuffer",
+  "weapon_family": "alchemy_vessel",
+  "package_version": "production_v001",
+  "facing_direction": "right",
+  "foot_pivot_normalized": {
+    "x": 0.5,
+    "y": 0.875,
+    "canvas_px": {
+      "width": 512,
+      "height": 512,
+      "pivot_x": 256,
+      "pivot_y": 448
+    }
+  },
+  "vn_portraits": {
+    "aspect_ratio": "2:3",
+    "resolution": "768x1152",
+    "chroma_key_source": "#00FF00",
+    "expressions": {
+      "composed": {
+        "rgba_png": "vn/kera_voss_vn_composed_v001.png",
+        "fullres_rgba_png": "vn/kera_voss_vn_composed_fullres_rgba_v001.png",
+        "green_source_png": "vn/kera_voss_vn_composed_green_v001.png"
+      },
+      "focused": {
+        "rgba_png": "vn/kera_voss_vn_focused_v001.png",
+        "fullres_rgba_png": "vn/kera_voss_vn_focused_fullres_rgba_v001.png",
+        "green_source_png": "vn/kera_voss_vn_focused_green_v001.png"
+      },
+      "proud_smile": {
+        "rgba_png": "vn/kera_voss_vn_proud_smile_v001.png",
+        "fullres_rgba_png": "vn/kera_voss_vn_proud_smile_fullres_rgba_v001.png",
+        "green_source_png": "vn/kera_voss_vn_proud_smile_green_v001.png"
+      },
+      "defiant": {
+        "rgba_png": "vn/kera_voss_vn_defiant_v001.png",
+        "fullres_rgba_png": "vn/kera_voss_vn_defiant_fullres_rgba_v001.png",
+        "green_source_png": "vn/kera_voss_vn_defiant_green_v001.png"
+      }
+    }
+  },
+  "chibi_battle_animation": {
+    "proportion": "2-head SD chibi",
+    "sheet_layout": "4x2 (8 states)",
+    "sheet_rgba_png": "animation/kera_voss_chibi_sheet_v001.png",
+    "sheet_green_png": "animation/kera_voss_chibi_sheet_green_v001.png",
+    "states": {
+      "idle": "animation/states/kera_voss_chibi_01_idle_v001.png",
+      "walk": "animation/states/kera_voss_chibi_02_walk_v001.png",
+      "basic": "animation/states/kera_voss_chibi_03_basic_v001.png",
+      "active": "animation/states/kera_voss_chibi_04_active_v001.png",
+      "ultimate": "animation/states/kera_voss_chibi_05_ultimate_v001.png",
+      "hit": "animation/states/kera_voss_chibi_06_hit_v001.png",
+      "defeat": "animation/states/kera_voss_chibi_07_defeat_v001.png",
+      "victory": "animation/states/kera_voss_chibi_08_victory_v001.png"
+    }
+  },
+  "gacha_splash": {
+    "file": "gacha/kera_voss_gacha_splash_v001.png",
+    "dimensions": {
+      "width": 1376,
+      "height": 768
+    },
+    "aspect_ratio": "16:9"
+  }
+}

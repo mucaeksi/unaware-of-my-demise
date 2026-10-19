@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "uomd_ui_screens_production_v001",
+  "round_compliance": "R14_PROVENANCE_AND_COMMERCIAL_TERMS",
+  "generated_at": "2026-10-19T07:40:00+03:00",
+  "generator_pipeline": {
+    "tool_name": "Google Antigravity image-generator (Gemini Imagen / Whisk pipeline) + sharp chroma-key pipeline",
+    "commercial_terms_urls": [
+      "https://ai.google.dev/gemini-api/terms",
+      "https://policies.google.com/terms",
+      "https://labs.google/fx/terms"
+    ],
+    "license_status": "Commercial rights verified under Google Gemini / Labs Terms of Service; original project-specific generations",
+    "chroma_key_background": "#00FF00",
+    "post_processing": "Automated RGBA chroma-key extraction, green despill, alpha bounding-box trim, and 9-slice margin calibration via tools/build_argon_production_v001.mjs"
+  },
+  "nine_slice_frames": {
+    "panel_frame_primary_9slice_v001": {
+      "file": "ui_kit/panel_frame_primary_9slice_v001.png",
+      "dimensions": {
+        "width": 906,
+        "height": 906
+      },
+      "nine_slice_insets_px": {
+        "left": 148,
+        "right": 148,
+        "top": 148,
+        "bottom": 148
+      },
+      "pixi_nine_slice_sprite_config": {
+        "leftWidth": 148,
+        "topHeight": 148,
+        "rightWidth": 148,
+        "bottomHeight": 148
+      }
+    },
+    "panel_frame_secondary_9slice_v001": {
+      "file": "ui_kit/panel_frame_secondary_9slice_v001.png",
+      "dimensions": {
+        "width": 734,
+        "height": 734
+      },
+      "nine_slice_insets_px": {
+        "left": 112,
+        "right": 112,
+        "top": 112,
+        "bottom": 112
+      },
+      "pixi_nine_slice_sprite_config": {
+        "leftWidth": 112,
+        "topHeight": 112,
+        "rightWidth": 112,
+        "bottomHeight": 112
+      }
+    },
+    "panel_frame_double_composite_9slice_v001": {
+      "file": "ui_kit/panel_frame_double_composite_9slice_v001.png",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "nine_slice_insets_px": {
+        "left": 224,
+        "right": 224,
+        "top": 224,
+        "bottom": 224
+      },
+      "pixi_nine_slice_sprite_config": {
+        "leftWidth": 224,
+        "topHeight": 224,
+        "rightWidth": 224,
+        "bottomHeight": 224
+      }
+    }
+  },
+  "buttons_4state": {
+    "normal": {
+      "file": "ui_kit/button_primary_normal_v001.png",
+      "dimensions": {
+        "width": 500,
+        "height": 207
+      },
+      "baked_text": false
+    },
+    "hover": {
+      "file": "ui_kit/button_primary_hover_v001.png",
+      "dimensions": {
+        "width": 500,
+        "height": 207
+      },
+      "baked_text": false
+    },
+    "pressed": {
+      "file": "ui_kit/button_primary_pressed_v001.png",
+      "dimensions": {
+        "width": 500,
+        "height": 190
+      },
+      "baked_text": false
+    },
+    "disabled": {
+      "file": "ui_kit/button_primary_disabled_v001.png",
+      "dimensions": {
+        "width": 500,
+        "height": 190
+      },
+      "baked_text": false
+    }
+  },
+  "store_brand_assets": {
+    "app_icon_512x512": "brand/app_icon_512x512_v001.png",
+    "android_adaptive_foreground_512x512": "brand/android_adaptive_foreground_512x512_v001.png",
+    "android_adaptive_background_512x512": "brand/android_adaptive_background_512x512_v001.png",
+    "google_play_feature_graphic_1024x500": "brand/google_play_feature_graphic_1024x500_v001.png"
+  }
+}

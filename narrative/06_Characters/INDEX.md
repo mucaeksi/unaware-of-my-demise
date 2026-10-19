@@ -24,6 +24,11 @@ Lore profilleri karakterin hikâyesini; runtime kataloğu mevcut oyun verilerini
 | `iona_mist` | [Iona Mist](Playable/iona_mist.md) | 24 | 4★ | Tide | healer |
 | `jori_flint` | [Jori Flint](Playable/jori_flint.md) | 20 | 3★ | Ember | guard |
 | `marek_vane` | [Marek Vane](Playable/marek_vane.md) | 30 | 4★ | Gale | control_buffer |
+| `garrick_cinder` | [Garrick Cinder](Playable/garrick_cinder.md) | 33 | 5★ | Ember | siege_breaker_dps |
+| `corbin_locke` | [Corbin Locke](Playable/corbin_locke.md) | 29 | 5★ | Tide | harpoon_vanguard |
+| `cassian_thorne` | [Cassian Thorne](Playable/cassian_thorne.md) | 27 | 4★ | Dawn | reliquary_templar |
+| `dorian_kesk` | [Dorian Kesk](Playable/dorian_kesk.md) | 26 | 4★ | Veil | cipher_debuffer_dps |
+| `rowan_reed` | [Rowan Reed](Playable/rowan_reed.md) | 19 | 3★ | Dawn | shrine_support |
 
 ## Antagonistler ve NPC'ler
 
