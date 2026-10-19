@@ -20,7 +20,7 @@ import { formatBytes } from '../ui/format';
 import { titleStyle } from '../ui/hubScreen';
 import { sceneFadeIn, verticalShade } from '../ui/pixiKit';
 import { C, DEPTH, F, T } from '../ui/theme';
-import { createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } from '../vfx/gothicUiVfx';
+import { createCrackedWatchSpinner, createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } from '../vfx/gothicUiVfx';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
@@ -258,8 +258,8 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     this.rule(g, cx - 330, cy + 6, 70, 1, C.silver, 0.45);
     this.rule(g, cx + 260, cy + 6, 70, 1, C.silver, 0.45);
     for (const dx of [-236, 236]) this.diamond(g, cx + dx, cy, 5, C.goldHi, 0.95);
-    // Crimson & Gold Wax Seal emblem beside the prompt
-    const seal = this.ui.box(cx + 216, cy - 18, 36, 36, 0x9e1b34, 0.95, g);
+    // Crimson & Gold Wax Seal emblem centered above the prompt
+    const seal = this.ui.box(cx - 18, cy - 60, 36, 36, 0x9e1b34, 0.95, g);
     seal.el.style.borderRadius = '50%';
     seal.el.style.border = `2px solid ${rgba(C.goldHi, 0.92)}`;
     seal.el.style.boxShadow = '0 0 14px rgba(212,50,92,.65)';
@@ -287,6 +287,8 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     if (this.busy) return;
     this.busy = true;
     void this.startAudio();
+    const insets = safeInsets();
+    triggerWaxSealBurst(this, 500 + insets.left, 640, DEPTH.hud + 6);
 
     if (!isInteractiveBrowser()) {
       const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
@@ -303,7 +305,6 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
       return;
     }
 
-    const insets = safeInsets();
     this.setBannerVisible(false);
     const cx = REF_W / 2;
     const cy = REF_H - 180 - insets.bottom;
@@ -312,6 +313,8 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     box.el.style.transition = 'opacity .36s ease-out';
     box.setAlpha(0);
     this.ui.panel(cx, cy - 10, 1180, 196, 'normal', box);
+    // #4 Approved UI Animation: Cracked Pocket Watch & Sanctuary Bell Spinner during auth/patch staging
+    createCrackedWatchSpinner(this, cx + 455, cy - 42, 0.38, DEPTH.hud + 5);
     // Google Play Games emblem
     const icon = this.ui.box(cx - 540, cy - 64, 44, 44, 0x1f3628, 0.95, box);
     icon.el.style.borderRadius = '10px';

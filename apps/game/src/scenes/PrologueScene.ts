@@ -80,7 +80,16 @@ export class PrologueScene extends PixiScene {
 
   /** the text nodes of one shot (each tweened on its own, see the overlap contract) */
   private get textNodes(): PIXI.Container[] {
-    return [this.body, this.caption, this.captionRule, this.subtitlePlaque, this.subtitleShimmer, this.voiceWaveTrack, this.voiceWaveFill];
+    return [
+      this.body,
+      this.caption,
+      this.captionRule,
+      this.subtitlePlaque,
+      this.subtitleShimmer,
+      this.voiceWaveTrack,
+      this.voiceWaveFill,
+      ...(this.captionBell ? [this.captionBell.container] : [])
+    ];
   }
 
   create(): void {
@@ -106,7 +115,6 @@ export class PrologueScene extends PixiScene {
     );
     this.captionRule.position.set(REF_W / 2, capY + 28);
     this.captionRule.alpha = 0;
-    this.captionBell = createSwingingBellEmblem(this, REF_W / 2, capY + 24, 0.54, DEPTH.hud + 1, 0);
 
     const plaqueTop = REF_H - 314 - insets.bottom;
     const bodyY = plaqueTop + 44;
@@ -129,6 +137,8 @@ export class PrologueScene extends PixiScene {
       DEPTH.hud - 2
     );
     this.subtitlePlaque.alpha = 0;
+    this.captionBell = createSwingingBellEmblem(this, cx, plaqueTop - 22, 0.48, DEPTH.hud + 1, 0);
+    this.captionBell.container.alpha = 0;
 
     this.subtitleShimmer = this.add(new PIXI.Graphics().rect(-60, -1, 120, 2).fill(0xf6e3b4), DEPTH.hud + 1);
     this.subtitleShimmer.position.set(cx - 340, plaqueTop);
@@ -282,9 +292,19 @@ export class PrologueScene extends PixiScene {
     this.showText(scene);
     this.fadeTimer?.stop();
     this.advanceTimer?.stop();
-    this.fadeTimer = this.anim.after(Math.max(0, holdMs - TEXT_FADE_MS), () => this.fadeText());
-    // advance exactly when this shot's duration_seconds has elapsed, so the holds sum to the authored opening length
-    this.advanceTimer = this.anim.after(holdMs, () => this.next());
+    this.fadeTimer = this.anim.after(Math.max(0, holdMs - TEXT_FADE_MS), () => {
+      if (!INTRO_FAST && isInteractiveBrowser() && this.stage?.isVoicePlaying()) return;
+      this.fadeText();
+    });
+    // advance when this shot's duration_seconds has elapsed, extending up to 2.2s if the voiceover was delayed by unlock
+    const tryAdvance = (extraWaitMs = 0): void => {
+      if (!INTRO_FAST && isInteractiveBrowser() && this.stage?.isVoicePlaying() && extraWaitMs < 2200) {
+        this.advanceTimer = this.anim.after(220, () => tryAdvance(extraWaitMs + 220));
+        return;
+      }
+      this.next();
+    };
+    this.advanceTimer = this.anim.after(holdMs, () => tryAdvance(0));
   }
 
   private showPlate(scene: PrologueData, first: boolean, holdMs: number): void {
@@ -325,6 +345,7 @@ export class PrologueScene extends PixiScene {
     this.captionRule.scale.x = calm ? 1 : 0.25;
     this.subtitlePlaque.alpha = 0;
     this.subtitlePlaque.y = calm ? 0 : 16;
+    if (this.captionBell) this.captionBell.container.alpha = 0;
     this.voiceWaveTrack.alpha = 0;
     this.voiceWaveFill.alpha = 0;
     this.voiceWaveFill.scale.x = 0;
@@ -334,7 +355,9 @@ export class PrologueScene extends PixiScene {
 
     this.anim.to(this.caption, { alpha: 1, y: this.baseCapY }, { duration: TEXT_FADE_MS * 1.6, delay: INTRO_FAST ? 15 : 180, ease: 'cubic.out' });
     this.anim.to(this.captionRule, { alpha: 1, scaleX: 1 }, { duration: TEXT_FADE_MS * 1.8, delay: INTRO_FAST ? 15 : 220, ease: 'back.out' });
-    for (const n of [this.subtitlePlaque, this.voiceWaveTrack, this.voiceWaveFill]) this.anim.to(n, n === this.subtitlePlaque ? { alpha: 1, y: 0 } : { alpha: 1 }, { duration: INTRO_FAST ? 40 : 480, ease: 'cubic.out' });
+    for (const n of [this.subtitlePlaque, this.voiceWaveTrack, this.voiceWaveFill, ...(this.captionBell ? [this.captionBell.container] : [])]) {
+      this.anim.to(n, n === this.subtitlePlaque ? { alpha: 1, y: 0 } : { alpha: 1 }, { duration: INTRO_FAST ? 40 : 480, ease: 'cubic.out' });
+    }
     this.anim.to(this.body, { y: this.baseBodyY }, { duration: INTRO_FAST ? 40 : 520, ease: 'cubic.out' });
     if (!calm) {
       this.subtitleShimmer.x = REF_W / 2 - 340;

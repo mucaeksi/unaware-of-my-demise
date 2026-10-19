@@ -251,7 +251,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.caret.visible = false;
     box.addChild(panel(0, 0, 1680, 248, 'normal'), rules, this.lineShimmer, syncTrack, this.voiceSyncFill, this.actionBadge, this.bodyText, this.caret);
     this.add(box, DEPTH.hud);
-    const readerBell: SwingingBellHandle = createSwingingBellEmblem(this, REF_W / 2, 886 - insets.bottom - 122, 0.48, DEPTH.hud + 2, 4200);
+    const readerBell: SwingingBellHandle = createSwingingBellEmblem(this, REF_W / 2, 886 - insets.bottom - 138, 0.42, DEPTH.hud + 2, 4200);
     readerBell.container.alpha = 0.92;
 
     const topBtnY = 58 + insets.top;
@@ -473,7 +473,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     const actor: Actor = { side, image, sprite, key, emotion, baseX, baseY, offsetX: 0, offsetY: 0, tiltDeg: 0, scaleMult: 1, breathe: null };
     const k = this.bustScale(character, actor);
     image.scale.set(k);
-    if (!prefs().reducedMotion) actor.breathe = this.anim.to(image, { scaleY: k * 1.012 }, { duration: side === 'left' ? 2800 : 2500, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    if (!prefs().reducedMotion) actor.breathe = this.anim.to(sprite, { y: -7 }, { duration: side === 'left' ? 2800 : 2500, yoyo: true, repeat: -1, ease: 'sine.inout' });
     this.actors.set(character, actor);
     if (!immediate && !this.cgActive) this.anim.to(image, { x: baseX, alpha: 0.86 }, { duration: prefs().reducedMotion ? 1 : 950, ease: 'cubic.out' });
   }
@@ -521,11 +521,11 @@ export class StoryScene extends PixiScene<StoryInit> {
 
     if (reactionImpulse && !prefs().reducedMotion) {
       if (newEmotion === 'dry_amusement' || newEmotion === 'dry_humor') {
-        this.anim.to(a.image, { y: Math.max(REF_H + 4, a.image.y - 10) }, { duration: 130, yoyo: true, ease: 'sine.inout' });
+        this.anim.to(a.sprite, { angle: a.side === 'left' ? -1.8 : 1.8 }, { duration: 130, yoyo: true, ease: 'sine.inout' });
       } else if (newEmotion === 'protective' || newEmotion === 'determined') {
-        this.anim.to(a.image, { scaleX: sc * 1.035, scaleY: sc * 1.035 }, { duration: 150, yoyo: true, ease: 'back.out' });
+        this.anim.to(a.sprite, { angle: a.side === 'left' ? 1.8 : -1.8 }, { duration: 150, yoyo: true, ease: 'back.out' });
       } else if (newEmotion === 'soft_smile') {
-        this.anim.to(a.image, { y: a.image.y + 8 }, { duration: 180, yoyo: true, ease: 'sine.inout' });
+        this.anim.to(a.sprite, { angle: a.side === 'left' ? 1.2 : -1.2 }, { duration: 180, yoyo: true, ease: 'sine.inout' });
       }
     }
   }
@@ -819,10 +819,22 @@ export class StoryScene extends PixiScene<StoryInit> {
     return { speakerEmotion: resolvedEmotion, moodLabel: MOOD_LABELS[resolvedEmotion] ?? 'COMPOSED' };
   }
 
-  private animateActorTransform(character: string, a: Actor, ms = 420): void {
+  private animateActorTransform(character: string, a: Actor, ms = 420, targetAlpha?: number): void {
     const targetScale = this.bustScale(character, a) * a.scaleMult;
     const liftY = this.currentLine?.speaker === character ? -14 : 6;
-    this.anim.to(a.image, { x: a.baseX + a.offsetX, y: Math.max(REF_H + 4, a.baseY + a.offsetY + liftY), angle: prefs().reducedMotion ? 0 : a.tiltDeg, scaleX: targetScale, scaleY: targetScale }, { duration: prefs().reducedMotion ? 1 : ms, ease: 'cubic.out' });
+    this.anim.killOf(a.image);
+    this.anim.to(
+      a.image,
+      {
+        x: a.baseX + a.offsetX,
+        y: Math.max(REF_H + 4, a.baseY + a.offsetY + liftY),
+        angle: prefs().reducedMotion ? 0 : a.tiltDeg,
+        scaleX: targetScale,
+        scaleY: targetScale,
+        ...(targetAlpha !== undefined ? { alpha: targetAlpha } : {})
+      },
+      { duration: prefs().reducedMotion ? 1 : ms, ease: 'cubic.out' }
+    );
   }
 
   private focusSpeaker(speaker: string, emotion?: string, ms = 280): void {
@@ -835,9 +847,8 @@ export class StoryScene extends PixiScene<StoryInit> {
       const active = id === speaker;
       const isNarr = speaker === '';
       a.image.zIndex = active ? DEPTH.world + 2 : DEPTH.world;
-      this.anim.to(a.image, { alpha: active ? 1 : isNarr ? 0.9 : 0.72 }, { duration: ms });
       a.sprite.tint = active ? 0xffffff : isNarr ? 0xe8e0f2 : 0xb0a4c2;
-      this.animateActorTransform(id, a, Math.max(360, ms));
+      this.animateActorTransform(id, a, Math.max(360, ms), active ? 1 : isNarr ? 0.9 : 0.72);
     }
   }
 
@@ -987,7 +998,21 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.bodyText.text = this.fullText;
     this.bodyText.y = -64;
     this.bodyText.alpha = 1;
-    this.drawSyncFill(1);
+    const lineId = this.currentLine?.lineId;
+    if (lineId && !this.skip && this.stage?.isVoicePlaying()) {
+      this.stopTyping = this.onTick(() => {
+        const vp = this.stage?.voiceProgress(lineId);
+        if (!vp || !vp.playing || vp.ratio >= 0.995) {
+          this.drawSyncFill(1);
+          this.stopTyping?.();
+          this.stopTyping = null;
+        } else {
+          this.drawSyncFill(vp.ratio);
+        }
+      });
+    } else {
+      this.drawSyncFill(1);
+    }
     this.lineDone = true;
     this.caret.visible = true;
     if (this.currentLine) this.read.add(this.currentLine.lineId);

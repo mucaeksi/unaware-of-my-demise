@@ -68,8 +68,8 @@ export class FinishScene extends PixiScene {
 
     const cx = REF_W / 2;
     // #1 & #4 Approved UI Animations: Eclipse Corona backdrop + Cracked Pocket Watch & Sanctuary Bell Spinner
-    createEclipseCorona(this, cx, 488, 250, -5, false).alpha = 0.55;
-    createCrackedWatchSpinner(this, cx, 122, 0.88, 5);
+    createEclipseCorona(this, cx, 488, 390, -5, false).alpha = 0.62;
+    createCrackedWatchSpinner(this, cx, 96, 0.78, 5);
 
     this.ui = new DomStage(app().uiLayer);
     this.attachDom(this.ui.root);

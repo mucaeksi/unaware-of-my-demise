@@ -72,7 +72,7 @@ export class StudioScene extends PixiScene {
       if (!calm) this.anim.to(mark, { scale: k }, { duration: NAME_IN + 500, ease: 'cubic.out' });
     }
 
-    const bell = createSwingingBellEmblem(this, cx, cy + 12, 0.72, 2, 1800);
+    const bell = createSwingingBellEmblem(this, cx, markY - 178, 0.58, 2, 1800);
     const divider = this.add(this.ornament(cx, cy + 28, calm, spark));
     const name = this.add(txt(cx, cy + 92, S.studio.name.toUpperCase(), { fontFamily: F.display, fontSize: 78, fontStyle: '600', color: '#e9e2d4', stroke: '#120a18', strokeThickness: 5, letterSpacing: 10 }, 0.5));
     const presents = this.add(txt(cx, cy + 168, S.studio.presents, { fontFamily: F.body, fontSize: 36, fontStyle: 'italic 500', color: T.gold, letterSpacing: 18 }, 0.5));

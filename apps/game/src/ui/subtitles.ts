@@ -82,7 +82,7 @@ export function buildSubtitleSchedule(
     // Finish revealing ~88% through the voice clip so the last words land right as the actor speaks them
     const targetSpanMs = Math.max(580, voiceMs * 0.88 - leadInMs);
     const minSpanMs = (len / 46) * 1000;
-    const maxSpanMs = (len / 11.5) * 1000;
+    const maxSpanMs = Math.max((len / 7.5) * 1000, voiceMs * 0.86);
     totalRevealMs = Math.max(minSpanMs, Math.min(maxSpanMs, targetSpanMs));
   } else {
     totalRevealMs = Math.max(450, (len / Math.max(12, fallbackCps)) * 1000);

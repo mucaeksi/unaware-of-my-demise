@@ -44,8 +44,9 @@ export class NarrativeStage {
   }
   voiceProgress(lineId: string): { playing: boolean; currentTime: number; duration: number; ratio: number } {
     const def = own(this.pack.voices, lineId);
-    const dur = def?.duration_s ?? 0;
     const clip = this.audio.get('voice');
+    const rawDur = clip && Number.isFinite(clip.element.duration) && clip.element.duration > 0.2 ? clip.element.duration : (def?.duration_s ?? 0);
+    const dur = Math.max(def?.duration_s ?? 0, rawDur);
     if (!clip || clip.element.paused || clip.element.ended || dur <= 0) {
       return { playing: false, currentTime: clip?.element.currentTime ?? 0, duration: dur, ratio: 0 };
     }
@@ -84,8 +85,8 @@ export class NarrativeStage {
       element.addEventListener('error', done, { once: true });
     });
     if (!this.alive || this.audio.get(key) !== clip) return;
-    element.onloadedmetadata = () => { if (!Number.isFinite(element.duration) || element.duration > duration + 0.5) this.stopAudio(key); };
-    element.ontimeupdate = () => { if (!loop && element.currentTime >= duration) this.stopAudio(key); };
+    element.onloadedmetadata = () => { if (!Number.isFinite(element.duration) || element.duration > duration + 3.0) this.stopAudio(key); };
+    element.ontimeupdate = () => { if (!loop && element.currentTime >= duration + 1.5) this.stopAudio(key); };
     element.onended = element.onerror = () => { if (this.audio.get(key) === clip) this.stopAudio(key); };
     await element.play().catch(() => {
       if (this.audio.get(key) !== clip) return;

@@ -69,15 +69,16 @@ test.describe('UOMD Control Center (admin SPA + API, local stack with a test-onl
     await page.screenshot({ path: `${SHOTS}/admin-${info.project.name}-graph-rejection.png`, fullPage: true });
   });
 
-  test('refuses to show anything without a valid Access token', async ({ page }) => {
-    await page.goto(ADMIN);
+  test('refuses to show any data page without a valid Access token', async ({ page }) => {
+    // without a token only the local Animations studio opens; every data page shows the API's refusal
+    await page.goto(`${ADMIN}?page=Dashboard`);
     await expect(page.getByRole('alert')).toContainText(/401|invalid_token|missing_token/);
-    expect(await page.getByRole('navigation').textContent()).toContain('not signed in');
+    expect(await page.getByRole('navigation').textContent()).toContain('local studio mode');
   });
 
   test('dashboard, characters (optimistic edit), assets, patches and audit work against real D1/R2', async ({ page }, info) => {
     await page.setExtraHTTPHeaders({ 'Cf-Access-Jwt-Assertion': jwt() });
-    await page.goto(ADMIN);
+    await page.goto(`${ADMIN}?page=Dashboard`); // the Control Center opens on the Animations studio by default
     await expect(page.getByText('e2e-owner@example.com · owner')).toBeVisible();
 
     // dashboard: D1 + R2 health and the published channel pointer

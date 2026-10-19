@@ -678,6 +678,8 @@ export class BattleScene extends PixiScene<BattleInit> {
     if (!l) return;
     this.lunged = null;
     const v = l.view;
+    const moved = Math.hypot(v.x - v.spot.x, v.y - v.spot.y) > 4;
+    if (v.alive && moved) v.applyState('walk');
     this.anim.to(v, { x: v.spot.x, y: v.spot.y }, { duration: 220, ease: 'quad.inout' });
     const dim = l.dim;
     if (dim) this.anim.to(dim, { alpha: 0 }, { duration: 260, onComplete: () => dim.destroy() });
@@ -991,7 +993,6 @@ export class BattleScene extends PixiScene<BattleInit> {
         v.applyState('victory');
         BattleVfx.castSigil(this, v.x, v.y - 10, 'Dawn', 1.15);
         this.burst(v.x, v.y - 80, 0xffe680, 14);
-        if (!prefs().reducedMotion) this.anim.to(v, { y: v.y - 16 }, { duration: 380, yoyo: true, repeat: 2, ease: 'sine.out' });
       }
       Sfx.victory();
     } else {

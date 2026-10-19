@@ -93,7 +93,7 @@ export async function publishFixture(request: APIRequestContext, id: string) {
   for (let i = 0; i < toUpload.length; i += 8) {
     await Promise.all(toUpload.slice(i, i + 8).map(async ({ path, sha256, bytes }) => {
       const result = await request.put(`${ADMIN}/admin/api/objects/${sha256}`, { headers: { ...headers, 'Content-Type': MEDIA_TYPE_BY_EXTENSION[path.split('.').pop() as AllowedExtension] }, data: Buffer.from(bytes) });
-      expect(result.ok(), path).toBe(true);
+      expect(result.ok(), `${path}: ${result.status()} ${result.ok() ? '' : await result.text()}`).toBe(true);
     }));
   }
   const created = await request.post(`${ADMIN}/admin/api/releases`, { headers, data: { id, channel: 'dev', files: entries, notes: 'Synthetic R08 integration fixture only' } }); expect(created.status(), await created.text()).toBe(201);

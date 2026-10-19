@@ -249,6 +249,8 @@ export class UnitView extends PIXI.Container {
   /** anticipation crouch, parabolic hop-dash with an elemental ghost trail, strike punch */
   playDashTo(toX: number, toY: number): Promise<void> {
     if (this.reduced) return Promise.resolve();
+    this.scene.anim.killOf(this.pose);
+    this.pose.position.set(0, 0);
     const sc = this.sc;
     const startX = this.x;
     const startY = this.y;
@@ -288,6 +290,9 @@ export class UnitView extends PIXI.Container {
   /** caster levitation pulse and a spell circle under the feet */
   playCast(isUltimate = false): void {
     if (this.reduced) return;
+    this.scene.anim.killOf(this.pose);
+    this.pose.position.set(0, 0);
+    this.pose.angle = 0;
     BattleVfx.castSigil(this.scene, this.x, this.y, this.element, isUltimate ? 1.45 : 1.05, isUltimate ? 820 : 620);
     const sc = this.sc;
     this.spawnGhost(BattleVfx.palette(this.element).core);
@@ -297,6 +302,8 @@ export class UnitView extends PIXI.Container {
   /** elastic knockback, squash-stretch jolt */
   playHitReaction(isCrit = false): void {
     if (this.reduced) return;
+    this.scene.anim.killOf(this.pose);
+    this.pose.position.set(0, 0);
     const sc = this.sc;
     const push = this.side === 'player' ? -1 : 1;
     this.pose.scale.set(sc * 0.82, sc * 1.2);
@@ -356,7 +363,8 @@ export class UnitView extends PIXI.Container {
 
   setHighlight(on: boolean): void {
     this.drawRing(on ? 0.16 : 0, C.silver, on ? 0.85 : 0);
-    this.auraRing.alpha = on ? 0.68 : 0.28;
+    this.scene.anim.killOf(this.auraRing);
+    this.auraRing.alpha = on ? 0.68 : 0.32;
   }
 
   setIntent(text: string | null, targetsLabel?: string): void {
