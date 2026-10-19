@@ -123,7 +123,9 @@ export const PartyMember = z
     row: z.enum(['front', 'rear']),
     /** final combat stats computed by the server (level growth + gear + set bonuses); absent = the unit's own level curve */
     stats: z
-      .object({ hp: z.number().int().min(1).max(100_000), atk: z.number().int().min(0).max(100_000), def: z.number().int().min(0).max(100_000), spd: z.number().int().min(1).max(10_000), res: z.number().int().min(0).max(100_000).optional() })
+      .object({ hp: z.number().int().min(1).max(100_000), atk: z.number().int().min(0).max(100_000), def: z.number().int().min(0).max(100_000), spd: z.number().int().min(1).max(10_000), res: z.number().int().min(0).max(100_000).optional(),
+        /** attribute heroes (D-27): from AGI and INT; absent = the battle rules' crit */
+        crit_rate: z.number().min(0).max(1).optional(), crit_damage: z.number().min(1).max(10).optional(), effect_hit: z.number().min(0).max(1).optional() })
       .strict()
       .optional(),
     /** skill_id -> rank (1-3); each rank above 1 raises damage/heal/shield multipliers of that skill */

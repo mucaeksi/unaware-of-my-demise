@@ -3,6 +3,7 @@ export * from './gacha';
 export * from './analysis';
 export * from './ration';
 export * from './flow';
+export * from './attributes';
 export * from './progression';
 export * from './gear';
 export * from './drops';

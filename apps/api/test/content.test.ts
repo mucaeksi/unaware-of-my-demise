@@ -178,7 +178,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     expect(manifest.depends_on).toBeUndefined();
     expect((await new ContentStore(baseEnv.DB, baseEnv.CONTENT).getRelease('rel_0003'))!.depends_on).toBeNull();
     const pm = new PatchManager(
-      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['presentation_v1', 'vfx_v1'], trustedKeys: [signingPublic], installId: 'chain', storageBudgetBytes: 1e9, validate: () => undefined },
+      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'], trustedKeys: [signingPublic], installId: 'chain', storageBudgetBytes: 1e9, validate: () => undefined },
       new MemoryStorage(),
       { fetchManifest: async () => manifest, fetchObject: async (sha) => new Uint8Array(await (await game(`/api/v1/content/objects/${sha}`)).arrayBuffer()) },
       { releaseId: 'rel_0001', generation: 1, files: Object.fromEntries(base.map((f) => [f.path, f.sha256])), read: async (p) => base.find((f) => f.path === p)!.bytes }
@@ -198,7 +198,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
 
   it.each(['rollback', 'kill'] as const)('retains min/max client and content schema on %s', async (mode) => {
     await upload(base);
-    const compat = { min_client: '1.2.0', max_client: '2.0.0', content_schema: 2, required_capabilities: ['presentation_v1', 'vfx_v1'] };
+    const compat = { min_client: '1.2.0', max_client: '2.0.0', content_schema: 2, required_capabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'] };
     expect((await post('/admin/api/releases', { id: 'rel_restricted', channel: 'dev', minClient: compat.min_client, maxClient: compat.max_client, contentSchema: compat.content_schema, files: entries(base) })).status).toBe(201);
     expect((await post('/admin/api/releases/rel_restricted/publish', {})).status).toBe(200);
     expect((await post(`/admin/api/channels/dev/${mode}`, { releaseId: 'rel_restricted' })).status).toBe(200);
@@ -213,7 +213,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     const created = await post('/admin/api/releases', { id: 'rel_composed', channel: 'dev', dependsOn: 'rel_restricted', minClient: '0.1.0', maxClient: '9.0.0', contentSchema: 1, files: entries([base[0]!]) });
     expect(created.status).toBe(201);
     const row = await new ContentStore(baseEnv.DB, baseEnv.CONTENT).getRelease('rel_composed');
-    expect(JSON.parse(row!.manifest_json).compat).toEqual({ min_client: '1.2.0', max_client: '2.0.0', content_schema: 2, required_capabilities: ['presentation_v1', 'vfx_v1'] });
+    expect(JSON.parse(row!.manifest_json).compat).toEqual({ min_client: '1.2.0', max_client: '2.0.0', content_schema: 2, required_capabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'] });
     const rejected = await post('/admin/api/releases', { id: 'rel_disjoint', channel: 'dev', dependsOn: 'rel_restricted', minClient: '3.0.0', files: entries([base[0]!]) });
     expect(rejected.status).toBe(400);
     expect(await rejected.json()).toMatchObject({ error: 'bad_compat' });
@@ -341,7 +341,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     const baseHashes = Object.fromEntries(base.map((f) => [f.path, f.sha256]));
     const baseContent: BaseContent = { releaseId: 'rel_0001', generation: 1, files: baseHashes, read: async (p) => (base.find((f) => f.path === p) as TestFile).bytes };
     const pm = new PatchManager(
-      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['presentation_v1', 'vfx_v1'], trustedKeys: [signingPublic], installId: 'x', storageBudgetBytes: 1e9, validate: () => undefined, sleep: async () => undefined },
+      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'], trustedKeys: [signingPublic], installId: 'x', storageBudgetBytes: 1e9, validate: () => undefined, sleep: async () => undefined },
       new MemoryStorage(),
       remote,
       baseContent

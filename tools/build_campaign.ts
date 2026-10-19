@@ -11,7 +11,9 @@ import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { playAuto } from '../packages/combat/src/index';
 import { ArtManifest, BattleParty, ChapterIndex, Encounter, type UnitPack, validateContentSet, type RewardAttachment } from '../packages/content-schema/src/index';
-import { finalStats } from '../packages/economy/src/index';
+import { aggregateGear, attributeStats, emptyGearStats, finalStats, type GearPiece, type GearStats } from '../packages/economy/src/index';
+import { CANON_PROGRESSION } from '../packages/economy/src/fixtures';
+import { ROLE_STAT, armorStats, balanceAttributes, weaponStats } from './lib/balance';
 import { buildUnitPack } from './lib/data';
 import { bindCampaignPhaseStories, compileCampaignStory } from './lib/campaign-story';
 import { compileNarrativeLibrary } from './lib/narrative-library';
@@ -95,7 +97,8 @@ for (const ch of chapters) {
       party: tutorial ? [{ unit_id: 'mahmut', level: 1, slot: 0, row: 'front' }, { unit_id: 'fadyme', level: 1, slot: 1, row: 'rear' }] : [],
       ...(st.guest_characters.length ? { guests: st.guest_characters } : {}),
       enemies: foes,
-      ...(st.enemy_stat_multiplier !== 1 ? { enemy_stat_multiplier: { value: st.enemy_stat_multiplier, applies_to: ['hp', 'atk'] } } : {}),
+      // D-27: attribute enemies are tuned in content/balance/attributes.json; the narrative's flat multiplier only applies to legacy stat blocks
+      ...(st.enemy_stat_multiplier !== 1 && foes.some((f) => !pack.units.find((u) => u.unit_id === f.unit_id)?.attributes) ? { enemy_stat_multiplier: { value: st.enemy_stat_multiplier, applies_to: ['hp', 'atk'] } } : {}),
       provenance: { source: `${NARR}/stages_part1.json#${st.stage_id}` }
     });
     encounters.set(id, enc);
@@ -241,9 +244,24 @@ const FREE = ['mahmut', 'fadyme'];
 const owned = [...FREE];
 const rows: string[] = [];
 const charById = new Map(chars.map((c) => [c.character_id as string, c]));
-const member = (id: string, level: number, loan: boolean): BattleParty[number] => {
+/** starter gear: the first 3★ weapon of the hero's weapon type and the 3★ padded armor, both at the hero's level, no accessories */
+const weapons = readJson<Json>(`${NARR}/weapons_part1.json`).weapons as Json[];
+const starterArmor = (readJson<Json>(`${NARR}/armors_part1.json`).armors as Json[]).find((a) => a.armor_id === 'armor_padded_3_01') as Json;
+const starterGear = (c: Json, level: number): GearStats => {
+  const weapon = weapons.filter((w) => w.rarity === 3 && w.weapon_type === c.equip_weapon_type).sort((x, y) => String(x.weapon_id).localeCompare(String(y.weapon_id)))[0];
+  const pieces: GearPiece[] = [{ slot: 'armor', setId: null, level, ascension: 0, ...armorStats(starterArmor) }];
+  if (weapon) pieces.push({ slot: 'weapon', setId: null, level, ascension: 0, ...weaponStats(weapon as never) });
+  return aggregateGear(CANON_PROGRESSION, pieces, catalogRoleStat(c.combat_role), {});
+};
+const catalogRoleStat = (role: string): string => {
+  const key = Object.keys(ROLE_STAT.roleStat).find((k) => k !== 'default' && role.includes(k)) as keyof typeof ROLE_STAT.roleStat | undefined;
+  return ROLE_STAT.roleStat[key ?? 'default'];
+};
+const member = (id: string, level: number, loan: boolean, geared: boolean): BattleParty[number] => {
   const c = charById.get(id) as Json;
-  const stats = finalStats(c.base_stats_level_1, c.growth_per_level, level, { flat: {}, pct: {}, other: {} });
+  const block = balanceAttributes(id, c.rarity);
+  const gear = geared && block ? starterGear(c, level) : emptyGearStats();
+  const { attributes: _shown, ...stats } = block ? attributeStats(block, level, gear) : { attributes: null, ...finalStats(c.base_stats_level_1, c.growth_per_level, level, gear) };
   return { unit_id: id, level, slot: 0, row: c.formation_affinity === 'front' ? 'front' : 'rear', stats, ...(loan ? { loan: true } : {}) };
 };
 let results = 0;
@@ -252,23 +270,27 @@ for (const st of stages) {
   const level = st.recommended_level as number;
   const guests = (enc.guests ?? []).slice(0, 5);
   const team = (enc.party_mode === 'fixed' ? enc.party.map((p) => p.unit_id) : [...guests, ...owned.filter((o) => !guests.includes(o))]).slice(0, 5);
-  const draft = team.map((id) => member(id, level, guests.includes(id) && !owned.includes(id)));
-  const front = draft.filter((m) => m.row === 'front').slice(0, 2);
-  const rest = draft.filter((m) => !front.includes(m));
-  const party = BattleParty.parse([...front.map((m, i) => ({ ...m, slot: i, row: 'front' as const })), ...rest.map((m, i) => ({ ...m, slot: front.length + i, row: 'rear' as const }))]);
-  let wins = 0;
-  let stars = 0;
-  const tries = 8;
-  for (let k = 0; k < tries; k++) {
-    const e = Encounter.parse({ ...enc, seed: (enc.seed + k * 7919) >>> 0 });
-    const { battle } = playAuto(pack as UnitPack, e, enc.party_mode === 'fixed' ? undefined : party);
-    if (battle.result?.winner === 'player') {
-      wins++;
-      stars += battle.result.stars;
+  const cells: string[] = [];
+  let names = '';
+  for (const geared of [false, true]) {
+    const draft = team.map((id) => member(id, level, guests.includes(id) && !owned.includes(id), geared));
+    const front = draft.filter((m) => m.row === 'front').slice(0, 2);
+    const rest = draft.filter((m) => !front.includes(m));
+    const party = BattleParty.parse([...front.map((m, i) => ({ ...m, slot: i, row: 'front' as const })), ...rest.map((m, i) => ({ ...m, slot: front.length + i, row: 'rear' as const }))]);
+    names = party.map((m) => m.unit_id.split('_')[0]).join(', ');
+    let wins = 0;
+    let rounds = 0;
+    const tries = 8;
+    for (let k = 0; k < tries; k++) {
+      const e = Encounter.parse({ ...enc, seed: (enc.seed + k * 7919) >>> 0 });
+      const { battle } = playAuto(pack as UnitPack, e, enc.party_mode === 'fixed' ? undefined : party);
+      rounds += battle.log.filter((ev) => ev.type === 'round_end').length;
+      if (battle.result?.winner === 'player') wins++;
     }
+    cells.push(`${wins}/${tries}`, (rounds / tries).toFixed(1));
   }
   results++;
-  rows.push(`| ${st.stage_id} | ${st.node_type} | ${level} | ${party.map((m) => m.unit_id.split('_')[0]).join(', ')} | ${wins}/${tries} | ${wins ? (stars / wins).toFixed(1) : '-'} |`);
+  rows.push(`| ${st.stage_id} | ${st.node_type} | ${level} | ${names} | ${cells.join(' | ')} |`);
   for (const r of st.story_rewards as Json[]) if (r.recruit_character_id && !owned.includes(r.recruit_character_id)) owned.push(r.recruit_character_id);
 }
 writeOut(
@@ -276,13 +298,13 @@ writeOut(
   `# Campaign balance probe (generated — do not edit)
 
 Generated by \`npm run build:campaign\`. Every stage is played ${8} times (different seeds) with the **Auto Battle** policy by the heroes a player owns at that point
-(free start + story recruits, no gacha, **no gear, no skill ranks**), at the stage's **recommended level**, plus the stage's story loans.
-The probe omits the declared loan equipment template and remains a conservative gearless smoke signal; R16 checks the full runtime configuration.
-This is a smoke signal for the future balance pass, not a tuned result. The narrative's \`enemy_stat_multiplier\` (2.5 on every non-tutorial stage) is applied
-to enemy HP and ATK — its exact meaning is not documented in the data (see docs/COMBAT_RULES.md).
+(free start + story recruits, no gacha, no skill ranks), at the stage's **recommended level**, plus the stage's story loans, twice: with **no gear**, and with
+**starter gear** (a 3★ weapon of the hero's weapon type and the 3★ padded armor at the hero's level, no accessories). R16 checks the full runtime configuration.
+Stats follow D-27 (STR/INT/VIT/AGI, docs/combat/STAT_MATH.md) from content/balance/attributes.json; the narrative's \`enemy_stat_multiplier\` is not
+applied to attribute enemies. Targets with starter gear: normal stages 4-6 rounds, bosses 8-12, nearly every stage won; without gear most stages still winnable.
 
-| Stage | Type | Level | Party | Wins | Avg stars |
-|---|---|---|---|---|---|
+| Stage | Type | Level | Party | Wins (no gear) | Rounds | Wins (starter gear) | Rounds |
+|---|---|---|---|---|---|---|---|
 ${rows.join('\n')}
 `
 );

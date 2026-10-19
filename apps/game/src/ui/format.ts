@@ -21,6 +21,15 @@ export function describeAttachments(atts: MailItem['attachments'], names: Map<st
 
 export const pct = (x: number, digits = 1): string => `${(x * 100).toFixed(digits).replace(/\.0+$/, '')} %`;
 
+const STAT_NAME: Record<string, string> = { str: 'STR', int: 'INT', vit: 'VIT', agi: 'AGI', power: 'POWER', def: 'DEF', hp: 'HP', atk: 'ATK', spd: 'SPD', heal_bonus: 'HEAL', focus_gain: 'FOCUS', effect_res: 'EFFECT RES', element_res: 'ELEMENT RES' };
+/** One gear stat for the player: whole points read `+1 VIT`, percentages `HEAL +5%`. */
+export function gearStat(id: string, value: number): string {
+  const m = /^(.+)_(flat|pct)$/.exec(id);
+  const name = (m && STAT_NAME[m[1]!]) ?? id.toUpperCase();
+  if (m?.[2] === 'pct') return `${name} +${Math.round(value * 1000) / 10}%`;
+  return `+${Math.round(value * 10) / 10} ${name}`;
+}
+
 /** Download sizes for the patch bar: "812 KB", "12.4 MB". */
 export function formatBytes(n: number): string {
   if (n < 1024 * 1024) return `${Math.max(0, Math.round(n / 1024))} KB`;

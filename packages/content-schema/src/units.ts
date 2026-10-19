@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { AttributeBlock, attributesAt, deriveStats } from '@uomd/economy';
 import { Element, Id, SafeAssetPath } from './primitives';
 import { ContinuousModifier, EffectOp, EventHook } from './effects';
 
@@ -115,8 +116,11 @@ export const UnitDef = z
     role: z.string().max(40),
     rarity: z.number().int().min(1).max(5).optional(),
     formation_affinity: z.enum(['front', 'rear']).optional(),
-    base_stats: Stats,
+    /** legacy stat contract (content before D-27); new content uses `attributes` */
+    base_stats: Stats.optional(),
     growth_per_level: Growth.optional(),
+    /** STR / INT / VIT / AGI; the combat stats are derived from them (capability attributes_v1) */
+    attributes: AttributeBlock.optional(),
     weaknesses: z.array(Element).optional(),
     resistances: z.array(Element).optional(),
     /** Fractional resistance [0, 1] reducing the probability of hostile status application. */
@@ -136,8 +140,39 @@ export const UnitDef = z
     art_key: Id,
     provenance: z.object({ source: z.string(), source_sha256: z.string().optional() }).strict()
   })
-  .strict();
+  .strict()
+  .refine((u) => (u.base_stats === undefined) !== (u.attributes === undefined), { message: 'a unit has either base_stats (legacy) or attributes', path: ['attributes'] });
 export type UnitDef = z.infer<typeof UnitDef>;
+
+export interface UnitLevelStats {
+  hp: number;
+  atk: number;
+  def: number;
+  spd: number;
+  /** legacy magic defense; attribute units have none (DEF covers every damage type) */
+  res: number | null;
+  crit_rate?: number;
+  crit_damage?: number;
+  effect_hit?: number;
+}
+
+/** A unit's own stats at a level, without gear: derived from its attributes, or the legacy base + growth curve rounded half up. */
+export function unitStatsAt(u: Pick<UnitDef, 'base_stats' | 'growth_per_level' | 'attributes'>, level: number): UnitLevelStats {
+  if (u.attributes) {
+    const d = deriveStats(u.attributes, attributesAt(u.attributes, level));
+    return { ...d, res: null };
+  }
+  const base = u.base_stats!;
+  // the engine's half-up rounding (with its epsilon), so legacy battles replay unchanged
+  const grow = (k: 'hp' | 'atk' | 'def' | 'spd' | 'res', v: number): number => Math.floor(v + (u.growth_per_level?.[k] ?? 0) * (level - 1) + 0.5 + 1e-9);
+  return {
+    hp: Math.max(1, grow('hp', base.hp)),
+    atk: grow('atk', base.atk),
+    def: Math.max(0, grow('def', base.def)),
+    spd: Math.max(1, grow('spd', base.spd)),
+    res: base.res === undefined ? null : Math.max(0, grow('res', base.res))
+  };
+}
 
 export const StatusDef = z
   .object({

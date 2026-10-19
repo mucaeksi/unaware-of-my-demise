@@ -40,7 +40,7 @@ beforeAll(async () => {
 });
 beforeEach(async () => {
   await resetContent();
-  await db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES ('prog_hero','Prog Hero',4,'Stone','tank',20,'gacha',10,2,2,4)").run();
+  await db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES ('prog_hero','Prog Hero',4,'Stone','tank',20,'gacha',10,2,2,4)").run();
   await upload(base);
   const r = await admin('/admin/api/releases', { method: 'POST', body: JSON.stringify({ id: 'rel_0001', channel: 'dev', notes: 'progress fixture', files: entries(base) }), headers: { 'Content-Type': 'application/json' } });
   expect(r.status).toBe(201);

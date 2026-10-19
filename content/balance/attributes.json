@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "note": "D-27 attribute stats (docs/combat/STAT_MATH.md). Engineering-owned balance data: the narrative keeps canon and skills, this file sets STR/INT/VIT/AGI. An archetype gives the shape, every unit names one; heroes add rarity points. Tune with npm run build:campaign (balance probe).",
+  "rarity_bonus": { "3": {}, "4": { "power": 1 }, "5": { "power": 1, "vit": 1 } },
+  "archetypes": {
+    "tank":    { "power": "str", "base": { "str": 2, "int": 1, "vit": 4, "agi": 2 }, "growth": { "str": 0.3, "int": 0.1, "vit": 0.5, "agi": 0.15 }, "armor": 1 },
+    "bruiser": { "power": "str", "base": { "str": 3, "int": 1, "vit": 3, "agi": 2 }, "growth": { "str": 0.45, "int": 0.05, "vit": 0.35, "agi": 0.2 } },
+    "striker": { "power": "str", "base": { "str": 3, "int": 1, "vit": 2, "agi": 4 }, "growth": { "str": 0.5, "int": 0.05, "vit": 0.25, "agi": 0.3 } },
+    "caster":  { "power": "int", "base": { "str": 1, "int": 3, "vit": 2, "agi": 3 }, "growth": { "str": 0.05, "int": 0.5, "vit": 0.25, "agi": 0.25 } },
+    "healer":  { "power": "int", "base": { "str": 1, "int": 3, "vit": 3, "agi": 2 }, "growth": { "str": 0.05, "int": 0.4, "vit": 0.35, "agi": 0.2 } },
+    "support": { "power": "int", "base": { "str": 1, "int": 2, "vit": 3, "agi": 3 }, "growth": { "str": 0.05, "int": 0.4, "vit": 0.3, "agi": 0.25 } },
+
+    "e_swarm":     { "power": "str", "base": { "str": 2, "int": 0, "vit": 6, "agi": 3 }, "growth": { "str": 0.3, "vit": 3.45, "agi": 0.1 } },
+    "e_flanker":   { "power": "str", "base": { "str": 1.5, "int": 0, "vit": 4, "agi": 5 }, "growth": { "str": 0.3, "vit": 2.9, "agi": 0.15 } },
+    "e_caster":    { "power": "int", "base": { "str": 0, "int": 2, "vit": 4, "agi": 3 }, "growth": { "int": 0.35, "vit": 2.45, "agi": 0.1 } },
+    "e_support":   { "power": "int", "base": { "str": 0, "int": 2, "vit": 9, "agi": 3 }, "growth": { "int": 0.3, "vit": 3.3, "agi": 0.1 }, "armor": 1 },
+    "e_bruiser":   { "power": "str", "base": { "str": 2, "int": 0, "vit": 9, "agi": 2 }, "growth": { "str": 0.35, "vit": 3.6, "agi": 0.1 }, "armor": 1 },
+    "e_vanguard":  { "power": "str", "base": { "str": 1, "int": 0, "vit": 7, "agi": 1 }, "growth": { "str": 0.25, "vit": 4.35, "agi": 0.05 }, "armor": 2 },
+    "e_elite":     { "power": "str", "base": { "str": 2, "int": 0, "vit": 10, "agi": 2 }, "growth": { "str": 0.4, "vit": 4.35, "agi": 0.1 }, "armor": 2 },
+    "e_boss":      { "power": "str", "base": { "str": 2.5, "int": 2, "vit": 31, "agi": 3 }, "growth": { "str": 0.4, "int": 0.2, "vit": 9.7, "agi": 0.1 }, "armor": 2 }
+  },
+  "units": {
+    "mahmut": "tank", "fadyme": "caster", "kera_voss": "caster", "brin_alder": "tank", "nixie_vale": "striker",
+    "sister_aveline": "healer", "sable_wren": "striker", "tilda_fen": "healer", "rikka_ember": "bruiser", "mirel_quill": "support",
+    "odelia_pike": "striker", "pippa_bell": "support", "nara_vell": "tank", "clem_marr": "support", "vespera_wisp": "caster",
+    "hana_birch": "bruiser", "thistle_roe": "healer", "iona_mist": "healer", "jori_flint": "tank", "marek_vane": "support",
+    "garrick_cinder": "bruiser", "corbin_locke": "tank", "cassian_thorne": "tank", "dorian_kesk": "caster", "rowan_reed": "healer",
+
+    "ash_wolf": "e_flanker", "bellbound_dead": "e_swarm", "bridge_revenant": "e_vanguard", "chain_cultist": "e_support",
+    "choir_knight": "e_elite", "corrupted_crown_guard": "e_elite", "corrupted_mercenary": "e_bruiser", "crownless_knight": "e_elite",
+    "eclipse_sentinel": { "archetype": "e_caster", "armor": 1 }, "estate_wraith": "e_caster", "glass_viper": "e_flanker",
+    "hollow_cleric": "e_caster", "hollow_pilgrim": "e_vanguard", "inkbound_dead": "e_caster", "lost_vow_knight": "e_elite",
+    "noble_retainer": "e_vanguard", "orchard_ghoul": "e_bruiser", "red_vial_alchemist": "e_caster", "red_vial_scout": "e_flanker",
+    "royal_hollow": { "archetype": "e_vanguard", "armor": 3 },
+
+    "boss_ash_maw": "e_boss", "boss_bell_widow": "e_boss", "boss_captain_rusk": "e_boss", "boss_red_vial_matron": "e_boss",
+    "boss_marshal_oren": "e_boss", "boss_ashen_lord_wraith": "e_boss", "boss_eclipse_construct": { "archetype": "e_boss", "armor": 3 }
+  }
+}

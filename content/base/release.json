@@ -10,6 +10,7 @@
   "compat": {
     "min_client": "0.1.2",
     "required_capabilities": [
+      "attributes_v1",
       "presentation_v1",
       "vfx_v1"
     ],
@@ -379,8 +380,8 @@
     },
     {
       "path": "units/unit_pack.json",
-      "sha256": "e619a56e854bde2e2a3be10897ae9c67fd1e7c155bce2ce73fd17c36056b9d8c",
-      "bytes": 21654,
+      "sha256": "4a1e9b139758c06277784e26b4748ff570b4ef08c6c46f4c74cb4fe4048429e2",
+      "bytes": 21910,
       "media_type": "application/json",
       "kind": "unit_pack"
     },

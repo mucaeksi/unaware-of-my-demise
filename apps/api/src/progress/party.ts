@@ -1,10 +1,10 @@
 import { BattleParty, EquipmentEffects, type Encounter, type PartyMember, type StoryLoanEquipment } from '@uomd/content-schema';
-import { finalStats, type ProgressionConfig } from '@uomd/economy';
+import { characterStats, type CharacterStatSource, type ProgressionConfig } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { computeCharacterStats } from '../gear/service';
 import { loadProgressionConfig } from '../progression/characters';
 import { loanGear } from './loan-gear';
-import { catalogCharacter, characterDefinition, type RuntimeCatalog } from '../content/runtime-catalog';
+import { CHARACTER_STAT_COLUMNS, catalogCharacter, characterDefinition, rowAttributes, type CharacterStatRow, type RuntimeCatalog } from '../content/runtime-catalog';
 
 interface TeamMember {
   characterId: string;
@@ -28,11 +28,12 @@ export async function buildParty(db: D1Database, playerId: string, encounter: En
 
   for (const id of [...new Set(encounter.guests ?? [])].filter((g) => unitIds.has(g)).slice(0, 5)) {
     const definition = catalog ? catalogCharacter(catalog, id) : undefined;
-    const ch = definition ? characterDefinition(definition) : await db
-      .prepare('SELECT base_hp, base_atk, base_def, base_spd, growth_hp, growth_atk, growth_def, growth_spd, formation_affinity, weapon_type, role FROM characters WHERE id = ?1')
+    const row = definition ? characterDefinition(definition) : await db
+      .prepare(`SELECT ${CHARACTER_STAT_COLUMNS}, formation_affinity, weapon_type, role FROM characters WHERE id = ?1`)
       .bind(id)
-      .first<{ base_hp: number; base_atk: number; base_def: number; base_spd: number; growth_hp: number; growth_atk: number; growth_def: number; growth_spd: number; formation_affinity: string | null; weapon_type: string | null; role: string }>();
-    if (!ch) continue;
+      .first<CharacterStatRow & { formation_affinity: string | null; weapon_type: string | null; role: string }>();
+    if (!row) continue;
+    const ch = 'stats' in row ? row : { ...row, stats: { attributes: rowAttributes(row) } as CharacterStatSource };
     const affinity = ch.formation_affinity === 'front' || ch.formation_affinity === 'rear' ? ch.formation_affinity : null;
     const owned = await db.prepare("SELECT 1 FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2").bind(playerId, id).first();
     if (owned) {
@@ -41,7 +42,7 @@ export async function buildParty(db: D1Database, playerId: string, encounter: En
     }
     // Older releases without a declared template retain their original gearless loan contract.
     const gear = template ? await loanGear(db, id, ch.weapon_type, ch.role, encounter.stage_id, cfg, template, catalog) : { flat: {}, pct: {}, other: {} };
-    const stats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, stageLevel, gear);
+    const { attributes: _shown, ...stats } = characterStats(ch.stats, stageLevel, gear);
     members.push({ unit_id: id, level: stageLevel, stats, ...equipmentEffects(gear.other), loan: true, affinity });
   }
 

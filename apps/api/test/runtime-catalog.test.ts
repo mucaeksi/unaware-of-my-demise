@@ -33,7 +33,7 @@ beforeAll(async () => {
     for (let i = 0; i < statements.length; i += 50) await db.batch(statements.slice(i, i + 50).map((s) => db.prepare(s)));
   }
   for (const [table, key, columns] of [
-    ['characters', 'id', ['base_hp', 'growth_hp', 'role', 'status']],
+    ['characters', 'id', ['base_vit', 'growth_vit', 'role', 'status']],
     ['gear_defs', 'gear_id', ['base_json', 'growth_json', 'extra_json', 'status']],
     ['accessory_sets', 'set_id', ['bonus_json']], ['game_config', 'key', ['value_json']], ['item_defs', 'item_id', ['stack_cap', 'status']]
   ] as [string, string, string[]][]) restoreRows.push({ table, key, columns, rows: (await db.prepare(`SELECT ${[key, ...columns].join(', ')} FROM ${table}`).all<Record<string, string | number | null>>()).results });
@@ -82,7 +82,7 @@ it('freezes owned stats, equipped definitions and story loans from the selected 
   await db.prepare("INSERT INTO player_gear (player_id, gear_id, slot, equipped_by) VALUES (?1, 'armor_padded_3_01', 'armor', 'mahmut')").bind(playerId).run();
   const original = await begin(playerId);
   await db.batch([
-    db.prepare("UPDATE characters SET base_hp = 9999, growth_hp = 9999, role = 'other'"),
+    db.prepare("UPDATE characters SET base_vit = 999, growth_vit = 99, role = 'other'"),
     db.prepare("UPDATE gear_defs SET base_json = '{}', growth_json = '{}', extra_json = '{}'"),
     db.prepare("UPDATE accessory_sets SET bonus_json = '{\"stat\":\"atk_pct\",\"pct\":4}'"),
     db.prepare("UPDATE game_config SET value_json = '{}' WHERE key IN ('progression','gear')")
@@ -134,7 +134,7 @@ it('retains explicit catalog-free legacy loading', async () => {
 
 it('does not grant live-only definitions or silently ignore an undeclared drop table', async () => {
   await admitFixture(); const { playerId } = await player(); const runtime = (await loadReleaseCatalog(baseEnv, releaseId))!;
-  await db.prepare("INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES ('live_only_probe','Probe',4,'Stone','tank',20,'gacha',10,2,2,4)").run();
+  await db.prepare("INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES ('live_only_probe','Probe',4,'Stone','tank',20,'gacha',10,2,2,4)").run();
   try {
     await expect(grantStatements(db, playerId, [{ type: 'character', itemId: 'live_only_probe' }], { keyPrefix: 'probe', reason: 'test', catalog: runtime })).rejects.toMatchObject({ code: 'unknown_item' });
     for (const table of ['undeclared_probe', 'constructor']) await expect(rollNodeDrops(db, { table }, true, true, runtime)).rejects.toMatchObject({ code: 'release_catalog_invalid' });
@@ -239,7 +239,7 @@ it.each(['declared_size', 'object_size', 'byte_budget'] as const)('rejects catal
 it.each(['owned', 'loan'] as const)('preserves live role priority after canonical export for %s equipment', async (kind) => {
   await admitFixture(); const { playerId } = await player(); const runtime = (await loadReleaseCatalog(baseEnv, releaseId))!;
   const character = catalog.characters.find((c) => c.id === 'nara_vell')!;
-  expect(runtime.data.config.gear.roleStatOrder).toEqual(['tank', 'healer', 'support']);
+  expect(runtime.data.config.gear.roleStatOrder).toEqual(['tank', 'guard', 'vanguard', 'templar', 'healer']);
   if (kind === 'loan') {
     const template = { ...pack.rules.story_loan_equipment!, rarity: 4, armor_id: 'armor_padded_4_01' };
     const legacy = await loanGear(db, character.id, character.weapon_type, character.role, 'priority_probe', catalog.config.progression, template);

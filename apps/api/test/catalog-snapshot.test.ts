@@ -66,7 +66,7 @@ it('keeps a staged catalog immutable and private, then publishes it with a signe
   await baseEnv.DB.prepare("UPDATE characters SET name_en = 'Later edit' WHERE id = 'mahmut'").run();
   expect(await store.effectiveBytes('rel_catalog_stage', CATALOG_PATH)).toEqual(bytes);
   expect((await game(`/api/v1/content/objects/${snapshot.sha256}`)).status).toBe(404);
-  expect(JSON.parse(before!.manifest_json).compat).toMatchObject({ min_client: '0.1.2', required_capabilities: ['catalog_v1', 'presentation_v1', 'vfx_v1'] });
+  expect(JSON.parse(before!.manifest_json).compat).toMatchObject({ min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'vfx_v1'] });
   const published = await post('/admin/api/releases/rel_catalog_stage/publish', {});
   expect(published.status).toBe(200);
   const after = await store.getRelease('rel_catalog_stage');
@@ -105,7 +105,8 @@ const invalidCatalogs: [string, (c: EconomyCatalog) => void][] = [
   ['drop pool', (c) => { c.config.drops.tables.bad_table = { repeat: [{ kind: 'gear_pool', slot: 'weapon', rarities: [1], chance: 1 }], firstClear: [] }; }],
   ['drop item', (c) => { c.config.drops.tables.bad_table = { repeat: [{ kind: 'item', itemId: 'missing_item', min: 1, max: 1, chance: 1 }], firstClear: [] }; }],
   ['reroll item', (c) => { c.config.gear.rerollCost.itemId = 'missing_item'; }],
-  ['missing role priority', (c) => { delete c.config.gear.roleStatOrder; }],
+  // healer_support then matches two role keys with different stats
+  ['missing role priority', (c) => { delete c.config.gear.roleStatOrder; (c.config.gear.roleStat as Record<string, string>).support = 'agi_flat'; }],
   ['duplicate role priority', (c) => { c.config.gear.roleStatOrder!.push(c.config.gear.roleStatOrder![0]!); }],
   ['unknown role priority', (c) => { c.config.gear.roleStatOrder!.push('unknown_role'); }],
   ['omitted role priority', (c) => { c.config.gear.roleStatOrder!.pop(); }],
@@ -124,7 +125,7 @@ it.each(invalidCatalogs)('rejects catalog %s', (_name, mutate) => {
 it.each(['reward', 'drop', 'prototype drop', 'boss set', 'gate', 'stats', 'skill', 'selector', 'loan'] as const)('rejects a dangling %s against the exact release before draft writes', async (kind) => {
   const set = new Map(files.map((f) => [f.path, f.bytes])); const candidate = structuredClone(catalog);
   if (kind === 'gate') candidate.config.progression.character.ascension[1]!.requiresNode = 'unknown_node';
-  else if (kind === 'stats') candidate.characters[0]!.base.hp += 1;
+  else if (kind === 'stats') candidate.characters[0]!.attributes!.base.vit += 1;
   else if (kind === 'skill') candidate.skills[0]!.skill_id += '_changed';
   else if (kind === 'selector') candidate.items.find((i) => i.item_id === 'first_oath_invitation')!.consumable = false;
   else if (kind === 'loan') candidate.gear.find((g) => g.gear_id === 'armor_padded_3_01')!.status = 'retired';
@@ -163,7 +164,7 @@ it('republishes a catalog rollback with a higher generation and the required bin
   const response = await post('/admin/api/channels/dev/rollback', { releaseId: 'rel_catalog_history' });
   expect(response.status).toBe(200);
   const served = await game('/api/v1/content/channels/dev/manifest');
-  expect(await served.json()).toMatchObject({ compat: { min_client: '0.1.2', required_capabilities: ['catalog_v1', 'presentation_v1', 'vfx_v1'] }, release: { generation: 2 } });
+  expect(await served.json()).toMatchObject({ compat: { min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'vfx_v1'] }, release: { generation: 2 } });
   expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM content_releases').first()).toEqual({ n: 2 });
 });
 

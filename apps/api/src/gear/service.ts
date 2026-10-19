@@ -1,6 +1,6 @@
 import { canonicalJson } from '@uomd/shared';
 import { z } from 'zod';
-import { aggregateGear, equipmentLevelFee, equipmentXpToNext, finalStats, gearLevelCap, rerollAccessory, type AccessoryDef, type AccessoryStats, type GearPiece, type ProgressionConfig } from '@uomd/economy';
+import { aggregateGear, characterStats as statsFor, resonancePoints, equipmentLevelFee, equipmentXpToNext, gearLevelCap, type AttributeValues, type CharacterStatSource, type CombatStats, rerollAccessory, type AccessoryDef, type AccessoryStats, type GearPiece, type ProgressionConfig } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { stackAdd, stackSpend } from '../db/grants';
 import { balanceOf, ledgerStatements } from '../db/ledger';
@@ -8,7 +8,7 @@ import { cryptoRoll } from '../db/rng';
 import { loadProgressionConfig } from '../progression/characters';
 import { taskEventStatements } from '../tasks/service';
 import { gearPassive, requireSupportedGearPassive } from './effects';
-import { catalogCharacter, characterDefinition, catalogGear, gearDefinition, catalogRoleStat, operationCatalog, type RuntimeCatalog, type ReleaseScope } from '../content/runtime-catalog';
+import { CHARACTER_STAT_COLUMNS, catalogCharacter, characterDefinition, rowAttributes, type CharacterStatRow, catalogGear, gearDefinition, catalogRoleStat, operationCatalog, type RuntimeCatalog, type ReleaseScope } from '../content/runtime-catalog';
 
 import { economicStatement, requireEconomic } from '../content/authority';
 import { identityStatement } from '../db/identities';
@@ -304,15 +304,16 @@ export function rerollGear(db: D1Database, playerId: string, id: number, input: 
 }
 
 /** Final combat stats of an owned character: level growth + equipped gear + set bonuses. This is what a server-verified party will use. */
-export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig, catalog?: RuntimeCatalog): Promise<{ characterId: string; level: number; stats: { hp: number; atk: number; def: number; spd: number }; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[]; unsupportedPassives: string[] }> {
+export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig, catalog?: RuntimeCatalog): Promise<{ characterId: string; level: number; stats: CombatStats; attributes?: AttributeValues; power?: 'str' | 'int'; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[]; unsupportedPassives: string[] }> {
   cfg = catalog?.data.config.progression ?? cfg ?? await loadProgressionConfig(db);
   const definition = catalog ? catalogCharacter(catalog, characterId) : undefined;
   if (catalog && !await db.prepare("SELECT 1 FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2").bind(playerId, characterId).first()) throw new HttpError(404, 'not_owned', 'you do not own this character');
-  const ch = definition ? characterDefinition(definition) : await db
-    .prepare("SELECT c.base_hp, c.base_atk, c.base_def, c.base_spd, c.growth_hp, c.growth_atk, c.growth_def, c.growth_spd, c.role FROM player_items i JOIN characters c ON c.id = i.item_id WHERE i.player_id = ?1 AND i.item_type = 'character' AND i.item_id = ?2")
+  const row = definition ? characterDefinition(definition) : await db
+    .prepare(`SELECT ${CHARACTER_STAT_COLUMNS.split(', ').map((c) => `c.${c}`).join(', ')}, c.role FROM player_items i JOIN characters c ON c.id = i.item_id WHERE i.player_id = ?1 AND i.item_type = 'character' AND i.item_id = ?2`)
     .bind(playerId, characterId)
-    .first<{ base_hp: number; base_atk: number; base_def: number; base_spd: number; growth_hp: number; growth_atk: number; growth_def: number; growth_spd: number; role: string }>();
-  if (!ch) throw new HttpError(404, 'not_owned', 'you do not own this character');
+    .first<CharacterStatRow & { role: string }>();
+  if (!row) throw new HttpError(404, 'not_owned', 'you do not own this character');
+  const ch = 'stats' in row ? row : { role: row.role, stats: { attributes: rowAttributes(row) } as CharacterStatSource };
   const st = await db.prepare('SELECT level FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, characterId).first<{ level: number }>();
   const level = st?.level ?? 1;
   const results = catalog
@@ -338,14 +339,15 @@ export async function computeCharacterStats(db: D1Database, playerId: string, ch
     ...(g.slot === 'necklace' || g.slot === 'ring' ? { rolled: JSON.parse(g.stats_json) as AccessoryStats } : {})
   }));
   const gear = aggregateGear(cfg, pieces, roleStat, sets);
-  const baseStats = finalStats({ hp: ch.base_hp, atk: ch.base_atk, def: ch.base_def, spd: ch.base_spd }, { hp: ch.growth_hp, atk: ch.growth_atk, def: ch.growth_def, spd: ch.growth_spd }, level, gear);
   const resRow = await db
     .prepare("SELECT progress FROM player_tasks WHERE player_id = ?1 AND period_key = 'shard:resonance' AND task_id = ?2")
     .bind(playerId, characterId)
     .first<{ progress: number }>();
   const resonanceTier = Math.max(0, Math.min(6, resRow?.progress ?? 0));
-  const stats =
-    resonanceTier > 0
+  // D-27: resonance tiers are whole attribute points; legacy catalogs keep the +1% per tier multiplier
+  const { attributes, ...baseStats } = statsFor(ch.stats, level, gear, resonancePoints(resonanceTier));
+  const stats: CombatStats =
+    resonanceTier > 0 && !attributes
       ? {
           hp: Math.ceil(baseStats.hp * (1 + resonanceTier * 0.01)),
           atk: Math.ceil(baseStats.atk * (1 + resonanceTier * 0.01)),
@@ -357,6 +359,7 @@ export async function computeCharacterStats(db: D1Database, playerId: string, ch
     characterId,
     level,
     stats,
+    ...(attributes ? { attributes, power: ch.stats.attributes!.power } : {}),
     ...(resonanceTier > 0 ? { resonanceTier } : {}),
     other: gear.other,
     equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })),

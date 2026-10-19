@@ -1,4 +1,5 @@
 import { CATALOG_PATH, ContentManifest, EconomyCatalog, MAX_CATALOG_BYTES } from '@uomd/content-schema';
+import type { AttributeBlock, CharacterStatSource } from '@uomd/economy';
 import { sha256Hex } from '@uomd/shared';
 import type { GameEnv } from '../env';
 import { ContentStore, HttpError } from './store';
@@ -51,9 +52,26 @@ export function catalogRoleStat(catalog: RuntimeCatalog, role: string): string {
   return (key ? roleStat[key] : roleStat.default)!;
 }
 
-export function characterDefinition(row: EconomyCatalog['characters'][number]) {
-  return { ...row, base_hp: row.base.hp, base_atk: row.base.atk, base_def: row.base.def, base_spd: row.base.spd,
-    growth_hp: row.growth.hp, growth_atk: row.growth.atk, growth_def: row.growth.def, growth_spd: row.growth.spd };
+/** A release's character row with its stat source: attributes (D-27) or the legacy base + growth of older catalogs. */
+export function characterDefinition(row: EconomyCatalog['characters'][number]): EconomyCatalog['characters'][number] & { stats: CharacterStatSource } {
+  return { ...row, stats: row.attributes ? { attributes: row.attributes } : { base: row.base!, growth: row.growth! } };
+}
+
+/** D1 `characters` attribute columns (migration 0029) as selected by CHARACTER_STAT_COLUMNS */
+export const CHARACTER_STAT_COLUMNS = 'power_stat, base_str, base_int, base_vit, base_agi, growth_str, growth_int, growth_vit, growth_agi, armor';
+export interface CharacterStatRow { power_stat: string; base_str: number; base_int: number; base_vit: number; base_agi: number; growth_str: number; growth_int: number; growth_vit: number; growth_agi: number; armor: number }
+/** a selected D1 row with its attribute columns folded into `attributes` */
+export function withAttributes<T extends CharacterStatRow>(row: T): Omit<T, keyof CharacterStatRow> & { attributes: AttributeBlock } {
+  const { power_stat: _p, base_str: _s, base_int: _i, base_vit: _v, base_agi: _a, growth_str: _gs, growth_int: _gi, growth_vit: _gv, growth_agi: _ga, armor: _ar, ...rest } = row;
+  return { ...rest, attributes: rowAttributes(row) };
+}
+export function rowAttributes(r: CharacterStatRow): AttributeBlock {
+  return {
+    power: r.power_stat === 'int' ? 'int' : 'str',
+    base: { str: r.base_str, int: r.base_int, vit: r.base_vit, agi: r.base_agi },
+    growth: { str: r.growth_str, int: r.growth_int, vit: r.growth_vit, agi: r.growth_agi },
+    ...(r.armor ? { armor: r.armor } : {})
+  };
 }
 
 /** Existing gear math consumes these columns; only player instance fields continue to come from D1. */

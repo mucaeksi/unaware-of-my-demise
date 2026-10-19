@@ -35,7 +35,7 @@ describe('effect_res & element_res', () => {
     base.advance();
     const baseStep = base.act({ skillId: 'fadyme_active_borrowed_hour', targetId: E0 });
     const baseDmg = events(baseStep.events, 'damage').find((d) => d.source === FADYME)?.amount ?? 0;
-    expect(baseDmg).toBe(4); // floor(3 * 1.6 * 0.9 = 4.32)
+    expect(baseDmg).toBe(5); // floor(4 * 1.6 * 0.9 = 5.76)
 
     const resistPack = patchUnit(noCrit(basePack()), 'bellbound_dead', (u) => ({
       ...u,
@@ -45,7 +45,7 @@ describe('effect_res & element_res', () => {
     resisted.advance();
     const resStep = resisted.act({ skillId: 'fadyme_active_borrowed_hour', targetId: E0 });
     const resDmg = events(resStep.events, 'damage').find((d) => d.source === FADYME)?.amount ?? 0;
-    expect(resDmg).toBe(2); // floor(4.32 * 0.5 = 2.16)
+    expect(resDmg).toBe(2); // floor(5.76 * 0.5 = 2.88)
   });
 
   it('supports equipment_effects.effect_res_pct and modify_stat effect_res on party members', () => {

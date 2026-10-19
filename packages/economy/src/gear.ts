@@ -35,7 +35,12 @@ function pickWeighted(pool: StatPoolEntry[], roll: Roll): StatPoolEntry {
   }
   return pool[pool.length - 1] as StatPoolEntry;
 }
-const value = (e: StatPoolEntry, roll: Roll): number => round3(e.min_value + roll() * (e.max_value - e.min_value));
+/** attribute, power and armor points with whole-number bounds roll whole numbers (D-27); everything else rolls inside its range */
+const WHOLE = /^(str|int|vit|agi|power|def)_flat$/;
+const value = (e: StatPoolEntry, roll: Roll): number =>
+  WHOLE.test(e.stat_id) && Number.isInteger(e.min_value) && Number.isInteger(e.max_value)
+    ? Math.min(e.max_value, e.min_value + Math.floor(roll() * (e.max_value - e.min_value + 1)))
+    : round3(e.min_value + roll() * (e.max_value - e.min_value));
 
 export function rollSubstats(def: AccessoryDef, mainStat: string, roll: Roll): RolledStat[] {
   const count = def.profile?.substat_count ?? 2;
@@ -57,21 +62,21 @@ export function rollAccessory(def: AccessoryDef, roll: Roll): AccessoryStats {
 /** Reroll keeps the main stat (and set, slot, rarity) and replaces only the sub stats. */
 export const rerollAccessory = (def: AccessoryDef, current: AccessoryStats, roll: Roll): AccessoryStats => ({ main: current.main, subs: rollSubstats(def, current.main.stat, roll) });
 
-const BASE = ['hp', 'atk', 'def', 'spd'] as const;
+/** weapon / armor base keys that scale with the item level */
+const BASE = ['hp', 'atk', 'def', 'spd', 'str', 'int', 'vit', 'agi', 'power'] as const;
 type Base = (typeof BASE)[number];
 
 export function emptyGearStats(): GearStats {
   return { flat: {}, pct: {}, other: {} };
 }
 
-/** adds one stat id such as hp_pct / atk_flat / effect_res_pct into a GearStats block */
+/** adds one stat id such as vit_flat / hp_pct / atk_flat / effect_res_pct into a GearStats block (attribute points are flat only) */
 export function addStat(g: GearStats, statId: string, v: number): void {
-  const m = /^(hp|atk|def|spd)_(pct|flat)$/.exec(statId);
-  if (m) {
-    const k = m[1] as Base;
-    const target = m[2] === 'pct' ? g.pct : g.flat;
-    target[k] = (target[k] ?? 0) + v;
-  } else g.other[statId] = (g.other[statId] ?? 0) + v;
+  const flat = /^(hp|atk|def|spd|str|int|vit|agi|power)_flat$/.exec(statId);
+  const pct = /^(hp|atk|def|spd)_pct$/.exec(statId);
+  if (flat) g.flat[flat[1] as Base] = (g.flat[flat[1] as Base] ?? 0) + v;
+  else if (pct) g.pct[pct[1] as 'hp'] = (g.pct[pct[1] as 'hp'] ?? 0) + v;
+  else g.other[statId] = (g.other[statId] ?? 0) + v;
 }
 
 export interface GearPiece {

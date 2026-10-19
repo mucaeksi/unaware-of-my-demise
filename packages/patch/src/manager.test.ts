@@ -87,11 +87,14 @@ async function objectsOf(files: { path: string; bytes: Uint8Array }[]): Promise<
 
 const env = (over: Partial<PatchEnv> = {}): PatchEnv => ({
   channel: 'staging',
-  clientVersion: '0.1.0',
+  // a capability-requiring release (the campaign's D-27 units) floors min_client at MIN_EFFECTIVE_CLIENT_VERSION
+  clientVersion: '0.1.2',
   supportedContentSchema: 1,
   trustedKeys: [publicJwk],
   installId: 'install-a',
   storageBudgetBytes: 50 * 1024 * 1024,
+  // the campaign patch's units are D-27 attribute units
+  supportedCapabilities: ['attributes_v1'],
   validate: () => undefined,
   sleep: async () => undefined,
   ...over
@@ -125,7 +128,7 @@ describe('PatchManager', () => {
     const manifest = await signedPatch({ dependsOn: undefined }, files);
     const storage = new MemoryStorage();
     const remote = new FakeRemote(manifest, await objectsOf(files));
-    const pm = new PatchManager(env({ clientVersion: '0.1.2', supportedCapabilities: ['presentation_v1', 'vfx_v1'] }), storage, remote, base);
+    const pm = new PatchManager(env({ clientVersion: '0.1.2', supportedCapabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'] }), storage, remote, base);
     expect((await pm.checkAndApply()).status).toBe('applied');
     const path = 'audio/bgm_ch1_ash_forest_calm.ogg';
     expect(remote.fetched).not.toContain(path);

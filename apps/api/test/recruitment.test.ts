@@ -17,11 +17,11 @@ beforeAll(async () => {
   await seedCanonCatalog(); files = await campaignFiles(); pack = UnitPack.parse(read('units/unit_pack.json')); index = ChapterIndex.parse(read('chapters/chapter_index.json'));
   // This chapter check uses real canonical stats, not helpers.ts's generic ten-HP catalog.
   for (const character of canonicalCharacters.characters) {
-    const base = character.base_stats_level_1; const growth = character.growth_per_level;
-    await db.prepare(`UPDATE characters SET name_en = ?2, element = ?3, role = ?4, formation_affinity = ?5,
-      base_hp = ?6, base_atk = ?7, base_def = ?8, base_spd = ?9, growth_hp = ?10, growth_atk = ?11, growth_def = ?12, growth_spd = ?13 WHERE id = ?1`)
-      .bind(character.character_id, character.name_en, character.element, character.combat_role, character.formation_affinity,
-        base.hp, base.atk, base.def, base.spd, growth.hp, growth.atk, growth.def, growth.spd).run();
+    const a = pack.units.find((u) => u.unit_id === character.character_id)!.attributes!; const g = a.growth ?? {};
+    await db.prepare(`UPDATE characters SET name_en = ?2, element = ?3, role = ?4, formation_affinity = ?5, power_stat = ?6,
+      base_str = ?7, base_int = ?8, base_vit = ?9, base_agi = ?10, growth_str = ?11, growth_int = ?12, growth_vit = ?13, growth_agi = ?14, armor = ?15 WHERE id = ?1`)
+      .bind(character.character_id, character.name_en, character.element, character.combat_role, character.formation_affinity, a.power,
+        a.base.str, a.base.int, a.base.vit, a.base.agi, g.str ?? 0, g.int ?? 0, g.vit ?? 0, g.agi ?? 0, a.armor ?? 0).run();
   }
 });
 beforeEach(async () => {

@@ -10,17 +10,21 @@
       "role": "tank_bruiser",
       "rarity": 5,
       "formation_affinity": "front",
-      "base_stats": {
-        "hp": 14,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.7,
-        "atk": 0.12,
-        "def": 0.1,
-        "spd": 0.16
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 3,
+          "int": 1,
+          "vit": 5,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.3,
+          "int": 0.1,
+          "vit": 0.5,
+          "agi": 0.15
+        },
+        "armor": 1
       },
       "skills": [
         {
@@ -174,17 +178,20 @@
       "role": "support_dps",
       "rarity": 5,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 11,
-        "atk": 3,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.55,
-        "atk": 0.18,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 3,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.5,
+          "vit": 0.25,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -337,17 +344,19 @@
       "name_en": "Bellbound Dead",
       "element": "Veil",
       "role": "swarm",
-      "base_stats": {
-        "hp": 5,
-        "atk": 1,
-        "def": 0,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.05,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 6,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.3,
+          "vit": 3.45,
+          "agi": 0.1
+        }
       },
       "weaknesses": [
         "Dawn",
@@ -417,17 +426,20 @@
       "name_en": "Hollow Pilgrim",
       "element": "Veil",
       "role": "slow_vanguard",
-      "base_stats": {
-        "hp": 8,
-        "atk": 1,
-        "def": 2,
-        "spd": 3
-      },
-      "growth_per_level": {
-        "hp": 0.4,
-        "atk": 0.05,
-        "def": 0.1,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1,
+          "int": 0,
+          "vit": 7,
+          "agi": 1
+        },
+        "growth": {
+          "str": 0.25,
+          "vit": 4.35,
+          "agi": 0.05
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Dawn",

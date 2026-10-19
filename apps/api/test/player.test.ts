@@ -6,8 +6,8 @@ const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 
 async function seedFreeStart(): Promise<void> {
   await db().batch([
-    db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES ('mahmut','Mahmut',5,'Stone','tank',28,'free_start',14,2,2,4)"),
-    db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES ('fadyme','Fadyme',5,'Veil','support',22,'free_start',11,3,1,5)")
+    db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES ('mahmut','Mahmut',5,'Stone','tank',28,'free_start',14,2,2,4)"),
+    db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES ('fadyme','Fadyme',5,'Veil','support',22,'free_start',11,3,1,5)")
   ]);
 }
 

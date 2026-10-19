@@ -80,10 +80,7 @@ export function Characters({ me, say }: { me: Me; say: (m: string) => void }): R
           role: String(f.get('role')),
           age: num('age'),
           acquisition: String(f.get('acquisition')),
-          base_hp: num('base_hp'),
-          base_atk: num('base_atk'),
-          base_def: num('base_def'),
-          base_spd: num('base_spd')
+          ...attributeBody(f)
         })
       });
       say(`${edit.name_en} saved`);
@@ -115,10 +112,7 @@ export function Characters({ me, say }: { me: Me; say: (m: string) => void }): R
           role: String(f.get('role')).trim(),
           age: num('age'),
           acquisition: String(f.get('acquisition')).trim(),
-          base_hp: num('base_hp'),
-          base_atk: num('base_atk'),
-          base_def: num('base_def'),
-          base_spd: num('base_spd'),
+          ...attributeBody(f),
           status: String(f.get('status'))
         })
       });
@@ -157,12 +151,12 @@ export function Characters({ me, say }: { me: Me; say: (m: string) => void }): R
         </select>
       </div>
       <table>
-        <thead><tr><th>ID</th><th>Name</th><th>★</th><th>Element</th><th>Role</th><th>HP</th><th>ATK</th><th>DEF</th><th>SPD</th><th>Status</th><th>v</th><th /></tr></thead>
+        <thead><tr><th>ID</th><th>Name</th><th>★</th><th>Element</th><th>Role</th><th>Power</th><th>STR</th><th>INT</th><th>VIT</th><th>AGI</th><th>Status</th><th>v</th><th /></tr></thead>
         <tbody>
           {rows.map((c) => (
             <tr key={c.id}>
               <td><code>{c.id}</code></td><td>{c.name_en}</td><td>{c.rarity}</td><td>{c.element}</td><td>{c.role}</td>
-              <td>{c.base_hp}</td><td>{c.base_atk}</td><td>{c.base_def}</td><td>{c.base_spd}</td>
+              <td>{c.power_stat.toUpperCase()}</td><td>{c.base_str}</td><td>{c.base_int}</td><td>{c.base_vit}</td><td>{c.base_agi}</td>
               <td><span className={`badge ${c.status === 'active' ? 'ok' : 'warn'}`}>{c.status}</span></td><td>{c.version}</td>
               <td className="row">
                 <button className="btn" type="button" onClick={() => inspect(c.id)}>Inspect</button>
@@ -216,12 +210,7 @@ export function Characters({ me, say }: { me: Me; say: (m: string) => void }): R
               <label>Age<input name="age" type="number" min="0" max="9999" defaultValue={edit.age} required /></label>
               <label>Acquisition<input name="acquisition" defaultValue={edit.acquisition} required maxLength={40} /></label>
             </div>
-            <div className="row">
-              <label>HP<input name="base_hp" type="number" step="0.01" min="0.01" defaultValue={edit.base_hp} required /></label>
-              <label>ATK<input name="base_atk" type="number" step="0.01" min="0" defaultValue={edit.base_atk} required /></label>
-              <label>DEF<input name="base_def" type="number" step="0.01" min="0" defaultValue={edit.base_def} required /></label>
-              <label>SPD<input name="base_spd" type="number" step="0.01" min="0.01" defaultValue={edit.base_spd} required /></label>
-            </div>
+            <AttributeInputs c={edit} />
             <div className="row"><button className="btn primary" type="submit">Save</button><button className="btn" type="button" onClick={() => setEdit(null)}>Cancel</button></div>
           </form>
         ) : null}
@@ -244,12 +233,7 @@ export function Characters({ me, say }: { me: Me; say: (m: string) => void }): R
               <label>Age<input name="age" type="number" min="0" max="9999" defaultValue="22" required /></label>
               <label>Acquisition<input name="acquisition" defaultValue="gacha" required maxLength={40} /></label>
             </div>
-            <div className="row">
-              <label>HP<input name="base_hp" type="number" step="0.01" min="0.01" defaultValue="14" required /></label>
-              <label>ATK<input name="base_atk" type="number" step="0.01" min="0" defaultValue="4" required /></label>
-              <label>DEF<input name="base_def" type="number" step="0.01" min="0" defaultValue="2" required /></label>
-              <label>SPD<input name="base_spd" type="number" step="0.01" min="0.01" defaultValue="5" required /></label>
-            </div>
+            <AttributeInputs c={NEW_ATTRIBUTES} />
             <div className="row">
               <button className="btn primary" type="submit">Create character</button>
               <button className="btn" type="button" onClick={() => setCreating(false)}>Cancel</button>
@@ -257,6 +241,39 @@ export function Characters({ me, say }: { me: Me; say: (m: string) => void }): R
           </form>
         ) : null}
       </dialog>
+    </>
+  );
+}
+
+type AttributeFields = Pick<Character, 'power_stat' | 'base_str' | 'base_int' | 'base_vit' | 'base_agi' | 'growth_str' | 'growth_int' | 'growth_vit' | 'growth_agi' | 'armor'>;
+const ATTRS = ['str', 'int', 'vit', 'agi'] as const;
+/** a caster-shaped starting point (docs/combat/STAT_MATH.md archetypes) */
+const NEW_ATTRIBUTES: AttributeFields = { power_stat: 'int', base_str: 1, base_int: 3, base_vit: 2, base_agi: 3, growth_str: 0.05, growth_int: 0.5, growth_vit: 0.25, growth_agi: 0.25, armor: 0 };
+
+function attributeBody(f: FormData): AttributeFields {
+  const num = (k: string): number => Number(f.get(k));
+  return {
+    power_stat: f.get('power_stat') === 'str' ? 'str' : 'int',
+    base_str: num('base_str'), base_int: num('base_int'), base_vit: num('base_vit'), base_agi: num('base_agi'),
+    growth_str: num('growth_str'), growth_int: num('growth_int'), growth_vit: num('growth_vit'), growth_agi: num('growth_agi'),
+    armor: num('armor')
+  };
+}
+
+/** STR / INT / VIT / AGI at level 1 and per level; HP = 4 + 3 x VIT, ATK = the power attribute, DEF = armor, SPD = AGI */
+function AttributeInputs({ c }: { c: AttributeFields }) {
+  return (
+    <>
+      <div className="row">
+        <label>Power<select name="power_stat" defaultValue={c.power_stat}><option value="str">STR</option><option value="int">INT</option></select></label>
+        <label>Natural armor<input name="armor" type="number" step="1" min="0" max="100" defaultValue={c.armor} required /></label>
+      </div>
+      <div className="row">
+        {ATTRS.map((k) => <label key={k}>{k.toUpperCase()}<input name={`base_${k}`} type="number" step="0.5" min={k === 'vit' || k === 'agi' ? 1 : 0} max="1000" defaultValue={c[`base_${k}`]} required /></label>)}
+      </div>
+      <div className="row">
+        {ATTRS.map((k) => <label key={k}>{k.toUpperCase()} / level<input name={`growth_${k}`} type="number" step="0.05" min="0" max="100" defaultValue={c[`growth_${k}`]} required /></label>)}
+      </div>
     </>
   );
 }

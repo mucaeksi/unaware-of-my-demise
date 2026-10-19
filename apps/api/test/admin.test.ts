@@ -8,7 +8,7 @@ beforeEach(async () => {
   await baseEnv.DB.batch([
     baseEnv.DB.prepare("DELETE FROM admin_users WHERE email <> 'x'"),
     baseEnv.DB.prepare("DELETE FROM characters"),
-    baseEnv.DB.prepare("INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES ('fadyme','Fadyme',5,'Veil','support_dps',22,'free_start',11,3,1,5)")
+    baseEnv.DB.prepare("INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES ('fadyme','Fadyme',5,'Veil','support_dps',22,'free_start',11,3,1,5)")
   ]);
 });
 
@@ -92,20 +92,20 @@ describe('role based access', () => {
 
 describe('character management', () => {
   it('uses optimistic concurrency and writes an audit entry per change', async () => {
-    const ok = await admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json({ expectedVersion: 1, base_hp: 12, status: 'active' }) });
+    const ok = await admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json({ expectedVersion: 1, base_vit: 12, status: 'active' }) });
     expect(ok.status).toBe(200);
-    expect(await ok.json()).toMatchObject({ base_hp: 12, version: 2, updated_by: 'owner@example.com' });
-    const stale = await admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json({ expectedVersion: 1, base_hp: 99 }) });
+    expect(await ok.json()).toMatchObject({ base_vit: 12, version: 2, updated_by: 'owner@example.com' });
+    const stale = await admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json({ expectedVersion: 1, base_vit: 99 }) });
     expect(stale.status).toBe(409);
     expect((await stale.json<{ error: string }>()).error).toBe('version_conflict');
-    expect((await admin('/admin/api/characters/nobody', { method: 'PATCH', ...json({ expectedVersion: 1, base_hp: 5 }) })).status).toBe(404);
+    expect((await admin('/admin/api/characters/nobody', { method: 'PATCH', ...json({ expectedVersion: 1, base_vit: 5 }) })).status).toBe(404);
     const log = await baseEnv.DB.prepare("SELECT actor, detail FROM audit_log WHERE action = 'character.update' ORDER BY id DESC LIMIT 1").first<{ actor: string; detail: string }>();
     expect(log?.actor).toBe('owner@example.com');
-    expect(JSON.parse(log?.detail ?? '{}')).toMatchObject({ fields: { base_hp: 12 } });
+    expect(JSON.parse(log?.detail ?? '{}')).toMatchObject({ fields: { base_vit: 12 } });
   });
 
   it('validates input strictly (unknown fields, ranges, injection attempts)', async () => {
-    for (const body of [{ expectedVersion: 1, rarity: 9 }, { expectedVersion: 1, base_hp: -1 }, { expectedVersion: 1, hacked: true }, { expectedVersion: 1 }, { expectedVersion: 1, status: "active'; DROP TABLE characters;--" }]) {
+    for (const body of [{ expectedVersion: 1, rarity: 9 }, { expectedVersion: 1, base_vit: -1 }, { expectedVersion: 1, hacked: true }, { expectedVersion: 1 }, { expectedVersion: 1, status: "active'; DROP TABLE characters;--" }]) {
       expect((await admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json(body) })).status).toBe(400);
     }
     expect((await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM characters').first<{ n: number }>())?.n).toBe(1);
@@ -137,14 +137,14 @@ describe('asset catalog, system status, audit trail', () => {
     const s = (await res.json()) as { d1: { ok: boolean; counts: Record<string, number>; migrations: { name: string }[] }; r2: { ok: boolean }; limits: { d1_rows_read_per_day: number }; auth: { access_configured: boolean } };
     expect(s.d1.ok).toBe(true);
     expect(s.d1.counts.characters).toBe(1);
-    expect(s.d1.migrations.map((m) => m.name)).toEqual(['0001_core.sql', '0002_economy_ledger.sql', '0003_player_core.sql', '0004_mail.sql', '0005_progress.sql', '0006_ads.sql', '0007_billing.sql', '0008_flags.sql', '0009_single_currency.sql', '0010_dev_notes.sql', '0011_currency_name.sql', '0012_catalog.sql', '0013_player_progression.sql', '0014_tasks.sql', '0015_teams.sql', '0016_ops.sql', '0017_battle_sessions.sql', '0018_monitoring.sql', '0019_entry_checkpoint.sql', '0020_purchase_entitlements.sql', '0021_rtdn_processing.sql', '0022_billing_reconciliation.sql', '0023_release_economic_authority.sql', '0024_reward_grant_journal.sql', '0025_operation_input_binding.sql', '0026_catalog_identities.sql', '0027_release_obligations.sql', '0028_admin_hardening.sql']);
+    expect(s.d1.migrations.map((m) => m.name)).toEqual(['0001_core.sql', '0002_economy_ledger.sql', '0003_player_core.sql', '0004_mail.sql', '0005_progress.sql', '0006_ads.sql', '0007_billing.sql', '0008_flags.sql', '0009_single_currency.sql', '0010_dev_notes.sql', '0011_currency_name.sql', '0012_catalog.sql', '0013_player_progression.sql', '0014_tasks.sql', '0015_teams.sql', '0016_ops.sql', '0017_battle_sessions.sql', '0018_monitoring.sql', '0019_entry_checkpoint.sql', '0020_purchase_entitlements.sql', '0021_rtdn_processing.sql', '0022_billing_reconciliation.sql', '0023_release_economic_authority.sql', '0024_reward_grant_journal.sql', '0025_operation_input_binding.sql', '0026_catalog_identities.sql', '0027_release_obligations.sql', '0028_admin_hardening.sql', '0029_attribute_stats.sql']);
     expect(s.r2.ok).toBe(true);
     expect(s.limits.d1_rows_read_per_day).toBe(5_000_000);
     expect(s.auth.access_configured).toBe(true);
   });
 
   it('audit log is append-only and listable', async () => {
-    await admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json({ expectedVersion: 1, base_atk: 4 }) });
+    await admin('/admin/api/characters/fadyme', { method: 'PATCH', ...json({ expectedVersion: 1, base_str: 4 }) });
     const entries = ((await (await admin('/admin/api/audit?limit=5')).json()) as { entries: { action: string }[] }).entries;
     expect(entries.some((e) => e.action === 'character.update')).toBe(true);
     await expect(baseEnv.DB.prepare('DELETE FROM audit_log').run()).rejects.toThrow(/append-only/);
@@ -154,7 +154,7 @@ describe('asset catalog, system status, audit trail', () => {
   it('game health reports D1 + R2', async () => {
     const res = await game('/api/v1/health');
     expect(res.status).toBe(200);
-    expect(await res.json()).toMatchObject({ ok: true, d1: { ok: true, migrations_applied: 28 }, r2: { ok: true }, environment: 'dev' });
+    expect(await res.json()).toMatchObject({ ok: true, d1: { ok: true, migrations_applied: 29 }, r2: { ok: true }, environment: 'dev' });
   });
 
   it('public health never leaks internal error text outside dev', async () => {
@@ -328,7 +328,7 @@ describe('R13 banner state: CAS, explicit no-change, atomic audit and replay', (
   beforeEach(async () => {
     await staff();
     for (const [id, rarity] of [['r13_five_a', 5], ['r13_five_b', 5], ['r13_four_a', 4], ['r13_four_b', 4], ['r13_three_a', 3], ['r13_three_b', 3]] as const) {
-      await db.prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES (?1,?1,?2,'Stone','tank',20,'gacha',10,2,2,4)").bind(id, rarity).run();
+      await db.prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES (?1,?1,?2,'Stone','tank',20,'gacha',10,2,2,4)").bind(id, rarity).run();
     }
   });
   const newBanner = async (): Promise<string> => {
@@ -420,7 +420,7 @@ describe('R13 bounded cursor pagination for admin collections', () => {
   it('characters: rarity/name/id order with deterministic ties, filters, cursor traversal and detail', async () => {
     const rows: [string, string, number, string][] = [['ch_b', 'Bryn', 5, 'active'], ['ch_a', 'Bryn', 5, 'hidden'], ['ch_c', 'Ash', 4, 'active'], ['ch_d', 'Cole', 4, 'active'], ['ch_e', 'Ash', 3, 'retired'], ['ch_f', 'Zed', 5, 'active'], ['ch_g', 'Dawn', 1, 'active']];
     for (const [id, name, rarity, status] of rows) {
-      await db.prepare("INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd, status) VALUES (?1,?2,?3,'Stone','tank',20,'gacha',10,2,2,4,?4)").bind(id, name, rarity, status).run();
+      await db.prepare("INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi, status) VALUES (?1,?2,?3,'Stone','tank',20,'gacha',10,2,2,4,?4)").bind(id, name, rarity, status).run();
     }
     expect(ids(await walk('/admin/api/characters', 'characters', 3))).toEqual(['ch_a', 'ch_b', 'fadyme', 'ch_f', 'ch_c', 'ch_d', 'ch_e', 'ch_g']);
     expect(ids(await walk('/admin/api/characters?rarity=4', 'characters', 1))).toEqual(['ch_c', 'ch_d']);

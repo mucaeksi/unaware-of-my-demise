@@ -104,7 +104,8 @@ export interface Combatant {
   level: number;
   maxHp: number;
   hp: number;
-  base: { atk: number; def: number; res: number | null; spd: number };
+  /** crit / critDamage / effectHit: attribute units (D-27); absent = the battle rules' crit and no effect hit */
+  base: { atk: number; def: number; res: number | null; spd: number; crit?: number; critDamage?: number; effectHit?: number };
   gauge: number;
   pendingDelay: number;
   focus: number;

@@ -9,7 +9,7 @@ const key = (): string => `k_${++n}_${Math.random().toString(36).slice(2, 8)}`;
 
 async function ensureCharacter(id: string, rarity: number): Promise<void> {
   await db()
-    .prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES (?1,?1,?2,'Stone','tank',20,'gacha',10,2,2,4)")
+    .prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES (?1,?1,?2,'Stone','tank',20,'gacha',10,2,2,4)")
     .bind(id, rarity)
     .run();
 }

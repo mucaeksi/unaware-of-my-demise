@@ -647,7 +647,7 @@ export class GameApi extends EventTarget {
   upgradeSkill(id: string, skillId: string, releaseId?: string): Promise<{ rank: number; skillId?: string; balance?: number; spent?: { items: { itemId: string; quantity: number }[]; fee: number } }> {
     return this.mutate(`/api/v1/characters/${id}/skills/${skillId}/upgrade`, releaseId ? { releaseId } : {});
   }
-  characterStats(id: string, releaseId?: string): Promise<{ level: number; stats: Record<string, number> }> {
+  characterStats(id: string, releaseId?: string): Promise<{ level: number; stats: Record<string, number>; attributes?: Record<'str' | 'int' | 'vit' | 'agi', number>; power?: 'str' | 'int' }> {
     return this.call('GET', `/api/v1/characters/${id}/stats${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
   async stacks(): Promise<{ item_id: string; qty: number }[]> {

@@ -19,6 +19,13 @@ type Ctx = { Bindings: AdminEnv; Variables: { admin: AdminIdentity } };
 
 const Sha = z.string().regex(/^[0-9a-f]{64}$/);
 const ReleaseId = z.string().regex(/^[a-z][a-z0-9_]{1,47}$/);
+/** D-27 attribute columns of `characters` (migration 0029) */
+const point = z.number().min(0).max(1000);
+const growth = z.number().min(0).max(100);
+const AttributeColumns = z.object({
+  power_stat: z.enum(['str', 'int']), base_str: point, base_int: point, base_vit: z.number().min(1).max(1000), base_agi: z.number().min(1).max(1000),
+  growth_str: growth, growth_int: growth, growth_vit: growth, growth_agi: growth, armor: z.number().int().min(0).max(100)
+});
 const CharacterPatch = z
   .object({
     expectedVersion: z.number().int().min(1),
@@ -29,10 +36,7 @@ const CharacterPatch = z
     role: z.string().min(1).max(40).optional(),
     age: z.number().int().min(0).max(9999).optional(),
     acquisition: z.string().min(1).max(40).optional(),
-    base_hp: z.number().positive().max(100000).optional(),
-    base_atk: z.number().min(0).max(100000).optional(),
-    base_def: z.number().min(0).max(100000).optional(),
-    base_spd: z.number().positive().max(1000).optional()
+    ...AttributeColumns.partial().shape
   })
   .strict();
 const CharacterCreate = z
@@ -45,10 +49,8 @@ const CharacterCreate = z
     // no default: a character's (adult) age is canon/provenance, never something the API may invent
     age: z.number().int().min(0).max(9999),
     acquisition: z.string().min(1).max(40).default('gacha'),
-    base_hp: z.number().positive().max(100000),
-    base_atk: z.number().min(0).max(100000),
-    base_def: z.number().min(0).max(100000),
-    base_spd: z.number().positive().max(1000),
+    ...AttributeColumns.shape,
+    growth_str: growth.default(0), growth_int: growth.default(0), growth_vit: growth.default(0), growth_agi: growth.default(0), armor: AttributeColumns.shape.armor.default(0),
     status: z.enum(['active', 'hidden', 'retired']).default('active')
   })
   .strict();
@@ -224,11 +226,11 @@ export function createAdminApp(deps: AdminDeps = {}): Hono<Ctx> {
     const res = await c.env.DB.batch([
       c.env.DB
         .prepare(
-          `INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd, status, updated_by)
-           VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)
+          `INSERT INTO characters (id, name_en, rarity, element, role, age, acquisition, power_stat, base_str, base_int, base_vit, base_agi, growth_str, growth_int, growth_vit, growth_agi, armor, status, updated_by)
+           VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18, ?19)
            ON CONFLICT (id) DO NOTHING`
         )
-        .bind(ch.id, ch.name_en, ch.rarity, ch.element, ch.role, ch.age, ch.acquisition, ch.base_hp, ch.base_atk, ch.base_def, ch.base_spd, ch.status, who),
+        .bind(ch.id, ch.name_en, ch.rarity, ch.element, ch.role, ch.age, ch.acquisition, ch.power_stat, ch.base_str, ch.base_int, ch.base_vit, ch.base_agi, ch.growth_str, ch.growth_int, ch.growth_vit, ch.growth_agi, ch.armor, ch.status, who),
       auditIfChanged(c.env.DB, who, 'character.create', ch.id, { name_en: ch.name_en, rarity: ch.rarity, role: ch.role })
     ]);
     if ((res[0]?.meta.changes ?? 0) !== 1) throw new HttpError(409, 'exists', `character ${ch.id} already exists`);

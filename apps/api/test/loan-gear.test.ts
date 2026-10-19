@@ -22,7 +22,8 @@ const gear = (stage = '1-2', value = template) => loanGear(db, 'brin_alder', cha
 it('produces deterministic armor/weapon/two-piece bonuses without minting or consuming inventory', async () => {
   const before = await db.batch([db.prepare('SELECT COUNT(*) AS n FROM player_gear'), db.prepare('SELECT COUNT(*) AS n FROM player_stacks')]);
   const first = await gear(); expect(await gear()).toEqual(first);
-  expect(first.flat.hp).toBeGreaterThan(0); expect(first.flat.atk).toBeGreaterThan(0); expect(first.pct.hp).toBeGreaterThanOrEqual(0.05);
+  // D-27: armor VIT, weapon power, and the two-piece set's whole VIT point
+  expect(first.flat.vit).toBeGreaterThanOrEqual(2); expect(first.flat.power).toBeGreaterThan(0); expect(first.flat.def).toBeGreaterThan(0);
   expect(await gear('1-3')).not.toEqual(first);
   const after = await db.batch([db.prepare('SELECT COUNT(*) AS n FROM player_gear'), db.prepare('SELECT COUNT(*) AS n FROM player_stacks')]);
   expect(after.map((batch) => batch.results)).toEqual(before.map((batch) => batch.results));

@@ -1063,13 +1063,6 @@ async function resolveModeBattleParty(
           level: 1,
           slot: idx,
           row: idx === 0 ? 'front' : 'rear',
-          stats: {
-            hp: Math.max(1, Math.round(u.base_stats.hp)),
-            atk: Math.max(0, Math.round(u.base_stats.atk)),
-            def: Math.max(0, Math.round(u.base_stats.def)),
-            spd: Math.max(1, Math.round(u.base_stats.spd)),
-            ...(u.base_stats.res !== undefined ? { res: Math.max(0, Math.round(u.base_stats.res)) } : {})
-          },
           loan: true
         }))
       );

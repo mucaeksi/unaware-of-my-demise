@@ -2,11 +2,11 @@ import { REF_W } from '../config';
 import type { GearView } from '../net/api';
 import { Services } from '../services';
 import { errText, HubScreen } from '../ui/hubScreen';
-import { stars } from '../ui/format';
+import { gearStat, stars } from '../ui/format';
 import { F, T } from '../ui/theme';
 
 const PER_PAGE = 6;
-const statLine = (g: GearView): string => (g.stats ? [g.stats.main, ...g.stats.subs].map((s) => `${s.stat.replace('_pct', '%')} ${s.value}`).join(' · ') : (g.passive ? `${g.passive.name}${g.passive.supported === false ? ' · Passive not available yet' : ''}` : ''));
+const statLine = (g: GearView): string => (g.stats ? [g.stats.main, ...g.stats.subs].map((s) => gearStat(s.stat, s.value)).join(' · ') : (g.passive ? `${g.passive.name}${g.passive.supported === false ? ' · Passive not available yet' : ''}` : ''));
 
 /** Gear list. Opened from a companion it filters to one slot and offers Equip; opened alone it lists everything. */
 export class GearScene extends HubScreen {

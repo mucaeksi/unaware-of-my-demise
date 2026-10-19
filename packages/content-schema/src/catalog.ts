@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BannerConfig, DropConfig, ProgressionConfig } from '@uomd/economy';
+import { ATTRIBUTES, AttributeBlock, BannerConfig, DropConfig, ProgressionConfig } from '@uomd/economy';
 import { Element, Id } from './primitives';
 import { TaskConfig } from './tasks';
 import type { RewardAttachment } from './rewards';
@@ -13,7 +13,7 @@ const Name = z.string().min(1).max(160);
 const Count = z.number().int().safe().nonnegative();
 const Status = z.enum(['active', 'hidden', 'retired']);
 const Slot = z.enum(['weapon', 'armor', 'necklace', 'ring']);
-export const GearStatId = z.enum(['hp_flat', 'atk_flat', 'def_flat', 'spd_flat', 'hp_pct', 'atk_pct', 'def_pct', 'spd_pct', 'effect_res_pct', 'element_res_pct', 'focus_gain_pct', 'heal_bonus_pct']);
+export const GearStatId = z.enum(['str_flat', 'int_flat', 'vit_flat', 'agi_flat', 'power_flat', 'hp_flat', 'atk_flat', 'def_flat', 'spd_flat', 'hp_pct', 'atk_pct', 'def_pct', 'spd_pct', 'effect_res_pct', 'element_res_pct', 'focus_gain_pct', 'heal_bonus_pct']);
 export const GearConfig = z.object({
   note: z.string().max(400).default(''), roleStat: z.record(Id, GearStatId), roleStatOrder: z.array(Id).max(512).optional(), equipSlots: z.array(Slot).min(1).max(4),
   rerollCost: z.object({ itemId: Id, quantityByRarity: z.partialRecord(z.enum(['1', '2', '3', '4', '5']), Count.min(1)) }).strict()
@@ -29,7 +29,10 @@ const Base = z.object({ hp: z.number().positive(), atk: z.number().nonnegative()
 const Growth = z.object({ hp: z.number().nonnegative(), atk: z.number().nonnegative(), def: z.number().nonnegative(), spd: z.number().nonnegative() }).strict();
 const Character = z.object({ id: Id, name_en: Name, rarity: z.number().int().min(1).max(5), element: Element, role: Id, age: Count,
   acquisition: z.enum(['free_start', 'free_story_recruit', 'free_story_recruit_and_banner', 'gacha', 'limited_banner', 'standard_banner_pool']),
-  base: Base, growth: Growth, formation_affinity: z.enum(['front', 'rear']).nullable(), weapon_type: Id, signature_weapon_id: Id, status: Status }).strict();
+  /** legacy derived stats (catalogs before D-27) or attributes; exactly one */
+  base: Base.optional(), growth: Growth.optional(), attributes: AttributeBlock.optional(),
+  formation_affinity: z.enum(['front', 'rear']).nullable(), weapon_type: Id, signature_weapon_id: Id, status: Status }).strict()
+  .refine((c) => c.attributes ? !c.base && !c.growth : !!c.base && !!c.growth, { message: 'a character has either base + growth (legacy) or attributes' });
 const Skill = z.object({ skill_id: Id, character_id: Id, type: z.enum(['basic', 'active', 'passive', 'ultimate']), name_en: Name }).strict();
 const Item = z.object({ item_id: Id, name_en: Name,
   kind: z.enum(['accessory_reroll_token', 'ascension', 'boss_shop', 'character_xp', 'crafting', 'duplicate_progression', 'equipment_xp', 'event_exchange', 'recruit_selector', 'skill_rank', 'weapon_xp_virtual_resource']),
@@ -53,10 +56,12 @@ const commonGear = { gear_id: Id, name_en: Name, rarity: z.number().int().min(1)
   dismantle: z.array(z.object({ item_id: Id, quantity: Count.min(1).max(9999) }).strict()).max(8), dismantle_allowed: z.boolean(), status: Status };
 const passive = z.object({ passive_name_en: Name.optional(), passive_effect_en: z.string().max(2000).optional(), passive_effect_id: Id.optional() }).strict();
 const Gear = z.discriminatedUnion('slot', [
-  z.object({ ...commonGear, slot: z.literal('weapon'), base: z.object({ atk: z.number().nonnegative(), secondary_stat: z.union([z.literal('role_stat'), GearStatId]), secondary_value: z.number().nonnegative() }).strict(), growth: z.object({ atk: z.number().nonnegative() }).strict(), extra: passive }).strict(),
-  z.object({ ...commonGear, slot: z.literal('armor'), base: z.object({ hp: z.number().nonnegative(), def: z.number().nonnegative() }).strict(), growth: z.object({ hp: z.number().nonnegative(), def: z.number().nonnegative() }).strict(), extra: z.object({}).strict() }).strict(),
+  // `power` (D-27) adds points to the wielder's power attribute; `atk` / armor `hp` are the legacy derived-stat contract
+  z.object({ ...commonGear, slot: z.literal('weapon'), base: z.union([z.object({ atk: z.number().nonnegative(), secondary_stat: z.union([z.literal('role_stat'), GearStatId]), secondary_value: z.number().nonnegative() }).strict(), z.object({ power: z.number().nonnegative(), secondary_stat: z.union([z.literal('role_stat'), GearStatId]), secondary_value: z.number().nonnegative() }).strict()]), growth: z.union([z.object({ atk: z.number().nonnegative() }).strict(), z.object({ power: z.number().nonnegative() }).strict()]), extra: passive }).strict(),
+  z.object({ ...commonGear, slot: z.literal('armor'), base: z.union([z.object({ hp: z.number().nonnegative(), def: z.number().nonnegative() }).strict(), z.object({ vit: z.number().nonnegative(), def: z.number().nonnegative() }).strict()]), growth: z.union([z.object({ hp: z.number().nonnegative(), def: z.number().nonnegative() }).strict(), z.object({ vit: z.number().nonnegative(), def: z.number().nonnegative() }).strict()]), extra: z.object({}).strict() }).strict(),
   ...(['necklace', 'ring'] as const).map((slot) => z.object({ ...commonGear, slot: z.literal(slot), level_cap: z.literal(1), base: z.object({}).strict(), growth: z.object({}).strict(), extra: Accessory }).strict())
 ]);
+/** `pct` is the bonus amount in the stat's own unit: a fraction for *_pct stats, points for *_flat stats */
 const SetDef = z.object({ set_id: Id, name_en: Name, pieces_for_bonus: Count.min(1).max(2), bonus: z.object({ stat: GearStatId, pct: z.number().nonnegative(), text: z.string().max(2000) }).strict() }).strict();
 const Banner = z.object({ id: Id, title_en: Name, config: BannerConfig, starts_at: z.iso.datetime().nullable(), ends_at: z.iso.datetime().nullable(), status: z.enum(['draft', 'active', 'retired']) }).strict()
   .superRefine((b, ctx) => {
@@ -123,6 +128,12 @@ export const EconomyCatalog = z.object({ schema_version: z.literal(1),
 export type EconomyCatalog = z.infer<typeof EconomyCatalog>;
 
 /** Additional references into the exact pack and chapter graph carried by this release. */
+function sameStats(u: UnitPack['units'][number], ch: EconomyCatalog['characters'][number]): boolean {
+  const a = u.attributes; const b = ch.attributes;
+  if (a || b) return !!a && !!b && a.power === b.power && (a.armor ?? 0) === (b.armor ?? 0) && ATTRIBUTES.every((k) => a.base[k] === b.base[k] && (a.growth?.[k] ?? 0) === (b.growth?.[k] ?? 0));
+  return (['hp', 'atk', 'def', 'spd'] as const).every((key) => u.base_stats?.[key] === ch.base?.[key] && (u.growth_per_level?.[key] ?? 0) === ch.growth?.[key]);
+}
+
 export function catalogContentProblems(c: EconomyCatalog, pack: UnitPack, index: ChapterIndex): string[] {
   const problems: string[] = []; const bad = (s: string): void => { problems.push(s); };
   const characters = new Map(c.characters.map((ch) => [ch.id, ch])); const items = new Map(c.items.map((i) => [i.item_id, i])); const gear = new Map(c.gear.map((g) => [g.gear_id, g]));
@@ -130,7 +141,7 @@ export function catalogContentProblems(c: EconomyCatalog, pack: UnitPack, index:
   for (const ch of c.characters.filter((ch) => ch.status !== 'retired')) {
     const u = units.get(ch.id);
     if (!u || u.kind !== 'character') { bad(`catalog character ${ch.id}: missing from release unit pack`); continue; }
-    if (u.name_en !== ch.name_en || u.rarity !== ch.rarity || u.element !== ch.element || u.role !== ch.role || (u.formation_affinity ?? null) !== ch.formation_affinity || (['hp', 'atk', 'def', 'spd'] as const).some((key) => u.base_stats[key] !== ch.base[key] || (u.growth_per_level?.[key] ?? 0) !== ch.growth[key])) bad(`catalog character ${ch.id}: stats/metadata differ from release unit pack`);
+    if (u.name_en !== ch.name_en || u.rarity !== ch.rarity || u.element !== ch.element || u.role !== ch.role || (u.formation_affinity ?? null) !== ch.formation_affinity || !sameStats(u, ch)) bad(`catalog character ${ch.id}: stats/metadata differ from release unit pack`);
     const skills = c.skills.filter((s) => s.character_id === ch.id);
     if (skills.length !== u.skills.length || skills.some((s) => !u.skills.some((sk) => sk.skill_id === s.skill_id && sk.type === s.type && sk.name_en === s.name_en))) bad(`catalog character ${ch.id}: skill identities differ from release unit pack`);
   }

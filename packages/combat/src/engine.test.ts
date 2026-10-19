@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Battle, IllegalActionError, MAX_TURNS, playAuto, replayBattle, type BattleEvent } from './index';
-import { basePack, encounterT1, encounterT2, noCrit, patchUnit } from './fixtures';
+import { asLegacy, basePack, encounterT1, encounterT2, noCrit, patchUnit } from './fixtures';
 
 const events = <T extends BattleEvent['type']>(log: BattleEvent[], type: T): Extract<BattleEvent, { type: T }>[] =>
   log.filter((e): e is Extract<BattleEvent, { type: T }> => e.type === type);
@@ -34,23 +34,23 @@ describe('turn order', () => {
 describe('damage rules', () => {
   const pack = noCrit(basePack());
 
-  it('Veilglass Thorn vs Bellbound Dead: 3 ATK x 1.0 x 10/10 x 0.9 (explicit Veil resistance) = floor 2', () => {
+  it('Veilglass Thorn vs Bellbound Dead: 4 ATK (INT) x 1.0 x 10/10 x 0.9 (explicit Veil resistance) = floor 3', () => {
     const b = Battle.create(pack, encounterT1());
     b.advance();
     const step = b.act({ skillId: 'fadyme_basic_veilglass_thorn', targetId: E0 });
     const dmg = events(step.events, 'damage').find((d) => d.source === FADYME);
-    expect(dmg).toMatchObject({ target: E0, amount: 2, hpAfter: 3, crit: false });
+    expect(dmg).toMatchObject({ target: E0, amount: 3, hpAfter: 19, crit: false });
     expect(dmg?.elementMultiplier).toBeCloseTo(0.9);
   });
 
   it('crit multiplies by 1.5 and is rolled from the seeded RNG only', () => {
-    const forced = { ...basePack(), rules: { ...basePack().rules, crit: { chance: 1, multiplier: 1.5 } } };
+    const forced = { ...asLegacy(basePack()), rules: { ...basePack().rules, crit: { chance: 1, multiplier: 1.5 } } };
     const b = Battle.create(forced, encounterT1());
     b.advance();
     const step = b.act({ skillId: 'fadyme_basic_veilglass_thorn', targetId: E0 });
     const dmg = events(step.events, 'damage').find((d) => d.source === FADYME);
     expect(dmg?.crit).toBe(true);
-    expect(dmg?.amount).toBe(4); // floor(3 * 0.9 * 1.5 = 4.05)
+    expect(dmg?.amount).toBe(5); // floor(4 * 0.9 * 1.5 = 5.4)
   });
 
   it('minimum damage is 1 and shields absorb before HP', () => {
@@ -103,7 +103,7 @@ describe('statuses, focus and skills', () => {
     const b = Battle.create(noCrit(basePack()), encounterT1());
     b.advance();
     const step = b.act({ skillId: 'fadyme_active_borrowed_hour', targetId: E0 });
-    expect(events(step.events, 'damage').find((d) => d.source === FADYME)).toMatchObject({ amount: 4 }); // floor(3*1.6*.9=4.32)
+    expect(events(step.events, 'damage').find((d) => d.source === FADYME)).toMatchObject({ amount: 5 }); // floor(4*1.6*.9=5.76)
     expect(events(step.events, 'status_applied')).toContainEqual(expect.objectContaining({ target: E0, status: 'dread', turns: 2 }));
     const focus = events(step.events, 'focus').find((f) => f.unit === FADYME);
     expect(focus?.delta).toBe(25);
@@ -179,8 +179,8 @@ describe('statuses, focus and skills', () => {
   });
 
   it("Fadyme's A Smile Kept raises Veil RES for all allies when she is below 50% HP, at most twice per battle", () => {
-    const sturdy = patchUnit(noCrit(basePack()), 'bellbound_dead', (u) => ({ ...u, base_stats: { ...u.base_stats, hp: 400 } }));
-    const lowFadyme = patchUnit(sturdy, 'fadyme', (u) => ({ ...u, base_stats: { ...u.base_stats, hp: 60 } }));
+    const sturdy = patchUnit(noCrit(basePack()), 'bellbound_dead', (u) => ({ ...u, base_stats: { ...u.base_stats!, hp: 400 } }));
+    const lowFadyme = patchUnit(sturdy, 'fadyme', (u) => ({ ...u, base_stats: { ...u.base_stats!, hp: 60 } }));
     const enc = { ...encounterT1(), party: encounterT1().party.map((p) => ({ ...p, row: 'front' as const })) };
     const b = Battle.create(lowFadyme, enc);
     b.advance();
@@ -221,7 +221,7 @@ describe('outcomes', () => {
   });
 
   it('defeat: overpowered enemies end the battle with 0 stars', () => {
-    const brutal = patchUnit(basePack(), 'bellbound_dead', (u) => ({ ...u, base_stats: { ...u.base_stats, atk: 60, hp: 400 } }));
+    const brutal = patchUnit(asLegacy(basePack()), 'bellbound_dead', (u) => ({ ...u, base_stats: { ...u.base_stats!, atk: 60, hp: 400 } }));
     const { battle } = playAuto(brutal, encounterT1());
     expect(battle.result).toMatchObject({ winner: 'enemy', stars: 0 });
   });

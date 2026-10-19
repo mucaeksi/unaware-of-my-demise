@@ -62,7 +62,7 @@ describe('gear: grants and equipping', () => {
     expect(g.find((x) => x.id === a)?.slot).toBe('armor');
     const acc = g.find((x) => x.id === ring)!;
     expect(acc.slot).toBe('ring');
-    expect(acc.stats?.main.stat).toMatch(/_pct$/);
+    expect(acc.stats?.main.stat).toMatch(/_(pct|flat)$/);
     expect(acc.stats?.subs.length).toBeGreaterThanOrEqual(2);
     // two copies of the same definition are two instances
     const [w2] = await give(playerId, ['weapon_arming_sword_3_01']);

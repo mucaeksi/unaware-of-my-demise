@@ -15,13 +15,6 @@
       "row": "front"
     }
   ],
-  "enemy_stat_multiplier": {
-    "value": 2.5,
-    "applies_to": [
-      "hp",
-      "atk"
-    ]
-  },
   "pre_story": "story/vn_7_5_pre.json",
   "post_story": "story/vn_7_5_post.json",
   "phase_stories": [

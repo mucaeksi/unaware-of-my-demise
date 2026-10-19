@@ -62,8 +62,8 @@ describe('the full playable roster and the regular enemies run in the engine', (
       const foes = Array.from({ length: 5 }, (_, k) => enemyIds[(i * 3 + k * 4) % enemyIds.length] as string);
       if (new Set(party).size < 5) continue;
       const boosted = i % 8 >= 4;
-      // boosted rotations also fight a much stronger enemy line, so slow front-liners get their turn before the fight is over
-      const enc = boosted ? encounter(1000 + i, party, foes, 6, 20) : encounter(1000 + i, party, foes); // half of the rotations open with full Focus so every Ultimate is exercised; the rest are replayable as-is
+      // boosted rotations also fight a stronger enemy line (D-27 enemies hit hard enough at +8 levels to drop a slow front-liner before her turn, so +4)
+      const enc = boosted ? encounter(1000 + i, party, foes, 10, 14) : encounter(1000 + i, party, foes); // half of the rotations open with full Focus so every Ultimate is exercised; the rest are replayable as-is
       const { battle, actions } = play(enc, boosted ? 100 : 0);
       expect(battle.result).not.toBeNull();
       if (!boosted) battles.push({ enc, actions, log: [...battle.log] });

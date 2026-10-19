@@ -12,6 +12,10 @@
   },
   "now": [
     {
+      "title": "D-27: RPG stat model (STR / INT / VIT / AGI)",
+      "detail": "Heroes, enemies and bosses share one derivation (HP = 4 + 3 VIT, ATK = power attribute, DEF = armor, SPD = AGI, crit from AGI); gear gives whole points; unit attributes in content/balance/attributes.json, D1 migration 0029, capability attributes_v1, legacy releases unchanged. Tuned with the campaign probe (starter gear: 35/35 won, normal ~4-6 rounds, bosses ~8-10). docs/combat/STAT_MATH.md. Branch feat/d27-attribute-stats."
+    },
+    {
       "title": "D-25 complete: the game client is pure PixiJS v8",
       "detail": "core/app (renderer, fit, frame loop), core/scenes (scene manager), core/assets (textures, atlas frames, audio); battle with data-driven VFX presets (vfx_v1); story/prologue on PIXI; menus, title, finish and account screens as an HTML/ARIA layer. Commits 25212cfa, 8f55a9d8, cf3a9a27, ea68484d."
     },
@@ -25,6 +29,10 @@
     }
   ],
   "next": [
+    {
+      "title": "Progression math pass: character and weapon XP",
+      "detail": "Level 20 should be hard to reach: tune the character XP curve, weapon XP (weapons level to 20), fees and drop/XP payouts against the new stats; Part II raises the cap to 40."
+    },
     {
       "title": "Argon art integration pilot: Kera Voss",
       "detail": "Four expressions, an eight-state chibi sheet and summon art through tools/ingest_art.ts, checked in game, then owner approval; the template then covers the other 22 characters. Delivery rules: Argon brief (https://claude.ai/artifact/Qobho5vJKwE9gYA5ra2Wqx)."

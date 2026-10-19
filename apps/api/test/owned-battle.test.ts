@@ -216,8 +216,8 @@ describe('the Part I campaign release', () => {
     const party = BattleParty.parse(started.party);
     expect(party.map((m) => m.unit_id).sort()).toEqual(['brin_alder', 'fadyme', 'kera_voss', 'mahmut', 'nixie_vale']);
     const brin = party.find((member) => member.unit_id === 'brin_alder')!;
-    const base = await db().prepare("SELECT base_hp, growth_hp FROM characters WHERE id = 'brin_alder'").first<{ base_hp: number; growth_hp: number }>();
-    expect(brin.stats!.hp).toBeGreaterThan(statAtLevel(base!.base_hp, base!.growth_hp, brin.level));
+    const base = await db().prepare("SELECT base_vit, growth_vit FROM characters WHERE id = 'brin_alder'").first<{ base_vit: number; growth_vit: number }>();
+    expect(brin.stats!.hp).toBeGreaterThan(4 + 3 * statAtLevel(base!.base_vit, base!.growth_vit, brin.level)); // loan armor adds VIT
     expect(await db().prepare('SELECT COUNT(*) AS n FROM player_gear WHERE player_id = ?1').bind(playerId).first()).toEqual({ n: 0 });
     expect(party.filter((m) => m.loan).map((m) => m.unit_id).sort()).toEqual(['brin_alder', 'kera_voss', 'nixie_vale']);
     const cfg = await loadProgressionConfig(db());

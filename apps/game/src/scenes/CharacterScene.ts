@@ -3,11 +3,19 @@ import { currency } from '../net/currency';
 import { Services } from '../services';
 import { planAscension, planLevelUp, planSkillUpgrade } from '../ui/growth';
 import { errText, HubScreen } from '../ui/hubScreen';
+import { resonancePoints } from '@uomd/economy';
 import { stars } from '../ui/format';
 import { describeCompanionAttachment, nextPortraitExpression } from '../ui/pilotAttachment';
 import { F, T } from '../ui/theme';
 
 const SLOTS = ['weapon', 'armor', 'necklace', 'ring'] as const;
+
+/** D-27 heroes resonate in whole points; legacy catalogs in percent */
+const resonanceText = (tier: number, bonusPct: number, attributes: boolean): string => {
+  if (!attributes) return `+${bonusPct}% HP/ATK/DEF`;
+  const p = resonancePoints(tier);
+  return `+${p.vit} VIT, +${p.power} POWER`;
+};
 
 /** One companion: level and ascension (materials from the server-side stacks), skill ranks, final stats and the four gear slots. */
 export class CharacterScene extends HubScreen {
@@ -65,7 +73,13 @@ export class CharacterScene extends HubScreen {
     this.text(520, 330, `Level ${c.level} / ${c.cap}    Ascension ${c.ascension}`, { fontSize: '36px' }).setOrigin(0.5);
     this.text(520, 372, c.xpToNext === null ? 'Maximum level' : `XP ${c.xp} / ${c.xpToNext}`, { fontSize: '25px', color: T.dim }).setOrigin(0.5);
     const s = st?.stats ?? {};
-    this.text(520, 424, ['hp', 'atk', 'def', 'spd'].map((k) => `${k.toUpperCase()} ${Math.round(s[k] ?? 0)}`).join('    '), { fontSize: '32px', color: T.gold }).setOrigin(0.5);
+    const derived = ['hp', 'atk', 'def', 'spd'].map((k) => `${k.toUpperCase()} ${Math.round(s[k] ?? 0)}`);
+    if (st?.attributes) {
+      // D-27: the four attributes, the power one marked, then what they make
+      const a = st.attributes;
+      this.text(520, 414, (['str', 'int', 'vit', 'agi'] as const).map((k) => `${k.toUpperCase()} ${a[k]}${k === st.power ? ' ◆' : ''}`).join('    '), { fontSize: '30px', color: T.gold }).setOrigin(0.5);
+      this.text(520, 448, [...derived, `CRIT ${Math.round((s.crit_rate ?? 0) * 100)}%`].join('   '), { fontSize: '21px', color: T.dim }).setOrigin(0.5);
+    } else this.text(520, 424, derived.join('    '), { fontSize: '32px', color: T.gold }).setOrigin(0.5);
 
     const lvPlan = planLevelUp({
       character: c,
@@ -129,7 +143,7 @@ export class CharacterScene extends HubScreen {
     const res = c.resonance;
     const shards = c.shards ?? 0;
     if (res) {
-      const resLabel = `Memory Shards: ${shards}  ·  Resonance ${res.tier}/${res.maxTier} (+${res.bonusPct}% HP/ATK/DEF, optional keepsake)`;
+      const resLabel = `Memory Shards: ${shards}  ·  Resonance ${res.tier}/${res.maxTier} (${resonanceText(res.tier, res.bonusPct, !!st?.attributes)}, optional keepsake)`;
       this.text(520, 710, resLabel, { fontSize: '19px', color: T.gold }).setOrigin(0.5);
       const canAttune = res.nextShardCost !== null && shards >= res.nextShardCost;
       if (canAttune) {
@@ -140,7 +154,7 @@ export class CharacterScene extends HubScreen {
           fontSize: 20,
           onClick: () => void this.act(async () => {
             const out = await api.attuneShards(this.id, releaseId);
-            this.lastOutcome = `Last Action: Memory Resonance Tier ${out.resonance.tier}/${out.resonance.maxTier} (+${out.resonance.bonusPct}% HP/ATK/DEF) · Spent ${out.spentShards} Memory Shards`;
+            this.lastOutcome = `Last Action: Memory Resonance Tier ${out.resonance.tier}/${out.resonance.maxTier} (${resonanceText(out.resonance.tier, out.resonance.bonusPct, !!st?.attributes)}) · Spent ${out.spentShards} Memory Shards`;
             this.say(`Resonance Tier ${out.resonance.tier}`);
           })
         });

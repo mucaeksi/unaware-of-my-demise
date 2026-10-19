@@ -12,7 +12,7 @@ import type { Channel } from '@uomd/content-schema';
 import type { GameEnv } from './env';
 import type { SsvKeyFetcher } from './ads/ssv';
 import type { PlayClient } from './billing/play';
-import { displayCatalog, characterDefinition } from './content/runtime-catalog';
+import { CHARACTER_STAT_COLUMNS, displayCatalog, withAttributes, type CharacterStatRow } from './content/runtime-catalog';
 import { registerPlayerRoutes } from './player/routes';
 import type { JWTVerifyGetKey } from 'jose';
 
@@ -121,11 +121,11 @@ export function createGameApp(opts: { getGoogleKey?: JWTVerifyGetKey; admobKeys?
     const selected = c.req.query('releaseId');
     if (selected !== undefined && !/^[a-z][a-z0-9_]{1,47}$/.test(selected)) throw new HttpError(400, 'bad_request', 'invalid release id');
     const catalog = await displayCatalog(c.env, selected);
-    if (catalog) return c.json({ releaseId: catalog.releaseId, catalogSha256: catalog.sha256, characters: catalog.data.characters.filter((c) => c.status === 'active').map((c) => { const r = characterDefinition(c); return { id: r.id, name_en: r.name_en, rarity: r.rarity, element: r.element, role: r.role, age: r.age, acquisition: r.acquisition, base_hp: r.base_hp, base_atk: r.base_atk, base_def: r.base_def, base_spd: r.base_spd }; }) }, 200, { 'Cache-Control': 'public, max-age=60' });
+    if (catalog) return c.json({ releaseId: catalog.releaseId, catalogSha256: catalog.sha256, characters: catalog.data.characters.filter((c) => c.status === 'active').map((r) => ({ id: r.id, name_en: r.name_en, rarity: r.rarity, element: r.element, role: r.role, age: r.age, acquisition: r.acquisition, ...(r.attributes ? { attributes: r.attributes } : { base: r.base }) })) }, 200, { 'Cache-Control': 'public, max-age=60' });
     const { results } = await c.env.DB.prepare(
-      "SELECT id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd FROM characters WHERE status = 'active' ORDER BY rarity DESC, name_en"
-    ).all();
-    return c.json({ characters: results }, 200, { 'Cache-Control': 'public, max-age=60' });
+      `SELECT id, name_en, rarity, element, role, age, acquisition, ${CHARACTER_STAT_COLUMNS} FROM characters WHERE status = 'active' ORDER BY rarity DESC, name_en`
+    ).all<CharacterStatRow & Record<string, unknown>>();
+    return c.json({ characters: results.map(withAttributes) }, 200, { 'Cache-Control': 'public, max-age=60' });
   });
 
   app.post('/api/v1/battles/verify', async (c) => {

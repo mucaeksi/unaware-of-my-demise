@@ -91,20 +91,21 @@ test.describe('UOMD Control Center (admin SPA + API, local stack with a test-onl
     await page.getByRole('button', { name: 'Characters' }).click();
     await expect(page.getByRole('row')).toHaveCount(21);
     const fadyme = page.getByRole('row').filter({ hasText: 'fadyme' });
-    const version = async (): Promise<number> => Number(await fadyme.locator('td').nth(10).textContent());
+    // columns: id, name, ★, element, role, power, STR, INT, VIT, AGI, status, version
+    const version = async (): Promise<number> => Number(await fadyme.locator('td').nth(11).textContent());
     const before = await version();
     await page.getByRole('button', { name: 'Edit Fadyme' }).click();
-    await page.getByLabel('HP').fill('12');
+    await page.getByLabel('VIT', { exact: true }).fill('12');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByRole('status')).toContainText('Fadyme saved');
-    await expect(fadyme.locator('td').nth(5)).toHaveText('12');
+    await expect(fadyme.locator('td').nth(8)).toHaveText('12');
     expect(await version()).toBe(before + 1); // optimistic-concurrency version bumped
     // restore the seed value so later runs start clean
     await page.getByRole('button', { name: 'Edit Fadyme' }).click();
-    await page.getByLabel('HP').fill('11');
+    await page.getByLabel('VIT', { exact: true }).fill('3');
     await page.getByRole('button', { name: 'Save' }).click();
     await expect(page.getByRole('status')).toContainText('Fadyme saved');
-    await expect(fadyme.locator('td').nth(5)).toHaveText('11');
+    await expect(fadyme.locator('td').nth(8)).toHaveText('3');
 
     // assets: register an asset with provenance
     await page.getByRole('button', { name: 'Assets' }).click();

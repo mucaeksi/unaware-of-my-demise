@@ -1,4 +1,5 @@
 import type { BattleParty, BossObjective, ContinuousModifier, EffectOp, Element, Encounter, EventHook, HookEvent, Predicate, RulesDef, SkillDef, StatusDef, TargetSelector, UnitDef, UnitPack } from '@uomd/content-schema';
+import { unitStatsAt } from '@uomd/content-schema';
 import { Rng } from '@uomd/shared';
 import {
   IllegalActionError,
@@ -40,6 +41,12 @@ export function computeVictoryStars(startingPlayers: number, defeated: number): 
 }
 
 const roundHalfUp = (x: number): number => Math.floor(x + 0.5 + 1e-9);
+/** per-unit crit and effect hit of attribute units; legacy units keep the battle rules' crit (no keys, so their snapshots are unchanged) */
+const critOf = (s: { crit_rate?: number | undefined; crit_damage?: number | undefined; effect_hit?: number | undefined }): Partial<Combatant['base']> => ({
+  ...(s.crit_rate !== undefined ? { crit: s.crit_rate } : {}),
+  ...(s.crit_damage !== undefined ? { critDamage: s.crit_damage } : {}),
+  ...(s.effect_hit !== undefined ? { effectHit: s.effect_hit } : {})
+});
 
 type ActionKind = 'basic' | 'active' | 'ultimate' | 'signature';
 
@@ -171,6 +178,7 @@ export class Battle {
       c.base.def = m.stats.def;
       c.base.spd = Math.max(1, m.stats.spd);
       if (m.stats.res !== undefined) c.base.res = m.stats.res;
+      Object.assign(c.base, critOf(m.stats));
     }
     if (m.skill_ranks) c.skillRanks = { ...m.skill_ranks };
     if (m.equipment_effects) c.equipmentEffects = { ...m.equipment_effects };
@@ -195,9 +203,8 @@ export class Battle {
   // ---------------------------------------------------------------- construction
 
   private makeCombatant(def: UnitDef, side: Side, slot: number, row: Row, level: number): Combatant {
-    const grow = (k: 'hp' | 'atk' | 'def' | 'spd'): number => roundHalfUp(def.base_stats[k] + (def.growth_per_level?.[k] ?? 0) * (level - 1));
-    const maxHp = Math.max(1, grow('hp'));
-    const resBase = def.base_stats.res;
+    const st = unitStatsAt(def, level);
+    const maxHp = st.hp;
     return {
       id: `${side}:${slot}:${def.unit_id}`,
       def,
@@ -207,12 +214,7 @@ export class Battle {
       level,
       maxHp,
       hp: maxHp,
-      base: {
-        atk: grow('atk'),
-        def: Math.max(0, grow('def')),
-        res: resBase === undefined ? null : Math.max(0, roundHalfUp(resBase + (def.growth_per_level?.res ?? 0) * (level - 1))),
-        spd: Math.max(1, grow('spd'))
-      },
+      base: { atk: st.atk, def: st.def, res: st.res, spd: st.spd, ...critOf(st) },
       gauge: 0,
       pendingDelay: 0,
       focus: 0,
@@ -1065,7 +1067,7 @@ export class Battle {
         const statusDef = this.statusDefs.get(op.status_id);
         const isHostile = statusDef !== undefined && statusDef.category !== 'buff';
         for (const t of targets) {
-          const effRes = isHostile ? this.effEffectRes(t) : 0;
+          const effRes = isHostile ? Math.max(0, this.effEffectRes(t) - (ctx.actor.base.effectHit ?? 0)) : 0;
           if (op.chance !== undefined) {
             const effectiveChance = op.chance * (1 - effRes);
             if (this.rng.next() >= effectiveChance) {
@@ -1383,7 +1385,7 @@ export class Battle {
     const attacker = ctx.actor;
     const defStat = op.damage_type === 'physical' ? this.effStat(target, 'def') : this.effStat(target, 'res');
     const elementMult = this.elementMultiplier(element, target);
-    const crit = this.rng.next() < this.rules.crit.chance;
+    const crit = this.rng.next() < (attacker.base.crit ?? this.rules.crit.chance);
     const elemResMult = this.effElementResMult(target, element);
     // per-target conditional multipliers of the op itself
     let mult = op.multiplier * this.rankFactor(attacker, ctx.skill.skill_id);
@@ -1431,7 +1433,7 @@ export class Battle {
       this.statusProduct(attacker, 'outgoing_damage_multiplier') *
       this.statusProduct(target, 'damage_taken_multiplier') *
       elemResMult *
-      (crit ? this.rules.crit.multiplier : 1);
+      (crit ? (attacker.base.critDamage ?? this.rules.crit.multiplier) : 1);
 
     const packet: Packet = { source: attacker, target, outMult: 1, inMult: 1, blocked: false, actionKind: attackKind };
     const hooked = attackKind !== null && !ctx.suppressHooks && op.can_trigger_passives !== false;

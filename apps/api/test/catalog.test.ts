@@ -24,8 +24,9 @@ describe('canon catalog seed', () => {
     expect(await count('SELECT COUNT(*) AS n FROM character_skills')).toBe(80);
     await seedCanonCatalog();
     expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon'")).toBe(180);
-    const m = await db().prepare("SELECT growth_hp, growth_atk, weapon_type, signature_weapon_id FROM characters WHERE id = 'mahmut'").first();
-    expect(m).toMatchObject({ growth_hp: 0.7, growth_atk: 0.12, weapon_type: 'arming_sword', signature_weapon_id: 'weapon_mahmut_signature' });
+    // attributes come with the row (seed/characters.sql); the catalog seed links the weapon identity
+    const m = await db().prepare("SELECT weapon_type, signature_weapon_id FROM characters WHERE id = 'mahmut'").first();
+    expect(m).toMatchObject({ weapon_type: 'arming_sword', signature_weapon_id: 'weapon_mahmut_signature' });
   });
 
   it('the seeded progression rules are valid and carry the canon curve and ascension steps', async () => {

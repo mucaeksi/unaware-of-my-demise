@@ -1,6 +1,7 @@
 import { CATALOG_LIMITS, CATALOG_PATH, EconomyCatalog, MAX_CATALOG_BYTES } from '@uomd/content-schema';
 import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { HttpError } from './store';
+import { CHARACTER_STAT_COLUMNS, withAttributes, type CharacterStatRow } from './runtime-catalog';
 
 export interface CatalogSnapshot {
   path: typeof CATALOG_PATH;
@@ -13,7 +14,7 @@ export interface CatalogSnapshot {
 /** One read batch gives every exported table the same D1 transaction snapshot. */
 export async function exportCatalog(db: D1Database): Promise<CatalogSnapshot> {
   const queries = [
-    `SELECT id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd, growth_hp, growth_atk, growth_def, growth_spd, formation_affinity, weapon_type, signature_weapon_id, status FROM characters ORDER BY id LIMIT ${CATALOG_LIMITS.characters + 1}`,
+    `SELECT id, name_en, rarity, element, role, age, acquisition, ${CHARACTER_STAT_COLUMNS}, formation_affinity, weapon_type, signature_weapon_id, status FROM characters ORDER BY id LIMIT ${CATALOG_LIMITS.characters + 1}`,
     `SELECT skill_id, character_id, type, name_en FROM character_skills ORDER BY skill_id LIMIT ${CATALOG_LIMITS.skills + 1}`,
     `SELECT item_id, name_en, kind, rarity, stack_cap, xp_value, consumable, data_json, status FROM item_defs ORDER BY item_id LIMIT ${CATALOG_LIMITS.items + 1}`,
     `SELECT gear_id, slot, name_en, rarity, family, tier, set_id, owner_character_id, banner_id, level_cap, base_json, growth_json, extra_json, dismantle_xp, dismantle_json, dismantle_allowed, status FROM gear_defs ORDER BY gear_id LIMIT ${CATALOG_LIMITS.gear + 1}`,
@@ -27,8 +28,7 @@ export async function exportCatalog(db: D1Database): Promise<CatalogSnapshot> {
   const raw = {
     schema_version: 1,
     characters: characters!.map((r) => {
-      const { base_hp, base_atk, base_def, base_spd, growth_hp, growth_atk, growth_def, growth_spd, ...rest } = r;
-      return { ...rest, base: { hp: base_hp, atk: base_atk, def: base_def, spd: base_spd }, growth: { hp: growth_hp, atk: growth_atk, def: growth_def, spd: growth_spd } };
+      return withAttributes(r as CharacterStatRow & Record<string, unknown>);
     }),
     skills,
     items: items!.map((r) => { const { data_json, consumable, ...rest } = r; return { ...rest, data: parse(data_json), consumable: consumable === 1 }; }),

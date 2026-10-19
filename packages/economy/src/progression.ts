@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { attributesAt, deriveStats, type Attribute, type AttributeBlock, type AttributeValues } from './attributes';
 
 /**
  * Character / account / equipment progression rules (canon: battle_rules_part1.json "character_progression", "account_progression",
@@ -161,8 +162,10 @@ export interface BaseStats {
 /** canon: stat(level) = base_stats_level_1 + growth_per_level * (level - 1), rounded half up */
 export const statAtLevel = (base: number, growth: number, level: number): number => roundHalfUp(base + growth * (level - 1));
 
+/** flat keys: derived stats (legacy gear), attribute points, and `power` (points for the wielder's power attribute) */
+export type GearFlatKey = 'hp' | 'atk' | 'def' | 'spd' | Attribute | 'power';
 export interface GearStats {
-  flat: Partial<Record<'hp' | 'atk' | 'def' | 'spd', number>>;
+  flat: Partial<Record<GearFlatKey, number>>;
   pct: Partial<Record<'hp' | 'atk' | 'def' | 'spd', number>>;
   other: Record<string, number>;
 }
@@ -175,6 +178,41 @@ export function finalStats(base: BaseStats, growth: BaseStats, level: number, ge
     out[k] = roundHalfUp((lv + (gear.flat[k] ?? 0)) * (1 + (gear.pct[k] ?? 0)));
   }
   return out;
+}
+
+export interface CombatStats extends BaseStats {
+  crit_rate?: number;
+  crit_damage?: number;
+  effect_hit?: number;
+}
+
+/**
+ * Final stats of an attribute-authored character (D-27): attributes at the level plus attribute points from gear, sets and
+ * `bonus` (resonance), derived by `deriveStats`; armor DEF joins the VIT share. Derived-stat gear of older catalogs still adds on top.
+ */
+export function attributeStats(block: AttributeBlock, level: number, gear: GearStats, bonus: Partial<Record<Attribute | 'power', number>> = {}): CombatStats & { attributes: AttributeValues } {
+  const pts = (k: Attribute | 'power'): number => (gear.flat[k] ?? 0) + (bonus[k] ?? 0);
+  const attributes = attributesAt(block, level, { str: pts('str'), int: pts('int'), vit: pts('vit'), agi: pts('agi'), power: pts('power') });
+  const d = deriveStats(block, attributes, gear.flat.def ?? 0);
+  const on = (k: 'hp' | 'atk' | 'spd', v: number): number => roundHalfUp((v + (gear.flat[k] ?? 0)) * (1 + (gear.pct[k] ?? 0)));
+  return {
+    attributes,
+    hp: Math.max(1, on('hp', d.hp)),
+    atk: on('atk', d.atk),
+    def: roundHalfUp(d.def * (1 + (gear.pct.def ?? 0))),
+    spd: Math.max(1, on('spd', d.spd)),
+    crit_rate: d.crit_rate,
+    crit_damage: d.crit_damage,
+    effect_hit: d.effect_hit
+  };
+}
+
+/** A character's stat source: the attribute block (D-27) or the legacy base + growth pair of older catalogs. */
+export type CharacterStatSource = { attributes: AttributeBlock } | { attributes?: undefined; base: BaseStats; growth: BaseStats };
+
+/** Final stats from either source; `bonus` attribute points apply to attribute characters only (legacy resonance stays a multiplier). */
+export function characterStats(src: CharacterStatSource, level: number, gear: GearStats, bonus: Partial<Record<Attribute | 'power', number>> = {}): CombatStats & { attributes?: AttributeValues } {
+  return src.attributes ? attributeStats(src.attributes, level, gear, bonus) : finalStats(src.base, src.growth, level, gear);
 }
 
 /** Gear stat at a level: base + growth * (level - 1), plus the milestone bonus (percentage of the level-1 value for the highest milestone passed). */

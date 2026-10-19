@@ -502,19 +502,20 @@ function VisualContentSummary({ path, data }: { path: string; data: unknown }): 
       kind: string;
       element: string;
       role?: string;
-      base_stats: { hp: number; atk: number; def: number; spd: number };
+      base_stats?: { hp: number; atk: number; def: number; spd: number };
+      attributes?: { power: string; base: { str: number; int: number; vit: number; agi: number }; armor?: number };
       skills: { skill_id: string; name_en: string; type: string; cooldown_turns: number }[];
     }[];
     return (
       <table>
-        <thead><tr><th>Unit ID</th><th>Name</th><th>Kind / Element</th><th>Stats (HP/ATK/DEF/SPD)</th><th>Skills</th></tr></thead>
+        <thead><tr><th>Unit ID</th><th>Name</th><th>Kind / Element</th><th>Stats (STR/INT/VIT/AGI or legacy HP/ATK/DEF/SPD)</th><th>Skills</th></tr></thead>
         <tbody>
           {units.map((u) => (
             <tr key={u.unit_id}>
               <td><code>{u.unit_id}</code></td>
               <td><strong>{u.name_en}</strong></td>
               <td><span className={`badge ${u.kind === 'character' ? 'ok' : 'warn'}`}>{u.kind}</span> · {u.element}</td>
-              <td className="mono">{u.base_stats.hp} / {u.base_stats.atk} / {u.base_stats.def} / {u.base_stats.spd}</td>
+              <td className="mono">{u.attributes ? `${u.attributes.base.str} / ${u.attributes.base.int} / ${u.attributes.base.vit} / ${u.attributes.base.agi} · ${u.attributes.power.toUpperCase()}${u.attributes.armor ? ` · armor ${u.attributes.armor}` : ''}` : u.base_stats ? `${u.base_stats.hp} / ${u.base_stats.atk} / ${u.base_stats.def} / ${u.base_stats.spd}` : '—'}</td>
               <td>{u.skills.map((sk) => <div key={sk.skill_id}><code>{sk.type}</code>: {sk.name_en} (CD {sk.cooldown_turns})</div>)}</td>
             </tr>
           ))}

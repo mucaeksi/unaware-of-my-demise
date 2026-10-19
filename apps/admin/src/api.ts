@@ -54,10 +54,17 @@ export interface Character {
   role: string;
   age: number;
   acquisition: string;
-  base_hp: number;
-  base_atk: number;
-  base_def: number;
-  base_spd: number;
+  /** D-27 attributes (docs/combat/STAT_MATH.md); the combat stats are derived from them */
+  power_stat: 'str' | 'int';
+  base_str: number;
+  base_int: number;
+  base_vit: number;
+  base_agi: number;
+  growth_str: number;
+  growth_int: number;
+  growth_vit: number;
+  growth_agi: number;
+  armor: number;
   status: 'active' | 'hidden' | 'retired';
   version: number;
   updated_at: string;

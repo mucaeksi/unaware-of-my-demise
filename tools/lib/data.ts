@@ -13,6 +13,7 @@ import {
   UnitPack,
   type StatusDef
 } from '../../packages/content-schema/src/index';
+import { balanceAttributes } from './balance';
 import { readJson, sha256, fileBytes } from './fsutil';
 
 const NARR = 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data';
@@ -20,6 +21,12 @@ const NARR = 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data';
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 const srcHash = (rel: string): string => sha256(fileBytes(`${NARR}/${rel}`));
+
+/** D-27: STR/INT/VIT/AGI from content/balance/attributes.json; a unit it does not list keeps the narrative's legacy base_stats */
+const stats = (id: string, legacy: Json, rarity?: number): Json => {
+  const attributes = balanceAttributes(id, rarity);
+  return attributes ? { attributes } : { base_stats: legacy.base_stats_level_1, growth_per_level: legacy.growth_per_level };
+};
 
 export function buildRules(): RulesDef {
   const rules = readJson<Json>(`${NARR}/content/battle_rules_part1.json`);
@@ -140,8 +147,7 @@ export function buildCharacter(id: string, artKey = id): UnitDef {
     role: c.combat_role,
     rarity: c.rarity,
     formation_affinity: c.formation_affinity === 'front' || c.formation_affinity === 'rear' ? c.formation_affinity : undefined,
-    base_stats: c.base_stats_level_1,
-    growth_per_level: c.growth_per_level,
+    ...stats(id, c, c.rarity),
     skills: (c.skills as Json[]).map(characterSkill),
     art_key: artKey,
     provenance: { source: `${NARR}/content/characters_part1.json#${id}`, source_sha256: srcHash('content/characters_part1.json') }
@@ -203,8 +209,7 @@ export function buildEnemy(id: string): UnitDef {
     name_en: e.name_en,
     element: e.element,
     role: e.role,
-    base_stats: e.base_stats_level_1,
-    growth_per_level: e.growth_per_level,
+    ...stats(id, e),
     weaknesses: e.weaknesses,
     resistances: e.resistances,
     skills,

@@ -10,17 +10,21 @@
       "role": "tank_bruiser",
       "rarity": 5,
       "formation_affinity": "front",
-      "base_stats": {
-        "hp": 14,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.7,
-        "atk": 0.12,
-        "def": 0.1,
-        "spd": 0.16
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 3,
+          "int": 1,
+          "vit": 5,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.3,
+          "int": 0.1,
+          "vit": 0.5,
+          "agi": 0.15
+        },
+        "armor": 1
       },
       "skills": [
         {
@@ -174,17 +178,20 @@
       "role": "support_dps",
       "rarity": 5,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 11,
-        "atk": 3,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.55,
-        "atk": 0.18,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 3,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.5,
+          "vit": 0.25,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -339,17 +346,20 @@
       "role": "alchemist_dps",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 10,
-        "atk": 3,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.5,
-        "atk": 0.18,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 2,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.5,
+          "vit": 0.25,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -482,17 +492,21 @@
       "role": "tank",
       "rarity": 4,
       "formation_affinity": "front",
-      "base_stats": {
-        "hp": 15,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.75,
-        "atk": 0.12,
-        "def": 0.1,
-        "spd": 0.16
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 3,
+          "int": 1,
+          "vit": 4,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.3,
+          "int": 0.1,
+          "vit": 0.5,
+          "agi": 0.15
+        },
+        "armor": 1
       },
       "skills": [
         {
@@ -614,17 +628,20 @@
       "role": "ranged_dps",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 10,
-        "atk": 3,
-        "def": 1,
-        "spd": 6
-      },
-      "growth_per_level": {
-        "hp": 0.5,
-        "atk": 0.18,
-        "def": 0.05,
-        "spd": 0.24
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 4,
+          "int": 1,
+          "vit": 2,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.5,
+          "int": 0.05,
+          "vit": 0.25,
+          "agi": 0.3
+        }
       },
       "skills": [
         {
@@ -761,17 +778,20 @@
       "role": "healer",
       "rarity": 5,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 12,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.6,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 4,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.35,
+          "agi": 0.2
+        }
       },
       "skills": [
         {
@@ -902,17 +922,20 @@
       "role": "assassin_dps",
       "rarity": 5,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 10,
-        "atk": 3,
-        "def": 1,
-        "spd": 6
-      },
-      "growth_per_level": {
-        "hp": 0.5,
-        "atk": 0.18,
-        "def": 0.05,
-        "spd": 0.24
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 4,
+          "int": 1,
+          "vit": 3,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.5,
+          "int": 0.05,
+          "vit": 0.25,
+          "agi": 0.3
+        }
       },
       "skills": [
         {
@@ -1038,17 +1061,20 @@
       "role": "healer",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 12,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.6,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 3,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.35,
+          "agi": 0.2
+        }
       },
       "skills": [
         {
@@ -1178,17 +1204,20 @@
       "role": "bruiser_dps",
       "rarity": 4,
       "formation_affinity": "front",
-      "base_stats": {
-        "hp": 12,
-        "atk": 3,
-        "def": 2,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.6,
-        "atk": 0.18,
-        "def": 0.1,
-        "spd": 0.2
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 4,
+          "int": 1,
+          "vit": 3,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.45,
+          "int": 0.05,
+          "vit": 0.35,
+          "agi": 0.2
+        }
       },
       "skills": [
         {
@@ -1308,17 +1337,20 @@
       "role": "buffer",
       "rarity": 5,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 11,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.55,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 3,
+          "vit": 4,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.3,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -1454,17 +1486,20 @@
       "role": "debuff_archer",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 11,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.55,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 4,
+          "int": 1,
+          "vit": 2,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.5,
+          "int": 0.05,
+          "vit": 0.25,
+          "agi": 0.3
+        }
       },
       "skills": [
         {
@@ -1593,17 +1628,20 @@
       "role": "buffer_bard",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 11,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.55,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 3,
+          "vit": 3,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.3,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -1729,17 +1767,21 @@
       "role": "tank_support",
       "rarity": 5,
       "formation_affinity": "front",
-      "base_stats": {
-        "hp": 15,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.75,
-        "atk": 0.12,
-        "def": 0.1,
-        "spd": 0.16
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 3,
+          "int": 1,
+          "vit": 5,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.3,
+          "int": 0.1,
+          "vit": 0.5,
+          "agi": 0.15
+        },
+        "armor": 1
       },
       "skills": [
         {
@@ -1876,17 +1918,20 @@
       "role": "debuffer",
       "rarity": 3,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 11,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.55,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 2,
+          "vit": 3,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.3,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -2014,17 +2059,20 @@
       "role": "mage_dps",
       "rarity": 5,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 10,
-        "atk": 3,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.5,
-        "atk": 0.18,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 3,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.5,
+          "vit": 0.25,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -2148,17 +2196,20 @@
       "role": "counter_dps",
       "rarity": 3,
       "formation_affinity": "front",
-      "base_stats": {
-        "hp": 12,
-        "atk": 3,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.6,
-        "atk": 0.18,
-        "def": 0.1,
-        "spd": 0.16
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 3,
+          "int": 1,
+          "vit": 3,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.45,
+          "int": 0.05,
+          "vit": 0.35,
+          "agi": 0.2
+        }
       },
       "skills": [
         {
@@ -2290,17 +2341,20 @@
       "role": "healer_support",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 12,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.6,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 3,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.35,
+          "agi": 0.2
+        }
       },
       "skills": [
         {
@@ -2424,17 +2478,20 @@
       "role": "healer",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 12,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.6,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 4,
+          "vit": 3,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.35,
+          "agi": 0.2
+        }
       },
       "skills": [
         {
@@ -2565,17 +2622,21 @@
       "role": "guard",
       "rarity": 3,
       "formation_affinity": "front",
-      "base_stats": {
-        "hp": 14,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.7,
-        "atk": 0.12,
-        "def": 0.1,
-        "spd": 0.16
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 1,
+          "vit": 4,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.3,
+          "int": 0.1,
+          "vit": 0.5,
+          "agi": 0.15
+        },
+        "armor": 1
       },
       "skills": [
         {
@@ -2696,17 +2757,20 @@
       "role": "control_buffer",
       "rarity": 4,
       "formation_affinity": "rear",
-      "base_stats": {
-        "hp": 11,
-        "atk": 2,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.55,
-        "atk": 0.12,
-        "def": 0.05,
-        "spd": 0.2
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 3,
+          "vit": 3,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.4,
+          "vit": 0.3,
+          "agi": 0.25
+        }
       },
       "skills": [
         {
@@ -2826,17 +2890,19 @@
       "name_en": "Ash Wolf",
       "element": "Ember",
       "role": "flanker",
-      "base_stats": {
-        "hp": 5,
-        "atk": 2,
-        "def": 0,
-        "spd": 6
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.1,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1.5,
+          "int": 0,
+          "vit": 4,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.3,
+          "vit": 2.9,
+          "agi": 0.15
+        }
       },
       "weaknesses": [
         "Tide",
@@ -2905,17 +2971,19 @@
       "name_en": "Bellbound Dead",
       "element": "Veil",
       "role": "swarm",
-      "base_stats": {
-        "hp": 5,
-        "atk": 1,
-        "def": 0,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.05,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 6,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.3,
+          "vit": 3.45,
+          "agi": 0.1
+        }
       },
       "weaknesses": [
         "Dawn",
@@ -2985,17 +3053,20 @@
       "name_en": "Bridge Revenant",
       "element": "Veil",
       "role": "spectral_guard",
-      "base_stats": {
-        "hp": 7,
-        "atk": 1,
-        "def": 1,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.35,
-        "atk": 0.05,
-        "def": 0.05,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1,
+          "int": 0,
+          "vit": 7,
+          "agi": 1
+        },
+        "growth": {
+          "str": 0.25,
+          "vit": 4.35,
+          "agi": 0.05
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Dawn",
@@ -3064,17 +3135,20 @@
       "name_en": "Chain Cultist",
       "element": "Veil",
       "role": "support",
-      "base_stats": {
-        "hp": 5,
-        "atk": 1,
-        "def": 0,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.05,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 0,
+          "int": 2,
+          "vit": 9,
+          "agi": 3
+        },
+        "growth": {
+          "int": 0.3,
+          "vit": 3.3,
+          "agi": 0.1
+        },
+        "armor": 1
       },
       "weaknesses": [
         "Dawn",
@@ -3137,17 +3211,20 @@
       "name_en": "Choir Knight",
       "element": "Dawn",
       "role": "elite_guard",
-      "base_stats": {
-        "hp": 9,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.45,
-        "atk": 0.1,
-        "def": 0.1,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 10,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.4,
+          "vit": 4.35,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Veil",
@@ -3235,17 +3312,20 @@
       "name_en": "Corrupted Crown Guard",
       "element": "Stone",
       "role": "elite_guard",
-      "base_stats": {
-        "hp": 9,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.45,
-        "atk": 0.1,
-        "def": 0.1,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 10,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.4,
+          "vit": 4.35,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Gale",
@@ -3318,17 +3398,20 @@
       "name_en": "Corrupted Mercenary",
       "element": "Ember",
       "role": "bruiser",
-      "base_stats": {
-        "hp": 7,
-        "atk": 2,
-        "def": 1,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.35,
-        "atk": 0.1,
-        "def": 0.05,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 9,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.35,
+          "vit": 3.6,
+          "agi": 0.1
+        },
+        "armor": 1
       },
       "weaknesses": [
         "Tide",
@@ -3405,17 +3488,20 @@
       "name_en": "Crownless Knight",
       "element": "Stone",
       "role": "elite_guard",
-      "base_stats": {
-        "hp": 9,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.45,
-        "atk": 0.1,
-        "def": 0.1,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 10,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.4,
+          "vit": 4.35,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Veil",
@@ -3482,17 +3568,20 @@
       "name_en": "Eclipse Sentinel",
       "element": "Veil",
       "role": "warder",
-      "base_stats": {
-        "hp": 6,
-        "atk": 1,
-        "def": 1,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.3,
-        "atk": 0.05,
-        "def": 0.05,
-        "spd": 0
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 0,
+          "int": 2,
+          "vit": 4,
+          "agi": 3
+        },
+        "growth": {
+          "int": 0.35,
+          "vit": 2.45,
+          "agi": 0.1
+        },
+        "armor": 1
       },
       "weaknesses": [
         "Dawn",
@@ -3555,17 +3644,19 @@
       "name_en": "Estate Wraith",
       "element": "Veil",
       "role": "spectral_caster",
-      "base_stats": {
-        "hp": 5,
-        "atk": 2,
-        "def": 0,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.1,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 0,
+          "int": 2,
+          "vit": 4,
+          "agi": 3
+        },
+        "growth": {
+          "int": 0.35,
+          "vit": 2.45,
+          "agi": 0.1
+        }
       },
       "weaknesses": [
         "Dawn",
@@ -3636,17 +3727,19 @@
       "name_en": "Glass Viper",
       "element": "Tide",
       "role": "assassin",
-      "base_stats": {
-        "hp": 4,
-        "atk": 2,
-        "def": 0,
-        "spd": 6
-      },
-      "growth_per_level": {
-        "hp": 0.2,
-        "atk": 0.1,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1.5,
+          "int": 0,
+          "vit": 4,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.3,
+          "vit": 2.9,
+          "agi": 0.15
+        }
       },
       "weaknesses": [
         "Ember",
@@ -3715,17 +3808,19 @@
       "name_en": "Hollow Cleric",
       "element": "Veil",
       "role": "ranged_caster",
-      "base_stats": {
-        "hp": 5,
-        "atk": 2,
-        "def": 0,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.1,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 0,
+          "int": 2,
+          "vit": 4,
+          "agi": 3
+        },
+        "growth": {
+          "int": 0.35,
+          "vit": 2.45,
+          "agi": 0.1
+        }
       },
       "weaknesses": [
         "Dawn",
@@ -3812,17 +3907,20 @@
       "name_en": "Hollow Pilgrim",
       "element": "Veil",
       "role": "slow_vanguard",
-      "base_stats": {
-        "hp": 8,
-        "atk": 1,
-        "def": 2,
-        "spd": 3
-      },
-      "growth_per_level": {
-        "hp": 0.4,
-        "atk": 0.05,
-        "def": 0.1,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1,
+          "int": 0,
+          "vit": 7,
+          "agi": 1
+        },
+        "growth": {
+          "str": 0.25,
+          "vit": 4.35,
+          "agi": 0.05
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Dawn",
@@ -3891,17 +3989,19 @@
       "name_en": "Inkbound Dead",
       "element": "Veil",
       "role": "ranged_caster",
-      "base_stats": {
-        "hp": 5,
-        "atk": 2,
-        "def": 0,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.1,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 0,
+          "int": 2,
+          "vit": 4,
+          "agi": 3
+        },
+        "growth": {
+          "int": 0.35,
+          "vit": 2.45,
+          "agi": 0.1
+        }
       },
       "weaknesses": [
         "Dawn",
@@ -3970,17 +4070,20 @@
       "name_en": "Lost-Vow Knight",
       "element": "Stone",
       "role": "elite_duelist",
-      "base_stats": {
-        "hp": 8,
-        "atk": 2,
-        "def": 1,
-        "spd": 6
-      },
-      "growth_per_level": {
-        "hp": 0.4,
-        "atk": 0.1,
-        "def": 0.05,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 10,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.4,
+          "vit": 4.35,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Veil",
@@ -4052,17 +4155,20 @@
       "name_en": "Noble Retainer",
       "element": "Dawn",
       "role": "support_guard",
-      "base_stats": {
-        "hp": 7,
-        "atk": 1,
-        "def": 1,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.35,
-        "atk": 0.05,
-        "def": 0.05,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1,
+          "int": 0,
+          "vit": 7,
+          "agi": 1
+        },
+        "growth": {
+          "str": 0.25,
+          "vit": 4.35,
+          "agi": 0.05
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Veil",
@@ -4126,17 +4232,20 @@
       "name_en": "Orchard Ghoul",
       "element": "Veil",
       "role": "bruiser",
-      "base_stats": {
-        "hp": 7,
-        "atk": 2,
-        "def": 1,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 0.35,
-        "atk": 0.1,
-        "def": 0.05,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2,
+          "int": 0,
+          "vit": 9,
+          "agi": 2
+        },
+        "growth": {
+          "str": 0.35,
+          "vit": 3.6,
+          "agi": 0.1
+        },
+        "armor": 1
       },
       "weaknesses": [
         "Dawn",
@@ -4217,17 +4326,19 @@
       "name_en": "Red Vial Alchemist",
       "element": "Ember",
       "role": "ranged_caster",
-      "base_stats": {
-        "hp": 5,
-        "atk": 2,
-        "def": 0,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.1,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "int",
+        "base": {
+          "str": 0,
+          "int": 2,
+          "vit": 4,
+          "agi": 3
+        },
+        "growth": {
+          "int": 0.35,
+          "vit": 2.45,
+          "agi": 0.1
+        }
       },
       "weaknesses": [
         "Tide",
@@ -4296,17 +4407,19 @@
       "name_en": "Red Vial Scout",
       "element": "Gale",
       "role": "flanker",
-      "base_stats": {
-        "hp": 5,
-        "atk": 2,
-        "def": 0,
-        "spd": 6
-      },
-      "growth_per_level": {
-        "hp": 0.25,
-        "atk": 0.1,
-        "def": 0,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1.5,
+          "int": 0,
+          "vit": 4,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.3,
+          "vit": 2.9,
+          "agi": 0.15
+        }
       },
       "weaknesses": [
         "Stone",
@@ -4381,17 +4494,20 @@
       "name_en": "Royal Hollow",
       "element": "Stone",
       "role": "armored_vanguard",
-      "base_stats": {
-        "hp": 9,
-        "atk": 1,
-        "def": 2,
-        "spd": 3
-      },
-      "growth_per_level": {
-        "hp": 0.45,
-        "atk": 0.05,
-        "def": 0.1,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 1,
+          "int": 0,
+          "vit": 7,
+          "agi": 1
+        },
+        "growth": {
+          "str": 0.25,
+          "vit": 4.35,
+          "agi": 0.05
+        },
+        "armor": 3
       },
       "weaknesses": [
         "Veil",
@@ -4472,17 +4588,21 @@
       "name_en": "The Ash-Maw",
       "element": "Ember",
       "role": "beast_boss",
-      "base_stats": {
-        "hp": 20,
-        "atk": 2,
-        "def": 2,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 1,
-        "atk": 0.1,
-        "def": 0.1,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2.5,
+          "int": 2,
+          "vit": 31,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.4,
+          "int": 0.2,
+          "vit": 9.7,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Stone",
@@ -4619,17 +4739,21 @@
       "name_en": "The Bell-Widow",
       "element": "Veil",
       "role": "ritual_boss",
-      "base_stats": {
-        "hp": 22,
-        "atk": 2,
-        "def": 3,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 1.1,
-        "atk": 0.1,
-        "def": 0.15,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2.5,
+          "int": 2,
+          "vit": 31,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.4,
+          "int": 0.2,
+          "vit": 9.7,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Dawn",
@@ -4774,17 +4898,21 @@
       "name_en": "Captain Rusk",
       "element": "Gale",
       "role": "duelist_boss",
-      "base_stats": {
-        "hp": 24,
-        "atk": 2,
-        "def": 3,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 1.2,
-        "atk": 0.1,
-        "def": 0.15,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2.5,
+          "int": 2,
+          "vit": 31,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.4,
+          "int": 0.2,
+          "vit": 9.7,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Stone",
@@ -4946,17 +5074,21 @@
       "name_en": "The Red Vial Matron",
       "element": "Ember",
       "role": "alchemist_boss",
-      "base_stats": {
-        "hp": 26,
-        "atk": 2,
-        "def": 4,
-        "spd": 4
-      },
-      "growth_per_level": {
-        "hp": 1.3,
-        "atk": 0.1,
-        "def": 0.2,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2.5,
+          "int": 2,
+          "vit": 31,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.4,
+          "int": 0.2,
+          "vit": 9.7,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Tide",
@@ -5106,17 +5238,21 @@
       "name_en": "Marshal Oren",
       "element": "Stone",
       "role": "commander_boss",
-      "base_stats": {
-        "hp": 28,
-        "atk": 3,
-        "def": 4,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 1.4,
-        "atk": 0.15,
-        "def": 0.2,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2.5,
+          "int": 2,
+          "vit": 31,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.4,
+          "int": 0.2,
+          "vit": 9.7,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Gale",
@@ -5285,17 +5421,21 @@
       "name_en": "The Ashen Lord's Wraith",
       "element": "Veil",
       "role": "spectral_boss",
-      "base_stats": {
-        "hp": 30,
-        "atk": 3,
-        "def": 5,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 1.5,
-        "atk": 0.15,
-        "def": 0.25,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2.5,
+          "int": 2,
+          "vit": 31,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.4,
+          "int": 0.2,
+          "vit": 9.7,
+          "agi": 0.1
+        },
+        "armor": 2
       },
       "weaknesses": [
         "Dawn",
@@ -5466,17 +5606,21 @@
       "name_en": "Eclipse Construct",
       "element": "Veil",
       "role": "mythic_construct_boss",
-      "base_stats": {
-        "hp": 32,
-        "atk": 3,
-        "def": 5,
-        "spd": 5
-      },
-      "growth_per_level": {
-        "hp": 1.6,
-        "atk": 0.15,
-        "def": 0.25,
-        "spd": 0
+      "attributes": {
+        "power": "str",
+        "base": {
+          "str": 2.5,
+          "int": 2,
+          "vit": 31,
+          "agi": 3
+        },
+        "growth": {
+          "str": 0.4,
+          "int": 0.2,
+          "vit": 9.7,
+          "agi": 0.1
+        },
+        "armor": 3
       },
       "weaknesses": [
         "Stone",

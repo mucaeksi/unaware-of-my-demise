@@ -28,7 +28,7 @@ function fixture() {
 describe('closed content grammar', () => {
   it('validates unlinked story, media, locale and finite UI references and derives signed capabilities', () => {
     const { files } = fixture(); expect(() => validateContentSet(files)).not.toThrow();
-    expect(requiredContentCapabilities(files)).toEqual(['locale_v1', 'presentation_v1', 'story_flags_v1', 'vfx_v1']);
+    expect(requiredContentCapabilities(files)).toEqual(['attributes_v1', 'locale_v1', 'presentation_v1', 'story_flags_v1', 'vfx_v1']);
   });
   it.each(['unknown JSON', 'unknown op', 'missing voice', 'mismatched caption', 'unknown locale key', 'invalid UTF8', 'oversized JSON'] as const)('rejects %s before admission', (kind) => {
     const { files, pack } = fixture();

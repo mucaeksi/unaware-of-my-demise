@@ -12,7 +12,7 @@ const j = (method: string, body: unknown, as?: string) => ({ method, body: JSON.
 beforeAll(async () => {
   const rows: [string, number][] = [['ops_five_a', 5], ['ops_five_b', 5], ['ops_four_a', 4], ['ops_four_b', 4], ['ops_three_a', 3], ['ops_three_b', 3]];
   for (const [id, rarity] of rows)
-    await db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_hp, base_atk, base_def, base_spd) VALUES (?1,?1,?2,'Stone','tank',20,'gacha',10,2,2,4)").bind(id, rarity).run();
+    await db().prepare("INSERT OR IGNORE INTO characters (id, name_en, rarity, element, role, age, acquisition, base_vit, base_str, base_int, base_agi) VALUES (?1,?1,?2,'Stone','tank',20,'gacha',10,2,2,4)").bind(id, rarity).run();
   await db().prepare("INSERT OR IGNORE INTO admin_users (email, role, created_by) VALUES ('viewer@example.com','viewer','test'), ('operator@example.com','operator','test')").run();
 });
 
