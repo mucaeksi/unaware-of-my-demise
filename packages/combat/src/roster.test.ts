@@ -57,11 +57,12 @@ describe('the full playable roster and the regular enemies run in the engine', (
   const battles: { enc: Encounter; actions: PlayerAction[]; log: BattleEvent[] }[] = [];
 
   it('every character and enemy can fight: 5v5 rotations finish without errors', () => {
-    for (let i = 0; i < 32; i++) {
-      const party = Array.from({ length: 5 }, (_, k) => characterIds[((i % 4) * 5 + k) % characterIds.length] as string);
+    const groups = Math.ceil(characterIds.length / 5);
+    for (let i = 0; i < 40; i++) {
+      const party = Array.from({ length: 5 }, (_, k) => characterIds[((i % groups) * 5 + k) % characterIds.length] as string);
       const foes = Array.from({ length: 5 }, (_, k) => enemyIds[(i * 3 + k * 4) % enemyIds.length] as string);
       if (new Set(party).size < 5) continue;
-      const boosted = i % 8 >= 4;
+      const boosted = i % (groups * 2) >= groups;
       // boosted rotations also fight a stronger enemy line (D-27 enemies hit hard enough at +8 levels to drop a slow front-liner before her turn, so +4)
       const enc = boosted ? encounter(1000 + i, party, foes, 10, 14) : encounter(1000 + i, party, foes); // half of the rotations open with full Focus so every Ultimate is exercised; the rest are replayable as-is
       const { battle, actions } = play(enc, boosted ? 100 : 0);

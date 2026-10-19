@@ -1,6 +1,7 @@
 import { Monitoring } from './pages/Monitoring';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { api, type ApiError, type Health, type Me } from './api';
+import { Animations } from './pages/Animations';
 import { Assets } from './pages/Assets';
 import { Audit } from './pages/Audit';
 import { Banners } from './pages/Banners';
@@ -14,7 +15,7 @@ import { Players } from './pages/Players';
 import { Releases } from './pages/Releases';
 import { Shop } from './pages/Shop';
 
-export const PAGES = ['Dashboard', 'Monitoring', 'Development', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
+export const PAGES = ['Dashboard', 'Monitoring', 'Development', 'Animations', 'Players', 'Banners', 'Economy', 'Shop', 'Flags', 'Catalog', 'Characters', 'Assets', 'Patches', 'Audit'] as const;
 export type Page = (typeof PAGES)[number];
 
 export function useToast(): { toast: string | null; say: (m: string) => void } {
@@ -46,7 +47,15 @@ export function ErrorNotice({ error }: { error: unknown }): ReactNode {
 }
 
 export function App(): ReactNode {
-  const [page, setPage] = useState<Page>('Dashboard');
+  const [page, setPage] = useState<Page>(() => {
+    if (typeof window !== 'undefined') {
+      const qPage = new URLSearchParams(window.location.search).get('page');
+      if (qPage && (PAGES as readonly string[]).includes(qPage)) {
+        return qPage as Page;
+      }
+    }
+    return 'Animations';
+  });
   const [health, setHealth] = useState<Health | null>(null);
   const [me, setMe] = useState<Me | null>(null);
   const [err, setErr] = useState<unknown>(null);
@@ -63,7 +72,7 @@ export function App(): ReactNode {
         <div className="brand">UOMD CONTROL CENTER</div>
         {PAGES.map((p) => (
           <button key={p} aria-current={p === page ? 'page' : undefined} onClick={() => setPage(p)}>
-            {p}
+            {p === 'Animations' ? '🎬 Animations' : p}
           </button>
         ))}
         <div className="who">
@@ -71,11 +80,12 @@ export function App(): ReactNode {
             {health ? <span className="badge ok">{health.environment}</span> : null}
             {me?.role ? <span className="badge info">{me.role}</span> : null}
           </div>
-          <div>{me ? `${me.identity} · ${me.role}` : 'not signed in'}</div>
+          <div>{me ? `${me.identity} · ${me.role}` : 'local studio mode'}</div>
         </div>
       </nav>
       <main>
-        {!me ? <ErrorNotice error={err} /> : null}
+        {!me && page !== 'Animations' ? <ErrorNotice error={err} /> : null}
+        {page === 'Animations' ? <Animations me={me} say={say} /> : null}
         {me && page === 'Monitoring' ? <Monitoring navigate={setPage} say={say} /> : null}
         {me && page === 'Dashboard' ? <Dashboard health={health} navigate={setPage} say={say} /> : null}
         {me && page === 'Development' ? <Development me={me} say={say} /> : null}

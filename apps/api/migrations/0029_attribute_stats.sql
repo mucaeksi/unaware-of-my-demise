@@ -14,6 +14,8 @@ ALTER TABLE characters ADD COLUMN power_stat TEXT NOT NULL DEFAULT 'str' CHECK (
 ALTER TABLE characters ADD COLUMN armor INTEGER NOT NULL DEFAULT 0 CHECK (armor BETWEEN 0 AND 100);
 UPDATE characters SET power_stat = 'str', base_str = 3, base_int = 1, base_vit = 5, base_agi = 2, growth_str = 0.3, growth_int = 0.1, growth_vit = 0.5, growth_agi = 0.15, armor = 1 WHERE id = 'mahmut';
 UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 4, base_vit = 3, base_agi = 3, growth_str = 0.05, growth_int = 0.5, growth_vit = 0.25, growth_agi = 0.25, armor = 0 WHERE id = 'fadyme';
+UPDATE characters SET power_stat = 'str', base_str = 3, base_int = 1, base_vit = 5, base_agi = 2, growth_str = 0.3, growth_int = 0.1, growth_vit = 0.5, growth_agi = 0.15, armor = 1 WHERE id = 'mahmut';
+UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 4, base_vit = 3, base_agi = 3, growth_str = 0.05, growth_int = 0.5, growth_vit = 0.25, growth_agi = 0.25, armor = 0 WHERE id = 'fadyme';
 UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 4, base_vit = 2, base_agi = 3, growth_str = 0.05, growth_int = 0.5, growth_vit = 0.25, growth_agi = 0.25, armor = 0 WHERE id = 'kera_voss';
 UPDATE characters SET power_stat = 'str', base_str = 3, base_int = 1, base_vit = 4, base_agi = 2, growth_str = 0.3, growth_int = 0.1, growth_vit = 0.5, growth_agi = 0.15, armor = 1 WHERE id = 'brin_alder';
 UPDATE characters SET power_stat = 'str', base_str = 4, base_int = 1, base_vit = 2, base_agi = 4, growth_str = 0.5, growth_int = 0.05, growth_vit = 0.25, growth_agi = 0.3, armor = 0 WHERE id = 'nixie_vale';
@@ -32,6 +34,11 @@ UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 4, base_vit =
 UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 4, base_vit = 3, base_agi = 2, growth_str = 0.05, growth_int = 0.4, growth_vit = 0.35, growth_agi = 0.2, armor = 0 WHERE id = 'iona_mist';
 UPDATE characters SET power_stat = 'str', base_str = 2, base_int = 1, base_vit = 4, base_agi = 2, growth_str = 0.3, growth_int = 0.1, growth_vit = 0.5, growth_agi = 0.15, armor = 1 WHERE id = 'jori_flint';
 UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 3, base_vit = 3, base_agi = 3, growth_str = 0.05, growth_int = 0.4, growth_vit = 0.3, growth_agi = 0.25, armor = 0 WHERE id = 'marek_vane';
+UPDATE characters SET power_stat = 'str', base_str = 4, base_int = 1, base_vit = 4, base_agi = 2, growth_str = 0.45, growth_int = 0.05, growth_vit = 0.35, growth_agi = 0.2, armor = 0 WHERE id = 'garrick_cinder';
+UPDATE characters SET power_stat = 'str', base_str = 3, base_int = 1, base_vit = 5, base_agi = 2, growth_str = 0.3, growth_int = 0.1, growth_vit = 0.5, growth_agi = 0.15, armor = 1 WHERE id = 'corbin_locke';
+UPDATE characters SET power_stat = 'str', base_str = 3, base_int = 1, base_vit = 4, base_agi = 2, growth_str = 0.3, growth_int = 0.1, growth_vit = 0.5, growth_agi = 0.15, armor = 1 WHERE id = 'cassian_thorne';
+UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 4, base_vit = 2, base_agi = 3, growth_str = 0.05, growth_int = 0.5, growth_vit = 0.25, growth_agi = 0.25, armor = 0 WHERE id = 'dorian_kesk';
+UPDATE characters SET power_stat = 'int', base_str = 1, base_int = 3, base_vit = 3, base_agi = 2, growth_str = 0.05, growth_int = 0.4, growth_vit = 0.35, growth_agi = 0.2, armor = 0 WHERE id = 'rowan_reed';
 UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_mahmut_signature' AND slot = 'weapon';
 UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_fadyme_signature' AND slot = 'weapon';
 UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_kera_voss_signature' AND slot = 'weapon';
@@ -52,6 +59,11 @@ UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","sec
 UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_iona_mist_signature' AND slot = 'weapon';
 UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_jori_flint_signature' AND slot = 'weapon';
 UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_marek_vane_signature' AND slot = 'weapon';
+UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_garrick_cinder_signature' AND slot = 'weapon';
+UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_corbin_locke_signature' AND slot = 'weapon';
+UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_cassian_thorne_signature' AND slot = 'weapon';
+UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_dorian_kesk_signature' AND slot = 'weapon';
+UPDATE gear_defs SET base_json = '{"power":2.5,"secondary_stat":"role_stat","secondary_value":2}', growth_json = '{"power":0.3}' WHERE gear_id = 'weapon_rowan_reed_signature' AND slot = 'weapon';
 UPDATE gear_defs SET base_json = '{"power":1.04,"secondary_stat":"role_stat","secondary_value":1}', growth_json = '{"power":0.12}' WHERE gear_id = 'weapon_arming_sword_3_01' AND slot = 'weapon';
 UPDATE gear_defs SET base_json = '{"power":1.14,"secondary_stat":"role_stat","secondary_value":1}', growth_json = '{"power":0.15}' WHERE gear_id = 'weapon_arming_sword_3_02' AND slot = 'weapon';
 UPDATE gear_defs SET base_json = '{"power":1.24,"secondary_stat":"role_stat","secondary_value":1}', growth_json = '{"power":0.15}' WHERE gear_id = 'weapon_arming_sword_3_03' AND slot = 'weapon';

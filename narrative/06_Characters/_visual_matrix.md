@@ -26,6 +26,11 @@ Rule: no two characters may share **all three** of silhouette anchor, hair and d
 | Iona | Prompt | Lantern raised, listening | Long straight black with blue sheen, olive skin | Deep navy, lantern amber | Tidal censer + lantern |
 | Jori | Prompt | Shield first, apron | Short ginger tied up, soot | Soot black, iron, copper | Hammer + round shield |
 | Marek | Prompt | Walking, viola on back | Long dark-brown tied, beard | Road brown, faded blue | Spear-horn + viola |
+| Garrick | Prompt | Planted heavy vanguard, furnace-pauldron | Cropped walnut-brown + bronze-russet streak, beard, jaw burn scar | Burnished brass, charred iron, ember crimson | Ignited pyre-halberd |
+| Corbin | Prompt | Sluice-wheel buckler on left arm, open oilskin | Wavy damp raven-black, sea-teal eyes, three-day stubble | Storm-slate blue, verdigris teal, tarnished brass | Chained river harpoon + sluice-wheel |
+| Cassian | Prompt | Upright templar, clapper-ring at hip | Swept-back deep auburn-chestnut, clean-shaven scarred chin | Dove grey, liturgical gold, blackened iron | Squared-tip reliquary greatsword |
+| Dorian | Prompt | Side-angled duelist, wax-stick bandolier | Tousled charcoal-black with dark-plum undertones, mole under eye | Smoked plum-charcoal, antique pewter, wax crimson | Smoked-glass rapier + heated brass seal-iron |
+| Rowan | Prompt | Hooked brazier pole held high, rain-capelet | Tousled sandy-hazel brown, freckles, earnest face | Warm beeswax gold, weathered oak, shrine ivory | Hooked wayshrine brazier + wood-chisel |
 
 **Known risk:** Fadyme, Kera and Nixie all have light hair in canon art. No new character may use pale blonde, ash or silver hair (except Vespera's single frost streak). Kera must always be identified by her hat, Nixie by her open face and teal/ochre cloak.
 

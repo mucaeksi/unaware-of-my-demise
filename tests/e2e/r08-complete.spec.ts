@@ -36,8 +36,8 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     }, { releaseId });
     await waitScene(page, 'Story');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Story').bodyText?.text)).toBe('Sentetik aktarım altyazısı.');
-    expect(await page.evaluate(() => JSON.parse(sessionStorage.getItem('uomd.story.checkpoint.v1')!).state.flags)).toEqual({ fixture_seen: true });
-    expect(await page.evaluate(() => !!(window as any).__UOMD__.game.scene.getScene('Story').stage.layers.get('fixture_layer').filter)).toBe(true);
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem(`uomd.continuity.v1:${(window as any).__UOMD__.services.flowKey()}`)!).stories['story/r08_probe.json'].state.flags)).toEqual({ fixture_seen: true });
+    expect(await page.evaluate(() => { const layer = (window as any).__UOMD__.game.scene.getScene('Story').stage.layers.get('fixture_layer'); return !!layer?.mask && layer.image.mask === layer.mask; })).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-layer-locale.png` });
     await tap(page, info, 960, 420);
     const dialog = page.getByRole('dialog', { name: 'Story video' }); await expect(dialog).toBeVisible();
@@ -52,7 +52,7 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
     await dialog.getByRole('button', { name: 'PLAY', exact: true }).click(); await expect(dialog).not.toBeVisible({ timeout: 20_000 });
     await waitScene(page, 'ContentPanel');
     await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('ContentPanel').texts().includes('Yalnızca sentetik çalışma testi.'))).toBe(true);
-    expect(await page.evaluate(() => { const scene = (window as any).__UOMD__.game.scene; return scene.getIndex('ContentPanel') > scene.getIndex('Story'); })).toBe(true);
+    expect(await page.evaluate(() => { const scene = (window as any).__UOMD__.game.scene; const order = scene.getScenes(false); const story = order.indexOf(scene.getScene('Story')); return story >= 0 && order.indexOf(scene.getScene('ContentPanel')) > story; })).toBe(true);
     await page.waitForTimeout(450); await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-notice.png` });
     await tap(page, info, 960, 820); await waitScene(page, 'Title');
     const recruited = await page.evaluate(async ({ releaseId, invitation, hero }) => (window as any).__UOMD__.services.api.selectRecruit(releaseId, invitation, hero), { releaseId, invitation: INVITATION, hero: HERO });
@@ -73,7 +73,7 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
       u.game.scene.getScene('Character').nav.start('Battle', { encounterPath: 'encounters/r08_probe.json', nodeId: node, releaseId, party: started.party, sessionId: started.sessionId, onBack: (s: any) => s.nav.start('Title'), onDone: (s: any) => s.nav.start('Title') });
     }, { releaseId, node: NODE });
     await waitScene(page, 'Battle');
-    await expect.poll(() => page.evaluate(() => [...(window as any).__UOMD__.game.scene.getScene('Battle').views.values()].some((v: any) => v.unitName === 'Synthetic R08 Probe' && v.sprite.anims.isPlaying))).toBe(true);
+    await expect.poll(() => page.evaluate(() => [...(window as any).__UOMD__.game.scene.getScene('Battle').views.values()].some((v: any) => v.unitName === 'Synthetic R08 Probe' && !!v.frames))).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-r08-new-hero-battle.png` });
     const claim = page.waitForResponse((response) => response.url().endsWith('/api/v1/progress/battle') && response.request().method() === 'POST');
     await finishBattleWithPolicy(page); const verified = await claim; expect(verified.status()).toBe(200); expect(await verified.json()).toMatchObject({ stars: 3, ration: { spent: 0 }, repeatRewardsAllowed: false });

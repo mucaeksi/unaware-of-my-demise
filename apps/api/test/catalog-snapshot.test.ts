@@ -41,7 +41,7 @@ it('exports a deterministic bounded complete catalog from real canonical D1 rows
   expect(snapshot.sha256).toBe(await sha256Hex(snapshot.json));
   expect(snapshot.bytes).toBe(new TextEncoder().encode(snapshot.json).byteLength);
   expect(snapshot.bytes).toBeLessThanOrEqual(MAX_CATALOG_BYTES);
-  expect(snapshot.counts).toEqual({ characters: 20, skills: 80, items: 18, gear: 258, sets: 7, weapon_types: 20, banners: 12 });
+  expect(snapshot.counts).toEqual({ characters: 25, skills: 100, items: 18, gear: 263, sets: 7, weapon_types: 20, banners: 12 });
   validateContentSet(new Map([...files.map((f) => [f.path, f.bytes] as const), [CATALOG_PATH, new TextEncoder().encode(snapshot.json)]]));
 });
 

@@ -59,7 +59,7 @@ describe('validateContentSet', () => {
     expect(validateContentSet(load(join(ROOT, 'base')))).toMatchObject({ nodes: 3, units: 4 });
   });
   it('accepts base + the Part I campaign (35 stages, the full cast, placeholder art) as one effective set', () => {
-    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 54, units: 47 });
+    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 54, units: 52 }); // 25 heroes, 20 enemies, 7 bosses
   });
   it.each(['duplicate item', 'duplicate choice', 'unknown hero', 'wrong rarity', 'battle gate', 'story gate', 'source hash'] as const)('rejects recruit selector %s', (kind) => {
     const files = campaign();

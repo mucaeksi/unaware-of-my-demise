@@ -2,7 +2,7 @@
   "schema_version": 1,
   "pack_id": "unaware_of_my_demise.part1.characters.v1",
   "game_title": "Unaware of My Demise",
-  "character_count": 20,
+  "character_count": 25,
   "level_cap": 20,
   "stat_formula_note": "Compact combat scale: level-one heroes use 10-15 HP and 2-3 ATK; growth is a small flat increment derived from the level-one stat and rounded half up.",
   "characters": [
@@ -55,10 +55,10 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0,
-            8.0
+            100,
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -70,7 +70,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "physical",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "apply_status",
@@ -95,8 +95,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            180.0,
-            50.0
+            180,
+            50
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -135,7 +135,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            60.0
+            60
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -184,8 +184,8 @@
           "scale_stat": "atk",
           "multiplier": 2.2,
           "multipliers_pct": [
-            220.0,
-            120.0
+            220,
+            120
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -268,9 +268,9 @@
           "element": "Veil",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -282,7 +282,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "magic",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "gain_focus",
@@ -306,8 +306,8 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0,
-            100.0
+            160,
+            100
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -331,7 +331,7 @@
               "op": "heal",
               "target_selector_id": "lowest_hp_ally",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             }
           ],
           "auto_priority": 30
@@ -346,8 +346,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            50.0,
-            8.0
+            50,
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -389,8 +389,8 @@
           "scale_stat": "atk",
           "multiplier": 1.8,
           "multipliers_pct": [
-            180.0,
-            40.0
+            180,
+            40
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -482,9 +482,9 @@
           "element": "Ember",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -494,7 +494,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -513,7 +513,7 @@
           "scale_stat": "atk",
           "multiplier": 1.5,
           "multipliers_pct": [
-            150.0
+            150
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -548,8 +548,8 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0,
-            40.0
+            10,
+            40
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -596,9 +596,9 @@
           "scale_stat": "atk",
           "multiplier": 1.9,
           "multipliers_pct": [
-            190.0,
-            10.0,
-            30.0
+            190,
+            10,
+            30
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -678,10 +678,10 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0,
-            5.0
+            100,
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -693,7 +693,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "grant_shield",
@@ -715,7 +715,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            15.0
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -749,7 +749,7 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -780,8 +780,8 @@
           "scale_stat": "atk",
           "multiplier": 1.7,
           "multipliers_pct": [
-            170.0,
-            100.0
+            170,
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -799,7 +799,7 @@
               "op": "grant_shield",
               "target_selector_id": "all_allies",
               "scale_stat": "def",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "duration_turns": 2
             }
           ],
@@ -858,9 +858,9 @@
           "element": "Gale",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -870,7 +870,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -889,8 +889,8 @@
           "scale_stat": "atk",
           "multiplier": 1.7,
           "multipliers_pct": [
-            170.0,
-            15.0
+            170,
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -925,7 +925,7 @@
           "scale_stat": "atk",
           "multiplier": 0.05,
           "multipliers_pct": [
-            5.0
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -973,9 +973,9 @@
           "element": "Gale",
           "target_rule": "highest_atk_enemy",
           "scale_stat": "atk",
-          "multiplier": 3.0,
+          "multiplier": 3,
           "multipliers_pct": [
-            300.0
+            300
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -987,7 +987,7 @@
               "target_selector_id": "enemy_with_highest_atk",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 3.0
+              "multiplier": 3
             },
             {
               "op": "gain_focus",
@@ -1055,8 +1055,8 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0,
-            20.0
+            90,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1089,7 +1089,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            110.0
+            110
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1122,8 +1122,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            25.0,
-            80.0
+            25,
+            80
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1167,8 +1167,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            220.0,
-            10.0
+            220,
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1245,7 +1245,7 @@
           "scale_stat": "atk",
           "multiplier": 1.1,
           "multipliers_pct": [
-            110.0
+            110
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1274,8 +1274,8 @@
           "scale_stat": "atk",
           "multiplier": 1.8,
           "multipliers_pct": [
-            180.0,
-            30.0
+            180,
+            30
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1311,7 +1311,7 @@
           "scale_stat": "atk",
           "multiplier": 0.5,
           "multipliers_pct": [
-            50.0
+            50
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1346,8 +1346,8 @@
           "scale_stat": "atk",
           "multiplier": 3.3,
           "multipliers_pct": [
-            330.0,
-            100.0
+            330,
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1366,7 +1366,7 @@
               "target_selector_id": "random_other_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "when": {
                 "predicate": "last_primary_target_defeated"
               },
@@ -1431,8 +1431,8 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0,
-            15.0
+            90,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1465,8 +1465,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            170.0,
-            10.0
+            170,
+            10
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1537,8 +1537,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            180.0,
-            35.0
+            180,
+            35
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1618,7 +1618,7 @@
           "scale_stat": "atk",
           "multiplier": 1.05,
           "multipliers_pct": [
-            105.0
+            105
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1647,8 +1647,8 @@
           "scale_stat": "atk",
           "multiplier": 1.8,
           "multipliers_pct": [
-            180.0,
-            25.0
+            180,
+            25
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1717,7 +1717,7 @@
           "scale_stat": "atk",
           "multiplier": 2.1,
           "multipliers_pct": [
-            210.0
+            210
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1795,9 +1795,9 @@
           "element": "Dawn",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1807,7 +1807,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -1826,8 +1826,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            18.0,
-            10.0
+            18,
+            10
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1902,8 +1902,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            20.0,
-            15.0
+            20,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1989,10 +1989,10 @@
           "element": "Tide",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0,
-            20.0
+            100,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2004,7 +2004,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "apply_status",
@@ -2026,8 +2026,8 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0,
-            15.0
+            160,
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2060,7 +2060,7 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2092,8 +2092,8 @@
           "scale_stat": "atk",
           "multiplier": 1.75,
           "multipliers_pct": [
-            175.0,
-            10.0
+            175,
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2179,7 +2179,7 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0
+            90
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2211,8 +2211,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            12.0,
-            10.0
+            12,
+            10
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2356,9 +2356,9 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2368,7 +2368,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -2387,7 +2387,7 @@
           "scale_stat": "atk",
           "multiplier": 0.25,
           "multipliers_pct": [
-            25.0
+            25
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2419,7 +2419,7 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2473,8 +2473,8 @@
           "scale_stat": "atk",
           "multiplier": 0.2,
           "multipliers_pct": [
-            20.0,
-            30.0
+            20,
+            30
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2554,7 +2554,7 @@
           "scale_stat": "atk",
           "multiplier": 0.95,
           "multipliers_pct": [
-            95.0
+            95
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2583,8 +2583,8 @@
           "scale_stat": "atk",
           "multiplier": 1.4,
           "multipliers_pct": [
-            140.0,
-            12.0
+            140,
+            12
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2619,7 +2619,7 @@
           "scale_stat": "atk",
           "multiplier": 0.08,
           "multipliers_pct": [
-            8.0
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2661,7 +2661,7 @@
           "scale_stat": "atk",
           "multiplier": 1.45,
           "multipliers_pct": [
-            145.0
+            145
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2738,9 +2738,9 @@
           "element": "Veil",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2750,7 +2750,7 @@
             {
               "op": "damage",
               "damage_type": "magic",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -2769,7 +2769,7 @@
           "scale_stat": "atk",
           "multiplier": 1.3,
           "multipliers_pct": [
-            130.0
+            130
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2839,8 +2839,8 @@
           "scale_stat": "atk",
           "multiplier": 2.2,
           "multipliers_pct": [
-            220.0,
-            20.0
+            220,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2919,9 +2919,9 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2931,7 +2931,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -2950,8 +2950,8 @@
           "scale_stat": "atk",
           "multiplier": 1.2,
           "multipliers_pct": [
-            120.0,
-            80.0
+            120,
+            80
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2987,7 +2987,7 @@
           "scale_stat": "atk",
           "multiplier": 0.2,
           "multipliers_pct": [
-            20.0
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3026,8 +3026,8 @@
           "scale_stat": "atk",
           "multiplier": 2.5,
           "multipliers_pct": [
-            250.0,
-            40.0
+            250,
+            40
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3113,7 +3113,7 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0
+            90
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3142,7 +3142,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            150.0
+            150
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3175,8 +3175,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            80.0,
-            5.0
+            80,
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3217,8 +3217,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            140.0,
-            8.0
+            140,
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3297,8 +3297,8 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0,
-            15.0
+            90,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3331,7 +3331,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            180.0
+            180
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3364,8 +3364,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            30.0,
-            50.0
+            30,
+            50
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3408,8 +3408,8 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0,
-            20.0
+            160,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3487,7 +3487,7 @@
           "scale_stat": "atk",
           "multiplier": 0.95,
           "multipliers_pct": [
-            95.0
+            95
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3516,7 +3516,7 @@
           "scale_stat": "def",
           "multiplier": null,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3527,7 +3527,7 @@
               "op": "grant_shield",
               "target_selector_id": "lowest_hp_ally",
               "scale_stat": "def",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "duration_turns": 2
             }
           ],
@@ -3543,7 +3543,7 @@
           "scale_stat": "atk",
           "multiplier": 0.15,
           "multipliers_pct": [
-            15.0
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3582,7 +3582,7 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0
+            160
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3664,9 +3664,9 @@
           "element": "Gale",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3676,7 +3676,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -3695,8 +3695,8 @@
           "scale_stat": "atk",
           "multiplier": 1.4,
           "multipliers_pct": [
-            140.0,
-            15.0
+            140,
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3728,7 +3728,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            5.0
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3761,9 +3761,9 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            15.0,
-            10.0,
-            5.0
+            15,
+            10,
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3797,6 +3797,927 @@
       ],
       "balance_status": "draft_v1_needs_battle_simulation",
       "equip_weapon_type": "spear_horn"
+    },
+    {
+      "character_id": "garrick_cinder",
+      "name_en": "Garrick Cinder",
+      "gender": "male",
+      "age": 33,
+      "rarity": 5,
+      "element": "Ember",
+      "class_id": "siege_breaker_dps",
+      "combat_role": "siege_breaker_dps",
+      "acquisition": "gacha",
+      "banner_id": "oath_06_garrick",
+      "signature_weapon_id": "weapon_garrick_cinder_signature",
+      "brand_mark_id": "mark_character_garrick_cinder",
+      "skill_brand_mark_ids": [
+        "mark_skill_garrick_cinder_basic_cinder_thrust",
+        "mark_skill_garrick_cinder_active_furnace_breach",
+        "mark_skill_garrick_cinder_passive_the_sixty_first_minute",
+        "mark_skill_garrick_cinder_ultimate_pyre_at_the_outer_gate"
+      ],
+      "base_stats_level_1": {
+        "hp": 13,
+        "atk": 3,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.65,
+        "atk": 0.18,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "level_cap": 20,
+      "stat_formula": "stat(level) = base_stats_level_1 + growth_per_level * (level - 1); growth is a small flat increment derived from level-one stat; round half up to integer",
+      "formation_affinity": "front",
+      "skill_ids": [
+        "garrick_cinder_basic_cinder_thrust",
+        "garrick_cinder_active_furnace_breach",
+        "garrick_cinder_passive_the_sixty_first_minute",
+        "garrick_cinder_ultimate_pyre_at_the_outer_gate"
+      ],
+      "skills": [
+        {
+          "skill_id": "garrick_cinder_basic_cinder_thrust",
+          "brand_mark_id": "mark_skill_garrick_cinder_basic_cinder_thrust",
+          "name_en": "Cinder Thrust",
+          "type": "basic",
+          "element": "Ember",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 1.05,
+          "multipliers_pct": [
+            105
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Ember damage equal to 105% of ATK to one enemy and inflicts Burn for 1 turn.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.05
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "burn",
+              "duration_turns": 1
+            }
+          ],
+          "auto_priority": 10,
+          "event_hooks": [],
+          "continuous_modifiers": []
+        },
+        {
+          "skill_id": "garrick_cinder_active_furnace_breach",
+          "brand_mark_id": "mark_skill_garrick_cinder_active_furnace_breach",
+          "name_en": "Furnace Breach",
+          "type": "active",
+          "element": "Ember",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 1.65,
+          "multipliers_pct": [
+            165,
+            10
+          ],
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Ember damage equal to 165% of ATK to one enemy, inflicts Burn for 2 turns, and grants Garrick Stoneguard for 1 turn.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.65
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "burn",
+              "duration_turns": 2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "self",
+              "status_id": "stoneguard",
+              "duration_turns": 1
+            }
+          ],
+          "auto_priority": 30
+        },
+        {
+          "skill_id": "garrick_cinder_passive_the_sixty_first_minute",
+          "brand_mark_id": "mark_skill_garrick_cinder_passive_the_sixty_first_minute",
+          "name_en": "The Sixty-First Minute",
+          "type": "passive",
+          "element": "Ember",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": null,
+          "multipliers_pct": [
+            15
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Garrick deals 15% more damage to enemies afflicted with Burn.",
+          "effect_ops": [],
+          "auto_priority": 0,
+          "event_hooks": [],
+          "continuous_modifiers": [
+            {
+              "event": "before_damage_dealt",
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "burn"
+              },
+              "target": "previous_op_targets",
+              "damage_multiplier": 1.15,
+              "applies_to": "self"
+            }
+          ]
+        },
+        {
+          "skill_id": "garrick_cinder_ultimate_pyre_at_the_outer_gate",
+          "brand_mark_id": "mark_skill_garrick_cinder_ultimate_pyre_at_the_outer_gate",
+          "name_en": "Pyre at the Outer Gate",
+          "type": "ultimate",
+          "element": "Ember",
+          "target_rule": "front_row_enemies",
+          "scale_stat": "atk",
+          "multiplier": 2.3,
+          "multipliers_pct": [
+            230,
+            15
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "focus_gain_rule": null,
+          "description_en": "Deals Ember damage equal to 230% of ATK to all Front Row enemies, inflicts Burn for 2 turns, and reduces their ATK by 15% for 2 turns.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 2.3
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "burn",
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "previous_op_targets",
+              "stat_id": "atk",
+              "mode": "add_pct",
+              "amount": -0.15,
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 40
+        }
+      ],
+      "balance_status": "draft_v1_needs_battle_simulation",
+      "equip_weapon_type": "glaive_shield"
+    },
+    {
+      "character_id": "corbin_locke",
+      "name_en": "Corbin Locke",
+      "gender": "male",
+      "age": 29,
+      "rarity": 5,
+      "element": "Tide",
+      "class_id": "harpoon_vanguard",
+      "combat_role": "harpoon_vanguard",
+      "acquisition": "gacha",
+      "banner_id": "oath_07_corbin",
+      "signature_weapon_id": "weapon_corbin_locke_signature",
+      "brand_mark_id": "mark_character_corbin_locke",
+      "skill_brand_mark_ids": [
+        "mark_skill_corbin_locke_basic_gaff_hook",
+        "mark_skill_corbin_locke_active_undertow_drag",
+        "mark_skill_corbin_locke_passive_sluice_warden_s_anchor",
+        "mark_skill_corbin_locke_ultimate_open_the_floodgates"
+      ],
+      "base_stats_level_1": {
+        "hp": 14,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.7,
+        "atk": 0.14,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "level_cap": 20,
+      "stat_formula": "stat(level) = base_stats_level_1 + growth_per_level * (level - 1); growth is a small flat increment derived from level-one stat; round half up to integer",
+      "formation_affinity": "front",
+      "skill_ids": [
+        "corbin_locke_basic_gaff_hook",
+        "corbin_locke_active_undertow_drag",
+        "corbin_locke_passive_sluice_warden_s_anchor",
+        "corbin_locke_ultimate_open_the_floodgates"
+      ],
+      "skills": [
+        {
+          "skill_id": "corbin_locke_basic_gaff_hook",
+          "brand_mark_id": "mark_skill_corbin_locke_basic_gaff_hook",
+          "name_en": "Gaff Hook",
+          "type": "basic",
+          "element": "Tide",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 1,
+          "multipliers_pct": [
+            100
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Tide damage equal to 100% of ATK to one enemy and inflicts Soaked for 1 turn.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "soaked",
+              "duration_turns": 1
+            }
+          ],
+          "auto_priority": 10,
+          "event_hooks": [],
+          "continuous_modifiers": []
+        },
+        {
+          "skill_id": "corbin_locke_active_undertow_drag",
+          "brand_mark_id": "mark_skill_corbin_locke_active_undertow_drag",
+          "name_en": "Undertow Drag",
+          "type": "active",
+          "element": "Tide",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 1.55,
+          "multipliers_pct": [
+            155,
+            120
+          ],
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Tide damage equal to 155% of ATK to one enemy, inflicts Soaked for 2 turns, and grants Corbin a shield equal to 120% of his DEF for 2 turns.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.55
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "soaked",
+              "duration_turns": 2
+            },
+            {
+              "op": "grant_shield",
+              "target_selector_id": "self",
+              "scale_stat": "def",
+              "multiplier": 1.2,
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 30
+        },
+        {
+          "skill_id": "corbin_locke_passive_sluice_warden_s_anchor",
+          "brand_mark_id": "mark_skill_corbin_locke_passive_sluice_warden_s_anchor",
+          "name_en": "Sluice-Warden's Anchor",
+          "type": "passive",
+          "element": "Tide",
+          "target_rule": "single_enemy",
+          "scale_stat": "def",
+          "multiplier": null,
+          "multipliers_pct": [
+            10
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "While Corbin is in the Front Row, all allies gain 10% RES.",
+          "effect_ops": [],
+          "auto_priority": 0,
+          "event_hooks": [],
+          "continuous_modifiers": [
+            {
+              "event": "stat_snapshot",
+              "condition": {
+                "predicate": "owner_in_row",
+                "value": "front"
+              },
+              "target": "all_allies",
+              "stat_id": "res",
+              "mode": "add_pct",
+              "amount": 0.1
+            }
+          ]
+        },
+        {
+          "skill_id": "corbin_locke_ultimate_open_the_floodgates",
+          "brand_mark_id": "mark_skill_corbin_locke_ultimate_open_the_floodgates",
+          "name_en": "Open the Floodgates",
+          "type": "ultimate",
+          "element": "Tide",
+          "target_rule": "all_enemies",
+          "scale_stat": "atk",
+          "multiplier": 2,
+          "multipliers_pct": [
+            200,
+            10
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "focus_gain_rule": null,
+          "description_en": "Deals Tide damage equal to 200% of ATK to all enemies, inflicts Soaked for 2 turns, and delays all enemies' next action gauge by 10%.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 2
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "soaked",
+              "duration_turns": 2
+            },
+            {
+              "op": "delay_next_action",
+              "target_selector_id": "all_enemies",
+              "gauge_fraction": 0.1
+            }
+          ],
+          "auto_priority": 40
+        }
+      ],
+      "balance_status": "draft_v1_needs_battle_simulation",
+      "equip_weapon_type": "spear"
+    },
+    {
+      "character_id": "cassian_thorne",
+      "name_en": "Cassian Thorne",
+      "gender": "male",
+      "age": 27,
+      "rarity": 4,
+      "element": "Dawn",
+      "class_id": "reliquary_templar",
+      "combat_role": "reliquary_templar",
+      "acquisition": "gacha",
+      "banner_id": "oath_01_aveline",
+      "signature_weapon_id": "weapon_cassian_thorne_signature",
+      "brand_mark_id": "mark_character_cassian_thorne",
+      "skill_brand_mark_ids": [
+        "mark_skill_cassian_thorne_basic_vigil_cleave",
+        "mark_skill_cassian_thorne_active_sanctuary_of_the_door",
+        "mark_skill_cassian_thorne_passive_belfry_oath",
+        "mark_skill_cassian_thorne_ultimate_bell_without_a_clapper"
+      ],
+      "base_stats_level_1": {
+        "hp": 13,
+        "atk": 2,
+        "def": 2,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.65,
+        "atk": 0.13,
+        "def": 0.1,
+        "spd": 0.16
+      },
+      "level_cap": 20,
+      "stat_formula": "stat(level) = base_stats_level_1 + growth_per_level * (level - 1); growth is a small flat increment derived from level-one stat; round half up to integer",
+      "formation_affinity": "front",
+      "skill_ids": [
+        "cassian_thorne_basic_vigil_cleave",
+        "cassian_thorne_active_sanctuary_of_the_door",
+        "cassian_thorne_passive_belfry_oath",
+        "cassian_thorne_ultimate_bell_without_a_clapper"
+      ],
+      "skills": [
+        {
+          "skill_id": "cassian_thorne_basic_vigil_cleave",
+          "brand_mark_id": "mark_skill_cassian_thorne_basic_vigil_cleave",
+          "name_en": "Vigil Cleave",
+          "type": "basic",
+          "element": "Dawn",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 1,
+          "multipliers_pct": [
+            100
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Dawn damage equal to 100% of ATK to one enemy.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ],
+          "auto_priority": 10,
+          "event_hooks": [],
+          "continuous_modifiers": []
+        },
+        {
+          "skill_id": "cassian_thorne_active_sanctuary_of_the_door",
+          "brand_mark_id": "mark_skill_cassian_thorne_active_sanctuary_of_the_door",
+          "name_en": "Sanctuary of the Door",
+          "type": "active",
+          "element": "Dawn",
+          "target_rule": "lowest_hp_ally",
+          "scale_stat": "def",
+          "multiplier": null,
+          "multipliers_pct": [
+            130
+          ],
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Cleanses 1 debuff from the ally with the lowest HP and grants them a shield equal to 130% of Cassian's DEF for 2 turns.",
+          "effect_ops": [
+            {
+              "op": "remove_status",
+              "target_selector_id": "lowest_hp_ally",
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
+            },
+            {
+              "op": "grant_shield",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "def",
+              "multiplier": 1.3,
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 30
+        },
+        {
+          "skill_id": "cassian_thorne_passive_belfry_oath",
+          "brand_mark_id": "mark_skill_cassian_thorne_passive_belfry_oath",
+          "name_en": "Belfry Oath",
+          "type": "passive",
+          "element": "Dawn",
+          "target_rule": "single_enemy",
+          "scale_stat": "def",
+          "multiplier": null,
+          "multipliers_pct": [
+            8
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "While Cassian is in the Front Row, Front Row allies gain 8% DEF.",
+          "effect_ops": [],
+          "auto_priority": 0,
+          "event_hooks": [],
+          "continuous_modifiers": [
+            {
+              "event": "stat_snapshot",
+              "condition": {
+                "predicate": "owner_in_row",
+                "value": "front"
+              },
+              "target": "front_row_allies",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": 0.08
+            }
+          ]
+        },
+        {
+          "skill_id": "cassian_thorne_ultimate_bell_without_a_clapper",
+          "brand_mark_id": "mark_skill_cassian_thorne_ultimate_bell_without_a_clapper",
+          "name_en": "Bell Without a Clapper",
+          "type": "ultimate",
+          "element": "Dawn",
+          "target_rule": "front_row_enemies",
+          "scale_stat": "atk",
+          "multiplier": 1.9,
+          "multipliers_pct": [
+            190,
+            15
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "focus_gain_rule": null,
+          "description_en": "Deals Dawn damage equal to 190% of ATK to all Front Row enemies and increases all allies' RES by 15% for 2 turns.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "front_row_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.9
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "res",
+              "mode": "add_pct",
+              "amount": 0.15,
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 40
+        }
+      ],
+      "balance_status": "draft_v1_needs_battle_simulation",
+      "equip_weapon_type": "arming_sword"
+    },
+    {
+      "character_id": "dorian_kesk",
+      "name_en": "Dorian Kesk",
+      "gender": "male",
+      "age": 26,
+      "rarity": 4,
+      "element": "Veil",
+      "class_id": "cipher_debuffer_dps",
+      "combat_role": "cipher_debuffer_dps",
+      "acquisition": "gacha",
+      "banner_id": "oath_02_sable",
+      "signature_weapon_id": "weapon_dorian_kesk_signature",
+      "brand_mark_id": "mark_character_dorian_kesk",
+      "skill_brand_mark_ids": [
+        "mark_skill_dorian_kesk_basic_hot_wax_cut",
+        "mark_skill_dorian_kesk_active_forged_warrant",
+        "mark_skill_dorian_kesk_passive_seven_notch_cipher",
+        "mark_skill_dorian_kesk_ultimate_broken_seal_of_the_chancery"
+      ],
+      "base_stats_level_1": {
+        "hp": 11,
+        "atk": 3,
+        "def": 1,
+        "spd": 5
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.16,
+        "def": 0.05,
+        "spd": 0.2
+      },
+      "level_cap": 20,
+      "stat_formula": "stat(level) = base_stats_level_1 + growth_per_level * (level - 1); growth is a small flat increment derived from level-one stat; round half up to integer",
+      "formation_affinity": "rear",
+      "skill_ids": [
+        "dorian_kesk_basic_hot_wax_cut",
+        "dorian_kesk_active_forged_warrant",
+        "dorian_kesk_passive_seven_notch_cipher",
+        "dorian_kesk_ultimate_broken_seal_of_the_chancery"
+      ],
+      "skills": [
+        {
+          "skill_id": "dorian_kesk_basic_hot_wax_cut",
+          "brand_mark_id": "mark_skill_dorian_kesk_basic_hot_wax_cut",
+          "name_en": "Hot Wax Cut",
+          "type": "basic",
+          "element": "Veil",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 1,
+          "multipliers_pct": [
+            100
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Veil damage equal to 100% of ATK to one enemy.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1
+            }
+          ],
+          "auto_priority": 10,
+          "event_hooks": [],
+          "continuous_modifiers": []
+        },
+        {
+          "skill_id": "dorian_kesk_active_forged_warrant",
+          "brand_mark_id": "mark_skill_dorian_kesk_active_forged_warrant",
+          "name_en": "Forged Warrant",
+          "type": "active",
+          "element": "Veil",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 1.5,
+          "multipliers_pct": [
+            150
+          ],
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Veil damage equal to 150% of ATK to one enemy and inflicts Dread for 2 turns.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.5
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 30
+        },
+        {
+          "skill_id": "dorian_kesk_passive_seven_notch_cipher",
+          "brand_mark_id": "mark_skill_dorian_kesk_passive_seven_notch_cipher",
+          "name_en": "Seven-Notch Cipher",
+          "type": "passive",
+          "element": "Veil",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": null,
+          "multipliers_pct": [
+            15
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Dorian deals 15% more damage to enemies afflicted with Dread.",
+          "effect_ops": [],
+          "auto_priority": 0,
+          "event_hooks": [],
+          "continuous_modifiers": [
+            {
+              "event": "before_damage_dealt",
+              "condition": {
+                "predicate": "target_has_status",
+                "value": "dread"
+              },
+              "target": "previous_op_targets",
+              "damage_multiplier": 1.15,
+              "applies_to": "self"
+            }
+          ]
+        },
+        {
+          "skill_id": "dorian_kesk_ultimate_broken_seal_of_the_chancery",
+          "brand_mark_id": "mark_skill_dorian_kesk_ultimate_broken_seal_of_the_chancery",
+          "name_en": "Broken Seal of the Chancery",
+          "type": "ultimate",
+          "element": "Veil",
+          "target_rule": "all_enemies",
+          "scale_stat": "atk",
+          "multiplier": 1.85,
+          "multipliers_pct": [
+            185,
+            15
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "focus_gain_rule": null,
+          "description_en": "Deals Veil damage equal to 185% of ATK to all enemies, inflicts Dread for 2 turns, and reduces their DEF by 15% for 2 turns.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "all_enemies",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 1.85
+            },
+            {
+              "op": "apply_status",
+              "target_selector_id": "previous_op_targets",
+              "status_id": "dread",
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "previous_op_targets",
+              "stat_id": "def",
+              "mode": "add_pct",
+              "amount": -0.15,
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 40
+        }
+      ],
+      "balance_status": "draft_v1_needs_battle_simulation",
+      "equip_weapon_type": "twin_daggers"
+    },
+    {
+      "character_id": "rowan_reed",
+      "name_en": "Rowan Reed",
+      "gender": "male",
+      "age": 19,
+      "rarity": 3,
+      "element": "Dawn",
+      "class_id": "shrine_support",
+      "combat_role": "shrine_support",
+      "acquisition": "gacha",
+      "banner_id": "standard",
+      "signature_weapon_id": "weapon_rowan_reed_signature",
+      "brand_mark_id": "mark_character_rowan_reed",
+      "skill_brand_mark_ids": [
+        "mark_skill_rowan_reed_basic_warming_spark",
+        "mark_skill_rowan_reed_active_recut_the_name",
+        "mark_skill_rowan_reed_passive_candle_in_the_rain",
+        "mark_skill_rowan_reed_ultimate_lanterns_along_the_wayshrine"
+      ],
+      "base_stats_level_1": {
+        "hp": 11,
+        "atk": 2,
+        "def": 1,
+        "spd": 4
+      },
+      "growth_per_level": {
+        "hp": 0.55,
+        "atk": 0.12,
+        "def": 0.06,
+        "spd": 0.16
+      },
+      "level_cap": 20,
+      "stat_formula": "stat(level) = base_stats_level_1 + growth_per_level * (level - 1); growth is a small flat increment derived from level-one stat; round half up to integer",
+      "formation_affinity": "rear",
+      "skill_ids": [
+        "rowan_reed_basic_warming_spark",
+        "rowan_reed_active_recut_the_name",
+        "rowan_reed_passive_candle_in_the_rain",
+        "rowan_reed_ultimate_lanterns_along_the_wayshrine"
+      ],
+      "skills": [
+        {
+          "skill_id": "rowan_reed_basic_warming_spark",
+          "brand_mark_id": "mark_skill_rowan_reed_basic_warming_spark",
+          "name_en": "Warming Spark",
+          "type": "basic",
+          "element": "Dawn",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": 0.95,
+          "multipliers_pct": [
+            95
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Deals Dawn damage equal to 95% of ATK to one enemy.",
+          "effect_ops": [
+            {
+              "op": "damage",
+              "target_selector_id": "single_enemy",
+              "damage_type": "elemental",
+              "scale_stat": "atk",
+              "multiplier": 0.95
+            }
+          ],
+          "auto_priority": 10,
+          "event_hooks": [],
+          "continuous_modifiers": []
+        },
+        {
+          "skill_id": "rowan_reed_active_recut_the_name",
+          "brand_mark_id": "mark_skill_rowan_reed_active_recut_the_name",
+          "name_en": "Recut the Name",
+          "type": "active",
+          "element": "Dawn",
+          "target_rule": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 1.3,
+          "multipliers_pct": [
+            130
+          ],
+          "cooldown_turns": 2,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "Cleanses 1 debuff from the ally with the lowest HP and heals them for 130% of Rowan's ATK.",
+          "effect_ops": [
+            {
+              "op": "remove_status",
+              "target_selector_id": "lowest_hp_ally",
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
+            },
+            {
+              "op": "heal",
+              "target_selector_id": "lowest_hp_ally",
+              "scale_stat": "atk",
+              "multiplier": 1.3
+            }
+          ],
+          "auto_priority": 30
+        },
+        {
+          "skill_id": "rowan_reed_passive_candle_in_the_rain",
+          "brand_mark_id": "mark_skill_rowan_reed_passive_candle_in_the_rain",
+          "name_en": "Candle in the Rain",
+          "type": "passive",
+          "element": "Dawn",
+          "target_rule": "single_enemy",
+          "scale_stat": "atk",
+          "multiplier": null,
+          "multipliers_pct": [
+            8
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 0,
+          "focus_gain_rule": null,
+          "description_en": "While Rowan is in the Rear Row, all allies gain 8% RES.",
+          "effect_ops": [],
+          "auto_priority": 0,
+          "event_hooks": [],
+          "continuous_modifiers": [
+            {
+              "event": "stat_snapshot",
+              "condition": {
+                "predicate": "owner_in_row",
+                "value": "rear"
+              },
+              "target": "all_allies",
+              "stat_id": "res",
+              "mode": "add_pct",
+              "amount": 0.08
+            }
+          ]
+        },
+        {
+          "skill_id": "rowan_reed_ultimate_lanterns_along_the_wayshrine",
+          "brand_mark_id": "mark_skill_rowan_reed_ultimate_lanterns_along_the_wayshrine",
+          "name_en": "Lanterns Along the Wayshrine",
+          "type": "ultimate",
+          "element": "Dawn",
+          "target_rule": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": null,
+          "multipliers_pct": [
+            120,
+            15
+          ],
+          "cooldown_turns": 0,
+          "focus_cost": 100,
+          "focus_gain_rule": null,
+          "description_en": "Grants all allies a shield equal to 120% of Rowan's ATK for 2 turns and increases all allies' RES by 15% for 2 turns.",
+          "effect_ops": [
+            {
+              "op": "grant_shield",
+              "target_selector_id": "all_allies",
+              "scale_stat": "atk",
+              "multiplier": 1.2,
+              "duration_turns": 2
+            },
+            {
+              "op": "modify_stat",
+              "target_selector_id": "all_allies",
+              "stat_id": "res",
+              "mode": "add_pct",
+              "amount": 0.15,
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 40
+        }
+      ],
+      "balance_status": "draft_v1_needs_battle_simulation",
+      "equip_weapon_type": "ritual_lantern"
     }
   ]
 }

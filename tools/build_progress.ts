@@ -59,10 +59,11 @@ function copyTree(srcDir: string, destDir: string): void {
     const s = join(srcDir, entry.name);
     const d = join(destDir, entry.name);
     if (entry.isDirectory()) copyTree(s, d);
-    else if (entry.isFile() && /\.(webp|png|ogg|json)$/i.test(entry.name)) copyFileSync(s, d);
+    else if (entry.isFile() && /\.(webp|png|gif|jpg|ogg|json)$/i.test(entry.name)) copyFileSync(s, d);
   }
 }
 copyTree(join(ROOT, 'content/base'), join(OUT, 'media'));
+copyTree(join(ROOT, 'narrative/15_Art_Workbench/ui_animations/gifs'), join(OUT, 'animations'));
 const appArtDir = join(ROOT, 'content/approved_art/art');
 if (existsSync(appArtDir)) {
   mkdirSync(join(OUT, 'media', 'art'), { recursive: true });

@@ -23,6 +23,7 @@ import { openContentStorage } from '../platform/idbStorage';
 import { prefs } from '../platform/prefs';
 import { imageSize } from './image-size';
 import { ApiRemote } from './remote';
+import { builtOnOlderBase } from './stale-base';
 import { validatePatch } from './validator';
 
 export interface AssetRef {
@@ -156,19 +157,7 @@ export class ContentService {
 
   private async isStaleBasePatch(): Promise<boolean> {
     const state = await this.patch.state();
-    if (!state.active) return false;
-    for (const key of [
-      'art/bg_forgotten_stone_crossing.webp',
-      'presentation/presentation.json',
-      'entry/prologue.json',
-      'art/art_manifest.json'
-    ]) {
-      const expected = this.base.files[key];
-      if (expected && !state.active.manifest.files.some((f) => f.path === key && f.sha256 === expected)) {
-        return true;
-      }
-    }
-    return false;
+    return !!state.active && builtOnOlderBase(state.active.manifest, this.base.files);
   }
 
   private async preferBaseFile(path: string): Promise<boolean> {

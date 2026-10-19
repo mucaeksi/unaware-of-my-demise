@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "package_id": "uomd_character_kera_voss_production_v001",
+  "round_compliance": "R14_PROVENANCE_AND_COMMERCIAL_TERMS",
+  "character_id": "kera_voss",
+  "generated_at": "2026-10-19T07:40:00+03:00",
+  "commercial_terms_urls": [
+    "https://ai.google.dev/gemini-api/terms",
+    "https://policies.google.com/terms",
+    "https://labs.google/fx/terms"
+  ],
+  "canonical_locks_used": [
+    "content/specs/character_locks/kera_voss_canonical_head_lock.png",
+    "content/specs/character_locks/kera_voss_canonical_boydan_lock.jpg"
+  ],
+  "pipeline_steps": [
+    "1. Generated base VN portrait (composed) on flat #00FF00 green using canonical boydan lock.",
+    "2. Generated 3 character-specific VN expressions (focused, proud_smile, defiant) passing composed portrait in ImagePaths for 100% locked pose/hat/camera alignment.",
+    "3. Generated 8-state 4x2 2-head SD chibi battle sprite sheet on flat #00FF00 green with all poses facing right.",
+    "4. Generated 16:9 Gacha Splash Art passing canonical boydan lock in ImagePaths.",
+    "5. Executed automated chroma-key RGBA extraction, green despill, and 512x512 foot-pivot normalization (x=256, y=448)."
+  ]
+}

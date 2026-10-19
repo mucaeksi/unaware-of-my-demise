@@ -12,18 +12,18 @@ beforeAll(async () => {
 });
 
 describe('canon catalog seed', () => {
-  it('imports every canon definition (18 items, 20 signature + 160 common weapons, 36 armor, 42 accessories in 7 sets) and is re-runnable', async () => {
+  it('imports every canon definition (18 items, 25 signature + 160 common weapons, 36 armor, 42 accessories in 7 sets) and is re-runnable', async () => {
     const count = async (sql: string): Promise<number> => ((await db().prepare(sql).first<{ n: number }>()) as { n: number }).n;
     expect(await count('SELECT COUNT(*) AS n FROM item_defs')).toBe(18);
-    expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon'")).toBe(180);
-    expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon' AND rarity = 5 AND owner_character_id IS NOT NULL")).toBe(20);
+    expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon'")).toBe(185);
+    expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon' AND rarity = 5 AND owner_character_id IS NOT NULL")).toBe(25);
     expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'armor'")).toBe(36);
     expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot IN ('necklace','ring')")).toBe(42);
     expect(await count('SELECT COUNT(*) AS n FROM accessory_sets')).toBe(7);
     expect(await count('SELECT COUNT(*) AS n FROM weapon_types')).toBe(20);
-    expect(await count('SELECT COUNT(*) AS n FROM character_skills')).toBe(80);
+    expect(await count('SELECT COUNT(*) AS n FROM character_skills')).toBe(100);
     await seedCanonCatalog();
-    expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon'")).toBe(180);
+    expect(await count("SELECT COUNT(*) AS n FROM gear_defs WHERE slot = 'weapon'")).toBe(185);
     // attributes come with the row (seed/characters.sql); the catalog seed links the weapon identity
     const m = await db().prepare("SELECT weapon_type, signature_weapon_id FROM characters WHERE id = 'mahmut'").first();
     expect(m).toMatchObject({ weapon_type: 'arming_sword', signature_weapon_id: 'weapon_mahmut_signature' });
@@ -40,7 +40,7 @@ describe('canon catalog seed', () => {
   it('serves the public catalog and lets operators edit rules with optimistic concurrency and validation', async () => {
     const pub = (await (await game('/api/v1/catalog')).json()) as { items: unknown[]; gear: unknown[]; config: { progression: { character: { levelCap: number } } } };
     expect(pub.items).toHaveLength(18);
-    expect(pub.gear.length).toBe(258);
+    expect(pub.gear.length).toBe(263);
     expect(pub.config.progression.character.levelCap).toBe(20);
     const cfg = (await (await admin('/admin/api/config/progression', { as: 'viewer@example.com' })).json()) as { value: Record<string, unknown>; version: number };
     expect((await admin('/admin/api/config/progression', j('PUT', { value: cfg.value, expectedVersion: cfg.version }, 'viewer@example.com'))).status).toBe(403);
