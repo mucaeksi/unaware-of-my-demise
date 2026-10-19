@@ -13,7 +13,7 @@
   "now": [
     {
       "title": "D-27: RPG stat model (STR / INT / VIT / AGI)",
-      "detail": "Heroes, enemies and bosses share one derivation (HP = 4 + 3 VIT, ATK = power attribute, DEF = armor, SPD = AGI, crit from AGI); gear gives whole points; unit attributes in content/balance/attributes.json, D1 migration 0029, capability attributes_v1, legacy releases unchanged. Tuned with the campaign probe (starter gear: 35/35 won, normal ~4-6 rounds, bosses ~8-10). docs/combat/STAT_MATH.md. Branch feat/d27-attribute-stats."
+      "detail": "Heroes, enemies and bosses share one derivation (HP = 4 + 3 VIT, ATK = power attribute, DEF = armor, SPD = AGI, crit from AGI); gear gives whole points; unit attributes in content/balance/attributes.json, D1 migration 0029, capability attributes_v1, legacy releases unchanged. Tuned with the campaign probe (starter gear: 35/35 won, normal ~5 rounds, bosses ~9). docs/combat/STAT_MATH.md. Branch feat/d27-attribute-stats."
     },
     {
       "title": "D-25 complete: the game client is pure PixiJS v8",

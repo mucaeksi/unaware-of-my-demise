@@ -1,6 +1,6 @@
 # Stat math (D-27)
 
-Heroes, enemies and bosses share one RPG attribute model. Content is authored in four attributes; the combat stats the engine runs on are derived from them by one function (`deriveStats`, `packages/economy/src/attributes.ts`) that the engine, the server and the content tools all call. Numbers stay small on purpose: a level-1 hero has 10–19 HP, the largest number in Part I is a level-20 boss bar of about 650 HP.
+Heroes, enemies and bosses share one RPG attribute model. Content is authored in four attributes; the combat stats the engine runs on are derived from them by one function (`deriveStats`, `packages/economy/src/attributes.ts`) that the engine, the server and the content tools all call. Numbers stay small on purpose: a level-1 hero has 10–19 HP, the largest number in Part I is a level-20 boss bar of about 750 HP.
 
 ## Attributes
 
@@ -37,9 +37,9 @@ Memory Shard resonance gives whole points too: odd tiers +1 VIT, even tiers +1 p
 | Mahmut (5★ tank, STR) | HP 19 · ATK 3 · DEF 1 | HP 49 · ATK 9 | HP 55 · ATK 12 · DEF 3 | HP 64 · ATK 17 · DEF 5 |
 | Fadyme (5★ caster, INT) | HP 13 · ATK 4 | HP 28 · ATK 14 · crit 16% | HP 37 · ATK 17 · DEF 2 | HP 43 · ATK 22 · DEF 4 |
 | Nixie (4★ striker, STR) | HP 10 · ATK 4 · crit 8% | HP 25 · ATK 14 · crit 20% | HP 34 · ATK 17 | HP 40 · ATK 22 |
-| Bellbound Dead (swarm) | HP 22 · ATK 2 | HP 220 · ATK 8 | | |
-| Choir Knight (elite) | HP 34 · ATK 2 · DEF 2 | HP 283 · ATK 10 · DEF 2 | | |
-| Ash-Maw (boss, per phase bar) | HP 97 · ATK 3 | HP 649 · ATK 10 | | |
+| Bellbound Dead (swarm) | HP 25 · ATK 2 | HP 250 · ATK 8 | | |
+| Choir Knight (elite) | HP 40 · ATK 2 · DEF 2 | HP 325 · ATK 10 · DEF 2 | | |
+| Ash-Maw (boss, per phase bar) | HP 112 · ATK 3 | HP 748 · ATK 10 | | |
 
 Enemies have more HP than heroes because a wave of three or four of them faces five heroes with area skills and ultimates; their hits stay small (a level-20 normal hits a 3★-armored hero for 5–8).
 
@@ -47,8 +47,8 @@ Enemies have more HP than heroes because a wave of three or four of them faces f
 
 Measured, not guessed: `npm run build:campaign` plays all 35 Part I stages with the Auto Battle policy and writes [CAMPAIGN_BALANCE.md](CAMPAIGN_BALANCE.md) (gearless and with starter gear).
 
-- With starter gear (3★ weapon + armor at the hero's level): every stage is won; normal stages ~4–6 rounds (median ~4.4), bosses ~8–10 (median ~8.3).
-- Without gear: most stages are still won, a few bosses and late mixed waves need gear.
+- With starter gear (3★ weapon + armor at the hero's level): every stage is won; normal stages ~4–6 rounds (median ~5), bosses ~8–12 (median ~9). Owner 2026-10-19: fights may run a little longer and harder, never a wall.
+- Without gear: 30 of 35 stages are still won; a few bosses and late mixed waves need gear.
 - The tutorial fights (two heroes) take 2–6 rounds.
 
 ## Where things live

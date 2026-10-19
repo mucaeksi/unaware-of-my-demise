@@ -39,7 +39,7 @@ describe('damage rules', () => {
     b.advance();
     const step = b.act({ skillId: 'fadyme_basic_veilglass_thorn', targetId: E0 });
     const dmg = events(step.events, 'damage').find((d) => d.source === FADYME);
-    expect(dmg).toMatchObject({ target: E0, amount: 3, hpAfter: 19, crit: false });
+    expect(dmg).toMatchObject({ target: E0, amount: 3, hpAfter: 22, crit: false });
     expect(dmg?.elementMultiplier).toBeCloseTo(0.9);
   });
 

@@ -2895,12 +2895,12 @@
         "base": {
           "str": 1.5,
           "int": 0,
-          "vit": 4,
+          "vit": 5,
           "agi": 5
         },
         "growth": {
           "str": 0.3,
-          "vit": 2.9,
+          "vit": 3.35,
           "agi": 0.15
         }
       },
@@ -2976,12 +2976,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 6,
+          "vit": 7,
           "agi": 3
         },
         "growth": {
           "str": 0.3,
-          "vit": 3.45,
+          "vit": 3.95,
           "agi": 0.1
         }
       },
@@ -3058,12 +3058,12 @@
         "base": {
           "str": 1,
           "int": 0,
-          "vit": 7,
+          "vit": 8,
           "agi": 1
         },
         "growth": {
           "str": 0.25,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.05
         },
         "armor": 2
@@ -3140,12 +3140,12 @@
         "base": {
           "str": 0,
           "int": 2,
-          "vit": 9,
+          "vit": 10,
           "agi": 3
         },
         "growth": {
           "int": 0.3,
-          "vit": 3.3,
+          "vit": 3.8,
           "agi": 0.1
         },
         "armor": 1
@@ -3216,12 +3216,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 10,
+          "vit": 12,
           "agi": 2
         },
         "growth": {
           "str": 0.4,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.1
         },
         "armor": 2
@@ -3317,12 +3317,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 10,
+          "vit": 12,
           "agi": 2
         },
         "growth": {
           "str": 0.4,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.1
         },
         "armor": 2
@@ -3403,12 +3403,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 9,
+          "vit": 10,
           "agi": 2
         },
         "growth": {
           "str": 0.35,
-          "vit": 3.6,
+          "vit": 4.15,
           "agi": 0.1
         },
         "armor": 1
@@ -3493,12 +3493,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 10,
+          "vit": 12,
           "agi": 2
         },
         "growth": {
           "str": 0.4,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.1
         },
         "armor": 2
@@ -3573,12 +3573,12 @@
         "base": {
           "str": 0,
           "int": 2,
-          "vit": 4,
+          "vit": 5,
           "agi": 3
         },
         "growth": {
           "int": 0.35,
-          "vit": 2.45,
+          "vit": 2.8,
           "agi": 0.1
         },
         "armor": 1
@@ -3649,12 +3649,12 @@
         "base": {
           "str": 0,
           "int": 2,
-          "vit": 4,
+          "vit": 5,
           "agi": 3
         },
         "growth": {
           "int": 0.35,
-          "vit": 2.45,
+          "vit": 2.8,
           "agi": 0.1
         }
       },
@@ -3732,12 +3732,12 @@
         "base": {
           "str": 1.5,
           "int": 0,
-          "vit": 4,
+          "vit": 5,
           "agi": 5
         },
         "growth": {
           "str": 0.3,
-          "vit": 2.9,
+          "vit": 3.35,
           "agi": 0.15
         }
       },
@@ -3813,12 +3813,12 @@
         "base": {
           "str": 0,
           "int": 2,
-          "vit": 4,
+          "vit": 5,
           "agi": 3
         },
         "growth": {
           "int": 0.35,
-          "vit": 2.45,
+          "vit": 2.8,
           "agi": 0.1
         }
       },
@@ -3912,12 +3912,12 @@
         "base": {
           "str": 1,
           "int": 0,
-          "vit": 7,
+          "vit": 8,
           "agi": 1
         },
         "growth": {
           "str": 0.25,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.05
         },
         "armor": 2
@@ -3994,12 +3994,12 @@
         "base": {
           "str": 0,
           "int": 2,
-          "vit": 4,
+          "vit": 5,
           "agi": 3
         },
         "growth": {
           "int": 0.35,
-          "vit": 2.45,
+          "vit": 2.8,
           "agi": 0.1
         }
       },
@@ -4075,12 +4075,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 10,
+          "vit": 12,
           "agi": 2
         },
         "growth": {
           "str": 0.4,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.1
         },
         "armor": 2
@@ -4160,12 +4160,12 @@
         "base": {
           "str": 1,
           "int": 0,
-          "vit": 7,
+          "vit": 8,
           "agi": 1
         },
         "growth": {
           "str": 0.25,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.05
         },
         "armor": 2
@@ -4237,12 +4237,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 9,
+          "vit": 10,
           "agi": 2
         },
         "growth": {
           "str": 0.35,
-          "vit": 3.6,
+          "vit": 4.15,
           "agi": 0.1
         },
         "armor": 1
@@ -4331,12 +4331,12 @@
         "base": {
           "str": 0,
           "int": 2,
-          "vit": 4,
+          "vit": 5,
           "agi": 3
         },
         "growth": {
           "int": 0.35,
-          "vit": 2.45,
+          "vit": 2.8,
           "agi": 0.1
         }
       },
@@ -4412,12 +4412,12 @@
         "base": {
           "str": 1.5,
           "int": 0,
-          "vit": 4,
+          "vit": 5,
           "agi": 5
         },
         "growth": {
           "str": 0.3,
-          "vit": 2.9,
+          "vit": 3.35,
           "agi": 0.15
         }
       },
@@ -4499,12 +4499,12 @@
         "base": {
           "str": 1,
           "int": 0,
-          "vit": 7,
+          "vit": 8,
           "agi": 1
         },
         "growth": {
           "str": 0.25,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.05
         },
         "armor": 3
@@ -4593,13 +4593,13 @@
         "base": {
           "str": 2.5,
           "int": 2,
-          "vit": 31,
+          "vit": 36,
           "agi": 3
         },
         "growth": {
           "str": 0.4,
           "int": 0.2,
-          "vit": 9.7,
+          "vit": 11.15,
           "agi": 0.1
         },
         "armor": 2
@@ -4744,13 +4744,13 @@
         "base": {
           "str": 2.5,
           "int": 2,
-          "vit": 31,
+          "vit": 36,
           "agi": 3
         },
         "growth": {
           "str": 0.4,
           "int": 0.2,
-          "vit": 9.7,
+          "vit": 11.15,
           "agi": 0.1
         },
         "armor": 2
@@ -4903,13 +4903,13 @@
         "base": {
           "str": 2.5,
           "int": 2,
-          "vit": 31,
+          "vit": 36,
           "agi": 3
         },
         "growth": {
           "str": 0.4,
           "int": 0.2,
-          "vit": 9.7,
+          "vit": 11.15,
           "agi": 0.1
         },
         "armor": 2
@@ -5079,13 +5079,13 @@
         "base": {
           "str": 2.5,
           "int": 2,
-          "vit": 31,
+          "vit": 36,
           "agi": 3
         },
         "growth": {
           "str": 0.4,
           "int": 0.2,
-          "vit": 9.7,
+          "vit": 11.15,
           "agi": 0.1
         },
         "armor": 2
@@ -5243,13 +5243,13 @@
         "base": {
           "str": 2.5,
           "int": 2,
-          "vit": 31,
+          "vit": 36,
           "agi": 3
         },
         "growth": {
           "str": 0.4,
           "int": 0.2,
-          "vit": 9.7,
+          "vit": 11.15,
           "agi": 0.1
         },
         "armor": 2
@@ -5426,13 +5426,13 @@
         "base": {
           "str": 2.5,
           "int": 2,
-          "vit": 31,
+          "vit": 36,
           "agi": 3
         },
         "growth": {
           "str": 0.4,
           "int": 0.2,
-          "vit": 9.7,
+          "vit": 11.15,
           "agi": 0.1
         },
         "armor": 2
@@ -5611,13 +5611,13 @@
         "base": {
           "str": 2.5,
           "int": 2,
-          "vit": 31,
+          "vit": 36,
           "agi": 3
         },
         "growth": {
           "str": 0.4,
           "int": 0.2,
-          "vit": 9.7,
+          "vit": 11.15,
           "agi": 0.1
         },
         "armor": 3

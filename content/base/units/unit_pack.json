@@ -349,12 +349,12 @@
         "base": {
           "str": 2,
           "int": 0,
-          "vit": 6,
+          "vit": 7,
           "agi": 3
         },
         "growth": {
           "str": 0.3,
-          "vit": 3.45,
+          "vit": 3.95,
           "agi": 0.1
         }
       },
@@ -431,12 +431,12 @@
         "base": {
           "str": 1,
           "int": 0,
-          "vit": 7,
+          "vit": 8,
           "agi": 1
         },
         "growth": {
           "str": 0.25,
-          "vit": 4.35,
+          "vit": 5,
           "agi": 0.05
         },
         "armor": 2
