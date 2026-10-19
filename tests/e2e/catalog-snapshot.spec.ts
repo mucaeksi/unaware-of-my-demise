@@ -29,7 +29,7 @@ test('exports a validated catalog after retry, stages it through the CLI and pub
   expect(download.suggestedFilename()).toBe('economy.json');
   const bytes = new Uint8Array(readFileSync((await download.path())!));
   const catalog = EconomyCatalog.parse(JSON.parse(new TextDecoder().decode(bytes)));
-  expect(catalog.characters).toHaveLength(20); expect(catalog.skills).toHaveLength(80); expect(catalog.gear).toHaveLength(258);
+  expect(catalog.characters).toHaveLength(25); expect(catalog.skills).toHaveLength(100); expect(catalog.gear).toHaveLength(263);
   const hash = await sha256Hex(bytes);
   await expect(page.locator('.catalog-export [role="status"]')).toContainText(hash);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
