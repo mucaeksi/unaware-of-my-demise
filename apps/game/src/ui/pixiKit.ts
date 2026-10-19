@@ -86,32 +86,51 @@ export function panelCanvas(w: number, h: number, variant: PanelVariant = 'norma
     const outerR = isPill ? Math.floor((h - 4) / 2) : Math.min(34, Math.max(18, Math.floor(Math.min(w, h) * 0.14)));
     const innerInset = isPill ? 7 : 9;
     const innerR = Math.max(6, outerR - (innerInset - 2));
-    const baseAlpha = hc ? 0.92 : variant === 'dim' ? 0.36 : variant === 'hot' ? 0.54 : variant === 'danger' ? 0.52 : 0.48;
-    const sheenAlpha = hc ? 0.5 : variant === 'dim' ? 0.16 : 0.26;
-    ctx.fillStyle = rgba(p.bottom, baseAlpha);
+    const baseAlpha = hc ? 0.94 : variant === 'dim' ? 0.42 : variant === 'hot' ? 0.72 : variant === 'danger' ? 0.68 : 0.62;
+    const sheenAlpha = hc ? 0.5 : variant === 'dim' ? 0.16 : variant === 'hot' ? 0.36 : 0.28;
+    const bgGrad = ctx.createLinearGradient(0, 2, 0, h - 2);
+    bgGrad.addColorStop(0, rgba(p.top, Math.min(0.96, baseAlpha + 0.14)));
+    bgGrad.addColorStop(0.55, rgba(p.bottom, baseAlpha));
+    bgGrad.addColorStop(1, rgba(0x06030a, Math.min(0.98, baseAlpha + 0.18)));
+    ctx.fillStyle = bgGrad;
     roundRect(ctx, 2, 2, w - 4, h - 4, outerR);
     ctx.fill();
-    const sheenH = Math.max(8, Math.floor((h - innerInset * 2) * 0.5));
+    const sheenH = Math.max(8, Math.floor((h - innerInset * 2) * 0.48));
     ctx.fillStyle = rgba(p.top, sheenAlpha);
     roundRect(ctx, innerInset, innerInset, w - innerInset * 2, sheenH, Math.min(innerR, Math.floor(sheenH / 2)));
     ctx.fill();
-    ctx.lineWidth = hc ? 3.5 : 2;
-    ctx.strokeStyle = rgba(p.edge, p.edgeA * (hc ? 1 : 0.85));
+    if (variant === 'hot' && !hc) {
+      const glow = ctx.createRadialGradient(w / 2, h / 2, 8, w / 2, h / 2, Math.max(w, h) * 0.55);
+      glow.addColorStop(0, 'rgba(227,195,125,0.20)');
+      glow.addColorStop(1, 'rgba(212,50,92,0)');
+      ctx.fillStyle = glow;
+      roundRect(ctx, innerInset, innerInset, w - innerInset * 2, h - innerInset * 2, innerR);
+      ctx.fill();
+    }
+    ctx.lineWidth = hc ? 3.5 : variant === 'hot' ? 2.6 : 2.1;
+    ctx.strokeStyle = rgba(p.edge, p.edgeA * (hc ? 1 : 0.92));
     roundRect(ctx, 2, 2, w - 4, h - 4, outerR);
     ctx.stroke();
-    ctx.lineWidth = hc ? 1.5 : 1;
-    ctx.strokeStyle = rgba(p.inner, hc ? 0.65 : 0.32);
+    ctx.lineWidth = hc ? 1.5 : 1.2;
+    ctx.strokeStyle = rgba(p.inner, hc ? 0.72 : variant === 'hot' ? 0.58 : 0.38);
     roundRect(ctx, innerInset, innerInset, w - innerInset * 2, h - innerInset * 2, innerR);
     ctx.stroke();
     if (isPill) {
-      const dx = Math.min(22, Math.max(13, Math.floor(h * 0.2)));
-      const r = Math.min(4.5, Math.max(3, h * 0.045));
-      ctx.fillStyle = rgba(p.inner, hc ? 0.85 : 0.62);
-      for (const cx of [dx, w - dx]) diamond(ctx, cx, h / 2, r);
+      const dx = Math.min(24, Math.max(14, Math.floor(h * 0.22)));
+      const r = Math.min(5, Math.max(3.2, h * 0.05));
+      ctx.fillStyle = rgba(p.inner, hc ? 0.92 : variant === 'hot' ? 0.9 : 0.68);
+      for (const cx of [dx, w - dx]) {
+        diamond(ctx, cx, h / 2, r);
+        if (variant === 'hot' && w >= 240) diamond(ctx, cx + (cx < w / 2 ? 9 : -9), h / 2, r * 0.55);
+      }
     } else {
       const c = Math.max(20, Math.round(outerR * 0.68));
-      ctx.fillStyle = rgba(p.inner, hc ? 0.85 : 0.65);
-      for (const [cx, cy] of [[c, c], [w - c, c], [c, h - c], [w - c, h - c]] as const) diamond(ctx, cx, cy, 5);
+      ctx.fillStyle = rgba(p.inner, hc ? 0.9 : 0.75);
+      for (const [cx, cy] of [[c, c], [w - c, c], [c, h - c], [w - c, h - c]] as const) diamond(ctx, cx, cy, 5.5);
+      if (w >= 320 && h >= 150) {
+        diamond(ctx, w / 2, innerInset, 6);
+        diamond(ctx, w / 2, h - innerInset, 5);
+      }
     }
   }
   panelCanvases.set(key, canvas);
@@ -400,10 +419,11 @@ export class Button extends PIXI.Container {
   }
 }
 
-/** Slim HP/Focus bar with smooth fill. */
+/** Slim HP/Focus bar with smooth fill, damage-trail ghost bar, and liquid sheen (#6 Approved UI Kit Bar). */
 export class Bar extends PIXI.Container {
   private readonly g = new PIXI.Graphics();
   shown = 1;
+  ghost = 1;
   private target = 1;
 
   constructor(private readonly scene: PixiScene, x: number, y: number, private readonly bw: number, private readonly bh: number, private readonly colorFn: (ratio: number) => number) {
@@ -415,14 +435,23 @@ export class Bar extends PIXI.Container {
 
   set(ratio: number, animate = true): void {
     const r = Math.min(1, Math.max(0, ratio));
+    const prev = this.shown;
     this.target = r;
     this.scene.anim.killOf(this);
     if (!animate || prefs().reducedMotion) {
       this.shown = r;
+      this.ghost = r;
       this.redraw();
       return;
     }
-    this.scene.anim.to(this, { shown: r }, { duration: 380, ease: 'cubic.out', onUpdate: () => this.redraw() });
+    if (r < prev) {
+      this.ghost = Math.max(this.ghost, prev);
+      this.scene.anim.to(this, { shown: r }, { duration: 260, ease: 'cubic.out', onUpdate: () => this.redraw() });
+      this.scene.anim.to(this, { ghost: r }, { duration: 620, delay: 140, ease: 'quad.out', onUpdate: () => this.redraw() });
+    } else {
+      this.ghost = r;
+      this.scene.anim.to(this, { shown: r }, { duration: 380, ease: 'cubic.out', onUpdate: () => this.redraw() });
+    }
   }
 
   private redraw(): void {
@@ -430,9 +459,28 @@ export class Bar extends PIXI.Container {
     const { bw, bh } = this;
     const hc = prefs().highContrast;
     const g = this.g.clear();
-    g.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2).fill({ color: 0x07040a, alpha: 0.85 });
-    if (this.shown > 0.001) g.roundRect(-bw / 2 + 1, -bh / 2 + 1, Math.max(bh - 2, (bw - 2) * this.shown), bh - 2, (bh - 2) / 2).fill(this.colorFn(this.target));
-    g.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2).stroke({ width: hc ? 2.5 : 1.5, color: hc ? 0xffffff : C.silver, alpha: hc ? 0.85 : 0.45 });
+    // 1. Dark obsidian recessed trough
+    g.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2).fill({ color: 0x07040a, alpha: 0.9 });
+    // 2. Delayed damage-trail ghost bar when losing HP
+    if (this.ghost > this.shown + 0.004) {
+      g.roundRect(-bw / 2 + 1, -bh / 2 + 1, Math.max(bh - 2, (bw - 2) * this.ghost), bh - 2, (bh - 2) / 2).fill({ color: 0xffb3c4, alpha: 0.72 });
+    }
+    // 3. Main liquid fill + top specular sheen
+    if (this.shown > 0.001) {
+      const fillW = Math.max(bh - 2, (bw - 2) * this.shown);
+      const col = this.colorFn(this.target);
+      g.roundRect(-bw / 2 + 1, -bh / 2 + 1, fillW, bh - 2, (bh - 2) / 2).fill(col);
+      if (bh >= 6) {
+        g.roundRect(-bw / 2 + 2, -bh / 2 + 1.5, Math.max(2, fillW - 2), Math.max(1.5, (bh - 2) * 0.42), (bh - 2) / 4).fill({ color: 0xffffff, alpha: 0.28 });
+      }
+    }
+    // 4. Metallic bezel & 100% Focus Ultimate-Ready golden-violet rim
+    const isFullFocus = this.target >= 0.995 && this.colorFn(1) === C.focus;
+    g.roundRect(-bw / 2, -bh / 2, bw, bh, bh / 2).stroke({
+      width: hc ? 2.5 : isFullFocus ? 2.2 : 1.5,
+      color: hc ? 0xffffff : isFullFocus ? C.goldHi : C.silver,
+      alpha: hc ? 0.9 : isFullFocus ? 0.95 : 0.52
+    });
   }
 }
 

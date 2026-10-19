@@ -8,6 +8,7 @@ import { prefs } from '../platform/prefs';
 import { Services } from '../services';
 import { txt } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
+import { createEclipseCorona, createSwingingBellEmblem } from '../vfx/gothicUiVfx';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
 
@@ -40,14 +41,15 @@ export class StudioScene extends PixiScene {
     const spark = vfxTextures().spark;
     const parts: PIXI.Container[] = [];
 
-    // ambient glow behind the emblem
+    // ambient glow + rotating eclipse corona behind the emblem
+    const corona = createEclipseCorona(this, cx, markY, 162, 0, false);
     const aura = this.add(new PIXI.Sprite(spark));
     aura.anchor.set(0.5);
     aura.position.set(cx, markY);
     aura.scale.set(6.2);
     aura.tint = C.gold;
     aura.blendMode = 'add';
-    parts.push(aura);
+    parts.push(corona, aura);
     if (!calm) this.anim.to(aura, { scale: { from: 5.4, to: 6.8 } }, { duration: 2600, yoyo: true, repeat: -1, ease: 'sine.inout' });
 
     // counter-rotating chronometer rings
@@ -70,13 +72,15 @@ export class StudioScene extends PixiScene {
       if (!calm) this.anim.to(mark, { scale: k }, { duration: NAME_IN + 500, ease: 'cubic.out' });
     }
 
+    const bell = createSwingingBellEmblem(this, cx, cy + 12, 0.72, 2, 1800);
     const divider = this.add(this.ornament(cx, cy + 28, calm, spark));
     const name = this.add(txt(cx, cy + 92, S.studio.name.toUpperCase(), { fontFamily: F.display, fontSize: 78, fontStyle: '600', color: '#e9e2d4', stroke: '#120a18', strokeThickness: 5, letterSpacing: 10 }, 0.5));
     const presents = this.add(txt(cx, cy + 168, S.studio.presents, { fontFamily: F.body, fontSize: 36, fontStyle: 'italic 500', color: T.gold, letterSpacing: 18 }, 0.5));
-    parts.push(divider, name);
+    parts.push(bell.container, divider, name);
     for (const o of [...parts, presents]) o.alpha = 0;
 
     Sfx.bell(330, 0.14, 2.2);
+    bell.pulseRing();
     for (const o of parts) this.anim.to(o, { alpha: 1 }, { duration: NAME_IN, ease: 'sine.inout' });
     this.anim.to(presents, { alpha: 1 }, { duration: NAME_IN, delay: PRESENTS_AT, ease: 'sine.inout' });
     if (!calm) this.anim.to(name, { y: cy + 86 }, { duration: total, ease: 'sine.inout' });

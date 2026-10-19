@@ -14,6 +14,7 @@ import { formatBytes } from '../ui/format';
 import { errText, titleStyle } from '../ui/hubScreen';
 import { backdrop, sceneFadeIn } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
+import { createCrackedWatchSpinner, createEclipseCorona } from '../vfx/gothicUiVfx';
 import { app } from '../core/app';
 
 const MAIN_THEME_CUE = 'bgm_main_theme';
@@ -65,13 +66,17 @@ export class FinishScene extends PixiScene {
       bg.scale.set(bg.scale.x * 1.04);
     });
 
+    const cx = REF_W / 2;
+    // #1 & #4 Approved UI Animations: Eclipse Corona backdrop + Cracked Pocket Watch & Sanctuary Bell Spinner
+    createEclipseCorona(this, cx, 488, 250, -5, false).alpha = 0.55;
+    createCrackedWatchSpinner(this, cx, 122, 0.88, 5);
+
     this.ui = new DomStage(app().uiLayer);
     this.attachDom(this.ui.root);
     this.onClose(() => {
       this.quoteTimer?.stop();
       this.ui.destroy();
     });
-    const cx = REF_W / 2;
     this.ui.panel(cx, 488, 1460, 584, 'hot');
     this.head = this.ui.text(cx, 265, '', titleStyle(50, T.gold)).setOrigin(0.5);
     this.note = this.ui.text(cx, 340, '', { fontSize: 34, color: T.text, align: 'center', wordWrap: { width: 1200 }, lineSpacing: 8 }).setOrigin(0.5, 0);

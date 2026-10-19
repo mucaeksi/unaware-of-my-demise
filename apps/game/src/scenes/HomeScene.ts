@@ -2,14 +2,22 @@ import { REF_W } from '../config';
 import { Services } from '../services';
 import { HubScreen } from '../ui/hubScreen';
 import { T } from '../ui/theme';
+import { createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } from '../vfx/gothicUiVfx';
 
 /** Hub of the account-backed features. */
 export class HomeScene extends HubScreen {
   protected readonly heading = 'THE COMPANY';
   protected override readonly needsSignIn = false;
   protected override readonly backTo = 'Title';
+  private vfxMounted = false;
 
   protected async build(): Promise<void> {
+    if (!this.vfxMounted) {
+      this.vfxMounted = true;
+      createEclipseCorona(this, REF_W / 2, 70, 88, -2, false).alpha = 0.65;
+      createSwingingBellEmblem(this, REF_W / 2 - 280, 52, 0.56, 2, 3400);
+      createSwingingBellEmblem(this, REF_W / 2 + 280, 52, 0.56, 2, 3900);
+    }
     const api = Services.api;
     const tiles: { label: string; sub: string; scene: string }[] = [
       { label: 'SUMMON', sub: 'Banners, rates, pity', scene: 'Summon' },
@@ -25,7 +33,20 @@ export class HomeScene extends HubScreen {
     tiles.forEach((t, i) => {
       const col = i % 3;
       const row = Math.floor(i / 3);
-      this.button(REF_W / 2 - 520 + col * 520, 290 + row * 215, { label: t.label, sub: t.sub, w: 480, h: 190, fontSize: 46, variant: i === 0 ? 'hot' : 'normal', onClick: () => this.nav.start(t.scene) });
+      const tx = REF_W / 2 - 520 + col * 520;
+      const ty = 290 + row * 215;
+      this.button(tx, ty, {
+        label: t.label,
+        sub: t.sub,
+        w: 480,
+        h: 190,
+        fontSize: 46,
+        variant: i === 0 ? 'hot' : 'normal',
+        onClick: () => {
+          triggerWaxSealBurst(this, tx, ty, 30);
+          this.nav.start(t.scene);
+        }
+      });
     });
     this.button(REF_W / 2, 1000, { label: 'NOTICES', w: 440, h: 110, onClick: () => this.nav.start('ContentPanel') });
     this.button(REF_W - 330, 1000, { label: 'ARCHIVE', w: 440, h: 110, onClick: () => this.nav.start('Library') });

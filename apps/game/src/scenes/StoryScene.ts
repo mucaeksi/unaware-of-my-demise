@@ -17,6 +17,7 @@ import { Services } from '../services';
 import { blocker, Button, panel, sceneFadeIn, title, toast, txt, verticalShade, type UiText } from '../ui/pixiKit';
 import { buildSubtitleSchedule, resolveSubtitleProgress, type SubtitleSchedule } from '../ui/subtitles';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
+import { createSwingingBellEmblem, type SwingingBellHandle } from '../vfx/gothicUiVfx';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
@@ -250,6 +251,8 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.caret.visible = false;
     box.addChild(panel(0, 0, 1680, 248, 'normal'), rules, this.lineShimmer, syncTrack, this.voiceSyncFill, this.actionBadge, this.bodyText, this.caret);
     this.add(box, DEPTH.hud);
+    const readerBell: SwingingBellHandle = createSwingingBellEmblem(this, REF_W / 2, 886 - insets.bottom - 122, 0.48, DEPTH.hud + 2, 4200);
+    readerBell.container.alpha = 0.92;
 
     const topBtnY = 58 + insets.top;
     const btnW = 148;
