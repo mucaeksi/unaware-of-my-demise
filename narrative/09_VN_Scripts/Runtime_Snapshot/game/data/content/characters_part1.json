@@ -55,10 +55,10 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0,
-            8.0
+            100,
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -70,7 +70,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "physical",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "apply_status",
@@ -95,8 +95,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            180.0,
-            50.0
+            180,
+            50
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -135,7 +135,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            60.0
+            60
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -184,8 +184,8 @@
           "scale_stat": "atk",
           "multiplier": 2.2,
           "multipliers_pct": [
-            220.0,
-            120.0
+            220,
+            120
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -268,9 +268,9 @@
           "element": "Veil",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -282,7 +282,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "magic",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "gain_focus",
@@ -306,8 +306,8 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0,
-            100.0
+            160,
+            100
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -331,7 +331,7 @@
               "op": "heal",
               "target_selector_id": "lowest_hp_ally",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             }
           ],
           "auto_priority": 30
@@ -346,8 +346,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            50.0,
-            8.0
+            50,
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -389,8 +389,8 @@
           "scale_stat": "atk",
           "multiplier": 1.8,
           "multipliers_pct": [
-            180.0,
-            40.0
+            180,
+            40
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -482,9 +482,9 @@
           "element": "Ember",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -494,7 +494,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -513,7 +513,7 @@
           "scale_stat": "atk",
           "multiplier": 1.5,
           "multipliers_pct": [
-            150.0
+            150
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -548,8 +548,8 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0,
-            40.0
+            10,
+            40
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -596,9 +596,9 @@
           "scale_stat": "atk",
           "multiplier": 1.9,
           "multipliers_pct": [
-            190.0,
-            10.0,
-            30.0
+            190,
+            10,
+            30
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -678,10 +678,10 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0,
-            5.0
+            100,
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -693,7 +693,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "grant_shield",
@@ -715,7 +715,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            15.0
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -749,7 +749,7 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -780,8 +780,8 @@
           "scale_stat": "atk",
           "multiplier": 1.7,
           "multipliers_pct": [
-            170.0,
-            100.0
+            170,
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -799,7 +799,7 @@
               "op": "grant_shield",
               "target_selector_id": "all_allies",
               "scale_stat": "def",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "duration_turns": 2
             }
           ],
@@ -858,9 +858,9 @@
           "element": "Gale",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -870,7 +870,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -889,8 +889,8 @@
           "scale_stat": "atk",
           "multiplier": 1.7,
           "multipliers_pct": [
-            170.0,
-            15.0
+            170,
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -925,7 +925,7 @@
           "scale_stat": "atk",
           "multiplier": 0.05,
           "multipliers_pct": [
-            5.0
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -973,9 +973,9 @@
           "element": "Gale",
           "target_rule": "highest_atk_enemy",
           "scale_stat": "atk",
-          "multiplier": 3.0,
+          "multiplier": 3,
           "multipliers_pct": [
-            300.0
+            300
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -987,7 +987,7 @@
               "target_selector_id": "enemy_with_highest_atk",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 3.0
+              "multiplier": 3
             },
             {
               "op": "gain_focus",
@@ -1055,8 +1055,8 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0,
-            20.0
+            90,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1089,7 +1089,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            110.0
+            110
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1122,8 +1122,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            25.0,
-            80.0
+            25,
+            80
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1167,8 +1167,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            220.0,
-            10.0
+            220,
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1245,7 +1245,7 @@
           "scale_stat": "atk",
           "multiplier": 1.1,
           "multipliers_pct": [
-            110.0
+            110
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1274,8 +1274,8 @@
           "scale_stat": "atk",
           "multiplier": 1.8,
           "multipliers_pct": [
-            180.0,
-            30.0
+            180,
+            30
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1311,7 +1311,7 @@
           "scale_stat": "atk",
           "multiplier": 0.5,
           "multipliers_pct": [
-            50.0
+            50
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1346,8 +1346,8 @@
           "scale_stat": "atk",
           "multiplier": 3.3,
           "multipliers_pct": [
-            330.0,
-            100.0
+            330,
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1366,7 +1366,7 @@
               "target_selector_id": "random_other_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "when": {
                 "predicate": "last_primary_target_defeated"
               },
@@ -1431,8 +1431,8 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0,
-            15.0
+            90,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1465,8 +1465,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            170.0,
-            10.0
+            170,
+            10
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1537,8 +1537,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            180.0,
-            35.0
+            180,
+            35
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1618,7 +1618,7 @@
           "scale_stat": "atk",
           "multiplier": 1.05,
           "multipliers_pct": [
-            105.0
+            105
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1647,8 +1647,8 @@
           "scale_stat": "atk",
           "multiplier": 1.8,
           "multipliers_pct": [
-            180.0,
-            25.0
+            180,
+            25
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1717,7 +1717,7 @@
           "scale_stat": "atk",
           "multiplier": 2.1,
           "multipliers_pct": [
-            210.0
+            210
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1795,9 +1795,9 @@
           "element": "Dawn",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -1807,7 +1807,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -1826,8 +1826,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            18.0,
-            10.0
+            18,
+            10
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -1902,8 +1902,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            20.0,
-            15.0
+            20,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -1989,10 +1989,10 @@
           "element": "Tide",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0,
-            20.0
+            100,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2004,7 +2004,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "apply_status",
@@ -2026,8 +2026,8 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0,
-            15.0
+            160,
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2060,7 +2060,7 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2092,8 +2092,8 @@
           "scale_stat": "atk",
           "multiplier": 1.75,
           "multipliers_pct": [
-            175.0,
-            10.0
+            175,
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2179,7 +2179,7 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0
+            90
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2211,8 +2211,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            12.0,
-            10.0
+            12,
+            10
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2356,9 +2356,9 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2368,7 +2368,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -2387,7 +2387,7 @@
           "scale_stat": "atk",
           "multiplier": 0.25,
           "multipliers_pct": [
-            25.0
+            25
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2419,7 +2419,7 @@
           "scale_stat": "atk",
           "multiplier": 0.1,
           "multipliers_pct": [
-            10.0
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2473,8 +2473,8 @@
           "scale_stat": "atk",
           "multiplier": 0.2,
           "multipliers_pct": [
-            20.0,
-            30.0
+            20,
+            30
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2554,7 +2554,7 @@
           "scale_stat": "atk",
           "multiplier": 0.95,
           "multipliers_pct": [
-            95.0
+            95
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2583,8 +2583,8 @@
           "scale_stat": "atk",
           "multiplier": 1.4,
           "multipliers_pct": [
-            140.0,
-            12.0
+            140,
+            12
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2619,7 +2619,7 @@
           "scale_stat": "atk",
           "multiplier": 0.08,
           "multipliers_pct": [
-            8.0
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2661,7 +2661,7 @@
           "scale_stat": "atk",
           "multiplier": 1.45,
           "multipliers_pct": [
-            145.0
+            145
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2738,9 +2738,9 @@
           "element": "Veil",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2750,7 +2750,7 @@
             {
               "op": "damage",
               "damage_type": "magic",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -2769,7 +2769,7 @@
           "scale_stat": "atk",
           "multiplier": 1.3,
           "multipliers_pct": [
-            130.0
+            130
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2839,8 +2839,8 @@
           "scale_stat": "atk",
           "multiplier": 2.2,
           "multipliers_pct": [
-            220.0,
-            20.0
+            220,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -2919,9 +2919,9 @@
           "element": "Stone",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -2931,7 +2931,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -2950,8 +2950,8 @@
           "scale_stat": "atk",
           "multiplier": 1.2,
           "multipliers_pct": [
-            120.0,
-            80.0
+            120,
+            80
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -2987,7 +2987,7 @@
           "scale_stat": "atk",
           "multiplier": 0.2,
           "multipliers_pct": [
-            20.0
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3026,8 +3026,8 @@
           "scale_stat": "atk",
           "multiplier": 2.5,
           "multipliers_pct": [
-            250.0,
-            40.0
+            250,
+            40
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3113,7 +3113,7 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0
+            90
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3142,7 +3142,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            150.0
+            150
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3175,8 +3175,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            80.0,
-            5.0
+            80,
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3217,8 +3217,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            140.0,
-            8.0
+            140,
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3297,8 +3297,8 @@
           "scale_stat": "atk",
           "multiplier": 0.9,
           "multipliers_pct": [
-            90.0,
-            15.0
+            90,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3331,7 +3331,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            180.0
+            180
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3364,8 +3364,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            30.0,
-            50.0
+            30,
+            50
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3408,8 +3408,8 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0,
-            20.0
+            160,
+            20
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3487,7 +3487,7 @@
           "scale_stat": "atk",
           "multiplier": 0.95,
           "multipliers_pct": [
-            95.0
+            95
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3516,7 +3516,7 @@
           "scale_stat": "def",
           "multiplier": null,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3527,7 +3527,7 @@
               "op": "grant_shield",
               "target_selector_id": "lowest_hp_ally",
               "scale_stat": "def",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "duration_turns": 2
             }
           ],
@@ -3543,7 +3543,7 @@
           "scale_stat": "atk",
           "multiplier": 0.15,
           "multipliers_pct": [
-            15.0
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3582,7 +3582,7 @@
           "scale_stat": "atk",
           "multiplier": 1.6,
           "multipliers_pct": [
-            160.0
+            160
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3664,9 +3664,9 @@
           "element": "Gale",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3676,7 +3676,7 @@
             {
               "op": "damage",
               "damage_type": "elemental",
-              "multiplier": 1.0,
+              "multiplier": 1,
               "scale_stat": "atk",
               "target_selector_id": "single_enemy"
             }
@@ -3695,8 +3695,8 @@
           "scale_stat": "atk",
           "multiplier": 1.4,
           "multipliers_pct": [
-            140.0,
-            15.0
+            140,
+            15
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3728,7 +3728,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            5.0
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3761,9 +3761,9 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            15.0,
-            10.0,
-            5.0
+            15,
+            10,
+            5
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3849,7 +3849,7 @@
           "scale_stat": "atk",
           "multiplier": 1.05,
           "multipliers_pct": [
-            105.0
+            105
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3884,8 +3884,8 @@
           "scale_stat": "atk",
           "multiplier": 1.65,
           "multipliers_pct": [
-            165.0,
-            10.0
+            165,
+            10
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -3924,7 +3924,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            15.0
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -3956,8 +3956,8 @@
           "scale_stat": "atk",
           "multiplier": 2.3,
           "multipliers_pct": [
-            230.0,
-            15.0
+            230,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -3990,7 +3990,7 @@
         }
       ],
       "balance_status": "draft_v1_needs_battle_simulation",
-      "equip_weapon_type": "pyre_halberd"
+      "equip_weapon_type": "glaive_shield"
     },
     {
       "character_id": "corbin_locke",
@@ -4041,9 +4041,9 @@
           "element": "Tide",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4055,7 +4055,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             },
             {
               "op": "apply_status",
@@ -4078,8 +4078,8 @@
           "scale_stat": "atk",
           "multiplier": 1.55,
           "multipliers_pct": [
-            155.0,
-            120.0
+            155,
+            120
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -4119,7 +4119,7 @@
           "scale_stat": "def",
           "multiplier": null,
           "multipliers_pct": [
-            10.0
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4150,10 +4150,10 @@
           "element": "Tide",
           "target_rule": "all_enemies",
           "scale_stat": "atk",
-          "multiplier": 2.0,
+          "multiplier": 2,
           "multipliers_pct": [
-            200.0,
-            10.0
+            200,
+            10
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -4165,7 +4165,7 @@
               "target_selector_id": "all_enemies",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 2.0
+              "multiplier": 2
             },
             {
               "op": "apply_status",
@@ -4183,7 +4183,7 @@
         }
       ],
       "balance_status": "draft_v1_needs_battle_simulation",
-      "equip_weapon_type": "chained_harpoon"
+      "equip_weapon_type": "spear"
     },
     {
       "character_id": "cassian_thorne",
@@ -4234,9 +4234,9 @@
           "element": "Dawn",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4248,7 +4248,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             }
           ],
           "auto_priority": 10,
@@ -4265,7 +4265,7 @@
           "scale_stat": "def",
           "multiplier": null,
           "multipliers_pct": [
-            130.0
+            130
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -4273,9 +4273,11 @@
           "description_en": "Cleanses 1 debuff from the ally with the lowest HP and grants them a shield equal to 130% of Cassian's DEF for 2 turns.",
           "effect_ops": [
             {
-              "op": "cleanse",
+              "op": "remove_status",
               "target_selector_id": "lowest_hp_ally",
-              "count": 1
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
             },
             {
               "op": "grant_shield",
@@ -4297,7 +4299,7 @@
           "scale_stat": "def",
           "multiplier": null,
           "multipliers_pct": [
-            8.0
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4330,8 +4332,8 @@
           "scale_stat": "atk",
           "multiplier": 1.9,
           "multipliers_pct": [
-            190.0,
-            15.0
+            190,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -4358,7 +4360,7 @@
         }
       ],
       "balance_status": "draft_v1_needs_battle_simulation",
-      "equip_weapon_type": "reliquary_greatsword"
+      "equip_weapon_type": "arming_sword"
     },
     {
       "character_id": "dorian_kesk",
@@ -4409,9 +4411,9 @@
           "element": "Veil",
           "target_rule": "single_enemy",
           "scale_stat": "atk",
-          "multiplier": 1.0,
+          "multiplier": 1,
           "multipliers_pct": [
-            100.0
+            100
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4423,7 +4425,7 @@
               "target_selector_id": "single_enemy",
               "damage_type": "elemental",
               "scale_stat": "atk",
-              "multiplier": 1.0
+              "multiplier": 1
             }
           ],
           "auto_priority": 10,
@@ -4440,7 +4442,7 @@
           "scale_stat": "atk",
           "multiplier": 1.5,
           "multipliers_pct": [
-            150.0
+            150
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -4473,7 +4475,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            15.0
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4505,8 +4507,8 @@
           "scale_stat": "atk",
           "multiplier": 1.85,
           "multipliers_pct": [
-            185.0,
-            15.0
+            185,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -4539,7 +4541,7 @@
         }
       ],
       "balance_status": "draft_v1_needs_battle_simulation",
-      "equip_weapon_type": "rapier_seal_iron"
+      "equip_weapon_type": "twin_daggers"
     },
     {
       "character_id": "rowan_reed",
@@ -4592,7 +4594,7 @@
           "scale_stat": "atk",
           "multiplier": 0.95,
           "multipliers_pct": [
-            95.0
+            95
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4621,7 +4623,7 @@
           "scale_stat": "atk",
           "multiplier": 1.3,
           "multipliers_pct": [
-            130.0
+            130
           ],
           "cooldown_turns": 2,
           "focus_cost": 0,
@@ -4629,9 +4631,11 @@
           "description_en": "Cleanses 1 debuff from the ally with the lowest HP and heals them for 130% of Rowan's ATK.",
           "effect_ops": [
             {
-              "op": "cleanse",
+              "op": "remove_status",
               "target_selector_id": "lowest_hp_ally",
-              "count": 1
+              "category": "debuff",
+              "count": 1,
+              "selection": "oldest_applied"
             },
             {
               "op": "heal",
@@ -4652,7 +4656,7 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            8.0
+            8
           ],
           "cooldown_turns": 0,
           "focus_cost": 0,
@@ -4685,8 +4689,8 @@
           "scale_stat": "atk",
           "multiplier": null,
           "multipliers_pct": [
-            120.0,
-            15.0
+            120,
+            15
           ],
           "cooldown_turns": 0,
           "focus_cost": 100,
@@ -4706,4 +4710,14 @@
               "stat_id": "res",
               "mode": "add_pct",
               "amount": 0.15,
-              "duration_t
+              "duration_turns": 2
+            }
+          ],
+          "auto_priority": 40
+        }
+      ],
+      "balance_status": "draft_v1_needs_battle_simulation",
+      "equip_weapon_type": "ritual_lantern"
+    }
+  ]
+}
