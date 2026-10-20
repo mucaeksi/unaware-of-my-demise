@@ -66,4 +66,4 @@ Done since the morning: Garrick/Corbin banners (`67b1c969`); the 25 signature we
 
 ## 6. Claude's current queue (do not duplicate)
 
-Signature weapon effects into data + vector tests once the owner approves the spec; extra enemy waves in the campaign builder; paged screens keeping their page; progression/economy tuning once the owner sets a target pace. Done today: the DEEDS / TRIALS / PROFILE screens and the journal fix that had blocked daily supplies, sweep, AFK and memory shards. If you need something from this queue sooner, say so instead of building a parallel version.
+Extra enemy waves in `tools/build_campaign.ts` once your current edit of that file is committed (tell the owner when it is); the 25 signature weapon entries in `content/balance/gear_passives.json` after the owner approves them (the mechanism is in `ccf7c113`); progression/economy tuning once the owner sets a target pace. Done today: DEEDS / TRIALS / PROFILE screens, the journal fix for daily supplies, sweep, AFK and memory shards, Roster keeping its page. If you need something from this queue sooner, say so instead of building a parallel version.
