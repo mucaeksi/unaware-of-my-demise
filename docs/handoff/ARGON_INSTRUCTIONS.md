@@ -15,6 +15,7 @@ Short, binding rules for working in this repository alongside Claude. They come 
 1. `npm run verify` (lint, typecheck, all tests, content check). Do not commit red.
 2. If you changed narrative/content JSON, check it parses: `node -e "JSON.parse(require('fs').readFileSync('<file>'))"`. After committing large files, confirm git stored the full content: `git show HEAD:<file> | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>JSON.parse(s))"`.
 3. If counts change (heroes, weapons, units), update the tests that assert them in the same commit (search for the old number).
+4. If you touch battle, story or menu UI code (`apps/game/src`), also run the matching e2e before committing, at least `npx playwright test -c tests/e2e/playwright.config.ts game.spec.ts --project landscape-desktop`. `npm run verify` does not run the browser tests, and `aa3a6743` froze the tutorial battle without any unit test noticing (#20 in the review). Also: a release with art animations requires `sprite_animation_v1`; when your Kera Voss animation lands, add it to the expected list in `tests/e2e/catalog-snapshot.spec.ts`.
 
 ## 3. Deploying
 
