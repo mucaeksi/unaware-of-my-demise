@@ -55,6 +55,13 @@ async function begin(sub: string): Promise<{ auth: Record<string, string>; playe
   return { auth, playerId, sessionId: j.sessionId, party: BattleParty.parse(j.party) };
 }
 
+/** a weapon whose passive has no approved battle effect (every seeded signature passive is supported now) */
+const futurePassiveWeapon = async (): Promise<string> => {
+  await db().prepare(`INSERT OR IGNORE INTO gear_defs (gear_id, slot, name_en, rarity, family, owner_character_id, banner_id, level_cap, base_json, growth_json, extra_json, dismantle_xp, dismantle_json, dismantle_allowed)
+    SELECT 'weapon_future_passive', slot, 'Future Passive', rarity, family, owner_character_id, banner_id, level_cap, base_json, growth_json, '{"passive_effect_id":"future_proc","passive_name_en":"Future proc"}', dismantle_xp, dismantle_json, dismantle_allowed FROM gear_defs WHERE gear_id = 'weapon_mahmut_signature'`).run();
+  return 'weapon_future_passive';
+};
+
 describe('owned-hero battles are fought with a server-frozen party', () => {
   it('start returns the party the server computed: the free-start heroes with their stats from D1', async () => {
     const { party, sessionId } = await begin(`sub-ob-${rid()}`);
@@ -177,9 +184,9 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     const { auth, playerId } = await signIn(`sub-ob-${rid()}`);
     const before = await start(auth); expect(before.status).toBe(200);
     const old = await before.json() as { sessionId: string; party: BattleParty };
-    const mail = await sendMail(db(), playerId, { kind: 'reward', title: 'legacy passive fixture', attachments: [{ type: 'gear', gearId: 'weapon_mahmut_signature' }] }, 'test');
+    const mail = await sendMail(db(), playerId, { kind: 'reward', title: 'legacy passive fixture', attachments: [{ type: 'gear', gearId: await futurePassiveWeapon() }] }, 'test');
     await claimMail(db(), playerId, mail.id);
-    const gear = await db().prepare("SELECT id FROM player_gear WHERE player_id = ?1 AND gear_id = 'weapon_mahmut_signature'").bind(playerId).first<{ id: number }>();
+    const gear = await db().prepare("SELECT id FROM player_gear WHERE player_id = ?1 AND gear_id = 'weapon_future_passive'").bind(playerId).first<{ id: number }>();
     await db().prepare("UPDATE player_gear SET equipped_by = 'mahmut' WHERE id = ?1").bind(gear!.id).run();
     const response = await start(auth); expect(response.status).toBe(422);
     expect(await response.json()).toMatchObject({ error: 'unsupported_gear_passive' });
@@ -187,7 +194,18 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect((await submit(auth, { sessionId: old.sessionId, actions: playAuto(pack, encounter, old.party).actions })).status).toBe(200);
     expect((await game(`/api/v1/gear/${gear!.id}/unequip`, post({}, auth))).status).toBe(200);
     expect((await start(auth)).status).toBe(200);
-    expect(await db().prepare('SELECT gear_id FROM player_gear WHERE id = ?1').bind(gear!.id).first()).toEqual({ gear_id: 'weapon_mahmut_signature' });
+    expect(await db().prepare('SELECT gear_id FROM player_gear WHERE id = ?1').bind(gear!.id).first()).toEqual({ gear_id: 'weapon_future_passive' });
+  });
+
+  it('equips an approved signature weapon and freezes its hook into the battle party', async () => {
+    const { auth, playerId } = await signIn(`sub-ob-${rid()}`);
+    const mail = await sendMail(db(), playerId, { kind: 'reward', title: 'signature fixture', attachments: [{ type: 'gear', gearId: 'weapon_mahmut_signature' }] }, 'test');
+    await claimMail(db(), playerId, mail.id);
+    const gear = await db().prepare("SELECT id FROM player_gear WHERE player_id = ?1 AND gear_id = 'weapon_mahmut_signature'").bind(playerId).first<{ id: number }>();
+    expect((await game(`/api/v1/gear/${gear!.id}/equip`, post({ characterId: 'mahmut' }, auth))).status).toBe(200);
+    const started = await start(auth); expect(started.status).toBe(200);
+    const { party } = await started.json() as { party: BattleParty };
+    expect(party.find((m) => m.unit_id === 'mahmut')?.equipment_effects?.hooks?.[0]).toMatchObject({ event: 'after_ally_ultimate', event_filter: { source_is_owner: true } });
   });
 
   it('a fixed story encounter also freezes a release session and starts with a null party', async () => {

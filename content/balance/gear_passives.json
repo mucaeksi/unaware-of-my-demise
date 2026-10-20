@@ -1,4 +1,643 @@
 {
-  "note": "Engineering-owned battle effects of gear passives: passive_effect_id -> EventHook (packages/content-schema/src/effects.ts). A weapon whose passive_effect_id is listed here can be equipped and its hook runs in battle; any other passive stays 'not available in battle yet'. Owner-approved entries only (designs: docs/combat/SIGNATURE_WEAPONS_SPEC.md).",
-  "hooks": {}
+  "note": "Engineering-owned battle effects of gear passives: passive_effect_id -> EventHook (packages/content-schema/src/effects.ts). A weapon whose passive_effect_id is listed here can be equipped and its hook runs in battle; any other passive stays 'not available in battle yet'. The 25 signature echoes are Argon's designs from docs/combat/SIGNATURE_WEAPONS_SPEC.md, approved by the owner 2026-10-20; magnitudes are retuned in the economy/combat math pass.",
+  "hooks": {
+    "signature_echo_mahmut": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        },
+        {
+          "op": "grant_shield",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "def",
+          "multiplier": 0.6,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_fadyme": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_allies",
+          "status_id": "sanctuary",
+          "duration_turns": 2
+        },
+        {
+          "op": "gain_focus",
+          "target_selector_id": "ally_with_lowest_focus",
+          "amount": 15
+        }
+      ]
+    },
+    "signature_echo_kera_voss": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "enemy_with_highest_atk",
+          "status_id": "burn",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_brin_alder": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "front_row_allies",
+          "status_id": "stoneguard",
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_nixie_vale": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        },
+        {
+          "op": "arm_next_attack_bonus",
+          "target_selector_id": "self",
+          "damage_multiplier": 1.2,
+          "consume_on_attack": true
+        }
+      ]
+    },
+    "signature_echo_sister_aveline": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_regeneration",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 0.35,
+          "ticks": 2,
+          "tick_event": "owner_turn_start",
+          "duration_turns": 2
+        },
+        {
+          "op": "remove_status",
+          "target_selector_id": "lowest_hp_ally",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        }
+      ]
+    },
+    "signature_echo_sable_wren": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.2,
+          "duration_turns": 2
+        },
+        {
+          "op": "gain_focus",
+          "target_selector_id": "self",
+          "amount": 20
+        }
+      ]
+    },
+    "signature_echo_tilda_fen": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_allies",
+          "status_id": "soaked_immunity",
+          "duration_turns": 2
+        },
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "atk",
+          "multiplier": 0.5
+        }
+      ]
+    },
+    "signature_echo_rikka_ember": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "self",
+          "scale_stat": "atk",
+          "multiplier": 0.8,
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_mirel_quill": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "reduce_cooldowns",
+          "target_selector_id": "all_allies",
+          "amount_turns": 1,
+          "minimum_remaining_turns": 0
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_odelia_pike": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "enemy_with_highest_atk",
+          "status_id": "fracture",
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "enemy_with_highest_atk",
+          "status_id": "soaked",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_pippa_bell": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.12,
+          "duration_turns": 2
+        },
+        {
+          "op": "gain_focus",
+          "target_selector_id": "ally_with_lowest_focus",
+          "amount": 15
+        }
+      ]
+    },
+    "signature_echo_nara_vell": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "all_allies",
+          "scale_stat": "def",
+          "multiplier": 0.7,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "front_row_allies",
+          "status_id": "stoneguard",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_clem_marr": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "dread",
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_allies",
+          "status_id": "dawnward",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_vespera_wisp": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.2,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "decay",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_hana_birch": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "front_row_enemies",
+          "status_id": "fracture",
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_thistle_roe": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_regeneration",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 0.3,
+          "ticks": 2,
+          "tick_event": "owner_turn_start",
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "all_allies",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.1,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_iona_mist": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "all_allies",
+          "scale_stat": "atk",
+          "multiplier": 0.6,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_allies",
+          "status_id": "sanctuary",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_jori_flint": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "self",
+          "scale_stat": "def",
+          "multiplier": 0.9,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "front_row_enemies",
+          "status_id": "burn",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_marek_vane": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "delay_next_action",
+          "target_selector_id": "enemy_with_highest_atk",
+          "gauge_fraction": 0.15
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "front_row_allies",
+          "stat_id": "def",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_garrick_cinder": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "atk",
+          "mode": "add_pct",
+          "amount": 0.2,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "self",
+          "status_id": "stoneguard",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_corbin_locke": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "grant_shield",
+          "target_selector_id": "front_row_allies",
+          "scale_stat": "def",
+          "multiplier": 0.8,
+          "duration_turns": 2
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "front_row_enemies",
+          "status_id": "fracture",
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_cassian_thorne": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_allies",
+          "status_id": "dawnward",
+          "duration_turns": 2
+        },
+        {
+          "op": "heal",
+          "target_selector_id": "lowest_hp_ally",
+          "scale_stat": "def",
+          "multiplier": 0.6
+        }
+      ]
+    },
+    "signature_echo_dorian_kesk": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "apply_status",
+          "target_selector_id": "all_enemies",
+          "status_id": "decay",
+          "duration_turns": 2
+        },
+        {
+          "op": "modify_stat",
+          "target_selector_id": "self",
+          "stat_id": "spd",
+          "mode": "add_pct",
+          "amount": 0.15,
+          "duration_turns": 2
+        }
+      ]
+    },
+    "signature_echo_rowan_reed": {
+      "event": "after_ally_ultimate",
+      "event_filter": {
+        "team": "player",
+        "source_is_owner": true
+      },
+      "limit": {
+        "per_owner_turn": 1
+      },
+      "effect_ops": [
+        {
+          "op": "remove_status",
+          "target_selector_id": "all_allies",
+          "category": "debuff",
+          "count": 1,
+          "selection": "oldest_applied"
+        },
+        {
+          "op": "apply_status",
+          "target_selector_id": "lowest_hp_ally",
+          "status_id": "sanctuary",
+          "duration_turns": 2
+        }
+      ]
+    }
+  }
 }

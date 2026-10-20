@@ -29,6 +29,13 @@ async function give(playerId: string, gearIds: string[]): Promise<number[]> {
 const call = (auth: Record<string, string>, path: string, body: unknown = {}) => game(`/api/v1${path}`, post(body, auth));
 const list = async (auth: Record<string, string>) => ((await (await game('/api/v1/gear', { headers: auth })).json()) as { gear: { id: number; slot: string; level: number; levelCap: number; equippedBy: string | null; stats: { main: { stat: string }; subs: unknown[] } | null; ascension: number; canDismantle: boolean }[] }).gear;
 
+/** a weapon whose passive has no approved battle effect (every seeded signature passive is supported now) */
+const futurePassiveWeapon = async (): Promise<string> => {
+  await db().prepare(`INSERT OR IGNORE INTO gear_defs (gear_id, slot, name_en, rarity, family, owner_character_id, banner_id, level_cap, base_json, growth_json, extra_json, dismantle_xp, dismantle_json, dismantle_allowed)
+    SELECT 'weapon_future_passive', slot, 'Future Passive', rarity, family, owner_character_id, banner_id, level_cap, base_json, growth_json, '{"passive_effect_id":"future_proc","passive_name_en":"Future proc"}', dismantle_xp, dismantle_json, dismantle_allowed FROM gear_defs WHERE gear_id = 'weapon_mahmut_signature'`).run();
+  return 'weapon_future_passive';
+};
+
 describe('gear: grants and equipping', () => {
   it('rejects malformed passive metadata and future effect IDs without interpreting text', () => {
     for (const value of ['invalid-json', '{"passive_effect_id":42}', '{"passive_name_en":null}']) expect(() => gearPassive(value)).toThrow(expect.objectContaining({ code: 'invalid_gear_definition', status: 503 }));
@@ -48,7 +55,7 @@ describe('gear: grants and equipping', () => {
   });
   it('refuses an undefined advertised passive before replacing working gear or writing state', async () => {
     const { auth, playerId } = await player();
-    const [sword, signature] = await give(playerId, ['weapon_arming_sword_3_01', 'weapon_mahmut_signature']);
+    const [sword, signature] = await give(playerId, ['weapon_arming_sword_3_01', await futurePassiveWeapon()]);
     expect((await call(auth, `/gear/${sword}/equip`, { characterId: 'mahmut' })).status).toBe(200);
     const before = (await db().prepare('SELECT * FROM player_gear WHERE player_id = ?1 ORDER BY id').bind(playerId).all()).results;
     const response = await call(auth, `/gear/${signature}/equip`, { characterId: 'mahmut' });

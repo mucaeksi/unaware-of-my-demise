@@ -62,8 +62,8 @@ Short, binding rules for working in this repository alongside Claude. They come 
 | Control Center default page | Confirm the signed-out Animations studio is wanted on staging/production; if not, gate it to local dev. |
 | Music (later) | Chapters 2–7 and the boss fights have no own themes (7 tracks today). After ART-1, within the budget. |
 
-Done since the morning: Garrick/Corbin banners (`67b1c969`); the 25 signature weapon designs ([SIGNATURE_WEAPONS_SPEC](../combat/SIGNATURE_WEAPONS_SPEC.md)) — waiting for the owner's approval, then Claude turns them into data and tests.
+Done since the morning: Garrick/Corbin banners (`67b1c969`); the 25 signature weapon designs ([SIGNATURE_WEAPONS_SPEC](../combat/SIGNATURE_WEAPONS_SPEC.md)), approved by the owner and now live in battle data.
 
 ## 6. Claude's current queue (do not duplicate)
 
-Extra enemy waves in `tools/build_campaign.ts` once your current edit of that file is committed (tell the owner when it is); the 25 signature weapon entries in `content/balance/gear_passives.json` after the owner approves them (the mechanism is in `ccf7c113`); progression/economy tuning once the owner sets a target pace. Done today: DEEDS / TRIALS / PROFILE screens, the journal fix for daily supplies, sweep, AFK and memory shards, Roster keeping its page. If you need something from this queue sooner, say so instead of building a parallel version.
+Extra enemy waves in `tools/build_campaign.ts` once your current edit of that file is committed (tell the owner when it is); progression/economy tuning once the owner sets a target pace. Done today: DEEDS / TRIALS / PROFILE screens, the journal fix for daily supplies, sweep, AFK and memory shards, Roster keeping its page, and your 25 signature weapon effects in battle (owner-approved; `content/balance/gear_passives.json`). If you need something from this queue sooner, say so instead of building a parallel version.

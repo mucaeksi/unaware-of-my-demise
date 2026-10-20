@@ -134,7 +134,7 @@ test('account: sign in, summon with server-side pity, claim mail, see roster; th
   expect(problems.filter((p) => !p.includes('favicon') && !p.includes('HTTP 401') && !p.includes('HTTP 402'))).toEqual([]);
 });
 
-test('armory: unsupported signature is disclosed and disabled while ordinary gear still equips', async ({ page, request }, info) => {
+test('armory: an approved signature weapon equips like ordinary gear and can be swapped out', async ({ page, request }, info) => {
   const problems = await openGame(page);
   const token = await googleToken(`e2e-gear-passive-${info.project.name}`);
   const player = await page.evaluate(async (t) => (window as any).__UOMD__.services.api.signInWithIdToken(t), token);
@@ -151,15 +151,18 @@ test('armory: unsupported signature is disclosed and disabled while ordinary gea
   let equips = 0;
   page.on('request', (r) => { if (/\/gear\/\d+\/equip$/.test(r.url())) equips++; });
   const disclosure = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').texts().join('\n'));
-  expect(disclosure).toContain('Passive not available yet');
+  // the signature passive has an approved battle effect (content/balance/gear_passives.json)
+  expect(disclosure).not.toContain('Passive not available yet');
   await tap(page, info, REF_W - 250, 260);
-  expect(equips).toBe(0);
+  await expect.poll(async () => (await call(page, '/api/v1/gear')).gear.find((g: any) => g.gearId === 'weapon_mahmut_signature')?.equippedBy).toBe('mahmut');
+  expect(equips).toBe(1);
+  await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').busy)).toBe(true);
   await tap(page, info, REF_W - 250, 380);
   await expect.poll(async () => (await call(page, '/api/v1/gear')).gear.find((g: any) => g.gearId === 'weapon_arming_sword_3_01')?.equippedBy).toBe('mahmut');
-  expect(equips).toBe(1);
+  expect(equips).toBe(2);
   await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').busy)).toBe(true);
   await expect.poll(() => page.evaluate(() => !(window as any).__UOMD__.game.scene.getScene('Gear').fading)).toBe(true);
   await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').texts().includes('Equipped'))).toBe(false);
-  await page.screenshot({ path: `${SHOTS}/${info.project.name}-gear-passive-unavailable.png` });
+  await page.screenshot({ path: `${SHOTS}/${info.project.name}-gear-signature-equipped.png` });
   expect(problems.filter((p) => !p.includes('favicon'))).toEqual([]);
 });
