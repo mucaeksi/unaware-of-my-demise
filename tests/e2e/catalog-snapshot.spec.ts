@@ -55,7 +55,7 @@ test('exports a validated catalog after retry, stages it through the CLI and pub
   await expect(page.getByRole('status')).toContainText('done');
   await expect(release).toContainText('published');
   const published = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();
-  expect(published).toMatchObject({ release: { id }, compat: { min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'vfx_v1', 'world_map_v1'] }, signature: { alg: 'ES256' } });
+  expect(published).toMatchObject({ release: { id }, compat: { min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'sprite_animation_v1', 'vfx_v1', 'world_map_v1'] }, signature: { alg: 'ES256' } });
   await page.screenshot({ path: `${SHOTS}/catalog-${info.project.name}-staged.png`, fullPage: true });
   expect(errors).toEqual([]);
   } finally { expect((await request.post(`${ADMIN}/admin/api/channels/dev/rollback`, { headers, data: { releaseId: pointer.release.id } })).status()).toBe(200); }
