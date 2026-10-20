@@ -4,10 +4,9 @@ Short, binding rules for working in this repository alongside Claude. They come 
 
 ## 1. Where to work (D-28, from 2026-10-20)
 
-- **`E:\unaware-of-my-demise` is the owner's `main` checkout for GitHub Desktop.** Do not edit or commit there. The owner merges branches into `main` there and pushes; the push deploys staging.
-- **Work on your own branch, in your own worktree on the local disk:** run `git -C E:\unaware-of-my-demise worktree add C:\Users\PC\uomd-argon -b argon/<task> main`, then open `C:\Users\PC\uomd-argon` and run `npm ci` once. Claude works the same way in `C:\Users\PC\uomd-claude` on `claude/*` branches. Before starting a new task, bring your branch up to date with `git merge main`.
-- **Never push, never commit to `main` and never merge into `main`.** When a step is done and verified, tell the owner the branch name and what it contains.
-- Work that is still uncommitted in `E:` moves to your branch without loss. In `E:` run `git switch -c argon/<task>`, commit your files, then run `git switch main`. Then add the worktree for that branch: `git worktree add C:\Users\PC\uomd-argon argon/<task>`.
+- **The repository is `F:\unaware-of-my-demise` (owner, 2026-10-20).** Open and edit only that folder. `E:\unaware-of-my-demise` and the `C:\Users\PC\uomd-*` worktrees are retired; do not edit or commit there.
+- **Never push.** Commit your own verified steps locally on `main` in F:. The owner pushes with GitHub Desktop when the work is done, and that push deploys staging.
+- Claude works in the same folder. Commit finished steps promptly, so neither agent's uncommitted work sits in files the other one is changing.
 - Google Drive is no longer part of the workflow. Never run `git` write commands in the old `G:\Drive'ım\unaware-of-my-demise` copy: Drive once served git a stale read during a commit (the 25-hero `characters_part1.json` was stored truncated in `7a640663`) and locked files halfway through a checkout.
 - **Commit only the files you changed** (`git add <paths>`, never `git add -A`).
 
