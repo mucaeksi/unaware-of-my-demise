@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "asset_id": "boss_marshal_oren_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 4,
+  "targets": {
+    "atlases": {
+      "atlas_boss_marshal_oren": {
+        "image": "art/atlas_boss_marshal_oren.webp",
+        "width": 1956,
+        "height": 681,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            152,
+            337
+          ],
+          "idle_2": [
+            160,
+            4,
+            152,
+            337
+          ],
+          "idle_3": [
+            316,
+            4,
+            152,
+            337
+          ],
+          "ultimate": [
+            472,
+            4,
+            218,
+            335
+          ],
+          "ultimate_2": [
+            694,
+            4,
+            218,
+            335
+          ],
+          "ultimate_3": [
+            916,
+            4,
+            218,
+            335
+          ],
+          "victory": [
+            1138,
+            4,
+            151,
+            335
+          ],
+          "active": [
+            1293,
+            4,
+            217,
+            334
+          ],
+          "active_2": [
+            1514,
+            4,
+            217,
+            334
+          ],
+          "active_3": [
+            1735,
+            4,
+            217,
+            334
+          ],
+          "basic": [
+            4,
+            345,
+            218,
+            332
+          ],
+          "basic_2": [
+            226,
+            345,
+            218,
+            332
+          ],
+          "basic_3": [
+            448,
+            345,
+            218,
+            332
+          ],
+          "walk": [
+            670,
+            345,
+            153,
+            332
+          ],
+          "hit": [
+            827,
+            345,
+            222,
+            328
+          ],
+          "defeat": [
+            1053,
+            345,
+            280,
+            325
+          ]
+        }
+      }
+    },
+    "units": {
+      "boss_marshal_oren": {
+        "atlas": "atlas_boss_marshal_oren",
+        "facing": "left",
+        "height_px": 310,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.492,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.489
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.477,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.476,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.477,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.597
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.485
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.49
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "34e0f9abb81058ed4bba16889762f2880e8aa75951d9e70afd6f5c19ae148ad5",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/boss_marshal_oren_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "a9714d3ce1bbd930751f83d639a4c325a9964ca2f53f0e4b44d131b56c9088ee",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "ec82a5ff69bed48b43c935d3749294e6eb4fc5de8d686b8b654e75c5619d7cef",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/boss_marshal_oren_chibi_sheet.ingest.json",
+    "spec_sha256": "a2355f3596d0ddb908e1b0ac033b506f2c7ccdff7727acd14308d512447f19c6",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "47b472bc44ca2c55d53d2b42f6999a772b782cf9d3f256e2fea2024718e02cca"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_boss_marshal_oren.webp",
+      "sha256": "07b59bf931127995b278a302725c0047f56088f43827865542684a3bc7d11023",
+      "pixels_sha256": "d0f80036a0bcdb9504bb1893e3f70275a26aaaa916b953035b4524da1a3e9e3f",
+      "bytes": 302564,
+      "width": 1956,
+      "height": 681
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=155"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.615"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1956x681"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "302564 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0009%"
+        }
+      },
+      "warnings": [
+        "A12: removed 155 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_marshal_oren.webp",
+          "sha256": "048586c471b48d8ca7556562290779c1b78a8fdd1c2ae4e39a41c1f085e4bed1",
+          "pixels_sha256": "d4d23bb9a08eb426b015920589ee2900b5f5306f135197b37d6b1114d1b98ada",
+          "bytes": 362180,
+          "width": 1956,
+          "height": 681
+        }
+      ],
+      "source_sha256": "80066b03fa10ad99a1ec421ba2cf760ba12438ef3dc5b11e096e791d4d07399a",
+      "fingerprint": "eb505469c218b7f0a47486ba50afe818f4d571e7371895717eebe0c49f5954b2"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_marshal_oren.webp",
+          "sha256": "0c62bc377cea72b5578c7c68a94863f7af326f606cc1ce23e15e00032108d7b5",
+          "pixels_sha256": "3bc78651e58a7710ae4aa49608d1070cf7f9971ba0ad784d74537483f8ffba95",
+          "bytes": 202834,
+          "width": 2023,
+          "height": 659
+        }
+      ],
+      "source_sha256": "8d126673dffef537b13be8ee224e03e43f0cbd470144540d9b8327a52abfd2c7",
+      "fingerprint": "2b1c953c43f36f8c7c5cc3db14ca40204e2c799bfc315f054a3104c245a3d798"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_marshal_oren.webp",
+          "sha256": "a7fe97a4ea77d0de5db3f60bf0352ac62a45e92fc15a7b254ac2cfa92ea9f785",
+          "pixels_sha256": "7493ee07206b4a214a8857bddfe486b0ae49538df14fc7fc2172aee886be4e0c",
+          "bytes": 217838,
+          "width": 1983,
+          "height": 670
+        }
+      ],
+      "source_sha256": "432010d8e3f81e1bc35f1faf1944f7ed9ac7e80cd19f440cd9c8308d72e4996f",
+      "fingerprint": "975421364bf69ad23c9a73d7681d94201dd947fcef8401b57ce4080e5b8d5e55"
+    }
+  ]
+}

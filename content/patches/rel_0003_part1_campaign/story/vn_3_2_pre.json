@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "kera_voss",
+      "character": "jori_flint",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
     },
     {
       "op": "say",

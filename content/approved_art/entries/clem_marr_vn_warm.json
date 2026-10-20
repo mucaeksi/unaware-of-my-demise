@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "asset_id": "clem_marr_vn_warm",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "clem_marr": {
+        "emotions": {
+          "gentle": "warm",
+          "smile": "warm",
+          "warm": "warm"
+        },
+        "images": {
+          "warm": "art/portrait_clem_marr_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "803426a5d7c4124e9ca561bbba43dae0243f01174c2fd68e3c181344b0fc3485",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/clem_marr_vn_warm/run.provenance.json",
+    "provenance_sha256": "2a4ef02b11fc7062da9155407832508831cd30174ae89f6aff9b63932244c302",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "0f023d9a90e3fd9ce9b9c469514095a5a56ad44226ba5a2029f747aac9e5ea29",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/clem_marr_vn_warm.ingest.json",
+    "spec_sha256": "2971425ae216bb888c9d53f8cd5d7667e821c59835d0e1053bdcdd919de7bf25",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "ed2d1dc5546911802e8f46fc835bf135b71270f935a4199380ace4ff9da0f8a0"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_clem_marr_warm.webp",
+      "sha256": "1b0644a1a674691f0340225c74eda33126a150a06ac6a5f942e65905692bbb9e",
+      "pixels_sha256": "6444365fe39e340a06d10261dbe552a00436c8c267a36be00344fd441e589dfa",
+      "bytes": 51894,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=8"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "51894 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 8 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_clem_marr_warm.webp",
+          "sha256": "4948bf37c4d1fe185d4b3dfbc471c762bfec6d4762450e5b1831653c3b35573a",
+          "pixels_sha256": "43b579e26312130d7d0a3830897c15b6868955df1205f096b88a80feec55edfa",
+          "bytes": 52288,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "94fe9dba2f53c5bda80ac47c98d67ae32c21158ea0b876b08a93fa8838f63648",
+      "fingerprint": "9a2e7b5271ce6c8584f7f25b652dd8773fd482c6548e4b6b4837307ed6a70bb8"
+    }
+  ]
+}

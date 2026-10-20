@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "asset_id": "clem_marr_vn_focused",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "968f57a89c5f",
+    "provenance": ".cache/generated/clem_marr_vn_focused/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "clem_marr",
+    "image": "focused",
+    "emotion_tags": [
+      "analytical",
+      "focused",
+      "serious"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

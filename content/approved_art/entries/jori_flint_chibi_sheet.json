@@ -1,0 +1,323 @@
+{
+  "schema": 1,
+  "asset_id": "jori_flint_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 2,
+  "targets": {
+    "atlases": {
+      "atlas_jori_flint": {
+        "image": "art/atlas_jori_flint.webp",
+        "width": 1930,
+        "height": 1043,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            200,
+            348
+          ],
+          "idle_2": [
+            208,
+            4,
+            200,
+            348
+          ],
+          "idle_3": [
+            412,
+            4,
+            200,
+            348
+          ],
+          "ultimate": [
+            616,
+            4,
+            268,
+            346
+          ],
+          "ultimate_2": [
+            888,
+            4,
+            268,
+            346
+          ],
+          "ultimate_3": [
+            1160,
+            4,
+            268,
+            346
+          ],
+          "victory": [
+            1432,
+            4,
+            197,
+            345
+          ],
+          "active": [
+            1633,
+            4,
+            267,
+            344
+          ],
+          "active_2": [
+            4,
+            356,
+            267,
+            344
+          ],
+          "active_3": [
+            275,
+            356,
+            267,
+            344
+          ],
+          "basic": [
+            546,
+            356,
+            293,
+            343
+          ],
+          "basic_2": [
+            843,
+            356,
+            293,
+            343
+          ],
+          "basic_3": [
+            1140,
+            356,
+            293,
+            343
+          ],
+          "walk": [
+            1437,
+            356,
+            287,
+            341
+          ],
+          "hit": [
+            1728,
+            356,
+            198,
+            338
+          ],
+          "defeat": [
+            4,
+            704,
+            198,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "jori_flint": {
+        "atlas": "atlas_jori_flint",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.454,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.554
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.555,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.502,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.502,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.509
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.51
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.453
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "315a0b35148fc2241bebc63d76a46d9821f55ee4a3f2862d861235410c15fadf",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/jori_flint_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "f6df4ea8886acc2a849bc583a1e169e56148bb62c8751eeee5f9e48ee5bc79af",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "438a637bec666228fab68e23314b22cec7f5f11cd2579cff9b802c54ca8c1eee",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/jori_flint_chibi_sheet.ingest.json",
+    "spec_sha256": "6ecda42855d5aa08627b2729c15955aa80fc81d2b6aa4b462ffc48d0ee1ffb61",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "475d93c4c474f136413940ffb967a5158d81a762f7b8683b127b3e8a5cab6fd4"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_jori_flint.webp",
+      "sha256": "9c5d8459fb141ac2feef75c5bab1901d5b9c962f26103ca17909b2c6ae2bad59",
+      "pixels_sha256": "8007c15006546500ec4079baf3c9ab463b3104b66fd006b7e09addb1b83853d5",
+      "bytes": 502856,
+      "width": 1930,
+      "height": 1043
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=151"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1930x1043"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "502856 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0042%"
+        }
+      },
+      "warnings": [
+        "A12: removed 151 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_jori_flint.webp",
+          "sha256": "5de967432271efec69f9c21c1677ff2983a43729b8a362aed77afd8e8ff309d5",
+          "pixels_sha256": "cefb7b3d69d8b91ad86e5e7378de27d258eb6df36c6726f11a85ce2ede2038de",
+          "bytes": 500556,
+          "width": 1985,
+          "height": 1043
+        }
+      ],
+      "source_sha256": "39622fac99fe0084723e4dbeec55b53978f1a9d7550c72b8d4f64bcf0bc6fb60",
+      "fingerprint": "efdfa131e819939145d32cdd7b47562467c99cd8778330d797794ae6be4fd938"
+    }
+  ]
+}

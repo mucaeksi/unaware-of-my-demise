@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "asset_id": "jori_flint_vn_warm",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "jori_flint": {
+        "emotions": {
+          "gentle": "warm",
+          "smile": "warm",
+          "warm": "warm"
+        },
+        "images": {
+          "warm": "art/portrait_jori_flint_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "dfe4647a2e6fc9525b7bad28c4bcd4dd5f7e46646ead63188384e2f276a7ff5b",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/jori_flint_vn_warm/run.provenance.json",
+    "provenance_sha256": "ed27eaac1f55365d672273c0f92f700a52ced4ebd1f22a51789374922b8d240b",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "8301561b977e457468b8326389da1b085eb15ed866cd35284896333c653adf6d",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/jori_flint_vn_warm.ingest.json",
+    "spec_sha256": "5ec6cc81d3881b55eb483ebe7ce38d1a1ab0fa3c2d2992b03d4fe2b6b2d186f9",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "58312b84c4e20fcdf12a01b21efdc83e38dd180a3948b06fe86e9a697dd3a312"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_jori_flint_warm.webp",
+      "sha256": "3d75dc5ffe2d42d93da352d27b2312700779e3fa7826968e3e8fedde20b2dac2",
+      "pixels_sha256": "a1b9ecff9fd6ec6edf1b9c54b138a7eae1b88e269c4cc35af389504476500a57",
+      "bytes": 51206,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=5"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "51206 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 5 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_jori_flint_warm.webp",
+          "sha256": "d0453d8210c3062443fa7a67b9b2d61ce9008ac5022819c437b45f27d0ebba00",
+          "pixels_sha256": "8bf3878a9abaaa75b69ac60d1ea50ca007217543fef57712f88c2b66fd65a6e7",
+          "bytes": 50950,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "0aa7f2c92a93f013972c1959f9261d4fc67f4f950eea6f8a2424d85c94bc7c92",
+      "fingerprint": "0ae14182876e0f101bd31c222f8ae728966b70fdd62ce71c8d7335e6de00cda3"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "asset_id": "nixie_vale_vn_defiant",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "nixie_vale": {
+        "emotions": {
+          "angry": "defiant",
+          "defiant": "defiant",
+          "fierce": "defiant",
+          "urgent": "defiant"
+        },
+        "images": {
+          "defiant": "art/portrait_nixie_vale_defiant.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "ea1db19be3ce818a337a0f02ce4f2931036d9b07039b484b0446f047f7852a02",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/nixie_vale_vn_defiant/run.provenance.json",
+    "provenance_sha256": "4d889304e2da4040a30a6964dc6b92d379f3f3b2b97c731113708fadd03508e8",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "d26927d2ab44ad4dcc808e6c21f8f55967d156536114edb70c6bb97eaa94b531",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/nixie_vale_vn_defiant.ingest.json",
+    "spec_sha256": "75a2c8cd42a954814c0d5e2572b6703cde556b7294ed18c8d093828f5269674d",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "66d2600bd6315943ec0e409b950d89a2c46ab052eb67e0b4e74750afe8d03f54"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_nixie_vale_defiant.webp",
+      "sha256": "8b6b51f736b5abe6e41fd4747474496295c8bfb79bb818b46a4c5a9e8326ed1a",
+      "pixels_sha256": "83253704f654f65827d318df7c1eccfa6d9a9d07970d7b1822f0bc42b1004134",
+      "bytes": 67936,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=77"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "67936 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 77 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_nixie_vale_defiant.webp",
+          "sha256": "c63ae40e37ba400550b0be921b8a3367df7073a3b04d24e766459937bd111478",
+          "pixels_sha256": "adca0ff0bcc16174b016d31826905bef22e308d4e6c8179bab6f643fcbe92cc2",
+          "bytes": 68214,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "d35748995c5a02a669ddfd0002e3f3de9ff74aa46895bf430c135dc141dc185a",
+      "fingerprint": "7ba59dfccc75d56fab8899f041d3d866101e539dac628ea7316378605085a0df"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "asset_id": "clem_marr_vn_defiant",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "clem_marr": {
+        "emotions": {
+          "defiant": "defiant",
+          "fierce": "defiant",
+          "urgent": "defiant"
+        },
+        "images": {
+          "defiant": "art/portrait_clem_marr_defiant.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "5f727a525beb1fff7d253ce7fdc14cda480ef9ce7fe420356407e66c6a871779",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/clem_marr_vn_defiant/run.provenance.json",
+    "provenance_sha256": "9b4b7ce387a6b390c8c51a5ee7010f69b4d0e4958c61a1f8cd2ece7518469b8e",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "d0e926f0470f76136ed4c32af5c7096bbc3bde15cc5db1947763a792d22647a9",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/clem_marr_vn_defiant.ingest.json",
+    "spec_sha256": "00b6b1e1c70e906133a47c5b04a9dd57727a246cddada1e65ad12ff32fa0b700",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "c4ea025b1aa581954f1112b14c51116e758a94b0ab97085a1957811f0cdbd8c8"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_clem_marr_defiant.webp",
+      "sha256": "7a6da38c26330cf1b7706c451721dfc04fecf8d2100dad68323d40ad09484a55",
+      "pixels_sha256": "186a7ed68054f1ad2d93a4452e02b6ff1153966407c5cacf6af5fe0de9f56844",
+      "bytes": 52580,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=5"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "52580 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 5 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_clem_marr_defiant.webp",
+          "sha256": "21e95962821bfd5ab2bd5c2288beff22432e66666d2b79bc076cc2da07e05f6e",
+          "pixels_sha256": "c5408dfd7f9a6530757bc5ca729d6c703db66092dd5edcccc4cc7bb7f67b196a",
+          "bytes": 52282,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "7b25b0a591f6673cc868690d25bb80694f52e8e3d85d03b2a36aa0629b3e4887",
+      "fingerprint": "cec5d91226ccd8d53cd5b84a4120c40bacf39ebcd90037495887d126a217a5fa"
+    }
+  ]
+}

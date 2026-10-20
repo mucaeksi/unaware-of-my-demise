@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "asset_id": "nixie_vale_vn_composed",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "981c481ea7b8",
+    "provenance": ".cache/generated/nixie_vale_vn_composed/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "nixie_vale",
+    "image": "composed",
+    "emotion_tags": [
+      "brisk",
+      "calm",
+      "composed",
+      "decisive",
+      "fear",
+      "firm",
+      "genki",
+      "neutral",
+      "practical",
+      "wary"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

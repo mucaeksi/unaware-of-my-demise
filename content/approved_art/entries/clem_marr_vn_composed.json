@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "asset_id": "clem_marr_vn_composed",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "clem_marr": {
+        "emotions": {
+          "calm": "composed",
+          "composed": "composed",
+          "concern": "composed",
+          "curious": "composed",
+          "direct": "composed",
+          "grim": "composed",
+          "matter_of_fact": "composed",
+          "neutral": "composed"
+        },
+        "images": {
+          "composed": "art/portrait_clem_marr_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "d547bf4313797bd4cb3e7ee2bc130c75274182ba0d2dfe67f08b95ee87a4133e",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/clem_marr_vn_composed/run.provenance.json",
+    "provenance_sha256": "b26c5a48e30ff221ccdf2497b3b7bda272f5363053b9e699b7c63c0b41285a2f",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "187842883ed5434899c4c7587e769d7c2a5f2e8ee3129f18a1ac2df5e6eac8c1",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/clem_marr_vn_composed.ingest.json",
+    "spec_sha256": "f94efacf12f7a444bdd6763e141ca2fa2fa2cdec2b91e89024988355e99352d0",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "45d6e1e83e12524cb7bef97ab83189c671b7332bc4c2a37430466a4c0eb4b69b"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_clem_marr_composed.webp",
+      "sha256": "6917f5c371649ba6cac09caf84f7529ec90413df60ae33d49d497fa6b5e78ebe",
+      "pixels_sha256": "e777dd0a788cd56918d96da1377c939d1b28541fa7f80eaa1c92aeba5e3067d1",
+      "bytes": 50898,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=6"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "50898 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 6 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_clem_marr_composed.webp",
+          "sha256": "13a1b27f5040f48b9143dd6f5c5cd75a754c8fecb996a3eb3ce4264e79b6eea2",
+          "pixels_sha256": "5fbd17e3db1e6164063c675d065bbe132a07468c6414f2851ffc84633ace0e22",
+          "bytes": 51002,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "41e2def8dff0e999146e17afd99eeea35e07241fd5a498a2b4a8340b12252b9f",
+      "fingerprint": "7b07fc3500bd12203226275cffcfc5a8f79bc21fd7f5942113f139d806a1f6fd"
+    }
+  ]
+}

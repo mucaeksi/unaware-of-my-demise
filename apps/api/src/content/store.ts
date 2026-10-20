@@ -161,9 +161,17 @@ export class ContentStore {
     const json = entries.filter((e) => e.path.endsWith('.json'));
     if (entries.reduce((n, e) => n + e.bytes, 0) > MAX_RELEASE_BYTES || json.some((e) => e.bytes > MAX_JSON_FILE_BYTES) || json.reduce((n, e) => n + e.bytes, 0) > MAX_JSON_TOTAL_BYTES) throw new HttpError(413, 'resource_budget', 'release exceeds the validation resource budget');
     // HEAD every object before admission; a stale D1 upload row does not prove media exists.
-    for (const entry of entries) {
-      if (entry.path.endsWith('.json')) set.set(entry.path, await this.readText(entry.sha256));
-      else { const object = await this.bucket.head(ContentStore.objectKey(entry.sha256)); if (!object || object.size !== entry.bytes) throw new HttpError(422, 'object_missing', `missing or truncated media ${entry.path}`); set.set(entry.path, EMPTY); }
+    for (const entry of entries) set.set(entry.path, EMPTY);
+    for (let i = 0; i < entries.length; i += 32) {
+      await Promise.all(
+        entries.slice(i, i + 32).map(async (entry) => {
+          if (entry.path.endsWith('.json')) set.set(entry.path, await this.readText(entry.sha256));
+          else {
+            const object = await this.bucket.head(ContentStore.objectKey(entry.sha256));
+            if (!object || object.size !== entry.bytes) throw new HttpError(422, 'object_missing', `missing or truncated media ${entry.path}`);
+          }
+        })
+      );
     }
     return set;
   }
@@ -276,21 +284,27 @@ export class ContentStore {
     if (media.length === 0) return { approved: [], pendingPreviewMedia: [] };
     const approved: string[] = [];
     const pendingPreviewMedia: string[] = [];
-    for (const [path, sha256] of media) {
-      const row = await this.db
-        .prepare(
-          `SELECT a.bytes AS bytes
-           FROM assets a
-           JOIN content_objects o ON o.sha256 = a.sha256 AND o.bytes = a.bytes AND o.media_type = a.media_type
-           JOIN admin_users u ON u.email = a.created_by AND u.role = 'owner'
-           WHERE a.path = ?1 AND a.sha256 = ?2 AND a.status = 'approved'
-             AND length(trim(a.source)) >= 3 AND length(trim(a.license)) >= 2`
-        )
-        .bind(path, sha256)
-        .first<{ bytes: number }>();
-      const head = row ? await this.bucket.head(ContentStore.objectKey(sha256)) : null;
-      if (row && head && head.size === row.bytes) approved.push(path);
-      else pendingPreviewMedia.push(path);
+    const stmt = this.db.prepare(
+      `SELECT a.bytes AS bytes
+       FROM assets a
+       JOIN content_objects o ON o.sha256 = a.sha256 AND o.bytes = a.bytes AND o.media_type = a.media_type
+       JOIN admin_users u ON u.email = a.created_by AND u.role = 'owner'
+       WHERE a.path = ?1 AND a.sha256 = ?2 AND a.status = 'approved'
+         AND length(trim(a.source)) >= 3 AND length(trim(a.license)) >= 2`
+    );
+    for (let i = 0; i < media.length; i += 32) {
+      const chunk = media.slice(i, i + 32);
+      const flags = await Promise.all(
+        chunk.map(async ([path, sha256]) => {
+          const row = await stmt.bind(path, sha256).first<{ bytes: number }>();
+          const head = row ? await this.bucket.head(ContentStore.objectKey(sha256)) : null;
+          return Boolean(row && head && head.size === row.bytes);
+        })
+      );
+      for (let j = 0; j < chunk.length; j++) {
+        if (flags[j]) approved.push(chunk[j]![0]);
+        else pendingPreviewMedia.push(chunk[j]![0]);
+      }
     }
     return { approved, pendingPreviewMedia };
   }

@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "asset_id": "nixie_vale_vn_warm",
+  "class": "portrait",
+  "revision": 3,
+  "targets": {
+    "portraits": {
+      "nixie_vale": {
+        "emotions": {
+          "gentle": "warm",
+          "smile": "warm",
+          "warm": "warm"
+        },
+        "images": {
+          "warm": "art/portrait_nixie_vale_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "b42175a93379cbfbdad873204cab37ee815576048d8731a24799ff891c1f14e5",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/nixie_vale_vn_warm/run.provenance.json",
+    "provenance_sha256": "3c6637278c496081d9fdf25883cafa8814330a8684c2dc11c6667a11e9bfe773",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "8a597c1dfc82999fd529e0db294a028800837f2c84b147f23191638cb94fb0e1",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/nixie_vale_vn_warm.ingest.json",
+    "spec_sha256": "5bf2009f9a01544851630ab6b3a6a92c60db41adeef0bab942320959b41e4402",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "99933744d9589c8cb0939929b6aeef20e5a2e223351aa64368137f5a76dfa24f"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_nixie_vale_warm.webp",
+      "sha256": "55e218beba01a1b026f1778cd7440492a1b894277b69da71f2e9d8eb0608424f",
+      "pixels_sha256": "ad8b5f930a0387289693ba4ba8b7ddce01bd22e5b4a19247feb5e0692263a314",
+      "bytes": 67622,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=76"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "67622 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 76 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/ui_nixie_vale_vn_warm.webp",
+          "sha256": "f4b36dcb30f48cc0a1d94151fe376949c663590236a9528022106f947cd870b3",
+          "pixels_sha256": "3fab7fa94992baa4d9cb32b60c66003f73cd3b62dbf04faa59a19beaaf8b9c10",
+          "bytes": 36688,
+          "width": 341,
+          "height": 512
+        }
+      ],
+      "source_sha256": "61106f06048cbb433d4dc90c1d7ead051f72590b1c95cc9fd2d1149074a1b20a",
+      "fingerprint": "c6a8ba62a9c1c30a8eb00288d8dbfd963c15b566fbdc3735b5f68b9fdf00797e"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_nixie_vale_warm.webp",
+          "sha256": "61e01ed21a7ba9b39467c043a05a30dc41746f9e383ef0a0f8705b03283cd6e9",
+          "pixels_sha256": "6466586f33b4c18b71cf434df3a3d5b50dd56c9a643bfa654002cb7299b6b45b",
+          "bytes": 68420,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "9cbe407a6874829366ea11c1dd740c0cb2024abad46f4629f84f08128fe4b173",
+      "fingerprint": "c851239a726b78ee8ec5a7271e2a90f6a28c81140fff2c3b30eca32cd2b766df"
+    }
+  ]
+}

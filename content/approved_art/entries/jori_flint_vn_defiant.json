@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "asset_id": "jori_flint_vn_defiant",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "jori_flint": {
+        "emotions": {
+          "alarm": "defiant",
+          "defiant": "defiant",
+          "fierce": "defiant",
+          "urgent": "defiant"
+        },
+        "images": {
+          "defiant": "art/portrait_jori_flint_defiant.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "705f58917fd95e7414212e76d54e9ff5582c2b9f6d081007c3eae9864521be38",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/jori_flint_vn_defiant/run.provenance.json",
+    "provenance_sha256": "cbc40a4cc4f064a661abb8b11ac542c4057cd8ba83203aa466ce87cf0f8ddcfc",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "78a832b3a4008106333a4552a44e39eaecc920e679784caa846e7d5fd8519c74",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/jori_flint_vn_defiant.ingest.json",
+    "spec_sha256": "90f3bb6f225ca38b8c54bfac8fcf3438e265950476abec42bb5cbebd999a5d0c",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "8eef69d5b07ae32479157d4f1e5e5ab42a0737050e422a884ef2fedd5e46739f"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_jori_flint_defiant.webp",
+      "sha256": "6d2d3e6f8acfd5167a1034d9324aa38b18e888a198d59d2c79e858461cdfc89c",
+      "pixels_sha256": "a4418fb46754c07aca0e22a6e6ec6502c3baf16ed964f3c39bdbc674d2b35924",
+      "bytes": 51936,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=5"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "51936 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 5 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_jori_flint_defiant.webp",
+          "sha256": "96542589b1fa83bf4d9d4007a45648b7043d10db0f8530b0835feb2b5f14f06e",
+          "pixels_sha256": "603d5c8c50f73f18e11da90abea96015a2a7da1dd9e950f267a0873d98ed1981",
+          "bytes": 51724,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "b5f609ae0183b27ca9d66cdca58869edec66a18fcf1dec4b8aa1b40d16cc1961",
+      "fingerprint": "bb23d72bef822484f2253f975e9a06bc03bd3035b723416249b24e40bc776c16"
+    }
+  ]
+}

@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "fadyme",
+      "character": "nixie_vale",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
     },
     {
       "op": "say",

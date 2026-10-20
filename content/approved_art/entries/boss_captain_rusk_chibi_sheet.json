@@ -1,0 +1,368 @@
+{
+  "schema": 1,
+  "asset_id": "boss_captain_rusk_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 5,
+  "targets": {
+    "atlases": {
+      "atlas_boss_captain_rusk": {
+        "image": "art/atlas_boss_captain_rusk.webp",
+        "width": 2014,
+        "height": 1012,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            225,
+            337
+          ],
+          "idle_2": [
+            233,
+            4,
+            225,
+            337
+          ],
+          "idle_3": [
+            462,
+            4,
+            225,
+            337
+          ],
+          "ultimate": [
+            691,
+            4,
+            261,
+            337
+          ],
+          "ultimate_2": [
+            956,
+            4,
+            261,
+            337
+          ],
+          "ultimate_3": [
+            1221,
+            4,
+            261,
+            337
+          ],
+          "active": [
+            1486,
+            4,
+            260,
+            336
+          ],
+          "active_2": [
+            1750,
+            4,
+            260,
+            336
+          ],
+          "active_3": [
+            4,
+            345,
+            260,
+            336
+          ],
+          "basic": [
+            268,
+            345,
+            260,
+            335
+          ],
+          "basic_2": [
+            532,
+            345,
+            260,
+            335
+          ],
+          "basic_3": [
+            796,
+            345,
+            260,
+            335
+          ],
+          "victory": [
+            1060,
+            345,
+            224,
+            335
+          ],
+          "hit": [
+            1288,
+            345,
+            203,
+            332
+          ],
+          "walk": [
+            1495,
+            345,
+            225,
+            332
+          ],
+          "defeat": [
+            4,
+            685,
+            343,
+            323
+          ]
+        }
+      }
+    },
+    "units": {
+      "boss_captain_rusk": {
+        "atlas": "atlas_boss_captain_rusk",
+        "facing": "left",
+        "height_px": 310,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.651,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.65
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.62,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.621,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.621,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.535
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.505
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.651
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "c38a011ec34fc030fc4ce307095dde24a8776816c4742c9d666e8a63bc53154e",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/boss_captain_rusk_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "32579e61bcb5e0acda3fc07576af7b56a4dac58220139cefee8f78c39eaeab0f",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "67500e69d2f6ffaf5a9e7548bd5142538a7a8eae99c67c543b61b0afb7810873",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/boss_captain_rusk_chibi_sheet.ingest.json",
+    "spec_sha256": "824e351dce0e766dbfaf16bf9785129d09564b00b01eef31190561a459c6c6aa",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "acb6d6164ebc47a66058b298a71758be99c46007905b4ee706fe9e0c6831b13b"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_boss_captain_rusk.webp",
+      "sha256": "74f0738256082fda33eab501bc7e994e3f8ac99cc50cd024f84de7b94d578815",
+      "pixels_sha256": "43fec389c2b2d4e194eae89bc2edc41e98295988fce9e2f23e3140cc3b13d87d",
+      "bytes": 300012,
+      "width": 2014,
+      "height": 1012
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=92"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.623"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2014x1012"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "300012 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0022%"
+        }
+      },
+      "warnings": [
+        "A12: removed 92 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_captain_rusk.webp",
+          "sha256": "2a20e2589e13eb85bb0d182c1d1be731790bb8c3b9967d5837ae27116efedae7",
+          "pixels_sha256": "0c5283dfc02072e62c416a178a16d2777ce085d1b7ae72a0040a1430a78abcf9",
+          "bytes": 351332,
+          "width": 2043,
+          "height": 687
+        }
+      ],
+      "source_sha256": "4fd30ca66fe83356ad0234fb54aae334d2381e33cf78a6fbbf2e9fab27d951a3",
+      "fingerprint": "11f70baac9c645c39fe4d325e711eac581846498b74f424e5a32ca74fc6d13f1"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_captain_rusk.webp",
+          "sha256": "7881e8bb2bad3bc9b27e75813905e97f621795160e7d68dad6b22d9797fa384e",
+          "pixels_sha256": "9b3829dd27b726f44bf3498630181fa834ef64cea0ce90557d171c89d6315dc8",
+          "bytes": 223556,
+          "width": 1852,
+          "height": 705
+        }
+      ],
+      "source_sha256": "763b7ef723b19481efd346506e40cdb2bc7fc9359e09a96b08c7296610cba893",
+      "fingerprint": "6d8654a236e3b579c3f420803a97ca2a65520ddd734d702d49f1477bbc4a94d4"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_captain_rusk.webp",
+          "sha256": "cd2a5f41148744c8f6e55bfecfed0796994970437df1dae53e0993f8a36ab329",
+          "pixels_sha256": "df4120bbf0f3bcf48ac23f7bfeec40e2186d4e14efa9ffee71f89f6b096f5063",
+          "bytes": 310462,
+          "width": 1877,
+          "height": 1111
+        }
+      ],
+      "source_sha256": "245b8bc5f15723e29af445253a06a095b56386f3987870ebb81d3939076af6c2",
+      "fingerprint": "680b3da0a8ab3c9341455d1db8f385d3d524a157a4ea9be36696e113fddc9ac6"
+    },
+    {
+      "revision": 4,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_captain_rusk.webp",
+          "sha256": "4822bd7402139f5e2e826ae1acd829a87b681df34b88abb55c07f04066de22fb",
+          "pixels_sha256": "d07422d3a15f1e23e2b14572925b57d7e411404ddd7fe6ce72577c1d4e80c29b",
+          "bytes": 292318,
+          "width": 2014,
+          "height": 1012
+        }
+      ],
+      "source_sha256": "a51c80586c7be1771266dbb7e20a57fe61ff8af84d85d9282a91547241325cde",
+      "fingerprint": "bdd86752193c71baea1701eef1757c55e5966d7c508fea059cba54a96c0d8a21"
+    }
+  ]
+}

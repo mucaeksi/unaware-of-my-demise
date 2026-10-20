@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "asset_id": "nixie_vale_vn_warm",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "b42175a93379",
+    "provenance": ".cache/generated/nixie_vale_vn_warm/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "nixie_vale",
+    "image": "warm",
+    "emotion_tags": [
+      "gentle",
+      "smile",
+      "warm"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

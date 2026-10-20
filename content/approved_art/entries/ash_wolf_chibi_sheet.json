@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "ash_wolf_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_ash_wolf": {
+        "image": "art/atlas_ash_wolf.webp",
+        "width": 1977,
+        "height": 1134,
+        "frames": {
+          "ultimate": [
+            4,
+            4,
+            490,
+            283
+          ],
+          "ultimate_2": [
+            498,
+            4,
+            490,
+            283
+          ],
+          "ultimate_3": [
+            992,
+            4,
+            490,
+            283
+          ],
+          "active": [
+            1486,
+            4,
+            487,
+            282
+          ],
+          "active_2": [
+            4,
+            291,
+            487,
+            282
+          ],
+          "active_3": [
+            495,
+            291,
+            487,
+            282
+          ],
+          "basic": [
+            986,
+            291,
+            486,
+            280
+          ],
+          "basic_2": [
+            1476,
+            291,
+            486,
+            280
+          ],
+          "basic_3": [
+            4,
+            577,
+            486,
+            280
+          ],
+          "hit": [
+            494,
+            577,
+            475,
+            280
+          ],
+          "walk": [
+            973,
+            577,
+            475,
+            277
+          ],
+          "idle": [
+            1452,
+            577,
+            476,
+            269
+          ],
+          "idle_2": [
+            4,
+            861,
+            476,
+            269
+          ],
+          "idle_3": [
+            484,
+            861,
+            476,
+            269
+          ],
+          "victory": [
+            964,
+            861,
+            475,
+            266
+          ],
+          "defeat": [
+            1443,
+            861,
+            476,
+            254
+          ]
+        }
+      }
+    },
+    "units": {
+      "ash_wolf": {
+        "atlas": "atlas_ash_wolf",
+        "facing": "left",
+        "height_px": 238,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.451,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.647
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.641,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.644,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.644,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.378
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.436
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.45
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "1bd7c7961924f8c072470750212ec29850d7de17ad50700b1007c294a784f24a",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/ash_wolf_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "af4e5bdd6afe492a9a856b4e47cdbc293fb074b1a5845f8f91fcb33967e00b12",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "16b3085d9ec2bcb6c9490f26c9e890939487b1559812a67c12a0a073277042f8",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/ash_wolf_chibi_sheet.ingest.json",
+    "spec_sha256": "d208750f8efd5c244841f369745040c57263efab8e001ff403786f361b5ecef0",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "c4949ad1c52b6a94d5209f51a7bbef813902e5a8a5be1bae71f3b4d7ab1fab3a"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_ash_wolf.webp",
+      "sha256": "2b403296e0a1e7722168c548987983b20e0453bf0e784729a08671805ac2a732",
+      "pixels_sha256": "9290045c3221362e43570ba95a30363eb0c92825ef2444b4f4b2dd682443375f",
+      "bytes": 321544,
+      "width": 1977,
+      "height": 1134
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=66"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.726"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1977x1134"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "321544 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0007%"
+        }
+      },
+      "warnings": [
+        "A12: removed 66 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

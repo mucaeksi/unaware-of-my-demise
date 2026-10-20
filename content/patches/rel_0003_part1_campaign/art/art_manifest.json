@@ -218,6 +218,1551 @@
         ]
       }
     },
+    "atlas_ash_wolf": {
+      "image": "art/atlas_ash_wolf.webp",
+      "width": 1977,
+      "height": 1134,
+      "frames": {
+        "ultimate": [
+          4,
+          4,
+          490,
+          283
+        ],
+        "ultimate_2": [
+          498,
+          4,
+          490,
+          283
+        ],
+        "ultimate_3": [
+          992,
+          4,
+          490,
+          283
+        ],
+        "active": [
+          1486,
+          4,
+          487,
+          282
+        ],
+        "active_2": [
+          4,
+          291,
+          487,
+          282
+        ],
+        "active_3": [
+          495,
+          291,
+          487,
+          282
+        ],
+        "basic": [
+          986,
+          291,
+          486,
+          280
+        ],
+        "basic_2": [
+          1476,
+          291,
+          486,
+          280
+        ],
+        "basic_3": [
+          4,
+          577,
+          486,
+          280
+        ],
+        "hit": [
+          494,
+          577,
+          475,
+          280
+        ],
+        "walk": [
+          973,
+          577,
+          475,
+          277
+        ],
+        "idle": [
+          1452,
+          577,
+          476,
+          269
+        ],
+        "idle_2": [
+          4,
+          861,
+          476,
+          269
+        ],
+        "idle_3": [
+          484,
+          861,
+          476,
+          269
+        ],
+        "victory": [
+          964,
+          861,
+          475,
+          266
+        ],
+        "defeat": [
+          1443,
+          861,
+          476,
+          254
+        ]
+      }
+    },
+    "atlas_boss_ash_maw": {
+      "image": "art/atlas_boss_ash_maw.webp",
+      "width": 1927,
+      "height": 1595,
+      "frames": {
+        "ultimate": [
+          4,
+          4,
+          270,
+          416
+        ],
+        "ultimate_2": [
+          278,
+          4,
+          270,
+          416
+        ],
+        "ultimate_3": [
+          552,
+          4,
+          270,
+          416
+        ],
+        "active": [
+          826,
+          4,
+          476,
+          415
+        ],
+        "active_2": [
+          1306,
+          4,
+          476,
+          415
+        ],
+        "active_3": [
+          4,
+          424,
+          476,
+          415
+        ],
+        "basic": [
+          484,
+          424,
+          477,
+          413
+        ],
+        "basic_2": [
+          965,
+          424,
+          477,
+          413
+        ],
+        "basic_3": [
+          1446,
+          424,
+          477,
+          413
+        ],
+        "hit": [
+          4,
+          843,
+          265,
+          405
+        ],
+        "defeat": [
+          273,
+          843,
+          496,
+          371
+        ],
+        "idle": [
+          773,
+          843,
+          496,
+          339
+        ],
+        "idle_2": [
+          1273,
+          843,
+          496,
+          339
+        ],
+        "idle_3": [
+          4,
+          1252,
+          496,
+          339
+        ],
+        "victory": [
+          504,
+          1252,
+          495,
+          336
+        ],
+        "walk": [
+          1003,
+          1252,
+          495,
+          333
+        ]
+      }
+    },
+    "atlas_boss_ashen_lord_wraith": {
+      "image": "art/atlas_boss_ashen_lord_wraith.webp",
+      "width": 1918,
+      "height": 684,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          191,
+          337
+        ],
+        "idle_2": [
+          199,
+          4,
+          191,
+          337
+        ],
+        "idle_3": [
+          394,
+          4,
+          191,
+          337
+        ],
+        "ultimate": [
+          589,
+          4,
+          218,
+          337
+        ],
+        "ultimate_2": [
+          811,
+          4,
+          218,
+          337
+        ],
+        "ultimate_3": [
+          1033,
+          4,
+          218,
+          337
+        ],
+        "active": [
+          1255,
+          4,
+          217,
+          336
+        ],
+        "active_2": [
+          1476,
+          4,
+          217,
+          336
+        ],
+        "active_3": [
+          1697,
+          4,
+          217,
+          336
+        ],
+        "basic": [
+          4,
+          345,
+          218,
+          335
+        ],
+        "basic_2": [
+          226,
+          345,
+          218,
+          335
+        ],
+        "basic_3": [
+          448,
+          345,
+          218,
+          335
+        ],
+        "victory": [
+          670,
+          345,
+          190,
+          335
+        ],
+        "walk": [
+          864,
+          345,
+          191,
+          332
+        ],
+        "hit": [
+          1059,
+          345,
+          186,
+          326
+        ],
+        "defeat": [
+          1249,
+          345,
+          198,
+          321
+        ]
+      }
+    },
+    "atlas_boss_bell_widow": {
+      "image": "art/atlas_boss_bell_widow.webp",
+      "width": 2027,
+      "height": 1017,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          176,
+          337
+        ],
+        "idle_2": [
+          184,
+          4,
+          176,
+          337
+        ],
+        "idle_3": [
+          364,
+          4,
+          176,
+          337
+        ],
+        "ultimate": [
+          544,
+          4,
+          330,
+          337
+        ],
+        "ultimate_2": [
+          878,
+          4,
+          330,
+          337
+        ],
+        "ultimate_3": [
+          1212,
+          4,
+          330,
+          337
+        ],
+        "active": [
+          1546,
+          4,
+          329,
+          336
+        ],
+        "active_2": [
+          4,
+          345,
+          329,
+          336
+        ],
+        "active_3": [
+          337,
+          345,
+          329,
+          336
+        ],
+        "basic": [
+          670,
+          345,
+          329,
+          335
+        ],
+        "basic_2": [
+          1003,
+          345,
+          329,
+          335
+        ],
+        "basic_3": [
+          1336,
+          345,
+          329,
+          335
+        ],
+        "victory": [
+          1669,
+          345,
+          175,
+          335
+        ],
+        "walk": [
+          1848,
+          345,
+          175,
+          332
+        ],
+        "hit": [
+          4,
+          685,
+          240,
+          328
+        ],
+        "defeat": [
+          248,
+          685,
+          266,
+          325
+        ]
+      }
+    },
+    "atlas_boss_captain_rusk": {
+      "image": "art/atlas_boss_captain_rusk.webp",
+      "width": 2014,
+      "height": 1012,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          225,
+          337
+        ],
+        "idle_2": [
+          233,
+          4,
+          225,
+          337
+        ],
+        "idle_3": [
+          462,
+          4,
+          225,
+          337
+        ],
+        "ultimate": [
+          691,
+          4,
+          261,
+          337
+        ],
+        "ultimate_2": [
+          956,
+          4,
+          261,
+          337
+        ],
+        "ultimate_3": [
+          1221,
+          4,
+          261,
+          337
+        ],
+        "active": [
+          1486,
+          4,
+          260,
+          336
+        ],
+        "active_2": [
+          1750,
+          4,
+          260,
+          336
+        ],
+        "active_3": [
+          4,
+          345,
+          260,
+          336
+        ],
+        "basic": [
+          268,
+          345,
+          260,
+          335
+        ],
+        "basic_2": [
+          532,
+          345,
+          260,
+          335
+        ],
+        "basic_3": [
+          796,
+          345,
+          260,
+          335
+        ],
+        "victory": [
+          1060,
+          345,
+          224,
+          335
+        ],
+        "hit": [
+          1288,
+          345,
+          203,
+          332
+        ],
+        "walk": [
+          1495,
+          345,
+          225,
+          332
+        ],
+        "defeat": [
+          4,
+          685,
+          343,
+          323
+        ]
+      }
+    },
+    "atlas_boss_eclipse_construct": {
+      "image": "art/atlas_boss_eclipse_construct.webp",
+      "width": 2047,
+      "height": 1014,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          185,
+          337
+        ],
+        "idle_2": [
+          193,
+          4,
+          185,
+          337
+        ],
+        "idle_3": [
+          382,
+          4,
+          185,
+          337
+        ],
+        "ultimate": [
+          571,
+          4,
+          284,
+          337
+        ],
+        "ultimate_2": [
+          859,
+          4,
+          284,
+          337
+        ],
+        "ultimate_3": [
+          1147,
+          4,
+          284,
+          337
+        ],
+        "active": [
+          1435,
+          4,
+          302,
+          336
+        ],
+        "active_2": [
+          1741,
+          4,
+          302,
+          336
+        ],
+        "active_3": [
+          4,
+          345,
+          302,
+          336
+        ],
+        "basic": [
+          310,
+          345,
+          301,
+          335
+        ],
+        "basic_2": [
+          615,
+          345,
+          301,
+          335
+        ],
+        "basic_3": [
+          920,
+          345,
+          301,
+          335
+        ],
+        "victory": [
+          1225,
+          345,
+          183,
+          335
+        ],
+        "walk": [
+          1412,
+          345,
+          183,
+          332
+        ],
+        "hit": [
+          1599,
+          345,
+          284,
+          328
+        ],
+        "defeat": [
+          4,
+          685,
+          284,
+          325
+        ]
+      }
+    },
+    "atlas_boss_marshal_oren": {
+      "image": "art/atlas_boss_marshal_oren.webp",
+      "width": 1956,
+      "height": 681,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          152,
+          337
+        ],
+        "idle_2": [
+          160,
+          4,
+          152,
+          337
+        ],
+        "idle_3": [
+          316,
+          4,
+          152,
+          337
+        ],
+        "ultimate": [
+          472,
+          4,
+          218,
+          335
+        ],
+        "ultimate_2": [
+          694,
+          4,
+          218,
+          335
+        ],
+        "ultimate_3": [
+          916,
+          4,
+          218,
+          335
+        ],
+        "victory": [
+          1138,
+          4,
+          151,
+          335
+        ],
+        "active": [
+          1293,
+          4,
+          217,
+          334
+        ],
+        "active_2": [
+          1514,
+          4,
+          217,
+          334
+        ],
+        "active_3": [
+          1735,
+          4,
+          217,
+          334
+        ],
+        "basic": [
+          4,
+          345,
+          218,
+          332
+        ],
+        "basic_2": [
+          226,
+          345,
+          218,
+          332
+        ],
+        "basic_3": [
+          448,
+          345,
+          218,
+          332
+        ],
+        "walk": [
+          670,
+          345,
+          153,
+          332
+        ],
+        "hit": [
+          827,
+          345,
+          222,
+          328
+        ],
+        "defeat": [
+          1053,
+          345,
+          280,
+          325
+        ]
+      }
+    },
+    "atlas_boss_red_vial_matron": {
+      "image": "art/atlas_boss_red_vial_matron.webp",
+      "width": 1945,
+      "height": 684,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          226,
+          337
+        ],
+        "idle_2": [
+          234,
+          4,
+          226,
+          337
+        ],
+        "idle_3": [
+          464,
+          4,
+          226,
+          337
+        ],
+        "ultimate": [
+          694,
+          4,
+          205,
+          337
+        ],
+        "ultimate_2": [
+          903,
+          4,
+          205,
+          337
+        ],
+        "ultimate_3": [
+          1112,
+          4,
+          205,
+          337
+        ],
+        "active": [
+          1321,
+          4,
+          204,
+          336
+        ],
+        "active_2": [
+          1529,
+          4,
+          204,
+          336
+        ],
+        "active_3": [
+          1737,
+          4,
+          204,
+          336
+        ],
+        "basic": [
+          4,
+          345,
+          205,
+          335
+        ],
+        "basic_2": [
+          213,
+          345,
+          205,
+          335
+        ],
+        "basic_3": [
+          422,
+          345,
+          205,
+          335
+        ],
+        "victory": [
+          631,
+          345,
+          225,
+          335
+        ],
+        "walk": [
+          860,
+          345,
+          225,
+          332
+        ],
+        "hit": [
+          1089,
+          345,
+          232,
+          328
+        ],
+        "defeat": [
+          1325,
+          345,
+          240,
+          325
+        ]
+      }
+    },
+    "atlas_clem_marr": {
+      "image": "art/atlas_clem_marr.webp",
+      "width": 2019,
+      "height": 699,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          191,
+          348
+        ],
+        "idle_2": [
+          199,
+          4,
+          191,
+          348
+        ],
+        "idle_3": [
+          394,
+          4,
+          191,
+          348
+        ],
+        "basic": [
+          589,
+          4,
+          243,
+          345
+        ],
+        "basic_2": [
+          836,
+          4,
+          243,
+          345
+        ],
+        "basic_3": [
+          1083,
+          4,
+          243,
+          345
+        ],
+        "victory": [
+          1330,
+          4,
+          191,
+          345
+        ],
+        "walk": [
+          1525,
+          4,
+          238,
+          343
+        ],
+        "ultimate": [
+          1767,
+          4,
+          248,
+          339
+        ],
+        "ultimate_2": [
+          4,
+          356,
+          248,
+          339
+        ],
+        "ultimate_3": [
+          256,
+          356,
+          248,
+          339
+        ],
+        "active": [
+          508,
+          356,
+          247,
+          338
+        ],
+        "active_2": [
+          759,
+          356,
+          247,
+          338
+        ],
+        "active_3": [
+          1010,
+          356,
+          247,
+          338
+        ],
+        "hit": [
+          1261,
+          356,
+          243,
+          338
+        ],
+        "defeat": [
+          1508,
+          356,
+          243,
+          335
+        ]
+      }
+    },
+    "atlas_corrupted_crown_guard": {
+      "image": "art/atlas_corrupted_crown_guard.webp",
+      "width": 1915,
+      "height": 811,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          319,
+          266
+        ],
+        "idle_2": [
+          327,
+          4,
+          319,
+          266
+        ],
+        "idle_3": [
+          650,
+          4,
+          319,
+          266
+        ],
+        "ultimate": [
+          973,
+          4,
+          310,
+          266
+        ],
+        "ultimate_2": [
+          1287,
+          4,
+          310,
+          266
+        ],
+        "ultimate_3": [
+          1601,
+          4,
+          310,
+          266
+        ],
+        "active": [
+          4,
+          274,
+          309,
+          265
+        ],
+        "active_2": [
+          317,
+          274,
+          309,
+          265
+        ],
+        "active_3": [
+          630,
+          274,
+          309,
+          265
+        ],
+        "basic": [
+          943,
+          274,
+          310,
+          264
+        ],
+        "basic_2": [
+          1257,
+          274,
+          310,
+          264
+        ],
+        "basic_3": [
+          1571,
+          274,
+          310,
+          264
+        ],
+        "victory": [
+          4,
+          543,
+          317,
+          264
+        ],
+        "walk": [
+          325,
+          543,
+          305,
+          262
+        ],
+        "hit": [
+          634,
+          543,
+          285,
+          260
+        ],
+        "defeat": [
+          923,
+          543,
+          317,
+          240
+        ]
+      }
+    },
+    "atlas_corrupted_mercenary": {
+      "image": "art/atlas_corrupted_mercenary.webp",
+      "width": 1933,
+      "height": 542,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          264,
+          266
+        ],
+        "idle_2": [
+          272,
+          4,
+          264,
+          266
+        ],
+        "idle_3": [
+          540,
+          4,
+          264,
+          266
+        ],
+        "ultimate": [
+          808,
+          4,
+          184,
+          266
+        ],
+        "ultimate_2": [
+          996,
+          4,
+          184,
+          266
+        ],
+        "ultimate_3": [
+          1184,
+          4,
+          184,
+          266
+        ],
+        "active": [
+          1372,
+          4,
+          183,
+          265
+        ],
+        "active_2": [
+          1559,
+          4,
+          183,
+          265
+        ],
+        "active_3": [
+          1746,
+          4,
+          183,
+          265
+        ],
+        "basic": [
+          4,
+          274,
+          184,
+          264
+        ],
+        "basic_2": [
+          192,
+          274,
+          184,
+          264
+        ],
+        "basic_3": [
+          380,
+          274,
+          184,
+          264
+        ],
+        "victory": [
+          568,
+          274,
+          261,
+          264
+        ],
+        "walk": [
+          833,
+          274,
+          180,
+          262
+        ],
+        "hit": [
+          1017,
+          274,
+          208,
+          258
+        ],
+        "defeat": [
+          1229,
+          274,
+          212,
+          256
+        ]
+      }
+    },
+    "atlas_eclipse_sentinel": {
+      "image": "art/atlas_eclipse_sentinel.webp",
+      "width": 1978,
+      "height": 542,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          141,
+          266
+        ],
+        "idle_2": [
+          149,
+          4,
+          141,
+          266
+        ],
+        "idle_3": [
+          294,
+          4,
+          141,
+          266
+        ],
+        "ultimate": [
+          439,
+          4,
+          253,
+          266
+        ],
+        "ultimate_2": [
+          696,
+          4,
+          253,
+          266
+        ],
+        "ultimate_3": [
+          953,
+          4,
+          253,
+          266
+        ],
+        "active": [
+          1210,
+          4,
+          252,
+          265
+        ],
+        "active_2": [
+          1466,
+          4,
+          252,
+          265
+        ],
+        "active_3": [
+          1722,
+          4,
+          252,
+          265
+        ],
+        "basic": [
+          4,
+          274,
+          253,
+          264
+        ],
+        "basic_2": [
+          261,
+          274,
+          253,
+          264
+        ],
+        "basic_3": [
+          518,
+          274,
+          253,
+          264
+        ],
+        "victory": [
+          775,
+          274,
+          141,
+          264
+        ],
+        "walk": [
+          920,
+          274,
+          248,
+          262
+        ],
+        "hit": [
+          1172,
+          274,
+          184,
+          259
+        ],
+        "defeat": [
+          1360,
+          274,
+          314,
+          250
+        ]
+      }
+    },
+    "atlas_estate_wraith": {
+      "image": "art/atlas_estate_wraith.webp",
+      "width": 2025,
+      "height": 799,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          176,
+          266
+        ],
+        "idle_2": [
+          184,
+          4,
+          176,
+          266
+        ],
+        "idle_3": [
+          364,
+          4,
+          176,
+          266
+        ],
+        "victory": [
+          544,
+          4,
+          176,
+          264
+        ],
+        "active": [
+          724,
+          4,
+          321,
+          260
+        ],
+        "active_2": [
+          1049,
+          4,
+          321,
+          260
+        ],
+        "active_3": [
+          1374,
+          4,
+          321,
+          260
+        ],
+        "ultimate": [
+          1699,
+          4,
+          322,
+          260
+        ],
+        "ultimate_2": [
+          4,
+          274,
+          322,
+          260
+        ],
+        "ultimate_3": [
+          330,
+          274,
+          322,
+          260
+        ],
+        "basic": [
+          656,
+          274,
+          321,
+          259
+        ],
+        "basic_2": [
+          981,
+          274,
+          321,
+          259
+        ],
+        "basic_3": [
+          1306,
+          274,
+          321,
+          259
+        ],
+        "hit": [
+          1631,
+          274,
+          224,
+          259
+        ],
+        "walk": [
+          4,
+          538,
+          318,
+          257
+        ],
+        "defeat": [
+          326,
+          538,
+          270,
+          256
+        ]
+      }
+    },
+    "atlas_inkbound_dead": {
+      "image": "art/atlas_inkbound_dead.webp",
+      "width": 1989,
+      "height": 762,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          278,
+          266
+        ],
+        "idle_2": [
+          286,
+          4,
+          278,
+          266
+        ],
+        "idle_3": [
+          568,
+          4,
+          278,
+          266
+        ],
+        "victory": [
+          850,
+          4,
+          278,
+          264
+        ],
+        "hit": [
+          1132,
+          4,
+          209,
+          259
+        ],
+        "ultimate": [
+          1345,
+          4,
+          318,
+          241
+        ],
+        "ultimate_2": [
+          1667,
+          4,
+          318,
+          241
+        ],
+        "ultimate_3": [
+          4,
+          274,
+          318,
+          241
+        ],
+        "active": [
+          326,
+          274,
+          317,
+          240
+        ],
+        "active_2": [
+          647,
+          274,
+          317,
+          240
+        ],
+        "active_3": [
+          968,
+          274,
+          317,
+          240
+        ],
+        "basic": [
+          1289,
+          274,
+          318,
+          239
+        ],
+        "basic_2": [
+          1611,
+          274,
+          318,
+          239
+        ],
+        "basic_3": [
+          4,
+          519,
+          318,
+          239
+        ],
+        "walk": [
+          326,
+          519,
+          316,
+          237
+        ],
+        "defeat": [
+          646,
+          519,
+          316,
+          185
+        ]
+      }
+    },
+    "atlas_jori_flint": {
+      "image": "art/atlas_jori_flint.webp",
+      "width": 1930,
+      "height": 1043,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          200,
+          348
+        ],
+        "idle_2": [
+          208,
+          4,
+          200,
+          348
+        ],
+        "idle_3": [
+          412,
+          4,
+          200,
+          348
+        ],
+        "ultimate": [
+          616,
+          4,
+          268,
+          346
+        ],
+        "ultimate_2": [
+          888,
+          4,
+          268,
+          346
+        ],
+        "ultimate_3": [
+          1160,
+          4,
+          268,
+          346
+        ],
+        "victory": [
+          1432,
+          4,
+          197,
+          345
+        ],
+        "active": [
+          1633,
+          4,
+          267,
+          344
+        ],
+        "active_2": [
+          4,
+          356,
+          267,
+          344
+        ],
+        "active_3": [
+          275,
+          356,
+          267,
+          344
+        ],
+        "basic": [
+          546,
+          356,
+          293,
+          343
+        ],
+        "basic_2": [
+          843,
+          356,
+          293,
+          343
+        ],
+        "basic_3": [
+          1140,
+          356,
+          293,
+          343
+        ],
+        "walk": [
+          1437,
+          356,
+          287,
+          341
+        ],
+        "hit": [
+          1728,
+          356,
+          198,
+          338
+        ],
+        "defeat": [
+          4,
+          704,
+          198,
+          335
+        ]
+      }
+    },
     "atlas_kera_voss": {
       "image": "art/atlas_kera_voss.webp",
       "width": 1904,
@@ -318,6 +1863,418 @@
           707,
           229,
           339
+        ]
+      }
+    },
+    "atlas_mirel_quill": {
+      "image": "art/atlas_mirel_quill.webp",
+      "width": 1943,
+      "height": 706,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          195,
+          348
+        ],
+        "idle_2": [
+          203,
+          4,
+          195,
+          348
+        ],
+        "idle_3": [
+          402,
+          4,
+          195,
+          348
+        ],
+        "ultimate": [
+          601,
+          4,
+          241,
+          348
+        ],
+        "ultimate_2": [
+          846,
+          4,
+          241,
+          348
+        ],
+        "ultimate_3": [
+          1091,
+          4,
+          241,
+          348
+        ],
+        "active": [
+          1336,
+          4,
+          241,
+          346
+        ],
+        "active_2": [
+          1581,
+          4,
+          241,
+          346
+        ],
+        "active_3": [
+          4,
+          356,
+          241,
+          346
+        ],
+        "basic": [
+          249,
+          356,
+          265,
+          345
+        ],
+        "basic_2": [
+          518,
+          356,
+          265,
+          345
+        ],
+        "basic_3": [
+          787,
+          356,
+          265,
+          345
+        ],
+        "victory": [
+          1056,
+          356,
+          192,
+          345
+        ],
+        "walk": [
+          1252,
+          356,
+          262,
+          343
+        ],
+        "hit": [
+          1518,
+          356,
+          209,
+          338
+        ],
+        "defeat": [
+          1731,
+          356,
+          208,
+          335
+        ]
+      }
+    },
+    "atlas_nixie_vale": {
+      "image": "art/atlas_nixie_vale.webp",
+      "width": 1960,
+      "height": 705,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          221,
+          348
+        ],
+        "idle_2": [
+          229,
+          4,
+          221,
+          348
+        ],
+        "idle_3": [
+          454,
+          4,
+          221,
+          348
+        ],
+        "ultimate": [
+          679,
+          4,
+          210,
+          348
+        ],
+        "ultimate_2": [
+          893,
+          4,
+          210,
+          348
+        ],
+        "ultimate_3": [
+          1107,
+          4,
+          210,
+          348
+        ],
+        "active": [
+          1321,
+          4,
+          209,
+          346
+        ],
+        "active_2": [
+          1534,
+          4,
+          209,
+          346
+        ],
+        "active_3": [
+          1747,
+          4,
+          209,
+          346
+        ],
+        "basic": [
+          4,
+          356,
+          259,
+          345
+        ],
+        "basic_2": [
+          267,
+          356,
+          259,
+          345
+        ],
+        "basic_3": [
+          530,
+          356,
+          259,
+          345
+        ],
+        "victory": [
+          793,
+          356,
+          219,
+          345
+        ],
+        "walk": [
+          1016,
+          356,
+          257,
+          343
+        ],
+        "hit": [
+          1277,
+          356,
+          228,
+          338
+        ],
+        "defeat": [
+          1509,
+          356,
+          228,
+          335
+        ]
+      }
+    },
+    "atlas_red_vial_alchemist": {
+      "image": "art/atlas_red_vial_alchemist.webp",
+      "width": 1939,
+      "height": 542,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          174,
+          266
+        ],
+        "idle_2": [
+          182,
+          4,
+          174,
+          266
+        ],
+        "idle_3": [
+          360,
+          4,
+          174,
+          266
+        ],
+        "ultimate": [
+          538,
+          4,
+          230,
+          266
+        ],
+        "ultimate_2": [
+          772,
+          4,
+          230,
+          266
+        ],
+        "ultimate_3": [
+          1006,
+          4,
+          230,
+          266
+        ],
+        "active": [
+          1240,
+          4,
+          229,
+          265
+        ],
+        "active_2": [
+          1473,
+          4,
+          229,
+          265
+        ],
+        "active_3": [
+          1706,
+          4,
+          229,
+          265
+        ],
+        "basic": [
+          4,
+          274,
+          229,
+          264
+        ],
+        "basic_2": [
+          237,
+          274,
+          229,
+          264
+        ],
+        "basic_3": [
+          470,
+          274,
+          229,
+          264
+        ],
+        "victory": [
+          703,
+          274,
+          173,
+          264
+        ],
+        "walk": [
+          880,
+          274,
+          225,
+          262
+        ],
+        "hit": [
+          1109,
+          274,
+          151,
+          259
+        ],
+        "defeat": [
+          1264,
+          274,
+          301,
+          256
+        ]
+      }
+    },
+    "atlas_sister_aveline": {
+      "image": "art/atlas_sister_aveline.webp",
+      "width": 1895,
+      "height": 1048,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          238,
+          348
+        ],
+        "idle_2": [
+          246,
+          4,
+          238,
+          348
+        ],
+        "idle_3": [
+          488,
+          4,
+          238,
+          348
+        ],
+        "ultimate": [
+          730,
+          4,
+          219,
+          348
+        ],
+        "ultimate_2": [
+          953,
+          4,
+          219,
+          348
+        ],
+        "ultimate_3": [
+          1176,
+          4,
+          219,
+          348
+        ],
+        "active": [
+          1399,
+          4,
+          217,
+          347
+        ],
+        "active_2": [
+          1620,
+          4,
+          217,
+          347
+        ],
+        "active_3": [
+          4,
+          356,
+          217,
+          347
+        ],
+        "basic": [
+          225,
+          356,
+          295,
+          347
+        ],
+        "basic_2": [
+          524,
+          356,
+          295,
+          347
+        ],
+        "basic_3": [
+          823,
+          356,
+          295,
+          347
+        ],
+        "victory": [
+          1122,
+          356,
+          236,
+          345
+        ],
+        "walk": [
+          1362,
+          356,
+          290,
+          344
+        ],
+        "hit": [
+          1656,
+          356,
+          235,
+          340
+        ],
+        "defeat": [
+          4,
+          707,
+          235,
+          337
         ]
       }
     },
@@ -666,6 +2623,1476 @@
         }
       }
     },
+    "ash_wolf": {
+      "atlas": "atlas_ash_wolf",
+      "facing": "left",
+      "height_px": 238,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.451
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.647
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.641
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.644
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.644
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.378
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.436
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.45
+        }
+      }
+    },
+    "boss_ash_maw": {
+      "atlas": "atlas_boss_ash_maw",
+      "facing": "left",
+      "height_px": 310,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.493
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.495
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.621
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.62
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.571
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.581
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.51
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.493
+        }
+      }
+    },
+    "boss_ashen_lord_wraith": {
+      "atlas": "atlas_boss_ashen_lord_wraith",
+      "facing": "left",
+      "height_px": 310,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.518
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.517
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.456
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.456
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.456
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.46
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.488
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.516
+        }
+      }
+    },
+    "boss_bell_widow": {
+      "atlas": "atlas_boss_bell_widow",
+      "facing": "left",
+      "height_px": 310,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.463
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.468
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.587
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.587
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.587
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.558
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.518
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.464
+        }
+      }
+    },
+    "boss_captain_rusk": {
+      "atlas": "atlas_boss_captain_rusk",
+      "facing": "left",
+      "height_px": 310,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.651
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.65
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.62
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.621
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.621
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.535
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.505
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.651
+        }
+      }
+    },
+    "boss_eclipse_construct": {
+      "atlas": "atlas_boss_eclipse_construct",
+      "facing": "left",
+      "height_px": 310,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.482
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.486
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.515
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.516
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.508
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.445
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.445
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.482
+        }
+      }
+    },
+    "boss_marshal_oren": {
+      "atlas": "atlas_boss_marshal_oren",
+      "facing": "left",
+      "height_px": 310,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.492
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.489
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.477
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.476
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.477
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.597
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.485
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.49
+        }
+      }
+    },
+    "boss_red_vial_matron": {
+      "atlas": "atlas_boss_red_vial_matron",
+      "facing": "left",
+      "height_px": 310,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.53
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.533
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.647
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.651
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.647
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.622
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.577
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.53
+        }
+      }
+    },
+    "clem_marr": {
+      "atlas": "atlas_clem_marr",
+      "facing": "right",
+      "height_px": 245,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.44
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.387
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.391
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.478
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.478
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.551
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.548
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.44
+        }
+      }
+    },
+    "corrupted_crown_guard": {
+      "atlas": "atlas_corrupted_crown_guard",
+      "facing": "left",
+      "height_px": 238,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.504
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.515
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.513
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.514
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.513
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.477
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.507
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.504
+        }
+      }
+    },
+    "corrupted_mercenary": {
+      "atlas": "atlas_corrupted_mercenary",
+      "facing": "left",
+      "height_px": 238,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.64
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.608
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.605
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.606
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.605
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.541
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.44
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.643
+        }
+      }
+    },
+    "eclipse_sentinel": {
+      "atlas": "atlas_eclipse_sentinel",
+      "facing": "left",
+      "height_px": 238,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.562
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.501
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.499
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.499
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.499
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.501
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.551
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.562
+        }
+      }
+    },
+    "estate_wraith": {
+      "atlas": "atlas_estate_wraith",
+      "facing": "left",
+      "height_px": 238,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.485
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.571
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.574
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.574
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.576
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.505
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.51
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.484
+        }
+      }
+    },
+    "inkbound_dead": {
+      "atlas": "atlas_inkbound_dead",
+      "facing": "left",
+      "height_px": 238,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.517
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.736
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.733
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.733
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.733
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.456
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.497
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.517
+        }
+      }
+    },
+    "jori_flint": {
+      "atlas": "atlas_jori_flint",
+      "facing": "right",
+      "height_px": 245,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.454
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.554
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.555
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.502
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.502
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.509
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.51
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.453
+        }
+      }
+    },
     "kera_voss": {
       "atlas": "atlas_kera_voss",
       "facing": "right",
@@ -764,6 +4191,398 @@
         }
       }
     },
+    "mirel_quill": {
+      "atlas": "atlas_mirel_quill",
+      "facing": "right",
+      "height_px": 245,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.487
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.487
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.484
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.493
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.495
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.534
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.536
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.485
+        }
+      }
+    },
+    "nixie_vale": {
+      "atlas": "atlas_nixie_vale",
+      "facing": "right",
+      "height_px": 245,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.473
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.411
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.412
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.511
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.511
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.546
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.546
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.472
+        }
+      }
+    },
+    "red_vial_alchemist": {
+      "atlas": "atlas_red_vial_alchemist",
+      "facing": "left",
+      "height_px": 238,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.521
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.492
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.489
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.49
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.491
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.48
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.486
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.521
+        }
+      }
+    },
+    "sister_aveline": {
+      "atlas": "atlas_sister_aveline",
+      "facing": "right",
+      "height_px": 245,
+      "states": {
+        "idle": {
+          "frame": "idle",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.421
+        },
+        "walk": {
+          "frame": "walk",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.389
+        },
+        "basic": {
+          "frame": "basic",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.39
+        },
+        "active": {
+          "frame": "active",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.442
+        },
+        "ultimate": {
+          "frame": "ultimate",
+          "scale": 1,
+          "foot_y": 1,
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.442
+        },
+        "hit": {
+          "frame": "hit",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.511
+        },
+        "defeat": {
+          "frame": "defeat",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.509
+        },
+        "victory": {
+          "frame": "victory",
+          "scale": 1,
+          "foot_y": 1,
+          "pivot_x": 0.42
+        }
+      }
+    },
     "brin_alder": {
       "atlas": "atlas_mahmut",
       "facing": "right",
@@ -816,116 +4635,6 @@
           "scale": 1,
           "foot_y": 1,
           "pivot_x": 0.475
-        }
-      }
-    },
-    "nixie_vale": {
-      "atlas": "atlas_hero_arcanist",
-      "facing": "right",
-      "height_px": 248,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "ultimate": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "defeat": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "victory": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        }
-      }
-    },
-    "sister_aveline": {
-      "atlas": "atlas_hero_arcanist",
-      "facing": "right",
-      "height_px": 248,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "ultimate": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "defeat": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "victory": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
         }
       }
     },
@@ -1094,61 +4803,6 @@
         }
       }
     },
-    "mirel_quill": {
-      "atlas": "atlas_hero_arcanist",
-      "facing": "right",
-      "height_px": 248,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "ultimate": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "defeat": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "victory": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        }
-      }
-    },
     "odelia_pike": {
       "atlas": "atlas_hero_arcanist",
       "facing": "right",
@@ -1311,61 +4965,6 @@
           "scale": 1,
           "foot_y": 1,
           "pivot_x": 0.475
-        }
-      }
-    },
-    "clem_marr": {
-      "atlas": "atlas_hero_arcanist",
-      "facing": "right",
-      "height_px": 248,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "ultimate": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "defeat": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "victory": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
         }
       }
     },
@@ -1586,61 +5185,6 @@
           "scale": 1,
           "foot_y": 1,
           "pivot_x": 0.429
-        }
-      }
-    },
-    "jori_flint": {
-      "atlas": "atlas_mahmut",
-      "facing": "right",
-      "height_px": 258,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.49
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.49
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.525
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.525
-        },
-        "ultimate": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.475
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.492
-        },
-        "defeat": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.492
-        },
-        "victory": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.475
         }
       }
     },
@@ -1974,61 +5518,6 @@
         }
       }
     },
-    "ash_wolf": {
-      "atlas": "atlas_bellbound_dead",
-      "facing": "left",
-      "height_px": 242,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.433
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.433
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.438
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.438
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.438
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.49
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.534
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.433
-        }
-      }
-    },
     "bridge_revenant": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
@@ -2194,116 +5683,6 @@
         }
       }
     },
-    "corrupted_crown_guard": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 260,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "corrupted_mercenary": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 260,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
     "crownless_knight": {
       "atlas": "atlas_enemy_knight",
       "facing": "left",
@@ -2356,116 +5735,6 @@
           "scale": 1,
           "foot_y": 1,
           "pivot_x": 0.401
-        }
-      }
-    },
-    "eclipse_sentinel": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 260,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "estate_wraith": {
-      "atlas": "atlas_hollow_pilgrim",
-      "facing": "left",
-      "height_px": 242,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.532
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.537
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
         }
       }
     },
@@ -2525,61 +5794,6 @@
       }
     },
     "hollow_cleric": {
-      "atlas": "atlas_hollow_pilgrim",
-      "facing": "left",
-      "height_px": 242,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.532
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.537
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        }
-      }
-    },
-    "inkbound_dead": {
       "atlas": "atlas_hollow_pilgrim",
       "facing": "left",
       "height_px": 242,
@@ -2799,61 +6013,6 @@
         }
       }
     },
-    "red_vial_alchemist": {
-      "atlas": "atlas_hollow_pilgrim",
-      "facing": "left",
-      "height_px": 242,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.607
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.532
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.537
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.568
-        }
-      }
-    },
     "red_vial_scout": {
       "atlas": "atlas_bellbound_dead",
       "facing": "left",
@@ -2913,391 +6072,6 @@
       "atlas": "atlas_enemy_knight",
       "facing": "left",
       "height_px": 260,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "boss_ash_maw": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 310,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "boss_bell_widow": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 310,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "boss_captain_rusk": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 310,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "boss_red_vial_matron": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 310,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "boss_marshal_oren": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 310,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "boss_ashen_lord_wraith": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 310,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        }
-      }
-    },
-    "boss_eclipse_construct": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 310,
       "states": {
         "idle": {
           "frame": "idle",
@@ -4099,6 +6873,67 @@
         "wry": "art/portrait_fadyme_wry.webp"
       }
     },
+    "clem_marr": {
+      "emotions": {
+        "calm": "composed",
+        "composed": "composed",
+        "concern": "composed",
+        "curious": "composed",
+        "direct": "composed",
+        "grim": "composed",
+        "matter_of_fact": "composed",
+        "neutral": "composed",
+        "defiant": "defiant",
+        "fierce": "defiant",
+        "urgent": "defiant",
+        "analytical": "focused",
+        "focused": "focused",
+        "serious": "focused",
+        "gentle": "warm",
+        "smile": "warm",
+        "warm": "warm"
+      },
+      "images": {
+        "composed": "art/portrait_clem_marr_composed.webp",
+        "defiant": "art/portrait_clem_marr_defiant.webp",
+        "focused": "art/portrait_clem_marr_focused.webp",
+        "warm": "art/portrait_clem_marr_warm.webp"
+      }
+    },
+    "jori_flint": {
+      "emotions": {
+        "ashamed": "composed",
+        "calm": "composed",
+        "certain": "composed",
+        "composed": "composed",
+        "confused": "composed",
+        "earnest": "composed",
+        "firm": "composed",
+        "honest": "composed",
+        "neutral": "composed",
+        "observant": "composed",
+        "relieved": "composed",
+        "resolved": "composed",
+        "stricken": "composed",
+        "stubborn": "composed",
+        "alarm": "defiant",
+        "defiant": "defiant",
+        "fierce": "defiant",
+        "urgent": "defiant",
+        "analytical": "focused",
+        "focused": "focused",
+        "serious": "focused",
+        "gentle": "warm",
+        "smile": "warm",
+        "warm": "warm"
+      },
+      "images": {
+        "composed": "art/portrait_jori_flint_composed.webp",
+        "defiant": "art/portrait_jori_flint_defiant.webp",
+        "focused": "art/portrait_jori_flint_focused.webp",
+        "warm": "art/portrait_jori_flint_warm.webp"
+      }
+    },
     "kera_voss": {
       "emotions": {
         "composed": "composed",
@@ -4138,6 +6973,98 @@
         "defiant": "art/portrait_kera_voss_defiant.webp",
         "focused": "art/portrait_kera_voss_focused.webp",
         "proud_smile": "art/portrait_kera_voss_proud_smile.webp"
+      }
+    },
+    "mirel_quill": {
+      "emotions": {
+        "calm": "composed",
+        "composed": "composed",
+        "decisive": "composed",
+        "dry": "composed",
+        "neutral": "composed",
+        "observant": "composed",
+        "resolved": "composed",
+        "stricken": "composed",
+        "uneasy": "composed",
+        "defiant": "defiant",
+        "fierce": "defiant",
+        "urgent": "defiant",
+        "analytical": "focused",
+        "focused": "focused",
+        "grave": "focused",
+        "serious": "focused",
+        "gentle": "warm",
+        "kind": "warm",
+        "smile": "warm",
+        "warm": "warm",
+        "wry": "warm"
+      },
+      "images": {
+        "composed": "art/portrait_mirel_quill_composed.webp",
+        "defiant": "art/portrait_mirel_quill_defiant.webp",
+        "focused": "art/portrait_mirel_quill_focused.webp",
+        "warm": "art/portrait_mirel_quill_warm.webp"
+      }
+    },
+    "nixie_vale": {
+      "emotions": {
+        "brisk": "composed",
+        "calm": "composed",
+        "composed": "composed",
+        "decisive": "composed",
+        "fear": "composed",
+        "firm": "composed",
+        "genki": "composed",
+        "neutral": "composed",
+        "practical": "composed",
+        "wary": "composed",
+        "angry": "defiant",
+        "defiant": "defiant",
+        "fierce": "defiant",
+        "urgent": "defiant",
+        "alert": "focused",
+        "analytical": "focused",
+        "focused": "focused",
+        "serious": "focused",
+        "gentle": "warm",
+        "smile": "warm",
+        "warm": "warm"
+      },
+      "images": {
+        "composed": "art/portrait_nixie_vale_composed.webp",
+        "defiant": "art/portrait_nixie_vale_defiant.webp",
+        "focused": "art/portrait_nixie_vale_focused.webp",
+        "warm": "art/portrait_nixie_vale_warm.webp"
+      }
+    },
+    "sister_aveline": {
+      "emotions": {
+        "calm": "composed",
+        "composed": "composed",
+        "confident": "composed",
+        "neutral": "composed",
+        "quiet": "composed",
+        "reading": "composed",
+        "relieved": "composed",
+        "resolved": "composed",
+        "thoughtful": "composed",
+        "defiant": "defiant",
+        "fierce": "defiant",
+        "urgent": "defiant",
+        "analytical": "focused",
+        "focused": "focused",
+        "grave": "focused",
+        "serious": "focused",
+        "firm_kind": "warm",
+        "gentle": "warm",
+        "smile": "warm",
+        "warm": "warm"
+      },
+      "images": {
+        "composed": "art/portrait_sister_aveline_composed.webp",
+        "defiant": "art/portrait_sister_aveline_defiant.webp",
+        "focused": "art/portrait_sister_aveline_focused.webp",
+        "warm": "art/portrait_sister_aveline_warm.webp"
       }
     }
   },

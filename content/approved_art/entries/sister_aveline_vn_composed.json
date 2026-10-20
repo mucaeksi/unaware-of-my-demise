@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "asset_id": "sister_aveline_vn_composed",
+  "class": "portrait",
+  "revision": 3,
+  "targets": {
+    "portraits": {
+      "sister_aveline": {
+        "emotions": {
+          "calm": "composed",
+          "composed": "composed",
+          "confident": "composed",
+          "neutral": "composed",
+          "quiet": "composed",
+          "reading": "composed",
+          "relieved": "composed",
+          "resolved": "composed",
+          "thoughtful": "composed"
+        },
+        "images": {
+          "composed": "art/portrait_sister_aveline_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "451e900270f984220bb44d0d6f281c903eac8edd1440f10ddd47faa7ef269849",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/sister_aveline_vn_composed/run.provenance.json",
+    "provenance_sha256": "1b1d31d4f8afcaf780a6fd898ec1df5f1ee087fa80084751a66e18a7a8866777",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "56cf90ba58655a6ea835d73d4f41ea9dc755d26358b702b34d6730f0f5c3e8a8",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sister_aveline_vn_composed.ingest.json",
+    "spec_sha256": "2330eaa6c5464fd9318db5299c1321489ee51a6baf6ac1c9d7f330c175017ede",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "8cd46696041c526eea35e65b759a19a7f41d55ce4dc15057658ea45357535b4b"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_sister_aveline_composed.webp",
+      "sha256": "0b64c19488ab68c25224dbdc8cda1da0815ad3aae067885791428e7d62cf6d66",
+      "pixels_sha256": "f8d4981c57859cd8bec0c6fdb6752936f1a0fef27293b7c208e0f93f3466e54a",
+      "bytes": 87988,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=7"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "87988 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 7 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_sister_aveline_composed.webp",
+          "sha256": "e9727c443179e58094eb3e1a58deb8c9f7a1dda2a15bd5ca4571b04027a9c5a3",
+          "pixels_sha256": "5628e734ce12286757feee79a47631779e9e65c76b131f8fb325d8f6baef4ced",
+          "bytes": 87950,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "7c34f455d869db48f3033eb42d5a0a403db4c375a3a46617054ce46a74353733",
+      "fingerprint": "c7d5b19294a75b11435c4d8006f78ab55411cea28c0a57bc32ba7c5b6acfe611"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_sister_aveline_composed.webp",
+          "sha256": "0b64c19488ab68c25224dbdc8cda1da0815ad3aae067885791428e7d62cf6d66",
+          "pixels_sha256": "f8d4981c57859cd8bec0c6fdb6752936f1a0fef27293b7c208e0f93f3466e54a",
+          "bytes": 87988,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "451e900270f984220bb44d0d6f281c903eac8edd1440f10ddd47faa7ef269849",
+      "fingerprint": "8cd46696041c526eea35e65b759a19a7f41d55ce4dc15057658ea45357535b4b"
+    }
+  ]
+}

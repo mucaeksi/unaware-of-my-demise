@@ -1,0 +1,323 @@
+{
+  "schema": 1,
+  "asset_id": "mirel_quill_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 2,
+  "targets": {
+    "atlases": {
+      "atlas_mirel_quill": {
+        "image": "art/atlas_mirel_quill.webp",
+        "width": 1943,
+        "height": 706,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            195,
+            348
+          ],
+          "idle_2": [
+            203,
+            4,
+            195,
+            348
+          ],
+          "idle_3": [
+            402,
+            4,
+            195,
+            348
+          ],
+          "ultimate": [
+            601,
+            4,
+            241,
+            348
+          ],
+          "ultimate_2": [
+            846,
+            4,
+            241,
+            348
+          ],
+          "ultimate_3": [
+            1091,
+            4,
+            241,
+            348
+          ],
+          "active": [
+            1336,
+            4,
+            241,
+            346
+          ],
+          "active_2": [
+            1581,
+            4,
+            241,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            241,
+            346
+          ],
+          "basic": [
+            249,
+            356,
+            265,
+            345
+          ],
+          "basic_2": [
+            518,
+            356,
+            265,
+            345
+          ],
+          "basic_3": [
+            787,
+            356,
+            265,
+            345
+          ],
+          "victory": [
+            1056,
+            356,
+            192,
+            345
+          ],
+          "walk": [
+            1252,
+            356,
+            262,
+            343
+          ],
+          "hit": [
+            1518,
+            356,
+            209,
+            338
+          ],
+          "defeat": [
+            1731,
+            356,
+            208,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "mirel_quill": {
+        "atlas": "atlas_mirel_quill",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.487,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.487
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.484,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.493,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.495,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.534
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.536
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.485
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "a72a819666f11d3d260af4d767e88a50f2f1a158d6318eccbfad2c320d62331a",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/mirel_quill_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "60ebea7d0c3a0c943532e0c4158df2aec52ccc8915ba3750737fbbfc5de0221f",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "89e35c832d9e9326896a5bb6707ac7310364e65af0ef9e43b9d9821e4aa30bc6",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/mirel_quill_chibi_sheet.ingest.json",
+    "spec_sha256": "16da376322ce6636259a894e17defd414be7157b1a50c83988c919ca144c15cd",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "27397e6001aae687ae87981166ce7f1f41550ec28f66f468c02a034c5c059d91"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_mirel_quill.webp",
+      "sha256": "523e119abdb7a8524c5729a924add9add2e4ac8dc0a50c762e681980bbcffc1e",
+      "pixels_sha256": "76c30470f0fa193cf5081d24364ce6a43a865ef7f681115fcdf1d895f00bca5a",
+      "bytes": 404024,
+      "width": 1943,
+      "height": 706
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=60"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1943x706"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "404024 bytes <= 665600"
+        },
+        "A08": {
+          "status": "warn",
+          "detail": "spill=0.0133%"
+        }
+      },
+      "warnings": [
+        "A12: removed 60 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_mirel_quill.webp",
+          "sha256": "8a5fe8aa3c69c8668ee3594c9c191450b0e6ca2beb425c5ca46d9030915a1088",
+          "pixels_sha256": "ed435c87233a548f5fd12049ebf2eb0907fa2d10bff9f71c818bd55f12ad3651",
+          "bytes": 401586,
+          "width": 1941,
+          "height": 708
+        }
+      ],
+      "source_sha256": "249c71de93ec39b0181c73b34de73841965a6aa5b779f04c66ed3deb697cc3a3",
+      "fingerprint": "301b0d729e07d910fc34388f6cbefe115f3af194c0da0b9762964d9f853fd7f8"
+    }
+  ]
+}

@@ -1,0 +1,338 @@
+{
+  "schema": 1,
+  "asset_id": "sister_aveline_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 3,
+  "targets": {
+    "atlases": {
+      "atlas_sister_aveline": {
+        "image": "art/atlas_sister_aveline.webp",
+        "width": 1895,
+        "height": 1048,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            238,
+            348
+          ],
+          "idle_2": [
+            246,
+            4,
+            238,
+            348
+          ],
+          "idle_3": [
+            488,
+            4,
+            238,
+            348
+          ],
+          "ultimate": [
+            730,
+            4,
+            219,
+            348
+          ],
+          "ultimate_2": [
+            953,
+            4,
+            219,
+            348
+          ],
+          "ultimate_3": [
+            1176,
+            4,
+            219,
+            348
+          ],
+          "active": [
+            1399,
+            4,
+            217,
+            347
+          ],
+          "active_2": [
+            1620,
+            4,
+            217,
+            347
+          ],
+          "active_3": [
+            4,
+            356,
+            217,
+            347
+          ],
+          "basic": [
+            225,
+            356,
+            295,
+            347
+          ],
+          "basic_2": [
+            524,
+            356,
+            295,
+            347
+          ],
+          "basic_3": [
+            823,
+            356,
+            295,
+            347
+          ],
+          "victory": [
+            1122,
+            356,
+            236,
+            345
+          ],
+          "walk": [
+            1362,
+            356,
+            290,
+            344
+          ],
+          "hit": [
+            1656,
+            356,
+            235,
+            340
+          ],
+          "defeat": [
+            4,
+            707,
+            235,
+            337
+          ]
+        }
+      }
+    },
+    "units": {
+      "sister_aveline": {
+        "atlas": "atlas_sister_aveline",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.421,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.389
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.39,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.442,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.442,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.511
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.509
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.42
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "972121e61342b92ef15b8d6fecc6af25a99d4f568a926ee33415e3ea37c68521",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/sister_aveline_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "861db02f46bc368280b49685c556df9aae87c79c25e3a6866aa1c8411e494c96",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "4080671f280f39031ce14e9818924b5f35bd0ac84c1505e84db4e2f24aca3c6b",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sister_aveline_chibi_sheet.ingest.json",
+    "spec_sha256": "fabd47ab8e0baba6197b1b3c3fee18f2cb92f0a7c8abaadaaa475e157586dc04",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "46b059de0d382d3e1c59bdc81a67d730a6f21c63149978326f1707705f896cea"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_sister_aveline.webp",
+      "sha256": "ba2901d18fea9d88723d7932d006fb8c14a21ddd54a5f5ac4fab01df6d8515ff",
+      "pixels_sha256": "87894a9e3e0fa09c06093ae0875192563421dd729f5970bacc13b633e51ae21c",
+      "bytes": 531398,
+      "width": 1895,
+      "height": 1048
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=60"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.636"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1895x1048"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "531398 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0049%"
+        }
+      },
+      "warnings": [
+        "A12: removed 60 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_sister_aveline.webp",
+          "sha256": "7613c90340ffc012c13ce3cfa9d3c41cecdf244d1e4cbd1697969fc09753bbcc",
+          "pixels_sha256": "ed23ba66ab10fb409c54d1e3e255e5ecec71d7aabfbbdf936b2a8664317d0e00",
+          "bytes": 493104,
+          "width": 1969,
+          "height": 707
+        }
+      ],
+      "source_sha256": "5270209e7aab639b12e561992b1d2bbadb1ec65a517737c3deb9b2cb42846117",
+      "fingerprint": "af7cdf6bd6ec264a05611430b5b928082217c2f936b45af3d821ce7c8d344d9d"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_sister_aveline.webp",
+          "sha256": "4adf747faceb8defd894f8383eaf01e8af51e2bd87c769120c50b6971e7ef490",
+          "pixels_sha256": "cccfe97f9dd4df4c01563177e69a21aaeea1aa3bb9cb20ddc6e484e7ca281193",
+          "bytes": 500422,
+          "width": 1972,
+          "height": 705
+        }
+      ],
+      "source_sha256": "5bd1849eb27126f30f363d3d1b3b94f8d0761042795a1f612e42b43bfd8779b9",
+      "fingerprint": "1381889fb508d809218ca9116806785276b5ba9cbb25849dbf89932b1b416172"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "asset_id": "mirel_quill_vn_focused",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "mirel_quill": {
+        "emotions": {
+          "analytical": "focused",
+          "focused": "focused",
+          "grave": "focused",
+          "serious": "focused"
+        },
+        "images": {
+          "focused": "art/portrait_mirel_quill_focused.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "4d70c41bb24d4c16023f5ab74191660f248e2e4aef4296342d6fba4c903b1fd4",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/mirel_quill_vn_focused/run.provenance.json",
+    "provenance_sha256": "d9b1b50c0a1b951eca43e9c34a0db7341a3a06c51953c465d0b7a825f9676eaf",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "d39e69e5fdae16a83b07a823b6aa00f26a78d0eaa2bf1edc3e562ab2acf617cb",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/mirel_quill_vn_focused.ingest.json",
+    "spec_sha256": "3a1b9e542d0255c87d00005b85e8cbfa33ff8065bcb1bc7f5485a31511b51e16",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "702d5c32c673dbd25f84190aa3c97c9611112dc5c606d9ebe6474f00dd6553aa"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_mirel_quill_focused.webp",
+      "sha256": "bf1c0ec8208daf3af8d49f06045f929ff677e9f0e2f66bfe68492126c8fa94f6",
+      "pixels_sha256": "d80865673c020adf6ec67ce52c68b0c44780d308c5d9db3dee0f2fca15634306",
+      "bytes": 42328,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=4"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "42328 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 4 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_mirel_quill_focused.webp",
+          "sha256": "76ead740d9b33eb90f8d632e29a8988cff4688359b2ecca869e8cb9d2f49f8b8",
+          "pixels_sha256": "06d96957bc1ca13e7b28c0aed9ba8d0ecbc7244c17de5cb864b555acbcca9f55",
+          "bytes": 43242,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "5f10dcb31507fb4cf6f7596b1ae80c45f3da4efcf37ad7c4a2a18b6cf5f55b75",
+      "fingerprint": "99e3de07f1a8b0f9cc5c685bcaf89f2b715e2c6e3921604aec9dc88b13315f4a"
+    }
+  ]
+}

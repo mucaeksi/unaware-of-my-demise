@@ -760,6 +760,17 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
       .composite(packed.placed.map((p) => ({ input: p.data, left: p.x, top: p.y })))
       .raw()
       .toBuffer();
+    if (spec.key) {
+      if (spec.key.despill !== false) {
+        for (let i = 0; i < compositeRaw.length; i += 4) {
+          if ((compositeRaw[i + 3] as number) > 0) {
+            const cap = Math.max(compositeRaw[i] as number, compositeRaw[i + 2] as number);
+            if ((compositeRaw[i + 1] as number) > cap) compositeRaw[i + 1] = cap;
+          }
+        }
+      }
+      bleed(compositeRaw, outW, outH, 4);
+    }
 
     const encoded = await encodeWebpWithinCap(compositeRaw, outW, outH, spec.export);
     finalWebp = encoded.bytes;
@@ -879,7 +890,17 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
     outW = resized.info.width;
     outH = resized.info.height;
     const finalRgba = Buffer.from(resized.data);
-    if (spec.key) bleed(finalRgba, outW, outH, 4);
+    if (spec.key) {
+      if (spec.key.despill !== false) {
+        for (let i = 0; i < finalRgba.length; i += 4) {
+          if ((finalRgba[i + 3] as number) > 0) {
+            const cap = Math.max(finalRgba[i] as number, finalRgba[i + 2] as number);
+            if ((finalRgba[i + 1] as number) > cap) finalRgba[i + 1] = cap;
+          }
+        }
+      }
+      bleed(finalRgba, outW, outH, 4);
+    }
 
     const encoded = await encodeWebpWithinCap(finalRgba, outW, outH, spec.export);
     finalWebp = encoded.bytes;

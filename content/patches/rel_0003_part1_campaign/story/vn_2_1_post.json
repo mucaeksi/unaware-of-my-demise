@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "fadyme",
+      "character": "sister_aveline",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "fadyme",
+      "side": "right"
     },
     {
       "op": "say",

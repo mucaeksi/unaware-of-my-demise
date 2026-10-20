@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "asset_id": "nixie_vale_vn_composed",
+  "class": "portrait",
+  "revision": 3,
+  "targets": {
+    "portraits": {
+      "nixie_vale": {
+        "emotions": {
+          "brisk": "composed",
+          "calm": "composed",
+          "composed": "composed",
+          "decisive": "composed",
+          "fear": "composed",
+          "firm": "composed",
+          "genki": "composed",
+          "neutral": "composed",
+          "practical": "composed",
+          "wary": "composed"
+        },
+        "images": {
+          "composed": "art/portrait_nixie_vale_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "981c481ea7b83f9a32cf13556f3273fafad6d355db5923e5d250d33aa402ff16",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/nixie_vale_vn_composed/run.provenance.json",
+    "provenance_sha256": "d8b2444331a811d4ae5663c27d4ac4d73789a80cc0e52c280dd73932d8235d59",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "8d9ccde3e12b0a398a40a978e49b37ff7a98d0f7bee18d8332a6aa3ae49a4a3a",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/nixie_vale_vn_composed.ingest.json",
+    "spec_sha256": "b55c44182ce41cf4ec94b87c50989d4cbaddbc1f48a7edddef15b943c5c26b23",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "a5213ff6f7686ff1a80f5684102b45b564aae50db6ed00b44adb7f6cb9f5d629"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_nixie_vale_composed.webp",
+      "sha256": "8241de6a2902bdd9197effcc98bf3ae6732c447a244bb9d38f448992c5fecaa4",
+      "pixels_sha256": "8c098f33d6187619845ef05fa87dbd7638100df88a2d66dfd6a0a2318341b64e",
+      "bytes": 66414,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=76"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "66414 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 76 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/ui_nixie_vale_vn_composed.webp",
+          "sha256": "8316d44f5b1e759a5ad21b4a65a5f034542450f657dfe2643539f43cfe57e93c",
+          "pixels_sha256": "d7cbf8b48a6e1664a2a91ba673b5eab2b7ba58de5e0ec1e8ec06c4ad465dae1c",
+          "bytes": 36386,
+          "width": 341,
+          "height": 512
+        }
+      ],
+      "source_sha256": "e0e2282fab8e2cb95d2484e3fcec0bb5b122077e78073d517d0ad78ff0282a9e",
+      "fingerprint": "b6d41cd1882044c51376691101a4fe5bec582c5541bdd979b59ef884fa16a2d0"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_nixie_vale_composed.webp",
+          "sha256": "b661d60b4ba9a046b38c7be31015a6cf24783ad29dbc4a79399072fde145ccce",
+          "pixels_sha256": "83357e52dcaf2e1fcc917785590a41c1c4015bd03918d6fcae6e4a28ec91f3cc",
+          "bytes": 66768,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "074195f50be606786eb383597dde8c642aa208d9fc94ab2d6d7bf23a4fbfa0aa",
+      "fingerprint": "37f11d73a6f4e5e2f6e1c3db700cec60a7a242b74f8167fc917b6338f90d6e5e"
+    }
+  ]
+}

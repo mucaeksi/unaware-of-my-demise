@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "asset_id": "jori_flint_vn_focused",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "jori_flint": {
+        "emotions": {
+          "analytical": "focused",
+          "focused": "focused",
+          "serious": "focused"
+        },
+        "images": {
+          "focused": "art/portrait_jori_flint_focused.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "66622959ea9aae4fa5d8ef75aa2c56095d9fb380d1e7766fe1665cbe82f3cd83",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/jori_flint_vn_focused/run.provenance.json",
+    "provenance_sha256": "1ddba53b8a8ba9218b888cd631ec7c69ce595649d5db3c120ae3a69ce5a3afc4",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "04baa20aae19c8c009727111c2f3ca7bef49ab69d17135a79ff20fc81aa248c4",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/jori_flint_vn_focused.ingest.json",
+    "spec_sha256": "8d62cd6d80d0f345c73ed39a2ddaa57c41841e2ed3b54735192c5bc4c4dab3d8",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "720a2f2faa3b8f5733e948b3e011fd2f76c20396ae816caae7e0ef3396a958b3"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_jori_flint_focused.webp",
+      "sha256": "f480116ca51eccc94fcec6c7766d89e8b8550d9c7f45aafefc85e04f208c7a19",
+      "pixels_sha256": "eaf04ea3e1ad84e2e0c86ad70a05f05d8aa764632d251ce41f027ce765a586b6",
+      "bytes": 49554,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=5"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "49554 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 5 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_jori_flint_focused.webp",
+          "sha256": "15f1124e5c104d87627fa9d65cf0daf9f8c7314662e9bc02c81d62737fab2788",
+          "pixels_sha256": "3736367789af0b392b37d1d7232f29568f34e061ca8f8dd2ce5b5b090af787d0",
+          "bytes": 49466,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "4f4abd93efa6efd8647a13cda2efbc9f95dc95a292a8ff462c4adb886a368001",
+      "fingerprint": "6061e2f906450bc102f25b4250d7707c158aa1e4c4a8435137c74a752e809582"
+    }
+  ]
+}

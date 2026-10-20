@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "asset_id": "boss_ashen_lord_wraith_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 4,
+  "targets": {
+    "atlases": {
+      "atlas_boss_ashen_lord_wraith": {
+        "image": "art/atlas_boss_ashen_lord_wraith.webp",
+        "width": 1918,
+        "height": 684,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            191,
+            337
+          ],
+          "idle_2": [
+            199,
+            4,
+            191,
+            337
+          ],
+          "idle_3": [
+            394,
+            4,
+            191,
+            337
+          ],
+          "ultimate": [
+            589,
+            4,
+            218,
+            337
+          ],
+          "ultimate_2": [
+            811,
+            4,
+            218,
+            337
+          ],
+          "ultimate_3": [
+            1033,
+            4,
+            218,
+            337
+          ],
+          "active": [
+            1255,
+            4,
+            217,
+            336
+          ],
+          "active_2": [
+            1476,
+            4,
+            217,
+            336
+          ],
+          "active_3": [
+            1697,
+            4,
+            217,
+            336
+          ],
+          "basic": [
+            4,
+            345,
+            218,
+            335
+          ],
+          "basic_2": [
+            226,
+            345,
+            218,
+            335
+          ],
+          "basic_3": [
+            448,
+            345,
+            218,
+            335
+          ],
+          "victory": [
+            670,
+            345,
+            190,
+            335
+          ],
+          "walk": [
+            864,
+            345,
+            191,
+            332
+          ],
+          "hit": [
+            1059,
+            345,
+            186,
+            326
+          ],
+          "defeat": [
+            1249,
+            345,
+            198,
+            321
+          ]
+        }
+      }
+    },
+    "units": {
+      "boss_ashen_lord_wraith": {
+        "atlas": "atlas_boss_ashen_lord_wraith",
+        "facing": "left",
+        "height_px": 310,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.518,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.517
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.456,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.456,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.456,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.46
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.488
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.516
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "6a498c5cb768f445398a2b81c4ced8f2f8fcf855aaad4312673dea54d0288e22",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/boss_ashen_lord_wraith_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "7fcd7f752537a416fbd46203ec4bb1c3cd300cd217336d2bce4a0c33b4c99569",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "fe96234d56919e21be4bcac458881471535eab9b1f00c80e11b1b93697f240af",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/boss_ashen_lord_wraith_chibi_sheet.ingest.json",
+    "spec_sha256": "e63d76a8987d15cf9c02f872b95ede069072dcf495f46cc819066d0f5d0afe9a",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "666d385dcc111930fac7222072917c617a8410ae308aab76b9622c96d35e01c8"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_boss_ashen_lord_wraith.webp",
+      "sha256": "93c7bf90ada4a6a7cd0a6382fdadc490f276e774fb39f10bb6c962d1487957d7",
+      "pixels_sha256": "4e720cebc05f9a91e5c1c48f14b446228da0594c7bd5943dcd96cf3db0194bcb",
+      "bytes": 397964,
+      "width": 1918,
+      "height": 684
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=24"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.613"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1918x684"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "397964 bytes <= 665600"
+        },
+        "A08": {
+          "status": "warn",
+          "detail": "spill=0.0077%"
+        }
+      },
+      "warnings": [
+        "A12: removed 24 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_ashen_lord_wraith.webp",
+          "sha256": "3380692de7f20477581a06e5ce6bd0ea8bea81700c857d0b4992120100ece4e2",
+          "pixels_sha256": "a76b3cd2f5c202462a7aa6a7202f67f5647e69110525defa67fe188f81af32d0",
+          "bytes": 436276,
+          "width": 1915,
+          "height": 684
+        }
+      ],
+      "source_sha256": "a08c783aa8019f9523a6ce774b41c4931561966c16c8fcbe9d756b25b27370af",
+      "fingerprint": "f0db88d7820479dcbe706644a6bd8abe203a1b33c2d74ac4be452b78fd6d8d98"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_ashen_lord_wraith.webp",
+          "sha256": "361e9e331ec4e2253a7df8f66afa80384308002cd724657e8bcbc031d3c5f2f9",
+          "pixels_sha256": "34dad714b5f359ccaa80483b5307b2dc1964728976b9b02aebdb6f2cbaa95783",
+          "bytes": 388608,
+          "width": 1918,
+          "height": 684
+        }
+      ],
+      "source_sha256": "b8f16fbcd86414cc260f24edefddf99bfc60b692d67c627f515c91939f93c2be",
+      "fingerprint": "9d189e934944bcb1dfbb8dfba5a3b967e1598621011300afd70fb14bab8e9e7f"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_ashen_lord_wraith.webp",
+          "sha256": "83b2dd6dad6ad9cf7e4db41e1e11b72329ed04c0dd44b58363fd9924727048b2",
+          "pixels_sha256": "a7ddf6f46d03bb1bc77624827f5dac7f008930fc7aff97f34c7420f1eb25f0cf",
+          "bytes": 389112,
+          "width": 1918,
+          "height": 684
+        }
+      ],
+      "source_sha256": "e006988a6e44b495ba9cbd2e270dc5164b6b017edcb977f40a99f4ba26603453",
+      "fingerprint": "02952dec2c26b562eabb3bb90e53f593d8cf59b8f055d5aad2b4dfb5b33af76d"
+    }
+  ]
+}

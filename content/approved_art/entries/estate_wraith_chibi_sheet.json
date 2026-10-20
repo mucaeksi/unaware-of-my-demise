@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "estate_wraith_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_estate_wraith": {
+        "image": "art/atlas_estate_wraith.webp",
+        "width": 2025,
+        "height": 799,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            176,
+            266
+          ],
+          "idle_2": [
+            184,
+            4,
+            176,
+            266
+          ],
+          "idle_3": [
+            364,
+            4,
+            176,
+            266
+          ],
+          "victory": [
+            544,
+            4,
+            176,
+            264
+          ],
+          "active": [
+            724,
+            4,
+            321,
+            260
+          ],
+          "active_2": [
+            1049,
+            4,
+            321,
+            260
+          ],
+          "active_3": [
+            1374,
+            4,
+            321,
+            260
+          ],
+          "ultimate": [
+            1699,
+            4,
+            322,
+            260
+          ],
+          "ultimate_2": [
+            4,
+            274,
+            322,
+            260
+          ],
+          "ultimate_3": [
+            330,
+            274,
+            322,
+            260
+          ],
+          "basic": [
+            656,
+            274,
+            321,
+            259
+          ],
+          "basic_2": [
+            981,
+            274,
+            321,
+            259
+          ],
+          "basic_3": [
+            1306,
+            274,
+            321,
+            259
+          ],
+          "hit": [
+            1631,
+            274,
+            224,
+            259
+          ],
+          "walk": [
+            4,
+            538,
+            318,
+            257
+          ],
+          "defeat": [
+            326,
+            538,
+            270,
+            256
+          ]
+        }
+      }
+    },
+    "units": {
+      "estate_wraith": {
+        "atlas": "atlas_estate_wraith",
+        "facing": "left",
+        "height_px": 238,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.485,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.571
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.574,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.574,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.576,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.505
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.51
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.484
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "7cb7ff76450d72992775529bb6cec50d9426816d5b893ffd101d325501d7414f",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/estate_wraith_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "bee6370a3062ab1f765d46fbe0506b6e7ec669c29626a861e702edeebcea9a53",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "c0a018963c0df44699163de5c9532b6492aff884ee172174115add05d1638e5f",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/estate_wraith_chibi_sheet.ingest.json",
+    "spec_sha256": "082cc7c336cd43493436b784b272d843c28f298014907c066411c3b64fe75df3",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "d27333ccef87dcb5dad78e3e6f41a2190bedef45cee26132f05a5bbd28e99e23"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_estate_wraith.webp",
+      "sha256": "7a7ccf277b68802af9532370c076cbb93c5fe2eaacc71d25de77cd4d3d4af6a2",
+      "pixels_sha256": "37d260835677e086fe0b341a3c8b65df598e6f5426402620b0149912aad2d084",
+      "bytes": 289488,
+      "width": 2025,
+      "height": 799
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=17"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.483"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2025x799"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "289488 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0041%"
+        }
+      },
+      "warnings": [
+        "A12: removed 17 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

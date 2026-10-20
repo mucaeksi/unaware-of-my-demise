@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "asset_id": "mirel_quill_vn_defiant",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "mirel_quill": {
+        "emotions": {
+          "defiant": "defiant",
+          "fierce": "defiant",
+          "urgent": "defiant"
+        },
+        "images": {
+          "defiant": "art/portrait_mirel_quill_defiant.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "8b6a6e4176e550a9ba1e3c60b2969d4091f0a5eab8d138dde33062ba2a931762",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/mirel_quill_vn_defiant/run.provenance.json",
+    "provenance_sha256": "11af0c117791cb792c28b0254ce17ef490f5acf6b1d78d48213ebedf9b6cd7fb",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "c42b3ea9374296f84ed63dd7424b1898a51b12580de419527665ed28e1e8e8fb",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/mirel_quill_vn_defiant.ingest.json",
+    "spec_sha256": "aacac8ffeb20a75867f1b56700484cf9644beb25788f2ee8bd4339d76cec1f14",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "1bfc488a63b6f98b1c4670f9ef82c3d4507d0b2b2b541adb67cf1aec78c33cdf"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_mirel_quill_defiant.webp",
+      "sha256": "7de224c15a138df379160371924897b4d684306eea6599118cc4916b95cd3c9a",
+      "pixels_sha256": "d492c821543a383786a5ce834b19418ddf4ec300de770c50f3b15d53f3a09abd",
+      "bytes": 43894,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=4"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "43894 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 4 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_mirel_quill_defiant.webp",
+          "sha256": "ac0cd7e70652e91756911097440d38dffd4f75b4232ebec03507479d89a16e3f",
+          "pixels_sha256": "8abec07a1f19a6e182bbcd3afb2d712802eac648279b4d794455b99d2f3f90ae",
+          "bytes": 45050,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "5edeccc39b917551a43710837ed0d775929fbcf96988055326aa53dfc29e51a7",
+      "fingerprint": "ed59ed861eba592bcba72b4ff4f9da9162bc3d872023715845e43be4019428b4"
+    }
+  ]
+}

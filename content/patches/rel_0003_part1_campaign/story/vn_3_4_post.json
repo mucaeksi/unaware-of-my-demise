@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "mahmut",
+      "character": "jori_flint",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
     },
     {
       "op": "say",

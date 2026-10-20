@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "asset_id": "nixie_vale_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 4,
+  "targets": {
+    "atlases": {
+      "atlas_nixie_vale": {
+        "image": "art/atlas_nixie_vale.webp",
+        "width": 1960,
+        "height": 705,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            221,
+            348
+          ],
+          "idle_2": [
+            229,
+            4,
+            221,
+            348
+          ],
+          "idle_3": [
+            454,
+            4,
+            221,
+            348
+          ],
+          "ultimate": [
+            679,
+            4,
+            210,
+            348
+          ],
+          "ultimate_2": [
+            893,
+            4,
+            210,
+            348
+          ],
+          "ultimate_3": [
+            1107,
+            4,
+            210,
+            348
+          ],
+          "active": [
+            1321,
+            4,
+            209,
+            346
+          ],
+          "active_2": [
+            1534,
+            4,
+            209,
+            346
+          ],
+          "active_3": [
+            1747,
+            4,
+            209,
+            346
+          ],
+          "basic": [
+            4,
+            356,
+            259,
+            345
+          ],
+          "basic_2": [
+            267,
+            356,
+            259,
+            345
+          ],
+          "basic_3": [
+            530,
+            356,
+            259,
+            345
+          ],
+          "victory": [
+            793,
+            356,
+            219,
+            345
+          ],
+          "walk": [
+            1016,
+            356,
+            257,
+            343
+          ],
+          "hit": [
+            1277,
+            356,
+            228,
+            338
+          ],
+          "defeat": [
+            1509,
+            356,
+            228,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "nixie_vale": {
+        "atlas": "atlas_nixie_vale",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.473,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.411
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.412,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.511,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.511,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.546
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.546
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.472
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "c5fd575ac54ac13d1a49c015d6c2031a965fb2600dc781423e47c80c5a834590",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/nixie_vale_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "0531ac2154caafc5deda58a4cfafdd36a47618e4caac38a429be30e50411ca01",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "2c073474dfd198e7756a36e93e9c17b80c1feccf5d962eb7b8c72cc6bc9c789d",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/nixie_vale_chibi_sheet.ingest.json",
+    "spec_sha256": "ce69c3492393078eee3dfdca4cba30ceca1eb218a9a99525d8ea2433536a8e87",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "f02c124c545d17d80c3c484bf1e98deb5d36173dea2857ecedd745e055e605bf"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_nixie_vale.webp",
+      "sha256": "b185ae272df8c11ee8c9a19bffb89dc9a45076f9f4ca67822662b15b39da4044",
+      "pixels_sha256": "3f0f9737690bb2eac1b560d5457d66fc1b971e43970a1b14f9ee8ef549f39d0f",
+      "bytes": 406046,
+      "width": 1960,
+      "height": 705
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=120"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1960x705"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "406046 bytes <= 665600"
+        },
+        "A08": {
+          "status": "warn",
+          "detail": "spill=0.0130%"
+        }
+      },
+      "warnings": [
+        "A12: removed 120 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_nixie_vale.webp",
+          "sha256": "293fd4acc13081cee36c65c940e003c59a5d2ba3d1bc57b86f90c34e3e488aec",
+          "pixels_sha256": "c9b3de8c5f13bd3f13c2bac7b63e92054b5c2c969beed61702e517a462c89672",
+          "bytes": 383816,
+          "width": 1819,
+          "height": 707
+        }
+      ],
+      "source_sha256": "d1204263f9cda3bc0a0c3d22fab1a538b82f7c37f09574c2b32dbfc217d27014",
+      "fingerprint": "492600cf2c6ca7148fa787680afaa83a84f2c8d311bedd797ae1fabfd135a464"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_nixie_vale.webp",
+          "sha256": "622b97b86e46bbd88c3f1036fe9b30536c9ae52ba2fa131527d79a1dbfc16a67",
+          "pixels_sha256": "6db1a59a6994c60f962664f5914608c9b9309ccfe1ff0db9175c4210973b56e6",
+          "bytes": 380470,
+          "width": 1819,
+          "height": 707
+        }
+      ],
+      "source_sha256": "b54feb9a8de2a364ffcd4e7786c433ec194c047ca5562c49dd74e6cc078234f5",
+      "fingerprint": "3c02a5ae0ff111690aaa75fcf506d4a27b11425bac33b8e971a18760596e7d25"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_nixie_vale.webp",
+          "sha256": "7a1a0bfc77ef712cbf32da35b135136589f8d327c71a3b45b7f5623aa40c73b6",
+          "pixels_sha256": "e9c52f6dabb1f417fb85b8a5d8dffe305cbce9858c04339a22e2904d8bf7317f",
+          "bytes": 378716,
+          "width": 1819,
+          "height": 707
+        }
+      ],
+      "source_sha256": "1eeaf1219735b7e508b63a94614f9a9a8b6581e048de67d10ff863274ddca175",
+      "fingerprint": "224a4ca0e6b2acd08a3daddd05d797c734361d7d606b01e652f86ee45d9c751e"
+    }
+  ]
+}

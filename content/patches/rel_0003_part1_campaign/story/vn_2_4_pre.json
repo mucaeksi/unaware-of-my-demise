@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "mahmut",
+      "character": "sister_aveline",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "right"
     },
     {
       "op": "say",

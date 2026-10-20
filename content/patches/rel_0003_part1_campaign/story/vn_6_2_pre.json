@@ -17,6 +17,16 @@
       "cue_id": "stop"
     },
     {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "sister_aveline",
+      "side": "right"
+    },
+    {
       "op": "say",
       "line_id": "node_6_2_pre_001",
       "speaker": "mirel_quill",

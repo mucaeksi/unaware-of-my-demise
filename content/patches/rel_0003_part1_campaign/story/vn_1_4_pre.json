@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "mahmut",
+      "character": "nixie_vale",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
     },
     {
       "op": "say",

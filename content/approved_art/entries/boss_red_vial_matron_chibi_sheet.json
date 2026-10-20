@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "asset_id": "boss_red_vial_matron_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 4,
+  "targets": {
+    "atlases": {
+      "atlas_boss_red_vial_matron": {
+        "image": "art/atlas_boss_red_vial_matron.webp",
+        "width": 1945,
+        "height": 684,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            226,
+            337
+          ],
+          "idle_2": [
+            234,
+            4,
+            226,
+            337
+          ],
+          "idle_3": [
+            464,
+            4,
+            226,
+            337
+          ],
+          "ultimate": [
+            694,
+            4,
+            205,
+            337
+          ],
+          "ultimate_2": [
+            903,
+            4,
+            205,
+            337
+          ],
+          "ultimate_3": [
+            1112,
+            4,
+            205,
+            337
+          ],
+          "active": [
+            1321,
+            4,
+            204,
+            336
+          ],
+          "active_2": [
+            1529,
+            4,
+            204,
+            336
+          ],
+          "active_3": [
+            1737,
+            4,
+            204,
+            336
+          ],
+          "basic": [
+            4,
+            345,
+            205,
+            335
+          ],
+          "basic_2": [
+            213,
+            345,
+            205,
+            335
+          ],
+          "basic_3": [
+            422,
+            345,
+            205,
+            335
+          ],
+          "victory": [
+            631,
+            345,
+            225,
+            335
+          ],
+          "walk": [
+            860,
+            345,
+            225,
+            332
+          ],
+          "hit": [
+            1089,
+            345,
+            232,
+            328
+          ],
+          "defeat": [
+            1325,
+            345,
+            240,
+            325
+          ]
+        }
+      }
+    },
+    "units": {
+      "boss_red_vial_matron": {
+        "atlas": "atlas_boss_red_vial_matron",
+        "facing": "left",
+        "height_px": 310,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.53,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.533
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.647,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.651,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.647,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.622
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.577
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.53
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "2eef5193a79ba78a591c293c075ab67d3f4908dd4bbcee4c91dd8c8d98ad9818",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/boss_red_vial_matron_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "45271085563a12765fe48e9f56404dcece83d4ca98f13995b7c491555aed903f",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "1775fbd689fcbdab7c6777a46d8ac0b4e12bd5078fee45aeb0b94c17d7fc13d8",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/boss_red_vial_matron_chibi_sheet.ingest.json",
+    "spec_sha256": "2d65ef033097a320b6dbd932706517a8f729f1a4881c444096d5709dcfeda38b",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "9be35ac2de179dcbdb2aec89afd466c1e18f9e8d975e798f572452720895cb49"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_boss_red_vial_matron.webp",
+      "sha256": "14ebeecaf476afc136a5d62c14f49876730bedc759b96fe93570009e488219be",
+      "pixels_sha256": "e2238b4291123a09816031545a54fb1f934e3f06676437f4ed020fdcb3d09470",
+      "bytes": 340584,
+      "width": 1945,
+      "height": 684
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=197"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.613"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1945x684"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "340584 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0049%"
+        }
+      },
+      "warnings": [
+        "A12: removed 197 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_red_vial_matron.webp",
+          "sha256": "740f9cfcc4a84a39abea11e8d2c9a19d21b811932461036d82aaa1cde4b0b972",
+          "pixels_sha256": "b6564f4d6b197a2e30798b784011d06f9c174beffe6b4866e42c18d9b184bbf7",
+          "bytes": 375962,
+          "width": 1868,
+          "height": 1017
+        }
+      ],
+      "source_sha256": "78b04ee134eff98768c867c8f57985a98b058ffe36c8743ae887bbbf134c8de0",
+      "fingerprint": "cde1e647e78806ad776292c324304d3682eb559944e9d6b4c8b8daf118992304"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_red_vial_matron.webp",
+          "sha256": "326ef16235fac92eb469f7d256c6b3091608d8ccc0a54c9fd4f6d6cb64266803",
+          "pixels_sha256": "7b5f4d70520047fb3cfd53634cf696982f22b94359a577481222211b4034dee0",
+          "bytes": 337716,
+          "width": 1945,
+          "height": 684
+        }
+      ],
+      "source_sha256": "7a212e62a06346ebb4e29bb09dc317d05875b8227c551b82ff675f54b2a0c3b0",
+      "fingerprint": "2b34cdde19502a825ca81b916af5dd0e0b9ef9d22ce319e0cbbc297ee8b4f12c"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_red_vial_matron.webp",
+          "sha256": "1e1309496892c06157d963ec8a0f9065ce43f3043ca95e91a2525f798814936a",
+          "pixels_sha256": "43838e4d6d533e4213434a5cf6c0f82e83a7b729d78735aee32b9a4635dc8d5a",
+          "bytes": 339684,
+          "width": 1945,
+          "height": 684
+        }
+      ],
+      "source_sha256": "a2ac808431520c7576916e95bb85e66a51e6a730ebcd38f94fa6e82570970b87",
+      "fingerprint": "1f5c30904a2bf5da3104614dd44c3bd6a814d18aa4e60ed89bea1f0d1dfc3291"
+    }
+  ]
+}

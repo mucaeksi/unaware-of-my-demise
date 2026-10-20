@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "asset_id": "boss_eclipse_construct_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 4,
+  "targets": {
+    "atlases": {
+      "atlas_boss_eclipse_construct": {
+        "image": "art/atlas_boss_eclipse_construct.webp",
+        "width": 2047,
+        "height": 1014,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            185,
+            337
+          ],
+          "idle_2": [
+            193,
+            4,
+            185,
+            337
+          ],
+          "idle_3": [
+            382,
+            4,
+            185,
+            337
+          ],
+          "ultimate": [
+            571,
+            4,
+            284,
+            337
+          ],
+          "ultimate_2": [
+            859,
+            4,
+            284,
+            337
+          ],
+          "ultimate_3": [
+            1147,
+            4,
+            284,
+            337
+          ],
+          "active": [
+            1435,
+            4,
+            302,
+            336
+          ],
+          "active_2": [
+            1741,
+            4,
+            302,
+            336
+          ],
+          "active_3": [
+            4,
+            345,
+            302,
+            336
+          ],
+          "basic": [
+            310,
+            345,
+            301,
+            335
+          ],
+          "basic_2": [
+            615,
+            345,
+            301,
+            335
+          ],
+          "basic_3": [
+            920,
+            345,
+            301,
+            335
+          ],
+          "victory": [
+            1225,
+            345,
+            183,
+            335
+          ],
+          "walk": [
+            1412,
+            345,
+            183,
+            332
+          ],
+          "hit": [
+            1599,
+            345,
+            284,
+            328
+          ],
+          "defeat": [
+            4,
+            685,
+            284,
+            325
+          ]
+        }
+      }
+    },
+    "units": {
+      "boss_eclipse_construct": {
+        "atlas": "atlas_boss_eclipse_construct",
+        "facing": "left",
+        "height_px": 310,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.482,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.486
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.515,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.516,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.508,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.445
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.445
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.482
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "2dfaaba015e5f591bc38afdd3b1f821bc71cb9dd16feab0315827b0907764236",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/boss_eclipse_construct_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "bf4ff83f3b549f981e1f9c817e77cc6402f17ca6bba5c33ecfa1c5929b153728",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "d15c58fa9e80e16ab6333e2583c66f5b0fa7cb2f672703c16d1a981d49b17ea7",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/boss_eclipse_construct_chibi_sheet.ingest.json",
+    "spec_sha256": "368087da005ed18f52a56b3d6da90b7b06580c20c45fa3d34cd976a490ab64c1",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "48500f7d7eff127f49c9380a0b2d33b20dc19ef4c4dc0413f180dcb0c40071af"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_boss_eclipse_construct.webp",
+      "sha256": "3b4389c07f03a1b53daee497ada431e4de4dadd21df1aa224ffccb422d087322",
+      "pixels_sha256": "851491f505e071a31f3be442ccd495f59866c73eb8ef8e5058594166bacdea0a",
+      "bytes": 423488,
+      "width": 2047,
+      "height": 1014
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=99"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.613"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2047x1014"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "423488 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0020%"
+        }
+      },
+      "warnings": [
+        "A12: removed 99 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_eclipse_construct.webp",
+          "sha256": "1843bbad88a9177b11db29fead9b54baeaa83ae9656088b43997a1bacf82734e",
+          "pixels_sha256": "1753561a83986a81385b2aaea6394db64633554b50a86cbb3b68f4f2145de463",
+          "bytes": 509942,
+          "width": 1962,
+          "height": 1025
+        }
+      ],
+      "source_sha256": "a13868a8a4f6df0983205c9bab79c8d493fd834810269da7d5b23020acb05a14",
+      "fingerprint": "1b478f1025b2297f8e002498cee1e9e3b1cc7611fdeb8807bf6671f9ecfca6ff"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_eclipse_construct.webp",
+          "sha256": "05becb5c06cf7c48df645544c80966aed813cf145c3ecdd34135014db796178b",
+          "pixels_sha256": "18d12a063b0a8272e5d411ff2c2382ddc67753196c01f8a6aa1dfe672405d238",
+          "bytes": 326950,
+          "width": 1803,
+          "height": 676
+        }
+      ],
+      "source_sha256": "5fa5c6c6c4adec4eab4b410c1ff175fab6a9e816fa627cbe0af7fa7684ca6682",
+      "fingerprint": "10a8feae1504b0f2189c3805400c62b5d64cbfd6b82eb34e774578298a1a9e37"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_eclipse_construct.webp",
+          "sha256": "a5691168be642d4e8faad6ceaf22905667c3c0d1ab1dfe8464df4516d45d509f",
+          "pixels_sha256": "b370139e25a76ddfbb384bea33b26ca4ea91f67e3fa04cc7e24beb52cc0710af",
+          "bytes": 358456,
+          "width": 1913,
+          "height": 677
+        }
+      ],
+      "source_sha256": "c9f77b8271f31008b6211a3b8a97a3c24022d15c9362f39b8c08edf5e458a8f5",
+      "fingerprint": "9561c433b7f22c38e4ac9cb469c7a2ad96793d6fa3b99689f4bfd942f504874a"
+    }
+  ]
+}

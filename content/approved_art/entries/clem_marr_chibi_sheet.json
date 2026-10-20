@@ -1,0 +1,323 @@
+{
+  "schema": 1,
+  "asset_id": "clem_marr_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 2,
+  "targets": {
+    "atlases": {
+      "atlas_clem_marr": {
+        "image": "art/atlas_clem_marr.webp",
+        "width": 2019,
+        "height": 699,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            191,
+            348
+          ],
+          "idle_2": [
+            199,
+            4,
+            191,
+            348
+          ],
+          "idle_3": [
+            394,
+            4,
+            191,
+            348
+          ],
+          "basic": [
+            589,
+            4,
+            243,
+            345
+          ],
+          "basic_2": [
+            836,
+            4,
+            243,
+            345
+          ],
+          "basic_3": [
+            1083,
+            4,
+            243,
+            345
+          ],
+          "victory": [
+            1330,
+            4,
+            191,
+            345
+          ],
+          "walk": [
+            1525,
+            4,
+            238,
+            343
+          ],
+          "ultimate": [
+            1767,
+            4,
+            248,
+            339
+          ],
+          "ultimate_2": [
+            4,
+            356,
+            248,
+            339
+          ],
+          "ultimate_3": [
+            256,
+            356,
+            248,
+            339
+          ],
+          "active": [
+            508,
+            356,
+            247,
+            338
+          ],
+          "active_2": [
+            759,
+            356,
+            247,
+            338
+          ],
+          "active_3": [
+            1010,
+            356,
+            247,
+            338
+          ],
+          "hit": [
+            1261,
+            356,
+            243,
+            338
+          ],
+          "defeat": [
+            1508,
+            356,
+            243,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "clem_marr": {
+        "atlas": "atlas_clem_marr",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.44,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.387
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.391,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.478,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.478,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.551
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.548
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.44
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "21d42ece8aeffc7bfa95aec560173865801c3422b2a01fd383a39a1d7753c2a2",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/clem_marr_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "c38abb5a09db2a039cb43ba5def77ed283f7eea8307980124e3c2c507564a6db",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "f0abc794e9183dd275bb0aa7c20d380899766471da509bd6643cff844545bdfd",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/clem_marr_chibi_sheet.ingest.json",
+    "spec_sha256": "4f5ac055703ca04016074e374a8bae4f0256194dea399f449151b2e52c692bbb",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "0e967ba09a0b4b0eb5e195d37384774459487e3355b3e0322641af03e0e9e6b6"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_clem_marr.webp",
+      "sha256": "01fcb2f1efabf8dac6558c62fd3324963f19d06a5c27712de1dbdc23aeebfaf3",
+      "pixels_sha256": "11050c7bf3a8205e7b544c0b7e5a9fba46665b50c0ab13ec6a75118ae20be546",
+      "bytes": 401224,
+      "width": 2019,
+      "height": 699
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=989"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2019x699"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "401224 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0046%"
+        }
+      },
+      "warnings": [
+        "A12: removed 989 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_clem_marr.webp",
+          "sha256": "faa4ee44772223e892cfc8c3b2516dcc7b56167622ca4554952bee29759a39e0",
+          "pixels_sha256": "9355aa6bdc19e3a65386cea2cef73c70392529f6a552548248674cfc813788df",
+          "bytes": 398926,
+          "width": 2032,
+          "height": 702
+        }
+      ],
+      "source_sha256": "dbd180e7549f1c28b8dd6147d553f7b37110d4b23f8c74a8db292121510b0a66",
+      "fingerprint": "91d72b13b01caf646e2a0842d1f4a50e6f37def6f2a946035f73c588f3a5821d"
+    }
+  ]
+}

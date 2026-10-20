@@ -199,10 +199,13 @@ export async function upload(files: TestFile[], as: string | null = 'owner@examp
   if (rest.length === 0) return;
   const probe = rest.find((f) => f.preseededSha256 === f.sha256);
   const r2Seeded = probe ? Boolean(await baseEnv.CONTENT.head(`objects/${probe.sha256}`)) : false;
-  for (const f of rest) {
-    if (!r2Seeded || f.preseededSha256 !== f.sha256) {
-      await baseEnv.CONTENT.put(`objects/${f.sha256}`, f.bytes, { httpMetadata: { contentType: f.mediaType }, sha256: f.sha256 });
-    }
+  const toPut = rest.filter((f) => !r2Seeded || f.preseededSha256 !== f.sha256);
+  for (let i = 0; i < toPut.length; i += 32) {
+    await Promise.all(
+      toPut.slice(i, i + 32).map((f) =>
+        baseEnv.CONTENT.put(`objects/${f.sha256}`, f.bytes, { httpMetadata: { contentType: f.mediaType }, sha256: f.sha256 })
+      )
+    );
   }
   const db = baseEnv.DB;
   for (let i = 0; i < rest.length; i += 50) {

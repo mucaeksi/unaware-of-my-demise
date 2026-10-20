@@ -22,6 +22,11 @@
       "side": "left"
     },
     {
+      "op": "show",
+      "character": "mirel_quill",
+      "side": "right"
+    },
+    {
       "op": "say",
       "line_id": "node_2_5_post_001",
       "speaker": "mahmut",

@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "asset_id": "sister_aveline_vn_focused",
+  "class": "portrait",
+  "revision": 3,
+  "targets": {
+    "portraits": {
+      "sister_aveline": {
+        "emotions": {
+          "analytical": "focused",
+          "focused": "focused",
+          "grave": "focused",
+          "serious": "focused"
+        },
+        "images": {
+          "focused": "art/portrait_sister_aveline_focused.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "075cc3b726213def03c528908e7eb8036e0f89850461a37f5be3bd9c3c6d2653",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/sister_aveline_vn_focused/run.provenance.json",
+    "provenance_sha256": "9f24713da7609bec711339295c1f3ff4fbad1c7ecdf62387524e31f5287019f3",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "f611ea5b6d5e77f3cbf5feea730da58fe7327290f71eabf3978e1db26a350ab4",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sister_aveline_vn_focused.ingest.json",
+    "spec_sha256": "9d3d5b08d1a21a2ec9ae89a6b295eec6514496e462ef205d8d44fa2563a18e6e",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "84f411ac63036f273c5d7585c5fa33bfda20a4292df6d56f4804d4c32896feab"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_sister_aveline_focused.webp",
+      "sha256": "4b22f55bb898c85615a43c21f6975f1a608dd0c945f45a56be72a71286615fd2",
+      "pixels_sha256": "bd2a00db4da507ddf497bebcbe59b2322c50a923f829b11a8d5b6a1a29250327",
+      "bytes": 87704,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=7"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "87704 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 7 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_sister_aveline_focused.webp",
+          "sha256": "531b69f6215ebd82c04b112f81bb46af57d207a00cd030f18f04ed0e1287b5b5",
+          "pixels_sha256": "e88ce54114ca2606716befedfa61fc1d980a35af6d1c96b35f4b381e73914401",
+          "bytes": 87696,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "1d81b7a6fc579d8ffa931b4264a60e4fbb925aa1bcf3b0ca7f61fc2d9862c315",
+      "fingerprint": "ebfb1fae94cdd63b529cdd8c3036b279159f759f81a230a0b4a64454b85fce21"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_sister_aveline_focused.webp",
+          "sha256": "4b22f55bb898c85615a43c21f6975f1a608dd0c945f45a56be72a71286615fd2",
+          "pixels_sha256": "bd2a00db4da507ddf497bebcbe59b2322c50a923f829b11a8d5b6a1a29250327",
+          "bytes": 87704,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "075cc3b726213def03c528908e7eb8036e0f89850461a37f5be3bd9c3c6d2653",
+      "fingerprint": "84f411ac63036f273c5d7585c5fa33bfda20a4292df6d56f4804d4c32896feab"
+    }
+  ]
+}

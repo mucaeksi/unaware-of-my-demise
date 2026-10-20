@@ -47,8 +47,12 @@ async function ensureR2Seeded(list: TestFile[]): Promise<void> {
   const firstHead = await bucket.head(`objects/${list[0]!.sha256}`);
   const lastHead = await bucket.head(`objects/${list.at(-1)!.sha256}`);
   if (firstHead && lastHead) return;
-  for (const f of list) {
-    await bucket.put(`objects/${f.sha256}`, f.bytes, { httpMetadata: { contentType: f.mediaType }, sha256: f.sha256 });
+  for (let i = 0; i < list.length; i += 32) {
+    await Promise.all(
+      list.slice(i, i + 32).map((f) =>
+        bucket.put(`objects/${f.sha256}`, f.bytes, { httpMetadata: { contentType: f.mediaType }, sha256: f.sha256 })
+      )
+    );
   }
 }
 

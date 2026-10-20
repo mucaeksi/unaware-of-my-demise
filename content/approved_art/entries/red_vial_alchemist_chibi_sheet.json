@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "red_vial_alchemist_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_red_vial_alchemist": {
+        "image": "art/atlas_red_vial_alchemist.webp",
+        "width": 1939,
+        "height": 542,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            174,
+            266
+          ],
+          "idle_2": [
+            182,
+            4,
+            174,
+            266
+          ],
+          "idle_3": [
+            360,
+            4,
+            174,
+            266
+          ],
+          "ultimate": [
+            538,
+            4,
+            230,
+            266
+          ],
+          "ultimate_2": [
+            772,
+            4,
+            230,
+            266
+          ],
+          "ultimate_3": [
+            1006,
+            4,
+            230,
+            266
+          ],
+          "active": [
+            1240,
+            4,
+            229,
+            265
+          ],
+          "active_2": [
+            1473,
+            4,
+            229,
+            265
+          ],
+          "active_3": [
+            1706,
+            4,
+            229,
+            265
+          ],
+          "basic": [
+            4,
+            274,
+            229,
+            264
+          ],
+          "basic_2": [
+            237,
+            274,
+            229,
+            264
+          ],
+          "basic_3": [
+            470,
+            274,
+            229,
+            264
+          ],
+          "victory": [
+            703,
+            274,
+            173,
+            264
+          ],
+          "walk": [
+            880,
+            274,
+            225,
+            262
+          ],
+          "hit": [
+            1109,
+            274,
+            151,
+            259
+          ],
+          "defeat": [
+            1264,
+            274,
+            301,
+            256
+          ]
+        }
+      }
+    },
+    "units": {
+      "red_vial_alchemist": {
+        "atlas": "atlas_red_vial_alchemist",
+        "facing": "left",
+        "height_px": 238,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.521,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.492
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.489,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.49,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.491,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.48
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.486
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.521
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "094fbe04c63a889bd80d2ab491b0a66738801ac5500ff790ff388db75afb8f65",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/red_vial_alchemist_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "b970df1a1aa4580ba3fb415976d5b3244e427ede3970aabb1855e52c621d8c5d",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "fb864a6fefb7f37a613afa101e8d378c8a4c3eca91c0edcfd675de5e022bc12d",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/red_vial_alchemist_chibi_sheet.ingest.json",
+    "spec_sha256": "2229ad446518917a49ca841db8f24e4771d1e918a5e2c466279acac5bd5aaf5b",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "77666e7e7565974133964464576b58c3756f6f364790541a30ba4843024bdabb"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_red_vial_alchemist.webp",
+      "sha256": "1eaad942b1dfb6a85ee1d641bcc4d93c86e37f095b6aa8f9d2fcc89c542e6743",
+      "pixels_sha256": "0a4fb116287195d73ddd74a7ba4c15cdca78fbb26d11dc69613201b75182bfe5",
+      "bytes": 245296,
+      "width": 1939,
+      "height": 542
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=29"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.483"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1939x542"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "245296 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0002%"
+        }
+      },
+      "warnings": [
+        "A12: removed 29 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}
