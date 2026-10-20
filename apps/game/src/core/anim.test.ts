@@ -54,6 +54,24 @@ describe('Animator', () => {
     }
   });
 
+  it('a tween on a destroyed object or a throwing callback never stops the other tweens and timers', async () => {
+    // a PIXI container destroyed mid-tween throws on position reads; the battle loop awaits timers in the same animator
+    const a = new Animator();
+    const gone = { destroyed: false, get y(): number { if (this.destroyed) throw new TypeError("Cannot read properties of null (reading 'y')"); return 0; }, set y(_v: number) { if (this.destroyed) throw new TypeError("Cannot set properties of null (setting 'y')"); } };
+    let effectDone = false;
+    void a.toAsync(gone, { y: 10 }, { duration: 100, delay: 10 }).then(() => (effectDone = true));
+    gone.destroyed = true;
+    let timerFired = false;
+    void a.wait(50).then(() => (timerFired = true));
+    a.tween({ duration: 10, onUpdate: () => { throw new Error('broken effect'); } });
+    expect(() => a.update(60)).not.toThrow();
+    a.update(60);
+    await Promise.resolve();
+    expect(timerFired).toBe(true);
+    expect(effectDone).toBe(true); // whoever awaited the destroyed object's tween is released
+    expect(a.active).toBe(0);
+  });
+
   it('yoyos, repeats, loops until killed, and resolves toAsync', async () => {
     const a = new Animator();
     const o = { y: 0 };

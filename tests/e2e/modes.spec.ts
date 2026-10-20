@@ -11,8 +11,9 @@ const settled = async (page: Page, key: string) => {
   await page.waitForTimeout(100);
 };
 const texts = (page: Page, key: string): Promise<string[]> => page.evaluate((key) => (window as any).__UOMD__.game.scene.getScene(key)?.texts() ?? [], key);
-const api = <T>(page: Page, method: string, ...args: unknown[]): Promise<T> =>
-  page.evaluate(async ([m, a]) => (window as any).__UOMD__.services.api[m as string](...(a as unknown[])), [method, args] as const) as Promise<T>;
+/** server state for the active release, the same scope the screens read */
+const state = <T>(page: Page, method: string): Promise<T> =>
+  page.evaluate(async (m) => { const u = (window as any).__UOMD__; return u.services.api[m](await u.services.content.activeReleaseId()); }, method) as Promise<T>;
 
 test('modes: deeds, profile and trials screens claim and fight through the server', async ({ page }, info) => {
   test.setTimeout(240_000);
@@ -30,7 +31,7 @@ test('modes: deeds, profile and trials screens claim and fight through the serve
   await settled(page, 'Deeds');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-modes-deeds.png` });
   await tap(page, info, 1670, 720); // CLAIM on the first achievement row (below the three event objectives)
-  await expect.poll(async () => (await api<any>(page, 'achievements', undefined)).achievements.find((a: any) => a.id === 'ach_first_clear').claimed).toBe(true);
+  await expect.poll(async () => (await state<any>(page, 'achievements')).achievements.find((a: any) => a.id === 'ach_first_clear').claimed).toBe(true);
 
   // PROFILE: third row, second tile; the claimed achievement unlocked a second title
   await goto(page, 'Home'); await waitScene(page, 'Home'); await settled(page, 'Home');
@@ -38,7 +39,7 @@ test('modes: deeds, profile and trials screens claim and fight through the serve
   await expect.poll(() => texts(page, 'Profile')).toContain('Novice Warden');
   await settled(page, 'Profile');
   await tap(page, info, 500, 820); // CHANGE TITLE
-  await expect.poll(async () => (await api<any>(page, 'profile', undefined)).titleBadge).toBe('wayfarer_of_ash');
+  await expect.poll(async () => (await state<any>(page, 'profile')).titleBadge).toBe('wayfarer_of_ash');
   await expect.poll(() => texts(page, 'Profile')).toContain('Wayfarer of Ash');
   await tap(page, info, 1310, 230); // ARENA board
   await expect.poll(() => texts(page, 'Profile').then((t) => t.some((s) => s.endsWith(' rating')))).toBe(true);
@@ -50,13 +51,13 @@ test('modes: deeds, profile and trials screens claim and fight through the serve
   await expect.poll(() => texts(page, 'Trials')).toContain('Start a run with one blessing:');
   await settled(page, 'Trials');
   await tap(page, info, 780, 350); // FIGHT the first arena opponent
-  await expect.poll(async () => (await api<any>(page, 'arenaState', undefined)).dailyUsed).toBe(1);
+  await expect.poll(async () => (await state<any>(page, 'arenaState')).dailyUsed).toBe(1);
   await tap(page, info, 1420, 400); // first blessing starts an endless run
-  await expect.poll(async () => (await api<any>(page, 'endlessState', undefined)).activeRun?.wave).toBe(1);
+  await expect.poll(async () => (await state<any>(page, 'endlessState')).activeRun?.wave).toBe(1);
   await expect.poll(() => texts(page, 'Trials')).toContain('FIGHT WAVE 1');
   await tap(page, info, 1420, 430); // FIGHT WAVE 1: won (best wave 1) or lost (the screen offers a new run)
   await expect.poll(async () => {
-    const best = (await api<any>(page, 'endlessState', undefined)).bestWave as number;
+    const best = (await state<any>(page, 'endlessState')).bestWave as number;
     return best >= 1 || (await texts(page, 'Trials')).includes('Start a run with one blessing:');
   }).toBe(true);
   await page.waitForTimeout(400);

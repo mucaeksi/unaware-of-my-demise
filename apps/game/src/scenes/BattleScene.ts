@@ -740,6 +740,9 @@ export class BattleScene extends PixiScene<BattleInit> {
   }
 
   private clearSkillPanel(): void {
+    // a quick pick lands inside the buttons' slide-in/selection tweens: stop them before the objects are destroyed
+    for (const entry of this.skillButtons.values()) this.anim.killOf(entry.btn);
+    for (const child of this.skillLayer?.children ?? []) this.anim.killOf(child);
     this.skillButtons.clear();
     this.skillLayer?.destroy({ children: true });
     this.skillLayer = null;

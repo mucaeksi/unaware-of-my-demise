@@ -43,6 +43,8 @@ test('First Oath: an earned seven-choice invitation survives response loss/reloa
         done = await page.evaluate((manual) => {
           const scene = (window as any).__UOMD__.game.scene.getScene('Battle'); const battle = scene.battle;
           if (battle.result) return true;
+          // ×3, as a player would: since D-27 fights and the ultimate cut-ins are longer than the 180 s budget at ×1
+          while (scene.speedBtn && scene.speed < 3) scene.toggleSpeed();
           if (!scene.pendingResolve) return false;
           let action = battle.autoAction();
           if (manual) {

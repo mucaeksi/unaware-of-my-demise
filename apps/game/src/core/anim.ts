@@ -129,7 +129,7 @@ export class Animator {
       o.onComplete?.();
       return Promise.resolve();
     }
-    return new Promise((resolve) => this.to(target, props, { ...o, onComplete: () => (o.onComplete?.(), resolve()) }));
+    return new Promise((resolve) => this.to(target, props, { ...o, onComplete: () => { try { o.onComplete?.(); } finally { resolve(); } } }));
   }
 
   /** runs `fn` on the first update at which `ms` (scaled) have passed */
@@ -161,37 +161,58 @@ export class Animator {
     const keep: Job[] = [];
     for (const j of batch) {
       if (j.stopped) continue;
-      if (j.delay > 0) {
-        j.delay -= dt;
+      // a PIXI object destroyed under its tween throws on every read/write: end the job without touching it again
+      if ((j.target as { destroyed?: boolean } | null)?.destroyed) {
+        this.drop(j);
+        continue;
+      }
+      try {
         if (j.delay > 0) {
-          keep.push(j);
-          continue;
+          j.delay -= dt;
+          if (j.delay > 0) {
+            keep.push(j);
+            continue;
+          }
+          j.elapsed = -j.delay;
+          j.delay = 0;
+        } else {
+          j.elapsed += dt;
         }
-        j.elapsed = -j.delay;
-        j.delay = 0;
-      } else {
-        j.elapsed += dt;
+        if (!j.started) {
+          j.started = true;
+          j.onStart?.();
+        }
+        const span = j.yoyo ? j.duration * 2 : j.duration;
+        // a long frame may cross several plays; land on the last one it reaches
+        const skip = Math.min(Math.floor(j.elapsed / span), j.plays - 1 - j.play);
+        if (skip > 0) {
+          j.elapsed -= skip * span;
+          j.play += skip;
+        }
+        const done = j.elapsed >= span;
+        const e = Math.min(j.elapsed, span);
+        const t = j.yoyo ? (e <= j.duration ? e / j.duration : 2 - e / j.duration) : e / j.duration;
+        j.onUpdate?.(j.ease(Math.min(1, Math.max(0, t))));
+        if (done) j.onComplete?.();
+        else keep.push(j);
+      } catch (error) {
+        // one broken effect must not take every other tween and timer of the scene with it (the battle loop awaits them)
+        console.warn('animation dropped after an error', error);
+        this.drop(j);
       }
-      if (!j.started) {
-        j.started = true;
-        j.onStart?.();
-      }
-      const span = j.yoyo ? j.duration * 2 : j.duration;
-      // a long frame may cross several plays; land on the last one it reaches
-      const skip = Math.min(Math.floor(j.elapsed / span), j.plays - 1 - j.play);
-      if (skip > 0) {
-        j.elapsed -= skip * span;
-        j.play += skip;
-      }
-      const done = j.elapsed >= span;
-      const e = Math.min(j.elapsed, span);
-      const t = j.yoyo ? (e <= j.duration ? e / j.duration : 2 - e / j.duration) : e / j.duration;
-      j.onUpdate?.(j.ease(Math.min(1, Math.max(0, t))));
-      if (done) j.onComplete?.();
-      else keep.push(j);
     }
     this.batch = [];
     this.jobs = keep.concat(this.jobs);
+  }
+
+  /** ends a job early; its onComplete still runs so anything awaiting it (toAsync, wait) is released */
+  private drop(j: Job): void {
+    j.stopped = true;
+    try {
+      j.onComplete?.();
+    } catch {
+      /* the completion touched the same broken object; toAsync still resolves (finally) */
+    }
   }
 
   get active(): number {
