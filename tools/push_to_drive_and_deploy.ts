@@ -1,14 +1,12 @@
 /**
- * Local (E:\unaware-of-my-demise) -> Google Drive (G:\Drive'ım\unaware-of-my-demise) -> Cloudflare deployment pipeline.
+ * Local (E:\unaware-of-my-demise) -> Google Drive (G:\Drive'ım\unaware-of-my-demise) mirror of the built bundles.
  *
- * Workflow:
- * 1. All development, tests, and Vite builds happen on fast local SSD (`E:\unaware-of-my-demise`).
- * 2. This script syncs the built AAB/Cloudflare assets (`apps/game/dist`, `apps/admin/dist`,
- *    `apps/android/android/app/src/main/assets/public`, and `apps/api/src`) into `G:\Drive'ım\unaware-of-my-demise`
- *    using in-place file copies (avoiding Google Drive virtual filesystem directory-delete race conditions).
- * 3. Deploys `uomd-game-staging` and `uomd-admin-staging` to Cloudflare.
+ * `npm run deploy:drive` first runs the verify-gated `npm run deploy:cloudflare` (lint, typecheck, tests, content check,
+ * remote D1 migrations + seeds, game/admin/ops Workers), then this script copies the built output (`apps/game/dist`,
+ * `apps/admin/dist`, the Android public web bundle and `apps/api/src`) into the Drive working copy with in-place file
+ * copies (avoiding Google Drive virtual filesystem directory-delete race conditions). It never deploys by itself: a Worker
+ * deployed without its migrations served 500s (D-27 code on a pre-0029 D1, 2026-10-19).
  */
-import { execFileSync, spawnSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from './lib/fsutil';
@@ -55,32 +53,8 @@ function syncDir(relPath: string): void {
   console.log(`  [sync] ${relPath} -> ${dst} (${count} updated files)`);
 }
 
-function runWrangler(cwd: string, args: string[]): void {
-  console.log(`\n> npx wrangler ${args.join(' ')}`);
-  const isWin = process.platform === 'win32';
-  const res = spawnSync(isWin ? 'npx.cmd' : 'npx', ['--no-install', 'wrangler', ...args], {
-    cwd,
-    stdio: 'inherit',
-    shell: isWin
-  });
-  if (res.status !== 0) {
-    throw new Error(`wrangler ${args.join(' ')} exited with code ${res.status}`);
-  }
-}
-
-function getVersionTag(): string {
-  const ts = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
-  try {
-    const sha = execFileSync('git', ['rev-parse', '--short=8', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
-    return `local-to-drive-${sha}-${ts}`;
-  } catch {
-    return `local-to-drive-${ts}`;
-  }
-}
-
 function main(): void {
-  const tag = getVersionTag();
-  console.log(`=== [1/3] Syncing built AAB & Cloudflare bundle from ${ROOT} -> ${DRIVE_ROOT} ===`);
+  console.log(`=== Mirroring built AAB & Cloudflare bundle from ${ROOT} -> ${DRIVE_ROOT} ===`);
   // Update the Android Capacitor AAB public web bundle on Local first
   const androidPublicLocal = join(ROOT, 'apps/android/android/app/src/main/assets/public');
   if (existsSync(join(ROOT, 'apps/game/dist'))) {
@@ -93,17 +67,9 @@ function main(): void {
     syncDir('apps/api/src');
     syncDir('apps/android/android/app/src/main/assets/public');
   } else {
-    console.warn(`Warning: ${DRIVE_ROOT} not found; deploying directly from ${ROOT}`);
+    console.warn(`Warning: ${DRIVE_ROOT} not found; nothing mirrored`);
   }
 
-  const apiDir = join(ROOT, 'apps/api');
-  console.log(`\n=== [2/3] Deploying uomd-game-staging [tag: ${tag}] ===`);
-  runWrangler(apiDir, ['deploy', '-c', 'wrangler.game.jsonc', '--env', 'staging', '--keep-vars', '--tag', tag]);
-
-  console.log(`\n=== [3/3] Deploying uomd-admin-staging [tag: ${tag}] ===`);
-  runWrangler(apiDir, ['deploy', '-c', 'wrangler.admin.jsonc', '--env', 'staging', '--keep-vars', '--tag', tag]);
-
-  console.log('\n=== Local (E:\\) -> Google Drive (G:\\) -> Cloudflare Deployment Complete ===');
   console.log('Game URL:  https://uomd-game-staging.muratcaneksiii.workers.dev');
   console.log('Admin URL: https://uomd-admin-staging.muratcaneksiii.workers.dev/?page=Animations');
 }
