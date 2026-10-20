@@ -19,7 +19,9 @@ function runWrangler(args: string[]): void {
   const res = spawnSync(isWin ? 'npx.cmd' : 'npx', ['--no-install', 'wrangler', ...args], {
     cwd: API_DIR,
     stdio: 'inherit',
-    shell: isWin
+    shell: isWin,
+    // non-interactive: from a terminal `d1 migrations apply --remote` otherwise waits on a y/N prompt and holds the deploy lock forever
+    env: { ...process.env, CI: 'true' }
   });
   if (res.status !== 0) {
     throw new Error(`wrangler ${args.join(' ')} exited with code ${res.status}`);
