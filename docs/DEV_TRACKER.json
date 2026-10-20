@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "45c641e2",
-  "reviewedAt": "2026-10-19",
+  "sourceCommit": "fccda5da",
+  "reviewedAt": "2026-10-20",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
@@ -12,46 +12,38 @@
   },
   "now": [
     {
-      "title": "D-27: RPG stat model (STR / INT / VIT / AGI)",
-      "detail": "Heroes, enemies and bosses share one derivation (HP = 4 + 3 VIT, ATK = power attribute, DEF = armor, SPD = AGI, crit from AGI); gear gives whole points; unit attributes in content/balance/attributes.json, D1 migration 0029, capability attributes_v1, legacy releases unchanged. Tuned with the campaign probe (starter gear: 35/35 won, normal ~5 rounds, bosses ~9). docs/combat/STAT_MATH.md. Branch feat/d27-attribute-stats."
+      "title": "Whole-game skeleton and mechanics review (2026-10-20)",
+      "detail": "docs/REVIEW_2026-10-20.md: ranked gaps, owners and the agreed order; binding Argon rules in docs/handoff/ARGON_INSTRUCTIONS.md."
     },
     {
-      "title": "D-25 complete: the game client is pure PixiJS v8",
-      "detail": "core/app (renderer, fit, frame loop), core/scenes (scene manager), core/assets (textures, atlas frames, audio); battle with data-driven VFX presets (vfx_v1); story/prologue on PIXI; menus, title, finish and account screens as an HTML/ARIA layer. Commits 25212cfa, 8f55a9d8, cf3a9a27, ea68484d."
+      "title": "D-27: RPG stat model (STR / INT / VIT / AGI) on main",
+      "detail": "Merged with the 25-hero roster (1aabe350). One derivation for engine, server and tools; gear gives whole points; content/balance/attributes.json; D1 migration 0029; capability attributes_v1. Starter gear: 35/35 stages won, normal ~5 rounds, bosses ~9. docs/combat/STAT_MATH.md."
     },
     {
-      "title": "D-26: R09 durable story continuity",
-      "detail": "Per-account continuity record (local + cloud save key, sequence merge, scene-hash binding), replay mode, committed-claim reconciliation. Commit feb1eaea; local scope only."
-    },
-    {
-      "title": "Regressions from the engine swap fixed; e2e repaired on Windows",
-      "detail": "Character/Gear start data (init), archive shelf/page on return, postrender event, a11y live region at boot; e2e worker D1 state dir, stale coordinates and capability lists. Commits 25aae616, 45c641e2. landscape-desktop: 39 of 40 pass (see Latest checks)."
+      "title": "Deploy safety",
+      "detail": "deploy:drive runs the verify-gated deploy and only mirrors to Drive (b0a23612); wrangler runs non-interactively so remote migrations never wait on a prompt (fccda5da). Staging still needs the deploy that applies migration 0029 (was 500 on /api/v1/characters)."
     }
   ],
   "next": [
     {
-      "title": "Progression math pass: character and weapon XP",
-      "detail": "Level 20 should be hard to reach: tune the character XP curve, weapon XP (weapons level to 20), fees and drop/XP payouts against the new stats; Part II raises the cap to 40."
+      "title": "AFK patrol screen",
+      "detail": "Server and client API exist, no scene calls them; AFK is the main XP source (12 h: ~4.8k XP early, ~19k late)."
     },
     {
-      "title": "Argon art integration pilot: Kera Voss",
-      "detail": "Four expressions, an eight-state chibi sheet and summon art through tools/ingest_art.ts, checked in game, then owner approval; the template then covers the other 22 characters. Delivery rules: Argon brief (https://claude.ai/artifact/Qobho5vJKwE9gYA5ra2Wqx)."
+      "title": "Progression pacing simulator and XP tuning",
+      "detail": "Campaign first-clear drops give ~8.4k of the ~130k XP a 5-hero team needs for level 20. Extend packages/economy chronological.ts with AFK, errand and repeat XP and feed daily levels into the campaign probe; tune to the owner target."
     },
     {
-      "title": "Stale-patch guard ignores legitimate presentation overrides",
-      "detail": "ContentService.isStaleBasePatch (b5774562) serves base presentation.json/art for any patch that overrides them, so a patch locale (TR) never shows; r08-complete.spec fails. A separate session is working on it."
+      "title": "Remaining mode screens",
+      "detail": "Achievements, Profile/Leaderboard, Async Arena, Endless Corridor: server done, client screens missing (first-AAB requirement)."
     },
     {
-      "title": "Phase 1 polish",
-      "detail": "Scene-by-scene music placement, a real SFX set (sounds are synthesized today), combat math and VFX polish, R10 layout comparison."
+      "title": "Owner decisions",
+      "detail": "Target progression pace, combat semantics C01-C39 (OPS_SPEC), economy tuning (TUNING_PROPOSAL), signature weapon effects (with Argon)."
     },
     {
-      "title": "Paged screens open on page 1 again",
-      "detail": "Roster, Mail, Team, Purchases, Operations, Recruit used to keep their page across visits (the old engine reused scene instances). Restore through start data where it matters."
-    },
-    {
-      "title": "R18 — physical Android device, live staging, first store AAB acceptance",
-      "detail": "Needs the owner-held upload keystore, live Cloudflare/Google/Play/AdMob settings, the restore key and a physical device for the cases in docs/QA_ANDROID.md."
+      "title": "Argon content fixes",
+      "detail": "Banners for Garrick Cinder and Corbin Locke (unobtainable now); 25 signature weapon effect designs; Kera Voss art pilot."
     }
   ],
   "blockedOnOwner": [
@@ -2332,28 +2324,28 @@
     }
   ],
   "checks": {
-    "date": "2026-10-19",
-    "commit": "45c641e2",
+    "date": "2026-10-20",
+    "commit": "b0a23612",
     "items": [
       {
-        "name": "Typecheck (root)",
+        "name": "npm run verify (lint, typecheck, all tests, content check)",
         "result": "pass",
-        "detail": ""
-      },
-      {
-        "name": "Lint (root)",
-        "result": "pass",
-        "detail": ""
-      },
-      {
-        "name": "Game unit tests",
-        "result": "pass",
-        "detail": "149 / 149"
+        "detail": "API 505, game 153, combat 99, schema 127, economy 53, patch 41, shared 26, admin 30, story 9"
       },
       {
         "name": "Playwright landscape-desktop",
-        "result": "partial",
-        "detail": "39 / 40 — r08-complete fails on the stale-patch guard"
+        "result": "pass",
+        "detail": "40 / 40 at 244dd856"
+      },
+      {
+        "name": "Engine coverage (tools/combat_coverage.ts)",
+        "result": "pass",
+        "detail": "25/25 heroes, 20/20 enemies, 7/7 bosses"
+      },
+      {
+        "name": "Staging /api/v1/characters",
+        "result": "fail",
+        "detail": "500 until migration 0029 is applied by npm run deploy:cloudflare"
       },
       {
         "name": "Playwright phone / tablet",

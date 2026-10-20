@@ -16,7 +16,7 @@ Initial embedded content covers the opening through the first restart. **All req
 
 | # | Screen | What the player sees | Behind the scenes | Leaves when |
 |---|---|---|---|---|
-| 1 | **Engine splash** | "Made with Phaser" on black with the bundled official pixel-art logo, fade in/out (~2.5 s). | Fonts, textures, base content load behind it. | Timer, and loading finished. |
+| 1 | **Engine splash** | The PixiJS engine credit (wordmark, ring and prism beam) on black with a synth chime, fade in/out (~2.5 s). | Fonts, textures, base content load behind it. | Timer, and loading finished. |
 | 2 | **Studio card** | *"SovTaym Studios Presents"* — one calm card, ink-on-black with the studio mark, slow fade (~4 s). Tap does not skip. | Preload of the menu art. | Timer. |
 | 3 | **Main menu (first run)** | Key art + logo, **Sign in with Google**, Settings/privacy, version. Preference coverage remains R10/R11. | Android Credential Manager; genuine configured Google identity for normal web staging. Preview identities are isolated automation only. UMP where applicable. | Signed in. |
 | 4 | **Patch gate** (a few seconds) | "Preparing the road" + progress bar. | Account is created/loaded; **the patch download starts** (manifest → signature → files → verify) in the background manager; the entry checkpoint is read (`not_started`). | Immediately continues; it does not wait for the download. |
@@ -63,7 +63,7 @@ A small parallel scene (`PatchBar`) sits above all other scenes at the bottom ed
 
 | Step | Source status | Remaining evidence / package |
 | --- | --- | --- |
-| F1 splash/studio/menu | BUILT: SplashScene, StudioScene, TitleScene | Approved studio presentation, settings/privacy reachability and R18 device evidence. Official Phaser logo is already bundled. |
+| F1 splash/studio/menu | BUILT: SplashScene, StudioScene, TitleScene | Approved studio presentation, settings/privacy reachability and R18 device evidence. The PixiJS credit is drawn in code (D-25). |
 | F2 entry/checkpoints | BUILT: entry/state.ts, entry/sync.ts and GET/PUT /api/v1/entry | R05/R09 durable save, scene/line/choice resume and correct campaign Continue. |
 | F3 staged patch/PatchBar | BUILT: PatchManager, PatchService, PatchBarScene | R03 generation and R08 storage/fault acceptance; R09 complete entry integration. |
 | F4 prologue | BUILT: PrologueScene and provisional plates | R09 outgoing-tween/text visibility and measured full timeline; R15 approved art, R16 VO. Authored holds total 120 s; 112.8 s is a code-derived estimate, not a measured run. |
