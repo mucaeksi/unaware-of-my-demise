@@ -141,6 +141,29 @@ export const Sfx = {
     Sfx.bell(220, 0.34, 2.4);
     window.setTimeout(() => Sfx.silverBell(587.33, 0.26), 160);
   },
+  /** 3-beat Japanese Ultimate chant audio cues: [1] Cast Ritual Charge, [2] Diagonal Cut-In Slash, [3] Final Release Detonation */
+  ultimateBeat(beat: 1 | 2 | 3): void {
+    const c = ready();
+    if (!c) return;
+    const t0 = c.currentTime;
+    if (beat === 1) {
+      // Beat 1: Deep sanctuary ritual gong + rising arcane charge sweep
+      Sfx.bell(196, 0.32, 2.0);
+      tone(98, 'triangle', t0, 0.05, 0.28, 0.72, 293.66);
+      tone(293.66, 'sine', t0 + 0.08, 0.04, 0.18, 0.65, 587.33);
+    } else if (beat === 2) {
+      // Beat 2: Razor-sharp cut-in flash + crystalline harmonic triad
+      noise(t0, 0.09, 0.34, 4200);
+      tone(880, 'triangle', t0, 0.004, 0.26, 0.22, 1760);
+      [440, 554.37, 659.25].forEach((f, i) => tone(f, 'sine', t0 + i * 0.045, 0.008, 0.19, 0.55));
+    } else {
+      // Beat 3: Cataclysmic release impact + dual sanctuary bell peal
+      noise(t0, 0.26, 0.45, 2200);
+      tone(73.42, 'sawtooth', t0, 0.005, 0.42, 0.58, 36.71);
+      Sfx.silverBell(587.33, 0.32);
+      Sfx.bell(293.66, 0.34, 2.2);
+    }
+  },
   victory(): void {
     [293.66, 349.23, 440.0, 587.33].forEach((f, i) => window.setTimeout(() => Sfx.bell(f, 0.2, 1.7), i * 140));
   },

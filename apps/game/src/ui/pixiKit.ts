@@ -7,6 +7,7 @@ import { qualityProfile } from '../platform/graphics';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
 import { Services } from '../services';
+import { attachLivingBackdrop } from '../vfx/livingBackdrop';
 import { C, DEPTH, F, SIZE, T } from './theme';
 
 /**
@@ -14,32 +15,38 @@ import { C, DEPTH, F, SIZE, T } from './theme';
  * the scenes still on the Phaser-style engine.
  */
 
-export type PanelVariant = 'normal' | 'hot' | 'dim' | 'danger';
+export type PanelVariant = 'normal' | 'hot' | 'active' | 'dim' | 'danger';
 
 const PALETTE: Record<PanelVariant, { top: number; bottom: number; edge: number; inner: number; edgeA: number }> = {
-  normal: { top: 0x24142e, bottom: 0x0f0914, edge: C.silver, inner: C.gold, edgeA: 0.55 },
-  hot: { top: 0x3a1c46, bottom: 0x1a0d22, edge: C.goldHi, inner: C.silver, edgeA: 0.95 },
-  dim: { top: 0x1a1220, bottom: 0x0c0810, edge: C.silver, inner: C.gold, edgeA: 0.22 },
-  danger: { top: 0x3a1020, bottom: 0x16070d, edge: C.crimsonHi, inner: C.gold, edgeA: 0.8 }
+  normal: { top: 0x22132e, bottom: 0x0d0713, edge: C.gold, inner: C.silver, edgeA: 0.76 },
+  hot: { top: 0x3e1a44, bottom: 0x18091f, edge: C.goldHi, inner: 0xffe8a3, edgeA: 0.96 },
+  active: { top: 0x541b31, bottom: 0x220915, edge: 0xffea9f, inner: C.goldHi, edgeA: 1.0 },
+  dim: { top: 0x16101c, bottom: 0x09060d, edge: C.silver, inner: C.gold, edgeA: 0.26 },
+  danger: { top: 0x421020, bottom: 0x17060c, edge: C.crimsonHi, inner: C.gold, edgeA: 0.88 }
 };
 
 const PALETTE_HC: Record<PanelVariant, { top: number; bottom: number; edge: number; inner: number; edgeA: number }> = {
   normal: { top: 0x140b1c, bottom: 0x050208, edge: 0xffffff, inner: C.goldHi, edgeA: 0.92 },
   hot: { top: 0x2a1036, bottom: 0x0a0410, edge: 0xffe680, inner: 0xffffff, edgeA: 1 },
+  active: { top: 0x3d1226, bottom: 0x14040c, edge: 0xfff099, inner: 0xffffff, edgeA: 1 },
   dim: { top: 0x0f0914, bottom: 0x040206, edge: C.silver, inner: C.gold, edgeA: 0.55 },
   danger: { top: 0x2e0816, bottom: 0x0c0206, edge: 0xff6b8b, inner: 0xffffff, edgeA: 0.98 }
 };
 
 const rgba = (c: number, a: number): string => `rgba(${(c >> 16) & 255},${(c >> 8) & 255},${c & 255},${a})`;
 
-function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number): void {
-  const rr = Math.max(0, Math.min(r, w / 2, h / 2));
+/** Octagonal chamfered Gothic frame with 45-degree beveled corners (Reverse: 1999 / Gothic Anime RPG style). */
+function chamferRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, cut: number): void {
+  const c = Math.max(2, Math.min(cut, w * 0.28, h * 0.34));
   ctx.beginPath();
-  ctx.moveTo(x + rr, y);
-  ctx.arcTo(x + w, y, x + w, y + h, rr);
-  ctx.arcTo(x + w, y + h, x, y + h, rr);
-  ctx.arcTo(x, y + h, x, y, rr);
-  ctx.arcTo(x, y, x + w, y, rr);
+  ctx.moveTo(x + c, y);
+  ctx.lineTo(x + w - c, y);
+  ctx.lineTo(x + w, y + c);
+  ctx.lineTo(x + w, y + h - c);
+  ctx.lineTo(x + w - c, y + h);
+  ctx.lineTo(x + c, y + h);
+  ctx.lineTo(x, y + h - c);
+  ctx.lineTo(x, y + c);
   ctx.closePath();
 }
 
@@ -58,7 +65,7 @@ const panels = new Map<string, PIXI.Texture>();
 
 const panelKey = (w: number, h: number, variant: PanelVariant): string => `${variant}|${prefs().highContrast ? 1 : 0}|${Math.round(w)}x${Math.round(h)}`;
 
-/** baked glass-gothic panel (pill for buttons, soft-cornered card otherwise), cached per size + variant + contrast */
+/** baked glass-gothic plaque (chamfered octagonal frame for buttons and modals), cached per size + variant + contrast */
 export function panelTexture(w: number, h: number, variant: PanelVariant = 'normal'): PIXI.Texture {
   const key = panelKey(w, h, variant);
   const hit = panels.get(key);
@@ -82,53 +89,79 @@ export function panelCanvas(w: number, h: number, variant: PanelVariant = 'norma
   canvas.height = h;
   const ctx = canvas.getContext('2d');
   if (ctx) {
-    const isPill = h <= 140 && w >= h * 1.25;
-    const outerR = isPill ? Math.floor((h - 4) / 2) : Math.min(34, Math.max(18, Math.floor(Math.min(w, h) * 0.14)));
-    const innerInset = isPill ? 7 : 9;
-    const innerR = Math.max(6, outerR - (innerInset - 2));
-    const baseAlpha = hc ? 0.94 : variant === 'dim' ? 0.42 : variant === 'hot' ? 0.72 : variant === 'danger' ? 0.68 : 0.62;
-    const sheenAlpha = hc ? 0.5 : variant === 'dim' ? 0.16 : variant === 'hot' ? 0.36 : 0.28;
+    const isBtn = h <= 140 && w >= h * 1.15;
+    const outerCut = isBtn ? Math.min(18, Math.max(8, Math.floor(h * 0.22))) : Math.min(24, Math.max(12, Math.floor(Math.min(w, h) * 0.055)));
+    const innerInset = isBtn ? 6 : 8;
+    const innerCut = Math.max(4, outerCut - 3);
+    const baseAlpha = hc ? 0.96 : variant === 'dim' ? 0.56 : variant === 'active' ? 0.92 : variant === 'hot' ? 0.88 : variant === 'danger' ? 0.86 : 0.84;
+    const sheenAlpha = hc ? 0.45 : variant === 'dim' ? 0.12 : variant === 'active' ? 0.38 : variant === 'hot' ? 0.32 : 0.22;
+
+    // 1. Deep smoked obsidian-violet glass fill
     const bgGrad = ctx.createLinearGradient(0, 2, 0, h - 2);
-    bgGrad.addColorStop(0, rgba(p.top, Math.min(0.96, baseAlpha + 0.14)));
-    bgGrad.addColorStop(0.55, rgba(p.bottom, baseAlpha));
-    bgGrad.addColorStop(1, rgba(0x06030a, Math.min(0.98, baseAlpha + 0.18)));
+    bgGrad.addColorStop(0, rgba(p.top, Math.min(0.98, baseAlpha + 0.08)));
+    bgGrad.addColorStop(0.52, rgba(p.bottom, baseAlpha));
+    bgGrad.addColorStop(1, rgba(0x050209, Math.min(0.99, baseAlpha + 0.12)));
     ctx.fillStyle = bgGrad;
-    roundRect(ctx, 2, 2, w - 4, h - 4, outerR);
+    chamferRect(ctx, 2, 2, w - 4, h - 4, outerCut);
     ctx.fill();
-    const sheenH = Math.max(8, Math.floor((h - innerInset * 2) * 0.48));
-    ctx.fillStyle = rgba(p.top, sheenAlpha);
-    roundRect(ctx, innerInset, innerInset, w - innerInset * 2, sheenH, Math.min(innerR, Math.floor(sheenH / 2)));
+
+    // 2. Upper glass reflection band
+    const sheenH = Math.max(8, Math.floor((h - innerInset * 2) * 0.44));
+    const sheenGrad = ctx.createLinearGradient(0, innerInset, 0, innerInset + sheenH);
+    sheenGrad.addColorStop(0, rgba(0xffffff, sheenAlpha * 0.42));
+    sheenGrad.addColorStop(1, rgba(p.top, 0));
+    ctx.fillStyle = sheenGrad;
+    chamferRect(ctx, innerInset, innerInset, w - innerInset * 2, sheenH, innerCut);
     ctx.fill();
-    if (variant === 'hot' && !hc) {
-      const glow = ctx.createRadialGradient(w / 2, h / 2, 8, w / 2, h / 2, Math.max(w, h) * 0.55);
-      glow.addColorStop(0, 'rgba(227,195,125,0.20)');
+
+    // 3. Inner radial sanctum glow on 'hot' and 'active' states
+    if ((variant === 'hot' || variant === 'active') && !hc) {
+      const glow = ctx.createRadialGradient(w / 2, h / 2, 6, w / 2, h / 2, Math.max(w, h) * 0.58);
+      glow.addColorStop(0, variant === 'active' ? 'rgba(255,222,130,0.34)' : 'rgba(227,195,125,0.22)');
+      glow.addColorStop(0.65, variant === 'active' ? 'rgba(212,50,92,0.18)' : 'rgba(180,140,255,0.08)');
       glow.addColorStop(1, 'rgba(212,50,92,0)');
       ctx.fillStyle = glow;
-      roundRect(ctx, innerInset, innerInset, w - innerInset * 2, h - innerInset * 2, innerR);
+      chamferRect(ctx, innerInset, innerInset, w - innerInset * 2, h - innerInset * 2, innerCut);
       ctx.fill();
     }
-    ctx.lineWidth = hc ? 3.5 : variant === 'hot' ? 2.6 : 2.1;
-    ctx.strokeStyle = rgba(p.edge, p.edgeA * (hc ? 1 : 0.92));
-    roundRect(ctx, 2, 2, w - 4, h - 4, outerR);
+
+    // 4. Outer antique-brass/gold frame
+    ctx.lineWidth = hc ? 3.2 : variant === 'active' ? 2.8 : variant === 'hot' ? 2.4 : 1.9;
+    ctx.strokeStyle = rgba(p.edge, p.edgeA);
+    chamferRect(ctx, 2, 2, w - 4, h - 4, outerCut);
     ctx.stroke();
-    ctx.lineWidth = hc ? 1.5 : 1.2;
-    ctx.strokeStyle = rgba(p.inner, hc ? 0.72 : variant === 'hot' ? 0.58 : 0.38);
-    roundRect(ctx, innerInset, innerInset, w - innerInset * 2, h - innerInset * 2, innerR);
+
+    // 5. Inset inner hairline frame
+    ctx.lineWidth = hc ? 1.5 : variant === 'active' ? 1.5 : 1.1;
+    ctx.strokeStyle = rgba(p.inner, hc ? 0.78 : variant === 'active' ? 0.78 : variant === 'hot' ? 0.58 : 0.36);
+    chamferRect(ctx, innerInset, innerInset, w - innerInset * 2, h - innerInset * 2, innerCut);
     ctx.stroke();
-    if (isPill) {
-      const dx = Math.min(24, Math.max(14, Math.floor(h * 0.22)));
-      const r = Math.min(5, Math.max(3.2, h * 0.05));
-      ctx.fillStyle = rgba(p.inner, hc ? 0.92 : variant === 'hot' ? 0.9 : 0.68);
+
+    // 6. Active state lit top & bottom sanctum indicator bars (replaces ugly checkmarks)
+    if (variant === 'active') {
+      const barW = Math.max(24, Math.min(w * 0.46, w - outerCut * 3));
+      ctx.fillStyle = rgba(0xffea9f, 0.95);
+      ctx.fillRect((w - barW) / 2, 2, barW, 3);
+      ctx.fillRect((w - barW) / 2, h - 5, barW, 3);
+    }
+
+    // 7. Gothic corner & side diamond filigree
+    if (isBtn) {
+      const dx = Math.min(20, Math.max(12, outerCut + 4));
+      const r = Math.min(4.8, Math.max(3, h * 0.048));
+      ctx.fillStyle = rgba(variant === 'active' ? 0xfff2ba : p.edge, hc ? 0.95 : variant === 'dim' ? 0.35 : 0.88);
       for (const cx of [dx, w - dx]) {
         diamond(ctx, cx, h / 2, r);
-        if (variant === 'hot' && w >= 240) diamond(ctx, cx + (cx < w / 2 ? 9 : -9), h / 2, r * 0.55);
+        if ((variant === 'hot' || variant === 'active') && w >= 180) {
+          diamond(ctx, cx + (cx < w / 2 ? 8 : -8), h / 2, r * 0.55);
+        }
       }
     } else {
-      const c = Math.max(20, Math.round(outerR * 0.68));
-      ctx.fillStyle = rgba(p.inner, hc ? 0.9 : 0.75);
-      for (const [cx, cy] of [[c, c], [w - c, c], [c, h - c], [w - c, h - c]] as const) diamond(ctx, cx, cy, 5.5);
+      const c = Math.max(14, innerInset + 4);
+      ctx.fillStyle = rgba(p.edge, hc ? 0.92 : 0.82);
+      for (const [cx, cy] of [[c, c], [w - c, c], [c, h - c], [w - c, h - c]] as const) diamond(ctx, cx, cy, 4.5);
       if (w >= 320 && h >= 150) {
-        diamond(ctx, w / 2, innerInset, 6);
+        diamond(ctx, w / 2, innerInset, 5.5);
         diamond(ctx, w / 2, h - innerInset, 5);
       }
     }
@@ -306,7 +339,7 @@ export class Button extends PIXI.Container {
   private readonly unmirror: () => void;
   private readonly bw: number;
   private readonly bh: number;
-  private readonly variant: PanelVariant;
+  private variant: PanelVariant;
   private enabled = true;
   private pressed = false;
 
@@ -318,10 +351,11 @@ export class Button extends PIXI.Container {
     this.variant = opts.variant ?? 'normal';
     this.bg = new PIXI.Sprite(panelTexture(this.bw, this.bh, this.variant));
     this.bg.anchor.set(0.5);
-    this.ring.roundRect(-this.bw / 2 - 4, -this.bh / 2 - 4, this.bw + 8, this.bh + 8, this.bh <= 140 ? Math.floor((this.bh + 4) / 2) : 28).stroke({ width: 4, color: C.goldHi });
+    this.ring.roundRect(-this.bw / 2 - 4, -this.bh / 2 - 4, this.bw + 8, this.bh + 8, 12).stroke({ width: 3.5, color: C.goldHi });
     this.ring.visible = false;
-    this.caption = txt(0, opts.sub ? -14 : 0, opts.label, { fontFamily: F.display, fontSize: opts.fontSize ?? 34, fontStyle: '600', color: T.text }, 0.5);
-    this.subLabel = opts.sub ? txt(0, 24, opts.sub, { fontSize: SIZE.small - 4, color: T.dim }, 0.5) : null;
+    const labelColor = this.variant === 'active' || this.variant === 'hot' ? '#fff3c4' : T.text;
+    this.caption = txt(0, opts.sub ? -12 : 0, opts.label, { fontFamily: F.display, fontSize: opts.fontSize ?? 32, fontStyle: '700', color: labelColor, stroke: '#07040c', strokeThickness: 3.5 }, 0.5);
+    this.subLabel = opts.sub ? txt(0, 20, opts.sub, { fontSize: Math.max(16, (opts.fontSize ?? 32) * 0.68), color: this.variant === 'active' ? '#ffd98a' : T.dim, stroke: '#07040c', strokeThickness: 2.5 }, 0.5) : null;
     this.fitLabels();
     this.addChild(this.bg, this.ring, this.caption, ...(this.subLabel ? [this.subLabel] : []));
     const hw = Math.max(this.bw, MIN_TOUCH_W);
@@ -337,11 +371,18 @@ export class Button extends PIXI.Container {
     this.on('pointerdown', () => {
       if (!this.enabled) return;
       this.pressed = true;
-      this.scale.set(0.97);
+      this.scene.anim.killOf(this);
+      this.scale.set(0.95);
       Sfx.tap();
     });
     this.on('pointerup', () => {
-      this.scale.set(1);
+      this.scene.anim.killOf(this);
+      if (!prefs().reducedMotion) {
+        this.scale.set(1.045);
+        this.scene.anim.to(this, { scaleX: 1, scaleY: 1 }, { duration: 180, ease: 'back.out' });
+      } else {
+        this.scale.set(1);
+      }
       // only a press that began on this button counts, so the tap that opened a scene cannot click through
       if (this.enabled && this.pressed) opts.onClick();
       this.pressed = false;
@@ -380,13 +421,21 @@ export class Button extends PIXI.Container {
   }
 
   private fitLabels(): void {
-    fitWidth(this.caption, this.bw - 48);
-    if (this.subLabel) fitWidth(this.subLabel, this.bw - 48);
+    fitWidth(this.caption, this.bw - 44);
+    if (this.subLabel) fitWidth(this.subLabel, this.bw - 44);
   }
 
   private hover(on: boolean): void {
-    this.bg.texture = panelTexture(this.bw, this.bh, on ? 'hot' : this.variant);
-    this.scale.set(on ? 1.02 : 1);
+    this.bg.texture = panelTexture(this.bw, this.bh, on ? (this.variant === 'active' ? 'active' : 'hot') : this.variant);
+    this.scale.set(on ? 1.025 : 1);
+  }
+
+  setVariant(v: PanelVariant): this {
+    this.variant = v;
+    this.bg.texture = panelTexture(this.bw, this.bh, this.enabled ? v : 'dim');
+    this.caption.style.fill = v === 'active' || v === 'hot' ? '#fff3c4' : T.text;
+    if (this.subLabel) this.subLabel.style.fill = v === 'active' ? '#ffd98a' : T.dim;
+    return this;
   }
 
   setEnabled(on: boolean): this {
@@ -555,7 +604,9 @@ export async function backdrop(scene: PixiScene, location: string, depth = -20):
     const img = scene.add(new PIXI.Sprite(scene.tex(art.background(location))), depth);
     img.anchor.set(0.5);
     img.position.set(REF_W / 2, REF_H / 2);
-    img.scale.set(Math.max(REF_W / (img.texture.width || REF_W), REF_H / (img.texture.height || REF_H)));
+    const cover = Math.max(REF_W / (img.texture.width || REF_W), REF_H / (img.texture.height || REF_H));
+    img.scale.set(cover);
+    attachLivingBackdrop(scene, img, { baseScale: cover, fxDepth: Math.max(depth + 1, -5), mood: 'sanctuary', intensity: 0.95 });
     return img;
   } catch {
     return null;

@@ -121,7 +121,17 @@ export class BattleVfx {
   /** anime ultimate cut-in for any hero or boss (pure PIXI, see vfx/cutIn.ts) */
   static ultimateCutIn(
     scene: PixiScene,
-    opts: { unitName: string; skillName: string; element?: string; side: 'player' | 'enemy'; portraitKey: string | null; flipPortrait?: boolean; poseTexture: PIXI.Texture }
+    opts: {
+      unitId?: string;
+      unitName: string;
+      skillName: string;
+      element?: string;
+      side: 'player' | 'enemy';
+      portraitKey: string | null;
+      flipPortrait?: boolean;
+      poseTexture: PIXI.Texture;
+      casterPos?: { x: number; y: number };
+    }
   ): Promise<void> {
     if (prefs().reducedMotion || prefs().reduceFlash) return Promise.resolve();
     const stage = stageFor(scene);
@@ -137,15 +147,18 @@ export class BattleVfx {
     const pal = BattleVfx.palette(opts.element);
     const ownsArt = isPortrait ? art : null;
     return playCutIn(stage.layers.overlay, stage.animator, {
+      unitId: opts.unitId,
       unitName: opts.unitName,
       skillName: opts.skillName,
+      element: opts.element,
       side: opts.side,
       palette: pal,
       art,
       isPortrait,
       flip: opts.flipPortrait ?? (opts.side !== 'player' && isPortrait),
       stageWidth: REF_W,
-      fonts: { display: F.display },
+      casterPos: opts.casterPos,
+      fonts: { display: F.display, body: F.body },
       gold: T.gold
     }).finally(() => ownsArt?.destroy(false));
   }

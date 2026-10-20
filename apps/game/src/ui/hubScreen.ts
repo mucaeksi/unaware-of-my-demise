@@ -43,7 +43,7 @@ export abstract class HubScreen<D = unknown> extends PixiScene<D> {
   create(data?: D): void {
     this.init?.((data ?? {}) as D);
     void backdrop(this, 'forest_whispering_ash');
-    this.add(new PIXI.Graphics().rect(0, 0, REF_W, REF_H).fill({ color: 0x0a0610, alpha: 0.88 }), -10);
+    this.add(new PIXI.Graphics().rect(0, 0, REF_W, REF_H).fill({ color: 0x0a0610, alpha: 0.62 }), -10);
     this.ui = new DomStage(app().uiLayer);
     this.attachDom(this.ui.root);
     sceneFadeIn(this, 350);
@@ -52,6 +52,7 @@ export abstract class HubScreen<D = unknown> extends PixiScene<D> {
     const headY = 70 + Math.round(insets.top * 0.5);
     this.ui.text(REF_W / 2, headY, this.heading, titleStyle(60, T.gold)).setOrigin(0.5);
     this.ui.button(190 + insets.left, REF_H - 80 - insets.bottom, { label: S.hub.back, w: 300, h: 110, escape: true, onClick: () => this.goBack() });
+    this.ui.button(150 + insets.left, headY, { label: 'OPTIONS', w: 180, h: 64, fontSize: 20, onClick: () => this.nav.start('Title', { openSettings: true }) }).setDepth(DEPTH.hud);
     this.walletText = this.ui.text(REF_W - 60 - insets.right, headY, '', { fontSize: 30, color: T.text }).setOrigin(1, 0.5).setDepth(DEPTH.hud);
     this.body = this.ui.group();
     const authChanged = (): void => void this.refresh();

@@ -12,23 +12,23 @@ import { C, DEPTH, F, SIZE, T } from './theme';
  */
 
 const CSS = `
-.uomd-stage{position:absolute;left:0;top:0;width:${REF_W}px;height:${REF_H}px;transform-origin:0 0;pointer-events:none;overflow:hidden;font-family:${F.body};color:${T.text}}
-.uomd-stage *{box-sizing:border-box}
+.uomd-stage{position:absolute;left:0;top:0;width:${REF_W}px;height:${REF_H}px;transform-origin:0 0;pointer-events:none;overflow:hidden;font-family:${F.body};color:${T.text};color-scheme:only dark;forced-color-adjust:none}
+.uomd-stage *{box-sizing:border-box;color-scheme:only dark;forced-color-adjust:none}
 .uomd-node{position:absolute;margin:0}
 .uomd-text{white-space:pre;pointer-events:none;paint-order:stroke fill;user-select:none;-webkit-user-select:none}
 .uomd-text.wrap{white-space:pre-wrap;overflow-wrap:anywhere}
-.uomd-btn{pointer-events:auto;border:0;padding:0;background:transparent center/100% 100% no-repeat;color:${T.text};cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:inherit;transition:transform .12s cubic-bezier(.34,1.56,.64,1),filter .15s ease-out;outline:none;border-radius:999px;overflow:hidden}
-.uomd-btn:hover:not(:disabled){transform:var(--uomd-t) scale(1.022);filter:drop-shadow(0 0 12px rgba(227,195,125,.28))}
-.uomd-btn:active:not(:disabled){transform:var(--uomd-t) scale(.965)!important}
+.uomd-btn{pointer-events:auto;border:0;padding:0;background:transparent center/100% 100% no-repeat;color:${T.text};-webkit-text-fill-color:${T.text};cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:inherit;transition:transform .14s cubic-bezier(.34,1.56,.64,1),filter .16s ease-out;outline:none;border-radius:10px;overflow:hidden}
+.uomd-btn:hover:not(:disabled){transform:var(--uomd-t) scale(1.028);filter:drop-shadow(0 0 14px rgba(227,195,125,.36))}
+.uomd-btn:active:not(:disabled){transform:var(--uomd-t) scale(.955)!important}
 .uomd-btn:focus-visible{box-shadow:0 0 0 4px ${'#' + C.goldHi.toString(16)}}
 .uomd-btn:disabled{cursor:default}
-.uomd-btn.hot::after{content:'';position:absolute;inset:0;background:linear-gradient(112deg,transparent 30%,rgba(255,244,212,.22) 48%,rgba(227,195,125,.35) 52%,transparent 68%);transform:translateX(-130%);animation:uomd-sheen 3.6s ease-in-out infinite;pointer-events:none}
+.uomd-btn.hot::after,.uomd-btn.active::after{content:'';position:absolute;inset:0;background:linear-gradient(112deg,transparent 30%,rgba(255,244,212,.22) 48%,rgba(227,195,125,.35) 52%,transparent 68%);transform:translateX(-130%);animation:uomd-sheen 3.6s ease-in-out infinite;pointer-events:none}
 @keyframes uomd-sheen{0%,28%{transform:translateX(-130%)}68%,100%{transform:translateX(130%)}}
-.uomd-btn .label{font-family:${F.display};font-weight:600;letter-spacing:.02em;white-space:nowrap;line-height:1.1;position:relative;z-index:1}
-.uomd-btn .sub{color:${T.dim};white-space:nowrap;line-height:1.1;position:relative;z-index:1}
+.uomd-btn .label{font-family:${F.display};font-weight:700;letter-spacing:.04em;white-space:nowrap;line-height:1.1;position:relative;z-index:1;paint-order:stroke fill;text-shadow:0 2px 6px rgba(5,2,8,.95),0 0 2px #050208}
+.uomd-btn .sub{color:${T.dim};-webkit-text-fill-color:${T.dim};white-space:nowrap;line-height:1.1;position:relative;z-index:1;paint-order:stroke fill;text-shadow:0 1px 4px rgba(5,2,8,.95)}
 .uomd-btn:disabled .label,.uomd-btn:disabled .sub{opacity:.45}
 .uomd-panel{pointer-events:none;background:center/100% 100% no-repeat}
-.uomd-panel.tap{pointer-events:auto;cursor:pointer;outline:none;border-radius:28px}
+.uomd-panel.tap{pointer-events:auto;cursor:pointer;outline:none;border-radius:14px}
 .uomd-panel.tap:focus-visible{box-shadow:0 0 0 4px ${'#' + C.goldHi.toString(16)}}
 .uomd-box{pointer-events:none}
 .uomd-box.block{pointer-events:auto}
@@ -37,7 +37,7 @@ const CSS = `
 .uomd-btn.bare .label,.uomd-btn.bare .sub{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .uomd-blink{animation:uomd-blink 2.3s ease-in-out infinite}
 @keyframes uomd-blink{0%,100%{opacity:1;scale:1.02}50%{opacity:.24;scale:.98}}
-@media (prefers-reduced-motion: reduce){.uomd-btn{transition:none}.uomd-btn.hot::after,.uomd-blink{animation:none}}
+@media (prefers-reduced-motion: reduce){.uomd-btn{transition:none}.uomd-btn.hot::after,.uomd-btn.active::after,.uomd-blink{animation:none}}
 `;
 
 function ensureCss(): void {
@@ -152,6 +152,7 @@ export class DomNode<E extends HTMLElement = HTMLElement> {
 function styleText(el: HTMLElement, o: TextOptions): void {
   const hc = prefs().highContrast;
   const base = o.color ?? (hc ? '#ffffff' : T.text);
+  const resolvedColor = hc && base === T.dim ? '#dfd6ec' : base;
   const size = fontPx(o.fontSize);
   const { fontStyle, fontWeight } = parseFontStyle(o.fontStyle);
   const thick = o.strokeThickness ?? (hc ? 3 : 0);
@@ -160,12 +161,14 @@ function styleText(el: HTMLElement, o: TextOptions): void {
   s.fontSize = `${size}px`;
   s.fontStyle = fontStyle;
   s.fontWeight = String(fontWeight);
-  s.color = hc && base === T.dim ? '#dfd6ec' : base;
+  s.color = resolvedColor;
+  s.setProperty('-webkit-text-fill-color', resolvedColor);
+  s.setProperty('paint-order', 'stroke fill');
   s.lineHeight = `${size * 1.2 + (o.lineSpacing ?? 0)}px`;
   s.letterSpacing = o.letterSpacing ? `${o.letterSpacing}px` : '';
   s.textAlign = o.align ?? 'left';
   s.setProperty('-webkit-text-stroke', thick > 0 ? `${thick}px ${o.stroke ?? '#050208'}` : '');
-  s.textShadow = o.shadow ? `${o.shadow.x}px ${o.shadow.y}px ${o.shadow.blur}px ${o.shadow.color}` : '';
+  s.textShadow = o.shadow ? `${o.shadow.x}px ${o.shadow.y}px ${o.shadow.blur}px ${o.shadow.color}` : '0 2px 5px rgba(5,2,8,0.92)';
 }
 
 export class DomText extends DomNode<HTMLDivElement> {
@@ -196,6 +199,7 @@ export class DomText extends DomNode<HTMLDivElement> {
 
   setColor(c: string): this {
     this.el.style.color = c;
+    this.el.style.setProperty('-webkit-text-fill-color', c);
     return this;
   }
 
@@ -231,7 +235,7 @@ export class DomButton extends DomNode<HTMLButtonElement> {
   private readonly sub: HTMLSpanElement | null;
   private readonly bw: number;
   private readonly bh: number;
-  private readonly variant: PanelVariant;
+  private variant: PanelVariant;
   private readonly fmtLabel = formatter(true);
   private readonly fmtSub = formatter(false);
 
@@ -246,24 +250,25 @@ export class DomButton extends DomNode<HTMLButtonElement> {
     b.style.width = `${Math.max(this.bw, MIN_TOUCH_W)}px`;
     b.style.height = `${Math.max(this.bh, MIN_TOUCH_H)}px`;
     b.style.backgroundSize = `${this.bw}px ${this.bh}px`;
-    b.style.borderRadius = this.bh <= 140 ? '999px' : '28px';
+    b.style.borderRadius = '10px';
     if (opts.escape) b.dataset.escape = '1';
     if (opts.bare) b.classList.add('bare');
-    if (this.variant === 'hot' && !opts.bare) b.classList.add('hot');
+    if ((this.variant === 'hot' || this.variant === 'active') && !opts.bare) b.classList.add(this.variant);
     if (opts.ariaLabel) b.setAttribute('aria-label', opts.ariaLabel);
+    const labelColor = this.variant === 'active' || this.variant === 'hot' ? '#fff3c4' : '#f6efe4';
     this.label = document.createElement('span');
     this.label.className = 'label';
-    styleText(this.label, { fontFamily: F.display, fontSize: opts.fontSize ?? 34, fontStyle: '600', color: T.text });
+    styleText(this.label, { fontFamily: F.display, fontSize: opts.fontSize ?? 32, fontStyle: '700', color: labelColor, stroke: '#07040c', strokeThickness: 3 });
     this.sub = opts.sub !== undefined ? document.createElement('span') : null;
     if (this.sub) {
       this.sub.className = 'sub';
-      styleText(this.sub, { fontSize: SIZE.small - 4, color: T.dim });
+      styleText(this.sub, { fontSize: Math.max(16, (opts.fontSize ?? 32) * 0.68), color: this.variant === 'active' ? '#ffd98a' : '#d6c8e6', stroke: '#07040c', strokeThickness: 2 });
     }
     b.append(this.label, ...(this.sub ? [this.sub] : []));
     this.setLabel(opts.label);
     if (opts.sub !== undefined) this.setSub(opts.sub);
     this.paint(this.variant);
-    b.addEventListener('pointerenter', () => !b.disabled && this.paint('hot'));
+    b.addEventListener('pointerenter', () => !b.disabled && this.paint(this.variant === 'active' ? 'active' : 'hot'));
     b.addEventListener('pointerleave', () => this.paint(b.disabled ? 'dim' : this.variant));
     b.addEventListener('pointerdown', () => !b.disabled && Sfx.tap());
     b.addEventListener('click', () => {
@@ -276,6 +281,22 @@ export class DomButton extends DomNode<HTMLButtonElement> {
 
   private paint(v: PanelVariant): void {
     this.el.style.backgroundImage = panelUrl(this.bw, this.bh, v);
+  }
+
+  setVariant(v: PanelVariant): this {
+    this.variant = v;
+    this.el.classList.toggle('hot', v === 'hot' && !this.opts.bare);
+    this.el.classList.toggle('active', v === 'active' && !this.opts.bare);
+    const labelColor = v === 'active' || v === 'hot' ? '#fff3c4' : '#f6efe4';
+    this.label.style.color = labelColor;
+    this.label.style.setProperty('-webkit-text-fill-color', labelColor);
+    if (this.sub) {
+      const subColor = v === 'active' ? '#ffd98a' : '#d6c8e6';
+      this.sub.style.color = subColor;
+      this.sub.style.setProperty('-webkit-text-fill-color', subColor);
+    }
+    this.paint(this.el.disabled ? 'dim' : v);
+    return this;
   }
 
   override mounted(): void {

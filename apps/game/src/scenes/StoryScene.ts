@@ -17,9 +17,9 @@ import { Services } from '../services';
 import { blocker, Button, panel, sceneFadeIn, title, toast, txt, verticalShade, type UiText } from '../ui/pixiKit';
 import { buildSubtitleSchedule, resolveSubtitleProgress, type SubtitleSchedule } from '../ui/subtitles';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
+import { getCharacterStature } from '../content/characterStature';
 import { createSwingingBellEmblem, type SwingingBellHandle } from '../vfx/gothicUiVfx';
-import { Sparks } from '../vfx/sparks';
-import { vfxTextures } from '../vfx/textures';
+import { attachLivingBackdrop } from '../vfx/livingBackdrop';
 import { app } from '../core/app';
 
 export interface StoryInit {
@@ -188,14 +188,12 @@ export class StoryScene extends PixiScene<StoryInit> {
 
   private build(): void {
     const { art } = Services.ready();
-    const reduced = prefs().reducedMotion;
     this.bg = this.add(new PIXI.Sprite(), DEPTH.bg);
     this.bg.anchor.set(0.5);
     this.bg.position.set(REF_W / 2, REF_H / 2);
     this.setBackground(art.background(this.data0.location_id));
     const cover = Math.max(REF_W / (this.bg.texture.width || REF_W), REF_H / (this.bg.texture.height || REF_H));
-    this.bg.scale.set(cover * 1.04);
-    if (!reduced) this.anim.to(this.bg, { scale: cover * 1.09, x: REF_W / 2 - 18 }, { duration: 36000, ease: 'sine.inout', yoyo: true, repeat: -1 });
+    attachLivingBackdrop(this, this.bg, { baseScale: cover, fxDepth: DEPTH.bg + 2, mood: 'eclipse', intensity: 1.05 });
 
     if (this.data0.illustration_id) {
       const stillKey = art.still(this.data0.illustration_id);
@@ -204,16 +202,9 @@ export class StoryScene extends PixiScene<StoryInit> {
         cg.anchor.set(0.5);
         cg.position.set(REF_W / 2, REF_H / 2);
         cg.alpha = 0;
-        cg.scale.set(Math.max(REF_W / (cg.texture.width || REF_W), REF_H / (cg.texture.height || REF_H)) * 1.02);
+        cg.scale.set(Math.max(REF_W / (cg.texture.width || REF_W), REF_H / (cg.texture.height || REF_H)) * 1.03);
         this.cgImage = cg;
       }
-    }
-
-    // atmospheric ash and ember motes behind the busts
-    if (!reduced) {
-      const motes = this.add(new Sparks(vfxTextures().spark), DEPTH.bg + 2);
-      motes.ambient({ every: 420, area: { x: [0, REF_W], y: [REF_H - 180, REF_H - 180] }, vx: [-14, 14], vy: [-42, -16], look: { lifespan: 9500, scale: [0.04, 0.13], randomScale: true, alpha: [0.28, 0], tint: [0xc9b6e4, 0xe3c37d, 0xefe8f5] } });
-      this.onTick((dt) => motes.update(dt));
     }
 
     // grade the world below the HUD so the dialogue and the busts keep their contrast
@@ -255,19 +246,33 @@ export class StoryScene extends PixiScene<StoryInit> {
     readerBell.container.alpha = 0.92;
 
     const topBtnY = 58 + insets.top;
-    const btnW = 148;
-    const btnH = 62;
-    const btnGap = 14;
-    const showSkip = !this.cutscene || isDevServer();
-    const skipX = REF_W - 104 - insets.right;
-    const autoX = showSkip ? skipX - (btnW + btnGap) : skipX;
+    const btnW = 144;
+    const btnH = 58;
+    const btnGap = 12;
+    const skipX = REF_W - 102 - insets.right;
+    const autoX = skipX - (btnW + btnGap);
     const logX = autoX - (btnW + btnGap);
     const voiceX = logX - (btnW + btnGap);
     const top = DEPTH.hud + 3;
-    if (showSkip) this.skipBtn = this.add(new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleSkip() }), top);
-    this.autoBtn = this.add(new Button(this, autoX, topBtnY, { label: this.auto ? 'AUTO ✓' : 'AUTO', w: btnW, h: btnH, fontSize: 21, onClick: () => this.toggleAuto() }), top);
-    this.add(new Button(this, logX, topBtnY, { label: 'LOG', w: btnW, h: btnH, fontSize: 21, onClick: () => this.showLog() }), top);
-    this.voiceBtn = this.add(new Button(this, voiceX, topBtnY, { label: 'VOICE', w: btnW, h: btnH, fontSize: 20, onClick: () => { if (this.currentLine) void this.stage?.voice(this.currentLine.lineId); } }), top);
+    this.skipBtn = this.add(new Button(this, skipX, topBtnY, { label: 'SKIP', w: btnW, h: btnH, fontSize: 20, variant: this.skip ? 'active' : 'normal', onClick: () => this.toggleSkip() }), top);
+    this.autoBtn = this.add(new Button(this, autoX, topBtnY, { label: 'AUTO', w: btnW, h: btnH, fontSize: 20, variant: this.auto ? 'active' : 'normal', onClick: () => this.toggleAuto() }), top);
+    this.add(new Button(this, logX, topBtnY, { label: 'LOG', w: btnW, h: btnH, fontSize: 20, onClick: () => this.showLog() }), top);
+    this.voiceBtn = this.add(
+      new Button(this, voiceX, topBtnY, {
+        label: 'VOICE',
+        w: btnW,
+        h: btnH,
+        fontSize: 20,
+        onClick: () => {
+          if (this.currentLine) {
+            this.voiceBtn?.setVariant('active');
+            this.anim.after(650, () => this.voiceBtn?.setVariant('normal'));
+            void this.stage?.voice(this.currentLine.lineId);
+          }
+        }
+      }),
+      top
+    );
     this.voiceBtn.visible = false;
     const heading = this.add(title(60 + insets.left, topBtnY, this.data0.title_en, 30, T.dim), top);
     heading.anchor.set(0, 0.5);
@@ -427,7 +432,7 @@ export class StoryScene extends PixiScene<StoryInit> {
   // ------------------------------------------------------------------ actors & bust choreography
 
   private targetBustHeight(character: string): number {
-    return character === 'fadyme' ? 1150 : 1040;
+    return getCharacterStature(character).vnTargetHeight;
   }
 
   private bustScale(character: string, a: Actor): number {
@@ -441,7 +446,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     const cover = Math.max(REF_W / (cg.texture.width || REF_W), REF_H / (cg.texture.height || REF_H));
     const ms = immediate || prefs().reducedMotion ? 1 : 1100;
     this.anim.to(cg, { alpha: 1 }, { duration: ms, ease: 'sine.inout' });
-    if (!prefs().reducedMotion) this.anim.to(cg, { scaleX: cover * 1.065, scaleY: cover * 1.065, y: REF_H / 2 - 12 }, { duration: 28000, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    if (!prefs().reducedMotion) this.anim.to(cg, { scaleX: cover * 1.08, scaleY: cover * 1.08, x: REF_W / 2 + 24, y: REF_H / 2 - 14 }, { duration: 9600, yoyo: true, repeat: -1, ease: 'sine.inout' });
     for (const [, a] of this.actors) {
       this.anim.killOf(a.image);
       this.anim.to(a.image, { alpha: 0 }, { duration: Math.min(650, ms), ease: 'sine.out' });
@@ -459,13 +464,13 @@ export class StoryScene extends PixiScene<StoryInit> {
       existing.image.destroy({ children: true });
       this.actors.delete(character);
     }
+    const stature = getCharacterStature(character);
     const baseX = side === 'left' ? 460 : REF_W - 460;
-    const baseY = REF_H + 18;
+    const baseY = stature.vnBaseY;
     const image = this.add(new PIXI.Container(), DEPTH.world);
     const sprite = new PIXI.Sprite(this.tex(key));
     sprite.anchor.set(0.5, 1);
-    // Fadyme's knee-up art faces left and Mahmut's faces right: mirror so each looks inward
-    const nativeFacing = character === 'fadyme' ? 'left' : 'right';
+    const nativeFacing = stature.nativeFacing ?? (character === 'fadyme' ? 'left' : 'right');
     sprite.scale.x = nativeFacing !== (side === 'left' ? 'right' : 'left') ? -1 : 1;
     image.addChild(sprite);
     image.position.set(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY);
@@ -1059,7 +1064,7 @@ export class StoryScene extends PixiScene<StoryInit> {
 
   private toggleAuto(): void {
     this.auto = !this.auto;
-    this.autoBtn.setLabel(this.auto ? 'AUTO ✓' : 'AUTO');
+    this.autoBtn.setVariant(this.auto ? 'active' : 'normal');
     if (this.cutscene) {
       // one on/off switch: turning it off keeps the current line on screen, turning it on resumes the normal reading hold
       this.autoTimer?.stop();
@@ -1074,7 +1079,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     const hasChoices = this.data0.commands.some((c) => c.op === 'choice');
     if (this.cutscene || !hasChoices) {
       this.skip = true;
-      this.skipBtn?.setLabel('SKIP ✓');
+      this.skipBtn?.setVariant('active');
       this.typing?.stop();
       this.stopTyping?.();
       this.autoTimer?.stop();
@@ -1082,7 +1087,7 @@ export class StoryScene extends PixiScene<StoryInit> {
       return;
     }
     this.skip = !this.skip;
-    this.skipBtn?.setLabel(this.skip ? 'SKIP ✓' : 'SKIP');
+    this.skipBtn?.setVariant(this.skip ? 'active' : 'normal');
     if (this.skip && this.waiting) {
       if (!this.lineDone) this.finishTyping();
       else this.advance();

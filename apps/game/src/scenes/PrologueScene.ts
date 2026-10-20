@@ -183,10 +183,21 @@ export class PrologueScene extends PixiScene {
     };
     canvas.addEventListener('pointerdown', onPointer);
     const top = DEPTH.hud + 3;
-    this.pauseBtn = this.add(new Button(this, 108 + insets.left, 56 + insets.top, { label: 'PAUSE', w: 148, h: 62, fontSize: 21, onClick: () => this.togglePause() }), top);
-    this.muteBtn = this.add(new Button(this, 270 + insets.left, 56 + insets.top, { label: this.muted ? 'UNMUTE' : 'MUTE', w: 148, h: 62, fontSize: 21, onClick: () => this.toggleMute() }), top);
-    // entry contract: no Skip on a first viewing (the dev server keeps it for the owner's review loop)
-    if (loadEntry().phase === 'completed' || isReplaying() || isDevServer()) this.skipBtn = this.add(new Button(this, REF_W - 108 - insets.right, 56 + insets.top, { label: 'SKIP', w: 148, h: 62, fontSize: 21, onClick: () => this.finish() }), top);
+    this.pauseBtn = this.add(new Button(this, 108 + insets.left, 56 + insets.top, { label: 'PAUSE', w: 144, h: 58, fontSize: 20, onClick: () => this.togglePause() }), top);
+    this.muteBtn = this.add(new Button(this, 266 + insets.left, 56 + insets.top, { label: this.muted ? 'UNMUTE' : 'MUTE', w: 144, h: 58, fontSize: 20, variant: this.muted ? 'active' : 'normal', onClick: () => this.toggleMute() }), top);
+    this.skipBtn = this.add(
+      new Button(this, REF_W - 108 - insets.right, 56 + insets.top, {
+        label: 'SKIP',
+        w: 144,
+        h: 58,
+        fontSize: 20,
+        onClick: () => {
+          this.skipBtn?.setVariant('active');
+          this.finish();
+        }
+      }),
+      top
+    );
     const onVisibility = (): void => {
       if (!this.live || this.done) return;
       this.hidden = document.hidden;
@@ -212,7 +223,7 @@ export class PrologueScene extends PixiScene {
     this.pausedByUser = !this.pausedByUser;
     this.syncPause();
     this.stage?.setPaused(this.pausedByUser);
-    this.pauseBtn?.setLabel(this.pausedByUser ? 'RESUME' : 'PAUSE');
+    this.pauseBtn?.setLabel(this.pausedByUser ? 'RESUME' : 'PAUSE').setVariant(this.pausedByUser ? 'active' : 'normal');
   }
 
   private toggleMute(): void {
@@ -220,7 +231,7 @@ export class PrologueScene extends PixiScene {
     audio.mute = this.muted;
     Music.setVolume(this.muted ? 0 : prefs().musicVolume);
     this.stage?.setVoiceMuted(this.muted);
-    this.muteBtn?.setLabel(this.muted ? 'UNMUTE' : 'MUTE');
+    this.muteBtn?.setLabel(this.muted ? 'UNMUTE' : 'MUTE').setVariant(this.muted ? 'active' : 'normal');
   }
 
   private ensurePrologueMusic(forceOffset?: number): void {
@@ -316,12 +327,20 @@ export class PrologueScene extends PixiScene {
     const cover = Math.max(REF_W / (img.texture.width || REF_W), REF_H / (img.texture.height || REF_H));
     const calm = prefs().reducedMotion;
     const zoomIn = this.index % 2 === 0;
-    img.scale.set(cover * (calm ? 1.04 : zoomIn ? 1.0 : 1.09));
-    const to = cover * (calm ? 1.04 : zoomIn ? 1.09 : 1.0);
-    const drift = calm ? 0 : this.index % 3 === 1 ? 46 : -46;
+    img.scale.set(cover * (calm ? 1.04 : zoomIn ? 1.02 : 1.12));
+    const to = cover * (calm ? 1.04 : zoomIn ? 1.12 : 1.02);
+    const drift = calm ? 0 : this.index % 3 === 1 ? 56 : -56;
+    const driftY = calm ? 0 : this.index % 2 === 0 ? 16 : -16;
     img.x -= drift;
+    img.y -= driftY;
     this.anim.to(img, { alpha: 1 }, { duration: first ? (INTRO_FAST ? 60 : 1700) : CROSSFADE_MS, ease: 'sine.inout' });
-    if (!calm) this.anim.to(img, { scale: to, x: REF_W / 2 + drift }, { duration: holdMs + CROSSFADE_MS, ease: 'sine.inout' });
+    if (!calm) {
+      this.anim.to(
+        img,
+        { scaleX: to, scaleY: to, x: REF_W / 2 + drift, y: REF_H / 2 + driftY, angle: this.index % 2 === 0 ? 0.45 : -0.45 },
+        { duration: holdMs + CROSSFADE_MS, ease: 'sine.inout' }
+      );
+    }
     const old = this.current;
     this.current = img;
     if (old) this.anim.after(CROSSFADE_MS + 80, () => old.destroy());

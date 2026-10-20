@@ -21,7 +21,7 @@ import { titleStyle } from '../ui/hubScreen';
 import { sceneFadeIn, verticalShade } from '../ui/pixiKit';
 import { C, DEPTH, F, T } from '../ui/theme';
 import { createCrackedWatchSpinner, createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } from '../vfx/gothicUiVfx';
-import { Sparks } from '../vfx/sparks';
+import { attachLivingBackdrop } from '../vfx/livingBackdrop';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
 
@@ -124,9 +124,8 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     const bg = this.add(new PIXI.Sprite(this.tex(titleBgKey ?? art.background('forest_whispering_ash'))), 0);
     bg.anchor.set(0.5);
     bg.position.set(REF_W / 2, REF_H / 2);
-    const k = cover(bg, titleBgKey ? 1.04 : 1.05);
-    bg.scale.set(k);
-    if (!reduced) this.anim.to(bg, { x: REF_W / 2 - (titleBgKey ? 22 : 30), scale: k * (titleBgKey ? 1.028 : 1.03) }, { duration: titleBgKey ? 22000 : 24000, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    const k = cover(bg, titleBgKey ? 1.045 : 1.055);
+    attachLivingBackdrop(this, bg, { baseScale: k, fxDepth: 1, mood: 'eclipse', intensity: 1.1 });
     const keyArt = titleBgKey ? null : art.ui('key_art');
     if (keyArt) {
       const ka = this.add(new PIXI.Sprite(this.tex(keyArt)), 1);
@@ -137,18 +136,13 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     // light top band behind the utility pills, deep bottom band behind TAP TO START
     this.add(verticalShade(0, 0, REF_W, 110, 0x05030a, 0.32, 0), 2);
     this.add(verticalShade(0, REF_H - 250, REF_W, 250, 0x05030a, 0, 0.82), 2);
-    if (!reduced) {
-      const ash = this.add(new Sparks(vfxTextures().spark), DEPTH.world);
-      ash.ambient({ every: 300, area: { x: [0, REF_W], y: [REF_H + 20, REF_H + 20] }, vx: [-18, 14], vy: [-58, -24], look: { lifespan: 10500, scale: [0.04, 0.16], randomScale: true, alpha: [0.36, 0], tint: [0xc9b6e4, 0xe3c37d, 0xd4325c] } });
-      this.onTick((dt) => ash.update(dt));
-    }
     const logoX = 500 + insetLeft;
-    const logoY = 278;
+    const logoY = 284;
     // #1 Approved UI Animation: Rotating Black-Sun Eclipse Corona & Rune Ring behind the emblem
-    const corona = createEclipseCorona(this, logoX, logoY - 8, 188, 3, false);
-    corona.alpha = 0.82;
+    const corona = createEclipseCorona(this, logoX, logoY - 12, 174, 3, false);
+    corona.alpha = 0.72;
     // #2 Approved UI Animation: Swinging Fractured Sanctuary Bell & Acoustic Shockwave Rings
-    const bell = createSwingingBellEmblem(this, logoX, logoY - 176, 1.05, 5, 2900);
+    const bell = createSwingingBellEmblem(this, logoX, logoY - 182, 0.86, 5, 2900);
     bell.container.alpha = 0;
     this.anim.to(bell.container, { alpha: 1 }, { duration: 1400, delay: 300, ease: 'sine.out' });
     const glow = this.add(new PIXI.Sprite(vfxTextures().spark), 3);
@@ -191,7 +185,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     const mx = 500 + insets.left;
     this.buildTapToContinueBanner('GOOGLE PLAY GAMES  ·  LIVEOPS', this.firstRun ? S.menu.tapSubFirstRun : S.menu.tapSubReturn, () => void this.onTapToStart());
     const top = DEPTH.hud + 2;
-    this.ui.button(REF_W - 360 - insets.right, 58 + insets.top, {
+    this.ui.button(REF_W - 375 - insets.right, 58 + insets.top, {
       label: 'REPLAY INTRO',
       w: 210,
       h: 62,
@@ -210,17 +204,17 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     if (this.firstRun) {
       const signedIn = Services.api.signedIn;
       const canSignIn = Services.identity?.kind === 'native' || Services.identity?.kind === 'web';
-      if (signedIn) this.ui.button(mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 540, h: 120, fontSize: 40, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(top);
-      else if (canSignIn) this.ui.button(mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 580, h: 120, fontSize: 36, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(top);
-      else if (PREVIEW_FLOW_ENABLED) this.ui.button(mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 580, h: 120, fontSize: 38, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(top);
+      if (signedIn) this.ui.button(mx, 640, { label: S.menu.cont, sub: S.menu.contSub, w: 460, h: 98, fontSize: 30, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(top);
+      else if (canSignIn) this.ui.button(mx, 640, { label: S.menu.signIn, sub: S.menu.signInSub, w: 480, h: 98, fontSize: 28, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(top);
+      else if (PREVIEW_FLOW_ENABLED) this.ui.button(mx, 640, { label: S.menu.preview, sub: S.menu.previewSub, w: 480, h: 98, fontSize: 28, variant: 'hot', onClick: () => void this.onTapToStart() }).setDepth(top);
       else {
-        this.ui.button(mx, 640, { label: S.menu.signIn, w: 580, h: 120, fontSize: 36, variant: 'dim', onClick: () => undefined }).setEnabled(false).setDepth(top);
-        this.ui.text(mx, 730, S.menu.webNote, { fontSize: 28, color: T.dim }).setOrigin(0.5).setDepth(top);
+        this.ui.button(mx, 640, { label: S.menu.signIn, w: 480, h: 98, fontSize: 28, variant: 'dim', onClick: () => undefined }).setEnabled(false).setDepth(top);
+        this.ui.text(mx, 730, S.menu.webNote, { fontSize: 26, color: T.dim }).setOrigin(0.5).setDepth(top);
       }
     } else {
-      this.ui.button(mx, 620, { label: 'CONTINUE', sub: 'Enter the Road', w: 540, h: 112, fontSize: 40, variant: 'hot', onClick: () => void this.begin() }).setDepth(top);
-      this.ui.button(mx, 748, { label: 'CHAPTERS', w: 540, h: 98, fontSize: 32, onClick: () => this.go('Chapters') }).setDepth(top);
-      this.ui.button(mx, 864, { label: 'COMPANY', w: 540, h: 98, fontSize: 32, onClick: () => this.go('Home') }).setDepth(top);
+      this.ui.button(mx, 620, { label: 'CONTINUE', sub: 'Enter the Road', w: 460, h: 98, fontSize: 32, variant: 'hot', onClick: () => void this.begin() }).setDepth(top);
+      this.ui.button(mx, 740, { label: 'CHAPTERS', w: 460, h: 88, fontSize: 28, onClick: () => this.go('Chapters') }).setDepth(top);
+      this.ui.button(mx, 850, { label: 'COMPANY', w: 460, h: 88, fontSize: 28, onClick: () => this.go('Home') }).setDepth(top);
     }
   }
 
@@ -581,15 +575,16 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     const layouts: Prefs['battleLayout'][] = ['afk_faithful', 'current', 'arena_lite'];
     const layoutTag = (l: Prefs['battleLayout']): string => (l === 'afk_faithful' ? 'AFK' : l === 'arena_lite' ? 'ARENA' : 'CURRENT');
     const adsLabel = (st: string | undefined): string => (st === 'withdrawn' || st === 'denied' ? 'ADS: WITHDRAWN' : st === 'OBTAINED' ? 'ADS: CONSENTED' : 'PRIVACY OPTIONS');
-    const toggles: { label: () => string; sub: string; onClick: (btn: DomButton) => void }[] = [
-      { label: () => `TEXT: ${prefs().textSize.toUpperCase()}`, sub: 'Text Size', onClick: (btn) => { setPref('textSize', prefs().textSize === 'normal' ? 'large' : 'normal'); btn.setLabel(`TEXT: ${prefs().textSize.toUpperCase()}`); } },
-      { label: () => `CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STD'}`, sub: 'Contrast Mode', onClick: (btn) => { setPref('highContrast', !prefs().highContrast); btn.setLabel(`CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STD'}`); } },
-      { label: () => `FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`, sub: 'Reduce Flash', onClick: (btn) => { setPref('reduceFlash', !prefs().reduceFlash); btn.setLabel(`FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`); } },
-      { label: () => `QUALITY: ${prefs().qualityTier.toUpperCase()}`, sub: 'Graphics Tier', onClick: (btn) => { const next = tiers[(tiers.indexOf(prefs().qualityTier) + 1) % tiers.length]!; setPref('qualityTier', next); btn.setLabel(`QUALITY: ${next.toUpperCase()}`); } },
-      { label: () => `LAYOUT: ${layoutTag(prefs().battleLayout)}`, sub: 'Battle Layout', onClick: (btn) => { const next = layouts[(layouts.indexOf(prefs().battleLayout) + 1) % layouts.length]!; setPref('battleLayout', next); btn.setLabel(`LAYOUT: ${layoutTag(next)}`); } },
+    const toggles: { label: () => string; sub: string; active: () => boolean; onClick: (btn: DomButton) => void }[] = [
+      { label: () => `TEXT: ${prefs().textSize.toUpperCase()}`, sub: 'Text Size', active: () => prefs().textSize === 'large', onClick: (btn) => { setPref('textSize', prefs().textSize === 'normal' ? 'large' : 'normal'); btn.setLabel(`TEXT: ${prefs().textSize.toUpperCase()}`).setVariant(prefs().textSize === 'large' ? 'active' : 'normal'); } },
+      { label: () => `CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STD'}`, sub: 'Contrast Mode', active: () => prefs().highContrast, onClick: (btn) => { setPref('highContrast', !prefs().highContrast); btn.setLabel(`CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STD'}`).setVariant(prefs().highContrast ? 'active' : 'normal'); } },
+      { label: () => `FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`, sub: 'Reduce Flash', active: () => prefs().reduceFlash, onClick: (btn) => { setPref('reduceFlash', !prefs().reduceFlash); btn.setLabel(`FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`).setVariant(prefs().reduceFlash ? 'active' : 'normal'); } },
+      { label: () => `QUALITY: ${prefs().qualityTier.toUpperCase()}`, sub: 'Graphics Tier', active: () => prefs().qualityTier === 'high', onClick: (btn) => { const next = tiers[(tiers.indexOf(prefs().qualityTier) + 1) % tiers.length]!; setPref('qualityTier', next); btn.setLabel(`QUALITY: ${next.toUpperCase()}`).setVariant(next === 'high' ? 'active' : 'normal'); } },
+      { label: () => `LAYOUT: ${layoutTag(prefs().battleLayout)}`, sub: 'Battle Layout', active: () => prefs().battleLayout === 'afk_faithful', onClick: (btn) => { const next = layouts[(layouts.indexOf(prefs().battleLayout) + 1) % layouts.length]!; setPref('battleLayout', next); btn.setLabel(`LAYOUT: ${layoutTag(next)}`).setVariant(next === 'afk_faithful' ? 'active' : 'normal'); } },
       {
         label: () => adsLabel(consentState()?.status),
         sub: 'Ad Consent',
+        active: () => false,
         onClick: (btn) =>
           void showPrivacyOptions()
             .then((next) => {
@@ -600,7 +595,7 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
       }
     ];
     toggles.forEach((t, i) => {
-      const btn: DomButton = this.ui.button(1600, cy - 300 + i * 110, { label: t.label(), sub: t.sub, w: 340, h: 96, fontSize: 22, onClick: () => t.onClick(btn) }, m);
+      const btn: DomButton = this.ui.button(1600, cy - 300 + i * 110, { label: t.label(), sub: t.sub, w: 340, h: 96, fontSize: 22, variant: t.active() ? 'active' : 'normal', onClick: () => t.onClick(btn) }, m);
     });
 
     if (this.firstRun) {

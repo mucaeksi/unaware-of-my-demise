@@ -49,13 +49,12 @@ export class SplashScene extends PixiScene<SplashInit> {
     glow.scale.set(7.5, 3.2);
     glow.tint = 0x9b4dff;
     glow.blendMode = 'add';
-    const made = txt(cx, cy - 134, S.splash.made, { fontFamily: F.body, fontSize: 34, fontStyle: '500', color: T.dim, letterSpacing: 16 }, 0.5);
-    const word = txt(cx, cy + 4, S.splash.engine, { fontFamily: F.display, fontSize: 112, fontStyle: '700', color: '#f1ece4', letterSpacing: 22 }, 0.5);
-    const sub = txt(cx, cy + 148, 'WEBGL2  ·  GOTHIC DOM UI  ·  v8.0', { fontFamily: F.display, fontSize: 20, fontStyle: '600', color: '#9ecfff', letterSpacing: 8 }, 0.5);
+    const made = txt(cx, cy - 124, S.splash.made, { fontFamily: F.body, fontSize: 34, fontStyle: '500', color: T.dim, letterSpacing: 16 }, 0.5);
+    const word = txt(cx, cy + 8, S.splash.engine, { fontFamily: F.display, fontSize: 112, fontStyle: '700', color: '#f1ece4', letterSpacing: 22 }, 0.5);
     const rule = new PIXI.Graphics().rect(-290, -1.5, 580, 3).fill({ color: C.silver, alpha: 0.78 });
-    rule.position.set(cx, cy + 112);
+    rule.position.set(cx, cy + 108);
     rule.scale.x = 0.02;
-    const all: PIXI.Container[] = [emblem, made, word, sub, rule, glow];
+    const all: PIXI.Container[] = [emblem, made, word, rule, glow];
     for (const o of all) {
       o.alpha = 0;
       this.add(o);
@@ -69,7 +68,7 @@ export class SplashScene extends PixiScene<SplashInit> {
     canvas.addEventListener('pointerdown', replay, { once: true });
     this.onClose(() => canvas.removeEventListener('pointerdown', replay));
 
-    for (const o of [emblem, made, word, sub, rule, corona]) this.anim.to(o, { alpha: 1 }, { duration: FADE_IN, ease: 'sine.inout' });
+    for (const o of [emblem, made, word, rule, corona]) this.anim.to(o, { alpha: 1 }, { duration: FADE_IN, ease: 'sine.inout' });
     this.anim.to(glow, { alpha: 0.42 }, { duration: FADE_IN, ease: 'sine.out' });
     this.anim.to(rule, { scaleX: 1 }, { duration: FADE_IN + HOLD * 0.75, ease: 'cubic.inout' });
     if (!prefs().reducedMotion) {

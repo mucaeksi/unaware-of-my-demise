@@ -11,12 +11,13 @@ import { UnitView } from '../battle/UnitView';
 import { PixiScene } from '../core/PixiScene';
 import { announce } from '../platform/a11y';
 import { qualityProfile } from '../platform/graphics';
-import { prefs } from '../platform/prefs';
+import { prefs, setPref, type Prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
 import { describeAttachment } from '../ui/format';
 import { Services } from '../services';
 import { blocker, Button, panel, sceneFadeIn, title, toast, txt, verticalShade, vignette, type UiText } from '../ui/pixiKit';
 import { C, DEPTH, F, SIZE, T } from '../ui/theme';
+import { attachLivingBackdrop } from '../vfx/livingBackdrop';
 import { Sparks } from '../vfx/sparks';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
@@ -79,6 +80,8 @@ export class BattleScene extends PixiScene<BattleInit> {
   private pendingResolve: ((a: PlayerAction) => void) | null = null;
   private bannerBox: PIXI.Container | null = null;
   private menuLayer: PIXI.Container | null = null;
+  private optionsLayer: PIXI.Container | null = null;
+  private skillButtons = new Map<string, { btn: Button; baseY: number; defaultVariant: 'normal' | 'hot' }>();
   private claimPromise: Promise<boolean> | null = null;
   private claimConfirmed = false;
   private primaryBtn: Button | null = null;
@@ -154,9 +157,9 @@ export class BattleScene extends PixiScene<BattleInit> {
     const bg = this.add(new PIXI.Sprite(this.tex(art.background(this.encounter.location_id))), DEPTH.bg);
     bg.anchor.set(0.5);
     bg.position.set(REF_W / 2, REF_H / 2);
-    const cover = Math.max(REF_W / (bg.texture.width || REF_W), REF_H / (bg.texture.height || REF_H)) * 1.1;
+    const cover = Math.max(REF_W / (bg.texture.width || REF_W), REF_H / (bg.texture.height || REF_H)) * 1.07;
     bg.scale.set(cover);
-    if (!reduced) this.anim.to(bg, { x: { from: REF_W / 2 - 26, to: REF_W / 2 + 26 }, scale: cover * 1.035 }, { duration: 26000, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    attachLivingBackdrop(this, bg, { baseScale: cover, fxDepth: DEPTH.bg + 1, mood: 'battle', intensity: 1.05 });
     this.add(verticalShade(0, 0, REF_W, 240, 0x0a0610, 0.28, 0.04), DEPTH.bg + 2);
     this.add(verticalShade(0, REF_H - 320, REF_W, 320, 0x0a0610, 0.04, 0.62), DEPTH.bg + 2);
     if (q.vignette) this.add(vignette(0.85, 0.24), DEPTH.hud - 100);
@@ -302,23 +305,23 @@ export class BattleScene extends PixiScene<BattleInit> {
 
     // the encounter's ui block can hide the speed and Auto buttons (the opening tutorials are manual, one turn at a time)
     const ui = this.encounter.ui ?? { speed: true, auto: true };
-    let edge = REF_W - 150 - insets.right;
-    const btnY = 70 + insets.top;
+    let edge = REF_W - 140 - insets.right;
+    const btnY = 66 + insets.top;
     if (ui.speed) {
-      this.speedBtn = this.add(new Button(this, edge, btnY, { label: '×1', w: 190, h: 100, fontSize: 36, onClick: () => this.toggleSpeed() }), DEPTH.hud);
-      edge -= 215;
+      this.speedBtn = this.add(new Button(this, edge, btnY, { label: '×1', w: 156, h: 72, fontSize: 28, onClick: () => this.toggleSpeed() }), DEPTH.hud);
+      edge -= 176;
     }
     if (ui.auto) {
-      this.autoBtn = this.add(new Button(this, edge, btnY, { label: 'AUTO', w: 210, h: 100, fontSize: 30, onClick: () => this.toggleAuto() }), DEPTH.hud);
-      edge -= 220;
+      this.autoBtn = this.add(new Button(this, edge, btnY, { label: 'AUTO', w: 176, h: 72, fontSize: 24, onClick: () => this.toggleAuto() }), DEPTH.hud);
+      edge -= 192;
     }
-    this.add(new Button(this, edge, btnY, { label: 'MENU', w: 210, h: 100, fontSize: 30, onClick: () => this.openMenu() }), DEPTH.hud);
+    this.add(new Button(this, edge, btnY, { label: 'MENU', w: 176, h: 72, fontSize: 24, onClick: () => this.openMenu() }), DEPTH.hud);
 
     // the turn hint lives in the free room between the title block and the speed/auto/menu buttons
     this.add(this.hintBg, DEPTH.hud - 1);
     this.add(this.descBg, DEPTH.hud - 1);
-    this.descText = this.add(txt(REF_W / 2, spec.descY - 18 - insets.bottom, '', { fontSize: 21, color: T.text, align: 'center', lineSpacing: 3, wordWrap: { width: Math.min(1360, 1560 - insets.left - insets.right) }, stroke: '#0a0610', strokeThickness: 3 }, 0.5), DEPTH.hud);
-    this.hintText = this.add(txt(REF_W / 2, 54 + insets.top, '', { fontFamily: F.display, fontSize: 25, fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }, 0.5), DEPTH.hud);
+    this.descText = this.add(txt(REF_W / 2, spec.descY - 6 - insets.bottom, '', { fontSize: 20, color: T.text, align: 'center', lineSpacing: 3, wordWrap: { width: Math.min(1360, 1560 - insets.left - insets.right) }, stroke: '#0a0610', strokeThickness: 3 }, 0.5), DEPTH.hud);
+    this.hintText = this.add(txt(REF_W / 2, 54 + insets.top, '', { fontFamily: F.display, fontSize: 24, fontStyle: '600', color: T.gold, stroke: '#0a0610', strokeThickness: 4 }, 0.5), DEPTH.hud);
     this.telegraphText = this.add(txt(REF_W - 60 - insets.right, 136 + insets.top, '', { fontFamily: F.display, fontSize: 26, fontStyle: '700', color: T.crimson, stroke: '#0a0610', strokeThickness: 5 }, [1, 0.5]), DEPTH.hud);
     this.refreshHud();
   }
@@ -327,14 +330,14 @@ export class BattleScene extends PixiScene<BattleInit> {
     this.hintBg.clear();
     if (this.hintText.text.trim()) {
       const w = Math.max(280, Math.min(720, this.hintText.width + 56));
-      const h = 44;
-      this.hintBg.roundRect(this.hintText.x - w / 2, this.hintText.y - h / 2, w, h, 22).fill({ color: 0x0c0714, alpha: 0.82 }).stroke({ width: 1.5, color: C.gold, alpha: 0.52 });
+      const h = 42;
+      this.hintBg.chamferRect(this.hintText.x - w / 2, this.hintText.y - h / 2, w, h, 10).fill({ color: 0x0c0714, alpha: 0.86 }).stroke({ width: 1.5, color: C.gold, alpha: 0.62 });
     }
     this.descBg.clear();
     if (this.descText.text.trim()) {
-      const w = Math.max(420, Math.min(1440, this.descText.width + 48));
-      const h = Math.max(38, this.descText.height + 14);
-      this.descBg.roundRect(this.descText.x - w / 2, this.descText.y - h / 2, w, h, Math.min(20, Math.floor(h / 2))).fill({ color: 0x0c0714, alpha: 0.78 }).stroke({ width: 1, color: C.gold, alpha: 0.35 });
+      const w = Math.max(420, Math.min(1440, this.descText.width + 52));
+      const h = Math.max(36, this.descText.height + 14);
+      this.descBg.chamferRect(this.descText.x - w / 2, this.descText.y - h / 2, w, h, 10).fill({ color: 0x0c0714, alpha: 0.84 }).stroke({ width: 1.2, color: C.gold, alpha: 0.45 });
     }
   }
 
@@ -350,7 +353,7 @@ export class BattleScene extends PixiScene<BattleInit> {
       const stepX = 54;
       const barW = 92 + order.length * stepX;
       const barH = 54;
-      const track = new PIXI.Graphics().roundRect(barX, barY - barH / 2, barW, barH, 27).fill({ color: 0x0c0714, alpha: 0.78 }).stroke({ width: 1.5, color: C.gold, alpha: 0.42 });
+      const track = new PIXI.Graphics().chamferRect(barX, barY - barH / 2, barW, barH, 12).fill({ color: 0x0c0714, alpha: 0.82 }).stroke({ width: 1.5, color: C.gold, alpha: 0.52 });
       this.chipLayer.addChild(track, txt(barX + 42, barY, 'TURN', { fontFamily: F.display, fontSize: 14, fontStyle: '700', color: T.gold }, 0.5));
       const defs = new Map(this.pack.units.map((u) => [u.unit_id, u]));
       order.forEach((id, i) => {
@@ -382,12 +385,12 @@ export class BattleScene extends PixiScene<BattleInit> {
   private toggleSpeed(): void {
     this.speed = this.speed >= 3 ? 1 : this.speed + 1; // ×1 → ×2 → ×3 → ×1
     this.anim.timeScale = this.speed;
-    this.speedBtn?.setLabel(`×${this.speed}`);
+    this.speedBtn?.setLabel(`×${this.speed}`).setVariant(this.speed > 1 ? 'active' : 'normal');
   }
 
   private toggleAuto(): void {
     this.auto = !this.auto;
-    this.autoBtn?.setLabel(this.auto ? 'AUTO ✓' : 'AUTO');
+    this.autoBtn?.setLabel('AUTO').setVariant(this.auto ? 'active' : 'normal');
     if (this.auto && this.pendingResolve) this.pendingResolve(this.battle.autoAction());
   }
 
@@ -395,14 +398,24 @@ export class BattleScene extends PixiScene<BattleInit> {
     if (this.menuLayer) return;
     const layer = new PIXI.Container();
     layer.addChild(
-      blocker(0x000000, 0.7),
-      panel(REF_W / 2, REF_H / 2, 700, 520, 'normal'),
-      title(REF_W / 2, 360, 'PAUSED', 48, T.gold),
-      new Button(this, REF_W / 2, 500, { label: 'RESUME', w: 520, onClick: () => this.closeMenu() }),
-      new Button(this, REF_W / 2, 650, {
+      blocker(0x000000, 0.72),
+      panel(REF_W / 2, REF_H / 2, 740, 640, 'normal'),
+      title(REF_W / 2, 305, 'PAUSED', 48, T.gold),
+      new Button(this, REF_W / 2, 435, { label: 'RESUME', w: 520, h: 92, fontSize: 28, onClick: () => this.closeMenu() }),
+      new Button(this, REF_W / 2, 565, {
+        label: 'OPTIONS',
+        sub: 'Audio, Graphics & Gameplay Settings',
+        w: 520,
+        h: 92,
+        fontSize: 28,
+        onClick: () => this.openOptionsModal()
+      }),
+      new Button(this, REF_W / 2, 695, {
         label: 'RETREAT',
         sub: 'Leave the battle',
         w: 520,
+        h: 92,
+        fontSize: 28,
         variant: 'danger',
         onClick: () => {
           this.closeMenu();
@@ -417,9 +430,165 @@ export class BattleScene extends PixiScene<BattleInit> {
   }
 
   private closeMenu(): void {
+    this.closeOptionsModal();
     this.menuLayer?.destroy({ children: true });
     this.menuLayer = null;
     this.anim.timeScale = this.speed;
+  }
+
+  private openOptionsModal(): void {
+    this.closeOptionsModal();
+    const layer = new PIXI.Container();
+    const cx = REF_W / 2;
+    const cy = REF_H / 2;
+    layer.addChild(
+      blocker(0x05020a, 0.85),
+      panel(cx, cy, 1540, 880, 'normal'),
+      title(cx, cy - 365, 'OPTIONS', 46, T.gold)
+    );
+
+    const stepVol = (key: 'musicVolume' | 'sfxVolume' | 'voiceVolume', d: number): void => {
+      const next = Math.min(1, Math.max(0, +(prefs()[key] + d).toFixed(1)));
+      setPref(key, next);
+      if (key === 'musicVolume') Music.setVolume(next);
+      if (key === 'sfxVolume') Sfx.setVolume(next);
+    };
+
+    const sliders: { label: string; get: () => string; dec: () => void; inc: () => void }[] = [
+      { label: 'MUSIC VOLUME', get: () => `${Math.round(prefs().musicVolume * 100)}%`, dec: () => stepVol('musicVolume', -0.1), inc: () => stepVol('musicVolume', 0.1) },
+      { label: 'SFX VOLUME', get: () => `${Math.round(prefs().sfxVolume * 100)}%`, dec: () => stepVol('sfxVolume', -0.1), inc: () => stepVol('sfxVolume', 0.1) },
+      { label: 'VOICE VOLUME', get: () => `${Math.round(prefs().voiceVolume * 100)}%`, dec: () => stepVol('voiceVolume', -0.1), inc: () => stepVol('voiceVolume', 0.1) },
+      {
+        label: 'TEXT SPEED',
+        get: () => prefs().textSpeed.toUpperCase(),
+        dec: () => setPref('textSpeed', ({ slow: 'fast', normal: 'slow', fast: 'normal' } as const)[prefs().textSpeed]),
+        inc: () => setPref('textSpeed', ({ slow: 'normal', normal: 'fast', fast: 'slow' } as const)[prefs().textSpeed])
+      },
+      {
+        label: 'REDUCED MOTION',
+        get: () => (prefs().reducedMotion ? 'ON' : 'OFF'),
+        dec: () => setPref('reducedMotion', !prefs().reducedMotion),
+        inc: () => setPref('reducedMotion', !prefs().reducedMotion)
+      }
+    ];
+
+    sliders.forEach((s, i) => {
+      const y = cy - 230 + i * 104;
+      const lbl = txt(cx - 670, y, s.label, { fontFamily: F.display, fontSize: 24, fontStyle: '600', color: T.text });
+      lbl.anchor.set(0, 0.5);
+      const val = txt(cx - 120, y, s.get(), { fontFamily: F.display, fontSize: 28, fontStyle: '700', color: T.gold }, 0.5);
+      const decBtn = new Button(this, cx - 260, y, {
+        label: '−',
+        w: 96,
+        h: 72,
+        fontSize: 34,
+        onClick: () => {
+          s.dec();
+          val.text = s.get();
+        }
+      });
+      const incBtn = new Button(this, cx + 20, y, {
+        label: '+',
+        w: 96,
+        h: 72,
+        fontSize: 34,
+        onClick: () => {
+          s.inc();
+          val.text = s.get();
+        }
+      });
+      layer.addChild(lbl, val, decBtn, incBtn);
+    });
+
+    const tiers: Prefs['qualityTier'][] = ['auto', 'low', 'medium', 'high'];
+    const layouts: Prefs['battleLayout'][] = ['afk_faithful', 'current', 'arena_lite'];
+    const layoutTag = (l: Prefs['battleLayout']): string => (l === 'afk_faithful' ? 'AFK' : l === 'arena_lite' ? 'ARENA' : 'CURRENT');
+
+    const toggles: { label: () => string; sub: string; active: () => boolean; onClick: (btn: Button) => void }[] = [
+      {
+        label: () => `QUALITY: ${prefs().qualityTier.toUpperCase()}`,
+        sub: 'Graphics Quality Tier',
+        active: () => prefs().qualityTier === 'high',
+        onClick: (btn) => {
+          const next = tiers[(tiers.indexOf(prefs().qualityTier) + 1) % tiers.length]!;
+          setPref('qualityTier', next);
+          btn.setLabel(`QUALITY: ${next.toUpperCase()}`).setVariant(next === 'high' ? 'active' : 'normal');
+        }
+      },
+      {
+        label: () => `LAYOUT: ${layoutTag(prefs().battleLayout)}`,
+        sub: 'Battle Formation Layout',
+        active: () => prefs().battleLayout === 'afk_faithful',
+        onClick: (btn) => {
+          const next = layouts[(layouts.indexOf(prefs().battleLayout) + 1) % layouts.length]!;
+          setPref('battleLayout', next);
+          btn.setLabel(`LAYOUT: ${layoutTag(next)}`).setVariant(next === 'afk_faithful' ? 'active' : 'normal');
+          this.relayout('player');
+          this.relayout('enemy');
+          this.refreshHud();
+        }
+      },
+      {
+        label: () => `TEXT SIZE: ${prefs().textSize.toUpperCase()}`,
+        sub: 'Dialogue & HUD Readability',
+        active: () => prefs().textSize === 'large',
+        onClick: (btn) => {
+          const next = prefs().textSize === 'normal' ? 'large' : 'normal';
+          setPref('textSize', next);
+          btn.setLabel(`TEXT SIZE: ${next.toUpperCase()}`).setVariant(next === 'large' ? 'active' : 'normal');
+        }
+      },
+      {
+        label: () => `FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`,
+        sub: 'Screen Flash Intensity',
+        active: () => prefs().reduceFlash,
+        onClick: (btn) => {
+          setPref('reduceFlash', !prefs().reduceFlash);
+          btn.setLabel(`FLASH: ${prefs().reduceFlash ? 'REDUCED' : 'NORMAL'}`).setVariant(prefs().reduceFlash ? 'active' : 'normal');
+        }
+      },
+      {
+        label: () => `CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STANDARD'}`,
+        sub: 'High Contrast Borders',
+        active: () => prefs().highContrast,
+        onClick: (btn) => {
+          setPref('highContrast', !prefs().highContrast);
+          btn.setLabel(`CONTRAST: ${prefs().highContrast ? 'HIGH' : 'STANDARD'}`).setVariant(prefs().highContrast ? 'active' : 'normal');
+        }
+      }
+    ];
+
+    toggles.forEach((t, i) => {
+      const y = cy - 230 + i * 104;
+      const btn = new Button(this, cx + 410, y, {
+        label: t.label(),
+        sub: t.sub,
+        w: 480,
+        h: 82,
+        fontSize: 22,
+        variant: t.active() ? 'active' : 'normal',
+        onClick: () => t.onClick(btn)
+      });
+      layer.addChild(btn);
+    });
+
+    layer.addChild(
+      new Button(this, cx, cy + 345, {
+        label: 'BACK TO MENU',
+        w: 440,
+        h: 86,
+        fontSize: 26,
+        variant: 'hot',
+        onClick: () => this.closeOptionsModal()
+      })
+    );
+
+    this.optionsLayer = this.add(layer, DEPTH.modal + 5);
+  }
+
+  private closeOptionsModal(): void {
+    this.optionsLayer?.destroy({ children: true });
+    this.optionsLayer = null;
   }
 
   // ------------------------------------------------------------------ main loop
@@ -511,9 +680,11 @@ export class BattleScene extends PixiScene<BattleInit> {
     const actor = this.battle.unit(prompt.actor);
     const layer = new PIXI.Container();
     const n = prompt.options.length;
-    const w = 380;
-    const gap = 24;
+    const w = 286;
+    const h = 88;
+    const gap = 36;
     const x0 = REF_W / 2 - ((n - 1) * (w + gap)) / 2;
+    const barY = spec.skillBarY - insets.bottom;
     const passive = actor.def.skills.find((s) => s.type === 'passive');
     const turnBanner = `${actor.def.name_en.toUpperCase()}'S TURN`;
     this.hintText.text = turnBanner;
@@ -521,17 +692,55 @@ export class BattleScene extends PixiScene<BattleInit> {
     this.descText.text = passive ? `Passive — ${passive.name_en}: ${passive.description_en}` : '';
     this.descText.style.fill = '#dfd6ec';
     this.updateHudPills();
+
+    // Subtle Gothic skill dock rail behind the compact tactical skill cards
+    const dockW = n * w + (n - 1) * gap + 48;
+    const dock = new PIXI.Graphics()
+      .chamferRect(REF_W / 2 - dockW / 2, barY - h / 2 - 8, dockW, h + 16, 14)
+      .fill({ color: 0x08040e, alpha: 0.62 })
+      .stroke({ width: 1.5, color: C.gold, alpha: 0.35 });
+    layer.addChild(dock);
+
+    const reduced = prefs().reducedMotion;
     prompt.options.forEach((o, i) => {
-      const label = o.type === 'ultimate' ? 'ULTIMATE' : o.type === 'basic' ? 'BASIC' : 'SKILL';
-      const sub = !o.available ? (o.reason === 'cooldown' ? `Cooldown ${o.cooldownLeft}` : `Focus ${actor.focus}/${o.def.focus_cost}`) : label;
-      const b = new Button(this, x0 + i * (w + gap), spec.skillBarY - insets.bottom, { label: o.name.toUpperCase(), sub, w, h: 128, fontSize: 28, variant: o.type === 'ultimate' ? 'hot' : 'normal', onClick: () => this.onSkillTapped(o) });
+      const isUlt = o.type === 'ultimate';
+      const label = isUlt ? '★ ULTIMATE' : o.type === 'basic' ? 'BASIC' : 'SKILL';
+      const sub = !o.available ? (o.reason === 'cooldown' ? `CD ${o.cooldownLeft}T` : `FOCUS ${actor.focus}/${o.def.focus_cost}`) : label;
+      const defaultVariant: 'normal' | 'hot' = isUlt ? 'hot' : 'normal';
+      const bx = x0 + i * (w + gap);
+
+      // Glowing golden-crimson astrolabe aura behind a ready Ultimate button
+      if (isUlt && o.available && !reduced) {
+        const halo = new PIXI.Graphics();
+        halo.chamferRect(-w / 2 - 5, -h / 2 - 5, w + 10, h + 10, 14).stroke({ width: 2.5, color: C.goldHi, alpha: 0.85 });
+        halo.position.set(bx, barY);
+        layer.addChild(halo);
+        this.anim.to(halo, { alpha: { from: 0.35, to: 0.95 }, scaleX: { from: 0.99, to: 1.03 }, scaleY: { from: 0.99, to: 1.05 } }, { duration: 760, yoyo: true, repeat: -1, ease: 'sine.inout' });
+      }
+
+      const b = new Button(this, bx, barY, {
+        label: o.name.toUpperCase(),
+        sub,
+        w,
+        h,
+        fontSize: 22,
+        variant: defaultVariant,
+        onClick: () => this.onSkillTapped(o)
+      });
       b.setEnabled(o.available);
+      if (!reduced) {
+        b.y = barY + 18;
+        b.alpha = 0;
+        this.anim.to(b, { y: barY, alpha: o.available ? 1 : 0.44 }, { duration: 210, delay: i * 45, ease: 'back.out' });
+      }
+      this.skillButtons.set(o.skillId, { btn: b, baseY: barY, defaultVariant });
       layer.addChild(b);
     });
     this.skillLayer = this.add(layer, DEPTH.hud);
   }
 
   private clearSkillPanel(): void {
+    this.skillButtons.clear();
     this.skillLayer?.destroy({ children: true });
     this.skillLayer = null;
     this.selected = null;
@@ -551,6 +760,14 @@ export class BattleScene extends PixiScene<BattleInit> {
     }
     this.selected = o;
     Sfx.confirm();
+    // Highlight the selected skill card with the 'active' variant and a subtle upward lift
+    for (const [id, entry] of this.skillButtons) {
+      const isSel = id === o.skillId;
+      entry.btn.setVariant(isSel ? 'active' : entry.defaultVariant);
+      if (!prefs().reducedMotion) {
+        this.anim.to(entry.btn, { y: isSel ? entry.baseY - 8 : entry.baseY }, { duration: 150, ease: 'back.out' });
+      }
+    }
     for (const v of this.views.values()) v.setSelectable(false);
     this.descText.style.fill = T.text;
     this.descText.text = o.def.description_en;
@@ -655,16 +872,21 @@ export class BattleScene extends PixiScene<BattleInit> {
     });
   }
 
-  private banner(text: string, ultimate: boolean): void {
+  private banner(text: string, ultimate: boolean, activeSkill = false): void {
     this.bannerBox?.destroy({ children: true });
     const box = new PIXI.Container();
-    box.addChild(panel(0, 0, Math.min(1100, 260 + text.length * 30), ultimate ? 120 : 88, ultimate ? 'hot' : 'normal'), title(0, 0, text.toUpperCase(), ultimate ? 52 : 38, ultimate ? T.gold : T.text));
-    box.position.set(REF_W / 2, 275);
+    const isHot = ultimate || activeSkill;
+    box.addChild(
+      panel(0, 0, Math.min(1100, 260 + text.length * 30), ultimate ? 120 : activeSkill ? 96 : 84, isHot ? 'hot' : 'normal'),
+      title(0, 0, text.toUpperCase(), ultimate ? 52 : activeSkill ? 40 : 34, isHot ? T.gold : T.text)
+    );
+    box.position.set(REF_W / 2, 265);
     box.alpha = 0;
+    box.scale.set(isHot ? 1.16 : 1.04);
     this.bannerBox = this.add(box, DEPTH.modal - 20);
-    this.anim.to(box, { alpha: 1, y: 290 }, { duration: 180 });
+    this.anim.to(box, { alpha: 1, y: 282, scaleX: 1, scaleY: 1 }, { duration: 190, ease: 'back.out' });
     this.anim.to(box, { alpha: 0 }, {
-      delay: ultimate ? 900 : 560,
+      delay: ultimate ? 900 : activeSkill ? 640 : 520,
       duration: 240,
       onComplete: () => {
         if (this.bannerBox === box) this.bannerBox = null;
@@ -728,10 +950,11 @@ export class BattleScene extends PixiScene<BattleInit> {
           if (!noFlash) {
             dim = this.add(new PIXI.Graphics().rect(0, 0, REF_W, REF_H).fill(0x07040c), DEPTH.units + 1100);
             dim.alpha = 0;
-            this.anim.to(dim, { alpha: 0.58 }, { duration: 240 });
+            this.anim.to(dim, { alpha: 0.68 }, { duration: 240 });
             v.setDepth(DEPTH.units + 1150);
-            this.zoomTo(1.06, 280);
+            this.zoomTo(1.075, 280);
           }
+          v.playCast(true);
           let portraitKey: string | null = null;
           try {
             const artLib = Services.ready().art;
@@ -741,36 +964,56 @@ export class BattleScene extends PixiScene<BattleInit> {
             /* the cut-in falls back to the chibi pose */
           }
           await BattleVfx.ultimateCutIn(this, {
+            unitId: actorUnit.def.unit_id,
             unitName: actorUnit.def.name_en,
             skillName: def?.name_en ?? e.skill,
             element,
             side: v.side,
             portraitKey,
             flipPortrait: v.side === 'player' ? actorUnit.def.unit_id === 'fadyme' : actorUnit.def.unit_id !== 'fadyme',
-            poseTexture: v.poseTexture
+            poseTexture: v.poseTexture,
+            casterPos: { x: v.x, y: v.y }
           });
           v.playCast(true);
-          // a content patch may assign its own preset to this skill (vfx/vfx_presets.json `skills`)
+          // Multi-wave cataclysmic Ultimate impact across all targets
+          const elColor = ELEMENT_COLOR[element] ?? C.goldHi;
+          this.ringPulse(v.x, v.hitPoint.y, elColor, 260);
+          this.burst(v.x, v.hitPoint.y, elColor, 22);
+          if (!noFlash) this.shake(260, 0.0085);
           const customUlt = BattleVfx.skillPreset(this, e.skill);
           if (customUlt) {
             for (const tid of e.targets) {
               const tv = this.views.get(tid);
-              if (tv) void BattleVfx.playPreset(this, customUlt, { x: tv.x, y: tv.y, element, dir: v.side === 'player' ? 1 : -1 });
+              if (tv) {
+                this.ringPulse(tv.x, tv.hitPoint.y, elColor, 220);
+                this.burst(tv.hitPoint.x, tv.hitPoint.y, elColor, 18);
+                void BattleVfx.playPreset(this, customUlt, { x: tv.x, y: tv.y, element, dir: v.side === 'player' ? 1 : -1 });
+              }
             }
           } else {
-            if (actorUnit.def.unit_id === 'fadyme') BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, 1.4);
-            else if (actorUnit.def.unit_id === 'mahmut') BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, 1.35);
+            if (actorUnit.def.unit_id === 'fadyme') BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, 1.55);
+            else if (actorUnit.def.unit_id === 'mahmut') BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, 1.5);
             for (const tid of e.targets) {
               const tv = this.views.get(tid);
               if (!tv) continue;
-              if (tv.side !== v.side) BattleVfx.pillarEruption(this, tv.x, tv.y, element);
-              else BattleVfx.castSigil(this, tv.x, tv.y - 12, element, 1.3);
+              this.ringPulse(tv.x, tv.hitPoint.y, elColor, 210);
+              this.burst(tv.hitPoint.x, tv.hitPoint.y, elColor, 16);
+              if (tv.side !== v.side) BattleVfx.pillarEruption(this, tv.x, tv.y, element, 1.25);
+              else BattleVfx.castSigil(this, tv.x, tv.y - 12, element, 1.4);
             }
           }
           this.lunged = { view: v, dim };
-          await this.wait(320);
+          await this.wait(360);
         } else {
-          this.banner(def?.name_en ?? e.skill, false);
+          const isActive = e.skillType === 'active';
+          const elColor = ELEMENT_COLOR[element] ?? C.silver;
+          this.banner(def?.name_en ?? e.skill, false, isActive);
+          if (isActive) {
+            if (!noFlash) this.zoomTo(1.035, 190);
+            BattleVfx.castSigil(this, v.x, v.y - 8, element, 1.18, 560);
+            this.ringPulse(v.x, v.hitPoint.y, elColor, 195);
+            this.burst(v.x, v.hitPoint.y, elColor, 16);
+          }
           const customSkill = BattleVfx.skillPreset(this, e.skill);
           if (customSkill) {
             if (opp && !isCaster) await v.playDashTo(opp.x + (v.side === 'player' ? -135 : 135), opp.y);
@@ -781,20 +1024,30 @@ export class BattleScene extends PixiScene<BattleInit> {
           }
           if (v.side === 'player' && actorUnit.def.unit_id === 'fadyme') {
             Sfx.cast();
-            BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, e.skillType === 'active' ? 1.15 : 0.9);
+            BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, isActive ? 1.3 : 0.95);
           } else if (v.side === 'player' && actorUnit.def.unit_id === 'mahmut') {
-            if (e.skillType === 'active') Sfx.shieldBash();
-            BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, e.skillType === 'active' ? 1.15 : 0.85);
+            if (isActive) Sfx.shieldBash();
+            BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, isActive ? 1.3 : 0.9);
+          } else if (isActive) {
+            Sfx.cast();
           }
           this.lunged = { view: v, dim: null };
           if (opp && !isCaster) {
             await v.playDashTo(opp.x + (v.side === 'player' ? -135 : 135), opp.y);
+            if (isActive) {
+              BattleVfx.pillarEruption(this, opp.x, opp.y, element, 0.95);
+              this.ringPulse(opp.hitPoint.x, opp.hitPoint.y, elColor, 180);
+            }
           } else if (opp && isCaster) {
             v.playCast(false);
-            await BattleVfx.projectile(this, v.x + (v.side === 'player' ? 40 : -40), v.hitPoint.y, opp.hitPoint.x, opp.hitPoint.y, element, e.skillType === 'active');
+            await BattleVfx.projectile(this, v.x + (v.side === 'player' ? 40 : -40), v.hitPoint.y, opp.hitPoint.x, opp.hitPoint.y, element, isActive);
+            if (isActive) {
+              BattleVfx.pillarEruption(this, opp.x, opp.y, element, 0.95);
+              this.ringPulse(opp.hitPoint.x, opp.hitPoint.y, elColor, 180);
+            }
           } else {
             v.playCast(false);
-            this.ringPulse(v.x, v.y - 120, ELEMENT_COLOR[element] ?? C.silver, 175);
+            this.ringPulse(v.x, v.y - 120, elColor, isActive ? 220 : 175);
             await this.wait(280);
           }
         }
