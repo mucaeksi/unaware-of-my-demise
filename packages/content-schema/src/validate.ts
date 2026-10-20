@@ -1,6 +1,6 @@
 import { PRESENTATION_PATH, PresentationPack, PresentationCommand, LocalePack, EventSchedule, ShopSchedule } from './presentation';
 import { VFX_PATH, VfxPack } from './vfx';
-import { MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES } from './primitives';
+import { MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES, MAX_VIDEO_BYTES } from './primitives';
 import { CATALOG_PATH, MAX_CATALOG_BYTES, EconomyCatalog, catalogContentProblems } from './catalog';
 import { ArtManifest } from './art';
 import { EntryIndex, Prologue } from './entry';
@@ -402,6 +402,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     for (const [id, sound] of Object.entries(profile.sounds)) if (!files.has(sound.file)) problems.push(`sound ${id}: missing audio`);
     for (const [id, video] of Object.entries(profile.videos)) {
       if (!files.has(video.file)) problems.push(`video ${id}: missing media`);
+      else if (files.get(video.file)!.byteLength > MAX_VIDEO_BYTES) problems.push(`video ${id}: exceeds the 20 MiB per-video budget`);
       if (video.poster_id && !exists(art?.stills, video.poster_id)) problems.push(`video ${id}: unknown poster`);
       for (const cue of video.captions) if (lines.get(cue.line_id) !== cue.text_en) problems.push(`video ${id}: captions differ from their stable English lines`);
     }
