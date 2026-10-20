@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "regions": [
+    {
+      "region_id": "forest_whispering_ash",
+      "chapter_id": "ch01_whispering_ash_forest",
+      "chapter_number": 1,
+      "title_en": "Whispering Ash Forest",
+      "part": 1,
+      "x": 390,
+      "y": 690
+    },
+    {
+      "region_id": "cathedral_saint_luthos",
+      "chapter_id": "ch02_ruined_cathedral_of_saint_luthos",
+      "chapter_number": 2,
+      "title_en": "The Ruined Cathedral of Saint Luthos",
+      "part": 1,
+      "x": 580,
+      "y": 520
+    },
+    {
+      "region_id": "village_oakhaven",
+      "chapter_id": "ch03_oakhaven_red_harvest",
+      "chapter_number": 3,
+      "title_en": "Oakhaven, the Red Harvest",
+      "part": 1,
+      "x": 770,
+      "y": 680
+    },
+    {
+      "region_id": "undercity_subterranean",
+      "chapter_id": "ch04_subterranean_undercity",
+      "chapter_number": 4,
+      "title_en": "The Subterranean Undercity",
+      "part": 1,
+      "x": 960,
+      "y": 500
+    },
+    {
+      "region_id": "bridge_forsaken",
+      "chapter_id": "ch05_bridge_forsaken",
+      "chapter_number": 5,
+      "title_en": "The Bridge of the Forsaken",
+      "part": 1,
+      "x": 1150,
+      "y": 660
+    },
+    {
+      "region_id": "estate_ashen_lord",
+      "chapter_id": "ch06_ashen_lord_estate",
+      "chapter_number": 6,
+      "title_en": "The Ashen Lord's Estate",
+      "part": 1,
+      "x": 1340,
+      "y": 480
+    },
+    {
+      "region_id": "altar_first_eclipse",
+      "chapter_id": "ch07_altar_first_eclipse",
+      "chapter_number": 7,
+      "title_en": "The Altar of the First Eclipse",
+      "part": 1,
+      "x": 1530,
+      "y": 640
+    },
+    {
+      "region_id": "lowland_refuge",
+      "title_en": "Lowland Refuge",
+      "part": 1,
+      "x": 600,
+      "y": 820
+    },
+    {
+      "region_id": "kiln_town",
+      "title_en": "Kiln Town",
+      "part": 1,
+      "x": 790,
+      "y": 340
+    },
+    {
+      "region_id": "salt_road_coast",
+      "title_en": "Salt Road Coast",
+      "part": 1,
+      "x": 1000,
+      "y": 820
+    },
+    {
+      "region_id": "highland_ridge",
+      "title_en": "Highland Ridge",
+      "part": 1,
+      "x": 1360,
+      "y": 310
+    }
+  ],
+  "roads": [
+    {
+      "from": "forest_whispering_ash",
+      "to": "cathedral_saint_luthos",
+      "kind": "main"
+    },
+    {
+      "from": "cathedral_saint_luthos",
+      "to": "village_oakhaven",
+      "kind": "main"
+    },
+    {
+      "from": "village_oakhaven",
+      "to": "undercity_subterranean",
+      "kind": "main"
+    },
+    {
+      "from": "undercity_subterranean",
+      "to": "bridge_forsaken",
+      "kind": "main"
+    },
+    {
+      "from": "bridge_forsaken",
+      "to": "estate_ashen_lord",
+      "kind": "main"
+    },
+    {
+      "from": "estate_ashen_lord",
+      "to": "altar_first_eclipse",
+      "kind": "main"
+    },
+    {
+      "from": "cathedral_saint_luthos",
+      "to": "lowland_refuge",
+      "kind": "side"
+    },
+    {
+      "from": "village_oakhaven",
+      "to": "kiln_town",
+      "kind": "side"
+    },
+    {
+      "from": "undercity_subterranean",
+      "to": "salt_road_coast",
+      "kind": "side"
+    },
+    {
+      "from": "estate_ashen_lord",
+      "to": "highland_ridge",
+      "kind": "side"
+    }
+  ]
+}

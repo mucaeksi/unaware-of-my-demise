@@ -5,6 +5,8 @@ import {
   PresentationPack,
   VFX_PATH,
   VfxPack,
+  WORLD_MAP_PATH,
+  WorldMap,
   LocalePack,
   ArtManifest,
   ChapterIndex,
@@ -200,6 +202,8 @@ export class ContentService {
   }
   /** combat VFX presets (base content, overridable by patches); null when the active content predates vfx_v1 */
   async vfx(): Promise<VfxPack | null> { return await this.has(VFX_PATH) ? this.json(VFX_PATH, VfxPack) : null; }
+  /** the world-map main menu (D-29); absent before the first chapter patch, when the hub falls back to its grid */
+  async worldMap(): Promise<WorldMap | null> { return await this.has(WORLD_MAP_PATH) ? this.json(WORLD_MAP_PATH, WorldMap) : null; }
   async presentation(): Promise<PresentationPack> { return await this.has(PRESENTATION_PATH) ? this.json(PRESENTATION_PATH, PresentationPack) : PresentationPack.parse({ schema_version: 1 }); }
   async locale(locale = prefs().locale): Promise<LocalePack | undefined> {
     const profile = await this.presentation();

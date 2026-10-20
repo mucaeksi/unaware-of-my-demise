@@ -18,6 +18,16 @@ export class ChaptersScene extends HubScreen {
   protected override readonly needsSignIn = false;
   protected override readonly usesWallet = false;
   protected override readonly backTo = 'Title';
+  /** opened from a world-map region: scroll to that chapter and go back to the map */
+  private chapterId: string | null = null;
+
+  protected override init(data: { chapterId?: string }): void {
+    this.chapterId = typeof data.chapterId === 'string' ? data.chapterId : null;
+  }
+
+  protected override goBack(): void {
+    this.nav.start(this.chapterId ? 'Home' : this.backTo);
+  }
 
   protected async build(): Promise<void> {
     const api = Services.api;
@@ -45,7 +55,9 @@ export class ChaptersScene extends HubScreen {
     const hasCampaign = index.chapters.some((ch) => ch.chapter_id !== 'tutorial');
     let y = 240;
     let firstOpen = -1;
+    let picked = -1;
     for (const ch of index.chapters) {
+      if (ch.chapter_id === this.chapterId) picked = y - 120;
       const isTutorial = ch.chapter_id === 'tutorial';
       const revealed = (isTutorial && entryDone) || ch.nodes.some((node) => progress[node.node_id] || !node.requires || progress[node.requires]);
       const heading = isTutorial && entryDone ? `${ch.title_en} · Replay` : revealed ? ch.title_en : 'Locked chapter';
@@ -65,7 +77,7 @@ export class ChaptersScene extends HubScreen {
       y += 24;
     }
     sc.setContentHeight(y + 160 - TOP);
-    sc.scrollTo(Math.max(0, (firstOpen < 0 ? 0 : firstOpen) - 420));
+    sc.scrollTo(Math.max(0, picked >= 0 ? picked - TOP : (firstOpen < 0 ? 0 : firstOpen) - 420));
   }
 
   private starBar(sc: DomScroll, y: number, earned: number, max: number): void {

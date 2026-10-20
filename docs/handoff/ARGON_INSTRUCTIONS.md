@@ -62,6 +62,14 @@ Short, binding rules for working in this repository alongside Claude. They come 
 | Control Center default page | Confirm the signed-out Animations studio is wanted on staging/production; if not, gate it to local dev. |
 | Music (later) | Chapters 2–7 and the boss fights have no own themes (7 tracks today). After ART-1, within the budget. |
 
+**Release visuals (D-29, [RELEASE_ROADMAP](../RELEASE_ROADMAP.md)): all visual work is Argon's.** Order: ART-1 pilot first, then these in this order.
+
+| Task | What the code expects | Deliverable |
+|---|---|---|
+| ART-2 World map | The hub draws the map from `world/world_map.json` (built by `tools/build_world_map.ts`): 7 chapter regions on the west→east Bell Road and 4 side-road landmarks, at fixed 1920×1080 coordinates (see the tool). The hub buttons occupy x < 250, x > 1670 and y > 950, so the painting's important parts must sit inside the middle. Set `background_id` to the new background once it is ingested. | One painted Part I map of Veyrhold (16:9, ingest class `background`, exported 1920×1080) that matches canon ([WORLD_ATLAS §2](../../narrative/08_Locations/WORLD_ATLAS_AND_GENIE_BIBLE_TR.md)); no Part II/III names (spoilers). Optional later: a fog/locked overlay style and node icons. |
+| ART-3 Store listing | Play Console specs in RELEASE_ROADMAP §2. | App icon 512×512 (32-bit PNG, alpha, ≤ 1 MB, full square, no text claims); feature graphic 1024×500 (no alpha); 4–8 landscape phone screenshots from real builds (Claude can script captures from the e2e stack on request). |
+| ART-4 Teaser video | YouTube URL in the listing; ~1:30, no later-chapter spoilers. Owner direction: mostly in-game capture, few generated shots (the media budget does not cover a generated 1:30). | Storyboard first (for the owner's approval), then the edit. |
+
 Done since the morning: Garrick/Corbin banners (`67b1c969`); the 25 signature weapon designs ([SIGNATURE_WEAPONS_SPEC](../combat/SIGNATURE_WEAPONS_SPEC.md)), approved by the owner and now live in battle data.
 
 ## 6. Claude's current queue (do not duplicate)

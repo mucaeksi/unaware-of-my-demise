@@ -8,6 +8,7 @@ import type { Predicate } from './effects';
 import { ChapterIndex, Encounter, StoryScene } from './story';
 import { UnitPack } from './units';
 import { NarrativeLibrary } from './library';
+import { WORLD_MAP_PATH, WorldMap } from './world';
 
 export class ContentValidationError extends Error {
   constructor(readonly problems: string[]) {
@@ -426,6 +427,12 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
     const vfx = parse(VFX_PATH, VfxPack);
     const skills = new Set([...units.values()].flatMap((u) => u.skills.map((skill) => skill.skill_id)));
     for (const skill of Object.keys(vfx?.skills ?? {})) if (!skills.has(skill)) problems.push(`vfx: unknown skill ${skill}`);
+  }
+  if (files.has(WORLD_MAP_PATH)) {
+    const map = parse(WORLD_MAP_PATH, WorldMap);
+    // a chapter region not in the index is "coming soon"; one in the index must be a real chapter, never the tutorial
+    if (map?.background_id && !exists(art?.backgrounds, map.background_id)) problems.push(`world map: unknown background ${map.background_id}`);
+    if (map && index) for (const r of map.regions) if (r.chapter_id === 'tutorial') problems.push('world map: the tutorial is not a map region');
   }
   // Every admitted JSON document gets a closed grammar, including unlinked resources.
   for (const path of files.keys()) if (path.endsWith('.json') && !parsedPaths.has(path)) {

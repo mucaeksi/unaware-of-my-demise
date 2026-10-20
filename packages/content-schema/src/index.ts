@@ -13,3 +13,4 @@ export * from './catalog';
 
 export * from './presentation';
 export * from './vfx';
+export * from './world';
