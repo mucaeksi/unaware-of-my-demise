@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ArtManifest, EconomyCatalog, MEDIA_TYPE_BY_EXTENSION, type AllowedExtension } from '@uomd/content-schema';
 import { sha256Hex } from '@uomd/shared';
-import { expect, type APIRequestContext } from '@playwright/test';
+import { expect, type APIRequestContext, type APIResponse } from '@playwright/test';
 import { ADMIN } from './helpers';
 const run = promisify(execFile); const root = fileURLToPath(new URL('../../', import.meta.url));
 export const HERO = 'r08_probe_hero'; export const HERO_FIVE = 'r08_probe_five'; export const INVITATION = 'r08_probe_invitation'; export const ARMOR = 'r08_probe_armor'; export const BANNER = 'r08_probe_banner'; export const NODE = 'r08_probe_battle';
@@ -90,16 +90,28 @@ export async function publishFixture(request: APIRequestContext, id: string) {
       toUpload.push({ path, sha256, bytes });
     }
   }
-  for (let i = 0; i < toUpload.length; i += 8) {
-    await Promise.all(toUpload.slice(i, i + 8).map(async ({ path, sha256, bytes }) => {
-      // content-addressed, so a retry is safe; the local workerd stack sometimes drops one of the parallel uploads ("Network connection lost")
-      let result = await request.put(`${ADMIN}/admin/api/objects/${sha256}`, { headers: { ...headers, 'Content-Type': MEDIA_TYPE_BY_EXTENSION[path.split('.').pop() as AllowedExtension] }, data: Buffer.from(bytes) });
-      for (let attempt = 1; attempt < 3 && result.status() >= 500; attempt++) result = await request.put(`${ADMIN}/admin/api/objects/${sha256}`, { headers: { ...headers, 'Content-Type': MEDIA_TYPE_BY_EXTENSION[path.split('.').pop() as AllowedExtension] }, data: Buffer.from(bytes) });
+  // the local workerd stack sometimes drops a request ("Network connection lost" 5xx, or a reset connection); every call here
+  // is idempotent (content-addressed objects, a fixed release id), so it is retried a few times before failing
+  const retried = async (call: () => Promise<APIResponse>): Promise<APIResponse> => {
+    for (let attempt = 0; ; attempt++) {
+      try {
+        const result = await call();
+        if (result.status() < 500 || attempt >= 3) return result;
+      } catch (error) {
+        if (attempt >= 3) throw error;
+      }
+      await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+    }
+  };
+  for (let i = 0; i < toUpload.length; i += 4) {
+    await Promise.all(toUpload.slice(i, i + 4).map(async ({ path, sha256, bytes }) => {
+      const result = await retried(() => request.put(`${ADMIN}/admin/api/objects/${sha256}`, { headers: { ...headers, 'Content-Type': MEDIA_TYPE_BY_EXTENSION[path.split('.').pop() as AllowedExtension] }, data: Buffer.from(bytes) }));
       expect(result.ok(), `${path}: ${result.status()} ${result.ok() ? '' : await result.text()}`).toBe(true);
     }));
   }
-  const created = await request.post(`${ADMIN}/admin/api/releases`, { headers, data: { id, channel: 'dev', files: entries, notes: 'Synthetic R08 integration fixture only' } }); expect(created.status(), await created.text()).toBe(201);
-  const published = await request.post(`${ADMIN}/admin/api/releases/${id}/publish`, { headers, data: {} }); expect(published.status(), await published.text()).toBe(200);
+  const created = await retried(() => request.post(`${ADMIN}/admin/api/releases`, { headers, data: { id, channel: 'dev', files: entries, notes: 'Synthetic R08 integration fixture only' } }));
+  expect([201, 409], await created.text()).toContain(created.status()); // 409: an earlier attempt created it before its response was lost
+  const published = await retried(() => request.post(`${ADMIN}/admin/api/releases/${id}/publish`, { headers, data: {} })); expect(published.status(), await published.text()).toBe(200);
   // A local readable fixture artifact, useful when a regression fails; contains no credentials.
   writeFileSync(join(dir, `${id}.summary.json`), JSON.stringify({ releaseId: id, files: entries.length, hero: HERO }));
   return { pack, encounter, headers };
