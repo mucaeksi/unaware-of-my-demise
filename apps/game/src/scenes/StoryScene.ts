@@ -11,7 +11,6 @@ import { PixiScene } from '../core/PixiScene';
 import { prefs } from '../platform/prefs';
 import { safeInsets } from '../platform/safeArea';
 import { CUTSCENE, cutsceneHoldSeconds, cutscenePauseSeconds } from '../entry/cutscene';
-import { isDevServer } from '../entry/state';
 import { clearStoryCheckpoint, loadFlowCheckpoint, loadReadLines, loadStoryCheckpoint, saveReadLines, saveStoryCheckpoint } from '../entry/resume';
 import { Services } from '../services';
 import { blocker, Button, panel, sceneFadeIn, title, toast, txt, verticalShade, type UiText } from '../ui/pixiKit';
