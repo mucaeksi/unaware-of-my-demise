@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "mahmut",
+      "character": "kera_voss",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
     },
     {
       "op": "say",

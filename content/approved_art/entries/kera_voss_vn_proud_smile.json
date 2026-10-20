@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "asset_id": "kera_voss_vn_proud_smile",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "kera_voss": {
+        "emotions": {
+          "proud_smile": "proud_smile",
+          "proud": "proud_smile",
+          "smug": "proud_smile",
+          "tsundere": "proud_smile",
+          "flustered": "proud_smile",
+          "defensive": "proud_smile"
+        },
+        "images": {
+          "proud_smile": "art/portrait_kera_voss_proud_smile.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "d0deafe2503d9a5c98cdd4a1d4bec7ce141958dcb516c9328cadeeb4ce004817",
+    "mime": "image/png",
+    "width": 960,
+    "height": 1440,
+    "provenance_file": ".cache/generated/kera_voss_vn_proud_smile/run.provenance.json",
+    "provenance_sha256": "0dd51df7575b0cc5005811055e3a7ee2f69e4f76cb2ffa52ce209b84ffde1338",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "84ea433017884b8cfa1c4109dfe162d18bb7143307c70e2d607ad6c67915d34e",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/kera_voss_vn_proud_smile.ingest.json",
+    "spec_sha256": "5634284ee1dc6c86c6ac675db8f67ce497040c1b9ac816a15341858b93de5ceb",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "18d055af01d9dd6d77f7e420b8c961c7e1ae80ec501ddc78a646a4403031e7b9"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_kera_voss_proud_smile.webp",
+      "sha256": "9300bdf4b74610c82ddb572f8b4d93caef08a8f2b6ce82e889b4fcd714901923",
+      "pixels_sha256": "4af160c9e2600e862448e30d8dd446fc81dd26ff2e8f9eff504430ecc935cae1",
+      "bytes": 64202,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 960x1440"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=4"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "64202 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0033%"
+        }
+      },
+      "warnings": [
+        "A12: removed 4 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_kera_voss_proud_smile.webp",
+          "sha256": "9300bdf4b74610c82ddb572f8b4d93caef08a8f2b6ce82e889b4fcd714901923",
+          "pixels_sha256": "4af160c9e2600e862448e30d8dd446fc81dd26ff2e8f9eff504430ecc935cae1",
+          "bytes": 64202,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "d0deafe2503d9a5c98cdd4a1d4bec7ce141958dcb516c9328cadeeb4ce004817",
+      "fingerprint": "18d055af01d9dd6d77f7e420b8c961c7e1ae80ec501ddc78a646a4403031e7b9"
+    }
+  ]
+}

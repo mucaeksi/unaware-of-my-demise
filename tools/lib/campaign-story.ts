@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { Id, LineId, StoryScene, type StoryCommand, type ChapterIndex, type Encounter, type UnitPack } from '../../packages/content-schema/src/index';
-import { fileBytes, sha256 } from './fsutil';
+import { campaignPortraitIds, fileBytes, sha256 } from './fsutil';
 
 const ROOT = 'narrative/02_Main_Story';
 const Line = z.object({ line_id: LineId, speaker_id: Id, speaker_display: z.string().min(1).max(40), text_en: z.string().min(1).max(600),
@@ -45,7 +45,7 @@ export function canonicalStorySources(): StorySources {
 }
 
 /** Compile spoken lines/order from canon; snapshot mechanics and source prose never become executable code. */
-export function compileCampaignStory(sources = canonicalStorySources(), portraits: ReadonlySet<string> = new Set(['mahmut', 'fadyme'])): {
+export function compileCampaignStory(sources = canonicalStorySources(), portraits: ReadonlySet<string> = campaignPortraitIds()): {
   entries: CampaignStoryEntry[]; files: Map<string, StoryScene>; coverage: NonNullable<ChapterIndex['story_coverage']>; selectors: NonNullable<ChapterIndex['recruit_selectors']>
 } {
   const manifest = Manifest.parse(decode(sources.manifest));

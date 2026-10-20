@@ -218,6 +218,109 @@
         ]
       }
     },
+    "atlas_kera_voss": {
+      "image": "art/atlas_kera_voss.webp",
+      "width": 1904,
+      "height": 1050,
+      "frames": {
+        "idle": [
+          4,
+          4,
+          226,
+          349
+        ],
+        "idle_2": [
+          234,
+          4,
+          226,
+          349
+        ],
+        "idle_3": [
+          464,
+          4,
+          226,
+          349
+        ],
+        "ultimate": [
+          694,
+          4,
+          320,
+          349
+        ],
+        "ultimate_2": [
+          1018,
+          4,
+          320,
+          349
+        ],
+        "ultimate_3": [
+          1342,
+          4,
+          320,
+          349
+        ],
+        "active": [
+          1666,
+          4,
+          234,
+          346
+        ],
+        "active_2": [
+          4,
+          357,
+          234,
+          346
+        ],
+        "active_3": [
+          242,
+          357,
+          234,
+          346
+        ],
+        "basic": [
+          480,
+          357,
+          288,
+          346
+        ],
+        "basic_2": [
+          772,
+          357,
+          288,
+          346
+        ],
+        "basic_3": [
+          1064,
+          357,
+          288,
+          346
+        ],
+        "victory": [
+          1356,
+          357,
+          253,
+          341
+        ],
+        "defeat": [
+          1613,
+          357,
+          266,
+          339
+        ],
+        "hit": [
+          4,
+          707,
+          234,
+          339
+        ],
+        "walk": [
+          242,
+          707,
+          229,
+          339
+        ]
+      }
+    },
     "atlas_objective": {
       "image": "art/atlas_objective.webp",
       "width": 192,
@@ -564,7 +667,7 @@
       }
     },
     "kera_voss": {
-      "atlas": "atlas_hero_arcanist",
+      "atlas": "atlas_kera_voss",
       "facing": "right",
       "height_px": 248,
       "states": {
@@ -572,49 +675,92 @@
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.414
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.584
         },
         "walk": {
-          "frame": "idle",
+          "frame": "walk",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.414
+          "pivot_x": 0.483
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.267
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.355
         },
         "active": {
-          "frame": "basic",
+          "frame": "active",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.267
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.53
         },
         "ultimate": {
           "frame": "ultimate",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.429
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.397
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.422
+          "pivot_x": 0.398
         },
         "defeat": {
-          "frame": "hit",
+          "frame": "defeat",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.422
+          "pivot_x": 0.468
         },
         "victory": {
-          "frame": "ultimate",
+          "frame": "victory",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.429
+          "pivot_x": 0.508
         }
       }
     },
@@ -3951,6 +4097,47 @@
         "resolve": "art/portrait_fadyme_resolve.webp",
         "warm": "art/portrait_fadyme_warm.webp",
         "wry": "art/portrait_fadyme_wry.webp"
+      }
+    },
+    "kera_voss": {
+      "emotions": {
+        "composed": "composed",
+        "steady": "composed",
+        "thoughtful": "composed",
+        "careful": "composed",
+        "low": "composed",
+        "tired": "composed",
+        "gentle": "composed",
+        "honest": "composed",
+        "gruff": "composed",
+        "defiant": "defiant",
+        "furious": "defiant",
+        "fierce": "defiant",
+        "bitter": "defiant",
+        "indignant": "defiant",
+        "stunned": "defiant",
+        "ashamed": "defiant",
+        "breaking": "defiant",
+        "focused": "focused",
+        "brisk": "focused",
+        "sharp": "focused",
+        "serious": "focused",
+        "impatient": "focused",
+        "annoyed": "focused",
+        "resolved": "focused",
+        "determined": "focused",
+        "proud_smile": "proud_smile",
+        "proud": "proud_smile",
+        "smug": "proud_smile",
+        "tsundere": "proud_smile",
+        "flustered": "proud_smile",
+        "defensive": "proud_smile"
+      },
+      "images": {
+        "composed": "art/portrait_kera_voss_composed.webp",
+        "defiant": "art/portrait_kera_voss_defiant.webp",
+        "focused": "art/portrait_kera_voss_focused.webp",
+        "proud_smile": "art/portrait_kera_voss_proud_smile.webp"
       }
     }
   },

@@ -71,6 +71,11 @@ if (existsSync(appArtDir)) {
     copyFileSync(join(appArtDir, f), join(OUT, 'media', 'art', f));
   }
 }
+const campManifest = join(ROOT, 'content/patches/rel_0003_part1_campaign/art/art_manifest.json');
+if (existsSync(campManifest)) {
+  mkdirSync(join(OUT, 'media', 'art'), { recursive: true });
+  copyFileSync(campManifest, join(OUT, 'media', 'art', 'campaign_art_manifest.json'));
+}
 
 const baseRel = JSON.parse(readFileSync(join(ROOT, 'content/base/release.json'), 'utf8')) as {
   release: { id: string; generation: number; channel: string; notes: string };

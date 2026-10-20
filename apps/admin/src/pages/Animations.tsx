@@ -471,14 +471,72 @@ const DEFAULT_APPROVED_IDS = [
   '09_kera_voss_vn_expressions_live'
 ];
 
+interface ManifestAtlas {
+  image: string;
+  width: number;
+  height: number;
+  frames: Record<string, [number, number, number, number]>;
+}
+interface ManifestUnitState {
+  frame: string;
+  scale: number;
+  foot_y: number;
+  pivot_x?: number;
+  animation?: { frames: string[]; fps: number; loop: boolean };
+}
+interface ManifestUnit {
+  atlas: string;
+  facing: 'left' | 'right';
+  height_px: number;
+  states: Record<string, ManifestUnitState>;
+}
+interface ManifestPortrait {
+  emotions: Record<string, string>;
+  images: Record<string, string>;
+}
+interface CampaignArtManifest {
+  atlases: Record<string, ManifestAtlas>;
+  units: Record<string, ManifestUnit>;
+  portraits: Record<string, ManifestPortrait>;
+}
+
 export function Animations({ me, say }: { me: Me | null; say: (m: string) => void }): ReactNode {
-  const [activeTab, setActiveTab] = useState<'first_aab' | 'in_context' | 'gif_gallery'>('first_aab');
+  const [activeTab, setActiveTab] = useState<'first_aab' | 'in_context' | 'atlas_inspector' | 'gif_gallery'>('first_aab');
   const [aabStepIdx, setAabStepIdx] = useState<number>(2); // Default to Scene 3 (Title Screen) or Scene 1
   const [fastIntro, setFastIntro] = useState<boolean>(false);
   const [iframeNonce, setIframeNonce] = useState<number>(0);
   const [stageScene, setStageScene] = useState<'title' | 'battle' | 'vn' | 'uikit'>('battle');
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL');
   const [bgMode, setBgMode] = useState<'cathedral' | 'checker' | 'green'>('cathedral');
+
+  // ART-1 Live Ingested Atlas & Portrait Inspector state
+  const [artManifest, setArtManifest] = useState<CampaignArtManifest | null>(null);
+  const [inspectUnitId, setInspectUnitId] = useState<string>('kera_voss');
+  const [inspectState, setInspectState] = useState<string>('idle');
+  const [inspectFrameIdx, setInspectFrameIdx] = useState<number>(0);
+  const [inspectPortraitKey, setInspectPortraitKey] = useState<string>('composed');
+
+  useEffect(() => {
+    fetch('/dev/media/art/campaign_art_manifest.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : fetch('/dev/media/art/art_manifest.json').then((r2) => r2.json())))
+      .then((data: CampaignArtManifest) => setArtManifest(data))
+      .catch(() => {
+        /* ignore if dev media not built */
+      });
+  }, []);
+
+  useEffect(() => {
+    const unit = artManifest?.units[inspectUnitId];
+    const st = unit?.states[inspectState];
+    const anim = st?.animation;
+    setInspectFrameIdx(0);
+    if (!anim || anim.frames.length <= 1) return;
+    const intervalMs = Math.max(40, Math.round(1000 / Math.max(1, anim.fps)));
+    const timer = window.setInterval(() => {
+      setInspectFrameIdx((prev) => (prev + 1) % anim.frames.length);
+    }, intervalMs);
+    return () => window.clearInterval(timer);
+  }, [artManifest, inspectUnitId, inspectState]);
 
   // Interactive Battle Stage state
   const [chibiStateIdx, setChibiStateIdx] = useState<number>(0);
@@ -687,10 +745,17 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
           </button>
           <button
             type="button"
+            className={`btn${activeTab === 'atlas_inspector' ? ' primary' : ''}`}
+            onClick={() => setActiveTab('atlas_inspector')}
+          >
+            🎨 3. Canlı Atlas &amp; Portre Denetçisi (ART-1)
+          </button>
+          <button
+            type="button"
             className={`btn${activeTab === 'gif_gallery' ? ' primary' : ''}`}
             onClick={() => setActiveTab('gif_gallery')}
           >
-            🎞️ 3. Tüm Hareketli GIF Galerisi ({ANIMATION_CATALOG.length} GIF)
+            🎞️ 4. Tüm Hareketli GIF Galerisi ({ANIMATION_CATALOG.length} GIF)
           </button>
           <button
             type="button"
@@ -1686,6 +1751,186 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
               </div>
             </div>
           ) : null}
+        </section>
+      ) : null}
+
+      {/* ==================== TAB 3: ART-1 LIVE INGESTED ATLAS & PORTRAIT INSPECTOR ==================== */}
+      {activeTab === 'atlas_inspector' && artManifest ? (
+        <section className="card" style={{ marginBottom: 18, padding: 16 }}>
+          {(() => {
+            const bespokeUnits = Object.entries(artManifest.units).filter(
+              ([id, u]) =>
+                id === u.atlas.replace(/^atlas_/, '') &&
+                !['hero_arcanist', 'enemy_knight', 'placeholder', 'objective'].includes(id)
+            );
+            const activeUnit = artManifest.units[inspectUnitId] ?? bespokeUnits[0]?.[1];
+            const activeAtlas = activeUnit ? artManifest.atlases[activeUnit.atlas] : undefined;
+            const stObj = activeUnit?.states[inspectState] ?? activeUnit?.states.idle;
+            const animFrames = stObj?.animation?.frames ?? (stObj ? [stObj.frame] : ['idle']);
+            const currentFrameName = animFrames[inspectFrameIdx % animFrames.length] ?? stObj?.frame ?? 'idle';
+            const frameRect = activeAtlas?.frames[currentFrameName] ?? [0, 0, 256, 256];
+            const [fx, fy, fw, fh] = frameRect;
+            const portraitDef = artManifest.portraits[inspectUnitId];
+            const portraitKeys = portraitDef ? Object.keys(portraitDef.images) : [];
+            const activePKey =
+              portraitKeys.includes(inspectPortraitKey) ? inspectPortraitKey : (portraitKeys[0] ?? 'composed');
+
+            return (
+              <div>
+                <div className="row" style={{ gap: 8, flexWrap: 'wrap', marginTop: 0, marginBottom: 12 }}>
+                  <strong>Ingest Edilmiş Birimler ({bespokeUnits.length}):</strong>
+                  {bespokeUnits.map(([id, u]) => (
+                    <button
+                      key={id}
+                      type="button"
+                      className={`btn${inspectUnitId === id ? ' primary' : ''}`}
+                      onClick={() => {
+                        setInspectUnitId(id);
+                        setInspectState('idle');
+                      }}
+                    >
+                      {id} ({u.facing === 'right' ? '→ Hero' : '← Enemy'})
+                    </button>
+                  ))}
+                </div>
+
+                {activeUnit && activeAtlas && stObj ? (
+                  <div>
+                    <div className="row" style={{ gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
+                      <strong>Durum (State):</strong>
+                      {Object.keys(activeUnit.states).map((stKey) => {
+                        const s = activeUnit.states[stKey]!;
+                        const fCount = s.animation?.frames.length ?? 1;
+                        return (
+                          <button
+                            key={stKey}
+                            type="button"
+                            className={`btn${inspectState === stKey ? ' primary' : ''}`}
+                            onClick={() => setInspectState(stKey)}
+                          >
+                            {stKey} ({fCount}f{s.animation ? ` @${s.animation.fps}fps` : ''})
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'minmax(320px, 1fr) minmax(360px, 1.3fr)',
+                        gap: 16,
+                        alignItems: 'start'
+                      }}
+                    >
+                      {/* Left: Live Frame-Stepped Sprite Preview with Foot & Pivot Guides */}
+                      <div className="card bg-checker" style={{ margin: 0, padding: 16, textAlign: 'center' }}>
+                        <div className="mono" style={{ fontSize: 12, marginBottom: 8 }}>
+                          <strong>{inspectUnitId}</strong> · state=<code>{inspectState}</code> · frame=
+                          <code>{currentFrameName}</code> [{fx},{fy},{fw}×{fh}] · foot_y={stObj.foot_y} · pivot_x=
+                          {stObj.pivot_x ?? 0.5}
+                        </div>
+                        <div
+                          style={{
+                            position: 'relative',
+                            width: Math.min(340, fw),
+                            height: Math.min(340, fh),
+                            margin: '0 auto',
+                            overflow: 'hidden',
+                            border: '1px dashed rgba(242,184,75,0.45)'
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: fw,
+                              height: fh,
+                              backgroundImage: `url(/dev/media/${activeAtlas.image})`,
+                              backgroundPosition: `-${fx}px -${fy}px`,
+                              backgroundRepeat: 'no-repeat',
+                              transform: fw > 340 || fh > 340 ? `scale(${Math.min(340 / fw, 340 / fh)})` : 'none',
+                              transformOrigin: 'top left'
+                            }}
+                          />
+                          {/* Ground shadow & pivot crosshair */}
+                          <div
+                            style={{
+                              position: 'absolute',
+                              left: 0,
+                              right: 0,
+                              top: `${stObj.foot_y * 100}%`,
+                              borderTop: '2px solid #3fa36c',
+                              pointerEvents: 'none'
+                            }}
+                          />
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              bottom: 0,
+                              left: `${(stObj.pivot_x ?? 0.5) * 100}%`,
+                              borderLeft: '1px dashed #f2b84b',
+                              pointerEvents: 'none'
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Right: Packed WebP Atlas & VN Portraits (if Hero) */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                        <div className="card bg-checker" style={{ margin: 0, padding: 12 }}>
+                          <div className="mono" style={{ fontSize: 12, marginBottom: 6 }}>
+                            Atlas: <code>{activeAtlas.image}</code> ({activeAtlas.width}×{activeAtlas.height}px ·{' '}
+                            {Object.keys(activeAtlas.frames).length} frames)
+                          </div>
+                          <img
+                            src={`/dev/media/${activeAtlas.image}`}
+                            alt={activeUnit.atlas}
+                            style={{ width: '100%', maxHeight: 280, objectFit: 'contain', display: 'block' }}
+                          />
+                        </div>
+
+                        {portraitDef ? (
+                          <div className="card bg-cathedral" style={{ margin: 0, padding: 12 }}>
+                            <div className="row" style={{ gap: 6, flexWrap: 'wrap', marginTop: 0, marginBottom: 8 }}>
+                              <strong>VN Portreleri ({portraitKeys.length} görsel · {Object.keys(portraitDef.emotions).length} duygu etiketi):</strong>
+                              {portraitKeys.map((pk) => (
+                                <button
+                                  key={pk}
+                                  type="button"
+                                  className={`btn${activePKey === pk ? ' primary' : ''}`}
+                                  onClick={() => setInspectPortraitKey(pk)}
+                                >
+                                  {pk}
+                                </button>
+                              ))}
+                            </div>
+                            <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                              <img
+                                src={`/dev/media/${portraitDef.images[activePKey]}`}
+                                alt={activePKey}
+                                style={{ height: 210, objectFit: 'contain', borderRadius: 8 }}
+                              />
+                              <div className="mono" style={{ fontSize: 11.5, color: '#e6d8f2' }}>
+                                <div>
+                                  <strong>Dosya:</strong> <code>{portraitDef.images[activePKey]}</code>
+                                </div>
+                                <div style={{ marginTop: 6 }}>
+                                  <strong>Eşleşen Duygu Etiketleri:</strong>{' '}
+                                  {Object.entries(portraitDef.emotions)
+                                    .filter(([, target]) => target === activePKey)
+                                    .map(([emo]) => emo)
+                                    .join(', ')}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })()}
         </section>
       ) : null}
 

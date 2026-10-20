@@ -17,6 +17,11 @@
       "cue_id": "stop"
     },
     {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "left"
+    },
+    {
       "op": "say",
       "line_id": "node_3_2_pre_001",
       "speaker": "jori_flint",

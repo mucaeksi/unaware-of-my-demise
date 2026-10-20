@@ -187,12 +187,30 @@ export async function signIn(sub: string): Promise<{ auth: Record<string, string
 export const post = (body: unknown, auth: Record<string, string> = {}): RequestInit => ({ method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', ...auth } });
 
 export async function upload(files: TestFile[], as: string | null = 'owner@example.com'): Promise<void> {
+  if (files.length === 0) return;
   const jwt = as ? await accessToken({ email: as }) : null;
-  for (const f of files) {
-    const headers: Record<string, string> = { 'Content-Type': f.mediaType };
-    if (jwt) headers['Cf-Access-Jwt-Assertion'] = jwt;
-    const res = await admin(`/admin/api/objects/${f.sha256}`, { method: 'PUT', body: f.bytes as BodyInit, headers, as: null });
-    if (res.status !== 200 && res.status !== 201) throw new Error(`upload ${f.path} failed: ${res.status} ${await res.text()}`);
+  const first = files[0]!;
+  const headers: Record<string, string> = { 'Content-Type': first.mediaType };
+  if (jwt) headers['Cf-Access-Jwt-Assertion'] = jwt;
+  const res = await admin(`/admin/api/objects/${first.sha256}`, { method: 'PUT', body: first.bytes as BodyInit, headers, as: null });
+  if (res.status !== 200 && res.status !== 201) throw new Error(`upload ${first.path} failed: ${res.status} ${await res.text()}`);
+
+  const rest = files.slice(1);
+  if (rest.length === 0) return;
+  const probe = rest.find((f) => f.preseededSha256 === f.sha256);
+  const r2Seeded = probe ? Boolean(await baseEnv.CONTENT.head(`objects/${probe.sha256}`)) : false;
+  for (const f of rest) {
+    if (!r2Seeded || f.preseededSha256 !== f.sha256) {
+      await baseEnv.CONTENT.put(`objects/${f.sha256}`, f.bytes, { httpMetadata: { contentType: f.mediaType }, sha256: f.sha256 });
+    }
+  }
+  const db = baseEnv.DB;
+  for (let i = 0; i < rest.length; i += 50) {
+    await db.batch(
+      rest.slice(i, i + 50).map((f) =>
+        db.prepare('INSERT OR IGNORE INTO content_objects (sha256, bytes, media_type) VALUES (?1, ?2, ?3)').bind(f.sha256, f.bytes.byteLength, f.mediaType)
+      )
+    );
   }
 }
 

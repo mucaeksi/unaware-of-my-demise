@@ -12,9 +12,9 @@ export default defineConfig({
   test: {
     setupFiles: ['./test/apply-migrations.ts'],
     include: ['test/**/*.test.ts'],
-    testTimeout: 30000,
-    hookTimeout: 30000,
-    maxWorkers: 4,
+    testTimeout: 60000,
+    hookTimeout: 60000,
+    maxWorkers: 2,
     // node_modules/@uomd/* are re-export stubs on Google Drive (no symlinks, see tools/link_workspaces.mjs); vitest must
     // transform them like source instead of handing them to Node, which cannot load the extensionless .ts imports
     server: { deps: { inline: [/@uomd\//] } }

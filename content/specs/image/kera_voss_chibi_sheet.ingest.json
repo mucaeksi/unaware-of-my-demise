@@ -1,0 +1,198 @@
+{
+  "schema": 1,
+  "asset_id": "kera_voss_chibi_sheet",
+  "class": "unit_sheet",
+  "source": {
+    "kind": "generated",
+    "pick": "a83b4c1647bc",
+    "provenance": ".cache/generated/kera_voss_chibi_sheet/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "bottom",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      20,
+      190
+    ],
+    "choke_px": 1,
+    "despill": true
+  },
+  "layout": {
+    "mode": "regions",
+    "cells": {
+      "idle": [
+        0,
+        0,
+        640,
+        640
+      ],
+      "idle_2": [
+        640,
+        0,
+        640,
+        640
+      ],
+      "idle_3": [
+        1280,
+        0,
+        640,
+        640
+      ],
+      "walk": [
+        1920,
+        0,
+        640,
+        640
+      ],
+      "basic": [
+        0,
+        640,
+        640,
+        640
+      ],
+      "basic_2": [
+        640,
+        640,
+        640,
+        640
+      ],
+      "basic_3": [
+        1280,
+        640,
+        640,
+        640
+      ],
+      "active": [
+        1920,
+        640,
+        640,
+        640
+      ],
+      "active_2": [
+        0,
+        1280,
+        640,
+        640
+      ],
+      "active_3": [
+        640,
+        1280,
+        640,
+        640
+      ],
+      "ultimate": [
+        1280,
+        1280,
+        640,
+        640
+      ],
+      "ultimate_2": [
+        1920,
+        1280,
+        640,
+        640
+      ],
+      "ultimate_3": [
+        0,
+        1920,
+        640,
+        640
+      ],
+      "hit": [
+        640,
+        1920,
+        640,
+        640
+      ],
+      "defeat": [
+        1280,
+        1920,
+        640,
+        640
+      ],
+      "victory": [
+        1920,
+        1920,
+        640,
+        640
+      ]
+    }
+  },
+  "frames": {
+    "idle": "idle",
+    "idle_frame_px": 340,
+    "ground": "lowest",
+    "pivot": "lower_body_centroid",
+    "animations": {
+      "idle": {
+        "frames": [
+          "idle",
+          "idle_2",
+          "idle_3",
+          "idle_2"
+        ],
+        "fps": 6,
+        "loop": true
+      },
+      "basic": {
+        "frames": [
+          "basic",
+          "basic_2",
+          "basic_3",
+          "basic_2",
+          "basic"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "active": {
+        "frames": [
+          "active",
+          "active_2",
+          "active_3",
+          "active_2",
+          "active"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "ultimate": {
+        "frames": [
+          "ultimate",
+          "ultimate_2",
+          "ultimate_3",
+          "ultimate_2",
+          "ultimate"
+        ],
+        "fps": 9,
+        "loop": false
+      }
+    }
+  },
+  "export": {
+    "fit": "trim",
+    "max_atlas": 2048,
+    "pad": 4,
+    "webp": {
+      "mode": "lossy",
+      "quality": 84,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 665600
+  },
+  "manifest": {
+    "atlas": "atlas_kera_voss",
+    "unit": "kera_voss",
+    "facing": "right",
+    "height_px": 248
+  },
+  "qc": {
+    "profile": "chibi_r2"
+  }
+}

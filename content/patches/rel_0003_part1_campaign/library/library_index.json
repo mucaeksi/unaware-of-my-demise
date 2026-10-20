@@ -563,6 +563,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_kera_voss_1_001",
               "speaker": "kera_voss",
@@ -681,6 +686,11 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
             },
             {
               "op": "say",
@@ -803,6 +813,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_kera_voss_3_001",
               "speaker": "kera_voss",
@@ -914,8 +929,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "kera_voss",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4095,6 +4115,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_odelia_pike_2_001",
               "speaker": "kera_voss",
@@ -6908,6 +6933,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_iona_mist_2_001",
               "speaker": "iona_mist",
@@ -8477,6 +8507,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "event_harvest_inn_meal_1_001",
               "speaker": "pippa_bell",
@@ -8943,6 +8978,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "event_guild_salt_fever_1_001",
               "speaker": "kera_voss",
@@ -9073,6 +9113,11 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "left"
             },
             {
               "op": "say",

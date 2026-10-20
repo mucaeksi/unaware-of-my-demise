@@ -66,7 +66,7 @@ it('keeps a staged catalog immutable and private, then publishes it with a signe
   await baseEnv.DB.prepare("UPDATE characters SET name_en = 'Later edit' WHERE id = 'mahmut'").run();
   expect(await store.effectiveBytes('rel_catalog_stage', CATALOG_PATH)).toEqual(bytes);
   expect((await game(`/api/v1/content/objects/${snapshot.sha256}`)).status).toBe(404);
-  expect(JSON.parse(before!.manifest_json).compat).toMatchObject({ min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'vfx_v1'] });
+  expect(JSON.parse(before!.manifest_json).compat).toMatchObject({ min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'sprite_animation_v1', 'vfx_v1', 'world_map_v1'] });
   const published = await post('/admin/api/releases/rel_catalog_stage/publish', {});
   expect(published.status).toBe(200);
   const after = await store.getRelease('rel_catalog_stage');
@@ -164,7 +164,7 @@ it('republishes a catalog rollback with a higher generation and the required bin
   const response = await post('/admin/api/channels/dev/rollback', { releaseId: 'rel_catalog_history' });
   expect(response.status).toBe(200);
   const served = await game('/api/v1/content/channels/dev/manifest');
-  expect(await served.json()).toMatchObject({ compat: { min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'vfx_v1'] }, release: { generation: 2 } });
+  expect(await served.json()).toMatchObject({ compat: { min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'presentation_v1', 'sprite_animation_v1', 'vfx_v1', 'world_map_v1'] }, release: { generation: 2 } });
   expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM content_releases').first()).toEqual({ n: 2 });
 });
 

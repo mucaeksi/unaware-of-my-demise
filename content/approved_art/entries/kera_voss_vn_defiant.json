@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "asset_id": "kera_voss_vn_defiant",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "kera_voss": {
+        "emotions": {
+          "defiant": "defiant",
+          "furious": "defiant",
+          "fierce": "defiant",
+          "bitter": "defiant",
+          "indignant": "defiant",
+          "stunned": "defiant",
+          "ashamed": "defiant",
+          "breaking": "defiant"
+        },
+        "images": {
+          "defiant": "art/portrait_kera_voss_defiant.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "2f3830c5da63469ee9f19d9f8829ab57eeb727f2e5cfddfedc9336eae6304b36",
+    "mime": "image/png",
+    "width": 960,
+    "height": 1440,
+    "provenance_file": ".cache/generated/kera_voss_vn_defiant/run.provenance.json",
+    "provenance_sha256": "17e0022ae895a5bbcee426d9a4caa22f56f4eeed8ba37d9512f76af0cdf6e5f8",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "684fcc2090fe44f547a638d8f2e51e40547a77fd3cb82fb1c56f3241c81927a3",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/kera_voss_vn_defiant.ingest.json",
+    "spec_sha256": "5342f8a08b4b27f2171a908aa726f815883806030dd2ceb366582fef24a3390a",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "7818bfd1c4f6db30a3a64404d39ed0971632fff469958c84f724eb43b8633dd1"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_kera_voss_defiant.webp",
+      "sha256": "cb081568e4ddfac0f5d0d4ac9a7f42f4005843c5ca43ecea8309e73c375d0815",
+      "pixels_sha256": "e7471f88d565014805997fd7d61cdaf9c9249382c5c80469734f1451c607a1ad",
+      "bytes": 66014,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 960x1440"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=4"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "66014 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0023%"
+        }
+      },
+      "warnings": [
+        "A12: removed 4 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_kera_voss_defiant.webp",
+          "sha256": "cb081568e4ddfac0f5d0d4ac9a7f42f4005843c5ca43ecea8309e73c375d0815",
+          "pixels_sha256": "e7471f88d565014805997fd7d61cdaf9c9249382c5c80469734f1451c607a1ad",
+          "bytes": 66014,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "2f3830c5da63469ee9f19d9f8829ab57eeb727f2e5cfddfedc9336eae6304b36",
+      "fingerprint": "7818bfd1c4f6db30a3a64404d39ed0971632fff469958c84f724eb43b8633dd1"
+    }
+  ]
+}

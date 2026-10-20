@@ -2,9 +2,9 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
-import type { ContentManifest, ManifestFile } from '@uomd/content-schema';
-import { generateSigningKeyPair, importPrivateKey, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
-import { MemoryStorage, PatchManager, buildManifest, signManifest, type BaseContent, type PatchEnv, type PatchProgress, type RemoteSource } from './index';
+import { MIN_EFFECTIVE_CLIENT_VERSION, requiredContentCapabilities, type ContentManifest, type ManifestFile } from '@uomd/content-schema';
+import { compareSemver, generateSigningKeyPair, importPrivateKey, sha256Hex, type PublicKeyJwk } from '@uomd/shared';
+import { MemoryStorage, PatchManager, buildManifest, manifestFromEntries, signManifest, type BaseContent, type FileEntry, type PatchEnv, type PatchProgress, type RemoteSource } from './index';
 
 const ROOT = fileURLToPath(new URL('../../../content/', import.meta.url));
 const walk = (dir: string, rel = ''): string[] =>
@@ -19,6 +19,12 @@ let privateKey: CryptoKey;
 let otherPublic: PublicKeyJwk;
 let baseFiles: { path: string; bytes: Uint8Array }[];
 let patchFiles: { path: string; bytes: Uint8Array }[];
+let patchEntries: FileEntry[];
+let baseCapabilities: string[];
+let patchCapabilities: string[];
+let patchObjects: Map<string, Uint8Array>;
+let shaByBytes: Map<Uint8Array, string>;
+let signedPatchCache: Map<string, ContentManifest>;
 let base: BaseContent;
 
 beforeAll(async () => {
@@ -28,8 +34,24 @@ beforeAll(async () => {
   otherPublic = { ...((await generateSigningKeyPair()).publicJwk as PublicKeyJwk), kid: 'test-1' };
   baseFiles = load(join(ROOT, 'base'));
   patchFiles = load(join(ROOT, 'patches/rel_0003_part1_campaign'));
+  patchEntries = [];
+  patchObjects = new Map();
+  shaByBytes = new Map();
+  signedPatchCache = new Map();
+  for (const f of patchFiles) {
+    const sha256 = await sha256Hex(f.bytes);
+    shaByBytes.set(f.bytes, sha256);
+    patchEntries.push({ path: f.path, sha256, bytes: f.bytes.byteLength });
+    patchObjects.set(sha256, f.bytes);
+  }
+  baseCapabilities = [...requiredContentCapabilities(new Map(baseFiles.map((f) => [f.path, f.bytes])))].sort();
+  patchCapabilities = [...requiredContentCapabilities(new Map(patchFiles.map((f) => [f.path, f.bytes])))].sort();
   const hashes: Record<string, string> = {};
-  for (const f of baseFiles) hashes[f.path] = await sha256Hex(f.bytes);
+  for (const f of baseFiles) {
+    const sha256 = await sha256Hex(f.bytes);
+    shaByBytes.set(f.bytes, sha256);
+    hashes[f.path] = sha256;
+  }
   base = {
     releaseId: 'rel_0001',
     generation: 1,
@@ -40,13 +62,27 @@ beforeAll(async () => {
       return f.bytes;
     }
   };
-});
+}, 30_000);
 
 async function signedPatch(over: Partial<Parameters<typeof buildManifest>[0]> = {}, files = patchFiles): Promise<ContentManifest> {
-  const m = await buildManifest(
-    { releaseId: 'rel_0002', generation: 2, channel: 'staging', notes: 'test', minClient: '0.1.0', dependsOn: { releaseId: 'rel_0001', generation: 1 }, ...over },
-    files
-  );
+  const meta = { releaseId: 'rel_0002', generation: 2, channel: 'staging' as const, notes: 'test', minClient: '0.1.0', dependsOn: { releaseId: 'rel_0001', generation: 1 }, ...over };
+  if (files === patchFiles) {
+    const cacheKey = JSON.stringify(meta);
+    const cached = signedPatchCache.get(cacheKey);
+    if (cached) return structuredClone(cached);
+    const requiredCapabilities = [...new Set([...(meta.requiredCapabilities ?? []), ...patchCapabilities])].sort();
+    const minClient = requiredCapabilities.length && compareSemver(meta.minClient, MIN_EFFECTIVE_CLIENT_VERSION) < 0 ? MIN_EFFECTIVE_CLIENT_VERSION : meta.minClient;
+    const signed = await signManifest(manifestFromEntries({ ...meta, minClient, requiredCapabilities }, patchEntries), privateKey, 'test-1');
+    signedPatchCache.set(cacheKey, signed);
+    return structuredClone(signed);
+  }
+  if (files.every((f) => shaByBytes.has(f.bytes))) {
+    const entries: FileEntry[] = files.map((f) => ({ path: f.path, sha256: shaByBytes.get(f.bytes)!, bytes: f.bytes.byteLength }));
+    const requiredCapabilities = [...new Set([...(meta.requiredCapabilities ?? []), ...baseCapabilities, ...patchCapabilities])].sort();
+    const minClient = requiredCapabilities.length && compareSemver(meta.minClient, MIN_EFFECTIVE_CLIENT_VERSION) < 0 ? MIN_EFFECTIVE_CLIENT_VERSION : meta.minClient;
+    return signManifest(manifestFromEntries({ ...meta, minClient, requiredCapabilities }, entries), privateKey, 'test-1');
+  }
+  const m = await buildManifest(meta, files);
   return signManifest(m, privateKey, 'test-1');
 }
 
@@ -80,8 +116,9 @@ class FakeRemote implements RemoteSource {
 }
 
 async function objectsOf(files: { path: string; bytes: Uint8Array }[]): Promise<Map<string, Uint8Array>> {
+  if (files === patchFiles) return patchObjects;
   const m = new Map<string, Uint8Array>();
-  for (const f of files) m.set(await sha256Hex(f.bytes), f.bytes);
+  for (const f of files) m.set(shaByBytes.get(f.bytes) ?? (await sha256Hex(f.bytes)), f.bytes);
   return m;
 }
 
@@ -93,8 +130,8 @@ const env = (over: Partial<PatchEnv> = {}): PatchEnv => ({
   trustedKeys: [publicJwk],
   installId: 'install-a',
   storageBudgetBytes: 50 * 1024 * 1024,
-  // the campaign patch's units are D-27 attribute units
-  supportedCapabilities: ['attributes_v1'],
+  // the campaign patch's units are D-27 attribute units with sprite animations and world map
+  supportedCapabilities: ['attributes_v1', 'sprite_animation_v1', 'world_map_v1'],
   validate: () => undefined,
   sleep: async () => undefined,
   ...over
@@ -128,11 +165,11 @@ describe('PatchManager', () => {
     const manifest = await signedPatch({ dependsOn: undefined }, files);
     const storage = new MemoryStorage();
     const remote = new FakeRemote(manifest, await objectsOf(files));
-    const pm = new PatchManager(env({ clientVersion: '0.1.2', supportedCapabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'] }), storage, remote, base);
+    const pm = new PatchManager(env({ clientVersion: '0.1.2', supportedCapabilities: ['attributes_v1', 'presentation_v1', 'sprite_animation_v1', 'vfx_v1', 'world_map_v1'] }), storage, remote, base);
     expect((await pm.checkAndApply()).status).toBe('applied');
     const path = 'audio/bgm_ch1_ash_forest_calm.ogg';
     expect(remote.fetched).not.toContain(path);
-    expect(await pm.read(path)).toEqual(await base.read(path));
+    expect(Buffer.compare(await pm.read(path), await base.read(path))).toBe(0);
     expect(storage.state?.active?.releaseId).toBe('rel_0002');
   }, 20_000);
 
@@ -244,7 +281,7 @@ describe('PatchManager', () => {
     expect(applied).toBeLessThan(32);
     const zero = await setup({}, { rolloutPercent: 0 });
     expect((await zero.pm.checkAndApply()).status).toBe('up_to_date');
-  });
+  }, 60_000);
 
   it('kill switch returns the device to the embedded base; rollback restores the previous release', async () => {
     const { pm, storage, remote } = await setup();

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { Id, LineId, NarrativeLibrary, StoryScene, type LibraryEntry, type NarrativeGate, type StoryCommand } from '../../packages/content-schema/src/index';
-import { fileBytes, sha256 } from './fsutil';
+import { campaignPortraitIds, fileBytes, sha256 } from './fsutil';
 
 const Line = z.object({ line_id: LineId, speaker_id: Id, speaker_display: z.string().min(1).max(40), text_en: z.string().min(1).max(600), emotion: z.string().max(40), voice_track: z.enum(['jp', 'jp_inner', 'jp_narration', 'none']) }).passthrough();
 const Stage = z.string().regex(/^\d+-\d+$/);
@@ -11,7 +11,7 @@ const Codex = z.object({ codex: z.array(z.object({ codex_id: Id, title_en: z.str
 export const LIBRARY_SOURCES = ['narrative/03_Companion_Stories/character_stories_part1.json', 'narrative/05_Codex_Lore/lore_text_part1.json', 'narrative/04_Events/events_part1.json'] as const;
 export const librarySources = () => LIBRARY_SOURCES.map((path) => ({ path, bytes: fileBytes(path) }));
 
-export function compileNarrativeLibrary(sources = librarySources(), portraits: ReadonlySet<string> = new Set(['mahmut', 'fadyme'])): NarrativeLibrary {
+export function compileNarrativeLibrary(sources = librarySources(), portraits: ReadonlySet<string> = campaignPortraitIds()): NarrativeLibrary {
   if (JSON.stringify(sources.map((source) => source.path)) !== JSON.stringify(LIBRARY_SOURCES)) throw new Error('library source coverage differs from canon');
   const entries: LibraryEntry[] = [];
   const sourceRecords = sources.map((source) => ({ path: source.path, sha256: sha256(Buffer.from(source.bytes)) }));

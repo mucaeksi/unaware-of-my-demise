@@ -178,7 +178,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     expect(manifest.depends_on).toBeUndefined();
     expect((await new ContentStore(baseEnv.DB, baseEnv.CONTENT).getRelease('rel_0003'))!.depends_on).toBeNull();
     const pm = new PatchManager(
-      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'], trustedKeys: [signingPublic], installId: 'chain', storageBudgetBytes: 1e9, validate: () => undefined },
+      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['attributes_v1', 'presentation_v1', 'sprite_animation_v1', 'vfx_v1', 'world_map_v1'], trustedKeys: [signingPublic], installId: 'chain', storageBudgetBytes: 1e9, validate: () => undefined },
       new MemoryStorage(),
       { fetchManifest: async () => manifest, fetchObject: async (sha) => new Uint8Array(await (await game(`/api/v1/content/objects/${sha}`)).arrayBuffer()) },
       { releaseId: 'rel_0001', generation: 1, files: Object.fromEntries(base.map((f) => [f.path, f.sha256])), read: async (p) => base.find((f) => f.path === p)!.bytes }
@@ -341,7 +341,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
     const baseHashes = Object.fromEntries(base.map((f) => [f.path, f.sha256]));
     const baseContent: BaseContent = { releaseId: 'rel_0001', generation: 1, files: baseHashes, read: async (p) => (base.find((f) => f.path === p) as TestFile).bytes };
     const pm = new PatchManager(
-      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'], trustedKeys: [signingPublic], installId: 'x', storageBudgetBytes: 1e9, validate: () => undefined, sleep: async () => undefined },
+      { channel: 'dev', clientVersion: '0.1.2', supportedContentSchema: 1, supportedCapabilities: ['attributes_v1', 'presentation_v1', 'sprite_animation_v1', 'vfx_v1', 'world_map_v1'], trustedKeys: [signingPublic], installId: 'x', storageBudgetBytes: 1e9, validate: () => undefined, sleep: async () => undefined },
       new MemoryStorage(),
       remote,
       baseContent

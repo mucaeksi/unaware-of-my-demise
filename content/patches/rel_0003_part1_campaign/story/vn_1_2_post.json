@@ -22,6 +22,11 @@
       "side": "left"
     },
     {
+      "op": "show",
+      "character": "kera_voss",
+      "side": "right"
+    },
+    {
       "op": "say",
       "line_id": "node_1_2_post_001",
       "speaker": "brin_alder",

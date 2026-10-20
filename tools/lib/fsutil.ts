@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -42,4 +42,20 @@ export function legacyBlob(path: string): Buffer {
 
 export function fileBytes(path: string): Buffer {
   return readFileSync(join(ROOT, path));
+}
+
+export function campaignPortraitIds(): Set<string> {
+  const ids = new Set<string>(['mahmut', 'fadyme']);
+  const entriesDir = join(ROOT, 'content/approved_art/entries');
+  if (existsSync(entriesDir)) {
+    for (const file of readdirSync(entriesDir).filter((f) => f.endsWith('.json')).sort()) {
+      const entry = JSON.parse(readFileSync(join(entriesDir, file), 'utf8')) as {
+        qc?: { human?: { status?: string } };
+        targets?: { portraits?: Record<string, unknown> };
+      };
+      if (entry.qc?.human?.status === 'rejected') continue;
+      for (const charId of Object.keys(entry.targets?.portraits ?? {})) ids.add(charId);
+    }
+  }
+  return ids;
 }

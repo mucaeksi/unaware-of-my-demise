@@ -50,6 +50,7 @@ export interface IngestSpec {
     cell_order?: number[];
     state_map?: Record<string, string>;
     overrides?: Record<string, { foot_y?: number; pivot_x?: number }>;
+    animations?: Record<string, { frames: string[]; fps: number; loop: boolean }>;
   };
   export: {
     fit: 'exact' | 'inside' | 'trim';
@@ -229,6 +230,44 @@ interface PlacedItem {
   x: number;
   y: number;
   data: Buffer;
+}
+
+async function alignAnimationGroup(frames: TrimmedFrame[]): Promise<void> {
+  if (frames.length <= 1) return;
+  let maxLeft = 0;
+  let maxRight = 0;
+  let maxH = 0;
+  const metrics = frames.map((tf) => {
+    const px = Math.round(tf.pivotX * tf.width);
+    const left = px;
+    const right = tf.width - px;
+    if (left > maxLeft) maxLeft = left;
+    if (right > maxRight) maxRight = right;
+    if (tf.height > maxH) maxH = tf.height;
+    return { tf, left };
+  });
+  const alignedW = Math.max(1, maxLeft + maxRight);
+  const alignedH = Math.max(1, maxH);
+  const sharedPivotX = Math.round((maxLeft / alignedW) * 1000) / 1000;
+  for (const { tf, left } of metrics) {
+    const offsetLeft = maxLeft - left;
+    const offsetTop = alignedH - tf.height;
+    if (offsetLeft === 0 && offsetTop === 0 && tf.width === alignedW && tf.height === alignedH) {
+      tf.pivotX = sharedPivotX;
+      tf.footY = 1;
+      continue;
+    }
+    tf.data = await sharp({
+      create: { width: alignedW, height: alignedH, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } },
+    })
+      .composite([{ input: tf.data, left: offsetLeft, top: offsetTop }])
+      .png()
+      .toBuffer();
+    tf.width = alignedW;
+    tf.height = alignedH;
+    tf.pivotX = sharedPivotX;
+    tf.footY = 1;
+  }
 }
 
 function shelfPackFrames(
@@ -683,6 +722,14 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
     }
     gates.A03 = { status: scaleK > 0.9 ? 'warn' : 'pass', detail: `k=${scaleK.toFixed(3)}` };
 
+    const animations = spec.frames?.animations ?? {};
+    for (const anim of Object.values(animations)) {
+      const uniqueFrames = [...new Set(anim.frames)]
+        .map((f) => trimmedMap.get(f))
+        .filter((tf): tf is TrimmedFrame => Boolean(tf));
+      await alignAnimationGroup(uniqueFrames);
+    }
+
     const packItems: { name: string; w: number; h: number; data: Buffer }[] = [];
     for (const [name, tf] of trimmedMap.entries()) {
       const w = Math.max(1, Math.round(tf.width * scaleK));
@@ -724,16 +771,28 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
 
     const stateMap = spec.frames?.state_map ?? {};
     const overrides = spec.frames?.overrides ?? {};
-    const statesRecord: Record<string, { frame: string; scale: number; foot_y: number; pivot_x: number }> = {};
+    const statesRecord: Record<
+      string,
+      { frame: string; scale: number; foot_y: number; pivot_x: number; animation?: { frames: string[]; fps: number; loop: boolean } }
+    > = {};
     for (const st of UNIT_ANIM_STATES) {
       const targetFrame = stateMap[st] ?? st;
       const tf = trimmedMap.get(targetFrame) ?? idleFrame;
       const ov = overrides[st] ?? {};
+      const anim = animations[st];
+      if (anim) {
+        for (const af of anim.frames) {
+          if (!framesRecord[af]) {
+            throw new Error(`A15: animation frame "${af}" for state "${st}" not found in packed frames`);
+          }
+        }
+      }
       statesRecord[st] = {
         frame: targetFrame,
         scale: 1,
         foot_y: ov.foot_y ?? tf.footY,
         pivot_x: ov.pivot_x ?? tf.pivotX,
+        ...(anim ? { animation: anim } : {}),
       };
     }
 

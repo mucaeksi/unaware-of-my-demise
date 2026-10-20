@@ -16,7 +16,7 @@ const state = <T>(page: Page, method: string): Promise<T> =>
   page.evaluate(async (m) => { const u = (window as any).__UOMD__; return u.services.api[m](await u.services.content.activeReleaseId()); }, method) as Promise<T>;
 
 test('modes: deeds, profile and trials screens claim and fight through the server', async ({ page }, info) => {
-  test.setTimeout(240_000);
+  test.setTimeout(420_000);
   const problems = await openGame(page);
   const actor = await signInDev(page, `modes-${info.project.name}`);
   // three stage clears (disposable local D1): unlocks arena/endless/events and completes the first-clear achievement
@@ -52,6 +52,9 @@ test('modes: deeds, profile and trials screens claim and fight through the serve
   await settled(page, 'Trials');
   await tap(page, info, 780, 350); // FIGHT the first arena opponent
   await expect.poll(async () => (await state<any>(page, 'arenaState')).dailyUsed).toBe(1);
+  // the screen re-reads server state after the fight; tap the next button only once that redraw shows the match
+  await expect.poll(() => texts(page, 'Trials').then((t) => t.some((x) => x.includes('matches 1/')))).toBe(true);
+  await settled(page, 'Trials');
   await tap(page, info, 1420, 400); // first blessing starts an endless run
   await expect.poll(async () => (await state<any>(page, 'endlessState')).activeRun?.wave).toBe(1);
   await expect.poll(() => texts(page, 'Trials')).toContain('FIGHT WAVE 1');

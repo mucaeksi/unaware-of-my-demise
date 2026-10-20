@@ -17,7 +17,8 @@ import { ROLE_STAT, armorStats, balanceAttributes, weaponStats } from './lib/bal
 import { buildUnitPack } from './lib/data';
 import { bindCampaignPhaseStories, compileCampaignStory } from './lib/campaign-story';
 import { compileNarrativeLibrary } from './lib/narrative-library';
-import { ROOT, readJson, writeJson, writeOut } from './lib/fsutil';
+import { ROOT, campaignPortraitIds, readJson, writeJson, writeOut } from './lib/fsutil';
+import { loadApprovedArtEntries } from './ingest_art';
 
 const NARR = 'narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content';
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -38,9 +39,10 @@ const REAR_ROLES = /caster|support|warder|assassin|flanker/;
 const pack = buildUnitPack('part1_campaign', chars.map((c) => c.character_id as string), enemies.map((e) => e.enemy_id as string));
 writeJson(`${OUT}/units/unit_pack.json`, pack);
 const base = ArtManifest.parse(readJson(`content/base/art/art_manifest.json`));
-const library = compileNarrativeLibrary(undefined, new Set(Object.keys(base.portraits)));
+const portraitSet = campaignPortraitIds();
+const library = compileNarrativeLibrary(undefined, portraitSet);
 writeJson(`${OUT}/library/library_index.json`, library);
-const story = compileCampaignStory(undefined, new Set(Object.keys(base.portraits)));
+const story = compileCampaignStory(undefined, portraitSet);
 for (const [path, scene] of story.files) writeJson(`${OUT}/${path}`, scene);
 
 // ---- encounters + chapter index ----------------------------------------------------------------------------------------
@@ -146,6 +148,23 @@ writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_vers
 // ---- art manifest: base art + SD Chibi archetype atlases for every campaign unit -------------------------------------------
 const art = base; // the base art manifest carries the tutorial cast (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim)
 mkdirSync(join(ROOT, `${OUT}/art`), { recursive: true });
+const approvedEntries = loadApprovedArtEntries(ROOT, false);
+const campaignPortraits: ArtManifest['portraits'] = structuredClone(art.portraits);
+for (const entry of approvedEntries) {
+  if (!entry.targets.portraits) continue;
+  for (const [charId, pTarget] of Object.entries(entry.targets.portraits)) {
+    if (art.portraits[charId]) continue;
+    for (const out of entry.outputs) {
+      writeOut(`${OUT}/${out.path}`, readFileSync(join(ROOT, 'content/approved_art', out.path)));
+    }
+    const prev = campaignPortraits[charId] ?? { emotions: {}, images: {} };
+    campaignPortraits[charId] = {
+      emotions: { ...prev.emotions, ...pTarget.emotions },
+      images: { ...prev.images, ...pTarget.images }
+    };
+  }
+}
+
 const heroArcanistEntry = readJson<Json>('content/approved_art/entries/roster_hero_arcanist_chibi_sheet.json');
 const enemyKnightEntry = readJson<Json>('content/approved_art/entries/campaign_enemy_knight_chibi_sheet.json');
 const heroArcanistBytes = readFileSync(join(ROOT, 'content/approved_art/art/atlas_hero_arcanist.webp'));
@@ -170,6 +189,17 @@ const unitArt: Record<string, unknown> = {
   hero_arcanist: heroArcanistUnit,
   enemy_knight: enemyKnightUnit
 };
+for (const entry of approvedEntries) {
+  if (entry.class !== 'unit_sheet' || !entry.targets.units) continue;
+  for (const [uKey, uTarget] of Object.entries(entry.targets.units)) {
+    if (art.units[uKey] || uKey === 'hero_arcanist' || uKey === 'enemy_knight') continue;
+    for (const out of entry.outputs) {
+      writeOut(`${OUT}/${out.path}`, readFileSync(join(ROOT, 'content/approved_art', out.path)));
+    }
+    Object.assign(atlases, entry.targets.atlases ?? {});
+    unitArt[uKey] = uTarget;
+  }
+}
 const placeholders: string[] = [];
 for (const u of pack.units) {
   if (unitArt[u.art_key]) continue;
@@ -228,7 +258,7 @@ for (const loc of new Set([...chapters.map((ch) => ch.location_id as string), ..
   writeOut(`${OUT}/art/bg_${loc}.webp`, await sharp(Buffer.from(bg)).webp({ quality: 70 }).toBuffer());
   backgrounds[loc] = `art/bg_${loc}.webp`;
 }
-const compiledArt = ArtManifest.parse({ ...art, atlases, units: unitArt, backgrounds });
+const compiledArt = ArtManifest.parse({ ...art, portraits: campaignPortraits, atlases, units: unitArt, backgrounds });
 const { stills, ...artWithoutStills } = compiledArt;
 writeJson(`${OUT}/art/art_manifest.json`, Object.keys(stills).length ? compiledArt : artWithoutStills);
 

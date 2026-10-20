@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "asset_id": "kera_voss_vn_focused",
+  "class": "portrait",
+  "revision": 2,
+  "targets": {
+    "portraits": {
+      "kera_voss": {
+        "emotions": {
+          "focused": "focused",
+          "brisk": "focused",
+          "sharp": "focused",
+          "serious": "focused",
+          "impatient": "focused",
+          "annoyed": "focused",
+          "resolved": "focused",
+          "determined": "focused"
+        },
+        "images": {
+          "focused": "art/portrait_kera_voss_focused.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "dda4ed09654bafea354020eda56852f13288bcc88464ae850d4c5c7c586efa69",
+    "mime": "image/png",
+    "width": 960,
+    "height": 1440,
+    "provenance_file": ".cache/generated/kera_voss_vn_focused/run.provenance.json",
+    "provenance_sha256": "27b9b3d30a1b704fa61d1c68e24ced8cc05c8f9b1e73b5f8af0157c886dd996a",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "657c5a8aa840f009fac57ab59a5551224fecb5c9dbfb0b008e95bc35cb0ff253",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/kera_voss_vn_focused.ingest.json",
+    "spec_sha256": "542da306aef91dcbf8da3e016c89fcc66716baf1272c8257e99adad5da209878",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "4510ab0cafb550aec88aedc407da471fa13395084a84bf37363c879ca29eda39"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_kera_voss_focused.webp",
+      "sha256": "ad48443f6b1aa12057d97a868096cc2b6d789709effe6a21d25b65420316de5f",
+      "pixels_sha256": "229199ef6a601fef437a1ce832b30665f30b79221df5a091c2d6d553921160f6",
+      "bytes": 63618,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 960x1440"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=6"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "63618 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0020%"
+        }
+      },
+      "warnings": [
+        "A12: removed 6 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_kera_voss_focused.webp",
+          "sha256": "ad48443f6b1aa12057d97a868096cc2b6d789709effe6a21d25b65420316de5f",
+          "pixels_sha256": "229199ef6a601fef437a1ce832b30665f30b79221df5a091c2d6d553921160f6",
+          "bytes": 63618,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "dda4ed09654bafea354020eda56852f13288bcc88464ae850d4c5c7c586efa69",
+      "fingerprint": "4510ab0cafb550aec88aedc407da471fa13395084a84bf37363c879ca29eda39"
+    }
+  ]
+}

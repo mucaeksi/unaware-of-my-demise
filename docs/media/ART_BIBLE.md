@@ -188,6 +188,55 @@ Locked brand art (never regenerate, only reference): wordmark `narrative/14_Refe
 | UNKNOWN | face, bell on the staff or pack (board only), pack contents, red cloth, the dragged foot in static art, exact height | UNKNOWN |
 Read the pair as opposites at 160 px: Bellbound thin, tall-reaching, chest bell and chains; Pilgrim broad triangle, hood, pack, planted staff, no chest bell or wrist chains.
 
+### 4.5 Kera Voss (`narrative/06_Characters/Playable/kera_voss.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "20 · Ember alchemist DPS · 4★ · Red Vial Guild, archive wing." | CANON |
+| Hat & hair | "The wide-brimmed hat is Hesper's field hat, built to keep sparks off the face; Kera added the ember-lens goggles herself, and they are the only thing she will admit to being sentimental about. Ash-silver hair from the explosion." | CANON |
+| Coat & apron | "Coat, apron, flask belt: archive-wing field kit. The cream apron is always clean except for one scorch mark she will not wash out." | CANON |
+| Weapon | "Redoubt's Last Vial: the brass mortar of her first master, who was expelled for refusing the ledger wing." | CANON |
+| Distinctness | "Her pale hair is explained by an accident, not by Veyr blood. Future art must keep her silhouette dominated by the hat, not the hair, so she never reads as a Fadyme look-alike." | CANON |
+
+### 4.6 Nixie Vale (`narrative/06_Characters/Playable/nixie_vale.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "19 · Gale ranged DPS · 4★ · caravan scout, a 'Vale' child from a road register; free story recruit." | CANON |
+| Look & props | "Teal hooded cloak with ochre lining in the Ochre Wheel colors, torn and patched; feather pin from the hawk; laced tall boots for climbing; shortbow, quiver, a knife and a map case. Light brown hair, amber eyes, a quick open grin." | CANON |
+| Weapon | "Windneedle Wayfinder: shortbow whose grip is wrapped in the map that 'lied' at 1-4." | CANON |
+| Distinctness | "She is the roster's open, bright face. Keep her expressions large (the sheet's laughing panels) and her hood usually back or loose, unlike Fadyme's." | CANON |
+
+### 4.7 Sister Aveline (`narrative/06_Characters/Playable/sister_aveline.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "26 · Dawn healer · 5★ limited (Oath Banner 1) · wandering sister of Saint Luthos." | CANON |
+| Look & props | "copper-auburn hair cropped short under a dove-grey veil, warm brown eyes, freckles; white-grey habit with an armored field apron and a satchel of bandages; open collar allowed by the costume guide, fully opaque. Reliquary staff crowned by a sun-disc lantern." | CANON |
+| Weapon | "Lantern of the Last Vigil: reliquary staff with a sun-disc; lit at every door she will not leave until the last person is out." | CANON |
+| Palette | "dawn gold, ivory, dove grey. Silhouette: upright, staff taller than her, lantern light on her face." | CANON |
+
+### 4.8 Mirel Quill (`narrative/06_Characters/Playable/mirel_quill.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "25 · Dawn buffer · 5★ limited (Oath Banner 4) · former court scribe, now archivist." | CANON |
+| Look & props | "petite; black hair in a severe bun held by two brass styluses, round brass spectacles, ink on her fingers; long-sleeved bottle-green dress with an opaque square neckline (costume guide), leather document satchel, signet ring." | CANON |
+| Weapon | "The Unwritten Ledger: brass astrolabe folio and stylus dagger; its last page is always blank." | CANON |
+| Palette | "bottle green, ink black, brass. Silhouette: astrolabe folio open in one hand, stylus raised like a baton." | CANON |
+
+### 4.9 Jori Flint (`narrative/06_Characters/Playable/jori_flint.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "20 · Ember guard · 3★ free story recruit · Oakhaven smith; family forged and repaired the altar chains." | CANON |
+| Look & props | "petite; short ginger hair tied up with a strip of leather, soot on her nose, burn freckles on her forearms; thick leather apron, arm guards; round short shield and small hammer." | CANON |
+| Weapon | "Furnace Door's Rivet: hammer-shield with a rivet from the family's chain die." | CANON |
+| Palette | "soot black, iron, copper (ginger hair is the accent). Silhouette: shield first, hammer cocked." | CANON |
+
+### 4.10 Clem Marr (`narrative/06_Characters/Playable/clem_marr.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "19 · Veil debuffer · 3★ standard · grave-register decoder." | CANON |
+| Look & props | "petite, round-faced; messy mouse-brown bob dusted with chalk; heather-grey work jacket, mustard scarf, chalk and brushes in every pocket; ritual lantern with symbol cut-outs." | CANON |
+| Weapon | "The Name Beneath Stone: ritual lantern that shows chalk names under moss." | CANON |
+| Palette | "heather grey, chalk white, mustard. Silhouette: kneeling at a stone, lantern raised." | CANON |
+
 ## 5. Canon-violation checklist (run on every generated image; any "no" fails it)
 **A. Global** 1 adult-coded (Mahmut 28, Fadyme 22; reunion plate 26/20) · 2 zero text/letters/digits/logos/watermarks/UI/rating badges · 3 dark-dominant, no pure black/white, no neon, crimson only per §1.3 · 4 painterly anime (R1/R2) or bold-contour glyph (R3), never photoreal/3D/clip-art · 5 no other named or identifiable character, no legible invented name, no faction emblem unless the scene allows · 6 no gore, no sexualised framing · 7 nothing from the legacy crimson/burgundy Fadyme atlas, never two Fadyme costumes in one image · 8 no cross/dagger-cross pins or holy motifs.
 **B. Fadyme** 1 hair pale ash-blonde (not silver, white or yellow) and **no bone-white lock** · 2 violet eyes · 3 deep plum hood up, broken crown fragment at the front edge above the brow · 4 black high-collar dress, silver-lilac embroidery (lilac, not gold) · 5 high white scarf, clean (no blood) · 6 silver chain bell with silver THORN clapper; tiny bell hairpin by the face is partly hidden; the three props are distinct · 7 no weapon, no black-gold hand lines, normal skin tone · 8 same adult face as the approved anchor.
