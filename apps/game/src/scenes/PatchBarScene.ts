@@ -14,6 +14,8 @@ import { app } from '../core/app';
 
 const BAR_H = 10;
 const STRIP_H = 110;
+/** screens whose own controls sit along the bottom edge: the strip never takes their taps (a skill tap must not pause or restart) */
+const GAMEPLAY = ['Battle', 'Story', 'Prologue'];
 
 /**
  * The download strip along the bottom edge of every screen while the first-install patch downloads. An HTML overlay
@@ -29,6 +31,8 @@ export class PatchBarScene extends PixiScene {
   private action!: DomButton;
   private shown = false;
   private restarting = false;
+  /** the strip offers pause/retry/restart; shown only while no gameplay screen is up */
+  private wantAction = false;
 
   constructor() {
     super(null);
@@ -56,9 +60,15 @@ export class PatchBarScene extends PixiScene {
     this.action = this.ui.button(REF_W / 2, REF_H - 55, { label: 'DOWNLOAD', bare: true, w: REF_W, h: STRIP_H, onClick: () => this.act() }, g).setVisible(false);
     this.left.el.setAttribute('aria-live', 'polite');
     this.onClose(Services.patches.subscribe((s) => this.render(s)));
+    this.onTick(() => this.syncAction());
+  }
+
+  private syncAction(): void {
+    this.action?.setVisible(this.wantAction && !GAMEPLAY.some((k) => this.nav.isActive(k)));
   }
 
   private act(): void {
+    if (GAMEPLAY.some((k) => this.nav.isActive(k))) return;
     const state = Services.patches.get();
     if (state.kind === 'ready' && state.outcome.status === 'staged' && loadEntry().phase === 'completed' && !this.restarting) {
       this.restarting = true;
@@ -81,7 +91,9 @@ export class PatchBarScene extends PixiScene {
   private say(left: string, color: string, centered: boolean, right = '', action = ''): void {
     this.left.setText(left).setColor(color).setOrigin(centered ? 0.5 : 0, 0.5).setPosition(centered ? REF_W / 2 : 44);
     this.right.setText(right);
-    this.action.setVisible(Boolean(action)).setLabel(action || 'DOWNLOAD');
+    this.wantAction = Boolean(action);
+    this.action.setLabel(action || 'DOWNLOAD');
+    this.syncAction();
   }
 
   private render(s: PatchStatus): void {
@@ -94,7 +106,8 @@ export class PatchBarScene extends PixiScene {
       return;
     }
     if (s.kind === 'idle' || s.kind === 'ready') {
-      this.action.setVisible(false);
+      this.wantAction = false;
+      this.syncAction();
       this.show(false);
       return;
     }

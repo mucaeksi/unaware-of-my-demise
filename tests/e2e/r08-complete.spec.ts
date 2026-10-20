@@ -4,6 +4,7 @@ import { ADMIN, GAME, SHOTS, finishBattleWithPolicy, openGame, signInDev, tap, w
 import { ARMOR, BANNER, HERO, HERO_FIVE, INVITATION, NODE, publishFixture } from './r08-fixture';
 
 test('one unchanged browser binary installs a signed synthetic season and uses its catalog, media, UI and animations', async ({ page, request }, info) => {
+  test.setTimeout(720_000); // the phone viewport (2x pixels) needs about twice the desktop 3.3 min
   const headers = { 'Cf-Access-Jwt-Assertion': process.env.E2E_ADMIN_JWT! };
   const original = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();
   const releaseId = `rel_r08_${info.project.name.startsWith('phone') ? 'phone' : 'desktop'}`;

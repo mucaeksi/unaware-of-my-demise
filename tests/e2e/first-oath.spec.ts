@@ -16,7 +16,7 @@ const settledRecruit = async (page: Page) => {
 };
 
 test('First Oath: an earned seven-choice invitation survives response loss/reload and completes chapter one without wishes or ads', async ({ page, request }, info) => {
-  test.setTimeout(720_000);
+  test.setTimeout(1_500_000); // five battles; the phone viewport (2x pixels) runs about twice as long as desktop
   const headers = { 'Cf-Access-Jwt-Assertion': process.env.E2E_ADMIN_JWT! };
   const id = `rel_oath_${info.project.name.replaceAll('-', '_')}`;
   await publishCampaign(process.env.E2E_ADMIN_JWT!, id);
