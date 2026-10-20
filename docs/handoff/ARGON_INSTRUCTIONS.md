@@ -27,20 +27,43 @@ Short, binding rules for working in this repository alongside Claude. They come 
 
 1. Narrative data in `narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/` (canon: names, skills, rarity, banner, weapon type).
 2. **Stats are not in the narrative any more** (D-27, [STAT_MATH](../combat/STAT_MATH.md)). Add the unit to `content/balance/attributes.json` with an archetype (`tank`, `bruiser`, `striker`, `caster`, `healer`, `support`; enemies `e_*`). A unit missing there keeps its old HP/ATK block and the seed refuses heroes without an entry.
-3. Make it obtainable: a story recruit, a banner pool entry, or a selector. A `banner_id` must exist in the banner data — Garrick Cinder (`oath_06_garrick`) and Corbin Locke (`oath_07_corbin`) currently point at banners that do not exist, so they cannot be obtained.
+3. Make it obtainable: a story recruit, a banner pool entry, or a selector. A `banner_id` must exist in the banner data. **Counts are asserted in tests:** when the number of banners, heroes, weapons or units changes, search the tests for the old number and update them in the same commit (`apps/api/test/catalog-snapshot.test.ts` missed the 12 → 16 banners in `67b1c969` and stopped three staging deploys).
 4. Rebuild: `npm run build:content`, `npx tsx tools/build_campaign.ts`, `npx tsx tools/seed_characters.ts`, `npx tsx tools/seed_catalog.ts`. Read `docs/combat/CAMPAIGN_BALANCE.md`: with starter gear every stage should still be won.
 5. Art through `tools/ingest_art.ts` (portrait, chibi sheet, summon art), then `npm run verify`.
-6. The skill grammar is closed. `npx tsx tools/combat_coverage.ts` must stay at full coverage; an op the engine does not know (e.g. the earlier `cleanse`) breaks the roster test. Ask Claude for a new op instead of inventing one in data.
+6. The skill grammar is closed. `npx tsx tools/combat_coverage.ts` must stay at full coverage; an ## 5. Current task for Argon: ART-1 — hero, boss and animation art, wave 1
 
-## 5. Open items that belong to Argon
+**Why.** The re-review ([REVIEW_2026-10-20 §7](../REVIEW_2026-10-20.md), #15–#17) found that 23 of 25 heroes borrow another unit's sheet (8 use Mahmut's, 15 the "arcanist" placeholder), only Mahmut and Fadyme have VN portraits, all 7 bosses share the generic knight sheet, and no sheet uses frame animation. Backgrounds are in good shape (44 distinct).
+
+**What the engine accepts** (`packages/content-schema/src/art.ts`, `UnitArt`): per unit an atlas (≤ 4096 × 4096), `facing`, `height_px` and up to 8 states — `idle, walk, basic, active, ultimate, hit, defeat, victory`. Each state has a still `frame` and an optional `animation: { frames (1–60), fps (1–30), loop }`. `idle` is required. With reduced motion the still frame is shown, so the still frame of each state must read well on its own. Portraits: `portraits.<character>.emotions → images`.
+
+**Order** (story line counts and battle appearances measured from the Part I patch):
+
+| Step | Units | Deliverable per unit |
+|---|---|---|
+| 1. Pilot | `kera_voss` (48 lines, 3rd speaker) | Chibi sheet with all 8 states (idle as a 4–6 frame loop, basic/active/ultimate as 4–8 frame one-shots, hit/defeat/victory), facing right; VN portrait with at least 4 emotions used by her lines; summon/recruit art if the Recruit screen needs it. Checked in the Control Center **Animations** studio and in a real battle and story scene before step 2. |
+| 2. Heroes, wave 1 | `nixie_vale` (34), `sister_aveline` (31), `mirel_quill` (31), `jori_flint` (27), `clem_marr` (25) | Same kit as the pilot. |
+| 3. Bosses | `boss_ash_maw`, `boss_bell_widow`, `boss_captain_rusk`, `boss_red_vial_matron`, `boss_marshal_oren`, `boss_ashen_lord_wraith`, `boss_eclipse_construct` | Own sheet each, facing left, with idle loop, basic, active, ultimate, hit, defeat. Bosses are larger (`height_px`), and their fresh-bar phases may want a phase-2 idle. |
+| 4. Frequent enemies | `inkbound_dead` (10 battles), `ash_wolf` (8), `corrupted_mercenary` (8), `red_vial_alchemist`, `corrupted_crown_guard`, `estate_wraith`, `eclipse_sentinel` (6 each) | Own sheet each: idle loop, basic, hit, defeat. |
+| 5. Upgrade the two leads | `mahmut`, `fadyme` | Add frame loops to the existing sheets plus the missing `defeat` and `victory` poses (identity unchanged). |
+| 6. Heroes, wave 2 | the remaining 15 heroes, by line count (`tilda_fen`, `iona_mist`, `brin_alder`, `marek_vane`, `sable_wren`, …) | Same kit as the pilot. |
+
+**Rules.**
+- Through `tools/ingest_art.ts` only (`init --class unit_sheet|portrait`, then ingest), so every image gets an `content/approved_art/entries/*.json` record with source, model, cost, licence, hashes and the human QC status. Then point the unit at its own atlas in the campaign `art/art_manifest.json` (replacing the borrowed `atlas_mahmut` / `atlas_hero_arcanist` / `atlas_enemy_knight` entry) and run `npm run build:content` (it also regenerates `apps/api/seed/assets.sql`).
+- Argon delivers candidates; `npx tsx tools/ingest_art.ts approve <asset_id> --by <owner>` is the owner's step after looking at the unit in game. `ingest_art.ts verify` and `report` show what is still a candidate.
+- Identity from canon only: [ART_BIBLE](../media/ART_BIBLE.md) §3.1/§3.2 conventions and §4 identity anchors; add an anchor section for each new character from `narrative/06_Characters` before generating. Anything not in canon stays UNKNOWN, not invented.
+- Budget: `content/budget/media_budget.json` — 1000 TL (20 USD) per month, at most 3 USD per batch and 3 paid attempts per asset. Steps 1–2 fit one month; log every paid call.
+- Verify before each commit: `npm run verify`; open the unit in the Animations studio and in battle on desktop and in the phone-landscape viewport; check alpha edges, foot line on the shadow, facing, frame alignment and readability at battle size.
+- Commit per unit (or per step) with only your files; never push. Tell the owner which commits are ready.
+
+**Other Argon items.**
 
 | Item | What is needed |
 |---|---|
-| Banners for Garrick Cinder and Corbin Locke | Create `oath_06_garrick` / `oath_07_corbin` (or move them into an existing pool) in the narrative banner data. |
-| Signature weapon effects (25) | Each signature weapon has prose but no executable effect; they cannot be equipped in battle. Write each effect as a finite rule (trigger, target, magnitude, duration, limit) using the existing op list in [COMBAT_RULES](../COMBAT_RULES.md); Claude turns approved designs into data and tests. |
-| Art pilot | Kera Voss end to end through `tools/ingest_art.ts`, checked in game, then the remaining heroes. Delivery rules: the Argon brief (https://claude.ai/artifact/Qobho5vJKwE9gYA5ra2Wqx). |
 | Control Center default page | Confirm the signed-out Animations studio is wanted on staging/production; if not, gate it to local dev. |
+| Music (later) | Chapters 2–7 and the boss fights have no own themes (7 tracks today). After ART-1, within the budget. |
+
+Done since the morning: Garrick/Corbin banners (`67b1c969`); the 25 signature weapon designs ([SIGNATURE_WEAPONS_SPEC](../combat/SIGNATURE_WEAPONS_SPEC.md)) — waiting for the owner's approval, then Claude turns them into data and tests.
 
 ## 6. Claude's current queue (do not duplicate)
 
-progression tuning once the owner sets a target pace (the pace probe is done: `docs/combat/PROGRESSION_PACE.md`), then the Achievements, Events, Profile/Leaderboard, Arena and Endless screens (AFK patrol already lives in Errands); extra enemy waves in the campaign builder; paged screens keeping their page. If you need one of these sooner, say so instead of building a parallel version.
+Signature weapon effects into data + vector tests once the owner approves the spec; extra enemy waves in the campaign builder; paged screens keeping their page; progression/economy tuning once the owner sets a target pace. Done today: the DEEDS / TRIALS / PROFILE screens and the journal fix that had blocked daily supplies, sweep, AFK and memory shards. If you need something from this queue sooner, say so instead of building a parallel version.
