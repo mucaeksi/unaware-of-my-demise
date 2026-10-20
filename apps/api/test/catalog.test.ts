@@ -65,7 +65,7 @@ describe('banner seed against the catalog', () => {
     for (const stmt of sql.split(/;\n(?=INSERT )/).map((x) => x.replace(/^--.*\n/, '').trim().replace(/;$/, '')).filter(Boolean)) await db().prepare(stmt).run();
     const { BannerConfig } = await import('@uomd/economy');
     const { results } = await db().prepare("SELECT id, config_json, status FROM banners WHERE id IN ('hall_of_ancestors','hall_of_armaments_weapons') OR id LIKE 'oath_%'").all<{ id: string; config_json: string; status: string }>();
-    expect(results.length).toBe(12);
+    expect(results.length).toBe(16);
     for (const b of results) {
       const cfg = BannerConfig.parse(JSON.parse(b.config_json));
       const ids = [...cfg.pools.fiveFeatured, ...cfg.pools.fiveOther, ...cfg.pools.four, ...cfg.pools.three];

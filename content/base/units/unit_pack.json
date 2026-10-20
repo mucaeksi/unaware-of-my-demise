@@ -167,7 +167,7 @@
       "art_key": "mahmut",
       "provenance": {
         "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#mahmut",
-        "source_sha256": "5a828bfd8784191f16837994c03272e2e911df369d71670d2c14bcebdeaed951"
+        "source_sha256": "8b91be1f502e9980e150da4c29b9ea1f819533b9297092b66fa991621287e3fc"
       }
     },
     {
@@ -335,7 +335,7 @@
       "art_key": "fadyme",
       "provenance": {
         "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json#fadyme",
-        "source_sha256": "5a828bfd8784191f16837994c03272e2e911df369d71670d2c14bcebdeaed951"
+        "source_sha256": "8b91be1f502e9980e150da4c29b9ea1f819533b9297092b66fa991621287e3fc"
       }
     },
     {

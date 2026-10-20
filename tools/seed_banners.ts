@@ -30,7 +30,7 @@ const rows: string[] = [];
 const hall = standardCharacterBanner('hall_of_ancestors', pools);
 rows.push(`INSERT INTO banners (id, title_en, config_json, status) VALUES (${q(hall.id)}, 'Hall of Ancestors', ${q(JSON.stringify(hall))}, 'active') ON CONFLICT (id) DO NOTHING;`);
 // rotation order from the canon economy file
-const order = ['sister_aveline', 'sable_wren', 'nara_vell', 'mirel_quill', 'vespera_wisp'];
+const order = ['sister_aveline', 'sable_wren', 'nara_vell', 'mirel_quill', 'vespera_wisp', 'garrick_cinder', 'corbin_locke'];
 order.forEach((featured, i) => {
   if (!oath.includes(featured)) throw new Error(`${featured} is not a limited_banner character`);
   const name = characters.find((c) => c.character_id === featured)?.name_en ?? featured;
@@ -45,7 +45,7 @@ const commons = (r: number): string[] => wdata.weapons.filter((w) => !w.owner_ch
 const wpools = { four: commons(4), three: commons(3) };
 const hallDef = wdata.weapon_banners.find((b) => b.banner_id === 'hall_of_armaments');
 const hallSigs = hallDef?.selected_signature_weapon_ids ?? [];
-if (hallSigs.length !== 15) throw new Error('Hall of Armaments must list 15 signature weapons');
+if (hallSigs.length !== 18) throw new Error('Hall of Armaments must list 18 signature weapons');
 const hallW = weaponBanner('hall_of_armaments_weapons', hallSigs, [], wpools, true);
 rows.push(`INSERT INTO banners (id, title_en, config_json, status) VALUES (${q(hallW.id)}, 'Hall of Armaments', ${q(JSON.stringify(hallW))}, 'active') ON CONFLICT (id) DO NOTHING;`);
 for (const b of wdata.weapon_banners.filter((x) => x.kind === 'limited_signature' && x.featured_weapon_id)) {

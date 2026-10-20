@@ -8,7 +8,7 @@ import { PixiScene } from '../core/PixiScene';
 import { advance } from '../entry/flow';
 import { S } from '../entry/strings';
 import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
-import { isDevServer, isForceFreshEntry, isInteractiveBrowser, isReplaying, loadEntry, markPrologueSeen } from '../entry/state';
+import { isForceFreshEntry, isInteractiveBrowser, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateTexture } from '../entry/plates';
 import { prefs } from '../platform/prefs';

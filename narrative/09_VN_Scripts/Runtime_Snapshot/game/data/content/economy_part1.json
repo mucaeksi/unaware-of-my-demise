@@ -288,6 +288,18 @@
         "character_id": "vespera_wisp",
         "weapon_id": "weapon_vespera_last_hour",
         "weapon_name": "Mirror of the Last Hour"
+      },
+      {
+        "banner_id": "oath_06_garrick",
+        "character_id": "garrick_cinder",
+        "weapon_id": "weapon_garrick_cinder_signature",
+        "weapon_name": "The Sixty-First Minute"
+      },
+      {
+        "banner_id": "oath_07_corbin",
+        "character_id": "corbin_locke",
+        "weapon_id": "weapon_corbin_locke_signature",
+        "weapon_name": "Seventh Sluice Anchor"
       }
     ],
     "standard_signature_weapon": {
@@ -310,7 +322,10 @@
         "weapon_thistle_roe_signature",
         "weapon_iona_mist_signature",
         "weapon_jori_flint_signature",
-        "weapon_marek_vane_signature"
+        "weapon_marek_vane_signature",
+        "weapon_cassian_thorne_signature",
+        "weapon_dorian_kesk_signature",
+        "weapon_rowan_reed_signature"
       ],
       "selected_target_required": true,
       "signature_feature_chance_on_unprotected_five_star": 0.55,
@@ -343,7 +358,9 @@
         "oath_02_sable",
         "oath_03_nara",
         "oath_04_mirel",
-        "oath_05_vespera"
+        "oath_05_vespera",
+        "oath_06_garrick",
+        "oath_07_corbin"
       ],
       "after_last": "loop",
       "permanent_banner_ids": [

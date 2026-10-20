@@ -23,7 +23,7 @@
         "atk": 0.1
       },
       "passive_name_en": "The Crestless Oath — Oath Echo",
-      "passive_effect_en": "When Mahmut uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Mahmut uses his Ultimate, increases his ATK by 15% for 2 turns and grants the ally with the lowest HP a shield equal to 60% of Mahmut's DEF for 2 turns.",
       "passive_effect_id": "signature_echo_mahmut",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -49,7 +49,7 @@
         "atk": 0.1
       },
       "passive_name_en": "The Hour Between Bells — Oath Echo",
-      "passive_effect_en": "When Fadyme uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Fadyme uses her Ultimate, grants all allies Sanctuary for 2 turns and grants the ally with the lowest Focus 15 Focus.",
       "passive_effect_id": "signature_echo_fadyme",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -75,7 +75,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Redoubt's Last Vial — Oath Echo",
-      "passive_effect_en": "When Kera Voss uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Kera Voss uses her Ultimate, increases her ATK by 15% for 2 turns and inflicts Burn on the enemy with the highest ATK for 2 turns.",
       "passive_effect_id": "signature_echo_kera_voss",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -101,7 +101,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Alderwall's Promise — Oath Echo",
-      "passive_effect_en": "When Brin Alder uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Brin Alder uses her Ultimate, grants all Front Row allies Stoneguard for 2 turns and increases Brin's DEF by 15% for 2 turns.",
       "passive_effect_id": "signature_echo_brin_alder",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -127,7 +127,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Windneedle Wayfinder — Oath Echo",
-      "passive_effect_en": "When Nixie Vale uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Nixie Vale uses her Ultimate, increases her Speed by 15% for 2 turns and arms her next attack to deal 20% more damage.",
       "passive_effect_id": "signature_echo_nixie_vale",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -153,7 +153,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Lantern of the Last Vigil — Oath Echo",
-      "passive_effect_en": "When Sister Aveline uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Sister Aveline uses her Ultimate, applies Regeneration equal to 35% of her ATK for 2 turns to all allies and cleanses 1 debuff from the ally with the lowest HP.",
       "passive_effect_id": "signature_echo_sister_aveline",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -179,7 +179,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Quietus at the Broken Bell — Oath Echo",
-      "passive_effect_en": "When Sable Wren uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Sable Wren uses her Ultimate, increases her ATK by 20% for 2 turns and gains 20 Focus.",
       "passive_effect_id": "signature_echo_sable_wren",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -205,7 +205,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Salt-Road Remedies — Oath Echo",
-      "passive_effect_en": "When Tilda Fen uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Tilda Fen uses her Ultimate, grants all allies Dry Ward for 2 turns and heals the ally with the lowest HP for 50% of Tilda's ATK.",
       "passive_effect_id": "signature_echo_tilda_fen",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -231,7 +231,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Procession's First Spark — Oath Echo",
-      "passive_effect_en": "When Rikka Ember uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Rikka Ember uses her Ultimate, grants her a shield equal to 80% of her ATK for 2 turns and increases her ATK by 15% for 2 turns.",
       "passive_effect_id": "signature_echo_rikka_ember",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -257,7 +257,7 @@
         "atk": 0.1
       },
       "passive_name_en": "The Unwritten Ledger — Oath Echo",
-      "passive_effect_en": "When Mirel Quill uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Mirel Quill uses her Ultimate, reduces all allies' skill cooldowns by 1 turn and increases all allies' ATK by 10% for 2 turns.",
       "passive_effect_id": "signature_echo_mirel_quill",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -283,7 +283,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Breakwater's Eye — Oath Echo",
-      "passive_effect_en": "When Odelia Pike uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Odelia Pike uses her Ultimate, inflicts Fracture and Soaked on the enemy with the highest ATK for 2 turns.",
       "passive_effect_id": "signature_echo_odelia_pike",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -309,7 +309,7 @@
         "atk": 0.1
       },
       "passive_name_en": "A Song Kept in Brass — Oath Echo",
-      "passive_effect_en": "When Pippa Bell uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Pippa Bell uses her Ultimate, increases all allies' Speed by 12% for 2 turns and grants the ally with the lowest Focus 15 Focus.",
       "passive_effect_id": "signature_echo_pippa_bell",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -335,7 +335,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Gatewarden's Promise — Oath Echo",
-      "passive_effect_en": "When Nara Vell uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Nara Vell uses her Ultimate, grants all allies a shield equal to 70% of Nara's DEF for 2 turns and grants all Front Row allies Stoneguard for 2 turns.",
       "passive_effect_id": "signature_echo_nara_vell",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -361,7 +361,7 @@
         "atk": 0.1
       },
       "passive_name_en": "The Name Beneath Stone — Oath Echo",
-      "passive_effect_en": "When Clem Marr uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Clem Marr uses his Ultimate, inflicts Dread on all enemies for 2 turns and grants all allies Dawnward for 2 turns.",
       "passive_effect_id": "signature_echo_clem_marr",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -387,7 +387,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Mirror of the Last Hour — Oath Echo",
-      "passive_effect_en": "When Vespera Wisp uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Vespera Wisp uses her Ultimate, increases her ATK by 20% for 2 turns and inflicts Decay on all enemies for 2 turns.",
       "passive_effect_id": "signature_echo_vespera_wisp",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -413,7 +413,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Stillbark Snare — Oath Echo",
-      "passive_effect_en": "When Hana Birch uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Hana Birch uses her Ultimate, inflicts Fracture on all Front Row enemies for 2 turns and increases Hana's Speed by 15% for 2 turns.",
       "passive_effect_id": "signature_echo_hana_birch",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -439,7 +439,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Garden Before Winter — Oath Echo",
-      "passive_effect_en": "When Thistle Roe uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Thistle Roe uses her Ultimate, applies Regeneration equal to 30% of her ATK for 2 turns to all allies and increases all allies' Speed by 10% for 2 turns.",
       "passive_effect_id": "signature_echo_thistle_roe",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -465,7 +465,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Safe Harbor Lantern — Oath Echo",
-      "passive_effect_en": "When Iona Mist uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Iona Mist uses her Ultimate, grants all allies a shield equal to 60% of her ATK for 2 turns and grants all allies Sanctuary for 2 turns.",
       "passive_effect_id": "signature_echo_iona_mist",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -491,7 +491,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Furnace Door's Rivet — Oath Echo",
-      "passive_effect_en": "When Jori Flint uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Jori Flint uses his Ultimate, grants himself a shield equal to 90% of his DEF for 2 turns and inflicts Burn on all Front Row enemies for 2 turns.",
       "passive_effect_id": "signature_echo_jori_flint",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -517,7 +517,7 @@
         "atk": 0.1
       },
       "passive_name_en": "March Without a Banner — Oath Echo",
-      "passive_effect_en": "When Marek Vane uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Marek Vane uses his Ultimate, delays the enemy with the highest ATK's next action gauge by 15% and increases all Front Row allies' DEF by 15% for 2 turns.",
       "passive_effect_id": "signature_echo_marek_vane",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -532,6 +532,7 @@
       "brand_mark_id": "mark_weapon_garrick_cinder_signature",
       "owner_character_id": "garrick_cinder",
       "acquisition": "weapon_banner_only",
+      "banner_id": "oath_06_garrick",
       "level_cap": 20,
       "base_stats_level_1": {
         "atk": 2,
@@ -542,7 +543,7 @@
         "atk": 0.1
       },
       "passive_name_en": "The Sixty-First Minute — Oath Echo",
-      "passive_effect_en": "When Garrick Cinder uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Garrick Cinder uses his Ultimate, increases his ATK by 20% for 2 turns and grants himself Stoneguard for 2 turns.",
       "passive_effect_id": "signature_echo_garrick_cinder",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -557,6 +558,7 @@
       "brand_mark_id": "mark_weapon_corbin_locke_signature",
       "owner_character_id": "corbin_locke",
       "acquisition": "weapon_banner_only",
+      "banner_id": "oath_07_corbin",
       "level_cap": 20,
       "base_stats_level_1": {
         "atk": 2,
@@ -567,7 +569,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Seventh Sluice Anchor — Oath Echo",
-      "passive_effect_en": "When Corbin Locke uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Corbin Locke uses his Ultimate, grants all Front Row allies a shield equal to 80% of Corbin's DEF for 2 turns and inflicts Fracture on all Front Row enemies for 2 turns.",
       "passive_effect_id": "signature_echo_corbin_locke",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -582,6 +584,7 @@
       "brand_mark_id": "mark_weapon_cassian_thorne_signature",
       "owner_character_id": "cassian_thorne",
       "acquisition": "weapon_banner_only",
+      "banner_id": "hall_of_armaments",
       "level_cap": 20,
       "base_stats_level_1": {
         "atk": 2,
@@ -592,7 +595,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Clapperless Verdict — Oath Echo",
-      "passive_effect_en": "When Cassian Thorne uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Cassian Thorne uses his Ultimate, grants all allies Dawnward for 2 turns and heals the ally with the lowest HP for 60% of Cassian's DEF.",
       "passive_effect_id": "signature_echo_cassian_thorne",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -607,6 +610,7 @@
       "brand_mark_id": "mark_weapon_dorian_kesk_signature",
       "owner_character_id": "dorian_kesk",
       "acquisition": "weapon_banner_only",
+      "banner_id": "hall_of_armaments",
       "level_cap": 20,
       "base_stats_level_1": {
         "atk": 2,
@@ -617,7 +621,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Seven-Notch Seal-Iron — Oath Echo",
-      "passive_effect_en": "When Dorian Kesk uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Dorian Kesk uses his Ultimate, inflicts Decay on all enemies for 2 turns and increases his Speed by 15% for 2 turns.",
       "passive_effect_id": "signature_echo_dorian_kesk",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -632,6 +636,7 @@
       "brand_mark_id": "mark_weapon_rowan_reed_signature",
       "owner_character_id": "rowan_reed",
       "acquisition": "weapon_banner_only",
+      "banner_id": "hall_of_armaments",
       "level_cap": 20,
       "base_stats_level_1": {
         "atk": 2,
@@ -642,7 +647,7 @@
         "atk": 0.1
       },
       "passive_name_en": "Wayshrine's Last Wick — Oath Echo",
-      "passive_effect_en": "When Rowan Reed uses their Ultimate, grants a small role-aligned effect for 2 turns.",
+      "passive_effect_en": "When Rowan Reed uses his Ultimate, cleanses 1 debuff from all allies and grants the ally with the lowest HP Sanctuary for 2 turns.",
       "passive_effect_id": "signature_echo_rowan_reed",
       "dismantle_xp": 0,
       "dismantle_output": [],
@@ -5589,6 +5594,20 @@
       "permanent": false
     },
     {
+      "banner_id": "oath_06_garrick",
+      "kind": "limited_signature",
+      "featured_weapon_id": "weapon_garrick_cinder_signature",
+      "paired_character_id": "garrick_cinder",
+      "permanent": false
+    },
+    {
+      "banner_id": "oath_07_corbin",
+      "kind": "limited_signature",
+      "featured_weapon_id": "weapon_corbin_locke_signature",
+      "paired_character_id": "corbin_locke",
+      "permanent": false
+    },
+    {
       "banner_id": "hall_of_armaments",
       "kind": "permanent_signature_rotation",
       "selected_signature_weapon_ids": [
@@ -5606,7 +5625,10 @@
         "weapon_thistle_roe_signature",
         "weapon_iona_mist_signature",
         "weapon_jori_flint_signature",
-        "weapon_marek_vane_signature"
+        "weapon_marek_vane_signature",
+        "weapon_cassian_thorne_signature",
+        "weapon_dorian_kesk_signature",
+        "weapon_rowan_reed_signature"
       ],
       "permanent": true
     }
