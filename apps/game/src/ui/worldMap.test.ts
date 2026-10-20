@@ -14,7 +14,7 @@ const map = {
 } as unknown as WorldMap;
 const node = (node_id: string, requires?: string) => ({ node_id, kind: 'battle', ...(requires ? { requires } : {}) });
 const index = { schema_version: 1, chapters: [
-  { chapter_id: 'ch1', title_en: 'One', nodes: [node('a1'), node('a2', 'a1')] },
+  { chapter_id: 'ch1', title_en: 'One', nodes: [node('a1'), node('a2', 'a1'), { ...node('a1h', 'a2'), difficulty: 'hard' }] },
   { chapter_id: 'ch2', title_en: 'Two', nodes: [node('b1', 'a2')] }
 ] } as unknown as ChapterIndex;
 
@@ -22,7 +22,7 @@ describe('regionStates', () => {
   it('opens chapter 1, locks chapter 2 until chapter 1 ends, and marks unshipped chapters coming soon', () => {
     expect(Object.fromEntries(regionStates(map, index, new Set()))).toEqual({ r1: 'open', r2: 'locked', r3: 'coming_soon', side: 'landmark' });
   });
-  it('clears a chapter when every node is cleared and opens the next one', () => {
+  it('clears a chapter when every Normal node is cleared (Hard stages do not count) and opens the next one', () => {
     expect(Object.fromEntries(regionStates(map, index, new Set(['a1', 'a2'])))).toEqual({ r1: 'cleared', r2: 'open', r3: 'coming_soon', side: 'landmark' });
   });
 });

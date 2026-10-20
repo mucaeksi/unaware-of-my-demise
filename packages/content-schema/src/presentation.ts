@@ -52,7 +52,7 @@ export const PresentationCommand = z.discriminatedUnion('op', [
   z.object({ op: z.literal('panel'), panel_id: Id }).strict()
 ]);
 export type PresentationCommand = z.infer<typeof PresentationCommand>;
-export const CONTENT_CAPABILITIES = ['calendar_v1', 'catalog_v1', 'presentation_v1', 'locale_v1', 'sprite_animation_v1', 'story_flags_v1', 'snapshot_v1', 'vfx_v1', 'attributes_v1', 'world_map_v1'] as const;
+export const CONTENT_CAPABILITIES = ['calendar_v1', 'catalog_v1', 'presentation_v1', 'locale_v1', 'sprite_animation_v1', 'story_flags_v1', 'snapshot_v1', 'vfx_v1', 'attributes_v1', 'world_map_v1', 'hard_mode_v1'] as const;
 export const ContentCapability = z.enum(CONTENT_CAPABILITIES);
 
 /** Required primitives are declared by the publisher; old binaries reject unknown capabilities before downloading. */
@@ -76,6 +76,7 @@ export function requiredContentCapabilities(files: ReadonlyMap<string, Uint8Arra
       if (row.attributes && typeof row.attributes === 'object' && 'power' in row.attributes) required.add('attributes_v1');
       if (typeof row.op === 'string' && presentationOps.has(row.op)) required.add('presentation_v1');
       if (path === 'art/art_manifest.json' && row.animation) required.add('sprite_animation_v1');
+      if (path.startsWith('chapters/') && row.difficulty === 'hard') required.add('hard_mode_v1');
       for (const item of Object.values(row)) pending.push(item);
     }
   }

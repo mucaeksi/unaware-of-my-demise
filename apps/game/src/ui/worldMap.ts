@@ -11,10 +11,11 @@ export function regionStates(map: WorldMap, index: ChapterIndex, cleared: Readon
   const chapters = new Map(index.chapters.map((c) => [c.chapter_id, c]));
   return new Map(map.regions.map((r): [string, RegionState] => {
     if (!r.chapter_id) return [r.region_id, 'landmark'];
-    const chapter = chapters.get(r.chapter_id);
-    if (!chapter || chapter.nodes.length === 0) return [r.region_id, 'coming_soon'];
-    if (chapter.nodes.every((n) => cleared.has(n.node_id))) return [r.region_id, 'cleared'];
-    const first = chapter.nodes[0]!;
+    // Hard stages (D-29) never decide whether a chapter is open or finished on the map
+    const nodes = chapters.get(r.chapter_id)?.nodes.filter((n) => n.difficulty !== 'hard') ?? [];
+    if (nodes.length === 0) return [r.region_id, 'coming_soon'];
+    if (nodes.every((n) => cleared.has(n.node_id))) return [r.region_id, 'cleared'];
+    const first = nodes[0]!;
     return [r.region_id, !first.requires || cleared.has(first.requires) ? 'open' : 'locked'];
   }));
 }

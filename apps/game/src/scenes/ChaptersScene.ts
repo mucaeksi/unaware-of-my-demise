@@ -11,6 +11,8 @@ type Node = ChapterIndex['chapters'][number]['nodes'][number];
 
 /** where the scroll area starts (below the heading); rows are laid out in screen coordinates and shifted by this */
 const TOP = 140;
+/** D-29 Hard mode: which variant the list shows; kept for the session, only offered when the content has Hard stages */
+let difficulty: 'normal' | 'hard' = 'normal';
 
 /** The campaign map: chapters, their nodes, stars and star chests. Scrolls natively (touch, wheel, keyboard). */
 export class ChaptersScene extends HubScreen {
@@ -50,13 +52,21 @@ export class ChaptersScene extends HubScreen {
     const active = await content.activeReleaseId();
     if (!this.isCurrentView()) return;
 
+    const hasHard = index.chapters.some((ch) => ch.nodes.some((n) => n.difficulty === 'hard'));
+    if (!hasHard) difficulty = 'normal';
+    else for (const [label, mode, x] of [['NORMAL', 'normal', REF_W - 420], ['HARD', 'hard', REF_W - 200]] as const) {
+      this.button(x, 70, { label, w: 200, h: 64, fontSize: 24, variant: difficulty === mode ? 'hot' : 'dim', onClick: () => { difficulty = mode; void this.refresh(); } });
+    }
+    const shown = (n: Node): boolean => (n.difficulty === 'hard') === (difficulty === 'hard');
     const sc = this.scroll(0, TOP, REF_W, REF_H - TOP);
     const entryDone = loadEntry().phase === 'completed';
     const hasCampaign = index.chapters.some((ch) => ch.chapter_id !== 'tutorial');
     let y = 240;
     let firstOpen = -1;
     let picked = -1;
-    for (const ch of index.chapters) {
+    for (const full of index.chapters) {
+      const ch = { ...full, nodes: full.nodes.filter(shown) };
+      if (ch.nodes.length === 0) continue;
       if (ch.chapter_id === this.chapterId) picked = y - 120;
       const isTutorial = ch.chapter_id === 'tutorial';
       const revealed = (isTutorial && entryDone) || ch.nodes.some((node) => progress[node.node_id] || !node.requires || progress[node.requires]);

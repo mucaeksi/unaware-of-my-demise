@@ -227,9 +227,12 @@ const ChapterNode = z
     boss: z.boolean().optional(),
     rewards: NodeRewards.optional(),
     /** random loot: a drop table (game_config 'drops') rolled by the server on every win; `boss_set_id` names the accessory set boss-set entries resolve to */
-    drop: z.object({ table: Id, boss_set_id: Id.optional() }).strict().optional()
+    drop: z.object({ table: Id, boss_set_id: Id.optional() }).strict().optional(),
+    /** D-29 Hard mode: hard stages are their own battle nodes (own progress, stars and rewards); absent = normal */
+    difficulty: z.enum(['normal', 'hard']).optional()
   })
-  .strict();
+  .strict()
+  .refine((n) => n.difficulty !== 'hard' || n.kind === 'battle', { message: 'only battle nodes have a Hard variant' });
 
 const Chapter = z
   .object({

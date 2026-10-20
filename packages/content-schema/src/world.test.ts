@@ -27,3 +27,18 @@ describe('WorldMap', () => {
     expect(requiredContentCapabilities(files)).toContain('world_map_v1');
   });
 });
+
+describe('Hard mode nodes (D-29)', () => {
+  const index = (difficulty: 'hard' | undefined, kind: 'battle' | 'story' = 'battle') => ({ schema_version: 1, chapters: [{ chapter_id: 'ch01', title_en: 'One', nodes: [
+    { node_id: 'stage_1_1', title_en: '1-1', kind: 'battle', encounter: 'encounters/stage_1_1.json' },
+    { node_id: 'stage_1_1_hard', title_en: '1-1 Hard', kind, ...(kind === 'battle' ? { encounter: 'encounters/stage_1_1_hard.json' } : { story: 'story/x.json' }), requires: 'stage_1_1', ...(difficulty ? { difficulty } : {}) }
+  ] }] });
+  it('are battle nodes and make a release require hard_mode_v1', async () => {
+    const { ChapterIndex } = await import('./story');
+    expect(ChapterIndex.safeParse(index('hard')).success).toBe(true);
+    expect(ChapterIndex.safeParse(index('hard', 'story')).success).toBe(false);
+    const files = (difficulty?: 'hard') => new Map([['chapters/chapter_index.json', new TextEncoder().encode(JSON.stringify(index(difficulty)))]]);
+    expect(requiredContentCapabilities(files('hard'))).toContain('hard_mode_v1');
+    expect(requiredContentCapabilities(files())).not.toContain('hard_mode_v1');
+  });
+});
