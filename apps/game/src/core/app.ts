@@ -108,7 +108,8 @@ export class App {
     const left = Math.round((vw - cw) / 2);
     const top = Math.round((vh - ch) / 2);
     this.renderer.pixi?.resize(this.cfg.width, this.cfg.height, this.displayResolution());
-    Object.assign(this.canvas.style, { width: `${cw}px`, height: `${ch}px`, marginLeft: `${left}px`, marginTop: `${top}px` });
+    // #game centres the canvas (CSS grid); a margin on top of that shifted it by half the letterbox on non-16:9 screens and split it from the HTML layer
+    Object.assign(this.canvas.style, { width: `${cw}px`, height: `${ch}px` });
     Object.assign(this.uiLayer.style, { left: `${left}px`, top: `${top}px`, width: `${cw}px`, height: `${ch}px` });
     this.events.emit('resize');
   }

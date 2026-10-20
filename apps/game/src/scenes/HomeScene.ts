@@ -9,7 +9,7 @@ import { createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } fr
 
 interface Tile { label: string; sub: string; scene: string }
 
-const STATE_LABEL: Record<Exclude<RegionState, 'landmark'>, string> = { cleared: 'Cleared â˜…', open: 'Open', locked: 'Locked', coming_soon: 'Coming soon' };
+const STATE_LABEL: Record<Exclude<RegionState, 'landmark'>, string> = { cleared: 'Cleared ★', open: 'Open', locked: 'Locked', coming_soon: 'Coming soon' };
 
 /**
  * Hub of the account-backed features. With the world map of a chapter patch (D-29) the map is the main menu and the
@@ -122,7 +122,7 @@ export class HomeScene extends HubScreen {
     for (const r of map.regions) {
       const state = states.get(r.region_id)!;
       if (state === 'landmark') {
-        this.text(r.x, r.y, `â—† ${r.title_en}`, { fontFamily: F.body, fontSize: 20, color: T.dim }).setOrigin(0.5);
+        this.text(r.x, r.y, `◆ ${r.title_en}`, { fontFamily: F.body, fontSize: 20, color: T.dim }).setOrigin(0.5);
         continue;
       }
       const playable = state === 'open' || state === 'cleared';
