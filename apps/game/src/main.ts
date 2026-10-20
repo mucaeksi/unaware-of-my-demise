@@ -17,10 +17,12 @@ import { ContentPanelScene } from './scenes/ContentPanelScene';
 import { FinishScene } from './scenes/FinishScene';
 import { GearScene } from './scenes/GearScene';
 import { HomeScene } from './scenes/HomeScene';
+import { DeedsScene } from './scenes/DeedsScene';
 import { LibraryScene } from './scenes/LibraryScene';
 import { MailScene } from './scenes/MailScene';
 import { OperationsScene } from './scenes/OperationsScene';
 import { PatchBarScene } from './scenes/PatchBarScene';
+import { ProfileScene } from './scenes/ProfileScene';
 import { PrologueScene } from './scenes/PrologueScene';
 import { PurchasesScene } from './scenes/PurchasesScene';
 import { RecruitScene } from './scenes/RecruitScene';
@@ -33,6 +35,7 @@ import { SummonScene } from './scenes/SummonScene';
 import { TasksScene } from './scenes/TasksScene';
 import { TeamScene } from './scenes/TeamScene';
 import { TitleScene } from './scenes/TitleScene';
+import { TrialsScene } from './scenes/TrialsScene';
 import { installA11y } from './platform/a11y';
 import { Services } from './services';
 
@@ -79,6 +82,9 @@ const SCENES: Record<string, () => AnyScene> = {
   Character: () => new CharacterScene(),
   Gear: () => new GearScene(),
   Tasks: () => new TasksScene(),
+  Deeds: () => new DeedsScene(),
+  Trials: () => new TrialsScene(),
+  Profile: () => new ProfileScene(),
   Team: () => new TeamScene(),
   PatchBar: () => new PatchBarScene()
 };

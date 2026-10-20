@@ -24,23 +24,26 @@ export class HomeScene extends HubScreen {
       { label: 'ROSTER', sub: 'Your company', scene: 'Roster' },
       { label: 'TEAM', sub: 'Formation and presets', scene: 'Team' },
       { label: 'ERRANDS', sub: 'Daily and weekly', scene: 'Tasks' },
+      { label: 'DEEDS', sub: 'Achievements and events', scene: 'Deeds' },
+      { label: 'TRIALS', sub: 'Arena and endless corridor', scene: 'Trials' },
       { label: 'ARMORY', sub: 'Weapons and relics', scene: 'Gear' },
       { label: 'MAIL', sub: 'Rewards and notices', scene: 'Mail' },
       { label: 'SHOP', sub: 'Offers and ads', scene: 'Shop' },
+      { label: 'PROFILE', sub: 'Title and leaderboards', scene: 'Profile' },
       { label: 'ACCOUNT', sub: api.signedIn ? 'Signed in' : 'Sign in', scene: 'Account' },
       { label: 'ACTIONS', sub: 'Pending results and history', scene: 'Operations' }
     ];
     tiles.forEach((t, i) => {
-      const col = i % 3;
-      const row = Math.floor(i / 3);
-      const tx = REF_W / 2 - 520 + col * 520;
+      const col = i % 4;
+      const row = Math.floor(i / 4);
+      const tx = REF_W / 2 - 690 + col * 460;
       const ty = 290 + row * 215;
       this.button(tx, ty, {
         label: t.label,
         sub: t.sub,
-        w: 480,
+        w: 430,
         h: 190,
-        fontSize: 46,
+        fontSize: 40,
         variant: i === 0 ? 'hot' : 'normal',
         onClick: () => {
           triggerWaxSealBurst(this, tx, ty, 30);

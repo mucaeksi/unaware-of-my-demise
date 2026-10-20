@@ -19,7 +19,12 @@ export function describeAttachments(atts: MailItem['attachments'], names: Map<st
   return atts.length === 0 ? 'No attachment' : atts.map((a) => describeAttachment(a, names)).join(' · ');
 }
 
-export const pct = (x: number, digits = 1): string => `${(x * 100).toFixed(digits).replace(/\.0+$/, '')} %`;
+const SMALL_WORDS = new Set(['of', 'the', 'and', 'a', 'in']);
+/** Server ids (badges, tiers, modifiers) as player text: `wayfarer_of_ash` → `Wayfarer of Ash`. */
+export const idLabel = (id: string): string =>
+  id.split('_').map((w, i) => (i > 0 && SMALL_WORDS.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1))).join(' ');
+
+export const pct =(x: number, digits = 1): string => `${(x * 100).toFixed(digits).replace(/\.0+$/, '')} %`;
 
 const STAT_NAME: Record<string, string> = { str: 'STR', int: 'INT', vit: 'VIT', agi: 'AGI', power: 'POWER', def: 'DEF', hp: 'HP', atk: 'ATK', spd: 'SPD', heal_bonus: 'HEAL', focus_gain: 'FOCUS', effect_res: 'EFFECT RES', element_res: 'ELEMENT RES' };
 /** One gear stat for the player: whole points read `+1 VIT`, percentages `HEAL +5%`. */

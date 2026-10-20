@@ -143,6 +143,26 @@ export interface GearView {
   stats: { main: { stat: string; value: number }; subs: { stat: string; value: number }[] } | null;
   passive: { name: string; text?: string; supported?: boolean } | null;
 }
+export interface ArenaState {
+  unlocked: boolean;
+  season: { seasonId: string; startsAtMs: number; endsAtMs: number };
+  rating: number;
+  wins: number;
+  tier: string;
+  seasonRewards: Attachment[];
+  seasonClaimed: boolean;
+  dailyUsed: number;
+  dailyLimit: number;
+  opponents: readonly { opponentId: string; displayName: string; rating: number; level: number }[];
+}
+export type EndlessModifier = 'blood_moon' | 'iron_ward' | 'ashen_haste';
+export interface EndlessState {
+  unlocked: boolean;
+  bestWave: number;
+  activeRun: { wave: number; sessionId: string; modifier: EndlessModifier; releaseId: string } | null;
+  availableModifiers: { id: EndlessModifier; description: string }[];
+  milestones: { wave: number; ready: boolean; claimed: boolean; rewards: Attachment[] }[];
+}
 export interface TaskView {
   rewardNames?: Record<string, string>;
   id: string;
@@ -784,28 +804,28 @@ export class GameApi extends EventTarget {
   leaderboard(board: 'campaign_stars' | 'arena' | 'endless' = 'campaign_stars', limit = 20): Promise<{ board: string; entries: { rank: number; playerTag: string; displayName: string; score: number; isMe: boolean }[] }> {
     return this.call('GET', `/api/v1/leaderboard?board=${encodeURIComponent(board)}&limit=${limit}`);
   }
-  arenaState(releaseId?: string): Promise<Record<string, unknown>> {
+  arenaState(releaseId?: string): Promise<ArenaState> {
     return this.call('GET', `/api/v1/arena${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
   setArenaDefense(members: TeamMember[], releaseId?: string): Promise<Record<string, unknown>> {
     return this.mutate('/api/v1/arena/defense', { members, ...(releaseId ? { releaseId } : {}) }, 'PUT');
   }
-  fightArenaMatch(releaseId: string, opponentId: string, actions?: { skillId: string; targetId?: string }[]): Promise<Record<string, unknown>> {
+  fightArenaMatch(releaseId: string, opponentId: string, actions?: { skillId: string; targetId?: string }[]): Promise<{ opponentId: string; won: boolean; turns: number; ratingBefore: number; ratingAfter: number; ratingDelta: number; dailyUsed: number; dailyLimit: number; rewards: Attachment[] }> {
     return this.mutate('/api/v1/arena/match', { releaseId, opponentId, ...(actions ? { actions } : {}) });
   }
-  claimArenaSeason(seasonId: string, releaseId?: string): Promise<Record<string, unknown>> {
+  claimArenaSeason(seasonId: string, releaseId?: string): Promise<{ seasonId: string; rating: number; tier: string; rewards: Attachment[] }> {
     return this.mutate('/api/v1/arena/season/claim', { seasonId, ...(releaseId ? { releaseId } : {}) });
   }
-  endlessState(releaseId?: string): Promise<Record<string, unknown>> {
+  endlessState(releaseId?: string): Promise<EndlessState> {
     return this.call('GET', `/api/v1/endless${releaseId ? `?releaseId=${encodeURIComponent(releaseId)}` : ''}`);
   }
-  startEndless(releaseId: string, modifier: 'blood_moon' | 'iron_ward' | 'ashen_haste' = 'blood_moon'): Promise<Record<string, unknown>> {
+  startEndless(releaseId: string, modifier: EndlessModifier = 'blood_moon'): Promise<{ sessionId: string; wave: number; modifier: EndlessModifier; expiresAt: string }> {
     return this.mutate('/api/v1/endless/start', { releaseId, modifier });
   }
-  submitEndlessWave(releaseId: string, sessionId: string, actions?: { skillId: string; targetId?: string }[]): Promise<Record<string, unknown>> {
+  submitEndlessWave(releaseId: string, sessionId: string, actions?: { skillId: string; targetId?: string }[]): Promise<{ clearedWave: number; bestWave: number; turns: number; nextWave: number; nextSessionId: string; rewards: Attachment[] }> {
     return this.mutate('/api/v1/endless/wave', { releaseId, sessionId, ...(actions ? { actions } : {}) });
   }
-  claimEndlessMilestone(wave: number, releaseId?: string): Promise<Record<string, unknown>> {
+  claimEndlessMilestone(wave: number, releaseId?: string): Promise<{ wave: number; rewards: Attachment[] }> {
     return this.mutate('/api/v1/endless/milestone/claim', { wave, ...(releaseId ? { releaseId } : {}) });
   }
 }

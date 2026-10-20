@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { gearStat } from './format';
+import { gearStat, idLabel } from './format';
+
+describe('idLabel', () => {
+  it('turns server ids into player text, keeping short joining words lower case', () => {
+    expect(idLabel('wayfarer_of_ash')).toBe('Wayfarer of Ash');
+    expect(idLabel('gold_bell')).toBe('Gold Bell');
+    expect(idLabel('of_the_demise')).toBe('Of the Demise');
+  });
+});
 
 describe('gearStat', () => {
   it('reads whole points as +N NAME and percentages as NAME +N%', () => {
