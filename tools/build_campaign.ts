@@ -66,22 +66,21 @@ for (const ch of chapters) {
     const st = stages.find((s) => s.stage_id === n.stage_id) as Json;
     const id = snake(st.stage_id);
     const tutorial = st.stage_id === '1-1';
-    const foes: { unit_id: string; level: number; slot: number; row: 'front' | 'rear' }[] = [];
-    let slot = 0;
-    for (const wave of (st.enemy_waves as Json[][]).slice(0, 1)) {
+    // one narrative wave -> placed foes; at most two front-row foes keep the formation readable (canon 2 front + 3 rear)
+    const place = (wave: Json[]): { unit_id: string; level: number; slot: number; row: 'front' | 'rear' }[] => {
+      const placed: { unit_id: string; level: number; slot: number; row: 'front' | 'rear' }[] = [];
       for (const e of wave) {
         const role = (enemies.find((x) => x.enemy_id === e.enemy_id) as Json).role as string;
-        for (let i = 0; i < e.count; i++) {
-          foes.push({ unit_id: e.enemy_id, level: st.enemy_level, slot, row: REAR_ROLES.test(role) && slot > 0 ? 'rear' : 'front' });
-          slot++;
-        }
+        for (let i = 0; i < e.count; i++) placed.push({ unit_id: e.enemy_id, level: st.enemy_level, slot: placed.length, row: REAR_ROLES.test(role) && placed.length > 0 ? 'rear' : 'front' });
       }
-    }
-    // at most two front-row foes keep the formation readable (canon 2 front + 3 rear)
-    let fronts = 0;
-    for (const f of foes) {
-      if (f.row === 'front' && ++fronts > 2) f.row = 'rear';
-    }
+      let fronts = 0;
+      for (const p of placed) if (p.row === 'front' && ++fronts > 2) p.row = 'rear';
+      return placed;
+    };
+    const [firstWave, ...laterWaves] = st.enemy_waves as Json[][];
+    const foes = place(firstWave!);
+    // waves 2+ follow in order once the field is cleared (engine Encounter.waves)
+    const waves = laterWaves.map(place);
     const entry = story.entries.find((entry) => entry.stageId === st.stage_id);
     if (!entry) throw new Error(`stage ${st.stage_id} has no canonical story entry`);
     const phaseStories = bindCampaignPhaseStories(entry, foes, pack);
@@ -99,10 +98,12 @@ for (const ch of chapters) {
       party: tutorial ? [{ unit_id: 'mahmut', level: 1, slot: 0, row: 'front' }, { unit_id: 'fadyme', level: 1, slot: 1, row: 'rear' }] : [],
       ...(st.guest_characters.length ? { guests: st.guest_characters } : {}),
       enemies: foes,
+      ...(waves.length ? { waves } : {}),
       // D-27: attribute enemies are tuned in content/balance/attributes.json; the narrative's flat multiplier only applies to legacy stat blocks
       ...(st.enemy_stat_multiplier !== 1 && foes.some((f) => !pack.units.find((u) => u.unit_id === f.unit_id)?.attributes) ? { enemy_stat_multiplier: { value: st.enemy_stat_multiplier, applies_to: ['hp', 'atk'] } } : {}),
       provenance: { source: `${NARR}/stages_part1.json#${st.stage_id}` }
     });
+    if ((enc.waves?.length ?? 0) !== waves.length) throw new Error(`stage ${st.stage_id}: lost enemy waves`);
     encounters.set(id, enc);
     writeJson(`${OUT}/encounters/${id}.json`, enc);
 
