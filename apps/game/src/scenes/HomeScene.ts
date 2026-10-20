@@ -53,12 +53,12 @@ export class HomeScene extends HubScreen {
     });
     this.button(REF_W / 2, 1000, { label: 'NOTICES', w: 440, h: 110, onClick: () => this.nav.start('ContentPanel') });
     this.button(REF_W - 330, 1000, { label: 'ARCHIVE', w: 440, h: 110, onClick: () => this.nav.start('Library') });
-    this.text(REF_W / 2, 830, api.signedIn ? 'Your progress, wallet and rolls are kept on the server.' : 'Sign in to keep your progress, wallet and rolls on the server.', { fontSize: 34, color: T.dim }).setOrigin(0.5);
+    this.text(REF_W / 2, 866, api.signedIn ? 'Your progress, wallet and rolls are kept on the server.' : 'Sign in to keep your progress, wallet and rolls on the server.', { fontSize: 34, color: T.dim }).setOrigin(0.5);
     try {
       const flags = await api.flags();
-      if (flags['maintenance.read_only']?.enabled) this.text(REF_W / 2, 920, 'The servers are in maintenance: some actions may be refused.', { fontSize: 34, color: T.crimson }).setOrigin(0.5);
+      if (flags['maintenance.read_only']?.enabled) this.text(REF_W / 2, 914, 'The servers are in maintenance: some actions may be refused.', { fontSize: 34, color: T.crimson }).setOrigin(0.5);
     } catch {
-      this.text(REF_W / 2, 920, 'Offline: server features are unavailable.', { fontSize: 34, color: T.dim }).setOrigin(0.5);
+      this.text(REF_W / 2, 914, 'Offline: server features are unavailable.', { fontSize: 34, color: T.dim }).setOrigin(0.5);
     }
   }
 }

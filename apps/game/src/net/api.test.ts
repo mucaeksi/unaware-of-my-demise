@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GameApi } from './api';
 import { OperationJournal, type OperationRecord, type OperationStorage } from './operations';
@@ -143,6 +144,22 @@ describe('authentication response ownership', () => {
     const rejected = expect(deletion).rejects.toMatchObject({ code: 'auth_changed' });
     await api.signInWithIdToken('identity-B'); delayed.resolve(Response.json({ deleted: true })); await rejected;
     expect(api.signedIn).toBe(true); expect(JSON.parse(values.get(sessionKey)!).token).toBe('session-B');
+  });
+});
+
+describe('operation journal coverage', () => {
+  it('accepts every mutation the client sends (a missing path fails the button before any request)', async () => {
+    const source = readFileSync(new URL('./api.ts', import.meta.url), 'utf8');
+    const calls = [...source.matchAll(/this\.mutate\((['`])([^'`]+)\1(.*)$/gm)].map((m) => ({
+      // template parts are ids: numeric for gear/mail rows, snake_case otherwise
+      path: m[2]!.replace(/(gear|mail)\/\$\{[^}]+\}/g, '$1/7').replace(/\$\{[^}]+\}/g, 'sample_id'),
+      method: /'PUT'\)/.test(m[3]!) ? ('PUT' as const) : ('POST' as const)
+    }));
+    expect(calls.length).toBeGreaterThan(25);
+    const journal = new OperationJournal(new TestOperationStorage());
+    const refused: string[] = [];
+    for (const c of calls) await journal.begin('player-A', c.method, c.path, { requestId: `req_${refused.length}_${c.path.length}x` }).catch(() => refused.push(`${c.method} ${c.path}`));
+    expect(refused).toEqual([]);
   });
 });
 

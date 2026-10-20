@@ -26,7 +26,7 @@ test('modes: deeds, profile and trials screens claim and fight through the serve
 
   // DEEDS: second row, first tile
   await tap(page, info, 270, 505); await waitScene(page, 'Deeds');
-  await expect.poll(() => texts(page, 'Deeds')).toContain('First Ashen Step   1/1');
+  await expect.poll(() => texts(page, 'Deeds')).toContain('FIRST ASHEN STEP   1/1');
   await settled(page, 'Deeds');
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-modes-deeds.png` });
   await tap(page, info, 1670, 720); // CLAIM on the first achievement row (below the three event objectives)
