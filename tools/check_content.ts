@@ -1,5 +1,6 @@
 /**
- * Drift gate: proves `npm run build:content` reproduces content/base byte for byte.
+ * Drift gate: proves `npm run build:content` reproduces content/base (and the D1 asset seed derived from it) byte for byte.
+ * Workers Builds deploys the committed apps/api/seed/assets.sql, so a stale seed must fail here, not ship.
  * The tree is snapshotted first and written back when the rebuild differs, so the check can never destroy
  * authored media (the failure mode that once deleted the main theme and all 116 voice lines).
  * Run: npm run check:content
@@ -10,7 +11,7 @@ import { dirname, join, relative } from 'node:path';
 import { ROOT } from './lib/fsutil';
 
 const BASE = join(ROOT, 'content/base');
-const EXTRA = [join(ROOT, 'content/provenance.json')];
+const EXTRA = [join(ROOT, 'content/provenance.json'), join(ROOT, 'apps/api/seed/assets.sql')];
 
 function snapshot(): Map<string, Buffer> {
   const out = new Map<string, Buffer>();

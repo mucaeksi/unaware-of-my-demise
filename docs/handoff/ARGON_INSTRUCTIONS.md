@@ -2,11 +2,14 @@
 
 Short, binding rules for working in this repository alongside Claude. They come from incidents in the last two days; each rule says why. The full brief is the [README](../../README.md); the current gap list is [REVIEW_2026-10-20](../REVIEW_2026-10-20.md).
 
-## 1. Where to work
+## 1. Where to work (D-28, from 2026-10-20)
 
-- **Work in `E:\unaware-of-my-demise` (local disk).** `G:\Drive'ım\unaware-of-my-demise` is only a mirror of built output. Never commit, merge or run `git` write commands in the Drive copy: Drive served git a stale read during a commit (the 25-hero `characters_part1.json` was stored truncated in `7a640663`) and locked files halfway through a checkout.
-- Claude and you share one working copy. **Commit only the files you changed** (`git add <paths>`, never `git add -A` over someone else's edits), and commit finished steps promptly: uncommitted work in shared files blocks the other agent's merges and deploys.
-- For larger parallel work, use a git worktree on the local disk (`git worktree add C:\Users\PC\uomd-<task> -b <branch>`).
+- **`E:\unaware-of-my-demise` is the owner's `main` checkout for GitHub Desktop.** Do not edit or commit there. The owner merges branches into `main` there and pushes; the push deploys staging.
+- **Work on your own branch, in your own worktree on the local disk:** run `git -C E:\unaware-of-my-demise worktree add C:\Users\PC\uomd-argon -b argon/<task> main`, then open `C:\Users\PC\uomd-argon` and run `npm ci` once. Claude works the same way in `C:\Users\PC\uomd-claude` on `claude/*` branches. Before starting a new task, bring your branch up to date with `git merge main`.
+- **Never push, never commit to `main` and never merge into `main`.** When a step is done and verified, tell the owner the branch name and what it contains.
+- Work that is still uncommitted in `E:` moves to your branch without loss. In `E:` run `git switch -c argon/<task>`, commit your files, then run `git switch main`. Then add the worktree for that branch: `git worktree add C:\Users\PC\uomd-argon argon/<task>`.
+- Google Drive is no longer part of the workflow. Never run `git` write commands in the old `G:\Drive'ım\unaware-of-my-demise` copy: Drive once served git a stale read during a commit (the 25-hero `characters_part1.json` was stored truncated in `7a640663`) and locked files halfway through a checkout.
+- **Commit only the files you changed** (`git add <paths>`, never `git add -A`).
 
 ## 2. Before every commit
 
@@ -16,10 +19,9 @@ Short, binding rules for working in this repository alongside Claude. They come 
 
 ## 3. Deploying
 
-- **Only** `npm run deploy:cloudflare` (or `npm run deploy:drive`, which runs it and then mirrors to Drive). It runs verify, applies remote D1 migrations and seeds, then deploys game/admin/ops with a version tag.
-- **Never** run `wrangler deploy` by hand or ship Workers without their migrations. On 2026-10-19 a direct deploy put the D-27 server on a D1 without migration 0029 and staging answered 500.
-- Deploy from a clean tree. If the shared working copy has uncommitted work, commit it first or deploy from a clean worktree of `HEAD`. On 2026-10-20 a deploy was started from the shared tree with uncommitted scene changes; it would have shipped them under a `-dirty` tag.
-- One deploy at a time (the script holds a lock in `%TEMP%\uomd-deploy.lock`). The same deploy waited 40+ minutes on wrangler's y/N migration prompt in a terminal while holding that lock; since `fccda5da` wrangler runs non-interactively. If a deploy looks stuck, check its terminal instead of starting another.
+- **Agents do not deploy.** The owner's push to GitHub `main` starts Cloudflare Workers Builds. The game build runs `npm run verify`, then [tools/deploy_staging.sh](../../tools/deploy_staging.sh) applies the D1 migrations and seeds and deploys; admin and ops each deploy only themselves. Settings are in the [RUNBOOK](../RUNBOOK.md#workers-builds). Build results appear as GitHub check runs on the commit.
+- The build deploys exactly what is committed, so every generated file must be committed up to date. `npm run build:content` now also regenerates `apps/api/seed/assets.sql`, and `npm run verify` fails when that file is stale. The other seeds (`characters`, `catalog`, `banners`) are regenerated with the commands in section 4.
+- **Never** run `wrangler deploy` by hand. On 2026-10-19 a Worker deployed without migration 0029 answered 500. The local Drive/Wrangler deploy scripts were removed; there is no local deploy path.
 - Never edit a migration that may already be applied remotely. New D1 data for new rows goes into the seeds (`tools/seed_*.ts`, `INSERT OR IGNORE`); a one-time rewrite of existing rows needs a new numbered migration.
 
 ## 4. Adding or changing a hero, enemy or weapon
@@ -42,4 +44,4 @@ Short, binding rules for working in this repository alongside Claude. They come 
 
 ## 6. Claude's current queue (do not duplicate)
 
-AFK patrol screen, then progression simulator and XP/AFK tuning, then the Achievements, Profile/Leaderboard, Arena and Endless screens; extra enemy waves in the campaign builder; paged screens keeping their page. If you need one of these sooner, say so instead of building a parallel version.
+progression tuning once the owner sets a target pace (the pace probe is done: `docs/combat/PROGRESSION_PACE.md`), then the Achievements, Events, Profile/Leaderboard, Arena and Endless screens (AFK patrol already lives in Errands); extra enemy waves in the campaign builder; paged screens keeping their page. If you need one of these sooner, say so instead of building a parallel version.

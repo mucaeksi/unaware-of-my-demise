@@ -6,8 +6,8 @@ Reconciled **2026-10-14** for R08 completion working tree based on `0f2f3f114039
 
 - **Done since 2026-10-19:** D-27 RPG attribute stats (STR / INT / VIT / AGI, [STAT_MATH](combat/STAT_MATH.md)) on `main` (`1aabe350`) with Argon's 25-hero roster; stale-base guard fix; e2e follow the Animations-first Control Center (Playwright landscape-desktop 40/40 at `244dd856`); `deploy:drive` goes through the verify-gated deploy (`b0a23612`) and wrangler runs non-interactively (`fccda5da`). `npm run verify` PASS at `b0a23612`.
 - **Workspace:** the repository moved to the local disk `E:\unaware-of-my-demise`; `G:\Drive'ım\unaware-of-my-demise` is a mirror of built output only (do not commit there).
-- **Staging (2026-10-20 08:30):** still serves `f0c7413b` without migration 0029 (`/api/v1/characters` 500) until a deploy through `npm run deploy:cloudflare` applies it; a terminal-started deploy was waiting on wrangler's y/N migration prompt.
-- **Open, ranked:** [REVIEW_2026-10-20](REVIEW_2026-10-20.md) — client screens missing for AFK, achievements, profile/leaderboard, arena and endless; progression pacing (campaign drops give ~8.4k of the ~130k XP a team needs for level 20); Garrick/Corbin banners missing; 25 signature weapon effects undefined; economy tuning and combat semantics awaiting owner decisions; extra waves dropped by the builder; paged screens reopen on page 1; phone/tablet e2e and devices not run.
+- **Staging (2026-10-20):** healthy: migration 0029 applied and `/api/v1/characters` returns 200. It serves `claude/afk-modes` `6a327c19` (tag `gdrive-6a327c19-dirty`, a fallback deploy of a branch from before D-28). From D-28 on, staging changes only through the owner's push to GitHub `main` (Workers Builds). `origin/main` is 37+ commits behind local `main` until that push.
+- **Open, ranked:** [REVIEW_2026-10-20](REVIEW_2026-10-20.md) — client screens missing for achievements, events, profile, leaderboard, arena and endless (AFK has one in Errands); progression pacing (campaign drops give ~8.4k of the ~130k XP a team needs for level 20); Garrick/Corbin banners missing; 25 signature weapon effects undefined; economy tuning and combat semantics awaiting owner decisions; extra waves dropped by the builder; paged screens reopen on page 1; phone/tablet e2e and devices not run.
 - **Argon:** binding working rules in [handoff/ARGON_INSTRUCTIONS](handoff/ARGON_INSTRUCTIONS.md); asset layout continues in parallel.
 
 ## Evidence contract
@@ -72,7 +72,7 @@ Historical Actions runs, browser screenshots and staging/backup reports remain h
 ## Deployment and resource facts
 
 - Staging uses **Cloudflare Workers Builds**, not the removed GitHub Actions workflows. [deploy_staging.sh](../tools/deploy_staging.sh) targets game/admin/ops: one build deploys one Worker; only game applies migrations/seeds.
-- Verify live build commands/path filters/test gates and source tags before claiming current staging results. No live configuration was read in R00. Main pushes may trigger existing pipelines.
+- Live build commands, path filters and the token were read on 2026-10-20 and are recorded in [RUNBOOK](RUNBOOK.md#workers-builds) (D-28). Every push to `main` triggers them. Confirm source tags before claiming current staging results.
 - Ops actively binds **uomd-db-backups**. Preserve it; obsolete decommission instructions are superseded. Configured cron schedules are 03:17 UTC daily and every 15 minutes, with catch-up logic; configuration is not latest-run success.
 - Admin service-binding 401/403 checks verify the Worker's own JWT rejection, not the public Access edge or MFA.
 - Approved media budget (Argon 4 now owns production): **1000 TL/month**, recorded **$20/month**, **$3/batch**, **three paid attempts per asset**. See [media_budget.json](../content/budget/media_budget.json); recheck exchange/provider prices and finish R14 guards before dependent production.

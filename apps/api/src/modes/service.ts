@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { BattleParty, Encounter, UnitPack, type PartyMember, type RewardAttachment } from '@uomd/content-schema';
 import { playAuto, replayBattle } from '@uomd/combat';
-import { accountLevelFromXp, weekStart, windowOf } from '@uomd/economy';
+import { accountLevelFromXp, afkYield, AFK_CAP_SEC, AFK_MIN_CLAIM_SEC, weekStart, windowOf, type AfkYield } from '@uomd/economy';
 import { sha256Hex } from '@uomd/shared';
 import { ContentStore, HttpError } from '../content/store';
 import { BATTLE_SESSION_TTL_MS, economicStatement, requireEconomic } from '../content/authority';
@@ -17,8 +17,7 @@ import { SWEEP_DAILY_NODE_LIMIT, SWEEP_MAX_BATCH } from '../progress/service';
 const RequestId = z.string().regex(/^[A-Za-z0-9_-]{8,64}$/);
 const ReleaseId = z.string().regex(/^[a-z][a-z0-9_]{1,47}$/);
 
-export const AFK_CAP_SEC = 12 * 3600;
-export const AFK_MIN_CLAIM_SEC = 60;
+export { AFK_CAP_SEC, AFK_MIN_CLAIM_SEC };
 export const ARENA_DAILY_LIMIT = 5;
 export const ARENA_BASE_RATING = 1000;
 
@@ -241,31 +240,15 @@ export async function getModeGates(db: D1Database, playerId: string, nowMs = Dat
   };
 }
 
-function computeAfkAccrual(checkpointSec: number, nowSec: number, clearedBattles: number): {
-  elapsedSeconds: number;
-  capped: boolean;
-  minutesAccrued: number;
-  claimable: boolean;
-  rewards: RewardAttachment[];
-} {
-  const rawElapsed = Math.max(0, nowSec - checkpointSec);
-  const elapsedSeconds = Math.min(rawElapsed, AFK_CAP_SEC);
-  const capped = rawElapsed >= AFK_CAP_SEC;
-  const minutesAccrued = Math.floor(elapsedSeconds / 60);
-  const claimable = clearedBattles >= 1 && elapsedSeconds >= AFK_MIN_CLAIM_SEC;
-  if (!claimable) {
-    return { elapsedSeconds, capped, minutesAccrued, claimable: false, rewards: [] };
-  }
-  const stageTier = Math.max(1, clearedBattles);
-  const accountXp = minutesAccrued * (2 + stageTier);
-  const pages = Math.max(1, Math.floor((minutesAccrued * (1 + Math.floor(stageTier / 3))) / 15));
-  const dust = Math.floor((minutesAccrued * (1 + Math.floor(stageTier / 4))) / 30);
+function computeAfkAccrual(checkpointSec: number, nowSec: number, clearedBattles: number): Omit<AfkYield, 'accountXp' | 'pages' | 'dust'> & { rewards: RewardAttachment[] } {
+  const { accountXp, pages, dust, ...rest } = afkYield(nowSec - checkpointSec, clearedBattles);
+  if (!rest.claimable) return { ...rest, rewards: [] };
   const rewards: RewardAttachment[] = [
     { type: 'account_xp', amount: accountXp },
     { type: 'item', itemId: 'torn_chronicle_page', quantity: pages },
     ...(dust >= 1 ? [{ type: 'item' as const, itemId: 'forge_dust', quantity: dust }] : [])
   ];
-  return { elapsedSeconds, capped, minutesAccrued, claimable: true, rewards };
+  return { ...rest, rewards };
 }
 
 /**

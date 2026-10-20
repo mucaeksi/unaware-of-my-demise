@@ -16,6 +16,18 @@ Source revision `5c83e3d1`, 2026-10-11. Documentation only: no remote rollback, 
 | Budget | Google generation 1000 TL/month, tracked $20/month, $3/batch, max 3 paid attempts/asset; runbook does not authorize calls |
 | Deploy authority | Cloudflare Workers Builds from GitHub main; GitHub Actions is not the current deployment/test platform |
 
+### Workers Builds
+
+Read from the Cloudflare builds API on 2026-10-20 (D-28). All three triggers use repo `unaware-of-my-demise`, branch `main`, root `/`, and the build token `unaware-of-my-demise-workers`, which has D1 edit (migrations ran in earlier builds). Workers Builds runs `npm clean-install` itself before the build command. Builds use Node 22.23.3, 2 vCPU and a 20-minute timeout; a full game build took about 5.5 minutes on 2026-10-18.
+
+| Worker | Build command | Deploy command | Watch paths (include / exclude) |
+|---|---|---|---|
+| `uomd-game-staging` | `npm run verify && VITE_CONTENT_CHANNEL=staging npm run build -w @uomd/game` | `bash tools/deploy_staging.sh game` | `apps/*`, `packages/*`, `content/*`, `tools/*`, `package.json`, `package-lock.json` / `*.md`, `narrative/*`, `docs/*`, `apps/android/*`, `apps/admin/*` |
+| `uomd-admin-staging` | `npm ci && npm run lint && npm run typecheck && npm run build -w @uomd/admin` | `bash tools/deploy_staging.sh admin` | `apps/*`, `packages/*`, `content/*`, `tools/*`, `docs/*`, `package.json`, `package-lock.json` / `narrative/*`, `apps/android/*`, `apps/game/*` |
+| `uomd-ops-staging` | `npm ci` | `bash tools/deploy_staging.sh ops` | `apps/api/*`, `packages/*`, `tools/deploy_staging.sh`, `package.json`, `package-lock.json` / `narrative/*`, `docs/*`, `*.md` |
+
+The owner set the game build command in the dashboard on 2026-10-20 (read back at 09:37 UTC). It replaced `npm ci && npm run lint && npm run typecheck && npm test && …`, which skipped the content drift check. The live admin build command still starts with `npm ci`, a harmless repeat of the automatic install. A failed build deploys nothing; the previous version keeps serving. The builds are independent, so admin or ops can finish before the game build has applied a new migration. A change that needs a migration first should reach staging in two pushes, or the admin build should be retried after the game build.
+
 One Workers Build must deploy **its own Worker only**: the latest source fix explicitly prevents the ops deploy overwriting the game Worker. Inspect Cloudflare build settings rather than assuming a script in GitHub controls them. `docs/BUILD_STATE.md` has historical green tests/old migration counts and older missing-service statements; use current code, deployment logs and health for actual state. Docs-only changes skip the game build; admin may rebuild because its Development page consumes docs. Do not migrate a database merely to roll back a Worker. There is no configured production environment to operate here.
 
 ## Diagnose logs and health
