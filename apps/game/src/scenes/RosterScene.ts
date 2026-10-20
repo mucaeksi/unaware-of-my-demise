@@ -6,10 +6,12 @@ import { describeCompanionAttachment } from '../ui/pilotAttachment';
 import { F, T } from '../ui/theme';
 
 const PER_PAGE = 12;
+/** the page survives Roster -> Character -> BACK, which builds a new Roster scene */
+let lastPage = 0;
 
 export class RosterScene extends HubScreen {
   protected readonly heading = 'ROSTER';
-  private page = 0;
+  private page = lastPage;
   private list: { id: string; name: string; rarity: number; element: string; role: string; copies: number; shards: number }[] = [];
 
   protected async build(): Promise<void> {
@@ -27,6 +29,7 @@ export class RosterScene extends HubScreen {
     this.body.removeAll();
     this.button(REF_W - 300, 170, { label: 'INVITATIONS', w: 420, h: 90, onClick: () => this.nav.start('Recruit', { returnTo: 'Roster' }) });
     this.text(REF_W / 2, 160, `${this.list.length} of ${total} companions`, { fontSize: 36, color: T.dim }).setOrigin(0.5);
+    lastPage = this.page = Math.min(this.page, Math.max(0, Math.ceil(this.list.length / PER_PAGE) - 1));
     const slice = this.list.slice(this.page * PER_PAGE, (this.page + 1) * PER_PAGE);
     slice.forEach((c, i) => {
       const x = 340 + (i % 4) * 415;
