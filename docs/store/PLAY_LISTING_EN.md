@@ -18,7 +18,9 @@ Unaware of My Demise is a gothic anime role-playing game with turn-based tactica
 
 Build your formation, read enemy intentions and choose when to attack, guard or support your allies. Detailed character portraits accompany story scenes, while expressive chibi units bring the battles to life.
 
-Begin with the opening and three tutorial sections, with cinematic scenes between them. Story access does not depend on winning a character through wishes.
+Begin with the opening and three tutorial sections, with cinematic scenes between them. Then follow the Bell Road across the kingdom of Veyrhold on the world map, starting with Chapter 1, the Whispering Ash Forest; new chapters arrive as in-game updates. Story access does not depend on winning a character through wishes.
+
+Between chapters, take on daily errands, earn deeds and titles, test your team in the Arena and descend the Endless Corridor wave by wave.
 
 English text and subtitles accompany Japanese character voices. The game is designed for landscape play on Android.
 
@@ -32,10 +34,10 @@ Android internal test build. Test Google sign-in, cloud saves, tactical tutorial
 
 ## First public release notes — use only after all listed content exists
 
-Begin your journey with the opening and three tutorial sections. Meet your first companions, learn turn-based tactics and save your progress with Google sign-in. English text and subtitles accompany Japanese dialogue. Includes optional purchases, subscriptions and rewarded ads.
+Begin your journey with the opening and three tutorial sections, then Chapter 1 on the world map. Meet your first companions, learn turn-based tactics and save your progress with Google sign-in. English text and subtitles accompany Japanese dialogue. Includes optional purchases, subscriptions and rewarded ads.
 
 ## Submission checks
 
-UNKNOWN actual initial release content/media completion and native feature/device acceptance. If any listed functionality is unavailable in the submitted AAB, remove or revise the relevant claim before submission. Do not promise 20 released characters, 27 released enemies, seven playable chapters, a 16+ regional rating, fully offline account progression, ad-free subscription, iOS/Steam availability or an AAB that will never require updating.
+D-29 ([RELEASE_ROADMAP](../RELEASE_ROADMAP.md)): the AAB ships the tutorial; Chapter 1, the world map and the modes arrive with patch 1 on first launch, so this copy is valid only once patch 1 is published on the production channel before the listing goes live. Name later chapters only after their patch is live. Preview video (YouTube teaser), icon, feature graphic and screenshots: Argon (ART-3/ART-4). UNKNOWN actual initial release content/media completion and native feature/device acceptance. If any listed functionality is unavailable in the submitted AAB, remove or revise the relevant claim before submission. Do not promise 20 released characters, 27 released enemies, seven playable chapters, a 16+ regional rating, fully offline account progression, ad-free subscription, iOS/Steam availability or an AAB that will never require updating.
 
 Website, privacy URL, deletion URL, support email and production release notes version: UNKNOWN. Source visual/voice language approval is not proof that all Japanese audio already exists.
