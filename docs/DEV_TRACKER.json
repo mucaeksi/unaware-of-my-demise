@@ -21,7 +21,7 @@
     },
     {
       "title": "Deploy safety",
-      "detail": "D-28: the owner pushes GitHub main with GitHub Desktop and Workers Builds deploys staging; agents never push or deploy. check:content now fails on a stale seed/assets.sql. The local deploy:cloudflare is a fallback that only ships a clean main equal to origin/main."
+      "detail": "D-28: the owner pushes GitHub main with GitHub Desktop and Workers Builds deploys staging; agents never push or deploy. check:content now fails on a stale seed/assets.sql. The Drive/Wrangler deploy scripts (deploy:cloudflare, deploy:drive) were removed."
     }
   ],
   "next": [

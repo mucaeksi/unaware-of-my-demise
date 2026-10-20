@@ -8,7 +8,7 @@ Short, binding rules for working in this repository alongside Claude. They come 
 - **Work on your own branch, in your own worktree on the local disk:** run `git -C E:\unaware-of-my-demise worktree add C:\Users\PC\uomd-argon -b argon/<task> main`, then open `C:\Users\PC\uomd-argon` and run `npm ci` once. Claude works the same way in `C:\Users\PC\uomd-claude` on `claude/*` branches. Before starting a new task, bring your branch up to date with `git merge main`.
 - **Never push, never commit to `main` and never merge into `main`.** When a step is done and verified, tell the owner the branch name and what it contains.
 - Work that is still uncommitted in `E:` moves to your branch without loss. In `E:` run `git switch -c argon/<task>`, commit your files, then run `git switch main`. Then add the worktree for that branch: `git worktree add C:\Users\PC\uomd-argon argon/<task>`.
-- `G:\Drive'ım\unaware-of-my-demise` is only a mirror of built output. Never run `git` write commands there: Drive once served git a stale read during a commit (the 25-hero `characters_part1.json` was stored truncated in `7a640663`) and locked files halfway through a checkout.
+- Google Drive is no longer part of the workflow. Never run `git` write commands in the old `G:\Drive'ım\unaware-of-my-demise` copy: Drive once served git a stale read during a commit (the 25-hero `characters_part1.json` was stored truncated in `7a640663`) and locked files halfway through a checkout.
 - **Commit only the files you changed** (`git add <paths>`, never `git add -A`).
 
 ## 2. Before every commit
@@ -21,7 +21,7 @@ Short, binding rules for working in this repository alongside Claude. They come 
 
 - **Agents do not deploy.** The owner's push to GitHub `main` starts Cloudflare Workers Builds. The game build runs `npm run verify`, then [tools/deploy_staging.sh](../../tools/deploy_staging.sh) applies the D1 migrations and seeds and deploys; admin and ops each deploy only themselves. Settings are in the [RUNBOOK](../RUNBOOK.md#workers-builds). Build results appear as GitHub check runs on the commit.
 - The build deploys exactly what is committed, so every generated file must be committed up to date. `npm run build:content` now also regenerates `apps/api/seed/assets.sql`, and `npm run verify` fails when that file is stale. The other seeds (`characters`, `catalog`, `banners`) are regenerated with the commands in section 4.
-- **Never** run `wrangler deploy` by hand. On 2026-10-19 a Worker deployed without migration 0029 answered 500. `npm run deploy:cloudflare` is the owner's emergency fallback only; it refuses anything but a clean `main` equal to `origin/main`.
+- **Never** run `wrangler deploy` by hand. On 2026-10-19 a Worker deployed without migration 0029 answered 500. The local Drive/Wrangler deploy scripts were removed; there is no local deploy path.
 - Never edit a migration that may already be applied remotely. New D1 data for new rows goes into the seeds (`tools/seed_*.ts`, `INSERT OR IGNORE`); a one-time rewrite of existing rows needs a new numbered migration.
 
 ## 4. Adding or changing a hero, enemy or weapon

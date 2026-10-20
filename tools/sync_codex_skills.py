@@ -75,7 +75,7 @@ def adaptation(name: str) -> str:
 """
     if name == "cloudflare-d1-liveops":
         return """- Prefer available Cloudflare connector/plugin tools and current official docs. CLI credential availability and connector access are separate; verify the specific capability instead of asking for secret values.
-- Staging deploys go from the Google Drive working copy through `npm run deploy:cloudflare` (D-24): the `npm run verify` gate, then tools/deploy_from_drive.ts (game owns D1 migrations/seeds). Workers Builds and GitHub Actions are retired. Keep the existing server-authoritative economy and Access/RBAC checks.
+- Staging deploys only through Cloudflare Workers Builds when the owner pushes GitHub `main` (D-28): one build per Worker, the game build gates on `npm run verify` and runs tools/deploy_staging.sh game (game owns D1 migrations/seeds). Agents never push or deploy; GitHub Actions stays unused. Keep the existing server-authoritative economy and Access/RBAC checks.
 - Use uomd-monitoring for safe operational data and uomd-monetization for SSV/Play/RTDN changes. Do not interpret a skill's general infrastructure recipes as authorization to provision production or paid services.
 """
     if name == "google-anime-media":
