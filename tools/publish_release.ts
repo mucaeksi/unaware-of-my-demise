@@ -54,10 +54,22 @@ if (process.argv.includes('--catalog-snapshot')) {
   files.push({ path: CATALOG_PATH, bytes, sha256: snapshot.sha256, type: 'application/json' });
   console.log(`catalog snapshot: ${snapshot.sha256} (${bytes.byteLength} bytes)`);
 }
+/** objects are content-addressed, so a dropped upload (reset connection or 5xx) is retried a few times before failing */
+async function putObject(f: (typeof files)[number]): Promise<Response> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const res = await call(`/objects/${f.sha256}`, { method: 'PUT', body: f.bytes as BodyInit, headers: { 'Content-Type': f.type as string } });
+      if (res.status < 500 || attempt >= 3) return res;
+    } catch (error) {
+      if (attempt >= 3) throw error;
+    }
+    await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+  }
+}
 let created = 0;
 for (let i = 0; i < files.length; i += 8) {
   await Promise.all(files.slice(i, i + 8).map(async (f) => {
-    const res = await call(`/objects/${f.sha256}`, { method: 'PUT', body: f.bytes as BodyInit, headers: { 'Content-Type': f.type as string } });
+    const res = await putObject(f);
     if (!res.ok) throw new Error(`upload ${f.path}: HTTP ${res.status} ${await res.text()}`);
     if (res.status === 201) created++;
   }));

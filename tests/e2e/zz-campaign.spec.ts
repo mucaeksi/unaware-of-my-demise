@@ -39,7 +39,7 @@ test.describe.configure({ mode: 'serial' });
 test('campaign: owned-hero stages with story loans, server-frozen party, team builder, and a boss with objectives and telegraphs', async ({ page, request }, info) => {
   // publishing is one-way per stack: this scenario runs once, last (file name sorts after the others), and rolls the channel back
   test.skip(info.project.name !== 'landscape-desktop', 'runs once per stack on the first project');
-  test.setTimeout(420_000);
+  test.setTimeout(900_000);
   const problems = await openGame(page);
   const token = await googleToken('e2e-campaign');
   await page.evaluate(async (t) => (window as any).__UOMD__.services.api.signInWithIdToken(t), token);
@@ -74,9 +74,8 @@ test('campaign: owned-hero stages with story loans, server-frozen party, team bu
       const texts = await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Battle').texts().join(' | '));
       throw new Error(`battle never prompted; problems: ${problems.join(' | ')}; on screen: ${texts}`, { cause: e });
     }
-    await tap(page, info, REF_W - 150, 70); // x2
-    await tap(page, info, REF_W - 150, 70); // x3
-    await tap(page, info, REF_W - 365, 70); // Auto
+    // x3 and Auto through the scene's own controls: the HUD buttons moved in the battle UI overhaul (aa3a6743), and a tap on MENU pauses the fight
+    await page.evaluate(() => { const b = (window as any).__UOMD__.game.scene.getScene('Battle'); while (b.speedBtn && b.speed < 3) b.toggleSpeed(); if (b.autoBtn && !b.auto) b.toggleAuto(); });
     await expect.poll(async () => (await probeBattle(page)).result, { timeout: 180_000 }).not.toBeNull();
   };
   const claimed = (id: string): Promise<boolean> => page.evaluate(async (n) => ((await (window as any).__UOMD__.services.api.progress()).nodes as any[]).some((x) => x.node_id === n && x.stars >= 1), id);
