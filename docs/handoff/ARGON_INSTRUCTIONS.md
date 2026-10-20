@@ -42,4 +42,4 @@ Short, binding rules for working in this repository alongside Claude. They come 
 
 ## 6. Claude's current queue (do not duplicate)
 
-AFK patrol screen, then progression simulator and XP/AFK tuning, then the Achievements, Profile/Leaderboard, Arena and Endless screens; extra enemy waves in the campaign builder; paged screens keeping their page. If you need one of these sooner, say so instead of building a parallel version.
+progression tuning once the owner sets a target pace (the pace probe is done: `docs/combat/PROGRESSION_PACE.md`), then the Achievements, Events, Profile/Leaderboard, Arena and Endless screens (AFK patrol already lives in Errands); extra enemy waves in the campaign builder; paged screens keeping their page. If you need one of these sooner, say so instead of building a parallel version.

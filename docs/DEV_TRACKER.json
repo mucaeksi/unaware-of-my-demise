@@ -26,16 +26,12 @@
   ],
   "next": [
     {
-      "title": "AFK patrol screen",
-      "detail": "Server and client API exist, no scene calls them; AFK is the main XP source (12 h: ~4.8k XP early, ~19k late)."
-    },
-    {
-      "title": "Progression pacing simulator and XP tuning",
-      "detail": "Campaign first-clear drops give ~8.4k of the ~130k XP a 5-hero team needs for level 20. Extend packages/economy chronological.ts with AFK, errand and repeat XP and feed daily levels into the campaign probe; tune to the owner target."
+      "title": "Progression tuning to the owner target",
+      "detail": "tools/progression_probe.ts (docs/combat/PROGRESSION_PACE.md): no-gacha player finishes Part I on day 12, team level 20 on day 25; gate is ascension materials, XP overflows from AFK scaling, loans carry the party far below recommended levels. Needs the owner target pace, then AFK cap / XP curve / material drops."
     },
     {
       "title": "Remaining mode screens",
-      "detail": "Achievements, Profile/Leaderboard, Async Arena, Endless Corridor: server done, client screens missing (first-AAB requirement)."
+      "detail": "Achievements, Events, Profile/Leaderboard, Async Arena, Endless Corridor: server done, client screens missing (first-AAB requirement). AFK patrol is already in Errands."
     },
     {
       "title": "Owner decisions",
