@@ -5,7 +5,8 @@ import { applyLedger } from '../src/db/ledger';
 import { sendMail } from '../src/mail/service';
 import { claimMail } from '../src/mail/service';
 import { game, post, seedCanonCatalog, signIn } from './helpers';
-import { gearPassive, requireSupportedGearPassive } from '../src/gear/effects';
+import { EventHook } from '@uomd/content-schema';
+import { GEAR_PASSIVE_HOOKS, gearPassive, gearPassiveHook, requireNoGearPassive, requireSupportedGearPassive } from '../src/gear/effects';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let n = 0;
@@ -33,6 +34,17 @@ describe('gear: grants and equipping', () => {
     for (const value of ['invalid-json', '{"passive_effect_id":42}', '{"passive_name_en":null}']) expect(() => gearPassive(value)).toThrow(expect.objectContaining({ code: 'invalid_gear_definition', status: 503 }));
     expect(() => requireSupportedGearPassive('{"passive_effect_id":"future_proc"}')).toThrow(expect.objectContaining({ code: 'unsupported_gear_passive', status: 422 }));
     expect(gearPassive('{"main":[],"sub":[]}')).toBeNull();
+  });
+  it('treats a passive with an approved hook as supported and hands that hook to the battle party', () => {
+    const hook = EventHook.parse({ event: 'after_ally_ultimate', event_filter: { team: 'player', source_is_owner: true }, limit: { per_owner_turn: 1 }, effect_ops: [{ op: 'gain_focus', target_selector_id: 'self', amount: 15 }] });
+    const table = { signature_echo_test: hook };
+    const extra = '{"passive_effect_id":"signature_echo_test","passive_name_en":"Echo"}';
+    expect(gearPassive(extra, table)).toEqual({ name: 'Echo', supported: true });
+    expect(gearPassiveHook(extra, table)).toEqual(hook);
+    expect(gearPassive(extra)?.supported).toBe(false); // not in the shipped table until the owner approves it
+    expect(gearPassiveHook('{"passive_effect_id":"future_proc"}', table)).toBeNull();
+    expect(() => requireNoGearPassive(extra)).toThrow(expect.objectContaining({ code: 'unsupported_gear_passive' }));
+    for (const h of Object.values(GEAR_PASSIVE_HOOKS)) expect(EventHook.safeParse(h).success).toBe(true);
   });
   it('refuses an undefined advertised passive before replacing working gear or writing state', async () => {
     const { auth, playerId } = await player();

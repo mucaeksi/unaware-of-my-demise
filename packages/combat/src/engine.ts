@@ -124,7 +124,8 @@ export class Battle {
   private round = 1;
   private readonly actedThisRound = new Set<string>();
   private readonly actionMarks = new Map<string, number>();
-  private readonly hookCache = new WeakMap<UnitDef, { hooks: HookEntry[]; mods: ContinuousModifier[] }>();
+  /** per combatant, not per UnitDef: two copies of a unit can carry different equipment hooks */
+  private readonly hookCache = new WeakMap<Combatant, { hooks: HookEntry[]; mods: ContinuousModifier[] }>();
   private turnCounter = 0;
   private current: Combatant | null = null;
   private outcome: BattleResult | null = null;
@@ -344,7 +345,7 @@ export class Battle {
   // ---------------------------------------------------------------- hooks and modifiers of a unit
 
   private rulesOf(u: Combatant): { hooks: HookEntry[]; mods: ContinuousModifier[] } {
-    let r = this.hookCache.get(u.def);
+    let r = this.hookCache.get(u);
     if (!r) {
       const hooks: HookEntry[] = [];
       const mods: ContinuousModifier[] = [];
@@ -354,9 +355,10 @@ export class Battle {
       }
       const first = u.def.skills[0];
       if (first) for (const [i, hook] of (u.def.passive_hooks ?? []).entries()) hooks.push({ key: `unit:${i}`, skill: first, hook });
+      if (first) for (const [i, hook] of (u.equipmentEffects.hooks ?? []).entries()) hooks.push({ key: `equip:${i}`, skill: first, hook });
       mods.push(...(u.def.continuous_modifiers ?? []));
       r = { hooks, mods };
-      this.hookCache.set(u.def, r);
+      this.hookCache.set(u, r);
     }
     return r;
   }

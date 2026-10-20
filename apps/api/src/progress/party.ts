@@ -1,4 +1,4 @@
-import { BattleParty, EquipmentEffects, type Encounter, type PartyMember, type StoryLoanEquipment } from '@uomd/content-schema';
+import { BattleParty, EquipmentEffects, type Encounter, type EventHook, type PartyMember, type StoryLoanEquipment } from '@uomd/content-schema';
 import { characterStats, type CharacterStatSource, type ProgressionConfig } from '@uomd/economy';
 import { HttpError } from '../content/store';
 import { computeCharacterStats } from '../gear/service';
@@ -72,11 +72,12 @@ async function ownedMember(db: D1Database, playerId: string, characterId: string
   if (st.unsupportedPassives.length) throw new HttpError(422, 'unsupported_gear_passive', 'an equipped passive is not available in battle yet; remove that item or choose other equipment');
   const ranks = await db.prepare('SELECT skill_ranks FROM player_chars WHERE player_id = ?1 AND character_id = ?2').bind(playerId, characterId).first<{ skill_ranks: string }>();
   const skillRanks = ranks ? JSON.parse(ranks.skill_ranks) as Record<string, number> : {};
-  return { unit_id: characterId, level: st.level, stats: st.stats, ...equipmentEffects(st.other), ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity };
+  return { unit_id: characterId, level: st.level, stats: st.stats, ...equipmentEffects(st.other, st.passiveHooks), ...(Object.keys(skillRanks).length ? { skill_ranks: skillRanks } : {}), affinity };
 }
 
-function equipmentEffects(other: Record<string, number>): Pick<PartyMember, 'equipment_effects'> {
-  const effects = Object.fromEntries(['heal_bonus_pct', 'focus_gain_pct'].filter((key) => other[key] !== undefined).map((key) => [key, other[key]]));
+function equipmentEffects(other: Record<string, number>, hooks: EventHook[] = []): Pick<PartyMember, 'equipment_effects'> {
+  const effects: Record<string, unknown> = Object.fromEntries(['heal_bonus_pct', 'focus_gain_pct'].filter((key) => other[key] !== undefined).map((key) => [key, other[key]]));
+  if (hooks.length) effects.hooks = hooks;
   if (!Object.keys(effects).length) return {};
   const parsed = EquipmentEffects.safeParse({ version: 1, ...effects });
   if (!parsed.success) throw new HttpError(503, 'invalid_equipment_effects', 'equipped effects exceed the supported battle contract');

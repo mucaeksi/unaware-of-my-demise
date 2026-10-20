@@ -60,6 +60,24 @@ describe('effect_res & element_res', () => {
   });
 });
 
+describe('equipment hooks', () => {
+  it('runs a gear passive hook for the member that carries it only, and replays deterministically', async () => {
+    const hook = { event: 'after_ally_action', event_filter: { team: 'player', source_is_owner: true }, limit: { per_owner_turn: 1 }, effect_ops: [{ op: 'gain_focus', target_selector_id: 'self', amount: 5 }] };
+    const party = (withHook: boolean) => [
+      { unit_id: 'mahmut', level: 1, slot: 0, row: 'front' as const, ...(withHook ? { equipment_effects: { version: 1 as const, hooks: [hook] } } : {}) },
+      { unit_id: 'fadyme', level: 1, slot: 1, row: 'rear' as const }
+    ];
+    const fired = (log: BattleEvent[], unit: string) => events(log, 'hook_triggered').filter((h) => h.unit === unit && h.event === 'after_ally_action').length;
+    const plain = playAuto(noCrit(basePack()), encounterT1(), party(false) as never);
+    const geared = playAuto(noCrit(basePack()), encounterT1(), party(true) as never);
+    expect(fired(geared.battle.log, 'player:0:mahmut')).toBeGreaterThan(fired(plain.battle.log, 'player:0:mahmut'));
+    expect(fired(geared.battle.log, 'player:1:fadyme')).toBe(fired(plain.battle.log, 'player:1:fadyme'));
+    const replay = await replayBattle(noCrit(basePack()), encounterT1(), geared.actions, party(true) as never);
+    expect(replay.valid).toBe(true);
+    expect(replay.result).toEqual(geared.battle.result);
+  });
+});
+
 describe('multi-wave encounters', () => {
   it('validates Encounter.waves schema and rejects duplicate slots within a wave', () => {
     const valid = Encounter.parse({

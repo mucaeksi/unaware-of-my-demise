@@ -1,0 +1,4 @@
+{
+  "note": "Engineering-owned battle effects of gear passives: passive_effect_id -> EventHook (packages/content-schema/src/effects.ts). A weapon whose passive_effect_id is listed here can be equipped and its hook runs in battle; any other passive stays 'not available in battle yet'. Owner-approved entries only (designs: docs/combat/SIGNATURE_WEAPONS_SPEC.md).",
+  "hooks": {}
+}

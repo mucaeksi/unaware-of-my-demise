@@ -1,3 +1,4 @@
+import { EventHook } from './effects';
 import { PresentationCommand } from './presentation';
 import { z } from 'zod';
 import { Element, Id, LineId, SafeAssetPath } from './primitives';
@@ -104,13 +105,17 @@ export const StoryScene = z
   });
 export type StoryScene = z.infer<typeof StoryScene>;
 
-/** Finite equipped-effect grammar; version 1 supports outgoing healing, normal-action Focus, and status/element resistances. */
+/**
+ * Finite equipped-effect grammar; version 1 supports outgoing healing, normal-action Focus, status/element resistances and the
+ * event hooks of supported gear passives (frozen into the battle snapshot like the rest).
+ */
 export const EquipmentEffects = z.object({
   version: z.literal(1),
   heal_bonus_pct: z.number().min(0).max(5).optional(),
   focus_gain_pct: z.number().min(0).max(5).optional(),
   effect_res_pct: z.number().min(0).max(1).optional(),
-  element_res_pct: z.partialRecord(Element, z.number().min(-1).max(1)).optional()
+  element_res_pct: z.partialRecord(Element, z.number().min(-1).max(1)).optional(),
+  hooks: z.array(EventHook).min(1).max(4).optional()
 }).strict();
 export type EquipmentEffects = z.infer<typeof EquipmentEffects>;
 

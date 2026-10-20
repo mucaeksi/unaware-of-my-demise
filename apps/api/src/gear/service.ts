@@ -1,3 +1,4 @@
+import type { EventHook } from '@uomd/content-schema';
 import { canonicalJson } from '@uomd/shared';
 import { z } from 'zod';
 import { aggregateGear, characterStats as statsFor, resonancePoints, equipmentLevelFee, equipmentXpToNext, gearLevelCap, type AttributeValues, type CharacterStatSource, type CombatStats, rerollAccessory, type AccessoryDef, type AccessoryStats, type GearPiece, type ProgressionConfig } from '@uomd/economy';
@@ -7,7 +8,7 @@ import { balanceOf, ledgerStatements } from '../db/ledger';
 import { cryptoRoll } from '../db/rng';
 import { loadProgressionConfig } from '../progression/characters';
 import { taskEventStatements } from '../tasks/service';
-import { gearPassive, requireSupportedGearPassive } from './effects';
+import { gearPassive, gearPassiveHook, requireSupportedGearPassive } from './effects';
 import { CHARACTER_STAT_COLUMNS, catalogCharacter, characterDefinition, rowAttributes, type CharacterStatRow, catalogGear, gearDefinition, catalogRoleStat, operationCatalog, type RuntimeCatalog, type ReleaseScope } from '../content/runtime-catalog';
 
 import { economicStatement, requireEconomic } from '../content/authority';
@@ -304,7 +305,7 @@ export function rerollGear(db: D1Database, playerId: string, id: number, input: 
 }
 
 /** Final combat stats of an owned character: level growth + equipped gear + set bonuses. This is what a server-verified party will use. */
-export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig, catalog?: RuntimeCatalog): Promise<{ characterId: string; level: number; stats: CombatStats; attributes?: AttributeValues; power?: 'str' | 'int'; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[]; unsupportedPassives: string[] }> {
+export async function computeCharacterStats(db: D1Database, playerId: string, characterId: string, cfg?: ProgressionConfig, catalog?: RuntimeCatalog): Promise<{ characterId: string; level: number; stats: CombatStats; attributes?: AttributeValues; power?: 'str' | 'int'; other: Record<string, number>; equipped: { id: number; slot: string; name: string }[]; unsupportedPassives: string[]; passiveHooks: EventHook[] }> {
   cfg = catalog?.data.config.progression ?? cfg ?? await loadProgressionConfig(db);
   const definition = catalog ? catalogCharacter(catalog, characterId) : undefined;
   if (catalog && !await db.prepare("SELECT 1 FROM player_items WHERE player_id = ?1 AND item_type = 'character' AND item_id = ?2").bind(playerId, characterId).first()) throw new HttpError(404, 'not_owned', 'you do not own this character');
@@ -363,7 +364,8 @@ export async function computeCharacterStats(db: D1Database, playerId: string, ch
     ...(resonanceTier > 0 ? { resonanceTier } : {}),
     other: gear.other,
     equipped: results.map((g) => ({ id: g.id, slot: g.slot, name: g.name_en })),
-    unsupportedPassives: results.filter((g) => gearPassive(g.extra_json)).map((g) => g.gear_id)
+    unsupportedPassives: results.filter((g) => gearPassive(g.extra_json)?.supported === false).map((g) => g.gear_id),
+    passiveHooks: results.map((g) => gearPassiveHook(g.extra_json)).filter((h): h is EventHook => h !== null)
   };
 }
 
