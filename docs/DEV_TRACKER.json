@@ -21,7 +21,7 @@
     },
     {
       "title": "Deploy safety",
-      "detail": "deploy:drive runs the verify-gated deploy and only mirrors to Drive (b0a23612); wrangler runs non-interactively so remote migrations never wait on a prompt (fccda5da). Staging still needs the deploy that applies migration 0029 (was 500 on /api/v1/characters)."
+      "detail": "D-28: the owner pushes GitHub main with GitHub Desktop and Workers Builds deploys staging; agents never push or deploy. check:content now fails on a stale seed/assets.sql. The local deploy:cloudflare is a fallback that only ships a clean main equal to origin/main."
     }
   ],
   "next": [
@@ -2340,8 +2340,8 @@
       },
       {
         "name": "Staging /api/v1/characters",
-        "result": "fail",
-        "detail": "500 until migration 0029 is applied by npm run deploy:cloudflare"
+        "result": "pass",
+        "detail": "200 after migration 0029 was applied (2026-10-20)"
       },
       {
         "name": "Playwright phone / tablet",

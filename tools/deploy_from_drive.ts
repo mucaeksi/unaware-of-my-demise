@@ -1,9 +1,8 @@
 /**
- * Direct Google Drive -> Cloudflare deployment pipeline.
- * Builds @uomd/game and @uomd/admin locally inside the Google Drive workspace,
- * applies remote D1 migrations & seeds (characters, catalog, banners, 170 assets),
- * and deploys uomd-game-staging, uomd-admin-staging, and uomd-ops-staging directly via Wrangler CLI
- * without requiring GitHub pushes or GitHub Actions.
+ * Emergency fallback only (D-28): staging normally deploys through Cloudflare Workers Builds when the owner pushes
+ * GitHub `main` (tools/deploy_staging.sh). This script applies remote D1 migrations & seeds and deploys
+ * uomd-game-staging, uomd-admin-staging and uomd-ops-staging from this machine with Wrangler, and refuses to run
+ * unless the tree is a clean `main` equal to `origin/main`, so it can only re-ship what GitHub already has.
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import { closeSync, existsSync, openSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
@@ -31,12 +30,11 @@ function runWrangler(args: string[]): void {
 function getVersionTag(): string {
   const ts = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 12);
   try {
+    // assertPushedMain() has already proven the tree clean, so the sha names the deployed source
     const sha = execFileSync('git', ['rev-parse', '--short=8', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
-    // uncommitted edits (Argon and Claude both work in this tree) mean the sha alone does not name the deployed source
-    const dirty = execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { cwd: ROOT, encoding: 'utf8' }).trim() !== '';
-    return `gdrive-${sha}${dirty ? '-dirty' : ''}-${ts}`;
+    return `local-${sha}-${ts}`;
   } catch {
-    return `gdrive-${ts}`;
+    return `local-${ts}`;
   }
 }
 
@@ -60,13 +58,30 @@ function acquireDeployLock(): () => void {
   return () => rmSync(lock, { force: true });
 }
 
+/** D-28: only what is already on GitHub main may reach staging; a branch or uncommitted work never ships from here. */
+function assertPushedMain(): void {
+  const git = (...args: string[]): string => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+  git('fetch', '--quiet', 'origin', 'main');
+  const branch = git('rev-parse', '--abbrev-ref', 'HEAD');
+  const dirty = git('status', '--porcelain', '--untracked-files=no');
+  const head = git('rev-parse', 'HEAD');
+  const remote = git('rev-parse', 'origin/main');
+  const problems = [
+    branch !== 'main' && `on branch ${branch}, not main`,
+    dirty !== '' && 'uncommitted changes in tracked files',
+    head !== remote && `HEAD ${head.slice(0, 8)} is not origin/main ${remote.slice(0, 8)} (push first, or pull)`
+  ].filter(Boolean);
+  if (problems.length > 0) throw new Error(`refusing to deploy: ${problems.join('; ')}`);
+}
+
 function main(): void {
+  assertPushedMain();
   const release = acquireDeployLock();
   process.on('exit', release);
   const targets = process.argv.slice(2);
   const runAll = targets.length === 0 || targets.includes('all');
   const tag = getVersionTag();
-  console.log(`=== Deploying from Google Drive (${ROOT}) to Cloudflare [tag: ${tag}] ===`);
+  console.log(`=== Local fallback deploy (${ROOT}) to Cloudflare [tag: ${tag}] ===`);
 
   if (runAll || targets.includes('game')) {
     console.log('\n--- [1/3] Applying D1 migrations & seeds for uomd-game-staging ---');
@@ -88,7 +103,7 @@ function main(): void {
     runWrangler(['deploy', '-c', 'wrangler.ops.jsonc', '--env', 'staging', '--tag', tag]);
   }
 
-  console.log('\n=== Google Drive -> Cloudflare Deployment Complete ===');
+  console.log('\n=== Local fallback deploy complete ===');
   console.log('Game URL:  https://uomd-game-staging.muratcaneksiii.workers.dev');
   console.log('Admin URL: https://uomd-admin-staging.muratcaneksiii.workers.dev');
 }
