@@ -5,6 +5,10 @@ Source revision `5c83e3d1`, 2026-10-11. Owner scope: **English only for now; Jap
 | Deliverable | File | Review dependency |
 |---|---|---|
 | Play title, short/full description, release notes | `PLAY_LISTING_EN.md` | final AAB feature/content/media verification |
+| App icon (`512×512`, 32-bit RGBA PNG, `≤ 1 MB`) | `assets/icon_512.png` (+ Android `res/mipmap-*/ic_launcher*.png`) | owner visual approval (`ART-3` / `B1`) |
+| Feature graphic (`1024×500`, 24-bit RGB PNG, no alpha) | `assets/feature_graphic_1024x500.png` | owner visual approval (`ART-3` / `B2`) |
+| Store screenshots (`6 × 1920×1080`, 24-bit RGB PNG, `16:9`) | `assets/screenshots/01_title_screen.png` .. `06_character_sheet.png` | captured from real builds (`ART-3` / `B3`) |
+| Preview video (`~1:30` teaser) storyboard & production plan | `TEASER_STORYBOARD.md` | owner track/budget & YouTube channel (`ART-4` / `B4`) |
 | Privacy policy | `PRIVACY_POLICY_EN.md` | legal operator/contact, purposes/legal basis, SDK disclosures, retention and public URL |
 | Terms | `TERMS_EN.md` | operator, age/territory/law, product/subscription and refund terms |
 | Ads/purchases disclosure | `ADS_PURCHASES_EN.md` | approved live product/rates/UMP configuration |
