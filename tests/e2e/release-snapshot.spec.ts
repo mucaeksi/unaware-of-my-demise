@@ -19,7 +19,7 @@ test('composed snapshots survive base-identical reads and reload; admin rollback
     const snapshot = await current();
     expect(snapshot.depends_on).toBeUndefined();
     expect(snapshot.files).toEqual(original.files);
-    expect(snapshot.compat).toEqual({ min_client: '0.1.2', max_client: '0.9.0', content_schema: 1, required_capabilities: ['attributes_v1', 'presentation_v1', 'vfx_v1'] });
+    expect(snapshot.compat).toEqual({ min_client: '0.1.2', max_client: '0.9.0', content_schema: 1, required_capabilities: ['attributes_v1', 'presentation_v1', 'sprite_animation_v1', 'vfx_v1'] });
     const apply = () => page.evaluate(async () => (window as any).__UOMD__.services.content.checkForUpdates());
     expect(await apply()).toMatchObject({ status: 'applied', releaseId: second });
     const active = () => page.evaluate(async () => (await (window as any).__UOMD__.services.content.state()).active?.releaseId ?? null);

@@ -12,6 +12,7 @@
     "required_capabilities": [
       "attributes_v1",
       "presentation_v1",
+      "sprite_animation_v1",
       "vfx_v1"
     ],
     "content_schema": 1
@@ -23,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "762d1346e95c1ca902da9da5a6bf7ae93e5763002a430c1685f18091e563b44d",
-      "bytes": 9869,
+      "sha256": "4b0ec1dd99eed2e3706e51b03c136a2cce365faee49655dc801a02c653f83962",
+      "bytes": 13999,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -37,8 +38,8 @@
     },
     {
       "path": "art/atlas_fadyme.webp",
-      "sha256": "82e5384d43a20a76c16c34d010cb4fcb107725edccfa0d39fcabbae7fa23fad4",
-      "bytes": 119834,
+      "sha256": "a7a0be9f54dc6431213ff21dcb1d9178493453184ffd95e7105e129b54f5a5dd",
+      "bytes": 383554,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -51,8 +52,8 @@
     },
     {
       "path": "art/atlas_mahmut.webp",
-      "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
-      "bytes": 110786,
+      "sha256": "2e75020a99ce546f04ae4a901d144453f3c9a76c2c5f85a34b5d6d4fb45416b7",
+      "bytes": 362334,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },

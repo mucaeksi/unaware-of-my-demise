@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "asset_id": "odelia_pike_vn_warm",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "odelia_pike": {
+        "emotions": {
+          "gentle": "warm",
+          "small_smile": "warm",
+          "smile": "warm",
+          "soft": "warm",
+          "warm": "warm"
+        },
+        "images": {
+          "warm": "art/portrait_odelia_pike_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "b1c9617035737ec9c9a06bbc906673cdc17bb4e00a610b3d2001d331239646e5",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/odelia_pike_vn_warm/run.provenance.json",
+    "provenance_sha256": "639441f409fe32d60dbac3c9f632590fa663f22fc79b9cf489c677fdb036e473",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "38e3666a058a0c40bcc90b472862710176a1fff0707e015f9d1a850962591790",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/odelia_pike_vn_warm.ingest.json",
+    "spec_sha256": "f4a1a1bff88a12a14a4c2852753842452c7c1fd57c8f2747afab28e064ed63ff",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "d75e00e534ceb25634dbaae5335d980fe276505d3f93e616aebbfa59509d3130"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_odelia_pike_warm.webp",
+      "sha256": "6ff1dbe9bb0e6d0c9bec6b0438ecdd2f4a172e2b2fee283b1e7ea31783efca72",
+      "pixels_sha256": "095500efe1be3459578f3e3192abe89c1db0502df1f4bd63be63f6c33a3714b1",
+      "bytes": 61976,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "pass",
+          "detail": "removed=0"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "61976 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

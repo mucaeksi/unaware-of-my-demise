@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "asset_id": "brin_alder_vn_warm",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "a36ac318c8e6",
+    "provenance": ".cache/generated/brin_alder_vn_warm/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "brin_alder",
+    "image": "warm",
+    "emotion_tags": [
+      "gentle",
+      "small_smile",
+      "smile",
+      "warm"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

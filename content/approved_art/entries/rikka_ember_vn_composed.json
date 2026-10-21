@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "asset_id": "rikka_ember_vn_composed",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "rikka_ember": {
+        "emotions": {
+          "awed": "composed",
+          "calm": "composed",
+          "competitive": "composed",
+          "composed": "composed",
+          "curious": "composed",
+          "defensive": "composed",
+          "excited": "composed",
+          "exuberant": "composed",
+          "flustered": "composed",
+          "nervous": "composed",
+          "neutral": "composed",
+          "pout": "composed",
+          "small": "composed",
+          "triumphant": "composed",
+          "wide_eyed": "composed"
+        },
+        "images": {
+          "composed": "art/portrait_rikka_ember_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "b63f0a90f58c396341816b42f12c5fbc2ea530f78f78f16feba0048b5e69fbcf",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/rikka_ember_vn_composed/run.provenance.json",
+    "provenance_sha256": "556998c3eda1b5bca2b00f49bb66e8465319778a19676c00ed7ff51ab79401e9",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "8862e7064e952eb9f1d2cd6602949650870ece25257c72872a399da82a0acdf8",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/rikka_ember_vn_composed.ingest.json",
+    "spec_sha256": "853c24b5b9e5e810fbe8e3b049bc58f4c0848442fc55a662414ec6740bcd41ff",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "f93f95b76da2069ba3579470d7495b92a4abd02ce78e7ee58972542654b1b546"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_rikka_ember_composed.webp",
+      "sha256": "5f27407342b5182208cc3eaaf24351c57d3bebae45c21ae654c334904cfe6bca",
+      "pixels_sha256": "b9a020b71ab9453534766541e9816506f66a362c2868e900adbf85f0338cb0cc",
+      "bytes": 77002,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=15"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "77002 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 15 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

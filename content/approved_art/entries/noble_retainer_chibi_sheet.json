@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "noble_retainer_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_noble_retainer": {
+        "image": "art/atlas_noble_retainer.webp",
+        "width": 1904,
+        "height": 543,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            195,
+            266
+          ],
+          "idle_2": [
+            203,
+            4,
+            195,
+            266
+          ],
+          "idle_3": [
+            402,
+            4,
+            195,
+            266
+          ],
+          "ultimate": [
+            601,
+            4,
+            253,
+            266
+          ],
+          "ultimate_2": [
+            858,
+            4,
+            253,
+            266
+          ],
+          "ultimate_3": [
+            1115,
+            4,
+            253,
+            266
+          ],
+          "active": [
+            1372,
+            4,
+            252,
+            265
+          ],
+          "active_2": [
+            1628,
+            4,
+            252,
+            265
+          ],
+          "active_3": [
+            4,
+            274,
+            252,
+            265
+          ],
+          "basic": [
+            260,
+            274,
+            253,
+            264
+          ],
+          "basic_2": [
+            517,
+            274,
+            253,
+            264
+          ],
+          "basic_3": [
+            774,
+            274,
+            253,
+            264
+          ],
+          "victory": [
+            1031,
+            274,
+            195,
+            264
+          ],
+          "walk": [
+            1230,
+            274,
+            248,
+            262
+          ],
+          "hit": [
+            1482,
+            274,
+            214,
+            259
+          ],
+          "defeat": [
+            1700,
+            274,
+            200,
+            256
+          ]
+        }
+      }
+    },
+    "units": {
+      "noble_retainer": {
+        "atlas": "atlas_noble_retainer",
+        "facing": "left",
+        "height_px": 240,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.525,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.479
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.477,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.477,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.477,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.545
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.517
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.525
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "f5828ab234b265c449e9a6b58cf7da76609ebde558200d955181c677358c211c",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/noble_retainer_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "82fd993b6ac488c85d9622938c36c9929d057c512f20ca2cfeeb15bc0f6af432",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "8d9bc3bd71bfbc27e4f4df4b164737369bb6e047e98ef70b6f5678fab107a925",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/noble_retainer_chibi_sheet.ingest.json",
+    "spec_sha256": "0a87d9bec74cdcf40d402a8a256b9bd5fab6e07184985635ca4840d9b0df1d0f",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "5bc82d96ed203c218afee9c67f7bfe7d06ce8ac4b42cf020c515717b3bf6c16f"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_noble_retainer.webp",
+      "sha256": "1904e5a9d1acdc78f0672ca1f89f7bd19d34a43e8d6b33a5bd83d4b0f0f1db22",
+      "pixels_sha256": "2cc02c763ea3bedb119a234ddddbfc62758dc9a3937f53ffe7adc05e71a96fa5",
+      "bytes": 223984,
+      "width": 1904,
+      "height": 543
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=44"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.483"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1904x543"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "223984 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0009%"
+        }
+      },
+      "warnings": [
+        "A12: removed 44 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

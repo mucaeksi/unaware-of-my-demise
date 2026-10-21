@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "cassian_thorne_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_cassian_thorne": {
+        "image": "art/atlas_cassian_thorne.webp",
+        "width": 2044,
+        "height": 705,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            219,
+            348
+          ],
+          "idle_2": [
+            227,
+            4,
+            219,
+            348
+          ],
+          "idle_3": [
+            450,
+            4,
+            219,
+            348
+          ],
+          "ultimate": [
+            673,
+            4,
+            154,
+            347
+          ],
+          "ultimate_2": [
+            831,
+            4,
+            154,
+            347
+          ],
+          "ultimate_3": [
+            989,
+            4,
+            154,
+            347
+          ],
+          "active": [
+            1147,
+            4,
+            295,
+            346
+          ],
+          "active_2": [
+            1446,
+            4,
+            295,
+            346
+          ],
+          "active_3": [
+            1745,
+            4,
+            295,
+            346
+          ],
+          "basic": [
+            4,
+            356,
+            296,
+            345
+          ],
+          "basic_2": [
+            304,
+            356,
+            296,
+            345
+          ],
+          "basic_3": [
+            604,
+            356,
+            296,
+            345
+          ],
+          "victory": [
+            904,
+            356,
+            148,
+            344
+          ],
+          "walk": [
+            1056,
+            356,
+            292,
+            343
+          ],
+          "hit": [
+            1352,
+            356,
+            220,
+            338
+          ],
+          "defeat": [
+            1576,
+            356,
+            221,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "cassian_thorne": {
+        "atlas": "atlas_cassian_thorne",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.512,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.349
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.353,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.351,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.494,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.425
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.424
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.496
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "bdfd60b850e7c2620a38628cbc1833bac9f284a996b439636fd91044ab72c94b",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/cassian_thorne_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "4c50cd68e4f146006bf4a23022bfa73bb6e9b3ca1a5b73a4cfa9fec5fbd4a45c",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "e6eb67112cfbdaf763efe00f83322fbba3ecbc8db7531fc7b66d6c4a32be3df5",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/cassian_thorne_chibi_sheet.ingest.json",
+    "spec_sha256": "bdd80d7d1527e81b1550a46b2062bc9efa13c1ba55d1e555497f18d7d96faedb",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "1b269dbafe1c03a971a631e3d5d3cf7a0a202c5d14e73db425c438da4292feb5"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_cassian_thorne.webp",
+      "sha256": "385a4bfe7bd29c40b915f61c186d0d16cd3967ef70cad55eb34473aadd3a0acd",
+      "pixels_sha256": "af7fdf252d48089e3ddb0f9ef4fe6ec40dbe42e4b6b703f744a44119f8ff5e40",
+      "bytes": 311082,
+      "width": 2044,
+      "height": 705
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=10"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2044x705"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "311082 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0003%"
+        }
+      },
+      "warnings": [
+        "A12: removed 10 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

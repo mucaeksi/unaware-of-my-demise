@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "mahmut",
+      "character": "nara_vell",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "mahmut",
+      "side": "right"
     },
     {
       "op": "say",

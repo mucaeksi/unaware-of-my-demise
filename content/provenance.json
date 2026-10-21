@@ -4,18 +4,18 @@
   "outputs": [
     {
       "output": "content/base/art/atlas_fadyme.webp",
-      "sha256": "82e5384d43a20a76c16c34d010cb4fcb107725edccfa0d39fcabbae7fa23fad4",
+      "sha256": "a7a0be9f54dc6431213ff21dcb1d9178493453184ffd95e7105e129b54f5a5dd",
       "sources": {
-        "generated:fadyme_chibi_sheet@rev2": "147265238e8dd1ef2649e6ca67f4b88da138f3fa24b27875e5be1089c35d6ea0",
-        "entry": "2db70025be2e7fda796badfb79e3eee133ee7223a251c828149fc028cc46e931"
+        "generated:fadyme_chibi_sheet@rev3": "c9a34f35c5d86ea574f38077f3900543f334d64f3d0a7f0727626fdeae1e64e1",
+        "entry": "80ef781b7e92ee69553a3dd8b541590b657643456cf30166ab7b83f03f599c85"
       }
     },
     {
       "output": "content/base/art/atlas_mahmut.webp",
-      "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
+      "sha256": "2e75020a99ce546f04ae4a901d144453f3c9a76c2c5f85a34b5d6d4fb45416b7",
       "sources": {
-        "generated:mahmut_chibi_sheet@rev2": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
-        "entry": "0bde6778cb901ad1cd40fdc23f108d4b90094d5e0067122374db14aae968f689"
+        "generated:mahmut_chibi_sheet@rev3": "ec5d79e08b7a721bcbe4fb71cf24e94439d98342c92d192e2f353d9480a13d1d",
+        "entry": "5d68145338a8c420972f7deae973b7d0a1a7ea212291eed7eeb2f094fb4ff63c"
       }
     },
     {
@@ -291,7 +291,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "762d1346e95c1ca902da9da5a6bf7ae93e5763002a430c1685f18091e563b44d",
+      "sha256": "4b0ec1dd99eed2e3706e51b03c136a2cce365faee49655dc801a02c653f83962",
       "sources": {}
     },
     {

@@ -1,0 +1,305 @@
+{
+  "schema": 1,
+  "asset_id": "marek_vane_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_marek_vane": {
+        "image": "art/atlas_marek_vane.webp",
+        "width": 1999,
+        "height": 1045,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            210,
+            348
+          ],
+          "idle_2": [
+            218,
+            4,
+            210,
+            348
+          ],
+          "idle_3": [
+            432,
+            4,
+            210,
+            348
+          ],
+          "ultimate": [
+            646,
+            4,
+            267,
+            348
+          ],
+          "ultimate_2": [
+            917,
+            4,
+            267,
+            348
+          ],
+          "ultimate_3": [
+            1188,
+            4,
+            267,
+            348
+          ],
+          "active": [
+            1459,
+            4,
+            266,
+            346
+          ],
+          "active_2": [
+            1729,
+            4,
+            266,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            266,
+            346
+          ],
+          "basic": [
+            274,
+            356,
+            278,
+            345
+          ],
+          "basic_2": [
+            556,
+            356,
+            278,
+            345
+          ],
+          "basic_3": [
+            838,
+            356,
+            278,
+            345
+          ],
+          "victory": [
+            1120,
+            356,
+            263,
+            345
+          ],
+          "walk": [
+            1387,
+            356,
+            273,
+            343
+          ],
+          "hit": [
+            1664,
+            356,
+            224,
+            338
+          ],
+          "defeat": [
+            4,
+            706,
+            224,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "marek_vane": {
+        "atlas": "atlas_marek_vane",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.44,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.466
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.468,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.501,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.501,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.524
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.519
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.502
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "417680356f7a476d8af2ef8c2be6b6b9d73be1c08ae0e828f28f46e422a779bc",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/marek_vane_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "a1b380304aee6fe4b171bf34c1d42bb56ea9d7ece0c8add154595cefa52e04c0",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "48d8cb9153c016b738e223a67aa2c0f0191a8b0d69c59d93a8b5de36f98e5476",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/marek_vane_chibi_sheet.ingest.json",
+    "spec_sha256": "52a8fe7a09df5e025ed0f9bd48ee2214eda9154e8a7cfb7caff44c2d803b4520",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "9c7d8d052409ca21544fb886f5544c451e8df411c53dd15cff87a57cf7172ff6"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_marek_vane.webp",
+      "sha256": "bb33108c8aac156e6b7d3ab6a590fa58a89745f1a1c2e9d0205ba1d2ff439fe4",
+      "pixels_sha256": "eec3e4e4c7fa4a207ebd3d07a723d18d2b9679c442983d2167c1317eb3f79072",
+      "bytes": 487228,
+      "width": 1999,
+      "height": 1045
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "pass",
+          "detail": "removed=0"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1999x1045"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "487228 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0007%"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

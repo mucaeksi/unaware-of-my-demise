@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "pippa_bell_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_pippa_bell": {
+        "image": "art/atlas_pippa_bell.webp",
+        "width": 1952,
+        "height": 706,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            176,
+            348
+          ],
+          "idle_2": [
+            184,
+            4,
+            176,
+            348
+          ],
+          "idle_3": [
+            364,
+            4,
+            176,
+            348
+          ],
+          "ultimate": [
+            544,
+            4,
+            278,
+            348
+          ],
+          "ultimate_2": [
+            826,
+            4,
+            278,
+            348
+          ],
+          "ultimate_3": [
+            1108,
+            4,
+            278,
+            348
+          ],
+          "active": [
+            1390,
+            4,
+            277,
+            346
+          ],
+          "active_2": [
+            1671,
+            4,
+            277,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            277,
+            346
+          ],
+          "basic": [
+            285,
+            356,
+            219,
+            345
+          ],
+          "basic_2": [
+            508,
+            356,
+            219,
+            345
+          ],
+          "basic_3": [
+            731,
+            356,
+            219,
+            345
+          ],
+          "victory": [
+            954,
+            356,
+            273,
+            345
+          ],
+          "walk": [
+            1231,
+            356,
+            212,
+            343
+          ],
+          "hit": [
+            1447,
+            356,
+            197,
+            338
+          ],
+          "defeat": [
+            1648,
+            356,
+            197,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "pippa_bell": {
+        "atlas": "atlas_pippa_bell",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.487,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.434
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.439,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.55,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.55,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.542
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.542
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.551
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "76e61a4231eb6840aa8c2b7b27c4b13e8866c091a9fa81b8d8307e91342eefb1",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/pippa_bell_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "3d3f21b307ee1b968113bc0c627dd1e48b35646109759d9175505b632e73ea71",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "e6c1a6abd18ed1972852880457627ef8afd9d65d0f64f32ff29e8d16687ad4fa",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/pippa_bell_chibi_sheet.ingest.json",
+    "spec_sha256": "a4e56f7e3af416b6ed2373c748cf1d65aa6fbd13640e2c2b3580eb40fa60d00b",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "397ff992f02a64b8975cdae81bb0343312ce3460eadb1eb063781eba72d74bc4"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_pippa_bell.webp",
+      "sha256": "901c8716df0326c3eaaf93f7ef02e3b95a25e595f731dbffbe15ac28a3ad6f8a",
+      "pixels_sha256": "a09465eb9f25c649833a433fd1401beb76b4a60df70842f892286c7ef5218011",
+      "bytes": 517034,
+      "width": 1952,
+      "height": 706
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=2"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1952x706"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "517034 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0040%"
+        }
+      },
+      "warnings": [
+        "A12: removed 2 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

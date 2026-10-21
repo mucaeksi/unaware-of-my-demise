@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "fadyme",
+      "character": "rikka_ember",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "marek_vane",
+      "side": "right"
     },
     {
       "op": "say",

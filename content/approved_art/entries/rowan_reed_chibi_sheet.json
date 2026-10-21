@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "rowan_reed_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_rowan_reed": {
+        "image": "art/atlas_rowan_reed.webp",
+        "width": 1952,
+        "height": 706,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            236,
+            348
+          ],
+          "idle_2": [
+            244,
+            4,
+            236,
+            348
+          ],
+          "idle_3": [
+            484,
+            4,
+            236,
+            348
+          ],
+          "ultimate": [
+            724,
+            4,
+            219,
+            348
+          ],
+          "ultimate_2": [
+            947,
+            4,
+            219,
+            348
+          ],
+          "ultimate_3": [
+            1170,
+            4,
+            219,
+            348
+          ],
+          "active": [
+            1393,
+            4,
+            263,
+            346
+          ],
+          "active_2": [
+            1660,
+            4,
+            263,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            263,
+            346
+          ],
+          "basic": [
+            271,
+            356,
+            264,
+            345
+          ],
+          "basic_2": [
+            539,
+            356,
+            264,
+            345
+          ],
+          "basic_3": [
+            807,
+            356,
+            264,
+            345
+          ],
+          "victory": [
+            1075,
+            356,
+            215,
+            345
+          ],
+          "walk": [
+            1294,
+            356,
+            260,
+            343
+          ],
+          "hit": [
+            1558,
+            356,
+            193,
+            338
+          ],
+          "defeat": [
+            1755,
+            356,
+            193,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "rowan_reed": {
+        "atlas": "atlas_rowan_reed",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.553,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.497
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.499,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.5,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.55,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.455
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.457
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.553
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "2a6c3f68f309dd97dff96f587522516723ddb522554011fba62a60409678c83f",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/rowan_reed_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "40a240709d5d6c75b325fe86016d9c92651c02284b202a47a8522835de6c16e3",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "99bec9cea17efc8a7dfff3acb23a01661e259b699aed8dce5fd13ed89e9d2131",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/rowan_reed_chibi_sheet.ingest.json",
+    "spec_sha256": "519d15cda12bb654da2e045eef7644f6548412c070299d8a00f20fe7c76f0630",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "e5671b488b4a86348ea007fc7412b4a3a43fd6da7a0c4178ec98b41c86b91ff5"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_rowan_reed.webp",
+      "sha256": "1d143ed6deb9c5536d5a64d7bbcec2fbde3f4e1c1cd6d1803ddc7479c4802f6e",
+      "pixels_sha256": "b9b0a1f5e36937c38925b537f5e724540539bf3b622bfdfb54f9a43c5e885b7a",
+      "bytes": 395486,
+      "width": 1952,
+      "height": 706
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=2"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1952x706"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "395486 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0004%"
+        }
+      },
+      "warnings": [
+        "A12: removed 2 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

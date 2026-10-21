@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "asset_id": "nara_vell_vn_composed",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "nara_vell": {
+        "emotions": {
+          "approving": "composed",
+          "calm": "composed",
+          "composed": "composed",
+          "cool": "composed",
+          "direct": "composed",
+          "dry": "composed",
+          "firm": "composed",
+          "hollow": "composed",
+          "honest": "composed",
+          "measured": "composed",
+          "neutral": "composed",
+          "plain": "composed",
+          "quiet": "composed",
+          "resolved": "composed",
+          "strained": "composed"
+        },
+        "images": {
+          "composed": "art/portrait_nara_vell_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "9d421979ae9c1c101111a657af643851af78f1a25cc5592bd356e0563a538258",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/nara_vell_vn_composed/run.provenance.json",
+    "provenance_sha256": "e976384443a59088c0088567a8cd6120423feba4935ec430435854f939cb88a4",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "ffed959d20d4f01ce5f7f8a09ac468bf7d2f5679d242dab9f960c51ed059dca0",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/nara_vell_vn_composed.ingest.json",
+    "spec_sha256": "dad6dc155113e583020ec97490514f98e24c666dae714bc87044dec20f28c038",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "cb2b29275afe22e17ddd1d70f4526c2d13dc17db65a696e84f181b6bf58903e7"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_nara_vell_composed.webp",
+      "sha256": "b41b0f730c3cdfdf2bc676be50fa6944653724a893375e1bcd036c55943f1dc7",
+      "pixels_sha256": "34d5db205448ba8aadbe9da03738a3c5fef31044a50bc2820eba158a419844cc",
+      "bytes": 65028,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=1"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "65028 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 1 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

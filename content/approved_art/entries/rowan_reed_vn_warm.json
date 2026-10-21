@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "asset_id": "rowan_reed_vn_warm",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "rowan_reed": {
+        "emotions": {
+          "gentle": "warm",
+          "smile": "warm",
+          "warm": "warm"
+        },
+        "images": {
+          "warm": "art/portrait_rowan_reed_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "e7c0297ebfeff2576f770600e77a4677ad78a04e6ecf72e8d49d3f3f080b4616",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/rowan_reed_vn_warm/run.provenance.json",
+    "provenance_sha256": "5a17229f27779d8a8634d64e0b72da3f72f928f531217095775906fbdd56b95b",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "dca68b2333ee40332b90e2f3ba53104c0fd1f332d08a2a90ec9919bfc42cfe8d",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/rowan_reed_vn_warm.ingest.json",
+    "spec_sha256": "5c9e28694ac23edf553e5c88f98eb7e95d1a6124a967d71e3654b2ff91e91361",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "9c9f567191b5634e915ebc284956833a8bcef7bd4100ce12d7a2c7cf65a774f9"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_rowan_reed_warm.webp",
+      "sha256": "bfc99a4d045b2b2a38c2970f5387868ea8354a865eabd664ce95e3dcea4ed57b",
+      "pixels_sha256": "d116c2080703d6f1711a34529b4ead148049b63b7c4529020b66ed54a1fbfaca",
+      "bytes": 94966,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=122"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "94966 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 122 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

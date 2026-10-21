@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "crownless_knight_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_crownless_knight": {
+        "image": "art/atlas_crownless_knight.webp",
+        "width": 2047,
+        "height": 797,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            100,
+            266
+          ],
+          "idle_2": [
+            108,
+            4,
+            100,
+            266
+          ],
+          "idle_3": [
+            212,
+            4,
+            100,
+            266
+          ],
+          "victory": [
+            316,
+            4,
+            99,
+            264
+          ],
+          "ultimate": [
+            419,
+            4,
+            322,
+            260
+          ],
+          "ultimate_2": [
+            745,
+            4,
+            322,
+            260
+          ],
+          "ultimate_3": [
+            1071,
+            4,
+            322,
+            260
+          ],
+          "active": [
+            1397,
+            4,
+            321,
+            259
+          ],
+          "active_2": [
+            1722,
+            4,
+            321,
+            259
+          ],
+          "active_3": [
+            4,
+            274,
+            321,
+            259
+          ],
+          "hit": [
+            329,
+            274,
+            183,
+            259
+          ],
+          "basic": [
+            516,
+            274,
+            322,
+            258
+          ],
+          "basic_2": [
+            842,
+            274,
+            322,
+            258
+          ],
+          "basic_3": [
+            1168,
+            274,
+            322,
+            258
+          ],
+          "defeat": [
+            1494,
+            274,
+            245,
+            256
+          ],
+          "walk": [
+            4,
+            537,
+            318,
+            256
+          ]
+        }
+      }
+    },
+    "units": {
+      "crownless_knight": {
+        "atlas": "atlas_crownless_knight",
+        "facing": "left",
+        "height_px": 240,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.502,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.724
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.722,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.723,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.722,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.507
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.542
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.503
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "91ba3e9f7d6febb07a664ef5308b2bb0e775c927f56b7498ca74cd2d43991b68",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/crownless_knight_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "657d83ed29110a350c78342e4b94e7e5a21dca06754fa9d822c115ed6fdf4e32",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "7a62c7391a86215f92acf358b8aec1d4a5bd5dd62d26a6f859e001cf528409e0",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/crownless_knight_chibi_sheet.ingest.json",
+    "spec_sha256": "45baf46841dd6b7d08ff0dcbd853514ebe4d8a462e2197203de66b256f96604a",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "c4f84dc9f78af4b9d9f2b592c0b828a582cef84c0df64741c298183fb558945d"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_crownless_knight.webp",
+      "sha256": "530ef1eda6f4f21adab950e2e5fb7926c674b722e7781e89d2a0d8b8bfe94b3f",
+      "pixels_sha256": "db95e6bad915e48a7efc4235e29d5a410ec12492229cd4d06c700af11bf9f1e1",
+      "bytes": 173794,
+      "width": 2047,
+      "height": 797
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=1"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.483"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2047x797"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "173794 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 1 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

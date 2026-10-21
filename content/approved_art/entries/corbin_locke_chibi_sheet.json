@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "corbin_locke_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_corbin_locke": {
+        "image": "art/atlas_corbin_locke.webp",
+        "width": 1916,
+        "height": 1044,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            185,
+            348
+          ],
+          "idle_2": [
+            193,
+            4,
+            185,
+            348
+          ],
+          "idle_3": [
+            382,
+            4,
+            185,
+            348
+          ],
+          "ultimate": [
+            571,
+            4,
+            214,
+            348
+          ],
+          "ultimate_2": [
+            789,
+            4,
+            214,
+            348
+          ],
+          "ultimate_3": [
+            1007,
+            4,
+            214,
+            348
+          ],
+          "active": [
+            1225,
+            4,
+            298,
+            346
+          ],
+          "active_2": [
+            1527,
+            4,
+            298,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            298,
+            346
+          ],
+          "basic": [
+            306,
+            356,
+            298,
+            345
+          ],
+          "basic_2": [
+            608,
+            356,
+            298,
+            345
+          ],
+          "basic_3": [
+            910,
+            356,
+            298,
+            345
+          ],
+          "victory": [
+            1212,
+            356,
+            210,
+            345
+          ],
+          "walk": [
+            1426,
+            356,
+            294,
+            343
+          ],
+          "hit": [
+            1724,
+            356,
+            188,
+            337
+          ],
+          "defeat": [
+            4,
+            706,
+            188,
+            334
+          ]
+        }
+      }
+    },
+    "units": {
+      "corbin_locke": {
+        "atlas": "atlas_corbin_locke",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.503,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.466
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.468,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.467,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.519,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.532
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.531
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.521
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "850b75973777072e214106d2bc07db4743a523bc8364e798826885e00e975e2c",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/corbin_locke_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "a563345abdef6a1ce1fc00198e9966849cc2462655c315fe5807393e07413551",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "17e378d7c3cd3eff66846b98735d68fd85b20d341409f287716918f281cd834c",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/corbin_locke_chibi_sheet.ingest.json",
+    "spec_sha256": "1c5134f7a3b82e4c749c945088f34271b91616518ac38098d5f005436c13c560",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "6e3d5f0982620840fbf9b26501f4f67e0f5bdad998b70debc9b5f5ec6e3a1823"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_corbin_locke.webp",
+      "sha256": "760d68bc937abc0beca44dd531956f4b81d10fb7b03d619d044bff41c73368e5",
+      "pixels_sha256": "f217249d10708a5ac368d7d524fdfb3347af4dbd00ef3253363465e8a1b14e8b",
+      "bytes": 341482,
+      "width": 1916,
+      "height": 1044
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=5"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1916x1044"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "341482 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0008%"
+        }
+      },
+      "warnings": [
+        "A12: removed 5 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

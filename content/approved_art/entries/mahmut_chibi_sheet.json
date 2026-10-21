@@ -2,37 +2,109 @@
   "schema": 1,
   "asset_id": "mahmut_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 2,
+  "revision": 3,
   "targets": {
     "atlases": {
       "atlas_mahmut": {
         "image": "art/atlas_mahmut.webp",
-        "width": 1547,
-        "height": 416,
+        "width": 2027,
+        "height": 1052,
         "frames": {
           "idle": [
             4,
             4,
-            305,
-            408
+            257,
+            348
+          ],
+          "idle_2": [
+            265,
+            4,
+            257,
+            348
+          ],
+          "idle_3": [
+            526,
+            4,
+            257,
+            348
           ],
           "ultimate": [
-            313,
+            787,
             4,
-            400,
-            398
+            347,
+            348
+          ],
+          "ultimate_2": [
+            1138,
+            4,
+            347,
+            348
+          ],
+          "ultimate_3": [
+            1489,
+            4,
+            347,
+            348
+          ],
+          "victory": [
+            4,
+            356,
+            343,
+            345
+          ],
+          "active": [
+            351,
+            356,
+            415,
+            344
+          ],
+          "active_2": [
+            770,
+            356,
+            415,
+            344
+          ],
+          "active_3": [
+            1189,
+            356,
+            415,
+            344
           ],
           "basic": [
-            717,
+            1608,
+            356,
+            415,
+            343
+          ],
+          "basic_2": [
             4,
-            467,
-            382
+            705,
+            415,
+            343
+          ],
+          "basic_3": [
+            423,
+            705,
+            415,
+            343
+          ],
+          "walk": [
+            842,
+            705,
+            412,
+            341
           ],
           "hit": [
-            1188,
-            4,
-            355,
-            376
+            1258,
+            705,
+            320,
+            338
+          ],
+          "defeat": [
+            1582,
+            705,
+            320,
+            335
           ]
         }
       }
@@ -47,49 +119,92 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.49
+            "pivot_x": 0.488,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
           },
           "walk": {
-            "frame": "idle",
+            "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.49
+            "pivot_x": 0.524
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.525
+            "pivot_x": 0.524,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "active": {
-            "frame": "basic",
+            "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.525
+            "pivot_x": 0.524,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "ultimate": {
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.475
+            "pivot_x": 0.472,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "hit": {
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.492
+            "pivot_x": 0.497
           },
           "defeat": {
-            "frame": "hit",
+            "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.492
+            "pivot_x": 0.498
           },
           "victory": {
-            "frame": "ultimate",
+            "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.475
+            "pivot_x": 0.474
           }
         }
       }
@@ -97,32 +212,32 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
+    "sha256": "ec5d79e08b7a721bcbe4fb71cf24e94439d98342c92d192e2f353d9480a13d1d",
     "mime": "image/png",
-    "width": 2752,
-    "height": 1536,
+    "width": 2880,
+    "height": 2880,
     "provenance_file": ".cache/generated/mahmut_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "bcb06ba9c62c89bb7fc63ea9c9f6ba7b01ad29cfd9ad99c653decfbc72cd6846",
+    "provenance_sha256": "7eb5b2bebc6b5fa0c187d662d02eef8fc35b30e5c23d9af6e37062e325ad9f1e",
     "model": "gemini-3-pro-image",
-    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
+    "prompt_sha256": "2912afe302c0d45740d2e3e70762f8c32b48b875e820c246fe16dd0aa21f65c2",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/mahmut_chibi_sheet.ingest.json",
-    "spec_sha256": "331620af80183a223760af3dfee653bd8e03fa53a4fdcb28b14c9a286d683181",
+    "spec_sha256": "ce656c05349f9c066812b6e3fec7be9c0d01aa22a7435a2e5b7f6caae95836b6",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "0bde6778cb901ad1cd40fdc23f108d4b90094d5e0067122374db14aae968f689"
+    "fingerprint": "5d68145338a8c420972f7deae973b7d0a1a7ea212291eed7eeb2f094fb4ff63c"
   },
   "outputs": [
     {
       "path": "art/atlas_mahmut.webp",
-      "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
-      "pixels_sha256": "5ea3bbf4af9f50af66d10d56b0397ccd7facea4847476c88c8087c73f10d613f",
-      "bytes": 110786,
-      "width": 1547,
-      "height": 416
+      "sha256": "2e75020a99ce546f04ae4a901d144453f3c9a76c2c5f85a34b5d6d4fb45416b7",
+      "pixels_sha256": "1506254d00635df784be4bf09b374ef0ab13bd635e4c8a8c3cdb615dd33cbb3e",
+      "bytes": 362334,
+      "width": 2027,
+      "height": 1052
     }
   ],
   "qc": {
@@ -138,7 +253,7 @@
         },
         "A02": {
           "status": "pass",
-          "detail": "image/png 2752x1536"
+          "detail": "image/png 2880x2880"
         },
         "A07": {
           "status": "pass",
@@ -150,26 +265,26 @@
         },
         "A14": {
           "status": "pass",
-          "detail": "4 cells"
+          "detail": "16 cells"
         },
         "A15": {
           "status": "pass"
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.596"
+          "detail": "k=0.632"
         },
         "A18": {
           "status": "pass",
-          "detail": "1547x416"
+          "detail": "2027x1052"
         },
         "A19": {
           "status": "pass",
-          "detail": "110786 bytes <= 665600"
+          "detail": "362334 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0037%"
+          "detail": "spill=0.0007%"
         }
       },
       "warnings": [
@@ -177,10 +292,10 @@
       ]
     },
     "human": {
-      "status": "approved",
-      "by": "antigravity",
-      "at": "2026-10-15T17:17:32.075Z",
-      "note": "Approved wide panoramic battlefields and resized 2-head SD Chibis"
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
     }
   },
   "license": {
@@ -203,6 +318,21 @@
       ],
       "source_sha256": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
       "fingerprint": "b60e92976bedb352d1b2e978c983fcaad1a7c08413eab1f92264eada7eeb35e9"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_mahmut.webp",
+          "sha256": "837f9d2c124fc8d8648b5eb5d7c5f1afe45747dc8ab96863f2f3f1c22221bd54",
+          "pixels_sha256": "5ea3bbf4af9f50af66d10d56b0397ccd7facea4847476c88c8087c73f10d613f",
+          "bytes": 110786,
+          "width": 1547,
+          "height": 416
+        }
+      ],
+      "source_sha256": "1acc2bc551cf777bcb26fce9ca592a4b02377804f5dcc6d412f312664558b87d",
+      "fingerprint": "0bde6778cb901ad1cd40fdc23f108d4b90094d5e0067122374db14aae968f689"
     }
   ]
 }

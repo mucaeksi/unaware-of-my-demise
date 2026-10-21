@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "mahmut",
+      "character": "sable_wren",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "hana_birch",
+      "side": "right"
     },
     {
       "op": "say",

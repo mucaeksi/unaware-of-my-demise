@@ -17,6 +17,16 @@
       "cue_id": "stop"
     },
     {
+      "op": "show",
+      "character": "rikka_ember",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "sable_wren",
+      "side": "right"
+    },
+    {
       "op": "say",
       "line_id": "node_5_3_pre_001",
       "speaker": "rikka_ember",

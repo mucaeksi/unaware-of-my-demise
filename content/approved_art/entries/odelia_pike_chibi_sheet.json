@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "odelia_pike_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_odelia_pike": {
+        "image": "art/atlas_odelia_pike.webp",
+        "width": 2020,
+        "height": 705,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            189,
+            348
+          ],
+          "idle_2": [
+            197,
+            4,
+            189,
+            348
+          ],
+          "idle_3": [
+            390,
+            4,
+            189,
+            348
+          ],
+          "ultimate": [
+            583,
+            4,
+            236,
+            348
+          ],
+          "ultimate_2": [
+            823,
+            4,
+            236,
+            348
+          ],
+          "ultimate_3": [
+            1063,
+            4,
+            236,
+            348
+          ],
+          "active": [
+            1303,
+            4,
+            235,
+            346
+          ],
+          "active_2": [
+            1542,
+            4,
+            235,
+            346
+          ],
+          "active_3": [
+            1781,
+            4,
+            235,
+            346
+          ],
+          "basic": [
+            4,
+            356,
+            253,
+            345
+          ],
+          "basic_2": [
+            261,
+            356,
+            253,
+            345
+          ],
+          "basic_3": [
+            518,
+            356,
+            253,
+            345
+          ],
+          "victory": [
+            775,
+            356,
+            231,
+            345
+          ],
+          "walk": [
+            1010,
+            356,
+            250,
+            343
+          ],
+          "hit": [
+            1264,
+            356,
+            209,
+            338
+          ],
+          "defeat": [
+            1477,
+            356,
+            209,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "odelia_pike": {
+        "atlas": "atlas_odelia_pike",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.458,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.48
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.476,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.5,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.5,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.549
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.544
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.5
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "4f0ddf6c95da4fc11b5642f219d94aae867a84b0162880fad2bc59b8652004af",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/odelia_pike_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "b360e0999230b30bd3d16426c417f7f4851fc0eca46a07ec4c11ac91922b4bb5",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "dbf802b6a4f3bc342199a4021b76824dd2a70f332a708afa18d03766ea174ba7",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/odelia_pike_chibi_sheet.ingest.json",
+    "spec_sha256": "37077b81cb23b6ebb2a0c9b15ca08275c2bd619125bc9b90d4362ec656d79969",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "09cce855b7fedf5aadd8e039672e0b9de482ccdcc446144d0f5b13b70a0b0c94"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_odelia_pike.webp",
+      "sha256": "47f8f2b68a82d003535b2b1a0263dcfed3b47a0b543f25f2f3cceb3c7ded6e31",
+      "pixels_sha256": "68b34bc2d3b93b7ac184bad15a9421d8a55cb07809d9abd8da0f3d2324df2c1d",
+      "bytes": 450042,
+      "width": 2020,
+      "height": 705
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=16"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2020x705"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "450042 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0015%"
+        }
+      },
+      "warnings": [
+        "A12: removed 16 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

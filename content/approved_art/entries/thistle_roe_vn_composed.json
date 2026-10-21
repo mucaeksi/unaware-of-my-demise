@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "asset_id": "thistle_roe_vn_composed",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "thistle_roe": {
+        "emotions": {
+          "anxious": "composed",
+          "calm": "composed",
+          "composed": "composed",
+          "curious": "composed",
+          "earnest": "composed",
+          "encouraging": "composed",
+          "firm": "composed",
+          "frightened": "composed",
+          "neutral": "composed",
+          "shy": "composed",
+          "tearful": "composed"
+        },
+        "images": {
+          "composed": "art/portrait_thistle_roe_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "323e345e2f3ed1960b860d1daee98e7bb34e8ae6022d86c410d0789f61c1156e",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/thistle_roe_vn_composed/run.provenance.json",
+    "provenance_sha256": "c1c989b7c20ca605f4b1dc76a1c86afd62437db949f58d2ac3f84c466c3cd43c",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "6e605dde934e60a410ef98d1557ae9229e3a8fac130b93f6639b4e4c7a6bba63",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/thistle_roe_vn_composed.ingest.json",
+    "spec_sha256": "fb6c77f909512be46b4df9e0de06c3d24e9333cdbe0a56e70089cb65718584eb",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "239dfac90438977a1ef4e5547a9d32f706cf300d7914b369c5c6527f3822e431"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_thistle_roe_composed.webp",
+      "sha256": "2fcfeca5f55c89dc37c24ffe34b409f0c4a1a23bb4e5c26b4c1c2ced5a5593a8",
+      "pixels_sha256": "9a93923706e21e48972f5bbbee8ee78edf1b0cd09c2d0b52914d5ffa08bae9f7",
+      "bytes": 74602,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=2"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "74602 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 2 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

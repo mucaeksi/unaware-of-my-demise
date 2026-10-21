@@ -22,6 +22,11 @@
       "side": "left"
     },
     {
+      "op": "show",
+      "character": "rikka_ember",
+      "side": "right"
+    },
+    {
       "op": "say",
       "line_id": "node_5_5_post_001",
       "speaker": "marshal_oren",

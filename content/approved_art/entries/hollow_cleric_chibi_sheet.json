@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "hollow_cleric_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_hollow_cleric": {
+        "image": "art/atlas_hollow_cleric.webp",
+        "width": 1968,
+        "height": 788,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            194,
+            266
+          ],
+          "idle_2": [
+            202,
+            4,
+            194,
+            266
+          ],
+          "idle_3": [
+            400,
+            4,
+            194,
+            266
+          ],
+          "victory": [
+            598,
+            4,
+            193,
+            264
+          ],
+          "hit": [
+            795,
+            4,
+            213,
+            259
+          ],
+          "defeat": [
+            1012,
+            4,
+            300,
+            256
+          ],
+          "ultimate": [
+            1316,
+            4,
+            322,
+            254
+          ],
+          "ultimate_2": [
+            1642,
+            4,
+            322,
+            254
+          ],
+          "ultimate_3": [
+            4,
+            274,
+            322,
+            254
+          ],
+          "active": [
+            330,
+            274,
+            321,
+            253
+          ],
+          "active_2": [
+            655,
+            274,
+            321,
+            253
+          ],
+          "active_3": [
+            980,
+            274,
+            321,
+            253
+          ],
+          "basic": [
+            1305,
+            274,
+            322,
+            252
+          ],
+          "basic_2": [
+            1631,
+            274,
+            322,
+            252
+          ],
+          "basic_3": [
+            4,
+            532,
+            322,
+            252
+          ],
+          "walk": [
+            330,
+            532,
+            318,
+            250
+          ]
+        }
+      }
+    },
+    "units": {
+      "hollow_cleric": {
+        "atlas": "atlas_hollow_cleric",
+        "facing": "left",
+        "height_px": 240,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.629,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.652
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.653,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.655,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.656,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.521
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.49
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.629
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "780c498b48dd8d136e1e9391326dcb00c07e0214b219daeac8bb113c1df6e067",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/hollow_cleric_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "de801f03a23c9541252d5d0f28985d396440854c03486177fbffab80f3c5fb47",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "560f1af582e9a8518d46e11980cb1db91b128e03e071fb19c5317b95ac3c7dfc",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/hollow_cleric_chibi_sheet.ingest.json",
+    "spec_sha256": "dd774f4e8c5ba92bea08c42323abb26fa7da376c719ca9ee82c1627d3db68477",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "23b55349008c72a7dc1fd2a32c7164bf844207251ba1595b902aa47a2dcd2287"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_hollow_cleric.webp",
+      "sha256": "f63c9cb2205729b09386c2c1fd42eb3922640154fec51f61c35643259a977f79",
+      "pixels_sha256": "16b337af717ab399d0602dab079b736dd6ba4e375900c222bea15cc63c6421d6",
+      "bytes": 323670,
+      "width": 1968,
+      "height": 788
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=44"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.483"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1968x788"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "323670 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0002%"
+        }
+      },
+      "warnings": [
+        "A12: removed 44 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

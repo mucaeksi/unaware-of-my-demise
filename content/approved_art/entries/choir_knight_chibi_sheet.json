@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "choir_knight_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_choir_knight": {
+        "image": "art/atlas_choir_knight.webp",
+        "width": 2023,
+        "height": 542,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            92,
+            266
+          ],
+          "idle_2": [
+            100,
+            4,
+            92,
+            266
+          ],
+          "idle_3": [
+            196,
+            4,
+            92,
+            266
+          ],
+          "ultimate": [
+            292,
+            4,
+            285,
+            266
+          ],
+          "ultimate_2": [
+            581,
+            4,
+            285,
+            266
+          ],
+          "ultimate_3": [
+            870,
+            4,
+            285,
+            266
+          ],
+          "active": [
+            1159,
+            4,
+            284,
+            265
+          ],
+          "active_2": [
+            1447,
+            4,
+            284,
+            265
+          ],
+          "active_3": [
+            1735,
+            4,
+            284,
+            265
+          ],
+          "basic": [
+            4,
+            274,
+            285,
+            264
+          ],
+          "basic_2": [
+            293,
+            274,
+            285,
+            264
+          ],
+          "basic_3": [
+            582,
+            274,
+            285,
+            264
+          ],
+          "victory": [
+            871,
+            274,
+            91,
+            264
+          ],
+          "walk": [
+            966,
+            274,
+            280,
+            262
+          ],
+          "hit": [
+            1250,
+            274,
+            172,
+            259
+          ],
+          "defeat": [
+            1426,
+            274,
+            317,
+            241
+          ]
+        }
+      }
+    },
+    "units": {
+      "choir_knight": {
+        "atlas": "atlas_choir_knight",
+        "facing": "left",
+        "height_px": 240,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.508,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.615
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.615,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.616,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.614,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.458
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.448
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.509
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "2149131f4703cf3d9a33cf0df024e15908f72182896bf28d0e079976064a1ec6",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/choir_knight_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "7b9868823ca29b454f0f3cfecc1a5c64087a6d1f12d886a9ac0f68cf668248a3",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "d1aba32de2a00b6b2632112353736d62a0f319618a63feb4ff465cf84e10344c",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/choir_knight_chibi_sheet.ingest.json",
+    "spec_sha256": "7f531682688d88a15b59a4c81af4f1fa8e2eaf92e2a2809a21b958a583c73700",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "14f346f9ab624f173014feb957257fad83518b7bfec7f0e6bd93647b1dc6696c"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_choir_knight.webp",
+      "sha256": "0c55329c40b85f535936f380b87f737d783800c15f05950c716ea47dfb2e3426",
+      "pixels_sha256": "c9a4601cd77a3d47d841ba5b5feb51436d3df135c1efe08b8faaffec6a9d75f2",
+      "bytes": 254052,
+      "width": 2023,
+      "height": 542
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=77"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.483"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2023x542"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "254052 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0012%"
+        }
+      },
+      "warnings": [
+        "A12: removed 77 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

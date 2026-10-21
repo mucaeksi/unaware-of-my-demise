@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "asset_id": "odelia_pike_vn_composed",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "c68045068451",
+    "provenance": ".cache/generated/odelia_pike_vn_composed/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "odelia_pike",
+    "image": "composed",
+    "emotion_tags": [
+      "breaking",
+      "calm",
+      "composed",
+      "dry",
+      "hesitant",
+      "hollow",
+      "low",
+      "measured",
+      "neutral",
+      "numb",
+      "plain",
+      "quiet",
+      "steady",
+      "stiff",
+      "stunned",
+      "tearful",
+      "wary"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

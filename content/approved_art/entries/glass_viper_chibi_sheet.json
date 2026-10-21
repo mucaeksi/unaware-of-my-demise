@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "glass_viper_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_glass_viper": {
+        "image": "art/atlas_glass_viper.webp",
+        "width": 2031,
+        "height": 638,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            278,
+            266
+          ],
+          "idle_2": [
+            286,
+            4,
+            278,
+            266
+          ],
+          "idle_3": [
+            568,
+            4,
+            278,
+            266
+          ],
+          "victory": [
+            850,
+            4,
+            278,
+            264
+          ],
+          "hit": [
+            1132,
+            4,
+            274,
+            259
+          ],
+          "defeat": [
+            1410,
+            4,
+            298,
+            256
+          ],
+          "ultimate": [
+            1712,
+            4,
+            315,
+            179
+          ],
+          "ultimate_2": [
+            4,
+            274,
+            315,
+            179
+          ],
+          "ultimate_3": [
+            323,
+            274,
+            315,
+            179
+          ],
+          "active": [
+            642,
+            274,
+            315,
+            178
+          ],
+          "active_2": [
+            961,
+            274,
+            315,
+            178
+          ],
+          "active_3": [
+            1280,
+            274,
+            315,
+            178
+          ],
+          "basic": [
+            1599,
+            274,
+            315,
+            177
+          ],
+          "basic_2": [
+            4,
+            457,
+            315,
+            177
+          ],
+          "basic_3": [
+            323,
+            457,
+            315,
+            177
+          ],
+          "walk": [
+            642,
+            457,
+            312,
+            175
+          ]
+        }
+      }
+    },
+    "units": {
+      "glass_viper": {
+        "atlas": "atlas_glass_viper",
+        "facing": "left",
+        "height_px": 240,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.569,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.736
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.738,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.737,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.739,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.494
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.283
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.568
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "8dbd9ef9eb8c59c6189f0b1485325a3375c6a5c7946cfbf83852346eda55f129",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/glass_viper_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "9549418f17c7e6cf852a9fed9c5e4e768ecf68a2d419db9da78e99c269f681fc",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "3406bcb39872fdd9690d77136fa030586646e7d1a1c9455d94abb9870ed32776",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/glass_viper_chibi_sheet.ingest.json",
+    "spec_sha256": "0a72b96f6ef24c95fad2538d3b9e6284ac9444d0a33c0b4978111f5c44e16825",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "7ef5ea3e32aa9a9eceb3f04f20950ecb3dd42d4314c56b173eb4dc9c8b520a33"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_glass_viper.webp",
+      "sha256": "4834785e4b5bf00aa1d6457ec9e8e142c2ea227bbb399dcfe0b5fd40d1108580",
+      "pixels_sha256": "474784416ab2f10b1bfe06d8c5b3f100401b20c21676ab34b3bcbe39cdb6afe0",
+      "bytes": 275204,
+      "width": 2031,
+      "height": 638
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=156"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.483"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2031x638"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "275204 bytes <= 665600"
+        },
+        "A08": {
+          "status": "warn",
+          "detail": "spill=0.0069%"
+        }
+      },
+      "warnings": [
+        "A12: removed 156 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

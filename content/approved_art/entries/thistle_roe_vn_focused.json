@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "asset_id": "thistle_roe_vn_focused",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "thistle_roe": {
+        "emotions": {
+          "analytical": "focused",
+          "focused": "focused",
+          "serious": "focused",
+          "tense": "focused",
+          "whisper": "focused"
+        },
+        "images": {
+          "focused": "art/portrait_thistle_roe_focused.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "3f6814fce796489e1f4e367b64c77c16fa0cbb8053629ef95ef21c2572f8cbab",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/thistle_roe_vn_focused/run.provenance.json",
+    "provenance_sha256": "c2a7d8c61a935fc4e1da23bfa17f30aea3c73b8fc0495244cc69e3e4d2e013ea",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "a7aa7abc7019f5f709f47dcba4de6fad8bf0d33d2fa0fd649ea1f70290a7af8b",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/thistle_roe_vn_focused.ingest.json",
+    "spec_sha256": "21ceacaad5f717ca434381624de13c6da62dc6198cba9567ab9eee043336bb4f",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "ba3cd4ac7b1f408cddd04a03583fa238829f5805208ff9c021397ed24d1562e0"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_thistle_roe_focused.webp",
+      "sha256": "f1bb79bb67c6e4c62866ed5a83083a4ca5f85b1b1a8a9720cac6bc0b148b963b",
+      "pixels_sha256": "f21323e87edce188939042dcf715cae31ad010ef87b8d3a126b78edf9db0489d",
+      "bytes": 74580,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=2"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "74580 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 2 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

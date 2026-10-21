@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "iona_mist_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_iona_mist": {
+        "image": "art/atlas_iona_mist.webp",
+        "width": 2026,
+        "height": 1045,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            219,
+            348
+          ],
+          "idle_2": [
+            227,
+            4,
+            219,
+            348
+          ],
+          "idle_3": [
+            450,
+            4,
+            219,
+            348
+          ],
+          "ultimate": [
+            673,
+            4,
+            267,
+            348
+          ],
+          "ultimate_2": [
+            944,
+            4,
+            267,
+            348
+          ],
+          "ultimate_3": [
+            1215,
+            4,
+            267,
+            348
+          ],
+          "active": [
+            1486,
+            4,
+            266,
+            346
+          ],
+          "active_2": [
+            1756,
+            4,
+            266,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            266,
+            346
+          ],
+          "basic": [
+            274,
+            356,
+            272,
+            345
+          ],
+          "basic_2": [
+            550,
+            356,
+            272,
+            345
+          ],
+          "basic_3": [
+            826,
+            356,
+            272,
+            345
+          ],
+          "victory": [
+            1102,
+            356,
+            262,
+            345
+          ],
+          "walk": [
+            1368,
+            356,
+            266,
+            343
+          ],
+          "hit": [
+            1638,
+            356,
+            222,
+            338
+          ],
+          "defeat": [
+            4,
+            706,
+            222,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "iona_mist": {
+        "atlas": "atlas_iona_mist",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.41,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.431
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.435,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.458,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.459,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.478
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.476
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.459
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "0af037f998ac3ea0e38200092063d80d301a115a1a91d7f6e00bc6b40aa4db09",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/iona_mist_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "7aad0e47316f2125b5ce17f9ce86fbdf059a3ee0a42f7dc85daa76891c8417f4",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "9f284bb97611f8924614cc90f2dbc78bed78e171a7a4aa3f0b546d3a195ac908",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/iona_mist_chibi_sheet.ingest.json",
+    "spec_sha256": "07ff55bbe089aa82b81ca1330fcef6658e7a57a7bda58594d56fc4bcd35ba9eb",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "bad10cb834cb5eb8e2531624458100236b096e192c84cd8425dd87f4233bda0e"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_iona_mist.webp",
+      "sha256": "0eefc4d9780339fe0861351619be39e061f30451256c323534e2eac09cf192f6",
+      "pixels_sha256": "466a99c361e5cbaae37fd48b57b169e4d080621532bade6f0645a5be653e3341",
+      "bytes": 427144,
+      "width": 2026,
+      "height": 1045
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=1"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2026x1045"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "427144 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0006%"
+        }
+      },
+      "warnings": [
+        "A12: removed 1 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

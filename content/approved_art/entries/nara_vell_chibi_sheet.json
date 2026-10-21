@@ -1,0 +1,307 @@
+{
+  "schema": 1,
+  "asset_id": "nara_vell_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_nara_vell": {
+        "image": "art/atlas_nara_vell.webp",
+        "width": 1926,
+        "height": 1045,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            193,
+            348
+          ],
+          "idle_2": [
+            201,
+            4,
+            193,
+            348
+          ],
+          "idle_3": [
+            398,
+            4,
+            193,
+            348
+          ],
+          "ultimate": [
+            595,
+            4,
+            247,
+            348
+          ],
+          "ultimate_2": [
+            846,
+            4,
+            247,
+            348
+          ],
+          "ultimate_3": [
+            1097,
+            4,
+            247,
+            348
+          ],
+          "active": [
+            1348,
+            4,
+            245,
+            346
+          ],
+          "active_2": [
+            1597,
+            4,
+            245,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            245,
+            346
+          ],
+          "basic": [
+            253,
+            356,
+            299,
+            345
+          ],
+          "basic_2": [
+            556,
+            356,
+            299,
+            345
+          ],
+          "basic_3": [
+            859,
+            356,
+            299,
+            345
+          ],
+          "victory": [
+            1162,
+            356,
+            241,
+            345
+          ],
+          "walk": [
+            1407,
+            356,
+            294,
+            343
+          ],
+          "hit": [
+            1705,
+            356,
+            217,
+            338
+          ],
+          "defeat": [
+            4,
+            706,
+            217,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "nara_vell": {
+        "atlas": "atlas_nara_vell",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.554,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.555
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.556,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.528,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.527,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.511
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.513
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.53
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "c0a148bb2e5a2dda8fbbecd8dd21ab1f1ab749c2ed9995dca1d77722135e9ca3",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/nara_vell_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "e934c422a550fad31fbfcf6f7b27e292acf64703decd66059417fdce03a3df35",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "0dd4730946d662f97e2a90cbcd7379f08313951bf1083a8fb5c9efb7978861f8",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/nara_vell_chibi_sheet.ingest.json",
+    "spec_sha256": "f2401c4cdcfd6d25c36008e32928aa687439f63b02b06b4a926368a3aa8d8b89",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "5cc563efbdbd03fa7381396e856a75684fc2437f9d2eaaff8583d5281d88d65e"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_nara_vell.webp",
+      "sha256": "26df74c8cffd1fe16b63e59aae62fe2ebf93dde62ce6c5c3ffb172fbfa7b2e97",
+      "pixels_sha256": "fb2d79008a17ca6d5e56d68ece7d17bbdf58f52de509ef476a5eef90e7149a03",
+      "bytes": 389040,
+      "width": 1926,
+      "height": 1045
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=6"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1926x1045"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "389040 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0006%"
+        }
+      },
+      "warnings": [
+        "A12: removed 6 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

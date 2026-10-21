@@ -17,6 +17,16 @@
       "cue_id": "stop"
     },
     {
+      "op": "show",
+      "character": "vespera_wisp",
+      "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "thistle_roe",
+      "side": "right"
+    },
+    {
       "op": "say",
       "line_id": "node_6_3_pre_001",
       "speaker": "vespera_wisp",

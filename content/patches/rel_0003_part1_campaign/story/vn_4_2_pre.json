@@ -18,8 +18,13 @@
     },
     {
       "op": "show",
-      "character": "kera_voss",
+      "character": "tilda_fen",
       "side": "left"
+    },
+    {
+      "op": "show",
+      "character": "iona_mist",
+      "side": "right"
     },
     {
       "op": "say",

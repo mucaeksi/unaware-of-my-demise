@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "asset_id": "tilda_fen_vn_defiant",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "tilda_fen": {
+        "emotions": {
+          "commanding": "defiant",
+          "defiant": "defiant",
+          "fierce": "defiant",
+          "urgent": "defiant"
+        },
+        "images": {
+          "defiant": "art/portrait_tilda_fen_defiant.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "6bac6b6ba9cb1370df06801dee3a8f0c8fcb6ffc8ceec2aed811fac4bf784f6b",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/tilda_fen_vn_defiant/run.provenance.json",
+    "provenance_sha256": "e03e1607dabdafe41cf26d01aaf01c9bc072d4f487c9cf68f281c4a68805c2fd",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "5c664c0f7d0e82c726e06e97194403511b41c7f29f384b17e105d813ae039df7",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/tilda_fen_vn_defiant.ingest.json",
+    "spec_sha256": "7a8e820bae2d6ba2bc5de1dba5a682ec2f23ddd50dc80cd683e503fb0c792dca",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "69f9b4d42174ad206ad2291dadb19abe70fcc87e31e37cc0aa118ea9f11c808d"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_tilda_fen_defiant.webp",
+      "sha256": "b63fa29d1f0bb243ddd51115b7b831f8fac72d6bffd5b1f55b733243eeb06b7a",
+      "pixels_sha256": "86dee951a6fdcb2c8a0a08a64999074914d9a53865bb0d5f95bc1d45904683a0",
+      "bytes": 66686,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=1"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "66686 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 1 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

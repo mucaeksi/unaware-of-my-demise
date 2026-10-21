@@ -4,7 +4,7 @@
   "class": "unit_sheet",
   "source": {
     "kind": "generated",
-    "pick": "147265238e8d",
+    "pick": "c9a34f35c5d8",
     "provenance": ".cache/generated/fadyme_chibi_sheet/run.provenance.json"
   },
   "key": {
@@ -28,39 +28,150 @@
       "idle": [
         0,
         0,
-        1376,
-        768
+        720,
+        720
+      ],
+      "idle_2": [
+        720,
+        0,
+        720,
+        720
+      ],
+      "idle_3": [
+        1440,
+        0,
+        720,
+        720
+      ],
+      "walk": [
+        2160,
+        0,
+        720,
+        720
       ],
       "basic": [
-        1376,
         0,
-        1376,
-        768
+        720,
+        720,
+        720
+      ],
+      "basic_2": [
+        720,
+        720,
+        720,
+        720
+      ],
+      "basic_3": [
+        1440,
+        720,
+        720,
+        720
+      ],
+      "active": [
+        2160,
+        720,
+        720,
+        720
+      ],
+      "active_2": [
+        0,
+        1440,
+        720,
+        720
+      ],
+      "active_3": [
+        720,
+        1440,
+        720,
+        720
       ],
       "ultimate": [
+        1440,
+        1440,
+        720,
+        720
+      ],
+      "ultimate_2": [
+        2160,
+        1440,
+        720,
+        720
+      ],
+      "ultimate_3": [
         0,
-        768,
-        1376,
-        768
+        2160,
+        720,
+        720
       ],
       "hit": [
-        1376,
-        768,
-        1376,
-        768
+        720,
+        2160,
+        720,
+        720
+      ],
+      "defeat": [
+        1440,
+        2160,
+        720,
+        720
+      ],
+      "victory": [
+        2160,
+        2160,
+        720,
+        720
       ]
     }
   },
   "frames": {
     "idle": "idle",
-    "idle_frame_px": 408,
+    "idle_frame_px": 340,
     "ground": "lowest",
     "pivot": "lower_body_centroid",
-    "state_map": {
-      "walk": "idle",
-      "active": "basic",
-      "victory": "ultimate",
-      "defeat": "hit"
+    "animations": {
+      "idle": {
+        "frames": [
+          "idle",
+          "idle_2",
+          "idle_3",
+          "idle_2"
+        ],
+        "fps": 6,
+        "loop": true
+      },
+      "basic": {
+        "frames": [
+          "basic",
+          "basic_2",
+          "basic_3",
+          "basic_2",
+          "basic"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "active": {
+        "frames": [
+          "active",
+          "active_2",
+          "active_3",
+          "active_2",
+          "active"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "ultimate": {
+        "frames": [
+          "ultimate",
+          "ultimate_2",
+          "ultimate_3",
+          "ultimate_2",
+          "ultimate"
+        ],
+        "fps": 9,
+        "loop": false
+      }
     }
   },
   "export": {
@@ -69,8 +180,8 @@
     "pad": 4,
     "webp": {
       "mode": "lossy",
-      "quality": 86,
-      "alpha_quality": 94,
+      "quality": 84,
+      "alpha_quality": 92,
       "effort": 5
     },
     "max_bytes": 665600

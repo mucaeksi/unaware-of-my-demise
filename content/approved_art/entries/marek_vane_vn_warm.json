@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "asset_id": "marek_vane_vn_warm",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "marek_vane": {
+        "emotions": {
+          "gentle": "warm",
+          "smile": "warm",
+          "warm": "warm"
+        },
+        "images": {
+          "warm": "art/portrait_marek_vane_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "6ee6ab4553af44ebaa4722d28ab93f751f420db2912ca141d7ecc590580c9acb",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/marek_vane_vn_warm/run.provenance.json",
+    "provenance_sha256": "06e071cfead86d0e0df87966026a72cebb6264fbe4d95df2c300c9ab77f2be33",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "8c1bffad5af249b279cc8e6de3ed49c47b77b45be28980ff0063da62df7a8ed2",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/marek_vane_vn_warm.ingest.json",
+    "spec_sha256": "ea06161d5067524802d15a71bf2022bc88786e5efdaa077f1cd6b002c399c140",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "b94eaf4a9d23e1c8bc622949dcc2831cbc19de607c65ccd84b36b2a1d41b2785"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_marek_vane_warm.webp",
+      "sha256": "5443c314a57b8565d1f4a1504a3e2abb403ef9a666f11f86c87d330a9ad99695",
+      "pixels_sha256": "6be14988103cc536739e2991c27e414c6ced11ff9b11570c13f1dab581020518",
+      "bytes": 75388,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=10"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "75388 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 10 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

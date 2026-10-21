@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "asset_id": "thistle_roe_vn_composed",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "323e345e2f3e",
+    "provenance": ".cache/generated/thistle_roe_vn_composed/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "thistle_roe",
+    "image": "composed",
+    "emotion_tags": [
+      "anxious",
+      "calm",
+      "composed",
+      "curious",
+      "earnest",
+      "encouraging",
+      "firm",
+      "frightened",
+      "neutral",
+      "shy",
+      "tearful"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

@@ -183,8 +183,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "marek_vane",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -708,6 +713,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "tilda_fen",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_kera_voss_2_001",
               "speaker": "kera_voss",
@@ -831,6 +841,11 @@
               "op": "show",
               "character": "kera_voss",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "iona_mist",
+              "side": "right"
             },
             {
               "op": "say",
@@ -1072,6 +1087,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "brin_alder",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_brin_alder_1_001",
               "speaker": "brin_alder",
@@ -1170,6 +1190,11 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "brin_alder",
+              "side": "left"
             },
             {
               "op": "say",
@@ -1283,8 +1308,13 @@
             },
             {
               "op": "show",
-              "character": "nixie_vale",
+              "character": "brin_alder",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "nixie_vale",
+              "side": "right"
             },
             {
               "op": "say",
@@ -1395,6 +1425,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "brin_alder",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "rikka_ember",
+              "side": "right"
             },
             {
               "op": "say",
@@ -1619,6 +1659,11 @@
               "op": "show",
               "character": "nixie_vale",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "pippa_bell",
+              "side": "right"
             },
             {
               "op": "say",
@@ -2404,6 +2449,16 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "rikka_ember",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "sable_wren",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_sable_wren_1_001",
               "speaker": "rikka_ember",
@@ -2505,8 +2560,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "sable_wren",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -2609,6 +2669,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "sable_wren",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_sable_wren_3_001",
               "speaker": "sable_wren",
@@ -2707,6 +2772,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "hana_birch",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "sable_wren",
+              "side": "right"
             },
             {
               "op": "say",
@@ -2819,12 +2894,12 @@
             },
             {
               "op": "show",
-              "character": "jori_flint",
+              "character": "tilda_fen",
               "side": "left"
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "jori_flint",
               "side": "right"
             },
             {
@@ -2948,6 +3023,16 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "tilda_fen",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "iona_mist",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_tilda_fen_2_001",
               "speaker": "tilda_fen",
@@ -3049,8 +3134,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "tilda_fen",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -3154,8 +3244,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "tilda_fen",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -3255,6 +3350,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "rikka_ember",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "sable_wren",
+              "side": "right"
             },
             {
               "op": "say",
@@ -3357,6 +3462,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "rikka_ember",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_rikka_ember_2_001",
               "speaker": "rikka_ember",
@@ -3455,6 +3565,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "brin_alder",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "rikka_ember",
+              "side": "right"
             },
             {
               "op": "say",
@@ -3570,6 +3690,11 @@
               "op": "show",
               "character": "fadyme",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "rikka_ember",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4006,6 +4131,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "odelia_pike",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_mirel_quill_4_001",
               "speaker": "mirel_quill",
@@ -4106,8 +4236,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "odelia_pike",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4215,6 +4350,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "odelia_pike",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_odelia_pike_2_001",
               "speaker": "kera_voss",
@@ -4316,8 +4456,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "odelia_pike",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4411,8 +4556,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "odelia_pike",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4515,8 +4665,13 @@
             },
             {
               "op": "show",
-              "character": "jori_flint",
+              "character": "pippa_bell",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "jori_flint",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4620,8 +4775,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "pippa_bell",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4725,12 +4885,12 @@
             },
             {
               "op": "show",
-              "character": "mirel_quill",
+              "character": "pippa_bell",
               "side": "left"
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "mirel_quill",
               "side": "right"
             },
             {
@@ -4825,8 +4985,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "pippa_bell",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -4919,8 +5084,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "nara_vell",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -5024,8 +5194,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "nara_vell",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -5126,6 +5301,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "marek_vane",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "nara_vell",
+              "side": "right"
             },
             {
               "op": "say",
@@ -5229,8 +5414,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "nara_vell",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -5557,6 +5747,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "hana_birch",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_clem_marr_3_001",
               "speaker": "clem_marr",
@@ -5756,6 +5951,16 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "vespera_wisp",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "iona_mist",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_vespera_wisp_1_001",
               "speaker": "vespera_wisp",
@@ -5857,8 +6062,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "vespera_wisp",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -5962,8 +6172,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "vespera_wisp",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -6077,8 +6292,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "vespera_wisp",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -6180,6 +6400,16 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "hana_birch",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "sable_wren",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_hana_birch_1_001",
               "speaker": "hana_birch",
@@ -6275,6 +6505,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "hana_birch",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_hana_birch_2_001",
               "speaker": "fadyme",
@@ -6363,6 +6598,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "hana_birch",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "tilda_fen",
+              "side": "right"
             },
             {
               "op": "say",
@@ -6456,8 +6701,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "hana_birch",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -6560,8 +6810,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "thistle_roe",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -6665,8 +6920,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "thistle_roe",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -6769,6 +7029,16 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "thistle_roe",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "iona_mist",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_thistle_roe_3_001",
               "speaker": "thistle_roe",
@@ -6860,8 +7130,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "thistle_roe",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -6954,8 +7229,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "iona_mist",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -7059,8 +7339,13 @@
             },
             {
               "op": "show",
-              "character": "kera_voss",
+              "character": "iona_mist",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "kera_voss",
+              "side": "right"
             },
             {
               "op": "say",
@@ -7153,6 +7438,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "iona_mist",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_iona_mist_3_001",
               "speaker": "iona_mist",
@@ -7234,8 +7524,13 @@
             },
             {
               "op": "show",
-              "character": "fadyme",
+              "character": "iona_mist",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "fadyme",
+              "side": "right"
             },
             {
               "op": "say",
@@ -7440,6 +7735,11 @@
               "op": "show",
               "character": "jori_flint",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "brin_alder",
+              "side": "right"
             },
             {
               "op": "say",
@@ -7727,8 +8027,13 @@
             },
             {
               "op": "show",
-              "character": "mahmut",
+              "character": "marek_vane",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mahmut",
+              "side": "right"
             },
             {
               "op": "say",
@@ -7831,6 +8136,16 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "marek_vane",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "nara_vell",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "cs_marek_vane_2_001",
               "speaker": "marek_vane",
@@ -7921,6 +8236,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "marek_vane",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "cs_marek_vane_3_001",
               "speaker": "marek_vane",
@@ -8004,6 +8324,11 @@
               "op": "show",
               "character": "fadyme",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "marek_vane",
+              "side": "right"
             },
             {
               "op": "say",
@@ -8653,12 +8978,12 @@
             },
             {
               "op": "show",
-              "character": "kera_voss",
+              "character": "pippa_bell",
               "side": "left"
             },
             {
               "op": "show",
-              "character": "jori_flint",
+              "character": "kera_voss",
               "side": "right"
             },
             {
@@ -8831,6 +9156,11 @@
               "cue_id": "stop"
             },
             {
+              "op": "show",
+              "character": "pippa_bell",
+              "side": "left"
+            },
+            {
               "op": "say",
               "line_id": "event_harvest_inn_meal_3_001",
               "speaker": "pippa_bell",
@@ -8925,6 +9255,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "vespera_wisp",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "event_sun_eclipse_day_1_001",
               "speaker": "clem_marr",
@@ -8980,6 +9315,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "thistle_roe",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "vespera_wisp",
+              "side": "right"
             },
             {
               "op": "say",
@@ -9051,6 +9396,11 @@
               "op": "show",
               "character": "clem_marr",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "thistle_roe",
+              "side": "right"
             },
             {
               "op": "say",
@@ -9143,6 +9493,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "tilda_fen",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "event_guild_salt_fever_1_001",
               "speaker": "kera_voss",
@@ -9216,6 +9571,16 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "tilda_fen",
+              "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "odelia_pike",
+              "side": "right"
             },
             {
               "op": "say",
@@ -9371,6 +9736,11 @@
               "side": "left"
             },
             {
+              "op": "show",
+              "character": "marek_vane",
+              "side": "right"
+            },
+            {
               "op": "say",
               "line_id": "event_council_herald_1_001",
               "speaker": "council_herald",
@@ -9429,8 +9799,13 @@
             },
             {
               "op": "show",
-              "character": "mirel_quill",
+              "character": "sable_wren",
               "side": "left"
+            },
+            {
+              "op": "show",
+              "character": "mirel_quill",
+              "side": "right"
             },
             {
               "op": "say",
@@ -9488,6 +9863,11 @@
             {
               "op": "music",
               "cue_id": "stop"
+            },
+            {
+              "op": "show",
+              "character": "marek_vane",
+              "side": "left"
             },
             {
               "op": "say",

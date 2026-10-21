@@ -1,0 +1,305 @@
+{
+  "schema": 1,
+  "asset_id": "tilda_fen_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_tilda_fen": {
+        "image": "art/atlas_tilda_fen.webp",
+        "width": 2033,
+        "height": 1045,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            224,
+            348
+          ],
+          "idle_2": [
+            232,
+            4,
+            224,
+            348
+          ],
+          "idle_3": [
+            460,
+            4,
+            224,
+            348
+          ],
+          "ultimate": [
+            688,
+            4,
+            265,
+            348
+          ],
+          "ultimate_2": [
+            957,
+            4,
+            265,
+            348
+          ],
+          "ultimate_3": [
+            1226,
+            4,
+            265,
+            348
+          ],
+          "active": [
+            1495,
+            4,
+            265,
+            346
+          ],
+          "active_2": [
+            1764,
+            4,
+            265,
+            346
+          ],
+          "active_3": [
+            4,
+            356,
+            265,
+            346
+          ],
+          "basic": [
+            273,
+            356,
+            267,
+            345
+          ],
+          "basic_2": [
+            544,
+            356,
+            267,
+            345
+          ],
+          "basic_3": [
+            815,
+            356,
+            267,
+            345
+          ],
+          "victory": [
+            1086,
+            356,
+            261,
+            345
+          ],
+          "walk": [
+            1351,
+            356,
+            262,
+            343
+          ],
+          "hit": [
+            1617,
+            356,
+            218,
+            338
+          ],
+          "defeat": [
+            4,
+            706,
+            217,
+            335
+          ]
+        }
+      }
+    },
+    "units": {
+      "tilda_fen": {
+        "atlas": "atlas_tilda_fen",
+        "facing": "right",
+        "height_px": 245,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.418,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.496
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.496,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.489,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.49,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.533
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.532
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.491
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "dfb8e338ee7f0c5cfff8f47c7895328c977c0d16bafb523fe5dec65eda5d9250",
+    "mime": "image/png",
+    "width": 2880,
+    "height": 2880,
+    "provenance_file": ".cache/generated/tilda_fen_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "3ae4b924c8f2d7ae8fe4dd49577b5a59f3408a3030525605f092fe8218d5b29d",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "02a6026cd3ca18e18a21f9e27c6439c6e458ed29b725625c4d696d112a5db425",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/tilda_fen_chibi_sheet.ingest.json",
+    "spec_sha256": "9e29a0ca8f7c19f420caf9b4eaa42025454f53f48ce07bf40bb7f0ffce1e6761",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "8ae0881db5079a4dc228db1246af972a4ac42d39847748ca8a9163f87745e24b"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_tilda_fen.webp",
+      "sha256": "b2f47cdc3378f3c9d0253ce16dd4e09b0d943ec0ddcdb94e0d349a776b28cb71",
+      "pixels_sha256": "9ecfde7264b24345c0f60242f6150eb330247d18db720193e19dbeae84a7ca12",
+      "bytes": 453496,
+      "width": 2033,
+      "height": 1045
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 2880x2880"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "pass",
+          "detail": "removed=0"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.632"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "2033x1045"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "453496 bytes <= 665600"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0003%"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}
