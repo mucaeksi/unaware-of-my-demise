@@ -1,6 +1,6 @@
 # Instructions for Argon — 2026-10-20
 
-Short, binding rules for working in this repository alongside Claude. They come from incidents in the last two days; each rule says why. The full brief is the [README](../../README.md); the current gap list is [REVIEW_2026-10-20](../REVIEW_2026-10-20.md).
+Short, binding rules for working in this repository. **Start with [ARGON_HANDOFF_2026-10-21](ARGON_HANDOFF_2026-10-21.md)** (Argon owns the whole project from 2026-10-21). They come from incidents in the last two days; each rule says why. The full brief is the [README](../../README.md); the current gap list is [REVIEW_2026-10-20](../REVIEW_2026-10-20.md).
 
 ## 1. Where to work (D-28, from 2026-10-20)
 
@@ -74,6 +74,6 @@ Short, binding rules for working in this repository alongside Claude. They come 
 
 Done since the morning: Garrick/Corbin banners (`67b1c969`); the 25 signature weapon designs ([SIGNATURE_WEAPONS_SPEC](../combat/SIGNATURE_WEAPONS_SPEC.md)), approved by the owner and now live in battle data.
 
-## 6. Claude's current queue (do not duplicate)
+## 6. Handoff (2026-10-21)
 
-Extra enemy waves in `tools/build_campaign.ts` once your current edit of that file is committed (tell the owner when it is); progression/economy tuning once the owner sets a target pace. Done today: DEEDS / TRIALS / PROFILE screens, the journal fix for daily supplies, sweep, AFK and memory shards, Roster keeping its page, and your 25 signature weapon effects in battle (owner-approved; `content/balance/gear_passives.json`). If you need something from this queue sooner, say so instead of building a parallel version.
+From 2026-10-21 Argon carries the whole project, engineering included. The ordered work list, the state at handoff (staging game build failing since 2026-10-20) and where each mechanism lives are in [ARGON_HANDOFF_2026-10-21](ARGON_HANDOFF_2026-10-21.md).
