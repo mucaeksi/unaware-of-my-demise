@@ -4,7 +4,7 @@
  * Everything after the first restart is a data-only patch published through R2 (content/patches/*, e.g. tools/build_campaign.ts).
  * Run: npm run build:content   (add --contact-sheet to also render .cache/contact_sheet.png)
  */
-import { existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import sharp from 'sharp';
 import { ChapterIndex, type ArtManifest, type StoryScene, type UnitAnimState } from '../packages/content-schema/src/index';
@@ -141,10 +141,47 @@ function readAuthoredMusic(): { authored: ArtManifest['music']; order: string[] 
   return { authored, order: Object.keys(music) };
 }
 
+/**
+ * Locked repo-sourced UI art (`logo`, `key_art`) is built via sharp + SVG mask when its source PNG changes.
+ * When the source PNG sha256 matches content/provenance.json and the existing .webp matches its recorded output sha256,
+ * reuse the committed .webp bytes so cross-OS sharp/librsvg/libwebp float differences do not cause drift on Linux CI.
+ */
+function readReusableRepoUiArt(): Map<string, { bytes: Buffer; outSha: string; srcSha: string }> {
+  const out = new Map<string, { bytes: Buffer; outSha: string; srcSha: string }>();
+  const provPath = join(ROOT, 'content/provenance.json');
+  if (!existsSync(provPath)) return out;
+  try {
+    const prov = JSON.parse(readFileSync(provPath, 'utf8')) as {
+      outputs?: { output: string; sha256: string; sources?: Record<string, string> }[];
+    };
+    for (const [uiKey, ref] of Object.entries(UI_FILES)) {
+      const relOut = `content/base/art/ui_${uiKey}.webp`;
+      const absOut = join(ROOT, relOut);
+      if (!existsSync(absOut)) continue;
+      const srcHash = sha256(fileBytes(ref.repo));
+      const rec = (prov.outputs ?? []).find((o) => o.output === relOut);
+      if (!rec || rec.sources?.[ref.repo] !== srcHash) continue;
+      const bytes = readFileSync(absOut);
+      const outHash = sha256(bytes);
+      if (outHash === rec.sha256) {
+        out.set(uiKey, { bytes, outSha: outHash, srcSha: srcHash });
+      }
+    }
+  } catch {
+    // ignore malformed provenance
+  }
+  return out;
+}
+
 function authoredFiles(): string[] {
   return AUTHORED_DIRS.flatMap((dir) => {
     const abs = join(ROOT, 'content/base', dir);
-    return existsSync(abs) ? readdirSync(abs, { recursive: true, withFileTypes: true }).filter((d) => d.isFile()).map((d) => relative(join(ROOT, 'content/base'), join(d.parentPath, d.name)).replaceAll('\\', '/')) : [];
+    return existsSync(abs)
+      ? readdirSync(abs, { recursive: true, withFileTypes: true })
+          .filter((d) => d.isFile())
+          .map((d) => relative(join(ROOT, 'content/base'), join(d.parentPath, d.name)).replaceAll('\\', '/'))
+          .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+      : [];
   });
 }
 
@@ -177,10 +214,20 @@ async function main(): Promise<void> {
   // build_all_voiceovers.py, generate_*_lyria35.py) and vfx/ presets are hand-authored; none has another source,
   // so keep them and regenerate the rest.
   const { authored: authoredMusic, order: previousMusicOrder } = readAuthoredMusic();
+  const reusableUiArt = readReusableRepoUiArt();
   for (const dir of ['art', 'story', 'encounters', 'units', 'chapters', 'entry']) rmSync(join(ROOT, 'content/base', dir), { recursive: true, force: true });
   for (const cue of Object.keys(MUSIC)) rmSync(join(ROOT, `content/base/audio/${cue}.ogg`), { force: true });
 
-  const legacyPortraits = JSON.parse(legacyBlob('game/data/presentation/battle_art_v001.json').toString('utf8')).portraits as Record<string, { emotions: Record<string, string> }>;
+  let cachedLegacyPortraits: Record<string, { emotions: Record<string, string> }> | null = null;
+  const getLegacyPortraits = (): Record<string, { emotions: Record<string, string> }> => {
+    if (!cachedLegacyPortraits) {
+      cachedLegacyPortraits = JSON.parse(legacyBlob('game/data/presentation/battle_art_v001.json').toString('utf8')).portraits as Record<
+        string,
+        { emotions: Record<string, string> }
+      >;
+    }
+    return cachedLegacyPortraits;
+  };
 
   // ---- narrative -> scenes/encounters ---------------------------------------------------------
   const party = ['mahmut', 'fadyme'];
@@ -279,25 +326,27 @@ async function main(): Promise<void> {
         }
       }
       const files = PORTRAIT_FILES[char];
-      const map = legacyPortraits[char]?.emotions;
-      if (files && map) {
-        const needed = new Set<string>(images.composed ? [] : ['composed']);
-        for (const tag of tags) {
-          if (emotions[tag]) continue;
-          const key = map[tag];
-          if (key) {
-            emotions[tag] = key;
-            if (!images[key]) needed.add(key);
+      const needed = new Set<string>(images.composed ? [] : ['composed']);
+      const missingTags = [...tags].filter((tag) => !emotions[tag]);
+      if (files && (needed.size > 0 || missingTags.length > 0)) {
+        const map = getLegacyPortraits()[char]?.emotions;
+        if (map) {
+          for (const tag of missingTags) {
+            const key = map[tag];
+            if (key) {
+              emotions[tag] = key;
+              if (!images[key]) needed.add(key);
+            }
           }
-        }
-        for (const key of needed) {
-          const src = files[key];
-          if (!src) throw new Error(`no portrait source for ${char}/${key}`);
-          const p = await buildPortrait(src, 1100);
-          const rel = `art/portrait_${char}_${key}.webp`;
-          writeOut(`${outDir}/${rel}`, p.bytes);
-          provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(p.bytes), sources: { [srcId(src)]: p.hash } });
-          images[key] = rel;
+          for (const key of needed) {
+            const src = files[key];
+            if (!src) throw new Error(`no portrait source for ${char}/${key}`);
+            const p = await buildPortrait(src, 1100);
+            const rel = `art/portrait_${char}_${key}.webp`;
+            writeOut(`${outDir}/${rel}`, p.bytes);
+            provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(p.bytes), sources: { [srcId(src)]: p.hash } });
+            images[key] = rel;
+          }
         }
       }
       if (images.composed) emotions.composed = 'composed';
@@ -345,7 +394,10 @@ async function main(): Promise<void> {
       copyApprovedEntryOutputs(e, outDir);
       ui.logo = e.targets.ui!.logo!;
     } else {
-      const logo = await buildKeyedImage(UI_FILES.logo, 1400);
+      const cachedLogo = reusableUiArt.get('logo');
+      const logo = cachedLogo
+        ? { bytes: cachedLogo.bytes, hash: cachedLogo.srcSha }
+        : await buildKeyedImage(UI_FILES.logo, 1400);
       writeOut(`${outDir}/art/ui_logo.webp`, logo.bytes);
       provenance.push({ output: `${outDir}/art/ui_logo.webp`, sha256: sha256(logo.bytes), sources: { [srcId(UI_FILES.logo)]: logo.hash } });
       ui.logo = 'art/ui_logo.webp';
@@ -355,7 +407,10 @@ async function main(): Promise<void> {
       copyApprovedEntryOutputs(e, outDir);
       ui.key_art = e.targets.ui!.key_art!;
     } else {
-      const key = await buildFadedKeyArt(UI_FILES.key_art, 760);
+      const cachedKey = reusableUiArt.get('key_art');
+      const key = cachedKey
+        ? { bytes: cachedKey.bytes, hash: cachedKey.srcSha }
+        : await buildFadedKeyArt(UI_FILES.key_art, 760);
       writeOut(`${outDir}/art/ui_key_art.webp`, key.bytes);
       provenance.push({ output: `${outDir}/art/ui_key_art.webp`, sha256: sha256(key.bytes), sources: { [srcId(UI_FILES.key_art)]: key.hash } });
       ui.key_art = 'art/ui_key_art.webp';

@@ -23,10 +23,12 @@ const opt = (name: string): string | undefined => {
 };
 
 const walk = (dir: string, rel = ''): string[] =>
-  readdirSync(join(dir, rel)).flatMap((n) => {
-    const r = rel ? `${rel}/${n}` : n;
-    return statSync(join(dir, r)).isDirectory() ? walk(dir, r) : [r];
-  });
+  readdirSync(join(dir, rel))
+    .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+    .flatMap((n) => {
+      const r = rel ? `${rel}/${n}` : n;
+      return statSync(join(dir, r)).isDirectory() ? walk(dir, r) : [r];
+    });
 
 const dir = resolve(ROOT, arg('dir'));
 const outPath = resolve(ROOT, arg('out'));
