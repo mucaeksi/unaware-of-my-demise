@@ -8,7 +8,7 @@ import { PixiScene } from '../core/PixiScene';
 import { advance } from '../entry/flow';
 import { S } from '../entry/strings';
 import { clearPrologueCheckpoint, loadPrologueCheckpoint, savePrologueCheckpoint } from '../entry/resume';
-import { isForceFreshEntry, isInteractiveBrowser, markPrologueSeen } from '../entry/state';
+import { isDevServer, isForceFreshEntry, isInteractiveBrowser, isReplaying, loadEntry, markPrologueSeen } from '../entry/state';
 import { recordEntry } from '../entry/sync';
 import { plateTexture } from '../entry/plates';
 import { prefs } from '../platform/prefs';
@@ -185,19 +185,22 @@ export class PrologueScene extends PixiScene {
     const top = DEPTH.hud + 3;
     this.pauseBtn = this.add(new Button(this, 108 + insets.left, 56 + insets.top, { label: 'PAUSE', w: 144, h: 58, fontSize: 20, onClick: () => this.togglePause() }), top);
     this.muteBtn = this.add(new Button(this, 266 + insets.left, 56 + insets.top, { label: this.muted ? 'UNMUTE' : 'MUTE', w: 144, h: 58, fontSize: 20, variant: this.muted ? 'active' : 'normal', onClick: () => this.toggleMute() }), top);
-    this.skipBtn = this.add(
-      new Button(this, REF_W - 108 - insets.right, 56 + insets.top, {
-        label: 'SKIP',
-        w: 144,
-        h: 58,
-        fontSize: 20,
-        onClick: () => {
-          this.skipBtn?.setVariant('active');
-          this.finish();
-        }
-      }),
-      top
-    );
+    // entry contract: no Skip on a first viewing (the dev server keeps it for the owner's review loop)
+    if (loadEntry().phase === 'completed' || isReplaying() || isDevServer()) {
+      this.skipBtn = this.add(
+        new Button(this, REF_W - 108 - insets.right, 56 + insets.top, {
+          label: 'SKIP',
+          w: 144,
+          h: 58,
+          fontSize: 20,
+          onClick: () => {
+            this.skipBtn?.setVariant('active');
+            this.finish();
+          }
+        }),
+        top
+      );
+    }
     const onVisibility = (): void => {
       if (!this.live || this.done) return;
       this.hidden = document.hidden;
