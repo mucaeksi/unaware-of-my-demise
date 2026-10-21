@@ -20,7 +20,10 @@ const need = (n: string): string => arg(n) ?? (() => { throw new Error(`missing 
 const admin = need('admin').replace(/\/$/, '');
 const dir = resolve(ROOT, need('dir'));
 const headers: Record<string, string> = {};
-if (process.env.UOMD_ADMIN_JWT) headers['Cf-Access-Jwt-Assertion'] = process.env.UOMD_ADMIN_JWT;
+if (process.env.UOMD_ADMIN_JWT) {
+  headers['Cf-Access-Jwt-Assertion'] = process.env.UOMD_ADMIN_JWT;
+  headers['Cookie'] = `CF_Authorization=${process.env.UOMD_ADMIN_JWT}`;
+}
 if (process.env.CF_ACCESS_CLIENT_ID && process.env.CF_ACCESS_CLIENT_SECRET) {
   headers['CF-Access-Client-Id'] = process.env.CF_ACCESS_CLIENT_ID;
   headers['CF-Access-Client-Secret'] = process.env.CF_ACCESS_CLIENT_SECRET;

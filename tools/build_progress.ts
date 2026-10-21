@@ -4,8 +4,11 @@
  * git history and the curated screenshots in docs/evidence. Output (git-ignored): apps/admin/public/dev/.
  */
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
+import { MEDIA_TYPE_BY_EXTENSION, type AllowedExtension } from '../packages/content-schema/src/index';
+import { chapterPatch } from './lib/chapter-patch';
 import { ROOT } from './lib/fsutil';
 
 const OUT = join(ROOT, 'apps/admin/public/dev');
@@ -71,10 +74,21 @@ if (existsSync(appArtDir)) {
     copyFileSync(join(appArtDir, f), join(OUT, 'media', 'art', f));
   }
 }
-const campManifest = join(ROOT, 'content/patches/rel_0003_part1_campaign/art/art_manifest.json');
+const campDir = join(ROOT, 'content/patches/rel_0003_part1_campaign');
+const campManifest = join(campDir, 'art/art_manifest.json');
 if (existsSync(campManifest)) {
   mkdirSync(join(OUT, 'media', 'art'), { recursive: true });
   copyFileSync(campManifest, join(OUT, 'media', 'art', 'campaign_art_manifest.json'));
+}
+const campWorldMap = join(campDir, 'world/world_map.json');
+if (existsSync(campWorldMap)) {
+  mkdirSync(join(OUT, 'media', 'world'), { recursive: true });
+  copyFileSync(campWorldMap, join(OUT, 'media', 'world', 'world_map.json'));
+}
+const campChapterIdx = join(campDir, 'chapters/chapter_index.json');
+if (existsSync(campChapterIdx)) {
+  mkdirSync(join(OUT, 'media', 'chapters'), { recursive: true });
+  copyFileSync(campChapterIdx, join(OUT, 'media', 'chapters', 'campaign_chapter_index.json'));
 }
 
 const baseRel = JSON.parse(readFileSync(join(ROOT, 'content/base/release.json'), 'utf8')) as {
@@ -82,6 +96,120 @@ const baseRel = JSON.parse(readFileSync(join(ROOT, 'content/base/release.json'),
   compat: { min_client: string; content_schema: number };
   files: { path: string; sha256: string; bytes: number; media_type: string; kind: string }[];
 };
+
+// Build D-29 1-click release presets for the Control Center Releases page (/dev/releases/presets.json)
+const shaHex = (buf: Uint8Array): string => createHash('sha256').update(buf).digest('hex');
+const mediaType = (p: string): string => MEDIA_TYPE_BY_EXTENSION[p.split('.').pop() as AllowedExtension] ?? 'application/octet-stream';
+const mediaHashes = new Map<string, string>();
+for (const f of baseRel.files) mediaHashes.set(f.path, f.sha256);
+if (existsSync(appArtDir)) {
+  for (const f of readdirSync(appArtDir).filter((n) => n.endsWith('.webp'))) {
+    const rel = `art/${f}`;
+    mediaHashes.set(rel, shaHex(readFileSync(join(OUT, 'media', rel))));
+  }
+}
+if (existsSync(campWorldMap)) mediaHashes.set('world/world_map.json', shaHex(readFileSync(campWorldMap)));
+
+const fullCampFiles = new Map<string, Uint8Array>();
+const fullCampHashes = new Map<string, string>();
+if (existsSync(campDir)) {
+  const walkCamp = (d: string): void => {
+    for (const e of readdirSync(d, { withFileTypes: true })) {
+      const p = join(d, e.name);
+      if (e.isDirectory()) walkCamp(p);
+      else if (e.name !== 'release.json') {
+        const rel = relative(campDir, p).replaceAll('\\', '/');
+        const bytes = new Uint8Array(readFileSync(p));
+        const sha = shaHex(bytes);
+        fullCampFiles.set(rel, bytes);
+        fullCampHashes.set(rel, sha);
+        if (mediaHashes.get(rel) !== sha) {
+          const dest = join(OUT, 'patches', 'full', rel);
+          mkdirSync(dirname(dest), { recursive: true });
+          writeFileSync(dest, bytes);
+        }
+      }
+    }
+  };
+  walkCamp(campDir);
+}
+
+interface PresetFileEntry {
+  path: string;
+  sha256: string;
+  bytes: number;
+  mediaType: string;
+  url: string;
+}
+interface ReleasePreset {
+  id: string;
+  label: string;
+  dependsOn?: string;
+  notes: string;
+  minClient: string;
+  files: PresetFileEntry[];
+}
+const releasePresets: ReleasePreset[] = [
+  {
+    id: 'rel_0001',
+    label: 'Base AAB v0.1.2 (rel_0001)',
+    notes: baseRel.release.notes,
+    minClient: baseRel.compat.min_client,
+    files: baseRel.files.map((f) => ({
+      path: f.path,
+      sha256: f.sha256,
+      bytes: f.bytes,
+      mediaType: f.media_type,
+      url: `/dev/media/${f.path}`
+    }))
+  }
+];
+if (fullCampFiles.size > 0) {
+  for (let ch = 1; ch <= 7; ch++) {
+    const snap = chapterPatch(fullCampFiles, ch);
+    const pFiles: PresetFileEntry[] = [];
+    for (const [rel, bytes] of snap) {
+      const sha = shaHex(bytes);
+      let url: string;
+      if (mediaHashes.get(rel) === sha) url = `/dev/media/${rel}`;
+      else if (fullCampHashes.get(rel) === sha) url = `/dev/patches/full/${rel}`;
+      else {
+        const dest = join(OUT, 'patches', `ch${ch}`, rel);
+        mkdirSync(dirname(dest), { recursive: true });
+        writeFileSync(dest, bytes);
+        url = `/dev/patches/ch${ch}/${rel}`;
+      }
+      pFiles.push({ path: rel, sha256: sha, bytes: bytes.byteLength, mediaType: mediaType(rel), url });
+    }
+    releasePresets.push({
+      id: `rel_part1_ch${ch}`,
+      label: ch === 1 ? 'Patch 1 — Part I Ch.1 + World Map Hub (rel_part1_ch1)' : ch === 7 ? 'Patch 7 — Part I Ch.1–7 + Hard Mode (rel_part1_ch7)' : `Patch ${ch} — Part I Ch.1–${ch} (rel_part1_ch${ch})`,
+      dependsOn: 'rel_0001',
+      notes: ch === 1 ? 'D-29 Phase C: Part I Chapter 1 + World Map Hub + 52 animated units' : `D-29 Phase D: Part I Chapters 1..${ch}${ch === 7 ? ' + Hard Mode' : ''}`,
+      minClient: baseRel.compat.min_client,
+      files: pFiles
+    });
+  }
+  releasePresets.push({
+    id: 'rel_0003_part1_campaign',
+    label: 'Full Part I Campaign + Hard Mode (rel_0003_part1_campaign)',
+    dependsOn: 'rel_0001',
+    notes: 'Full Part I Campaign (Chapters 1–7, 35 Normal + 35 Hard stages, World Map, 52 animated units)',
+    minClient: baseRel.compat.min_client,
+    files: Array.from(fullCampFiles.entries()).map(([rel, bytes]) => {
+      const sha = fullCampHashes.get(rel)!;
+      return {
+        path: rel,
+        sha256: sha,
+        bytes: bytes.byteLength,
+        mediaType: mediaType(rel),
+        url: mediaHashes.get(rel) === sha ? `/dev/media/${rel}` : `/dev/patches/full/${rel}`
+      };
+    })
+  });
+}
+mkdirSync(join(OUT, 'releases'), { recursive: true });
+writeFileSync(join(OUT, 'releases', 'presets.json'), JSON.stringify({ presets: releasePresets }, null, 1));
 const entriesDir = join(ROOT, 'content/approved_art/entries');
 const approvedEntries = existsSync(entriesDir)
   ? readdirSync(entriesDir)

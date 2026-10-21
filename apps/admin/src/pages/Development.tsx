@@ -212,7 +212,7 @@ function Overview({ p }: { p: Progress }): ReactNode {
         <thead><tr><th>ID</th><th>When / who</th><th>Decision</th></tr></thead>
         <tbody>{p.decisions.slice().reverse().map((d) => <tr key={d.id}><td>{d.id}</td><td>{d.when}</td><td>{d.what}</td></tr>)}</tbody>
       </table>
-      <h3>Recent commits (local Git on Drive; GitHub retired, D-24)</h3>
+      <h3>Recent commits (GitHub main → Cloudflare Workers Builds, D-28)</h3>
       <table>
         <tbody>{p.commits.map((c) => <tr key={c.sha}><td><code>{c.sha}</code></td><td>{c.at.slice(0, 16).replace('T', ' ')}</td><td>{c.subject}</td></tr>)}</tbody>
       </table>

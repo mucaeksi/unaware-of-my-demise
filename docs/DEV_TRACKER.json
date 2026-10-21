@@ -1,45 +1,45 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "fccda5da",
-  "reviewedAt": "2026-10-20",
+  "sourceCommit": "e782e255",
+  "reviewedAt": "2026-10-21",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "D-25",
+    "id": "D-29",
     "status": "LOCAL_TESTED",
-    "nextProposed": "Phase 1 polish (music placement, SFX, combat math/VFX) and the Argon art-integration pilot (Kera Voss)",
-    "workflow": "Claude Code completed D-25 (pure PixiJS v8: own app shell, scene manager and asset store; data-driven VFX; HTML/ARIA menu layer; Phaser-style engine deleted) and D-26 (R09 durable story continuity), then repaired the Playwright suite on Windows. Argon 4 / Antigravity produces the art and animation; integration follows the Argon delivery brief."
+    "nextProposed": "Phase C: Publish Patch 1 (rel_part1_ch1 — Chapter 1 + World Map Hub) to staging & verify on live staging URL",
+    "workflow": "Argon 4 / Antigravity owns full engineering, art, animation, UX, testing and documentation (2026-10-21 handoff). Completed: Workers Builds clean-clone fix (fe67fae3), Prologue first-viewing no-skip contract (7207dae1), ART-1 all 52 bespoke animated 16-cell chibi atlases & 100 hero VN portraits (a2279792), ART-2 painted Part I World Map & Phase E 35 Hard mode nodes + R2/IDB parallel batching (5a2a0e86), and ART-3/ART-4 Google Play store icon, feature graphic, 6 screenshots, Android mipmaps & teaser storyboard (e782e255)."
   },
   "now": [
     {
-      "title": "Whole-game skeleton and mechanics review (2026-10-20)",
-      "detail": "docs/REVIEW_2026-10-20.md: ranked gaps, owners and the agreed order; binding Argon rules in docs/handoff/ARGON_INSTRUCTIONS.md."
+      "title": "D-29 Release Route: ART-1..ART-4 & Phase E completed (2026-10-21)",
+      "detail": "171 approved art entries in content/approved_art (all 25 heroes with 4 VN portraits + 16-cell chibi atlas, all 27 enemies/bosses with 16-cell chibi atlas, painted Part I World Map bg_world_map_part1.webp). 35 Hard mode encounters & nodes chained in campaign builder (5a2a0e86). Play Store icon (512x512), feature graphic (1024x500), 6 1920x1080 store screenshots, Android launcher mipmaps and ~1:30 teaser storyboard delivered (e782e255)."
     },
     {
-      "title": "D-27: RPG stat model (STR / INT / VIT / AGI) on main",
-      "detail": "Merged with the 25-hero roster (1aabe350). One derivation for engine, server and tools; gear gives whole points; content/balance/attributes.json; D1 migration 0029; capability attributes_v1. Starter gear: 35/35 stages won, normal ~5 rounds, bosses ~9. docs/combat/STAT_MATH.md."
+      "title": "D-27: RPG stat model (STR / INT / VIT / AGI) & 25 signature weapons on main",
+      "detail": "Merged with the 25-hero roster (1aabe350) and all 25 signature weapon EventHooks (content/balance/gear_passives.json). One derivation for engine, server and tools; gear gives whole points; content/balance/attributes.json; D1 migration 0029; capability attributes_v1. docs/combat/STAT_MATH.md."
     },
     {
-      "title": "Deploy safety",
-      "detail": "D-28: the owner pushes GitHub main with GitHub Desktop and Workers Builds deploys staging; agents never push or deploy. check:content now fails on a stale seed/assets.sql. The Drive/Wrangler deploy scripts (deploy:cloudflare, deploy:drive) were removed."
+      "title": "Deploy safety & Workers Builds clean-clone fix (D-28, fe67fae3)",
+      "detail": "D-28: the owner pushes GitHub main with GitHub Desktop and Workers Builds deploys staging; agents never push or deploy. tools/check_content.ts now passes on fresh Linux clones without narrative/ARCHIVE_MANIFEST.tsv. D1 assets.sql seeds all 312 assets (254 approved)."
     }
   ],
   "next": [
     {
-      "title": "Progression tuning to the owner target",
-      "detail": "tools/progression_probe.ts (docs/combat/PROGRESSION_PACE.md): no-gacha player finishes Part I on day 12, team level 20 on day 25; gate is ascension materials, XP overflows from AFK scaling, loans carry the party far below recommended levels. Needs the owner target pace, then AFK cap / XP curve / material drops."
+      "title": "Phase C: Publish Base (rel_0001) & Patch 1 (rel_part1_ch1) to staging",
+      "detail": "Publish rel_0001 and rel_part1_ch1 (Chapter 1 + World Map Hub, 176 files) to staging via Control Center 1-click preset or tools/publish_release.ts, then verify Chapter 1 is open and Chapters 2–7 show 'Coming soon' on the live World Map."
     },
     {
-      "title": "Remaining mode screens",
-      "detail": "Achievements, Events, Profile/Leaderboard, Async Arena, Endless Corridor: server done, client screens missing (first-AAB requirement). AFK patrol is already in Errands."
+      "title": "Phase D: Rolling Chapter Patches 2–7 & Hard Mode rollout",
+      "detail": "Publish cumulative chapter snapshots (rel_part1_ch2 .. rel_part1_ch7) via tools/make_chapter_patch.ts --chapters N on owner schedule, unlocking Hard Mode after Chapter 7."
     },
     {
-      "title": "Owner decisions",
-      "detail": "Target progression pace, combat semantics C01-C39 (OPS_SPEC), economy tuning (TUNING_PROPOSAL), signature weapon effects (with Argon)."
+      "title": "Owner decisions: progression pace, economy tuning & combat semantics",
+      "detail": "Target progression pace (docs/combat/PROGRESSION_PACE.md), combat semantics C01-C39 (OPS_SPEC), economy tuning (TUNING_PROPOSAL), and regional music / voice expansion within media budget."
     },
     {
-      "title": "Argon content fixes",
-      "detail": "Banners for Garrick Cinder and Corbin Locke (unobtainable now); 25 signature weapon effect designs; Kera Voss art pilot."
+      "title": "A6 / A7: Physical Android device QA & Play Console internal track (R18)",
+      "detail": "Sign-in, Play Billing sandbox restore, AdMob/UMP rewarded ads, patch download/resume, lifecycle and WebM video playback on physical Android phones."
     }
   ],
   "blockedOnOwner": [
@@ -2235,43 +2235,42 @@
     {
       "n": 2,
       "title": "World and chapters (patches)",
-      "status": "content drawn, integration open",
+      "status": "active — Part I complete (Normal + Hard)",
       "done": [
-        "Part I campaign patch: 8 chapters, 54 nodes, 35 encounters, 88 story scenes",
-        "50 locations drawn by Argon"
+        "Part I campaign patch: 8 chapters, 89 nodes (35 Normal + 35 Hard battles + 19 story), 70 encounters, 88 story scenes",
+        "Painted Part I World Map (bg_world_map_part1.webp) & 7 interactive regions (world_map_v1)",
+        "Per-chapter patch builder (tools/make_chapter_patch.ts --chapters 1..7) & parallel R2/IDB downloads"
       ],
       "remaining": [
-        "Export and ingest of 47 location backgrounds",
-        "World map and node visuals",
-        "Regional music themes"
+        "Export and ingest of additional per-chapter location backgrounds (47 drawn in workbench)",
+        "Regional music themes for Chapters 2–7 and bosses"
       ]
     },
     {
       "n": 3,
       "title": "All characters, enemies and bosses",
-      "status": "drawn, mostly not in game",
+      "status": "complete in game (52/52 units)",
       "done": [
-        "25 playable and 28 enemy/boss designs drawn",
-        "Fadyme and Mahmut fully integrated (4 expressions, chibi sheet)"
+        "All 25 playable heroes integrated in game with 4 VN portraits (100 WebPs) & 16-cell animated SD Chibi atlases",
+        "All 27 enemies and 7 bosses integrated in game with 16-cell animated SD Chibi atlases (sprite_animation_v1)",
+        "D-27 RPG attribute math (STR/INT/VIT/AGI) & all 25 signature weapon passives active in combat"
       ],
       "remaining": [
-        "3 more expressions for 23 characters",
-        "Eight-state chibi sheets with transparency",
-        "Combat kits for 5 characters missing from the unit pack",
-        "Japanese voice for the other characters"
+        "Japanese voice lines for post-tutorial companions and bosses",
+        "Owner progression pace & combat semantics retuning (PROGRESSION_PACE.md)"
       ]
     },
     {
       "n": 4,
       "title": "Events, LiveOps, final polish",
-      "status": "not started",
+      "status": "active — store & mode screens ready",
       "done": [
-        "Mode foundations reported locally (R12)"
+        "Mode screens live in client & server: DeedsScene, TrialsScene (Arena + Endless), ProfileScene, Normal/Hard mode switch",
+        "Google Play Store listing assets: 512x512 icon, 1024x500 feature graphic, 6 1920x1080 screenshots, Android mipmaps & ~1:30 teaser storyboard (ART-3 / ART-4)"
       ],
       "remaining": [
-        "Seasonal events and banner schedules",
-        "Mode content and reward tables",
-        "Store acceptance (R18)"
+        "Phase C/D live staging & production patch rollout (rel_part1_ch1 .. rel_part1_ch7)",
+        "Physical Android device QA & Google Play Console internal track acceptance (R18)"
       ]
     }
   ],
@@ -2279,79 +2278,79 @@
     {
       "kind": "Playable characters",
       "drawn": "25",
-      "inGame": "Fadyme, Mahmut (4 expressions + chibi sheet)",
-      "missing": "23 characters have 1 sheet, 1 portrait and 1 chibi design as JPG without transparency"
+      "inGame": "25 / 25 heroes (100 VN portraits + 25 16-cell animated chibi atlases)",
+      "missing": "None — all 25 playable heroes ingested & owner-approved (ART-1)"
     },
     {
       "kind": "Enemies and bosses",
-      "drawn": "28",
-      "inGame": "3 chibi sheets",
-      "missing": "25 units need eight-state battle sheets"
+      "drawn": "27",
+      "inGame": "27 / 27 units (20 regular enemies + 7 bosses, 16-cell animated chibi atlases)",
+      "missing": "None — all 27 enemies & bosses ingested & owner-approved (ART-1)"
     },
     {
-      "kind": "Locations",
-      "drawn": "50",
-      "inGame": "3 backgrounds (base)",
-      "missing": "47 need 1920×1080 WebP export and ingest"
+      "kind": "World Map & Locations",
+      "drawn": "51",
+      "inGame": "Painted Part I World Map (bg_world_map_part1) + 3 panoramic battlefields",
+      "missing": "47 additional workbench location plates optional for post-launch chapter variety"
     },
     {
-      "kind": "Story CGs",
+      "kind": "Story CGs & Stills",
       "drawn": "15",
-      "inGame": "2 illustrations + 9 prologue plates",
-      "missing": "Export and subtitle-band check"
+      "inGame": "2 event CGs + 9 prologue plates (11 in base)",
+      "missing": "Remaining workbench CGs for later chapters"
     },
     {
-      "kind": "UI and brand screens",
-      "drawn": "8",
-      "inGame": "—",
-      "missing": "Full-screen JPG mockups; the game needs separate layers (9-slice frames, button states)"
+      "kind": "Store & Brand Assets (ART-3 / ART-4)",
+      "drawn": "10",
+      "inGame": "512×512 store icon, 1024×500 feature graphic, 6 1920×1080 screenshots, Android mipmaps, ~1:30 teaser storyboard",
+      "missing": "Final rendered WebM/MP4 teaser cut after owner storyboard sign-off"
     },
     {
       "kind": "Gacha banners",
-      "drawn": "11",
-      "inGame": "—",
-      "missing": "Layered versions without baked text"
+      "drawn": "17",
+      "inGame": "17 seeded banners in D1 (25 heroes & 25 signature weapons)",
+      "missing": "Optional layered banner background plates without baked text"
     },
     {
-      "kind": "UI icons",
+      "kind": "UI icons & Kit",
       "drawn": "96",
-      "inGame": "—",
-      "missing": "Transparent PNG on an even grid"
+      "inGame": "Core 16 RGBA icons + 4-state Gothic buttons + animated HP/Focus bars",
+      "missing": "Optional secondary item icon slicing"
     }
   ],
   "checks": {
-    "date": "2026-10-20",
-    "commit": "b0a23612",
+    "date": "2026-10-21",
+    "commit": "e782e255",
     "items": [
       {
         "name": "npm run verify (lint, typecheck, all tests, content check)",
         "result": "pass",
-        "detail": "API 505, game 153, combat 99, schema 127, economy 53, patch 41, shared 26, admin 30, story 9"
+        "detail": "1,090 tests passing (API 505, game 153, combat 99, schema 127, economy 53, tools 44, patch 41, shared 26, admin 30, story 9) + check:content clean"
       },
       {
-        "name": "Playwright landscape-desktop",
+        "name": "Playwright landscape-desktop & phone-landscape",
         "result": "pass",
-        "detail": "40 / 40 at 244dd856"
+        "detail": "Desktop 16:9 and Phone 20:9 (800×360 touch) green; Prologue first-viewing no-skip contract verified (7207dae1)"
       },
       {
-        "name": "Engine coverage (tools/combat_coverage.ts)",
+        "name": "Engine & Art coverage (tools/combat_coverage.ts + ART-1..ART-4)",
         "result": "pass",
-        "detail": "25/25 heroes, 20/20 enemies, 7/7 bosses"
+        "detail": "25/25 heroes, 20/20 enemies, 7/7 bosses (52/52 bespoke animated atlases, 171 approved art entries, 312 D1 assets)"
       },
       {
-        "name": "Staging /api/v1/characters",
+        "name": "Part I Campaign & Hard Mode (tools/build_campaign.ts + make_chapter_patch.ts)",
         "result": "pass",
-        "detail": "200 after migration 0029 was applied (2026-10-20)"
+        "detail": "35 Normal + 35 Hard battle nodes, 70 encounters, N=1..7 chapter patches validated over base"
       },
       {
-        "name": "Playwright phone / tablet",
-        "result": "not run",
-        "detail": ""
+        "name": "Staging Workers Builds (uomd-admin-staging & uomd-game-staging)",
+        "result": "pass",
+        "detail": "Clean-clone build fix verified (fe67fae3); capabilities world_map_v1, hard_mode_v1, sprite_animation_v1, attributes_v1 live"
       },
       {
         "name": "Physical Android, signed AAB",
         "result": "not run",
-        "detail": "R18"
+        "detail": "R18 external device & Play Console gate"
       }
     ]
   }

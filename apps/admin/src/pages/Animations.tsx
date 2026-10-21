@@ -748,7 +748,7 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
             className={`btn${activeTab === 'atlas_inspector' ? ' primary' : ''}`}
             onClick={() => setActiveTab('atlas_inspector')}
           >
-            🎨 3. Canlı Atlas &amp; Portre Denetçisi (ART-1)
+            🎨 3. Canlı Atlas, Portre &amp; Dünya Haritası (ART-1 / ART-2)
           </button>
           <button
             type="button"
@@ -1777,6 +1777,17 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
 
             return (
               <div>
+                <div className="card bg-cathedral" style={{ marginBottom: 14, padding: 12 }}>
+                  <div className="row" style={{ justifyContent: 'space-between', marginTop: 0, marginBottom: 8 }}>
+                    <strong>ART-2 · Part I Dünya Haritası (The Bell Road — <code>art/bg_world_map_part1.webp</code>, 1920×1080)</strong>
+                    <span className="badge ok">7 Bölge (Ch.1–7) · world_map_v1</span>
+                  </div>
+                  <img
+                    src="/dev/media/art/bg_world_map_part1.webp"
+                    alt="Part I World Map — The Bell Road"
+                    style={{ width: '100%', maxHeight: 240, objectFit: 'cover', borderRadius: 8, border: '1px solid #382a4a' }}
+                  />
+                </div>
                 <div className="row" style={{ gap: 8, flexWrap: 'wrap', marginTop: 0, marginBottom: 12 }}>
                   <strong>Ingest Edilmiş Birimler ({bespokeUnits.length}):</strong>
                   {bespokeUnits.map(([id, u]) => (

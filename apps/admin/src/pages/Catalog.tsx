@@ -273,9 +273,12 @@ const CONTENT_FILES: { path: string; label: string; group: string }[] = [
   { path: 'encounters/tutorial_t2.json', label: 'Encounter · Tutorial T-2 (Stone Crossing)', group: 'Combat & Encounters' },
   { path: 'encounters/tutorial_t3.json', label: 'Encounter · Tutorial T-3 (Shelter Courtyard)', group: 'Combat & Encounters' },
   { path: 'entry/entry_index.json', label: 'Entry Sequence Graph (entry_index.json)', group: 'Progression & Audio' },
-  { path: 'chapters/chapter_index.json', label: 'Chapters & Stage Graph (chapter_index.json)', group: 'Progression & Audio' },
+  { path: 'world/world_map.json', label: 'Part I World Map · The Bell Road (world_map.json)', group: 'Progression & Audio' },
+  { path: 'chapters/chapter_index.json', label: 'Base Tutorial Stage Graph (chapter_index.json)', group: 'Progression & Audio' },
+  { path: 'chapters/campaign_chapter_index.json', label: 'Part I Campaign Graph · 35 Normal + 35 Hard (campaign_chapter_index.json)', group: 'Progression & Audio' },
   { path: 'presentation/presentation.json', label: 'Audio, Voiceovers & Cues (presentation.json)', group: 'Progression & Audio' },
-  { path: 'art/art_manifest.json', label: 'Art & Music Manifest (art_manifest.json)', group: 'Progression & Audio' }
+  { path: 'art/art_manifest.json', label: 'Base Art & Music Manifest (art_manifest.json)', group: 'Progression & Audio' },
+  { path: 'art/campaign_art_manifest.json', label: 'Full Campaign Art Manifest · 52 Units (campaign_art_manifest.json)', group: 'Progression & Audio' }
 ];
 
 function GameContentStudio({ me, say }: { me: Me; say: (m: string) => void }): ReactNode {
@@ -544,9 +547,53 @@ function VisualContentSummary({ path, data }: { path: string; data: unknown }): 
     );
   }
 
+  // World Map (world_map.json)
+  if (Array.isArray(obj.regions)) {
+    const regions = obj.regions as {
+      region_id: string;
+      chapter_id: string;
+      order: number;
+      title_en: string;
+      subtitle_en: string;
+      bell_en: string;
+      x: number;
+      y: number;
+      accent: string;
+    }[];
+    const bgId = typeof obj.background_id === 'string' ? obj.background_id : null;
+    return (
+      <div>
+        <p className="mono">
+          World Map: <strong>{String(obj.title_en ?? '')}</strong> — {String(obj.subtitle_en ?? '')} · Background: <code>{bgId ?? 'procedural'}</code>
+        </p>
+        {bgId ? (
+          <img
+            src={`/dev/media/art/${bgId}.webp`}
+            alt={String(obj.title_en ?? 'World Map')}
+            style={{ width: '100%', maxHeight: 280, objectFit: 'cover', borderRadius: 8, marginBottom: 12, border: '1px solid #352b44' }}
+          />
+        ) : null}
+        <table>
+          <thead><tr><th>#</th><th>Region / Chapter</th><th>Title &amp; Subtitle</th><th>Sanctuary Bell</th><th>Coords (1920×1080)</th></tr></thead>
+          <tbody>
+            {regions.map((r) => (
+              <tr key={r.region_id}>
+                <td>{r.order}</td>
+                <td><code>{r.region_id}</code> · <code>{r.chapter_id}</code></td>
+                <td><strong>{r.title_en}</strong><div className="muted">{r.subtitle_en}</div></td>
+                <td>{r.bell_en}</td>
+                <td className="mono">({r.x}, {r.y}) · <span style={{ color: r.accent }}>{r.accent}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
   // Chapters
   if (Array.isArray(obj.chapters)) {
-    const chapters = obj.chapters as { chapter_id: string; title_en: string; nodes: { node_id: string; kind: string; title_en: string; encounter?: string; requires?: string }[] }[];
+    const chapters = obj.chapters as { chapter_id: string; title_en: string; nodes: { node_id: string; kind: string; difficulty?: string; title_en: string; encounter?: string; requires?: string }[] }[];
     return (
       <div>
         {chapters.map((ch) => (
@@ -555,7 +602,18 @@ function VisualContentSummary({ path, data }: { path: string; data: unknown }): 
             <table>
               <thead><tr><th>Node ID</th><th>Kind</th><th>Title</th><th>Encounter</th><th>Requires</th></tr></thead>
               <tbody>
-                {ch.nodes.map((n) => <tr key={n.node_id}><td><code>{n.node_id}</code></td><td><span className="badge info">{n.kind}</span></td><td>{n.title_en}</td><td><code>{n.encounter ?? '—'}</code></td><td><code>{n.requires ?? '—'}</code></td></tr>)}
+                {ch.nodes.map((n) => (
+                  <tr key={n.node_id}>
+                    <td><code>{n.node_id}</code></td>
+                    <td>
+                      <span className="badge info">{n.kind}</span>
+                      {n.difficulty === 'hard' ? <span className="badge warn" style={{ marginLeft: 4 }}>hard</span> : null}
+                    </td>
+                    <td>{n.title_en}</td>
+                    <td><code>{n.encounter ?? '—'}</code></td>
+                    <td><code>{n.requires ?? '—'}</code></td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

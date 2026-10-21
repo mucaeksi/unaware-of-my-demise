@@ -1,15 +1,20 @@
 # Argon 4 / Antigravity Continuation & Master Execution Plan
 
-Updated **2026-10-20**. [README](../README.md) is the complete execution brief and master prompt; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status.
+Updated **2026-10-21**. [README](../README.md) is the complete execution brief and master prompt; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status.
 
-## Status 2026-10-20
+## Status 2026-10-21
 
-- **Done since 2026-10-19:** D-27 RPG attribute stats (STR / INT / VIT / AGI, [STAT_MATH](combat/STAT_MATH.md)) on `main` (`1aabe350`) with Argon's 25-hero roster; stale-base guard fix; e2e follow the Animations-first Control Center (Playwright landscape-desktop 40/40 at `244dd856`); `deploy:drive` goes through the verify-gated deploy (`b0a23612`) and wrangler runs non-interactively (`fccda5da`). `npm run verify` PASS at `b0a23612`.
+- **Done since 2026-10-20:**
+  - **Workers Builds clean-clone fix (`fe67fae3`)**: `tools/check_content.ts` no longer fails on fresh Linux clones without `narrative/ARCHIVE_MANIFEST.tsv`.
+  - **Prologue first-viewing no-skip contract (`7207dae1`)**: SKIP button hidden on first viewing (`!account.storyProgress.prologueDone`) per entry contract; all 5 long desktop E2E scenarios (`zzz-entry-flow.spec.ts`) and phone-landscape E2E pass.
+  - **ART-1 complete (`a2279792`)**: All 25 playable heroes (100 VN portraits + 25 16-cell animated chibi atlases) and all 27 enemies & bosses (27 16-cell animated chibi atlases) ingested and owner-approved (`171` approved art entries in `content/approved_art`, `312` seeded assets in `apps/api/seed/assets.sql`).
+  - **ART-2 & Phase E (`5a2a0e86`)**: Painted Part I World Map (`bg_world_map_part1.webp`) ingested and wired into `world/world_map.json`; 35 Hard mode battle nodes (`ch01_s01_battle_hard`..`ch07_s05_boss_hard`) and 35 Hard encounters built in `tools/build_campaign.ts` (`hard_mode_v1`); parallel R2/IDB batch downloads in `PatchManager` and `IdbStorage`.
+  - **ART-3 & ART-4 (`e782e255`)**: Google Play store icon (`512x512`), Android launcher mipmaps (`mdpi`..`xxxhdpi`), feature graphic (`1024x500`), 6 `1920x1080` store screenshots (`docs/store/assets/`), and 90-second spoiler-free teaser storyboard (`docs/store/TEASER_STORYBOARD_90S.md`).
 - **Workspace:** the repository is `F:\unaware-of-my-demise` (owner, 2026-10-20); the owner pushes GitHub `main` with GitHub Desktop. `E:\unaware-of-my-demise`, the `C:\Users\PC\uomd-*` worktrees and the Drive copy are retired (do not edit or commit there).
-- **Staging (2026-10-20):** healthy: migration 0029 applied and `/api/v1/characters` returns 200. It serves `claude/afk-modes` `6a327c19` (tag `gdrive-6a327c19-dirty`, a fallback deploy of a branch from before D-28). From D-28 on, staging changes only through the owner's push to GitHub `main` (Workers Builds). `origin/main` is 37+ commits behind local `main` until that push.
-- **Release plan (D-29):** [RELEASE_ROADMAP](RELEASE_ROADMAP.md) — first AAB carries all code (world map hub, Hard mode switch, video), patch 1 = Chapter 1 + the hub, patches 2–7 = one chapter each, then Hard mode; store listing with a ~1:30 teaser.
-- **Open, ranked:** [REVIEW_2026-10-20 §7](REVIEW_2026-10-20.md) (afternoon re-review). Push `ae005921`: the journal fix unblocks daily supplies, sweep, AFK, memory shards and the new mode screens (the banner-count fix that had stopped three staging game builds went out with `4f55de1d`). Owner decisions: target pace, economy numbers, combat semantics, the 25 signature weapon effects ([SIGNATURE_WEAPONS_SPEC](combat/SIGNATURE_WEAPONS_SPEC.md)). Claude: signature effects into data after approval, builder waves, paged screens. Argon: ART-1 (own art and frame animation for heroes, bosses and frequent enemies; 23/25 heroes and all 7 bosses still borrow sheets). Phone/tablet e2e and devices not run.
-- **Argon:** binding working rules in [handoff/ARGON_INSTRUCTIONS](handoff/ARGON_INSTRUCTIONS.md); asset layout continues in parallel.
+- **Staging (2026-10-21):** healthy: migration 0029 applied, `/api/v1/health` reports `world_map_v1`, `hard_mode_v1`, `sprite_animation_v1`, `attributes_v1`. Control Center (`uomd-admin-staging`) includes 1-click D-29 release presets (`rel_0001`, `rel_part1_ch1`, `rel_0003_part1_campaign`) and full 52-unit / World Map inspector.
+- **Release plan (D-29):** [RELEASE_ROADMAP](RELEASE_ROADMAP.md) — first AAB carries all code (world map hub, Hard mode switch, video), patch 1 = Chapter 1 + the hub (`rel_part1_ch1`), patches 2–7 = one chapter each, then Hard mode; store listing with a ~1:30 teaser.
+- **Open, ranked:** Phase C live publication of `rel_0001` + `rel_part1_ch1` on staging; owner decisions on target progression pace, economy numbers, combat semantics (`PROGRESSION_PACE.md`); Chapters 2–7 and boss music within media budget; physical Android device QA & Play Console internal track (`R18`).
+- **Argon:** binding working rules in [handoff/ARGON_INSTRUCTIONS](handoff/ARGON_INSTRUCTIONS.md).
 
 ## Master 4-Phase Execution Order (Owner Direction — 2026-10-17)
 

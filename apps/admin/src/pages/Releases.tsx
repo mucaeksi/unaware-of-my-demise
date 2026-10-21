@@ -22,7 +22,25 @@ interface StagedFile {
   uploaded: boolean;
 }
 
+interface PresetFileEntry {
+  path: string;
+  sha256: string;
+  bytes: number;
+  mediaType: string;
+  url: string;
+}
+
+interface ReleasePreset {
+  id: string;
+  label: string;
+  dependsOn?: string;
+  notes: string;
+  minClient: string;
+  files: PresetFileEntry[];
+}
+
 export function Releases({ me, say }: { me: Me; say: (m: string) => void }): ReactNode {
+  const defaultChannel = typeof window !== 'undefined' && window.location.hostname.includes('staging') ? 'staging' : 'dev';
   const [rows, setRows] = useState<Release[] | null>(null);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [channelFilter, setChannelFilter] = useState('');
@@ -32,8 +50,20 @@ export function Releases({ me, say }: { me: Me; say: (m: string) => void }): Rea
   const [econ, setEcon] = useState<EconomicPolicyInfo | null>(null);
   const [showComposer, setShowComposer] = useState(false);
   const [staged, setStaged] = useState<StagedFile[]>([]);
+  const [presets, setPresets] = useState<ReleasePreset[]>([]);
+  const [presetChannel, setPresetChannel] = useState<string>(defaultChannel);
+  const [presetProgress, setPresetProgress] = useState<string | null>(null);
   const [err, setErr] = useState<unknown>(null);
   const [busy, setBusy] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('/dev/releases/presets.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : { presets: [] }))
+      .then((d: { presets?: ReleasePreset[] }) => setPresets(d.presets ?? []))
+      .catch(() => {
+        /* ignore if dev presets not built */
+      });
+  }, []);
 
   const buildQuery = useCallback((cursor?: string | null): string => {
     const params = new URLSearchParams();
@@ -214,6 +244,83 @@ export function Releases({ me, say }: { me: Me; say: (m: string) => void }): Rea
     }
   };
 
+  const runPresetStep = async (preset: ReleasePreset, channel: string): Promise<void> => {
+    let done = 0;
+    const total = preset.files.length;
+    setPresetProgress(`Uploading ${preset.id} objects to R2 (0 / ${total})…`);
+    for (let i = 0; i < total; i += 8) {
+      await Promise.all(
+        preset.files.slice(i, i + 8).map(async (f) => {
+          const r = await fetch(f.url, { cache: 'no-cache' });
+          if (!r.ok) throw new Error(`Failed to read bundled ${f.path} (${r.status})`);
+          const buf = await r.arrayBuffer();
+          const up = await fetch(`/admin/api/objects/${f.sha256}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': f.mediaType },
+            body: buf,
+            credentials: 'same-origin'
+          });
+          if (!up.ok) {
+            const b = (await up.json().catch(() => ({}))) as { error?: string; message?: string };
+            throw new ApiError(up.status, b.error ?? 'upload_failed', `${f.path}: ${b.message ?? up.status}`);
+          }
+          done++;
+          setPresetProgress(`Uploading ${preset.id} objects to R2 (${done} / ${total})…`);
+        })
+      );
+    }
+    const existing = rows?.find((r) => r.id === preset.id && r.channel === channel);
+    if (!existing) {
+      setPresetProgress(`Creating draft ${preset.id} on ${channel}…`);
+      await api('/releases', {
+        method: 'POST',
+        body: JSON.stringify({
+          id: preset.id,
+          channel,
+          ...(preset.dependsOn ? { dependsOn: preset.dependsOn } : {}),
+          minClient: preset.minClient,
+          rolloutPercent: 100,
+          notes: preset.notes,
+          files: preset.files.map((f) => ({ path: f.path, sha256: f.sha256 }))
+        })
+      });
+    }
+    if (existing?.state === 'published') {
+      if (!existing.is_current) {
+        setPresetProgress(`Activating ${preset.id} on ${channel}…`);
+        await api(`/channels/${channel}/rollback`, { method: 'POST', body: JSON.stringify({ releaseId: preset.id }) });
+      }
+    } else {
+      setPresetProgress(`Signing & publishing ${preset.id} on ${channel}…`);
+      await api(`/releases/${preset.id}/publish`, { method: 'POST', body: '{}' });
+    }
+  };
+
+  const publishPreset = async (presetId: string): Promise<void> => {
+    const preset = presets.find((p) => p.id === presetId);
+    if (!preset) return;
+    if (!window.confirm(`Publish ${preset.label} on channel "${presetChannel}"?\nThis uploads ${preset.files.length} files to R2, signs the manifest (ES256), and sets the active channel pointer.`)) return;
+    setBusy(`preset:${presetId}`);
+    try {
+      if (preset.dependsOn) {
+        const baseExists = rows?.some((r) => r.id === preset.dependsOn && r.channel === presetChannel && r.state === 'published');
+        if (!baseExists) {
+          const basePreset = presets.find((p) => p.id === preset.dependsOn);
+          if (basePreset) await runPresetStep(basePreset, presetChannel);
+        }
+      }
+      await runPresetStep(preset, presetChannel);
+      say(`Published ${preset.id} on ${presetChannel}`);
+      load();
+      inspect(preset.id);
+    } catch (x) {
+      say(`Preset ${preset.id} failed: ${x instanceof ApiError ? `${x.code}: ${x.message}` : (x as Error).message}`);
+    } finally {
+      setBusy(null);
+      setPresetProgress(null);
+    }
+  };
+
   if (err) return <ErrorNotice error={err} />;
   if (!rows) return <p>Loading releases…</p>;
   const canWrite = me.role !== 'viewer';
@@ -228,6 +335,45 @@ export function Releases({ me, say }: { me: Me; say: (m: string) => void }): Rea
       <div className="notice">
         Releases contain data and media only (JSON, WebP/PNG, OGG…). Executable code is rejected by the schema. Draft composition copies the complete file set from a published release on the same channel; the resulting snapshot has no runtime dependency. New snapshots require client 0.1.1 or later. Rollback preserves or tightens compatibility; kill retains the source limits. Publishing signs the manifest (ES256) and atomically moves the channel pointer; rollback and kill switch publish a <em>new, higher</em> generation so devices only ever move forward.
       </div>
+      {canWrite && presets.length > 0 ? (
+        <section className="card" aria-label="D-29 Release Pipeline Presets" style={{ marginBottom: 12 }}>
+          <div className="row" style={{ justifyContent: 'space-between', flexWrap: 'wrap', marginTop: 0 }}>
+            <div>
+              <h3 style={{ margin: 0 }}>D-29 Release Pipeline — 1-Click Publish Presets</h3>
+              <p className="muted" style={{ margin: '4px 0 0' }}>
+                Uploads bundled content objects directly to R2, validates against the active game Worker capabilities, signs the ES256 manifest, and updates the channel pointer. If <code>rel_0001</code> is not yet published on the target channel, publishing a chapter patch automatically publishes <code>rel_0001</code> first.
+              </p>
+            </div>
+            <label>
+              Target channel{' '}
+              <select value={presetChannel} onChange={(e) => setPresetChannel(e.target.value)} disabled={busy !== null}>
+                <option value="staging">staging</option>
+                <option value="dev">dev</option>
+                {me.role === 'owner' ? <option value="production">production</option> : null}
+              </select>
+            </label>
+          </div>
+          {presetProgress ? <div className="notice" style={{ marginTop: 8 }}>{presetProgress}</div> : null}
+          <div className="row" style={{ flexWrap: 'wrap', gap: 8, marginTop: 10 }}>
+            {presets.map((p) => {
+              const isCurrent = rows.some((r) => r.id === p.id && r.channel === presetChannel && r.is_current);
+              const isPrimary = p.id === 'rel_part1_ch1' || p.id === 'rel_0001';
+              return (
+                <button
+                  key={p.id}
+                  type="button"
+                  className={`btn${isPrimary ? ' primary' : ''}`}
+                  disabled={busy !== null}
+                  onClick={() => void publishPreset(p.id)}
+                >
+                  {isCurrent ? '✓ ' : '🚀 '}
+                  {p.label} ({p.files.length} files)
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
       {showComposer && canWrite ? (
         <section className="card" aria-label="Release composer">
           <h3>Release composer (upload → validate → draft → preview → publish)</h3>
