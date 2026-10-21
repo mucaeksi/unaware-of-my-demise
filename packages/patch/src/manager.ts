@@ -211,10 +211,15 @@ export class PatchManager {
     // 1. what is missing locally? (base-identical files and already-stored objects are free)
     const missing: ManifestFile[] = []; const seen = new Set<string>();
     const verifiedObjects = new Map<string, Uint8Array>();
+    const storedKeys = new Set(await this.storage.listObjects().catch(() => [] as string[]));
     for (const f of m.files) {
       checkAbort(opts.signal);
       if (this.base.files[f.path] === f.sha256 || seen.has(f.sha256)) continue;
       seen.add(f.sha256);
+      if (!storedKeys.has(f.sha256)) {
+        missing.push(f);
+        continue;
+      }
       const stored = await this.storage.getObject(f.sha256);
       if (!stored || stored.byteLength !== f.bytes || await sha256Hex(stored) !== f.sha256) {
         if (stored) { await this.storage.deleteObject(f.sha256); throw new Reject('hash_mismatch', `stored object for ${f.path} is damaged; retry to download a clean copy`); }
@@ -248,16 +253,50 @@ export class PatchManager {
 
     // 2. download + verify each object; completed objects survive an interruption (resume)
     let downloaded = 0;
+    let filesDone = 0;
+    let highWaterBytes = 0;
+    const inFlight = new Map<string, number>();
+    const reportProgress = (): void => {
+      const current = downloaded + [...inFlight.values()].reduce((a, b) => a + b, 0);
+      highWaterBytes = Math.max(highWaterBytes, Math.min(addBytes, current));
+      emit('downloading', { filesDone, filesTotal: missing.length, bytesDone: highWaterBytes, bytesTotal: addBytes });
+    };
     emit('downloading', { filesTotal: missing.length, bytesTotal: addBytes });
-    for (const [i, f] of missing.entries()) {
-      const bytes = await this.download(f, owner, opts.signal, (received) => emit('downloading', { filesDone: i, filesTotal: missing.length, bytesDone: downloaded + received, bytesTotal: addBytes }));
-      checkAbort(opts.signal);
-      await this.storage.putObject(f.sha256, bytes, owner);
-      this.checkObject(f, bytes);
-      verifiedObjects.set(f.sha256, f.path.endsWith('.json') ? bytes : new Uint8Array(0));
-      downloaded += bytes.byteLength;
-      emit('downloading', { filesDone: i + 1, filesTotal: missing.length, bytesDone: downloaded, bytesTotal: addBytes });
-    }
+    let nextIdx = 0;
+    let stopped = false;
+    const concurrency = Math.min(6, missing.length || 1);
+    await Promise.all(
+      Array.from({ length: concurrency }, async () => {
+        while (!stopped && nextIdx < missing.length) {
+          const f = missing[nextIdx++]!;
+          try {
+            checkAbort(opts.signal);
+            const bytes = await this.download(
+              f,
+              owner,
+              opts.signal,
+              (received) => {
+                inFlight.set(f.sha256, received);
+                reportProgress();
+              },
+              storedKeys.has(`partial:${f.sha256}`)
+            );
+            checkAbort(opts.signal);
+            await this.storage.putObject(f.sha256, bytes, owner);
+            this.checkObject(f, bytes);
+            verifiedObjects.set(f.sha256, f.path.endsWith('.json') ? bytes : new Uint8Array(0));
+            inFlight.delete(f.sha256);
+            downloaded += bytes.byteLength;
+            filesDone++;
+            highWaterBytes = Math.max(highWaterBytes, downloaded);
+            reportProgress();
+          } catch (err) {
+            stopped = true;
+            throw err;
+          }
+        }
+      })
+    );
 
     // 3. semantic validation of the complete file set, as it would be activated
     emit('verifying', { filesDone: missing.length, filesTotal: missing.length, bytesDone: downloaded, bytesTotal: addBytes });
@@ -376,16 +415,17 @@ export class PatchManager {
     catch (error) { throw new Reject('validation_failed', error instanceof Error ? error.message : 'media exceeds the supported resource contract'); }
   }
 
-  private async download(f: ManifestFile, owner: string, signal: AbortSignal | undefined, onBytes?: (received: number) => void): Promise<Uint8Array> {
+  private async download(f: ManifestFile, owner: string, signal: AbortSignal | undefined, onBytes?: (received: number) => void, hasPartial = true): Promise<Uint8Array> {
     const attempts = this.env.maxAttempts ?? 3;
     const sleep = this.env.sleep ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
     let last = 'unknown';
+    let checkPartial = hasPartial;
     for (let i = 1; i <= attempts; i++) {
       try {
         checkAbort(signal);
-        const saved = await this.storage.getObject(`partial:${f.sha256}`);
+        const saved = checkPartial ? await this.storage.getObject(`partial:${f.sha256}`) : null;
         const partial = saved && saved.byteLength < f.bytes ? saved : undefined;
-        const bytes = await interrupted(this.remote.fetchObject(f.sha256, f, onBytes, { signal, partial, onPartial: async (prefix) => { checkAbort(signal); await this.storage.putObject(`partial:${f.sha256}`, prefix, owner); } }), signal);
+        const bytes = await interrupted(this.remote.fetchObject(f.sha256, f, onBytes, { signal, partial, onPartial: async (prefix) => { checkAbort(signal); checkPartial = true; await this.storage.putObject(`partial:${f.sha256}`, prefix, owner); } }), signal);
         checkAbort(signal);
         if (bytes.byteLength !== f.bytes) {
           last = `size ${bytes.byteLength} != ${f.bytes}`;

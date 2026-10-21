@@ -3,6 +3,7 @@ import type { WorldMap } from '@uomd/content-schema';
 import { REF_W } from '../config';
 import { Progress, Services } from '../services';
 import { HubScreen } from '../ui/hubScreen';
+import { backdrop } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
 import { regionStates, type RegionState } from '../ui/worldMap';
 import { createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } from '../vfx/gothicUiVfx';
@@ -21,6 +22,7 @@ export class HomeScene extends HubScreen {
   protected override readonly backTo = 'Title';
   private vfxMounted = false;
   private roads: PIXI.Graphics | null = null;
+  private mapBg: PIXI.Sprite | null = null;
 
   protected async build(): Promise<void> {
     if (!this.vfxMounted) {
@@ -105,6 +107,10 @@ export class HomeScene extends HubScreen {
     if (!this.isCurrentView()) return;
     const states = regionStates(map, index, cleared);
     const at = new Map(map.regions.map((r) => [r.region_id, r]));
+
+    this.mapBg?.destroy();
+    this.mapBg = map.background_id ? await backdrop(this, map.background_id, -9) : null;
+    if (!this.isCurrentView()) return;
 
     this.roads?.destroy();
     const g = new PIXI.Graphics();

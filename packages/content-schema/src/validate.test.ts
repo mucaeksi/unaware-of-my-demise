@@ -59,7 +59,7 @@ describe('validateContentSet', () => {
     expect(validateContentSet(load(join(ROOT, 'base')))).toMatchObject({ nodes: 3, units: 4 });
   });
   it('accepts base + the Part I campaign (35 stages, the full cast, placeholder art) as one effective set', () => {
-    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 54, units: 52 }); // 25 heroes, 20 enemies, 7 bosses
+    expect(validateContentSet(campaign())).toMatchObject({ chapters: 8, nodes: 89, units: 52 }); // 25 heroes, 20 enemies, 7 bosses; 3 tutorial + 51 normal + 35 hard nodes
   });
   it.each(['duplicate item', 'duplicate choice', 'unknown hero', 'wrong rarity', 'battle gate', 'story gate', 'source hash'] as const)('rejects recruit selector %s', (kind) => {
     const files = campaign();
@@ -134,7 +134,7 @@ describe('validateContentSet', () => {
   it('accepts acyclic cross-chapter prerequisites regardless of chapter order', () => {
     const files = campaign();
     edit<ChapterIndex>(files, 'chapters/chapter_index.json', (index) => { delete index.story_coverage; index.chapters.reverse(); });
-    expect(validateContentSet(files)).toMatchObject({ chapters: 8, nodes: 54 });
+    expect(validateContentSet(files)).toMatchObject({ chapters: 8, nodes: 89 });
   });
   it.each(['party slot', 'enemy slot', 'hero', 'guest'] as const)('rejects repeated %s declarations without changing valid enemy copies', (kind) => {
     const files = campaign();
@@ -166,7 +166,7 @@ describe('validateContentSet', () => {
     expect(tutorial.enemies.filter((member) => member.unit_id === 'bellbound_dead')).toHaveLength(2);
     const finalApproach = JSON.parse(new TextDecoder().decode(files.get('encounters/stage_7_4.json'))) as Encounter;
     expect(finalApproach.guests).toHaveLength(6);
-    expect(validateContentSet(files)).toMatchObject({ nodes: 54 });
+    expect(validateContentSet(files)).toMatchObject({ nodes: 89 });
   });
   it.each(['intent', 'signature', 'unit immunity', 'boss preservation', 'status immunity'] as const)('rejects an undefined %s reference', (kind) => {
     const files = campaign();

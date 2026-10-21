@@ -12,7 +12,7 @@ test('one unchanged browser binary installs a signed synthetic season and uses i
   try {
     const fixture = await publishFixture(request, releaseId);
     const manifest = await (await request.get(`${GAME}/api/v1/content/channels/dev/manifest`)).json();
-    expect(manifest.compat).toMatchObject({ min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'locale_v1', 'presentation_v1', 'sprite_animation_v1', 'story_flags_v1', 'vfx_v1', 'world_map_v1'] });
+    expect(manifest.compat).toMatchObject({ min_client: '0.1.2', required_capabilities: ['attributes_v1', 'catalog_v1', 'hard_mode_v1', 'locale_v1', 'presentation_v1', 'sprite_animation_v1', 'story_flags_v1', 'vfx_v1', 'world_map_v1'] });
     // Same page/assets/binary throughout installation. No app rebuild, SQL publication or client response stubs.
     expect(await page.evaluate(async () => (window as any).__UOMD__.services.content.checkForUpdates({ activate: false }))).toMatchObject({ status: 'staged', releaseId });
     await page.reload(); await waitScene(page, 'Title');

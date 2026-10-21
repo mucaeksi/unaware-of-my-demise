@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "background_id": "world_map_part1",
   "regions": [
     {
       "region_id": "forest_whispering_ash",

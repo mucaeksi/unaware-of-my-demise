@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_5_4_hard",
+  "stage_id": "5-4H",
+  "title_en": "The White Strand (Hard)",
+  "location_id": "bridge_forsaken",
+  "seed": 3279521864,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "bridge_revenant",
+      "level": 19,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "bridge_revenant",
+      "level": 19,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "corrupted_crown_guard",
+      "level": 19,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "corrupted_crown_guard",
+      "level": 19,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#5-4"
+  }
+}

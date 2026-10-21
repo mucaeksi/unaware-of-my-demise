@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_6_5_hard",
+  "stage_id": "6-5H",
+  "title_en": "The Ashen Lord's Wraith (Hard)",
+  "location_id": "estate_ashen_lord",
+  "seed": 1294064578,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "boss_ashen_lord_wraith",
+      "level": 20,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 20,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 20,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.35,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#6-5"
+  }
+}

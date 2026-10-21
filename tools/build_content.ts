@@ -366,8 +366,15 @@ async function main(): Promise<void> {
       provenance.push({ output: `${outDir}/${rel}`, sha256: sha256(p.bytes), sources: { [srcId(src)]: p.hash } });
       backgrounds[loc] = rel;
     }
+    const baseLocations = new Set([
+      ...Object.keys(BG_FILES),
+      ...scenesUsed.flatMap((s) => [s.location_id, ...s.commands.flatMap((c) => (c.op === 'background' ? [c.location_id] : []))]),
+      enc1.location_id,
+      enc2.location_id,
+      enc3.location_id
+    ]);
     for (const [loc, appBg] of approvedBackgrounds) {
-      if (!backgrounds[loc] && appBg.targets.backgrounds?.[loc]) {
+      if (baseLocations.has(loc) && !backgrounds[loc] && appBg.targets.backgrounds?.[loc]) {
         copyApprovedEntryOutputs(appBg, outDir);
         backgrounds[loc] = appBg.targets.backgrounds[loc]!;
       }

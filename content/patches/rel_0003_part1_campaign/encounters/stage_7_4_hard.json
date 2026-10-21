@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_7_4_hard",
+  "stage_id": "7-4H",
+  "title_en": "Before the Last Toll (Hard)",
+  "location_id": "altar_first_eclipse",
+  "seed": 837589331,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "crownless_knight",
+      "level": 20,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "crownless_knight",
+      "level": 20,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "eclipse_sentinel",
+      "level": 20,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "eclipse_sentinel",
+      "level": 20,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#7-4"
+  }
+}

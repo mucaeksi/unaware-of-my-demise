@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_1_5_hard",
+  "stage_id": "1-5H",
+  "title_en": "The Ash-Maw (Hard)",
+  "location_id": "forest_whispering_ash",
+  "seed": 2334457691,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "boss_ash_maw",
+      "level": 15,
+      "slot": 0,
+      "row": "front"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.35,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#1-5"
+  }
+}

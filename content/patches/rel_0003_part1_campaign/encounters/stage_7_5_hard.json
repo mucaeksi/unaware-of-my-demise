@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_7_5_hard",
+  "stage_id": "7-5H",
+  "title_en": "The Eclipse Construct (Hard)",
+  "location_id": "altar_first_eclipse",
+  "seed": 1218341868,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "boss_eclipse_construct",
+      "level": 20,
+      "slot": 0,
+      "row": "front"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.35,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#7-5"
+  }
+}

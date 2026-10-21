@@ -30,6 +30,7 @@ const SIDE_ROADS = [
 
 const map = WorldMap.parse({
   schema_version: 1,
+  background_id: 'world_map_part1',
   regions: [
     ...CHAPTERS.map(([region_id, chapter_id, title_en, x, y], i) => ({ region_id, chapter_id, chapter_number: i + 1, title_en, part: 1, x, y })),
     ...SIDE_ROADS.map(([region_id, title_en, x, y]) => ({ region_id, title_en, part: 1, x, y }))

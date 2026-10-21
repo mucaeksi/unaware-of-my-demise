@@ -1,6 +1,6 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
-import { validateContentSet, type ChapterIndex } from '@uomd/content-schema';
+import { validateContentSet, type ChapterIndex, type Encounter } from '@uomd/content-schema';
 import { describe, expect, it } from 'vitest';
 import { CHAPTER_INDEX_PATH, chapterPatch } from './chapter-patch';
 import { ROOT } from './fsutil';
@@ -37,5 +37,25 @@ describe('per-chapter campaign patches (D-29 A3)', () => {
   }
   it('the last chapter patch is the whole campaign', () => {
     expect([...chapterPatch(campaign, chapterCount).keys()].sort()).toEqual([...campaign.keys()].sort());
+  });
+  it('emits 35 Hard mode battle nodes chained after Chapter 7 with stronger enemy levels/stats and own first-clear rewards (D-29 Phase E)', () => {
+    expect(() => validateContentSet(new Map([...base, ...campaign]))).not.toThrow();
+    const index = JSON.parse(new TextDecoder().decode(campaign.get(CHAPTER_INDEX_PATH))) as ChapterIndex;
+    const normalNodes = index.chapters.slice(1).flatMap((c) => c.nodes.filter((n) => n.difficulty !== 'hard'));
+    const hardNodes = index.chapters.slice(1).flatMap((c) => c.nodes.filter((n) => n.difficulty === 'hard'));
+    expect(hardNodes).toHaveLength(35);
+    expect(hardNodes[0]!.requires).toBe(normalNodes.at(-1)!.node_id);
+    for (let i = 1; i < hardNodes.length; i++) expect(hardNodes[i]!.requires).toBe(hardNodes[i - 1]!.node_id);
+    for (const hn of hardNodes) {
+      expect(hn.kind).toBe('battle');
+      expect(hn.rewards?.first_clear.length).toBeGreaterThan(0);
+      const hardEnc = JSON.parse(new TextDecoder().decode(campaign.get(hn.encounter!)!)) as Encounter;
+      const normalEnc = JSON.parse(new TextDecoder().decode(campaign.get(hn.encounter!.replace('_hard.json', '.json'))!)) as Encounter;
+      expect(hardEnc.enemies[0]!.level).toBeGreaterThanOrEqual(normalEnc.enemies[0]!.level);
+      if (normalEnc.enemies[0]!.level < 20) expect(hardEnc.enemies[0]!.level).toBeGreaterThan(normalEnc.enemies[0]!.level);
+      expect(hardEnc.enemy_stat_multiplier?.value).toBeGreaterThan(1);
+    }
+    const patch1 = JSON.parse(new TextDecoder().decode(chapterPatch(campaign, 1).get(CHAPTER_INDEX_PATH))) as ChapterIndex;
+    expect(patch1.chapters.some((c) => c.nodes.some((n) => n.difficulty === 'hard'))).toBe(false);
   });
 });

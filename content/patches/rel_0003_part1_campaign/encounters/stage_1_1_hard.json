@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_1_1_hard",
+  "stage_id": "1-1H",
+  "title_en": "The Road That Whispers (Hard)",
+  "location_id": "forest_whispering_ash",
+  "seed": 1705959503,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "ash_wolf",
+      "level": 15,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "ash_wolf",
+      "level": 15,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "hollow_pilgrim",
+      "level": 15,
+      "slot": 2,
+      "row": "front"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#1-1"
+  }
+}

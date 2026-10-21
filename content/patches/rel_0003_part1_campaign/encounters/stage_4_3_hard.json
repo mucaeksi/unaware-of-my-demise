@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_4_3_hard",
+  "stage_id": "4-3H",
+  "title_en": "The Measure of a Life (Hard)",
+  "location_id": "undercity_subterranean",
+  "seed": 2335808642,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "chain_cultist",
+      "level": 15,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "chain_cultist",
+      "level": 15,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "glass_viper",
+      "level": 15,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#4-3"
+  }
+}

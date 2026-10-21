@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_6_4_hard",
+  "stage_id": "6-4H",
+  "title_en": "The Manor Gives Way (Hard)",
+  "location_id": "estate_ashen_lord",
+  "seed": 2043294171,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "noble_retainer",
+      "level": 20,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "noble_retainer",
+      "level": 20,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "estate_wraith",
+      "level": 20,
+      "slot": 2,
+      "row": "rear"
+    },
+    {
+      "unit_id": "estate_wraith",
+      "level": 20,
+      "slot": 3,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#6-4"
+  }
+}

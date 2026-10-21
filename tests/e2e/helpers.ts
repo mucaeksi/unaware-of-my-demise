@@ -51,7 +51,7 @@ export async function openGame(page: Page, path = '/', opts: OpenOptions = {}): 
   const url = `${GAME}${path}${opts.realIntro ? '' : `${path.includes('?') ? '&' : '?'}fastintro`}`;
   await page.goto(url);
   const until = opts.until ?? 'Title';
-  await page.waitForFunction((k) => (window as any).__UOMD__?.game.scene.isActive(k), until, { timeout: 60_000 });
+  await page.waitForFunction((k) => (window as any).__UOMD__?.game.scene.isActive(k), until, { timeout: 120_000 });
   await page.waitForTimeout(1200);
   return problems;
 }

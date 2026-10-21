@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_4_2_hard",
+  "stage_id": "4-2H",
+  "title_en": "The Red Vial Ward (Hard)",
+  "location_id": "undercity_subterranean",
+  "seed": 2587155309,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "red_vial_alchemist",
+      "level": 15,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "red_vial_alchemist",
+      "level": 15,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "chain_cultist",
+      "level": 15,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#4-2"
+  }
+}

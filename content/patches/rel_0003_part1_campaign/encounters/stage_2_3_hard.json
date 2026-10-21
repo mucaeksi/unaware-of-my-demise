@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_2_3_hard",
+  "stage_id": "2-3H",
+  "title_en": "The Guest Roll (Hard)",
+  "location_id": "cathedral_saint_luthos",
+  "seed": 3412480433,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "inkbound_dead",
+      "level": 15,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "inkbound_dead",
+      "level": 15,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "hollow_cleric",
+      "level": 15,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#2-3"
+  }
+}

@@ -132,6 +132,173 @@
           "kind": "story",
           "story": "story/ch1_camp.json",
           "requires": "stage_1_5"
+        },
+        {
+          "node_id": "stage_1_1_hard",
+          "title_en": "The Road That Whispers (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_1_hard.json",
+          "requires": "part1_clockless_reveal",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_forest_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_1_2_hard",
+          "title_en": "No Bell in the Trees (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_2_hard.json",
+          "requires": "stage_1_1_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_forest_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_1_3_hard",
+          "title_en": "A Cart of Empty Bottles (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_3_hard.json",
+          "requires": "stage_1_2_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_forest_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_1_4_hard",
+          "title_en": "The Map's Little Lie (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_4_hard.json",
+          "requires": "stage_1_3_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_forest_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_1_5_hard",
+          "title_en": "The Ash-Maw (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_1_5_hard.json",
+          "requires": "stage_1_4_hard",
+          "ration_class": "campaign",
+          "boss": true,
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 120
+              },
+              {
+                "type": "account_xp",
+                "amount": 100
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "ash_maw_hide"
+          },
+          "difficulty": "hard"
         }
       ]
     },
@@ -209,6 +376,173 @@
           "kind": "story",
           "story": "story/ch2_camp.json",
           "requires": "stage_2_5"
+        },
+        {
+          "node_id": "stage_2_1_hard",
+          "title_en": "Rain in the Nave (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_1_hard.json",
+          "requires": "stage_1_5_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_cathedral_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_2_2_hard",
+          "title_en": "The Choir Without Breath (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_2_hard.json",
+          "requires": "stage_2_1_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_cathedral_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_2_3_hard",
+          "title_en": "The Guest Roll (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_3_hard.json",
+          "requires": "stage_2_2_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_cathedral_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_2_4_hard",
+          "title_en": "A Page Beneath the Font (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_4_hard.json",
+          "requires": "stage_2_3_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_cathedral_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_2_5_hard",
+          "title_en": "The Bell-Widow's Verdict (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_2_5_hard.json",
+          "requires": "stage_2_4_hard",
+          "ration_class": "campaign",
+          "boss": true,
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 120
+              },
+              {
+                "type": "account_xp",
+                "amount": 100
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "widow_verdict"
+          },
+          "difficulty": "hard"
         }
       ]
     },
@@ -296,6 +630,173 @@
           "kind": "story",
           "story": "story/ch3_camp.json",
           "requires": "stage_3_5"
+        },
+        {
+          "node_id": "stage_3_1_hard",
+          "title_en": "The Empty Orchard (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_1_hard.json",
+          "requires": "stage_2_5_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_oakhaven_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_3_2_hard",
+          "title_en": "A Smith's Last Bell (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_2_hard.json",
+          "requires": "stage_3_1_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_oakhaven_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_3_3_hard",
+          "title_en": "The Well Runs Red (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_3_hard.json",
+          "requires": "stage_3_2_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_oakhaven_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_3_4_hard",
+          "title_en": "The Inn of Borrowed Names (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_4_hard.json",
+          "requires": "stage_3_3_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_oakhaven_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_3_5_hard",
+          "title_en": "The Mercenary Captain (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_3_5_hard.json",
+          "requires": "stage_3_4_hard",
+          "ration_class": "campaign",
+          "boss": true,
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 120
+              },
+              {
+                "type": "account_xp",
+                "amount": 100
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "road_captain_oath"
+          },
+          "difficulty": "hard"
         }
       ]
     },
@@ -373,6 +874,173 @@
           "kind": "story",
           "story": "story/ch4_camp.json",
           "requires": "stage_4_5"
+        },
+        {
+          "node_id": "stage_4_1_hard",
+          "title_en": "Stairs Below the Cistern (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_1_hard.json",
+          "requires": "stage_3_5_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_undercity_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_4_2_hard",
+          "title_en": "The Red Vial Ward (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_2_hard.json",
+          "requires": "stage_4_1_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_undercity_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_4_3_hard",
+          "title_en": "The Measure of a Life (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_3_hard.json",
+          "requires": "stage_4_2_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_undercity_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_4_4_hard",
+          "title_en": "The Elixir Lie (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_4_hard.json",
+          "requires": "stage_4_3_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_undercity_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_4_5_hard",
+          "title_en": "The Red Vial Matron (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_4_5_hard.json",
+          "requires": "stage_4_4_hard",
+          "ration_class": "campaign",
+          "boss": true,
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 120
+              },
+              {
+                "type": "account_xp",
+                "amount": 100
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "red_vial_residue"
+          },
+          "difficulty": "hard"
         }
       ]
     },
@@ -450,6 +1118,173 @@
           "kind": "story",
           "story": "story/ch5_camp.json",
           "requires": "stage_5_5"
+        },
+        {
+          "node_id": "stage_5_1_hard",
+          "title_en": "A Banner in the Fog (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_1_hard.json",
+          "requires": "stage_4_5_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_bridge_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_5_2_hard",
+          "title_en": "The Gatekeeper's Measure (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_2_hard.json",
+          "requires": "stage_5_1_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_bridge_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_5_3_hard",
+          "title_en": "A Knife Between Orders (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_3_hard.json",
+          "requires": "stage_5_2_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_bridge_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_5_4_hard",
+          "title_en": "The White Strand (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_4_hard.json",
+          "requires": "stage_5_3_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_bridge_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_5_5_hard",
+          "title_en": "The Commander Who Remained (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_5_5_hard.json",
+          "requires": "stage_5_4_hard",
+          "ration_class": "campaign",
+          "boss": true,
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 120
+              },
+              {
+                "type": "account_xp",
+                "amount": 100
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "bridgewarden_plating"
+          },
+          "difficulty": "hard"
         }
       ]
     },
@@ -527,6 +1362,173 @@
           "kind": "story",
           "story": "story/ch6_camp.json",
           "requires": "stage_6_5"
+        },
+        {
+          "node_id": "stage_6_1_hard",
+          "title_en": "The Servants' Entrance (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_1_hard.json",
+          "requires": "stage_5_5_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_estate_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_6_2_hard",
+          "title_en": "Portraits Without Names (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_2_hard.json",
+          "requires": "stage_6_1_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_estate_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_6_3_hard",
+          "title_en": "The Sealed Conservatory (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_3_hard.json",
+          "requires": "stage_6_2_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_estate_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_6_4_hard",
+          "title_en": "The Manor Gives Way (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_4_hard.json",
+          "requires": "stage_6_3_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_estate_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_6_5_hard",
+          "title_en": "The Ashen Lord's Wraith (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_6_5_hard.json",
+          "requires": "stage_6_4_hard",
+          "ration_class": "campaign",
+          "boss": true,
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 120
+              },
+              {
+                "type": "account_xp",
+                "amount": 100
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_boss_first_clear",
+            "boss_set_id": "nameless_gallery"
+          },
+          "difficulty": "hard"
         }
       ]
     },
@@ -611,6 +1613,173 @@
           "kind": "story",
           "story": "story/part1_clockless_reveal.json",
           "requires": "part1_emotional_confession"
+        },
+        {
+          "node_id": "stage_7_1_hard",
+          "title_en": "The Stair of Seven Chains (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_1_hard.json",
+          "requires": "stage_6_5_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_altar_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_7_2_hard",
+          "title_en": "Those Who Held the Road (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_2_hard.json",
+          "requires": "stage_7_1_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_altar_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_7_3_hard",
+          "title_en": "The Names We Kept (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_3_hard.json",
+          "requires": "stage_7_2_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_altar_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_7_4_hard",
+          "title_en": "Before the Last Toll (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_4_hard.json",
+          "requires": "stage_7_3_hard",
+          "ration_class": "campaign",
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              },
+              {
+                "type": "account_xp",
+                "amount": 50
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 30
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_altar_common"
+          },
+          "difficulty": "hard"
+        },
+        {
+          "node_id": "stage_7_5_hard",
+          "title_en": "The Eclipse Construct (Hard)",
+          "kind": "battle",
+          "encounter": "encounters/stage_7_5_hard.json",
+          "requires": "stage_7_4_hard",
+          "ration_class": "campaign",
+          "boss": true,
+          "rewards": {
+            "first_clear": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 120
+              },
+              {
+                "type": "account_xp",
+                "amount": 100
+              }
+            ],
+            "three_star": [
+              {
+                "type": "currency",
+                "currency": "eclipse_token",
+                "amount": 60
+              }
+            ],
+            "repeat": []
+          },
+          "drop": {
+            "table": "story_boss_final",
+            "boss_set_id": "first_eclipse"
+          },
+          "difficulty": "hard"
         }
       ]
     }

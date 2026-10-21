@@ -14,6 +14,8 @@ function req<T>(r: IDBRequest<T>): Promise<T> {
 
 /** IndexedDB-backed patch storage. The patch state is ONE record, so activation is atomic. */
 class IdbStorage implements ContentStorage {
+  private readonly writeQueue: { sha: string; bytes: Uint8Array | null; reservation?: string; resolve: () => void; reject: (e: unknown) => void }[] = [];
+  private flushing = false;
   constructor(private readonly db: IDBDatabase) {}
 
   private store(name: string, mode: IDBTransactionMode): IDBObjectStore {
@@ -66,20 +68,64 @@ class IdbStorage implements ContentStorage {
   }
   private objectWrite(sha: string, bytes: Uint8Array | null, reservation?: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      const tx = this.db.transaction([OBJECTS, META], 'readwrite'); const objects = tx.objectStore(OBJECTS); const meta = tx.objectStore(META);
-      tx.oncomplete = () => resolve(); tx.onabort = tx.onerror = () => reject(tx.error ?? new Error('content object transaction aborted'));
-      const save = (): void => {
-        if (bytes) { objects.put(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), sha); meta.put(bytes.byteLength, `size:${sha}`); }
-        else { objects.delete(sha); meta.delete(`size:${sha}`); }
-        if (reservation && !sha.startsWith('partial:')) { objects.delete(`partial:${sha}`); meta.delete(`size:partial:${sha}`); }
-      };
-      if (!reservation) { save(); return; }
-      const request = meta.get('downloads'); request.onsuccess = () => {
-        const entry = (request.result as Record<string, DownloadReservation> | undefined)?.[reservation]; const limit = entry?.files[sha.replace(/^partial:/, '')];
-        if (!entry || entry.expiresAt <= Date.now() || limit === undefined || bytes && bytes.byteLength > limit) { tx.abort(); return; }
-        save();
-      };
+      this.writeQueue.push({ sha, bytes, reservation, resolve, reject });
+      if (!this.flushing) {
+        this.flushing = true;
+        queueMicrotask(() => this.flushWrites());
+      }
     });
+  }
+  private flushWrites(): void {
+    const batch = this.writeQueue.splice(0);
+    if (batch.length === 0) {
+      this.flushing = false;
+      return;
+    }
+    const tx = this.db.transaction([OBJECTS, META], 'readwrite');
+    const objects = tx.objectStore(OBJECTS);
+    const meta = tx.objectStore(META);
+    tx.oncomplete = () => {
+      for (const item of batch) item.resolve();
+      this.flushWrites();
+    };
+    tx.onabort = tx.onerror = () => {
+      const err = tx.error ?? new Error('content object transaction aborted');
+      for (const item of batch) item.reject(err);
+      this.flushWrites();
+    };
+    const saveItem = (item: (typeof batch)[number]): void => {
+      if (item.bytes) {
+        objects.put(item.bytes.buffer.slice(item.bytes.byteOffset, item.bytes.byteOffset + item.bytes.byteLength), item.sha);
+        meta.put(item.bytes.byteLength, `size:${item.sha}`);
+      } else {
+        objects.delete(item.sha);
+        meta.delete(`size:${item.sha}`);
+      }
+      if (item.reservation && !item.sha.startsWith('partial:')) {
+        objects.delete(`partial:${item.sha}`);
+        meta.delete(`size:partial:${item.sha}`);
+      }
+    };
+    if (batch.every((item) => !item.reservation)) {
+      for (const item of batch) saveItem(item);
+      return;
+    }
+    const request = meta.get('downloads');
+    request.onsuccess = () => {
+      const downloads = request.result as Record<string, DownloadReservation> | undefined;
+      const now = Date.now();
+      for (const item of batch) {
+        if (item.reservation) {
+          const entry = downloads?.[item.reservation];
+          const limit = entry?.files[item.sha.replace(/^partial:/, '')];
+          if (!entry || entry.expiresAt <= now || limit === undefined || (item.bytes && item.bytes.byteLength > limit)) {
+            tx.abort();
+            return;
+          }
+        }
+        saveItem(item);
+      }
+    };
   }
   private write(name: string, work: (store: IDBObjectStore) => void): Promise<void> {
     return new Promise((resolve, reject) => {

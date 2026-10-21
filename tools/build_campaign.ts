@@ -5,7 +5,7 @@
  * It also plays every stage with the Auto Battle policy and reports whether the stage can be won at its recommended level (docs/combat/CAMPAIGN_BALANCE.md).
  * Run: npm run build:campaign
  */
-import { mkdirSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
@@ -60,6 +60,7 @@ const chapterOut: Json[] = [
 ];
 const encounters = new Map<string, Encounter>();
 const battleNodes = new Map<string, Json>();
+const hardBattleNodes = new Map<string, Json>();
 
 for (const ch of chapters) {
   for (const n of ch.nodes as Json[]) {
@@ -124,6 +125,45 @@ for (const ch of chapters) {
       ...(st.drop_table_id ? { drop: { table: st.drop_table_id, ...(st.boss_id && bossSets.get(st.boss_id) ? { boss_set_id: bossSets.get(st.boss_id) } : {}) } } : {})
     });
     nodeIds.push(id);
+
+    // D-29 Phase E: Hard mode variant per normal battle stage (stronger enemy levels + stat multiplier, own first-clear rewards)
+    const hardId = `${id}_hard`;
+    const hardLevel = Math.min(20, Math.max(15, Number(st.enemy_level) + 5));
+    const hardScale = (wave: { unit_id: string; level: number; slot: number; row: 'front' | 'rear' }[]) =>
+      wave.map((p) => ({ ...p, level: hardLevel }));
+    const hardEnc = Encounter.parse({
+      schema_version: 1,
+      encounter_id: hardId,
+      stage_id: `${st.stage_id}H`,
+      title_en: `${st.title_en} (Hard)`,
+      location_id: ch.location_id,
+      seed: seedOf(`${st.stage_id}:hard`),
+      party_mode: 'owned',
+      party: [],
+      enemies: hardScale(foes),
+      ...(waves.length ? { waves: waves.map(hardScale) } : {}),
+      enemy_stat_multiplier: { value: st.boss_id ? 1.35 : 1.25, applies_to: ['hp', 'atk', 'def'] },
+      provenance: { source: `${NARR}/stages_part1.json#${st.stage_id}` }
+    });
+    writeJson(`${OUT}/encounters/${hardId}.json`, hardEnc);
+    hardBattleNodes.set(id, {
+      node_id: hardId,
+      title_en: `${st.title_en} (Hard)`,
+      kind: 'battle',
+      difficulty: 'hard',
+      encounter: `encounters/${hardId}.json`,
+      ration_class: 'campaign',
+      ...(st.boss_id ? { boss: true } : {}),
+      rewards: {
+        first_clear: [
+          { type: 'currency', currency: 'eclipse_token', amount: st.boss_id ? 120 : 60 },
+          { type: 'account_xp', amount: st.boss_id ? 100 : 50 }
+        ],
+        three_star: [{ type: 'currency', currency: 'eclipse_token', amount: st.boss_id ? 60 : 30 }],
+        repeat: []
+      },
+      ...(st.drop_table_id ? { drop: { table: st.drop_table_id, ...(st.boss_id && bossSets.get(st.boss_id) ? { boss_set_id: bossSets.get(st.boss_id) } : {}) } } : {})
+    });
   }
 }
 if (battleNodes.size !== story.entries.filter((entry) => entry.stageId).length) throw new Error('canonical/mechanical stage coverage differs');
@@ -144,52 +184,70 @@ for (const [chapterNumber, ch] of chapters.entries()) {
   if (!nodes.length) throw new Error(`chapter ${ch.chapter_id} has no canonical story entries`);
   chapterOut.push({ chapter_id: chapterId, title_en: ch.title_en, nodes });
 }
+let hardPrevious = previous;
+for (const ch of chapterOut.slice(1)) {
+  const normalBattles = (ch.nodes as Json[]).filter((n) => n.kind === 'battle' && n.difficulty !== 'hard');
+  for (const nb of normalBattles) {
+    const hardNode = hardBattleNodes.get(nb.node_id as string)!;
+    const linkedHard = { ...hardNode, requires: hardPrevious };
+    hardPrevious = hardNode.node_id as string;
+    (ch.nodes as Json[]).push(linkedHard);
+  }
+}
 writeJson(`${OUT}/chapters/chapter_index.json`, ChapterIndex.parse({ schema_version: 1, chapters: chapterOut, story_coverage: story.coverage, recruit_selectors: story.selectors }));
 
 // ---- art manifest: base art + SD Chibi archetype atlases for every campaign unit -------------------------------------------
 const art = base; // the base art manifest carries the tutorial cast (Mahmut, Fadyme, Bellbound Dead, Hollow Pilgrim)
+rmSync(join(ROOT, `${OUT}/art`), { recursive: true, force: true });
 mkdirSync(join(ROOT, `${OUT}/art`), { recursive: true });
 const approvedEntries = loadApprovedArtEntries(ROOT, false);
-const campaignPortraits: ArtManifest['portraits'] = structuredClone(art.portraits);
+const usedEmotions = new Map<string, Set<string>>();
+for (const scene of [...story.files.values(), ...library.entries.flatMap((entry) => entry.scenes)]) {
+  for (const c of scene.commands) {
+    if (c.op === 'show' && !usedEmotions.has(c.character)) usedEmotions.set(c.character, new Set(['composed']));
+    if (c.op === 'say') {
+      const set = usedEmotions.get(c.speaker) ?? new Set(['composed']);
+      if (c.emotion) set.add(c.emotion);
+      usedEmotions.set(c.speaker, set);
+    }
+  }
+}
+const rawPortraits = new Map<string, { emotions: Record<string, string>; images: Record<string, string> }>();
 for (const entry of approvedEntries) {
   if (!entry.targets.portraits) continue;
   for (const [charId, pTarget] of Object.entries(entry.targets.portraits)) {
     if (art.portraits[charId]) continue;
-    for (const out of entry.outputs) {
-      writeOut(`${OUT}/${out.path}`, readFileSync(join(ROOT, 'content/approved_art', out.path)));
-    }
-    const prev = campaignPortraits[charId] ?? { emotions: {}, images: {} };
-    campaignPortraits[charId] = {
+    const prev = rawPortraits.get(charId) ?? { emotions: {}, images: {} };
+    rawPortraits.set(charId, {
       emotions: { ...prev.emotions, ...pTarget.emotions },
       images: { ...prev.images, ...pTarget.images }
-    };
+    });
   }
+}
+const campaignPortraits: ArtManifest['portraits'] = structuredClone(art.portraits);
+for (const [charId, p] of rawPortraits) {
+  const wantedTags = usedEmotions.get(charId) ?? new Set(['composed']);
+  const wantedImgs = new Set(['composed', ...[...wantedTags].map((t) => p.emotions[t] ?? 'composed')]);
+  const images = Object.fromEntries(Object.entries(p.images).filter(([k]) => wantedImgs.has(k)));
+  const emotions = Object.fromEntries(Object.entries(p.emotions).map(([t, img]) => [t, images[img] ? img : 'composed']));
+  for (const relPath of Object.values(images)) {
+    writeOut(`${OUT}/${relPath}`, readFileSync(join(ROOT, 'content/approved_art', relPath)));
+  }
+  campaignPortraits[charId] = { emotions, images };
 }
 
 const heroArcanistEntry = readJson<Json>('content/approved_art/entries/roster_hero_arcanist_chibi_sheet.json');
 const enemyKnightEntry = readJson<Json>('content/approved_art/entries/campaign_enemy_knight_chibi_sheet.json');
 const heroArcanistBytes = readFileSync(join(ROOT, 'content/approved_art/art/atlas_hero_arcanist.webp'));
 const enemyKnightBytes = readFileSync(join(ROOT, 'content/approved_art/art/atlas_enemy_knight.webp'));
-writeOut(`${OUT}/art/atlas_hero_arcanist.webp`, heroArcanistBytes);
-writeOut(`${OUT}/art/atlas_enemy_knight.webp`, enemyKnightBytes);
-writeOut(`${OUT}/art/atlas_placeholder.webp`, heroArcanistBytes);
 
 const heroArcanistAtlas = heroArcanistEntry.targets.atlases.atlas_hero_arcanist;
 const enemyKnightAtlas = enemyKnightEntry.targets.atlases.atlas_enemy_knight;
 const heroArcanistUnit = heroArcanistEntry.targets.units.hero_arcanist;
 const enemyKnightUnit = enemyKnightEntry.targets.units.enemy_knight;
 
-const atlases: Record<string, unknown> = {
-  ...art.atlases,
-  atlas_hero_arcanist: heroArcanistAtlas,
-  atlas_enemy_knight: enemyKnightAtlas,
-  atlas_placeholder: { ...heroArcanistAtlas, image: 'art/atlas_placeholder.webp' }
-};
-const unitArt: Record<string, unknown> = {
-  ...art.units,
-  hero_arcanist: heroArcanistUnit,
-  enemy_knight: enemyKnightUnit
-};
+const atlases: Record<string, unknown> = { ...art.atlases };
+const unitArt: Record<string, unknown> = { ...art.units };
 for (const entry of approvedEntries) {
   if (entry.class !== 'unit_sheet' || !entry.targets.units) continue;
   for (const [uKey, uTarget] of Object.entries(entry.targets.units)) {
@@ -225,6 +283,16 @@ for (const u of pack.units) {
   }
   placeholders.push(u.art_key);
 }
+if (placeholders.length > 0) {
+  writeOut(`${OUT}/art/atlas_hero_arcanist.webp`, heroArcanistBytes);
+  writeOut(`${OUT}/art/atlas_enemy_knight.webp`, enemyKnightBytes);
+  writeOut(`${OUT}/art/atlas_placeholder.webp`, heroArcanistBytes);
+  atlases.atlas_hero_arcanist = heroArcanistAtlas;
+  atlases.atlas_enemy_knight = enemyKnightAtlas;
+  atlases.atlas_placeholder = { ...heroArcanistAtlas, image: 'art/atlas_placeholder.webp' };
+  unitArt.hero_arcanist = heroArcanistUnit;
+  unitArt.enemy_knight = enemyKnightUnit;
+}
 // breakable boss objectives are drawn from one generic "weak point" icon until each gets its own art
 const OW = 192;
 const objSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${OW}" height="${OW}"><circle cx="96" cy="96" r="80" fill="#3b2a4d" stroke="#e7c36a" stroke-width="6"/><path d="M60 120 L96 52 L132 120 Z" fill="none" stroke="#e7c36a" stroke-width="7" stroke-linejoin="round"/><circle cx="96" cy="108" r="7" fill="#e7c36a"/></svg>`;
@@ -252,6 +320,16 @@ const backgrounds: Record<string, string> = {
   ...(art.backgrounds.forgotten_stone_crossing ? { bridge_forsaken: art.backgrounds.forgotten_stone_crossing } : {}),
   ...(art.backgrounds.shelter_courtyard_dusk ? { village_oakhaven: art.backgrounds.shelter_courtyard_dusk } : {})
 };
+for (const entry of approvedEntries) {
+  if (!entry.targets.backgrounds) continue;
+  for (const [bgKey, bgPath] of Object.entries(entry.targets.backgrounds)) {
+    if (art.backgrounds[bgKey]) continue;
+    for (const out of entry.outputs) {
+      writeOut(`${OUT}/${out.path}`, readFileSync(join(ROOT, 'content/approved_art', out.path)));
+    }
+    backgrounds[bgKey] = bgPath;
+  }
+}
 for (const loc of new Set([...chapters.map((ch) => ch.location_id as string), ...[...story.files.values()].map((scene) => scene.location_id), ...library.entries.flatMap((entry) => entry.scenes.map((scene) => scene.location_id))])) {
   if (backgrounds[loc]) continue;
   const [a, b] = TINT[loc] ?? ['#3a3048', '#0f0b16'];

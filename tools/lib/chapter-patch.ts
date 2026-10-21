@@ -18,7 +18,9 @@ export function chapterPatch(files: ReadonlyMap<string, Uint8Array>, chapters: n
   const index = read<ChapterIndex>(files, CHAPTER_INDEX_PATH);
   const campaign = index.chapters.filter((c) => c.chapter_id !== 'tutorial');
   if (!Number.isInteger(chapters) || chapters < 1 || chapters > campaign.length) throw new Error(`chapters must be 1..${campaign.length}`);
-  const kept = index.chapters.filter((c) => c.chapter_id === 'tutorial' || campaign.indexOf(c) < chapters);
+  const kept = index.chapters
+    .filter((c) => c.chapter_id === 'tutorial' || campaign.indexOf(c) < chapters)
+    .map((c) => (chapters < campaign.length ? { ...c, nodes: c.nodes.filter((n) => n.difficulty !== 'hard') } : c));
   const keptIds = new Set(kept.map((c) => c.chapter_id));
   const nodes = new Set(kept.flatMap((c) => c.nodes.map((n) => n.node_id)));
 

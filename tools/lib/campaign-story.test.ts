@@ -52,11 +52,15 @@ describe('canonical campaign story compilation', () => {
     const index = ChapterIndex.parse(readJson(`${root}/chapters/chapter_index.json`));
     expect(index.story_coverage).toEqual(output.coverage);
     expect(index.recruit_selectors).toEqual(output.selectors);
-    const nodes = index.chapters.slice(1).flatMap((chapter) => chapter.nodes);
+    const nodes = index.chapters.slice(1).flatMap((chapter) => chapter.nodes.filter((node) => node.difficulty !== 'hard'));
+    const hardNodes = index.chapters.slice(1).flatMap((chapter) => chapter.nodes.filter((node) => node.difficulty === 'hard'));
     expect(nodes.map((node) => node.node_id)).toEqual(output.entries.map((entry) => entry.nodeId));
     for (const [i, node] of nodes.entries()) expect(node.requires).toBe(nodes[i - 1]?.node_id);
     expect(nodes.filter((node) => node.kind === 'battle')).toHaveLength(35);
     expect(nodes.filter((node) => node.kind === 'story')).toHaveLength(16);
+    expect(hardNodes).toHaveLength(35);
+    expect(hardNodes[0]!.requires).toBe(nodes.at(-1)!.node_id);
+    for (let i = 1; i < hardNodes.length; i++) expect(hardNodes[i]!.requires).toBe(hardNodes[i - 1]!.node_id);
     const sources = readJson<{ stages: { stage_id: string; stamina_cost: number; story_rewards: { recruit_character_id?: string; grant_item_id?: string }[] }[] }>('narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json');
     for (const stage of sources.stages) {
       const node = nodes.find((node) => node.node_id === `stage_${stage.stage_id.replace('-', '_')}`)!;

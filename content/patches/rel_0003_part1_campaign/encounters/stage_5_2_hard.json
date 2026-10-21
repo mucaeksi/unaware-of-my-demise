@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "encounter_id": "stage_5_2_hard",
+  "stage_id": "5-2H",
+  "title_en": "The Gatekeeper's Measure (Hard)",
+  "location_id": "bridge_forsaken",
+  "seed": 2959253914,
+  "party_mode": "owned",
+  "party": [],
+  "enemies": [
+    {
+      "unit_id": "corrupted_crown_guard",
+      "level": 18,
+      "slot": 0,
+      "row": "front"
+    },
+    {
+      "unit_id": "corrupted_crown_guard",
+      "level": 18,
+      "slot": 1,
+      "row": "front"
+    },
+    {
+      "unit_id": "lost_vow_knight",
+      "level": 18,
+      "slot": 2,
+      "row": "rear"
+    }
+  ],
+  "enemy_stat_multiplier": {
+    "value": 1.25,
+    "applies_to": [
+      "hp",
+      "atk",
+      "def"
+    ]
+  },
+  "provenance": {
+    "source": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/stages_part1.json#5-2"
+  }
+}

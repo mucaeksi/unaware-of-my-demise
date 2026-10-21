@@ -269,99 +269,6 @@
         ]
       }
     },
-    "atlas_hero_arcanist": {
-      "image": "art/atlas_hero_arcanist.webp",
-      "width": 1613,
-      "height": 425,
-      "frames": {
-        "ultimate": [
-          4,
-          4,
-          339,
-          417
-        ],
-        "idle": [
-          347,
-          4,
-          306,
-          408
-        ],
-        "basic": [
-          657,
-          4,
-          571,
-          398
-        ],
-        "hit": [
-          1232,
-          4,
-          377,
-          331
-        ]
-      }
-    },
-    "atlas_enemy_knight": {
-      "image": "art/atlas_enemy_knight.webp",
-      "width": 1795,
-      "height": 425,
-      "frames": {
-        "hit": [
-          4,
-          4,
-          387,
-          417
-        ],
-        "idle": [
-          395,
-          4,
-          349,
-          408
-        ],
-        "basic": [
-          748,
-          4,
-          634,
-          395
-        ],
-        "defeat": [
-          1386,
-          4,
-          405,
-          364
-        ]
-      }
-    },
-    "atlas_placeholder": {
-      "image": "art/atlas_placeholder.webp",
-      "width": 1613,
-      "height": 425,
-      "frames": {
-        "ultimate": [
-          4,
-          4,
-          339,
-          417
-        ],
-        "idle": [
-          347,
-          4,
-          306,
-          408
-        ],
-        "basic": [
-          657,
-          4,
-          571,
-          398
-        ],
-        "hit": [
-          1232,
-          4,
-          377,
-          331
-        ]
-      }
-    },
     "atlas_ash_wolf": {
       "image": "art/atlas_ash_wolf.webp",
       "width": 1977,
@@ -5624,116 +5531,6 @@
           "scale": 1,
           "foot_y": 1,
           "pivot_x": 0.568
-        }
-      }
-    },
-    "hero_arcanist": {
-      "atlas": "atlas_hero_arcanist",
-      "facing": "right",
-      "height_px": 248,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.414
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.267
-        },
-        "ultimate": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "defeat": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.422
-        },
-        "victory": {
-          "frame": "ultimate",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.429
-        }
-      }
-    },
-    "enemy_knight": {
-      "atlas": "atlas_enemy_knight",
-      "facing": "left",
-      "height_px": 258,
-      "states": {
-        "idle": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "walk": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
-        },
-        "basic": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "active": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "ultimate": {
-          "frame": "basic",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.557
-        },
-        "hit": {
-          "frame": "hit",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.459
-        },
-        "defeat": {
-          "frame": "defeat",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.463
-        },
-        "victory": {
-          "frame": "idle",
-          "scale": 1,
-          "foot_y": 1,
-          "pivot_x": 0.401
         }
       }
     },
@@ -11211,9 +11008,9 @@
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
         "gentle": "warm",
         "small_smile": "warm",
         "smile": "warm",
@@ -11222,7 +11019,6 @@
       "images": {
         "composed": "art/portrait_brin_alder_composed.webp",
         "defiant": "art/portrait_brin_alder_defiant.webp",
-        "focused": "art/portrait_brin_alder_focused.webp",
         "warm": "art/portrait_brin_alder_warm.webp"
       }
     },
@@ -11231,21 +11027,18 @@
         "calm": "composed",
         "composed": "composed",
         "neutral": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
-        "gentle": "warm",
-        "smile": "warm",
-        "warm": "warm"
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
       },
       "images": {
-        "composed": "art/portrait_cassian_thorne_composed.webp",
-        "defiant": "art/portrait_cassian_thorne_defiant.webp",
-        "focused": "art/portrait_cassian_thorne_focused.webp",
-        "warm": "art/portrait_cassian_thorne_warm.webp"
+        "composed": "art/portrait_cassian_thorne_composed.webp"
       }
     },
     "clem_marr": {
@@ -11258,20 +11051,18 @@
         "grim": "composed",
         "matter_of_fact": "composed",
         "neutral": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
         "gentle": "warm",
         "smile": "warm",
         "warm": "warm"
       },
       "images": {
         "composed": "art/portrait_clem_marr_composed.webp",
-        "defiant": "art/portrait_clem_marr_defiant.webp",
-        "focused": "art/portrait_clem_marr_focused.webp",
         "warm": "art/portrait_clem_marr_warm.webp"
       }
     },
@@ -11280,21 +11071,18 @@
         "calm": "composed",
         "composed": "composed",
         "neutral": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
-        "gentle": "warm",
-        "smile": "warm",
-        "warm": "warm"
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
       },
       "images": {
-        "composed": "art/portrait_corbin_locke_composed.webp",
-        "defiant": "art/portrait_corbin_locke_defiant.webp",
-        "focused": "art/portrait_corbin_locke_focused.webp",
-        "warm": "art/portrait_corbin_locke_warm.webp"
+        "composed": "art/portrait_corbin_locke_composed.webp"
       }
     },
     "dorian_kesk": {
@@ -11302,21 +11090,18 @@
         "calm": "composed",
         "composed": "composed",
         "neutral": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
-        "gentle": "warm",
-        "smile": "warm",
-        "warm": "warm"
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
       },
       "images": {
-        "composed": "art/portrait_dorian_kesk_composed.webp",
-        "defiant": "art/portrait_dorian_kesk_defiant.webp",
-        "focused": "art/portrait_dorian_kesk_focused.webp",
-        "warm": "art/portrait_dorian_kesk_warm.webp"
+        "composed": "art/portrait_dorian_kesk_composed.webp"
       }
     },
     "garrick_cinder": {
@@ -11324,21 +11109,18 @@
         "calm": "composed",
         "composed": "composed",
         "neutral": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
-        "gentle": "warm",
-        "smile": "warm",
-        "warm": "warm"
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
       },
       "images": {
-        "composed": "art/portrait_garrick_cinder_composed.webp",
-        "defiant": "art/portrait_garrick_cinder_defiant.webp",
-        "focused": "art/portrait_garrick_cinder_focused.webp",
-        "warm": "art/portrait_garrick_cinder_warm.webp"
+        "composed": "art/portrait_garrick_cinder_composed.webp"
       }
     },
     "hana_birch": {
@@ -11361,9 +11143,9 @@
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
         "gentle": "warm",
         "smile": "warm",
         "soft": "warm",
@@ -11372,7 +11154,6 @@
       "images": {
         "composed": "art/portrait_hana_birch_composed.webp",
         "defiant": "art/portrait_hana_birch_defiant.webp",
-        "focused": "art/portrait_hana_birch_focused.webp",
         "warm": "art/portrait_hana_birch_warm.webp"
       }
     },
@@ -11387,12 +11168,12 @@
         "quiet": "composed",
         "resolved": "composed",
         "steady": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
         "gentle": "warm",
         "smile": "warm",
         "warm": "warm",
@@ -11400,8 +11181,6 @@
       },
       "images": {
         "composed": "art/portrait_iona_mist_composed.webp",
-        "defiant": "art/portrait_iona_mist_defiant.webp",
-        "focused": "art/portrait_iona_mist_focused.webp",
         "warm": "art/portrait_iona_mist_warm.webp"
       }
     },
@@ -11425,18 +11204,16 @@
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
-        "gentle": "warm",
-        "smile": "warm",
-        "warm": "warm"
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
       },
       "images": {
         "composed": "art/portrait_jori_flint_composed.webp",
-        "defiant": "art/portrait_jori_flint_defiant.webp",
-        "focused": "art/portrait_jori_flint_focused.webp",
-        "warm": "art/portrait_jori_flint_warm.webp"
+        "defiant": "art/portrait_jori_flint_defiant.webp"
       }
     },
     "kera_voss": {
@@ -11493,9 +11270,9 @@
         "ringing": "composed",
         "singing": "composed",
         "steady": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
         "analytical": "focused",
         "focused": "focused",
         "grave": "focused",
@@ -11506,7 +11283,6 @@
       },
       "images": {
         "composed": "art/portrait_marek_vane_composed.webp",
-        "defiant": "art/portrait_marek_vane_defiant.webp",
         "focused": "art/portrait_marek_vane_focused.webp",
         "warm": "art/portrait_marek_vane_warm.webp"
       }
@@ -11563,9 +11339,9 @@
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
         "gentle": "warm",
         "smile": "warm",
         "warm": "warm"
@@ -11573,7 +11349,6 @@
       "images": {
         "composed": "art/portrait_nara_vell_composed.webp",
         "defiant": "art/portrait_nara_vell_defiant.webp",
-        "focused": "art/portrait_nara_vell_focused.webp",
         "warm": "art/portrait_nara_vell_warm.webp"
       }
     },
@@ -11662,9 +11437,9 @@
         "determined": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
         "bright": "warm",
         "gentle": "warm",
         "grinning": "warm",
@@ -11675,7 +11450,6 @@
       "images": {
         "composed": "art/portrait_pippa_bell_composed.webp",
         "defiant": "art/portrait_pippa_bell_defiant.webp",
-        "focused": "art/portrait_pippa_bell_focused.webp",
         "warm": "art/portrait_pippa_bell_warm.webp"
       }
     },
@@ -11700,9 +11474,9 @@
         "determined": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
         "cheerful": "warm",
         "gentle": "warm",
         "grinning": "warm",
@@ -11712,7 +11486,6 @@
       "images": {
         "composed": "art/portrait_rikka_ember_composed.webp",
         "defiant": "art/portrait_rikka_ember_defiant.webp",
-        "focused": "art/portrait_rikka_ember_focused.webp",
         "warm": "art/portrait_rikka_ember_warm.webp"
       }
     },
@@ -11721,21 +11494,18 @@
         "calm": "composed",
         "composed": "composed",
         "neutral": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
-        "analytical": "focused",
-        "focused": "focused",
-        "serious": "focused",
-        "gentle": "warm",
-        "smile": "warm",
-        "warm": "warm"
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
       },
       "images": {
-        "composed": "art/portrait_rowan_reed_composed.webp",
-        "defiant": "art/portrait_rowan_reed_defiant.webp",
-        "focused": "art/portrait_rowan_reed_focused.webp",
-        "warm": "art/portrait_rowan_reed_warm.webp"
+        "composed": "art/portrait_rowan_reed_composed.webp"
       }
     },
     "sable_wren": {
@@ -11759,9 +11529,9 @@
         "steady": "composed",
         "stricken": "composed",
         "terse": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
         "analytical": "focused",
         "focused": "focused",
         "hushed": "focused",
@@ -11773,7 +11543,6 @@
       },
       "images": {
         "composed": "art/portrait_sable_wren_composed.webp",
-        "defiant": "art/portrait_sable_wren_defiant.webp",
         "focused": "art/portrait_sable_wren_focused.webp",
         "warm": "art/portrait_sable_wren_warm.webp"
       }
@@ -11789,9 +11558,9 @@
         "relieved": "composed",
         "resolved": "composed",
         "thoughtful": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
         "analytical": "focused",
         "focused": "focused",
         "grave": "focused",
@@ -11803,7 +11572,6 @@
       },
       "images": {
         "composed": "art/portrait_sister_aveline_composed.webp",
-        "defiant": "art/portrait_sister_aveline_defiant.webp",
         "focused": "art/portrait_sister_aveline_focused.webp",
         "warm": "art/portrait_sister_aveline_warm.webp"
       }
@@ -11821,9 +11589,9 @@
         "neutral": "composed",
         "shy": "composed",
         "tearful": "composed",
-        "defiant": "defiant",
-        "fierce": "defiant",
-        "urgent": "defiant",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
         "analytical": "focused",
         "focused": "focused",
         "serious": "focused",
@@ -11835,7 +11603,6 @@
       },
       "images": {
         "composed": "art/portrait_thistle_roe_composed.webp",
-        "defiant": "art/portrait_thistle_roe_defiant.webp",
         "focused": "art/portrait_thistle_roe_focused.webp",
         "warm": "art/portrait_thistle_roe_warm.webp"
       }
@@ -11916,6 +11683,7 @@
     "shelter_courtyard_dusk": "art/bg_shelter_courtyard_dusk.webp",
     "bridge_forsaken": "art/bg_forgotten_stone_crossing.webp",
     "village_oakhaven": "art/bg_shelter_courtyard_dusk.webp",
+    "world_map_part1": "art/bg_world_map_part1.webp",
     "cathedral_saint_luthos": "art/bg_cathedral_saint_luthos.webp",
     "undercity_subterranean": "art/bg_undercity_subterranean.webp",
     "estate_ashen_lord": "art/bg_estate_ashen_lord.webp",

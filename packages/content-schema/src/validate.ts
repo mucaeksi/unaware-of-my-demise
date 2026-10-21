@@ -255,7 +255,7 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
       unique('story coverage line', coverage.entries.flatMap((entry) => entry.line_ids));
       const sourceHashes = new Map(coverage.sources.map((source) => [source.path, source.sha256]));
       for (const id of coverage.chapter_ids) if (!index.chapters.some((chapter) => chapter.chapter_id === id)) problems.push(`story coverage: missing chapter ${id}`);
-      const actualOrder = index.chapters.filter((chapter) => coverage.chapter_ids.includes(chapter.chapter_id)).flatMap((chapter) => chapter.nodes.map((node) => node.node_id));
+      const actualOrder = index.chapters.filter((chapter) => coverage.chapter_ids.includes(chapter.chapter_id)).flatMap((chapter) => chapter.nodes.filter((node) => node.difficulty !== 'hard').map((node) => node.node_id));
       if (JSON.stringify(index.chapters.filter((chapter) => coverage.chapter_ids.includes(chapter.chapter_id)).map((chapter) => chapter.chapter_id)) !== JSON.stringify(coverage.chapter_ids)) problems.push('story coverage: chapter order differs from declared canon');
       if (JSON.stringify(actualOrder) !== JSON.stringify(coverage.entries.map((entry) => entry.node_id))) problems.push('story coverage: chapter node order differs from declared canon');
       for (const [position, entry] of coverage.entries.entries()) {

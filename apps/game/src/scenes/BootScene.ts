@@ -12,7 +12,7 @@ import { prefs } from '../platform/prefs';
 import { Services } from '../services';
 import type { SplashInit } from './SplashScene';
 
-const UPDATE_TIMEOUT_MS = 25000;
+const UPDATE_TIMEOUT_MS = 90000;
 type Done = (s: PixiScene<unknown>) => void;
 
 /** Startup: fonts, audio, identity and store bridges, content and menu art; then the engine credit (or a preview scene). */
