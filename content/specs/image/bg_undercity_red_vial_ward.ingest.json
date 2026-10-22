@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_undercity_red_vial_ward",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "f33af7cc2957",
+    "provenance": ".cache/generated/bg_undercity_red_vial_ward/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 80,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "undercity_red_vial_ward"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

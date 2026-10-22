@@ -9,7 +9,8 @@
         "emotions": {
           "analytical": "focused",
           "focused": "focused",
-          "serious": "focused"
+          "serious": "focused",
+          "strained": "focused"
         },
         "images": {
           "focused": "art/portrait_nara_vell_focused.webp"
@@ -88,10 +89,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.947Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

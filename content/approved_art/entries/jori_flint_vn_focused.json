@@ -8,8 +8,14 @@
       "jori_flint": {
         "emotions": {
           "analytical": "focused",
+          "ashamed": "focused",
+          "confused": "focused",
+          "embarrassed": "focused",
           "focused": "focused",
-          "serious": "focused"
+          "observant": "focused",
+          "serious": "focused",
+          "stricken": "focused",
+          "wounded": "focused"
         },
         "images": {
           "focused": "art/portrait_jori_flint_focused.webp"
@@ -88,10 +94,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.931Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

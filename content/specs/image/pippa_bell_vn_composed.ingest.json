@@ -42,14 +42,8 @@
     "emotion_tags": [
       "calm",
       "composed",
-      "joyful",
       "neutral",
-      "quiet",
-      "resolute",
-      "smiling",
-      "startled",
-      "uneasy",
-      "wondering"
+      "quiet"
     ]
   },
   "qc": {

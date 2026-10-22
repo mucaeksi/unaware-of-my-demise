@@ -209,63 +209,207 @@
     },
     "atlas_bellbound_dead": {
       "image": "art/atlas_bellbound_dead.webp",
-      "width": 1581,
-      "height": 416,
+      "width": 1984,
+      "height": 931,
       "frames": {
         "idle": [
           4,
           4,
-          292,
-          408
+          215,
+          307
+        ],
+        "idle_2": [
+          223,
+          4,
+          215,
+          307
+        ],
+        "idle_3": [
+          442,
+          4,
+          215,
+          307
+        ],
+        "ultimate": [
+          661,
+          4,
+          327,
+          307
+        ],
+        "ultimate_2": [
+          992,
+          4,
+          327,
+          307
+        ],
+        "ultimate_3": [
+          1323,
+          4,
+          327,
+          307
+        ],
+        "active": [
+          1654,
+          4,
+          326,
+          306
+        ],
+        "active_2": [
+          4,
+          315,
+          326,
+          306
+        ],
+        "active_3": [
+          334,
+          315,
+          326,
+          306
         ],
         "basic": [
-          300,
+          664,
+          315,
+          327,
+          304
+        ],
+        "basic_2": [
+          995,
+          315,
+          327,
+          304
+        ],
+        "basic_3": [
+          1326,
+          315,
+          327,
+          304
+        ],
+        "victory": [
+          1657,
+          315,
+          214,
+          304
+        ],
+        "walk": [
           4,
-          433,
-          400
+          625,
+          325,
+          302
         ],
         "hit": [
-          737,
-          4,
-          442,
-          387
+          333,
+          625,
+          343,
+          298
         ],
         "defeat": [
-          1183,
-          4,
-          394,
-          344
+          680,
+          625,
+          343,
+          296
         ]
       }
     },
     "atlas_hollow_pilgrim": {
       "image": "art/atlas_hollow_pilgrim.webp",
-      "width": 2026,
-      "height": 437,
+      "width": 1754,
+      "height": 1154,
       "frames": {
-        "hit": [
-          4,
-          4,
-          521,
-          429
-        ],
         "idle": [
-          529,
           4,
-          467,
-          408
+          4,
+          344,
+          307
+        ],
+        "idle_2": [
+          352,
+          4,
+          344,
+          307
+        ],
+        "idle_3": [
+          700,
+          4,
+          344,
+          307
+        ],
+        "ultimate": [
+          1048,
+          4,
+          343,
+          307
+        ],
+        "ultimate_2": [
+          1395,
+          4,
+          343,
+          307
+        ],
+        "ultimate_3": [
+          4,
+          315,
+          343,
+          307
+        ],
+        "active": [
+          351,
+          315,
+          341,
+          306
+        ],
+        "active_2": [
+          696,
+          315,
+          341,
+          306
+        ],
+        "active_3": [
+          1041,
+          315,
+          341,
+          306
         ],
         "basic": [
-          1000,
+          1386,
+          315,
+          342,
+          304
+        ],
+        "basic_2": [
           4,
-          452,
-          401
+          626,
+          342,
+          304
+        ],
+        "basic_3": [
+          350,
+          626,
+          342,
+          304
+        ],
+        "victory": [
+          696,
+          626,
+          343,
+          304
+        ],
+        "walk": [
+          1043,
+          626,
+          338,
+          302
+        ],
+        "hit": [
+          1385,
+          626,
+          365,
+          298
         ],
         "defeat": [
-          1456,
           4,
-          566,
-          343
+          934,
+          365,
+          216
         ]
       }
     },
@@ -5215,12 +5359,108 @@
     },
     "atlas_objective": {
       "image": "art/atlas_objective.webp",
-      "width": 192,
-      "height": 192,
+      "width": 768,
+      "height": 768,
       "frames": {
         "idle": [
           0,
           0,
+          192,
+          192
+        ],
+        "jaw_bell_intact": [
+          0,
+          0,
+          192,
+          192
+        ],
+        "jaw_bell_broken": [
+          192,
+          0,
+          192,
+          192
+        ],
+        "wax_seal_intact": [
+          384,
+          0,
+          192,
+          192
+        ],
+        "signal_banner_intact": [
+          576,
+          0,
+          192,
+          192
+        ],
+        "signal_banner_broken": [
+          0,
+          192,
+          192,
+          192
+        ],
+        "flask_rack_intact": [
+          192,
+          192,
+          192,
+          192
+        ],
+        "flask_rack_broken": [
+          384,
+          192,
+          192,
+          192
+        ],
+        "signal_standard_intact": [
+          576,
+          192,
+          192,
+          192
+        ],
+        "signal_standard_broken": [
+          0,
+          384,
+          192,
+          192
+        ],
+        "mirror_frame_intact": [
+          192,
+          384,
+          192,
+          192
+        ],
+        "mirror_frame_broken": [
+          384,
+          384,
+          192,
+          192
+        ],
+        "chain_joint_intact": [
+          576,
+          384,
+          192,
+          192
+        ],
+        "chain_joint_broken": [
+          0,
+          576,
+          192,
+          192
+        ],
+        "ankle_anchor_intact": [
+          192,
+          576,
+          192,
+          192
+        ],
+        "ankle_anchor_broken": [
+          384,
+          576,
+          192,
+          192
+        ],
+        "altar_pylon_intact": [
+          576,
+          576,
           192,
           192
         ]
@@ -5433,46 +5673,89 @@
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.433
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.434
         },
         "walk": {
-          "frame": "idle",
+          "frame": "walk",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.433
+          "pivot_x": 0.437
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.438
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.435
         },
         "active": {
-          "frame": "basic",
+          "frame": "active",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.438
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.436
         },
         "ultimate": {
-          "frame": "basic",
+          "frame": "ultimate",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.438
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.435
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.49
+          "pivot_x": 0.485
         },
         "defeat": {
           "frame": "defeat",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.534
+          "pivot_x": 0.538
         },
         "victory": {
-          "frame": "idle",
+          "frame": "victory",
           "scale": 1,
           "foot_y": 1,
           "pivot_x": 0.433
@@ -5488,49 +5771,92 @@
           "frame": "idle",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.568
+          "animation": {
+            "frames": [
+              "idle",
+              "idle_2",
+              "idle_3",
+              "idle_2"
+            ],
+            "fps": 6,
+            "loop": true
+          },
+          "pivot_x": 0.571
         },
         "walk": {
-          "frame": "idle",
+          "frame": "walk",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.568
+          "pivot_x": 0.612
         },
         "basic": {
           "frame": "basic",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.607
+          "animation": {
+            "frames": [
+              "basic",
+              "basic_2",
+              "basic_3",
+              "basic_2",
+              "basic"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.609
         },
         "active": {
-          "frame": "basic",
+          "frame": "active",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.607
+          "animation": {
+            "frames": [
+              "active",
+              "active_2",
+              "active_3",
+              "active_2",
+              "active"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.609
         },
         "ultimate": {
-          "frame": "basic",
+          "frame": "ultimate",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.607
+          "animation": {
+            "frames": [
+              "ultimate",
+              "ultimate_2",
+              "ultimate_3",
+              "ultimate_2",
+              "ultimate"
+            ],
+            "fps": 9,
+            "loop": false
+          },
+          "pivot_x": 0.61
         },
         "hit": {
           "frame": "hit",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.532
+          "pivot_x": 0.531
         },
         "defeat": {
           "frame": "defeat",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.537
+          "pivot_x": 0.543
         },
         "victory": {
-          "frame": "idle",
+          "frame": "victory",
           "scale": 1,
           "foot_y": 1,
-          "pivot_x": 0.568
+          "pivot_x": 0.571
         }
       }
     },
@@ -10244,49 +10570,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "jaw_bell_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "jaw_bell_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "jaw_bell_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "jaw_bell_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "jaw_bell_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "jaw_bell_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "jaw_bell_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "jaw_bell_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10299,49 +10625,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "wax_seal_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10354,49 +10680,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "signal_banner_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "signal_banner_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "signal_banner_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "signal_banner_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "signal_banner_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "signal_banner_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "signal_banner_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "signal_banner_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10409,49 +10735,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "flask_rack_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10464,49 +10790,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "flask_rack_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "flask_rack_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10519,49 +10845,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "signal_standard_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "signal_standard_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "signal_standard_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "signal_standard_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "signal_standard_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "signal_standard_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "signal_standard_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "signal_standard_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10574,49 +10900,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "mirror_frame_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "mirror_frame_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "mirror_frame_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "mirror_frame_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "mirror_frame_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "mirror_frame_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "mirror_frame_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "mirror_frame_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10629,49 +10955,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "chain_joint_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10684,49 +11010,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "chain_joint_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "chain_joint_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10739,49 +11065,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "ankle_anchor_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "ankle_anchor_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "ankle_anchor_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "ankle_anchor_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "ankle_anchor_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "ankle_anchor_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "ankle_anchor_broken",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "ankle_anchor_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10794,49 +11120,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10849,49 +11175,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10904,49 +11230,49 @@
       "height_px": 150,
       "states": {
         "idle": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "walk": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "basic": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "active": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "ultimate": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "hit": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
         },
         "victory": {
-          "frame": "idle",
+          "frame": "altar_pylon_intact",
           "scale": 1,
           "foot_y": 0.97,
           "pivot_x": 0.5
@@ -10961,7 +11287,67 @@
         "dry_humor": "dry_humor",
         "protective_resolve": "protective_resolve",
         "protective": "protective_resolve",
-        "watchful": "watchful"
+        "watchful": "watchful",
+        "gentle": "dry_humor",
+        "concern": "composed",
+        "defiant": "protective_resolve",
+        "too_quick": "composed",
+        "alert": "watchful",
+        "steady": "composed",
+        "wry": "dry_humor",
+        "wary": "watchful",
+        "calm": "composed",
+        "skeptical": "watchful",
+        "command": "protective_resolve",
+        "hard": "protective_resolve",
+        "measured": "composed",
+        "direct": "composed",
+        "grim": "composed",
+        "angry": "protective_resolve",
+        "tight": "watchful",
+        "frustrated": "composed",
+        "low": "composed",
+        "ashamed": "watchful",
+        "tired": "composed",
+        "casual": "dry_humor",
+        "deadpan": "composed",
+        "resolved": "protective_resolve",
+        "respectful": "composed",
+        "warm": "dry_humor",
+        "questioning": "watchful",
+        "decisive": "protective_resolve",
+        "curious": "composed",
+        "careful": "watchful",
+        "promise": "protective_resolve",
+        "surprised": "watchful",
+        "hopeful": "dry_humor",
+        "guarded": "composed",
+        "certain": "composed",
+        "stunned": "watchful",
+        "quiet": "composed",
+        "anger": "protective_resolve",
+        "hollow": "composed",
+        "raw": "protective_resolve",
+        "searching": "watchful",
+        "urgent": "protective_resolve",
+        "dry": "dry_humor",
+        "grateful": "dry_humor",
+        "tender": "dry_humor",
+        "alarmed": "watchful",
+        "fear": "watchful",
+        "shaken": "watchful",
+        "hurt": "watchful",
+        "grief_to_anger": "protective_resolve",
+        "remorseful": "watchful",
+        "warning": "protective_resolve",
+        "strained": "watchful",
+        "troubled": "watchful",
+        "thoughtful": "composed",
+        "observant": "watchful",
+        "tense": "watchful",
+        "polite": "dry_humor",
+        "approving": "composed",
+        "flat": "composed"
       },
       "images": {
         "composed": "art/portrait_mahmut_composed.webp",
@@ -10979,13 +11365,84 @@
         "warm": "warm",
         "soft_smile": "warm",
         "wry": "wry",
-        "dry_amusement": "wry"
+        "dry_amusement": "wry",
+        "deflecting": "wry",
+        "pained_smile": "warm",
+        "encouraging": "warm",
+        "curious": "composed",
+        "gentle": "warm",
+        "focused": "resolve",
+        "false_reassurance": "composed",
+        "smile": "warm",
+        "steady": "composed",
+        "light": "warm",
+        "wistful": "resolve",
+        "uneasy": "resolve",
+        "quiet": "composed",
+        "soft": "warm",
+        "controlled": "composed",
+        "sad": "resolve",
+        "guarded": "resolve",
+        "stunned": "resolve",
+        "dry": "wry",
+        "knowing": "wry",
+        "strained": "resolve",
+        "firm": "resolve",
+        "hopeful": "warm",
+        "kind": "warm",
+        "pleading": "resolve",
+        "breathless": "resolve",
+        "false_calm": "composed",
+        "small_smile": "warm",
+        "cold": "composed",
+        "relieved": "warm",
+        "perceptive": "resolve",
+        "weak_smile": "warm",
+        "low": "composed",
+        "smiling": "warm",
+        "vulnerable": "resolve",
+        "defiant": "resolve",
+        "weak_laugh": "warm",
+        "honest": "composed",
+        "fragile": "resolve",
+        "tearful": "resolve",
+        "breaking": "resolve",
+        "disbelief": "resolve",
+        "afraid": "resolve",
+        "amused": "wry",
+        "laughing": "warm",
+        "observant": "resolve",
+        "wary": "resolve",
+        "sharp": "resolve",
+        "careful": "resolve",
+        "touched": "warm",
+        "serious": "resolve"
       },
       "images": {
         "composed": "art/portrait_fadyme_composed.webp",
         "resolve": "art/portrait_fadyme_resolve.webp",
         "warm": "art/portrait_fadyme_warm.webp",
         "wry": "art/portrait_fadyme_wry.webp"
+      }
+    },
+    "ashen_lord_wraith": {
+      "emotions": {
+        "calm": "composed",
+        "composed": "composed",
+        "neutral": "composed",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "echo": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
+      },
+      "images": {
+        "composed": "art/portrait_ashen_lord_wraith_composed.webp"
       }
     },
     "brin_alder": {
@@ -10999,19 +11456,19 @@
         "neutral": "composed",
         "quiet": "composed",
         "realizing": "composed",
-        "relieved": "composed",
         "resolved": "composed",
         "steady": "composed",
-        "strained": "composed",
-        "uneasy": "composed",
         "commanding": "defiant",
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
+        "analytical": "focused",
+        "focused": "focused",
+        "serious": "focused",
+        "strained": "focused",
+        "uneasy": "focused",
         "gentle": "warm",
+        "relieved": "warm",
         "small_smile": "warm",
         "smile": "warm",
         "warm": "warm"
@@ -11019,6 +11476,7 @@
       "images": {
         "composed": "art/portrait_brin_alder_composed.webp",
         "defiant": "art/portrait_brin_alder_defiant.webp",
+        "focused": "art/portrait_brin_alder_focused.webp",
         "warm": "art/portrait_brin_alder_warm.webp"
       }
     },
@@ -11046,23 +11504,39 @@
         "calm": "composed",
         "composed": "composed",
         "concern": "composed",
-        "curious": "composed",
         "direct": "composed",
-        "grim": "composed",
+        "honest": "composed",
         "matter_of_fact": "composed",
         "neutral": "composed",
-        "defiant": "composed",
-        "fierce": "composed",
-        "urgent": "composed",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
+        "resolved": "composed",
+        "shaken": "composed",
+        "angry": "defiant",
+        "blunt": "defiant",
+        "defiant": "defiant",
+        "fierce": "defiant",
+        "urgent": "defiant",
+        "vow": "defiant",
+        "analytical": "focused",
+        "ashamed": "focused",
+        "curious": "focused",
+        "focused": "focused",
+        "grim": "focused",
+        "hurt": "focused",
+        "serious": "focused",
+        "tense": "focused",
+        "uneasy": "focused",
+        "bright": "warm",
+        "cheerful": "warm",
+        "delighted": "warm",
         "gentle": "warm",
         "smile": "warm",
+        "soft": "warm",
         "warm": "warm"
       },
       "images": {
         "composed": "art/portrait_clem_marr_composed.webp",
+        "defiant": "art/portrait_clem_marr_defiant.webp",
+        "focused": "art/portrait_clem_marr_focused.webp",
         "warm": "art/portrait_clem_marr_warm.webp"
       }
     },
@@ -11104,6 +11578,27 @@
         "composed": "art/portrait_dorian_kesk_composed.webp"
       }
     },
+    "eclipse_construct": {
+      "emotions": {
+        "calm": "composed",
+        "composed": "composed",
+        "mechanical": "composed",
+        "neutral": "composed",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "fading": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
+      },
+      "images": {
+        "composed": "art/portrait_eclipse_construct_composed.webp"
+      }
+    },
     "garrick_cinder": {
       "emotions": {
         "calm": "composed",
@@ -11125,28 +11620,28 @@
     },
     "hana_birch": {
       "emotions": {
-        "ashamed": "composed",
         "calm": "composed",
         "composed": "composed",
-        "curious": "composed",
         "firm": "composed",
         "honest": "composed",
-        "nervous": "composed",
         "neutral": "composed",
         "quiet": "composed",
-        "relieved": "composed",
         "small": "composed",
-        "thoughtful": "composed",
-        "trembling": "composed",
-        "worried": "composed",
         "alarm": "defiant",
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
+        "analytical": "focused",
+        "ashamed": "focused",
+        "curious": "focused",
+        "focused": "focused",
+        "nervous": "focused",
+        "serious": "focused",
+        "thoughtful": "focused",
+        "trembling": "focused",
+        "worried": "focused",
         "gentle": "warm",
+        "relieved": "warm",
         "smile": "warm",
         "soft": "warm",
         "warm": "warm"
@@ -11154,26 +11649,27 @@
       "images": {
         "composed": "art/portrait_hana_birch_composed.webp",
         "defiant": "art/portrait_hana_birch_defiant.webp",
+        "focused": "art/portrait_hana_birch_focused.webp",
         "warm": "art/portrait_hana_birch_warm.webp"
       }
     },
     "iona_mist": {
       "emotions": {
         "calm": "composed",
-        "careful": "composed",
         "composed": "composed",
         "direct": "composed",
         "neutral": "composed",
-        "observant": "composed",
         "quiet": "composed",
         "resolved": "composed",
         "steady": "composed",
         "defiant": "composed",
         "fierce": "composed",
         "urgent": "composed",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
+        "analytical": "focused",
+        "careful": "focused",
+        "focused": "focused",
+        "observant": "focused",
+        "serious": "focused",
         "gentle": "warm",
         "smile": "warm",
         "warm": "warm",
@@ -11181,80 +11677,147 @@
       },
       "images": {
         "composed": "art/portrait_iona_mist_composed.webp",
+        "focused": "art/portrait_iona_mist_focused.webp",
         "warm": "art/portrait_iona_mist_warm.webp"
       }
     },
     "jori_flint": {
       "emotions": {
-        "ashamed": "composed",
         "calm": "composed",
         "certain": "composed",
         "composed": "composed",
-        "confused": "composed",
         "earnest": "composed",
         "firm": "composed",
+        "frustrated": "composed",
+        "grudging": "composed",
+        "hollow": "composed",
         "honest": "composed",
         "neutral": "composed",
-        "observant": "composed",
-        "relieved": "composed",
         "resolved": "composed",
-        "stricken": "composed",
-        "stubborn": "composed",
         "alarm": "defiant",
         "defiant": "defiant",
+        "determined": "defiant",
         "fierce": "defiant",
+        "furious": "defiant",
+        "gruff": "defiant",
+        "horrified": "defiant",
+        "stubborn": "defiant",
         "urgent": "defiant",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
-        "gentle": "composed",
-        "smile": "composed",
-        "warm": "composed"
+        "analytical": "focused",
+        "ashamed": "focused",
+        "confused": "focused",
+        "embarrassed": "focused",
+        "focused": "focused",
+        "observant": "focused",
+        "serious": "focused",
+        "stricken": "focused",
+        "wounded": "focused",
+        "gentle": "warm",
+        "relieved": "warm",
+        "smile": "warm",
+        "warm": "warm"
       },
       "images": {
         "composed": "art/portrait_jori_flint_composed.webp",
-        "defiant": "art/portrait_jori_flint_defiant.webp"
+        "defiant": "art/portrait_jori_flint_defiant.webp",
+        "focused": "art/portrait_jori_flint_focused.webp",
+        "warm": "art/portrait_jori_flint_warm.webp"
       }
     },
     "kera_voss": {
       "emotions": {
+        "annoyed": "composed",
+        "brisk": "composed",
+        "calm": "composed",
         "composed": "composed",
-        "steady": "composed",
-        "thoughtful": "composed",
-        "careful": "composed",
-        "low": "composed",
-        "tired": "composed",
-        "gentle": "composed",
         "honest": "composed",
-        "gruff": "composed",
+        "impatient": "composed",
+        "low": "composed",
+        "neutral": "composed",
+        "resolved": "composed",
+        "smug": "proud_smile",
+        "steady": "composed",
+        "tired": "composed",
+        "tsundere": "proud_smile",
+        "defensive": "proud_smile",
         "defiant": "defiant",
-        "furious": "defiant",
+        "determined": "defiant",
         "fierce": "defiant",
-        "bitter": "defiant",
+        "furious": "defiant",
+        "gruff": "defiant",
         "indignant": "defiant",
-        "stunned": "defiant",
-        "ashamed": "defiant",
-        "breaking": "defiant",
+        "urgent": "defiant",
+        "analytical": "focused",
+        "ashamed": "focused",
+        "bitter": "focused",
+        "breaking": "focused",
+        "careful": "focused",
+        "flustered": "proud_smile",
         "focused": "focused",
-        "brisk": "focused",
-        "sharp": "focused",
         "serious": "focused",
-        "impatient": "focused",
-        "annoyed": "focused",
-        "resolved": "focused",
-        "determined": "focused",
+        "sharp": "focused",
+        "stunned": "focused",
+        "thoughtful": "focused",
         "proud_smile": "proud_smile",
         "proud": "proud_smile",
-        "smug": "proud_smile",
-        "tsundere": "proud_smile",
-        "flustered": "proud_smile",
-        "defensive": "proud_smile"
+        "gentle": "composed"
       },
       "images": {
         "composed": "art/portrait_kera_voss_composed.webp",
         "defiant": "art/portrait_kera_voss_defiant.webp",
         "focused": "art/portrait_kera_voss_focused.webp",
         "proud_smile": "art/portrait_kera_voss_proud_smile.webp"
+      }
+    },
+    "lady_yseldra_vale": {
+      "emotions": {
+        "calm": "composed",
+        "cold": "composed",
+        "composed": "composed",
+        "controlled": "composed",
+        "distant": "composed",
+        "honest": "composed",
+        "neutral": "composed",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "warning": "composed",
+        "analytical": "composed",
+        "bitter": "composed",
+        "focused": "composed",
+        "grave": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
+      },
+      "images": {
+        "composed": "art/portrait_lady_yseldra_vale_composed.webp"
+      }
+    },
+    "lord_cael_veyr": {
+      "emotions": {
+        "calm": "composed",
+        "cold": "composed",
+        "composed": "composed",
+        "cool_amusement": "composed",
+        "formal": "composed",
+        "measured": "composed",
+        "neutral": "composed",
+        "defiant": "composed",
+        "fierce": "composed",
+        "quiet_threat": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "inviting": "composed",
+        "smile": "composed",
+        "warm": "composed"
+      },
+      "images": {
+        "composed": "art/portrait_lord_cael_veyr_composed.webp"
       }
     },
     "marek_vane": {
@@ -11265,10 +11828,7 @@
         "measured": "composed",
         "neutral": "composed",
         "quiet": "composed",
-        "reflective": "composed",
         "resolved": "composed",
-        "ringing": "composed",
-        "singing": "composed",
         "steady": "composed",
         "defiant": "composed",
         "fierce": "composed",
@@ -11276,8 +11836,11 @@
         "analytical": "focused",
         "focused": "focused",
         "grave": "focused",
+        "reflective": "focused",
         "serious": "focused",
         "gentle": "warm",
+        "ringing": "warm",
+        "singing": "warm",
         "smile": "warm",
         "warm": "warm"
       },
@@ -11287,24 +11850,54 @@
         "warm": "art/portrait_marek_vane_warm.webp"
       }
     },
-    "mirel_quill": {
+    "marshal_oren": {
       "emotions": {
         "calm": "composed",
         "composed": "composed",
-        "decisive": "composed",
-        "dry": "composed",
         "neutral": "composed",
-        "observant": "composed",
         "resolved": "composed",
-        "stricken": "composed",
-        "uneasy": "composed",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "regret": "composed",
+        "serious": "composed",
+        "shame": "composed",
+        "strained": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
+      },
+      "images": {
+        "composed": "art/portrait_marshal_oren_composed.webp"
+      }
+    },
+    "mirel_quill": {
+      "emotions": {
+        "approving": "composed",
+        "calm": "composed",
+        "composed": "composed",
+        "dry": "composed",
+        "hollow": "composed",
+        "neutral": "composed",
+        "resolved": "composed",
+        "steady": "composed",
+        "decisive": "defiant",
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
         "analytical": "focused",
+        "bitter": "focused",
+        "careful": "focused",
         "focused": "focused",
         "grave": "focused",
+        "observant": "focused",
         "serious": "focused",
+        "sharp": "focused",
+        "stricken": "focused",
+        "tense": "focused",
+        "uneasy": "focused",
         "gentle": "warm",
         "kind": "warm",
         "smile": "warm",
@@ -11334,14 +11927,14 @@
         "plain": "composed",
         "quiet": "composed",
         "resolved": "composed",
-        "strained": "composed",
         "command": "defiant",
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
+        "analytical": "focused",
+        "focused": "focused",
+        "serious": "focused",
+        "strained": "focused",
         "gentle": "warm",
         "smile": "warm",
         "warm": "warm"
@@ -11349,32 +11942,48 @@
       "images": {
         "composed": "art/portrait_nara_vell_composed.webp",
         "defiant": "art/portrait_nara_vell_defiant.webp",
+        "focused": "art/portrait_nara_vell_focused.webp",
         "warm": "art/portrait_nara_vell_warm.webp"
       }
     },
     "nixie_vale": {
       "emotions": {
+        "approving": "composed",
         "brisk": "composed",
         "calm": "composed",
         "composed": "composed",
-        "decisive": "composed",
-        "fear": "composed",
+        "earnest": "composed",
         "firm": "composed",
+        "flat": "composed",
         "genki": "composed",
+        "knowing": "composed",
         "neutral": "composed",
         "practical": "composed",
+        "quiet": "composed",
+        "resolved": "composed",
         "wary": "composed",
         "angry": "defiant",
+        "decisive": "defiant",
         "defiant": "defiant",
         "fierce": "defiant",
+        "heroic": "defiant",
         "urgent": "defiant",
         "alert": "focused",
         "analytical": "focused",
+        "bitter": "focused",
+        "curious": "focused",
+        "fear": "focused",
         "focused": "focused",
+        "grave": "focused",
         "serious": "focused",
+        "surprised": "focused",
+        "suspicious": "focused",
         "gentle": "warm",
+        "innocent": "warm",
+        "light": "warm",
         "smile": "warm",
-        "warm": "warm"
+        "warm": "warm",
+        "wry": "warm"
       },
       "images": {
         "composed": "art/portrait_nixie_vale_composed.webp",
@@ -11385,11 +11994,9 @@
     },
     "odelia_pike": {
       "emotions": {
-        "breaking": "composed",
         "calm": "composed",
         "composed": "composed",
         "dry": "composed",
-        "hesitant": "composed",
         "hollow": "composed",
         "low": "composed",
         "measured": "composed",
@@ -11399,15 +12006,17 @@
         "quiet": "composed",
         "steady": "composed",
         "stiff": "composed",
-        "stunned": "composed",
-        "tearful": "composed",
         "wary": "composed",
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
         "analytical": "focused",
+        "breaking": "focused",
         "focused": "focused",
+        "hesitant": "focused",
         "serious": "focused",
+        "stunned": "focused",
+        "tearful": "focused",
         "gentle": "warm",
         "small_smile": "warm",
         "smile": "warm",
@@ -11425,58 +12034,79 @@
       "emotions": {
         "calm": "composed",
         "composed": "composed",
-        "joyful": "composed",
         "neutral": "composed",
         "quiet": "composed",
-        "resolute": "composed",
-        "smiling": "composed",
-        "startled": "composed",
-        "uneasy": "composed",
-        "wondering": "composed",
         "defiant": "defiant",
         "determined": "defiant",
         "fierce": "defiant",
+        "resolute": "defiant",
         "urgent": "defiant",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
+        "analytical": "focused",
+        "focused": "focused",
+        "serious": "focused",
+        "startled": "focused",
+        "uneasy": "focused",
+        "wondering": "focused",
         "bright": "warm",
         "gentle": "warm",
         "grinning": "warm",
+        "joyful": "warm",
         "smile": "warm",
+        "smiling": "warm",
         "tender": "warm",
         "warm": "warm"
       },
       "images": {
         "composed": "art/portrait_pippa_bell_composed.webp",
         "defiant": "art/portrait_pippa_bell_defiant.webp",
+        "focused": "art/portrait_pippa_bell_focused.webp",
         "warm": "art/portrait_pippa_bell_warm.webp"
+      }
+    },
+    "red_vial_matron": {
+      "emotions": {
+        "calm": "composed",
+        "composed": "composed",
+        "neutral": "composed",
+        "defiant": "composed",
+        "fierce": "composed",
+        "hungry": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
+      },
+      "images": {
+        "composed": "art/portrait_red_vial_matron_composed.webp"
       }
     },
     "rikka_ember": {
       "emotions": {
-        "awed": "composed",
         "calm": "composed",
-        "competitive": "composed",
         "composed": "composed",
-        "curious": "composed",
-        "defensive": "composed",
-        "excited": "composed",
-        "exuberant": "composed",
-        "flustered": "composed",
-        "nervous": "composed",
         "neutral": "composed",
-        "pout": "composed",
         "small": "composed",
-        "triumphant": "composed",
-        "wide_eyed": "composed",
+        "competitive": "defiant",
+        "defensive": "defiant",
         "defiant": "defiant",
         "determined": "defiant",
+        "excited": "defiant",
+        "exuberant": "defiant",
         "fierce": "defiant",
+        "triumphant": "defiant",
         "urgent": "defiant",
-        "analytical": "composed",
-        "focused": "composed",
-        "serious": "composed",
+        "analytical": "focused",
+        "awed": "focused",
+        "curious": "focused",
+        "flustered": "focused",
+        "focused": "focused",
+        "nervous": "focused",
+        "pout": "focused",
+        "serious": "focused",
+        "wide_eyed": "focused",
         "cheerful": "warm",
         "gentle": "warm",
         "grinning": "warm",
@@ -11486,6 +12116,7 @@
       "images": {
         "composed": "art/portrait_rikka_ember_composed.webp",
         "defiant": "art/portrait_rikka_ember_defiant.webp",
+        "focused": "art/portrait_rikka_ember_focused.webp",
         "warm": "art/portrait_rikka_ember_warm.webp"
       }
     },
@@ -11508,10 +12139,30 @@
         "composed": "art/portrait_rowan_reed_composed.webp"
       }
     },
+    "rusk": {
+      "emotions": {
+        "calm": "composed",
+        "cold": "composed",
+        "composed": "composed",
+        "neutral": "composed",
+        "defiant": "composed",
+        "fierce": "composed",
+        "urgent": "composed",
+        "analytical": "composed",
+        "focused": "composed",
+        "serious": "composed",
+        "uneasy": "composed",
+        "gentle": "composed",
+        "smile": "composed",
+        "warm": "composed"
+      },
+      "images": {
+        "composed": "art/portrait_rusk_composed.webp"
+      }
+    },
     "sable_wren": {
       "emotions": {
         "assured": "composed",
-        "bitter": "composed",
         "calm": "composed",
         "composed": "composed",
         "cool": "composed",
@@ -11521,21 +12172,22 @@
         "honest": "composed",
         "low": "composed",
         "neutral": "composed",
-        "observant": "composed",
         "quiet": "composed",
         "resolved": "composed",
         "respectful": "composed",
         "small": "composed",
         "steady": "composed",
-        "stricken": "composed",
         "terse": "composed",
         "defiant": "composed",
         "fierce": "composed",
         "urgent": "composed",
         "analytical": "focused",
+        "bitter": "focused",
         "focused": "focused",
         "hushed": "focused",
+        "observant": "focused",
         "serious": "focused",
+        "stricken": "focused",
         "whisper": "focused",
         "gentle": "warm",
         "smile": "warm",
@@ -11550,53 +12202,62 @@
     "sister_aveline": {
       "emotions": {
         "calm": "composed",
+        "cold": "composed",
         "composed": "composed",
         "confident": "composed",
+        "firm": "composed",
+        "hard": "composed",
         "neutral": "composed",
+        "prayerful": "composed",
         "quiet": "composed",
         "reading": "composed",
-        "relieved": "composed",
         "resolved": "composed",
-        "thoughtful": "composed",
-        "defiant": "composed",
-        "fierce": "composed",
-        "urgent": "composed",
+        "defiant": "defiant",
+        "fierce": "defiant",
+        "urgent": "defiant",
+        "vow": "defiant",
         "analytical": "focused",
+        "curious": "focused",
         "focused": "focused",
         "grave": "focused",
         "serious": "focused",
+        "stunned": "focused",
+        "thoughtful": "focused",
+        "dry_kind": "warm",
         "firm_kind": "warm",
         "gentle": "warm",
+        "relieved": "warm",
         "smile": "warm",
         "warm": "warm"
       },
       "images": {
         "composed": "art/portrait_sister_aveline_composed.webp",
+        "defiant": "art/portrait_sister_aveline_defiant.webp",
         "focused": "art/portrait_sister_aveline_focused.webp",
         "warm": "art/portrait_sister_aveline_warm.webp"
       }
     },
     "thistle_roe": {
       "emotions": {
-        "anxious": "composed",
         "calm": "composed",
         "composed": "composed",
-        "curious": "composed",
         "earnest": "composed",
-        "encouraging": "composed",
         "firm": "composed",
-        "frightened": "composed",
         "neutral": "composed",
-        "shy": "composed",
-        "tearful": "composed",
         "defiant": "composed",
         "fierce": "composed",
         "urgent": "composed",
         "analytical": "focused",
+        "anxious": "focused",
+        "curious": "focused",
         "focused": "focused",
+        "frightened": "focused",
         "serious": "focused",
+        "shy": "focused",
+        "tearful": "focused",
         "tense": "focused",
         "whisper": "focused",
+        "encouraging": "warm",
         "gentle": "warm",
         "smile": "warm",
         "warm": "warm"
@@ -11609,23 +12270,23 @@
     },
     "tilda_fen": {
       "emotions": {
-        "bitter": "composed",
         "calm": "composed",
-        "careful": "composed",
         "composed": "composed",
         "direct": "composed",
         "dry": "composed",
         "firm": "composed",
-        "grim": "composed",
         "neutral": "composed",
-        "reflective": "composed",
         "steady": "composed",
         "commanding": "defiant",
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
         "analytical": "focused",
+        "bitter": "focused",
+        "careful": "focused",
         "focused": "focused",
+        "grim": "focused",
+        "reflective": "focused",
         "serious": "focused",
         "sharp": "focused",
         "suspicious": "focused",
@@ -11646,7 +12307,6 @@
     "vespera_wisp": {
       "emotions": {
         "calm": "composed",
-        "careful": "composed",
         "composed": "composed",
         "distant": "composed",
         "dry": "composed",
@@ -11655,15 +12315,16 @@
         "neutral": "composed",
         "quiet": "composed",
         "tired": "composed",
-        "uneasy": "composed",
         "defiant": "defiant",
         "fierce": "defiant",
         "urgent": "defiant",
         "warning": "defiant",
         "analytical": "focused",
+        "careful": "focused",
         "focused": "focused",
         "grave": "focused",
         "serious": "focused",
+        "uneasy": "focused",
         "gentle": "warm",
         "smile": "warm",
         "soft": "warm",
@@ -11681,50 +12342,50 @@
     "forest_whispering_ash": "art/bg_forest_whispering_ash.webp",
     "forgotten_stone_crossing": "art/bg_forgotten_stone_crossing.webp",
     "shelter_courtyard_dusk": "art/bg_shelter_courtyard_dusk.webp",
-    "bridge_forsaken": "art/bg_forgotten_stone_crossing.webp",
-    "village_oakhaven": "art/bg_shelter_courtyard_dusk.webp",
-    "world_map_part1": "art/bg_world_map_part1.webp",
-    "cathedral_saint_luthos": "art/bg_cathedral_saint_luthos.webp",
-    "undercity_subterranean": "art/bg_undercity_subterranean.webp",
-    "estate_ashen_lord": "art/bg_estate_ashen_lord.webp",
+    "bridge_forsaken": "art/bg_bridge_forsaken.webp",
+    "village_oakhaven": "art/bg_village_oakhaven.webp",
+    "altar_east_passage": "art/bg_altar_east_passage.webp",
+    "altar_field_infirmary": "art/bg_altar_field_infirmary.webp",
     "altar_first_eclipse": "art/bg_altar_first_eclipse.webp",
-    "forest_edge_road": "art/bg_forest_edge_road.webp",
-    "orchard_lowlands": "art/bg_orchard_lowlands.webp",
-    "oakhaven_inn": "art/bg_oakhaven_inn.webp",
-    "river_city_gates": "art/bg_river_city_gates.webp",
-    "eastern_ravine_road": "art/bg_eastern_ravine_road.webp",
-    "bridge_far_bank": "art/bg_bridge_far_bank.webp",
-    "eastern_highland_road": "art/bg_eastern_highland_road.webp",
-    "ashen_estate_ruins": "art/bg_ashen_estate_ruins.webp",
-    "mountain_crater_rim": "art/bg_mountain_crater_rim.webp",
     "altar_first_eclipse_outer_dais": "art/bg_altar_first_eclipse_outer_dais.webp",
     "altar_first_eclipse_reflection": "art/bg_altar_first_eclipse_reflection.webp",
-    "undercity_red_vial_ward": "art/bg_undercity_red_vial_ward.webp",
-    "undercity_antidote_archive": "art/bg_undercity_antidote_archive.webp",
-    "undercity_market": "art/bg_undercity_market.webp",
-    "lowland_refuge": "art/bg_lowland_refuge.webp",
-    "mountain_lower_pass": "art/bg_mountain_lower_pass.webp",
-    "oakhaven_refuge": "art/bg_oakhaven_refuge.webp",
-    "altar_round_archive": "art/bg_altar_round_archive.webp",
-    "bridge_signal_tower": "art/bg_bridge_signal_tower.webp",
-    "ashen_estate_servants_wing": "art/bg_ashen_estate_servants_wing.webp",
-    "altar_east_passage": "art/bg_altar_east_passage.webp",
-    "ashen_estate_conservatory": "art/bg_ashen_estate_conservatory.webp",
-    "altar_field_infirmary": "art/bg_altar_field_infirmary.webp",
-    "kiln_town": "art/bg_kiln_town.webp",
     "altar_outer_stair": "art/bg_altar_outer_stair.webp",
+    "altar_round_archive": "art/bg_altar_round_archive.webp",
+    "ashen_estate_conservatory": "art/bg_ashen_estate_conservatory.webp",
     "ashen_estate_gallery": "art/bg_ashen_estate_gallery.webp",
-    "undercity_cistern_stairs": "art/bg_undercity_cistern_stairs.webp",
+    "ashen_estate_ruins": "art/bg_ashen_estate_ruins.webp",
+    "ashen_estate_servants_wing": "art/bg_ashen_estate_servants_wing.webp",
+    "bridge_far_bank": "art/bg_bridge_far_bank.webp",
     "bridge_gate": "art/bg_bridge_gate.webp",
-    "lowland_refuge_road": "art/bg_lowland_refuge_road.webp",
-    "undercity_archive_room": "art/bg_undercity_archive_room.webp",
-    "undercity_cistern": "art/bg_undercity_cistern.webp",
-    "oakhaven_forge": "art/bg_oakhaven_forge.webp",
-    "oakhaven_square": "art/bg_oakhaven_square.webp",
+    "bridge_signal_tower": "art/bg_bridge_signal_tower.webp",
+    "cathedral_saint_luthos": "art/bg_cathedral_saint_luthos.webp",
+    "eastern_highland_road": "art/bg_eastern_highland_road.webp",
+    "eastern_ravine_road": "art/bg_eastern_ravine_road.webp",
     "eastern_village_square": "art/bg_eastern_village_square.webp",
+    "estate_ashen_lord": "art/bg_estate_ashen_lord.webp",
+    "forest_edge_road": "art/bg_forest_edge_road.webp",
     "highland_ridge": "art/bg_highland_ridge.webp",
     "highland_village": "art/bg_highland_village.webp",
-    "salt_road_coast": "art/bg_salt_road_coast.webp"
+    "kiln_town": "art/bg_kiln_town.webp",
+    "lowland_refuge": "art/bg_lowland_refuge.webp",
+    "lowland_refuge_road": "art/bg_lowland_refuge_road.webp",
+    "mountain_crater_rim": "art/bg_mountain_crater_rim.webp",
+    "mountain_lower_pass": "art/bg_mountain_lower_pass.webp",
+    "oakhaven_forge": "art/bg_oakhaven_forge.webp",
+    "oakhaven_inn": "art/bg_oakhaven_inn.webp",
+    "oakhaven_refuge": "art/bg_oakhaven_refuge.webp",
+    "oakhaven_square": "art/bg_oakhaven_square.webp",
+    "orchard_lowlands": "art/bg_orchard_lowlands.webp",
+    "river_city_gates": "art/bg_river_city_gates.webp",
+    "salt_road_coast": "art/bg_salt_road_coast.webp",
+    "undercity_antidote_archive": "art/bg_undercity_antidote_archive.webp",
+    "undercity_archive_room": "art/bg_undercity_archive_room.webp",
+    "undercity_cistern": "art/bg_undercity_cistern.webp",
+    "undercity_cistern_stairs": "art/bg_undercity_cistern_stairs.webp",
+    "undercity_market": "art/bg_undercity_market.webp",
+    "undercity_red_vial_ward": "art/bg_undercity_red_vial_ward.webp",
+    "undercity_subterranean": "art/bg_undercity_subterranean.webp",
+    "world_map_part1": "art/bg_world_map_part1.webp"
   },
   "music": {
     "bgm_main_theme": {

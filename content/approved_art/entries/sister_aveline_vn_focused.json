@@ -8,9 +8,12 @@
       "sister_aveline": {
         "emotions": {
           "analytical": "focused",
+          "curious": "focused",
           "focused": "focused",
           "grave": "focused",
-          "serious": "focused"
+          "serious": "focused",
+          "stunned": "focused",
+          "thoughtful": "focused"
         },
         "images": {
           "focused": "art/portrait_sister_aveline_focused.webp"
@@ -89,10 +92,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.964Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

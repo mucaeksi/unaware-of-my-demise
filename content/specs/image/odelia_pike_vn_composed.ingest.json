@@ -40,11 +40,9 @@
     "character": "odelia_pike",
     "image": "composed",
     "emotion_tags": [
-      "breaking",
       "calm",
       "composed",
       "dry",
-      "hesitant",
       "hollow",
       "low",
       "measured",
@@ -54,8 +52,6 @@
       "quiet",
       "steady",
       "stiff",
-      "stunned",
-      "tearful",
       "wary"
     ]
   },

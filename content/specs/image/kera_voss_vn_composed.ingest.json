@@ -40,15 +40,19 @@
     "character": "kera_voss",
     "image": "composed",
     "emotion_tags": [
+      "annoyed",
+      "brisk",
+      "calm",
       "composed",
-      "steady",
-      "thoughtful",
-      "careful",
-      "low",
-      "tired",
-      "gentle",
       "honest",
-      "gruff"
+      "impatient",
+      "low",
+      "neutral",
+      "resolved",
+      "smug",
+      "steady",
+      "tired",
+      "tsundere"
     ]
   },
   "qc": {

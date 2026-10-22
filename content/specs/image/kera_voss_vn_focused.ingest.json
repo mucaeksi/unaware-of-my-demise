@@ -40,14 +40,17 @@
     "character": "kera_voss",
     "image": "focused",
     "emotion_tags": [
+      "analytical",
+      "ashamed",
+      "bitter",
+      "breaking",
+      "careful",
+      "flustered",
       "focused",
-      "brisk",
-      "sharp",
       "serious",
-      "impatient",
-      "annoyed",
-      "resolved",
-      "determined"
+      "sharp",
+      "stunned",
+      "thoughtful"
     ]
   },
   "qc": {

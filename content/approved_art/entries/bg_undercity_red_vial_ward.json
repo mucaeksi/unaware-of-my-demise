@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_undercity_red_vial_ward",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "undercity_red_vial_ward": "art/bg_undercity_red_vial_ward.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "f33af7cc295787f03b3e5ed15475cc176596baa3ee2f18481c3673b04024a624",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_undercity_red_vial_ward/run.provenance.json",
+    "provenance_sha256": "4f4dc8ba604e87ef5cbc62f98d08f753c6d8fa5f9a4bcc101c84653faa3eb2b3",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "7da2d37663b40480fb45a7012b3d46c8c7ab0e8a4345c8e05ca9b45413a4c58a",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_undercity_red_vial_ward.ingest.json",
+    "spec_sha256": "43a80552dfef6c641a99d0225dac37bb392294f84f1c1c0d935cf81c527b3d92",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "d6c8261befe96c52bc5ea400fe1eef92bbfb9f0ea4b7576439304be49d390a6f"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_undercity_red_vial_ward.webp",
+      "sha256": "078db5a59839deca037162ebc7229600691cecaf8ee1be6c0dc7102b4740e887",
+      "pixels_sha256": "4fc204d0cde6e5c9cd36b10abaa6bd6e1ecad97a1f30ca0ae0bc0b97c24f2028",
+      "bytes": 249214,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "249214 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.903Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

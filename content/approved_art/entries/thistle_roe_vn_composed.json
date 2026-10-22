@@ -7,17 +7,11 @@
     "portraits": {
       "thistle_roe": {
         "emotions": {
-          "anxious": "composed",
           "calm": "composed",
           "composed": "composed",
-          "curious": "composed",
           "earnest": "composed",
-          "encouraging": "composed",
           "firm": "composed",
-          "frightened": "composed",
-          "neutral": "composed",
-          "shy": "composed",
-          "tearful": "composed"
+          "neutral": "composed"
         },
         "images": {
           "composed": "art/portrait_thistle_roe_composed.webp"
@@ -96,10 +90,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.966Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

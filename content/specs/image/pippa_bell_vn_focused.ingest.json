@@ -42,7 +42,10 @@
     "emotion_tags": [
       "analytical",
       "focused",
-      "serious"
+      "serious",
+      "startled",
+      "uneasy",
+      "wondering"
     ]
   },
   "qc": {

@@ -10,6 +10,7 @@
           "analytical": "focused",
           "focused": "focused",
           "grave": "focused",
+          "reflective": "focused",
           "serious": "focused"
         },
         "images": {
@@ -89,10 +90,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.943Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

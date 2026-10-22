@@ -40,17 +40,11 @@
     "character": "thistle_roe",
     "image": "composed",
     "emotion_tags": [
-      "anxious",
       "calm",
       "composed",
-      "curious",
       "earnest",
-      "encouraging",
       "firm",
-      "frightened",
-      "neutral",
-      "shy",
-      "tearful"
+      "neutral"
     ]
   },
   "qc": {

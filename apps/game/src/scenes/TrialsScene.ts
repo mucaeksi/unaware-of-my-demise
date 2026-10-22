@@ -113,12 +113,12 @@ export class TrialsScene extends HubScreen {
       const active = teams.teams.find((t) => t.active);
       let members: TeamMember[] = active?.members?.length ? active.members : [];
       if (members.length === 0) {
-        const affinity = new Map(roster.map((c) => [c.id, c.formation_affinity]));
+        const roleById = new Map(roster.map((c) => [c.id, c.role]));
         const top = [...mine.characters].sort((a, b) => b.level - a.level || a.id.localeCompare(b.id)).slice(0, 5);
         let front = 0;
         let rear = 0;
         members = top.map((c, slot) => {
-          const wantFront = affinity.get(c.id) === 'front';
+          const wantFront = /tank|bruiser|vanguard|knight|defender|shield|warden|front/i.test(roleById.get(c.id) ?? '');
           const row: 'front' | 'rear' = wantFront && front < 2 ? (front++, 'front') : rear < 3 ? (rear++, 'rear') : (front++, 'front');
           return { characterId: c.id, slot, row };
         });

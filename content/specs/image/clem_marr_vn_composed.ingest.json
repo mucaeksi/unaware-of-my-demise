@@ -43,11 +43,12 @@
       "calm",
       "composed",
       "concern",
-      "curious",
       "direct",
-      "grim",
+      "honest",
       "matter_of_fact",
-      "neutral"
+      "neutral",
+      "resolved",
+      "shaken"
     ]
   },
   "qc": {

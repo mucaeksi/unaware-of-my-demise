@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_village_oakhaven",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "01b78221e789",
+    "provenance": ".cache/generated/bg_village_oakhaven/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 80,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "village_oakhaven"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

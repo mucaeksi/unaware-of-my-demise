@@ -24,15 +24,15 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "4b0ec1dd99eed2e3706e51b03c136a2cce365faee49655dc801a02c653f83962",
-      "bytes": 13999,
+      "sha256": "0aa3ae8f24d56175bdb9cb6f0c9d87f8e6f8f9324c4f3b099f91ae06792365cc",
+      "bytes": 18137,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
     {
       "path": "art/atlas_bellbound_dead.webp",
-      "sha256": "990827030c29201f07911b41e31dc7ba01f1020e8f46c1a25b0bc9e987f8d548",
-      "bytes": 101988,
+      "sha256": "8625696053f796c6b4f48bf524228fc69e3ffd493dbfe0f535a03c931ffffae1",
+      "bytes": 315038,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -45,8 +45,8 @@
     },
     {
       "path": "art/atlas_hollow_pilgrim.webp",
-      "sha256": "d2915a6a939ef3a09cd0d5880e7d13e474a45a73733575ee8f19f7aaa1663dc0",
-      "bytes": 123116,
+      "sha256": "6d72ccf2e831d52867b7bbee44f74db77135559d4f19d1572415c1e736a76fa2",
+      "bytes": 345924,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },

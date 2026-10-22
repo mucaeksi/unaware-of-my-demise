@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_village_oakhaven",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "village_oakhaven": "art/bg_village_oakhaven.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "01b78221e789087a91ee39e8fb7b63fadbc9dbd9debc1e0684d065df5013ed8f",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_village_oakhaven/run.provenance.json",
+    "provenance_sha256": "98068244c9de6884af00715d207102d4ea466445f831647c3f75923675f34361",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "8ffa9300bc0b398aacd4444dd4a3322c46d1e6e4aeaedfafc2366108772bbd04",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_village_oakhaven.ingest.json",
+    "spec_sha256": "5e18ce33ac100a97f6fd63ef25e6b17717439c9d1818e0c2c7b9a881a2d50a58",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "8e935edb3b3575ba3e814262bdeb0cd87886d29d7b1a91fdc0d6541f83d65b36"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_village_oakhaven.webp",
+      "sha256": "7b500641ed7e5b1726d5de8a2ab43753e0e44af4766068f4c30106e07f26afc5",
+      "pixels_sha256": "bf81c0ffa9202d003de2cf8e722bf638cf5489b04a2c108429dbb36f60e4f2d5",
+      "bytes": 174900,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "174900 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.903Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

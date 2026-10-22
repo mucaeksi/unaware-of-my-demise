@@ -18,12 +18,12 @@
     },
     {
       "op": "show",
-      "character": "kera_voss",
+      "character": "red_vial_matron",
       "side": "left"
     },
     {
       "op": "show",
-      "character": "fadyme",
+      "character": "kera_voss",
       "side": "right"
     },
     {

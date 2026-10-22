@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "asset_id": "ashen_lord_wraith_vn_defiant",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "ashen_lord_wraith": {
+        "emotions": {
+          "defiant": "defiant",
+          "fierce": "defiant",
+          "urgent": "defiant"
+        },
+        "images": {
+          "defiant": "art/portrait_ashen_lord_wraith_defiant.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "028ca950452914348cd843fd3c55a4d2f1a6893509f6b7b501efab2734292ca1",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/ashen_lord_wraith_vn_defiant/run.provenance.json",
+    "provenance_sha256": "4c5f3d4994239bb2361dcad4bc336bf83d49f30cf3ee719dd85b23aad7b7ba8a",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "2fec619460b5570b57bc43bb1f11614bc83a0b6ca1202090a9f8b4ccc046da27",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/ashen_lord_wraith_vn_defiant.ingest.json",
+    "spec_sha256": "3a1bfcb3514d310ef6576e783afa8ab9cfdfb234e094a4cf121126273e1093b0",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "9ad81ffc9fc4e40601b0fb5a55c4db9eec34c463b0bd8015ab83489fa6892938"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_ashen_lord_wraith_defiant.webp",
+      "sha256": "3020f586072ec9b3b2a676813f60e9fba7972126ddfa3a0a3364397b2370c094",
+      "pixels_sha256": "f745eeb0aa22b957e3b8129ab2e29372f5e5b9a1ac59178d3a395813a0ca3501",
+      "bytes": 51304,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=15"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "51304 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 15 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.885Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

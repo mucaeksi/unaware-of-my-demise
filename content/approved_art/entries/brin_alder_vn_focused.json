@@ -9,7 +9,9 @@
         "emotions": {
           "analytical": "focused",
           "focused": "focused",
-          "serious": "focused"
+          "serious": "focused",
+          "strained": "focused",
+          "uneasy": "focused"
         },
         "images": {
           "focused": "art/portrait_brin_alder_focused.webp"
@@ -88,10 +90,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.909Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

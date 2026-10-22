@@ -7,20 +7,13 @@
     "portraits": {
       "hana_birch": {
         "emotions": {
-          "ashamed": "composed",
           "calm": "composed",
           "composed": "composed",
-          "curious": "composed",
           "firm": "composed",
           "honest": "composed",
-          "nervous": "composed",
           "neutral": "composed",
           "quiet": "composed",
-          "relieved": "composed",
-          "small": "composed",
-          "thoughtful": "composed",
-          "trembling": "composed",
-          "worried": "composed"
+          "small": "composed"
         },
         "images": {
           "composed": "art/portrait_hana_birch_composed.webp"
@@ -99,10 +92,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.925Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

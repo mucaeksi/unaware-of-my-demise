@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_lowland_refuge",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "lowland_refuge": "art/bg_lowland_refuge.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "b9af4f75e7ea32b1f22a5db0eb3057240d0955f20602a5216b70bb6ee1ff9184",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_lowland_refuge/run.provenance.json",
+    "provenance_sha256": "400f0ec2fac3d33f5564234e58c713c7777e088d446f967bab93e184e45f10d6",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "b9bf88a374b6b9124b3fbb70308bf087164a10fcba18bf18c9de50261a3c3d82",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_lowland_refuge.ingest.json",
+    "spec_sha256": "900ac37f26fd610caa948cffab21180d2284b98263e794a17a91512715065e94",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "ad2173818b963dbb1edf365c9d0917cf22d00dfcc35c500efa1db4f72b7b29c1"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_lowland_refuge.webp",
+      "sha256": "687b3d25ccdc81db8168102da9b70f4fa16275d299374bceffd08aa1c76ef2d2",
+      "pixels_sha256": "ffcc5c0f559e11e5273bd07cd169e55b29c745bbe82a7238b3d38fb145a82d91",
+      "bytes": 148854,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "148854 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.897Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

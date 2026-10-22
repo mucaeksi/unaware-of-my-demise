@@ -2,37 +2,109 @@
   "schema": 1,
   "asset_id": "hollow_pilgrim_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 5,
+  "revision": 6,
   "targets": {
     "atlases": {
       "atlas_hollow_pilgrim": {
         "image": "art/atlas_hollow_pilgrim.webp",
-        "width": 2026,
-        "height": 437,
+        "width": 1754,
+        "height": 1154,
         "frames": {
-          "hit": [
-            4,
-            4,
-            521,
-            429
-          ],
           "idle": [
-            529,
             4,
-            467,
-            408
+            4,
+            344,
+            307
+          ],
+          "idle_2": [
+            352,
+            4,
+            344,
+            307
+          ],
+          "idle_3": [
+            700,
+            4,
+            344,
+            307
+          ],
+          "ultimate": [
+            1048,
+            4,
+            343,
+            307
+          ],
+          "ultimate_2": [
+            1395,
+            4,
+            343,
+            307
+          ],
+          "ultimate_3": [
+            4,
+            315,
+            343,
+            307
+          ],
+          "active": [
+            351,
+            315,
+            341,
+            306
+          ],
+          "active_2": [
+            696,
+            315,
+            341,
+            306
+          ],
+          "active_3": [
+            1041,
+            315,
+            341,
+            306
           ],
           "basic": [
-            1000,
+            1386,
+            315,
+            342,
+            304
+          ],
+          "basic_2": [
             4,
-            452,
-            401
+            626,
+            342,
+            304
+          ],
+          "basic_3": [
+            350,
+            626,
+            342,
+            304
+          ],
+          "victory": [
+            696,
+            626,
+            343,
+            304
+          ],
+          "walk": [
+            1043,
+            626,
+            338,
+            302
+          ],
+          "hit": [
+            1385,
+            626,
+            365,
+            298
           ],
           "defeat": [
-            1456,
             4,
-            566,
-            343
+            934,
+            365,
+            216
           ]
         }
       }
@@ -47,49 +119,92 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.568
+            "pivot_x": 0.571,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
           },
           "walk": {
-            "frame": "idle",
+            "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.568
+            "pivot_x": 0.612
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.607
+            "pivot_x": 0.609,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "active": {
-            "frame": "basic",
+            "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.607
+            "pivot_x": 0.609,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "ultimate": {
-            "frame": "basic",
+            "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.607
+            "pivot_x": 0.61,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "hit": {
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.532
+            "pivot_x": 0.531
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.537
+            "pivot_x": 0.543
           },
           "victory": {
-            "frame": "idle",
+            "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.568
+            "pivot_x": 0.571
           }
         }
       }
@@ -97,32 +212,32 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "f8b7571307515e817e662957f7445ace12e48bf832ca00f244749815895f222e",
+    "sha256": "18334911e016bd1878be1cc655f42ed2eadcf62d9d26c4b23c76688399add76c",
     "mime": "image/png",
-    "width": 2752,
-    "height": 1536,
+    "width": 2880,
+    "height": 2880,
     "provenance_file": ".cache/generated/hollow_pilgrim_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "1def05ec39792fcdb06aff31169d777846f69eb53762762663ea8974f98de435",
+    "provenance_sha256": "bc2fdcde923cf68028d7a52253f2cb6f7a4c4a9112e16ef44b74d7717d4fb914",
     "model": "gemini-3-pro-image",
-    "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
+    "prompt_sha256": "12c6178036f28a4bb95f4fb07cc2d719c82a4188d8a1c461d56770063c7220c4",
     "references": [],
     "settled_usd": 0
   },
   "ingest": {
     "spec_path": "content/specs/image/hollow_pilgrim_chibi_sheet.ingest.json",
-    "spec_sha256": "bd84874b91300913fe9503e9bf01884a57a2edac6867f2c0c817bdbb3840887f",
+    "spec_sha256": "57944e60415a5985203351ed062d0560a3f1b03d7f99f96f1db47f65ae0f7f32",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "2fa68f680793c354e1a9e5c493b53835b03b3dc58ef8b0c42469c86c626d303d"
+    "fingerprint": "04ea71faf8f7274aa90ae0b263c40183f9cb37e8c1fcced6f837eaf0f7cf1016"
   },
   "outputs": [
     {
       "path": "art/atlas_hollow_pilgrim.webp",
-      "sha256": "d2915a6a939ef3a09cd0d5880e7d13e474a45a73733575ee8f19f7aaa1663dc0",
-      "pixels_sha256": "6dee4311edee11bcd0a2033df949385bccd6facb2867ad9591776c3e46b19ca8",
-      "bytes": 123116,
-      "width": 2026,
-      "height": 437
+      "sha256": "6d72ccf2e831d52867b7bbee44f74db77135559d4f19d1572415c1e736a76fa2",
+      "pixels_sha256": "57046084d90f0b51a767421bc2464fa8bfdb12ed5018b415c38ab57371cc1cc4",
+      "bytes": 345924,
+      "width": 1754,
+      "height": 1154
     }
   ],
   "qc": {
@@ -138,7 +253,7 @@
         },
         "A02": {
           "status": "pass",
-          "detail": "image/png 2752x1536"
+          "detail": "image/png 2880x2880"
         },
         "A07": {
           "status": "pass",
@@ -146,41 +261,41 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=3"
+          "detail": "removed=10"
         },
         "A14": {
           "status": "pass",
-          "detail": "4 cells"
+          "detail": "16 cells"
         },
         "A15": {
           "status": "pass"
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.708"
+          "detail": "k=0.558"
         },
         "A18": {
           "status": "pass",
-          "detail": "2026x437"
+          "detail": "1754x1154"
         },
         "A19": {
           "status": "pass",
-          "detail": "123116 bytes <= 665600"
+          "detail": "345924 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0008%"
+          "detail": "spill=0.0000%"
         }
       },
       "warnings": [
-        "A12: removed 3 isolated specks"
+        "A12: removed 10 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner",
-      "at": "2026-10-15T19:30:17.144Z",
-      "note": "Approved"
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.927Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {
@@ -248,6 +363,21 @@
       ],
       "source_sha256": "b340fb827f190fdf3209c3b6912d874b4cf9c810a7335473dc3a8c51f82523cf",
       "fingerprint": "29034404cbda3d0cb0c85f8d69392d44b3cf3b42571f2f978282e5ba6a881d86"
+    },
+    {
+      "revision": 5,
+      "outputs": [
+        {
+          "path": "art/atlas_hollow_pilgrim.webp",
+          "sha256": "d2915a6a939ef3a09cd0d5880e7d13e474a45a73733575ee8f19f7aaa1663dc0",
+          "pixels_sha256": "6dee4311edee11bcd0a2033df949385bccd6facb2867ad9591776c3e46b19ca8",
+          "bytes": 123116,
+          "width": 2026,
+          "height": 437
+        }
+      ],
+      "source_sha256": "f8b7571307515e817e662957f7445ace12e48bf832ca00f244749815895f222e",
+      "fingerprint": "2fa68f680793c354e1a9e5c493b53835b03b3dc58ef8b0c42469c86c626d303d"
     }
   ]
 }

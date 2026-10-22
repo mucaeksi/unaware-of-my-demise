@@ -8,7 +8,9 @@
       "iona_mist": {
         "emotions": {
           "analytical": "focused",
+          "careful": "focused",
           "focused": "focused",
+          "observant": "focused",
           "serious": "focused"
         },
         "images": {
@@ -88,10 +90,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.929Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

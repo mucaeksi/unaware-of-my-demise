@@ -20,18 +20,18 @@
     },
     {
       "output": "content/base/art/atlas_bellbound_dead.webp",
-      "sha256": "990827030c29201f07911b41e31dc7ba01f1020e8f46c1a25b0bc9e987f8d548",
+      "sha256": "8625696053f796c6b4f48bf524228fc69e3ffd493dbfe0f535a03c931ffffae1",
       "sources": {
-        "generated:bellbound_dead_chibi_sheet@rev4": "31fb3337c0aad2f298926ab2e03699770a0c3ecff4c1cfa118019dfe5c82ca57",
-        "entry": "38019e50b1e5b6ef5b04c62516aef80b52eb462ca9c8f4be70cc6f3ab93e5236"
+        "generated:bellbound_dead_chibi_sheet@rev5": "ed460693e88f597afd8ccd663586f3936077d2f83edb1e14c37f8b2587480f85",
+        "entry": "4cb15b762d5f6018670161457be8695b9881bce009078eba90731ed31fabbfab"
       }
     },
     {
       "output": "content/base/art/atlas_hollow_pilgrim.webp",
-      "sha256": "d2915a6a939ef3a09cd0d5880e7d13e474a45a73733575ee8f19f7aaa1663dc0",
+      "sha256": "6d72ccf2e831d52867b7bbee44f74db77135559d4f19d1572415c1e736a76fa2",
       "sources": {
-        "generated:hollow_pilgrim_chibi_sheet@rev5": "f8b7571307515e817e662957f7445ace12e48bf832ca00f244749815895f222e",
-        "entry": "2fa68f680793c354e1a9e5c493b53835b03b3dc58ef8b0c42469c86c626d303d"
+        "generated:hollow_pilgrim_chibi_sheet@rev6": "18334911e016bd1878be1cc655f42ed2eadcf62d9d26c4b23c76688399add76c",
+        "entry": "04ea71faf8f7274aa90ae0b263c40183f9cb37e8c1fcced6f837eaf0f7cf1016"
       }
     },
     {
@@ -291,7 +291,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "4b0ec1dd99eed2e3706e51b03c136a2cce365faee49655dc801a02c653f83962",
+      "sha256": "0aa3ae8f24d56175bdb9cb6f0c9d87f8e6f8f9324c4f3b099f91ae06792365cc",
       "sources": {}
     },
     {

@@ -40,20 +40,13 @@
     "character": "hana_birch",
     "image": "composed",
     "emotion_tags": [
-      "ashamed",
       "calm",
       "composed",
-      "curious",
       "firm",
       "honest",
-      "nervous",
       "neutral",
       "quiet",
-      "relieved",
-      "small",
-      "thoughtful",
-      "trembling",
-      "worried"
+      "small"
     ]
   },
   "qc": {

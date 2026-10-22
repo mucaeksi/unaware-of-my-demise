@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "asset_id": "lady_yseldra_vale_vn_focused",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "635b18d13eee",
+    "provenance": ".cache/generated/lady_yseldra_vale_vn_focused/run.provenance.json"
+  },
+  "key": {
+    "colour": "auto",
+    "sample": [
+      "top",
+      "left",
+      "right"
+    ],
+    "alpha_ramp": [
+      30,
+      210
+    ],
+    "choke_px": 1.5,
+    "despill": true
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 92,
+      "effort": 5
+    },
+    "max_bytes": 245760
+  },
+  "manifest": {
+    "character": "lady_yseldra_vale",
+    "image": "focused",
+    "emotion_tags": [
+      "analytical",
+      "bitter",
+      "focused",
+      "grave",
+      "serious"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

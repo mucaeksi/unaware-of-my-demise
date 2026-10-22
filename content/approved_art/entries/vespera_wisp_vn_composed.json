@@ -8,7 +8,6 @@
       "vespera_wisp": {
         "emotions": {
           "calm": "composed",
-          "careful": "composed",
           "composed": "composed",
           "distant": "composed",
           "dry": "composed",
@@ -16,8 +15,7 @@
           "low": "composed",
           "neutral": "composed",
           "quiet": "composed",
-          "tired": "composed",
-          "uneasy": "composed"
+          "tired": "composed"
         },
         "images": {
           "composed": "art/portrait_vespera_wisp_composed.webp"
@@ -96,10 +94,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.969Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

@@ -41,8 +41,12 @@
     "image": "focused",
     "emotion_tags": [
       "analytical",
+      "breaking",
       "focused",
-      "serious"
+      "hesitant",
+      "serious",
+      "stunned",
+      "tearful"
     ]
   },
   "qc": {
