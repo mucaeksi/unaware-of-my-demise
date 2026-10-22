@@ -11,7 +11,7 @@
     },
     "cloudflare-d1-liveops": {
       "adapter": ".agents/skills/cloudflare-d1-liveops/SKILL.md",
-      "adapter_sha256": "0e17b14ad60f889de122f5311c1ac984b90b2f0381f05d3b71340df5aa7705d7",
+      "adapter_sha256": "99c569230a2cf023aba3d26fea7c5e4eb92593f98b2dbec6b83a659dbe7b1ceb",
       "source": ".claude/skills/cloudflare-d1-liveops/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/cloudflare-d1-liveops/SKILL.md": "64387b0a773f9374384ad6602830c7f6c43b0e07a9af43f4d1d9363d3caf4ec0"
