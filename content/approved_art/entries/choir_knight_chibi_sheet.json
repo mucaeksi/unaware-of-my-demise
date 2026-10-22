@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "choir_knight_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_choir_knight": {
         "image": "art/atlas_choir_knight.webp",
         "width": 2023,
-        "height": 542,
+        "height": 980,
         "frames": {
-          "idle": [
-            4,
-            4,
-            92,
-            266
-          ],
-          "idle_2": [
-            100,
-            4,
-            92,
-            266
-          ],
-          "idle_3": [
-            196,
-            4,
-            92,
-            266
-          ],
           "ultimate": [
-            292,
             4,
-            285,
-            266
+            4,
+            332,
+            351
           ],
           "ultimate_2": [
-            581,
+            340,
             4,
-            285,
-            266
+            332,
+            351
           ],
           "ultimate_3": [
-            870,
+            676,
             4,
-            285,
-            266
+            332,
+            351
           ],
           "active": [
-            1159,
+            1012,
             4,
-            284,
-            265
+            333,
+            343
           ],
           "active_2": [
-            1447,
+            1349,
             4,
-            284,
-            265
+            333,
+            343
           ],
           "active_3": [
-            1735,
+            1686,
             4,
-            284,
-            265
-          ],
-          "basic": [
-            4,
-            274,
-            285,
-            264
-          ],
-          "basic_2": [
-            293,
-            274,
-            285,
-            264
-          ],
-          "basic_3": [
-            582,
-            274,
-            285,
-            264
+            333,
+            343
           ],
           "victory": [
-            871,
-            274,
-            91,
-            264
+            4,
+            359,
+            128,
+            338
+          ],
+          "basic": [
+            136,
+            359,
+            338,
+            325
+          ],
+          "basic_2": [
+            478,
+            359,
+            338,
+            325
+          ],
+          "basic_3": [
+            820,
+            359,
+            338,
+            325
+          ],
+          "idle": [
+            1162,
+            359,
+            120,
+            323
+          ],
+          "idle_2": [
+            1286,
+            359,
+            120,
+            323
+          ],
+          "idle_3": [
+            1410,
+            359,
+            120,
+            323
           ],
           "walk": [
-            966,
-            274,
-            280,
-            262
-          ],
-          "hit": [
-            1250,
-            274,
-            172,
-            259
+            1534,
+            359,
+            309,
+            323
           ],
           "defeat": [
-            1426,
-            274,
-            317,
-            241
+            4,
+            701,
+            373,
+            275
+          ],
+          "hit": [
+            381,
+            701,
+            373,
+            275
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.508,
+            "pivot_x": 0.54,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.615
+            "pivot_x": 0.616,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.615,
+            "pivot_x": 0.605,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.616,
+            "pivot_x": 0.619,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.614,
+            "pivot_x": 0.613,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.458
+            "pivot_x": 0.456,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.448
+            "pivot_x": 0.456,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.509
+            "pivot_x": 0.431,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "2149131f4703cf3d9a33cf0df024e15908f72182896bf28d0e079976064a1ec6",
+    "sha256": "e2f4d02c0dbaadc1348065a863556d64d399cb12c4f6761d55dd2c635767bed4",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/choir_knight_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "7b9868823ca29b454f0f3cfecc1a5c64087a6d1f12d886a9ac0f68cf668248a3",
+    "provenance_sha256": "c7cf4f2e6514c6882b55d0d3742c5129154f63b3779a99fa67a23cfaf53e3f48",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "d1aba32de2a00b6b2632112353736d62a0f319618a63feb4ff465cf84e10344c",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/choir_knight_chibi_sheet.ingest.json",
-    "spec_sha256": "7f531682688d88a15b59a4c81af4f1fa8e2eaf92e2a2809a21b958a583c73700",
+    "spec_sha256": "be84c3debb20d2c42e92f9c651640bfc40e7e410b11cfbafce7162fb1c4496fd",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "14f346f9ab624f173014feb957257fad83518b7bfec7f0e6bd93647b1dc6696c"
+    "fingerprint": "8e3df0e1511b7977c4030e2e58b0a8f3c94eff817f48ab8ff40474cefc0c4d54"
   },
   "outputs": [
     {
       "path": "art/atlas_choir_knight.webp",
-      "sha256": "0c55329c40b85f535936f380b87f737d783800c15f05950c716ea47dfb2e3426",
-      "pixels_sha256": "c9a4601cd77a3d47d841ba5b5feb51436d3df135c1efe08b8faaffec6a9d75f2",
-      "bytes": 254052,
+      "sha256": "e13142773677bd4615c6843f8763d5d2d0ffa82a42d429adf41b2b27ea073ba8",
+      "pixels_sha256": "6054e58bd4e0933b495b0b17655dcaa5d4fdbb755c2da69c76a753c8dcd5a435",
+      "bytes": 313568,
       "width": 2023,
-      "height": 542
+      "height": 980
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=77"
+          "detail": "removed=8"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "2023x542"
+          "detail": "2023x980"
         },
         "A19": {
           "status": "pass",
-          "detail": "254052 bytes <= 665600"
+          "detail": "313568 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0012%"
+          "detail": "spill=0.0022%"
         }
       },
       "warnings": [
-        "A12: removed 77 isolated specks"
+        "A12: removed 8 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.911Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:29:40.754Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_choir_knight.webp",
+          "sha256": "0c55329c40b85f535936f380b87f737d783800c15f05950c716ea47dfb2e3426",
+          "pixels_sha256": "c9a4601cd77a3d47d841ba5b5feb51436d3df135c1efe08b8faaffec6a9d75f2",
+          "bytes": 254052,
+          "width": 2023,
+          "height": 542
+        }
+      ],
+      "source_sha256": "2149131f4703cf3d9a33cf0df024e15908f72182896bf28d0e079976064a1ec6",
+      "fingerprint": "14f346f9ab624f173014feb957257fad83518b7bfec7f0e6bd93647b1dc6696c"
+    }
+  ]
 }

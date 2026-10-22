@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "hana_birch_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_hana_birch": {
         "image": "art/atlas_hana_birch.webp",
-        "width": 2015,
-        "height": 706,
+        "width": 1945,
+        "height": 676,
         "frames": {
-          "idle": [
-            4,
-            4,
-            229,
-            348
-          ],
-          "idle_2": [
-            237,
-            4,
-            229,
-            348
-          ],
-          "idle_3": [
-            470,
-            4,
-            229,
-            348
-          ],
           "ultimate": [
-            703,
             4,
-            240,
-            348
+            4,
+            234,
+            349
           ],
           "ultimate_2": [
-            947,
+            242,
             4,
-            240,
-            348
+            234,
+            349
           ],
           "ultimate_3": [
-            1191,
+            480,
             4,
-            240,
-            348
-          ],
-          "active": [
-            1435,
-            4,
-            238,
-            346
-          ],
-          "active_2": [
-            1677,
-            4,
-            238,
-            346
-          ],
-          "active_3": [
-            4,
-            356,
-            238,
-            346
-          ],
-          "basic": [
-            246,
-            356,
-            262,
-            345
-          ],
-          "basic_2": [
-            512,
-            356,
-            262,
-            345
-          ],
-          "basic_3": [
-            778,
-            356,
-            262,
-            345
+            234,
+            349
           ],
           "victory": [
-            1044,
-            356,
-            234,
-            345
+            718,
+            4,
+            220,
+            340
+          ],
+          "active": [
+            942,
+            4,
+            231,
+            339
+          ],
+          "active_2": [
+            1177,
+            4,
+            231,
+            339
+          ],
+          "active_3": [
+            1412,
+            4,
+            231,
+            339
           ],
           "walk": [
-            1282,
-            356,
-            257,
-            343
+            1647,
+            4,
+            254,
+            318
           ],
-          "hit": [
-            1543,
-            356,
-            232,
-            338
+          "idle": [
+            4,
+            357,
+            215,
+            315
+          ],
+          "idle_2": [
+            223,
+            357,
+            215,
+            315
+          ],
+          "idle_3": [
+            442,
+            357,
+            215,
+            315
+          ],
+          "basic": [
+            661,
+            357,
+            254,
+            312
+          ],
+          "basic_2": [
+            919,
+            357,
+            254,
+            312
+          ],
+          "basic_3": [
+            1177,
+            357,
+            254,
+            312
           ],
           "defeat": [
-            1779,
-            356,
-            232,
-            335
+            1435,
+            357,
+            251,
+            281
+          ],
+          "hit": [
+            1690,
+            357,
+            251,
+            281
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.506,
+            "pivot_x": 0.479,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.458
+            "pivot_x": 0.445,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.463,
+            "pivot_x": 0.458,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.511,
+            "pivot_x": 0.49,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.512,
+            "pivot_x": 0.496,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.571
+            "pivot_x": 0.591,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.568
+            "pivot_x": 0.591,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.514
+            "pivot_x": 0.502,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "b6041adf5d5559ff3e0b809afe17c290c58d004279c109205ddf461d0a4c3abd",
+    "sha256": "0c4d369b56d0cbde85e144d26ccab3dc23ad27883f8944a6f1667d8a33d6a482",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/hana_birch_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "65e777522d649768600a5627193f9bfe818ff50c658f3a560a2c09374c556052",
+    "provenance_sha256": "44321098b42674045e52bd87563d6e82a24864560fd43b73c8be9073f4fd291b",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "da4ed6ccc7e4c320fd916cec96a5d59f5ebe444e94f34518cacb82d1b302845c",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/hana_birch_chibi_sheet.ingest.json",
-    "spec_sha256": "a472fadcfc912de1d0826a166e883034ad30c6b01302f463150fa33fd2f31893",
+    "spec_sha256": "00f5047e4aa7d2078d2f66214ab3a52c396ab81f0f7c4a961997e026ad6a3eea",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "5d37a68445ba9bf0b794a73501a6148ddc76a8b8bfc82d81c2521fedb13847ae"
+    "fingerprint": "40c46ce4a6ed743a099e934fa24b6aa21cb1389815f6645eb8a55a87f6cc29c9"
   },
   "outputs": [
     {
       "path": "art/atlas_hana_birch.webp",
-      "sha256": "6e2da328434b180b84d0d0f00b6530bee65e5113d205ba6de1fc400de7328bbb",
-      "pixels_sha256": "2a7fd394195c1453d5af721c041dbd752a5c276ada76ff38c73edf812fab5285",
-      "bytes": 455738,
-      "width": 2015,
-      "height": 706
+      "sha256": "726b30da1a8fd421cec28aaa94be2eae1f022a87ec1c0223b4854e8bcb047053",
+      "pixels_sha256": "9e035ad154ee29cf43efab86b363939b450e426dfaae938313350a2b5f27649a",
+      "bytes": 384768,
+      "width": 1945,
+      "height": 676
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=8"
+          "detail": "removed=27"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "2015x706"
+          "detail": "1945x676"
         },
         "A19": {
           "status": "pass",
-          "detail": "455738 bytes <= 665600"
+          "detail": "384768 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0011%"
+          "detail": "spill=0.0010%"
         }
       },
       "warnings": [
-        "A12: removed 8 isolated specks"
+        "A12: removed 27 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.925Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:30:20.249Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_hana_birch.webp",
+          "sha256": "6e2da328434b180b84d0d0f00b6530bee65e5113d205ba6de1fc400de7328bbb",
+          "pixels_sha256": "2a7fd394195c1453d5af721c041dbd752a5c276ada76ff38c73edf812fab5285",
+          "bytes": 455738,
+          "width": 2015,
+          "height": 706
+        }
+      ],
+      "source_sha256": "b6041adf5d5559ff3e0b809afe17c290c58d004279c109205ddf461d0a4c3abd",
+      "fingerprint": "5d37a68445ba9bf0b794a73501a6148ddc76a8b8bfc82d81c2521fedb13847ae"
+    }
+  ]
 }

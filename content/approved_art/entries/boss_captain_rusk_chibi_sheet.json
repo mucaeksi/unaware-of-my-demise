@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "boss_captain_rusk_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 5,
+  "revision": 6,
   "targets": {
     "atlases": {
       "atlas_boss_captain_rusk": {
         "image": "art/atlas_boss_captain_rusk.webp",
-        "width": 2014,
-        "height": 1012,
+        "width": 2038,
+        "height": 612,
         "frames": {
-          "idle": [
-            4,
-            4,
-            225,
-            337
-          ],
-          "idle_2": [
-            233,
-            4,
-            225,
-            337
-          ],
-          "idle_3": [
-            462,
-            4,
-            225,
-            337
-          ],
           "ultimate": [
-            691,
             4,
-            261,
-            337
+            4,
+            235,
+            315
           ],
           "ultimate_2": [
-            956,
+            243,
             4,
-            261,
-            337
+            235,
+            315
           ],
           "ultimate_3": [
-            1221,
+            482,
             4,
-            261,
-            337
+            235,
+            315
           ],
           "active": [
-            1486,
+            721,
             4,
-            260,
-            336
+            233,
+            305
           ],
           "active_2": [
-            1750,
+            958,
             4,
-            260,
-            336
+            233,
+            305
           ],
           "active_3": [
+            1195,
             4,
-            345,
-            260,
-            336
-          ],
-          "basic": [
-            268,
-            345,
-            260,
-            335
-          ],
-          "basic_2": [
-            532,
-            345,
-            260,
-            335
-          ],
-          "basic_3": [
-            796,
-            345,
-            260,
-            335
+            233,
+            305
           ],
           "victory": [
-            1060,
-            345,
-            224,
-            335
+            1432,
+            4,
+            196,
+            302
           ],
-          "hit": [
-            1288,
-            345,
-            203,
-            332
+          "idle": [
+            1632,
+            4,
+            199,
+            285
+          ],
+          "idle_2": [
+            1835,
+            4,
+            199,
+            285
+          ],
+          "idle_3": [
+            4,
+            323,
+            199,
+            285
           ],
           "walk": [
-            1495,
-            345,
-            225,
-            332
+            207,
+            323,
+            199,
+            284
+          ],
+          "basic": [
+            410,
+            323,
+            227,
+            274
+          ],
+          "basic_2": [
+            641,
+            323,
+            227,
+            274
+          ],
+          "basic_3": [
+            872,
+            323,
+            227,
+            274
           ],
           "defeat": [
-            4,
-            685,
-            343,
-            323
+            1103,
+            323,
+            293,
+            256
+          ],
+          "hit": [
+            1400,
+            323,
+            293,
+            256
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.651,
+            "pivot_x": 0.681,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.65
+            "pivot_x": 0.699,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.62,
+            "pivot_x": 0.579,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.621,
+            "pivot_x": 0.631,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.621,
+            "pivot_x": 0.629,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.535
+            "pivot_x": 0.531,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.505
+            "pivot_x": 0.531,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.651
+            "pivot_x": 0.609,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "c38a011ec34fc030fc4ce307095dde24a8776816c4742c9d666e8a63bc53154e",
+    "sha256": "6af8f587fa63637b34bb42c045b93e1d625987d06a1a254c9af72f505de669fc",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/boss_captain_rusk_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "32579e61bcb5e0acda3fc07576af7b56a4dac58220139cefee8f78c39eaeab0f",
+    "provenance_sha256": "2b9efd649070cb66815150e188f9ac8a836c63db7e2239b9950bc2b2de70b4b9",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "67500e69d2f6ffaf5a9e7548bd5142538a7a8eae99c67c543b61b0afb7810873",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/boss_captain_rusk_chibi_sheet.ingest.json",
-    "spec_sha256": "824e351dce0e766dbfaf16bf9785129d09564b00b01eef31190561a459c6c6aa",
+    "spec_sha256": "ef6535bd21286a41d1478ec79136208025f06e01863478f09eb292cb7c3e5ba6",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "acb6d6164ebc47a66058b298a71758be99c46007905b4ee706fe9e0c6831b13b"
+    "fingerprint": "d4f842dc922bdee9c2b4b37c699f811c849b1f3a39fb39e0dd75dfea9d1c5e6a"
   },
   "outputs": [
     {
       "path": "art/atlas_boss_captain_rusk.webp",
-      "sha256": "74f0738256082fda33eab501bc7e994e3f8ac99cc50cd024f84de7b94d578815",
-      "pixels_sha256": "43fec389c2b2d4e194eae89bc2edc41e98295988fce9e2f23e3140cc3b13d87d",
-      "bytes": 300012,
-      "width": 2014,
-      "height": 1012
+      "sha256": "8ad2f2a4da96f49ab05fa01a7c800bd410c1bff0ab1464d92ee1d75a41cbade9",
+      "pixels_sha256": "b2b7551f06ec29a31efdbbb9b952275c996c13925aed03af33fd7ddab4d17909",
+      "bytes": 250066,
+      "width": 2038,
+      "height": 612
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=92"
+          "detail": "removed=158"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.623"
+          "detail": "k=0.535"
         },
         "A18": {
           "status": "pass",
-          "detail": "2014x1012"
+          "detail": "2038x612"
         },
         "A19": {
           "status": "pass",
-          "detail": "300012 bytes <= 665600"
+          "detail": "250066 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0022%"
+          "detail": "spill=0.0041%"
         }
       },
       "warnings": [
-        "A12: removed 92 isolated specks"
+        "A12: removed 158 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.905Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:29:12.539Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -363,6 +400,21 @@
       ],
       "source_sha256": "a51c80586c7be1771266dbb7e20a57fe61ff8af84d85d9282a91547241325cde",
       "fingerprint": "bdd86752193c71baea1701eef1757c55e5966d7c508fea059cba54a96c0d8a21"
+    },
+    {
+      "revision": 5,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_captain_rusk.webp",
+          "sha256": "74f0738256082fda33eab501bc7e994e3f8ac99cc50cd024f84de7b94d578815",
+          "pixels_sha256": "43fec389c2b2d4e194eae89bc2edc41e98295988fce9e2f23e3140cc3b13d87d",
+          "bytes": 300012,
+          "width": 2014,
+          "height": 1012
+        }
+      ],
+      "source_sha256": "c38a011ec34fc030fc4ce307095dde24a8776816c4742c9d666e8a63bc53154e",
+      "fingerprint": "acb6d6164ebc47a66058b298a71758be99c46007905b4ee706fe9e0c6831b13b"
     }
   ]
 }

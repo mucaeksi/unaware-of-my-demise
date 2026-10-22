@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "bellbound_dead_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 5,
+  "revision": 7,
   "targets": {
     "atlases": {
       "atlas_bellbound_dead": {
         "image": "art/atlas_bellbound_dead.webp",
-        "width": 1984,
-        "height": 931,
+        "width": 1991,
+        "height": 977,
         "frames": {
-          "idle": [
-            4,
-            4,
-            215,
-            307
-          ],
-          "idle_2": [
-            223,
-            4,
-            215,
-            307
-          ],
-          "idle_3": [
-            442,
-            4,
-            215,
-            307
-          ],
-          "ultimate": [
-            661,
-            4,
-            327,
-            307
-          ],
-          "ultimate_2": [
-            992,
-            4,
-            327,
-            307
-          ],
-          "ultimate_3": [
-            1323,
-            4,
-            327,
-            307
-          ],
-          "active": [
-            1654,
-            4,
-            326,
-            306
-          ],
-          "active_2": [
-            4,
-            315,
-            326,
-            306
-          ],
-          "active_3": [
-            334,
-            315,
-            326,
-            306
-          ],
-          "basic": [
-            664,
-            315,
-            327,
-            304
-          ],
-          "basic_2": [
-            995,
-            315,
-            327,
-            304
-          ],
-          "basic_3": [
-            1326,
-            315,
-            327,
-            304
-          ],
           "victory": [
-            1657,
-            315,
-            214,
-            304
+            4,
+            4,
+            241,
+            354
           ],
           "walk": [
+            249,
             4,
-            625,
-            325,
-            302
+            340,
+            329
           ],
-          "hit": [
-            333,
-            625,
-            343,
+          "idle": [
+            593,
+            4,
+            230,
+            317
+          ],
+          "idle_2": [
+            827,
+            4,
+            230,
+            317
+          ],
+          "idle_3": [
+            1061,
+            4,
+            230,
+            317
+          ],
+          "basic": [
+            1295,
+            4,
+            344,
+            310
+          ],
+          "basic_2": [
+            1643,
+            4,
+            344,
+            310
+          ],
+          "basic_3": [
+            4,
+            362,
+            344,
+            310
+          ],
+          "active": [
+            352,
+            362,
+            350,
             298
           ],
+          "active_2": [
+            706,
+            362,
+            350,
+            298
+          ],
+          "active_3": [
+            1060,
+            362,
+            350,
+            298
+          ],
+          "ultimate": [
+            1414,
+            362,
+            336,
+            297
+          ],
+          "ultimate_2": [
+            4,
+            676,
+            336,
+            297
+          ],
+          "ultimate_3": [
+            344,
+            676,
+            336,
+            297
+          ],
           "defeat": [
-            680,
-            625,
-            343,
-            296
+            684,
+            676,
+            400,
+            240
+          ],
+          "hit": [
+            1088,
+            676,
+            400,
+            240
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.434,
+            "pivot_x": 0.471,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.437
+            "pivot_x": 0.437,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.435,
+            "pivot_x": 0.427,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.436,
+            "pivot_x": 0.414,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.435,
+            "pivot_x": 0.42,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.485
+            "pivot_x": 0.495,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.538
+            "pivot_x": 0.495,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.433
+            "pivot_x": 0.347,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "ed460693e88f597afd8ccd663586f3936077d2f83edb1e14c37f8b2587480f85",
+    "sha256": "a71fa07e451efc449bc49b37ee7160ffd27bff7c7e26db73e626609fc836d411",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/bellbound_dead_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "997bc40c61c4788bd3748613e7771b860530db69d8749796944a9224fbdbe23a",
+    "provenance_sha256": "18fbb3ea190b4d6f27f75d2831508190e7f514f95467f4038e81fff55369ac41",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "37b6f6b3d92a631bc86b38124fdf0a63df50d1fdaa6a1611b405b8b29ce6556a",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/bellbound_dead_chibi_sheet.ingest.json",
-    "spec_sha256": "2abb9c2b1bcaac2eb22bd342b02ed80b7dc48d68e4db57dbae3ea1654e840a45",
+    "spec_sha256": "0190039497196a8fa485131d75f888a9c37afe31e49c9be8c153ad7e837406ea",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "4cb15b762d5f6018670161457be8695b9881bce009078eba90731ed31fabbfab"
+    "fingerprint": "17c8d7aa79b0599c241270ff7e878407ef590b462b534a7df7b803f884843fd8"
   },
   "outputs": [
     {
       "path": "art/atlas_bellbound_dead.webp",
-      "sha256": "8625696053f796c6b4f48bf524228fc69e3ffd493dbfe0f535a03c931ffffae1",
-      "pixels_sha256": "732b470b2146f28b519579c10d1348b6ee85227ece0760dfce397bec430d0116",
-      "bytes": 315038,
-      "width": 1984,
-      "height": 931
+      "sha256": "200076551e8200d7f82afab74461d564782f51c7b3ebcfb95c25ff08d16f0a3c",
+      "pixels_sha256": "2e6e513997228296a5a4bf6ac2adde26102aa3968a8817b82e9a4610ffc40d4f",
+      "bytes": 325268,
+      "width": 1991,
+      "height": 977
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=20"
+          "detail": "removed=1"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.558"
+          "detail": "k=0.612"
         },
         "A18": {
           "status": "pass",
-          "detail": "1984x931"
+          "detail": "1991x977"
         },
         "A19": {
           "status": "pass",
-          "detail": "315038 bytes <= 665600"
+          "detail": "325268 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0000%"
+          "detail": "spill=0.0003%"
         }
       },
       "warnings": [
-        "A12: removed 20 isolated specks"
+        "A12: removed 1 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.888Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:28:59.716Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -363,6 +400,36 @@
       ],
       "source_sha256": "31fb3337c0aad2f298926ab2e03699770a0c3ecff4c1cfa118019dfe5c82ca57",
       "fingerprint": "38019e50b1e5b6ef5b04c62516aef80b52eb462ca9c8f4be70cc6f3ab93e5236"
+    },
+    {
+      "revision": 5,
+      "outputs": [
+        {
+          "path": "art/atlas_bellbound_dead.webp",
+          "sha256": "8625696053f796c6b4f48bf524228fc69e3ffd493dbfe0f535a03c931ffffae1",
+          "pixels_sha256": "732b470b2146f28b519579c10d1348b6ee85227ece0760dfce397bec430d0116",
+          "bytes": 315038,
+          "width": 1984,
+          "height": 931
+        }
+      ],
+      "source_sha256": "ed460693e88f597afd8ccd663586f3936077d2f83edb1e14c37f8b2587480f85",
+      "fingerprint": "4cb15b762d5f6018670161457be8695b9881bce009078eba90731ed31fabbfab"
+    },
+    {
+      "revision": 6,
+      "outputs": [
+        {
+          "path": "art/atlas_bellbound_dead.webp",
+          "sha256": "95dc67dbf8351e03fd96e61d4aa5e82b29abb4b4fff12d087426a4eab76b8df0",
+          "pixels_sha256": "f11d589897ac0973e6bd7e990e2dcf3005e9570471a23a96a32c160d7a74e208",
+          "bytes": 331278,
+          "width": 1987,
+          "height": 1018
+        }
+      ],
+      "source_sha256": "6e4f458e9053aa3e73417505a408230513d69d05284a9978dd39e505e5ee6abd",
+      "fingerprint": "7fa6bc2a57a22bbff45d98f4aed083b46e35f882019bc7059cf7c598fd74b1fc"
     }
   ]
 }

@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "sable_wren_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_sable_wren": {
         "image": "art/atlas_sable_wren.webp",
-        "width": 1996,
-        "height": 1047,
+        "width": 1809,
+        "height": 1029,
         "frames": {
-          "idle": [
+          "victory": [
             4,
             4,
-            208,
-            348
-          ],
-          "idle_2": [
-            216,
-            4,
-            208,
-            348
-          ],
-          "idle_3": [
-            428,
-            4,
-            208,
-            348
+            270,
+            362
           ],
           "ultimate": [
-            640,
+            278,
             4,
-            286,
-            346
+            301,
+            352
           ],
           "ultimate_2": [
-            930,
+            583,
             4,
-            286,
-            346
+            301,
+            352
           ],
           "ultimate_3": [
-            1220,
+            888,
             4,
-            286,
-            346
+            301,
+            352
           ],
           "active": [
-            1510,
+            1193,
             4,
-            284,
-            345
-          ],
-          "active_2": [
-            4,
-            356,
-            284,
-            345
-          ],
-          "active_3": [
-            292,
-            356,
-            284,
-            345
-          ],
-          "basic": [
-            580,
-            356,
-            281,
-            345
-          ],
-          "basic_2": [
-            865,
-            356,
-            281,
-            345
-          ],
-          "basic_3": [
-            1150,
-            356,
-            281,
-            345
-          ],
-          "victory": [
-            1435,
-            356,
-            279,
+            304,
             344
           ],
-          "walk": [
-            1718,
-            356,
-            274,
-            343
-          ],
-          "hit": [
+          "active_2": [
+            1501,
             4,
-            705,
-            239,
-            338
+            304,
+            344
+          ],
+          "active_3": [
+            4,
+            370,
+            304,
+            344
+          ],
+          "idle": [
+            312,
+            370,
+            206,
+            317
+          ],
+          "idle_2": [
+            522,
+            370,
+            206,
+            317
+          ],
+          "idle_3": [
+            732,
+            370,
+            206,
+            317
+          ],
+          "walk": [
+            942,
+            370,
+            258,
+            317
+          ],
+          "basic": [
+            1204,
+            370,
+            279,
+            307
+          ],
+          "basic_2": [
+            1487,
+            370,
+            279,
+            307
+          ],
+          "basic_3": [
+            4,
+            718,
+            279,
+            307
           ],
           "defeat": [
-            247,
-            705,
-            238,
-            335
+            287,
+            718,
+            237,
+            281
+          ],
+          "hit": [
+            528,
+            718,
+            237,
+            281
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.492,
+            "pivot_x": 0.477,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.412
+            "pivot_x": 0.383,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.417,
+            "pivot_x": 0.428,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.501,
+            "pivot_x": 0.466,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.502,
+            "pivot_x": 0.47,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.526
+            "pivot_x": 0.516,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.524
+            "pivot_x": 0.516,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.503
+            "pivot_x": 0.558,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "8e486f4122c1a72fdbb45ccdee3e4d6d75bcfe7eb40c421d6db98e5ae6b263c6",
+    "sha256": "8c01900ffdbffbc19987664b940f221b181c425b2dab0064cec450c4f8d2024b",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/sable_wren_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "201641f091ba4d38b3722cbfa16518fb139e3a20a3dfa1027095885ea42789e1",
+    "provenance_sha256": "770562b657e578142e7e49584f6842de772dff2be6f796663ed376b9c3cd5196",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "133e2859de4b5a942e6adf55e9bd029a7c689f9e7276b9f9e0e92b65519d1f35",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/sable_wren_chibi_sheet.ingest.json",
-    "spec_sha256": "adb86fe491a7349060c8351fb442544f226969fae25b935632eeb49fe8d7e1a5",
+    "spec_sha256": "e79e2f7d724c1bd6a0189ef3c1b863f4e04a8db4080af8927af0a647b374cf32",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "ff8823063fe24f65fb08801f40221375169ca4e8b45eb13ef9decbaa29fb015a"
+    "fingerprint": "23fec7c989d84ee82df911d25230a9d9ae0ab6e06587a1e527a7d91e2af78789"
   },
   "outputs": [
     {
       "path": "art/atlas_sable_wren.webp",
-      "sha256": "0fed39e2d22b02249bd49fbfc7a60251e1780a78ffa6fe51f289a2a94362c022",
-      "pixels_sha256": "20053d034d8211a8dc70eb91f5af4ae0f0cdaca815c668aa50d8e65f703c5d45",
-      "bytes": 488236,
-      "width": 1996,
-      "height": 1047
+      "sha256": "59092246c38a71269ea3743ae381d445f9b09443af682a193a18da23918be4ba",
+      "pixels_sha256": "03e4ddfa67284565055e874dce25c02ac9ae61f012ab180fb8659087685c9198",
+      "bytes": 395386,
+      "width": 1809,
+      "height": 1029
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=161"
+          "detail": "removed=257"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1996x1047"
+          "detail": "1809x1029"
         },
         "A19": {
           "status": "pass",
-          "detail": "488236 bytes <= 665600"
+          "detail": "395386 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0010%"
+          "detail": "spill=0.0003%"
         }
       },
       "warnings": [
-        "A12: removed 161 isolated specks"
+        "A12: removed 257 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.961Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:31:38.550Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_sable_wren.webp",
+          "sha256": "0fed39e2d22b02249bd49fbfc7a60251e1780a78ffa6fe51f289a2a94362c022",
+          "pixels_sha256": "20053d034d8211a8dc70eb91f5af4ae0f0cdaca815c668aa50d8e65f703c5d45",
+          "bytes": 488236,
+          "width": 1996,
+          "height": 1047
+        }
+      ],
+      "source_sha256": "8e486f4122c1a72fdbb45ccdee3e4d6d75bcfe7eb40c421d6db98e5ae6b263c6",
+      "fingerprint": "ff8823063fe24f65fb08801f40221375169ca4e8b45eb13ef9decbaa29fb015a"
+    }
+  ]
 }

@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "orchard_ghoul_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_orchard_ghoul": {
         "image": "art/atlas_orchard_ghoul.webp",
-        "width": 1961,
-        "height": 740,
+        "width": 1969,
+        "height": 935,
         "frames": {
+          "victory": [
+            4,
+            4,
+            267,
+            340
+          ],
           "idle": [
+            275,
             4,
-            4,
-            205,
-            266
+            258,
+            316
           ],
           "idle_2": [
-            213,
+            537,
             4,
-            205,
-            266
+            258,
+            316
           ],
           "idle_3": [
-            422,
+            799,
             4,
-            205,
-            266
-          ],
-          "victory": [
-            631,
-            4,
-            204,
-            264
-          ],
-          "hit": [
-            839,
-            4,
-            263,
-            259
+            258,
+            316
           ],
           "ultimate": [
-            1106,
+            1061,
             4,
-            323,
-            230
+            397,
+            295
           ],
           "ultimate_2": [
-            1433,
+            1462,
             4,
-            323,
-            230
+            397,
+            295
           ],
           "ultimate_3": [
             4,
-            274,
-            323,
-            230
+            348,
+            397,
+            295
           ],
           "active": [
-            331,
-            274,
-            322,
-            229
+            405,
+            348,
+            393,
+            286
           ],
           "active_2": [
-            657,
-            274,
-            322,
-            229
+            802,
+            348,
+            393,
+            286
           ],
           "active_3": [
-            983,
-            274,
-            322,
-            229
-          ],
-          "basic": [
-            1309,
-            274,
-            322,
-            228
-          ],
-          "basic_2": [
-            1635,
-            274,
-            322,
-            228
-          ],
-          "basic_3": [
-            4,
-            508,
-            322,
-            228
-          ],
-          "walk": [
-            330,
-            508,
-            316,
-            226
+            1199,
+            348,
+            393,
+            286
           ],
           "defeat": [
-            650,
-            508,
-            316,
-            169
+            1596,
+            348,
+            369,
+            284
+          ],
+          "hit": [
+            4,
+            647,
+            369,
+            284
+          ],
+          "walk": [
+            377,
+            647,
+            379,
+            271
+          ],
+          "basic": [
+            760,
+            647,
+            375,
+            263
+          ],
+          "basic_2": [
+            1139,
+            647,
+            375,
+            263
+          ],
+          "basic_3": [
+            1518,
+            647,
+            375,
+            263
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.513,
+            "pivot_x": 0.515,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.565
+            "pivot_x": 0.575,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.562,
+            "pivot_x": 0.548,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.563,
+            "pivot_x": 0.576,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.563,
+            "pivot_x": 0.584,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.473
+            "pivot_x": 0.486,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.494
+            "pivot_x": 0.486,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.513
+            "pivot_x": 0.509,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "59ec0df442cbda04f85d01336b901e16aad84ac5cb8663857896db6792a68ea6",
+    "sha256": "339caa81efdbde2a9099935a5871d9538649ee566d9d7377b145666537815aba",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/orchard_ghoul_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "03fac77b3d121572e27ad5ab80924fd0f8a7e581d2dd372588046dcfa0a4d21a",
+    "provenance_sha256": "2dfd6828b79bc65315366f4c91993e15e74e87166321e14b8f36c251de46d07a",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "d1eb52f05fbc27ac7a4127c9e7cb11ef81bd8b0df0d75777005c894e9407f16e",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/orchard_ghoul_chibi_sheet.ingest.json",
-    "spec_sha256": "bb49cb147456defcd1637da5b0f4e252103ed32ae489e3790a815422a022d184",
+    "spec_sha256": "3e5862a98696e46d04a4556f9412b5297eb5c176fe36f9de7ce07b59074b13b4",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "19b95360bcaa9f80b9d1441bcb57ece9e242a6e6aded07d7e147b31c65620043"
+    "fingerprint": "24c71591b51325deae7420f37b4df78f5043fcf65b76d2a6a291e225fdb39047"
   },
   "outputs": [
     {
       "path": "art/atlas_orchard_ghoul.webp",
-      "sha256": "09106505230c4190fd4f3f81395744d5c9d3d95027b2f11aeeeeff181dd22c1e",
-      "pixels_sha256": "70b12d2d2bf3e9a2252dafe26f7352cecd474c79d455212125031be601b879c7",
-      "bytes": 255310,
-      "width": 1961,
-      "height": 740
+      "sha256": "8227e404b09f21d605e9a45c65f91939a423674af2ad9e78b2a2d31781a969f1",
+      "pixels_sha256": "6bd741dabb748cc6934a64621d49fad03e4740ca04a98dba548ea0057d580ec0",
+      "bytes": 301830,
+      "width": 1969,
+      "height": 935
     }
   ],
   "qc": {
@@ -272,19 +309,19 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1961x740"
+          "detail": "1969x935"
         },
         "A19": {
           "status": "pass",
-          "detail": "255310 bytes <= 665600"
+          "detail": "301830 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0000%"
+          "detail": "spill=0.0001%"
         }
       },
       "warnings": [
@@ -293,9 +330,9 @@
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.952Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:31:11.600Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_orchard_ghoul.webp",
+          "sha256": "09106505230c4190fd4f3f81395744d5c9d3d95027b2f11aeeeeff181dd22c1e",
+          "pixels_sha256": "70b12d2d2bf3e9a2252dafe26f7352cecd474c79d455212125031be601b879c7",
+          "bytes": 255310,
+          "width": 1961,
+          "height": 740
+        }
+      ],
+      "source_sha256": "59ec0df442cbda04f85d01336b901e16aad84ac5cb8663857896db6792a68ea6",
+      "fingerprint": "19b95360bcaa9f80b9d1441bcb57ece9e242a6e6aded07d7e147b31c65620043"
+    }
+  ]
 }

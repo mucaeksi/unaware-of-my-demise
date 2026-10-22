@@ -159,7 +159,7 @@ export class BattleScene extends PixiScene<BattleInit> {
     bg.position.set(REF_W / 2, REF_H / 2);
     const cover = Math.max(REF_W / (bg.texture.width || REF_W), REF_H / (bg.texture.height || REF_H)) * 1.07;
     bg.scale.set(cover);
-    attachLivingBackdrop(this, bg, { baseScale: cover, fxDepth: DEPTH.bg + 1, mood: 'battle', intensity: 1.05 });
+    attachLivingBackdrop(this, bg, { baseScale: cover, fxDepth: DEPTH.bg + 1, mood: 'battle', location: this.encounter.location_id, intensity: 1.08 });
     this.add(verticalShade(0, 0, REF_W, 240, 0x0a0610, 0.28, 0.04), DEPTH.bg + 2);
     this.add(verticalShade(0, REF_H - 320, REF_W, 320, 0x0a0610, 0.04, 0.62), DEPTH.bg + 2);
     if (q.vignette) this.add(vignette(0.85, 0.24), DEPTH.hud - 100);

@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "chain_cultist_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_chain_cultist": {
         "image": "art/atlas_chain_cultist.webp",
-        "width": 1938,
-        "height": 809,
+        "width": 1929,
+        "height": 1000,
         "frames": {
-          "idle": [
-            4,
-            4,
-            213,
-            266
-          ],
-          "idle_2": [
-            221,
-            4,
-            213,
-            266
-          ],
-          "idle_3": [
-            438,
-            4,
-            213,
-            266
-          ],
           "ultimate": [
-            655,
             4,
-            317,
-            266
+            4,
+            394,
+            344
           ],
           "ultimate_2": [
-            976,
+            402,
             4,
-            317,
-            266
+            394,
+            344
           ],
           "ultimate_3": [
-            1297,
+            800,
             4,
-            317,
-            266
+            394,
+            344
+          ],
+          "victory": [
+            1198,
+            4,
+            248,
+            336
           ],
           "active": [
-            1618,
+            1450,
             4,
-            316,
-            265
+            391,
+            335
           ],
           "active_2": [
             4,
-            274,
-            316,
-            265
+            352,
+            391,
+            335
           ],
           "active_3": [
-            324,
-            274,
-            316,
-            265
+            399,
+            352,
+            391,
+            335
           ],
-          "basic": [
-            644,
-            274,
-            317,
-            264
+          "idle": [
+            794,
+            352,
+            247,
+            316
           ],
-          "basic_2": [
-            965,
-            274,
-            317,
-            264
+          "idle_2": [
+            1045,
+            352,
+            247,
+            316
           ],
-          "basic_3": [
-            1286,
-            274,
-            317,
-            264
-          ],
-          "victory": [
-            1607,
-            274,
-            212,
-            264
+          "idle_3": [
+            1296,
+            352,
+            247,
+            316
           ],
           "walk": [
-            4,
-            543,
-            313,
-            262
+            1547,
+            352,
+            378,
+            315
           ],
-          "hit": [
-            321,
-            543,
-            221,
-            259
+          "basic": [
+            4,
+            691,
+            384,
+            305
+          ],
+          "basic_2": [
+            392,
+            691,
+            384,
+            305
+          ],
+          "basic_3": [
+            780,
+            691,
+            384,
+            305
           ],
           "defeat": [
-            546,
-            543,
-            317,
-            225
+            1168,
+            691,
+            372,
+            291
+          ],
+          "hit": [
+            1544,
+            691,
+            372,
+            291
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.497,
+            "pivot_x": 0.494,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.481
+            "pivot_x": 0.504,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.48,
+            "pivot_x": 0.503,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.48,
+            "pivot_x": 0.494,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.48,
+            "pivot_x": 0.489,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.467
+            "pivot_x": 0.513,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.525
+            "pivot_x": 0.513,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.497
+            "pivot_x": 0.475,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "4a39979976adc9ebd392630925dbfc0fc3f54d8f085888d2226497feb00e5454",
+    "sha256": "5202f9efb24b76881e692d05bff7168b4b927e05d0abbc0b929527b807d39cce",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/chain_cultist_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "c319ac266d7fd25f4a02dfe084d5ea55331f1698c278bb03efed97c1d25502ed",
+    "provenance_sha256": "d0a94865528cb6675547542ffd6913c461959af6c4e5e09acbf7e142bbc92ad9",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "2f86a6dfc351a01d03568c01e17725ce7cc6ad9a18915d2d8aef14b763a199e8",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/chain_cultist_chibi_sheet.ingest.json",
-    "spec_sha256": "5b436197ea9211037c3617fcdd99eefd3bfb39f9995d9d3e0a3de3fba5f3cf47",
+    "spec_sha256": "0b79e2b6471eba7f19084360133359cc55bf81ceef079b6b631be8d7beed548a",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "2cefba94696b3cb30cbeb2fb2e61a160227f5f42fa415f5709e33bdd23c0dfc8"
+    "fingerprint": "8d44c93d7ac919d06405c78919e7dcceff3c2fca5eec705db8a6097cf914746c"
   },
   "outputs": [
     {
       "path": "art/atlas_chain_cultist.webp",
-      "sha256": "5ae61cfa82120365c2e22cc25be0609f122981e04943747fcf103e6d3253c313",
-      "pixels_sha256": "7b58f11dc4eabdb0fc1cbabfba60602d1ed88896326fe1af10e56b268835d8b0",
-      "bytes": 280832,
-      "width": 1938,
-      "height": 809
+      "sha256": "c142fb412f9044f06aece902b3d7d3aaa4736660080fb4d4e5593c6bd1914352",
+      "pixels_sha256": "b4f2f69be7087468617f573941219ee4504ae1ffc6d240ade56901690a2000b2",
+      "bytes": 341662,
+      "width": 1929,
+      "height": 1000
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=18"
+          "detail": "removed=39"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.484"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1938x809"
+          "detail": "1929x1000"
         },
         "A19": {
           "status": "pass",
-          "detail": "280832 bytes <= 665600"
+          "detail": "341662 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0007%"
+          "detail": "spill=0.0004%"
         }
       },
       "warnings": [
-        "A12: removed 18 isolated specks"
+        "A12: removed 39 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.911Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:29:37.621Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_chain_cultist.webp",
+          "sha256": "5ae61cfa82120365c2e22cc25be0609f122981e04943747fcf103e6d3253c313",
+          "pixels_sha256": "7b58f11dc4eabdb0fc1cbabfba60602d1ed88896326fe1af10e56b268835d8b0",
+          "bytes": 280832,
+          "width": 1938,
+          "height": 809
+        }
+      ],
+      "source_sha256": "4a39979976adc9ebd392630925dbfc0fc3f54d8f085888d2226497feb00e5454",
+      "fingerprint": "2cefba94696b3cb30cbeb2fb2e61a160227f5f42fa415f5709e33bdd23c0dfc8"
+    }
+  ]
 }

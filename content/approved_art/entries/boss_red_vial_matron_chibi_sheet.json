@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "boss_red_vial_matron_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 4,
+  "revision": 5,
   "targets": {
     "atlases": {
       "atlas_boss_red_vial_matron": {
         "image": "art/atlas_boss_red_vial_matron.webp",
-        "width": 1945,
-        "height": 684,
+        "width": 2041,
+        "height": 612,
         "frames": {
-          "idle": [
-            4,
-            4,
-            226,
-            337
-          ],
-          "idle_2": [
-            234,
-            4,
-            226,
-            337
-          ],
-          "idle_3": [
-            464,
-            4,
-            226,
-            337
-          ],
           "ultimate": [
-            694,
             4,
-            205,
-            337
+            4,
+            197,
+            316
           ],
           "ultimate_2": [
-            903,
-            4,
             205,
-            337
+            4,
+            197,
+            316
           ],
           "ultimate_3": [
-            1112,
+            406,
             4,
-            205,
-            337
+            197,
+            316
           ],
           "active": [
-            1321,
+            607,
             4,
-            204,
-            336
+            198,
+            306
           ],
           "active_2": [
-            1529,
+            809,
             4,
-            204,
-            336
+            198,
+            306
           ],
           "active_3": [
-            1737,
+            1011,
             4,
-            204,
-            336
-          ],
-          "basic": [
-            4,
-            345,
-            205,
-            335
-          ],
-          "basic_2": [
-            213,
-            345,
-            205,
-            335
-          ],
-          "basic_3": [
-            422,
-            345,
-            205,
-            335
+            198,
+            306
           ],
           "victory": [
-            631,
-            345,
-            225,
-            335
+            1213,
+            4,
+            203,
+            300
+          ],
+          "idle": [
+            1420,
+            4,
+            203,
+            284
+          ],
+          "idle_2": [
+            1627,
+            4,
+            203,
+            284
+          ],
+          "idle_3": [
+            1834,
+            4,
+            203,
+            284
           ],
           "walk": [
-            860,
-            345,
-            225,
-            332
+            4,
+            324,
+            197,
+            284
           ],
-          "hit": [
-            1089,
-            345,
-            232,
-            328
+          "basic": [
+            205,
+            324,
+            201,
+            272
+          ],
+          "basic_2": [
+            410,
+            324,
+            201,
+            272
+          ],
+          "basic_3": [
+            615,
+            324,
+            201,
+            272
           ],
           "defeat": [
-            1325,
-            345,
-            240,
-            325
+            820,
+            324,
+            221,
+            248
+          ],
+          "hit": [
+            1045,
+            324,
+            221,
+            248
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.53,
+            "pivot_x": 0.559,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.533
+            "pivot_x": 0.588,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.647,
+            "pivot_x": 0.691,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.651,
+            "pivot_x": 0.675,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.647,
+            "pivot_x": 0.663,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.622
+            "pivot_x": 0.564,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.577
+            "pivot_x": 0.564,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.53
+            "pivot_x": 0.478,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "2eef5193a79ba78a591c293c075ab67d3f4908dd4bbcee4c91dd8c8d98ad9818",
+    "sha256": "131ed0c5b8abfb21f4742b140be80ef1d7fd4c1daa7b7f974eef8d32030cecda",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/boss_red_vial_matron_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "45271085563a12765fe48e9f56404dcece83d4ca98f13995b7c491555aed903f",
+    "provenance_sha256": "23eb06bec0757add083692b796dd22b3ac4f5476427bf9169a68e60bab4d7c46",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "1775fbd689fcbdab7c6777a46d8ac0b4e12bd5078fee45aeb0b94c17d7fc13d8",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/boss_red_vial_matron_chibi_sheet.ingest.json",
-    "spec_sha256": "2d65ef033097a320b6dbd932706517a8f729f1a4881c444096d5709dcfeda38b",
+    "spec_sha256": "b8e1b3c20a210983df770e9919cb6b5ec368e2678e6dec87db1c0b5ddebe0234",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "9be35ac2de179dcbdb2aec89afd466c1e18f9e8d975e798f572452720895cb49"
+    "fingerprint": "db53979f1d5726dd50ca395dd8324a01a2ecae280ba6be3b5456d3d52f00268f"
   },
   "outputs": [
     {
       "path": "art/atlas_boss_red_vial_matron.webp",
-      "sha256": "14ebeecaf476afc136a5d62c14f49876730bedc759b96fe93570009e488219be",
-      "pixels_sha256": "e2238b4291123a09816031545a54fb1f934e3f06676437f4ed020fdcb3d09470",
-      "bytes": 340584,
-      "width": 1945,
-      "height": 684
+      "sha256": "6d130b6a7d76f58590169407760f5aeeb285261c9e699ba8a92e72d270791350",
+      "pixels_sha256": "9666e97006c736f8c0d322d7a61a97c331a9caa1d1eebcf5352d5583ef4c07b0",
+      "bytes": 270394,
+      "width": 2041,
+      "height": 612
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=197"
+          "detail": "removed=96"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.613"
+          "detail": "k=0.531"
         },
         "A18": {
           "status": "pass",
-          "detail": "1945x684"
+          "detail": "2041x612"
         },
         "A19": {
           "status": "pass",
-          "detail": "340584 bytes <= 665600"
+          "detail": "270394 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0049%"
+          "detail": "spill=0.0026%"
         }
       },
       "warnings": [
-        "A12: removed 197 isolated specks"
+        "A12: removed 96 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.907Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:29:21.386Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -348,6 +385,21 @@
       ],
       "source_sha256": "a2ac808431520c7576916e95bb85e66a51e6a730ebcd38f94fa6e82570970b87",
       "fingerprint": "1f5c30904a2bf5da3104614dd44c3bd6a814d18aa4e60ed89bea1f0d1dfc3291"
+    },
+    {
+      "revision": 4,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_red_vial_matron.webp",
+          "sha256": "14ebeecaf476afc136a5d62c14f49876730bedc759b96fe93570009e488219be",
+          "pixels_sha256": "e2238b4291123a09816031545a54fb1f934e3f06676437f4ed020fdcb3d09470",
+          "bytes": 340584,
+          "width": 1945,
+          "height": 684
+        }
+      ],
+      "source_sha256": "2eef5193a79ba78a591c293c075ab67d3f4908dd4bbcee4c91dd8c8d98ad9818",
+      "fingerprint": "9be35ac2de179dcbdb2aec89afd466c1e18f9e8d975e798f572452720895cb49"
     }
   ]
 }

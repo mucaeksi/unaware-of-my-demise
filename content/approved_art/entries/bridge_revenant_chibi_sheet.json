@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "bridge_revenant_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_bridge_revenant": {
         "image": "art/atlas_bridge_revenant.webp",
-        "width": 1957,
-        "height": 766,
+        "width": 1950,
+        "height": 1263,
         "frames": {
-          "idle": [
-            4,
-            4,
-            239,
-            266
-          ],
-          "idle_2": [
-            247,
-            4,
-            239,
-            266
-          ],
-          "idle_3": [
-            490,
-            4,
-            239,
-            266
-          ],
           "victory": [
-            733,
             4,
-            238,
-            264
-          ],
-          "hit": [
-            975,
             4,
-            191,
-            259
+            287,
+            343
           ],
           "ultimate": [
-            1170,
+            295,
             4,
-            322,
-            243
+            405,
+            318
           ],
           "ultimate_2": [
-            1496,
+            704,
             4,
-            322,
-            243
+            405,
+            318
           ],
           "ultimate_3": [
+            1113,
             4,
-            274,
-            322,
-            243
+            405,
+            318
+          ],
+          "idle": [
+            1522,
+            4,
+            282,
+            316
+          ],
+          "idle_2": [
+            4,
+            351,
+            282,
+            316
+          ],
+          "idle_3": [
+            290,
+            351,
+            282,
+            316
           ],
           "active": [
-            330,
-            274,
-            321,
-            242
+            576,
+            351,
+            403,
+            311
           ],
           "active_2": [
-            655,
-            274,
-            321,
-            242
+            983,
+            351,
+            403,
+            311
           ],
           "active_3": [
-            980,
-            274,
-            321,
-            242
+            1390,
+            351,
+            403,
+            311
           ],
           "basic": [
-            1305,
-            274,
-            322,
-            241
+            4,
+            671,
+            396,
+            292
           ],
           "basic_2": [
-            1631,
-            274,
-            322,
-            241
+            404,
+            671,
+            396,
+            292
           ],
           "basic_3": [
-            4,
-            521,
-            322,
-            241
-          ],
-          "walk": [
-            330,
-            521,
-            318,
-            239
+            804,
+            671,
+            396,
+            292
           ],
           "defeat": [
-            652,
-            521,
-            316,
-            180
+            1204,
+            671,
+            369,
+            292
+          ],
+          "hit": [
+            1577,
+            671,
+            369,
+            292
+          ],
+          "walk": [
+            4,
+            967,
+            381,
+            292
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.506,
+            "pivot_x": 0.52,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.746
+            "pivot_x": 0.745,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.746,
+            "pivot_x": 0.704,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.748,
+            "pivot_x": 0.758,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.748,
+            "pivot_x": 0.765,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.449
+            "pivot_x": 0.454,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.485
+            "pivot_x": 0.454,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.507
+            "pivot_x": 0.521,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "5cd7b24dcf12f60e02dbc2a1c7079100674a113fd1a9077dec301c6c39a204fc",
+    "sha256": "9947d7ba22cde542e42b6bd2a471c4d5a94c4b86844cd04b5efd96120f1a8f84",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/bridge_revenant_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "cc751b89f4d3cd79a99d1c98547f083882acfc88aba29a8fd0b5f05a2d38d8ec",
+    "provenance_sha256": "6409c05becca041ed631f652b847b1d517eac64deff356a6e6a140da2e8271d4",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "e984db19b48ba129167fe07b8087699d95e0d5befdff37688e674c89e4e4c8fe",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/bridge_revenant_chibi_sheet.ingest.json",
-    "spec_sha256": "76e1d19425289864723ccf1ecaeb94c865d113080b64962c4d065b406e10febc",
+    "spec_sha256": "d931d60a46b3d9152e18d8193287af2d443005fe7af45d8376323378bcb34e7e",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "c9ccb367f317abd1ee9469042dbd7353b615acd04558db687f55b00946b43e8f"
+    "fingerprint": "20fa0dca9e639a189c5a23d9164f24037133d90b427bd8e8f2f6c7b2b663243c"
   },
   "outputs": [
     {
       "path": "art/atlas_bridge_revenant.webp",
-      "sha256": "7eebc0c81ae50881683bd519b0512f07a38d5bd3eeabaed5bf1fb7d61e9f4c26",
-      "pixels_sha256": "b208799c66a521314a8db5a09813e43955ca64cb14e6c5f7953fad3b8263f5b6",
-      "bytes": 318068,
-      "width": 1957,
-      "height": 766
+      "sha256": "658032fd3ed930514f1749e070b88095e3107849b520f6ea12ed7ba810016044",
+      "pixels_sha256": "8e245dc04653cfa5fe4619f69adb3246b772b5eb2d2858f3b7132a01693943cc",
+      "bytes": 384044,
+      "width": 1950,
+      "height": 1263
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=11"
+          "detail": "removed=178"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.594"
         },
         "A18": {
           "status": "pass",
-          "detail": "1957x766"
+          "detail": "1950x1263"
         },
         "A19": {
           "status": "pass",
-          "detail": "318068 bytes <= 665600"
+          "detail": "384044 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0019%"
+          "detail": "spill=0.0014%"
         }
       },
       "warnings": [
-        "A12: removed 11 isolated specks"
+        "A12: removed 178 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.907Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:29:24.863Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_bridge_revenant.webp",
+          "sha256": "7eebc0c81ae50881683bd519b0512f07a38d5bd3eeabaed5bf1fb7d61e9f4c26",
+          "pixels_sha256": "b208799c66a521314a8db5a09813e43955ca64cb14e6c5f7953fad3b8263f5b6",
+          "bytes": 318068,
+          "width": 1957,
+          "height": 766
+        }
+      ],
+      "source_sha256": "5cd7b24dcf12f60e02dbc2a1c7079100674a113fd1a9077dec301c6c39a204fc",
+      "fingerprint": "c9ccb367f317abd1ee9469042dbd7353b615acd04558db687f55b00946b43e8f"
+    }
+  ]
 }

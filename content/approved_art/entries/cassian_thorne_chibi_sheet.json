@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "cassian_thorne_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_cassian_thorne": {
         "image": "art/atlas_cassian_thorne.webp",
-        "width": 2044,
-        "height": 705,
+        "width": 2007,
+        "height": 689,
         "frames": {
-          "idle": [
-            4,
-            4,
-            219,
-            348
-          ],
-          "idle_2": [
-            227,
-            4,
-            219,
-            348
-          ],
-          "idle_3": [
-            450,
-            4,
-            219,
-            348
-          ],
           "ultimate": [
-            673,
             4,
-            154,
-            347
+            4,
+            157,
+            359
           ],
           "ultimate_2": [
-            831,
+            165,
             4,
-            154,
-            347
+            157,
+            359
           ],
           "ultimate_3": [
-            989,
+            326,
             4,
-            154,
-            347
-          ],
-          "active": [
-            1147,
-            4,
-            295,
-            346
-          ],
-          "active_2": [
-            1446,
-            4,
-            295,
-            346
-          ],
-          "active_3": [
-            1745,
-            4,
-            295,
-            346
-          ],
-          "basic": [
-            4,
-            356,
-            296,
-            345
-          ],
-          "basic_2": [
-            304,
-            356,
-            296,
-            345
-          ],
-          "basic_3": [
-            604,
-            356,
-            296,
-            345
+            157,
+            359
           ],
           "victory": [
-            904,
-            356,
-            148,
-            344
+            487,
+            4,
+            152,
+            339
+          ],
+          "active": [
+            643,
+            4,
+            304,
+            336
+          ],
+          "active_2": [
+            951,
+            4,
+            304,
+            336
+          ],
+          "active_3": [
+            1259,
+            4,
+            304,
+            336
+          ],
+          "idle": [
+            1567,
+            4,
+            216,
+            318
+          ],
+          "idle_2": [
+            1787,
+            4,
+            216,
+            318
+          ],
+          "idle_3": [
+            4,
+            367,
+            216,
+            318
+          ],
+          "basic": [
+            224,
+            367,
+            309,
+            311
+          ],
+          "basic_2": [
+            537,
+            367,
+            309,
+            311
+          ],
+          "basic_3": [
+            850,
+            367,
+            309,
+            311
           ],
           "walk": [
-            1056,
-            356,
-            292,
-            343
-          ],
-          "hit": [
-            1352,
-            356,
-            220,
-            338
+            1163,
+            367,
+            288,
+            311
           ],
           "defeat": [
-            1576,
-            356,
-            221,
-            335
+            1455,
+            367,
+            187,
+            276
+          ],
+          "hit": [
+            1646,
+            367,
+            187,
+            276
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.512,
+            "pivot_x": 0.49,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.349
+            "pivot_x": 0.321,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.353,
+            "pivot_x": 0.348,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.351,
+            "pivot_x": 0.338,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.494,
+            "pivot_x": 0.453,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.425
+            "pivot_x": 0.517,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.424
+            "pivot_x": 0.517,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.496
+            "pivot_x": 0.567,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "bdfd60b850e7c2620a38628cbc1833bac9f284a996b439636fd91044ab72c94b",
+    "sha256": "6597b14036dcaf1ddec35964ab8aa38bba8fcf81d20b6d155684a66be67572c3",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/cassian_thorne_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "4c50cd68e4f146006bf4a23022bfa73bb6e9b3ca1a5b73a4cfa9fec5fbd4a45c",
+    "provenance_sha256": "324fdfd9925f086b16ff9bb67e23aa553a20ed7395013092bbdaf6df81369be8",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "e6eb67112cfbdaf763efe00f83322fbba3ecbc8db7531fc7b66d6c4a32be3df5",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/cassian_thorne_chibi_sheet.ingest.json",
-    "spec_sha256": "bdd80d7d1527e81b1550a46b2062bc9efa13c1ba55d1e555497f18d7d96faedb",
+    "spec_sha256": "ade9b5d63f236cc3d4e73aceac9ea65f87ccc681c35f97cc8a6e4e25394d2191",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "1b269dbafe1c03a971a631e3d5d3cf7a0a202c5d14e73db425c438da4292feb5"
+    "fingerprint": "16ed81a17fcedcbb507f063af26876161af002953546f7d0d3d4e7519c671ddb"
   },
   "outputs": [
     {
       "path": "art/atlas_cassian_thorne.webp",
-      "sha256": "385a4bfe7bd29c40b915f61c186d0d16cd3967ef70cad55eb34473aadd3a0acd",
-      "pixels_sha256": "af7fdf252d48089e3ddb0f9ef4fe6ec40dbe42e4b6b703f744a44119f8ff5e40",
-      "bytes": 311082,
-      "width": 2044,
-      "height": 705
+      "sha256": "9428f1a39fc1c38e773680b056e4869a4e6e854d30c8dc53c018c0ae3289e5ba",
+      "pixels_sha256": "d95f186875aac56731b4494b237463a457f94279770c0dcdd037880916f8e9f7",
+      "bytes": 275390,
+      "width": 2007,
+      "height": 689
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=10"
+          "detail": "removed=9"
         },
         "A14": {
           "status": "pass",
@@ -272,15 +309,15 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.594"
         },
         "A18": {
           "status": "pass",
-          "detail": "2044x705"
+          "detail": "2007x689"
         },
         "A19": {
           "status": "pass",
-          "detail": "311082 bytes <= 665600"
+          "detail": "275390 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
@@ -288,14 +325,14 @@
         }
       },
       "warnings": [
-        "A12: removed 10 isolated specks"
+        "A12: removed 9 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.909Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:29:34.248Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_cassian_thorne.webp",
+          "sha256": "385a4bfe7bd29c40b915f61c186d0d16cd3967ef70cad55eb34473aadd3a0acd",
+          "pixels_sha256": "af7fdf252d48089e3ddb0f9ef4fe6ec40dbe42e4b6b703f744a44119f8ff5e40",
+          "bytes": 311082,
+          "width": 2044,
+          "height": 705
+        }
+      ],
+      "source_sha256": "bdfd60b850e7c2620a38628cbc1833bac9f284a996b439636fd91044ab72c94b",
+      "fingerprint": "1b269dbafe1c03a971a631e3d5d3cf7a0a202c5d14e73db425c438da4292feb5"
+    }
+  ]
 }

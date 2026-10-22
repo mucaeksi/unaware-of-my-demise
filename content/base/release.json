@@ -24,36 +24,36 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "0aa3ae8f24d56175bdb9cb6f0c9d87f8e6f8f9324c4f3b099f91ae06792365cc",
-      "bytes": 18137,
+      "sha256": "05a64da1b0e55a898ca178527164780d5ece32055840e70dda61ea1779f58464",
+      "bytes": 21343,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
     {
       "path": "art/atlas_bellbound_dead.webp",
-      "sha256": "8625696053f796c6b4f48bf524228fc69e3ffd493dbfe0f535a03c931ffffae1",
-      "bytes": 315038,
+      "sha256": "200076551e8200d7f82afab74461d564782f51c7b3ebcfb95c25ff08d16f0a3c",
+      "bytes": 325268,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
     {
       "path": "art/atlas_fadyme.webp",
-      "sha256": "a7a0be9f54dc6431213ff21dcb1d9178493453184ffd95e7105e129b54f5a5dd",
-      "bytes": 383554,
+      "sha256": "45294a788697a7f53a33d15cb17fc2e100d360cf82e5ee89c1ff653a59927324",
+      "bytes": 344334,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
     {
       "path": "art/atlas_hollow_pilgrim.webp",
-      "sha256": "6d72ccf2e831d52867b7bbee44f74db77135559d4f19d1572415c1e736a76fa2",
-      "bytes": 345924,
+      "sha256": "3c8ea1852ebef98d3d14932f7998b713da8e38b01c5d28dfb76db45257392236",
+      "bytes": 341644,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
     {
       "path": "art/atlas_mahmut.webp",
-      "sha256": "2e75020a99ce546f04ae4a901d144453f3c9a76c2c5f85a34b5d6d4fb45416b7",
-      "bytes": 362334,
+      "sha256": "2366ef2aedb2305251eb2ca64ae8d6f0ca9cf4de43e59cffe066f3a4e082bf05",
+      "bytes": 324128,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },

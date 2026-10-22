@@ -176,12 +176,17 @@ export class UnitView extends PIXI.Container {
   private playFrames(a: UnitAnimation, key: string): void {
     const step = { i: 0 };
     const n = a.frames.length;
+    const u = this.art.unit(this.artKey);
     this.frames = this.scene.anim.to(step, { i: n }, {
       duration: (n * 1000) / Math.max(1, a.fps),
       repeat: a.loop ? -1 : 0,
       onUpdate: () => {
         const f = a.frames[Math.min(n - 1, Math.floor(step.i))];
-        if (f && !this.img.destroyed) this.img.texture = this.scene.tex(key, f);
+        if (f && !this.img.destroyed) {
+          this.img.texture = this.scene.tex(key, f);
+          const st = u.states[f];
+          if (st) this.img.anchor.set(st.pivotX, 1);
+        }
       }
     });
   }
@@ -215,11 +220,26 @@ export class UnitView extends PIXI.Container {
       if (state === 'active' || state === 'ultimate') this.spawnGhost();
       this.pose.scale.set(sc * 0.85, sc * 1.17);
       this.scene.anim.to(this.pose, { scaleX: sc * mult, scaleY: sc * 0.95 }, { duration: 135, yoyo: true, ease: 'back.out', onComplete: () => this.pose.scale.set(sc) });
+    } else if (state === 'hit') {
+      const push = this.side === 'player' ? -1 : 1;
+      this.pose.scale.set(sc * 0.86, sc * 1.14);
+      this.pose.angle = push * 8;
+      this.scene.anim.to(this.pose, { x: push * 18, scaleX: sc * 1.08, scaleY: sc * 0.94, angle: 0 }, {
+        duration: 120,
+        yoyo: true,
+        ease: 'back.out',
+        onComplete: () => {
+          this.pose.position.set(0, 0);
+          this.pose.scale.set(sc);
+          this.pose.angle = 0;
+        }
+      });
     } else if (state === 'defeat') {
       const fallDir = this.side === 'player' ? -1 : 1;
       this.scene.anim.to(this.pose, { angle: fallDir * 11, y: 6, scaleY: sc * 0.9, scaleX: sc * 1.04 }, { duration: 280, ease: 'cubic.out' });
     } else if (state === 'victory') {
       this.loops.push(this.scene.anim.to(this.pose, { y: -18, scaleY: sc * 1.06, scaleX: sc * 0.95 }, { duration: 380, yoyo: true, repeat: -1, ease: 'quad.out' }));
+      this.loops.push(this.scene.anim.to(this.auraRing, { alpha: { from: 0.3, to: 0.72 } }, { duration: 420, yoyo: true, repeat: -1, ease: 'sine.inout' }));
     }
   }
 

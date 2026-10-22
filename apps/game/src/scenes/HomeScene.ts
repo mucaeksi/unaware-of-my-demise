@@ -7,6 +7,8 @@ import { backdrop } from '../ui/pixiKit';
 import { C, F, T } from '../ui/theme';
 import { regionStates, type RegionState } from '../ui/worldMap';
 import { createEclipseCorona, createSwingingBellEmblem, triggerWaxSealBurst } from '../vfx/gothicUiVfx';
+import { vfxTextures } from '../vfx/textures';
+import { prefs } from '../platform/prefs';
 
 interface Tile { label: string; sub: string; scene: string }
 
@@ -21,7 +23,7 @@ export class HomeScene extends HubScreen {
   protected override readonly needsSignIn = false;
   protected override readonly backTo = 'Title';
   private vfxMounted = false;
-  private roads: PIXI.Graphics | null = null;
+  private roads: PIXI.Container | null = null;
   private mapBg: PIXI.Sprite | null = null;
 
   protected async build(): Promise<void> {
@@ -112,18 +114,33 @@ export class HomeScene extends HubScreen {
     this.mapBg = map.background_id ? await backdrop(this, map.background_id, -9) : null;
     if (!this.isCurrentView()) return;
 
-    this.roads?.destroy();
+    this.roads?.destroy({ children: true });
+    const roadLayer = new PIXI.Container();
     const g = new PIXI.Graphics();
-    for (const road of map.roads) {
+    roadLayer.addChild(g);
+    const vTex = vfxTextures();
+    for (let i = 0; i < map.roads.length; i++) {
+      const road = map.roads[i]!;
       const a = at.get(road.from)!;
       const b = at.get(road.to)!;
       const shipped = states.get(a.region_id) !== 'coming_soon' && states.get(b.region_id) !== 'coming_soon';
       // a side road leaves its chapter above the node or below the title, so it never crosses the chapter's name
       const fromY = road.kind === 'side' ? (b.y > a.y ? a.y + 78 : a.y - 44) : a.y;
       g.moveTo(a.x, fromY).lineTo(b.x, b.y).stroke(road.kind === 'main' ? { width: 7, color: C.gold, alpha: shipped ? 0.8 : 0.28 } : { width: 3, color: C.silver, alpha: 0.32 });
+      if (shipped && road.kind === 'main' && !prefs().reducedMotion) {
+        const bead = new PIXI.Sprite(vTex.star);
+        bead.anchor.set(0.5);
+        bead.position.set(a.x, fromY);
+        bead.scale.set(0.28);
+        bead.tint = 0xffe49c;
+        bead.blendMode = 'add';
+        bead.alpha = 0.82;
+        roadLayer.addChild(bead);
+        this.anim.to(bead, { x: b.x, y: b.y }, { duration: 2400 + i * 320, repeat: -1, ease: 'sine.inout' });
+      }
     }
-    this.roads = g;
-    this.add(g, -5);
+    this.roads = roadLayer;
+    this.add(roadLayer, -5);
 
     for (const r of map.regions) {
       const state = states.get(r.region_id)!;
@@ -132,6 +149,17 @@ export class HomeScene extends HubScreen {
         continue;
       }
       const playable = state === 'open' || state === 'cleared';
+      if (playable && !prefs().reducedMotion) {
+        const beacon = new PIXI.Sprite(vTex.ring);
+        beacon.anchor.set(0.5);
+        beacon.position.set(r.x, r.y);
+        beacon.tint = state === 'open' ? 0xff7a96 : 0xe3c37d;
+        beacon.blendMode = 'add';
+        beacon.scale.set(0.24, 0.14);
+        beacon.alpha = 0.45;
+        roadLayer.addChild(beacon);
+        this.anim.to(beacon, { scaleX: 0.56, scaleY: 0.32, alpha: 0 }, { duration: 2600, repeat: -1, ease: 'quad.out' });
+      }
       this.button(r.x, r.y, {
         label: `CHAPTER ${r.chapter_number}`,
         sub: STATE_LABEL[state],

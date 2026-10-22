@@ -373,7 +373,17 @@ for (const u of pack.units) {
     const states = Object.fromEntries(
       ['idle', 'walk', 'basic', 'active', 'ultimate', 'hit', 'defeat', 'victory'].map((st) => [
         st,
-        { frame: st === 'defeat' ? brokenFrame : intactFrame, scale: 1, foot_y: 0.97, pivot_x: 0.5 },
+        {
+          frame: st === 'defeat' ? brokenFrame : intactFrame,
+          scale: 1,
+          foot_y: 0.97,
+          pivot_x: 0.5,
+          ...(st === 'hit' && brokenFrame !== intactFrame
+            ? { animation: { frames: [intactFrame, brokenFrame, intactFrame], fps: 8, loop: false } }
+            : st === 'defeat' && brokenFrame !== intactFrame
+              ? { animation: { frames: [intactFrame, brokenFrame], fps: 6, loop: false } }
+              : {}),
+        },
       ]),
     );
     unitArt[o.objective_id] = { atlas: 'atlas_objective', facing: 'left', height_px: 150, states };

@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "red_vial_alchemist_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_red_vial_alchemist": {
         "image": "art/atlas_red_vial_alchemist.webp",
-        "width": 1939,
-        "height": 542,
+        "width": 1991,
+        "height": 970,
         "frames": {
-          "idle": [
-            4,
-            4,
-            174,
-            266
-          ],
-          "idle_2": [
-            182,
-            4,
-            174,
-            266
-          ],
-          "idle_3": [
-            360,
-            4,
-            174,
-            266
-          ],
           "ultimate": [
-            538,
             4,
-            230,
-            266
+            4,
+            286,
+            349
           ],
           "ultimate_2": [
-            772,
+            294,
             4,
-            230,
-            266
+            286,
+            349
           ],
           "ultimate_3": [
-            1006,
+            584,
             4,
-            230,
-            266
+            286,
+            349
           ],
           "active": [
-            1240,
+            874,
             4,
-            229,
-            265
+            291,
+            341
           ],
           "active_2": [
-            1473,
+            1169,
             4,
-            229,
-            265
+            291,
+            341
           ],
           "active_3": [
-            1706,
+            1464,
             4,
-            229,
-            265
-          ],
-          "basic": [
-            4,
-            274,
-            229,
-            264
-          ],
-          "basic_2": [
-            237,
-            274,
-            229,
-            264
-          ],
-          "basic_3": [
-            470,
-            274,
-            229,
-            264
+            291,
+            341
           ],
           "victory": [
-            703,
-            274,
-            173,
-            264
+            1759,
+            4,
+            228,
+            335
           ],
           "walk": [
-            880,
-            274,
-            225,
-            262
+            4,
+            357,
+            267,
+            323
           ],
-          "hit": [
-            1109,
-            274,
-            151,
-            259
+          "basic": [
+            275,
+            357,
+            273,
+            322
+          ],
+          "basic_2": [
+            552,
+            357,
+            273,
+            322
+          ],
+          "basic_3": [
+            829,
+            357,
+            273,
+            322
+          ],
+          "idle": [
+            1106,
+            357,
+            219,
+            315
+          ],
+          "idle_2": [
+            1329,
+            357,
+            219,
+            315
+          ],
+          "idle_3": [
+            1552,
+            357,
+            219,
+            315
           ],
           "defeat": [
-            1264,
-            274,
-            301,
-            256
+            4,
+            684,
+            339,
+            282
+          ],
+          "hit": [
+            347,
+            684,
+            339,
+            282
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.521,
+            "pivot_x": 0.535,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.492
+            "pivot_x": 0.519,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.489,
+            "pivot_x": 0.485,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.49,
+            "pivot_x": 0.502,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.491,
+            "pivot_x": 0.512,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.48
+            "pivot_x": 0.406,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.486
+            "pivot_x": 0.406,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.521
+            "pivot_x": 0.499,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "094fbe04c63a889bd80d2ab491b0a66738801ac5500ff790ff388db75afb8f65",
+    "sha256": "a85e453e64646a2e2225d1dc9a8d21ef0854062f2636b46680c8af1e8ab4b940",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/red_vial_alchemist_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "b970df1a1aa4580ba3fb415976d5b3244e427ede3970aabb1855e52c621d8c5d",
+    "provenance_sha256": "9edfda85928d726e58ce8de9312666d098ca0df6f9521866524e84d4d90123f7",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "fb864a6fefb7f37a613afa101e8d378c8a4c3eca91c0edcfd675de5e022bc12d",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/red_vial_alchemist_chibi_sheet.ingest.json",
-    "spec_sha256": "2229ad446518917a49ca841db8f24e4771d1e918a5e2c466279acac5bd5aaf5b",
+    "spec_sha256": "9703d60c2a6908485e5f3ada78cd57a8f00d0983cca0775d958b07ac3576da54",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "77666e7e7565974133964464576b58c3756f6f364790541a30ba4843024bdabb"
+    "fingerprint": "03a3da0d6956e155cc6fafdead5bbb480d95bc0dba6a89c932520c73f7615046"
   },
   "outputs": [
     {
       "path": "art/atlas_red_vial_alchemist.webp",
-      "sha256": "1eaad942b1dfb6a85ee1d641bcc4d93c86e37f095b6aa8f9d2fcc89c542e6743",
-      "pixels_sha256": "0a4fb116287195d73ddd74a7ba4c15cdca78fbb26d11dc69613201b75182bfe5",
-      "bytes": 245296,
-      "width": 1939,
-      "height": 542
+      "sha256": "d096bb7ed810a1bdc0978fdd4be8fd62f77c83acd8037adc0a7553689a1b376a",
+      "pixels_sha256": "057bdb62ae1982832355ca5c13a8f631085f429d3ab358a22d78763eadb180af",
+      "bytes": 285860,
+      "width": 1991,
+      "height": 970
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=29"
+          "detail": "removed=51"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1939x542"
+          "detail": "1991x970"
         },
         "A19": {
           "status": "pass",
-          "detail": "245296 bytes <= 665600"
+          "detail": "285860 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0002%"
+          "detail": "spill=0.0023%"
         }
       },
       "warnings": [
-        "A12: removed 29 isolated specks"
+        "A12: removed 51 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.954Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:31:17.929Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_red_vial_alchemist.webp",
+          "sha256": "1eaad942b1dfb6a85ee1d641bcc4d93c86e37f095b6aa8f9d2fcc89c542e6743",
+          "pixels_sha256": "0a4fb116287195d73ddd74a7ba4c15cdca78fbb26d11dc69613201b75182bfe5",
+          "bytes": 245296,
+          "width": 1939,
+          "height": 542
+        }
+      ],
+      "source_sha256": "094fbe04c63a889bd80d2ab491b0a66738801ac5500ff790ff388db75afb8f65",
+      "fingerprint": "77666e7e7565974133964464576b58c3756f6f364790541a30ba4843024bdabb"
+    }
+  ]
 }

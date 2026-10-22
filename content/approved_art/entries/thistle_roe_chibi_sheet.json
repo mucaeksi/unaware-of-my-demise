@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "thistle_roe_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_thistle_roe": {
         "image": "art/atlas_thistle_roe.webp",
-        "width": 2035,
-        "height": 1045,
+        "width": 1915,
+        "height": 970,
         "frames": {
-          "idle": [
+          "victory": [
             4,
             4,
-            238,
-            348
-          ],
-          "idle_2": [
-            246,
-            4,
-            238,
-            348
-          ],
-          "idle_3": [
-            488,
-            4,
-            238,
-            348
+            254,
+            354
           ],
           "ultimate": [
-            730,
+            262,
             4,
-            257,
-            348
+            261,
+            352
           ],
           "ultimate_2": [
-            991,
+            527,
             4,
-            257,
-            348
+            261,
+            352
           ],
           "ultimate_3": [
-            1252,
+            792,
             4,
-            257,
-            348
+            261,
+            352
           ],
           "active": [
-            1513,
+            1057,
             4,
-            257,
-            346
+            269,
+            339
           ],
           "active_2": [
-            1774,
+            1330,
             4,
-            257,
-            346
+            269,
+            339
           ],
           "active_3": [
+            1603,
             4,
-            356,
-            257,
-            346
-          ],
-          "basic": [
-            265,
-            356,
-            301,
-            345
-          ],
-          "basic_2": [
-            570,
-            356,
-            301,
-            345
-          ],
-          "basic_3": [
-            875,
-            356,
-            301,
-            345
-          ],
-          "victory": [
-            1180,
-            356,
-            253,
-            345
+            269,
+            339
           ],
           "walk": [
-            1437,
-            356,
-            293,
-            343
+            4,
+            362,
+            281,
+            318
           ],
-          "hit": [
-            1734,
-            356,
-            225,
-            338
+          "idle": [
+            289,
+            362,
+            232,
+            316
+          ],
+          "idle_2": [
+            525,
+            362,
+            232,
+            316
+          ],
+          "idle_3": [
+            761,
+            362,
+            232,
+            316
+          ],
+          "basic": [
+            997,
+            362,
+            302,
+            315
+          ],
+          "basic_2": [
+            1303,
+            362,
+            302,
+            315
+          ],
+          "basic_3": [
+            1609,
+            362,
+            302,
+            315
           ],
           "defeat": [
             4,
-            706,
-            225,
-            335
+            684,
+            245,
+            282
+          ],
+          "hit": [
+            253,
+            684,
+            245,
+            282
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.495,
+            "pivot_x": 0.457,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.359
+            "pivot_x": 0.322,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.366,
+            "pivot_x": 0.33,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.525,
+            "pivot_x": 0.475,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.526,
+            "pivot_x": 0.469,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.547
+            "pivot_x": 0.63,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.545
+            "pivot_x": 0.63,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.527
+            "pivot_x": 0.551,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "1c65f4aabdb6bc34e884d35f83f4d7f81f1f6d724508de720e2df2811fc8af23",
+    "sha256": "0d6ef0b1484dd2b9888e352cf0c937e65caadab4adf361ef833fa23ac4b565fa",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/thistle_roe_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "7fa7c03452a2d0f715052feadfdd3c3a071db02116ef599a21b1cce8cb5cd226",
+    "provenance_sha256": "49acb886c22eaa378b3e57dff39359b617ed8a4e53a8d4c709c17c10c2d549e5",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "cd10b25795376ca0792041f6df6dac29c58b4898a2f2c740b0ce2edfa130c34c",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/thistle_roe_chibi_sheet.ingest.json",
-    "spec_sha256": "569f8cc6d9c56bd3298420ef5cbd437ac7b8458bf7e1956e8e8b8dc17b25929f",
+    "spec_sha256": "c35a75262381bc420540c79e881f01f68c5f608ec46a76521eb8e3ce5e0f3ffa",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "5f1ff51a631cacd8d782ec249a00d7c75ab5c3561d4824033c794a9cce721683"
+    "fingerprint": "d92927af73b11352f15123537ae63994a545d989f1f4e9f96646fd5a2eeee886"
   },
   "outputs": [
     {
       "path": "art/atlas_thistle_roe.webp",
-      "sha256": "5dc536c069669848517355e8404e1e98872984e7e12faf4579008547b798bd38",
-      "pixels_sha256": "142bc73845033b2fdaf033a81ada63fcdbdc9196a1c4e17331556f0cf8814958",
-      "bytes": 507966,
-      "width": 2035,
-      "height": 1045
+      "sha256": "eb6e5c813cad7c1141e0b1f0df75f32e5f0f3612c7edcc80e23cf3f695cd0433",
+      "pixels_sha256": "189d534e2bb382fb2a34b0f859a73e5b058746680116a0bb58b2b16d8df37933",
+      "bytes": 435852,
+      "width": 1915,
+      "height": 970
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=31"
+          "detail": "removed=20"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "2035x1045"
+          "detail": "1915x970"
         },
         "A19": {
           "status": "pass",
-          "detail": "507966 bytes <= 665600"
+          "detail": "435852 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0034%"
+          "detail": "spill=0.0029%"
         }
       },
       "warnings": [
-        "A12: removed 31 isolated specks"
+        "A12: removed 20 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.965Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:31:45.680Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_thistle_roe.webp",
+          "sha256": "5dc536c069669848517355e8404e1e98872984e7e12faf4579008547b798bd38",
+          "pixels_sha256": "142bc73845033b2fdaf033a81ada63fcdbdc9196a1c4e17331556f0cf8814958",
+          "bytes": 507966,
+          "width": 2035,
+          "height": 1045
+        }
+      ],
+      "source_sha256": "1c65f4aabdb6bc34e884d35f83f4d7f81f1f6d724508de720e2df2811fc8af23",
+      "fingerprint": "5f1ff51a631cacd8d782ec249a00d7c75ab5c3561d4824033c794a9cce721683"
+    }
+  ]
 }

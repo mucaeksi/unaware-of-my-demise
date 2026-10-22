@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "royal_hollow_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_royal_hollow": {
         "image": "art/atlas_royal_hollow.webp",
-        "width": 1991,
-        "height": 767,
+        "width": 2013,
+        "height": 953,
         "frames": {
+          "victory": [
+            4,
+            4,
+            226,
+            331
+          ],
           "idle": [
+            234,
             4,
-            4,
-            170,
-            266
+            215,
+            319
           ],
           "idle_2": [
-            178,
+            453,
             4,
-            170,
-            266
+            215,
+            319
           ],
           "idle_3": [
-            352,
+            672,
             4,
-            170,
-            266
-          ],
-          "victory": [
-            526,
-            4,
-            169,
-            264
-          ],
-          "hit": [
-            699,
-            4,
-            313,
-            259
+            215,
+            319
           ],
           "ultimate": [
-            1016,
+            891,
             4,
-            321,
-            245
+            401,
+            319
           ],
           "ultimate_2": [
-            1341,
+            1296,
             4,
-            321,
-            245
+            401,
+            319
           ],
           "ultimate_3": [
-            1666,
             4,
-            321,
-            245
+            339,
+            401,
+            319
           ],
           "active": [
-            4,
-            274,
-            320,
-            244
+            409,
+            339,
+            402,
+            310
           ],
           "active_2": [
-            328,
-            274,
-            320,
-            244
+            815,
+            339,
+            402,
+            310
           ],
           "active_3": [
-            652,
-            274,
-            320,
-            244
-          ],
-          "basic": [
-            976,
-            274,
-            320,
-            243
-          ],
-          "basic_2": [
-            1300,
-            274,
-            320,
-            243
-          ],
-          "basic_3": [
-            1624,
-            274,
-            320,
-            243
+            1221,
+            339,
+            402,
+            310
           ],
           "walk": [
-            4,
-            522,
-            316,
-            241
+            1627,
+            339,
+            382,
+            292
           ],
           "defeat": [
-            324,
-            522,
-            316,
-            169
+            4,
+            662,
+            397,
+            287
+          ],
+          "hit": [
+            405,
+            662,
+            397,
+            287
+          ],
+          "basic": [
+            806,
+            662,
+            387,
+            282
+          ],
+          "basic_2": [
+            1197,
+            662,
+            387,
+            282
+          ],
+          "basic_3": [
+            1588,
+            662,
+            387,
+            282
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.398,
+            "pivot_x": 0.443,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.495
+            "pivot_x": 0.507,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.493,
+            "pivot_x": 0.488,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.494,
+            "pivot_x": 0.504,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.494,
+            "pivot_x": 0.509,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.397
+            "pivot_x": 0.439,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.479
+            "pivot_x": 0.439,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.396
+            "pivot_x": 0.376,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "cfb53f090f8e5cd68820da57e1b49fe37d34a756a46b70e59e63fb73a24da017",
+    "sha256": "f379c983b60995fbe20bd4ceb2ee219b747c2c77104a9b55dbc2207a2a0ecf26",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/royal_hollow_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "257492c1660562a3f3787e58b3fac8ff98a0812319118110b699a8960500723b",
+    "provenance_sha256": "51c88dd31081dbc1b57cd75a995b0bb7e5af90d8c602d88f30ad677c03e40e17",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "72dd0caf94c6b6729b8278cecfec97506a530f57f8c182ca8cccab322030d76b",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/royal_hollow_chibi_sheet.ingest.json",
-    "spec_sha256": "c24ba568a69a64c780bab25d037038dccbb3384ac77b6d9a00d99332082334b8",
+    "spec_sha256": "cdc5b9add6b981a084b1fb41a566850a3472018ead44c8f9c3966da8ca718818",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "8d6d588abd38c1c43fb68e1b5f891ad692bd83cf9d43d76b9a5dd3347e073f50"
+    "fingerprint": "2532a2321ee4bedad2b0faf3d9bd9443375c3c2ab6d6ffae40360e98debee190"
   },
   "outputs": [
     {
       "path": "art/atlas_royal_hollow.webp",
-      "sha256": "5ac27441c55802093f506a849470cc5af55d8f17d0565731b8b81e3e69c5832f",
-      "pixels_sha256": "a590d2eaa0cfd33c56a074fd3ca44c9e5283e8b1d11f6bcfbb801f55de97aa12",
-      "bytes": 261102,
-      "width": 1991,
-      "height": 767
+      "sha256": "d7b93d02744522c9d14415245b9db9c24804dde62feaa48ce4d3ec2c91e21bb5",
+      "pixels_sha256": "a5137af6b0109b697e666a72f21c4316cb94dc94b2d5f66c4eb16577773d3416",
+      "bytes": 345174,
+      "width": 2013,
+      "height": 953
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=1"
+          "detail": "removed=11"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.600"
         },
         "A18": {
           "status": "pass",
-          "detail": "1991x767"
+          "detail": "2013x953"
         },
         "A19": {
           "status": "pass",
-          "detail": "261102 bytes <= 665600"
+          "detail": "345174 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0002%"
+          "detail": "spill=0.0006%"
         }
       },
       "warnings": [
-        "A12: removed 1 isolated specks"
+        "A12: removed 11 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.960Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:31:34.995Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_royal_hollow.webp",
+          "sha256": "5ac27441c55802093f506a849470cc5af55d8f17d0565731b8b81e3e69c5832f",
+          "pixels_sha256": "a590d2eaa0cfd33c56a074fd3ca44c9e5283e8b1d11f6bcfbb801f55de97aa12",
+          "bytes": 261102,
+          "width": 1991,
+          "height": 767
+        }
+      ],
+      "source_sha256": "cfb53f090f8e5cd68820da57e1b49fe37d34a756a46b70e59e63fb73a24da017",
+      "fingerprint": "8d6d588abd38c1c43fb68e1b5f891ad692bd83cf9d43d76b9a5dd3347e073f50"
+    }
+  ]
 }

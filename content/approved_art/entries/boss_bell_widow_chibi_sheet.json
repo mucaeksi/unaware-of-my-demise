@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "boss_bell_widow_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 4,
+  "revision": 5,
   "targets": {
     "atlases": {
       "atlas_boss_bell_widow": {
         "image": "art/atlas_boss_bell_widow.webp",
-        "width": 2027,
-        "height": 1017,
+        "width": 2034,
+        "height": 608,
         "frames": {
-          "idle": [
-            4,
-            4,
-            176,
-            337
-          ],
-          "idle_2": [
-            184,
-            4,
-            176,
-            337
-          ],
-          "idle_3": [
-            364,
-            4,
-            176,
-            337
-          ],
           "ultimate": [
-            544,
             4,
-            330,
-            337
+            4,
+            297,
+            310
           ],
           "ultimate_2": [
-            878,
+            305,
             4,
-            330,
-            337
+            297,
+            310
           ],
           "ultimate_3": [
-            1212,
+            606,
             4,
-            330,
-            337
+            297,
+            310
           ],
           "active": [
-            1546,
+            907,
             4,
-            329,
-            336
+            304,
+            302
           ],
           "active_2": [
+            1215,
             4,
-            345,
-            329,
-            336
+            304,
+            302
           ],
           "active_3": [
-            337,
-            345,
-            329,
-            336
-          ],
-          "basic": [
-            670,
-            345,
-            329,
-            335
-          ],
-          "basic_2": [
-            1003,
-            345,
-            329,
-            335
-          ],
-          "basic_3": [
-            1336,
-            345,
-            329,
-            335
+            1523,
+            4,
+            304,
+            302
           ],
           "victory": [
-            1669,
-            345,
-            175,
-            335
+            1831,
+            4,
+            166,
+            302
+          ],
+          "idle": [
+            4,
+            318,
+            161,
+            286
+          ],
+          "idle_2": [
+            169,
+            318,
+            161,
+            286
+          ],
+          "idle_3": [
+            334,
+            318,
+            161,
+            286
           ],
           "walk": [
-            1848,
-            345,
-            175,
-            332
+            499,
+            318,
+            155,
+            285
           ],
-          "hit": [
-            4,
-            685,
-            240,
-            328
+          "basic": [
+            658,
+            318,
+            296,
+            281
+          ],
+          "basic_2": [
+            958,
+            318,
+            296,
+            281
+          ],
+          "basic_3": [
+            1258,
+            318,
+            296,
+            281
           ],
           "defeat": [
-            248,
-            685,
-            266,
-            325
+            1558,
+            318,
+            234,
+            244
+          ],
+          "hit": [
+            1796,
+            318,
+            234,
+            244
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.463,
+            "pivot_x": 0.498,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.468
+            "pivot_x": 0.526,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.587,
+            "pivot_x": 0.614,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.587,
+            "pivot_x": 0.606,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.587,
+            "pivot_x": 0.619,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.558
+            "pivot_x": 0.536,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.518
+            "pivot_x": 0.536,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.464
+            "pivot_x": 0.424,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "d1de8cb26a4f34140f62a4c9c170492cb490c6ab467739a107721be769bf5f40",
+    "sha256": "8ed42d9431c8feb7daecf6007eb74ed2d26cefe5e427b6ba1f8bce50e1ad289e",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/boss_bell_widow_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "17ea5d9755c9a7d4f3841dd7a9e01fd4773eaec93596917a7d042c8ceb420165",
+    "provenance_sha256": "98a8cd56cbd9a8e3c0e9ffb2f43ad4b4627a5346f735985b1763ad48fbde3066",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "2165b4c08b0be5be3d1656c751893f7f22fe080f310495a9847100c6d398a079",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/boss_bell_widow_chibi_sheet.ingest.json",
-    "spec_sha256": "72c37e8baa399a88890759220cb44b2ac8015c23bace8bf9cd6ed36d77767a4c",
+    "spec_sha256": "53977c088c5d3ac3adb0bae08e23d4459cf535837562321982700edbf9eb41d2",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "1d11d2d7f9012d7449e2a53876427f61da196ad7c61fd87029d8f808da699649"
+    "fingerprint": "c8b756d7ac878221c9e833477604e38b780dda668ae8ebe9ed904e82e773b4ae"
   },
   "outputs": [
     {
       "path": "art/atlas_boss_bell_widow.webp",
-      "sha256": "196ca13b01eb8e35d679db26ddd5ef58c34f3a7be12b130bc6ac97842ad452f6",
-      "pixels_sha256": "0ee7e09a480cfc8537dcbf3f1246e9b7e70b2be7d38cb67d0664842d03dc874a",
-      "bytes": 372772,
-      "width": 2027,
-      "height": 1017
+      "sha256": "659fc80ee25cce35027013400568e247d748508a7b42845ca0386067e09b39b1",
+      "pixels_sha256": "c54f93c869d56cc438e3ec3c951591dc5afaac48efee6be483cbbd55934ada23",
+      "bytes": 299082,
+      "width": 2034,
+      "height": 608
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=136"
+          "detail": "removed=149"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.613"
+          "detail": "k=0.533"
         },
         "A18": {
           "status": "pass",
-          "detail": "2027x1017"
+          "detail": "2034x608"
         },
         "A19": {
           "status": "pass",
-          "detail": "372772 bytes <= 665600"
+          "detail": "299082 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0004%"
+          "detail": "spill=0.0011%"
         }
       },
       "warnings": [
-        "A12: removed 136 isolated specks"
+        "A12: removed 149 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.905Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:29:09.761Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -348,6 +385,21 @@
       ],
       "source_sha256": "69a729d010200de89c4a5f31a9e06cb55b40181f149a81c19015ce8f7ae6fc67",
       "fingerprint": "9dd5561dc55408ecf01d8715d259d2ff629922c37e870287c8bed2471e88010a"
+    },
+    {
+      "revision": 4,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_bell_widow.webp",
+          "sha256": "196ca13b01eb8e35d679db26ddd5ef58c34f3a7be12b130bc6ac97842ad452f6",
+          "pixels_sha256": "0ee7e09a480cfc8537dcbf3f1246e9b7e70b2be7d38cb67d0664842d03dc874a",
+          "bytes": 372772,
+          "width": 2027,
+          "height": 1017
+        }
+      ],
+      "source_sha256": "d1de8cb26a4f34140f62a4c9c170492cb490c6ab467739a107721be769bf5f40",
+      "fingerprint": "1d11d2d7f9012d7449e2a53876427f61da196ad7c61fd87029d8f808da699649"
     }
   ]
 }

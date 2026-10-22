@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "hollow_cleric_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_hollow_cleric": {
         "image": "art/atlas_hollow_cleric.webp",
-        "width": 1968,
-        "height": 788,
+        "width": 1937,
+        "height": 978,
         "frames": {
-          "idle": [
-            4,
-            4,
-            194,
-            266
-          ],
-          "idle_2": [
-            202,
-            4,
-            194,
-            266
-          ],
-          "idle_3": [
-            400,
-            4,
-            194,
-            266
-          ],
           "victory": [
-            598,
             4,
-            193,
-            264
-          ],
-          "hit": [
-            795,
             4,
-            213,
-            259
-          ],
-          "defeat": [
-            1012,
-            4,
-            300,
-            256
+            238,
+            335
           ],
           "ultimate": [
-            1316,
+            246,
             4,
-            322,
-            254
+            397,
+            331
           ],
           "ultimate_2": [
-            1642,
+            647,
             4,
-            322,
-            254
+            397,
+            331
           ],
           "ultimate_3": [
+            1048,
             4,
-            274,
-            322,
-            254
+            397,
+            331
           ],
           "active": [
-            330,
-            274,
-            321,
-            253
+            1449,
+            4,
+            398,
+            324
           ],
           "active_2": [
-            655,
-            274,
-            321,
-            253
+            4,
+            343,
+            398,
+            324
           ],
           "active_3": [
-            980,
-            274,
-            321,
-            253
+            406,
+            343,
+            398,
+            324
           ],
-          "basic": [
-            1305,
-            274,
-            322,
-            252
+          "idle": [
+            808,
+            343,
+            244,
+            315
           ],
-          "basic_2": [
-            1631,
-            274,
-            322,
-            252
+          "idle_2": [
+            1056,
+            343,
+            244,
+            315
           ],
-          "basic_3": [
-            4,
-            532,
-            322,
-            252
+          "idle_3": [
+            1304,
+            343,
+            244,
+            315
           ],
           "walk": [
-            330,
-            532,
-            318,
-            250
+            1552,
+            343,
+            381,
+            305
+          ],
+          "basic": [
+            4,
+            671,
+            391,
+            303
+          ],
+          "basic_2": [
+            399,
+            671,
+            391,
+            303
+          ],
+          "basic_3": [
+            794,
+            671,
+            391,
+            303
+          ],
+          "defeat": [
+            1189,
+            671,
+            364,
+            292
+          ],
+          "hit": [
+            1557,
+            671,
+            364,
+            292
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.629,
+            "pivot_x": 0.659,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.652
+            "pivot_x": 0.68,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.653,
+            "pivot_x": 0.645,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.655,
+            "pivot_x": 0.69,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.656,
+            "pivot_x": 0.701,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.521
+            "pivot_x": 0.49,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.49
+            "pivot_x": 0.49,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.629
+            "pivot_x": 0.611,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "780c498b48dd8d136e1e9391326dcb00c07e0214b219daeac8bb113c1df6e067",
+    "sha256": "01e66437fd5742ec6e8b8b34506d60bfe222a8b3c8550b890bebe1ccb182ec69",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/hollow_cleric_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "de801f03a23c9541252d5d0f28985d396440854c03486177fbffab80f3c5fb47",
+    "provenance_sha256": "cf8b0d6cd5bb91c4b9cd1f4dc59c78763651818007fc8c5ffa13860ff0c0c0ee",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "560f1af582e9a8518d46e11980cb1db91b128e03e071fb19c5317b95ac3c7dfc",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/hollow_cleric_chibi_sheet.ingest.json",
-    "spec_sha256": "dd774f4e8c5ba92bea08c42323abb26fa7da376c719ca9ee82c1627d3db68477",
+    "spec_sha256": "0178ef6707e8bd8902e98e8894078bcb22d5528e1df763c19e07d9ae6b58c26a",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "23b55349008c72a7dc1fd2a32c7164bf844207251ba1595b902aa47a2dcd2287"
+    "fingerprint": "0f400a965bb89e9450d58931f06424f60805d8858aa00867c8c496c02bafa148"
   },
   "outputs": [
     {
       "path": "art/atlas_hollow_cleric.webp",
-      "sha256": "f63c9cb2205729b09386c2c1fd42eb3922640154fec51f61c35643259a977f79",
-      "pixels_sha256": "16b337af717ab399d0602dab079b736dd6ba4e375900c222bea15cc63c6421d6",
-      "bytes": 323670,
-      "width": 1968,
-      "height": 788
+      "sha256": "7a39ebafdeff460d229c54ba5bbac03b5db61db062cc24fea0876b53352aa571",
+      "pixels_sha256": "419c586eefc793127bcf126f04caa8982394e14ed9568ac79235a4d385a33d4c",
+      "bytes": 392206,
+      "width": 1937,
+      "height": 978
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=44"
+          "detail": "removed=219"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1968x788"
+          "detail": "1937x978"
         },
         "A19": {
           "status": "pass",
-          "detail": "323670 bytes <= 665600"
+          "detail": "392206 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0002%"
+          "detail": "spill=0.0005%"
         }
       },
       "warnings": [
-        "A12: removed 44 isolated specks"
+        "A12: removed 219 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.926Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T06:30:23.887Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_hollow_cleric.webp",
+          "sha256": "f63c9cb2205729b09386c2c1fd42eb3922640154fec51f61c35643259a977f79",
+          "pixels_sha256": "16b337af717ab399d0602dab079b736dd6ba4e375900c222bea15cc63c6421d6",
+          "bytes": 323670,
+          "width": 1968,
+          "height": 788
+        }
+      ],
+      "source_sha256": "780c498b48dd8d136e1e9391326dcb00c07e0214b219daeac8bb113c1df6e067",
+      "fingerprint": "23b55349008c72a7dc1fd2a32c7164bf844207251ba1595b902aa47a2dcd2287"
+    }
+  ]
 }

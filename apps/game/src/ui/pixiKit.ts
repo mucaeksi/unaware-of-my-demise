@@ -606,7 +606,16 @@ export async function backdrop(scene: PixiScene, location: string, depth = -20):
     img.position.set(REF_W / 2, REF_H / 2);
     const cover = Math.max(REF_W / (img.texture.width || REF_W), REF_H / (img.texture.height || REF_H));
     img.scale.set(cover);
-    attachLivingBackdrop(scene, img, { baseScale: cover, fxDepth: Math.max(depth + 1, -5), mood: 'sanctuary', intensity: 0.95 });
+    const fx = attachLivingBackdrop(scene, img, {
+      baseScale: cover,
+      fxDepth: Math.max(depth + 1, -5),
+      mood: 'sanctuary',
+      location,
+      intensity: 0.98
+    });
+    img.once('destroyed', () => {
+      if (!fx.destroyed) fx.destroy({ children: true });
+    });
     return img;
   } catch {
     return null;

@@ -57,6 +57,7 @@ export class StoryScene extends PixiScene<StoryInit> {
   private runner!: StoryRunner;
   private bg!: PIXI.Sprite;
   private bgKey = '';
+  private bgFx: PIXI.Container | null = null;
   private cgImage: PIXI.Sprite | null = null;
   private cgActive = false;
   private actors = new Map<string, Actor>();
@@ -179,10 +180,20 @@ export class StoryScene extends PixiScene<StoryInit> {
 
   // ------------------------------------------------------------------ layout
 
-  private setBackground(key: string): void {
+  private setBackground(key: string, locationId?: string): void {
     if (this.bgKey === key) return;
     this.bgKey = key;
     this.bg.texture = this.tex(key);
+    this.anim.killOf(this.bg);
+    this.bgFx?.destroy({ children: true });
+    const cover = Math.max(REF_W / (this.bg.texture.width || REF_W), REF_H / (this.bg.texture.height || REF_H));
+    this.bgFx = attachLivingBackdrop(this, this.bg, {
+      baseScale: cover,
+      fxDepth: DEPTH.bg + 2,
+      mood: 'eclipse',
+      location: locationId ?? this.data0.location_id,
+      intensity: 1.05
+    });
   }
 
   private build(): void {
@@ -190,9 +201,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.bg = this.add(new PIXI.Sprite(), DEPTH.bg);
     this.bg.anchor.set(0.5);
     this.bg.position.set(REF_W / 2, REF_H / 2);
-    this.setBackground(art.background(this.data0.location_id));
-    const cover = Math.max(REF_W / (this.bg.texture.width || REF_W), REF_H / (this.bg.texture.height || REF_H));
-    attachLivingBackdrop(this, this.bg, { baseScale: cover, fxDepth: DEPTH.bg + 2, mood: 'eclipse', intensity: 1.05 });
+    this.setBackground(art.background(this.data0.location_id), this.data0.location_id);
 
     if (this.data0.illustration_id) {
       const stillKey = art.still(this.data0.illustration_id);
@@ -330,7 +339,7 @@ export class StoryScene extends PixiScene<StoryInit> {
   private restoreFromRunner(): void {
     const { art } = Services.ready();
     const r = this.runner.restored;
-    this.setBackground(art.background(r.locationId));
+    this.setBackground(art.background(r.locationId), r.locationId);
     this.playSceneMusic(r.musicCueId && r.musicCueId !== 'stop' ? r.musicCueId : this.defaultMusicCueForScene(), 1.5);
     for (const [character, a] of r.actors) this.showActor(character, a.side, a.emotion, true);
     this.prevSpeaker = r.prevSpeaker;
@@ -377,7 +386,7 @@ export class StoryScene extends PixiScene<StoryInit> {
         return true;
       }
       case 'background':
-        this.setBackground(art.background(e.locationId));
+        this.setBackground(art.background(e.locationId), e.locationId);
         return false;
       case 'music':
         if (e.cueId && e.cueId !== 'stop') this.playSceneMusic(e.cueId, 1.5);
@@ -617,45 +626,43 @@ export class StoryScene extends PixiScene<StoryInit> {
       if (ov?.listener) {
         this.setActorEmotion(ov.listener.char, ov.listener.emotion, false);
       } else {
-        // Default reactive listener expression based on speaker's tone
-        const otherChar = e.speaker === 'mahmut' ? 'fadyme' : 'mahmut';
-        if (resolvedEmotion === 'protective' || resolvedEmotion === 'determined') {
-          this.setActorEmotion(otherChar, otherChar === 'fadyme' ? 'determined' : 'protective', false);
-        } else if (resolvedEmotion === 'dry_amusement' || resolvedEmotion === 'dry_humor') {
-          this.setActorEmotion(otherChar, otherChar === 'fadyme' ? 'soft_smile' : 'dry_humor', false);
+        // Default reactive listener expression for any companion or antagonist currently on stage
+        for (const [otherChar] of this.actors) {
+          if (otherChar === e.speaker) continue;
+          const em = resolvedEmotion.toLowerCase();
+          if (/protect|determin|fierce|defian|urgent|command|warn/.test(em)) {
+            this.setActorEmotion(otherChar, otherChar === 'fadyme' ? 'determined' : otherChar === 'mahmut' ? 'protective' : 'focused', false);
+          } else if (/dry|wry|amused|smile|warm|gentle|kind/.test(em)) {
+            this.setActorEmotion(otherChar, otherChar === 'fadyme' ? 'soft_smile' : otherChar === 'mahmut' ? 'dry_humor' : 'warm', false);
+          } else if (/watch|alert|focus|analyt|tense|cold|mock|imperious/.test(em)) {
+            this.setActorEmotion(otherChar, otherChar === 'mahmut' ? 'watchful' : 'focused', false);
+          }
         }
       }
     }
 
-    // 1. Default emotion-driven micro-posture for the active speaker
+    // 1. Default emotion-driven micro-posture for the active speaker (covers all 25 heroes & 7 antagonists)
     if (e.speaker !== 'narration') {
       const sp = this.actors.get(e.speaker);
       if (sp) {
         const inward = sp.side === 'left' ? 1 : -1;
-        switch (resolvedEmotion) {
-          case 'watchful':
-            sp.tiltDeg = inward * 1.4;
-            sp.scaleMult = 1.015;
-            break;
-          case 'dry_humor':
-          case 'dry_amusement':
-            sp.tiltDeg = inward * -2.2;
-            sp.scaleMult = 1.015;
-            break;
-          case 'soft_smile':
-            sp.tiltDeg = inward * 1.8;
-            sp.scaleMult = 1.02;
-            break;
-          case 'protective':
-          case 'determined':
-            sp.tiltDeg = inward * 2.4;
-            sp.offsetX = Math.max(sp.offsetX * inward, 42) * inward;
-            sp.scaleMult = 1.05;
-            break;
-          default:
-            sp.tiltDeg = 0;
-            sp.scaleMult = 1.0;
-            break;
+        const em = resolvedEmotion.toLowerCase();
+        if (/watch|alert|focus|analyt|study|tense|narrow|careful/.test(em)) {
+          sp.tiltDeg = inward * 1.4;
+          sp.scaleMult = 1.015;
+        } else if (/dry|wry|amused|mock|imperious|cold/.test(em)) {
+          sp.tiltDeg = inward * -2.2;
+          sp.scaleMult = 1.015;
+        } else if (/soft_smile|smile|warm|gentle|kind|relief|hopeful|tender/.test(em)) {
+          sp.tiltDeg = inward * 1.8;
+          sp.scaleMult = 1.02;
+        } else if (/protect|determin|defian|fierce|urgent|command|warn|angry|vow|resolve/.test(em)) {
+          sp.tiltDeg = inward * 2.4;
+          sp.offsetX = Math.max(sp.offsetX * inward, 42) * inward;
+          sp.scaleMult = 1.05;
+        } else {
+          sp.tiltDeg = 0;
+          sp.scaleMult = 1.0;
         }
       }
     }

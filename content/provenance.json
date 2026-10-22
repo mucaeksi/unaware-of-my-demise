@@ -4,34 +4,34 @@
   "outputs": [
     {
       "output": "content/base/art/atlas_fadyme.webp",
-      "sha256": "a7a0be9f54dc6431213ff21dcb1d9178493453184ffd95e7105e129b54f5a5dd",
+      "sha256": "45294a788697a7f53a33d15cb17fc2e100d360cf82e5ee89c1ff653a59927324",
       "sources": {
-        "generated:fadyme_chibi_sheet@rev3": "c9a34f35c5d86ea574f38077f3900543f334d64f3d0a7f0727626fdeae1e64e1",
-        "entry": "80ef781b7e92ee69553a3dd8b541590b657643456cf30166ab7b83f03f599c85"
+        "generated:fadyme_chibi_sheet@rev4": "e609f27b2b25f0d8a037c2dfc07ebc3d0ac7ee7736fa338d6503da8254bfba19",
+        "entry": "acc0394925403a8c6efa9a26ece40e1faf069730adef140bfc66c4d6fa1154e2"
       }
     },
     {
       "output": "content/base/art/atlas_mahmut.webp",
-      "sha256": "2e75020a99ce546f04ae4a901d144453f3c9a76c2c5f85a34b5d6d4fb45416b7",
+      "sha256": "2366ef2aedb2305251eb2ca64ae8d6f0ca9cf4de43e59cffe066f3a4e082bf05",
       "sources": {
-        "generated:mahmut_chibi_sheet@rev3": "ec5d79e08b7a721bcbe4fb71cf24e94439d98342c92d192e2f353d9480a13d1d",
-        "entry": "5d68145338a8c420972f7deae973b7d0a1a7ea212291eed7eeb2f094fb4ff63c"
+        "generated:mahmut_chibi_sheet@rev5": "b540300e4d00b0951f26f5ae82896cd36caf92d4ff2dd498899985041bf45889",
+        "entry": "657463fe5c8a44506c53df775c18a7b53b4046f560d80dfc6b3d47e90c939fdf"
       }
     },
     {
       "output": "content/base/art/atlas_bellbound_dead.webp",
-      "sha256": "8625696053f796c6b4f48bf524228fc69e3ffd493dbfe0f535a03c931ffffae1",
+      "sha256": "200076551e8200d7f82afab74461d564782f51c7b3ebcfb95c25ff08d16f0a3c",
       "sources": {
-        "generated:bellbound_dead_chibi_sheet@rev5": "ed460693e88f597afd8ccd663586f3936077d2f83edb1e14c37f8b2587480f85",
-        "entry": "4cb15b762d5f6018670161457be8695b9881bce009078eba90731ed31fabbfab"
+        "generated:bellbound_dead_chibi_sheet@rev7": "a71fa07e451efc449bc49b37ee7160ffd27bff7c7e26db73e626609fc836d411",
+        "entry": "17c8d7aa79b0599c241270ff7e878407ef590b462b534a7df7b803f884843fd8"
       }
     },
     {
       "output": "content/base/art/atlas_hollow_pilgrim.webp",
-      "sha256": "6d72ccf2e831d52867b7bbee44f74db77135559d4f19d1572415c1e736a76fa2",
+      "sha256": "3c8ea1852ebef98d3d14932f7998b713da8e38b01c5d28dfb76db45257392236",
       "sources": {
-        "generated:hollow_pilgrim_chibi_sheet@rev6": "18334911e016bd1878be1cc655f42ed2eadcf62d9d26c4b23c76688399add76c",
-        "entry": "04ea71faf8f7274aa90ae0b263c40183f9cb37e8c1fcced6f837eaf0f7cf1016"
+        "generated:hollow_pilgrim_chibi_sheet@rev7": "fae244277fd1add79c62701d7c6e1dd0b0dd03041c233370cb42cd40c83f184c",
+        "entry": "5deb42db7853fc8008cba42a8ba418e4bc643b7966b5bdc4fd64c4022a556657"
       }
     },
     {
@@ -291,7 +291,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "0aa3ae8f24d56175bdb9cb6f0c9d87f8e6f8f9324c4f3b099f91ae06792365cc",
+      "sha256": "05a64da1b0e55a898ca178527164780d5ece32055840e70dda61ea1779f58464",
       "sources": {}
     },
     {

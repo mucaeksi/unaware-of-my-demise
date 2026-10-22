@@ -2,37 +2,109 @@
   "schema": 1,
   "asset_id": "campaign_enemy_knight_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 3,
+  "revision": 4,
   "targets": {
     "atlases": {
       "atlas_enemy_knight": {
         "image": "art/atlas_enemy_knight.webp",
-        "width": 1795,
-        "height": 425,
+        "width": 2031,
+        "height": 885,
         "frames": {
-          "hit": [
+          "victory": [
             4,
             4,
-            387,
-            417
+            277,
+            348
           ],
           "idle": [
-            395,
+            285,
             4,
-            349,
-            408
+            270,
+            316
           ],
-          "basic": [
-            748,
+          "idle_2": [
+            559,
             4,
-            634,
-            395
+            270,
+            316
+          ],
+          "idle_3": [
+            833,
+            4,
+            270,
+            316
+          ],
+          "walk": [
+            1107,
+            4,
+            250,
+            306
           ],
           "defeat": [
-            1386,
+            1361,
             4,
-            405,
-            364
+            324,
+            281
+          ],
+          "hit": [
+            1689,
+            4,
+            324,
+            281
+          ],
+          "ultimate": [
+            4,
+            356,
+            403,
+            264
+          ],
+          "ultimate_2": [
+            411,
+            356,
+            403,
+            264
+          ],
+          "ultimate_3": [
+            818,
+            356,
+            403,
+            264
+          ],
+          "active": [
+            1225,
+            356,
+            399,
+            257
+          ],
+          "active_2": [
+            1628,
+            356,
+            399,
+            257
+          ],
+          "active_3": [
+            4,
+            624,
+            399,
+            257
+          ],
+          "basic": [
+            407,
+            624,
+            418,
+            240
+          ],
+          "basic_2": [
+            829,
+            624,
+            418,
+            240
+          ],
+          "basic_3": [
+            1251,
+            624,
+            418,
+            240
           ]
         }
       }
@@ -47,49 +119,129 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.401
+            "pivot_x": 0.431,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
           },
           "walk": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.401
+            "pivot_x": 0.431,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.557
+            "pivot_x": 0.529,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "active": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.557
+            "pivot_x": 0.529,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "ultimate": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.557
+            "pivot_x": 0.529,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "hit": {
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.459
+            "pivot_x": 0.457,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.463
+            "pivot_x": 0.457,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.401
+            "pivot_x": 0.431,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -97,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "73edb6a96ae058f647aabe5f43fcea5ef7091ae3740c86f178776c46fa8fa4ab",
+    "sha256": "e28c7a170ece3374049fee1d8bddb0d06ecefc893b0ad890966224aebf9b2187",
     "mime": "image/png",
-    "width": 2752,
-    "height": 1536,
+    "width": 2880,
+    "height": 2880,
     "provenance_file": ".cache/generated/campaign_enemy_knight_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "799838d6030d7bc9d070ed74898047d024709231140bda1c97103b0f042b67a5",
+    "provenance_sha256": "c03f986a79be0bafbbeeacbf8237ec64722bafb338c6b71feba3eb191fafa2f5",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
     "references": [],
@@ -110,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/campaign_enemy_knight_chibi_sheet.ingest.json",
-    "spec_sha256": "17223237aa717ce1c7338b0296a4668a92edd71f197143435520d749d604ea3f",
+    "spec_sha256": "d0fe608ade46a68a4378d4200a902437bb299c03ef1908ed5a3c6f29cf98dc92",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "df057481f6e018165e2f3dc047acf51084bb88b0906bfef3ca2064866d9ecdb5"
+    "fingerprint": "b7e6bdc5181a8d2b7a82bcd6edf0881875b22de1571f63e6a0c54876f790f7fd"
   },
   "outputs": [
     {
       "path": "art/atlas_enemy_knight.webp",
-      "sha256": "402d987e1af8c454323b339b1c2cd8bf6657ffd06092ee3b64db75e3023310e3",
-      "pixels_sha256": "d4cf457fd3640d9408878815668c183f0846953a77e92cc8397f43019fb64e29",
-      "bytes": 93846,
-      "width": 1795,
-      "height": 425
+      "sha256": "4e5ff4f3e184a1fa57553fe000ec022eb1e36329a8b80ab890e0f470df6ccde6",
+      "pixels_sha256": "55cc2b368cf28845710092362b20482dc368d17d3546a311dacdaf1e28e59b31",
+      "bytes": 258332,
+      "width": 2031,
+      "height": 885
     }
   ],
   "qc": {
@@ -138,7 +290,7 @@
         },
         "A02": {
           "status": "pass",
-          "detail": "image/png 2752x1536"
+          "detail": "image/png 2880x2880"
         },
         "A07": {
           "status": "pass",
@@ -146,26 +298,26 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=4"
+          "detail": "removed=49"
         },
         "A14": {
           "status": "pass",
-          "detail": "4 cells"
+          "detail": "16 cells"
         },
         "A15": {
           "status": "pass"
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.633"
+          "detail": "k=0.579"
         },
         "A18": {
           "status": "pass",
-          "detail": "1795x425"
+          "detail": "2031x885"
         },
         "A19": {
           "status": "pass",
-          "detail": "93846 bytes <= 665600"
+          "detail": "258332 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
@@ -173,14 +325,14 @@
         }
       },
       "warnings": [
-        "A12: removed 4 isolated specks"
+        "A12: removed 49 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T19:30:21.260Z",
-      "note": "Approved"
+      "at": "2026-10-22T06:29:31.189Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -218,6 +370,21 @@
       ],
       "source_sha256": "2a84df4d6559e6bbe439e72594b561c4c72e806afe30e5c62712b6b5bba1fe9b",
       "fingerprint": "6f4314a57949a46455b41c1ae77d81d87e15c2b8b52e2ba8ab5aee7d7ca2ed78"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_enemy_knight.webp",
+          "sha256": "402d987e1af8c454323b339b1c2cd8bf6657ffd06092ee3b64db75e3023310e3",
+          "pixels_sha256": "d4cf457fd3640d9408878815668c183f0846953a77e92cc8397f43019fb64e29",
+          "bytes": 93846,
+          "width": 1795,
+          "height": 425
+        }
+      ],
+      "source_sha256": "73edb6a96ae058f647aabe5f43fcea5ef7091ae3740c86f178776c46fa8fa4ab",
+      "fingerprint": "df057481f6e018165e2f3dc047acf51084bb88b0906bfef3ca2064866d9ecdb5"
     }
   ]
 }

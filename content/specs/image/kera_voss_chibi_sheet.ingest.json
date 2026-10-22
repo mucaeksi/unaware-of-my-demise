@@ -4,7 +4,7 @@
   "class": "unit_sheet",
   "source": {
     "kind": "generated",
-    "pick": "a83b4c1647bc",
+    "pick": "e42b822436df",
     "provenance": ".cache/generated/kera_voss_chibi_sheet/run.provenance.json"
   },
   "key": {
@@ -28,104 +28,104 @@
       "idle": [
         0,
         0,
-        640,
-        640
+        720,
+        720
       ],
       "idle_2": [
-        640,
+        720,
         0,
-        640,
-        640
+        720,
+        720
       ],
       "idle_3": [
-        1280,
+        1440,
         0,
-        640,
-        640
+        720,
+        720
       ],
       "walk": [
-        1920,
+        2160,
         0,
-        640,
-        640
+        720,
+        720
       ],
       "basic": [
         0,
-        640,
-        640,
-        640
+        720,
+        720,
+        720
       ],
       "basic_2": [
-        640,
-        640,
-        640,
-        640
+        720,
+        720,
+        720,
+        720
       ],
       "basic_3": [
-        1280,
-        640,
-        640,
-        640
+        1440,
+        720,
+        720,
+        720
       ],
       "active": [
-        1920,
-        640,
-        640,
-        640
+        2160,
+        720,
+        720,
+        720
       ],
       "active_2": [
         0,
-        1280,
-        640,
-        640
+        1440,
+        720,
+        720
       ],
       "active_3": [
-        640,
-        1280,
-        640,
-        640
+        720,
+        1440,
+        720,
+        720
       ],
       "ultimate": [
-        1280,
-        1280,
-        640,
-        640
+        1440,
+        1440,
+        720,
+        720
       ],
       "ultimate_2": [
-        1920,
-        1280,
-        640,
-        640
+        2160,
+        1440,
+        720,
+        720
       ],
       "ultimate_3": [
         0,
-        1920,
-        640,
-        640
+        2160,
+        720,
+        720
       ],
       "hit": [
-        640,
-        1920,
-        640,
-        640
+        720,
+        2160,
+        720,
+        720
       ],
       "defeat": [
-        1280,
-        1920,
-        640,
-        640
+        1440,
+        2160,
+        720,
+        720
       ],
       "victory": [
-        1920,
-        1920,
-        640,
-        640
+        2160,
+        2160,
+        720,
+        720
       ]
     }
   },
   "frames": {
     "idle": "idle",
-    "idle_frame_px": 340,
+    "idle_frame_px": 300,
     "ground": "lowest",
     "pivot": "lower_body_centroid",
     "animations": {
@@ -171,6 +171,43 @@
         ],
         "fps": 9,
         "loop": false
+      },
+      "hit": {
+        "frames": [
+          "hit",
+          "defeat",
+          "hit"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "defeat": {
+        "frames": [
+          "hit",
+          "defeat"
+        ],
+        "fps": 6,
+        "loop": false
+      },
+      "walk": {
+        "frames": [
+          "walk",
+          "idle_2",
+          "walk",
+          "basic_2"
+        ],
+        "fps": 8,
+        "loop": true
+      },
+      "victory": {
+        "frames": [
+          "victory",
+          "ultimate_2",
+          "victory",
+          "idle_3"
+        ],
+        "fps": 7,
+        "loop": true
       }
     }
   },
