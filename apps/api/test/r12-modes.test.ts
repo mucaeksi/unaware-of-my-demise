@@ -328,6 +328,23 @@ describe('R12 — Sweep, Memory Shards, AFK Patrol, Modes, Arena & Endless Corri
     );
     expect(seasonClaim.status).toBe(200);
     expect(await seasonClaim.json()).toMatchObject({ seasonId: body0.season.seasonId, replayed: false });
+
+    // Second player sees first player's defense snapshot in matchmaking and fights it
+    const { auth: auth2 } = await signIn(`sub-arena-challenger-${rid()}`);
+    expect((await clearNode(auth2, 't1')).status).toBe(200);
+    const state2 = await game('/api/v1/arena?releaseId=rel_0001', { headers: auth2 });
+    expect(state2.status).toBe(200);
+    const body2 = (await state2.json()) as {
+      opponents: { opponentId: string; displayName: string; rating: number; level: number }[];
+    };
+    const pvpOpp = body2.opponents.find((o) => o.opponentId.startsWith('player:'));
+    expect(pvpOpp).toBeDefined();
+    const pvpMatch = await game(
+      '/api/v1/arena/match',
+      post({ releaseId: 'rel_0001', opponentId: pvpOpp!.opponentId, requestId: rid() }, auth2),
+    );
+    expect(pvpMatch.status).toBe(200);
+    expect(await pvpMatch.json()).toMatchObject({ opponentId: pvpOpp!.opponentId, dailyUsed: 1 });
   });
 
   it('snapshots Endless Corridor party and modifiers at run start, advances waves, and claims milestones', async () => {

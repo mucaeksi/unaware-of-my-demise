@@ -153,6 +153,7 @@ export interface ArenaState {
   seasonClaimed: boolean;
   dailyUsed: number;
   dailyLimit: number;
+  defense?: TeamMember[];
   opponents: readonly { opponentId: string; displayName: string; rating: number; level: number }[];
 }
 export type EndlessModifier = 'blood_moon' | 'iron_ward' | 'ashen_haste';
