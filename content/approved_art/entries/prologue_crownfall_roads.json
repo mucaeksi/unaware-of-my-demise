@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_prologue_roads.webp",
-      "sha256": "e39648cc80ebfe248facc21867f612dc9c676f0aa1d8e77b2f5fefb000d3ef68",
-      "pixels_sha256": "03dd45d7252a2ff7f789370ba13e6b52fae5c31fdce0a3e4efcb7e0b835d7f9f",
-      "bytes": 92422,
+      "sha256": "c04cb40cfc9d236c4c9bc51613ab4cd5809bfb1e9c9eda0734a63e0d584f4ce9",
+      "pixels_sha256": "2f39346fefa96f31440818f45576f5282ce799aca9bf1920d9b741a5f6848598",
+      "bytes": 585066,
       "width": 1920,
       "height": 1080
     }

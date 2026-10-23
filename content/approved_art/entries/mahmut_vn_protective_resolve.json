@@ -39,9 +39,9 @@
   "outputs": [
     {
       "path": "art/portrait_mahmut_protective_resolve.webp",
-      "sha256": "f180bc09767df70c96d373882758b635c305b38b5f5670daa7ba9fb0d1ad4c3a",
-      "pixels_sha256": "e515e21d58acd8a2280b166d1d9913b5f42da5eda1541c5a8cf4d994433c1ee9",
-      "bytes": 65644,
+      "sha256": "03c92c664aeea26c3fd82c28ca54cae28fb837a3c1a1523de84e4e376c4a28ff",
+      "pixels_sha256": "caf3e2fcc0c59534f409ca0f122f5f3f1ccde64705396fe3c5f9c0bcf0964f14",
+      "bytes": 80458,
       "width": 768,
       "height": 1152
     }

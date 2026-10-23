@@ -38,9 +38,9 @@
   "outputs": [
     {
       "path": "art/portrait_mahmut_watchful.webp",
-      "sha256": "b571bb4d338fd66184d5d9a7cabbeb3fe073698453268e23b243bd5067849cb3",
-      "pixels_sha256": "0585978f8afd96ebf2c33f6e814369c343639373b11fe66cca0133f4a59c1ec9",
-      "bytes": 64010,
+      "sha256": "1cc87e9a1118da5a97385e9ae9a52be76bf280a45c03f1cf08caacf54d4f4548",
+      "pixels_sha256": "52f4374190f7d9610a5227bae5c5f95a6ff740709ee0576d7fbae7866f2960f3",
+      "bytes": 79062,
       "width": 768,
       "height": 1152
     }

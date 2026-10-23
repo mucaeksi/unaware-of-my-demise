@@ -38,9 +38,9 @@
   "outputs": [
     {
       "path": "art/portrait_mahmut_composed.webp",
-      "sha256": "b31c0024cbb35d81255f7ede0d7073980ead5cafa9d2e1bb19f778e13a3e790b",
-      "pixels_sha256": "98e714705cda4edbbad171e135fd7199d0958b823943d8a257aa3b1f2bae1941",
-      "bytes": 61214,
+      "sha256": "13d0080a2b5b02f3c7249f03de6f2e3ff87e220b7f344319b84e57278ff0e63e",
+      "pixels_sha256": "fa856901faafbdd7f6ef8a4d43d1ee3d795ca4177917aaa7c763cff465ce3123",
+      "bytes": 74296,
       "width": 768,
       "height": 1152
     }

@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_shelter_evening.webp",
-      "sha256": "930bb95b09a4d7f59697d7adb3b126abd7d367edabf72e48220ca49b7753ce7f",
-      "pixels_sha256": "aa8e66059a500c3fb43553ef0a64a2e1ff921512ce3ddf12fb11477deb4f29cd",
-      "bytes": 116214,
+      "sha256": "ac32b768eef50683bc760156f4bad0fe0bb3dbc988a010a2d23278a6baa1a945",
+      "pixels_sha256": "ba9ecb1148c7455000b42c89f28fd6c2a2b4e3f0986e7cbefbd93084b192d93c",
+      "bytes": 151512,
       "width": 1920,
       "height": 1080
     }

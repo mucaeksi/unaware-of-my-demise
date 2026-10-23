@@ -38,9 +38,9 @@
   "outputs": [
     {
       "path": "art/portrait_mahmut_dry_humor.webp",
-      "sha256": "86769af525118f6183fb12f164132df9e62d2070f45a9ccce92f93516a88ff48",
-      "pixels_sha256": "fc3105b12a02371ad4ee3e975db4aeed2e54369b13c8e7f9e06159581c911567",
-      "bytes": 57842,
+      "sha256": "d5d7645dd210a18e12a89bdba3bcf134cb9d6f4ff5ccf007b773a9a2fc34c674",
+      "pixels_sha256": "9a91d5d885793c31b9a7eaa899c927ccaca16ce2af68e6d6697606e01bf80c39",
+      "bytes": 73086,
       "width": 768,
       "height": 1152
     }

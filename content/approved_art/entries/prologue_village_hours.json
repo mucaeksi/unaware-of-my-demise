@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_prologue_hours.webp",
-      "sha256": "2d6d72585235543db6845c0a78ee6fb9918d3a02b6843a503b833052e6f4f8ce",
-      "pixels_sha256": "7a21e5a2320c41666d407506cafd81a5ff3cdc442a1d78edd8ec2ee3892df298",
-      "bytes": 133828,
+      "sha256": "e90038234e471ec0f255213fa9856463f66289d55be7b84a28fed524d0b018c9",
+      "pixels_sha256": "f20c624b276df5e1bf641294d797b04c201b07e6ed0f113988304e3ce1315ae0",
+      "bytes": 864958,
       "width": 1920,
       "height": 1080
     }

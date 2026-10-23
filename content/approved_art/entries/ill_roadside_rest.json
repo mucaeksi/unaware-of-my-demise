@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_roadside_rest.webp",
-      "sha256": "07187d709ea566cfdbbdcb0b7f6c9cfd53a41254003bc8f35968cfc369a0c186",
-      "pixels_sha256": "0a1c07dff9da841f9711efa34ffe64539e669800161a0f658757cd9d19ea6439",
-      "bytes": 140624,
+      "sha256": "dec4d4a42672ad85c70ef6b73e6afcdd5a18e3e61e0368a673f0f1f5b14175d5",
+      "pixels_sha256": "9c947d8b285267e67acff10e9ee1f015f419cd99931c95fbcc1077a05539f3c1",
+      "bytes": 182422,
       "width": 1920,
       "height": 1080
     }

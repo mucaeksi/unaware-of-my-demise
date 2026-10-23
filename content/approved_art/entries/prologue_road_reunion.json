@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_prologue_reunion.webp",
-      "sha256": "473adcf837dc8e76508abc8d1fe42584d6a378a75ce6abc8a7ecddd4bb62c9d6",
-      "pixels_sha256": "2e02c62880da0ff4c11c6c5b5010a14af573f7dd6d08b41d3425b9da90e08918",
-      "bytes": 127234,
+      "sha256": "8507e9432154618c17d0a3f31afed4ae97fae86e96ab534a6a843e22f67cf943",
+      "pixels_sha256": "7decf207914ed9056a5a0ff798075196996b3058dd8c65d4af1dc4dce5a89fa3",
+      "bytes": 884074,
       "width": 1920,
       "height": 1080
     }
