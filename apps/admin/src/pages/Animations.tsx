@@ -1768,6 +1768,12 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
             const stObj = activeUnit?.states[inspectState] ?? activeUnit?.states.idle;
             const animFrames = stObj?.animation?.frames ?? (stObj ? [stObj.frame] : ['idle']);
             const currentFrameName = animFrames[inspectFrameIdx % animFrames.length] ?? stObj?.frame ?? 'idle';
+            const frameState =
+              activeUnit?.states[currentFrameName] ??
+              activeUnit?.states[currentFrameName.replace(/_\d+$/, '')] ??
+              stObj;
+            const frameFootY = frameState?.foot_y ?? stObj?.foot_y ?? 1;
+            const framePivotX = frameState?.pivot_x ?? stObj?.pivot_x ?? 0.5;
             const frameRect = activeAtlas?.frames[currentFrameName] ?? [0, 0, 256, 256];
             const [fx, fy, fw, fh] = frameRect;
             const portraitDef = artManifest.portraits[inspectUnitId];
@@ -1837,37 +1843,47 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
                       <div className="card bg-checker" style={{ margin: 0, padding: 16, textAlign: 'center' }}>
                         <div className="mono" style={{ fontSize: 12, marginBottom: 8 }}>
                           <strong>{inspectUnitId}</strong> · state=<code>{inspectState}</code> · frame=
-                          <code>{currentFrameName}</code> [{fx},{fy},{fw}×{fh}] · foot_y={stObj.foot_y} · pivot_x=
-                          {stObj.pivot_x ?? 0.5}
+                          <code>{currentFrameName}</code> [{fx},{fy},{fw}×{fh}] · foot_y={frameFootY} · pivot_x=
+                          {framePivotX}
                         </div>
                         <div
                           style={{
                             position: 'relative',
-                            width: Math.min(340, fw),
-                            height: Math.min(340, fh),
+                            width: 340,
+                            height: 340,
                             margin: '0 auto',
                             overflow: 'hidden',
                             border: '1px dashed rgba(242,184,75,0.45)'
                           }}
                         >
-                          <div
-                            style={{
-                              width: fw,
-                              height: fh,
-                              backgroundImage: `url(/dev/media/${activeAtlas.image})`,
-                              backgroundPosition: `-${fx}px -${fy}px`,
-                              backgroundRepeat: 'no-repeat',
-                              transform: fw > 340 || fh > 340 ? `scale(${Math.min(340 / fw, 340 / fh)})` : 'none',
-                              transformOrigin: 'top left'
-                            }}
-                          />
+                          {(() => {
+                            const scale = Math.min(1, 320 / Math.max(1, fw), 300 / Math.max(1, fh));
+                            const anchorX = 170 - framePivotX * fw * scale;
+                            const anchorY = 308 - frameFootY * fh * scale;
+                            return (
+                              <div
+                                style={{
+                                  position: 'absolute',
+                                  left: anchorX,
+                                  top: anchorY,
+                                  width: fw,
+                                  height: fh,
+                                  backgroundImage: `url(/dev/media/${activeAtlas.image})`,
+                                  backgroundPosition: `-${fx}px -${fy}px`,
+                                  backgroundRepeat: 'no-repeat',
+                                  transform: `scale(${scale})`,
+                                  transformOrigin: 'top left'
+                                }}
+                              />
+                            );
+                          })()}
                           {/* Ground shadow & pivot crosshair */}
                           <div
                             style={{
                               position: 'absolute',
                               left: 0,
                               right: 0,
-                              top: `${stObj.foot_y * 100}%`,
+                              top: 308,
                               borderTop: '2px solid #3fa36c',
                               pointerEvents: 'none'
                             }}
@@ -1877,7 +1893,7 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
                               position: 'absolute',
                               top: 0,
                               bottom: 0,
-                              left: `${(stObj.pivot_x ?? 0.5) * 100}%`,
+                              left: 170,
                               borderLeft: '1px dashed #f2b84b',
                               pointerEvents: 'none'
                             }}

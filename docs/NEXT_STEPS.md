@@ -1,10 +1,17 @@
 # Argon 4 / Antigravity Continuation & Master Execution Plan
 
-Updated **2026-10-21**. [README](../README.md) is the complete execution brief and master prompt; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status.
+Updated **2026-10-23**. [README](../README.md) is the complete execution brief and master prompt; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status; [ARGON_ART_DIRECTOR](handoff/ARGON_ART_DIRECTOR.md) defines the D-30 Art Director mandate and §4 queue.
 
-## Status 2026-10-21
+## Status 2026-10-23
 
 - **Done since 2026-10-20:**
+  - **D-30 Art Director Handoff (`356bcf75`) & §4.1 Art-Direction Pass:**
+    - Merged PR #37 (`356bcf75`), establishing D-30 (`argon:art-director`) and canonical store/brand master generators (`tools/build_canonical_store_and_brand_assets.mjs`).
+    - Completed **§4.1 Art-Direction Pass** across all 242 `approved_art` entries, 96 icons, 10 banners, and 17 store/brand masters (`docs/media/QUEUE_DATA.json` & `docs/media/QUEUE.md` updated).
+    - Fixed sub-frame pivot resolution (`idle_2`, `idle_3`, `basic_2`, `active_2`, `ultimate_2`) in `UnitView.ts`, `CharacterScene.ts`, and `Animations.tsx` (`atlas_inspector` anchored at `(framePivotX, frameFootY)` on a 340×340 stage).
+    - Upgraded `atlas_objective.webp` from 4×4 (`768×768`) to 9×3 (`1728×576`, 27 cells) with grounded (`foot_y = 0.96`, `maxY = 183`) `intact`, `pulse`, and `broken` states for all 9 objective families, stripped orphan border whiskers, and wired all 8 animation states across all 13 boss objectives in `tools/build_campaign.ts`.
+    - Measured `phone-landscape` (`1200×540 @ 2x`) per-scene texture memory (`7.91 MB`–`71.19 MB` decoded textures, `8.02 MB`–`117.70 MB` total media, well below the `300 MB` budget) and frame times (`avgStep = 0.06 ms`–`2.44 ms`, `p95 = 0.1 ms`–`2.2 ms`, well below the `16.7 ms` budget).
+    - Next in D-30 queue: **§4.2 Signature VFX**, **§4.3 Remaining character & enemy art (`cael`)**, **§4.4 Banners, icons & store graphics**, **§4.5 Opening video & store teaser**, **§4.6 Music & SFX**, **§4.7 Japanese voice direction**.
   - **Workers Builds clean-clone fix (`fe67fae3`)**: `tools/check_content.ts` no longer fails on fresh Linux clones without `narrative/ARCHIVE_MANIFEST.tsv`.
   - **Prologue first-viewing no-skip contract (`7207dae1`)**: SKIP button hidden on first viewing (`!account.storyProgress.prologueDone`) per entry contract; all 5 long desktop E2E scenarios (`zzz-entry-flow.spec.ts`) and phone-landscape E2E pass.
   - **ART-1 complete (`a2279792`)**: All 25 playable heroes (100 VN portraits + 25 16-cell animated chibi atlases) and all 27 enemies & bosses (27 16-cell animated chibi atlases) ingested and owner-approved (`171` approved art entries in `content/approved_art`, `312` seeded assets in `apps/api/seed/assets.sql`).

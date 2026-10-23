@@ -1,20 +1,29 @@
-> **Archived 2026-10-11:** the images/audio this document links to were moved out of `main` (still in branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, references: `reference/`). Links to them are historical.
+> **Archived 2026-10-11:** historical prototype images/audio were moved out of `main` (branch `archive/pre-cleanup-2026-10-10`; index: `narrative/ARCHIVE.md`, locked visual references: `reference/` and `narrative/14_References/recovered_locked_v001/`).
 
-# Character and environment art workbench
+# Character, environment, UI and media art workbench (D-30)
 
-Codex's owner-authorized creative staging area. Claude consumes explicit approved handoffs for runtime integration. Existing canon, original references and approved asset versions remain in their established paths.
+This directory is the canonical creative staging area owned by the **Art Director** (`argon:art-director`, owner decision **D-30**; see [`docs/handoff/ARGON_ART_DIRECTOR.md`](../../docs/handoff/ARGON_ART_DIRECTOR.md)). The Art Director owns both creative production inside `narrative/` and full runtime integration/verification in the game (`apps/game/`, `apps/admin/`, `content/`).
 
 | Folder | Purpose |
 |---|---|
-| `characters/` | Briefs, prompts, candidates and approved derivatives per existing character ID |
-| `locations/` | Briefs, prompts, candidates and approved environment/background layers per existing location ID |
-| `enemies/` | Existing enemy-ID concept boards, design cards and explicit production handoffs |
-| `handoff/` | Art-to-code specifications, source/hash metadata and integration acceptance |
+| `characters/` | Per-character briefs, prompts, candidate turnarounds, expressions, chibi sheets and provenance (`<id>/production_v001/`) |
+| `locations/` | Location briefs, atmospheric background plates and lighting passes per canonical location ID |
+| `enemies/` | Part I enemy concept boards (`enemies/design_v001/`), design cards (`design_cards.json`) and boss/objective handoffs |
+| `icons/` | Chroma-keyed `#00FF00` -> RGBA 256×256 icon sheets (`icons/production_v001/`, 96 icons across 6 sheets + 16 core UI icons) |
+| `ui_screens/` | Gothic UI kit 9-slice frames, 4-state buttons, summon banner key art (`ui_screens/production_v001/banners/`) and store/brand masters (`ui_screens/production_v001/store_brand/`) |
+| `handoff/` | Art-to-runtime specifications, source/hash metadata and QC records |
 
-For a selected asset use `<existing-id>/<version>/` with briefs, prompts, artwork and provenance metadata. Create `candidates/` or `approved/` only when that status is established. Follow existing filename/version/ID conventions and record the actual tool used.
+## Canonical inputs & identity locks
 
-Current enemy package: [26 Part I designs](enemies/design_v001/README.md), with seven active boards and per-ID cards. Yseldra/The Bell-Widow and Cael are reserved for final individual design passes before the remaining 18 playable characters.
+1. Always start from [`content/specs/character_locks/CHARACTER_LOCKS.md`](../../content/specs/character_locks/CHARACTER_LOCKS.md), [`docs/media/ART_BIBLE.md`](../../docs/media/ART_BIBLE.md), [`docs/media/EXPORT_PIPELINE.md`](../../docs/media/EXPORT_PIPELINE.md), and the canonical character/location/story sheets in `../00_Canon/`, `../06_Characters/`, `../08_Locations/`, and `../09_Story_Scenes/`.
+2. Locked visual references live in `reference/` and `../14_References/recovered_locked_v001/` (verified by gate `A31` in `tools/ingest_art.ts`).
+3. Do not invent an unapproved identity when `CHARACTER_LOCKS.md` or `docs/media/QUEUE_DATA.json` marks an entity as needing a lock; write the visual lock proposal first.
 
-Start with current owner direction in `../00_Canon/Owner_Current_Direction/`, the visual canon in `../FADYME_MEDIA_ALL/` and relevant original `../06_Characters/` or `../08_Locations/` files. These inputs and Production/Drive LEGACY masters are read-only. Do not invent a missing identity or create a new canon ID without owner direction.
+## Promotion & runtime integration pipeline
 
-Runtime assets remain in existing `game/assets/` paths. Promotion needs provenance, license, technical validity, approval status and base/patch inclusion. See `../../docs/ART_AND_CODE_HANDOFF.md` and repository-root `.codex/standards/asset-pipeline.md`. UI/subtitles: English. Voice: Japanese.
+Runtime assets do **not** live in legacy `game/assets/` paths:
+- **Approved art store:** `content/approved_art/art/*.webp` + `content/approved_art/entries/*.json` (ingested, keyed, sliced, packed, and QC-gated by `npx tsx tools/ingest_art.ts` and approved with `--by argon:art-director`).
+- **Embedded First-AAB base bundle (`rel_0001`):** `content/base/` built deterministically by `npm run build:content` (`tools/build_content.ts`) and drift-checked by `npm run check:content`.
+- **Full Part I campaign patch (`rel_0002`):** `content/campaign/` built deterministically by `npm run build:campaign` (`tools/build_campaign.ts`).
+- **Control Center review studio:** `apps/admin/src/pages/Animations.tsx` + `apps/admin/public/dev/animations/`.
+- **Language:** Player-facing UI, subtitles, docs and metadata are **English**; spoken voiceover is reviewed **Japanese**.

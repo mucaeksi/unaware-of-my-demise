@@ -1,6 +1,29 @@
 # Media production queue — SOL-5
 
-Status: planning only, 2026-10-11. **No model calls, budget reservations, uploads or integrations were made.** English text; every spoken line is Japanese (`ja-JP`, Chirp 3 HD). [QUEUE_DATA.json](QUEUE_DATA.json) contains the complete English prompts and source hashes for **20 playable characters and 27 enemies**.
+Status: **§4.1 Art-Direction Audit Completed (`2026-10-23`, `argon:art-director`)**. English text; every spoken line is Japanese (`ja-JP`, Chirp 3 HD). [QUEUE_DATA.json](QUEUE_DATA.json) contains the complete English prompts, source hashes, per-asset audit verdicts (`keep` / `fixed` / `regenerate`), runtime fixes, and `phone-landscape` (`1200×540 @ 2x`) texture-memory and frame-time measurements.
+
+## §4.1 Art-Direction Pass Summary (2026-10-23)
+
+- **Audited inventory (`content/approved_art/`, `content/base/`, `content/campaign/`, `branding/`, `store/`):**
+  - `53 / 53` character & enemy 6×4 chibi sprite sheets (`1728×1152`, 13 occupied cells, 8 animation states, `foot_y = 0.938` / `maxY = 180`, 0 alpha-fringe pixels) → **`keep`**
+  - `1 / 1` boss objective sheet (`atlas_objective.webp`) → **`fixed`** (upgraded from 4×4 `768×768` to 9×3 `1728×576` with 27 cells covering `intact`, `pulse`, and `broken` for all 9 objective families grounded at `foot_y = 0.96` / `maxY = 183`; stripped orphan border whiskers on `ankle_anchor` and `altar_pylon`; crafted distinct cleft/shattered `wax_seal_broken` and `altar_pylon_broken` cells; wired all 13 boss objectives to all 8 animation states in `tools/build_campaign.ts`)
+  - `128 / 128` story portraits (`768×1344`, 32 characters × 4 emotions, 0 alpha-fringe pixels) → **`keep`**
+  - `47 / 47` battle & story backgrounds (`1920×1080`) → **`keep`**
+  - `11 / 11` narrative stills / CGs (`1920×1080`) → **`keep`**
+  - `2 / 2` UI crests (`ui_title_crest`, `ui_eclipse_seal`), `96 / 96` icons (`256×256`), `10 / 10` gacha banners (`1600×720`), `17 / 17` store & brand masters → **`keep`**
+  - **Queued for §4.3 (`regenerate` / new):** `cael` (Act V reveal antagonist — needs identity lock proposal, `unit_cael.webp` 6×4 sheet, and `portrait_cael_{neutral,confident,irritated,unmasked}.webp`).
+- **Runtime animation & inspector fixes applied in §4.1:**
+  - Fixed numbered sub-frame pivot lookup (`idle_2`, `idle_3`, `basic_2`, `active_2`, `ultimate_2`) in `apps/game/src/battle/UnitView.ts`, `apps/game/src/scenes/CharacterScene.ts`, and `apps/admin/src/pages/Animations.tsx` (`u.states[f] ?? u.states[f.replace(/_\d+$/, '')] ?? u.states[currentState]`), eliminating horizontal anchor drift during `walk` and `victory` loops.
+  - Updated `apps/admin/src/pages/Animations.tsx` (`atlas_inspector`) so the sprite preview renders on a fixed `340×340` stage anchored at `(framePivotX, frameFootY)` on the ground shadow line.
+- **Measured `phone-landscape` (`1200×540 @ 2x`) texture memory & frame time (budget: `< 300 MB`, `< 16.7 ms`):**
+  - `title`: `23.58 MB` textures (`88.46 MB` total media), `avgStep = 0.23 ms`, `p95 = 1.0 ms`
+  - `prologue`: `71.19 MB` textures (`117.70 MB` total media), `avgStep = 0.06 ms`, `p95 = 0.1 ms`
+  - `story_t1`: `34.91 MB` textures (`113.41 MB` total media), `avgStep = 0.89 ms`, `p95 = 2.2 ms`
+  - `story_t2_cg`: `42.82 MB` textures (`76.69 MB` total media), `avgStep = 0.54 ms`, `p95 = 2.0 ms`
+  - `battle_t1`: `43.89 MB` textures (`76.12 MB` total media), `avgStep = 0.55 ms`, `p95 = 1.3 ms`
+  - `battle_t3`: `53.62 MB` textures (`86.20 MB` total media), `avgStep = 2.44 ms`, `p95 = 0.9 ms`
+  - `hub`: `7.91 MB` textures (`8.02 MB` total media), `avgStep = 0.21 ms`, `p95 = 0.7 ms`
+  - `roster`: `7.91 MB` textures (`8.04 MB` total media), `avgStep = 1.24 ms`, `p95 = 0.8 ms`
 
 ## Source and canon controls
 

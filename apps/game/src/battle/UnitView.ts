@@ -185,7 +185,7 @@ export class UnitView extends PIXI.Container {
         const f = a.frames[Math.min(n - 1, Math.floor(step.i))];
         if (f && !this.img.destroyed) {
           this.img.texture = this.scene.tex(key, f);
-          const st = u.states[f];
+          const st = u.states[f] ?? u.states[f.replace(/_\d+$/, '')] ?? u.states[this.animName];
           if (st) this.img.anchor.set(st.pivotX, 1);
         }
       }

@@ -5359,8 +5359,8 @@
     },
     "atlas_objective": {
       "image": "art/atlas_objective.webp",
-      "width": 768,
-      "height": 768,
+      "width": 1728,
+      "height": 576,
       "frames": {
         "idle": [
           0,
@@ -5374,93 +5374,159 @@
           192,
           192
         ],
+        "jaw_bell_pulse": [
+          0,
+          192,
+          192,
+          192
+        ],
         "jaw_bell_broken": [
+          0,
+          384,
+          192,
+          192
+        ],
+        "wax_seal_intact": [
           192,
           0,
           192,
           192
         ],
-        "wax_seal_intact": [
+        "wax_seal_pulse": [
+          192,
+          192,
+          192,
+          192
+        ],
+        "wax_seal_broken": [
+          192,
+          384,
+          192,
+          192
+        ],
+        "signal_banner_intact": [
           384,
           0,
           192,
           192
         ],
-        "signal_banner_intact": [
+        "signal_banner_pulse": [
+          384,
+          192,
+          192,
+          192
+        ],
+        "signal_banner_broken": [
+          384,
+          384,
+          192,
+          192
+        ],
+        "flask_rack_intact": [
           576,
           0,
           192,
           192
         ],
-        "signal_banner_broken": [
-          0,
-          192,
-          192,
-          192
-        ],
-        "flask_rack_intact": [
-          192,
+        "flask_rack_pulse": [
+          576,
           192,
           192,
           192
         ],
         "flask_rack_broken": [
+          576,
           384,
-          192,
           192,
           192
         ],
         "signal_standard_intact": [
-          576,
+          768,
+          0,
+          192,
+          192
+        ],
+        "signal_standard_pulse": [
+          768,
           192,
           192,
           192
         ],
         "signal_standard_broken": [
-          0,
+          768,
           384,
           192,
           192
         ],
         "mirror_frame_intact": [
+          960,
+          0,
           192,
-          384,
+          192
+        ],
+        "mirror_frame_pulse": [
+          960,
+          192,
           192,
           192
         ],
         "mirror_frame_broken": [
-          384,
+          960,
           384,
           192,
           192
         ],
         "chain_joint_intact": [
-          576,
-          384,
+          1152,
+          0,
+          192,
+          192
+        ],
+        "chain_joint_pulse": [
+          1152,
+          192,
           192,
           192
         ],
         "chain_joint_broken": [
-          0,
-          576,
+          1152,
+          384,
           192,
           192
         ],
         "ankle_anchor_intact": [
+          1344,
+          0,
           192,
-          576,
+          192
+        ],
+        "ankle_anchor_pulse": [
+          1344,
+          192,
           192,
           192
         ],
         "ankle_anchor_broken": [
+          1344,
           384,
-          576,
           192,
           192
         ],
         "altar_pylon_intact": [
-          576,
-          576,
+          1536,
+          0,
+          192,
+          192
+        ],
+        "altar_pylon_pulse": [
+          1536,
+          192,
+          192,
+          192
+        ],
+        "altar_pylon_broken": [
+          1536,
+          384,
           192,
           192
         ]
@@ -12496,37 +12562,82 @@
         "idle": {
           "frame": "jaw_bell_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "jaw_bell_intact",
+              "jaw_bell_pulse",
+              "jaw_bell_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "jaw_bell_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "jaw_bell_intact",
+              "jaw_bell_pulse",
+              "jaw_bell_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "jaw_bell_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "jaw_bell_intact",
+              "jaw_bell_pulse",
+              "jaw_bell_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "jaw_bell_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "jaw_bell_intact",
+              "jaw_bell_pulse",
+              "jaw_bell_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "jaw_bell_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "jaw_bell_intact",
+              "jaw_bell_pulse",
+              "jaw_bell_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "jaw_bell_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "jaw_bell_intact",
@@ -12541,7 +12652,7 @@
         "defeat": {
           "frame": "jaw_bell_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "jaw_bell_intact",
@@ -12555,7 +12666,16 @@
         "victory": {
           "frame": "jaw_bell_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "jaw_bell_intact",
+              "jaw_bell_pulse",
+              "jaw_bell_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -12568,49 +12688,120 @@
         "idle": {
           "frame": "wax_seal_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_pulse",
+              "wax_seal_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "wax_seal_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_pulse",
+              "wax_seal_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "wax_seal_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_pulse",
+              "wax_seal_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "wax_seal_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_pulse",
+              "wax_seal_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "wax_seal_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_pulse",
+              "wax_seal_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "wax_seal_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_broken",
+              "wax_seal_intact"
+            ],
+            "fps": 8,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "wax_seal_intact",
+          "frame": "wax_seal_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_broken"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "victory": {
           "frame": "wax_seal_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "wax_seal_intact",
+              "wax_seal_pulse",
+              "wax_seal_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -12623,37 +12814,82 @@
         "idle": {
           "frame": "signal_banner_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_banner_intact",
+              "signal_banner_pulse",
+              "signal_banner_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "signal_banner_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_banner_intact",
+              "signal_banner_pulse",
+              "signal_banner_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "signal_banner_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_banner_intact",
+              "signal_banner_pulse",
+              "signal_banner_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "signal_banner_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_banner_intact",
+              "signal_banner_pulse",
+              "signal_banner_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "signal_banner_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_banner_intact",
+              "signal_banner_pulse",
+              "signal_banner_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "signal_banner_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "signal_banner_intact",
@@ -12668,7 +12904,7 @@
         "defeat": {
           "frame": "signal_banner_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "signal_banner_intact",
@@ -12682,7 +12918,16 @@
         "victory": {
           "frame": "signal_banner_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_banner_intact",
+              "signal_banner_pulse",
+              "signal_banner_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -12695,37 +12940,82 @@
         "idle": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "flask_rack_intact",
@@ -12740,7 +13030,7 @@
         "defeat": {
           "frame": "flask_rack_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "flask_rack_intact",
@@ -12754,7 +13044,16 @@
         "victory": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -12767,37 +13066,82 @@
         "idle": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "flask_rack_intact",
@@ -12812,7 +13156,7 @@
         "defeat": {
           "frame": "flask_rack_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "flask_rack_intact",
@@ -12826,7 +13170,16 @@
         "victory": {
           "frame": "flask_rack_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "flask_rack_intact",
+              "flask_rack_pulse",
+              "flask_rack_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -12839,37 +13192,82 @@
         "idle": {
           "frame": "signal_standard_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_standard_intact",
+              "signal_standard_pulse",
+              "signal_standard_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "signal_standard_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_standard_intact",
+              "signal_standard_pulse",
+              "signal_standard_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "signal_standard_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_standard_intact",
+              "signal_standard_pulse",
+              "signal_standard_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "signal_standard_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_standard_intact",
+              "signal_standard_pulse",
+              "signal_standard_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "signal_standard_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_standard_intact",
+              "signal_standard_pulse",
+              "signal_standard_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "signal_standard_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "signal_standard_intact",
@@ -12884,7 +13282,7 @@
         "defeat": {
           "frame": "signal_standard_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "signal_standard_intact",
@@ -12898,7 +13296,16 @@
         "victory": {
           "frame": "signal_standard_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "signal_standard_intact",
+              "signal_standard_pulse",
+              "signal_standard_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -12911,37 +13318,82 @@
         "idle": {
           "frame": "mirror_frame_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "mirror_frame_intact",
+              "mirror_frame_pulse",
+              "mirror_frame_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "mirror_frame_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "mirror_frame_intact",
+              "mirror_frame_pulse",
+              "mirror_frame_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "mirror_frame_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "mirror_frame_intact",
+              "mirror_frame_pulse",
+              "mirror_frame_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "mirror_frame_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "mirror_frame_intact",
+              "mirror_frame_pulse",
+              "mirror_frame_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "mirror_frame_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "mirror_frame_intact",
+              "mirror_frame_pulse",
+              "mirror_frame_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "mirror_frame_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "mirror_frame_intact",
@@ -12956,7 +13408,7 @@
         "defeat": {
           "frame": "mirror_frame_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "mirror_frame_intact",
@@ -12970,7 +13422,16 @@
         "victory": {
           "frame": "mirror_frame_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "mirror_frame_intact",
+              "mirror_frame_pulse",
+              "mirror_frame_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -12983,37 +13444,82 @@
         "idle": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "chain_joint_intact",
@@ -13028,7 +13534,7 @@
         "defeat": {
           "frame": "chain_joint_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "chain_joint_intact",
@@ -13042,7 +13548,16 @@
         "victory": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -13055,37 +13570,82 @@
         "idle": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "chain_joint_intact",
@@ -13100,7 +13660,7 @@
         "defeat": {
           "frame": "chain_joint_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "chain_joint_intact",
@@ -13114,7 +13674,16 @@
         "victory": {
           "frame": "chain_joint_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "chain_joint_intact",
+              "chain_joint_pulse",
+              "chain_joint_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -13127,37 +13696,82 @@
         "idle": {
           "frame": "ankle_anchor_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "ankle_anchor_intact",
+              "ankle_anchor_pulse",
+              "ankle_anchor_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "ankle_anchor_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "ankle_anchor_intact",
+              "ankle_anchor_pulse",
+              "ankle_anchor_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "ankle_anchor_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "ankle_anchor_intact",
+              "ankle_anchor_pulse",
+              "ankle_anchor_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "ankle_anchor_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "ankle_anchor_intact",
+              "ankle_anchor_pulse",
+              "ankle_anchor_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "ankle_anchor_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "ankle_anchor_intact",
+              "ankle_anchor_pulse",
+              "ankle_anchor_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "ankle_anchor_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "ankle_anchor_intact",
@@ -13172,7 +13786,7 @@
         "defeat": {
           "frame": "ankle_anchor_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
           "animation": {
             "frames": [
               "ankle_anchor_intact",
@@ -13186,7 +13800,16 @@
         "victory": {
           "frame": "ankle_anchor_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "ankle_anchor_intact",
+              "ankle_anchor_pulse",
+              "ankle_anchor_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -13199,49 +13822,120 @@
         "idle": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_broken",
+              "altar_pylon_intact"
+            ],
+            "fps": 8,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "altar_pylon_intact",
+          "frame": "altar_pylon_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_broken"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "victory": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -13254,49 +13948,120 @@
         "idle": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_broken",
+              "altar_pylon_intact"
+            ],
+            "fps": 8,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "altar_pylon_intact",
+          "frame": "altar_pylon_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_broken"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "victory": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }
@@ -13309,49 +14074,120 @@
         "idle": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 4,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "walk": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         },
         "basic": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "active": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "ultimate": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "hit": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_broken",
+              "altar_pylon_intact"
+            ],
+            "fps": 8,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "defeat": {
-          "frame": "altar_pylon_intact",
+          "frame": "altar_pylon_broken",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_broken"
+            ],
+            "fps": 6,
+            "loop": false
+          },
           "pivot_x": 0.5
         },
         "victory": {
           "frame": "altar_pylon_intact",
           "scale": 1,
-          "foot_y": 0.97,
+          "foot_y": 0.96,
+          "animation": {
+            "frames": [
+              "altar_pylon_intact",
+              "altar_pylon_pulse",
+              "altar_pylon_intact"
+            ],
+            "fps": 6,
+            "loop": true
+          },
           "pivot_x": 0.5
         }
       }

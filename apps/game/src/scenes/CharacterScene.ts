@@ -85,7 +85,7 @@ export class CharacterScene extends HubScreen {
             const fname = f.animation!.frames[Math.min(n - 1, Math.floor(step.i))];
             if (fname && !chibi.destroyed) {
               chibi.texture = this.tex(f.key, fname);
-              const st = u.states[fname];
+              const st = u.states[fname] ?? u.states[fname.replace(/_\d+$/, '')] ?? u.states[this.pose];
               if (st) chibi.anchor.set(st.pivotX, 1);
             }
           }

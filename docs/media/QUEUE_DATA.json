@@ -1,7 +1,7 @@
 {
   "schema": "uomd.media-queue.proposal.v1",
-  "date": "2026-10-11",
-  "status": "PLANNED_NO_GENERATION",
+  "date": "2026-10-23",
+  "status": "AUDITED_SECTION_4_1_COMPLETE",
   "player_text_language": "en",
   "spoken_language": "ja-JP",
   "source_hashes": {
@@ -61,6 +61,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Mahmut, canon age 28. Tall adult; dark messy hair, brown eyes, stubble, worn repaired dark half-plate, tattered oxblood cloak. Crown Guard star remains on breastplate with crown hammered off and empty socket. Repaired heater shield; arming sword with iron-filled crest socket. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Mahmut, canon age 28. Tall adult; dark messy hair, brown eyes, stubble, worn repaired dark half-plate, tattered oxblood cloak. Crown Guard star remains on breastplate with crown hammered off and empty socket. Repaired heater shield; arming sword with iron-filled crest socket. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Mahmut, canon age 28. Tall adult; dark messy hair, brown eyes, stubble, worn repaired dark half-plate, tattered oxblood cloak. Crown Guard star remains on breastplate with crown hammered off and empty socket. Repaired heater shield; arming sword with iron-filled crest socket. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -86,6 +99,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Fadyme, canon age 22. Adult woman; pale ash-blonde hair, violet eyes, deep plum hood, black dress with fading silver-lilac embroidery, high white scarf. Broken crown fragment at hood clasp; separate tiny maternal silver bell-shaped hairpin. Silver House Veyr bell on chain with motionless silver-thorn clapper. No bone-white lock before 5-4; no bloody scarf in tutorial. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Fadyme, canon age 22. Adult woman; pale ash-blonde hair, violet eyes, deep plum hood, black dress with fading silver-lilac embroidery, high white scarf. Broken crown fragment at hood clasp; separate tiny maternal silver bell-shaped hairpin. Silver House Veyr bell on chain with motionless silver-thorn clapper. No bone-white lock before 5-4; no bloody scarf in tutorial. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Fadyme, canon age 22. Adult woman; pale ash-blonde hair, violet eyes, deep plum hood, black dress with fading silver-lilac embroidery, high white scarf. Broken crown fragment at hood clasp; separate tiny maternal silver bell-shaped hairpin. Silver House Veyr bell on chain with motionless silver-thorn clapper. No bone-white lock before 5-4; no bloody scarf in tutorial. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -111,6 +137,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Kera Voss, canon age 20. Wide witch-brim hat with goggles, ash-silver hair from an explosion, ember orange and dark brown clothing; brass mortar and vials. Distinguish from Nixie by closed witch-hat silhouette. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Kera Voss, canon age 20. Wide witch-brim hat with goggles, ash-silver hair from an explosion, ember orange and dark brown clothing; brass mortar and vials. Distinguish from Nixie by closed witch-hat silhouette. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Kera Voss, canon age 20. Wide witch-brim hat with goggles, ash-silver hair from an explosion, ember orange and dark brown clothing; brass mortar and vials. Distinguish from Nixie by closed witch-hat silhouette. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -136,6 +176,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Brin Alder, canon age 23. Sturdy guard with fur collar, long brown braid; pine green, iron and cream; hand axe and round buckler. Weight planted firmly, practical village equipment. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Brin Alder, canon age 23. Sturdy guard with fur collar, long brown braid; pine green, iron and cream; hand axe and round buckler. Weight planted firmly, practical village equipment. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Brin Alder, canon age 23. Sturdy guard with fur collar, long brown braid; pine green, iron and cream; hand axe and round buckler. Weight planted firmly, practical village equipment. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -161,6 +215,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Nixie Vale, canon age 19. Loose hood and tall laced boots, light-brown hair, amber eyes, open grin; teal and ochre; shortbow. Scout mobility, no witch hat or silver hair. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Nixie Vale, canon age 19. Loose hood and tall laced boots, light-brown hair, amber eyes, open grin; teal and ochre; shortbow. Scout mobility, no witch hat or silver hair. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Nixie Vale, canon age 19. Loose hood and tall laced boots, light-brown hair, amber eyes, open grin; teal and ochre; shortbow. Scout mobility, no witch hat or silver hair. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -186,6 +254,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Sister Aveline, canon age 26. Copper-auburn cropped hair, brown eyes, freckles, dove-grey veil; ivory-grey habit and armored field apron, bandage satchel, opaque collar. Dawn-gold sun-disc reliquary lantern staff; no generic modern cross. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Sister Aveline, canon age 26. Copper-auburn cropped hair, brown eyes, freckles, dove-grey veil; ivory-grey habit and armored field apron, bandage satchel, opaque collar. Dawn-gold sun-disc reliquary lantern staff; no generic modern cross. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Sister Aveline, canon age 26. Copper-auburn cropped hair, brown eyes, freckles, dove-grey veil; ivory-grey habit and armored field apron, bandage satchel, opaque collar. Dawn-gold sun-disc reliquary lantern staff; no generic modern cross. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -211,6 +293,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Sable Wren, canon age 21. Black bob with one long side lock, pale-grey eyes; charcoal mouth cowl, ink-blue leather, opaque fitted high-neck bodice and cropped off-shoulder jacket; broken courier wax seals, twin daggers and cut bell rope. Adult knowing gaze in portrait only; chibi stays practical. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Sable Wren, canon age 21. Black bob with one long side lock, pale-grey eyes; charcoal mouth cowl, ink-blue leather, opaque fitted high-neck bodice and cropped off-shoulder jacket; broken courier wax seals, twin daggers and cut bell rope. Adult knowing gaze in portrait only; chibi stays practical. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Sable Wren, canon age 21. Black bob with one long side lock, pale-grey eyes; charcoal mouth cowl, ink-blue leather, opaque fitted high-neck bodice and cropped off-shoulder jacket; broken courier wax seals, twin daggers and cut bell rope. Adult knowing gaze in portrait only; chibi stays practical. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -236,6 +332,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Tilda Fen, canon age 24. Tan skin, freckles, short dark curls, sea-green kerchief; hooded oilcloth cape, rolled sleeves, herb pouches; sea-green, sand and driftwood; reed staff with sea-glass vials. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Tilda Fen, canon age 24. Tan skin, freckles, short dark curls, sea-green kerchief; hooded oilcloth cape, rolled sleeves, herb pouches; sea-green, sand and driftwood; reed staff with sea-glass vials. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Tilda Fen, canon age 24. Tan skin, freckles, short dark curls, sea-green kerchief; hooded oilcloth cape, rolled sleeves, herb pouches; sea-green, sand and driftwood; reed staff with sea-glass vials. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -261,6 +371,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rikka Ember, canon age 18. Bright-red thick twin braids, soot cheeks, wide grin; closed red lamellar festival armor and gold cords; ember red, brick and festival gold; spear with bell tassel. No Kera-orange dominant outfit. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rikka Ember, canon age 18. Bright-red thick twin braids, soot cheeks, wide grin; closed red lamellar festival armor and gold cords; ember red, brick and festival gold; spear with bell tassel. No Kera-orange dominant outfit. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rikka Ember, canon age 18. Bright-red thick twin braids, soot cheeks, wide grin; closed red lamellar festival armor and gold cords; ember red, brick and festival gold; spear with bell tassel. No Kera-orange dominant outfit. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -286,6 +410,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Mirel Quill, canon age 25. Petite adult, severe black bun with two brass styluses, round brass glasses, ink-stained fingers; bottle-green long-sleeved opaque square-neck dress, leather document satchel, signet ring; astrolabe folio and stylus dagger. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Mirel Quill, canon age 25. Petite adult, severe black bun with two brass styluses, round brass glasses, ink-stained fingers; bottle-green long-sleeved opaque square-neck dress, leather document satchel, signet ring; astrolabe folio and stylus dagger. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Mirel Quill, canon age 25. Petite adult, severe black bun with two brass styluses, round brass glasses, ink-stained fingers; bottle-green long-sleeved opaque square-neck dress, leather document satchel, signet ring; astrolabe folio and stylus dagger. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -311,6 +449,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Odelia Pike, canon age 22. Sun-browned tracker, short salt-stiff dark-brown hair, red knit cap; grey-blue wool jacket with rope toggles; net-knotted arrows, waterproof longbow case; harbor grey-blue, rope tan and red cap. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Odelia Pike, canon age 22. Sun-browned tracker, short salt-stiff dark-brown hair, red knit cap; grey-blue wool jacket with rope toggles; net-knotted arrows, waterproof longbow case; harbor grey-blue, rope tan and red cap. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Odelia Pike, canon age 22. Sun-browned tracker, short salt-stiff dark-brown hair, red knit cap; grey-blue wool jacket with rope toggles; net-knotted arrows, waterproof longbow case; harbor grey-blue, rope tan and red cap. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -336,6 +488,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Pippa Bell, canon age 20. Rose-pink curls, crooked feather cap, patchwork road jacket made with old concert posters; rose, cream and mustard; lute sling and wrist bell charm. Adult road musician. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Pippa Bell, canon age 20. Rose-pink curls, crooked feather cap, patchwork road jacket made with old concert posters; rose, cream and mustard; lute sling and wrist bell charm. Adult road musician. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Pippa Bell, canon age 20. Rose-pink curls, crooked feather cap, patchwork road jacket made with old concert posters; rose, cream and mustard; lute sling and wrist bell charm. Adult road musician. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -361,6 +527,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Nara Vell, canon age 27. Petite heavily armored adult, deep brown skin, cropped black hair with shaved sides; stone-grey plate and family crest on knee guards; compact kite shield and glaive, stone/slate/moss-copper. Never a round tower shield. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Nara Vell, canon age 27. Petite heavily armored adult, deep brown skin, cropped black hair with shaved sides; stone-grey plate and family crest on knee guards; compact kite shield and glaive, stone/slate/moss-copper. Never a round tower shield. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Nara Vell, canon age 27. Petite heavily armored adult, deep brown skin, cropped black hair with shaved sides; stone-grey plate and family crest on knee guards; compact kite shield and glaive, stone/slate/moss-copper. Never a round tower shield. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -386,6 +566,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Clem Marr, canon age 19. Petite adult with round face, messy mouse-brown bob and chalk dust; heather-grey work jacket, mustard scarf, chalk brushes in pockets; ritual lantern with symbol cut-outs. Quiet macabre curiosity without gore. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Clem Marr, canon age 19. Petite adult with round face, messy mouse-brown bob and chalk dust; heather-grey work jacket, mustard scarf, chalk brushes in pockets; ritual lantern with symbol cut-outs. Quiet macabre curiosity without gore. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Clem Marr, canon age 19. Petite adult with round face, messy mouse-brown bob and chalk dust; heather-grey work jacket, mustard scarf, chalk brushes in pockets; ritual lantern with symbol cut-outs. Quiet macabre curiosity without gore. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -411,6 +605,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Vespera Wisp, canon age 23. Long midnight-blue hair with exactly one frost-white streak; pale tired blue eyes, very still adult posture; high-collared closed robe, glass-bead hem, closed gloves; glass lantern and focus ring, pale spirit flame; midnight blue/glass teal/candle gold. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Vespera Wisp, canon age 23. Long midnight-blue hair with exactly one frost-white streak; pale tired blue eyes, very still adult posture; high-collared closed robe, glass-bead hem, closed gloves; glass lantern and focus ring, pale spirit flame; midnight blue/glass teal/candle gold. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Vespera Wisp, canon age 23. Long midnight-blue hair with exactly one frost-white streak; pale tired blue eyes, very still adult posture; high-collared closed robe, glass-bead hem, closed gloves; glass lantern and focus ring, pale spirit flame; midnight blue/glass teal/candle gold. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -436,6 +644,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hana Birch, canon age 18. Petite adult with short honey-brown hair and birch-white bandana; quilted rust-brown coat with shield plate above knee, rope coils and small bear trap; hatchet; rust/birch white/moss. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hana Birch, canon age 18. Petite adult with short honey-brown hair and birch-white bandana; quilted rust-brown coat with shield plate above knee, rope coils and small bear trap; hatchet; rust/birch white/moss. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hana Birch, canon age 18. Petite adult with short honey-brown hair and birch-white bandana; quilted rust-brown coat with shield plate above knee, rope coils and small bear trap; hatchet; rust/birch white/moss. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -461,6 +683,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Thistle Roe, canon age 21. Chestnut low double buns, wide straw hat, thick wool gloves, earth-stained apron over sage dress; seed tins and thorn crook; sage/straw/earth brown. No pale or silver hair. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Thistle Roe, canon age 21. Chestnut low double buns, wide straw hat, thick wool gloves, earth-stained apron over sage dress; seed tins and thorn crook; sage/straw/earth brown. No pale or silver hair. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Thistle Roe, canon age 21. Chestnut low double buns, wide straw hat, thick wool gloves, earth-stained apron over sage dress; seed tins and thorn crook; sage/straw/earth brown. No pale or silver hair. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -486,6 +722,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Iona Mist, canon age 24. Olive skin, long straight black hair with river-blue sheen; deep navy oilskin raincoat with hood down; glass river lantern staff with tidal censer and blue mist; navy/lantern amber/fog grey. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Iona Mist, canon age 24. Olive skin, long straight black hair with river-blue sheen; deep navy oilskin raincoat with hood down; glass river lantern staff with tidal censer and blue mist; navy/lantern amber/fog grey. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Iona Mist, canon age 24. Olive skin, long straight black hair with river-blue sheen; deep navy oilskin raincoat with hood down; glass river lantern staff with tidal censer and blue mist; navy/lantern amber/fog grey. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -511,6 +761,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Jori Flint, canon age 20. Petite adult with short ginger hair tied with leather, soot on nose, forearm burn freckles; thick leather apron and arm guards; round short shield and small hammer; soot black/iron/copper. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Jori Flint, canon age 20. Petite adult with short ginger hair tied with leather, soot on nose, forearm burn freckles; thick leather apron and arm guards; round short shield and small hammer; soot black/iron/copper. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Jori Flint, canon age 20. Petite adult with short ginger hair tied with leather, soot on nose, forearm burn freckles; thick leather apron and arm guards; round short shield and small hammer; soot black/iron/copper. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -536,6 +800,20 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Marek Vane, canon age 30. Tall adult with tied long dark-brown hair, short beard, calm grey eyes; long road cloak and closed dark-leather coat; viola on back and spear-horn with pennant removed; road brown/faded blue/brass. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Marek Vane, canon age 30. Tall adult with tied long dark-brown hair, short beard, calm grey eyes; long road cloak and closed dark-leather coat; viola on back and spear-horn with pennant removed; road brown/faded blue/brass. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Marek Vane, canon age 30. Tall adult with tied long dark-brown hair, short beard, calm grey eyes; long road cloak and closed dark-leather coat; viola on back and spear-horn with pennant removed; road brown/faded blue/brass. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy",
+          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+        }
       }
     },
     {
@@ -555,6 +833,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Ash Wolf. Canon: Wolves that ate from bell-ash in the Whispering Forest. They hunt whoever walks apart from the pack. Visual interpretation (candidate for review): Low agile ash-coated smoke-grey wolf; long wedge body, pointed muzzle and trailing tail; small amber chest cracks. No collar, human weapon, horns, or Ash-Maw-sized jaw. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Ash Wolf. Canon: Wolves that ate from bell-ash in the Whispering Forest. They hunt whoever walks apart from the pack. Visual interpretation (candidate for review): Low agile ash-coated smoke-grey wolf; long wedge body, pointed muzzle and trailing tail; small amber chest cracks. No collar, human weapon, horns, or Ash-Maw-sized jaw. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Ash Wolf. Canon: Wolves that ate from bell-ash in the Whispering Forest. They hunt whoever walks apart from the pack. Visual interpretation (candidate for review): Low agile ash-coated smoke-grey wolf; long wedge body, pointed muzzle and trailing tail; small amber chest cracks. No collar, human weapon, horns, or Ash-Maw-sized jaw. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -574,6 +865,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Bellbound Dead. Canon: Hollows wired to a bell by their own chains. Alone they are weak; the bell never sends one alone. Visual interpretation (candidate for review): Slumped thin hollow with long hanging arms, charcoal cloth, dirty bone and cold brass; chest bell and its own chains linking chest to wrists. Preserve tutorial identity, no heavy knight armor. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Bellbound Dead. Canon: Hollows wired to a bell by their own chains. Alone they are weak; the bell never sends one alone. Visual interpretation (candidate for review): Slumped thin hollow with long hanging arms, charcoal cloth, dirty bone and cold brass; chest bell and its own chains linking chest to wrists. Preserve tutorial identity, no heavy knight armor. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Bellbound Dead. Canon: Hollows wired to a bell by their own chains. Alone they are weak; the bell never sends one alone. Visual interpretation (candidate for review): Slumped thin hollow with long hanging arms, charcoal cloth, dirty bone and cold brass; chest bell and its own chains linking chest to wrists. Preserve tutorial identity, no heavy knight armor. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -593,6 +897,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Bridge Revenant. Canon: A drowned sentry of the old span. It still hooks anyone who stands at the front, as if the gate had never fallen. Visual interpretation (candidate for review): Drowned old bridge sentry hunched in wet lead armor and muddy ash cloth; rusted narrow helmet and one long hooked chain, large negative space. No Bellbound chest bell or living Oren soldier face. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Bridge Revenant. Canon: A drowned sentry of the old span. It still hooks anyone who stands at the front, as if the gate had never fallen. Visual interpretation (candidate for review): Drowned old bridge sentry hunched in wet lead armor and muddy ash cloth; rusted narrow helmet and one long hooked chain, large negative space. No Bellbound chest bell or living Oren soldier face. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Bridge Revenant. Canon: A drowned sentry of the old span. It still hooks anyone who stands at the front, as if the gate had never fallen. Visual interpretation (candidate for review): Drowned old bridge sentry hunched in wet lead armor and muddy ash cloth; rusted narrow helmet and one long hooked chain, large negative space. No Bellbound chest bell or living Oren soldier face. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -612,6 +929,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Chain Cultist. Canon: Chain-bearers of the First Eclipse. They pray to an eclipse that never moves and share one another's wounds. Visual interpretation (candidate for review): Living First Eclipse chain-bearer, closed hood and knotted chest; spread chains form broad triangle, charcoal cloth and lead-grey with restrained violet. Links connect allies; no invented enemy-pull ability. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Chain Cultist. Canon: Chain-bearers of the First Eclipse. They pray to an eclipse that never moves and share one another's wounds. Visual interpretation (candidate for review): Living First Eclipse chain-bearer, closed hood and knotted chest; spread chains form broad triangle, charcoal cloth and lead-grey with restrained violet. Links connect allies; no invented enemy-pull ability. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Chain Cultist. Canon: Chain-bearers of the First Eclipse. They pray to an eclipse that never moves and share one another's wounds. Visual interpretation (candidate for review): Living First Eclipse chain-bearer, closed hood and knotted chest; spread chains form broad triangle, charcoal cloth and lead-grey with restrained violet. Links connect allies; no invented enemy-pull ability. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -631,6 +961,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Choir Knight. Canon: Oath-armor of the Saint Luthos choir guard. It sings without breath and strikes back when a brother is struck. Visual interpretation (candidate for review): Tall organ-pipe helmet, narrow symmetric dirty-ivory oath armor, oxidized brass and dim dawn gold, straight sword; empty helmet slit. No modern cross or Yseldra mask. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Choir Knight. Canon: Oath-armor of the Saint Luthos choir guard. It sings without breath and strikes back when a brother is struck. Visual interpretation (candidate for review): Tall organ-pipe helmet, narrow symmetric dirty-ivory oath armor, oxidized brass and dim dawn gold, straight sword; empty helmet slit. No modern cross or Yseldra mask. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Choir Knight. Canon: Oath-armor of the Saint Luthos choir guard. It sings without breath and strikes back when a brother is struck. Visual interpretation (candidate for review): Tall organ-pipe helmet, narrow symmetric dirty-ivory oath armor, oxidized brass and dim dawn gold, straight sword; empty helmet slit. No modern cross or Yseldra mask. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -650,6 +993,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corrupted Crown Guard. Canon: Crown Guard soldiers still following Crown-era orders. The shield comes up before the signal strike, as it was drilled. Visual interpretation (candidate for review): Living disciplined former Crown Guard; compact rectangle silhouette, large full shield and short spear; old slate steel, matte oxblood and dirty ivory with damaged crest. Not dead Royal Hollow or fully crest-stripped Crownless. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corrupted Crown Guard. Canon: Crown Guard soldiers still following Crown-era orders. The shield comes up before the signal strike, as it was drilled. Visual interpretation (candidate for review): Living disciplined former Crown Guard; compact rectangle silhouette, large full shield and short spear; old slate steel, matte oxblood and dirty ivory with damaged crest. Not dead Royal Hollow or fully crest-stripped Crownless. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corrupted Crown Guard. Canon: Crown Guard soldiers still following Crown-era orders. The shield comes up before the signal strike, as it was drilled. Visual interpretation (candidate for review): Living disciplined former Crown Guard; compact rectangle silhouette, large full shield and short spear; old slate steel, matte oxblood and dirty ivory with damaged crest. Not dead Royal Hollow or fully crest-stripped Crownless. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -669,6 +1025,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corrupted Mercenary. Canon: Hired blades of the Red Vial ledger wing, fed on red glass that makes them strong and careless. Visual interpretation (candidate for review): Living broad-shouldered mercenary; heavy single axe, mismatched rusty armor and dark leather, limited oxblood and red-glass dose pocket. Not a skeleton or demon. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corrupted Mercenary. Canon: Hired blades of the Red Vial ledger wing, fed on red glass that makes them strong and careless. Visual interpretation (candidate for review): Living broad-shouldered mercenary; heavy single axe, mismatched rusty armor and dark leather, limited oxblood and red-glass dose pocket. Not a skeleton or demon. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corrupted Mercenary. Canon: Hired blades of the Red Vial ledger wing, fed on red glass that makes them strong and careless. Visual interpretation (candidate for review): Living broad-shouldered mercenary; heavy single axe, mismatched rusty armor and dark leather, limited oxblood and red-glass dose pocket. Not a skeleton or demon. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -688,6 +1057,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Crownless Knight. Canon: A knight who stripped his own crest, not out of defiance but despair. It hates shields and ignores fear. Visual interpretation (candidate for review): Living upright duelist, scraped empty crest area, slim two-handed sword and no shield; charcoal slate, ash ivory and bare scraped metal. Distinguish from dead Lost-Vow by living face and empty crest. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Crownless Knight. Canon: A knight who stripped his own crest, not out of defiance but despair. It hates shields and ignores fear. Visual interpretation (candidate for review): Living upright duelist, scraped empty crest area, slim two-handed sword and no shield; charcoal slate, ash ivory and bare scraped metal. Distinguish from dead Lost-Vow by living face and empty crest. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Crownless Knight. Canon: A knight who stripped his own crest, not out of defiance but despair. It hates shields and ignores fear. Visual interpretation (candidate for review): Living upright duelist, scraped empty crest area, slim two-handed sword and no shield; charcoal slate, ash ivory and bare scraped metal. Distinguish from dead Lost-Vow by living face and empty crest. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -707,6 +1089,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Eclipse Sentinel. Canon: Warders of the First Eclipse who feed the altar's barrier through its pylons. Visual interpretation (candidate for review): Living upright First Eclipse warder with broad shoulder mantle; charcoal stone-like cloth, dirty brass and limited veil violet; small pylon-shaped staff/key is candidate. Not robot, no Cael watch/scales. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Eclipse Sentinel. Canon: Warders of the First Eclipse who feed the altar's barrier through its pylons. Visual interpretation (candidate for review): Living upright First Eclipse warder with broad shoulder mantle; charcoal stone-like cloth, dirty brass and limited veil violet; small pylon-shaped staff/key is candidate. Not robot, no Cael watch/scales. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Eclipse Sentinel. Canon: Warders of the First Eclipse who feed the altar's barrier through its pylons. Visual interpretation (candidate for review): Living upright First Eclipse warder with broad shoulder mantle; charcoal stone-like cloth, dirty brass and limited veil violet; small pylon-shaped staff/key is candidate. Not robot, no Cael watch/scales. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -726,6 +1121,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Estate Wraith. Canon: A noble shade of the Ashen estate. Having lost its name, it borrows the strongest protection it can see. Visual interpretation (candidate for review): Sliding thin noble shade with fading skirt and small broken oval portrait frame; ash-grey noble cloth, dirty gold and cool glass teal. No invented identity or repeated Ashen Lord face. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Estate Wraith. Canon: A noble shade of the Ashen estate. Having lost its name, it borrows the strongest protection it can see. Visual interpretation (candidate for review): Sliding thin noble shade with fading skirt and small broken oval portrait frame; ash-grey noble cloth, dirty gold and cool glass teal. No invented identity or repeated Ashen Lord face. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Estate Wraith. Canon: A noble shade of the Ashen estate. Having lost its name, it borrows the strongest protection it can see. Visual interpretation (candidate for review): Sliding thin noble shade with fading skirt and small broken oval portrait frame; ash-grey noble cloth, dirty gold and cool glass teal. No invented identity or repeated Ashen Lord face. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -745,6 +1153,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Glass Viper. Canon: A glass-scaled serpent bred in the Red Vial cisterns. Fast, fragile, and never sold to anyone who asked what it was for. Visual interpretation (candidate for review): Natural slender S-curved serpent with small pointed head; fragile glass scales, dirty translucent blue-grey, cold tidal light and slight red sediment. No cobra wings, humanoid torso or dragon anatomy. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Glass Viper. Canon: A glass-scaled serpent bred in the Red Vial cisterns. Fast, fragile, and never sold to anyone who asked what it was for. Visual interpretation (candidate for review): Natural slender S-curved serpent with small pointed head; fragile glass scales, dirty translucent blue-grey, cold tidal light and slight red sediment. No cobra wings, humanoid torso or dragon anatomy. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Glass Viper. Canon: A glass-scaled serpent bred in the Red Vial cisterns. Fast, fragile, and never sold to anyone who asked what it was for. Visual interpretation (candidate for review): Natural slender S-curved serpent with small pointed head; fragile glass scales, dirty translucent blue-grey, cold tidal light and slight red sediment. No cobra wings, humanoid torso or dragon anatomy. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -764,6 +1185,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hollow Cleric. Canon: A grave scribe that still keeps its ledger. It mends its own and curses whoever looks weakest. Visual interpretation (candidate for review): Bent long ash-ivory robe, dark ink and matte purple-grey; open ledger as large horizontal anchor, thin bone-like fingers and candle traces. Separate mend and curse poses; no invented summons. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hollow Cleric. Canon: A grave scribe that still keeps its ledger. It mends its own and curses whoever looks weakest. Visual interpretation (candidate for review): Bent long ash-ivory robe, dark ink and matte purple-grey; open ledger as large horizontal anchor, thin bone-like fingers and candle traces. Separate mend and curse poses; no invented summons. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hollow Cleric. Canon: A grave scribe that still keeps its ledger. It mends its own and curses whoever looks weakest. Visual interpretation (candidate for review): Bent long ash-ivory robe, dark ink and matte purple-grey; open ledger as large horizontal anchor, thin bone-like fingers and candle traces. Separate mend and curse poses; no invented summons. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -783,6 +1217,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hollow Pilgrim. Canon: A pilgrim whose hours ran out on the road but whose feet did not. Slow, stubborn, heavy. Visual interpretation (candidate for review): Heavy hunched pilgrim under coarse ash-beige hood, face in shadow; worn brown-leather pack and one thick planted walking staff. Not a floating ghost or fast assassin. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hollow Pilgrim. Canon: A pilgrim whose hours ran out on the road but whose feet did not. Slow, stubborn, heavy. Visual interpretation (candidate for review): Heavy hunched pilgrim under coarse ash-beige hood, face in shadow; worn brown-leather pack and one thick planted walking staff. Not a floating ghost or fast assassin. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Hollow Pilgrim. Canon: A pilgrim whose hours ran out on the road but whose feet did not. Slow, stubborn, heavy. Visual interpretation (candidate for review): Heavy hunched pilgrim under coarse ash-beige hood, face in shadow; worn brown-leather pack and one thick planted walking staff. Not a floating ghost or fast assassin. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -802,6 +1249,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Inkbound Dead. Canon: A corpse wrapped in erased records. The ink it bleeds marks the living for the dead. Visual interpretation (candidate for review): Corpse wrapped in erased parchment records, asymmetric strips hanging from one arm; dirty parchment, matte ink black and cool grey. No legible spoiler text or Estate Wraith portrait frame. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Inkbound Dead. Canon: A corpse wrapped in erased records. The ink it bleeds marks the living for the dead. Visual interpretation (candidate for review): Corpse wrapped in erased parchment records, asymmetric strips hanging from one arm; dirty parchment, matte ink black and cool grey. No legible spoiler text or Estate Wraith portrait frame. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Inkbound Dead. Canon: A corpse wrapped in erased records. The ink it bleeds marks the living for the dead. Visual interpretation (candidate for review): Corpse wrapped in erased parchment records, asymmetric strips hanging from one arm; dirty parchment, matte ink black and cool grey. No legible spoiler text or Estate Wraith portrait frame. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -821,6 +1281,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lost-Vow Knight. Canon: A dead knight of a broken order. It punishes every shield it sees, because its own failed. Visual interpretation (candidate for review): Dead knight of broken order in torn oath cloak; two-handed broad sword and broken former shield fragment at belt; ash steel, faded ivory and stone grey. Fragment is not an active blocking shield. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lost-Vow Knight. Canon: A dead knight of a broken order. It punishes every shield it sees, because its own failed. Visual interpretation (candidate for review): Dead knight of broken order in torn oath cloak; two-handed broad sword and broken former shield fragment at belt; ash steel, faded ivory and stone grey. Fragment is not an active blocking shield. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lost-Vow Knight. Canon: A dead knight of a broken order. It punishes every shield it sees, because its own failed. Visual interpretation (candidate for review): Dead knight of broken order in torn oath cloak; two-handed broad sword and broken former shield fragment at belt; ash steel, faded ivory and stone grey. Fragment is not an active blocking shield. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -840,6 +1313,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Noble Retainer. Canon: The ghost of a household attendant. It still steps in front of the most wounded master. Visual interpretation (candidate for review): Dead household attendant bowing low with arms outspread and broad serving cloth; old matte ivory and charcoal coat with slight cold teal. Tray is a visual candidate only, not a weapon. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Noble Retainer. Canon: The ghost of a household attendant. It still steps in front of the most wounded master. Visual interpretation (candidate for review): Dead household attendant bowing low with arms outspread and broad serving cloth; old matte ivory and charcoal coat with slight cold teal. Tray is a visual candidate only, not a weapon. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Noble Retainer. Canon: The ghost of a household attendant. It still steps in front of the most wounded master. Visual interpretation (candidate for review): Dead household attendant bowing low with arms outspread and broad serving cloth; old matte ivory and charcoal coat with slight cold teal. Tray is a visual candidate only, not a weapon. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -859,6 +1345,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Orchard Ghoul. Canon: The Oakhaven dead, bloated from the red harvest. The more it feeds, the harder it becomes to cut. Visual interpretation (candidate for review): Bloated pear-shaped dead orchard worker, small bowed head, broad muddy feet; pale ash skin, harvest oxblood and earth brown; torn work apron and harvest-sack scraps. No exposed gore or tree-monster anatomy. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Orchard Ghoul. Canon: The Oakhaven dead, bloated from the red harvest. The more it feeds, the harder it becomes to cut. Visual interpretation (candidate for review): Bloated pear-shaped dead orchard worker, small bowed head, broad muddy feet; pale ash skin, harvest oxblood and earth brown; torn work apron and harvest-sack scraps. No exposed gore or tree-monster anatomy. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Orchard Ghoul. Canon: The Oakhaven dead, bloated from the red harvest. The more it feeds, the harder it becomes to cut. Visual interpretation (candidate for review): Bloated pear-shaped dead orchard worker, small bowed head, broad muddy feet; pale ash skin, harvest oxblood and earth brown; torn work apron and harvest-sack scraps. No exposed gore or tree-monster anatomy. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -878,6 +1377,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Red Vial Alchemist. Canon: A ledger-wing bomber. Break the flask rack and the formula breaks with it. Visual interpretation (candidate for review): Living ledger-wing bomber; wide tool apron and distinct left/right flask-rack silhouettes, throwing hand readable; charcoal leather, dirty teal glass and amber. Half respirator is candidate only; no Kera witch hat. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Red Vial Alchemist. Canon: A ledger-wing bomber. Break the flask rack and the formula breaks with it. Visual interpretation (candidate for review): Living ledger-wing bomber; wide tool apron and distinct left/right flask-rack silhouettes, throwing hand readable; charcoal leather, dirty teal glass and amber. Half respirator is candidate only; no Kera witch hat. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Red Vial Alchemist. Canon: A ledger-wing bomber. Break the flask rack and the formula breaks with it. Visual interpretation (candidate for review): Living ledger-wing bomber; wide tool apron and distinct left/right flask-rack silhouettes, throwing hand readable; charcoal leather, dirty teal glass and amber. Half respirator is candidate only; no Kera witch hat. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -897,6 +1409,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Red Vial Scout. Canon: A Guild courier with a poison dart and a route-marking shot. It reports to whoever pays in seals. Visual interpretation (candidate for review): Living lean Guild courier angled forward; short charcoal cape, faded leather, small dart crossbow, route cylinder, a few red vials. No Kera costume or invisibility effects. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Red Vial Scout. Canon: A Guild courier with a poison dart and a route-marking shot. It reports to whoever pays in seals. Visual interpretation (candidate for review): Living lean Guild courier angled forward; short charcoal cape, faded leather, small dart crossbow, route cylinder, a few red vials. No Kera costume or invisibility effects. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Red Vial Scout. Canon: A Guild courier with a poison dart and a route-marking shot. It reports to whoever pays in seals. Visual interpretation (candidate for review): Living lean Guild courier angled forward; short charcoal cape, faded leather, small dart crossbow, route cylinder, a few red vials. No Kera costume or invisibility effects. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -916,6 +1441,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Royal Hollow. Canon: A palace guard still standing at a post that no longer exists. It blocks one blow each round, as it always did. Visual interpretation (candidate for review): Dead palace guard at vanished post; very broad rigid shield, tall empty helmet, ash steel, faded ivory tabard and darkened gold; breathless frozen discipline. Not living Corrupted Crown Guard or seated king. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Royal Hollow. Canon: A palace guard still standing at a post that no longer exists. It blocks one blow each round, as it always did. Visual interpretation (candidate for review): Dead palace guard at vanished post; very broad rigid shield, tall empty helmet, ash steel, faded ivory tabard and darkened gold; breathless frozen discipline. Not living Corrupted Crown Guard or seated king. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Royal Hollow. Canon: A palace guard still standing at a post that no longer exists. It blocks one blow each round, as it always did. Visual interpretation (candidate for review): Dead palace guard at vanished post; very broad rigid shield, tall empty helmet, ash steel, faded ivory tabard and darkened gold; breathless frozen discipline. Not living Corrupted Crown Guard or seated king. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -935,6 +1473,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Ash-Maw. Canon: A wolf carcass fused with a shard of the Whispering Bell. Not a wolf: what the bell left wearing one. Visual interpretation (candidate for review): Great low four-legged wolf carcass; deep chest, soot-black fur plates, ash-white cracks and amber throat; asymmetric broken lower jaw fused with Whispering Bell shard. Separate jaw_bell target; no second head or dragon horns. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Ash-Maw. Canon: A wolf carcass fused with a shard of the Whispering Bell. Not a wolf: what the bell left wearing one. Visual interpretation (candidate for review): Great low four-legged wolf carcass; deep chest, soot-black fur plates, ash-white cracks and amber throat; asymmetric broken lower jaw fused with Whispering Bell shard. Separate jaw_bell target; no second head or dragon horns. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Ash-Maw. Canon: A wolf carcass fused with a shard of the Whispering Bell. Not a wolf: what the bell left wearing one. Visual interpretation (candidate for review): Great low four-legged wolf carcass; deep chest, soot-black fur plates, ash-white cracks and amber throat; asymmetric broken lower jaw fused with Whispering Bell shard. Separate jaw_bell target; no second head or dragon horns. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -954,6 +1505,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Bell-Widow. Canon: Yseldra is the Bell Widow encounter, the same non-playable woman; no additional monster identity. Visual interpretation (candidate for review): Adult Lady Yseldra Vale, 34, tall and straight-backed; opaque mourning veil over separate cracked bone-white half-mask, black-plum split surcoat over fitted mail, leather gloves with seven small bell-clapper rings. Seven gray wax seals cut through center and stamped seven-notched Inquisition mark; cracked brass handbell clapper tied with red thread. Black plum, ash ivory and cold brass. No skull motif; never seven red seals. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Bell-Widow. Canon: Yseldra is the Bell Widow encounter, the same non-playable woman; no additional monster identity. Visual interpretation (candidate for review): Adult Lady Yseldra Vale, 34, tall and straight-backed; opaque mourning veil over separate cracked bone-white half-mask, black-plum split surcoat over fitted mail, leather gloves with seven small bell-clapper rings. Seven gray wax seals cut through center and stamped seven-notched Inquisition mark; cracked brass handbell clapper tied with red thread. Black plum, ash ivory and cold brass. No skull motif; never seven red seals. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Bell-Widow. Canon: Yseldra is the Bell Widow encounter, the same non-playable woman; no additional monster identity. Visual interpretation (candidate for review): Adult Lady Yseldra Vale, 34, tall and straight-backed; opaque mourning veil over separate cracked bone-white half-mask, black-plum split surcoat over fitted mail, leather gloves with seven small bell-clapper rings. Seven gray wax seals cut through center and stamped seven-notched Inquisition mark; cracked brass handbell clapper tied with red thread. Black plum, ash ivory and cold brass. No skull motif; never seven red seals. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -973,6 +1537,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Captain Rusk. Canon: A mercenary captain carrying an order sealed by someone the Crown buried years ago. Visual interpretation (candidate for review): Living mercenary captain with long asymmetric cloak, slender long dueling blade and separate signal_banner; charcoal leather, old copper, matte oxblood, hard silver. Face/hair undecided; no royal Oren uniform or bell mask. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Captain Rusk. Canon: A mercenary captain carrying an order sealed by someone the Crown buried years ago. Visual interpretation (candidate for review): Living mercenary captain with long asymmetric cloak, slender long dueling blade and separate signal_banner; charcoal leather, old copper, matte oxblood, hard silver. Face/hair undecided; no royal Oren uniform or bell mask. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Captain Rusk. Canon: A mercenary captain carrying an order sealed by someone the Crown buried years ago. Visual interpretation (candidate for review): Living mercenary captain with long asymmetric cloak, slender long dueling blade and separate signal_banner; charcoal leather, old copper, matte oxblood, hard silver. Face/hair undecided; no royal Oren uniform or bell mask. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -992,6 +1569,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Red Vial Matron. Canon: Head of the Red Vial ledger wing. She believes the heir's blood is the last ingredient. Visual interpretation (candidate for review): Adult living ledger-wing leader upright in broad work apron and charcoal coat, wine red, dirty teal glass and matte copper; ledger and two separate low flask racks. Face/hair unapproved; no pin-up or gore. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Red Vial Matron. Canon: Head of the Red Vial ledger wing. She believes the heir's blood is the last ingredient. Visual interpretation (candidate for review): Adult living ledger-wing leader upright in broad work apron and charcoal coat, wine red, dirty teal glass and matte copper; ledger and two separate low flask racks. Face/hair unapproved; no pin-up or gore. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Red Vial Matron. Canon: Head of the Red Vial ledger wing. She believes the heir's blood is the last ingredient. Visual interpretation (candidate for review): Adult living ledger-wing leader upright in broad work apron and charcoal coat, wine red, dirty teal glass and matte copper; ledger and two separate low flask racks. Face/hair unapproved; no pin-up or gore. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -1011,6 +1601,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Marshal Oren. Canon: Mahmut's former commander. He signed the order; he did not know the rite would hollow her out. Visual interpretation (candidate for review): Living mature former commander with heavy heater shield and long command sword; matte slate steel, oxblood cloak, worn ivory and limited old gold; inverted old Crown crest, separate signal_standard. Short grey hair is candidate, no demon or corpse face. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Marshal Oren. Canon: Mahmut's former commander. He signed the order; he did not know the rite would hollow her out. Visual interpretation (candidate for review): Living mature former commander with heavy heater shield and long command sword; matte slate steel, oxblood cloak, worn ivory and limited old gold; inverted old Crown crest, separate signal_standard. Short grey hair is candidate, no demon or corpse face. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Marshal Oren. Canon: Mahmut's former commander. He signed the order; he did not know the rite would hollow her out. Visual interpretation (candidate for review): Living mature former commander with heavy heater shield and long command sword; matte slate steel, oxblood cloak, worn ivory and limited old gold; inverted old Crown crest, separate signal_standard. Short grey hair is candidate, no demon or corpse face. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -1030,6 +1633,19 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Ashen Lord's Wraith. Canon: The Ashen Lord, who once hid the bell-keeper's daughter from the Crown. He kept her face and lost her name. Visual interpretation (candidate for review): Tall noble shade upper body, lower body fading into smoke; large rectangular mirror_frame separate from body, ash grey, tarnished gold and cool glass teal; portrait-like older noble. No skull, gore, personal-name spoiler or mirror merged into torso. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Ashen Lord's Wraith. Canon: The Ashen Lord, who once hid the bell-keeper's daughter from the Crown. He kept her face and lost her name. Visual interpretation (candidate for review): Tall noble shade upper body, lower body fading into smoke; large rectangular mirror_frame separate from body, ash grey, tarnished gold and cool glass teal; portrait-like older noble. No skull, gore, personal-name spoiler or mirror merged into torso. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: The Ashen Lord's Wraith. Canon: The Ashen Lord, who once hid the bell-keeper's daughter from the Crown. He kept her face and lost her name. Visual interpretation (candidate for review): Tall noble shade upper body, lower body fading into smoke; large rectangular mirror_frame separate from body, ash grey, tarnished gold and cool glass teal; portrait-like older noble. No skull, gore, personal-name spoiler or mirror merged into torso. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     },
     {
@@ -1049,7 +1665,1372 @@
         "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Eclipse Construct. Canon: The hinge of the First Eclipse Altar, built around the Eclipse Bell. It is the instrument, not the author. Visual interpretation (candidate for review): Great upright altar hinge mechanism around Eclipse Bell: charcoal stone, old bronze, ash ivory and small cold violet core; broken crown ring, two arms/two feet, external chain joints, separate ankle anchor and three separate altar pylons. Not a god or Cael body; no invented third phase. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
         "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Eclipse Construct. Canon: The hinge of the First Eclipse Altar, built around the Eclipse Bell. It is the instrument, not the author. Visual interpretation (candidate for review): Great upright altar hinge mechanism around Eclipse Bell: charcoal stone, old bronze, ash ivory and small cold violet core; broken crown ring, two arms/two feet, external chain joints, separate ankle anchor and three separate altar pylons. Not a god or Cael body; no invented third phase. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
         "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Eclipse Construct. Canon: The hinge of the First Eclipse Altar, built around the Eclipse Bell. It is the instrument, not the author. Visual interpretation (candidate for review): Great upright altar hinge mechanism around Eclipse Bell: charcoal stone, old bronze, ash ivory and small cold violet core; broken crown ring, two arms/two feet, external chain joints, separate ankle anchor and three separate altar pylons. Not a god or Cael body; no invented third phase. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
       }
     }
-  ]
+  ],
+  "art_direction_audit": {
+    "section": "4.1",
+    "audited_at": "2026-10-23T11:25:00+03:00",
+    "auditor": "argon:art-director",
+    "summary": {
+      "approved_art_total": 242,
+      "unit_sheets_keep": 53,
+      "objective_sheets_fixed": 1,
+      "portraits_keep": 128,
+      "backgrounds_keep": 47,
+      "stills_keep": 11,
+      "ui_crests_keep": 2,
+      "icons_keep": 96,
+      "banners_keep": 10,
+      "store_brand_masters_keep": 17,
+      "queued_for_4_3_regenerate_or_new": [
+        "unit_cael",
+        "portrait_cael_neutral",
+        "portrait_cael_confident",
+        "portrait_cael_irritated",
+        "portrait_cael_unmasked"
+      ]
+    },
+    "fixes_applied_in_4_1": [
+      {
+        "target": "apps/game/src/battle/UnitView.ts, apps/game/src/scenes/CharacterScene.ts, apps/admin/src/pages/Animations.tsx",
+        "issue": "Numbered sub-frames (idle_2, idle_3, basic_2, active_2, ultimate_2) resolved u.states[f] as undefined, leaving anchor.x stuck on previous state pivotX during walk and victory loops.",
+        "resolution": "Resolved frame state via u.states[f] ?? u.states[f.replace(/_\\d+$/, \"\")] ?? u.states[currentState] and anchored Admin atlas_inspector preview at (framePivotX, frameFootY) on a 340x340 ground line."
+      },
+      {
+        "target": "content/approved_art/art/atlas_objective.webp, tools/build_campaign.ts",
+        "issue": "atlas_objective.webp was a 4x4 (768x768) sheet missing dedicated broken states for wax_seal and altar_pylon, jaw_bell floated at y=154 (foot_y 0.80) above shadow line y=183, ankle_anchor/altar_pylon had orphan dark border whiskers at x=0/x=191/y=0, and boss objectives only defined 4 animation states.",
+        "resolution": "Rebuilt atlas_objective.webp as a 9x3 (1728x576) 27-cell sheet with intact/pulse/broken states for all 9 objective families grounded at y=183 (foot_y 0.96), stripped border whiskers, fractured wax_seal_broken and altar_pylon_broken, and wired all 8 states across all 13 boss objectives in tools/build_campaign.ts."
+      }
+    ],
+    "additional_audited_entities": [
+      {
+        "id": "velka",
+        "kind": "character",
+        "decision": "keep",
+        "unit_sheet": "unit_velka",
+        "portraits": 4
+      },
+      {
+        "id": "veska",
+        "kind": "character",
+        "decision": "keep",
+        "unit_sheet": "unit_veska",
+        "portraits": 4
+      },
+      {
+        "id": "sister_maris",
+        "kind": "character",
+        "decision": "keep",
+        "unit_sheet": "unit_sister_maris",
+        "portraits": 4
+      },
+      {
+        "id": "maren",
+        "kind": "character",
+        "decision": "keep",
+        "unit_sheet": "unit_maren",
+        "portraits": 4
+      },
+      {
+        "id": "brother_calder",
+        "kind": "character",
+        "decision": "keep",
+        "unit_sheet": "unit_brother_calder",
+        "portraits": 4
+      },
+      {
+        "id": "prior_voss",
+        "kind": "character",
+        "decision": "keep",
+        "unit_sheet": "unit_prior_voss",
+        "portraits": 4
+      },
+      {
+        "id": "yseldra",
+        "kind": "npc_boss",
+        "decision": "keep",
+        "unit_sheet": "unit_boss_bell_widow",
+        "portraits": 4
+      },
+      {
+        "id": "atlas_objective",
+        "kind": "boss_objectives",
+        "decision": "fixed",
+        "sheet": "atlas_objective.webp (1728x576, 9x3, 27 cells)",
+        "units_covered": 13
+      },
+      {
+        "id": "cael",
+        "kind": "antagonist",
+        "decision": "regenerate",
+        "note": "Queued for §4.3: identity lock proposal + 6x4 unit sheet + 4 story portraits."
+      }
+    ],
+    "scene_metrics_phone_landscape": {
+      "title": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 5,
+        "residentAudio": 1,
+        "decodedImageMB": 23.58,
+        "encodedMB": 3.93,
+        "totalCostMB": 88.46,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.23,
+        "p95StepMs": 1,
+        "assetList": [
+          {
+            "path": "art/ui_logo.webp",
+            "w": 1400,
+            "h": 647,
+            "decodedMB": 3.46
+          },
+          {
+            "path": "art/ui_key_art.webp",
+            "w": 760,
+            "h": 1140,
+            "decodedMB": 3.31
+          },
+          {
+            "path": "art/ui_studio_mark.webp",
+            "w": 512,
+            "h": 512,
+            "decodedMB": 1
+          },
+          {
+            "path": "art/ui_title_bg.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "audio/bgm_main_theme.ogg",
+            "costMB": 64.3
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-title.png"
+      },
+      "prologue": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 9,
+        "residentAudio": 1,
+        "decodedImageMB": 71.19,
+        "encodedMB": 2.56,
+        "totalCostMB": 117.7,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.06,
+        "p95StepMs": 0.1,
+        "assetList": [
+          {
+            "path": "art/still_prologue_roads.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_crownfall.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_throne_wars.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_ordinary_days.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_names.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_hours.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_reunion.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_beginning.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_search.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "audio/bgm_prologue_before_the_road.ogg",
+            "costMB": 45.54
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-prologue.png"
+      },
+      "story_t1": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 9,
+        "residentAudio": 2,
+        "decodedImageMB": 34.91,
+        "encodedMB": 4.66,
+        "totalCostMB": 113.41,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.89,
+        "p95StepMs": 2.2,
+        "assetList": [
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "audio/bgm_ch1_ash_forest_uneasy.ogg",
+            "costMB": 39
+          },
+          {
+            "path": "audio/bgm_ch1_ash_forest_calm.ogg",
+            "costMB": 38.88
+          },
+          {
+            "path": "art/portrait_mahmut_dry_humor.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_watchful.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_warm.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_wry.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-story_t1.png"
+      },
+      "story_t2_cg": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 10,
+        "residentAudio": 2,
+        "decodedImageMB": 42.82,
+        "encodedMB": 2.35,
+        "totalCostMB": 76.69,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.54,
+        "p95StepMs": 2,
+        "assetList": [
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/bg_forgotten_stone_crossing.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_roadside_rest.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "audio/bgm_fadyme_theme.ogg",
+            "costMB": 33.07
+          },
+          {
+            "path": "art/portrait_mahmut_dry_humor.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_watchful.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_warm.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_wry.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "voices/tutorial_t2_after_004.ogg",
+            "costMB": 0.05
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-story_t2_cg.png"
+      },
+      "battle_t1": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 8,
+        "residentAudio": 1,
+        "decodedImageMB": 43.89,
+        "encodedMB": 2.96,
+        "totalCostMB": 76.12,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.55,
+        "p95StepMs": 1.3,
+        "battleUnits": [
+          {
+            "id": "player:0:mahmut",
+            "artKey": "mahmut",
+            "animName": "idle",
+            "x": 590,
+            "y": 704,
+            "anchorX": 0.464,
+            "anchorY": 1,
+            "texW": 240,
+            "texH": 318
+          },
+          {
+            "id": "player:1:fadyme",
+            "artKey": "fadyme",
+            "animName": "idle",
+            "x": 346,
+            "y": 647,
+            "anchorX": 0.517,
+            "anchorY": 1,
+            "texW": 227,
+            "texH": 317
+          },
+          {
+            "id": "enemy:0:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1330,
+            "y": 704,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          },
+          {
+            "id": "enemy:1:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1574,
+            "y": 647,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          }
+        ],
+        "assetList": [
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_mahmut.webp",
+            "w": 1960,
+            "h": 967,
+            "decodedMB": 7.23
+          },
+          {
+            "path": "audio/bgm_battle_field.ogg",
+            "costMB": 30.91
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_fadyme.webp",
+            "w": 2026,
+            "h": 1013,
+            "decodedMB": 7.83
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_bellbound_dead.webp",
+            "w": 1991,
+            "h": 977,
+            "decodedMB": 7.42
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-battle_t1.png"
+      },
+      "battle_t3": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 9,
+        "residentAudio": 1,
+        "decodedImageMB": 53.62,
+        "encodedMB": 3.31,
+        "totalCostMB": 86.2,
+        "budgetCapMB": 256,
+        "avgStepMs": 2.44,
+        "p95StepMs": 0.9,
+        "battleUnits": [
+          {
+            "id": "player:0:mahmut",
+            "artKey": "mahmut",
+            "animName": "idle",
+            "x": 590,
+            "y": 704,
+            "anchorX": 0.464,
+            "anchorY": 1,
+            "texW": 240,
+            "texH": 318
+          },
+          {
+            "id": "player:1:fadyme",
+            "artKey": "fadyme",
+            "animName": "idle",
+            "x": 346,
+            "y": 647,
+            "anchorX": 0.517,
+            "anchorY": 1,
+            "texW": 227,
+            "texH": 317
+          },
+          {
+            "id": "enemy:2:hollow_pilgrim",
+            "artKey": "hollow_pilgrim",
+            "animName": "idle",
+            "x": 1330,
+            "y": 704,
+            "anchorX": 0.566,
+            "anchorY": 1,
+            "texW": 380,
+            "texH": 315
+          },
+          {
+            "id": "enemy:0:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1602,
+            "y": 599,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          },
+          {
+            "id": "enemy:1:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1546,
+            "y": 757,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          }
+        ],
+        "assetList": [
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_mahmut.webp",
+            "w": 1960,
+            "h": 967,
+            "decodedMB": 7.23
+          },
+          {
+            "path": "art/bg_shelter_courtyard_dusk.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "audio/bgm_battle_field.ogg",
+            "costMB": 30.91
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_fadyme.webp",
+            "w": 2026,
+            "h": 1013,
+            "decodedMB": 7.83
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_bellbound_dead.webp",
+            "w": 1991,
+            "h": 977,
+            "decodedMB": 7.42
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_hollow_pilgrim.webp",
+            "w": 1912,
+            "h": 1334,
+            "decodedMB": 9.73
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-battle_t3.png"
+      },
+      "hub": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 1,
+        "residentAudio": 0,
+        "decodedImageMB": 7.91,
+        "encodedMB": 0.11,
+        "totalCostMB": 8.02,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.21,
+        "p95StepMs": 0.7,
+        "assetList": [
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-hub.png"
+      },
+      "roster": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 1
+        },
+        "residentImages": 1,
+        "residentAudio": 0,
+        "decodedImageMB": 7.91,
+        "encodedMB": 0.13,
+        "totalCostMB": 8.04,
+        "budgetCapMB": 256,
+        "avgStepMs": 1.24,
+        "p95StepMs": 0.8,
+        "assetList": [
+          {
+            "path": "art/bg_shelter_courtyard_dusk.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\phone-landscape-roster.png"
+      }
+    },
+    "scene_metrics_desktop": {
+      "title": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 5,
+        "residentAudio": 1,
+        "decodedImageMB": 23.58,
+        "encodedMB": 3.93,
+        "totalCostMB": 88.46,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.95,
+        "p95StepMs": 1,
+        "assetList": [
+          {
+            "path": "art/ui_logo.webp",
+            "w": 1400,
+            "h": 647,
+            "decodedMB": 3.46
+          },
+          {
+            "path": "art/ui_key_art.webp",
+            "w": 760,
+            "h": 1140,
+            "decodedMB": 3.31
+          },
+          {
+            "path": "art/ui_studio_mark.webp",
+            "w": 512,
+            "h": 512,
+            "decodedMB": 1
+          },
+          {
+            "path": "art/ui_title_bg.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "audio/bgm_main_theme.ogg",
+            "costMB": 64.3
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-title.png"
+      },
+      "prologue": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 9,
+        "residentAudio": 1,
+        "decodedImageMB": 71.19,
+        "encodedMB": 2.56,
+        "totalCostMB": 117.7,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.06,
+        "p95StepMs": 0.2,
+        "assetList": [
+          {
+            "path": "art/still_prologue_hours.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_names.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_ordinary_days.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_throne_wars.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_crownfall.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_roads.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_search.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_beginning.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_prologue_reunion.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "audio/bgm_prologue_before_the_road.ogg",
+            "costMB": 45.54
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-prologue.png"
+      },
+      "story_t1": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 9,
+        "residentAudio": 2,
+        "decodedImageMB": 34.91,
+        "encodedMB": 4.66,
+        "totalCostMB": 113.41,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.02,
+        "p95StepMs": 0.1,
+        "assetList": [
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "audio/bgm_ch1_ash_forest_calm.ogg",
+            "costMB": 38.88
+          },
+          {
+            "path": "audio/bgm_ch1_ash_forest_uneasy.ogg",
+            "costMB": 39
+          },
+          {
+            "path": "art/portrait_mahmut_dry_humor.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_watchful.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_warm.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_wry.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-story_t1.png"
+      },
+      "story_t2_cg": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 10,
+        "residentAudio": 2,
+        "decodedImageMB": 42.82,
+        "encodedMB": 2.35,
+        "totalCostMB": 76.69,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.28,
+        "p95StepMs": 0.5,
+        "assetList": [
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/bg_forgotten_stone_crossing.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/still_roadside_rest.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "audio/bgm_fadyme_theme.ogg",
+            "costMB": 33.07
+          },
+          {
+            "path": "art/portrait_mahmut_dry_humor.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_mahmut_watchful.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_warm.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_wry.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "voices/tutorial_t2_after_004.ogg",
+            "costMB": 0.05
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-story_t2_cg.png"
+      },
+      "battle_t1": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 8,
+        "residentAudio": 1,
+        "decodedImageMB": 43.89,
+        "encodedMB": 2.96,
+        "totalCostMB": 76.12,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.47,
+        "p95StepMs": 1.3,
+        "battleUnits": [
+          {
+            "id": "player:0:mahmut",
+            "artKey": "mahmut",
+            "animName": "idle",
+            "x": 590,
+            "y": 704,
+            "anchorX": 0.464,
+            "anchorY": 1,
+            "texW": 240,
+            "texH": 318
+          },
+          {
+            "id": "player:1:fadyme",
+            "artKey": "fadyme",
+            "animName": "idle",
+            "x": 346,
+            "y": 647,
+            "anchorX": 0.517,
+            "anchorY": 1,
+            "texW": 227,
+            "texH": 317
+          },
+          {
+            "id": "enemy:0:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1330,
+            "y": 704,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          },
+          {
+            "id": "enemy:1:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1574,
+            "y": 647,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          }
+        ],
+        "assetList": [
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_mahmut.webp",
+            "w": 1960,
+            "h": 967,
+            "decodedMB": 7.23
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_fadyme.webp",
+            "w": 2026,
+            "h": 1013,
+            "decodedMB": 7.83
+          },
+          {
+            "path": "audio/bgm_battle_field.ogg",
+            "costMB": 30.91
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_bellbound_dead.webp",
+            "w": 1991,
+            "h": 977,
+            "decodedMB": 7.42
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-battle_t1.png"
+      },
+      "battle_t3": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 9,
+        "residentAudio": 1,
+        "decodedImageMB": 53.62,
+        "encodedMB": 3.31,
+        "totalCostMB": 86.2,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.48,
+        "p95StepMs": 1.6,
+        "battleUnits": [
+          {
+            "id": "player:0:mahmut",
+            "artKey": "mahmut",
+            "animName": "idle",
+            "x": 590,
+            "y": 704,
+            "anchorX": 0.464,
+            "anchorY": 1,
+            "texW": 240,
+            "texH": 318
+          },
+          {
+            "id": "player:1:fadyme",
+            "artKey": "fadyme",
+            "animName": "idle",
+            "x": 346,
+            "y": 647,
+            "anchorX": 0.517,
+            "anchorY": 1,
+            "texW": 227,
+            "texH": 317
+          },
+          {
+            "id": "enemy:2:hollow_pilgrim",
+            "artKey": "hollow_pilgrim",
+            "animName": "idle",
+            "x": 1330,
+            "y": 704,
+            "anchorX": 0.566,
+            "anchorY": 1,
+            "texW": 380,
+            "texH": 315
+          },
+          {
+            "id": "enemy:0:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1602,
+            "y": 599,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          },
+          {
+            "id": "enemy:1:bellbound_dead",
+            "artKey": "bellbound_dead",
+            "animName": "idle",
+            "x": 1546,
+            "y": 757,
+            "anchorX": 0.471,
+            "anchorY": 1,
+            "texW": 230,
+            "texH": 317
+          }
+        ],
+        "assetList": [
+          {
+            "path": "art/atlas_mahmut.webp",
+            "w": 1960,
+            "h": 967,
+            "decodedMB": 7.23
+          },
+          {
+            "path": "art/portrait_mahmut_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "audio/bgm_battle_field.ogg",
+            "costMB": 30.91
+          },
+          {
+            "path": "art/bg_shelter_courtyard_dusk.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          },
+          {
+            "path": "art/portrait_mahmut_protective_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_fadyme.webp",
+            "w": 2026,
+            "h": 1013,
+            "decodedMB": 7.83
+          },
+          {
+            "path": "art/portrait_fadyme_composed.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_bellbound_dead.webp",
+            "w": 1991,
+            "h": 977,
+            "decodedMB": 7.42
+          },
+          {
+            "path": "art/portrait_fadyme_resolve.webp",
+            "w": 768,
+            "h": 1152,
+            "decodedMB": 3.38
+          },
+          {
+            "path": "art/atlas_hollow_pilgrim.webp",
+            "w": 1912,
+            "h": 1334,
+            "decodedMB": 9.73
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-battle_t3.png"
+      },
+      "hub": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 1,
+        "residentAudio": 0,
+        "decodedImageMB": 7.91,
+        "encodedMB": 0.11,
+        "totalCostMB": 8.02,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.18,
+        "p95StepMs": 0.3,
+        "assetList": [
+          {
+            "path": "art/bg_forest_whispering_ash.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-hub.png"
+      },
+      "roster": {
+        "renderer": {
+          "name": "webgl",
+          "type": 2,
+          "resolution": 0.667
+        },
+        "residentImages": 1,
+        "residentAudio": 0,
+        "decodedImageMB": 7.91,
+        "encodedMB": 0.13,
+        "totalCostMB": 8.04,
+        "budgetCapMB": 256,
+        "avgStepMs": 0.23,
+        "p95StepMs": 0.5,
+        "assetList": [
+          {
+            "path": "art/bg_shelter_courtyard_dusk.webp",
+            "w": 1920,
+            "h": 1080,
+            "decodedMB": 7.91
+          }
+        ],
+        "errors": [
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+          "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+        ],
+        "screenshot": "C:\\Users\\PC\\.gemini\\antigravity\\brain\\a2763432-9424-4531-af86-a224e8f4176c\\scratch\\shots_4_1\\landscape-desktop-roster.png"
+      }
+    }
+  }
 }

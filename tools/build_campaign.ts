@@ -328,37 +328,45 @@ if (placeholders.length > 0) {
   unitArt.hero_arcanist = heroArcanistUnit;
   unitArt.enemy_knight = enemyKnightUnit;
 }
-// breakable boss objectives use their dedicated intact + broken sprites packed in atlas_objective.webp
+// breakable boss objectives use their dedicated intact + pulse + broken sprites packed in atlas_objective.webp (9x3 grid)
 const OW = 192;
-const OBJ_CELLS = [
-  'jaw_bell_intact', 'jaw_bell_broken', 'wax_seal_intact', 'signal_banner_intact',
-  'signal_banner_broken', 'flask_rack_intact', 'flask_rack_broken', 'signal_standard_intact',
-  'signal_standard_broken', 'mirror_frame_intact', 'mirror_frame_broken', 'chain_joint_intact',
-  'chain_joint_broken', 'ankle_anchor_intact', 'ankle_anchor_broken', 'altar_pylon_intact',
+const OBJ_FAMILIES = [
+  'jaw_bell',
+  'wax_seal',
+  'signal_banner',
+  'flask_rack',
+  'signal_standard',
+  'mirror_frame',
+  'chain_joint',
+  'ankle_anchor',
+  'altar_pylon',
 ] as const;
 const objFrames: Record<string, [number, number, number, number]> = { idle: [0, 0, OW, OW] };
-for (let i = 0; i < OBJ_CELLS.length; i++) {
-  objFrames[OBJ_CELLS[i]!] = [(i % 4) * OW, Math.floor(i / 4) * OW, OW, OW];
+for (let c = 0; c < OBJ_FAMILIES.length; c++) {
+  const fam = OBJ_FAMILIES[c]!;
+  objFrames[`${fam}_intact`] = [c * OW, 0, OW, OW];
+  objFrames[`${fam}_pulse`] = [c * OW, OW, OW, OW];
+  objFrames[`${fam}_broken`] = [c * OW, OW * 2, OW, OW];
 }
-const OBJ_MAP: Record<string, { intact: string; broken: string }> = {
-  jaw_bell: { intact: 'jaw_bell_intact', broken: 'jaw_bell_broken' },
-  wax_seal: { intact: 'wax_seal_intact', broken: 'wax_seal_intact' },
-  signal_banner: { intact: 'signal_banner_intact', broken: 'signal_banner_broken' },
-  flask_rack_left: { intact: 'flask_rack_intact', broken: 'flask_rack_broken' },
-  flask_rack_right: { intact: 'flask_rack_intact', broken: 'flask_rack_broken' },
-  signal_standard: { intact: 'signal_standard_intact', broken: 'signal_standard_broken' },
-  mirror_frame: { intact: 'mirror_frame_intact', broken: 'mirror_frame_broken' },
-  chain_joint_left: { intact: 'chain_joint_intact', broken: 'chain_joint_broken' },
-  chain_joint_right: { intact: 'chain_joint_intact', broken: 'chain_joint_broken' },
-  ankle_anchor: { intact: 'ankle_anchor_intact', broken: 'ankle_anchor_broken' },
-  altar_pylon_left: { intact: 'altar_pylon_intact', broken: 'altar_pylon_intact' },
-  altar_pylon_center: { intact: 'altar_pylon_intact', broken: 'altar_pylon_intact' },
-  altar_pylon_right: { intact: 'altar_pylon_intact', broken: 'altar_pylon_intact' },
+const OBJ_MAP: Record<string, { intact: string; pulse: string; broken: string }> = {
+  jaw_bell: { intact: 'jaw_bell_intact', pulse: 'jaw_bell_pulse', broken: 'jaw_bell_broken' },
+  wax_seal: { intact: 'wax_seal_intact', pulse: 'wax_seal_pulse', broken: 'wax_seal_broken' },
+  signal_banner: { intact: 'signal_banner_intact', pulse: 'signal_banner_pulse', broken: 'signal_banner_broken' },
+  flask_rack_left: { intact: 'flask_rack_intact', pulse: 'flask_rack_pulse', broken: 'flask_rack_broken' },
+  flask_rack_right: { intact: 'flask_rack_intact', pulse: 'flask_rack_pulse', broken: 'flask_rack_broken' },
+  signal_standard: { intact: 'signal_standard_intact', pulse: 'signal_standard_pulse', broken: 'signal_standard_broken' },
+  mirror_frame: { intact: 'mirror_frame_intact', pulse: 'mirror_frame_pulse', broken: 'mirror_frame_broken' },
+  chain_joint_left: { intact: 'chain_joint_intact', pulse: 'chain_joint_pulse', broken: 'chain_joint_broken' },
+  chain_joint_right: { intact: 'chain_joint_intact', pulse: 'chain_joint_pulse', broken: 'chain_joint_broken' },
+  ankle_anchor: { intact: 'ankle_anchor_intact', pulse: 'ankle_anchor_pulse', broken: 'ankle_anchor_broken' },
+  altar_pylon_left: { intact: 'altar_pylon_intact', pulse: 'altar_pylon_pulse', broken: 'altar_pylon_broken' },
+  altar_pylon_center: { intact: 'altar_pylon_intact', pulse: 'altar_pylon_pulse', broken: 'altar_pylon_broken' },
+  altar_pylon_right: { intact: 'altar_pylon_intact', pulse: 'altar_pylon_pulse', broken: 'altar_pylon_broken' },
 };
 const approvedObjAtlas = join(ROOT, 'content/approved_art/art/atlas_objective.webp');
 if (existsSync(approvedObjAtlas)) {
   writeOut(`${OUT}/art/atlas_objective.webp`, readFileSync(approvedObjAtlas));
-  atlases.atlas_objective = { image: 'art/atlas_objective.webp', width: OW * 4, height: OW * 4, frames: objFrames };
+  atlases.atlas_objective = { image: 'art/atlas_objective.webp', width: OW * 9, height: OW * 3, frames: objFrames };
 } else {
   const objSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${OW}" height="${OW}"><circle cx="96" cy="96" r="80" fill="#3b2a4d" stroke="#e7c36a" stroke-width="6"/><path d="M60 120 L96 52 L132 120 Z" fill="none" stroke="#e7c36a" stroke-width="7" stroke-linejoin="round"/><circle cx="96" cy="108" r="7" fill="#e7c36a"/></svg>`;
   writeOut(`${OUT}/art/atlas_objective.webp`, await sharp(Buffer.from(objSvg)).webp({ quality: 85 }).toBuffer());
@@ -369,6 +377,7 @@ for (const u of pack.units) {
     if (unitArt[o.objective_id]) continue;
     const mapping = existsSync(approvedObjAtlas) ? OBJ_MAP[o.objective_id] : undefined;
     const intactFrame = mapping?.intact ?? 'idle';
+    const pulseFrame = mapping?.pulse ?? intactFrame;
     const brokenFrame = mapping?.broken ?? intactFrame;
     const states = Object.fromEntries(
       ['idle', 'walk', 'basic', 'active', 'ultimate', 'hit', 'defeat', 'victory'].map((st) => [
@@ -376,13 +385,21 @@ for (const u of pack.units) {
         {
           frame: st === 'defeat' ? brokenFrame : intactFrame,
           scale: 1,
-          foot_y: 0.97,
+          foot_y: 0.96,
           pivot_x: 0.5,
           ...(st === 'hit' && brokenFrame !== intactFrame
             ? { animation: { frames: [intactFrame, brokenFrame, intactFrame], fps: 8, loop: false } }
             : st === 'defeat' && brokenFrame !== intactFrame
               ? { animation: { frames: [intactFrame, brokenFrame], fps: 6, loop: false } }
-              : {}),
+              : pulseFrame !== intactFrame
+                ? {
+                    animation: {
+                      frames: [intactFrame, pulseFrame, intactFrame],
+                      fps: st === 'idle' ? 4 : 6,
+                      loop: st === 'idle' || st === 'walk' || st === 'victory',
+                    },
+                  }
+                : {}),
         },
       ]),
     );
