@@ -1,6 +1,6 @@
 # Instructions for Argon — 2026-10-20
 
-Short, binding rules for working in this repository. **Start with [ARGON_HANDOFF_2026-10-21](ARGON_HANDOFF_2026-10-21.md)** (Argon owns the whole project from 2026-10-21). They come from incidents in the last two days; each rule says why. The full brief is the [README](../../README.md); the current gap list is [REVIEW_2026-10-20](../REVIEW_2026-10-20.md).
+Short, binding rules for working in this repository. **Start with [ARGON_HANDOFF_2026-10-21](ARGON_HANDOFF_2026-10-21.md)** (Argon owns the whole project from 2026-10-21) **and [ARGON_ART_DIRECTOR](ARGON_ART_DIRECTOR.md)** (D-30: Argon is the Art Director and owns `narrative/` and all art, animation, VFX, banner, video and audio work). They come from incidents in the last two days; each rule says why. The full brief is the [README](../../README.md); the current gap list is [REVIEW_2026-10-20](../REVIEW_2026-10-20.md).
 
 ## 1. Where to work (D-28, from 2026-10-20)
 
@@ -50,7 +50,7 @@ Short, binding rules for working in this repository. **Start with [ARGON_HANDOFF
 
 **Rules.**
 - Through `tools/ingest_art.ts` only (`init --class unit_sheet|portrait`, then ingest), so every image gets an `content/approved_art/entries/*.json` record with source, model, cost, licence, hashes and the human QC status. Then point the unit at its own atlas in the campaign `art/art_manifest.json` (replacing the borrowed `atlas_mahmut` / `atlas_hero_arcanist` / `atlas_enemy_knight` entry) and run `npm run build:content` (it also regenerates `apps/api/seed/assets.sql`).
-- Argon delivers candidates; `npx tsx tools/ingest_art.ts approve <asset_id> --by <owner>` is the owner's step after looking at the unit in game. `ingest_art.ts verify` and `report` show what is still a candidate.
+- Since D-30 (2026-10-23) Argon approves as Art Director after looking at the unit in game: `npx tsx tools/ingest_art.ts approve <asset_id> --by argon:art-director --note "<what was checked>"`. The owner keeps a veto. `ingest_art.ts verify` and `report` show what is still a candidate. The full creative mandate is [ARGON_ART_DIRECTOR](ARGON_ART_DIRECTOR.md).
 - Identity from canon only: [ART_BIBLE](../media/ART_BIBLE.md) §3.1/§3.2 conventions and §4 identity anchors; add an anchor section for each new character from `narrative/06_Characters` before generating. Anything not in canon stays UNKNOWN, not invented.
 - Budget: `content/budget/media_budget.json` — 1000 TL (20 USD) per month, at most 3 USD per batch and 3 paid attempts per asset. Steps 1–2 fit one month; log every paid call.
 - Verify before each commit: `npm run verify`; open the unit in the Animations studio and in battle on desktop and in the phone-landscape viewport; check alpha edges, foot line on the shadow, facing, frame alignment and readability at battle size.
