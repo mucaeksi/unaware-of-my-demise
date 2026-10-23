@@ -1,17 +1,18 @@
 # Media production queue — SOL-5
 
-Status: **§4.1 Art-Direction Audit Completed (`2026-10-23`, `argon:art-director`)**. English text; every spoken line is Japanese (`ja-JP`, Chirp 3 HD). [QUEUE_DATA.json](QUEUE_DATA.json) contains the complete English prompts, source hashes, per-asset audit verdicts (`keep` / `fixed` / `regenerate`), runtime fixes, and `phone-landscape` (`1200×540 @ 2x`) texture-memory and frame-time measurements.
+Status: **§4.1–§4.3 Art-Direction, Signature VFX & Identity Locks Completed (`2026-10-23`, `argon:art-director`)**. English text; every spoken line is Japanese (`ja-JP`, Chirp 3 HD). [QUEUE_DATA.json](QUEUE_DATA.json) contains the complete English prompts, source hashes, per-asset audit verdicts (`keep` / `fixed` / `regenerate`), runtime fixes, and `phone-landscape` (`1200×540 @ 2x`) texture-memory and frame-time measurements.
 
-## §4.1 Art-Direction Pass Summary (2026-10-23)
+## §4.1–§4.3 Art-Direction & Identity Lock Summary (2026-10-23)
 
-- **Audited inventory (`content/approved_art/`, `content/base/`, `content/campaign/`, `branding/`, `store/`):**
+- **Audited inventory (`content/approved_art/`, `content/base/`, `content/patches/rel_0003_part1_campaign/`, `docs/store/assets/`):**
   - `53 / 53` character & enemy 6×4 chibi sprite sheets (`1728×1152`, 13 occupied cells, 8 animation states, `foot_y = 0.938` / `maxY = 180`, 0 alpha-fringe pixels) → **`keep`**
   - `1 / 1` boss objective sheet (`atlas_objective.webp`) → **`fixed`** (upgraded from 4×4 `768×768` to 9×3 `1728×576` with 27 cells covering `intact`, `pulse`, and `broken` for all 9 objective families grounded at `foot_y = 0.96` / `maxY = 183`; stripped orphan border whiskers on `ankle_anchor` and `altar_pylon`; crafted distinct cleft/shattered `wax_seal_broken` and `altar_pylon_broken` cells; wired all 13 boss objectives to all 8 animation states in `tools/build_campaign.ts`)
-  - `128 / 128` story portraits (`768×1344`, 32 characters × 4 emotions, 0 alpha-fringe pixels) → **`keep`**
+  - `128 / 128` story portraits (`768×1344`, 32 characters × 4 emotions including `lord_cael_veyr`, 0 alpha-fringe pixels) → **`keep`**
   - `47 / 47` battle & story backgrounds (`1920×1080`) → **`keep`**
   - `11 / 11` narrative stills / CGs (`1920×1080`) → **`keep`**
-  - `2 / 2` UI crests (`ui_title_crest`, `ui_eclipse_seal`), `96 / 96` icons (`256×256`), `10 / 10` gacha banners (`1600×720`), `17 / 17` store & brand masters → **`keep`**
-  - **Queued for §4.3 (`regenerate` / new):** `cael` (Act V reveal antagonist — needs identity lock proposal, `unit_cael.webp` 6×4 sheet, and `portrait_cael_{neutral,confident,irritated,unmasked}.webp`).
+  - `2 / 2` UI crests (`ui_title_crest`, `ui_eclipse_seal`), `96 / 96` icons (`256×256`), `11 / 11` gacha banners, `17 / 17` store & brand masters → **`keep`**
+  - **§4.2 Signature VFX:** `115` bespoke VFX presets and `133` non-passive skill mappings across all 25 heroes, 7 bosses, and 20 enemies in `content/base/vfx/vfx_presets.json`, plus 5 new emblem textures (`bell`, `chain`, `seal`, `droplet`, `feather`) and 4 vector shapes (`bell_arch`, `shield_wall`, `eclipse_corona`, `crosshair`).
+  - **§4.3 Identity Anchors & Character Locks:** Added verbatim canon anchors (`§4.11`–`§4.29`) in [ART_BIBLE.md](ART_BIBLE.md) for all 17 remaining playable heroes, 7 Part I bosses + `lord_cael_veyr`, and 18 recurring enemies; registered all 32 speaking characters' `composed` portrait SHA-256 locks and 52 combat units' 16-frame chibi atlas SHA-256 locks in `content/specs/character_locks/CHARACTER_LOCKS.md`; added the 5 male heroes (`garrick_cinder`, `corbin_locke`, `cassian_thorne`, `dorian_kesk`, `rowan_reed`) and `lord_cael_veyr` to [QUEUE_DATA.json](QUEUE_DATA.json) (`53` entries total). Media budget spend: `$0.00 / $20.00`.
 - **Runtime animation & inspector fixes applied in §4.1:**
   - Fixed numbered sub-frame pivot lookup (`idle_2`, `idle_3`, `basic_2`, `active_2`, `ultimate_2`) in `apps/game/src/battle/UnitView.ts`, `apps/game/src/scenes/CharacterScene.ts`, and `apps/admin/src/pages/Animations.tsx` (`u.states[f] ?? u.states[f.replace(/_\d+$/, '')] ?? u.states[currentState]`), eliminating horizontal anchor drift during `walk` and `victory` loops.
   - Updated `apps/admin/src/pages/Animations.tsx` (`atlas_inspector`) so the sprite preview renders on a fixed `340×340` stage anchored at `(framePivotX, frameFootY)` on the ground shadow line.

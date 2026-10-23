@@ -237,6 +237,176 @@ Read the pair as opposites at 160 px: Bellbound thin, tall-reaching, chest bell 
 | Weapon | "The Name Beneath Stone: ritual lantern that shows chalk names under moss." | CANON |
 | Palette | "heather grey, chalk white, mustard. Silhouette: kneeling at a stone, lantern raised." | CANON |
 
+### 4.11 Brin Alder (`narrative/06_Characters/Playable/brin_alder.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "23 · Stone tank · 4★ · forest village guard and woodcutter; free story recruit." | CANON |
+| Look & props | "The pine-green cloak is the village guard's; the fur collar is from a wolf that took two of the village's goats, and she is quietly proud of it. Quilted gambeson because plate is for people with smiths. Long brown braid, practical boots with guards for rough ground." | CANON |
+| Weapon | "Alderwall's Promise: axe-shield cut from the alder that shaded her village shrine." / "hand axe and round iron buckler, alder wood under the leather." | CANON |
+| Palette | "Pine green, iron, cream" (`narrative/06_Characters/_visual_matrix.md`) | CANON |
+
+### 4.12 Sable Wren (`narrative/06_Characters/Playable/sable_wren.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "21 · Veil assassin DPS · 5★ limited (Oath Banner 2) · courier-infiltrator." | CANON |
+| Look & props | "petite; black bob with one long side lock, pale grey eyes; charcoal cowl pulled over the mouth, hood down; tailored ink-blue leather with an off-the-shoulder cropped jacket over an opaque high-necked bodice … a belt of old courier wax seals, each broken; twin daggers bound with a cut bell-rope." | CANON |
+| Weapon | "Quietus at the Broken Bell: twin blades and a severed bell rope; she cut the rope of the Forsaken Bell's signal tower (5-3)." | CANON |
+| Palette | "ink blue, charcoal, beeswax amber. Silhouette: low crouch, blades reversed." | CANON |
+
+### 4.13 Tilda Fen (`narrative/06_Characters/Playable/tilda_fen.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "24 · Tide healer · 4★ (First Oath choice) · marsh village healer turned Undercity field surgeon." | CANON |
+| Look & props | "tan skin, freckles, short dark curly hair tied back with a sea-green kerchief; hooded oilcloth cape over rolled sleeves; herb pouches; reed staff hung with sea-glass vials." | CANON |
+| Weapon | "Salt-Road Remedies: her reed staff carries sea-glass vials from the salt road where she learned." | CANON |
+| Palette | "sea green, sand, driftwood grey. Silhouette: sleeves rolled, always mid-task." | CANON |
+
+### 4.14 Rikka Ember (`narrative/06_Characters/Playable/rikka_ember.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "18 · Ember bruiser DPS · 4★ · festival spear-guard of a kiln company." | CANON |
+| Look & props | "bright red hair in two thick braids, soot on her cheeks, wide grin; closed red lamellar festival armor with gold cord; spear with a small bell tassel." | CANON |
+| Weapon | "Procession's First Spark: spear with a bell tassel; first lit at her first procession." | CANON |
+| Palette | "ember red, brick, festival gold (not Kera's orange-brown). Silhouette: forward lunge, braids flying." | CANON |
+
+### 4.15 Odelia Pike (`narrative/06_Characters/Playable/odelia_pike.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "22 · Tide debuff archer · 4★ · harbor watcher." | CANON |
+| Look & props | "sun-browned skin, dark brown hair cut short and salt-stiff, a red knitted harbor cap; grey-blue wool jacket with rope toggles, net-knotted arrow fletching, waterproof bow case." | CANON |
+| Weapon | "Breakwater's Eye: longbow with net-knotted arrows from her harbor." | CANON |
+| Palette | "harbor grey-blue, rope tan, one red cap. Silhouette: crouched, reading the ground." | CANON |
+
+### 4.16 Pippa Bell (`narrative/06_Characters/Playable/pippa_bell.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "20 · Gale buffer bard · 4★ · wandering singer who carries names to refuges." | CANON |
+| Look & props | "rose-pink curls under a crooked feathered cap; patchwork road jacket sewn from old concert posters; small lute-sling; the trembling bell charm at her wrist." | CANON |
+| Weapon | "A Song Kept in Brass: lute-sling with the charm tied to its neck." | CANON |
+| Palette | "rose, cream, mustard. Silhouette: mid-strum, one foot on a chair." | CANON |
+
+### 4.17 Nara Vell (`narrative/06_Characters/Playable/nara_vell.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "27 · Stone tank support · 5★ limited (Oath Banner 3) · bridge gatekeeper; family crests on her knee guard." | CANON |
+| Look & props | "petite but heavily armored; deep brown skin, cropped black hair with shaved sides; stone-grey plate with Vell family crests on the knee guards; compact kite shield and a glaive (the Gatewarden's Promise pair; the GDD's 'round tower shield' is superseded by the banner and weapon lore); opaque, practical shoulder line" | CANON |
+| Weapon | "Gatewarden's Promise: glaive and compact kite shield of the Vell wardens." | CANON |
+| Palette | "stone grey, slate, moss-copper. Silhouette: shield planted, body behind it." | CANON |
+
+### 4.18 Vespera Wisp (`narrative/06_Characters/Playable/vespera_wisp.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "23 · Veil mage DPS · 5★ limited (Oath Banner 5) · wandering glass mage." | CANON |
+| Look & props | "long midnight-blue hair with one frost-white streak; tired pale-blue eyes; high-collared layered robe with glass beads sewn along the hems; closed gloves; glass lantern and focus ring; pale spirit-flame motifs (not horror)." | CANON |
+| Weapon | "Mirror of the Last Hour: glass lantern and focus ring from the conservatory." | CANON |
+| Palette | "midnight blue, glass teal, candle gold. Silhouette: very still, lantern held out." | CANON |
+
+### 4.19 Hana Birch (`narrative/06_Characters/Playable/hana_birch.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "18 · Stone counter DPS · 3★ standard · forest trap warden." | CANON |
+| Look & props | "petite; honey-brown short hair under a birch-bark-white bandana; quilted rust-brown clothes, a shield plate strapped above the knee, rope coils, a small bear trap and a short hatchet." | CANON |
+| Weapon | "Stillbark Snare: hatchet and small trap from her forest post." | CANON |
+| Palette | "rust, birch white, moss. Silhouette: crouched beside a snare, very still." | CANON |
+
+### 4.20 Thistle Roe (`narrative/06_Characters/Playable/thistle_roe.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "21 · Gale healer support · 4★ · monastery bell gardener of Saint Luthos." | CANON |
+| Look & props | "chestnut hair in two low buns under a wide straw hat; thick wool gardening gloves; earth-stained apron over a sage dress; seed tins on a belt; thorn crook." | CANON |
+| Weapon | "Garden Before Winter: thorn crook cut from the monastery bell garden." | CANON |
+| Palette | "sage, straw, earth brown. Silhouette: hat brim down, crook in both hands." | CANON |
+
+### 4.21 Iona Mist (`narrative/06_Characters/Playable/iona_mist.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "24 · Tide healer · 4★ · river lantern keeper." | CANON |
+| Look & props | "olive skin, long straight black hair with a river-blue sheen; deep navy oilskin raincoat, hood down; glass river lantern; staff veined with blue mist." | CANON |
+| Weapon | "Safe Harbor Lantern: tidal censer and glass lantern." | CANON |
+| Palette | "deep navy, lantern amber, fog grey. Silhouette: lantern raised, head tilted, listening." | CANON |
+
+### 4.22 Marek Vane (`narrative/06_Characters/Playable/marek_vane.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "30 · Gale control buffer · 4★ · road herald, former border guard." | CANON |
+| Look & props | "tall; long dark-brown hair tied back, short beard, calm grey eyes; long road cloak, closed dark leather coat, a viola across his back, spear-horn with its pennant removed." | CANON |
+| Weapon | "March Without a Banner: spear-horn; he removed its herald pennant after Crownfall." | CANON |
+| Palette | "road brown, faded blue, brass. Silhouette: walking, not standing; instrument and spear both visible." | CANON |
+
+### 4.23 Garrick Cinder (`narrative/06_Characters/Playable/garrick_cinder.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "33 · male · Ember siege-breaker DPS · 5★ limited (Oath Banner 6) · former Royal Pyre-Lancer captain and siege engineer, now Oakhaven and eastern hills night-watch commander." | CANON |
+| Look & props | "tall, broad-shouldered veteran build; cropped dark-walnut brown hair with a warm bronze-russet streak at the temple, rugged square jaw with a neatly trimmed dark beard and mustache, an old burn scar tracing his left jawline, fierce amber-gold eyes; heavy riveted blackened-steel and brass-rimmed brigandine coat over an ember-crimson quilted gambeson, asymmetrical furnace-pauldron on the left shoulder, broken brass siege-plumb hanging at his hip, fireproof leather gauntlets, soot-weathered greaves (no cloak, keeping his silhouette distinct from Mahmut)." | CANON |
+| Weapon | "The Late Relief: heavy iron-and-brass siege partisan (`pyre_halberd`) with an internal flint-and-oil channel along the shaft that ignites on impact, paired with a broken brass siege-plumb at his belt." | CANON |
+| Palette | "burnished brass, charred iron-black, deep ember-crimson. Silhouette: wide planted vanguard stance, long ignited pyre-halberd angled across the frame." | CANON |
+
+### 4.24 Corbin Locke (`narrative/06_Characters/Playable/corbin_locke.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "29 · male · Tide harpoon vanguard · 5★ limited (Oath Banner 7) · former Chief Sluice-Warden of Glassford's lower cisterns, now protector of the Undercity clinic." | CANON |
+| Look & props | "tall, broad-shouldered swimmer and dockworker build; wavy raven-black hair swept back and damp at the nape, piercing sea-teal eyes, light olive skin with a small healed hook-nick on the bridge of his nose and three-day jaw shadow; rolled-cuff storm-blue oilskin longcoat worn open over a salt-weathered corded brigandine vest, coiled anchor chain across the torso, heavy iron sluice-wheel buckler on the left forearm, brass-barbed river harpoon, high waterproof river-waders with brass buckles." | CANON |
+| Weapon | "Low-Water Key: heavy brass-barbed river harpoon tethered by wet anchor-chain to a notched iron sluice-wheel buckler strapped to his left forearm." | CANON |
+| Palette | "storm-slate blue, oxidized verdigris teal, tarnished brass. Silhouette: sluice-wheel buckler raised forward, chained harpoon poised to haul." | CANON |
+
+### 4.25 Cassian Thorne (`narrative/06_Characters/Playable/cassian_thorne.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "27 · male · Dawn reliquary templar · 4★ · former Bell-Tower Warden of the Cathedral of Saint Luthos, sworn escort to Sister Aveline and Mirel Quill." | CANON |
+| Look & props | "tall, lean-muscular templar build with upright posture; deep auburn-chestnut hair swept back from a high brow, warm hazel-gold eyes, clean-shaven angular jaw with a thin stone-chip scar on the chin; sleeveless dove-grey and ivory Saint Luthos tabard buckled over blackened chainmail and articulated brass-trimmed shoulder and gauntlet plate, the heavy iron bell-clapper suspension ring chained at his hip, squared-tip reliquary greatsword resting against his shoulder." | CANON |
+| Weapon | "Tongue of the Ropeless Bell: squared-tip reliquary greatsword (`reliquary_greatsword`) forged around the iron suspension bar of the removed Saint Luthos bell clapper, etched with witness names along the fuller." | CANON |
+| Palette | "dove grey, tarnished liturgical gold, blackened iron, warm auburn accent. Silhouette: upright templar stance, squared reliquary greatsword planted or shouldered." | CANON |
+
+### 4.26 Dorian Kesk (`narrative/06_Characters/Playable/dorian_kesk.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "26 · male · Veil cipher-debuffer DPS · 4★ · former novice seal-cutter of the Royal Inquisition, now an Undercity pass-forger and cipher broker allied with Clem Marr and Sable Wren." | CANON |
+| Look & props | "slender, agile duelist build; tousled charcoal-black hair with dark-plum undertones falling loosely past one brow, sharp grey-violet eyes, clean-shaven narrow jaw, a small mole beneath the left eye, wry half-smirk; tailored asymmetrical smoked-plum and charcoal longcoat with an upturned collar and wax-stained cuffs over a buttoned waistcoat, a leather bandolier of gray and crimson sealing-wax sticks and brass matrix stamps, black leather duelist gloves, smoked-glass rapier and heated brass seal-iron (no hood or mask, keeping him distinct from Fadyme, Sable and Yseldra)." | CANON |
+| Weapon | "Counterfeit Verdict: smoked-glass and blackened-steel dueling rapier paired with a heated brass wax-cauterizer and seal-iron in his off-hand (`rapier_seal_iron`)." | CANON |
+| Palette | "smoked plum-charcoal, antique pewter, sealing-wax crimson accent. Silhouette: side-angled duelist stance, rapier point low, brass seal-iron glowing faintly in the off-hand." | CANON |
+
+### 4.27 Rowan Reed (`narrative/06_Characters/Playable/rowan_reed.md`)
+| Aspect | Verbatim | Status |
+|---|---|---|
+| Identity | "19 · male · Dawn shrine support · 3★ standard · apprentice wayshrine keeper of the Whispering Ash Forest and the Saint Luthos pilgrim road." | CANON |
+| Look & props | "medium height, lean youthful road-walker build; tousled warm sandy-hazel brown hair, earnest green-brown eyes, light freckles across the bridge of his nose; weatherproofed ochre-gold and slate-ivory wayshrine novice coat with a buttoned rain-capelet over a quilted linen tunic, leather tool-belt holding woodcarving chisels, a wooden name-tally board and dry tallow candle tins, sturdy mud-gaiter boots; hooked iron wayshrine pole suspending a glowing caged brass brazier." | CANON |
+| Weapon | "Wayshrine Brazier & Chisel: hooked iron wayshrine staff suspending a caged brass wind-brazier of blessed beeswax flame, paired with a woodcarver's mallet and name-chisel at his belt (`shrine_brazier`)." | CANON |
+| Palette | "warm beeswax gold, weathered oak brown, shrine ivory. Silhouette: brazier pole held high to light the path, chisel pouch at hip, stepping forward into rain." | CANON |
+
+### 4.28 Antagonists & Part I Bosses (`narrative/06_Characters/Antagonists_NPCs/*.md`, `narrative/07_Enemies_Bosses/VILLAIN_BIBLE_PART1.md`, `bestiary.md`)
+| Entity | Verbatim Canon & Approved Design Anchor | Status |
+|---|---|---|
+| `boss_ash_maw` (The Ash-Maw) | "A wolf carcass fused with a shard of the Whispering Bell. Not a wolf: what the bell left wearing one." Great low four-legged wolf carcass; deep chest, soot-black fur plates, ash-white cracks and amber throat; asymmetric broken lower jaw fused with Whispering Bell shard (`jaw_bell`). | CANON + LOCKED |
+| `boss_bell_widow` / `lady_yseldra_vale` (Lady Yseldra Vale) | "Lady Yseldra Vale, 34, former Royal Inquisitor. Not playable." "tall, straight-backed; opaque mourning veil over a separate bone-white half-mask (Inquisitor's mask, cracked across one eye); black-plum split surcoat over fitted mail; leather gloves with seven small bell-clapper rings. Seven gray wax seals, each stamped with the seven-notched Inquisition mark and cut through the center. Cracked brass handbell, clapper tied off with red thread. Palette: black plum, ash ivory, cold brass. Never a skull motif." | CANON + LOCKED |
+| `boss_captain_rusk` / `rusk` (Captain Rusk) | "A mercenary captain carrying an order sealed by someone the Crown buried years ago." Living mercenary captain with long asymmetric cloak, slender long dueling blade and separate `signal_banner`; charcoal leather, old copper, matte oxblood, hard silver. | CANON + LOCKED |
+| `boss_red_vial_matron` / `red_vial_matron` (The Red Vial Matron) | "Head of the Red Vial ledger wing. She believes the heir's blood is the last ingredient." Adult living ledger-wing leader upright in broad work apron and charcoal coat, wine red, dirty teal glass and matte copper; ledger and two separate low flask racks (`flask_rack_left`, `flask_rack_right`). | CANON + LOCKED |
+| `boss_marshal_oren` / `marshal_oren` (Marshal Oren) | "Mahmut's former commander. He signed the order; he did not know the rite would hollow her out." Living mature former commander with heavy heater shield and long command sword; matte slate steel, oxblood cloak, worn ivory and limited old gold; inverted old Crown crest, separate `signal_standard`. | CANON + LOCKED |
+| `boss_ashen_lord_wraith` / `ashen_lord_wraith` (The Ashen Lord's Wraith) | "The Ashen Lord, who once hid the bell-keeper's daughter from the Crown. He kept her face and lost her name." "Noble of about sixty, dressed as in his own portrait; every portrait in the gallery wears his face over a cut nameplate; ash-grey, tarnished gold, cold glass teal. The mirror frame (`mirror_frame`) holds him. No skull, no gore." | CANON + LOCKED |
+| `boss_eclipse_construct` / `eclipse_construct` (Eclipse Construct) | "The hinge of the First Eclipse Altar, built around the Eclipse Bell. It is the instrument, not the author." Great upright altar hinge mechanism around Eclipse Bell: charcoal stone, old bronze, ash ivory and small cold violet core; broken crown ring, two arms/two feet, external chain joints (`chain_joint_left`, `chain_joint_right`), separate `ankle_anchor` and three separate `altar_pylon` targets. | CANON + LOCKED |
+| `lord_cael_veyr` (Lord Cael Veyr) | "Lord Cael Veyr, the Clockless Chancellor. 41 at Crownfall; current age uncertain. Not playable." "slender adult man, dark hair, grey eyes; severe high-collared black court coat over antique-gold scale panels; one empty signet socket on the right hand; gloves with no insignia; a small watch on a signet chain with an empty dial and no hands. Face partly caught in fractured mirror reflections, never a mask. Palette: ink black, aged gold, cold white." | CANON + LOCKED |
+
+### 4.29 Remaining Part I Recurring Enemies (`narrative/07_Enemies_Bosses/bestiary.md`, `design_cards.json`)
+| Enemy ID | Kind & Chapter | Verbatim Canon Lore & Approved Silhouette Anchor |
+|---|---|---|
+| `ash_wolf` | Ashbound beast (Ch.1) | "Wolves that ate from bell-ash in the Whispering Forest. They hunt whoever walks apart from the pack." Low agile ash-coated smoke-grey wolf; small amber chest cracks. |
+| `choir_knight` | Hollow oath-armor (Ch.2) | "Oath-armor of the Saint Luthos choir guard. It sings without breath and strikes back when a brother is struck." Tall organ-pipe helmet, dirty-ivory oath armor, oxidized brass and dim dawn gold, straight sword. |
+| `hollow_cleric` | Hollow (Ch.2) | "A grave scribe that still keeps its ledger. It mends its own and curses whoever looks weakest." Bent long ash-ivory robe, dark ink and matte purple-grey; open ledger as large horizontal anchor. |
+| `inkbound_dead` | Inkbound (Ch.2, Ch.6) | "A corpse wrapped in erased records. The ink it bleeds marks the living for the dead." Asymmetric parchment strips hanging from one arm; dirty parchment, matte ink black and cool grey. |
+| `corrupted_mercenary` | Living — Red Vial (Ch.3) | "Hired blades of the Red Vial ledger wing, fed on red glass that makes them strong and careless." Broad-shouldered living mercenary; heavy single axe, mismatched rusty armor and dark leather, red-glass dose pocket. |
+| `orchard_ghoul` | Hollow (Ch.3) | "The Oakhaven dead, bloated from the red harvest. The more it feeds, the harder it becomes to cut." Heavy hunched dead orchard worker; pale ash skin, harvest oxblood and earth brown; torn work apron. |
+| `red_vial_scout` | Living — Red Vial (Ch.3) | "A Guild courier with a poison dart and a route-marking shot. It reports to whoever pays in seals." Lean living Guild courier angled forward; short charcoal cape, small dart crossbow, route cylinder, red vials. |
+| `chain_cultist` | Living — First Eclipse (Ch.4) | "Chain-bearers of the First Eclipse. They pray to an eclipse that never moves and share one another's wounds." Closed hood and knotted chest; spread chains form broad triangle, charcoal cloth and lead-grey with restrained violet. |
+| `glass_viper` | Bred creature (Ch.4) | "A glass-scaled serpent bred in the Red Vial cisterns. Fast, fragile, and never sold to anyone who asked what it was for." Slender S-curved serpent; fragile glass scales, translucent blue-grey, cold tidal light and slight red sediment. |
+| `red_vial_alchemist` | Living — Red Vial (Ch.4) | "A ledger-wing bomber. Break the flask rack and the formula breaks with it." Wide tool apron and left/right flask-rack silhouettes, throwing hand readable; charcoal leather, dirty teal glass and amber. |
+| `bridge_revenant` | Hollow (Ch.5) | "A drowned sentry of the old span. It still hooks anyone who stands at the front, as if the gate had never fallen." Hunched in wet lead armor and muddy ash cloth; rusted narrow helmet and one long hooked chain. |
+| `corrupted_crown_guard` | Living — Crown Remnant (Ch.5) | "Crown Guard soldiers still following Crown-era orders. The shield comes up before the signal strike, as it was drilled." Disciplined former Crown Guard; compact rectangle silhouette, large full shield and short spear; slate steel, matte oxblood, damaged crest. |
+| `lost_vow_knight` | Hollow (Ch.5) | "A dead knight of a broken order. It punishes every shield it sees, because its own failed." Torn oath cloak; two-handed broad sword and broken former shield fragment at belt; ash steel, faded ivory. |
+| `estate_wraith` | Wraith (Ch.6) | "A noble shade of the Ashen estate. Having lost its name, it borrows the strongest protection it can see." Sliding thin noble shade with fading skirt and small broken oval portrait frame; ash-grey noble cloth, dirty gold, cool glass teal. |
+| `noble_retainer` | Wraith household (Ch.6) | "The ghost of a household attendant. It still steps in front of the most wounded master." Dead household attendant bowing low with arms outspread and broad serving cloth; matte ivory and charcoal coat with cold teal. |
+| `crownless_knight` | Living — Crown Remnant (Ch.7) | "A knight who stripped his own crest, not out of defiance but despair. It hates shields and ignores fear." Living upright duelist, scraped empty crest area, slim two-handed sword and no shield; charcoal slate and bare scraped metal. |
+| `eclipse_sentinel` | Living — First Eclipse (Ch.7) | "Warders of the First Eclipse who feed the altar's barrier through its pylons." Upright First Eclipse warder with broad shoulder mantle; charcoal stone-like cloth, dirty brass, veil violet, pylon-shaped staff. |
+| `royal_hollow` | Hollow (Ch.7) | "A palace guard still standing at a post that no longer exists. It blocks one blow each round, as it always did." Very broad rigid shield, tall empty helmet, ash steel, faded ivory tabard and darkened gold. |
+
 ## 5. Canon-violation checklist (run on every generated image; any "no" fails it)
 **A. Global** 1 adult-coded (Mahmut 28, Fadyme 22; reunion plate 26/20) · 2 zero text/letters/digits/logos/watermarks/UI/rating badges · 3 dark-dominant, no pure black/white, no neon, crimson only per §1.3 · 4 painterly anime (R1/R2) or bold-contour glyph (R3), never photoreal/3D/clip-art · 5 no other named or identifiable character, no legible invented name, no faction emblem unless the scene allows · 6 no gore, no sexualised framing · 7 nothing from the legacy crimson/burgundy Fadyme atlas, never two Fadyme costumes in one image · 8 no cross/dagger-cross pins or holy motifs.
 **B. Fadyme** 1 hair pale ash-blonde (not silver, white or yellow) and **no bone-white lock** · 2 violet eyes · 3 deep plum hood up, broken crown fragment at the front edge above the brow · 4 black high-collar dress, silver-lilac embroidery (lilac, not gold) · 5 high white scarf, clean (no blood) · 6 silver chain bell with silver THORN clapper; tiny bell hairpin by the face is partly hidden; the three props are distinct · 7 no weapon, no black-gold hand lines, normal skin tone · 8 same adult face as the approved anchor.

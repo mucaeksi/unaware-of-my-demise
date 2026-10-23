@@ -6,12 +6,15 @@ This directory is the canonical creative staging area owned by the **Art Directo
 
 | Folder | Purpose |
 |---|---|
-| `characters/` | Per-character briefs, prompts, candidate turnarounds, expressions, chibi sheets and provenance (`<id>/production_v001/`) |
-| `locations/` | Location briefs, atmospheric background plates and lighting passes per canonical location ID |
+| `banners/` | Summon & LiveOps banner key art masters (`banner_standard_hall_of_armaments`, 5 Oath character banners, 5 weapon banners) |
+| `cg/` | Full-bleed 16:9 narrative event CGs (`roadside_rest`, `shelter_evening`, prologue and chapter stills) |
+| `characters/` | Per-character briefs, prompts, candidate turnarounds, expressions, chibi sheets and provenance (`<id>/production_v001/`, `design_v001/`) |
 | `enemies/` | Part I enemy concept boards (`enemies/design_v001/`), design cards (`design_cards.json`) and boss/objective handoffs |
-| `icons/` | Chroma-keyed `#00FF00` -> RGBA 256×256 icon sheets (`icons/production_v001/`, 96 icons across 6 sheets + 16 core UI icons) |
-| `ui_screens/` | Gothic UI kit 9-slice frames, 4-state buttons, summon banner key art (`ui_screens/production_v001/banners/`) and store/brand masters (`ui_screens/production_v001/store_brand/`) |
 | `handoff/` | Art-to-runtime specifications, source/hash metadata and QC records |
+| `icons/` | Chroma-keyed `#00FF00` -> RGBA 256×256 icon sheets (`icons/production_v001/`, 96 icons across 6 sheets + 16 core UI icons) |
+| `locations/` | Location briefs, atmospheric background plates and lighting passes per canonical location ID |
+| `ui_animations/` | Control Center Animation Studio GIF previews (`ui_animations/gifs/`) and interactive stage specs |
+| `ui_screens/` | Gothic UI kit 9-slice frames, 4-state buttons, summon banner staging and store/brand masters |
 
 ## Canonical inputs & identity locks
 
@@ -24,6 +27,6 @@ This directory is the canonical creative staging area owned by the **Art Directo
 Runtime assets do **not** live in legacy `game/assets/` paths:
 - **Approved art store:** `content/approved_art/art/*.webp` + `content/approved_art/entries/*.json` (ingested, keyed, sliced, packed, and QC-gated by `npx tsx tools/ingest_art.ts` and approved with `--by argon:art-director`).
 - **Embedded First-AAB base bundle (`rel_0001`):** `content/base/` built deterministically by `npm run build:content` (`tools/build_content.ts`) and drift-checked by `npm run check:content`.
-- **Full Part I campaign patch (`rel_0002`):** `content/campaign/` built deterministically by `npm run build:campaign` (`tools/build_campaign.ts`).
+- **Full Part I campaign patch (`rel_0003_part1_campaign`):** `content/patches/rel_0003_part1_campaign/` built deterministically by `npm run build:campaign` (`tools/build_campaign.ts`).
 - **Control Center review studio:** `apps/admin/src/pages/Animations.tsx` + `apps/admin/public/dev/animations/`.
 - **Language:** Player-facing UI, subtitles, docs and metadata are **English**; spoken voiceover is reviewed **Japanese**.

@@ -1,7 +1,7 @@
 {
   "schema": "uomd.media-queue.proposal.v1",
   "date": "2026-10-23",
-  "status": "AUDITED_SECTION_4_2_COMPLETE",
+  "status": "AUDITED_SECTION_4_3_COMPLETE",
   "player_text_language": "en",
   "spoken_language": "ja-JP",
   "source_hashes": {
@@ -35,7 +35,16 @@
     "narrative/06_Characters/Playable/sister_aveline.md": "8a7ffad91d85c487488eb2ee4980107231977951cf0acf50d20c758ac34ceb5e",
     "narrative/06_Characters/Playable/thistle_roe.md": "0a27220b868dee231aa82cf7079afcfd34a9c9ef8dfe49f53be9aa13d018fb5f",
     "narrative/06_Characters/Playable/tilda_fen.md": "29048ba7310ab36fbbdc9fb89e03867b9e213a326915a6a6a92f42af26fe9149",
-    "narrative/06_Characters/Playable/vespera_wisp.md": "73de740ec2ef6d7f3e202e09f902ebb4d8270dc162c8fe738b2c1458a217339a"
+    "narrative/06_Characters/Playable/vespera_wisp.md": "73de740ec2ef6d7f3e202e09f902ebb4d8270dc162c8fe738b2c1458a217339a",
+    "narrative/06_Characters/Playable/garrick_cinder.md": "c15dab9df67107a380b3c9d7b518257e1ec5f4aca8dd3aa5ee7398f7587a6a02",
+    "narrative/06_Characters/Playable/corbin_locke.md": "0e513b940fb7b166ebac8d0a66256a192c26783745ab6a84811559da686cf143",
+    "narrative/06_Characters/Playable/cassian_thorne.md": "4a0cc82685a93786437d63dd4c03d0812a870796c7f29700e13bd3f07e3e0f93",
+    "narrative/06_Characters/Playable/dorian_kesk.md": "6b72d42c4dc9bbf6712d332228a7d185bdd8ca6709547bf42fa13455b5e43c33",
+    "narrative/06_Characters/Playable/rowan_reed.md": "6c18e41f646322873ebed33ce42f04423ffe8bf55eb37a3977e95eea98b29dad",
+    "narrative/06_Characters/Antagonists_NPCs/cael.md": "affed817d5d7a0918c17ae3f5df49f58728b4a679c62dd1d7c5a16916e13c107",
+    "narrative/06_Characters/Antagonists_NPCs/ashen_lord.md": "a4d2bdc26f57767da326c9e13bd771a66926ada98fb8b0334d59e5396761ad53",
+    "docs/media/ART_BIBLE.md": "c00b404bd6c3c510fd930f7efc17a45989d84ed2ebe3e2d5cb93d3dd7fe59e05",
+    "content/specs/character_locks/CHARACTER_LOCKS.md": "79ea408180d1d23af7ea00f92290b1c7e5626904fc0f5e2bfee61b7d6b5d0f07"
   },
   "entries": [
     {
@@ -148,8 +157,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -187,8 +195,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -226,8 +233,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -265,8 +271,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -304,8 +309,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -343,8 +347,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -382,8 +385,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -421,8 +423,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -460,8 +461,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -499,8 +499,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -538,8 +537,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -577,8 +575,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -616,8 +613,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -655,8 +651,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -694,8 +689,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -733,8 +727,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -772,8 +765,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -811,8 +803,7 @@
           "asset_ids": [],
           "dimensions": null,
           "alpha_fringe_pixels": 0,
-          "status": "not_required_for_combat_enemy",
-          "note": "Facial expression regions vary cleanly across emotions; full-pose silhouette variation is optional post-P0."
+          "status": "not_required_for_combat_enemy"
         }
       }
     },
@@ -1679,10 +1670,238 @@
           "status": "not_required_for_combat_enemy"
         }
       }
+    },
+    {
+      "id": "garrick_cinder",
+      "name": "Garrick Cinder",
+      "kind": "character",
+      "priority": "P2",
+      "age": 33,
+      "acquisition": "limited_banner",
+      "source": "narrative/06_Characters/Playable/garrick_cinder.md",
+      "identity": "Tall broad-shouldered veteran; cropped dark-walnut brown hair with bronze-russet temple streak, trimmed dark beard, left-jaw burn scar, amber-gold eyes; blackened-steel and brass-rimmed brigandine over ember-crimson gambeson, asymmetrical furnace-pauldron, broken brass siege-plumb at hip, ignited pyre-halberd; no cloak.",
+      "voice_direction": {
+        "name": "Garrick",
+        "sentence": "Low, gravelly, measured",
+        "humor": "Dry veteran warmth",
+        "stress": "Siege-command cadence",
+        "silence": "Counting minutes",
+        "never_says": "\"We have time to spare.\""
+      },
+      "prompts": {
+        "portrait_neutral": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Garrick Cinder, canon age 33. Tall broad-shouldered veteran; cropped dark-walnut brown hair with bronze-russet temple streak, trimmed dark beard, left-jaw burn scar, amber-gold eyes; blackened-steel and brass-rimmed brigandine over ember-crimson gambeson, asymmetrical furnace-pauldron, broken brass siege-plumb at hip, ignited pyre-halberd; no cloak. Bust portrait, neutral resting expression; fixed front three-quarter camera and crop, simple charcoal background, clean face and prop read.",
+        "portrait_intent": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Garrick Cinder, canon age 33. Tall broad-shouldered veteran; cropped dark-walnut brown hair with bronze-russet temple streak, trimmed dark beard, left-jaw burn scar, amber-gold eyes; blackened-steel and brass-rimmed brigandine over ember-crimson gambeson, asymmetrical furnace-pauldron, broken brass siege-plumb at hip, ignited pyre-halberd; no cloak. Same portrait identity, crop and lighting; alert combat-intent expression appropriate to the canonical role, no added anatomy or abilities.",
+        "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Garrick Cinder, canon age 33. Tall broad-shouldered veteran; cropped dark-walnut brown hair with bronze-russet temple streak, trimmed dark beard, left-jaw burn scar, amber-gold eyes; blackened-steel and brass-rimmed brigandine over ember-crimson gambeson, asymmetrical furnace-pauldron, broken brass siege-plumb at hip, ignited pyre-halberd; no cloak. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
+        "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Garrick Cinder, canon age 33. Tall broad-shouldered veteran; cropped dark-walnut brown hair with bronze-russet temple streak, trimmed dark beard, left-jaw burn scar, amber-gold eyes; blackened-steel and brass-rimmed brigandine over ember-crimson gambeson, asymmetrical furnace-pauldron, broken brass siege-plumb at hip, ignited pyre-halberd; no cloak. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
+        "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Garrick Cinder, canon age 33. Tall broad-shouldered veteran; cropped dark-walnut brown hair with bronze-russet temple streak, trimmed dark beard, left-jaw burn scar, amber-gold eyes; blackened-steel and brass-rimmed brigandine over ember-crimson gambeson, asymmetrical furnace-pauldron, broken brass siege-plumb at hip, ignited pyre-halberd; no cloak. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
+      }
+    },
+    {
+      "id": "corbin_locke",
+      "name": "Corbin Locke",
+      "kind": "character",
+      "priority": "P2",
+      "age": 29,
+      "acquisition": "limited_banner",
+      "source": "narrative/06_Characters/Playable/corbin_locke.md",
+      "identity": "Tall dockworker build; wavy damp raven-black hair, piercing sea-teal eyes, nose-bridge hook nick, three-day stubble; open storm-blue oilskin longcoat over corded brigandine vest, coiled anchor chain across torso, iron sluice-wheel buckler on left forearm, brass-barbed river harpoon.",
+      "voice_direction": {
+        "name": "Corbin",
+        "sentence": "Unhurried bass-baritone",
+        "humor": "Dry dockworker wit",
+        "stress": "Quiet, steady",
+        "silence": "Listening to pipes",
+        "never_says": "\"The water took them.\""
+      },
+      "prompts": {
+        "portrait_neutral": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corbin Locke, canon age 29. Tall dockworker build; wavy damp raven-black hair, piercing sea-teal eyes, nose-bridge hook nick, three-day stubble; open storm-blue oilskin longcoat over corded brigandine vest, coiled anchor chain across torso, iron sluice-wheel buckler on left forearm, brass-barbed river harpoon. Bust portrait, neutral resting expression; fixed front three-quarter camera and crop, simple charcoal background, clean face and prop read.",
+        "portrait_intent": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corbin Locke, canon age 29. Tall dockworker build; wavy damp raven-black hair, piercing sea-teal eyes, nose-bridge hook nick, three-day stubble; open storm-blue oilskin longcoat over corded brigandine vest, coiled anchor chain across torso, iron sluice-wheel buckler on left forearm, brass-barbed river harpoon. Same portrait identity, crop and lighting; alert combat-intent expression appropriate to the canonical role, no added anatomy or abilities.",
+        "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corbin Locke, canon age 29. Tall dockworker build; wavy damp raven-black hair, piercing sea-teal eyes, nose-bridge hook nick, three-day stubble; open storm-blue oilskin longcoat over corded brigandine vest, coiled anchor chain across torso, iron sluice-wheel buckler on left forearm, brass-barbed river harpoon. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
+        "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corbin Locke, canon age 29. Tall dockworker build; wavy damp raven-black hair, piercing sea-teal eyes, nose-bridge hook nick, three-day stubble; open storm-blue oilskin longcoat over corded brigandine vest, coiled anchor chain across torso, iron sluice-wheel buckler on left forearm, brass-barbed river harpoon. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
+        "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Corbin Locke, canon age 29. Tall dockworker build; wavy damp raven-black hair, piercing sea-teal eyes, nose-bridge hook nick, three-day stubble; open storm-blue oilskin longcoat over corded brigandine vest, coiled anchor chain across torso, iron sluice-wheel buckler on left forearm, brass-barbed river harpoon. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
+      }
+    },
+    {
+      "id": "cassian_thorne",
+      "name": "Cassian Thorne",
+      "kind": "character",
+      "priority": "P2",
+      "age": 27,
+      "acquisition": "gacha",
+      "source": "narrative/06_Characters/Playable/cassian_thorne.md",
+      "identity": "Tall lean-muscular templar; swept-back deep auburn-chestnut hair, hazel-gold eyes, clean-shaven jaw with chin stone-chip scar; sleeveless dove-grey and ivory Saint Luthos tabard over blackened chainmail and brass-trimmed plate, iron bell-clapper suspension ring chained at hip, squared-tip reliquary greatsword.",
+      "voice_direction": {
+        "name": "Cassian",
+        "sentence": "Measured, formal",
+        "humor": "Self-deprecating irony",
+        "stress": "Oath-steady",
+        "silence": "Penance",
+        "never_says": "\"The bell knows best.\""
+      },
+      "prompts": {
+        "portrait_neutral": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Cassian Thorne, canon age 27. Tall lean-muscular templar; swept-back deep auburn-chestnut hair, hazel-gold eyes, clean-shaven jaw with chin stone-chip scar; sleeveless dove-grey and ivory Saint Luthos tabard over blackened chainmail and brass-trimmed plate, iron bell-clapper suspension ring chained at hip, squared-tip reliquary greatsword. Bust portrait, neutral resting expression; fixed front three-quarter camera and crop, simple charcoal background, clean face and prop read.",
+        "portrait_intent": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Cassian Thorne, canon age 27. Tall lean-muscular templar; swept-back deep auburn-chestnut hair, hazel-gold eyes, clean-shaven jaw with chin stone-chip scar; sleeveless dove-grey and ivory Saint Luthos tabard over blackened chainmail and brass-trimmed plate, iron bell-clapper suspension ring chained at hip, squared-tip reliquary greatsword. Same portrait identity, crop and lighting; alert combat-intent expression appropriate to the canonical role, no added anatomy or abilities.",
+        "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Cassian Thorne, canon age 27. Tall lean-muscular templar; swept-back deep auburn-chestnut hair, hazel-gold eyes, clean-shaven jaw with chin stone-chip scar; sleeveless dove-grey and ivory Saint Luthos tabard over blackened chainmail and brass-trimmed plate, iron bell-clapper suspension ring chained at hip, squared-tip reliquary greatsword. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
+        "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Cassian Thorne, canon age 27. Tall lean-muscular templar; swept-back deep auburn-chestnut hair, hazel-gold eyes, clean-shaven jaw with chin stone-chip scar; sleeveless dove-grey and ivory Saint Luthos tabard over blackened chainmail and brass-trimmed plate, iron bell-clapper suspension ring chained at hip, squared-tip reliquary greatsword. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
+        "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Cassian Thorne, canon age 27. Tall lean-muscular templar; swept-back deep auburn-chestnut hair, hazel-gold eyes, clean-shaven jaw with chin stone-chip scar; sleeveless dove-grey and ivory Saint Luthos tabard over blackened chainmail and brass-trimmed plate, iron bell-clapper suspension ring chained at hip, squared-tip reliquary greatsword. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
+      }
+    },
+    {
+      "id": "dorian_kesk",
+      "name": "Dorian Kesk",
+      "kind": "character",
+      "priority": "P2",
+      "age": 26,
+      "acquisition": "gacha",
+      "source": "narrative/06_Characters/Playable/dorian_kesk.md",
+      "identity": "Slender agile duelist; tousled charcoal-black hair with dark-plum undertones, sharp grey-violet eyes, mole under left eye; asymmetrical smoked-plum and charcoal longcoat with wax-stained cuffs, leather bandolier of gray and crimson sealing-wax sticks and brass matrix stamps, smoked-glass rapier and heated brass seal-iron.",
+      "voice_direction": {
+        "name": "Dorian",
+        "sentence": "Smooth, quick-witted",
+        "humor": "Chancery irony",
+        "stress": "Cold precision",
+        "silence": "Calculating exits",
+        "never_says": "\"The seal is authentic.\""
+      },
+      "prompts": {
+        "portrait_neutral": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Dorian Kesk, canon age 26. Slender agile duelist; tousled charcoal-black hair with dark-plum undertones, sharp grey-violet eyes, mole under left eye; asymmetrical smoked-plum and charcoal longcoat with wax-stained cuffs, leather bandolier of gray and crimson sealing-wax sticks and brass matrix stamps, smoked-glass rapier and heated brass seal-iron. Bust portrait, neutral resting expression; fixed front three-quarter camera and crop, simple charcoal background, clean face and prop read.",
+        "portrait_intent": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Dorian Kesk, canon age 26. Slender agile duelist; tousled charcoal-black hair with dark-plum undertones, sharp grey-violet eyes, mole under left eye; asymmetrical smoked-plum and charcoal longcoat with wax-stained cuffs, leather bandolier of gray and crimson sealing-wax sticks and brass matrix stamps, smoked-glass rapier and heated brass seal-iron. Same portrait identity, crop and lighting; alert combat-intent expression appropriate to the canonical role, no added anatomy or abilities.",
+        "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Dorian Kesk, canon age 26. Slender agile duelist; tousled charcoal-black hair with dark-plum undertones, sharp grey-violet eyes, mole under left eye; asymmetrical smoked-plum and charcoal longcoat with wax-stained cuffs, leather bandolier of gray and crimson sealing-wax sticks and brass matrix stamps, smoked-glass rapier and heated brass seal-iron. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
+        "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Dorian Kesk, canon age 26. Slender agile duelist; tousled charcoal-black hair with dark-plum undertones, sharp grey-violet eyes, mole under left eye; asymmetrical smoked-plum and charcoal longcoat with wax-stained cuffs, leather bandolier of gray and crimson sealing-wax sticks and brass matrix stamps, smoked-glass rapier and heated brass seal-iron. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
+        "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Dorian Kesk, canon age 26. Slender agile duelist; tousled charcoal-black hair with dark-plum undertones, sharp grey-violet eyes, mole under left eye; asymmetrical smoked-plum and charcoal longcoat with wax-stained cuffs, leather bandolier of gray and crimson sealing-wax sticks and brass matrix stamps, smoked-glass rapier and heated brass seal-iron. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
+      }
+    },
+    {
+      "id": "rowan_reed",
+      "name": "Rowan Reed",
+      "kind": "character",
+      "priority": "P2",
+      "age": 19,
+      "acquisition": "standard_banner_pool",
+      "source": "narrative/06_Characters/Playable/rowan_reed.md",
+      "identity": "Lean youthful road-walker; tousled sandy-hazel brown hair, earnest green-brown eyes, nose-bridge freckles; ochre-gold and slate-ivory wayshrine novice coat with buttoned rain-capelet, leather tool-belt with woodcarving chisels and tally board, hooked iron wayshrine pole suspending a caged brass wind-brazier.",
+      "voice_direction": {
+        "name": "Rowan",
+        "sentence": "Earnest, polite",
+        "humor": "Countryside warmth",
+        "stress": "Steady resolve",
+        "silence": "Carving letters",
+        "never_says": "\"The road is closed.\""
+      },
+      "prompts": {
+        "portrait_neutral": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rowan Reed, canon age 19. Lean youthful road-walker; tousled sandy-hazel brown hair, earnest green-brown eyes, nose-bridge freckles; ochre-gold and slate-ivory wayshrine novice coat with buttoned rain-capelet, leather tool-belt with woodcarving chisels and tally board, hooked iron wayshrine pole suspending a caged brass wind-brazier. Bust portrait, neutral resting expression; fixed front three-quarter camera and crop, simple charcoal background, clean face and prop read.",
+        "portrait_intent": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rowan Reed, canon age 19. Lean youthful road-walker; tousled sandy-hazel brown hair, earnest green-brown eyes, nose-bridge freckles; ochre-gold and slate-ivory wayshrine novice coat with buttoned rain-capelet, leather tool-belt with woodcarving chisels and tally board, hooked iron wayshrine pole suspending a caged brass wind-brazier. Same portrait identity, crop and lighting; alert combat-intent expression appropriate to the canonical role, no added anatomy or abilities.",
+        "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rowan Reed, canon age 19. Lean youthful road-walker; tousled sandy-hazel brown hair, earnest green-brown eyes, nose-bridge freckles; ochre-gold and slate-ivory wayshrine novice coat with buttoned rain-capelet, leather tool-belt with woodcarving chisels and tally board, hooked iron wayshrine pole suspending a caged brass wind-brazier. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
+        "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rowan Reed, canon age 19. Lean youthful road-walker; tousled sandy-hazel brown hair, earnest green-brown eyes, nose-bridge freckles; ochre-gold and slate-ivory wayshrine novice coat with buttoned rain-capelet, leather tool-belt with woodcarving chisels and tally board, hooked iron wayshrine pole suspending a caged brass wind-brazier. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
+        "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Rowan Reed, canon age 19. Lean youthful road-walker; tousled sandy-hazel brown hair, earnest green-brown eyes, nose-bridge freckles; ochre-gold and slate-ivory wayshrine novice coat with buttoned rain-capelet, leather tool-belt with woodcarving chisels and tally board, hooked iron wayshrine pole suspending a caged brass wind-brazier. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
+      }
+    },
+    {
+      "id": "lord_cael_veyr",
+      "name": "Lord Cael Veyr",
+      "kind": "antagonist",
+      "priority": "P3",
+      "age": 41,
+      "acquisition": "non_playable_reveal_antagonist",
+      "source": "narrative/06_Characters/Antagonists_NPCs/cael.md",
+      "identity": "Slender adult man, dark hair, grey eyes; severe high-collared black court coat over antique-gold scale panels; one empty signet socket on right hand; gloves with no insignia; small unwound watch on a signet chain with empty dial and no hands. Palette: ink black, aged gold, cold white.",
+      "voice_direction": {
+        "name": "Cael",
+        "sentence": "Quiet courtly baritone",
+        "humor": "None (gentle irony)",
+        "stress": "Deliberate pause before offer",
+        "silence": "Accounting",
+        "never_says": "Villainous threats or gloating"
+      },
+      "prompts": {
+        "portrait_neutral": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lord Cael Veyr, canon age 41. Slender adult man, dark hair, grey eyes; severe high-collared black court coat over antique-gold scale panels; one empty signet socket on right hand; gloves with no insignia; small unwound watch on a signet chain with empty dial and no hands. Palette: ink black, aged gold, cold white. Bust portrait, neutral resting expression; fixed front three-quarter camera and crop, simple charcoal background, clean face and prop read.",
+        "portrait_intent": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lord Cael Veyr, canon age 41. Slender adult man, dark hair, grey eyes; severe high-collared black court coat over antique-gold scale panels; one empty signet socket on right hand; gloves with no insignia; small unwound watch on a signet chain with empty dial and no hands. Palette: ink black, aged gold, cold white. Same portrait identity, crop and lighting; alert combat-intent expression appropriate to the canonical role, no added anatomy or abilities.",
+        "portrait_vulnerable": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lord Cael Veyr, canon age 41. Slender adult man, dark hair, grey eyes; severe high-collared black court coat over antique-gold scale panels; one empty signet socket on right hand; gloves with no insignia; small unwound watch on a signet chain with empty dial and no hands. Palette: ink black, aged gold, cold white. Same portrait identity, crop and lighting; restrained recovery/strain expression appropriate to the canonical role, no injury gore or story-state mutation.",
+        "chibi_sheet": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lord Cael Veyr, canon age 41. Slender adult man, dark hair, grey eyes; severe high-collared black court coat over antique-gold scale panels; one empty signet socket on right hand; gloves with no insignia; small unwound watch on a signet chain with empty dial and no hands. Palette: ink black, aged gold, cold white. One design review turnaround sheet: front, left side, back and three-quarter views, identical adult identity and equipment at compact chibi proportions; unobstructed complete silhouette, neutral plain background, no labels. This is a reference sheet, not an animation atlas or rig.",
+        "key_art": "Original Gothic anime/light-novel illustration; detailed faces/hair, matte cloth, weathered leather/metal, warm rim light and cool ambient light, charcoal/smoke/brown/ivory with restrained crimson eclipse accents. Preserve entity-specific palette and identity. No copied franchise designs, UI, text, logos, rating badges or mock store metrics. Subject: Lord Cael Veyr, canon age 41. Slender adult man, dark hair, grey eyes; severe high-collared black court coat over antique-gold scale panels; one empty signet socket on right hand; gloves with no insignia; small unwound watch on a signet chain with empty dial and no hands. Palette: ink black, aged gold, cold white. One full-body entity key-art illustration, character/equipment intact, original Gothic stone/ash atmospheric setting, complete silhouette and focal prop, no additional named people or plot reveals."
+      },
+      "art_audit": {
+        "audited_at": "2026-10-23",
+        "auditor": "argon:art-director",
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": {
+          "count": 0,
+          "asset_ids": [],
+          "dimensions": null,
+          "alpha_fringe_pixels": 0,
+          "status": "not_required_for_combat_enemy"
+        }
+      }
     }
   ],
   "art_direction_audit": {
-    "section": "4.1",
+    "section": "4.1-4.3",
     "audited_at": "2026-10-23T11:25:00+03:00",
     "auditor": "argon:art-director",
     "summary": {
@@ -1696,13 +1915,7 @@
       "icons_keep": 96,
       "banners_keep": 10,
       "store_brand_masters_keep": 17,
-      "queued_for_4_3_regenerate_or_new": [
-        "unit_cael",
-        "portrait_cael_neutral",
-        "portrait_cael_confident",
-        "portrait_cael_irritated",
-        "portrait_cael_unmasked"
-      ]
+      "queued_for_4_3_regenerate_or_new": []
     },
     "fixes_applied_in_4_1": [
       {
@@ -1718,55 +1931,6 @@
     ],
     "additional_audited_entities": [
       {
-        "id": "velka",
-        "kind": "character",
-        "decision": "keep",
-        "unit_sheet": "unit_velka",
-        "portraits": 4
-      },
-      {
-        "id": "veska",
-        "kind": "character",
-        "decision": "keep",
-        "unit_sheet": "unit_veska",
-        "portraits": 4
-      },
-      {
-        "id": "sister_maris",
-        "kind": "character",
-        "decision": "keep",
-        "unit_sheet": "unit_sister_maris",
-        "portraits": 4
-      },
-      {
-        "id": "maren",
-        "kind": "character",
-        "decision": "keep",
-        "unit_sheet": "unit_maren",
-        "portraits": 4
-      },
-      {
-        "id": "brother_calder",
-        "kind": "character",
-        "decision": "keep",
-        "unit_sheet": "unit_brother_calder",
-        "portraits": 4
-      },
-      {
-        "id": "prior_voss",
-        "kind": "character",
-        "decision": "keep",
-        "unit_sheet": "unit_prior_voss",
-        "portraits": 4
-      },
-      {
-        "id": "yseldra",
-        "kind": "npc_boss",
-        "decision": "keep",
-        "unit_sheet": "unit_boss_bell_widow",
-        "portraits": 4
-      },
-      {
         "id": "atlas_objective",
         "kind": "boss_objectives",
         "decision": "fixed",
@@ -1774,10 +1938,12 @@
         "units_covered": 13
       },
       {
-        "id": "cael",
+        "id": "lord_cael_veyr",
         "kind": "antagonist",
-        "decision": "regenerate",
-        "note": "Queued for §4.3: identity lock proposal + 6x4 unit sheet + 4 story portraits."
+        "decision": "keep",
+        "unit_sheet": null,
+        "portraits": 4,
+        "note": "Story-only reveal antagonist (4 approved VN portraits in content/approved_art/)."
       }
     ],
     "scene_metrics_phone_landscape": {
