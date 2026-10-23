@@ -1,9 +1,18 @@
 {
   "schema": "uomd.media-queue.proposal.v1",
   "date": "2026-10-23",
-  "status": "AUDITED_SECTION_4_3_COMPLETE",
+  "status": "AUDITED_SECTION_4_1_TO_4_7_COMPLETE",
   "player_text_language": "en",
   "spoken_language": "ja-JP",
+  "section_4_deliverables": {
+    "approved_art_entries": 258,
+    "banners_ingested_and_wired": 16,
+    "vfx_presets": 115,
+    "vfx_skill_bindings": 133,
+    "sfx_cues_in_presentation_sounds": 16,
+    "seeded_r2_assets": 415,
+    "media_budget_spent_usd": 0
+  },
   "source_hashes": {
     "README.md": "87e45e826013d00af4618404a13449d4472c5e9314b33319a321a1f2dd172ddc",
     "content/budget/media_budget.json": "e74997d6242b90416b1683598ac3e711d21b958afb89ff27413696667799d236",
