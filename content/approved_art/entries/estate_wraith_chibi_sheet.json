@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "estate_wraith_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_estate_wraith": {
         "image": "art/atlas_estate_wraith.webp",
-        "width": 2025,
-        "height": 799,
+        "width": 1874,
+        "height": 987,
         "frames": {
-          "idle": [
-            4,
-            4,
-            176,
-            266
-          ],
-          "idle_2": [
-            184,
-            4,
-            176,
-            266
-          ],
-          "idle_3": [
-            364,
-            4,
-            176,
-            266
-          ],
-          "victory": [
-            544,
-            4,
-            176,
-            264
-          ],
-          "active": [
-            724,
-            4,
-            321,
-            260
-          ],
-          "active_2": [
-            1049,
-            4,
-            321,
-            260
-          ],
-          "active_3": [
-            1374,
-            4,
-            321,
-            260
-          ],
           "ultimate": [
-            1699,
             4,
-            322,
-            260
+            4,
+            404,
+            335
           ],
           "ultimate_2": [
+            412,
             4,
-            274,
-            322,
-            260
+            404,
+            335
           ],
           "ultimate_3": [
-            330,
-            274,
-            322,
-            260
+            820,
+            4,
+            404,
+            335
           ],
-          "basic": [
-            656,
-            274,
-            321,
-            259
+          "victory": [
+            1228,
+            4,
+            235,
+            335
           ],
-          "basic_2": [
-            981,
-            274,
-            321,
-            259
+          "active": [
+            1467,
+            4,
+            403,
+            328
           ],
-          "basic_3": [
-            1306,
-            274,
-            321,
-            259
+          "active_2": [
+            4,
+            343,
+            403,
+            328
           ],
-          "hit": [
-            1631,
-            274,
-            224,
-            259
+          "active_3": [
+            411,
+            343,
+            403,
+            328
+          ],
+          "idle": [
+            818,
+            343,
+            212,
+            316
+          ],
+          "idle_2": [
+            1034,
+            343,
+            212,
+            316
+          ],
+          "idle_3": [
+            1250,
+            343,
+            212,
+            316
           ],
           "walk": [
+            1466,
+            343,
+            385,
+            310
+          ],
+          "basic": [
             4,
-            538,
-            318,
-            257
+            675,
+            397,
+            308
+          ],
+          "basic_2": [
+            405,
+            675,
+            397,
+            308
+          ],
+          "basic_3": [
+            806,
+            675,
+            397,
+            308
           ],
           "defeat": [
-            326,
-            538,
-            270,
-            256
+            1207,
+            675,
+            316,
+            291
+          ],
+          "hit": [
+            1527,
+            675,
+            316,
+            291
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.485,
+            "pivot_x": 0.468,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.571
+            "pivot_x": 0.592,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.574,
+            "pivot_x": 0.553,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.574,
+            "pivot_x": 0.598,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.576,
+            "pivot_x": 0.611,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.505
+            "pivot_x": 0.447,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.51
+            "pivot_x": 0.447,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.484
+            "pivot_x": 0.447,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "7cb7ff76450d72992775529bb6cec50d9426816d5b893ffd101d325501d7414f",
+    "sha256": "6fee7e4a8f4f61ae4c750fdd7d16a3ef3fbc314ad10acb50cacec54179069b52",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/estate_wraith_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "bee6370a3062ab1f765d46fbe0506b6e7ec669c29626a861e702edeebcea9a53",
+    "provenance_sha256": "775bf9cc7c79490b38b744b9965402c37ad263be11debaeb46ca5f52ccba7407",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "c0a018963c0df44699163de5c9532b6492aff884ee172174115add05d1638e5f",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/estate_wraith_chibi_sheet.ingest.json",
-    "spec_sha256": "082cc7c336cd43493436b784b272d843c28f298014907c066411c3b64fe75df3",
+    "spec_sha256": "c14bdc5c4a146260aaa6f8ca0315f47365586469655f39bb66bf20cec8e24da6",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "d27333ccef87dcb5dad78e3e6f41a2190bedef45cee26132f05a5bbd28e99e23"
+    "fingerprint": "c31e806539ec75bd2119a10010efd3a557dd760af17604b87f24e9e2c4fe932b"
   },
   "outputs": [
     {
       "path": "art/atlas_estate_wraith.webp",
-      "sha256": "7a7ccf277b68802af9532370c076cbb93c5fe2eaacc71d25de77cd4d3d4af6a2",
-      "pixels_sha256": "37d260835677e086fe0b341a3c8b65df598e6f5426402620b0149912aad2d084",
-      "bytes": 289488,
-      "width": 2025,
-      "height": 799
+      "sha256": "4aeca7a9e9fdb6ba47f61cb8a32828ca293af0c523bba1b6ee23c295ab9cfbc8",
+      "pixels_sha256": "801681feec5bd4bf57e3f2b39bb14bf3fef90e16f5a314fecf8f704df48ab521",
+      "bytes": 346778,
+      "width": 1874,
+      "height": 987
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=17"
+          "detail": "removed=18"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "2025x799"
+          "detail": "1874x987"
         },
         "A19": {
           "status": "pass",
-          "detail": "289488 bytes <= 665600"
+          "detail": "346778 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0041%"
+          "detail": "spill=0.0007%"
         }
       },
       "warnings": [
-        "A12: removed 17 isolated specks"
+        "A12: removed 18 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:30:07.090Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_estate_wraith.webp",
+          "sha256": "7a7ccf277b68802af9532370c076cbb93c5fe2eaacc71d25de77cd4d3d4af6a2",
+          "pixels_sha256": "37d260835677e086fe0b341a3c8b65df598e6f5426402620b0149912aad2d084",
+          "bytes": 289488,
+          "width": 2025,
+          "height": 799
+        }
+      ],
+      "source_sha256": "7cb7ff76450d72992775529bb6cec50d9426816d5b893ffd101d325501d7414f",
+      "fingerprint": "d27333ccef87dcb5dad78e3e6f41a2190bedef45cee26132f05a5bbd28e99e23"
+    }
+  ]
 }

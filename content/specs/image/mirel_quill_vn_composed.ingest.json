@@ -40,15 +40,14 @@
     "character": "mirel_quill",
     "image": "composed",
     "emotion_tags": [
+      "approving",
       "calm",
       "composed",
-      "decisive",
       "dry",
+      "hollow",
       "neutral",
-      "observant",
       "resolved",
-      "stricken",
-      "uneasy"
+      "steady"
     ]
   },
   "qc": {

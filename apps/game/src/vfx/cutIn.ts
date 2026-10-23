@@ -91,7 +91,7 @@ export function playCutIn(layer: PIXI.Container, anim: Animator, o: CutInOptions
       fontWeight: '700',
       fill: '#fff6e0',
       stroke: { color: '#07040c', width: 6, join: 'round' },
-      dropShadow: { color: pal.hex, blur: 10, distance: 0, alpha: 0.85 }
+      dropShadow: { color: pal.hex, blur: 10, distance: 0, angle: 0, alpha: 0.85 }
     }
   });
   p1Jp.anchor.set(0.5);
@@ -166,24 +166,17 @@ export function playCutIn(layer: PIXI.Container, anim: Animator, o: CutInOptions
 
   const startX = isPlayer ? -W / 2 - 340 : W / 2 + 340;
   const targetX = isPlayer ? -W / 2 + 430 : W / 2 - 430;
-  const bottomY = bandH / 2 - 2;
+  const bottomY = bandH / 2 - 10;
   const makeArt = (): PIXI.Sprite => {
     const s = new PIXI.Sprite(o.art);
     s.anchor.set(0.5, 1);
     s.position.set(startX, bottomY);
     return s;
   };
-  const scale = (o.isPortrait ? 490 : 370) / Math.max(1, o.art.height);
+  const scale = (o.isPortrait ? bandH - 20 : bandH - 34) / Math.max(1, o.art.height);
   const echo = makeArt();
-  echo.scale.set(scale * 1.1 * (o.flip ? -1 : 1), scale * 1.1);
-  const fill = new PIXI.ColorMatrixFilter();
-  fill.matrix = [
-    0, 0, 0, 0, ((pal.primary >> 16) & 255) / 255,
-    0, 0, 0, 0, ((pal.primary >> 8) & 255) / 255,
-    0, 0, 0, 0, (pal.primary & 255) / 255,
-    0, 0, 0, 1, 0
-  ];
-  echo.filters = [fill];
+  echo.scale.set(scale * 1.03 * (o.flip ? -1 : 1), scale * 1.03);
+  echo.tint = pal.primary;
   echo.blendMode = 'add';
   echo.alpha = 0.62;
   const main = makeArt();
@@ -223,7 +216,7 @@ export function playCutIn(layer: PIXI.Container, anim: Animator, o: CutInOptions
         fontWeight: '700',
         fill: color,
         stroke: { color: '#07040c', width: stroke, join: 'round' },
-        dropShadow: { color: pal.hex, blur: 8, distance: 0, alpha: 0.7 }
+        dropShadow: { color: pal.hex, blur: 8, distance: 0, angle: 0, alpha: 0.7 }
       }
     });
     t.anchor.set(0.5);

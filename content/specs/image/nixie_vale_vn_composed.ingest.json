@@ -40,15 +40,19 @@
     "character": "nixie_vale",
     "image": "composed",
     "emotion_tags": [
+      "approving",
       "brisk",
       "calm",
       "composed",
-      "decisive",
-      "fear",
+      "earnest",
       "firm",
+      "flat",
       "genki",
+      "knowing",
       "neutral",
       "practical",
+      "quiet",
+      "resolved",
       "wary"
     ]
   },

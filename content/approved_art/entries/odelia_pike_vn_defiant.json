@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "odelia_pike_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "odelia_pike": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "e380740cc215470ac8d5f8dc72733fc2ec3c947cc6422a820b8ebbec55892a23",
+    "sha256": "e9a99a01a354fe5b2c454f786ec1c3633245a5ac5d120259013ba72f3ff270d6",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/odelia_pike_vn_defiant/run.provenance.json",
-    "provenance_sha256": "17cd302f9ea9595f3b2eacfeab86ffd246ed50163baa9d53a06be1039ca539a5",
+    "provenance_sha256": "8ce24cd733f976d3e1e1e1e75e62efc260866d8276bd764e852d4bf0e9ef109e",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "bb7ace8567b61ac276d7c6507d16f7e1323e52eecb42e2754c942874ed198068",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/odelia_pike_vn_defiant.ingest.json",
-    "spec_sha256": "7e3669b4a745a49acc0e66a89c72f148ce12760781247691c4f93ce9970df7ec",
+    "spec_sha256": "732504c9f1f0f54d5285fbbcb3a98ce196f3308c5874cc09319984e2aedddb3d",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "f52daa9f5d0aff8bbe63b4658adc9f1642d5ea89876dbe66873d8fc646b621f0"
+    "fingerprint": "56ddd88d69d6cb8a7d346f71dd87d216e8f8dd39994e031be02c99e1aeec7781"
   },
   "outputs": [
     {
       "path": "art/portrait_odelia_pike_defiant.webp",
-      "sha256": "5217d54b1070969160514a9749024c12829e69f1877791fff08d688e818550fa",
-      "pixels_sha256": "1cbcb4363ded48093005c605df2501429cbf4ea763b2a16e3ab1a20c45e1a83c",
-      "bytes": 62156,
+      "sha256": "f84481a52f1248e93cbd156dac89d1539ce23ec7a00e6fed1ba4a80c941b82fa",
+      "pixels_sha256": "89959e46abdc8ad14483106cf30437161f507ba74504a2793c838da4548738c0",
+      "bytes": 71354,
       "width": 768,
       "height": 1152
     }
@@ -67,8 +67,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=21"
         },
         "A18": {
           "status": "pass",
@@ -76,20 +76,22 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "62156 bytes <= 245760"
+          "detail": "71354 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 21 isolated specks"
+      ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -97,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_odelia_pike_defiant.webp",
+          "sha256": "5217d54b1070969160514a9749024c12829e69f1877791fff08d688e818550fa",
+          "pixels_sha256": "1cbcb4363ded48093005c605df2501429cbf4ea763b2a16e3ab1a20c45e1a83c",
+          "bytes": 62156,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "e380740cc215470ac8d5f8dc72733fc2ec3c947cc6422a820b8ebbec55892a23",
+      "fingerprint": "f52daa9f5d0aff8bbe63b4658adc9f1642d5ea89876dbe66873d8fc646b621f0"
+    }
+  ]
 }

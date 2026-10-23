@@ -9,7 +9,12 @@
         "emotions": {
           "alarm": "defiant",
           "defiant": "defiant",
+          "determined": "defiant",
           "fierce": "defiant",
+          "furious": "defiant",
+          "gruff": "defiant",
+          "horrified": "defiant",
+          "stubborn": "defiant",
           "urgent": "defiant"
         },
         "images": {
@@ -89,10 +94,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.931Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

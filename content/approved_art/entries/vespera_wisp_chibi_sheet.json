@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "vespera_wisp_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_vespera_wisp": {
         "image": "art/atlas_vespera_wisp.webp",
-        "width": 1908,
-        "height": 1048,
+        "width": 2019,
+        "height": 959,
         "frames": {
-          "idle": [
-            4,
-            4,
-            221,
-            348
-          ],
-          "idle_2": [
-            229,
-            4,
-            221,
-            348
-          ],
-          "idle_3": [
-            454,
-            4,
-            221,
-            348
-          ],
           "ultimate": [
-            679,
             4,
-            277,
-            348
+            4,
+            276,
+            346
           ],
           "ultimate_2": [
-            960,
+            284,
             4,
-            277,
-            348
+            276,
+            346
           ],
           "ultimate_3": [
-            1241,
+            564,
             4,
-            277,
-            348
+            276,
+            346
           ],
           "active": [
-            1522,
+            844,
             4,
-            276,
-            346
+            274,
+            337
           ],
           "active_2": [
+            1122,
             4,
-            356,
-            276,
-            346
+            274,
+            337
           ],
           "active_3": [
-            284,
-            356,
-            276,
-            346
-          ],
-          "basic": [
-            564,
-            356,
-            264,
-            345
-          ],
-          "basic_2": [
-            832,
-            356,
-            264,
-            345
-          ],
-          "basic_3": [
-            1100,
-            356,
-            264,
-            345
+            1400,
+            4,
+            274,
+            337
           ],
           "victory": [
-            1368,
-            356,
-            272,
-            345
+            1678,
+            4,
+            268,
+            336
           ],
           "walk": [
-            1644,
-            356,
+            4,
+            354,
+            253,
+            317
+          ],
+          "idle": [
+            261,
+            354,
+            216,
+            316
+          ],
+          "idle_2": [
+            481,
+            354,
+            216,
+            316
+          ],
+          "idle_3": [
+            701,
+            354,
+            216,
+            316
+          ],
+          "basic": [
+            921,
+            354,
+            274,
+            306
+          ],
+          "basic_2": [
+            1199,
+            354,
+            274,
+            306
+          ],
+          "basic_3": [
+            1477,
+            354,
+            274,
+            306
+          ],
+          "defeat": [
+            1755,
+            354,
             260,
-            343
+            280
           ],
           "hit": [
             4,
-            706,
-            223,
-            338
-          ],
-          "defeat": [
-            231,
-            706,
-            222,
-            335
+            675,
+            260,
+            280
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.369,
+            "pivot_x": 0.346,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.348
+            "pivot_x": 0.324,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.352,
+            "pivot_x": 0.377,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.499,
+            "pivot_x": 0.474,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.499,
+            "pivot_x": 0.481,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.526
+            "pivot_x": 0.585,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.525
+            "pivot_x": 0.585,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.5
+            "pivot_x": 0.528,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "1adf2bc21d18048b9a79ddb7cd987a979b0ea5563d35c8b5269678c9a037a77e",
+    "sha256": "fa9e35da00ad153754d2da08911810f3f6a2b2874083a53736d839e5ec3e8b77",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/vespera_wisp_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "d956e43139c3654a648b0993e61745a41e60658b8dc69037ad0ca66120df6cf2",
+    "provenance_sha256": "cc10137a832a570e0db1aff76da0e96722fc58bf190eaaf27c96012c7a3c6d60",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "be0d5058e9ffded294414ced26be3b87292376a75ac745dc2d967b2a63615034",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/vespera_wisp_chibi_sheet.ingest.json",
-    "spec_sha256": "b8d372a544e71bb041543fa76deabb372487ca8e00817d668bd0662fc511cef4",
+    "spec_sha256": "cbbfa7936a672d20f4674096dc6056cc31fde85b00fc589c58bedba22c5c84be",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "d87511ad503b82b6da36b63a1134c4920c6f3fe1890f70b7892d1da4c23888d4"
+    "fingerprint": "84eb78c1fcc21c82cc32c991ceb8eda7bc35fda2a52d09a6c07462b8c9a935d8"
   },
   "outputs": [
     {
       "path": "art/atlas_vespera_wisp.webp",
-      "sha256": "23280a217db4e64f27911ba68bc3fdd77b2c1c14ee256b7e43222964c5ccf9ce",
-      "pixels_sha256": "4218746dd4a352b67e8cb4185ebef3331df0b5da7afb7bfa8a391ca1fbde16b3",
-      "bytes": 454188,
-      "width": 1908,
-      "height": 1048
+      "sha256": "6128732c5e5a1aa16d0dbee805b0a6d8aaeb248f702606c2d05c4cc10f6eda7d",
+      "pixels_sha256": "323b61d186ef2a093ebda4caaa0259e08a2cd7c4e5bee447575adf5d33c0d4fa",
+      "bytes": 386554,
+      "width": 2019,
+      "height": 959
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=38"
+          "detail": "removed=79"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1908x1048"
+          "detail": "2019x959"
         },
         "A19": {
           "status": "pass",
-          "detail": "454188 bytes <= 665600"
+          "detail": "386554 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0006%"
+          "detail": "spill=0.0007%"
         }
       },
       "warnings": [
-        "A12: removed 38 isolated specks"
+        "A12: removed 79 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:31:52.842Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_vespera_wisp.webp",
+          "sha256": "23280a217db4e64f27911ba68bc3fdd77b2c1c14ee256b7e43222964c5ccf9ce",
+          "pixels_sha256": "4218746dd4a352b67e8cb4185ebef3331df0b5da7afb7bfa8a391ca1fbde16b3",
+          "bytes": 454188,
+          "width": 1908,
+          "height": 1048
+        }
+      ],
+      "source_sha256": "1adf2bc21d18048b9a79ddb7cd987a979b0ea5563d35c8b5269678c9a037a77e",
+      "fingerprint": "d87511ad503b82b6da36b63a1134c4920c6f3fe1890f70b7892d1da4c23888d4"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "brin_alder_vn_warm",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "brin_alder": {
@@ -20,12 +20,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "a36ac318c8e69c11c850a32203644bdcdc60a5839d1456c6d07c1a6aca95d113",
+    "sha256": "aa825de7fe6be4d3834d2814fecb3f86be0d768bb5acd120d36add27d6403fd0",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/brin_alder_vn_warm/run.provenance.json",
-    "provenance_sha256": "9bf6c5d8521b8f599d127a675e604b8cc19269c82e278e9dc4312d75d5398a3e",
+    "provenance_sha256": "bb2b03b55a1a83d8143c6343bdba7b20dc0ff5c038e3574b4eb3e2ea713948ab",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "91251ea7f4785a4feb7443b12c658ddc49b70c2cb2d0d8017618bd2be92d3a2e",
     "references": [],
@@ -33,17 +33,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/brin_alder_vn_warm.ingest.json",
-    "spec_sha256": "9fba37c77371583c3b64980143d1f6f2d5feb4feae7725e6e8633f986370774e",
+    "spec_sha256": "7690e60be5f16f4817e25666853af76e4011234730003723e918599c7137005d",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "3a261ec0df7a596bd419fcf00d4ee7533cc1708a0aa01fbfd388018b7a1eac41"
+    "fingerprint": "3d03a68d72dfab8b9c1a4011583cd3e8d3c5e24b0d68ee911ae13b12fff15650"
   },
   "outputs": [
     {
       "path": "art/portrait_brin_alder_warm.webp",
-      "sha256": "2ea35105512fc3003c06ef2f605c7ca6328b5e6ed28c597ff68dbd2d2bcd879a",
-      "pixels_sha256": "73fdb63fcbb192b6c63b2558200e46fc362f7448de95b028f04c938543697fa3",
-      "bytes": 67876,
+      "sha256": "890cf830c0e3938d7583d9563d2d1e3d183150e60d4555f995e02541717612b0",
+      "pixels_sha256": "001581fc1f0b9b2041dc18b25c309f8350c8323faacc9b7faaeb15413bb708b4",
+      "bytes": 68446,
       "width": 768,
       "height": 1152
     }
@@ -69,7 +69,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=6"
+          "detail": "removed=15"
         },
         "A18": {
           "status": "pass",
@@ -77,7 +77,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "67876 bytes <= 245760"
+          "detail": "68446 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -85,14 +85,14 @@
         }
       },
       "warnings": [
-        "A12: removed 6 isolated specks"
+        "A12: removed 15 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -100,5 +100,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_brin_alder_warm.webp",
+          "sha256": "2ea35105512fc3003c06ef2f605c7ca6328b5e6ed28c597ff68dbd2d2bcd879a",
+          "pixels_sha256": "73fdb63fcbb192b6c63b2558200e46fc362f7448de95b028f04c938543697fa3",
+          "bytes": 67876,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "a36ac318c8e69c11c850a32203644bdcdc60a5839d1456c6d07c1a6aca95d113",
+      "fingerprint": "3a261ec0df7a596bd419fcf00d4ee7533cc1708a0aa01fbfd388018b7a1eac41"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_brin_alder_warm.webp",
+          "sha256": "890cf830c0e3938d7583d9563d2d1e3d183150e60d4555f995e02541717612b0",
+          "pixels_sha256": "001581fc1f0b9b2041dc18b25c309f8350c8323faacc9b7faaeb15413bb708b4",
+          "bytes": 68446,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "aa825de7fe6be4d3834d2814fecb3f86be0d768bb5acd120d36add27d6403fd0",
+      "fingerprint": "3d03a68d72dfab8b9c1a4011583cd3e8d3c5e24b0d68ee911ae13b12fff15650"
+    }
+  ]
 }

@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "asset_id": "lady_yseldra_vale_vn_warm",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "lady_yseldra_vale": {
+        "emotions": {
+          "gentle": "warm",
+          "smile": "warm",
+          "warm": "warm"
+        },
+        "images": {
+          "warm": "art/portrait_lady_yseldra_vale_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "37d93a5a857637dfe9c670661016ea8682cc5b52bb23b7ed56781821df99ce47",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/lady_yseldra_vale_vn_warm/run.provenance.json",
+    "provenance_sha256": "81b54b65ff6bac1700df3663269621a44418304514e332a71a4e1af89cef0bb1",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "ab8f8dca926535cfd8bc6889eae2cdf658bb84b1d246af6a2cc20394f6b146c5",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/lady_yseldra_vale_vn_warm.ingest.json",
+    "spec_sha256": "8437e7f4f44b7a554c09fb579f95c071befdc683c2822a687267cb04a1a321f3",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "608d7f2d6b58b4ce8a96f264312d89b1f275d91e554470ad3848c89486a12268"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_lady_yseldra_vale_warm.webp",
+      "sha256": "eae5454e546631349d4e9088a5bf7cc107487b973577cdb13105f4c4e237f928",
+      "pixels_sha256": "3154df672d2e85e77c193448767748bde76836e7deb0ae837f3067f3d8692e2c",
+      "bytes": 30238,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=53"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "30238 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 53 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.939Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

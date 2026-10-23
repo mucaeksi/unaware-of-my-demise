@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "red_vial_scout_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_red_vial_scout": {
         "image": "art/atlas_red_vial_scout.webp",
-        "width": 1939,
-        "height": 718,
+        "width": 2030,
+        "height": 1170,
         "frames": {
+          "victory": [
+            4,
+            4,
+            260,
+            337
+          ],
           "idle": [
+            268,
             4,
-            4,
-            209,
-            266
+            254,
+            316
           ],
           "idle_2": [
-            217,
+            526,
             4,
-            209,
-            266
+            254,
+            316
           ],
           "idle_3": [
-            430,
+            784,
             4,
-            209,
-            266
-          ],
-          "victory": [
-            643,
-            4,
-            207,
-            264
-          ],
-          "hit": [
-            854,
-            4,
-            288,
-            259
+            254,
+            316
           ],
           "defeat": [
-            1146,
+            1042,
             4,
-            293,
-            256
+            363,
+            299
+          ],
+          "hit": [
+            1409,
+            4,
+            363,
+            299
           ],
           "ultimate": [
-            1443,
             4,
-            319,
-            219
+            345,
+            411,
+            282
           ],
           "ultimate_2": [
-            4,
-            274,
-            319,
-            219
+            419,
+            345,
+            411,
+            282
           ],
           "ultimate_3": [
-            327,
-            274,
-            319,
-            219
+            834,
+            345,
+            411,
+            282
           ],
           "active": [
-            650,
-            274,
-            318,
-            218
+            1249,
+            345,
+            408,
+            275
           ],
           "active_2": [
-            972,
-            274,
-            318,
-            218
+            4,
+            631,
+            408,
+            275
           ],
           "active_3": [
-            1294,
-            274,
-            318,
-            218
-          ],
-          "basic": [
-            1616,
-            274,
-            319,
-            217
-          ],
-          "basic_2": [
-            4,
-            497,
-            319,
-            217
-          ],
-          "basic_3": [
-            327,
-            497,
-            319,
-            217
+            416,
+            631,
+            408,
+            275
           ],
           "walk": [
-            650,
-            497,
-            316,
-            216
+            828,
+            631,
+            390,
+            261
+          ],
+          "basic": [
+            1222,
+            631,
+            400,
+            256
+          ],
+          "basic_2": [
+            1626,
+            631,
+            400,
+            256
+          ],
+          "basic_3": [
+            4,
+            910,
+            400,
+            256
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.517,
+            "pivot_x": 0.507,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.699
+            "pivot_x": 0.716,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.697,
+            "pivot_x": 0.714,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.698,
+            "pivot_x": 0.714,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.697,
+            "pivot_x": 0.711,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.42
+            "pivot_x": 0.442,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.446
+            "pivot_x": 0.442,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.515
+            "pivot_x": 0.462,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "b14cb0a4f3cc1ea577a7aadb3084e3992e229ece91f64ea0bc329cde3b38a472",
+    "sha256": "33d513b3e83fd0e813d68b11b7d645ae79a7aa36c200aca592af26111a9eabf3",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/red_vial_scout_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "b2adb35a7e802fc65cc13dedfaf35a90667b280c3f0dffbc9e9a6c4a20e4e1c0",
+    "provenance_sha256": "13141f830dad679acbe542750613a6ab693687568bbec57c17a9cbd066c966eb",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "39d55614f661b34513885098ae54971dbbb7d8f9537aaeb59de536cf684d631a",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/red_vial_scout_chibi_sheet.ingest.json",
-    "spec_sha256": "5165d8d69b33679249035feb9faada0aba029477ae4b5394a2c3b4b68ad47e76",
+    "spec_sha256": "508886f1a37aa0de50a416993d2f7887d8f3f3789345de1f6ed6a772bf3e7c6a",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "93e97fdc2d6ff520bb8bceff86c49854fd20307707a664c76663a5db2fc9a66b"
+    "fingerprint": "d18a3db1ab33c63436211591b491383e51ad54fe21175253212c7875ad7a229f"
   },
   "outputs": [
     {
       "path": "art/atlas_red_vial_scout.webp",
-      "sha256": "78ac24d69f7fbeb450672eca2c1f1c4a86153824e28b64c8cb44bf3f6e8f8d3e",
-      "pixels_sha256": "70ab1b520b6dd781ad24d40f6d0d295e9f7464d008e3ee3781d7ae3d887e95a5",
-      "bytes": 218852,
-      "width": 1939,
-      "height": 718
+      "sha256": "11c78e2899fb839de051b163441b30c14507704fec22c84e21456cb184417104",
+      "pixels_sha256": "ac791c2230c1da0c4661eb84870295f0803db71bf11fc833f99afd37a960e957",
+      "bytes": 269044,
+      "width": 2030,
+      "height": 1170
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=107"
+          "detail": "removed=130"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1939x718"
+          "detail": "2030x1170"
         },
         "A19": {
           "status": "pass",
-          "detail": "218852 bytes <= 665600"
+          "detail": "269044 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0015%"
+          "detail": "spill=0.0004%"
         }
       },
       "warnings": [
-        "A12: removed 107 isolated specks"
+        "A12: removed 130 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:31:21.140Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_red_vial_scout.webp",
+          "sha256": "78ac24d69f7fbeb450672eca2c1f1c4a86153824e28b64c8cb44bf3f6e8f8d3e",
+          "pixels_sha256": "70ab1b520b6dd781ad24d40f6d0d295e9f7464d008e3ee3781d7ae3d887e95a5",
+          "bytes": 218852,
+          "width": 1939,
+          "height": 718
+        }
+      ],
+      "source_sha256": "b14cb0a4f3cc1ea577a7aadb3084e3992e229ece91f64ea0bc329cde3b38a472",
+      "fingerprint": "93e97fdc2d6ff520bb8bceff86c49854fd20307707a664c76663a5db2fc9a66b"
+    }
+  ]
 }

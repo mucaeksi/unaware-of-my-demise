@@ -19,6 +19,21 @@ import { app } from '../core/app';
 
 const MAIN_THEME_CUE = 'bgm_main_theme';
 
+function formatReleaseTitle(releaseId?: string): string {
+  if (!releaseId) return '';
+  const m = /^rel_(\d+)_(.+)$/i.exec(releaseId.trim());
+  if (!m) return releaseId;
+  const num = m[1]!;
+  const label = m[2]!
+    .split('_')
+    .map((w) => (/^part(\d+)$/i.test(w) ? `Part ${w.slice(4).toUpperCase()}` : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ')
+    .replace(/\bPart 1\b/g, 'Part I')
+    .replace(/\bPart 2\b/g, 'Part II')
+    .replace(/\bPart 3\b/g, 'Part III');
+  return `${label} (rel_${num})`;
+}
+
 /**
  * Post-tutorial patch screen: opens when the background patch is still downloading/verifying after the third tutorial.
  * Plays the Main Theme, rotates canon quotes under the progress box, and restarts the client once the patch is ready.
@@ -81,11 +96,11 @@ export class FinishScene extends PixiScene {
     this.head = this.ui.text(cx, 265, '', titleStyle(50, T.gold)).setOrigin(0.5);
     this.note = this.ui.text(cx, 340, '', { fontSize: 34, color: T.text, align: 'center', wordWrap: { width: 1200 }, lineSpacing: 8 }).setOrigin(0.5, 0);
     this.note.el.setAttribute('aria-live', 'polite');
-    this.bar = this.ui.bar(cx, 516, 1080, 28, () => C.goldHi);
-    this.figures = this.ui.text(cx, 558, '', { fontSize: 28, color: T.dim }).setOrigin(0.5, 0);
-    this.saveLine = this.ui.text(cx, 604, '', { fontSize: 24, color: T.dim }).setOrigin(0.5, 0);
+    this.bar = this.ui.bar(cx, 492, 1080, 28, () => C.goldHi);
+    this.figures = this.ui.text(cx, 536, '', { fontSize: 28, color: T.dim }).setOrigin(0.5, 0);
+    this.saveLine = this.ui.text(cx, 582, '', { fontSize: 24, color: T.dim }).setOrigin(0.5, 0);
     this.saveLine.el.setAttribute('aria-live', 'polite');
-    this.action = this.ui.button(cx, 700, { label: S.finish.restart, w: 700, h: 112, fontSize: 34, variant: 'hot', onClick: () => void this.onAction() }).setVisible(false);
+    this.action = this.ui.button(cx, 704, { label: S.finish.restart, w: 700, h: 104, fontSize: 34, variant: 'hot', onClick: () => void this.onAction() }).setVisible(false);
 
     // canon quotes under the box
     const rule = this.ui.group();
@@ -153,7 +168,8 @@ export class FinishScene extends PixiScene {
       this.note.setText(S.finish.readyBody);
       this.bar.set(1);
       this.bar.setVisible(true);
-      this.figures.setText('100 %   ·   READY');
+      const relLabel = s.outcome.status === 'staged' || s.outcome.status === 'applied' ? formatReleaseTitle(s.outcome.releaseId) : '';
+      this.figures.setText(relLabel ? `100 %   ·   READY   ·   ${relLabel}` : '100 %   ·   READY');
       if (isInteractiveBrowser() && !previewHold) {
         this.action.setVisible(true).setLabel(S.finish.restarting).setEnabled(false);
         void this.triggerAutoRestart();

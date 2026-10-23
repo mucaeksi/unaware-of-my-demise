@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "nara_vell_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "nara_vell": {
@@ -20,12 +20,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "81038d3ba6fcbbd2414295e01e5ad920a508e0efc4a19462b960d5bebc5ce49a",
+    "sha256": "8727b93b455bb9f4a468f7b6b5f387241acdc2ec657ed4a2e7f86002dd68d0ad",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/nara_vell_vn_defiant/run.provenance.json",
-    "provenance_sha256": "c8103418743c8a3fc047bfa83d52b6c0aeea0a8753ee0258eceb33a711e85ced",
+    "provenance_sha256": "76eee347f0f0f23fe298b6450f40016356bb0e5e25dd58ab6db6a6c2d39955cc",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "610431666cd0fc40540e47694c1d2b53b11a768ca970814b81b79a6845faeaa4",
     "references": [],
@@ -33,17 +33,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/nara_vell_vn_defiant.ingest.json",
-    "spec_sha256": "d8442529a92ff8ca4ba567c0c2d88a085ff892da9a63069abaef05bc79fcbc89",
+    "spec_sha256": "d94ddc2d71f3c078cf024ceef8f8f7f6dc73613dcb9bb0729290afe5317907bf",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "e7b9186e9ac98d0d8446884ce83aa88d11cec846f29622d5e8f1c15c8a99fc8e"
+    "fingerprint": "b0a0e87f089a03f194555dcb3d0143649efa33835069ff5844492b763bc144b8"
   },
   "outputs": [
     {
       "path": "art/portrait_nara_vell_defiant.webp",
-      "sha256": "f342b136f3a54e1deed09166e1abf073b7f88f7049440c50fc81c703cb4aca83",
-      "pixels_sha256": "a1fc7629d296dfc15686a3a626465ac8836ecf8139a591e0bdc184523e0677bd",
-      "bytes": 67836,
+      "sha256": "2bbba4dae106188e4bc7ca801e43b6a68ee9d9aa6c4c4f884fe692c4568bb4d8",
+      "pixels_sha256": "4040253b3b04741c9400bafd9f46d6a90585589764d9670f972b1f93596cb62d",
+      "bytes": 67630,
       "width": 768,
       "height": 1152
     }
@@ -68,8 +68,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "warn",
-          "detail": "removed=1"
+          "status": "pass",
+          "detail": "removed=0"
         },
         "A18": {
           "status": "pass",
@@ -77,22 +77,20 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "67836 bytes <= 245760"
+          "detail": "67630 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": [
-        "A12: removed 1 isolated specks"
-      ]
+      "warnings": []
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -100,5 +98,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_nara_vell_defiant.webp",
+          "sha256": "f342b136f3a54e1deed09166e1abf073b7f88f7049440c50fc81c703cb4aca83",
+          "pixels_sha256": "a1fc7629d296dfc15686a3a626465ac8836ecf8139a591e0bdc184523e0677bd",
+          "bytes": 67836,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "81038d3ba6fcbbd2414295e01e5ad920a508e0efc4a19462b960d5bebc5ce49a",
+      "fingerprint": "e7b9186e9ac98d0d8446884ce83aa88d11cec846f29622d5e8f1c15c8a99fc8e"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_nara_vell_defiant.webp",
+          "sha256": "2bbba4dae106188e4bc7ca801e43b6a68ee9d9aa6c4c4f884fe692c4568bb4d8",
+          "pixels_sha256": "4040253b3b04741c9400bafd9f46d6a90585589764d9670f972b1f93596cb62d",
+          "bytes": 67630,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "8727b93b455bb9f4a468f7b6b5f387241acdc2ec657ed4a2e7f86002dd68d0ad",
+      "fingerprint": "b0a0e87f089a03f194555dcb3d0143649efa33835069ff5844492b763bc144b8"
+    }
+  ]
 }

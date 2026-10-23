@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_undercity_antidote_archive",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "c610fd39c577",
+    "provenance": ".cache/generated/bg_undercity_antidote_archive/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 80,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "undercity_antidote_archive"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

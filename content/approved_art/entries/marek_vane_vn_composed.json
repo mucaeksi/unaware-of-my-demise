@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "marek_vane_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "marek_vane": {
@@ -27,12 +27,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "8f470f88bb3f2d62fb2b8e67f7bf94c88cb534faf6051658599360be8415657c",
+    "sha256": "25fd60d7355fead0aa1e2b49f437102351f50fea234141cccb0d266f90dc6967",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/marek_vane_vn_composed/run.provenance.json",
-    "provenance_sha256": "a031a62403b85d4cb908b86813ff1570520f45aad262d6238f82851b9e488a31",
+    "provenance_sha256": "09c2c7dfc7a88c553ff1a1e842f0c1638cbbb071443f3ce791b04a0efe252b1d",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "d06df07cb6dbbb8dcd142355acbc599fc140262e38527cfca5512465e538fdba",
     "references": [],
@@ -40,17 +40,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/marek_vane_vn_composed.ingest.json",
-    "spec_sha256": "1ecee8e5b12e58bf7b57a047fad3738549fbb97c6b7a47714f5eb163ed6c7139",
+    "spec_sha256": "8336be1c7c0f1e680cb1ad93ca4c31b39277a2f7ac701c6d53c92a1a2b80f46e",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "6f36c466ee039dfd5e3116810b368fbd69f55070b27b91df6fa884a236e8d63e"
+    "fingerprint": "80bc5657db7fa0bd28dace7f445e42fb93fe777454046280e50335c3b13d37f3"
   },
   "outputs": [
     {
       "path": "art/portrait_marek_vane_composed.webp",
-      "sha256": "6962400e8d31f45787a9a63736c0220edf7911aa7d1ab29ed18bab9c8ee34897",
-      "pixels_sha256": "e8a0671b9dab17d7fb48f9c2f1165627b199fbf6e9de10e878cbeac94e4f0bf2",
-      "bytes": 71480,
+      "sha256": "b6b54c9835efeddeb7072bee0bca006aed31b266381e10883d601a7f6bab33da",
+      "pixels_sha256": "84485593b15cbd0695588b149064864832f8c43369783288f74a46a15979a813",
+      "bytes": 70186,
       "width": 768,
       "height": 1152
     }
@@ -76,7 +76,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=10"
+          "detail": "removed=8"
         },
         "A18": {
           "status": "pass",
@@ -84,7 +84,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "71480 bytes <= 245760"
+          "detail": "70186 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -92,14 +92,14 @@
         }
       },
       "warnings": [
-        "A12: removed 10 isolated specks"
+        "A12: removed 8 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -107,5 +107,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_marek_vane_composed.webp",
+          "sha256": "6962400e8d31f45787a9a63736c0220edf7911aa7d1ab29ed18bab9c8ee34897",
+          "pixels_sha256": "e8a0671b9dab17d7fb48f9c2f1165627b199fbf6e9de10e878cbeac94e4f0bf2",
+          "bytes": 71480,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "8f470f88bb3f2d62fb2b8e67f7bf94c88cb534faf6051658599360be8415657c",
+      "fingerprint": "6f36c466ee039dfd5e3116810b368fbd69f55070b27b91df6fa884a236e8d63e"
+    }
+  ]
 }

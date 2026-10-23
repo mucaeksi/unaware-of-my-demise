@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "mirel_quill_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 2,
+  "revision": 3,
   "targets": {
     "atlases": {
       "atlas_mirel_quill": {
         "image": "art/atlas_mirel_quill.webp",
-        "width": 1943,
-        "height": 706,
+        "width": 1951,
+        "height": 680,
         "frames": {
-          "idle": [
-            4,
-            4,
-            195,
-            348
-          ],
-          "idle_2": [
-            203,
-            4,
-            195,
-            348
-          ],
-          "idle_3": [
-            402,
-            4,
-            195,
-            348
-          ],
           "ultimate": [
-            601,
             4,
-            241,
-            348
+            4,
+            246,
+            351
           ],
           "ultimate_2": [
-            846,
+            254,
             4,
-            241,
-            348
+            246,
+            351
           ],
           "ultimate_3": [
-            1091,
+            504,
             4,
-            241,
-            348
+            246,
+            351
           ],
           "active": [
-            1336,
+            754,
             4,
-            241,
-            346
+            247,
+            340
           ],
           "active_2": [
-            1581,
+            1005,
             4,
-            241,
-            346
+            247,
+            340
           ],
           "active_3": [
+            1256,
             4,
-            356,
-            241,
-            346
-          ],
-          "basic": [
-            249,
-            356,
-            265,
-            345
-          ],
-          "basic_2": [
-            518,
-            356,
-            265,
-            345
-          ],
-          "basic_3": [
-            787,
-            356,
-            265,
-            345
+            247,
+            340
           ],
           "victory": [
-            1056,
-            356,
-            192,
-            345
+            1507,
+            4,
+            189,
+            337
           ],
           "walk": [
-            1252,
-            356,
-            262,
-            343
+            1700,
+            4,
+            247,
+            318
           ],
-          "hit": [
-            1518,
-            356,
-            209,
-            338
+          "idle": [
+            4,
+            359,
+            186,
+            317
+          ],
+          "idle_2": [
+            194,
+            359,
+            186,
+            317
+          ],
+          "idle_3": [
+            384,
+            359,
+            186,
+            317
+          ],
+          "basic": [
+            574,
+            359,
+            251,
+            313
+          ],
+          "basic_2": [
+            829,
+            359,
+            251,
+            313
+          ],
+          "basic_3": [
+            1084,
+            359,
+            251,
+            313
           ],
           "defeat": [
-            1731,
-            356,
-            208,
-            335
+            1339,
+            359,
+            241,
+            283
+          ],
+          "hit": [
+            1584,
+            359,
+            241,
+            283
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.487,
+            "pivot_x": 0.448,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.487
+            "pivot_x": 0.463,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.484,
+            "pivot_x": 0.479,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.493,
+            "pivot_x": 0.468,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.495,
+            "pivot_x": 0.478,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.534
+            "pivot_x": 0.593,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.536
+            "pivot_x": 0.593,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.485
+            "pivot_x": 0.519,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "a72a819666f11d3d260af4d767e88a50f2f1a158d6318eccbfad2c320d62331a",
+    "sha256": "a451d5ae1f5cbda0fdd377e229d0698d0c3e4edb8ce0faa442749aeb01b46c62",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/mirel_quill_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "60ebea7d0c3a0c943532e0c4158df2aec52ccc8915ba3750737fbbfc5de0221f",
+    "provenance_sha256": "4d1edc979ddbee027281b58f6d57099d4741e0652d735be70e6ec742626e498e",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "89e35c832d9e9326896a5bb6707ac7310364e65af0ef9e43b9d9821e4aa30bc6",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/mirel_quill_chibi_sheet.ingest.json",
-    "spec_sha256": "16da376322ce6636259a894e17defd414be7157b1a50c83988c919ca144c15cd",
+    "spec_sha256": "6d0f25fd54481c735e2ddcf1032e6fe92acdd09e72133e8cac89975ac00a3012",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "27397e6001aae687ae87981166ce7f1f41550ec28f66f468c02a034c5c059d91"
+    "fingerprint": "05707e670fc2b46250bdae20e42fbcce21f443eda0f4de5c890b93500a75f14c"
   },
   "outputs": [
     {
       "path": "art/atlas_mirel_quill.webp",
-      "sha256": "523e119abdb7a8524c5729a924add9add2e4ac8dc0a50c762e681980bbcffc1e",
-      "pixels_sha256": "76c30470f0fa193cf5081d24364ce6a43a865ef7f681115fcdf1d895f00bca5a",
-      "bytes": 404024,
-      "width": 1943,
-      "height": 706
+      "sha256": "a3471b85ea7b4cc0b9ea358715fe883f31e7578488633b16e85ed59d6f4a254b",
+      "pixels_sha256": "ce5fec65c5384742ab379e81fd57c2282755d5a8a6f0527b2a410d09aa63265e",
+      "bytes": 350858,
+      "width": 1951,
+      "height": 680
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=60"
+          "detail": "removed=27"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.592"
         },
         "A18": {
           "status": "pass",
-          "detail": "1943x706"
+          "detail": "1951x680"
         },
         "A19": {
           "status": "pass",
-          "detail": "404024 bytes <= 665600"
+          "detail": "350858 bytes <= 665600"
         },
         "A08": {
-          "status": "warn",
-          "detail": "spill=0.0133%"
+          "status": "pass",
+          "detail": "spill=0.0045%"
         }
       },
       "warnings": [
-        "A12: removed 60 isolated specks"
+        "A12: removed 27 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:30:55.049Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -318,6 +355,21 @@
       ],
       "source_sha256": "249c71de93ec39b0181c73b34de73841965a6aa5b779f04c66ed3deb697cc3a3",
       "fingerprint": "301b0d729e07d910fc34388f6cbefe115f3af194c0da0b9762964d9f853fd7f8"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/atlas_mirel_quill.webp",
+          "sha256": "523e119abdb7a8524c5729a924add9add2e4ac8dc0a50c762e681980bbcffc1e",
+          "pixels_sha256": "76c30470f0fa193cf5081d24364ce6a43a865ef7f681115fcdf1d895f00bca5a",
+          "bytes": 404024,
+          "width": 1943,
+          "height": 706
+        }
+      ],
+      "source_sha256": "a72a819666f11d3d260af4d767e88a50f2f1a158d6318eccbfad2c320d62331a",
+      "fingerprint": "27397e6001aae687ae87981166ce7f1f41550ec28f66f468c02a034c5c059d91"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "odelia_pike_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "odelia_pike": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "e6582c999d4390e9f57edf5d4d34312985788e73a58f780d2801c044a0a2fa43",
+    "sha256": "7980b10fb92e61ccb38fe379db68f67c423d97443c5921379d95e3e717e966f6",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/odelia_pike_vn_focused/run.provenance.json",
-    "provenance_sha256": "94fb5e3bcda30b1b8b9a615c2582bc30b4ba0e93eab829f3c3e51a3112bd46ed",
+    "provenance_sha256": "a514777b1e2b2348ab0855f82a6811b60d7a62a4614a633865062eceadec4940",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "234fbaa26138225f9d32c18c95677d35a2955333cf71e1021780ed6e6c10d823",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/odelia_pike_vn_focused.ingest.json",
-    "spec_sha256": "7f06336b9f2245ffd808320832c0ddc20da4ecde0bb37c2566d8169288c19517",
+    "spec_sha256": "0c85a99293afec97dbe7b1a154d5c2892005c81e8b7a6cf40b54c5a70e62dfc6",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "9d57c5db401d3522bcc26c9d4df59f98a3d76e2e6372f724bae44b0e659c8c6f"
+    "fingerprint": "4d04fcb72b30185494e461fcf081f9e97602b6fc95cd9217b0a6b14299d69f89"
   },
   "outputs": [
     {
       "path": "art/portrait_odelia_pike_focused.webp",
-      "sha256": "ce425f4ab76e3eb5778d3582b151c528ff99a9d3c555a3964231fd45f898ffae",
-      "pixels_sha256": "173a0532c7044d232f0cd8951dce43f317fbc21d1897c1e49c5cb4b14d1708b8",
-      "bytes": 60228,
+      "sha256": "f2b6dd81f6fdf6b514f6ecc8cee81668c6bc13a049cef18d0226b6e323eaa06b",
+      "pixels_sha256": "f3178490a89ce7c522c34b4153de78b257f08da79f5439be80070b8b836af6da",
+      "bytes": 69906,
       "width": 768,
       "height": 1152
     }
@@ -67,8 +67,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=21"
         },
         "A18": {
           "status": "pass",
@@ -76,20 +76,22 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "60228 bytes <= 245760"
+          "detail": "69906 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 21 isolated specks"
+      ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -97,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_odelia_pike_focused.webp",
+          "sha256": "ce425f4ab76e3eb5778d3582b151c528ff99a9d3c555a3964231fd45f898ffae",
+          "pixels_sha256": "173a0532c7044d232f0cd8951dce43f317fbc21d1897c1e49c5cb4b14d1708b8",
+          "bytes": 60228,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "e6582c999d4390e9f57edf5d4d34312985788e73a58f780d2801c044a0a2fa43",
+      "fingerprint": "9d57c5db401d3522bcc26c9d4df59f98a3d76e2e6372f724bae44b0e659c8c6f"
+    }
+  ]
 }

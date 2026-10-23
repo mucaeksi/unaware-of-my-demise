@@ -40,9 +40,24 @@ export abstract class HubScreen<D = unknown> extends PixiScene<D> {
   /** reads the start data before the first build (Character, Gear) */
   protected init?(data: D): void;
 
+  private resolveHubBackdrop(): string {
+    const h = this.heading.toUpperCase();
+    if (h.includes('SUMMON')) return 'altar_first_eclipse';
+    if (h.includes('ARMORY') || h.includes('GEAR')) return 'oakhaven_forge';
+    if (h.includes('TRIALS') || h.includes('ARENA')) return 'bridge_forsaken';
+    if (h.includes('ARCHIVE') || h.includes('LIBRARY')) return 'undercity_archive_room';
+    if (h.includes('SHOP') || h.includes('PURCHASES')) return 'oakhaven_inn';
+    if (h.includes('DEEDS') || h.includes('ERRANDS')) return 'cathedral_saint_luthos';
+    if (h.includes('ROSTER') || h.includes('COMPANION') || h.includes('TEAM') || h.includes('INVITATIONS')) return 'shelter_courtyard_dusk';
+    return 'forest_whispering_ash';
+  }
+
   create(data?: D): void {
     this.init?.((data ?? {}) as D);
-    void backdrop(this, 'forest_whispering_ash');
+    const loc = this.resolveHubBackdrop();
+    void backdrop(this, loc).then((img) => {
+      if (!img && this.live && loc !== 'forest_whispering_ash') void backdrop(this, 'forest_whispering_ash');
+    });
     this.add(new PIXI.Graphics().rect(0, 0, REF_W, REF_H).fill({ color: 0x0a0610, alpha: 0.62 }), -10);
     this.ui = new DomStage(app().uiLayer);
     this.attachDom(this.ui.root);

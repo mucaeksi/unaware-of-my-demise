@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "tilda_fen_vn_warm",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "tilda_fen": {
@@ -22,12 +22,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "2615e29826bb1bcb6c67215204e0b14a9c6624d896a6753282b2061146e63a86",
+    "sha256": "8df55890d8ea9280ff2fc8bae8e36bb7b621bc237118171148823b7449ad5dc3",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/tilda_fen_vn_warm/run.provenance.json",
-    "provenance_sha256": "775df0a316951c3cf2bfc61d9bc4f4572344c679dea0e5fca080ca4cada0accd",
+    "provenance_sha256": "ca4d156644be23b2e39e0a687b067c6fe65e162b938390a2f6f7db394b1edd66",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "4f1131487b8c227cd1cd4e9c9f2741ba7ddd6dfce5b2c31f2374b9cbd5fc1020",
     "references": [],
@@ -35,17 +35,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/tilda_fen_vn_warm.ingest.json",
-    "spec_sha256": "e05fb57452364f4d8b7d5602b97b639b1870d18ff72d19151709f1ce74f4edc4",
+    "spec_sha256": "371d02c867281169c7422e079ba5132addd87ecf04f4060a3d89cf6e679bf0a2",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "8b60909abe1b3bedcab5019d70adfe3773ac39d485ebdcc97c3d87a73c902ef9"
+    "fingerprint": "cb72dcaa9f63f4074ed208ade9fad7b64782a3e510a552265f172deff9bfe27a"
   },
   "outputs": [
     {
       "path": "art/portrait_tilda_fen_warm.webp",
-      "sha256": "1acee3196719f40cf2df57e11c533b23c10023ea4edbcfa62f1736f202666098",
-      "pixels_sha256": "cafc9b3877d97a4cf3d0d3ff32816236efd9581f05fc3743d311c78a73cb1e74",
-      "bytes": 66210,
+      "sha256": "faa9a081d46216b431a2fea0978c4ef8667f8ac31f45dc064efe6e26092a84fc",
+      "pixels_sha256": "f14bd8566a9967f6562444e58f877e359248615ddd61ffe277e1fff3d5a0a4e5",
+      "bytes": 66252,
       "width": 768,
       "height": 1152
     }
@@ -71,7 +71,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=1"
+          "detail": "removed=4"
         },
         "A18": {
           "status": "pass",
@@ -79,7 +79,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "66210 bytes <= 245760"
+          "detail": "66252 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -87,14 +87,14 @@
         }
       },
       "warnings": [
-        "A12: removed 1 isolated specks"
+        "A12: removed 4 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -102,5 +102,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_warm.webp",
+          "sha256": "1acee3196719f40cf2df57e11c533b23c10023ea4edbcfa62f1736f202666098",
+          "pixels_sha256": "cafc9b3877d97a4cf3d0d3ff32816236efd9581f05fc3743d311c78a73cb1e74",
+          "bytes": 66210,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "2615e29826bb1bcb6c67215204e0b14a9c6624d896a6753282b2061146e63a86",
+      "fingerprint": "8b60909abe1b3bedcab5019d70adfe3773ac39d485ebdcc97c3d87a73c902ef9"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_warm.webp",
+          "sha256": "faa9a081d46216b431a2fea0978c4ef8667f8ac31f45dc064efe6e26092a84fc",
+          "pixels_sha256": "f14bd8566a9967f6562444e58f877e359248615ddd61ffe277e1fff3d5a0a4e5",
+          "bytes": 66252,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "8df55890d8ea9280ff2fc8bae8e36bb7b621bc237118171148823b7449ad5dc3",
+      "fingerprint": "cb72dcaa9f63f4074ed208ade9fad7b64782a3e510a552265f172deff9bfe27a"
+    }
+  ]
 }

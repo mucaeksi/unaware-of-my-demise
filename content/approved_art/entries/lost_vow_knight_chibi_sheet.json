@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "lost_vow_knight_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_lost_vow_knight": {
         "image": "art/atlas_lost_vow_knight.webp",
-        "width": 1927,
-        "height": 542,
+        "width": 1939,
+        "height": 954,
         "frames": {
-          "idle": [
-            4,
-            4,
-            182,
-            266
-          ],
-          "idle_2": [
-            190,
-            4,
-            182,
-            266
-          ],
-          "idle_3": [
-            376,
-            4,
-            182,
-            266
-          ],
           "ultimate": [
-            562,
             4,
-            224,
-            266
+            4,
+            278,
+            347
           ],
           "ultimate_2": [
-            790,
+            286,
             4,
-            224,
-            266
+            278,
+            347
           ],
           "ultimate_3": [
-            1018,
+            568,
             4,
-            224,
-            266
+            278,
+            347
           ],
           "active": [
-            1246,
+            850,
             4,
-            223,
-            265
+            285,
+            336
           ],
           "active_2": [
-            1473,
+            1139,
             4,
-            223,
-            265
+            285,
+            336
           ],
           "active_3": [
-            1700,
+            1428,
             4,
-            223,
-            265
-          ],
-          "basic": [
-            4,
-            274,
-            224,
-            264
-          ],
-          "basic_2": [
-            232,
-            274,
-            224,
-            264
-          ],
-          "basic_3": [
-            460,
-            274,
-            224,
-            264
+            285,
+            336
           ],
           "victory": [
-            688,
-            274,
-            181,
-            264
+            1717,
+            4,
+            218,
+            336
+          ],
+          "idle": [
+            4,
+            355,
+            217,
+            317
+          ],
+          "idle_2": [
+            225,
+            355,
+            217,
+            317
+          ],
+          "idle_3": [
+            446,
+            355,
+            217,
+            317
           ],
           "walk": [
-            873,
-            274,
-            219,
-            262
+            667,
+            355,
+            259,
+            312
           ],
-          "hit": [
-            1096,
-            274,
-            201,
-            259
+          "basic": [
+            930,
+            355,
+            272,
+            302
+          ],
+          "basic_2": [
+            1206,
+            355,
+            272,
+            302
+          ],
+          "basic_3": [
+            1482,
+            355,
+            272,
+            302
           ],
           "defeat": [
-            1301,
-            274,
-            199,
-            256
+            4,
+            676,
+            287,
+            274
+          ],
+          "hit": [
+            295,
+            676,
+            287,
+            274
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.492,
+            "pivot_x": 0.503,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.544
+            "pivot_x": 0.572,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.54,
+            "pivot_x": 0.547,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.54,
+            "pivot_x": 0.546,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.54,
+            "pivot_x": 0.561,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.494
+            "pivot_x": 0.43,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.477
+            "pivot_x": 0.43,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.492
+            "pivot_x": 0.483,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "6c1cda8a78fef01197b0c27a6929e8cf23ad805a8c4069d45d7d9f04a3f8c7da",
+    "sha256": "fd695afcbcf008f9f1f1576f6112d80cbf4f3cb0d5052fe0410b253d89173bc6",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/lost_vow_knight_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "c7ff8c0db61366ff1bc8bad3941735b6f1c4dc59253273feaf128ab4ff1a03f9",
+    "provenance_sha256": "a1f85e09010859d2321eff67e0f9c100ac48983dc063c95b10fb1026b1848e03",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "b48af94483f7689bdfc5ffb6764544bfb461e90caf003f6173dd40e3e0ddd2bc",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/lost_vow_knight_chibi_sheet.ingest.json",
-    "spec_sha256": "8166c1fdb19f374b5694ae610c3afd1dbf2b4402fdbcc8ce6b3ffc66eb37f51e",
+    "spec_sha256": "83ea8875f73b72ad1f2d22b9fe3295f365e4493868628503654e4951fd79ff8c",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "b06aab91b31569eccf1683e1c001c5cbb0946b592d6a9c6771734d3d5c2f373e"
+    "fingerprint": "2887b7bf8c54cdd83d31948c33fc40ce911fcb49b849c0886edb245dc20d5610"
   },
   "outputs": [
     {
       "path": "art/atlas_lost_vow_knight.webp",
-      "sha256": "52923da15a54ce18ea33b7a33c53fa073ef6e1d1116666a4d2ea61c4b135aa85",
-      "pixels_sha256": "7593d1607c4c4f12748338779717a25cb8c47b0b8d5f50156ae548a06358dea5",
-      "bytes": 267612,
-      "width": 1927,
-      "height": 542
+      "sha256": "1ed9c271b0c885ad79724f67d790b224c551a6df81db03a54ac831693ee0a07f",
+      "pixels_sha256": "02bc8ec8a6485e425456e840827c19ee94e18aa62fafd2e24ffcbbb831869f67",
+      "bytes": 329872,
+      "width": 1939,
+      "height": 954
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=187"
+          "detail": "removed=151"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1927x542"
+          "detail": "1939x954"
         },
         "A19": {
           "status": "pass",
-          "detail": "267612 bytes <= 665600"
+          "detail": "329872 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0012%"
+          "detail": "spill=0.0014%"
         }
       },
       "warnings": [
-        "A12: removed 187 isolated specks"
+        "A12: removed 151 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:30:44.754Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_lost_vow_knight.webp",
+          "sha256": "52923da15a54ce18ea33b7a33c53fa073ef6e1d1116666a4d2ea61c4b135aa85",
+          "pixels_sha256": "7593d1607c4c4f12748338779717a25cb8c47b0b8d5f50156ae548a06358dea5",
+          "bytes": 267612,
+          "width": 1927,
+          "height": 542
+        }
+      ],
+      "source_sha256": "6c1cda8a78fef01197b0c27a6929e8cf23ad805a8c4069d45d7d9f04a3f8c7da",
+      "fingerprint": "b06aab91b31569eccf1683e1c001c5cbb0946b592d6a9c6771734d3d5c2f373e"
+    }
+  ]
 }

@@ -41,7 +41,6 @@
     "image": "composed",
     "emotion_tags": [
       "calm",
-      "careful",
       "composed",
       "distant",
       "dry",
@@ -49,8 +48,7 @@
       "low",
       "neutral",
       "quiet",
-      "tired",
-      "uneasy"
+      "tired"
     ]
   },
   "qc": {

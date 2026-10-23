@@ -916,15 +916,58 @@ export function arenaTierRewards(rating: number): { tier: string; rewards: Rewar
   };
 }
 
+interface ArenaDefenseMember {
+  characterId: string;
+  slot: number;
+  row: 'front' | 'rear';
+}
+
+async function listArenaOpponents(
+  db: D1Database,
+  playerId: string,
+  seasonId: string,
+  playerRating: number
+): Promise<readonly { opponentId: string; displayName: string; rating: number; level: number }[]> {
+  const { results } = await db
+    .prepare(
+      `SELECT p.id AS player_id,
+              p.display_name,
+              COALESCE(elo.progress, ?2) AS rating,
+              COALESCE((SELECT MAX(pc.level) FROM player_chars pc WHERE pc.player_id = p.id), 1) AS max_level
+       FROM player_tasks def
+       JOIN players p ON p.id = def.player_id
+       LEFT JOIN player_tasks elo ON elo.player_id = p.id AND elo.period_key = ?3 AND elo.task_id = 'elo'
+       WHERE def.period_key = 'arena:defense'
+         AND def.task_id = 'formation'
+         AND def.player_id != ?1
+         AND p.status = 'active'
+         AND def.claimed_at IS NOT NULL
+       ORDER BY ABS(COALESCE(elo.progress, ?2) - ?4) ASC, p.created_at ASC
+       LIMIT 2`
+    )
+    .bind(playerId, ARENA_BASE_RATING, `arena:rating:${seasonId}`, playerRating)
+    .all<{ player_id: string; display_name: string | null; rating: number; max_level: number }>();
+
+  const realOpponents = results.map((r) => ({
+    opponentId: `player:${r.player_id}`,
+    displayName: r.display_name ?? 'Wanderer',
+    rating: r.rating,
+    level: Math.min(20, Math.max(1, r.max_level))
+  }));
+  const pool = [SYNTHETIC_ARENA_OPPONENTS[0], ...realOpponents, ...SYNTHETIC_ARENA_OPPONENTS.slice(1)];
+  return pool.slice(0, 3);
+}
+
 export async function getArenaState(db: D1Database, playerId: string, nowMs = Date.now(), scope?: ReleaseScope): Promise<Record<string, unknown>> {
   const catalog = await operationCatalog(db, playerId, scope, new Date(nowMs));
   const stats = await loadProgressStats(db, playerId, nowMs, catalog);
   const season = arenaSeasonOf(nowMs);
   const win = windowOf(nowMs, 12);
-  const [defRow, matchesRow, seasonClaimRow] = await Promise.all([
+  const [defRow, matchesRow, seasonClaimRow, opponents] = await Promise.all([
     db.prepare("SELECT claimed_at FROM player_tasks WHERE player_id = ?1 AND period_key = 'arena:defense' AND task_id = 'formation'").bind(playerId).first<{ claimed_at: string | null }>(),
     db.prepare("SELECT progress FROM player_tasks WHERE player_id = ?1 AND period_key = ?2 AND task_id = 'arena:matches'").bind(playerId, win.key).first<{ progress: number }>(),
-    db.prepare('SELECT claimed FROM player_tasks WHERE player_id = ?1 AND period_key = ?2 AND task_id = ?3').bind(playerId, `arena:season:${season.seasonId}`, 'settlement').first<{ claimed: number }>()
+    db.prepare('SELECT claimed FROM player_tasks WHERE player_id = ?1 AND period_key = ?2 AND task_id = ?3').bind(playerId, `arena:season:${season.seasonId}`, 'settlement').first<{ claimed: number }>(),
+    listArenaOpponents(db, playerId, season.seasonId, stats.arenaRating)
   ]);
   const defense = defRow?.claimed_at ? (JSON.parse(defRow.claimed_at) as unknown[]) : [];
   const tier = arenaTierRewards(stats.arenaRating);
@@ -939,7 +982,7 @@ export async function getArenaState(db: D1Database, playerId: string, nowMs = Da
     dailyUsed: matchesRow?.progress ?? 0,
     dailyLimit: ARENA_DAILY_LIMIT,
     defense,
-    opponents: SYNTHETIC_ARENA_OPPONENTS
+    opponents
   };
 }
 
@@ -1054,6 +1097,94 @@ async function resolveModeBattleParty(
   }
 }
 
+function buildPlayerDefenseEncounter(
+  pack: UnitPack,
+  defenderId: string,
+  seed: number,
+  members: readonly ArenaDefenseMember[],
+  levels: ReadonlyMap<string, number>,
+  fallbackLevel: number
+): Encounter {
+  const unitIds = new Set(pack.units.map((u) => u.unit_id));
+  const valid = members.filter((m) => unitIds.has(m.characterId)).slice(0, 5);
+  if (valid.length === 0) {
+    return buildSyntheticEncounter(pack, `arena_p_${defenderId.slice(0, 8)}`, seed, fallbackLevel, 1);
+  }
+  const heroTemplates = pack.units.filter((u) => u.kind === 'character');
+  const fallbackHero = heroTemplates[0]?.unit_id ?? pack.units[0]!.unit_id;
+  const safeId = `arena_p_${defenderId.replace(/[^a-z0-9_]/gi, '_').toLowerCase()}`.slice(0, 20);
+  const usedSlots = new Set<number>();
+  const enemies = valid.map((m, idx) => {
+    let slot = m.slot >= 0 && m.slot <= 4 && !usedSlots.has(m.slot) ? m.slot : idx;
+    while (usedSlots.has(slot) && slot < 4) slot++;
+    usedSlots.add(slot);
+    return {
+      unit_id: m.characterId,
+      level: Math.min(20, Math.max(1, levels.get(m.characterId) ?? 1)),
+      slot,
+      row: m.row === 'front' ? ('front' as const) : ('rear' as const)
+    };
+  });
+  return Encounter.parse({
+    schema_version: 1,
+    encounter_id: safeId,
+    stage_id: safeId,
+    title_en: safeId,
+    location_id: 'bell_tower',
+    seed,
+    party_mode: 'owned',
+    party: [{ unit_id: fallbackHero, level: 1, slot: 0, row: 'front' }],
+    guests: [],
+    enemies,
+    provenance: { source: 'runtime_arena_defense' }
+  });
+}
+
+async function resolveArenaOpponentEncounter(
+  db: D1Database,
+  attackerId: string,
+  opponentId: string,
+  pack: UnitPack,
+  seed: number
+): Promise<{ opponentId: string; encounter: Encounter }> {
+  const synthetic = SYNTHETIC_ARENA_OPPONENTS.find((o) => o.opponentId === opponentId);
+  if (synthetic) {
+    return {
+      opponentId: synthetic.opponentId,
+      encounter: buildSyntheticEncounter(pack, `arena_${synthetic.opponentId}`, seed, synthetic.level, 1)
+    };
+  }
+  if (!opponentId.startsWith('player:')) {
+    throw new HttpError(404, 'unknown_opponent', 'no such arena opponent');
+  }
+  const defenderId = opponentId.slice('player:'.length);
+  if (!defenderId || defenderId === attackerId) {
+    throw new HttpError(404, 'unknown_opponent', 'no such arena opponent');
+  }
+  const [defRow, charRows] = await Promise.all([
+    db
+      .prepare(
+        `SELECT def.claimed_at
+         FROM player_tasks def
+         JOIN players p ON p.id = def.player_id
+         WHERE def.player_id = ?1 AND def.period_key = 'arena:defense' AND def.task_id = 'formation' AND p.status = 'active'`
+      )
+      .bind(defenderId)
+      .first<{ claimed_at: string | null }>(),
+    db.prepare('SELECT character_id, level FROM player_chars WHERE player_id = ?1').bind(defenderId).all<{ character_id: string; level: number }>()
+  ]);
+  if (!defRow?.claimed_at) {
+    throw new HttpError(404, 'unknown_opponent', 'no such arena opponent');
+  }
+  const members = JSON.parse(defRow.claimed_at) as ArenaDefenseMember[];
+  const levels = new Map(charRows.results.map((c) => [c.character_id, c.level]));
+  const maxLevel = members.reduce((m, c) => Math.max(m, levels.get(c.characterId) ?? 1), 1);
+  return {
+    opponentId: `player:${defenderId}`,
+    encounter: buildPlayerDefenseEncounter(pack, defenderId, seed, members, levels, maxLevel)
+  };
+}
+
 export async function fightArenaMatch(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CONTENT_CHANNEL'>, playerId: string, input: z.infer<typeof ArenaMatchBody>, now = new Date()): Promise<Record<string, unknown>> {
   const db = env.DB;
   const kind = `arena_match:${input.opponentId}`;
@@ -1067,12 +1198,10 @@ export async function fightArenaMatch(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CON
   if (stats.clearedBattles < 1) {
     throw new HttpError(403, 'mode_locked', 'clear at least one campaign battle stage before entering the Arena');
   }
-  const opponent = SYNTHETIC_ARENA_OPPONENTS.find((o) => o.opponentId === input.opponentId);
-  if (!opponent) throw new HttpError(404, 'unknown_opponent', 'no such arena opponent');
 
   const pack = await loadPublishedUnitPack(env, input.releaseId);
   const seed = (parseInt((await sha256Hex(`${playerId}:${input.requestId}`)).slice(0, 8), 16) >>> 0) || 1;
-  const encounter = buildSyntheticEncounter(pack, `arena_${opponent.opponentId}`, seed, opponent.level, 1);
+  const { opponentId, encounter } = await resolveArenaOpponentEncounter(db, playerId, input.opponentId, pack, seed);
   const party = await resolveModeBattleParty(db, playerId, encounter, pack, catalog);
 
   const sim = input.actions
@@ -1119,7 +1248,7 @@ export async function fightArenaMatch(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CON
     const result = {
       ...(catalog ? { catalogSha256: catalog.sha256 } : {}),
       requestId: input.requestId,
-      opponentId: opponent.opponentId,
+      opponentId,
       won,
       turns: sim.result?.turns ?? 1,
       logHash: sim.logHash,
@@ -1133,7 +1262,7 @@ export async function fightArenaMatch(env: Pick<GameEnv, 'DB' | 'CONTENT' | 'CON
 
     const grantStmts = await grantStatements(db, playerId, rewards, {
       keyPrefix: `arena:${playerId}:${input.requestId}`,
-      reason: `arena_match:${opponent.opponentId}`,
+      reason: `arena_match:${opponentId}`,
       catalog
     });
 

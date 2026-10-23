@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "dorian_kesk_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_dorian_kesk": {
         "image": "art/atlas_dorian_kesk.webp",
-        "width": 1835,
-        "height": 1053,
+        "width": 2047,
+        "height": 961,
         "frames": {
-          "idle": [
-            4,
-            4,
-            277,
-            348
-          ],
-          "idle_2": [
-            285,
-            4,
-            277,
-            348
-          ],
-          "idle_3": [
-            566,
-            4,
-            277,
-            348
-          ],
           "ultimate": [
-            847,
             4,
-            210,
+            4,
+            220,
             348
           ],
           "ultimate_2": [
-            1061,
+            228,
             4,
-            210,
+            220,
             348
           ],
           "ultimate_3": [
-            1275,
+            452,
             4,
-            210,
+            220,
             348
           ],
           "active": [
-            1489,
+            676,
             4,
-            320,
-            346
+            315,
+            338
           ],
           "active_2": [
+            995,
             4,
-            356,
-            320,
-            346
+            315,
+            338
           ],
           "active_3": [
-            328,
-            356,
-            320,
-            346
-          ],
-          "basic": [
-            652,
-            356,
-            320,
-            345
-          ],
-          "basic_2": [
-            976,
-            356,
-            320,
-            345
-          ],
-          "basic_3": [
-            1300,
-            356,
-            320,
-            345
+            1314,
+            4,
+            315,
+            338
           ],
           "victory": [
-            1624,
-            356,
-            207,
-            345
+            1633,
+            4,
+            196,
+            335
           ],
           "walk": [
             4,
-            706,
-            318,
-            343
+            356,
+            299,
+            317
           ],
-          "hit": [
-            326,
-            706,
-            224,
-            338
+          "idle": [
+            307,
+            356,
+            261,
+            316
+          ],
+          "idle_2": [
+            572,
+            356,
+            261,
+            316
+          ],
+          "idle_3": [
+            837,
+            356,
+            261,
+            316
+          ],
+          "basic": [
+            1102,
+            356,
+            311,
+            307
+          ],
+          "basic_2": [
+            1417,
+            356,
+            311,
+            307
+          ],
+          "basic_3": [
+            1732,
+            356,
+            311,
+            307
           ],
           "defeat": [
-            554,
-            706,
-            223,
-            335
+            4,
+            677,
+            246,
+            280
+          ],
+          "hit": [
+            254,
+            677,
+            246,
+            280
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.518,
+            "pivot_x": 0.494,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.408
+            "pivot_x": 0.398,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.406,
+            "pivot_x": 0.443,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.405,
+            "pivot_x": 0.401,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.432,
+            "pivot_x": 0.435,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.511
+            "pivot_x": 0.587,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.512
+            "pivot_x": 0.587,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.434
+            "pivot_x": 0.476,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "6fae24a3edc0277c3bf0c9e5b9362f3153aec487ebdb848cc3606a49ada77265",
+    "sha256": "ecdd8e8a26431b9ebe3ab2ca62d85537e3d7739d9460d6f3305f7c6da16d78ed",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/dorian_kesk_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "2c1f0ad52ef07be3f376f84b9e6d0c69adb6c3d60808f27dffb500ed65f95392",
+    "provenance_sha256": "436b45d0a3791475b1e050400b89d7a464db94ef163471d23c4db9d15a7b53b1",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "5710683bf47e6fb6013ba77fa4547a0c1f675d02238d28949e57c29caf1ead3c",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/dorian_kesk_chibi_sheet.ingest.json",
-    "spec_sha256": "e18e1fac4c51a1290c3bc72624c340263eea13d9b68e1b8bcb283ec12535c665",
+    "spec_sha256": "a11f0a41d9bda3cffb6f5a9643cc8c4902138de7cbbbd00c768474eddea94a2c",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "7d6173a3a455e0ddcc9248c6bc64b3847702de248710665e9f0c4ecf73c3b283"
+    "fingerprint": "22a77b6b478aebbc8e101fd2ac25ce95d239cecb1ccaa8a771e5a91ea0db92d8"
   },
   "outputs": [
     {
       "path": "art/atlas_dorian_kesk.webp",
-      "sha256": "cd850023d4d687addebbad2428b0e935125ff53ef3d1d74e94b22f29a93cef7e",
-      "pixels_sha256": "34b1d08ddc4d9a7ef7f49a406a1b763ced7b918b015097d90e65bba6a0ee7435",
-      "bytes": 346978,
-      "width": 1835,
-      "height": 1053
+      "sha256": "9c969e137965e877c83248503c999011473abc2e9660e2ede761a592e59e9c5f",
+      "pixels_sha256": "ee3b74816b519e801b062272d41c526987937d6febab57446085c496a8190d5f",
+      "bytes": 310562,
+      "width": 2047,
+      "height": 961
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=24"
+          "detail": "removed=118"
         },
         "A14": {
           "status": "pass",
@@ -272,30 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.595"
         },
         "A18": {
           "status": "pass",
-          "detail": "1835x1053"
+          "detail": "2047x961"
         },
         "A19": {
           "status": "pass",
-          "detail": "346978 bytes <= 665600"
+          "detail": "310562 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0000%"
+          "detail": "spill=0.0003%"
         }
       },
       "warnings": [
-        "A12: removed 24 isolated specks"
+        "A12: removed 118 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:30:00.018Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_dorian_kesk.webp",
+          "sha256": "cd850023d4d687addebbad2428b0e935125ff53ef3d1d74e94b22f29a93cef7e",
+          "pixels_sha256": "34b1d08ddc4d9a7ef7f49a406a1b763ced7b918b015097d90e65bba6a0ee7435",
+          "bytes": 346978,
+          "width": 1835,
+          "height": 1053
+        }
+      ],
+      "source_sha256": "6fae24a3edc0277c3bf0c9e5b9362f3153aec487ebdb848cc3606a49ada77265",
+      "fingerprint": "7d6173a3a455e0ddcc9248c6bc64b3847702de248710665e9f0c4ecf73c3b283"
+    }
+  ]
 }

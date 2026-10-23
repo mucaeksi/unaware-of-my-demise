@@ -40,14 +40,14 @@
     "character": "kera_voss",
     "image": "defiant",
     "emotion_tags": [
+      "defensive",
       "defiant",
-      "furious",
+      "determined",
       "fierce",
-      "bitter",
+      "furious",
+      "gruff",
       "indignant",
-      "stunned",
-      "ashamed",
-      "breaking"
+      "urgent"
     ]
   },
   "qc": {

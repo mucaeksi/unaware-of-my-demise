@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "garrick_cinder_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "garrick_cinder": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "a7740dc212eb949421c9a9b218b9ffd1d13519be0fceec0fdb3ccf329b7987b5",
+    "sha256": "91bf6ebfec1c026e4d57d944b58e070bba0aecf0d5691945047c36b605555733",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/garrick_cinder_vn_focused/run.provenance.json",
-    "provenance_sha256": "97549a8105046b0f2017849e3fbb78956d818844613158ac3c8cd9d467781ff7",
+    "provenance_sha256": "0fc928ad3acbbb69372522a43727f657f76248cd414ccc628c07026616f0edb8",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "fbe8dd525e932256d3f056fd1c112b635555c9191195be86c57f58110451088b",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/garrick_cinder_vn_focused.ingest.json",
-    "spec_sha256": "93fe059bf000b5b76ce0e8c93b7da3e81617d7d100f8a5b299ce760dd3ee6038",
+    "spec_sha256": "7bde41a6962665138aca081c2cd23368069e51277647488b8a0ed08fb15f571b",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "8885e45f1f9d860e279cbda158dfb82f58ae457acb889d1e326528f0e441ffc8"
+    "fingerprint": "634d0be31b25bbe3f5e28db0c04ce05ec50e49d3bab4a4b42f8a304eb0217c6c"
   },
   "outputs": [
     {
       "path": "art/portrait_garrick_cinder_focused.webp",
-      "sha256": "5be5c407134d4c887c5ec156a5a3875e35a1c784a1f71d0403c3a638908d022c",
-      "pixels_sha256": "b6f5a0c80798a4c3a6153168a5380e8c0a6e779b3bf903a6e29f33317ad72c89",
-      "bytes": 77656,
+      "sha256": "a7373734d228f96c3946ef53d76e35f3eb03f0de88ac4eca66e199c26976fd73",
+      "pixels_sha256": "174599e64b1554ec26e4e374ab123674b3626fc61f6366cf1b25712d51178d99",
+      "bytes": 51112,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=44"
+          "detail": "removed=12"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "77656 bytes <= 245760"
+          "detail": "51112 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 44 isolated specks"
+        "A12: removed 12 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_garrick_cinder_focused.webp",
+          "sha256": "5be5c407134d4c887c5ec156a5a3875e35a1c784a1f71d0403c3a638908d022c",
+          "pixels_sha256": "b6f5a0c80798a4c3a6153168a5380e8c0a6e779b3bf903a6e29f33317ad72c89",
+          "bytes": 77656,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "a7740dc212eb949421c9a9b218b9ffd1d13519be0fceec0fdb3ccf329b7987b5",
+      "fingerprint": "8885e45f1f9d860e279cbda158dfb82f58ae457acb889d1e326528f0e441ffc8"
+    }
+  ]
 }

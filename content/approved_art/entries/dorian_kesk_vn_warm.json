@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "dorian_kesk_vn_warm",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "dorian_kesk": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "85a2365159e6968bbee6941a073b0fda25c990b9dc1e0d6a2d499337024e888c",
+    "sha256": "af494cb0b23d9760a193eda97add2a51b52f458dab73d71e2d584276e06e8cd3",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/dorian_kesk_vn_warm/run.provenance.json",
-    "provenance_sha256": "04dcfa102bff1b24213797bbe14b4d50abddadad2b702d7bf44b3fece3c005ad",
+    "provenance_sha256": "c473bec001f7b48a0bd28e19ae6cc91d0a32931c0cf9003afd4076316a425ab0",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "216133fe9e2cae87f291fe5d791d25d9232c17bf2a33cea98291d729b0a0931b",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/dorian_kesk_vn_warm.ingest.json",
-    "spec_sha256": "0fe7838e365969f993ac4d40089b3cfc37cb37e22cdb39d5b09968602c61a325",
+    "spec_sha256": "3a24a7fce062f3b8f1aca728d4ae0527f7b7725002090545208e9db737e7e74c",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "1b910c99ffbc50a7493f1c785f67e7200589cb8e739c0806bb127a0785fde2fe"
+    "fingerprint": "53ced31e3c8552844bc88ee292da581a78007fd538b6dc2c8910239b34e87b43"
   },
   "outputs": [
     {
       "path": "art/portrait_dorian_kesk_warm.webp",
-      "sha256": "a6e0af476336966b4e35dfb772d9860d35aa19c0bd2c5b2bff363a0ef7509bfb",
-      "pixels_sha256": "1e449abbb8eae54b31f0f8d6f00b561e2c3b45370d035a37300e11307dec7c8b",
-      "bytes": 69548,
+      "sha256": "4f90063cf59d490c1cbcaa7e93ede76c73bc4a80e570d30f9031ac6eca10938f",
+      "pixels_sha256": "a5c4706ef9b65179fdb2f453156ea1594655c551b7aab889e516d36457d8ab66",
+      "bytes": 33568,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=159"
+          "detail": "removed=19"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "69548 bytes <= 245760"
+          "detail": "33568 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 159 isolated specks"
+        "A12: removed 19 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_dorian_kesk_warm.webp",
+          "sha256": "a6e0af476336966b4e35dfb772d9860d35aa19c0bd2c5b2bff363a0ef7509bfb",
+          "pixels_sha256": "1e449abbb8eae54b31f0f8d6f00b561e2c3b45370d035a37300e11307dec7c8b",
+          "bytes": 69548,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "85a2365159e6968bbee6941a073b0fda25c990b9dc1e0d6a2d499337024e888c",
+      "fingerprint": "1b910c99ffbc50a7493f1c785f67e7200589cb8e739c0806bb127a0785fde2fe"
+    }
+  ]
 }

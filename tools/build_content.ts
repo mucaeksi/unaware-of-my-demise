@@ -256,7 +256,15 @@ async function main(): Promise<void> {
     { unit_id: 'fadyme', row: 'rear' as const }
   ];
   const enc1 = buildEncounter('T-1', 'tutorial_t1', partyDefs, BATTLE_MUSIC, 'tutorial_t1', TUTORIAL_UI);
-  const enc2 = { ...buildEncounter('T-2', 'tutorial_t2', partyDefs, BATTLE_MUSIC, 'tutorial_t2', TUTORIAL_UI), location_id: 'forgotten_stone_crossing' };
+  const enc2 = {
+    ...buildEncounter('T-2', 'tutorial_t2', partyDefs, BATTLE_MUSIC, 'tutorial_t2', TUTORIAL_UI),
+    location_id: 'forgotten_stone_crossing',
+    enemies: [
+      { unit_id: 'hollow_pilgrim', level: 1, slot: 0, row: 'front' as const },
+      { unit_id: 'bellbound_dead', level: 1, slot: 1, row: 'rear' as const },
+      { unit_id: 'bellbound_dead', level: 1, slot: 2, row: 'rear' as const }
+    ]
+  };
   const enc3 = { ...buildEncounter('T-3', 'tutorial_t3', partyDefs, BATTLE_MUSIC, 'tutorial_t3', TUTORIAL_UI), location_id: 'shelter_courtyard_dusk' };
 
   // ---- art (approved_art first, legacy fallback only for uncovered keys) ----------------------

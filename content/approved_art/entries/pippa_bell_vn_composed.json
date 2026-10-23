@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "pippa_bell_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "pippa_bell": {
@@ -26,12 +26,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "da172c44c33616840f532cdaa47daff868336a379d48c4fb53bcb2ec218f50e6",
+    "sha256": "cbe240eec1906f482dee34272056d60ccadfed06e93e3a2e644c51b5de9bfb77",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/pippa_bell_vn_composed/run.provenance.json",
-    "provenance_sha256": "f3ac6ab60ef7c222d4709c6b7d385146a6c4caec1088b0173d9e72094c5fa732",
+    "provenance_sha256": "da0ed558c9a26315d84a6ad9d7f123339aeac6e97d870285ebd3c87a0625e6d7",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "a023658d20f71baaeea9b67bb7665eb10d9016ee32433928432dc7d67e5fe5eb",
     "references": [],
@@ -39,17 +39,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/pippa_bell_vn_composed.ingest.json",
-    "spec_sha256": "a78c91c652f7960be7708155c8144e3eaf5bd5860d0a9040e1e8b94fc8d49962",
+    "spec_sha256": "fca04255a588c0fe00fcd33ba511349892749e523d045ba62a24925d684cdb43",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "78645fae5cdb2c3db49e9c8539f90a9028f2961164d93b7d40cd259ef0e0eec0"
+    "fingerprint": "c7d6f8986f4082d13fbe590150cf800a992a091970642e43345c4fadbfc4f47b"
   },
   "outputs": [
     {
       "path": "art/portrait_pippa_bell_composed.webp",
-      "sha256": "783bc48f48a3a32dbbb86b161e48995c27a9cba7bcb7474bd662085761649a40",
-      "pixels_sha256": "5c5e8a4baa07cc107763313a2777d9eb92d4e8086797ab946a29db4aae993a1c",
-      "bytes": 74954,
+      "sha256": "5c3c6137cfd723bfb9d2eae2aa7c9357ebf3d8b8494e2c8bd550f52c75de6e14",
+      "pixels_sha256": "74074bfd8ad387800bd61e766c00b2bb4b49ba7bceff4b5c3f3be592121f9155",
+      "bytes": 71730,
       "width": 768,
       "height": 1152
     }
@@ -75,7 +75,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=7"
+          "detail": "removed=1"
         },
         "A18": {
           "status": "pass",
@@ -83,7 +83,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "74954 bytes <= 245760"
+          "detail": "71730 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -91,14 +91,14 @@
         }
       },
       "warnings": [
-        "A12: removed 7 isolated specks"
+        "A12: removed 1 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -106,5 +106,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_pippa_bell_composed.webp",
+          "sha256": "783bc48f48a3a32dbbb86b161e48995c27a9cba7bcb7474bd662085761649a40",
+          "pixels_sha256": "5c5e8a4baa07cc107763313a2777d9eb92d4e8086797ab946a29db4aae993a1c",
+          "bytes": 74954,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "da172c44c33616840f532cdaa47daff868336a379d48c4fb53bcb2ec218f50e6",
+      "fingerprint": "78645fae5cdb2c3db49e9c8539f90a9028f2961164d93b7d40cd259ef0e0eec0"
+    }
+  ]
 }

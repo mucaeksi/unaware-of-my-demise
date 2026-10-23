@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "rowan_reed_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "rowan_reed": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "edbb18aa00e09170cce2268f98456476b44a6d4cff5d9eccfb10df4f13966501",
+    "sha256": "363295e5e8ae40f4cdb9c24eaddfd01e0f01ebb1d4406080532ab40e72755c22",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/rowan_reed_vn_focused/run.provenance.json",
-    "provenance_sha256": "03dc8a3c7d21a06ca5a5df9457cf7b3bb542607b67fd2ea4d282c6de6cab3f81",
+    "provenance_sha256": "7ecd91e6e1294a60c40de621812258eb246c3abaf2b948380364c4815e4aa8e9",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "c5594903ed8d1876d9e59d18c6c35c10ade7d10360945455fdd7bffdac35c649",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/rowan_reed_vn_focused.ingest.json",
-    "spec_sha256": "774c82df1831f023e77aac981357fd494656652fc48d26173efece68a8ee444f",
+    "spec_sha256": "d7a82c6c5ef0c52b5fb73c7f83f02fe01aa27e240392aa0649a85279f9417110",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "a22cab802257227302a7e8210549db78d98ffc4ce3847321d437899ef463e755"
+    "fingerprint": "b5252a8c9f1bacdebe5bd0aff4ebfcaadc55d5474c8720c94510a65dd115b45b"
   },
   "outputs": [
     {
       "path": "art/portrait_rowan_reed_focused.webp",
-      "sha256": "946c3587a9ac841f9a0865c03a14f3bd377ff0af7dd872eb3779b6cd6e3049f4",
-      "pixels_sha256": "4a96e7bf127c83663ed5c6ea0815e73eb0914d247d43b681e2f3e64cc8754af8",
-      "bytes": 94620,
+      "sha256": "9d6d17a4de6c6ff21b5b26af1dd2cb6e74c6ee33ecfdf023ed6554ea72e5808e",
+      "pixels_sha256": "7381bf5d323e22f1b1f044fd4cf8d32160d14be9b8d71777f8e4a4fd341fe36b",
+      "bytes": 52402,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=121"
+          "detail": "removed=20"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "94620 bytes <= 245760"
+          "detail": "52402 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 121 isolated specks"
+        "A12: removed 20 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_rowan_reed_focused.webp",
+          "sha256": "946c3587a9ac841f9a0865c03a14f3bd377ff0af7dd872eb3779b6cd6e3049f4",
+          "pixels_sha256": "4a96e7bf127c83663ed5c6ea0815e73eb0914d247d43b681e2f3e64cc8754af8",
+          "bytes": 94620,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "edbb18aa00e09170cce2268f98456476b44a6d4cff5d9eccfb10df4f13966501",
+      "fingerprint": "a22cab802257227302a7e8210549db78d98ffc4ce3847321d437899ef463e755"
+    }
+  ]
 }

@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_mountain_lower_pass",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "mountain_lower_pass": "art/bg_mountain_lower_pass.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "4633bd6b45bf1c8cad5d7c019c7412f51144800dd1e0e8f115e7965d0ef46251",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_mountain_lower_pass/run.provenance.json",
+    "provenance_sha256": "40235589bbedd57a8f00b488ec6fca199d89b02dcecbcfcc910a2dc8fd0d8d96",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "3f0b8d4e534c8f52c05cc36c6e3e7824c123d1d394972da5cca375d6138231de",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_mountain_lower_pass.ingest.json",
+    "spec_sha256": "f640b9353f75e5957793b3d30b1fa2bbe24f2539e1511ee75038c1b6db2169ad",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "b0a1326104fd78e0101a1639df74a5a410e155641c7ed7a8e747e998b8e4c576"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_mountain_lower_pass.webp",
+      "sha256": "509eed45fc11f684b528a98fc0b01fd76e3f25ce28e7dcf695d34926f06acda8",
+      "pixels_sha256": "d781dea2a6b9c8ed59e5156fba155408074495d3c7dec584c70023d66c580817",
+      "bytes": 193940,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "193940 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.898Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

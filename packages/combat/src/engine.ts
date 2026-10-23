@@ -570,7 +570,7 @@ export class Battle {
         if (!skill) {
           this.emit({ type: 'turn_skipped', actor: actor.id, reason: 'no_usable_skill' });
         } else {
-          const target = skill.player_target === 'enemy' ? this.pickDefaultTarget(actor) : null;
+          const target = skill.player_target === 'enemy' ? this.pickDefaultTarget(actor) : skill.player_target === 'ally' ? (this.byLowestHp(this.allies(actor))[0] ?? null) : null;
           this.executeSkill(actor, skill, target);
         }
       }

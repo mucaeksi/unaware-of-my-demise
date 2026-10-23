@@ -55,6 +55,10 @@ test('modes: deeds, profile and trials screens claim and fight through the serve
   // the screen re-reads server state after the fight; tap the next button only once that redraw shows the match
   await expect.poll(() => texts(page, 'Trials').then((t) => t.some((x) => x.includes('matches 1/')))).toBe(true);
   await settled(page, 'Trials');
+  await tap(page, info, 290, 810); // SET DEFENSE from active/owned heroes
+  await expect.poll(async () => (await state<any>(page, 'arenaState')).defense?.length ?? 0).toBeGreaterThan(0);
+  await expect.poll(() => texts(page, 'Trials')).toContain('UPDATE DEFENSE');
+  await settled(page, 'Trials');
   await tap(page, info, 1420, 400); // first blessing starts an endless run
   await expect.poll(async () => (await state<any>(page, 'endlessState')).activeRun?.wave).toBe(1);
   await expect.poll(() => texts(page, 'Trials')).toContain('FIGHT WAVE 1');

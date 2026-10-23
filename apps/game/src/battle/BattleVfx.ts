@@ -139,8 +139,14 @@ export class BattleVfx {
     let isPortrait = false;
     const base = opts.portraitKey ? scene.tex(opts.portraitKey) : PIXI.Texture.EMPTY;
     if (base !== PIXI.Texture.EMPTY) {
-      // waist-up bust: top 68 % of the knee-up portrait, so the band's bottom edge frames it
-      art = new PIXI.Texture({ source: base.source, frame: new PIXI.Rectangle(base.frame.x, base.frame.y, base.frame.width, Math.round(base.frame.height * 0.68)) });
+      // Frame the head and upper bust cleanly inside the diagonal cut-in band
+      const isFadyme = opts.unitId === 'fadyme' || Boolean(opts.portraitKey?.includes('fadyme'));
+      const isMahmut = opts.unitId === 'mahmut' || Boolean(opts.portraitKey?.includes('mahmut'));
+      const topFrac = isFadyme ? 0.22 : isMahmut ? 0.18 : 0.035;
+      const heightFrac = 0.42;
+      const fy = base.frame.y + Math.round(base.frame.height * topFrac);
+      const fh = Math.max(1, Math.min(base.frame.height - Math.round(base.frame.height * topFrac), Math.round(base.frame.height * heightFrac)));
+      art = new PIXI.Texture({ source: base.source, frame: new PIXI.Rectangle(base.frame.x, fy, base.frame.width, fh) });
       isPortrait = true;
     }
     if (art === PIXI.Texture.EMPTY) return Promise.resolve();

@@ -1,4 +1,4 @@
-import { ApiError, type ArenaState, type EndlessModifier, type EndlessState } from '../net/api';
+import { ApiError, type ArenaState, type EndlessModifier, type EndlessState, type TeamMember } from '../net/api';
 import { Services } from '../services';
 import { describeAttachments, idLabel } from '../ui/format';
 import { errText, HubScreen } from '../ui/hubScreen';
@@ -37,6 +37,7 @@ export class TrialsScene extends HubScreen {
   }
 
   private drawArena(a: ArenaState): void {
+    const defCount = a.defense?.length ?? 0;
     this.columnHead(ARENA_X, 'ARENA', `${idLabel(a.tier)} · rating ${a.rating} · matches ${a.dailyUsed}/${a.dailyLimit} · season ends ${day(a.season.endsAtMs)}`);
     if (!a.unlocked) {
       this.text(ARENA_X, 450, 'Clear a campaign battle to enter the Arena.', { fontSize: 30, color: T.dim }).setOrigin(0.5);
@@ -52,10 +53,27 @@ export class TrialsScene extends HubScreen {
     });
     const claimable = a.wins >= 1 && !a.seasonClaimed;
     this.text(ARENA_X, 720, `Season reward (${idLabel(a.tier)}): ${describeAttachments(a.seasonRewards, this.names)}`, { fontSize: 22, color: T.dim }).setOrigin(0.5);
-    this.button(ARENA_X, 810, { label: a.seasonClaimed ? 'SEASON CLAIMED' : 'CLAIM SEASON', sub: claimable ? undefined : a.seasonClaimed ? undefined : 'Win a match first', w: 480, h: 100, fontSize: 26, variant: claimable ? 'hot' : 'dim', onClick: () => void this.act(async () => {
-      const r = await Services.api.claimArenaSeason(a.season.seasonId, this.releaseId);
-      return `Season reward (${idLabel(r.tier)}): ${describeAttachments(r.rewards, this.names)}`;
-    }) }).setEnabled(claimable);
+    this.button(ARENA_X - 210, 810, {
+      label: defCount ? 'UPDATE DEFENSE' : 'SET DEFENSE',
+      sub: defCount ? `${defCount} guard${defCount === 1 ? '' : 's'} active` : 'Use active team',
+      w: 380,
+      h: 100,
+      fontSize: 24,
+      variant: defCount ? 'normal' : 'hot',
+      onClick: () => void this.saveDefense()
+    });
+    this.button(ARENA_X + 210, 810, {
+      label: a.seasonClaimed ? 'SEASON CLAIMED' : 'CLAIM SEASON',
+      sub: claimable ? undefined : a.seasonClaimed ? undefined : 'Win a match first',
+      w: 380,
+      h: 100,
+      fontSize: 24,
+      variant: claimable ? 'hot' : 'dim',
+      onClick: () => void this.act(async () => {
+        const r = await Services.api.claimArenaSeason(a.season.seasonId, this.releaseId);
+        return `Season reward (${idLabel(r.tier)}): ${describeAttachments(r.rewards, this.names)}`;
+      })
+    }).setEnabled(claimable);
   }
 
   private drawEndless(s: EndlessState): void {
@@ -82,6 +100,31 @@ export class TrialsScene extends HubScreen {
         const r = await Services.api.claimEndlessMilestone(ms.wave, this.releaseId);
         return `Wave ${r.wave} milestone: ${describeAttachments(r.rewards, this.names)}`;
       }) }).setEnabled(ms.ready && !ms.claimed);
+    });
+  }
+
+  private saveDefense(): Promise<void> {
+    return this.act(async () => {
+      const [teams, mine, roster] = await Promise.all([
+        Services.api.teams(),
+        Services.api.characters(this.releaseId),
+        Services.api.roster(this.releaseId)
+      ]);
+      const active = teams.teams.find((t) => t.active);
+      let members: TeamMember[] = active?.members?.length ? active.members : [];
+      if (members.length === 0) {
+        const roleById = new Map(roster.map((c) => [c.id, c.role]));
+        const top = [...mine.characters].sort((a, b) => b.level - a.level || a.id.localeCompare(b.id)).slice(0, 5);
+        let front = 0;
+        let rear = 0;
+        members = top.map((c, slot) => {
+          const wantFront = /tank|bruiser|vanguard|knight|defender|shield|warden|front/i.test(roleById.get(c.id) ?? '');
+          const row: 'front' | 'rear' = wantFront && front < 2 ? (front++, 'front') : rear < 3 ? (rear++, 'rear') : (front++, 'front');
+          return { characterId: c.id, slot, row };
+        });
+      }
+      await Services.api.setArenaDefense(members, this.releaseId);
+      return `Arena defense set (${members.length} guard${members.length === 1 ? '' : 's'})`;
     });
   }
 

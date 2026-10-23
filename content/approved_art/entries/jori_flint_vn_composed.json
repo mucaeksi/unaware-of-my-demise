@@ -7,20 +7,17 @@
     "portraits": {
       "jori_flint": {
         "emotions": {
-          "ashamed": "composed",
           "calm": "composed",
           "certain": "composed",
           "composed": "composed",
-          "confused": "composed",
           "earnest": "composed",
           "firm": "composed",
+          "frustrated": "composed",
+          "grudging": "composed",
+          "hollow": "composed",
           "honest": "composed",
           "neutral": "composed",
-          "observant": "composed",
-          "relieved": "composed",
-          "resolved": "composed",
-          "stricken": "composed",
-          "stubborn": "composed"
+          "resolved": "composed"
         },
         "images": {
           "composed": "art/portrait_jori_flint_composed.webp"
@@ -99,10 +96,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.930Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

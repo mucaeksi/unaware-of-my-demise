@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "marek_vane_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_marek_vane": {
         "image": "art/atlas_marek_vane.webp",
-        "width": 1999,
-        "height": 1045,
+        "width": 1989,
+        "height": 966,
         "frames": {
-          "idle": [
+          "victory": [
             4,
             4,
-            210,
-            348
-          ],
-          "idle_2": [
-            218,
-            4,
-            210,
-            348
-          ],
-          "idle_3": [
-            432,
-            4,
-            210,
-            348
+            261,
+            353
           ],
           "ultimate": [
-            646,
+            269,
             4,
-            267,
-            348
+            272,
+            350
           ],
           "ultimate_2": [
-            917,
+            545,
             4,
-            267,
-            348
+            272,
+            350
           ],
           "ultimate_3": [
-            1188,
+            821,
             4,
-            267,
-            348
+            272,
+            350
           ],
           "active": [
-            1459,
+            1097,
             4,
-            266,
-            346
-          ],
-          "active_2": [
-            1729,
-            4,
-            266,
-            346
-          ],
-          "active_3": [
-            4,
-            356,
-            266,
-            346
-          ],
-          "basic": [
-            274,
-            356,
-            278,
-            345
-          ],
-          "basic_2": [
-            556,
-            356,
-            278,
-            345
-          ],
-          "basic_3": [
-            838,
-            356,
-            278,
-            345
-          ],
-          "victory": [
-            1120,
-            356,
-            263,
-            345
-          ],
-          "walk": [
-            1387,
-            356,
-            273,
-            343
-          ],
-          "hit": [
-            1664,
-            356,
-            224,
+            275,
             338
           ],
-          "defeat": [
+          "active_2": [
+            1376,
             4,
-            706,
-            224,
-            335
+            275,
+            338
+          ],
+          "active_3": [
+            1655,
+            4,
+            275,
+            338
+          ],
+          "idle": [
+            4,
+            361,
+            207,
+            317
+          ],
+          "idle_2": [
+            215,
+            361,
+            207,
+            317
+          ],
+          "idle_3": [
+            426,
+            361,
+            207,
+            317
+          ],
+          "walk": [
+            637,
+            361,
+            259,
+            313
+          ],
+          "basic": [
+            900,
+            361,
+            275,
+            301
+          ],
+          "basic_2": [
+            1179,
+            361,
+            275,
+            301
+          ],
+          "basic_3": [
+            1458,
+            361,
+            275,
+            301
+          ],
+          "defeat": [
+            1737,
+            361,
+            248,
+            280
+          ],
+          "hit": [
+            4,
+            682,
+            248,
+            280
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.44,
+            "pivot_x": 0.407,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.466
+            "pivot_x": 0.45,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.468,
+            "pivot_x": 0.489,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.501,
+            "pivot_x": 0.462,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.501,
+            "pivot_x": 0.466,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.524
+            "pivot_x": 0.558,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.519
+            "pivot_x": 0.558,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.502
+            "pivot_x": 0.538,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "417680356f7a476d8af2ef8c2be6b6b9d73be1c08ae0e828f28f46e422a779bc",
+    "sha256": "c85c68f954f06c6b72c5a9bd63f66ae9d13cc72d778440f723b684617a96d9a6",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/marek_vane_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "a1b380304aee6fe4b171bf34c1d42bb56ea9d7ece0c8add154595cefa52e04c0",
+    "provenance_sha256": "430cc31fd02ab3e567a3993cd2742e1d4d525eddf70801205c7f4641101b0768",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "48d8cb9153c016b738e223a67aa2c0f0191a8b0d69c59d93a8b5de36f98e5476",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/marek_vane_chibi_sheet.ingest.json",
-    "spec_sha256": "52a8fe7a09df5e025ed0f9bd48ee2214eda9154e8a7cfb7caff44c2d803b4520",
+    "spec_sha256": "017ff4e0235306cb8b7725c42c51fed3fcfabd14e294a936d065f56775fcd4db",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "9c7d8d052409ca21544fb886f5544c451e8df411c53dd15cff87a57cf7172ff6"
+    "fingerprint": "316b5ab726fbf4d23c2d282c3efc5db8df0f671e775aaa791550397676272c55"
   },
   "outputs": [
     {
       "path": "art/atlas_marek_vane.webp",
-      "sha256": "bb33108c8aac156e6b7d3ab6a590fa58a89745f1a1c2e9d0205ba1d2ff439fe4",
-      "pixels_sha256": "eec3e4e4c7fa4a207ebd3d07a723d18d2b9679c442983d2167c1317eb3f79072",
-      "bytes": 487228,
-      "width": 1999,
-      "height": 1045
+      "sha256": "22d97845968efcb535637d255de034b34fe7ad3f8dc2e968900e18da0b4faf8b",
+      "pixels_sha256": "2724dd17c3dd1646b87f438785ca40d6d483f46f002cdfce3aa9ce8695ebb088",
+      "bytes": 413138,
+      "width": 1989,
+      "height": 966
     }
   ],
   "qc": {
@@ -260,8 +297,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=5"
         },
         "A14": {
           "status": "pass",
@@ -272,28 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1999x1045"
+          "detail": "1989x966"
         },
         "A19": {
           "status": "pass",
-          "detail": "487228 bytes <= 665600"
+          "detail": "413138 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0007%"
+          "detail": "spill=0.0011%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 5 isolated specks"
+      ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:30:52.059Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -301,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_marek_vane.webp",
+          "sha256": "bb33108c8aac156e6b7d3ab6a590fa58a89745f1a1c2e9d0205ba1d2ff439fe4",
+          "pixels_sha256": "eec3e4e4c7fa4a207ebd3d07a723d18d2b9679c442983d2167c1317eb3f79072",
+          "bytes": 487228,
+          "width": 1999,
+          "height": 1045
+        }
+      ],
+      "source_sha256": "417680356f7a476d8af2ef8c2be6b6b9d73be1c08ae0e828f28f46e422a779bc",
+      "fingerprint": "9c7d8d052409ca21544fb886f5544c451e8df411c53dd15cff87a57cf7172ff6"
+    }
+  ]
 }

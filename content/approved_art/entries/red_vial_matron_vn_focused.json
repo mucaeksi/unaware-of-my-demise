@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "asset_id": "red_vial_matron_vn_focused",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "red_vial_matron": {
+        "emotions": {
+          "analytical": "focused",
+          "focused": "focused",
+          "serious": "focused"
+        },
+        "images": {
+          "focused": "art/portrait_red_vial_matron_focused.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "1298c38158b3d28f4b7552c645f40cfc30c88d660a64c7dec7479b72600ec2e0",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/red_vial_matron_vn_focused/run.provenance.json",
+    "provenance_sha256": "48b541cd0a2bb4e99af69aa653dce40893104a626bd7679f1b308ff128d6abb6",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "cb57b2b43cfc6ac8b9f4e328acb4d0a2baf9a47214cdedd6eb6c58e9f0ee3d64",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/red_vial_matron_vn_focused.ingest.json",
+    "spec_sha256": "33c87682fa1fb2f165e60b26df1faeed59e85cbe1368a9cba508c0173e9d3c3a",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "79d53fde0184eb46ca4d1a6a5f4dab824bd5cf38a26232b8a40f27edfeed80d8"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_red_vial_matron_focused.webp",
+      "sha256": "0e50d11713204d81c9526cefe47da0461d3c386b4619dee070d195dacb456e47",
+      "pixels_sha256": "c11333820e5736398553826df5ed4597d6728234358293abadf522c8bca20f31",
+      "bytes": 34832,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "warn",
+          "detail": "removed=58"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "34832 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": [
+        "A12: removed 58 isolated specks"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.955Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

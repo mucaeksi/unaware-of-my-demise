@@ -10,11 +10,12 @@
           "calm": "composed",
           "composed": "composed",
           "concern": "composed",
-          "curious": "composed",
           "direct": "composed",
-          "grim": "composed",
+          "honest": "composed",
           "matter_of_fact": "composed",
-          "neutral": "composed"
+          "neutral": "composed",
+          "resolved": "composed",
+          "shaken": "composed"
         },
         "images": {
           "composed": "art/portrait_clem_marr_composed.webp"
@@ -93,10 +94,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.913Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

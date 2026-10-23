@@ -40,21 +40,10 @@
     "character": "rikka_ember",
     "image": "composed",
     "emotion_tags": [
-      "awed",
       "calm",
-      "competitive",
       "composed",
-      "curious",
-      "defensive",
-      "excited",
-      "exuberant",
-      "flustered",
-      "nervous",
       "neutral",
-      "pout",
-      "small",
-      "triumphant",
-      "wide_eyed"
+      "small"
     ]
   },
   "qc": {

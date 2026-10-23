@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "asset_id": "lord_cael_veyr_vn_focused",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "lord_cael_veyr": {
+        "emotions": {
+          "analytical": "focused",
+          "focused": "focused",
+          "serious": "focused"
+        },
+        "images": {
+          "focused": "art/portrait_lord_cael_veyr_focused.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "337cc69c78054425515e5860b35c6b3e4810bd91103ee8ab528a3fd97d66254c",
+    "mime": "image/png",
+    "width": 768,
+    "height": 1152,
+    "provenance_file": ".cache/generated/lord_cael_veyr_vn_focused/run.provenance.json",
+    "provenance_sha256": "cba244d8cece88ad0e389af03efe8626eafca62ec920a9dbe91f7ea94b67a2c3",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "bbf827c286d4e340fe9039221ca346a622cc036ffe7cd791a8bcd8b8940fab60",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/lord_cael_veyr_vn_focused.ingest.json",
+    "spec_sha256": "efb4c1a9040658b006c919e90c09d4de6a72c7c617300e75f37b9c60e94908ab",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "649de6d95a694b53adb25cf3065bfa190dca306861c687ebd9c303b4df2e4389"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_lord_cael_veyr_focused.webp",
+      "sha256": "5256d0aab0d1f745d9d6b211d637f35999f53ba873ee917a81292752493ac70d",
+      "pixels_sha256": "13c879227c0ad1ef970e807e0dcfd59e7dc2aaf200dc9666fc72c1d89ba60134",
+      "bytes": 29470,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 768x1152"
+        },
+        "A07": {
+          "status": "pass",
+          "detail": "sigma=0.00"
+        },
+        "A12": {
+          "status": "pass",
+          "detail": "removed=0"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "29470 bytes <= 245760"
+        },
+        "A08": {
+          "status": "pass",
+          "detail": "spill=0.0000%"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.940Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "thistle_roe_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "thistle_roe": {
@@ -21,12 +21,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "3f6814fce796489e1f4e367b64c77c16fa0cbb8053629ef95ef21c2572f8cbab",
+    "sha256": "362b3e09f4ea86db9b1d2d2265f554988e957e87b2e4b1b48534372e98e88251",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/thistle_roe_vn_focused/run.provenance.json",
-    "provenance_sha256": "c2a7d8c61a935fc4e1da23bfa17f30aea3c73b8fc0495244cc69e3e4d2e013ea",
+    "provenance_sha256": "f87043458b6d0e23b7fc41e21cf6e8397fc245aa7f38bfde968b570141a4c461",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "a7aa7abc7019f5f709f47dcba4de6fad8bf0d33d2fa0fd649ea1f70290a7af8b",
     "references": [],
@@ -34,17 +34,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/thistle_roe_vn_focused.ingest.json",
-    "spec_sha256": "21ceacaad5f717ca434381624de13c6da62dc6198cba9567ab9eee043336bb4f",
+    "spec_sha256": "80126b319b43f32aa0637e8440e6deef91841b36efbf98e5221ded2d0f4820dc",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "ba3cd4ac7b1f408cddd04a03583fa238829f5805208ff9c021397ed24d1562e0"
+    "fingerprint": "acfb8a008c68bb271a82582d231feac9cb4f7ba9725fce200d3be235e468a104"
   },
   "outputs": [
     {
       "path": "art/portrait_thistle_roe_focused.webp",
-      "sha256": "f1bb79bb67c6e4c62866ed5a83083a4ca5f85b1b1a8a9720cac6bc0b148b963b",
-      "pixels_sha256": "f21323e87edce188939042dcf715cae31ad010ef87b8d3a126b78edf9db0489d",
-      "bytes": 74580,
+      "sha256": "a0145fcc7c8a7a90c91d9cf4e9b8731af45c8177e7bbb418f2642a8e4e04c21c",
+      "pixels_sha256": "46619d81204f883484d478ae054d8c9c88d89852aa74c272102fef2e1349c581",
+      "bytes": 67206,
       "width": 768,
       "height": 1152
     }
@@ -70,7 +70,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=2"
+          "detail": "removed=15"
         },
         "A18": {
           "status": "pass",
@@ -78,7 +78,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "74580 bytes <= 245760"
+          "detail": "67206 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -86,14 +86,14 @@
         }
       },
       "warnings": [
-        "A12: removed 2 isolated specks"
+        "A12: removed 15 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -101,5 +101,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_thistle_roe_focused.webp",
+          "sha256": "f1bb79bb67c6e4c62866ed5a83083a4ca5f85b1b1a8a9720cac6bc0b148b963b",
+          "pixels_sha256": "f21323e87edce188939042dcf715cae31ad010ef87b8d3a126b78edf9db0489d",
+          "bytes": 74580,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "3f6814fce796489e1f4e367b64c77c16fa0cbb8053629ef95ef21c2572f8cbab",
+      "fingerprint": "ba3cd4ac7b1f408cddd04a03583fa238829f5805208ff9c021397ed24d1562e0"
+    }
+  ]
 }

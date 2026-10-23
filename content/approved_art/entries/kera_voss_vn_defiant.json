@@ -7,14 +7,14 @@
     "portraits": {
       "kera_voss": {
         "emotions": {
+          "defensive": "defiant",
           "defiant": "defiant",
-          "furious": "defiant",
+          "determined": "defiant",
           "fierce": "defiant",
-          "bitter": "defiant",
+          "furious": "defiant",
+          "gruff": "defiant",
           "indignant": "defiant",
-          "stunned": "defiant",
-          "ashamed": "defiant",
-          "breaking": "defiant"
+          "urgent": "defiant"
         },
         "images": {
           "defiant": "art/portrait_kera_voss_defiant.webp"
@@ -93,10 +93,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.933Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

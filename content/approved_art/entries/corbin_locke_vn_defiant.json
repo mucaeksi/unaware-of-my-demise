@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "corbin_locke_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "corbin_locke": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "7779b301de5bf42695fd8fe985c233da5b610ff33f8c62d62e6103eb81d4639b",
+    "sha256": "6a4d67416ac97dbbdd2929e464c85d89b641f79dfc757abd54f80a54fcfd376c",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/corbin_locke_vn_defiant/run.provenance.json",
-    "provenance_sha256": "e8546bd174a6c3cbc78b3fdad768b366c16ce280082795d40b6276a6e5cb8b25",
+    "provenance_sha256": "96c9b1d82d99a7975230500f0472264bb7f8827bcb51a33f60bb4ccdefbe8777",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "f8b3c76c7569dad475282d81984d9a4e1e3b680b5798799e48ac278a22468a60",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/corbin_locke_vn_defiant.ingest.json",
-    "spec_sha256": "4b29f8f8cde4f178e3b543f699153fca81f037ee806797e476af97d17e17ca7b",
+    "spec_sha256": "00fcb1f372fdec121af872d060f8f857b62954081a72ed140f41759128ae26cb",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "a56990b6929fb98ad2758fc838011306f3174122bf12361d8a36b4541eda19b7"
+    "fingerprint": "bac1c40f9be97c9ca79ed9b0b198b6bc90c6640808ccce8a8fcb2a984e400470"
   },
   "outputs": [
     {
       "path": "art/portrait_corbin_locke_defiant.webp",
-      "sha256": "b1346f54ef6a7c13444b022da9ab527e92eaf99f2cb9d566b047546ab7c59eba",
-      "pixels_sha256": "faf71ff5b70ea9628b99871df1a5e01e7a56bdc9ebc91cca24fcf48b63e53738",
-      "bytes": 79396,
+      "sha256": "e17d1a26b9a7baf70108157eb964e7888a3dc7908cf993a44abcfcc98e9b0478",
+      "pixels_sha256": "4d43092b85b9124b2eac9ea00257d5e82c12570ca92b4e39212a6831884463d6",
+      "bytes": 56780,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=80"
+          "detail": "removed=5"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "79396 bytes <= 245760"
+          "detail": "56780 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 80 isolated specks"
+        "A12: removed 5 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_corbin_locke_defiant.webp",
+          "sha256": "b1346f54ef6a7c13444b022da9ab527e92eaf99f2cb9d566b047546ab7c59eba",
+          "pixels_sha256": "faf71ff5b70ea9628b99871df1a5e01e7a56bdc9ebc91cca24fcf48b63e53738",
+          "bytes": 79396,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "7779b301de5bf42695fd8fe985c233da5b610ff33f8c62d62e6103eb81d4639b",
+      "fingerprint": "a56990b6929fb98ad2758fc838011306f3174122bf12361d8a36b4541eda19b7"
+    }
+  ]
 }

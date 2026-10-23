@@ -1,5 +1,8 @@
-import { REF_W } from '../config';
+import * as PIXI from 'pixi.js';
+import { UNIT_ANIM_STATES, type UnitAnimState } from '@uomd/content-schema';
+import { REF_H, REF_W } from '../config';
 import { currency } from '../net/currency';
+import { prefs } from '../platform/prefs';
 import { Services } from '../services';
 import { planAscension, planLevelUp, planSkillUpgrade } from '../ui/growth';
 import { errText, HubScreen } from '../ui/hubScreen';
@@ -25,14 +28,72 @@ export class CharacterScene extends HubScreen {
   private busy = false;
   private lastOutcome = '';
   private expression = 'composed';
+  private pose: UnitAnimState = 'idle';
+  private visualLayer: PIXI.Container | null = null;
 
   protected override init(data: { id?: string }): void {
     const nextId = data.id ?? '';
     if (nextId !== this.id) {
       this.lastOutcome = '';
       this.expression = 'composed';
+      this.pose = 'idle';
     }
     this.id = nextId;
+  }
+
+  private async mountVisuals(): Promise<void> {
+    this.visualLayer?.destroy({ children: true });
+    this.visualLayer = null;
+    const art = Services.art;
+    if (!art || !this.id || !this.isCurrentView()) return;
+    const layer = this.add(new PIXI.Container(), -3);
+    this.visualLayer = layer;
+    try {
+      await Promise.all([
+        art.loadPortraits(this, [this.id]).catch(() => undefined),
+        art.loadUnits(this, [this.id]).catch(() => undefined)
+      ]);
+      if (!this.isCurrentView() || layer.destroyed) return;
+      const pKey = art.portrait(this.id, this.expression) ?? art.portrait(this.id, 'composed');
+      if (pKey) {
+        const sp = new PIXI.Sprite(this.tex(pKey));
+        sp.anchor.set(0.5, 1);
+        sp.position.set(170, REF_H + 20);
+        const sc = 880 / Math.max(1, sp.texture.height || 880);
+        sp.scale.set(sc);
+        sp.alpha = 0.42;
+        layer.addChild(sp);
+        if (!prefs().reducedMotion) {
+          this.anim.to(sp, { y: REF_H + 10, scaleY: sc * 1.022 }, { duration: 2600, yoyo: true, repeat: -1, ease: 'sine.inout' });
+        }
+      }
+      const f = art.frameFor(this.id, this.pose);
+      const u = art.unit(this.id);
+      const chibi = new PIXI.Sprite(this.tex(f.key, f.frame));
+      chibi.anchor.set(f.pivotX, 1);
+      chibi.position.set(175, 420);
+      const cScale = (190 / Math.max(1, chibi.texture.height || u.heightPx)) * f.scale;
+      chibi.scale.set(cScale);
+      layer.addChild(chibi);
+      if (f.animation && !prefs().reducedMotion) {
+        const step = { i: 0 };
+        const n = f.animation.frames.length;
+        this.anim.to(step, { i: n }, {
+          duration: (n * 1000) / Math.max(1, f.animation.fps),
+          repeat: -1,
+          onUpdate: () => {
+            const fname = f.animation!.frames[Math.min(n - 1, Math.floor(step.i))];
+            if (fname && !chibi.destroyed) {
+              chibi.texture = this.tex(f.key, fname);
+              const st = u.states[fname];
+              if (st) chibi.anchor.set(st.pivotX, 1);
+            }
+          }
+        });
+      }
+    } catch {
+      /* optional preview */
+    }
   }
 
   protected async build(): Promise<void> {
@@ -70,6 +131,18 @@ export class CharacterScene extends HubScreen {
         }
       });
     }
+    this.button(190, 206, {
+      label: `POSE: ${this.pose.toUpperCase()}`,
+      w: 184,
+      h: 44,
+      fontSize: 16,
+      onClick: () => {
+        const idx = UNIT_ANIM_STATES.indexOf(this.pose);
+        this.pose = UNIT_ANIM_STATES[(idx + 1) % UNIT_ANIM_STATES.length] ?? 'idle';
+        void this.refresh();
+      }
+    });
+    void this.mountVisuals();
     this.text(520, 330, `Level ${c.level} / ${c.cap}    Ascension ${c.ascension}`, { fontSize: '36px' }).setOrigin(0.5);
     this.text(520, 372, c.xpToNext === null ? 'Maximum level' : `XP ${c.xp} / ${c.xpToNext}`, { fontSize: '25px', color: T.dim }).setOrigin(0.5);
     const s = st?.stats ?? {};

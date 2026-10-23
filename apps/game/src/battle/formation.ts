@@ -52,8 +52,8 @@ export const BATTLE_LAYOUTS: Readonly<Record<BattleLayoutPreset, BattleLayoutSpe
     id: 'arena_lite',
     code: 'B',
     title: 'B · Arena-Lite Wide',
-    groundTop: 555,
-    groundBottom: 775,
+    groundTop: 568,
+    groundBottom: 788,
     frontX: 640,
     rearX: 340,
     jitterX: 24,
@@ -69,8 +69,8 @@ export const BATTLE_LAYOUTS: Readonly<Record<BattleLayoutPreset, BattleLayoutSpe
     id: 'afk_faithful',
     code: 'C',
     title: 'C · AFK-Faithful 3-Rear 2-Front (Selected)',
-    groundTop: 555,
-    groundBottom: 775,
+    groundTop: 568,
+    groundBottom: 788,
     frontX: 590,
     rearX: 346,
     jitterX: 28,
@@ -150,6 +150,9 @@ export function spotFor(
   } else if (spec.interleaveFrontTwo && row === 'front' && count === 2) {
     // Interleave 2 front units at 25% and 75% of the band so they sit cleanly between 3 rear units (0%, 50%, 100%)
     y = Math.round(spec.groundTop + span * (index === 0 ? 0.25 : 0.75));
+  } else if (spec.interleaveFrontTwo && row === 'rear' && count === 2) {
+    // Keep a 2-unit rear row comfortably grounded away from the top horizon and bottom HUD
+    y = Math.round(spec.groundTop + span * (index === 0 ? 0.14 : 0.86));
   } else {
     y = Math.round(spec.groundTop + (span * index) / (count - 1));
   }

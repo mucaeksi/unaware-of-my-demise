@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_ashen_estate_ruins",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "62691c583a43",
+    "provenance": ".cache/generated/bg_ashen_estate_ruins/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 80,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "ashen_estate_ruins"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

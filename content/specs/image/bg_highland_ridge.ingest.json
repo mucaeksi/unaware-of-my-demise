@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_highland_ridge",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "281877e4797b",
+    "provenance": ".cache/generated/bg_highland_ridge/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 80,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "highland_ridge"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

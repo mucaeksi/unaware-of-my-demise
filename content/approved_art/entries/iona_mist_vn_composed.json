@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "iona_mist_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 4,
   "targets": {
     "portraits": {
       "iona_mist": {
@@ -25,12 +25,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "3ee3cf46d0415d379a9640edf35b3c29701189d7b5f08ac596074bf788950537",
+    "sha256": "11e9152ac2e9e7e42988d5f3f869acf6d313bc2d32878eb98477034b6aee9046",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/iona_mist_vn_composed/run.provenance.json",
-    "provenance_sha256": "c5edb270863bee075ce8d8b838562942b793f18aede789210ebae17db3d10d55",
+    "provenance_sha256": "0eb2e573be1477ac1a18997b878317c24dae63404570c7bc33d1a830a1ec8f7d",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "75c364234d9ce6e403e170abc51bce8feb611a860c89d6420481f87dd49b1bfa",
     "references": [],
@@ -38,17 +38,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/iona_mist_vn_composed.ingest.json",
-    "spec_sha256": "a1d5116b6e3782d138512e07e3045383fe38c001b74b97a9e8be9695bf65b6d4",
+    "spec_sha256": "c50409b74e50e6cf80573059d23b2d5c35f44d1eda2781722fb3c80e9b46e483",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "1500c0ab6f64ee6aac5227884f55ab5eb1e626a29ef86ab41b24c76b8a4ea772"
+    "fingerprint": "4a4073a911e0970ab3720a9f27d4b3dacc1016d390b11f085ed8f6ec754a0744"
   },
   "outputs": [
     {
       "path": "art/portrait_iona_mist_composed.webp",
-      "sha256": "e69d5e3a5a2b4cb7c2d746fe54754b1b8c2974b5e85d01331bfcac5b1a09bb51",
-      "pixels_sha256": "4807a845c6e6dd0cd05c5b322b3737103aa83c61aab43a1bce77c9c882d6ebad",
-      "bytes": 59204,
+      "sha256": "a0ee17324621777a6781ec6f08130190a53b4814a6714bf7e9087564334e7e27",
+      "pixels_sha256": "c331a5416358b5a771de2a3439d60aef01049c73f50c8c30357f9ca3a15b8e19",
+      "bytes": 53168,
       "width": 768,
       "height": 1152
     }
@@ -74,7 +74,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=7"
+          "detail": "removed=24"
         },
         "A18": {
           "status": "pass",
@@ -82,7 +82,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "59204 bytes <= 245760"
+          "detail": "53168 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -90,14 +90,14 @@
         }
       },
       "warnings": [
-        "A12: removed 7 isolated specks"
+        "A12: removed 24 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -105,5 +105,51 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_composed.webp",
+          "sha256": "e69d5e3a5a2b4cb7c2d746fe54754b1b8c2974b5e85d01331bfcac5b1a09bb51",
+          "pixels_sha256": "4807a845c6e6dd0cd05c5b322b3737103aa83c61aab43a1bce77c9c882d6ebad",
+          "bytes": 59204,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "3ee3cf46d0415d379a9640edf35b3c29701189d7b5f08ac596074bf788950537",
+      "fingerprint": "1500c0ab6f64ee6aac5227884f55ab5eb1e626a29ef86ab41b24c76b8a4ea772"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_composed.webp",
+          "sha256": "fa9863a57ca6e03a8e54ee8d6d96b90aaa1bf66a1ba6119dadf7da1d494b6d0b",
+          "pixels_sha256": "5688f580c25e4d21b4cb240381a0b31b052414ec40dd1d0f33efa2d10665ef46",
+          "bytes": 57580,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "839e0d09b5e0e5d52f489bdd9f5b8400bcbb4d39d6a1e3638d9be73e4506c0fb",
+      "fingerprint": "356d5547cffae17172d03cae4844b54930d893fe62132f231e7e7679dca5d0b8"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_composed.webp",
+          "sha256": "09d4d7c5bbaf6a254112f3af74c9dded9898c4537b90bc407caa494c7470eac0",
+          "pixels_sha256": "5612a904c67cab6a9e7726ff5a0a131acdac9cc1aac9fc947fb28b59a4f5f0f2",
+          "bytes": 57148,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "dd967bf523d3f8567e6e8a170980b9f6d8fce5656e4459e426791d3210c6fd41",
+      "fingerprint": "5e980c267e4a7f52c89d028b71f20fd74d30a30443177c97d6dd7e846b25f080"
+    }
+  ]
 }

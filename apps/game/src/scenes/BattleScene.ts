@@ -159,7 +159,7 @@ export class BattleScene extends PixiScene<BattleInit> {
     bg.position.set(REF_W / 2, REF_H / 2);
     const cover = Math.max(REF_W / (bg.texture.width || REF_W), REF_H / (bg.texture.height || REF_H)) * 1.07;
     bg.scale.set(cover);
-    attachLivingBackdrop(this, bg, { baseScale: cover, fxDepth: DEPTH.bg + 1, mood: 'battle', intensity: 1.05 });
+    attachLivingBackdrop(this, bg, { baseScale: cover, fxDepth: DEPTH.bg + 1, mood: 'battle', location: this.encounter.location_id, intensity: 1.08 });
     this.add(verticalShade(0, 0, REF_W, 240, 0x0a0610, 0.28, 0.04), DEPTH.bg + 2);
     this.add(verticalShade(0, REF_H - 320, REF_W, 320, 0x0a0610, 0.04, 0.62), DEPTH.bg + 2);
     if (q.vignette) this.add(vignette(0.85, 0.24), DEPTH.hud - 100);
@@ -335,9 +335,9 @@ export class BattleScene extends PixiScene<BattleInit> {
     }
     this.descBg.clear();
     if (this.descText.text.trim()) {
-      const w = Math.max(420, Math.min(1440, this.descText.width + 52));
-      const h = Math.max(36, this.descText.height + 14);
-      this.descBg.chamferRect(this.descText.x - w / 2, this.descText.y - h / 2, w, h, 10).fill({ color: 0x0c0714, alpha: 0.84 }).stroke({ width: 1.2, color: C.gold, alpha: 0.45 });
+      const w = Math.max(460, Math.min(1480, this.descText.width + 64));
+      const h = Math.max(40, this.descText.height + 18);
+      this.descBg.chamferRect(this.descText.x - w / 2, this.descText.y - h / 2, w, h, 10).fill({ color: 0x090510, alpha: 0.9 }).stroke({ width: 1.4, color: C.gold, alpha: 0.55 });
     }
   }
 
@@ -973,7 +973,7 @@ export class BattleScene extends PixiScene<BattleInit> {
             element,
             side: v.side,
             portraitKey,
-            flipPortrait: v.side === 'player' ? actorUnit.def.unit_id === 'fadyme' : actorUnit.def.unit_id !== 'fadyme',
+            flipPortrait: v.side !== 'player',
             poseTexture: v.poseTexture,
             casterPos: { x: v.x, y: v.y }
           });

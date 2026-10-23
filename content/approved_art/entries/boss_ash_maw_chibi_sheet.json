@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "boss_ash_maw_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 4,
+  "revision": 5,
   "targets": {
     "atlases": {
       "atlas_boss_ash_maw": {
         "image": "art/atlas_boss_ash_maw.webp",
-        "width": 1927,
-        "height": 1595,
+        "width": 2041,
+        "height": 1360,
         "frames": {
           "ultimate": [
             4,
             4,
-            270,
-            416
+            239,
+            391
           ],
           "ultimate_2": [
-            278,
+            247,
             4,
-            270,
-            416
+            239,
+            391
           ],
           "ultimate_3": [
-            552,
+            490,
             4,
-            270,
-            416
+            239,
+            391
           ],
           "active": [
-            826,
+            733,
             4,
-            476,
-            415
+            432,
+            364
           ],
           "active_2": [
-            1306,
+            1169,
             4,
-            476,
-            415
+            432,
+            364
           ],
           "active_3": [
+            1605,
             4,
-            424,
-            476,
-            415
+            432,
+            364
           ],
           "basic": [
-            484,
-            424,
-            477,
-            413
+            4,
+            399,
+            425,
+            342
           ],
           "basic_2": [
-            965,
-            424,
-            477,
-            413
+            433,
+            399,
+            425,
+            342
           ],
           "basic_3": [
-            1446,
-            424,
-            477,
-            413
+            862,
+            399,
+            425,
+            342
+          ],
+          "defeat": [
+            1291,
+            399,
+            413,
+            321
           ],
           "hit": [
             4,
-            843,
-            265,
-            405
+            745,
+            413,
+            321
           ],
-          "defeat": [
-            273,
-            843,
-            496,
-            371
+          "victory": [
+            421,
+            745,
+            440,
+            311
           ],
           "idle": [
-            773,
-            843,
-            496,
-            339
+            865,
+            745,
+            446,
+            286
           ],
           "idle_2": [
-            1273,
-            843,
-            496,
-            339
+            1315,
+            745,
+            446,
+            286
           ],
           "idle_3": [
             4,
-            1252,
-            496,
-            339
-          ],
-          "victory": [
-            504,
-            1252,
-            495,
-            336
+            1070,
+            446,
+            286
           ],
           "walk": [
-            1003,
-            1252,
-            495,
-            333
+            454,
+            1070,
+            429,
+            278
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.493,
+            "pivot_x": 0.494,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.495
+            "pivot_x": 0.506,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.621,
+            "pivot_x": 0.63,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.62,
+            "pivot_x": 0.624,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.571,
+            "pivot_x": 0.573,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.581
+            "pivot_x": 0.497,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.51
+            "pivot_x": 0.497,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.493
+            "pivot_x": 0.466,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "8a9415c6079fd6d71c93cb23657baefc6b2743a872c950cbe363ff7570e8864e",
+    "sha256": "35faa6aacc7207fc38c8cf0c40f40a8482c6667dd7f74fd9f2ed56a8fada13ef",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/boss_ash_maw_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "23f3901823b5d29602b7a180ddcb783cb26bea408e20eb250fdcfb6a536d5dbf",
+    "provenance_sha256": "81d549792fdf76967e1fa7d491170c1f88b89ce886f523b1cd6fdc8eb9e9c72c",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "685e414a160268ac9ea44cfda68ea3cd80d32af118a63858b62da8085784e094",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/boss_ash_maw_chibi_sheet.ingest.json",
-    "spec_sha256": "bbb6bbc1889383221c1021fcf507690d3f20d438a9cdfb911f31bcf453294c88",
+    "spec_sha256": "379a4702963c11e079ca3e0d4a9faca1b2cc0b7670e36e68c4da2d021fb5bf6c",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "8467f0679b47d39dcbbb34548a270441824a2d48c9c3b810c00a37c22adc422b"
+    "fingerprint": "7b4970ecc94d0aad4a71d19933757542d66eaa840bcb565b8dd47143f7506fb7"
   },
   "outputs": [
     {
       "path": "art/atlas_boss_ash_maw.webp",
-      "sha256": "2aee6e84fde889e6a624e301491231b1f9c16b1d882a7fc5967f59ab429a0cba",
-      "pixels_sha256": "45ab331103c6e91dbfccd4a6c0f3f53496209a4ba3097d1901cbc705b0908c1d",
-      "bytes": 367310,
-      "width": 1927,
-      "height": 1595
+      "sha256": "8b43773b59a05d2446da8c94f08e3b2350ef2cc1b73c300341f5c9d6c22a9cd5",
+      "pixels_sha256": "dfe462389f1b394cfb470bf5de0fb3368252ee0825e159b19deb3e2d058720bf",
+      "bytes": 296766,
+      "width": 2041,
+      "height": 1360
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=38"
+          "detail": "removed=68"
         },
         "A14": {
           "status": "pass",
@@ -272,15 +309,15 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.757"
+          "detail": "k=0.655"
         },
         "A18": {
           "status": "pass",
-          "detail": "1927x1595"
+          "detail": "2041x1360"
         },
         "A19": {
           "status": "pass",
-          "detail": "367310 bytes <= 665600"
+          "detail": "296766 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
@@ -288,14 +325,14 @@
         }
       },
       "warnings": [
-        "A12: removed 38 isolated specks"
+        "A12: removed 68 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:29:03.476Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -348,6 +385,21 @@
       ],
       "source_sha256": "e5156d343f69d5d0cea9fd18d07625011c6351496d8db2af06da8db5f65e5492",
       "fingerprint": "9c3451d1f0ee680850036a5c13f1aa87dbf93d8f6c55d5bcf6cd615ac6da99c3"
+    },
+    {
+      "revision": 4,
+      "outputs": [
+        {
+          "path": "art/atlas_boss_ash_maw.webp",
+          "sha256": "2aee6e84fde889e6a624e301491231b1f9c16b1d882a7fc5967f59ab429a0cba",
+          "pixels_sha256": "45ab331103c6e91dbfccd4a6c0f3f53496209a4ba3097d1901cbc705b0908c1d",
+          "bytes": 367310,
+          "width": 1927,
+          "height": 1595
+        }
+      ],
+      "source_sha256": "8a9415c6079fd6d71c93cb23657baefc6b2743a872c950cbe363ff7570e8864e",
+      "fingerprint": "8467f0679b47d39dcbbb34548a270441824a2d48c9c3b810c00a37c22adc422b"
     }
   ]
 }

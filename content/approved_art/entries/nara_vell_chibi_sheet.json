@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "nara_vell_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_nara_vell": {
         "image": "art/atlas_nara_vell.webp",
-        "width": 1926,
-        "height": 1045,
+        "width": 1951,
+        "height": 678,
         "frames": {
-          "idle": [
-            4,
-            4,
-            193,
-            348
-          ],
-          "idle_2": [
-            201,
-            4,
-            193,
-            348
-          ],
-          "idle_3": [
-            398,
-            4,
-            193,
-            348
-          ],
           "ultimate": [
-            595,
+            4,
             4,
             247,
             348
           ],
           "ultimate_2": [
-            846,
+            255,
             4,
             247,
             348
           ],
           "ultimate_3": [
-            1097,
+            506,
             4,
             247,
             348
           ],
           "active": [
-            1348,
+            757,
             4,
-            245,
-            346
-          ],
-          "active_2": [
-            1597,
-            4,
-            245,
-            346
-          ],
-          "active_3": [
-            4,
-            356,
-            245,
-            346
-          ],
-          "basic": [
-            253,
-            356,
-            299,
-            345
-          ],
-          "basic_2": [
-            556,
-            356,
-            299,
-            345
-          ],
-          "basic_3": [
-            859,
-            356,
-            299,
-            345
-          ],
-          "victory": [
-            1162,
-            356,
-            241,
-            345
-          ],
-          "walk": [
-            1407,
-            356,
-            294,
-            343
-          ],
-          "hit": [
-            1705,
-            356,
-            217,
+            246,
             338
           ],
-          "defeat": [
+          "active_2": [
+            1007,
             4,
-            706,
-            217,
-            335
+            246,
+            338
+          ],
+          "active_3": [
+            1257,
+            4,
+            246,
+            338
+          ],
+          "victory": [
+            1507,
+            4,
+            234,
+            336
+          ],
+          "idle": [
+            1745,
+            4,
+            187,
+            318
+          ],
+          "idle_2": [
+            4,
+            356,
+            187,
+            318
+          ],
+          "idle_3": [
+            195,
+            356,
+            187,
+            318
+          ],
+          "walk": [
+            386,
+            356,
+            276,
+            315
+          ],
+          "basic": [
+            666,
+            356,
+            291,
+            305
+          ],
+          "basic_2": [
+            961,
+            356,
+            291,
+            305
+          ],
+          "basic_3": [
+            1256,
+            356,
+            291,
+            305
+          ],
+          "defeat": [
+            1551,
+            356,
+            196,
+            283
+          ],
+          "hit": [
+            1751,
+            356,
+            196,
+            283
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.554,
+            "pivot_x": 0.508,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.555
+            "pivot_x": 0.513,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.556,
+            "pivot_x": 0.515,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.528,
+            "pivot_x": 0.506,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.527,
+            "pivot_x": 0.518,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.511
+            "pivot_x": 0.573,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.513
+            "pivot_x": 0.573,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.53
+            "pivot_x": 0.534,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "c0a148bb2e5a2dda8fbbecd8dd21ab1f1ab749c2ed9995dca1d77722135e9ca3",
+    "sha256": "b75a332825c72b0623c3a52cc5ef7a2d8a208f8200b4b52f95761938186f3cab",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/nara_vell_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "e934c422a550fad31fbfcf6f7b27e292acf64703decd66059417fdce03a3df35",
+    "provenance_sha256": "4c33661700eb7d77b48f8ba7395a0a09be264a14dde839950bec3b1f4262e6e9",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "0dd4730946d662f97e2a90cbcd7379f08313951bf1083a8fb5c9efb7978861f8",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/nara_vell_chibi_sheet.ingest.json",
-    "spec_sha256": "f2401c4cdcfd6d25c36008e32928aa687439f63b02b06b4a926368a3aa8d8b89",
+    "spec_sha256": "ab2efe9f932aedbe5f6d42e135ac0205bc5346fc52d36cc57dc5ea84da190e1f",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "5cc563efbdbd03fa7381396e856a75684fc2437f9d2eaaff8583d5281d88d65e"
+    "fingerprint": "42eb2a5db1b5c0ee9ffaedb2dac40dbc6763faf364bc3659f1c56935e5031db3"
   },
   "outputs": [
     {
       "path": "art/atlas_nara_vell.webp",
-      "sha256": "26df74c8cffd1fe16b63e59aae62fe2ebf93dde62ce6c5c3ffb172fbfa7b2e97",
-      "pixels_sha256": "fb2d79008a17ca6d5e56d68ece7d17bbdf58f52de509ef476a5eef90e7149a03",
-      "bytes": 389040,
-      "width": 1926,
-      "height": 1045
+      "sha256": "5cc3473d9e5ecfd5dcb336f066004105b2cfbc04d5f2464d19243449f8e87094",
+      "pixels_sha256": "fa1f746f544f1d9d8e6ad17cfdc4dfbafafb83116d6aeb96a9ba67446655e543",
+      "bytes": 327374,
+      "width": 1951,
+      "height": 678
     }
   ],
   "qc": {
@@ -261,7 +298,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=6"
+          "detail": "removed=33"
         },
         "A14": {
           "status": "pass",
@@ -272,15 +309,15 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1926x1045"
+          "detail": "1951x678"
         },
         "A19": {
           "status": "pass",
-          "detail": "389040 bytes <= 665600"
+          "detail": "327374 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
@@ -288,14 +325,14 @@
         }
       },
       "warnings": [
-        "A12: removed 6 isolated specks"
+        "A12: removed 33 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:30:58.316Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -303,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_nara_vell.webp",
+          "sha256": "26df74c8cffd1fe16b63e59aae62fe2ebf93dde62ce6c5c3ffb172fbfa7b2e97",
+          "pixels_sha256": "fb2d79008a17ca6d5e56d68ece7d17bbdf58f52de509ef476a5eef90e7149a03",
+          "bytes": 389040,
+          "width": 1926,
+          "height": 1045
+        }
+      ],
+      "source_sha256": "c0a148bb2e5a2dda8fbbecd8dd21ab1f1ab749c2ed9995dca1d77722135e9ca3",
+      "fingerprint": "5cc563efbdbd03fa7381396e856a75684fc2437f9d2eaaff8583d5281d88d65e"
+    }
+  ]
 }

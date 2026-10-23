@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "hana_birch_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "hana_birch": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "57e01d3abef23beb3ffad1fd6e98d477456fcd6a631e6c58e9bf37244b5707b6",
+    "sha256": "8e4523531bff3d194794e7f9a9a59fc65ec77a00baed10ca670c288fff7c5b95",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/hana_birch_vn_focused/run.provenance.json",
-    "provenance_sha256": "ab9e793e69b728af6357b3c1f75273e938f03d0f85dfb1e7543cbe2f28f50885",
+    "provenance_sha256": "d53b80b2e836f355bbf1e8ccebd3393f9b6b420ba5a39384ec77ae6f701b1a27",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "5e07ac052cedb6e043dffbf29d1a50c4d12381233536b73649afbedd221df337",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/hana_birch_vn_focused.ingest.json",
-    "spec_sha256": "5de6be125a081b7678b4983ae61d1d482e67fa77355d6552a77d6f1e195dea1f",
+    "spec_sha256": "804670246053e030b35232b1839821a5f58db5800a68955c6ddd1070098e6324",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "0e5f6aa1dbd9046e4eb3519a113b6e8558b44235dd6150945c7cfdaae170b0b8"
+    "fingerprint": "854dcca5939ae2e99db8cd58c6c2f517a0e1c6ffece49cabe7ad844e97197b96"
   },
   "outputs": [
     {
       "path": "art/portrait_hana_birch_focused.webp",
-      "sha256": "a8994252b3624d845bbc21dec6b86943b3cd643b53c424ea8867115b66213848",
-      "pixels_sha256": "04405cbc764fb81c369c117686622d025b43100c11a37b16387d56560aae5902",
-      "bytes": 62044,
+      "sha256": "171fa2493b2eee74b043c5c7a9b18bb5c96fe7bf15bea16b90c22517339ca679",
+      "pixels_sha256": "b20fbf7a5e86976d58245fffe756314e2911a360aee849142ddff329f310bc49",
+      "bytes": 61634,
       "width": 768,
       "height": 1152
     }
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "62044 bytes <= 245760"
+          "detail": "61634 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -88,10 +88,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_hana_birch_focused.webp",
+          "sha256": "a8994252b3624d845bbc21dec6b86943b3cd643b53c424ea8867115b66213848",
+          "pixels_sha256": "04405cbc764fb81c369c117686622d025b43100c11a37b16387d56560aae5902",
+          "bytes": 62044,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "57e01d3abef23beb3ffad1fd6e98d477456fcd6a631e6c58e9bf37244b5707b6",
+      "fingerprint": "0e5f6aa1dbd9046e4eb3519a113b6e8558b44235dd6150945c7cfdaae170b0b8"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_hana_birch_focused.webp",
+          "sha256": "171fa2493b2eee74b043c5c7a9b18bb5c96fe7bf15bea16b90c22517339ca679",
+          "pixels_sha256": "b20fbf7a5e86976d58245fffe756314e2911a360aee849142ddff329f310bc49",
+          "bytes": 61634,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "8e4523531bff3d194794e7f9a9a59fc65ec77a00baed10ca670c288fff7c5b95",
+      "fingerprint": "854dcca5939ae2e99db8cd58c6c2f517a0e1c6ffece49cabe7ad844e97197b96"
+    }
+  ]
 }

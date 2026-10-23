@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "corrupted_mercenary_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_corrupted_mercenary": {
         "image": "art/atlas_corrupted_mercenary.webp",
-        "width": 1933,
-        "height": 542,
+        "width": 2036,
+        "height": 962,
         "frames": {
-          "idle": [
-            4,
-            4,
-            264,
-            266
-          ],
-          "idle_2": [
-            272,
-            4,
-            264,
-            266
-          ],
-          "idle_3": [
-            540,
-            4,
-            264,
-            266
-          ],
           "ultimate": [
-            808,
             4,
-            184,
-            266
+            4,
+            241,
+            346
           ],
           "ultimate_2": [
-            996,
+            249,
             4,
-            184,
-            266
+            241,
+            346
           ],
           "ultimate_3": [
-            1184,
+            494,
             4,
-            184,
-            266
+            241,
+            346
           ],
           "active": [
-            1372,
+            739,
             4,
-            183,
-            265
+            241,
+            337
           ],
           "active_2": [
-            1559,
+            984,
             4,
-            183,
-            265
+            241,
+            337
           ],
           "active_3": [
-            1746,
+            1229,
             4,
-            183,
-            265
+            241,
+            337
+          ],
+          "victory": [
+            1474,
+            4,
+            330,
+            333
+          ],
+          "walk": [
+            1808,
+            4,
+            224,
+            320
           ],
           "basic": [
             4,
-            274,
-            184,
-            264
+            354,
+            239,
+            317
           ],
           "basic_2": [
-            192,
-            274,
-            184,
-            264
+            247,
+            354,
+            239,
+            317
           ],
           "basic_3": [
-            380,
-            274,
-            184,
-            264
+            490,
+            354,
+            239,
+            317
           ],
-          "victory": [
-            568,
-            274,
-            261,
-            264
+          "idle": [
+            733,
+            354,
+            327,
+            317
           ],
-          "walk": [
-            833,
-            274,
-            180,
-            262
+          "idle_2": [
+            1064,
+            354,
+            327,
+            317
           ],
-          "hit": [
-            1017,
-            274,
-            208,
-            258
+          "idle_3": [
+            1395,
+            354,
+            327,
+            317
           ],
           "defeat": [
-            1229,
-            274,
-            212,
-            256
+            1726,
+            354,
+            275,
+            283
+          ],
+          "hit": [
+            4,
+            675,
+            275,
+            283
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.64,
+            "pivot_x": 0.655,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.608
+            "pivot_x": 0.646,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.605,
+            "pivot_x": 0.618,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.606,
+            "pivot_x": 0.629,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.605,
+            "pivot_x": 0.628,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.541
+            "pivot_x": 0.44,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.44
+            "pivot_x": 0.44,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.643
+            "pivot_x": 0.641,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "9517e2d329fe7cb620ae9a9116ba6b988667685d7a5de5ae0cc1da24ba711de4",
+    "sha256": "2c3e54fa49e0257101338607def0de99fa988ff1cf81de8b2e2e9fda241722ba",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/corrupted_mercenary_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "cf379e3d5b1ffb757f3a223770dde79ee09c620b444e4f76fe66f115d1ea8301",
+    "provenance_sha256": "40012cdb1d75db6648635ee59009d0df9cdedfef065bd6b4b0c72c85b8891189",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "e5abe692ff77b7397afe26bc3283307c4eaa428b78a826836b396e9b0ac0981b",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/corrupted_mercenary_chibi_sheet.ingest.json",
-    "spec_sha256": "e68ccc90d28b066312f180747c1c7094bf9a6f3f4066f32f001943465467a05a",
+    "spec_sha256": "ae4e4d6a7878efe0bd417b0f301279efb33ac0feb823df6a5ca4b59214b3ebe3",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "31be04d18d96fdf6b94a60af3a52852111d79b079567c98cf34d432227e7337e"
+    "fingerprint": "467c59495d929566032ff04d65bd1f6711ed7f8b6a4aff3e4e1329025a42411b"
   },
   "outputs": [
     {
       "path": "art/atlas_corrupted_mercenary.webp",
-      "sha256": "7628a0c7d68f0c79ab99bbd920290575be7a4d7fd301c209765a2325e03efcf8",
-      "pixels_sha256": "08ca1e9fee10551518b6d73191b65dd55bfb0a027b31d3277b5847821f10df73",
-      "bytes": 227466,
-      "width": 1933,
-      "height": 542
+      "sha256": "577cbbd38a3a65047618c1c3f677f6968d53e046e5768003cbeb3f4b6e2e4bbd",
+      "pixels_sha256": "9b96eb705f1d7484e225ed2832c7fb0f59ee89d5df73e15b973acb20c650074b",
+      "bytes": 258704,
+      "width": 2036,
+      "height": 962
     }
   ],
   "qc": {
@@ -260,8 +297,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=19"
         },
         "A14": {
           "status": "pass",
@@ -272,28 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.483"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "1933x542"
+          "detail": "2036x962"
         },
         "A19": {
           "status": "pass",
-          "detail": "227466 bytes <= 665600"
+          "detail": "258704 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 19 isolated specks"
+      ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:29:53.926Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -301,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_corrupted_mercenary.webp",
+          "sha256": "7628a0c7d68f0c79ab99bbd920290575be7a4d7fd301c209765a2325e03efcf8",
+          "pixels_sha256": "08ca1e9fee10551518b6d73191b65dd55bfb0a027b31d3277b5847821f10df73",
+          "bytes": 227466,
+          "width": 1933,
+          "height": 542
+        }
+      ],
+      "source_sha256": "9517e2d329fe7cb620ae9a9116ba6b988667685d7a5de5ae0cc1da24ba711de4",
+      "fingerprint": "31be04d18d96fdf6b94a60af3a52852111d79b079567c98cf34d432227e7337e"
+    }
+  ]
 }

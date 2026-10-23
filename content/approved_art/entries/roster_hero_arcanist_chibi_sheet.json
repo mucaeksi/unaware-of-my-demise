@@ -2,37 +2,109 @@
   "schema": 1,
   "asset_id": "roster_hero_arcanist_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 3,
+  "revision": 4,
   "targets": {
     "atlases": {
       "atlas_hero_arcanist": {
         "image": "art/atlas_hero_arcanist.webp",
-        "width": 1613,
-        "height": 425,
+        "width": 1895,
+        "height": 961,
         "frames": {
           "ultimate": [
             4,
             4,
-            339,
-            417
+            291,
+            354
+          ],
+          "ultimate_2": [
+            299,
+            4,
+            291,
+            354
+          ],
+          "ultimate_3": [
+            594,
+            4,
+            291,
+            354
+          ],
+          "victory": [
+            889,
+            4,
+            243,
+            353
           ],
           "idle": [
-            347,
+            1136,
             4,
-            306,
-            408
+            249,
+            316
           ],
-          "basic": [
-            657,
+          "idle_2": [
+            1389,
             4,
-            571,
-            398
+            249,
+            316
+          ],
+          "idle_3": [
+            1642,
+            4,
+            249,
+            316
+          ],
+          "walk": [
+            4,
+            362,
+            250,
+            311
+          ],
+          "active": [
+            258,
+            362,
+            404,
+            293
+          ],
+          "active_2": [
+            666,
+            362,
+            404,
+            293
+          ],
+          "active_3": [
+            1074,
+            362,
+            404,
+            293
+          ],
+          "defeat": [
+            1482,
+            362,
+            352,
+            280
           ],
           "hit": [
-            1232,
             4,
-            377,
-            331
+            677,
+            352,
+            280
+          ],
+          "basic": [
+            360,
+            677,
+            412,
+            275
+          ],
+          "basic_2": [
+            776,
+            677,
+            412,
+            275
+          ],
+          "basic_3": [
+            1192,
+            677,
+            412,
+            275
           ]
         }
       }
@@ -47,49 +119,129 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.414
+            "pivot_x": 0.382,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
           },
           "walk": {
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.414
+            "pivot_x": 0.382,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.267
+            "pivot_x": 0.352,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3",
+                "basic_2",
+                "basic"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "active": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.267
+            "pivot_x": 0.352,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3",
+                "active_2",
+                "active"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "ultimate": {
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.429
+            "pivot_x": 0.407,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3",
+                "ultimate_2",
+                "ultimate"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "hit": {
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.422
+            "pivot_x": 0.437,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.422
+            "pivot_x": 0.437,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.429
+            "pivot_x": 0.407,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -97,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "064693c1234bbbee069144908e8a1991d65c8226985880a7014418ef46998c29",
+    "sha256": "56060751719ee5f730371a991cac7b09361ff156ae515f6cf7619b032c40f9ee",
     "mime": "image/png",
-    "width": 2752,
-    "height": 1536,
+    "width": 2880,
+    "height": 2880,
     "provenance_file": ".cache/generated/roster_hero_arcanist_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "2d20b39f21a37f09c6b2115fc7bbd6db4f42a3207aea7b5ef3436d9acc1e6383",
+    "provenance_sha256": "33f0ca5f62a69c51ba1bdc98e33da2f940fa5c1127e177ffb0265452f6e9c244",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "4f9ec577f4a115f5f863c6bbe56c8d49d9a09fb24fdf9865333f20bcebbf9349",
     "references": [],
@@ -110,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/roster_hero_arcanist_chibi_sheet.ingest.json",
-    "spec_sha256": "7bcc03eb27ab9dee4aebf981e199e42b0dfbb7aaa17a98e4933cc10154a16045",
+    "spec_sha256": "c42a19fb976d0c935dc6c2b6bf27bfda8f634f8e932060d41fced21fcf465d27",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "258a88f0d4e05af3b03182d0a3c27470db5c211d1e487e58000a1c1060ac539f"
+    "fingerprint": "9d95a3ad075a38b16b33211cd1831b45d8254ee6fca69892728d286eefa6595d"
   },
   "outputs": [
     {
       "path": "art/atlas_hero_arcanist.webp",
-      "sha256": "4f6d839ff91d8bb1f73fc1c2305b5493a764c612af0e37bfc99ad4e4f47fea3e",
-      "pixels_sha256": "b41e4049d4217da83c316d322fec1e36d11ba01f73c9bbc1787a2722f7b4ea35",
-      "bytes": 139572,
-      "width": 1613,
-      "height": 425
+      "sha256": "e4618adaa937602a3f3b150a687072eb93d5b8d822437c23b539c5b46c60ec08",
+      "pixels_sha256": "b4a7a1d6becbe2fcbb457114af53cc6185767f58f922fddf0e62f92ca6f1750f",
+      "bytes": 402990,
+      "width": 1895,
+      "height": 961
     }
   ],
   "qc": {
@@ -138,7 +290,7 @@
         },
         "A02": {
           "status": "pass",
-          "detail": "image/png 2752x1536"
+          "detail": "image/png 2880x2880"
         },
         "A07": {
           "status": "pass",
@@ -146,41 +298,41 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=8"
+          "detail": "removed=53"
         },
         "A14": {
           "status": "pass",
-          "detail": "4 cells"
+          "detail": "16 cells"
         },
         "A15": {
           "status": "pass"
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.575"
+          "detail": "k=0.587"
         },
         "A18": {
           "status": "pass",
-          "detail": "1613x425"
+          "detail": "1895x961"
         },
         "A19": {
           "status": "pass",
-          "detail": "139572 bytes <= 665600"
+          "detail": "402990 bytes <= 665600"
         },
         "A08": {
-          "status": "warn",
-          "detail": "spill=0.0109%"
+          "status": "pass",
+          "detail": "spill=0.0044%"
         }
       },
       "warnings": [
-        "A12: removed 8 isolated specks"
+        "A12: removed 53 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
       "by": "owner",
-      "at": "2026-10-15T19:30:25.556Z",
-      "note": "Approved"
+      "at": "2026-10-22T06:31:28.004Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -218,6 +370,21 @@
       ],
       "source_sha256": "05e188d6dc3d61996e3355023154830ecf0a0ceaf0c9220cede25967ad0af01e",
       "fingerprint": "7da9e8f404e09f56ea2d7f198b75c1cf22051b9929c9df80af4f55cda167b9cc"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/atlas_hero_arcanist.webp",
+          "sha256": "4f6d839ff91d8bb1f73fc1c2305b5493a764c612af0e37bfc99ad4e4f47fea3e",
+          "pixels_sha256": "b41e4049d4217da83c316d322fec1e36d11ba01f73c9bbc1787a2722f7b4ea35",
+          "bytes": 139572,
+          "width": 1613,
+          "height": 425
+        }
+      ],
+      "source_sha256": "064693c1234bbbee069144908e8a1991d65c8226985880a7014418ef46998c29",
+      "fingerprint": "258a88f0d4e05af3b03182d0a3c27470db5c211d1e487e58000a1c1060ac539f"
     }
   ]
 }

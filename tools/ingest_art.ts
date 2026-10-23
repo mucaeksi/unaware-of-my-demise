@@ -723,11 +723,16 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
     gates.A03 = { status: scaleK > 0.9 ? 'warn' : 'pass', detail: `k=${scaleK.toFixed(3)}` };
 
     const animations = spec.frames?.animations ?? {};
+    const alignedSet = new Set<string>();
     for (const anim of Object.values(animations)) {
       const uniqueFrames = [...new Set(anim.frames)]
+        .filter((f) => !alignedSet.has(f))
         .map((f) => trimmedMap.get(f))
         .filter((tf): tf is TrimmedFrame => Boolean(tf));
-      await alignAnimationGroup(uniqueFrames);
+      if (uniqueFrames.length > 1) {
+        await alignAnimationGroup(uniqueFrames);
+        for (const tf of uniqueFrames) alignedSet.add(tf.name);
+      }
     }
 
     const packItems: { name: string; w: number; h: number; data: Buffer }[] = [];

@@ -41,8 +41,14 @@
     "image": "focused",
     "emotion_tags": [
       "analytical",
+      "ashamed",
+      "confused",
+      "embarrassed",
       "focused",
-      "serious"
+      "observant",
+      "serious",
+      "stricken",
+      "wounded"
     ]
   },
   "qc": {

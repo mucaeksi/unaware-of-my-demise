@@ -24,36 +24,36 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "4b0ec1dd99eed2e3706e51b03c136a2cce365faee49655dc801a02c653f83962",
-      "bytes": 13999,
+      "sha256": "05a64da1b0e55a898ca178527164780d5ece32055840e70dda61ea1779f58464",
+      "bytes": 21343,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
     {
       "path": "art/atlas_bellbound_dead.webp",
-      "sha256": "990827030c29201f07911b41e31dc7ba01f1020e8f46c1a25b0bc9e987f8d548",
-      "bytes": 101988,
+      "sha256": "200076551e8200d7f82afab74461d564782f51c7b3ebcfb95c25ff08d16f0a3c",
+      "bytes": 325268,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
     {
       "path": "art/atlas_fadyme.webp",
-      "sha256": "a7a0be9f54dc6431213ff21dcb1d9178493453184ffd95e7105e129b54f5a5dd",
-      "bytes": 383554,
+      "sha256": "45294a788697a7f53a33d15cb17fc2e100d360cf82e5ee89c1ff653a59927324",
+      "bytes": 344334,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
     {
       "path": "art/atlas_hollow_pilgrim.webp",
-      "sha256": "d2915a6a939ef3a09cd0d5880e7d13e474a45a73733575ee8f19f7aaa1663dc0",
-      "bytes": 123116,
+      "sha256": "3c8ea1852ebef98d3d14932f7998b713da8e38b01c5d28dfb76db45257392236",
+      "bytes": 341644,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
     {
       "path": "art/atlas_mahmut.webp",
-      "sha256": "2e75020a99ce546f04ae4a901d144453f3c9a76c2c5f85a34b5d6d4fb45416b7",
-      "bytes": 362334,
+      "sha256": "2366ef2aedb2305251eb2ca64ae8d6f0ca9cf4de43e59cffe066f3a4e082bf05",
+      "bytes": 324128,
       "media_type": "image/webp",
       "kind": "atlas_image"
     },
@@ -185,8 +185,8 @@
     },
     {
       "path": "art/still_prologue_search.webp",
-      "sha256": "889052436a8db6cce9b2d55d4af21291137be565df0e903b4a5767025ae6ddff",
-      "bytes": 97260,
+      "sha256": "38b309152c816b8891c2a93d3a1c6011cfc6aae0dfff0da432aa3711254a869d",
+      "bytes": 106558,
       "media_type": "image/webp",
       "kind": "background"
     },
@@ -304,8 +304,8 @@
     },
     {
       "path": "encounters/tutorial_t2.json",
-      "sha256": "93395cc73b0b3fc58de9728d572b1645664a8bccefee7aa1b53b26f02bf23afc",
-      "bytes": 864,
+      "sha256": "4c9d3f3f7d39860278ad21fa32eb488d4552c16b2cb6936b304162c07a4f88cf",
+      "bytes": 1070,
       "media_type": "application/json",
       "kind": "encounter"
     },

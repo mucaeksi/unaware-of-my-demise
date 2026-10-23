@@ -40,9 +40,12 @@
     "character": "clem_marr",
     "image": "defiant",
     "emotion_tags": [
+      "angry",
+      "blunt",
       "defiant",
       "fierce",
-      "urgent"
+      "urgent",
+      "vow"
     ]
   },
   "qc": {

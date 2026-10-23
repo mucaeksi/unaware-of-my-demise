@@ -2,109 +2,109 @@
   "schema": 1,
   "asset_id": "tilda_fen_chibi_sheet",
   "class": "unit_sheet",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "atlases": {
       "atlas_tilda_fen": {
         "image": "art/atlas_tilda_fen.webp",
-        "width": 2033,
-        "height": 1045,
+        "width": 1958,
+        "height": 965,
         "frames": {
-          "idle": [
-            4,
-            4,
-            224,
-            348
-          ],
-          "idle_2": [
-            232,
-            4,
-            224,
-            348
-          ],
-          "idle_3": [
-            460,
-            4,
-            224,
-            348
-          ],
           "ultimate": [
-            688,
             4,
-            265,
-            348
+            4,
+            266,
+            350
           ],
           "ultimate_2": [
-            957,
+            274,
             4,
-            265,
-            348
+            266,
+            350
           ],
           "ultimate_3": [
-            1226,
-            4,
-            265,
-            348
-          ],
-          "active": [
-            1495,
-            4,
-            265,
-            346
-          ],
-          "active_2": [
-            1764,
-            4,
-            265,
-            346
-          ],
-          "active_3": [
-            4,
-            356,
-            265,
-            346
-          ],
-          "basic": [
-            273,
-            356,
-            267,
-            345
-          ],
-          "basic_2": [
             544,
-            356,
-            267,
-            345
-          ],
-          "basic_3": [
-            815,
-            356,
-            267,
-            345
+            4,
+            266,
+            350
           ],
           "victory": [
-            1086,
-            356,
-            261,
-            345
+            814,
+            4,
+            253,
+            349
+          ],
+          "active": [
+            1071,
+            4,
+            264,
+            339
+          ],
+          "active_2": [
+            1339,
+            4,
+            264,
+            339
+          ],
+          "active_3": [
+            1607,
+            4,
+            264,
+            339
           ],
           "walk": [
-            1351,
-            356,
-            262,
-            343
+            4,
+            358,
+            253,
+            319
           ],
-          "hit": [
-            1617,
-            356,
-            218,
-            338
+          "idle": [
+            261,
+            358,
+            213,
+            317
+          ],
+          "idle_2": [
+            478,
+            358,
+            213,
+            317
+          ],
+          "idle_3": [
+            695,
+            358,
+            213,
+            317
+          ],
+          "basic": [
+            912,
+            358,
+            263,
+            315
+          ],
+          "basic_2": [
+            1179,
+            358,
+            263,
+            315
+          ],
+          "basic_3": [
+            1446,
+            358,
+            263,
+            315
           ],
           "defeat": [
+            1713,
+            358,
+            241,
+            280
+          ],
+          "hit": [
             4,
-            706,
-            217,
-            335
+            681,
+            241,
+            280
           ]
         }
       }
@@ -119,7 +119,7 @@
             "frame": "idle",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.418,
+            "pivot_x": 0.386,
             "animation": {
               "frames": [
                 "idle",
@@ -135,13 +135,23 @@
             "frame": "walk",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.496
+            "pivot_x": 0.47,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "basic_2"
+              ],
+              "fps": 8,
+              "loop": true
+            }
           },
           "basic": {
             "frame": "basic",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.496,
+            "pivot_x": 0.482,
             "animation": {
               "frames": [
                 "basic",
@@ -158,7 +168,7 @@
             "frame": "active",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.489,
+            "pivot_x": 0.479,
             "animation": {
               "frames": [
                 "active",
@@ -175,7 +185,7 @@
             "frame": "ultimate",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.49,
+            "pivot_x": 0.486,
             "animation": {
               "frames": [
                 "ultimate",
@@ -192,19 +202,46 @@
             "frame": "hit",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.533
+            "pivot_x": 0.563,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat",
+                "hit"
+              ],
+              "fps": 9,
+              "loop": false
+            }
           },
           "defeat": {
             "frame": "defeat",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.532
+            "pivot_x": 0.563,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
           },
           "victory": {
             "frame": "victory",
             "scale": 1,
             "foot_y": 1,
-            "pivot_x": 0.491
+            "pivot_x": 0.515,
+            "animation": {
+              "frames": [
+                "victory",
+                "ultimate_2",
+                "victory",
+                "idle_3"
+              ],
+              "fps": 7,
+              "loop": true
+            }
           }
         }
       }
@@ -212,12 +249,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "dfb8e338ee7f0c5cfff8f47c7895328c977c0d16bafb523fe5dec65eda5d9250",
+    "sha256": "5ca07af3acdd88cb5a5541318a262b34fc8b3984b92eef1cfceef7aa50476b09",
     "mime": "image/png",
     "width": 2880,
     "height": 2880,
     "provenance_file": ".cache/generated/tilda_fen_chibi_sheet/run.provenance.json",
-    "provenance_sha256": "3ae4b924c8f2d7ae8fe4dd49577b5a59f3408a3030525605f092fe8218d5b29d",
+    "provenance_sha256": "3dbac79dc1781981a1edb0082109bd4321300bfda4493e9dde0d01ff08a51010",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "02a6026cd3ca18e18a21f9e27c6439c6e458ed29b725625c4d696d112a5db425",
     "references": [],
@@ -225,19 +262,19 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/tilda_fen_chibi_sheet.ingest.json",
-    "spec_sha256": "9e29a0ca8f7c19f420caf9b4eaa42025454f53f48ce07bf40bb7f0ffce1e6761",
+    "spec_sha256": "a6cec470a8c2c232d912be2d7198edfa13089ee6abeed285268594f8011b8131",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "8ae0881db5079a4dc228db1246af972a4ac42d39847748ca8a9163f87745e24b"
+    "fingerprint": "c360a00722a31fca721badc31c9d140048831425f9752c2503dbd5f81387e708"
   },
   "outputs": [
     {
       "path": "art/atlas_tilda_fen.webp",
-      "sha256": "b2f47cdc3378f3c9d0253ce16dd4e09b0d943ec0ddcdb94e0d349a776b28cb71",
-      "pixels_sha256": "9ecfde7264b24345c0f60242f6150eb330247d18db720193e19dbeae84a7ca12",
-      "bytes": 453496,
-      "width": 2033,
-      "height": 1045
+      "sha256": "be86b8818f8bcf020d667a2e17d4ce554435c49e820823e730172e2b5cb5fbce",
+      "pixels_sha256": "33bc32edbf80c3ab4b6aaadbc08d98d5a6d8ee2e8bc48b7a3ac88976c468069c",
+      "bytes": 382054,
+      "width": 1958,
+      "height": 965
     }
   ],
   "qc": {
@@ -260,8 +297,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=68"
         },
         "A14": {
           "status": "pass",
@@ -272,28 +309,30 @@
         },
         "A03": {
           "status": "pass",
-          "detail": "k=0.632"
+          "detail": "k=0.593"
         },
         "A18": {
           "status": "pass",
-          "detail": "2033x1045"
+          "detail": "1958x965"
         },
         "A19": {
           "status": "pass",
-          "detail": "453496 bytes <= 665600"
+          "detail": "382054 bytes <= 665600"
         },
         "A08": {
           "status": "pass",
-          "detail": "spill=0.0003%"
+          "detail": "spill=0.0005%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 68 isolated specks"
+      ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T06:31:49.319Z",
+      "note": "Full 16-frame articulated chibi sheet with all 8 animated states"
     }
   },
   "license": {
@@ -301,5 +340,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/atlas_tilda_fen.webp",
+          "sha256": "b2f47cdc3378f3c9d0253ce16dd4e09b0d943ec0ddcdb94e0d349a776b28cb71",
+          "pixels_sha256": "9ecfde7264b24345c0f60242f6150eb330247d18db720193e19dbeae84a7ca12",
+          "bytes": 453496,
+          "width": 2033,
+          "height": 1045
+        }
+      ],
+      "source_sha256": "dfb8e338ee7f0c5cfff8f47c7895328c977c0d16bafb523fe5dec65eda5d9250",
+      "fingerprint": "8ae0881db5079a4dc228db1246af972a4ac42d39847748ca8a9163f87745e24b"
+    }
+  ]
 }

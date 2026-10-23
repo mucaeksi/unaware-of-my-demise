@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "bg_mountain_crater_rim",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "f75aa3c671fe",
+    "provenance": ".cache/generated/bg_mountain_crater_rim/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1920,
+    "height": 1080,
+    "webp": {
+      "mode": "lossy",
+      "quality": 80,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "mountain_crater_rim"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

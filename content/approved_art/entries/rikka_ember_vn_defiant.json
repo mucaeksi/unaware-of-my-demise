@@ -7,9 +7,14 @@
     "portraits": {
       "rikka_ember": {
         "emotions": {
+          "competitive": "defiant",
+          "defensive": "defiant",
           "defiant": "defiant",
           "determined": "defiant",
+          "excited": "defiant",
+          "exuberant": "defiant",
           "fierce": "defiant",
+          "triumphant": "defiant",
           "urgent": "defiant"
         },
         "images": {
@@ -89,10 +94,10 @@
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.957Z",
+      "note": "Approved for Part I full release"
     }
   },
   "license": {

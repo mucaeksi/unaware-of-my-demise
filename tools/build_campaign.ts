@@ -5,7 +5,7 @@
  * It also plays every stage with the Auto Battle policy and reports whether the stage can be won at its recommended level (docs/combat/CAMPAIGN_BALANCE.md).
  * Run: npm run build:campaign
  */
-import { mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
@@ -225,11 +225,46 @@ for (const entry of approvedEntries) {
   }
 }
 const campaignPortraits: ArtManifest['portraits'] = structuredClone(art.portraits);
+for (const [charId, p] of Object.entries(campaignPortraits)) {
+  const tags = usedEmotions.get(charId) ?? new Set<string>();
+  for (const tag of tags) {
+    if (p.emotions[tag]) continue;
+    const t = tag.toLowerCase();
+    if (charId === 'mahmut') {
+      if (/dry|wry|amused|casual|polite|gentle|warm|grateful|tender|hopeful/.test(t) && p.images.dry_humor) {
+        p.emotions[tag] = 'dry_humor';
+      } else if (/protect|defian|command|decisive|urgent|warn|anger|angry|firm|resolv|promise|hard|raw|grief/.test(t) && p.images.protective_resolve) {
+        p.emotions[tag] = 'protective_resolve';
+      } else if (/watch|alert|observ|careful|search|question|skeptic|wary|tense|tight|strained|alarm|shaken|stun|surpris|fear|troubl|remors|asham|hurt/.test(t) && p.images.watchful) {
+        p.emotions[tag] = 'watchful';
+      } else {
+        p.emotions[tag] = 'composed';
+      }
+    } else if (charId === 'fadyme') {
+      if (/wry|dry|amused|knowing|deflect/.test(t) && p.images.wry) {
+        p.emotions[tag] = 'wry';
+      } else if (/warm|smile|smiling|gentle|soft|kind|hopeful|reliev|encourag|laugh|light|touch/.test(t) && p.images.warm) {
+        p.emotions[tag] = 'warm';
+      } else if (/resolv|defian|firm|focus|sharp|percept|observ|careful|wary|guard|serious|strained|tear|fragil|vulnerable|afraid|plead|sad|wistful|break|stun|disbelief|breathless|uneasy/.test(t) && p.images.resolve) {
+        p.emotions[tag] = 'resolve';
+      } else {
+        p.emotions[tag] = 'composed';
+      }
+    }
+  }
+}
+const playableCharIds = new Set(chars.map((c) => c.character_id));
 for (const [charId, p] of rawPortraits) {
   const wantedTags = usedEmotions.get(charId) ?? new Set(['composed']);
-  const wantedImgs = new Set(['composed', ...[...wantedTags].map((t) => p.emotions[t] ?? 'composed')]);
+  const wantedImgs = playableCharIds.has(charId)
+    ? new Set(['composed', ...[...wantedTags].map((t) => p.emotions[t] ?? 'composed')])
+    : new Set(['composed']);
   const images = Object.fromEntries(Object.entries(p.images).filter(([k]) => wantedImgs.has(k)));
   const emotions = Object.fromEntries(Object.entries(p.emotions).map(([t, img]) => [t, images[img] ? img : 'composed']));
+  for (const t of wantedTags) {
+    if (!emotions[t]) emotions[t] = 'composed';
+  }
+  if (!emotions.composed) emotions.composed = 'composed';
   for (const relPath of Object.values(images)) {
     writeOut(`${OUT}/${relPath}`, readFileSync(join(ROOT, 'content/approved_art', relPath)));
   }
@@ -293,15 +328,64 @@ if (placeholders.length > 0) {
   unitArt.hero_arcanist = heroArcanistUnit;
   unitArt.enemy_knight = enemyKnightUnit;
 }
-// breakable boss objectives are drawn from one generic "weak point" icon until each gets its own art
+// breakable boss objectives use their dedicated intact + broken sprites packed in atlas_objective.webp
 const OW = 192;
-const objSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${OW}" height="${OW}"><circle cx="96" cy="96" r="80" fill="#3b2a4d" stroke="#e7c36a" stroke-width="6"/><path d="M60 120 L96 52 L132 120 Z" fill="none" stroke="#e7c36a" stroke-width="7" stroke-linejoin="round"/><circle cx="96" cy="108" r="7" fill="#e7c36a"/></svg>`;
-writeOut(`${OUT}/art/atlas_objective.webp`, await sharp(Buffer.from(objSvg)).webp({ quality: 85 }).toBuffer());
-atlases.atlas_objective = { image: 'art/atlas_objective.webp', width: OW, height: OW, frames: { idle: [0, 0, OW, OW] } };
+const OBJ_CELLS = [
+  'jaw_bell_intact', 'jaw_bell_broken', 'wax_seal_intact', 'signal_banner_intact',
+  'signal_banner_broken', 'flask_rack_intact', 'flask_rack_broken', 'signal_standard_intact',
+  'signal_standard_broken', 'mirror_frame_intact', 'mirror_frame_broken', 'chain_joint_intact',
+  'chain_joint_broken', 'ankle_anchor_intact', 'ankle_anchor_broken', 'altar_pylon_intact',
+] as const;
+const objFrames: Record<string, [number, number, number, number]> = { idle: [0, 0, OW, OW] };
+for (let i = 0; i < OBJ_CELLS.length; i++) {
+  objFrames[OBJ_CELLS[i]!] = [(i % 4) * OW, Math.floor(i / 4) * OW, OW, OW];
+}
+const OBJ_MAP: Record<string, { intact: string; broken: string }> = {
+  jaw_bell: { intact: 'jaw_bell_intact', broken: 'jaw_bell_broken' },
+  wax_seal: { intact: 'wax_seal_intact', broken: 'wax_seal_intact' },
+  signal_banner: { intact: 'signal_banner_intact', broken: 'signal_banner_broken' },
+  flask_rack_left: { intact: 'flask_rack_intact', broken: 'flask_rack_broken' },
+  flask_rack_right: { intact: 'flask_rack_intact', broken: 'flask_rack_broken' },
+  signal_standard: { intact: 'signal_standard_intact', broken: 'signal_standard_broken' },
+  mirror_frame: { intact: 'mirror_frame_intact', broken: 'mirror_frame_broken' },
+  chain_joint_left: { intact: 'chain_joint_intact', broken: 'chain_joint_broken' },
+  chain_joint_right: { intact: 'chain_joint_intact', broken: 'chain_joint_broken' },
+  ankle_anchor: { intact: 'ankle_anchor_intact', broken: 'ankle_anchor_broken' },
+  altar_pylon_left: { intact: 'altar_pylon_intact', broken: 'altar_pylon_intact' },
+  altar_pylon_center: { intact: 'altar_pylon_intact', broken: 'altar_pylon_intact' },
+  altar_pylon_right: { intact: 'altar_pylon_intact', broken: 'altar_pylon_intact' },
+};
+const approvedObjAtlas = join(ROOT, 'content/approved_art/art/atlas_objective.webp');
+if (existsSync(approvedObjAtlas)) {
+  writeOut(`${OUT}/art/atlas_objective.webp`, readFileSync(approvedObjAtlas));
+  atlases.atlas_objective = { image: 'art/atlas_objective.webp', width: OW * 4, height: OW * 4, frames: objFrames };
+} else {
+  const objSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${OW}" height="${OW}"><circle cx="96" cy="96" r="80" fill="#3b2a4d" stroke="#e7c36a" stroke-width="6"/><path d="M60 120 L96 52 L132 120 Z" fill="none" stroke="#e7c36a" stroke-width="7" stroke-linejoin="round"/><circle cx="96" cy="108" r="7" fill="#e7c36a"/></svg>`;
+  writeOut(`${OUT}/art/atlas_objective.webp`, await sharp(Buffer.from(objSvg)).webp({ quality: 85 }).toBuffer());
+  atlases.atlas_objective = { image: 'art/atlas_objective.webp', width: OW, height: OW, frames: { idle: [0, 0, OW, OW] } };
+}
 for (const u of pack.units) {
   for (const o of u.boss?.phases.flatMap((p) => p.objectives) ?? []) {
     if (unitArt[o.objective_id]) continue;
-    const states = Object.fromEntries(['idle', 'walk', 'basic', 'active', 'ultimate', 'hit', 'defeat', 'victory'].map((st) => [st, { frame: 'idle', scale: 1, foot_y: 0.97, pivot_x: 0.5 }]));
+    const mapping = existsSync(approvedObjAtlas) ? OBJ_MAP[o.objective_id] : undefined;
+    const intactFrame = mapping?.intact ?? 'idle';
+    const brokenFrame = mapping?.broken ?? intactFrame;
+    const states = Object.fromEntries(
+      ['idle', 'walk', 'basic', 'active', 'ultimate', 'hit', 'defeat', 'victory'].map((st) => [
+        st,
+        {
+          frame: st === 'defeat' ? brokenFrame : intactFrame,
+          scale: 1,
+          foot_y: 0.97,
+          pivot_x: 0.5,
+          ...(st === 'hit' && brokenFrame !== intactFrame
+            ? { animation: { frames: [intactFrame, brokenFrame, intactFrame], fps: 8, loop: false } }
+            : st === 'defeat' && brokenFrame !== intactFrame
+              ? { animation: { frames: [intactFrame, brokenFrame], fps: 6, loop: false } }
+              : {}),
+        },
+      ]),
+    );
     unitArt[o.objective_id] = { atlas: 'atlas_objective', facing: 'left', height_px: 150, states };
   }
 }

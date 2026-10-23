@@ -21,7 +21,7 @@ const STATURE_TABLE: Readonly<Record<string, CharacterStature>> = {
   // Colossal / Heavy Vanguards & Templars (186cm - 196cm)
   garrick_cinder: { heightCm: 195, vnTargetHeight: 1255, vnBaseY: REF_H + 8, nativeFacing: 'right' },
   corbin_locke: { heightCm: 191, vnTargetHeight: 1235, vnBaseY: REF_H + 10, nativeFacing: 'right' },
-  mahmut: { heightCm: 190, vnTargetHeight: 1225, vnBaseY: REF_H + 10, nativeFacing: 'right' },
+  mahmut: { heightCm: 190, vnTargetHeight: 1185, vnBaseY: REF_H + 10, nativeFacing: 'right' },
   cassian_thorne: { heightCm: 188, vnTargetHeight: 1210, vnBaseY: REF_H + 12, nativeFacing: 'right' },
   marek_vane: { heightCm: 185, vnTargetHeight: 1190, vnBaseY: REF_H + 14, nativeFacing: 'right' },
   brin_alder: { heightCm: 184, vnTargetHeight: 1180, vnBaseY: REF_H + 14, nativeFacing: 'right' },
@@ -45,7 +45,7 @@ const STATURE_TABLE: Readonly<Record<string, CharacterStature>> = {
 
   // Slender / Petite Characters (154cm - 163cm)
   clem_marr: { heightCm: 162, vnTargetHeight: 1015, vnBaseY: REF_H + 26, nativeFacing: 'left' },
-  fadyme: { heightCm: 161, vnTargetHeight: 995, vnBaseY: REF_H + 28, nativeFacing: 'left' },
+  fadyme: { heightCm: 161, vnTargetHeight: 1095, vnBaseY: REF_H + 18, nativeFacing: 'left' },
   thistle_roe: { heightCm: 160, vnTargetHeight: 990, vnBaseY: REF_H + 28, nativeFacing: 'left' },
   nixie_vale: { heightCm: 159, vnTargetHeight: 982, vnBaseY: REF_H + 30, nativeFacing: 'left' },
   hana_birch: { heightCm: 158, vnTargetHeight: 974, vnBaseY: REF_H + 30, nativeFacing: 'left' },

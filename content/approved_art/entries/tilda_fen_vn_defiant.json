@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "tilda_fen_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "tilda_fen": {
@@ -20,12 +20,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "6bac6b6ba9cb1370df06801dee3a8f0c8fcb6ffc8ceec2aed811fac4bf784f6b",
+    "sha256": "e2bd827580ba8bb4a4a3ea8bbef49e4eeedd5cd27bbcee63e47539f2585d50f2",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/tilda_fen_vn_defiant/run.provenance.json",
-    "provenance_sha256": "e03e1607dabdafe41cf26d01aaf01c9bc072d4f487c9cf68f281c4a68805c2fd",
+    "provenance_sha256": "9cb850769bb5929b7ba30ec36ceac14acf950de762e3f1b421e67fc417cd8a4b",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "5c664c0f7d0e82c726e06e97194403511b41c7f29f384b17e105d813ae039df7",
     "references": [],
@@ -33,17 +33,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/tilda_fen_vn_defiant.ingest.json",
-    "spec_sha256": "7a8e820bae2d6ba2bc5de1dba5a682ec2f23ddd50dc80cd683e503fb0c792dca",
+    "spec_sha256": "539a4be91027af8621033dc236f405bd7b87f539c1941b6299197e37a68cbdc0",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "69f9b4d42174ad206ad2291dadb19abe70fcc87e31e37cc0aa118ea9f11c808d"
+    "fingerprint": "945e9940d6af861f0ac558d42ed64d672f1d85b79c07b612027aca01ad33d790"
   },
   "outputs": [
     {
       "path": "art/portrait_tilda_fen_defiant.webp",
-      "sha256": "b63fa29d1f0bb243ddd51115b7b831f8fac72d6bffd5b1f55b733243eeb06b7a",
-      "pixels_sha256": "86dee951a6fdcb2c8a0a08a64999074914d9a53865bb0d5f95bc1d45904683a0",
-      "bytes": 66686,
+      "sha256": "365d1c0cc92629db1fced9e3fc9d0a531fd5da3be892b1cc48986825ba4b2b77",
+      "pixels_sha256": "01c627a0f92282311cb0ff944f26fe823e137173215b1e54c3073013577107cc",
+      "bytes": 67608,
       "width": 768,
       "height": 1152
     }
@@ -69,7 +69,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=1"
+          "detail": "removed=5"
         },
         "A18": {
           "status": "pass",
@@ -77,7 +77,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "66686 bytes <= 245760"
+          "detail": "67608 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -85,14 +85,14 @@
         }
       },
       "warnings": [
-        "A12: removed 1 isolated specks"
+        "A12: removed 5 isolated specks"
       ]
     },
     "human": {
-      "status": "pending",
-      "by": null,
-      "at": null,
-      "note": ""
+      "status": "approved",
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -100,5 +100,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_defiant.webp",
+          "sha256": "b63fa29d1f0bb243ddd51115b7b831f8fac72d6bffd5b1f55b733243eeb06b7a",
+          "pixels_sha256": "86dee951a6fdcb2c8a0a08a64999074914d9a53865bb0d5f95bc1d45904683a0",
+          "bytes": 66686,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "6bac6b6ba9cb1370df06801dee3a8f0c8fcb6ffc8ceec2aed811fac4bf784f6b",
+      "fingerprint": "69f9b4d42174ad206ad2291dadb19abe70fcc87e31e37cc0aa118ea9f11c808d"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_defiant.webp",
+          "sha256": "365d1c0cc92629db1fced9e3fc9d0a531fd5da3be892b1cc48986825ba4b2b77",
+          "pixels_sha256": "01c627a0f92282311cb0ff944f26fe823e137173215b1e54c3073013577107cc",
+          "bytes": 67608,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "e2bd827580ba8bb4a4a3ea8bbef49e4eeedd5cd27bbcee63e47539f2585d50f2",
+      "fingerprint": "945e9940d6af861f0ac558d42ed64d672f1d85b79c07b612027aca01ad33d790"
+    }
+  ]
 }

@@ -4,7 +4,7 @@
   "class": "unit_sheet",
   "source": {
     "kind": "generated",
-    "pick": "2eef5193a79b",
+    "pick": "131ed0c5b8ab",
     "provenance": ".cache/generated/boss_red_vial_matron_chibi_sheet/run.provenance.json"
   },
   "key": {
@@ -125,7 +125,7 @@
   },
   "frames": {
     "idle": "idle",
-    "idle_frame_px": 330,
+    "idle_frame_px": 270,
     "ground": "lowest",
     "pivot": "lower_body_centroid",
     "animations": {
@@ -171,6 +171,43 @@
         ],
         "fps": 9,
         "loop": false
+      },
+      "hit": {
+        "frames": [
+          "hit",
+          "defeat",
+          "hit"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "defeat": {
+        "frames": [
+          "hit",
+          "defeat"
+        ],
+        "fps": 6,
+        "loop": false
+      },
+      "walk": {
+        "frames": [
+          "walk",
+          "idle_2",
+          "walk",
+          "basic_2"
+        ],
+        "fps": 8,
+        "loop": true
+      },
+      "victory": {
+        "frames": [
+          "victory",
+          "ultimate_2",
+          "victory",
+          "idle_3"
+        ],
+        "fps": 7,
+        "loop": true
       }
     }
   },

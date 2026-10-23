@@ -42,8 +42,14 @@
     "emotion_tags": [
       "alert",
       "analytical",
+      "bitter",
+      "curious",
+      "fear",
       "focused",
-      "serious"
+      "grave",
+      "serious",
+      "surprised",
+      "suspicious"
     ]
   },
   "qc": {

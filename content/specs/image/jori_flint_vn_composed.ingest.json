@@ -40,20 +40,17 @@
     "character": "jori_flint",
     "image": "composed",
     "emotion_tags": [
-      "ashamed",
       "calm",
       "certain",
       "composed",
-      "confused",
       "earnest",
       "firm",
+      "frustrated",
+      "grudging",
+      "hollow",
       "honest",
       "neutral",
-      "observant",
-      "relieved",
-      "resolved",
-      "stricken",
-      "stubborn"
+      "resolved"
     ]
   },
   "qc": {

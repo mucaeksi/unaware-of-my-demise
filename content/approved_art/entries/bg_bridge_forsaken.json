@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_bridge_forsaken",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "bridge_forsaken": "art/bg_bridge_forsaken.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "f8c5a6228ebb26dcf821af97462edd8bfcf78792e64fa102e34db7b36e1f3ce3",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_bridge_forsaken/run.provenance.json",
+    "provenance_sha256": "e2aaf91f187f53da805fd0e682853c88764f2d44ea4467d5baa60d606544fa1e",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "2891a82dbf62bf686caf4efe9e5639ab24e9d3606317c9c1bdb0f95d0fae24ae",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_bridge_forsaken.ingest.json",
+    "spec_sha256": "36986bb3995e05344e9daf415b97b522969de05b709885665dfd5231b312e2a0",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "88c04cd523cbe77a3cc1b7423a3017840397de9bda8f609c9114ceb4d4295e4a"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_bridge_forsaken.webp",
+      "sha256": "86fd4b99574aab5ce185fac6d8647215cfeb4ee027dc2278fa81d76a088813a6",
+      "pixels_sha256": "1efd38001bb8e6078e01bab0d963e0f1b78ce113990683b14005a2f7730f0330",
+      "bytes": 177400,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "177400 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.893Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -387,7 +387,8 @@ export class PrologueScene extends PixiScene {
       this.anim.to(this.subtitleShimmer, { x: REF_W / 2 + 340, alpha: 0 }, { duration: 1250, ease: 'sine.out' });
     }
 
-    const full = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
+    const rawFull = this.stage?.text(scene.line_id, scene.text_en) ?? scene.text_en;
+    const full = this.body.wrap(rawFull).join('\n');
     void this.stage?.voice(scene.line_id);
 
     if (INTRO_FAST || !isInteractiveBrowser()) {

@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "asset_id": "bg_highland_ridge",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "highland_ridge": "art/bg_highland_ridge.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "281877e4797b37e8a31bd3673c77a282f833c7f0b4b1ae59e05412890dd93217",
+    "mime": "image/png",
+    "width": 1920,
+    "height": 1080,
+    "provenance_file": ".cache/generated/bg_highland_ridge/run.provenance.json",
+    "provenance_sha256": "c213709d3a47a3e617443f151994f9f5bcd6131c97858a43dd50ee13b6d8f402",
+    "model": "gemini-3-pro-image",
+    "prompt_sha256": "3bd40e96f103cc3e09c3cec643f03afc7284242798b29d7d4085f97574fbaf2a",
+    "references": [],
+    "settled_usd": 0
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/bg_highland_ridge.ingest.json",
+    "spec_sha256": "2991fda02dd317904d82aa9d9614003b2f09f950a836aba31d27d0d3cfcc7eb9",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "196139863e911314c305e98cf628c90e89993a73490f981b420293a6d202b07f"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_highland_ridge.webp",
+      "sha256": "4b628195d42486150b30bd3ed3acd3a1cca52ea2e5375ffa054d24da989f57e6",
+      "pixels_sha256": "ca5a26034300aadbc069f3d85c5574d0565885080dc11cf7935238c452470a3f",
+      "bytes": 91740,
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1920x1080"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1920x1080"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "91740 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "approved",
+      "by": "owner@sovtaym.studio",
+      "at": "2026-10-22T05:05:53.896Z",
+      "note": "Approved for Part I full release"
+    }
+  },
+  "license": {
+    "origin": "antigravity_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}
