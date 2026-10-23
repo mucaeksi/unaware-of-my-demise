@@ -1,6 +1,6 @@
 ---
 name: pixijs-scene-dom-container
-description: "Codex/UOMD adaptation. Use this skill when overlaying HTML elements on the PixiJS v8 canvas. Covers DOMContainer with element, anchor, and scene-graph-driven CSS transforms, the pixi.js/dom side-effect import, DOMPipe registration, visibility sync, pointer-events handling. Triggers on: DOMContainer, pixi.js/dom, DOMPipe, HTML overlay, input on canvas, iframe overlay, DOMContainerOptions, element, anchor, constructor options."
+description: "Codex/UOMD adaptation. Use this skill when overlaying HTML elements on the PixiJS v8 canvas. Covers DOMContainer with element, anchor, and scene-graph-driven CSS transforms, the pixi.js/dom side-effect import, DOMPipe …"
 license: "MIT"
 ---
 # pixijs-scene-dom-container — Codex adaptation

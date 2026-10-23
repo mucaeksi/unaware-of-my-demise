@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
-"""Install and verify the curated Everything Claude Code (ECC v2.2.3) suite for Claude Code and Antigravity.
+"""Install, prune, and verify the Everything Claude Code (ECC v2.2.3) suite for Claude Code and Antigravity.
 
 Configures separate, host-adapted surfaces without enabling background hook daemons:
-  - Claude Code (.claude/):
+  - Claude Code (.claude/ — full curated UOMD surface):
       - .claude/skills/<name>/           (77 canonical UOMD-relevant ECC skills, locked in .claude/skills-lock.json)
       - .claude/agents/<name>.md         (28 subagents with Claude tool frontmatter + UOMD alignment)
       - .claude/commands/<name>.md       (26 slash commands adapted to UOMD verification and D-28)
       - .claude/rules/ecc/<pack>/*.md    (6 stack rule packs: common, typescript, react, web, python, kotlin)
       - .claude/third-party-licenses/ecc/LICENSE
-  - Antigravity / Codex (.agents/):
-      - .agents/skills/<name>/SKILL.md   (generated and locked via tools/sync_codex_skills.py)
-      - .agents/agents/<name>.md         (28 subagents adapted to Antigravity tools & pro/flash models)
-      - .agents/workflows/<name>.md      (26 slash workflows adapted for Antigravity)
-      - .agents/rules/ecc-*.md           (4 consolidated rule packs within Antigravity's 20,000-token rule budget)
+  - Antigravity / Codex (.agents/ — token-budget-optimized surface with 0 skill evictions):
+      - .agents/skills/<name>/SKILL.md   (14 high-signal ECC skills + 53 UOMD/PixiJS/Ponytail skills, <=220 char descriptions)
+      - .agents/agents/<name>.md         (10 core specialist subagents adapted to Antigravity tools & pro/flash models)
+      - .agents/workflows/<name>.md      (8 UOMD-relevant workflows adapted for Antigravity)
+      - .agents/rules/ecc-*.md           (4 ultra-compact rule summaries < 10 KB total, well inside the 20,000-token rule budget)
 
 Usage:
     python3 tools/install_ecc.py --source /path/to/ECC   # install/refresh from ECC checkout + sync adapters
-    python3 tools/install_ecc.py --check                 # verify installed Claude + Antigravity ECC surfaces
+    python3 tools/install_ecc.py --sync-antigravity      # prune & regenerate .agents/ surfaces and compact rules
+    python3 tools/install_ecc.py --check                 # verify installed Claude + Antigravity ECC surfaces & token budgets
 """
 from __future__ import annotations
 
@@ -40,6 +41,8 @@ ECC_COMMIT = "90606c8315ee09cafc303515c5f33024db6b9882"
 ECC_REPO = "https://github.com/affaan-m/ECC"
 
 ECC_SKILLS: list[str] = sorted(sync_codex_skills.ECC_SKILLS)
+ANTIGRAVITY_ECC_SKILLS: list[str] = sorted(sync_codex_skills.ANTIGRAVITY_ECC_SKILLS)
+ANTIGRAVITY_EXCLUDED_ECC_SKILLS: list[str] = sorted(sync_codex_skills.ANTIGRAVITY_EXCLUDED_ECC_SKILLS)
 
 ECC_AGENTS: list[str] = [
     "a11y-architect",
@@ -72,6 +75,22 @@ ECC_AGENTS: list[str] = [
     "typescript-reviewer",
 ]
 
+# Only the 10 highest-value, non-redundant specialist subagents are kept in .agents/agents/
+# for Antigravity (excluding Postgres/Supabase database-reviewer, retired Context7 docs-lookup, etc.).
+ANTIGRAVITY_AGENTS: list[str] = [
+    "architect",
+    "build-error-resolver",
+    "code-reviewer",
+    "e2e-runner",
+    "performance-optimizer",
+    "react-build-resolver",
+    "react-reviewer",
+    "refactor-cleaner",
+    "security-reviewer",
+    "typescript-reviewer",
+]
+ANTIGRAVITY_EXCLUDED_AGENTS: list[str] = sorted(set(ECC_AGENTS) - set(ANTIGRAVITY_AGENTS))
+
 ECC_COMMANDS: list[str] = [
     "build-fix",
     "checkpoint",
@@ -101,7 +120,26 @@ ECC_COMMANDS: list[str] = [
     "update-docs",
 ]
 
+# Only the 8 core UOMD workflows are kept in .agents/workflows/ for Antigravity
+# (excluding ~/.claude/session-data/ commands and duplicates of native /plan and /learn).
+ANTIGRAVITY_WORKFLOWS: list[str] = [
+    "build-fix",
+    "code-review",
+    "feature-dev",
+    "quality-gate",
+    "react-build",
+    "react-review",
+    "react-test",
+    "refactor-clean",
+]
+ANTIGRAVITY_EXCLUDED_WORKFLOWS: list[str] = sorted(set(ECC_COMMANDS) - set(ANTIGRAVITY_WORKFLOWS))
+
 ECC_RULE_PACKS: list[str] = ["common", "typescript", "react", "web", "python", "kotlin"]
+
+# Hard token/byte budget ceilings for Antigravity (.agents/)
+MAX_AGY_SKILLS_INDEX_BYTES = 24_000   # ~6,000 tokens (leaves >26 KB for global/builtin skills inside the 50 KB cap)
+MAX_AGY_AGENTS_INDEX_BYTES = 3_500    # ~875 tokens
+MAX_AGY_RULES_TOTAL_BYTES = 12_000    # ~3,000 tokens (well inside the 20,000-token rules budget)
 
 ANTIGRAVITY_TOOL_MAP: dict[str, str] = {
     "Read": "read_file",
@@ -207,6 +245,8 @@ def adapt_agent_for_antigravity(raw_text: str) -> str:
     if not match:
         raise ValueError("Agent file missing YAML frontmatter")
     header, body = match.groups()
+    if CLAUDE_AGENT_FOOTER.strip() in body:
+        body = body.replace(CLAUDE_AGENT_FOOTER.strip(), "").rstrip()
 
     name_match = re.search(r"^name:\s*(.+)$", header, re.MULTILINE)
     desc_match = re.search(r"^description:\s*(.+)$", header, re.MULTILINE)
@@ -225,13 +265,13 @@ def adapt_agent_for_antigravity(raw_text: str) -> str:
 
     mapped_tools: list[str] = []
     for t in tool_items:
-        mapped = ANTIGRAVITY_TOOL_MAP.get(t)
+        mapped = ANTIGRAVITY_TOOL_MAP.get(t, t if t in ANTIGRAVITY_TOOL_MAP.values() else None)
         if mapped and mapped not in mapped_tools:
             mapped_tools.append(mapped)
     if not mapped_tools:
         mapped_tools = ["read_file"]
 
-    mapped_model = ANTIGRAVITY_MODEL_MAP.get(raw_model, "pro")
+    mapped_model = ANTIGRAVITY_MODEL_MAP.get(raw_model, raw_model if raw_model in ("pro", "flash") else "pro")
 
     new_header = (
         "---\n"
@@ -267,6 +307,9 @@ def adapt_command_for_antigravity(name: str, raw_text: str) -> str:
     if name == "quality-gate":
         return UOMD_QUALITY_GATE_COMMAND
     text = raw_text.replace("\r\n", "\n")
+    marker = "\n\n---\n> **UOMD Note (D-28):**"
+    if marker in text:
+        text = text.split(marker, 1)[0]
     text = (
         text.replace("Use Read tool", "Use `read_file` tool")
         .replace("Use Edit tool", "Use `edit_file` tool")
@@ -284,88 +327,105 @@ def adapt_command_for_antigravity(name: str, raw_text: str) -> str:
     )
 
 
-def strip_rule_frontmatter(text: str) -> str:
-    text = text.replace("\r\n", "\n")
-    if text.startswith("---\n") and "\n---\n" in text[4:]:
-        return text.split("\n---\n", 1)[1].lstrip()
-    return text
+def build_antigravity_consolidated_rules() -> dict[str, str]:
+    """Build 4 ultra-compact, token-lean rule summaries for .agents/rules/ (< 8 KB total)."""
+    ecc_common = """# ECC 2.2.3 Core Rules (Antigravity / Argon 4 Compact Summary)
 
+> Root `README.md` and `AGENTS.md` take precedence. Full verbose rules live in `.claude/rules/ecc/common/`.
 
-def build_antigravity_consolidated_rules(claude_rules_root: Path) -> dict[str, str]:
-    """Build 4 concise, high-signal rule files for .agents/rules/ well within Antigravity's 24 KB/file and 20,000-token budget."""
-    common_dir = claude_rules_root / "common"
-    ts_dir = claude_rules_root / "typescript"
-    web_dir = claude_rules_root / "web"
-    py_dir = claude_rules_root / "python"
-    kt_dir = claude_rules_root / "kotlin"
-
-    common_parts = [
-        "# ECC 2.2.3 Core Engineering Rules (Antigravity / Argon 4 Adaptation)\n\n"
-        "> Adapted for **Unaware of My Demise**. Root `README.md` and `AGENTS.md` take precedence.\n"
-        "> Under **Decision D-28**, agents verify with `npm run verify` and commit locally; never `git push` or deploy Workers."
-    ]
-    for fname in (
-        "coding-style.md",
-        "development-workflow.md",
-        "testing.md",
-        "security.md",
-        "code-review.md",
-        "patterns.md",
-        "git-workflow.md",
-    ):
-        fpath = common_dir / fname
-        if fpath.is_file():
-            common_parts.append(strip_rule_frontmatter(fpath.read_text(encoding="utf-8")).strip())
-
-    ts_web_parts = [
-        "# ECC 2.2.3 TypeScript & Web Rules (PixiJS v8 + Gothic DOM/CSS UI & Cloudflare Workers)\n\n"
-        "> Applies to `apps/game`, `apps/api`, `apps/admin`, `packages/*`, and `tools/*`.\n"
-        "> Game client uses pure PixiJS v8 (`apps/game/src/core`) + HTML/ARIA layer (`apps/game/src/ui/domKit.ts`). Backend uses Cloudflare Workers + Hono + D1 SQLite."
-    ]
-    for d in (ts_dir, web_dir):
-        for fpath in sorted(d.glob("*.md")):
-            if fpath.name == "hooks.md":
-                continue
-            ts_web_parts.append(strip_rule_frontmatter(fpath.read_text(encoding="utf-8")).strip())
-
-    react_rule = """# ECC 2.2.3 React Rules (UOMD Control Center — `apps/admin`)
-
-> Applies to the React + TypeScript UOMD Control Center (`apps/admin`). Full examples live in `.claude/rules/ecc/react/` and the `react-patterns`, `react-performance`, and `react-testing` skills.
-
-## 1. Component & State Architecture (`coding-style.md` & `patterns.md`)
-- Prefer small, single-responsibility function components with explicit named `interface` props (avoid `React.FC` and `any`).
-- Compute derived state during render instead of syncing state inside `useEffect`.
-- Keep state as local as possible; colocate form, filter, and modal state within the owning Control Center view.
-- Use controlled inputs with explicit validation feedback and deterministic loading / empty / error states.
-- Preserve UOMD Control Center security invariants: Cloudflare Access JWT, RBAC role checks, CSRF headers on mutations, and immutable audit trail verification.
-
-## 2. React Hooks Discipline (`hooks.md`)
-- Call hooks unconditionally at the top level of function components or custom `use*` hooks.
-- Use `useEffect` strictly for external synchronization (DOM events, timers, network abort controllers) and always return a cleanup function (e.g. `AbortController.abort()`, `clearInterval`).
-- Include all reactive dependencies in `useEffect` / `useMemo` / `useCallback` dependency arrays.
-- Do not prematurely wrap values in `useMemo` or `useCallback` unless passed to a memoized child, used in a hook dependency array, or proven expensive.
-
-## 3. Security & Testing (`security.md` & `testing.md`)
-- Never render unvalidated HTML (`dangerouslySetInnerHTML`) or expose raw secrets/tokens in Control Center views, logs, or URL query parameters.
-- Test user-visible behavior and accessibility roles (`getByRole`, `getByLabelText`) rather than internal component state.
+- **Minimalism & Ponytail (`ultra`)**: Make the smallest change that completely solves the task. Keep files focused (`< 800` lines), functions small (`< 50` lines), and avoid speculative abstractions or unapproved dependencies.
+- **Immutability & Error Handling**: Prefer immutable state transformations. Catch and handle errors explicitly with typed/structured context; never silently swallow exceptions.
+- **Testing & Verification**: Write deterministic unit/integration/E2E tests covering happy paths, edge cases, and error paths. Run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`) before committing.
+- **Security**: Validate all external inputs at system boundaries (`packages/contracts` / Zod). Never hardcode secrets, log tokens/PII, or concatenate raw SQL (always bind D1 prepared statements).
+- **Delivery (D-28)**: Create reviewable Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`) locally on `main`. **Never run `git push` or `wrangler deploy` from an agent session** — the owner pushes via GitHub Desktop.
 """
 
-    py_kt_parts = [
-        "# ECC 2.2.3 Python Tooling & Kotlin/Android Rules (`tools/` & `apps/android`)\n\n"
-        "> Applies to Python verification/ingest scripts in `tools/` and the Capacitor 8 Android native shell in `apps/android`."
-    ]
-    for d in (py_dir, kt_dir):
-        for fpath in sorted(d.glob("*.md")):
-            if fpath.name in ("hooks.md", "fastapi.md"):
-                continue
-            py_kt_parts.append(strip_rule_frontmatter(fpath.read_text(encoding="utf-8")).strip())
+    ecc_ts_web = """# ECC 2.2.3 TypeScript & Web Rules (`apps/game`, `apps/api`, `apps/admin`, `packages/*`)
+
+> Full verbose rules live in `.claude/rules/ecc/typescript/` and `.claude/rules/ecc/web/`.
+
+- **Type Safety**: Enforce strict TypeScript (`noImplicitAny`, `strictNullChecks`). Prefer `unknown` + narrowing or `packages/contracts` schemas over `any` or unsafe `as` casts.
+- **PixiJS v8 + Gothic DOM/CSS (`apps/game`)**: Keep battle/narrative canvas rendering on pure PixiJS v8 (`apps/game/src/core`) and menu overlays in the accessible HTML/CSS + ARIA layer (`apps/game/src/ui/domKit.ts`). Clean up tickers, tweens, textures, and event listeners on scene teardown.
+- **Cloudflare Workers + D1 (`apps/api`)**: Keep handlers stateless on Hono + D1 SQLite + R2 + Queues. Enforce server-authoritative combat/economy, idempotency keys, and Cloudflare Access/RBAC checks.
+- **Web Accessibility & Vital Budgets**: Maintain semantic ARIA roles, keyboard focus management, `>= 44x44 CSS px` touch targets, WCAG AA contrast, and `prefers-reduced-motion` support.
+"""
+
+    ecc_react = """# ECC 2.2.3 React Rules (UOMD Control Center — `apps/admin`)
+
+> Full verbose rules live in `.claude/rules/ecc/react/` and the `react-patterns`, `react-performance`, and `react-testing` skills.
+
+- **Component & State Design**: Use small function components with explicit `interface` props. Compute derived state during render instead of syncing state inside `useEffect`. Colocate local UI state.
+- **Hooks Discipline**: Call hooks unconditionally at the top level. Use `useEffect` strictly for external synchronization and always clean up subscriptions, timers, and `AbortController` instances.
+- **Control Center Security & Testing**: Preserve Cloudflare Access JWT, RBAC role gates, CSRF mutation headers, and audit trail checks. Never use `dangerouslySetInnerHTML` with untrusted data. Test behavior via accessible queries (`getByRole`, `getByLabelText`).
+"""
+
+    ecc_py_kt = """# ECC 2.2.3 Python Tooling & Kotlin/Android Rules (`tools/` & `apps/android`)
+
+> Full verbose rules live in `.claude/rules/ecc/python/` and `.claude/rules/ecc/kotlin/`.
+
+- **Python (`tools/*.py`)**: Follow PEP 8 with explicit type hints, `pathlib.Path`, deterministic UTF-8 (`newline="\\n"`) file writes, symlink/path-traversal guards, and `unittest`/`pytest` verification without unapproved third-party packages.
+- **Kotlin & Capacitor Android (`apps/android`)**: Prefer `val`, immutable collections, sealed classes/interfaces for state/results, and structured concurrency (`viewModelScope` / `lifecycleScope` with explicit cancellation handling; never `GlobalScope`). Keep native Billing, AdMob/UMP, and Play Integrity bridges behind clean repository/plugin boundaries.
+"""
 
     return {
-        "ecc-common.md": "\n\n---\n\n".join(common_parts) + "\n",
-        "ecc-typescript-web.md": "\n\n---\n\n".join(ts_web_parts) + "\n",
-        "ecc-react.md": react_rule,
-        "ecc-python-kotlin.md": "\n\n---\n\n".join(py_kt_parts) + "\n",
+        "ecc-common.md": ecc_common,
+        "ecc-typescript-web.md": ecc_ts_web,
+        "ecc-react.md": ecc_react,
+        "ecc-python-kotlin.md": ecc_py_kt,
     }
+
+
+def sync_antigravity_surfaces() -> None:
+    """Prune unnecessary ECC files from .agents/ and regenerate compact Antigravity surfaces from .claude/."""
+    claude_agents_dir = CLAUDE_DIR / "agents"
+    agy_agents_dir = AGENTS_DIR / "agents"
+    agy_agents_dir.mkdir(parents=True, exist_ok=True)
+
+    for removed_agent in ANTIGRAVITY_EXCLUDED_AGENTS:
+        p = agy_agents_dir / f"{removed_agent}.md"
+        if p.is_file():
+            p.unlink()
+
+    for agent_name in ANTIGRAVITY_AGENTS:
+        c_agent = claude_agents_dir / f"{agent_name}.md"
+        if not c_agent.is_file():
+            raise SystemExit(f"FAIL: Missing Claude agent source {c_agent}")
+        (agy_agents_dir / f"{agent_name}.md").write_text(
+            adapt_agent_for_antigravity(c_agent.read_text(encoding="utf-8")),
+            encoding="utf-8",
+            newline="\n",
+        )
+
+    claude_cmds_dir = CLAUDE_DIR / "commands"
+    agy_workflows_dir = AGENTS_DIR / "workflows"
+    agy_workflows_dir.mkdir(parents=True, exist_ok=True)
+
+    for removed_wf in ANTIGRAVITY_EXCLUDED_WORKFLOWS:
+        p = agy_workflows_dir / f"{removed_wf}.md"
+        if p.is_file():
+            p.unlink()
+
+    for wf_name in ANTIGRAVITY_WORKFLOWS:
+        c_cmd = claude_cmds_dir / f"{wf_name}.md"
+        if not c_cmd.is_file():
+            raise SystemExit(f"FAIL: Missing Claude command source {c_cmd}")
+        (agy_workflows_dir / f"{wf_name}.md").write_text(
+            adapt_command_for_antigravity(wf_name, c_cmd.read_text(encoding="utf-8")),
+            encoding="utf-8",
+            newline="\n",
+        )
+
+    agy_rules_dir = AGENTS_DIR / "rules"
+    agy_rules_dir.mkdir(parents=True, exist_ok=True)
+    for rule_name, rule_content in build_antigravity_consolidated_rules().items():
+        (agy_rules_dir / rule_name).write_text(rule_content, encoding="utf-8", newline="\n")
+
+    adapter_count = sync_codex_skills.sync(ROOT, check=False)
+    print(
+        f"PASS: Synced Antigravity (.agents/) surfaces: {len(ANTIGRAVITY_ECC_SKILLS)} ECC skills "
+        f"({adapter_count} total adapters), {len(ANTIGRAVITY_AGENTS)} subagents, "
+        f"{len(ANTIGRAVITY_WORKFLOWS)} workflows, and 4 compact rule packs."
+    )
 
 
 def install_from_source(source: Path) -> None:
@@ -387,7 +447,6 @@ def install_from_source(source: Path) -> None:
             if src_file.is_symlink() or not src_file.is_file():
                 continue
             rel = src_file.relative_to(src_skill)
-            # Exclude hook scripts/docs since executable_hooks_enabled is false
             if "hooks" in rel.parts or rel.name == "hook-integration.md":
                 continue
             out_file = dst_skill / rel
@@ -399,23 +458,19 @@ def install_from_source(source: Path) -> None:
     LICENSE_DEST.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(source / "LICENSE", LICENSE_DEST)
     lock["ecc_skills"] = {
+        "antigravity_skills": ANTIGRAVITY_ECC_SKILLS,
         "commit": ECC_COMMIT,
-        " hooks_enabled": False,
+        "hooks_enabled": False,
         "license": "MIT",
         "skills": ECC_SKILLS,
         "source": ECC_REPO,
         "version": ECC_VERSION,
     }
-    # Fix key name without leading space
-    lock["ecc_skills"].pop(" hooks_enabled", None)
-    lock["ecc_skills"]["hooks_enabled"] = False
     LOCK_PATH.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 
-    # 3. Install 28 curated subagents separately for Claude (.claude/agents/) and Antigravity (.agents/agents/)
+    # 3. Install 28 curated subagents into .claude/agents/
     claude_agents_dir = CLAUDE_DIR / "agents"
-    agy_agents_dir = AGENTS_DIR / "agents"
     claude_agents_dir.mkdir(parents=True, exist_ok=True)
-    agy_agents_dir.mkdir(parents=True, exist_ok=True)
     for agent_name in ECC_AGENTS:
         src_agent = source / "agents" / f"{agent_name}.md"
         if not src_agent.is_file():
@@ -424,15 +479,10 @@ def install_from_source(source: Path) -> None:
         (claude_agents_dir / f"{agent_name}.md").write_text(
             adapt_agent_for_claude(raw_text), encoding="utf-8", newline="\n"
         )
-        (agy_agents_dir / f"{agent_name}.md").write_text(
-            adapt_agent_for_antigravity(raw_text), encoding="utf-8", newline="\n"
-        )
 
-    # 4. Install 26 curated slash commands (.claude/commands/) and Antigravity workflows (.agents/workflows/)
+    # 4. Install 26 curated slash commands into .claude/commands/
     claude_cmds_dir = CLAUDE_DIR / "commands"
-    agy_workflows_dir = AGENTS_DIR / "workflows"
     claude_cmds_dir.mkdir(parents=True, exist_ok=True)
-    agy_workflows_dir.mkdir(parents=True, exist_ok=True)
     for cmd_name in ECC_COMMANDS:
         src_cmd = source / "commands" / f"{cmd_name}.md"
         if not src_cmd.is_file():
@@ -441,11 +491,8 @@ def install_from_source(source: Path) -> None:
         (claude_cmds_dir / f"{cmd_name}.md").write_text(
             adapt_command_for_claude(cmd_name, raw_text), encoding="utf-8", newline="\n"
         )
-        (agy_workflows_dir / f"{cmd_name}.md").write_text(
-            adapt_command_for_antigravity(cmd_name, raw_text), encoding="utf-8", newline="\n"
-        )
 
-    # 5. Install 6 stack rule packs for Claude (.claude/rules/ecc/) and 4 consolidated rule files for Antigravity (.agents/rules/)
+    # 5. Install 6 stack rule packs for Claude (.claude/rules/ecc/)
     claude_rules_root = CLAUDE_DIR / "rules" / "ecc"
     if claude_rules_root.exists():
         shutil.rmtree(claude_rules_root)
@@ -465,17 +512,30 @@ def install_from_source(source: Path) -> None:
                 content = content.replace("\r\n", "\n")
             (dst_pack / src_rule.name).write_text(content, encoding="utf-8", newline="\n")
 
-    agy_rules_dir = AGENTS_DIR / "rules"
-    agy_rules_dir.mkdir(parents=True, exist_ok=True)
-    for rule_name, rule_content in build_antigravity_consolidated_rules(claude_rules_root).items():
-        (agy_rules_dir / rule_name).write_text(rule_content, encoding="utf-8", newline="\n")
+    # 6. Sync & prune Antigravity (.agents/) surfaces
+    sync_antigravity_surfaces()
 
-    # 6. Synchronize .agents/skills/ adapters and .agents/skills-lock.json
-    adapter_count = sync_codex_skills.sync(ROOT, check=False)
-    print(
-        f"PASS: Installed {len(ECC_SKILLS)} ECC skills, {len(ECC_AGENTS)} Claude/Antigravity subagents, "
-        f"{len(ECC_COMMANDS)} commands/workflows, and stack rules; synced {adapter_count} total adapters."
-    )
+
+def measure_antigravity_index_budgets() -> tuple[int, int]:
+    """Return (skills_index_bytes, agents_index_bytes) for all workspace items in .agents/."""
+    skills_bytes = 0
+    for skill_dir in sorted((AGENTS_DIR / "skills").iterdir()):
+        f = skill_dir / "SKILL.md"
+        if not f.is_file():
+            continue
+        fields = sync_codex_skills.metadata(f.read_text(encoding="utf-8"))
+        line = f"- {fields['name']} ({f.resolve()}): {fields['description']}"
+        skills_bytes += len(line.encode("utf-8"))
+
+    agents_bytes = 0
+    for agent_file in sorted((AGENTS_DIR / "agents").glob("*.md")):
+        txt = agent_file.read_text(encoding="utf-8")
+        m = re.search(r"^description:\s*(.+)$", txt, re.MULTILINE)
+        desc = m.group(1).strip() if m else ""
+        line = f"- {agent_file.stem}: {desc}"
+        agents_bytes += len(line.encode("utf-8"))
+
+    return skills_bytes, agents_bytes
 
 
 def verify_installation() -> None:
@@ -490,26 +550,39 @@ def verify_installation() -> None:
 
     for name in ECC_SKILLS:
         skill_md = CLAUDE_DIR / "skills" / name / "SKILL.md"
-        adapter_md = AGENTS_DIR / "skills" / name / "SKILL.md"
-        if not skill_md.is_file() or not adapter_md.is_file():
-            raise SystemExit(f"FAIL: Missing skill or adapter for {name}")
+        if not skill_md.is_file():
+            raise SystemExit(f"FAIL: Missing Claude canonical skill .claude/skills/{name}/SKILL.md")
         if lock["skill_file_sha256"].get(name) != sha256(skill_md.read_bytes()):
             raise SystemExit(f"FAIL: Lock hash mismatch for .claude/skills/{name}/SKILL.md")
+        adapter_md = AGENTS_DIR / "skills" / name / "SKILL.md"
+        if name in ANTIGRAVITY_ECC_SKILLS and not adapter_md.is_file():
+            raise SystemExit(f"FAIL: Missing retained Antigravity ECC skill adapter .agents/skills/{name}/SKILL.md")
+        if name in ANTIGRAVITY_EXCLUDED_ECC_SKILLS and adapter_md.exists():
+            raise SystemExit(f"FAIL: Excluded ECC skill adapter still present in Antigravity: .agents/skills/{name}")
 
     for agent_name in ECC_AGENTS:
         c_agent = CLAUDE_DIR / "agents" / f"{agent_name}.md"
+        if not c_agent.is_file():
+            raise SystemExit(f"FAIL: Missing Claude subagent .claude/agents/{agent_name}.md")
         a_agent = AGENTS_DIR / "agents" / f"{agent_name}.md"
-        if not c_agent.is_file() or not a_agent.is_file():
-            raise SystemExit(f"FAIL: Missing subagent {agent_name} in .claude/agents or .agents/agents")
-        a_text = a_agent.read_text(encoding="utf-8")
-        if "model: pro" not in a_text and "model: flash" not in a_text:
-            raise SystemExit(f"FAIL: Antigravity subagent {agent_name} missing adapted model tier")
+        if agent_name in ANTIGRAVITY_AGENTS:
+            if not a_agent.is_file():
+                raise SystemExit(f"FAIL: Missing Antigravity subagent .agents/agents/{agent_name}.md")
+            a_text = a_agent.read_text(encoding="utf-8")
+            if "model: pro" not in a_text and "model: flash" not in a_text:
+                raise SystemExit(f"FAIL: Antigravity subagent {agent_name} missing adapted model tier")
+        elif a_agent.exists():
+            raise SystemExit(f"FAIL: Excluded subagent still present in Antigravity: .agents/agents/{agent_name}.md")
 
     for cmd_name in ECC_COMMANDS:
         c_cmd = CLAUDE_DIR / "commands" / f"{cmd_name}.md"
+        if not c_cmd.is_file():
+            raise SystemExit(f"FAIL: Missing Claude command .claude/commands/{cmd_name}.md")
         a_wf = AGENTS_DIR / "workflows" / f"{cmd_name}.md"
-        if not c_cmd.is_file() or not a_wf.is_file():
-            raise SystemExit(f"FAIL: Missing command/workflow {cmd_name}")
+        if cmd_name in ANTIGRAVITY_WORKFLOWS and not a_wf.is_file():
+            raise SystemExit(f"FAIL: Missing Antigravity workflow .agents/workflows/{cmd_name}.md")
+        if cmd_name in ANTIGRAVITY_EXCLUDED_WORKFLOWS and a_wf.exists():
+            raise SystemExit(f"FAIL: Excluded workflow still present in Antigravity: .agents/workflows/{cmd_name}.md")
 
     for pack in ECC_RULE_PACKS:
         if not (CLAUDE_DIR / "rules" / "ecc" / pack).is_dir():
@@ -525,26 +598,51 @@ def verify_installation() -> None:
             raise SystemExit(f"FAIL: Antigravity rule file {rname} exceeds 24 KB per-file cap ({size} bytes)")
         total_agy_rule_bytes += size
 
+    if total_agy_rule_bytes > MAX_AGY_RULES_TOTAL_BYTES:
+        raise SystemExit(
+            f"FAIL: Antigravity rules total ({total_agy_rule_bytes} B) exceeds compact budget ({MAX_AGY_RULES_TOTAL_BYTES} B)"
+        )
+
+    skills_index_bytes, agents_index_bytes = measure_antigravity_index_budgets()
+    if skills_index_bytes > MAX_AGY_SKILLS_INDEX_BYTES:
+        raise SystemExit(
+            f"FAIL: Antigravity .agents/skills index ({skills_index_bytes} B) exceeds budget ({MAX_AGY_SKILLS_INDEX_BYTES} B)"
+        )
+    if agents_index_bytes > MAX_AGY_AGENTS_INDEX_BYTES:
+        raise SystemExit(
+            f"FAIL: Antigravity .agents/agents index ({agents_index_bytes} B) exceeds budget ({MAX_AGY_AGENTS_INDEX_BYTES} B)"
+        )
+
     sync_codex_skills.sync(ROOT, check=True)
     print(
-        f"PASS: ECC {ECC_VERSION} verified ({len(ECC_SKILLS)} skills, {len(ECC_AGENTS)} subagents, "
-        f"{len(ECC_COMMANDS)} commands/workflows, Antigravity rules={total_agy_rule_bytes} bytes, hooks disabled)"
+        f"PASS: ECC {ECC_VERSION} verified | Claude: {len(ECC_SKILLS)} skills, {len(ECC_AGENTS)} agents, {len(ECC_COMMANDS)} commands | "
+        f"Antigravity: {len(ANTIGRAVITY_ECC_SKILLS)} ECC skills (index={skills_index_bytes}B/{MAX_AGY_SKILLS_INDEX_BYTES}B), "
+        f"{len(ANTIGRAVITY_AGENTS)} agents (index={agents_index_bytes}B/{MAX_AGY_AGENTS_INDEX_BYTES}B), "
+        f"{len(ANTIGRAVITY_WORKFLOWS)} workflows, rules={total_agy_rule_bytes}B/{MAX_AGY_RULES_TOTAL_BYTES}B"
     )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, help="Path to ECC repository checkout")
-    parser.add_argument("--check", action="store_true", help="Verify installed ECC files without writing")
+    parser.add_argument("--sync-antigravity", action="store_true", help="Prune and regenerate .agents/ surfaces from .claude/")
+    parser.add_argument("--check", action="store_true", help="Verify installed ECC files and Antigravity token budgets")
     args = parser.parse_args()
 
     if args.check:
+        verify_installation()
+    elif args.sync_antigravity:
+        lock = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
+        if "ecc_skills" in lock:
+            lock["ecc_skills"]["antigravity_skills"] = ANTIGRAVITY_ECC_SKILLS
+            LOCK_PATH.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+        sync_antigravity_surfaces()
         verify_installation()
     elif args.source:
         install_from_source(args.source.resolve())
         verify_installation()
     else:
-        parser.error("Specify either --source <path-to-ECC> or --check")
+        parser.error("Specify --source <path>, --sync-antigravity, or --check")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 ---
 name: uomd-chibi-animation
-description: "Codex/UOMD adaptation. Produce or integrate Unaware of My Demise character media — 2-head SD chibi battle atlases, knee-up (boydan) Light Novel portraits, cut-ins and their PixiJS v8 animation (frame swaps, procedural tweens) with locked identity, pivots and provenance."
+description: "Codex/UOMD adaptation. Produce or integrate Unaware of My Demise character media — 2-head SD chibi battle atlases, knee-up (boydan) Light Novel portraits, cut-ins and their PixiJS v8 animation (frame swaps, procedural …"
 ---
 # uomd-chibi-animation — Codex adaptation
 

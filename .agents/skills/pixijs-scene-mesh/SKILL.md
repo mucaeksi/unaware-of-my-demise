@@ -1,6 +1,6 @@
 ---
 name: pixijs-scene-mesh
-description: "Codex/UOMD adaptation. Use this skill when rendering custom geometry in PixiJS v8. Covers Mesh with MeshGeometry (positions, uvs, indices, topology), MeshSimple for per-frame vertex animation, MeshPlane for subdivided deformation, MeshRope for path-following textures, PerspectiveMesh for 2.5D corners. Triggers on: Mesh, MeshGeometry, MeshSimple, MeshPlane, MeshRope, PerspectiveMesh, positions, uvs, indices, topology, setCorners, constructor options, MeshOptions, MeshPlaneOptions, MeshRopeOptions, SimpleMeshOptions, PerspectivePlaneOptions."
+description: "Codex/UOMD adaptation. Use this skill when rendering custom geometry in PixiJS v8. Covers Mesh with MeshGeometry (positions, uvs, indices, topology), MeshSimple for per-frame vertex animation, MeshPlane for subdivided …"
 license: "MIT"
 ---
 # pixijs-scene-mesh — Codex adaptation

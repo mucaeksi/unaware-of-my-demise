@@ -1,6 +1,6 @@
 ---
 name: pixijs-scene-sprite
-description: "Codex/UOMD adaptation. Use this skill when drawing images in PixiJS v8. Covers Sprite with anchor/tint/texture, AnimatedSprite for frame animation, NineSliceSprite for resizable UI panels, TilingSprite for scrolling/repeating backgrounds. Triggers on: Sprite, AnimatedSprite, NineSliceSprite, TilingSprite, Sprite.from, anchor, tint, tilePosition, animationSpeed, gotoAndPlay, leftWidth, topHeight, constructor options, SpriteOptions, AnimatedSpriteOptions, NineSliceSpriteOptions, TilingSpriteOptions."
+description: "Codex/UOMD adaptation. Use this skill when drawing images in PixiJS v8. Covers Sprite with anchor/tint/texture, AnimatedSprite for frame animation, NineSliceSprite for resizable UI panels, TilingSprite for scrolling/re …"
 license: "MIT"
 ---
 # pixijs-scene-sprite — Codex adaptation

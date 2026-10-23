@@ -1,6 +1,6 @@
 ---
 name: uomd-battle
-description: "Codex/UOMD adaptation. Design or implement the Unaware of My Demise 5v5 tactical turn-based battle — deterministic @uomd/combat rules, BattleScene/UnitView/BattleVfx presentation on the PixiJS v8 stage, battle HUD, Auto/Sweep/AFK foundations and server verification."
+description: "Codex/UOMD adaptation. Design or implement the Unaware of My Demise 5v5 tactical turn-based battle — deterministic @uomd/combat rules, BattleScene/UnitView/BattleVfx presentation on the PixiJS v8 stage, battle HUD, Aut …"
 ---
 # uomd-battle — Codex adaptation
 

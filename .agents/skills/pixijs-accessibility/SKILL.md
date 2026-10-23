@@ -1,6 +1,6 @@
 ---
 name: pixijs-accessibility
-description: "Codex/UOMD adaptation. Use this skill when adding screen reader and keyboard navigation to PixiJS v8 apps. Covers AccessibilitySystem options (enabledByDefault, debug, activateOnTab, deactivateOnMouseMove), per-container accessibility properties, shadow DOM overlay, mobile touch-hook activation. Triggers on: accessibility, a11y, screen reader, ARIA, keyboard navigation, tab order, AccessibilitySystem, accessibleTitle, accessibleHint, tabIndex, accessibleChildren."
+description: "Codex/UOMD adaptation. Use this skill when adding screen reader and keyboard navigation to PixiJS v8 apps. Covers AccessibilitySystem options (enabledByDefault, debug, activateOnTab, deactivateOnMouseMove), per-contain …"
 license: "MIT"
 ---
 # pixijs-accessibility — Codex adaptation

@@ -1,6 +1,6 @@
 ---
 name: pixijs-math
-description: "Codex/UOMD adaptation. Use this skill when working with coordinates, vectors, matrices, shapes, hit testing, or layout rectangles in PixiJS v8. Covers Point/ObservablePoint, Matrix (2D affine, decompose (including mirrored/negative-scale matrices), apply, applyInverse), shapes (Rectangle, Circle, Ellipse, Polygon, RoundedRectangle, Triangle), Rectangle layout helpers (pad, fit, enlarge, ceil, scale, getBounds), strokeContains hit tests, Polygon isClockwise/containsPolygon, toGlobal/toLocal, PointData/PointLike/Size types, DEG_TO_RAD, and pixi.js/math-extras vector and intersection helpers. Triggers on: Point, ObservablePoint, Matrix, Rectangle, Circle, Polygon, Triangle, RoundedRectangle, toGlobal, toLocal, hitArea, strokeContains, pad, fit, enlarge, ceil, getBounds, containsRect, intersects, isClockwise, math-extras, lineIntersection, segmentIntersection, DEG_TO_RAD, PointData, decompose, mirror, flip, negative scale, setFromMatrix."
+description: "Codex/UOMD adaptation. Use this skill when working with coordinates, vectors, matrices, shapes, hit testing, or layout rectangles in PixiJS v8. Covers Point/ObservablePoint, Matrix (2D affine, decompose (including mirr …"
 license: "MIT"
 ---
 # pixijs-math — Codex adaptation

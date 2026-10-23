@@ -1,5 +1,21 @@
 {
   "ecc_skills": {
+    "antigravity_skills": [
+      "android-clean-architecture",
+      "api-design",
+      "click-path-audit",
+      "contract-first",
+      "error-handling",
+      "frontend-a11y",
+      "frontend-patterns",
+      "i18n-sync",
+      "kotlin-coroutines-flows",
+      "make-interfaces-feel-better",
+      "react-patterns",
+      "react-performance",
+      "react-testing",
+      "vite-patterns"
+    ],
     "commit": "90606c8315ee09cafc303515c5f33024db6b9882",
     "hooks_enabled": false,
     "license": "MIT",

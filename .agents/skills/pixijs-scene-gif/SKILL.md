@@ -1,6 +1,6 @@
 ---
 name: pixijs-scene-gif
-description: "Codex/UOMD adaptation. Use this skill when displaying animated GIFs in PixiJS v8. Covers the pixi.js/gif side-effect import, Assets.load returning a GifSource, GifSprite playback (play/stop/currentFrame/animationSpeed), autoPlay/loop options, onComplete/onLoop/onFrameChange callbacks, GifSource sharing, clone, destroy. Triggers on: GifSprite, GifSource, pixi.js/gif, animationSpeed, currentFrame, autoPlay, onComplete, onFrameChange, constructor options, GifSpriteOptions."
+description: "Codex/UOMD adaptation. Use this skill when displaying animated GIFs in PixiJS v8. Covers the pixi.js/gif side-effect import, Assets.load returning a GifSource, GifSprite playback (play/stop/currentFrame/animationSpeed) …"
 license: "MIT"
 ---
 # pixijs-scene-gif — Codex adaptation

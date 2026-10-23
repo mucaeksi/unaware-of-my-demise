@@ -1,6 +1,6 @@
 ---
 name: pixijs-create
-description: "Codex/UOMD adaptation. Use this skill when scaffolding a new PixiJS v8 project with the create-pixi CLI or adding PixiJS to an existing project. Covers npm/yarn/pnpm/bun create commands, interactive vs non-interactive flows, bundler vs creation template categories, available template presets (bundler-vite, bundler-webpack, bundler-esbuild, bundler-import-map, creation-web, framework-react, extension-default), Node version requirements, `npm install pixi.js` for existing projects, TypeScript 5/6/7 tsconfig setup (moduleResolution, @webgpu/types, @types/web), post-scaffold dev flow, and the Vite top-level-await production-build gotcha. Triggers on: create pixi.js, npm create, npm install pixi.js, scaffold, template, bundler-vite, bundler-webpack, creation-web, framework-react, new project, existing project, getting started, quick start, TypeScript, tsconfig, moduleResolution, @webgpu/types, @types/web, Cannot find name GPUTextureUsage."
+description: "Codex/UOMD adaptation. Use this skill when scaffolding a new PixiJS v8 project with the create-pixi CLI or adding PixiJS to an existing project. Covers npm/yarn/pnpm/bun create commands, interactive vs non-interactive …"
 license: "MIT"
 ---
 # pixijs-create — Codex adaptation

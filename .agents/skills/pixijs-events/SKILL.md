@@ -1,6 +1,6 @@
 ---
 name: pixijs-events
-description: "Codex/UOMD adaptation. Use this skill when handling pointer, mouse, touch, or wheel input in PixiJS v8. Covers eventMode (none, passive, auto, static, dynamic), FederatedEvent types, propagation and capture phase, hitArea, interactiveChildren, cursor and cursorStyles, global move events for drag, eventFeatures config. Triggers on: eventMode, FederatedPointerEvent, pointerdown, click, tap, globalpointermove, drag, hitArea, cursor, stopPropagation, persistentDeviceId, contextmenu, rightclick."
+description: "Codex/UOMD adaptation. Use this skill when handling pointer, mouse, touch, or wheel input in PixiJS v8. Covers eventMode (none, passive, auto, static, dynamic), FederatedEvent types, propagation and capture phase, hitA …"
 license: "MIT"
 ---
 # pixijs-events — Codex adaptation

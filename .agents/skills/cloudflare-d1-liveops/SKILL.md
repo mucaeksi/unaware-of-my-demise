@@ -1,6 +1,6 @@
 ---
 name: cloudflare-d1-liveops
-description: "Codex/UOMD adaptation. Architect, implement and audit the Cloudflare-only production backend for Unaware of My Demise: Workers, D1 SQLite, R2, Queues, Cron, Access, admin, game economy, events, patch manifests and Google identity/payment integrations. Use whenever backend, SQL, storage, monetization, patch or LiveOps work is requested."
+description: "Codex/UOMD adaptation. Architect, implement and audit the Cloudflare-only production backend for Unaware of My Demise: Workers, D1 SQLite, R2, Queues, Cron, Access, admin, game economy, events, patch manifests and Goog …"
 license: "MIT"
 ---
 # cloudflare-d1-liveops — Codex adaptation

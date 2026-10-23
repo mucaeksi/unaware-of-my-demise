@@ -1,6 +1,6 @@
 ---
 name: uomd-narrative-cinematics
-description: "Codex/UOMD adaptation. Implement the Unaware of My Demise visual novel and cinematic runtime (PrologueScene, StoryScene, NarrativeStage, subtitles, voice, music) on the PixiJS v8 stage for Part I — the ~120-second opening and the T-1/T-2/T-3 tutorial scenes."
+description: "Codex/UOMD adaptation. Implement the Unaware of My Demise visual novel and cinematic runtime (PrologueScene, StoryScene, NarrativeStage, subtitles, voice, music) on the PixiJS v8 stage for Part I — the ~120-second open …"
 ---
 # uomd-narrative-cinematics — Codex adaptation
 

@@ -1,6 +1,6 @@
 ---
 name: pixijs-custom-rendering
-description: "Codex/UOMD adaptation. Use this skill when writing custom shaders, uniforms, filters, batchers, or low-level draw code in PixiJS v8. Covers Shader.from({gl, gpu, resources}), GlProgram/GpuProgram, UniformGroup with typed uniforms (f32, vec2, mat4x4), UBO mode, textures as resources, TextureView for depth sampling, 3D and array textures (depth, arrayLayerCount, sampler3D, texture_3d), WebGPU storage textures (storage: true), WGSL override constants, custom bind group layouts (gpuLayout), partial buffer updates (Buffer.update), Geometry.vertexCount/indexCount, TexturePool scratch textures, State winding and culling (clockwiseFrontFace, cullMode), WebGPU render bundles, custom Filter via Filter.from, GLSL ES 3.0 conventions (finalColor), uBackTexture sampling, pixi.js/unsafe-eval for strict CSP, custom Batcher and InstructionPipe.destroyInstructionSet via extensions. Triggers on: Shader, GLSL, WGSL, uniform, custom shader, blendRequired, ShaderOverrides, bind group layout, depth texture, 3D texture, sampler3 …"
+description: "Codex/UOMD adaptation. Use this skill when writing custom shaders, uniforms, filters, batchers, or low-level draw code in PixiJS v8. Covers Shader.from({gl, gpu, resources}), GlProgram/GpuProgram, UniformGroup with typ …"
 license: "MIT"
 ---
 # pixijs-custom-rendering — Codex adaptation

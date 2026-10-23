@@ -1,6 +1,6 @@
 ---
 name: ponytail-debt
-description: "Codex/UOMD adaptation. List every `shortcut:` comment (and older `ponytail:` ones) as a debt ledger. One-shot report, changes nothing. Use for \"ponytail debt\", \"what did ponytail defer\", \"list the shortcuts\", /ponytail-debt."
+description: "Codex/UOMD adaptation. List every `shortcut:` comment (and older `ponytail:` ones) as a debt ledger. One-shot report, changes nothing. Use for \"ponytail debt\", \"what did ponytail defer\", \"list the shortcuts\", /ponytail …"
 ---
 # ponytail-debt — Codex adaptation
 

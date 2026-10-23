@@ -91,6 +91,30 @@ ECC_SKILLS = frozenset({
     "vite-patterns",
 })
 
+# High-signal ECC skills retained as active Antigravity (.agents/skills/) adapters.
+# The remaining 63 ECC skills stay in .claude/skills/ for Claude Code only, keeping
+# Antigravity's <skills> index well inside its ~50 KB context budget with 0 evictions.
+ANTIGRAVITY_ECC_SKILLS = frozenset({
+    "android-clean-architecture",
+    "api-design",
+    "click-path-audit",
+    "contract-first",
+    "error-handling",
+    "frontend-a11y",
+    "frontend-patterns",
+    "i18n-sync",
+    "kotlin-coroutines-flows",
+    "make-interfaces-feel-better",
+    "react-patterns",
+    "react-performance",
+    "react-testing",
+    "vite-patterns",
+})
+
+ANTIGRAVITY_EXCLUDED_ECC_SKILLS = ECC_SKILLS - ANTIGRAVITY_ECC_SKILLS
+MAX_ADAPTER_DESCRIPTION_CHARS = 220
+
+
 
 
 def digest(data: bytes) -> str:
@@ -185,9 +209,9 @@ def adaptation(name: str) -> str:
 
 def render(name: str, fields: dict[str, str]) -> str:
     description = f"Codex/UOMD adaptation. {fields['description']}"
-    if len(description) > 1024:
-        # Codex caps descriptions at 1024 chars; upstream trigger lists (official PixiJS skills) can be longer
-        description = description[:1020].rstrip() + " …"
+    if len(description) > MAX_ADAPTER_DESCRIPTION_CHARS:
+        # Keep Antigravity's <skills> index compact so long upstream descriptions (e.g. PixiJS) never cause budget evictions
+        description = description[: MAX_ADAPTER_DESCRIPTION_CHARS - 2].rstrip() + " …"
     header = f"---\nname: {name}\ndescription: {json.dumps(description, ensure_ascii=False)}\n"
     if fields.get("license"):
         header += f"license: {json.dumps(fields['license'])}\n"
@@ -213,6 +237,7 @@ def expected(root: Path) -> dict[str, bytes]:
     if any(path.is_symlink() for path in (root / ".claude", source, lock_path)):
         raise ValueError("Refusing symlink canonical directory/lock")
     locked = json.loads(lock_path.read_text())["skill_file_sha256"]
+    verified_canonical = set()
     inventory = {}
     outputs = {}
     files = sorted(source.glob("*/SKILL.md"))
@@ -234,11 +259,14 @@ def expected(root: Path) -> dict[str, bytes]:
                 raise ValueError(f"Unexpected canonical symlink: {resource}")
             if resource.is_file() and "__pycache__" not in resource.parts and resource.suffix != ".pyc":
                 resources[resource.relative_to(root).as_posix()] = digest(resource.read_bytes())
+        verified_canonical.add(name)
+        if name in ANTIGRAVITY_EXCLUDED_ECC_SKILLS:
+            continue
         relative = f".agents/skills/{name}/SKILL.md"
         rendered = render(name, fields).encode()
         outputs[relative] = rendered
         inventory[name] = {"source": path.relative_to(root).as_posix(), "source_sha256": digest(raw), "source_resources_sha256": resources, "adapter": relative, "adapter_sha256": digest(rendered)}
-    if set(locked) != set(inventory):
+    if set(locked) != verified_canonical:
         raise ValueError("Canonical inventory does not match the Claude lock")
     manifest = {"schemaVersion": 1, "generatedBy": "tools/sync_codex_skills.py", "canonicalLockSha256": digest(lock_path.read_bytes()), "executableHooksEnabled": False, "adapters": inventory}
     outputs[".agents/skills-lock.json"] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
@@ -262,12 +290,25 @@ def sync(root: Path, check: bool) -> int:
     if previous.is_file():
         old_names = set(json.loads(previous.read_text()).get("adapters", {}))
         new_names = {Path(p).parent.name for p in outputs if p.endswith("/SKILL.md")}
-        if old_names - new_names:
-            raise ValueError("Canonical skills removed; review obsolete adapters explicitly: " + ", ".join(sorted(old_names - new_names)))
-    mismatches = [p for p, raw in outputs.items() if not (root / p).is_file() or (root / p).read_bytes() != raw]
+        unexpected_removed = (old_names - new_names) - ANTIGRAVITY_EXCLUDED_ECC_SKILLS
+        if unexpected_removed:
+            raise ValueError("Canonical skills removed; review obsolete adapters explicitly: " + ", ".join(sorted(unexpected_removed)))
+    stale_excluded = [
+        f".agents/skills/{name}/SKILL.md"
+        for name in sorted(ANTIGRAVITY_EXCLUDED_ECC_SKILLS)
+        if (root / ".agents" / "skills" / name).exists()
+    ]
+    mismatches = [p for p, raw in outputs.items() if not (root / p).is_file() or (root / p).read_bytes() != raw] + stale_excluded
     if check and mismatches:
         raise ValueError("Codex adapters stale/missing: " + ", ".join(mismatches[:8]))
     if not check:
+        for name in ANTIGRAVITY_EXCLUDED_ECC_SKILLS:
+            excluded_dir = root / ".agents" / "skills" / name
+            if excluded_dir.is_dir() and not excluded_dir.is_symlink():
+                for child in excluded_dir.iterdir():
+                    if child.is_file() and not child.is_symlink():
+                        child.unlink()
+                excluded_dir.rmdir()
         for relative, raw in outputs.items():
             dest = root / relative
             dest.parent.mkdir(parents=True, exist_ok=True)

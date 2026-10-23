@@ -1,6 +1,6 @@
 ---
 name: kotlin-coroutines-flows
-description: "Codex/UOMD adaptation. Kotlin Coroutines and Flow patterns for Android and KMP — structured concurrency, Flow operators, StateFlow, error handling, and testing. Use when writing coroutines or Flow code on Android or KMP, or debugging cancellation and concurrency."
+description: "Codex/UOMD adaptation. Kotlin Coroutines and Flow patterns for Android and KMP — structured concurrency, Flow operators, StateFlow, error handling, and testing. Use when writing coroutines or Flow code on Android or KM …"
 ---
 # kotlin-coroutines-flows — Codex adaptation
 

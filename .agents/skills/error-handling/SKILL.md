@@ -1,6 +1,6 @@
 ---
 name: error-handling
-description: "Codex/UOMD adaptation. Patterns for robust error handling across TypeScript, Python, and Go. Covers typed errors, error boundaries, retries, circuit breakers, and user-facing error messages. Use when designing error types, retries, circuit breakers, or user-facing failure messages in TypeScript, Python, or Go."
+description: "Codex/UOMD adaptation. Patterns for robust error handling across TypeScript, Python, and Go. Covers typed errors, error boundaries, retries, circuit breakers, and user-facing error messages. Use when designing error ty …"
 ---
 # error-handling — Codex adaptation
 

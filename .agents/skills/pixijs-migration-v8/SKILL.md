@@ -1,6 +1,6 @@
 ---
 name: pixijs-migration-v8
-description: "Codex/UOMD adaptation. Use this skill when upgrading to PixiJS v8 from v7 or diagnosing broken v7 code after an upgrade. Covers async app.init, single pixi.js package (deprecated @pixi/* sub-packages), Graphics shape-then-fill, BaseTexture → TextureSource, shader/uniform rework, ParticleContainer+Particle, constructor options objects, DisplayObject removal, settings/utils removal, Ticker signature, events rewrite. Triggers on: migrate v7, v8 breaking changes, @pixi/ import, DisplayObject, beginFill, endFill, cacheAsBitmap, BaseTexture, deprecated."
+description: "Codex/UOMD adaptation. Use this skill when upgrading to PixiJS v8 from v7 or diagnosing broken v7 code after an upgrade. Covers async app.init, single pixi.js package (deprecated @pixi/* sub-packages), Graphics shape-t …"
 license: "MIT"
 ---
 # pixijs-migration-v8 — Codex adaptation

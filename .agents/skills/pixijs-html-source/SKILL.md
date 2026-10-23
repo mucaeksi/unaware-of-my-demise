@@ -1,6 +1,6 @@
 ---
 name: pixijs-html-source
-description: "Codex/UOMD adaptation. Use this skill when rendering live HTML/DOM elements (or frozen snapshots of them) as PixiJS v8 textures via the EXPERIMENTAL HTML-in-Canvas browser APIs. Covers the pixi.js/html-source import, feature detection with canvas.requestPaint, HTMLSource for a live, repainting, still-interactive element (autoLayout/autoUpdate/autoRequestPaint, requestPaint, isReady, HTMLSource.defaultOptions, the direct-child-of-canvas + layoutsubtree requirement), ElementImageSource for an immutable captureElementImage() snapshot (autoClose, ready immediately), using the source on a Sprite/Texture/Mesh, fallback-only auto-detection via Texture.from at priority -10, uploader error messages, and destroy/cleanup. Triggers on: HTMLSource, ElementImageSource, ElementImage, HTML in canvas, render DOM to texture, render HTML to texture, texElementImage2D, copyElementImageToTexture, HTMLSourceOptions, ElementImageSourceOptions, HTMLSourceCanvas."
+description: "Codex/UOMD adaptation. Use this skill when rendering live HTML/DOM elements (or frozen snapshots of them) as PixiJS v8 textures via the EXPERIMENTAL HTML-in-Canvas browser APIs. Covers the pixi.js/html-source import, f …"
 license: "MIT"
 ---
 # pixijs-html-source — Codex adaptation

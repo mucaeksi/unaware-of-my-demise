@@ -1,6 +1,6 @@
 ---
 name: pixijs-scene-core-concepts
-description: "Codex/UOMD adaptation. Use this skill when reasoning about the PixiJS v8 scene graph as a whole: how containers, leaves, transforms, and render order fit together. Covers leaf vs container distinction, local/world coordinates, culling, render groups, sortable children, masking, RenderLayer, constructor options shared by every scene node, and which leaf skill covers which display object. Triggers on: scene graph, display list, Container, Sprite, Graphics, Text, Mesh, ParticleContainer, DOMContainer, GifSprite, masking, render group, RenderLayer, world transform, constructor options, ContainerOptions."
+description: "Codex/UOMD adaptation. Use this skill when reasoning about the PixiJS v8 scene graph as a whole: how containers, leaves, transforms, and render order fit together. Covers leaf vs container distinction, local/world coor …"
 license: "MIT"
 ---
 # pixijs-scene-core-concepts — Codex adaptation

@@ -1,6 +1,6 @@
 ---
 name: pixijs-performance
-description: "Codex/UOMD adaptation. Use this skill when profiling or optimizing a PixiJS v8 app for FPS, draw calls, or GPU memory. Covers destroy patterns (cacheAsTexture(false), releaseGlobalResources), GCSystem and TextureGCSystem, PrepareSystem, object pooling, batching rules, BitmapText for dynamic text, culling (Culler, CullerPlugin, cullable, cullArea), resolution/antialias tradeoffs, low-level wins (transient MSAA render textures, render bundles, partial buffer updates). Triggers on: FPS, jank, draw calls, batching, object pool, GCSystem, PrepareSystem, Culler, cacheAsTexture, memory leak, destroy patterns, render bundle, transient, MSAA, Buffer.update, WebGPU performance, TexturePool, repeatEdgePixels, bind group."
+description: "Codex/UOMD adaptation. Use this skill when profiling or optimizing a PixiJS v8 app for FPS, draw calls, or GPU memory. Covers destroy patterns (cacheAsTexture(false), releaseGlobalResources), GCSystem and TextureGCSyst …"
 license: "MIT"
 ---
 # pixijs-performance — Codex adaptation

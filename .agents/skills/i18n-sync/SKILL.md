@@ -1,6 +1,6 @@
 ---
 name: i18n-sync
-description: "Codex/UOMD adaptation. Translate and synchronize application JSON locale files using source-key usage, project terminology, and focused validation. Use when adding keys or languages, updating source copy, or reviewing missing and stale translations."
+description: "Codex/UOMD adaptation. Translate and synchronize application JSON locale files using source-key usage, project terminology, and focused validation. Use when adding keys or languages, updating source copy, or reviewing …"
 ---
 # i18n-sync — Codex adaptation
 

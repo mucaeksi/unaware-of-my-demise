@@ -1,6 +1,6 @@
 ---
 name: pixijs-blend-modes
-description: "Codex/UOMD adaptation. Use this skill when compositing display objects with blend modes in PixiJS v8. Covers standard modes (normal, add, multiply, screen, erase, min, max), advanced modes via pixi.js/advanced-blend-modes (color-burn, overlay, hard-light, etc.), batch-friendly ordering. Triggers on: blendMode, additive, multiply, screen, overlay, color-burn, color-dodge, advanced-blend-modes, glow, erase."
+description: "Codex/UOMD adaptation. Use this skill when compositing display objects with blend modes in PixiJS v8. Covers standard modes (normal, add, multiply, screen, erase, min, max), advanced modes via pixi.js/advanced-blend-mo …"
 license: "MIT"
 ---
 # pixijs-blend-modes — Codex adaptation

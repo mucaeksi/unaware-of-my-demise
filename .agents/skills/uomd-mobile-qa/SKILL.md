@@ -1,6 +1,6 @@
 ---
 name: uomd-mobile-qa
-description: "Codex/UOMD adaptation. Test and profile Unaware of My Demise web previews and Capacitor Android builds — PixiJS v8 renderer bootstrap, frame time, memory, WebGL context loss, lifecycle, patches and release gates. Browser evidence is not device acceptance."
+description: "Codex/UOMD adaptation. Test and profile Unaware of My Demise web previews and Capacitor Android builds — PixiJS v8 renderer bootstrap, frame time, memory, WebGL context loss, lifecycle, patches and release gates. Brows …"
 ---
 # uomd-mobile-qa — Codex adaptation
 

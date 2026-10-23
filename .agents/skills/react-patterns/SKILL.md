@@ -1,6 +1,6 @@
 ---
 name: react-patterns
-description: "Codex/UOMD adaptation. React 18/19 patterns including hooks discipline, server/client component boundaries, Suspense + error boundaries, form actions, data fetching, state management decision trees, and accessibility-first composition. Use when writing or reviewing React components."
+description: "Codex/UOMD adaptation. React 18/19 patterns including hooks discipline, server/client component boundaries, Suspense + error boundaries, form actions, data fetching, state management decision trees, and accessibility-f …"
 ---
 # react-patterns — Codex adaptation
 

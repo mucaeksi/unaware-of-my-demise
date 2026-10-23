@@ -1,6 +1,6 @@
 ---
 name: make-interfaces-feel-better
-description: "Codex/UOMD adaptation. Apply concrete design-engineering details that make interfaces feel polished. Use when reviewing or improving UI spacing, typography, borders, shadows, motion, hit areas, icons, text wrapping, and interaction states."
+description: "Codex/UOMD adaptation. Apply concrete design-engineering details that make interfaces feel polished. Use when reviewing or improving UI spacing, typography, borders, shadows, motion, hit areas, icons, text wrapping, an …"
 ---
 # make-interfaces-feel-better — Codex adaptation
 
