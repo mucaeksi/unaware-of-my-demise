@@ -1311,7 +1311,7 @@
     },
     {
       "output": "content/base/presentation/presentation.json",
-      "sha256": "4fff132a8591dae2dcc8e606049c8278e565b7b810a3220803508df707e8743a",
+      "sha256": "957c38df03c738a703fd87ef6d6c9126c77b8c09260d82ae4504f6b39cc4ff84",
       "sources": {
         "authored": "content/base/presentation/presentation.json"
       }
@@ -1321,6 +1321,118 @@
       "sha256": "f9733746d9558e37ccc450f5de05b3a7ba5aec918951556fbd8e61213279e364",
       "sources": {
         "authored": "content/base/vfx/vfx_presets.json"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_bell_sanctuary.ogg",
+      "sha256": "60db88fe1dd789dc839c26cfee7950ca4d5ff4b3f924ddda5976a1393e56bdfb",
+      "sources": {
+        "authored": "content/base/sfx/sfx_bell_sanctuary.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_bell_silver.ogg",
+      "sha256": "e42b4308d65c3c01dc83c0fedf4aca5d703e71993a0be36ef42570ce3449a9a0",
+      "sources": {
+        "authored": "content/base/sfx/sfx_bell_silver.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_blade_heavy.ogg",
+      "sha256": "e48d75ec8511ffc1c9cb02fc44e7bb6200739c5d5dc1bf83359b321686328c5b",
+      "sources": {
+        "authored": "content/base/sfx/sfx_blade_heavy.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_blade_slash.ogg",
+      "sha256": "6c1c576410386f41171d0539d0ba6f6f56f5396332c01f1eba42ee2c6ccea2d9",
+      "sources": {
+        "authored": "content/base/sfx/sfx_blade_slash.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_footstep_ash.ogg",
+      "sha256": "f0c3ecc67669ab07ee6186a11409f4dbedfd588e2bc88bcd60303168e2cf3f52",
+      "sources": {
+        "authored": "content/base/sfx/sfx_footstep_ash.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_footstep_march.ogg",
+      "sha256": "034b32a9eeeb6ae42306ab05b451704bef5e88947e2e78894b436125f7cf2b71",
+      "sources": {
+        "authored": "content/base/sfx/sfx_footstep_march.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_shield_bash.ogg",
+      "sha256": "fed7f71aae5afb0038139a301998397d2babe621730c869ff3544e438e44b489",
+      "sources": {
+        "authored": "content/base/sfx/sfx_shield_bash.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_shield_guard.ogg",
+      "sha256": "6c53b2abea3fe84e998d0914e27c4a9555130e89dde0a8e4dd87e636f3fb2bab",
+      "sources": {
+        "authored": "content/base/sfx/sfx_shield_guard.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_status_buff.ogg",
+      "sha256": "ff2890677a5ef08b44ea1873b34780731ffa2001c78619ecfafcaf72240ee949",
+      "sources": {
+        "authored": "content/base/sfx/sfx_status_buff.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_status_debuff.ogg",
+      "sha256": "681398e9529e08ccbfeed1d4de10033680b75b5aefe75ef265c792ff90e7f2b0",
+      "sources": {
+        "authored": "content/base/sfx/sfx_status_debuff.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_ui_confirm.ogg",
+      "sha256": "48c2adf37138fb87140e39e0d13a602e4cc85fcfaaf67f91512df61911bb4583",
+      "sources": {
+        "authored": "content/base/sfx/sfx_ui_confirm.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_ui_tap.ogg",
+      "sha256": "3daf884df76487a937ad5ce426916a9038ba983c9244977e8ac3f3067e6e6eea",
+      "sources": {
+        "authored": "content/base/sfx/sfx_ui_tap.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_ui_wax_seal.ogg",
+      "sha256": "6efe9c1dad606214ab04028be7ba2290bc81ede567e382d3c3a88321bd5f0db7",
+      "sources": {
+        "authored": "content/base/sfx/sfx_ui_wax_seal.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_ultimate_cast.ogg",
+      "sha256": "e3afabefe483323d6e48c28a043b2e26fb2e47a42f252c0d3f54504ec495853f",
+      "sources": {
+        "authored": "content/base/sfx/sfx_ultimate_cast.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_ultimate_cutin.ogg",
+      "sha256": "4a85209231697b308de73c71771ff93862dc548182099b3791d0de732b53b097",
+      "sources": {
+        "authored": "content/base/sfx/sfx_ultimate_cutin.ogg"
+      }
+    },
+    {
+      "output": "content/base/sfx/sfx_ultimate_release.ogg",
+      "sha256": "0afdbd1c332bdb8c8261a387a2cb913aea7a9e52a2c4522f1a12d98c0aa77495",
+      "sources": {
+        "authored": "content/base/sfx/sfx_ultimate_release.ogg"
       }
     },
     {

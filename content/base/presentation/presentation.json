@@ -698,7 +698,104 @@
       "duration_s": 10.31
     }
   },
-  "sounds": {},
+  "sounds": {
+    "sfx_ui_tap": {
+      "file": "sfx/sfx_ui_tap.ogg",
+      "duration_s": 0.14,
+      "loop": false,
+      "volume": 0.65
+    },
+    "sfx_ui_confirm": {
+      "file": "sfx/sfx_ui_confirm.ogg",
+      "duration_s": 0.28,
+      "loop": false,
+      "volume": 0.72
+    },
+    "sfx_ui_wax_seal": {
+      "file": "sfx/sfx_ui_wax_seal.ogg",
+      "duration_s": 0.42,
+      "loop": false,
+      "volume": 0.78
+    },
+    "sfx_footstep_ash": {
+      "file": "sfx/sfx_footstep_ash.ogg",
+      "duration_s": 0.24,
+      "loop": false,
+      "volume": 0.58
+    },
+    "sfx_footstep_march": {
+      "file": "sfx/sfx_footstep_march.ogg",
+      "duration_s": 0.36,
+      "loop": false,
+      "volume": 0.64
+    },
+    "sfx_blade_slash": {
+      "file": "sfx/sfx_blade_slash.ogg",
+      "duration_s": 0.26,
+      "loop": false,
+      "volume": 0.76
+    },
+    "sfx_blade_heavy": {
+      "file": "sfx/sfx_blade_heavy.ogg",
+      "duration_s": 0.38,
+      "loop": false,
+      "volume": 0.84
+    },
+    "sfx_shield_bash": {
+      "file": "sfx/sfx_shield_bash.ogg",
+      "duration_s": 0.48,
+      "loop": false,
+      "volume": 0.8
+    },
+    "sfx_shield_guard": {
+      "file": "sfx/sfx_shield_guard.ogg",
+      "duration_s": 0.3,
+      "loop": false,
+      "volume": 0.72
+    },
+    "sfx_bell_sanctuary": {
+      "file": "sfx/sfx_bell_sanctuary.ogg",
+      "duration_s": 1.85,
+      "loop": false,
+      "volume": 0.82
+    },
+    "sfx_bell_silver": {
+      "file": "sfx/sfx_bell_silver.ogg",
+      "duration_s": 1.65,
+      "loop": false,
+      "volume": 0.78
+    },
+    "sfx_status_buff": {
+      "file": "sfx/sfx_status_buff.ogg",
+      "duration_s": 0.62,
+      "loop": false,
+      "volume": 0.74
+    },
+    "sfx_status_debuff": {
+      "file": "sfx/sfx_status_debuff.ogg",
+      "duration_s": 0.56,
+      "loop": false,
+      "volume": 0.74
+    },
+    "sfx_ultimate_cast": {
+      "file": "sfx/sfx_ultimate_cast.ogg",
+      "duration_s": 1.15,
+      "loop": false,
+      "volume": 0.84
+    },
+    "sfx_ultimate_cutin": {
+      "file": "sfx/sfx_ultimate_cutin.ogg",
+      "duration_s": 0.68,
+      "loop": false,
+      "volume": 0.84
+    },
+    "sfx_ultimate_release": {
+      "file": "sfx/sfx_ultimate_release.ogg",
+      "duration_s": 1.95,
+      "loop": false,
+      "volume": 0.88
+    }
+  },
   "videos": {},
   "locales": [],
   "panels": {}

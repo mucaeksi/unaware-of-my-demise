@@ -2132,6 +2132,12 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
               <code>SummonScene.showResults()</code> 4★/5★ hale parıltısı + sesli kademeli açılış ve <code>HubScreen.openModal()</code> sahne-kontrollü geçiş.
             </div>
           </div>
+          <div style={{ padding: 10, borderRadius: 8, background: 'rgba(14,10,22,0.72)', border: '1px solid rgba(212,168,87,0.22)', fontSize: 12.5 }}>
+            <strong style={{ color: '#f3d287' }}>§4.6 Ses Motifleri &amp; 16 SFX Seti</strong>
+            <div className="muted" style={{ marginTop: 4 }}>
+              <code>presentation.sounds</code> içinde 16 kanonik Ogg Vorbis SFX (UI, adım, kılıç, kalkan, çan, statü, ultimate) + Bölüm 1–7 &amp; Boss müzik motif eşlemesi.
+            </div>
+          </div>
         </div>
       </div>
 

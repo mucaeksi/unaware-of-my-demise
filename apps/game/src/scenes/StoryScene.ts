@@ -323,8 +323,26 @@ export class StoryScene extends PixiScene<StoryInit> {
       case 'tutorial_t2_before':
       case 'tutorial_t3_before':
         return ['bgm_ch1_ash_forest_uneasy', 'bgm_ch1_ash_forest_chaotic'];
-      default:
+      default: {
+        const id = sceneId.toLowerCase();
+        if (id.includes('_phase_') || id.endsWith('_5_pre')) {
+          return ['bgm_ch1_ash_forest_chaotic', 'bgm_ch1_ash_forest_uneasy'];
+        }
+        if (id.endsWith('_pre')) {
+          if (/^ch[2367]_/.test(id)) return ['bgm_ch1_ash_forest_uneasy', 'bgm_ch1_ash_forest_chaotic'];
+          return ['bgm_ch1_ash_forest_calm', 'bgm_ch1_ash_forest_uneasy'];
+        }
+        if (id.endsWith('_post') || id.includes('oath') || id.includes('camp') || id.includes('rest')) {
+          return ['bgm_fadyme_theme', 'bgm_ch1_ash_forest_calm'];
+        }
+        if (/^ch[2467]_/.test(id)) {
+          return ['bgm_prologue_before_the_road', 'bgm_ch1_ash_forest_uneasy'];
+        }
+        if (/^ch[135]_/.test(id)) {
+          return ['bgm_ch1_ash_forest_calm', 'bgm_fadyme_theme'];
+        }
         return ['bgm_fadyme_theme'];
+      }
     }
   }
 

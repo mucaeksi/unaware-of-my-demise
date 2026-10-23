@@ -130,7 +130,7 @@ const MUSIC: Record<string, { file: string; meta: string }> = {
 };
 
 const PRESENTATION = 'content/base/presentation/presentation.json';
-const AUTHORED_DIRS = ['voices', 'presentation', 'vfx'];
+const AUTHORED_DIRS = ['voices', 'presentation', 'vfx', 'sfx'];
 
 /** music cues the base manifest declares beyond MUSIC whose file is still on disk (Lyria tracks written in place) */
 function readAuthoredMusic(): { authored: ArtManifest['music']; order: string[] } {

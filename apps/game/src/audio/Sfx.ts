@@ -1,8 +1,10 @@
+import { Assets } from '../core/assets';
 import { prefs } from '../platform/prefs';
 
 /**
- * Procedural interim sound effects (Web Audio synthesis). They keep the UI and combat readable until
- * the real SFX set exists (README: SFX need a verified Google-based workflow - Lyria is music only).
+ * Sound effects engine (§4.6): plays decoded Ogg Vorbis samples registered in `presentation.sounds`
+ * (`sfx/sfx_*.ogg`) when cached in `Assets.audio`, with zero-latency Web Audio modal synthesis
+ * so every UI, footstep, blade, shield, bell, status, and ultimate cue sounds immediately.
  */
 let ctx: AudioContext | null = null;
 let out: GainNode | null = null;
@@ -11,6 +13,20 @@ function ready(): AudioContext | null {
   if (!ctx || !out) return null;
   if (ctx.state === 'suspended') void ctx.resume();
   return ctx;
+}
+
+function playSample(cueId: string, volume = 0.78): boolean {
+  const c = ready();
+  if (!c || !out) return false;
+  const buf = Assets.audio(`sfx/${cueId}.ogg`) ?? Assets.audio(cueId);
+  if (!buf || typeof buf.getChannelData !== 'function') return false;
+  const src = c.createBufferSource();
+  const g = c.createGain();
+  src.buffer = buf;
+  g.gain.value = Math.max(0, Math.min(1, volume));
+  src.connect(g).connect(out);
+  src.start(0);
+  return true;
 }
 
 function env(c: AudioContext, g: GainNode, t0: number, attack: number, peak: number, release: number): void {
@@ -69,23 +85,44 @@ export const Sfx = {
     }
   },
   tap(): void {
+    if (playSample('sfx_ui_tap', 0.65)) return;
     const c = ready();
     if (c) tone(720, 'triangle', c.currentTime, 0.004, 0.18, 0.07, 980);
   },
   confirm(): void {
+    if (playSample('sfx_ui_confirm', 0.72)) return;
     const c = ready();
     if (!c) return;
     tone(520, 'triangle', c.currentTime, 0.004, 0.2, 0.09);
     tone(780, 'triangle', c.currentTime + 0.07, 0.004, 0.2, 0.14);
   },
+  waxSeal(): void {
+    if (playSample('sfx_ui_wax_seal', 0.78)) return;
+    const c = ready();
+    if (!c) return;
+    noise(c.currentTime, 0.12, 0.28, 1400);
+    tone(140, 'triangle', c.currentTime, 0.003, 0.34, 0.22, 62);
+    tone(587.33, 'sine', c.currentTime + 0.02, 0.005, 0.18, 0.34);
+  },
+  footstep(armored = false): void {
+    if (playSample(armored ? 'sfx_footstep_march' : 'sfx_footstep_ash', armored ? 0.64 : 0.58)) return;
+    const c = ready();
+    if (!c) return;
+    const t0 = c.currentTime;
+    noise(t0, 0.09, 0.22, armored ? 1600 : 1850);
+    tone(armored ? 96 : 112, 'triangle', t0, 0.003, 0.18, 0.08, 48);
+    if (armored) tone(1320, 'sine', t0 + 0.02, 0.002, 0.07, 0.08, 980);
+  },
   /** Bell strike: inharmonic partials with long decay (the game's sonic motif). */
   bell(freq = 440, gain = 0.28, long = 1.8): void {
+    if (freq === 440 && playSample('sfx_bell_sanctuary', 0.82)) return;
     const c = ready();
     if (!c) return;
     [1, 2.76, 5.4, 8.93].forEach((r, i) => tone(freq * r, 'sine', c.currentTime, 0.004, gain / (1 + i * 1.6), long / (1 + i * 0.7)));
   },
   /** Fadyme's signature silver warding bell: crystalline D-minor harmonic shimmer with gentle stereo-like detuned overtones. */
   silverBell(freq = 587.33, gain = 0.24): void {
+    if (Math.abs(freq - 587.33) < 1 && playSample('sfx_bell_silver', 0.78)) return;
     const c = ready();
     if (!c) return;
     const t0 = c.currentTime;
@@ -96,6 +133,7 @@ export const Sfx = {
   },
   /** Mahmut's iron shield & broadsword bulwark resonance: low metallic thud + warm brass-iron ring. */
   shieldBash(): void {
+    if (playSample('sfx_shield_bash', 0.8)) return;
     const c = ready();
     if (!c) return;
     const t0 = c.currentTime;
@@ -105,6 +143,7 @@ export const Sfx = {
     tone(659.25, 'triangle', t0 + 0.02, 0.004, 0.1, 0.45);
   },
   hit(heavy = false): void {
+    if (playSample(heavy ? 'sfx_blade_heavy' : 'sfx_blade_slash', heavy ? 0.84 : 0.76)) return;
     const c = ready();
     if (!c) return;
     noise(c.currentTime, heavy ? 0.22 : 0.12, heavy ? 0.44 : 0.28, heavy ? 1900 : 2900);
@@ -112,15 +151,24 @@ export const Sfx = {
     if (heavy) tone(293.66, 'triangle', c.currentTime, 0.003, 0.22, 0.14, 98);
   },
   guard(): void {
+    if (playSample('sfx_shield_guard', 0.72)) return;
     const c = ready();
     if (!c) return;
     tone(1174.66, 'triangle', c.currentTime, 0.002, 0.11, 0.08);
     tone(1760, 'sine', c.currentTime + 0.02, 0.003, 0.12, 0.22);
   },
   heal(): void {
+    if (playSample('sfx_status_buff', 0.74)) return;
     const c = ready();
     if (!c) return;
     [523.25, 659.25, 783.99].forEach((f, i) => tone(f, 'sine', c.currentTime + i * 0.08, 0.01, 0.16, 0.38));
+  },
+  statusDebuff(): void {
+    if (playSample('sfx_status_debuff', 0.74)) return;
+    const c = ready();
+    if (!c) return;
+    [311.13, 233.08, 155.56].forEach((f, i) => tone(f, 'sawtooth', c.currentTime + i * 0.085, 0.008, 0.15, 0.32, f * 0.88));
+    noise(c.currentTime, 0.35, 0.18, 950);
   },
   defeat(): void {
     const c = ready();
@@ -129,12 +177,14 @@ export const Sfx = {
     noise(c.currentTime, 0.28, 0.22, 900);
   },
   cast(): void {
+    if (playSample('sfx_ultimate_cast', 0.84)) return;
     const c = ready();
     if (!c) return;
     tone(293.66, 'sine', c.currentTime, 0.035, 0.14, 0.48, 880);
     Sfx.silverBell(587.33, 0.2);
   },
   ultimate(): void {
+    if (playSample('sfx_ultimate_release', 0.88)) return;
     const c = ready();
     if (!c) return;
     tone(110, 'sawtooth', c.currentTime, 0.08, 0.16, 1.0, 587.33);
@@ -143,6 +193,9 @@ export const Sfx = {
   },
   /** 3-beat Japanese Ultimate chant audio cues: [1] Cast Ritual Charge, [2] Diagonal Cut-In Slash, [3] Final Release Detonation */
   ultimateBeat(beat: 1 | 2 | 3): void {
+    if (beat === 1 && playSample('sfx_ultimate_cast', 0.84)) return;
+    if (beat === 2 && playSample('sfx_ultimate_cutin', 0.84)) return;
+    if (beat === 3 && playSample('sfx_ultimate_release', 0.88)) return;
     const c = ready();
     if (!c) return;
     const t0 = c.currentTime;

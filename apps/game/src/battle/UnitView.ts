@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import type { Combatant } from '@uomd/combat';
 import type { UnitAnimState } from '@uomd/content-schema';
+import { Sfx } from '../audio/Sfx';
 import type { ArtLibrary, UnitAnimation } from '../content/ArtLibrary';
 import type { Handle } from '../core/anim';
 import type { PixiScene } from '../core/PixiScene';
@@ -229,6 +230,7 @@ export class UnitView extends PIXI.Container {
       this.startBreathing();
     } else if (state === 'walk' && this.alive) {
       const dir = this.side === 'player' ? 1 : -1;
+      Sfx.footstep(this.artKey === 'mahmut' || this.artKey.includes('knight') || this.artKey.includes('warden'));
       this.loops.push(this.scene.anim.to(this.pose, { y: -14, scaleY: sc * 1.045, scaleX: sc * 0.96 }, { duration: 190, yoyo: true, repeat: -1, ease: 'quad.out' }));
       this.loops.push(this.scene.anim.to(this.pose, { angle: { from: -3.2 * dir, to: 3.8 * dir } }, { duration: 380, yoyo: true, repeat: -1, ease: 'sine.inout' }));
     } else if (state === 'basic' || state === 'active' || state === 'ultimate') {

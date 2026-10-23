@@ -90,6 +90,17 @@ export class BattleScene extends PixiScene<BattleInit> {
   private submit: ((a: PlayerAction) => void) | null = null;
   private activeSkillType: 'basic' | 'active' | 'ultimate' | 'passive' | 'signature' = 'basic';
 
+  private resolveBattleMusicCue(): string {
+    if (this.encounter.music_cue) return this.encounter.music_cue;
+    const hasBoss = this.battle.combatants.some((c) => c.side === 'enemy' && Boolean(c.def.boss));
+    if (hasBoss) return 'bgm_ch1_ash_forest_chaotic';
+    const loc = this.encounter.location_id;
+    if (loc === 'cathedral_saint_luthos' || loc === 'altar_first_eclipse' || loc === 'estate_ashen_lord') {
+      return 'bgm_ch1_ash_forest_chaotic';
+    }
+    return 'bgm_battle_field';
+  }
+
   async create(data: BattleInit): Promise<void> {
     this.cfg = data;
     const { content, art } = Services.ready();
@@ -103,7 +114,7 @@ export class BattleScene extends PixiScene<BattleInit> {
       const artKeys = this.battle.combatants.map((c) => defs.get(c.def.unit_id)?.art_key ?? c.def.art_key);
       const playerUnitIds = this.battle.combatants.filter((c) => c.side === 'player').map((c) => c.def.unit_id);
       const cutInEmotions = new Map(playerUnitIds.map((id) => [id, new Set(['neutral', 'composed', 'determined', 'protective'])]));
-      const musicCue = this.encounter.music_cue ?? 'bgm_battle_field';
+      const musicCue = this.resolveBattleMusicCue();
       await Promise.all([
         art.loadBackground(this, this.encounter.location_id),
         art.loadUnits(this, artKeys),
@@ -123,7 +134,7 @@ export class BattleScene extends PixiScene<BattleInit> {
     this.buildHud();
     sceneFadeIn(this, 1200);
     const playBattleMusic = (fade = 1.2): void => {
-      const m = art.music(this.encounter.music_cue ?? 'bgm_battle_field');
+      const m = art.music(this.resolveBattleMusicCue());
       if (m) Music.play(m.key, m.loopStart, m.duration, fade);
     };
     playBattleMusic(1.2);
@@ -1127,6 +1138,8 @@ export class BattleScene extends PixiScene<BattleInit> {
         const t = this.unit(e.target);
         const s = this.statusNames.get(e.status);
         const cue = s?.category === 'buff' ? '▲ ' : s?.category === 'control' ? '◆ ' : '▼ ';
+        if (s?.category === 'buff') Sfx.heal();
+        else Sfx.statusDebuff();
         BattleVfx.castSigil(this, t.x, t.y - 10, s?.category === 'buff' ? 'Dawn' : 'Veil', 0.9);
         this.float(t, `${cue}${(s?.name ?? e.status).toUpperCase()}`, s?.category === 'buff' ? T.shield : T.crimson, 32, 0);
         await this.wait(190);
