@@ -1,8 +1,11 @@
+/* global console */
+import { Buffer } from 'node:buffer';
 import fs from 'node:fs';
 import path from 'node:path';
+import process from 'node:process';
 import sharp from 'sharp';
 
-const ROOT = 'f:/unaware-of-my-demise';
+const ROOT = path.resolve(import.meta.dirname, '..');
 const STORE_ASSETS = path.join(ROOT, 'docs/store/assets');
 const STORE_SCREENSHOTS = path.join(STORE_ASSETS, 'screenshots');
 const BRAND_DIR = path.join(

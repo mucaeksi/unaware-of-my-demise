@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "e782e255",
-  "reviewedAt": "2026-10-21",
+  "sourceCommit": "3e0be8eb",
+  "reviewedAt": "2026-10-23",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-29",
     "status": "LOCAL_TESTED",
     "nextProposed": "Phase C: Publish Patch 1 (rel_part1_ch1 — Chapter 1 + World Map Hub) to staging & verify on live staging URL",
-    "workflow": "Argon 4 / Antigravity owns full engineering, art, animation, UX, testing and documentation (2026-10-21 handoff). Completed: Workers Builds clean-clone fix (fe67fae3), Prologue first-viewing no-skip contract (7207dae1), ART-1 all 52 bespoke animated 16-cell chibi atlases & 100 hero VN portraits (a2279792), ART-2 painted Part I World Map & Phase E 35 Hard mode nodes + R2/IDB parallel batching (5a2a0e86), and ART-3/ART-4 Google Play store icon, feature graphic, 6 screenshots, Android mipmaps & teaser storyboard (e782e255)."
+    "workflow": "Argon 4 / Antigravity owns full engineering, art, animation, UX, testing and documentation. Completed: 242 approved art entries (all 32 character portrait sets = 112 clean alpha-keyed WebPs across 25 heroes + 7 antagonists, 54 16-frame animated chibi sheets across all 8 states, 13 breakable boss objectives, 43 bespoke painted location backgrounds + painted Part I World Map bg_world_map_part1.webp + biome-aware living backdrops), 383 D1 seeded assets, canonical Google Play Store & Brand Identity Kit (logo_master.png, logo_compact.png, icon_512.png, feature_graphic_1024x500.png, 8 1920x1080 showcase screenshots, 15 Android mipmaps, 11 dark gothic Android splash screens), and Living Portrait + Chibi Showcase in RosterScene & CharacterScene."
   },
   "now": [
     {
-      "title": "D-29 Release Route: ART-1..ART-4 & Phase E completed (2026-10-21)",
-      "detail": "171 approved art entries in content/approved_art (all 25 heroes with 4 VN portraits + 16-cell chibi atlas, all 27 enemies/bosses with 16-cell chibi atlas, painted Part I World Map bg_world_map_part1.webp). 35 Hard mode encounters & nodes chained in campaign builder (5a2a0e86). Play Store icon (512x512), feature graphic (1024x500), 6 1920x1080 store screenshots, Android launcher mipmaps and ~1:30 teaser storyboard delivered (e782e255)."
+      "title": "D-29 Canonical Art, Store Identity, 32 Portrait Cutouts & 43 Living Locations (2026-10-23)",
+      "detail": "242 approved art entries in content/approved_art (all 32 character portrait sets = 112 clean alpha-keyed WebPs, 54 16-cell animated chibi sheets across all 8 states, 13 breakable boss objectives, 43 bespoke location backgrounds + painted Part I World Map bg_world_map_part1.webp). Master/compact brand logos, Play Store icon (512x512), feature graphic (1024x500 24-bit RGB), 8 1920x1080 store showcase screenshots (01..08), 15 Android launcher mipmaps, and 11 dark gothic Android splash screens delivered."
     },
     {
       "title": "D-27: RPG stat model (STR / INT / VIT / AGI) & 25 signature weapons on main",
@@ -21,7 +21,7 @@
     },
     {
       "title": "Deploy safety & Workers Builds clean-clone fix (D-28, fe67fae3)",
-      "detail": "D-28: the owner pushes GitHub main with GitHub Desktop and Workers Builds deploys staging; agents never push or deploy. tools/check_content.ts now passes on fresh Linux clones without narrative/ARCHIVE_MANIFEST.tsv. D1 assets.sql seeds all 312 assets (254 approved)."
+      "detail": "D-28: the owner pushes GitHub main with GitHub Desktop and Workers Builds deploys staging; agents never push or deploy. tools/check_content.ts now passes on fresh Linux clones without narrative/ARCHIVE_MANIFEST.tsv. D1 assets.sql seeds all 383 assets."
     }
   ],
   "next": [
@@ -2235,24 +2235,23 @@
     {
       "n": 2,
       "title": "World and chapters (patches)",
-      "status": "active — Part I complete (Normal + Hard)",
+      "status": "complete — Part I + 43 locations + Hard Mode",
       "done": [
         "Part I campaign patch: 8 chapters, 89 nodes (35 Normal + 35 Hard battles + 19 story), 70 encounters, 88 story scenes",
-        "Painted Part I World Map (bg_world_map_part1.webp) & 7 interactive regions (world_map_v1)",
+        "Painted Part I World Map (bg_world_map_part1.webp), 7 interactive regions (world_map_v1), and all 43 bespoke painted location backgrounds + biome-aware living backdrops",
         "Per-chapter patch builder (tools/make_chapter_patch.ts --chapters 1..7) & parallel R2/IDB downloads"
       ],
       "remaining": [
-        "Export and ingest of additional per-chapter location backgrounds (47 drawn in workbench)",
         "Regional music themes for Chapters 2–7 and bosses"
       ]
     },
     {
       "n": 3,
       "title": "All characters, enemies and bosses",
-      "status": "complete in game (52/52 units)",
+      "status": "complete in game (52/52 units + 13 boss objectives)",
       "done": [
-        "All 25 playable heroes integrated in game with 4 VN portraits (100 WebPs) & 16-cell animated SD Chibi atlases",
-        "All 27 enemies and 7 bosses integrated in game with 16-cell animated SD Chibi atlases (sprite_animation_v1)",
+        "All 32 character VN portrait sets (25 heroes + 7 antagonists = 112 clean alpha-keyed WebPs) integrated & verified",
+        "All 54 animated 16-cell SD Chibi sheets across all 8 combat states (52 units + 2 boss forms) + 13 breakable boss objective atlases",
         "D-27 RPG attribute math (STR/INT/VIT/AGI) & all 25 signature weapon passives active in combat"
       ],
       "remaining": [
@@ -2265,8 +2264,8 @@
       "title": "Events, LiveOps, final polish",
       "status": "active — store & mode screens ready",
       "done": [
-        "Mode screens live in client & server: DeedsScene, TrialsScene (Arena + Endless), ProfileScene, Normal/Hard mode switch",
-        "Google Play Store listing assets: 512x512 icon, 1024x500 feature graphic, 6 1920x1080 screenshots, Android mipmaps & ~1:30 teaser storyboard (ART-3 / ART-4)"
+        "Mode screens live in client & server: DeedsScene, TrialsScene (Arena + Endless), ProfileScene, Normal/Hard mode switch, Living Portrait + Chibi Showcase in RosterScene & CharacterScene",
+        "Canonical Google Play Store & Brand Identity Kit: logo_master.png (1600x760), logo_compact.png (960x360), 512x512 icon, 1024x500 feature graphic, 8 1920x1080 showcase screenshots (01..08), 15 Android mipmaps, 11 dark gothic Android splash screens & ~1:30 teaser storyboard"
       ],
       "remaining": [
         "Phase C/D live staging & production patch rollout (rel_part1_ch1 .. rel_part1_ch7)",
@@ -2278,20 +2277,20 @@
     {
       "kind": "Playable characters",
       "drawn": "25",
-      "inGame": "25 / 25 heroes (100 VN portraits + 25 16-cell animated chibi atlases)",
-      "missing": "None — all 25 playable heroes ingested & owner-approved (ART-1)"
+      "inGame": "25 / 25 heroes (100 clean alpha-keyed VN portraits + 25 16-cell animated chibi atlases)",
+      "missing": "None — all 25 playable heroes ingested, alpha-keyed & owner-approved"
     },
     {
-      "kind": "Enemies and bosses",
-      "drawn": "27",
-      "inGame": "27 / 27 units (20 regular enemies + 7 bosses, 16-cell animated chibi atlases)",
-      "missing": "None — all 27 enemies & bosses ingested & owner-approved (ART-1)"
+      "kind": "Enemies, bosses & objectives",
+      "drawn": "40",
+      "inGame": "27 / 27 units (20 regular enemies + 7 bosses, 7 antagonist VN portraits, 29 16-cell animated chibi sheets + 13 breakable boss objectives)",
+      "missing": "None — all 27 enemies/bosses & 13 breakable objectives ingested & owner-approved"
     },
     {
       "kind": "World Map & Locations",
-      "drawn": "51",
-      "inGame": "Painted Part I World Map (bg_world_map_part1) + 3 panoramic battlefields",
-      "missing": "47 additional workbench location plates optional for post-launch chapter variety"
+      "drawn": "44",
+      "inGame": "Painted Part I World Map (bg_world_map_part1) + all 43 bespoke location backgrounds & biome-aware living backdrops",
+      "missing": "None — all 43 Part I locations + World Map integrated"
     },
     {
       "kind": "Story CGs & Stills",
@@ -2300,9 +2299,9 @@
       "missing": "Remaining workbench CGs for later chapters"
     },
     {
-      "kind": "Store & Brand Assets (ART-3 / ART-4)",
-      "drawn": "10",
-      "inGame": "512×512 store icon, 1024×500 feature graphic, 6 1920×1080 screenshots, Android mipmaps, ~1:30 teaser storyboard",
+      "kind": "Store, Brand, Launcher & Splash Assets",
+      "drawn": "38",
+      "inGame": "logo_master (1600×760), logo_compact (960×360), 512×512 store icon, 1024×500 feature graphic, 8 1920×1080 showcase screenshots (01..08), 15 Android mipmaps, 11 dark gothic Android splash screens",
       "missing": "Final rendered WebM/MP4 teaser cut after owner storyboard sign-off"
     },
     {
@@ -2319,33 +2318,33 @@
     }
   ],
   "checks": {
-    "date": "2026-10-21",
-    "commit": "e782e255",
+    "date": "2026-10-23",
+    "commit": "3e0be8eb",
     "items": [
       {
         "name": "npm run verify (lint, typecheck, all tests, content check)",
         "result": "pass",
-        "detail": "1,090 tests passing (API 505, game 153, combat 99, schema 127, economy 53, tools 44, patch 41, shared 26, admin 30, story 9) + check:content clean"
+        "detail": "1,090 tests passing (API 507, game 158, combat 100, schema 131, economy 53, tools 65, patch 41, shared 26, story 9) + eslint 0 errors + check:content 172 files reproduced byte-for-byte"
       },
       {
-        "name": "Playwright landscape-desktop & phone-landscape",
+        "name": "Strict Art & Cutout Verification (tools/ingest_art.ts verify --require-approved --strict-art)",
         "result": "pass",
-        "detail": "Desktop 16:9 and Phone 20:9 (800×360 touch) green; Prologue first-viewing no-skip contract verified (7207dae1)"
+        "detail": "242 approved art entries verified (0 errors, 0 warnings); all 32 character portrait sets (112 WebPs) cleanly alpha-keyed; 383 D1 assets seeded"
       },
       {
-        "name": "Engine & Art coverage (tools/combat_coverage.ts + ART-1..ART-4)",
+        "name": "Canonical Store, Brand, Mipmap & Splash Kit (tools/build_canonical_store_and_brand_assets.mjs)",
         "result": "pass",
-        "detail": "25/25 heroes, 20/20 enemies, 7/7 bosses (52/52 bespoke animated atlases, 171 approved art entries, 312 D1 assets)"
+        "detail": "logo_master (1600×760), logo_compact (960×360), icon_512 (512×512), feature_graphic_1024x500 (24-bit RGB), 8× 1920×1080 showcase banners (01..08), 15 Android mipmaps & 11 dark gothic splash screens verified"
       },
       {
         "name": "Part I Campaign & Hard Mode (tools/build_campaign.ts + make_chapter_patch.ts)",
         "result": "pass",
-        "detail": "35 Normal + 35 Hard battle nodes, 70 encounters, N=1..7 chapter patches validated over base"
+        "detail": "52 units, 35 Normal + 35 Hard battle nodes, 70 encounters, 43 locations, 0 placeholder-art units, N=1..7 chapter patches validated over base"
       },
       {
         "name": "Staging Workers Builds (uomd-admin-staging & uomd-game-staging)",
         "result": "pass",
-        "detail": "Clean-clone build fix verified (fe67fae3); capabilities world_map_v1, hard_mode_v1, sprite_animation_v1, attributes_v1 live"
+        "detail": "Clean-clone build & ESLint .mjs globals verified; capabilities world_map_v1, hard_mode_v1, sprite_animation_v1, attributes_v1 live"
       },
       {
         "name": "Physical Android, signed AAB",

@@ -103,6 +103,18 @@ export class BootScene extends PixiScene {
         return this.nav.start('Finish');
       case 'hub':
         return this.nav.start('Home');
+      case 'chapters':
+        return this.nav.start('Chapters');
+      case 'roster':
+        return this.nav.start('Roster');
+      case 'character':
+        return this.nav.start('Character', { id: 'fadyme' });
+      case 'summon':
+        return this.nav.start('Summon');
+      case 'trials':
+        return this.nav.start('Trials');
+      case 'deeds':
+        return this.nav.start('Deeds');
       default:
         return this.nav.start('Title');
     }

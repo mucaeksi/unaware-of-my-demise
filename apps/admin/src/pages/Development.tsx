@@ -32,6 +32,7 @@ interface Progress {
   decisions: { id: string; when: string; what: string; note: string }[];
   commits: { sha: string; at: string; subject: string }[];
   screens: { file: string; caption: string }[];
+  storeAssets?: { file: string; label: string; kind: 'brand' | 'screenshot' }[];
   now: Item[];
   next: Item[];
   blockedOnOwner: Item[];
@@ -54,7 +55,7 @@ const codeBadge = (s: string): string => (s === 'COMPLETE' ? 'ok' : s === 'PARTI
 const checkBadge = (r: string): string => (r === 'pass' ? 'ok' : r === 'partial' ? 'warn' : r === 'fail' ? 'bad' : 'info');
 interface Note { id: number; area: string; kind: string; body: string; status: string; resolution: string; created_by: string; created_at: string; updated_by: string | null }
 
-const TABS = ['Overview', 'Live preview', 'Screens', 'Feedback'] as const;
+const TABS = ['Overview', 'Live preview', 'Store & Brand Kit', 'Screens', 'Feedback'] as const;
 type Tab = (typeof TABS)[number];
 const AREAS = ['General', 'Splash & Studio', 'Title', 'Prologue (120s)', 'Story', 'Battle', 'Patch Wait & Restart', 'Company hub', 'Summon', 'Roster', 'Mail', 'Shop', 'Account', 'Chapters', 'Control Center', 'Economy', 'Art direction'];
 
@@ -85,6 +86,7 @@ export function Development({ me, say }: { me: Me; say: (m: string) => void }): 
       </div>
       {tab === 'Overview' ? <Overview p={p} /> : null}
       {tab === 'Live preview' ? <Preview /> : null}
+      {tab === 'Store & Brand Kit' ? <StoreKit p={p} /> : null}
       {tab === 'Screens' ? <Screens p={p} onNote={(a) => { setArea(a); setTab('Feedback'); }} /> : null}
       {tab === 'Feedback' ? <Feedback me={me} say={say} area={area} setArea={setArea} /> : null}
     </>
@@ -240,7 +242,12 @@ const SCENE_PRESETS: { id: string; label: string }[] = [
   { id: 'battle_t3', label: '12. Battle T-3 (Shelter Courtyard)' },
   { id: 'story_t3_after', label: '13. LN T-3 Finale' },
   { id: 'finish_wait', label: '14. Patch Wait (Quotes)' },
-  { id: 'hub', label: '15. Company Hub' }
+  { id: 'hub', label: '15. Company Hub' },
+  { id: 'chapters', label: '16. World Map (Chapters)' },
+  { id: 'roster', label: '17. Companion Roster (25 Heroes)' },
+  { id: 'character', label: '18. Character Sheet (Fadyme)' },
+  { id: 'summon', label: '19. Hall of Ancestors (Summon)' },
+  { id: 'trials', label: '20. Trials (Arena & Endless)' }
 ];
 
 function Preview(): ReactNode {
@@ -276,6 +283,39 @@ function Preview(): ReactNode {
       </div>
       <div style={{ maxWidth: '100%', overflow: 'auto', marginTop: 12 }}>
         <iframe key={`${f}-${scene}-${target}-${nonce}`} title="Game preview" src={url} width={frame.w} height={frame.h} style={{ border: '1px solid var(--edge, #444)', borderRadius: 8, background: '#0a0610', maxWidth: '100%' }} allow="autoplay; fullscreen" />
+      </div>
+    </>
+  );
+}
+
+function StoreKit({ p }: { p: Progress }): ReactNode {
+  const list = p.storeAssets ?? [];
+  const brand = list.filter((x) => x.kind === 'brand');
+  const shots = list.filter((x) => x.kind === 'screenshot');
+  return (
+    <>
+      <p>Canonical Google Play Store &amp; Brand Identity Kit built from 100% approved runtime assets (silver-haired veil-hooded Fadyme, dark-brown-haired armored Mahmut, 32 clean alpha-keyed character portraits, and 54 animated chibi sheets).</p>
+      <h3>Brand Logos, App Icon &amp; Feature Graphic</h3>
+      <div className="grid">
+        {brand.map((b) => (
+          <figure key={b.file} className="card" style={{ margin: 0 }}>
+            <a href={`/dev/store/${b.file}`} target="_blank" rel="noreferrer">
+              <img src={`/dev/store/${b.file}`} alt={b.label} loading="lazy" style={{ width: '100%', maxHeight: 260, objectFit: 'contain', borderRadius: 6, background: '#0c0814' }} />
+            </a>
+            <figcaption className="mono">{b.label} (<code>docs/store/assets/{b.file}</code>)</figcaption>
+          </figure>
+        ))}
+      </div>
+      <h3>8× 1920×1080 Google Play Landscape Store Showcase Screenshots</h3>
+      <div className="grid">
+        {shots.map((s) => (
+          <figure key={s.file} className="card" style={{ margin: 0 }}>
+            <a href={`/dev/store/${s.file}`} target="_blank" rel="noreferrer">
+              <img src={`/dev/store/${s.file}`} alt={s.label} loading="lazy" style={{ width: '100%', borderRadius: 6 }} />
+            </a>
+            <figcaption className="mono">{s.label} (<code>docs/store/assets/{s.file}</code>)</figcaption>
+          </figure>
+        ))}
       </div>
     </>
   );

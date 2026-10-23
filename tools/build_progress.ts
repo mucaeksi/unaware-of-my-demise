@@ -67,6 +67,29 @@ function copyTree(srcDir: string, destDir: string): void {
 }
 copyTree(join(ROOT, 'content/base'), join(OUT, 'media'));
 copyTree(join(ROOT, 'narrative/15_Art_Workbench/ui_animations/gifs'), join(OUT, 'animations'));
+copyTree(join(ROOT, 'docs/store/assets'), join(OUT, 'store'));
+const storeDir = join(ROOT, 'docs/store/assets');
+const storeScreenshotsDir = join(storeDir, 'screenshots');
+const storeAssets: { file: string; label: string; kind: 'brand' | 'screenshot' }[] = [];
+if (existsSync(storeDir)) {
+  for (const [f, label] of [
+    ['icon_512.png', 'Google Play App Icon (512×512 32-bit RGBA)'],
+    ['logo_master.png', 'Master Brand Logo (1600×760 32-bit RGBA)'],
+    ['logo_compact.png', 'Compact Brand Logo (960×360 32-bit RGBA)'],
+    ['feature_graphic_1024x500.png', 'Google Play Feature Graphic (1024×500 24-bit RGB)']
+  ] as const) {
+    if (existsSync(join(storeDir, f))) storeAssets.push({ file: f, label, kind: 'brand' });
+  }
+}
+if (existsSync(storeScreenshotsDir)) {
+  for (const f of readdirSync(storeScreenshotsDir).filter((n) => n.endsWith('.png')).sort()) {
+    storeAssets.push({
+      file: `screenshots/${f}`,
+      label: f.replace(/\.png$/, '').replace(/[-_]+/g, ' '),
+      kind: 'screenshot'
+    });
+  }
+}
 const appArtDir = join(ROOT, 'content/approved_art/art');
 if (existsSync(appArtDir)) {
   mkdirSync(join(OUT, 'media', 'art'), { recursive: true });
@@ -251,7 +274,7 @@ const baseRelease = {
 const count = (needle: string): number => roadmap.filter((r) => r.status.includes(needle)).length;
 writeFileSync(
   join(OUT, 'progress.json'),
-  JSON.stringify({ generatedAt: new Date().toISOString(), summary: { total: roadmap.length, done: count('✅'), partial: count('🟡'), missing: count('❌') }, baseRelease, roadmap, decisions, commits, screens, ...tracker }, null, 1)
+  JSON.stringify({ generatedAt: new Date().toISOString(), summary: { total: roadmap.length, done: count('✅'), partial: count('🟡'), missing: count('❌') }, baseRelease, roadmap, decisions, commits, screens, storeAssets, ...tracker }, null, 1)
 );
 console.log(`progress.json: ${roadmap.length} roadmap rows, ${decisions.length} decisions, ${commits.length} commits, ${screens.length} screens, ${approvedEntries.length} approved art entries`);
 
