@@ -1,0 +1,551 @@
+#!/usr/bin/env python3
+"""Install and verify the curated Everything Claude Code (ECC v2.2.3) suite for Claude Code and Antigravity.
+
+Configures separate, host-adapted surfaces without enabling background hook daemons:
+  - Claude Code (.claude/):
+      - .claude/skills/<name>/           (77 canonical UOMD-relevant ECC skills, locked in .claude/skills-lock.json)
+      - .claude/agents/<name>.md         (28 subagents with Claude tool frontmatter + UOMD alignment)
+      - .claude/commands/<name>.md       (26 slash commands adapted to UOMD verification and D-28)
+      - .claude/rules/ecc/<pack>/*.md    (6 stack rule packs: common, typescript, react, web, python, kotlin)
+      - .claude/third-party-licenses/ecc/LICENSE
+  - Antigravity / Codex (.agents/):
+      - .agents/skills/<name>/SKILL.md   (generated and locked via tools/sync_codex_skills.py)
+      - .agents/agents/<name>.md         (28 subagents adapted to Antigravity tools & pro/flash models)
+      - .agents/workflows/<name>.md      (26 slash workflows adapted for Antigravity)
+      - .agents/rules/ecc-*.md           (4 consolidated rule packs within Antigravity's 20,000-token rule budget)
+
+Usage:
+    python3 tools/install_ecc.py --source /path/to/ECC   # install/refresh from ECC checkout + sync adapters
+    python3 tools/install_ecc.py --check                 # verify installed Claude + Antigravity ECC surfaces
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import re
+import shutil
+from pathlib import Path
+
+import sync_codex_skills
+
+ROOT = Path(__file__).resolve().parents[1]
+CLAUDE_DIR = ROOT / ".claude"
+AGENTS_DIR = ROOT / ".agents"
+LOCK_PATH = CLAUDE_DIR / "skills-lock.json"
+LICENSE_DEST = CLAUDE_DIR / "third-party-licenses" / "ecc" / "LICENSE"
+
+ECC_VERSION = "2.2.3"
+ECC_COMMIT = "90606c8315ee09cafc303515c5f33024db6b9882"
+ECC_REPO = "https://github.com/affaan-m/ECC"
+
+ECC_SKILLS: list[str] = sorted(sync_codex_skills.ECC_SKILLS)
+
+ECC_AGENTS: list[str] = [
+    "a11y-architect",
+    "architect",
+    "build-error-resolver",
+    "code-architect",
+    "code-explorer",
+    "code-reviewer",
+    "code-simplifier",
+    "comment-analyzer",
+    "commit-reviewer",
+    "database-reviewer",
+    "doc-updater",
+    "docs-lookup",
+    "e2e-runner",
+    "kotlin-build-resolver",
+    "kotlin-reviewer",
+    "performance-optimizer",
+    "planner",
+    "pr-test-analyzer",
+    "python-reviewer",
+    "react-build-resolver",
+    "react-reviewer",
+    "refactor-cleaner",
+    "security-reviewer",
+    "silent-failure-hunter",
+    "spec-miner",
+    "tdd-guide",
+    "type-design-analyzer",
+    "typescript-reviewer",
+]
+
+ECC_COMMANDS: list[str] = [
+    "build-fix",
+    "checkpoint",
+    "code-review",
+    "ecc-guide",
+    "feature-dev",
+    "gradle-build",
+    "kotlin-build",
+    "kotlin-review",
+    "kotlin-test",
+    "learn-eval",
+    "learn",
+    "plan-prd",
+    "plan",
+    "python-review",
+    "quality-gate",
+    "react-build",
+    "react-review",
+    "react-test",
+    "refactor-clean",
+    "resume-session",
+    "save-session",
+    "security-scan",
+    "sessions",
+    "test-coverage",
+    "update-codemaps",
+    "update-docs",
+]
+
+ECC_RULE_PACKS: list[str] = ["common", "typescript", "react", "web", "python", "kotlin"]
+
+ANTIGRAVITY_TOOL_MAP: dict[str, str] = {
+    "Read": "read_file",
+    "Write": "write_file",
+    "Edit": "edit_file",
+    "Bash": "run_command",
+    "Grep": "read_file",
+    "Glob": "read_file",
+    "WebSearch": "search_web",
+    "WebFetch": "search_web",
+}
+
+ANTIGRAVITY_MODEL_MAP: dict[str, str] = {
+    "haiku": "flash",
+    "sonnet": "pro",
+    "opus": "pro",
+}
+
+CLAUDE_AGENT_FOOTER = """
+---
+
+## UOMD Project Alignment (Claude Code)
+
+- **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction.
+- **Architecture**: Pure PixiJS v8 + Gothic DOM/CSS UI (`apps/game`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon), Capacitor 8 Android (`apps/android`).
+- **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers from an agent session; the owner pushes via GitHub Desktop.
+- **Hooks & MCP**: Background ECC hook daemons (`hooks.json`) and Context7 are disabled. Use the pinned project MCPs (`graphify`, `chrome-devtools`, `uomd-pixi-live`) when available.
+"""
+
+ANTIGRAVITY_AGENT_FOOTER = """
+---
+
+## UOMD Project Alignment (Antigravity / Argon 4)
+
+- **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `AGENTS.md` is the workspace rule entry point.
+- **Host Tools**: Use Antigravity's native tools (`read_file`, `edit_file`, `write_file`, `run_command`, `search_web`, `invoke_subagent`) and active project MCP servers (`uomd-pixi-live`, `graphify`, `chrome-devtools`).
+- **Architecture**: Pure PixiJS v8 + Gothic DOM/CSS UI (`apps/game`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon), Capacitor 8 Android (`apps/android`).
+- **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers; the owner pushes `main` via GitHub Desktop.
+"""
+
+UOMD_QUALITY_GATE_COMMAND = """---
+description: Run the Unaware of My Demise verification and skill/adapter integrity gate.
+argument-hint: "[--quick | --full]"
+---
+
+# UOMD Quality Gate
+
+Run the repository's deterministic quality and integrity checks before committing changes locally (D-28).
+
+## Standard Verification Gate
+
+1. **Skill & Adapter Integrity**:
+   ```bash
+   python3 tools/sync_codex_skills.py --check
+   python3 tools/skills_doctor.py
+   python3 tools/install_ecc.py --check
+   python3 -m unittest discover -s tools/tests -p 'test_*.py'
+   ```
+2. **Workspace Deploy Gate (`npm run verify`)**:
+   ```bash
+   npm run verify
+   ```
+   This executes `npm run lint`, `npm run typecheck`, `npm test`, and `npm run check:content` (proving `content/base` is byte-for-byte reproducible).
+
+## Reporting
+
+Report actual `PASS` / `FAIL` / `BLOCKED` / `UNVERIFIED` outcomes for each step. Under D-28, commit verified changes locally and never run `git push` or deploy Workers by hand.
+"""
+
+
+def sha256(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def adapt_common_rule(filename: str, text: str) -> str:
+    text = text.replace("\r\n", "\n")
+    if filename == "development-workflow.md":
+        text = text.replace(
+            "Use Context7 or primary vendor docs",
+            "Use pinned project skills (`.claude/skills/` / `.agents/skills/`), `uomd-pixi-live`, `graphify`, or official vendor docs (Context7 is retired in UOMD)",
+        )
+        text = text.replace(
+            "4. **Commit & Push**\n   - Detailed commit messages\n   - Follow conventional commits format\n   - See [git-workflow.md](./git-workflow.md) for commit message format and PR process",
+            "4. **Verify & Local Commit (D-28)**\n   - Run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`)\n   - Create reviewable local commits following conventional commits format\n   - **Never `git push` or deploy Workers from an agent session** — the owner pushes `main` with GitHub Desktop (D-28)",
+        )
+    elif filename == "git-workflow.md":
+        text += (
+            "\n## UOMD D-28 Delivery Policy (Override)\n\n"
+            "- Agents edit and commit **locally** in `F:\\unaware-of-my-demise` after passing `npm run verify`.\n"
+            "- **Never run `git push` or `wrangler deploy` from an agent session.** The owner pushes `main` via GitHub Desktop, which triggers Cloudflare Workers Builds.\n"
+        )
+    return text
+
+
+def adapt_agent_for_claude(raw_text: str) -> str:
+    text = raw_text.replace("\r\n", "\n").rstrip()
+    return text + "\n" + CLAUDE_AGENT_FOOTER
+
+
+def adapt_agent_for_antigravity(raw_text: str) -> str:
+    text = raw_text.replace("\r\n", "\n")
+    match = re.match(r"^---\n([\s\S]*?)\n---\n([\s\S]*)\Z", text)
+    if not match:
+        raise ValueError("Agent file missing YAML frontmatter")
+    header, body = match.groups()
+
+    name_match = re.search(r"^name:\s*(.+)$", header, re.MULTILINE)
+    desc_match = re.search(r"^description:\s*(.+)$", header, re.MULTILINE)
+    tools_match = re.search(r"^tools:\s*(.+)$", header, re.MULTILINE)
+    model_match = re.search(r"^model:\s*(.+)$", header, re.MULTILINE)
+
+    name = name_match.group(1).strip() if name_match else "agent"
+    desc = desc_match.group(1).strip() if desc_match else ""
+    raw_tools = tools_match.group(1).strip() if tools_match else "Read, Grep, Glob"
+    raw_model = model_match.group(1).strip().strip("\"'") if model_match else "sonnet"
+
+    if raw_tools.startswith("[") and raw_tools.endswith("]"):
+        tool_items = [t.strip().strip("\"'") for t in raw_tools[1:-1].split(",") if t.strip()]
+    else:
+        tool_items = [t.strip().strip("\"'") for t in raw_tools.split(",") if t.strip()]
+
+    mapped_tools: list[str] = []
+    for t in tool_items:
+        mapped = ANTIGRAVITY_TOOL_MAP.get(t)
+        if mapped and mapped not in mapped_tools:
+            mapped_tools.append(mapped)
+    if not mapped_tools:
+        mapped_tools = ["read_file"]
+
+    mapped_model = ANTIGRAVITY_MODEL_MAP.get(raw_model, "pro")
+
+    new_header = (
+        "---\n"
+        f"name: {name}\n"
+        f"description: {desc}\n"
+        f"tools: [{', '.join(mapped_tools)}]\n"
+        f"model: {mapped_model}\n"
+        "---\n"
+    )
+
+    adapted_body = (
+        body.replace("Use Read tool", "Use `read_file` tool")
+        .replace("Use Edit tool", "Use `edit_file` tool")
+        .replace("Use Write tool", "Use `write_file` tool")
+        .replace("Use Bash tool", "Use `run_command` tool")
+        .rstrip()
+    )
+    return new_header + adapted_body + "\n" + ANTIGRAVITY_AGENT_FOOTER
+
+
+def adapt_command_for_claude(name: str, raw_text: str) -> str:
+    if name == "quality-gate":
+        return UOMD_QUALITY_GATE_COMMAND
+    text = raw_text.replace("\r\n", "\n").rstrip()
+    return (
+        text
+        + "\n\n---\n"
+        + "> **UOMD Note (D-28):** Validate with `npm run verify`. Create local commits only; never `git push` or deploy Workers from an agent session.\n"
+    )
+
+
+def adapt_command_for_antigravity(name: str, raw_text: str) -> str:
+    if name == "quality-gate":
+        return UOMD_QUALITY_GATE_COMMAND
+    text = raw_text.replace("\r\n", "\n")
+    text = (
+        text.replace("Use Read tool", "Use `read_file` tool")
+        .replace("Use Edit tool", "Use `edit_file` tool")
+        .replace("Use Write tool", "Use `write_file` tool")
+        .replace("Use Bash tool", "Use `run_command` tool")
+        .replace(".claude/plans/", ".agents/plans/")
+        .replace(".claude/prds/", ".agents/prds/")
+        .replace(".claude/reviews/", ".agents/reviews/")
+        .rstrip()
+    )
+    return (
+        text
+        + "\n\n---\n"
+        + "> **Antigravity / UOMD Note (D-28):** Use native Antigravity tools (`read_file`, `edit_file`, `write_file`, `run_command`, `invoke_subagent`). Validate with `npm run verify`. Create local commits only; never `git push` or deploy Workers.\n"
+    )
+
+
+def strip_rule_frontmatter(text: str) -> str:
+    text = text.replace("\r\n", "\n")
+    if text.startswith("---\n") and "\n---\n" in text[4:]:
+        return text.split("\n---\n", 1)[1].lstrip()
+    return text
+
+
+def build_antigravity_consolidated_rules(claude_rules_root: Path) -> dict[str, str]:
+    """Build 4 concise, high-signal rule files for .agents/rules/ well within Antigravity's 24 KB/file and 20,000-token budget."""
+    common_dir = claude_rules_root / "common"
+    ts_dir = claude_rules_root / "typescript"
+    web_dir = claude_rules_root / "web"
+    py_dir = claude_rules_root / "python"
+    kt_dir = claude_rules_root / "kotlin"
+
+    common_parts = [
+        "# ECC 2.2.3 Core Engineering Rules (Antigravity / Argon 4 Adaptation)\n\n"
+        "> Adapted for **Unaware of My Demise**. Root `README.md` and `AGENTS.md` take precedence.\n"
+        "> Under **Decision D-28**, agents verify with `npm run verify` and commit locally; never `git push` or deploy Workers."
+    ]
+    for fname in (
+        "coding-style.md",
+        "development-workflow.md",
+        "testing.md",
+        "security.md",
+        "code-review.md",
+        "patterns.md",
+        "git-workflow.md",
+    ):
+        fpath = common_dir / fname
+        if fpath.is_file():
+            common_parts.append(strip_rule_frontmatter(fpath.read_text(encoding="utf-8")).strip())
+
+    ts_web_parts = [
+        "# ECC 2.2.3 TypeScript & Web Rules (PixiJS v8 + Gothic DOM/CSS UI & Cloudflare Workers)\n\n"
+        "> Applies to `apps/game`, `apps/api`, `apps/admin`, `packages/*`, and `tools/*`.\n"
+        "> Game client uses pure PixiJS v8 (`apps/game/src/core`) + HTML/ARIA layer (`apps/game/src/ui/domKit.ts`). Backend uses Cloudflare Workers + Hono + D1 SQLite."
+    ]
+    for d in (ts_dir, web_dir):
+        for fpath in sorted(d.glob("*.md")):
+            if fpath.name == "hooks.md":
+                continue
+            ts_web_parts.append(strip_rule_frontmatter(fpath.read_text(encoding="utf-8")).strip())
+
+    react_rule = """# ECC 2.2.3 React Rules (UOMD Control Center — `apps/admin`)
+
+> Applies to the React + TypeScript UOMD Control Center (`apps/admin`). Full examples live in `.claude/rules/ecc/react/` and the `react-patterns`, `react-performance`, and `react-testing` skills.
+
+## 1. Component & State Architecture (`coding-style.md` & `patterns.md`)
+- Prefer small, single-responsibility function components with explicit named `interface` props (avoid `React.FC` and `any`).
+- Compute derived state during render instead of syncing state inside `useEffect`.
+- Keep state as local as possible; colocate form, filter, and modal state within the owning Control Center view.
+- Use controlled inputs with explicit validation feedback and deterministic loading / empty / error states.
+- Preserve UOMD Control Center security invariants: Cloudflare Access JWT, RBAC role checks, CSRF headers on mutations, and immutable audit trail verification.
+
+## 2. React Hooks Discipline (`hooks.md`)
+- Call hooks unconditionally at the top level of function components or custom `use*` hooks.
+- Use `useEffect` strictly for external synchronization (DOM events, timers, network abort controllers) and always return a cleanup function (e.g. `AbortController.abort()`, `clearInterval`).
+- Include all reactive dependencies in `useEffect` / `useMemo` / `useCallback` dependency arrays.
+- Do not prematurely wrap values in `useMemo` or `useCallback` unless passed to a memoized child, used in a hook dependency array, or proven expensive.
+
+## 3. Security & Testing (`security.md` & `testing.md`)
+- Never render unvalidated HTML (`dangerouslySetInnerHTML`) or expose raw secrets/tokens in Control Center views, logs, or URL query parameters.
+- Test user-visible behavior and accessibility roles (`getByRole`, `getByLabelText`) rather than internal component state.
+"""
+
+    py_kt_parts = [
+        "# ECC 2.2.3 Python Tooling & Kotlin/Android Rules (`tools/` & `apps/android`)\n\n"
+        "> Applies to Python verification/ingest scripts in `tools/` and the Capacitor 8 Android native shell in `apps/android`."
+    ]
+    for d in (py_dir, kt_dir):
+        for fpath in sorted(d.glob("*.md")):
+            if fpath.name in ("hooks.md", "fastapi.md"):
+                continue
+            py_kt_parts.append(strip_rule_frontmatter(fpath.read_text(encoding="utf-8")).strip())
+
+    return {
+        "ecc-common.md": "\n\n---\n\n".join(common_parts) + "\n",
+        "ecc-typescript-web.md": "\n\n---\n\n".join(ts_web_parts) + "\n",
+        "ecc-react.md": react_rule,
+        "ecc-python-kotlin.md": "\n\n---\n\n".join(py_kt_parts) + "\n",
+    }
+
+
+def install_from_source(source: Path) -> None:
+    if not (source / "skills").is_dir() or not (source / "agents").is_dir():
+        raise SystemExit(f"FAIL: Invalid ECC source directory: {source}")
+
+    lock = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
+
+    # 1. Install 77 curated canonical skills into .claude/skills/<name>/
+    target_skills = CLAUDE_DIR / "skills"
+    for name in ECC_SKILLS:
+        src_skill = source / "skills" / name
+        if not (src_skill / "SKILL.md").is_file():
+            raise SystemExit(f"FAIL: Missing ECC skill {name} in {source}")
+        dst_skill = target_skills / name
+        if dst_skill.exists():
+            shutil.rmtree(dst_skill)
+        for src_file in sorted(src_skill.rglob("*")):
+            if src_file.is_symlink() or not src_file.is_file():
+                continue
+            rel = src_file.relative_to(src_skill)
+            # Exclude hook scripts/docs since executable_hooks_enabled is false
+            if "hooks" in rel.parts or rel.name == "hook-integration.md":
+                continue
+            out_file = dst_skill / rel
+            out_file.parent.mkdir(parents=True, exist_ok=True)
+            out_file.write_bytes(src_file.read_bytes())
+        lock["skill_file_sha256"][name] = sha256((dst_skill / "SKILL.md").read_bytes())
+
+    # 2. Copy ECC MIT license and update .claude/skills-lock.json
+    LICENSE_DEST.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(source / "LICENSE", LICENSE_DEST)
+    lock["ecc_skills"] = {
+        "commit": ECC_COMMIT,
+        " hooks_enabled": False,
+        "license": "MIT",
+        "skills": ECC_SKILLS,
+        "source": ECC_REPO,
+        "version": ECC_VERSION,
+    }
+    # Fix key name without leading space
+    lock["ecc_skills"].pop(" hooks_enabled", None)
+    lock["ecc_skills"]["hooks_enabled"] = False
+    LOCK_PATH.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+
+    # 3. Install 28 curated subagents separately for Claude (.claude/agents/) and Antigravity (.agents/agents/)
+    claude_agents_dir = CLAUDE_DIR / "agents"
+    agy_agents_dir = AGENTS_DIR / "agents"
+    claude_agents_dir.mkdir(parents=True, exist_ok=True)
+    agy_agents_dir.mkdir(parents=True, exist_ok=True)
+    for agent_name in ECC_AGENTS:
+        src_agent = source / "agents" / f"{agent_name}.md"
+        if not src_agent.is_file():
+            raise SystemExit(f"FAIL: Missing ECC agent {agent_name}.md")
+        raw_text = src_agent.read_text(encoding="utf-8")
+        (claude_agents_dir / f"{agent_name}.md").write_text(
+            adapt_agent_for_claude(raw_text), encoding="utf-8", newline="\n"
+        )
+        (agy_agents_dir / f"{agent_name}.md").write_text(
+            adapt_agent_for_antigravity(raw_text), encoding="utf-8", newline="\n"
+        )
+
+    # 4. Install 26 curated slash commands (.claude/commands/) and Antigravity workflows (.agents/workflows/)
+    claude_cmds_dir = CLAUDE_DIR / "commands"
+    agy_workflows_dir = AGENTS_DIR / "workflows"
+    claude_cmds_dir.mkdir(parents=True, exist_ok=True)
+    agy_workflows_dir.mkdir(parents=True, exist_ok=True)
+    for cmd_name in ECC_COMMANDS:
+        src_cmd = source / "commands" / f"{cmd_name}.md"
+        if not src_cmd.is_file():
+            raise SystemExit(f"FAIL: Missing ECC command {cmd_name}.md")
+        raw_text = src_cmd.read_text(encoding="utf-8")
+        (claude_cmds_dir / f"{cmd_name}.md").write_text(
+            adapt_command_for_claude(cmd_name, raw_text), encoding="utf-8", newline="\n"
+        )
+        (agy_workflows_dir / f"{cmd_name}.md").write_text(
+            adapt_command_for_antigravity(cmd_name, raw_text), encoding="utf-8", newline="\n"
+        )
+
+    # 5. Install 6 stack rule packs for Claude (.claude/rules/ecc/) and 4 consolidated rule files for Antigravity (.agents/rules/)
+    claude_rules_root = CLAUDE_DIR / "rules" / "ecc"
+    if claude_rules_root.exists():
+        shutil.rmtree(claude_rules_root)
+    for pack in ECC_RULE_PACKS:
+        src_pack = source / "rules" / pack
+        dst_pack = claude_rules_root / pack
+        dst_pack.mkdir(parents=True, exist_ok=True)
+        for src_rule in sorted(src_pack.glob("*.md")):
+            if src_rule.name == "fastapi.md":
+                continue
+            if src_rule.name == "hooks.md" and pack != "react":
+                continue
+            content = src_rule.read_text(encoding="utf-8")
+            if pack == "common":
+                content = adapt_common_rule(src_rule.name, content)
+            else:
+                content = content.replace("\r\n", "\n")
+            (dst_pack / src_rule.name).write_text(content, encoding="utf-8", newline="\n")
+
+    agy_rules_dir = AGENTS_DIR / "rules"
+    agy_rules_dir.mkdir(parents=True, exist_ok=True)
+    for rule_name, rule_content in build_antigravity_consolidated_rules(claude_rules_root).items():
+        (agy_rules_dir / rule_name).write_text(rule_content, encoding="utf-8", newline="\n")
+
+    # 6. Synchronize .agents/skills/ adapters and .agents/skills-lock.json
+    adapter_count = sync_codex_skills.sync(ROOT, check=False)
+    print(
+        f"PASS: Installed {len(ECC_SKILLS)} ECC skills, {len(ECC_AGENTS)} Claude/Antigravity subagents, "
+        f"{len(ECC_COMMANDS)} commands/workflows, and stack rules; synced {adapter_count} total adapters."
+    )
+
+
+def verify_installation() -> None:
+    lock = json.loads(LOCK_PATH.read_text(encoding="utf-8"))
+    ecc_meta = lock.get("ecc_skills", {})
+    if ecc_meta.get("version") != ECC_VERSION or ecc_meta.get("skills") != ECC_SKILLS:
+        raise SystemExit("FAIL: .claude/skills-lock.json missing or mismatched ecc_skills metadata")
+    if lock.get("executable_hooks_enabled") is not False:
+        raise SystemExit("FAIL: executable_hooks_enabled must remain false")
+    if not LICENSE_DEST.is_file():
+        raise SystemExit("FAIL: Missing .claude/third-party-licenses/ecc/LICENSE")
+
+    for name in ECC_SKILLS:
+        skill_md = CLAUDE_DIR / "skills" / name / "SKILL.md"
+        adapter_md = AGENTS_DIR / "skills" / name / "SKILL.md"
+        if not skill_md.is_file() or not adapter_md.is_file():
+            raise SystemExit(f"FAIL: Missing skill or adapter for {name}")
+        if lock["skill_file_sha256"].get(name) != sha256(skill_md.read_bytes()):
+            raise SystemExit(f"FAIL: Lock hash mismatch for .claude/skills/{name}/SKILL.md")
+
+    for agent_name in ECC_AGENTS:
+        c_agent = CLAUDE_DIR / "agents" / f"{agent_name}.md"
+        a_agent = AGENTS_DIR / "agents" / f"{agent_name}.md"
+        if not c_agent.is_file() or not a_agent.is_file():
+            raise SystemExit(f"FAIL: Missing subagent {agent_name} in .claude/agents or .agents/agents")
+        a_text = a_agent.read_text(encoding="utf-8")
+        if "model: pro" not in a_text and "model: flash" not in a_text:
+            raise SystemExit(f"FAIL: Antigravity subagent {agent_name} missing adapted model tier")
+
+    for cmd_name in ECC_COMMANDS:
+        c_cmd = CLAUDE_DIR / "commands" / f"{cmd_name}.md"
+        a_wf = AGENTS_DIR / "workflows" / f"{cmd_name}.md"
+        if not c_cmd.is_file() or not a_wf.is_file():
+            raise SystemExit(f"FAIL: Missing command/workflow {cmd_name}")
+
+    for pack in ECC_RULE_PACKS:
+        if not (CLAUDE_DIR / "rules" / "ecc" / pack).is_dir():
+            raise SystemExit(f"FAIL: Missing Claude rule pack .claude/rules/ecc/{pack}")
+
+    total_agy_rule_bytes = 0
+    for rname in ("ecc-common.md", "ecc-typescript-web.md", "ecc-react.md", "ecc-python-kotlin.md"):
+        rpath = AGENTS_DIR / "rules" / rname
+        if not rpath.is_file():
+            raise SystemExit(f"FAIL: Missing Antigravity rule file .agents/rules/{rname}")
+        size = rpath.stat().st_size
+        if size > 24_000:
+            raise SystemExit(f"FAIL: Antigravity rule file {rname} exceeds 24 KB per-file cap ({size} bytes)")
+        total_agy_rule_bytes += size
+
+    sync_codex_skills.sync(ROOT, check=True)
+    print(
+        f"PASS: ECC {ECC_VERSION} verified ({len(ECC_SKILLS)} skills, {len(ECC_AGENTS)} subagents, "
+        f"{len(ECC_COMMANDS)} commands/workflows, Antigravity rules={total_agy_rule_bytes} bytes, hooks disabled)"
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", type=Path, help="Path to ECC repository checkout")
+    parser.add_argument("--check", action="store_true", help="Verify installed ECC files without writing")
+    args = parser.parse_args()
+
+    if args.check:
+        verify_installation()
+    elif args.source:
+        install_from_source(args.source.resolve())
+        verify_installation()
+    else:
+        parser.error("Specify either --source <path-to-ECC> or --check")
+
+
+if __name__ == "__main__":
+    main()

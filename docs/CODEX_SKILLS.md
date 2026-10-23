@@ -37,6 +37,7 @@ Each listed name has `.agents/skills/<name>/SKILL.md` linked to `.claude/skills/
 | Backend, security, media | `cloudflare-d1-liveops`, `security-audit`, `google-anime-media` | Actual connector access; D1-only staging builds; audit isolation retained; Google-only approved media/budgets |
 | Project PixiJS v8 workflows (D-23a) | `uomd-pixi-engine`, `uomd-battle`, `uomd-anime-ui`, `uomd-chibi-animation`, `uomd-mobile-qa`, `uomd-narrative-cinematics` | The real engine in `apps/game/src/engine` (PIXI stage behind a Phaser-style scene API); narrative/asset provenance; browser evidence distinguished from Android acceptance. Replaced the `phaser4-*` aliases on 2026-10-18 |
 | Official PixiJS v8 skills | `pixijs` (router) + 25 `pixijs-*` topic skills | Mirrored from the installed `pixi.js` package by `python tools/install_pixijs_skills.py` (version = package-lock); `--check` verifies; never edit the copies |
+| Everything Claude Code (ECC 2.2.3) | 77 curated engineering/stack skills (`tdd-workflow`, `verification-loop`, `security-review`, `e2e-testing`, `frontend-patterns`, `react-patterns`, `backend-patterns`, `database-migrations`, `android-clean-architecture`, `kotlin-patterns`, `python-patterns`, `strategic-compact`, etc.) + 28 subagents + 26 commands/workflows + stack rules | Installed and verified by `python3 tools/install_ecc.py` (`--check` verifies); separate Claude (`.claude/agents/`, `.claude/commands/`, `.claude/rules/ecc/`) and Antigravity (`.agents/agents/`, `.agents/workflows/`, `.agents/rules/ecc-*.md`) surfaces; hooks disabled (`executable_hooks_enabled: false`) |
 
 The 28 upstream Phaser topic skills were retired in Decision D-23 (2026-10-17); the six `phaser4-*` compatibility aliases followed on 2026-10-18. There is no official PixiJS MCP server: the project MCP `uomd-pixi-live` (`tools/mcp_pixi_live.ts`) serves the PixiJS/project skills and inspects the live game. Archive pins/licenses for the remaining third-party skills stay in `.claude/skills-lock.json` and `.claude/third-party-licenses/`. Graphify is 0.9.84, Chrome DevTools MCP 1.10.1, Ponytail 5.1.0 and UI/UX Pro Max 2.15.0 according to the existing source inventory. Skill instructions mentioning newer upstream tool options are checked against the actual pinned runtime before use.
 
@@ -68,6 +69,7 @@ The [new-session project review prompt](NEW_SESSION_PROJECT_REVIEW.md) implement
 ```bash
 python3 tools/sync_codex_skills.py
 python3 tools/sync_codex_skills.py --check
+python3 tools/install_ecc.py --check
 python3 -m unittest discover -s tools/tests -p 'test_*.py'
 python3 tools/bootstrap_skills.py --verify
 python3 tools/skills_doctor.py

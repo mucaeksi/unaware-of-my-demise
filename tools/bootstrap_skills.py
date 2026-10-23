@@ -131,9 +131,11 @@ def main():
     }
     previous = ROOT / ".claude" / "skills-lock.json"
     if previous.is_file():
-        # keep the official PixiJS mirror record written by tools/install_pixijs_skills.py
-        kept = json.loads(previous.read_text(encoding="utf-8")).get("pixijs_skills")
-        if kept: lock["pixijs_skills"] = kept
+        # keep the official PixiJS and ECC mirror records written by their installers
+        prev_data = json.loads(previous.read_text(encoding="utf-8"))
+        for key in ("pixijs_skills", "ecc_skills"):
+            if prev_data.get(key):
+                lock[key] = prev_data[key]
     write_safe(ROOT / ".claude" / "skills-lock.json", (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode())
     print("PASS: copied", copied, "archive files; installed", len(lock["skill_file_sha256"]), "skills.")
     main_verify = [name for name in ("ponytail", "graphify", "ui-ux-pro-max", "uomd-pixi-engine", "security-audit") if not (TARGET / name / "SKILL.md").exists()]

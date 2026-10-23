@@ -11,6 +11,87 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 
+ECC_SKILLS = frozenset({
+    "accessibility",
+    "agent-introspection-debugging",
+    "agent-security-hardening",
+    "agent-self-evaluation",
+    "ai-regression-testing",
+    "android-clean-architecture",
+    "api-design",
+    "architecture-decision-records",
+    "backend-patterns",
+    "blueprint",
+    "browser-qa",
+    "change-impact",
+    "click-path-audit",
+    "code-tour",
+    "codebase-onboarding",
+    "coding-standards",
+    "content-hash-cache-pattern",
+    "context-and-decisions",
+    "context-budget",
+    "contract-first",
+    "conventional-commit-review",
+    "cost-aware-llm-pipeline",
+    "cost-tracking",
+    "database-migrations",
+    "delivery-gate",
+    "deployment-patterns",
+    "design-system",
+    "docs-governance",
+    "documentation-lookup",
+    "e2e-testing",
+    "ecc-guide",
+    "ecc-recipes",
+    "error-handling",
+    "eval-harness",
+    "frontend-a11y",
+    "frontend-design-direction",
+    "frontend-patterns",
+    "git-workflow",
+    "hexagonal-architecture",
+    "i18n-sync",
+    "intent-driven-development",
+    "iterative-retrieval",
+    "kotlin-coroutines-flows",
+    "kotlin-patterns",
+    "kotlin-testing",
+    "latency-critical-systems",
+    "living-docs-governance",
+    "make-interfaces-feel-better",
+    "mcp-dependency-review",
+    "mcp-server-patterns",
+    "module-regression",
+    "motion-advanced",
+    "motion-foundations",
+    "motion-patterns",
+    "parallel-execution-optimizer",
+    "plan-canvas",
+    "plan-orchestrate",
+    "production-audit",
+    "python-patterns",
+    "python-testing",
+    "react-patterns",
+    "react-performance",
+    "react-testing",
+    "safety-guard",
+    "santa-method",
+    "search-first",
+    "security-review",
+    "security-scan",
+    "story-lifecycle",
+    "strategic-compact",
+    "tdd-workflow",
+    "team-agent-orchestration",
+    "test-collaboration",
+    "token-budget-advisor",
+    "unified-memory",
+    "verification-loop",
+    "vite-patterns",
+})
+
+
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -90,6 +171,12 @@ def adaptation(name: str) -> str:
     if name.startswith("pixijs"):
         return """- Official PixiJS skill mirrored from the installed `pixi.js` package by `tools/install_pixijs_skills.py`; it matches the version in package-lock.json. Do not edit the copy: upgrade pixi.js and re-run the installer.
 - Its llms.txt fallback (`https://pixijs.download/release/docs/llms.txt`) documents the newest release; confirm any API it suggests against `node_modules/pixi.js/lib` before using it here.
+"""
+    if name in ECC_SKILLS:
+        return f"""- ECC 2.2.3 workflow adapted for Antigravity (Argon 4) and Codex on Unaware of My Demise. Resolve relative `references/`, `templates/`, `examples/` and `scripts/` paths against `.claude/skills/{name}/`.
+- Map generic Claude tool names (`Read`, `Write`, `Edit`, `Bash`, `Grep`, `Glob`, `Task`) to actual Antigravity/Codex tools (`read_file`, `write_file`, `edit_file`, `run_command`, `search_web`, `invoke_subagent`). Never assume ECC's background hook daemon (`hooks.json`) or retired Context7 MCP is active.
+- Preserve UOMD architecture: pure PixiJS v8 + Gothic DOM/CSS UI (`apps/game`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api`), Capacitor 8 Android (`apps/android`).
+- Follow D-28 delivery rules: verify changes locally (`npm run verify`) and create reviewable local commits only; never `git push` or deploy Workers from an agent session.
 """
     return """- Preserve the canonical workflow and resolve its resources against the source directory. Review new source/version changes before using new runtimes or instructions.
 - Use current project constraints and actual host capabilities; do not infer permission to install, delegate, spend or deploy from generic examples.
