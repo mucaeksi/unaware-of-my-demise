@@ -7,7 +7,19 @@ import { VfxStage, type VfxEnvironment } from './VfxStage';
 
 const pack = VfxPack.parse(JSON.parse(readFileSync(new URL('../../../../content/base/vfx/vfx_presets.json', import.meta.url), 'utf8')));
 const tex = PIXI.Texture.EMPTY;
-const textures = () => ({ spark: tex, star: tex, slash: tex, ring: tex, pillar: tex, shard: tex });
+const textures = () => ({
+  spark: tex,
+  star: tex,
+  slash: tex,
+  ring: tex,
+  pillar: tex,
+  shard: tex,
+  bell: tex,
+  chain: tex,
+  seal: tex,
+  droplet: tex,
+  feather: tex,
+});
 const env = (over: Partial<VfxEnvironment> = {}) => () => ({ particles: true, particleDensity: 1, reducedMotion: false, reduceFlash: false, ...over });
 const kids = (s: VfxStage) => s.layers.ground.children.length + s.layers.fx.children.length + s.layers.overlay.children.length;
 const run = (s: VfxStage, ms: number, step = 16) => {
@@ -67,6 +79,33 @@ describe('VfxStage', () => {
     expect(s.layers.fx.children.length).toBe(1);
     run(s, 500);
     expect(s.layers.fx.children.length).toBe(0);
+    s.destroy();
+  });
+
+  it('compiles all signature hero, boss, and enemy presets including new shapes, emblem textures, projectiles, and cues', async () => {
+    const s = new VfxStage(env(), textures);
+    s.setPack(pack);
+    expect(s.hasProjectile('kera_flask_flick')).toBe(true);
+    expect(s.hasProjectile('fadyme_bell_that_forgets')).toBe(false);
+
+    const firedCues: string[] = [];
+    const done = s.play('fadyme_bell_that_forgets', {
+      x: 320,
+      y: 240,
+      target: { x: 640, y: 240 },
+      element: 'Veil',
+      onCue: (cue) => firedCues.push(cue),
+    });
+    run(s, 950);
+    await done;
+    expect(firedCues).toEqual(expect.arrayContaining(['hit_stop', 'shake', 'flash']));
+    expect(kids(s)).toBe(0);
+
+    // Play a projectile preset and a boss eclipse preset to verify bell_arch, shield_wall, eclipse_corona, crosshair
+    const pDone = s.play('boss_construct_eclipse_pulse', { x: 640, y: 240, element: 'Veil' });
+    run(s, 1100);
+    await pDone;
+    expect(kids(s)).toBe(0);
     s.destroy();
   });
 });

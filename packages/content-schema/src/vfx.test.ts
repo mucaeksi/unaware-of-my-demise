@@ -16,6 +16,9 @@ describe('data-driven VFX presets', () => {
   it('keeps the grammar closed: no unknown primitives, fields, textures or colour expressions', () => {
     const one = (el: Record<string, unknown>) => VfxPack.safeParse({ schema_version: 1, presets: { pp: { elements: [el] } } }).success;
     expect(one({ kind: 'sprite', texture: 'ring', duration_ms: 100 })).toBe(true);
+    expect(one({ kind: 'sprite', texture: 'bell', duration_ms: 100 })).toBe(true);
+    expect(one({ kind: 'shape', shape: 'bell_arch', size: 120, duration_ms: 100 })).toBe(true);
+    expect(one({ kind: 'shape', shape: 'eclipse_corona', size: 140, duration_ms: 100 })).toBe(true);
     expect(one({ kind: 'shader', source: 'void main(){}' })).toBe(false);
     expect(one({ kind: 'sprite', texture: 'https://example.com/a.png', duration_ms: 100 })).toBe(false);
     expect(one({ kind: 'sprite', texture: 'ring', duration_ms: 100, onComplete: 'alert(1)' })).toBe(false);
@@ -31,5 +34,21 @@ describe('data-driven VFX presets', () => {
   it('requires the vfx_v1 capability so older binaries refuse such patches before downloading', () => {
     expect(requiredContentCapabilities(new Map([[VFX_PATH, enc(base)]]))).toContain('vfx_v1');
     expect(requiredContentCapabilities(new Map([['story/x.json', enc({})]]))).not.toContain('vfx_v1');
+  });
+
+  it('maps every non-passive skill across all 25 heroes, 7 bosses, and 20 enemies to a valid signature preset', () => {
+    const pack = VfxPack.parse(base);
+    const campaignUnits = JSON.parse(
+      readFileSync(new URL('../../../content/patches/rel_0003_part1_campaign/units/unit_pack.json', import.meta.url), 'utf8'),
+    ) as { units: Array<{ unit_id: string; kind: string; skills: Array<{ skill_id: string; type: string }> }> };
+    expect(campaignUnits.units.length).toBe(52);
+    for (const u of campaignUnits.units) {
+      for (const sk of u.skills) {
+        if (sk.type === 'passive') continue;
+        const presetId = pack.skills[sk.skill_id];
+        expect(presetId, `${u.unit_id}.${sk.skill_id}`).toBeDefined();
+        expect(pack.presets[presetId!], `preset ${presetId} for ${u.unit_id}.${sk.skill_id}`).toBeDefined();
+      }
+    }
   });
 });

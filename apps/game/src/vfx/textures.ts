@@ -106,6 +106,91 @@ function build(): Record<TextureName, PIXI.Texture> {
       ctx.lineTo(10, 24);
       ctx.closePath();
       ctx.fill();
+    }),
+    bell: canvasTexture(96, 96, (ctx) => {
+      radial(ctx, 48, 44, [[0, 0.55], [0.55, 0.22], [1, 0]]);
+      ctx.strokeStyle = 'rgba(255,255,255,0.95)';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      ctx.arc(48, 16, 7, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.beginPath();
+      ctx.moveTo(48, 22);
+      ctx.bezierCurveTo(30, 22, 24, 42, 16, 66);
+      ctx.lineTo(80, 66);
+      ctx.bezierCurveTo(72, 42, 66, 22, 48, 22);
+      ctx.closePath();
+      ctx.fill();
+      // Thorn clapper & acoustic rim
+      ctx.beginPath();
+      ctx.moveTo(44, 66);
+      ctx.lineTo(48, 88);
+      ctx.lineTo(52, 66);
+      ctx.closePath();
+      ctx.fill();
+    }),
+    chain: canvasTexture(96, 96, (ctx) => {
+      ctx.translate(48, 48);
+      ctx.rotate(-Math.PI / 4);
+      ctx.strokeStyle = 'rgba(255,255,255,0.95)';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.roundRect(-34, -13, 42, 26, 12);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.roundRect(-8, -13, 42, 26, 12);
+      ctx.stroke();
+    }),
+    seal: canvasTexture(96, 96, (ctx) => {
+      radial(ctx, 48, 44, [[0, 0.75], [0.6, 0.35], [1, 0]]);
+      ctx.translate(48, 48);
+      ctx.strokeStyle = 'rgba(255,255,255,0.95)';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const a = (i * Math.PI) / 4 + Math.PI / 8;
+        const x = Math.cos(a) * 36;
+        const y = Math.sin(a) * 36;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(0, 0, 22, 0, Math.PI * 2);
+      ctx.moveTo(-16, 0);
+      ctx.lineTo(16, 0);
+      ctx.moveTo(0, -16);
+      ctx.lineTo(0, 16);
+      ctx.stroke();
+    }),
+    droplet: canvasTexture(64, 64, (ctx) => {
+      radial(ctx, 32, 28, [[0, 0.55], [0.65, 0.2], [1, 0]]);
+      ctx.fillStyle = 'rgba(255,255,255,0.95)';
+      ctx.beginPath();
+      ctx.moveTo(32, 6);
+      ctx.bezierCurveTo(48, 26, 52, 40, 52, 44);
+      ctx.arc(32, 44, 20, 0, Math.PI, false);
+      ctx.bezierCurveTo(12, 40, 16, 26, 32, 6);
+      ctx.closePath();
+      ctx.fill();
+    }),
+    feather: canvasTexture(96, 48, (ctx) => {
+      ctx.fillStyle = 'rgba(255,255,255,0.94)';
+      ctx.beginPath();
+      ctx.moveTo(8, 24);
+      ctx.quadraticCurveTo(48, 4, 90, 24);
+      ctx.quadraticCurveTo(48, 44, 8, 24);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,1)';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(4, 24);
+      ctx.lineTo(92, 24);
+      ctx.stroke();
     })
   };
 }

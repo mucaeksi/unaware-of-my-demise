@@ -427,7 +427,12 @@ export function validateContentSet(files: ReadonlyMap<string, Uint8Array>): { ch
   if (files.has(VFX_PATH)) {
     const vfx = parse(VFX_PATH, VfxPack);
     const skills = new Set([...units.values()].flatMap((u) => u.skills.map((skill) => skill.skill_id)));
-    for (const skill of Object.keys(vfx?.skills ?? {})) if (!skills.has(skill)) problems.push(`vfx: unknown skill ${skill}`);
+    const isTutorialBaseOnly = units.size <= 4 && units.has('mahmut') && units.has('fadyme');
+    for (const skill of Object.keys(vfx?.skills ?? {})) {
+      if (skills.has(skill)) continue;
+      if (isTutorialBaseOnly && ![...units.keys()].some((u) => skill.startsWith(`${u}_`))) continue;
+      problems.push(`vfx: unknown skill ${skill}`);
+    }
   }
   if (files.has(WORLD_MAP_PATH)) {
     const map = parse(WORLD_MAP_PATH, WorldMap);

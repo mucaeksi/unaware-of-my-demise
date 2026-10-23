@@ -113,6 +113,11 @@ if (existsSync(campChapterIdx)) {
   mkdirSync(join(OUT, 'media', 'chapters'), { recursive: true });
   copyFileSync(campChapterIdx, join(OUT, 'media', 'chapters', 'campaign_chapter_index.json'));
 }
+const campUnitPack = join(campDir, 'units/unit_pack.json');
+if (existsSync(campUnitPack)) {
+  mkdirSync(join(OUT, 'media', 'units'), { recursive: true });
+  copyFileSync(campUnitPack, join(OUT, 'media', 'units', 'campaign_unit_pack.json'));
+}
 
 const baseRel = JSON.parse(readFileSync(join(ROOT, 'content/base/release.json'), 'utf8')) as {
   release: { id: string; generation: number; channel: string; notes: string };

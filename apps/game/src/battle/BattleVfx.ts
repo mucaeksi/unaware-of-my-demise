@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import type { PixiScene } from '../core/PixiScene';
-import { REF_W } from '../config';
+import { REF_H, REF_W } from '../config';
 import { qualityProfile } from '../platform/graphics';
 import { prefs } from '../platform/prefs';
 import { Services } from '../services';
@@ -73,8 +73,41 @@ export class BattleVfx {
     return stageFor(scene).presetForSkill(skillId);
   }
 
+  /** true when the preset contains a projectile element */
+  static hasProjectile(scene: PixiScene, id: string): boolean {
+    return stageFor(scene).hasProjectile(id);
+  }
+
   static playPreset(scene: PixiScene, id: string, o: PlayOptions): Promise<void> {
-    return stageFor(scene).play(id, o);
+    const stage = stageFor(scene);
+    const pal = BattleVfx.palette(o.element);
+    const defaultCue = (cue: 'hit_stop' | 'shake' | 'flash', durationMs: number, intensity: number): void => {
+      const p = prefs();
+      if (p.reducedMotion) return;
+      if (cue === 'hit_stop') {
+        BattleVfx.hitStop(scene, Math.round(durationMs));
+      } else if (cue === 'shake' && !p.reduceFlash) {
+        const shakeable = scene as unknown as { shake?: (d: number, i: number) => void };
+        shakeable.shake?.(Math.round(durationMs), intensity * 0.011);
+      } else if (cue === 'flash' && !p.reduceFlash) {
+        const flash = new PIXI.Graphics()
+          .rect(0, 0, REF_W, REF_H)
+          .fill({ color: pal.core, alpha: Math.min(0.45, intensity * 0.36) });
+        flash.blendMode = 'add';
+        stage.layers.overlay.addChild(flash);
+        stage.animator.tween({
+          duration: Math.max(60, Math.round(durationMs)),
+          onUpdate: (k) => {
+            flash.alpha = 1 - k;
+          },
+          onComplete: () => flash.destroy()
+        });
+      }
+    };
+    return stage.play(id, {
+      ...o,
+      onCue: o.onCue ?? defaultCue
+    });
   }
 
   /** durationMs stretches the authored 680 ms sigil (ultimates use a slower one) */

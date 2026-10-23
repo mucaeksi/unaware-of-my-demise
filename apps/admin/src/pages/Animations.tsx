@@ -499,6 +499,32 @@ interface CampaignArtManifest {
   units: Record<string, ManifestUnit>;
   portraits: Record<string, ManifestPortrait>;
 }
+interface UnitSkillInfo {
+  skill_id: string;
+  name_en: string;
+  type: string;
+  player_target?: string;
+}
+interface UnitInfo {
+  unit_id: string;
+  name_en: string;
+  kind: string;
+  element: string;
+  skills: UnitSkillInfo[];
+}
+interface VfxPresetElement {
+  kind: string;
+  texture?: string;
+  shape?: string;
+  cue?: string;
+  duration_ms?: number;
+  lifespan_ms?: number;
+  delay_ms?: number;
+}
+interface VfxPresetData {
+  presets: Record<string, { elements: VfxPresetElement[] }>;
+  skills: Record<string, string>;
+}
 
 export function Animations({ me, say }: { me: Me | null; say: (m: string) => void }): ReactNode {
   const [activeTab, setActiveTab] = useState<'first_aab' | 'in_context' | 'atlas_inspector' | 'gif_gallery'>('first_aab');
@@ -511,6 +537,8 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
 
   // ART-1 Live Ingested Atlas & Portrait Inspector state
   const [artManifest, setArtManifest] = useState<CampaignArtManifest | null>(null);
+  const [unitPackData, setUnitPackData] = useState<Record<string, UnitInfo>>({});
+  const [vfxPackData, setVfxPackData] = useState<VfxPresetData | null>(null);
   const [inspectUnitId, setInspectUnitId] = useState<string>('kera_voss');
   const [inspectState, setInspectState] = useState<string>('idle');
   const [inspectFrameIdx, setInspectFrameIdx] = useState<number>(0);
@@ -522,6 +550,24 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
       .then((data: CampaignArtManifest) => setArtManifest(data))
       .catch(() => {
         /* ignore if dev media not built */
+      });
+    fetch('/dev/media/units/campaign_unit_pack.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : fetch('/dev/media/units/unit_pack.json').then((r2) => r2.json())))
+      .then((data: { units: UnitInfo[] }) => {
+        const map: Record<string, UnitInfo> = {};
+        for (const u of data.units ?? []) map[u.unit_id] = u;
+        setUnitPackData(map);
+      })
+      .catch(() => {
+        /* ignore */
+      });
+    fetch('/dev/media/vfx/vfx_presets.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: VfxPresetData | null) => {
+        if (data) setVfxPackData(data);
+      })
+      .catch(() => {
+        /* ignore */
       });
   }, []);
 
@@ -1948,6 +1994,54 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
                                     .join(', ')}
                                 </div>
                               </div>
+                            </div>
+                          </div>
+                        ) : null}
+
+                        {unitPackData[inspectUnitId] && vfxPackData ? (
+                          <div className="card" style={{ margin: 0, padding: 12 }}>
+                            <div className="mono" style={{ fontSize: 12, marginBottom: 8 }}>
+                              <strong>Signature VFX Bindings (§4.2):</strong>{' '}
+                              <code>{unitPackData[inspectUnitId]?.name_en}</code> ({unitPackData[inspectUnitId]?.element} ·{' '}
+                              {unitPackData[inspectUnitId]?.kind})
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                              {unitPackData[inspectUnitId]!.skills
+                                .filter((sk) => sk.type !== 'passive')
+                                .map((sk) => {
+                                  const presetId = vfxPackData.skills[sk.skill_id] ?? 'unmapped';
+                                  const preset = vfxPackData.presets[presetId];
+                                  const shapes = preset?.elements.filter((el) => el.shape).map((el) => el.shape) ?? [];
+                                  const textures = preset?.elements.filter((el) => el.texture).map((el) => el.texture) ?? [];
+                                  const cues = preset?.elements.filter((el) => el.cue).map((el) => el.cue) ?? [];
+                                  return (
+                                    <div
+                                      key={sk.skill_id}
+                                      className="mono"
+                                      style={{
+                                        fontSize: 11.5,
+                                        padding: '6px 8px',
+                                        borderRadius: 6,
+                                        background: 'rgba(18, 13, 28, 0.72)',
+                                        border: '1px solid #382a4a'
+                                      }}
+                                    >
+                                      <div>
+                                        <span className="badge info" style={{ marginRight: 6 }}>
+                                          {sk.type.toUpperCase()}
+                                        </span>
+                                        <strong>{sk.name_en}</strong> (<code>{sk.skill_id}</code>) →{' '}
+                                        <code style={{ color: '#f2b84b' }}>{presetId}</code>
+                                      </div>
+                                      <div style={{ color: 'var(--dim)', marginTop: 3 }}>
+                                        {preset ? `${preset.elements.length} el` : 'missing'} · shapes=[
+                                        {[...new Set(shapes)].join(', ') || '—'}] · textures=[
+                                        {[...new Set(textures)].join(', ') || '—'}] · cues=[
+                                        {[...new Set(cues)].join(', ') || '—'}]
+                                      </div>
+                                    </div>
+                                  );
+                                })}
                             </div>
                           </div>
                         ) : null}

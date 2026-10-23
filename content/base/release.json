@@ -388,8 +388,8 @@
     },
     {
       "path": "vfx/vfx_presets.json",
-      "sha256": "f72967c51d400d4de76d306d692bcc6645ae8debe50cbf0bdf0737b5fe3ee146",
-      "bytes": 17205,
+      "sha256": "f9733746d9558e37ccc450f5de05b3a7ba5aec918951556fbd8e61213279e364",
+      "bytes": 376009,
       "media_type": "application/json",
       "kind": "other_data"
     },

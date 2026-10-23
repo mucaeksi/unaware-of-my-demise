@@ -84,6 +84,12 @@ export class VfxStage {
     return id && this.has(id) ? id : undefined;
   }
 
+  /** true when the named preset contains a projectile element */
+  hasProjectile(id: string): boolean {
+    const preset = this.pack?.presets[id];
+    return Boolean(preset?.elements.some((el) => el.kind === 'projectile'));
+  }
+
   /** resolves when the projectile lands, or when the last element finishes when there is no projectile */
   play(id: string, o: PlayOptions): Promise<void> {
     const preset: VfxPreset | undefined = this.pack?.presets[id];
@@ -302,6 +308,93 @@ export class VfxStage {
           const color = i === 0 ? tint : i === el.count - 1 ? tint2 : secondary;
           g.rect(-w / 2, -r, w, r).fill({ color, alpha: 0.55 + (0.4 * i) / Math.max(1, el.count - 1) });
         }
+        break;
+      }
+      case 'bell_arch': {
+        // Gothic ogive sanctuary arch + inner tracery + suspended clapper lance
+        const w = r * 0.72;
+        const h = r;
+        g.moveTo(-w, h * 0.45)
+          .lineTo(-w, -h * 0.15)
+          .quadraticCurveTo(-w * 0.85, -h * 0.78, 0, -h)
+          .quadraticCurveTo(w * 0.85, -h * 0.78, w, -h * 0.15)
+          .lineTo(w, h * 0.45)
+          .closePath()
+          .fill({ color: tint, alpha: el.fill_alpha * 0.28 })
+          .stroke({ width: el.thickness, color: tint2, alpha: 0.95 });
+        const iw = w * 0.76;
+        const ih = h * 0.82;
+        g.moveTo(-iw, h * 0.38)
+          .lineTo(-iw, -ih * 0.12)
+          .quadraticCurveTo(-iw * 0.8, -ih * 0.76, 0, -ih)
+          .quadraticCurveTo(iw * 0.8, -ih * 0.76, iw, -ih * 0.12)
+          .lineTo(iw, h * 0.38)
+          .stroke({ width: Math.max(1.5, el.thickness * 0.6), color: tint, alpha: 0.85 });
+        // Clapper lance and top rose ring
+        g.circle(0, -h * 0.52, r * 0.18).stroke({ width: Math.max(1.5, el.thickness * 0.6), color: tint2, alpha: 0.92 });
+        g.moveTo(0, -h * 0.7).lineTo(0, h * 0.32).stroke({ width: Math.max(2, el.thickness * 0.75), color: tint2, alpha: 0.95 });
+        break;
+      }
+      case 'shield_wall': {
+        // Faceted heater/kite bastion shield with broken-crown top notch and chevron ribs
+        const w = r * 0.82;
+        const h = r;
+        g.poly([
+          -w, -h * 0.62,
+          -w * 0.32, -h * 0.76,
+          0, -h * 0.58,
+          w * 0.32, -h * 0.76,
+          w, -h * 0.62,
+          w * 0.88, h * 0.12,
+          0, h * 0.88,
+          -w * 0.88, h * 0.12
+        ], true)
+          .fill({ color: tint, alpha: el.fill_alpha * 0.34 })
+          .stroke({ width: el.thickness + 1, color: tint2, alpha: 0.96 });
+        const ribs = Math.max(1, Math.min(6, el.count));
+        for (let i = 0; i < ribs; i++) {
+          const y = -h * 0.32 + (i * h * 0.72) / Math.max(1, ribs);
+          const span = w * (0.72 - i * 0.08);
+          g.moveTo(-span, y - 14).lineTo(0, y + 14).lineTo(span, y - 14);
+        }
+        g.stroke({ width: Math.max(1.5, el.thickness * 0.65), color: tint, alpha: 0.88 });
+        break;
+      }
+      case 'eclipse_corona': {
+        // Dark void core ringed by blazing corona spokes and twin lunar rims
+        const spokes = Math.max(6, el.count);
+        for (let i = 0; i < spokes; i++) {
+          const a = (i * Math.PI * 2) / spokes;
+          const rOuter = i % 2 === 0 ? r * 1.18 : r * 0.92;
+          const rInner = r * 0.56;
+          g.poly([
+            Math.cos(a - 0.09) * rInner,
+            Math.sin(a - 0.09) * rInner,
+            Math.cos(a) * rOuter,
+            Math.sin(a) * rOuter,
+            Math.cos(a + 0.09) * rInner,
+            Math.sin(a + 0.09) * rInner
+          ], true).fill({ color: i % 2 === 0 ? tint2 : tint, alpha: 0.92 });
+        }
+        g.circle(0, 0, r * 0.58).fill({ color: 0x090512, alpha: el.fill_alpha });
+        g.circle(0, 0, r * 0.6).stroke({ width: el.thickness + 1.5, color: tint2, alpha: 0.98 });
+        g.circle(0, 0, r * 0.74).stroke({ width: Math.max(1.5, el.thickness * 0.6), color: tint, alpha: 0.82 });
+        break;
+      }
+      case 'crosshair': {
+        // Tactical alchemical/marksman reticle with diamond sight and radial tick blades
+        g.circle(0, 0, r).stroke({ width: el.thickness, color: tint, alpha: 0.92 });
+        g.circle(0, 0, r * 0.58).stroke({ width: Math.max(1.5, el.thickness * 0.65), color: tint2, alpha: 0.88 });
+        const d = r * 0.34;
+        g.poly([0, -d, d, 0, 0, d, -d, 0], true).stroke({ width: Math.max(1.5, el.thickness * 0.65), color: tint2, alpha: 0.95 });
+        const ticks = Math.max(4, el.count);
+        for (let i = 0; i < ticks; i++) {
+          const a = (i * Math.PI * 2) / ticks;
+          const r0 = i % 2 === 0 ? r * 0.42 : r * 0.72;
+          const r1 = i % 2 === 0 ? r * 1.16 : r * 1.04;
+          g.moveTo(Math.cos(a) * r0, Math.sin(a) * r0).lineTo(Math.cos(a) * r1, Math.sin(a) * r1);
+        }
+        g.stroke({ width: el.thickness, color: tint2, alpha: 0.94 });
         break;
       }
     }

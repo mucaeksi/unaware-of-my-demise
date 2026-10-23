@@ -942,7 +942,7 @@ export class BattleScene extends PixiScene<BattleInit> {
         const def = this.skillDef(e.actor, e.skill);
         const ult = e.skillType === 'ultimate';
         const element = def?.element ?? actorUnit.def.element;
-        v.applyState(e.skillType === 'ultimate' ? 'ultimate' : e.skillType === 'active' ? 'active' : 'basic');
+        v.applyState(e.skillType === 'ultimate' ? 'ultimate' : e.skillType === 'active' || e.skillType === 'signature' ? 'active' : 'basic');
         let dim: PIXI.Graphics | null = null;
         const roleLower = actorUnit.def.role.toLowerCase();
         const isCaster = def?.player_target === 'ally' || actorUnit.def.formation_affinity === 'rear' || /support|healer|mage|caster|arcan|bell|alchem|ranged|seer|choir/.test(roleLower);
@@ -985,12 +985,16 @@ export class BattleScene extends PixiScene<BattleInit> {
           if (!noFlash) this.shake(260, 0.0085);
           const customUlt = BattleVfx.skillPreset(this, e.skill);
           if (customUlt) {
-            for (const tid of e.targets) {
+            if (actorUnit.def.unit_id === 'fadyme') BattleVfx.silverBellRipple(this, v.x, v.hitPoint.y, 1.55);
+            else if (actorUnit.def.unit_id === 'mahmut') BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, 1.5);
+            else BattleVfx.castSigil(this, v.x, v.y - 10, element, 1.35, 680);
+            const ultTargets = e.targets.length > 0 ? e.targets : [e.actor];
+            for (const tid of ultTargets) {
               const tv = this.views.get(tid);
               if (tv) {
                 this.ringPulse(tv.x, tv.hitPoint.y, elColor, 220);
                 this.burst(tv.hitPoint.x, tv.hitPoint.y, elColor, 18);
-                void BattleVfx.playPreset(this, customUlt, { x: tv.x, y: tv.y, element, dir: v.side === 'player' ? 1 : -1 });
+                void BattleVfx.playPreset(this, customUlt, { x: tv.hitPoint.x, y: tv.hitPoint.y, element, dir: v.side === 'player' ? 1 : -1 });
               }
             }
           } else {
@@ -1008,7 +1012,7 @@ export class BattleScene extends PixiScene<BattleInit> {
           this.lunged = { view: v, dim };
           await this.wait(360);
         } else {
-          const isActive = e.skillType === 'active';
+          const isActive = e.skillType === 'active' || e.skillType === 'signature';
           const elColor = ELEMENT_COLOR[element] ?? C.silver;
           this.banner(def?.name_en ?? e.skill, false, isActive);
           if (isActive) {
@@ -1016,14 +1020,6 @@ export class BattleScene extends PixiScene<BattleInit> {
             BattleVfx.castSigil(this, v.x, v.y - 8, element, 1.18, 560);
             this.ringPulse(v.x, v.hitPoint.y, elColor, 195);
             this.burst(v.x, v.hitPoint.y, elColor, 16);
-          }
-          const customSkill = BattleVfx.skillPreset(this, e.skill);
-          if (customSkill) {
-            if (opp && !isCaster) await v.playDashTo(opp.x + (v.side === 'player' ? -135 : 135), opp.y);
-            else v.playCast(false);
-            this.lunged = { view: v, dim: null };
-            await BattleVfx.playPreset(this, customSkill, { x: v.x, y: v.hitPoint.y, element, dir: v.side === 'player' ? 1 : -1, ...(opp ? { target: { x: opp.hitPoint.x, y: opp.hitPoint.y } } : {}) });
-            break;
           }
           if (v.side === 'player' && actorUnit.def.unit_id === 'fadyme') {
             Sfx.cast();
@@ -1033,6 +1029,33 @@ export class BattleScene extends PixiScene<BattleInit> {
             BattleVfx.ironBulwarkWave(this, v.x, v.hitPoint.y, isActive ? 1.3 : 0.9);
           } else if (isActive) {
             Sfx.cast();
+          }
+          const customSkill = BattleVfx.skillPreset(this, e.skill);
+          if (customSkill) {
+            const primaryTarget = opp ?? e.targets.map((t) => this.views.get(t)).find(Boolean) ?? v;
+            const isProj = BattleVfx.hasProjectile(this, customSkill) && Boolean(opp);
+            if (opp && !isCaster && !isProj) await v.playDashTo(opp.x + (v.side === 'player' ? -135 : 135), opp.y);
+            else v.playCast(false);
+            this.lunged = { view: v, dim: null };
+            if (isProj && opp) {
+              await BattleVfx.playPreset(this, customSkill, {
+                x: v.x + (v.side === 'player' ? 40 : -40),
+                y: v.hitPoint.y,
+                element,
+                dir: v.side === 'player' ? 1 : -1,
+                target: { x: opp.hitPoint.x, y: opp.hitPoint.y }
+              });
+            } else {
+              void BattleVfx.playPreset(this, customSkill, {
+                x: primaryTarget.hitPoint.x,
+                y: primaryTarget.hitPoint.y,
+                element,
+                dir: v.side === 'player' ? 1 : -1,
+                ...(opp ? { target: { x: opp.hitPoint.x, y: opp.hitPoint.y } } : {})
+              });
+              if (!opp || isCaster) await this.wait(220);
+            }
+            break;
           }
           this.lunged = { view: v, dim: null };
           if (opp && !isCaster) {
@@ -1066,7 +1089,7 @@ export class BattleScene extends PixiScene<BattleInit> {
           t.flash(0xffffff, 110);
           t.playHitReaction(heavy);
         }
-        const slashStyle = e.crit || this.activeSkillType === 'ultimate' ? 'heavy' : this.activeSkillType === 'active' ? 'cross' : 'single';
+        const slashStyle = e.crit || this.activeSkillType === 'ultimate' ? 'heavy' : this.activeSkillType === 'active' || this.activeSkillType === 'signature' ? 'cross' : 'single';
         BattleVfx.slashImpact(this, t.hitPoint.x, t.hitPoint.y, element, slashStyle, (src?.x ?? 0) <= t.x);
         BattleVfx.hitImpact(this, t.hitPoint.x, t.hitPoint.y, element, e.crit, heavy);
         if (heavy && e.amount > 0) BattleVfx.hitStop(this, e.crit ? 65 : 48);

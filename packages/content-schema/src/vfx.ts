@@ -10,7 +10,7 @@ export const VFX_PATH = 'vfx/vfx_presets.json';
 
 /** palette slots resolve against the element of the action (Veil, Stone, Ember, Tide, Gale, Dawn) */
 export const VfxColor = z.union([z.enum(['primary', 'secondary', 'core', 'crit']), z.string().regex(/^#[0-9a-fA-F]{6}$/)]);
-export const VfxTexture = z.enum(['spark', 'star', 'slash', 'ring', 'pillar', 'shard']);
+export const VfxTexture = z.enum(['spark', 'star', 'slash', 'ring', 'pillar', 'shard', 'bell', 'chain', 'seal', 'droplet', 'feather']);
 export const VfxEase = z.enum(['linear', 'quad.in', 'quad.out', 'cubic.out', 'back.out', 'sine.inout']);
 export const VfxBlend = z.enum(['normal', 'add', 'screen']);
 /** ground = under the units, fx = over the units, overlay = above the HUD band */
@@ -53,7 +53,7 @@ const SpriteEl = z.object({ kind: z.literal('sprite'), texture: VfxTexture, tint
 const ShapeEl = z
   .object({
     kind: z.literal('shape'),
-    shape: z.enum(['crescent', 'star_flare', 'spikes', 'crest', 'rings', 'bars']),
+    shape: z.enum(['crescent', 'star_flare', 'spikes', 'crest', 'rings', 'bars', 'bell_arch', 'shield_wall', 'eclipse_corona', 'crosshair']),
     /** main radius / half-span in reference pixels */
     size: z.number().min(1).max(2000),
     /** spikes/crest spokes, crescent smoothness, bars count */
