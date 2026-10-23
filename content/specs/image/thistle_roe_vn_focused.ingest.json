@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "3f6814fce796",
+    "pick": "362b3e09f4ea",
     "provenance": ".cache/generated/thistle_roe_vn_focused/run.provenance.json"
   },
   "key": {
@@ -41,13 +41,8 @@
     "image": "focused",
     "emotion_tags": [
       "analytical",
-      "anxious",
-      "curious",
       "focused",
-      "frightened",
       "serious",
-      "shy",
-      "tearful",
       "tense",
       "whisper"
     ]

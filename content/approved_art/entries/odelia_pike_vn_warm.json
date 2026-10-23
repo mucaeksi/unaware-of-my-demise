@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "odelia_pike_vn_warm",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "odelia_pike": {
@@ -21,12 +21,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "b1c9617035737ec9c9a06bbc906673cdc17bb4e00a610b3d2001d331239646e5",
+    "sha256": "e90697ce324a1b556790daa6d7e953fad5e57608a3c58dea2e5bd32a8b402485",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/odelia_pike_vn_warm/run.provenance.json",
-    "provenance_sha256": "639441f409fe32d60dbac3c9f632590fa663f22fc79b9cf489c677fdb036e473",
+    "provenance_sha256": "ed1ed315437331cee65f425cb3c43643a25459662a3b3b2ebaaa1921605b6dad",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "38e3666a058a0c40bcc90b472862710176a1fff0707e015f9d1a850962591790",
     "references": [],
@@ -34,17 +34,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/odelia_pike_vn_warm.ingest.json",
-    "spec_sha256": "f4a1a1bff88a12a14a4c2852753842452c7c1fd57c8f2747afab28e064ed63ff",
+    "spec_sha256": "4c511983bfab11985b97efbf60b60714fca37e8b05520705f53352f3f58fd751",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "d75e00e534ceb25634dbaae5335d980fe276505d3f93e616aebbfa59509d3130"
+    "fingerprint": "8ec7df6dde592afdbcd88380a79ac10ae8b16df09600a09e8f42ac2a91c0f6e5"
   },
   "outputs": [
     {
       "path": "art/portrait_odelia_pike_warm.webp",
-      "sha256": "6ff1dbe9bb0e6d0c9bec6b0438ecdd2f4a172e2b2fee283b1e7ea31783efca72",
-      "pixels_sha256": "095500efe1be3459578f3e3192abe89c1db0502df1f4bd63be63f6c33a3714b1",
-      "bytes": 61976,
+      "sha256": "910987a21037165e0478f42bb9a5649fc33947001622101ba92e6bfd2789279b",
+      "pixels_sha256": "0ba51508937ed7bd57bd4e060a1788d6fcf85c3a6d25d8374d9ee79bd18e0c46",
+      "bytes": 71080,
       "width": 768,
       "height": 1152
     }
@@ -69,8 +69,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=21"
         },
         "A18": {
           "status": "pass",
@@ -78,20 +78,22 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "61976 bytes <= 245760"
+          "detail": "71080 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 21 isolated specks"
+      ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.952Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +101,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_odelia_pike_warm.webp",
+          "sha256": "6ff1dbe9bb0e6d0c9bec6b0438ecdd2f4a172e2b2fee283b1e7ea31783efca72",
+          "pixels_sha256": "095500efe1be3459578f3e3192abe89c1db0502df1f4bd63be63f6c33a3714b1",
+          "bytes": 61976,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "b1c9617035737ec9c9a06bbc906673cdc17bb4e00a610b3d2001d331239646e5",
+      "fingerprint": "d75e00e534ceb25634dbaae5335d980fe276505d3f93e616aebbfa59509d3130"
+    }
+  ]
 }

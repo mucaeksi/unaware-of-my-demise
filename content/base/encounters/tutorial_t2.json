@@ -25,6 +25,18 @@
       "level": 1,
       "slot": 0,
       "row": "front"
+    },
+    {
+      "unit_id": "bellbound_dead",
+      "level": 1,
+      "slot": 1,
+      "row": "rear"
+    },
+    {
+      "unit_id": "bellbound_dead",
+      "level": 1,
+      "slot": 2,
+      "row": "rear"
     }
   ],
   "ui": {

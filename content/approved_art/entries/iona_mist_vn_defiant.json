@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "iona_mist_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 4,
   "targets": {
     "portraits": {
       "iona_mist": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "0ce4462662b2cbc3192338adc84843d3f4b6d330bb66342409aa3e863897eb7e",
+    "sha256": "68a88f1611a52cec90714249f3c6c771ca02740690dc49a5f706dc71c8ebd7c0",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/iona_mist_vn_defiant/run.provenance.json",
-    "provenance_sha256": "31a2e55dc7e2b12097ab2ca78d86175e7a74464f2263a194bd51dc8210980e01",
+    "provenance_sha256": "a6c9386d010e0a9bc3ec633a133fd28b124ba20baeff0f008fb41aa046877ed9",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "754a9f4476268d35a2e23bcf48b6e905e3a2f02b2c1c1b412b0be816d9bb2c57",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/iona_mist_vn_defiant.ingest.json",
-    "spec_sha256": "43bc0ecc3fddc842c10b9ba0dc1de1dbf38b2ca49b4d4245d91a4fa19f704327",
+    "spec_sha256": "32fed61521f2b4c3be1657efc62b15e4cb2150879f0d81116e4aba20710f1364",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "41811c30e9caf97edd3fecd3c6ba0a1862b15c8f4f4350106e1d892fc8eb4be9"
+    "fingerprint": "f5d04ad6494d160feb648d5e285fe1260119239bf22ce021bedf0f48d2233e04"
   },
   "outputs": [
     {
       "path": "art/portrait_iona_mist_defiant.webp",
-      "sha256": "22585c2699b541675ca42aa6ed57142f85700628c7518857bcb38bd36364657e",
-      "pixels_sha256": "580ccccca104269a857e5cc04cbc62ef9b103da36191926fac03bb9b9d1f99bf",
-      "bytes": 60236,
+      "sha256": "7f3ad5adea726d96eeccc37aacbd09edeb89f588e7af4f8244df30c88f728af7",
+      "pixels_sha256": "bdb31d5647fe21d7e0283b1ab6ec9e40049d0727b9d007c7043a34533af080d3",
+      "bytes": 54232,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=7"
+          "detail": "removed=24"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "60236 bytes <= 245760"
+          "detail": "54232 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 7 isolated specks"
+        "A12: removed 24 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.929Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,51 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_defiant.webp",
+          "sha256": "22585c2699b541675ca42aa6ed57142f85700628c7518857bcb38bd36364657e",
+          "pixels_sha256": "580ccccca104269a857e5cc04cbc62ef9b103da36191926fac03bb9b9d1f99bf",
+          "bytes": 60236,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "0ce4462662b2cbc3192338adc84843d3f4b6d330bb66342409aa3e863897eb7e",
+      "fingerprint": "41811c30e9caf97edd3fecd3c6ba0a1862b15c8f4f4350106e1d892fc8eb4be9"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_defiant.webp",
+          "sha256": "fc7009e6705dce215259007a3b21fd00fa3a4c0cc1b69d5ce2471e5151bb30de",
+          "pixels_sha256": "f94c0bf515c9a76ed1ed5686794b41000b3d710c6e5e5e447f3734c7bc56a489",
+          "bytes": 58566,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "111e41c9990424b8890bac8e2a28c23c58c9f5e0132ed12a3920253e111a0c47",
+      "fingerprint": "effc2253406f9545446b6ab33d4f1c9f12d127d2f61bbf6f1410726773355ef5"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_defiant.webp",
+          "sha256": "3bfb3f7a7cded4cfb491a2fcad70e399a2d6034073d7a96a12ada1561c06b59f",
+          "pixels_sha256": "60f2076939ee72fc8315237ba78ee5e41117397ee0069cdecd3f8e66651e2f5a",
+          "bytes": 58310,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "49a732ac84400bd57d1032ecbddcd18f82632a87bb791b8563d62903a7a158ef",
+      "fingerprint": "61424eb50365528cb6d0f4ae4749785e57a14ac472e29754dd903352db87754e"
+    }
+  ]
 }

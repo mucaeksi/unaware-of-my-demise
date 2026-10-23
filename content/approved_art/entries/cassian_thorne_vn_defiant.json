@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "cassian_thorne_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "cassian_thorne": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "69093992c4c15df455add874b3a616d54432f7d07e2999abe9a638b422a73439",
+    "sha256": "8617b150d778f0b92f776321d01cfe920ae097c7e7636356c20188abc94abd96",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/cassian_thorne_vn_defiant/run.provenance.json",
-    "provenance_sha256": "fdcc270ee1bf95050962dc45acc91dc6f52b021dd19dabc0cc9fe3e32d547f9b",
+    "provenance_sha256": "52b23825f180217a7d6f94038e2b88a84a6b9c4fedca6fd135f57d7026342ff7",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "bba0031c905a3cb5ba5a5507864a9235acab701f4a647f5f9e99f26d14f509e2",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/cassian_thorne_vn_defiant.ingest.json",
-    "spec_sha256": "6222603a7def8b9e730065ab33a4b975ed7605f6d51a3e5682b813d5e20221f1",
+    "spec_sha256": "fe220832ffe66ba56db0707c449a700cfbae5881617e6e95150657f5add7fc89",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "b7f37ba2a419234d128304a74f6a4b6619eb37d1d13b5f74398e94a796e67fc2"
+    "fingerprint": "d78080e514c2d27b9de5cdf63ca404bde80d2b43c9eb494646b078c7bc562650"
   },
   "outputs": [
     {
       "path": "art/portrait_cassian_thorne_defiant.webp",
-      "sha256": "d796dbe1128a1c50d80643836964a90ed767db1d99c679d003e0c8fe97d50de9",
-      "pixels_sha256": "2f9006b702d53dcfe3416e91492a4914c808a35f6075fbe90964b8b891697424",
-      "bytes": 101300,
+      "sha256": "955fdde4199141e97e3a6e93673de5dc79718a0b40d87f2179af6a3a0615d02f",
+      "pixels_sha256": "5a8fc71bcdee17608ecaba59f76f86d3c6905e54655718bf6703a8ee912b7c7f",
+      "bytes": 60744,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=92"
+          "detail": "removed=6"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "101300 bytes <= 245760"
+          "detail": "60744 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 92 isolated specks"
+        "A12: removed 6 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.910Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_cassian_thorne_defiant.webp",
+          "sha256": "d796dbe1128a1c50d80643836964a90ed767db1d99c679d003e0c8fe97d50de9",
+          "pixels_sha256": "2f9006b702d53dcfe3416e91492a4914c808a35f6075fbe90964b8b891697424",
+          "bytes": 101300,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "69093992c4c15df455add874b3a616d54432f7d07e2999abe9a638b422a73439",
+      "fingerprint": "b7f37ba2a419234d128304a74f6a4b6619eb37d1d13b5f74398e94a796e67fc2"
+    }
+  ]
 }

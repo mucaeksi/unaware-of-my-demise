@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "marek_vane_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "marek_vane": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "edf11e6cb2227b121f1f09fa6d6bed234bfe471e64187ebd3b7bf633be9ed5e5",
+    "sha256": "cac2043063052136e38b09ddc19e2de547dd4799d351926d5416d1a031acebcf",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/marek_vane_vn_defiant/run.provenance.json",
-    "provenance_sha256": "16cada46c6967cfdcf667e982c00a4de4dc4cfbbf0eea8c6911c91f91090c671",
+    "provenance_sha256": "a85941fc39dba4c702622b309ee143b3f050a6f5cfa71deb8758bc037c392af1",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "ad9d0ac43ce002f87800991bba3cc77760870199f55841336653ffad6b8b61fa",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/marek_vane_vn_defiant.ingest.json",
-    "spec_sha256": "7c5247624246fb6d187c1c5f177543bd58554c415d1697a8035ebd9f235a4283",
+    "spec_sha256": "256f61f085f51b251dd503ac9f85998a54e85c0bb768115f0e52734c3effea4b",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "6cd722bf0d7acf73400145ba845b6d2ba8c5ca9deeecc3cfcb881dcc16a7de17"
+    "fingerprint": "3bfe8f8b528b56515daafcd2b36280cd4496af3276f2d0df94991c78b2bd5793"
   },
   "outputs": [
     {
       "path": "art/portrait_marek_vane_defiant.webp",
-      "sha256": "10c07627bd19a1255300b0c49f1f06462bfac231937e15ae0774c5e2865e19c5",
-      "pixels_sha256": "cf59d96d3bf34b4f49f5a0f0cecb2189cf7ef9ccd27a5135ba19d0caea084117",
-      "bytes": 76030,
+      "sha256": "a73c0c2e88c19f63cd6ceae82121e78d6cc2225cc48de9450cbe75053317338d",
+      "pixels_sha256": "628f6cc7189d1ac5502065fcd5e2bf9ac7a25b26ba406ef08c8d6528ec57ff04",
+      "bytes": 74188,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=10"
+          "detail": "removed=8"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "76030 bytes <= 245760"
+          "detail": "74188 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 10 isolated specks"
+        "A12: removed 8 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.942Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_marek_vane_defiant.webp",
+          "sha256": "10c07627bd19a1255300b0c49f1f06462bfac231937e15ae0774c5e2865e19c5",
+          "pixels_sha256": "cf59d96d3bf34b4f49f5a0f0cecb2189cf7ef9ccd27a5135ba19d0caea084117",
+          "bytes": 76030,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "edf11e6cb2227b121f1f09fa6d6bed234bfe471e64187ebd3b7bf633be9ed5e5",
+      "fingerprint": "6cd722bf0d7acf73400145ba845b6d2ba8c5ca9deeecc3cfcb881dcc16a7de17"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "brin_alder_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "brin_alder": {
@@ -20,12 +20,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "bde5e83401b355ccfcafaea8d438471facf71af79d52a737ccdb8e134171b92d",
+    "sha256": "0580c52cf83cc34bd1fd976d139fc45b50a84bccc856fc9e07c6a7168b8c0729",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/brin_alder_vn_defiant/run.provenance.json",
-    "provenance_sha256": "63d8759826da12004c009b38578054df7e54ba819206a9074d9f3ff089c0b8d7",
+    "provenance_sha256": "3a433f1cee2bed98c74093ff2baf4438b15371baa4c5dd24ec9851cf73a8e927",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "1322e6c91f46ae6a95f468dee130594ae9358ea1649d704dbe9671525d733ab1",
     "references": [],
@@ -33,17 +33,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/brin_alder_vn_defiant.ingest.json",
-    "spec_sha256": "a700a1800c285db00493df314734990eb197330a6395bc203c252f881501f820",
+    "spec_sha256": "cd513da1adbbceb84ce5c8a6db2b8be5149a55e74ed5e5c4015af4a318e1dc8c",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "fea8ed1fb7b903f2a38edb980b84491bbcd8eec0788573d36a2444c2b42fadb3"
+    "fingerprint": "2ce29f2a68e24ecdecf8eb22d5ff567b780f306a0f0ed48e70fd3ccfdb6b651f"
   },
   "outputs": [
     {
       "path": "art/portrait_brin_alder_defiant.webp",
-      "sha256": "b4ed10f780545aab0d657162210e2d47872f33d2a0859665a0992ab5757c6753",
-      "pixels_sha256": "049a3f5314daef61d91664f938be775e17b482b69b8f717617ecabd2d2bc387d",
-      "bytes": 68318,
+      "sha256": "b4aedb26382038bde16d7f90d3bca0c798a1d4e27254cae815740305f5981ca2",
+      "pixels_sha256": "ed2cb574d541e0a7c1b2cfda3d654e61bc202508525c363b69b3037ca210d14b",
+      "bytes": 70432,
       "width": 768,
       "height": 1152
     }
@@ -69,7 +69,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=6"
+          "detail": "removed=14"
         },
         "A18": {
           "status": "pass",
@@ -77,7 +77,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "68318 bytes <= 245760"
+          "detail": "70432 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -85,14 +85,14 @@
         }
       },
       "warnings": [
-        "A12: removed 6 isolated specks"
+        "A12: removed 14 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.908Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -100,5 +100,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_brin_alder_defiant.webp",
+          "sha256": "b4ed10f780545aab0d657162210e2d47872f33d2a0859665a0992ab5757c6753",
+          "pixels_sha256": "049a3f5314daef61d91664f938be775e17b482b69b8f717617ecabd2d2bc387d",
+          "bytes": 68318,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "bde5e83401b355ccfcafaea8d438471facf71af79d52a737ccdb8e134171b92d",
+      "fingerprint": "fea8ed1fb7b903f2a38edb980b84491bbcd8eec0788573d36a2444c2b42fadb3"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_brin_alder_defiant.webp",
+          "sha256": "b4aedb26382038bde16d7f90d3bca0c798a1d4e27254cae815740305f5981ca2",
+          "pixels_sha256": "ed2cb574d541e0a7c1b2cfda3d654e61bc202508525c363b69b3037ca210d14b",
+          "bytes": 70432,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "0580c52cf83cc34bd1fd976d139fc45b50a84bccc856fc9e07c6a7168b8c0729",
+      "fingerprint": "2ce29f2a68e24ecdecf8eb22d5ff567b780f306a0f0ed48e70fd3ccfdb6b651f"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "rowan_reed_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "rowan_reed": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "ff75a62713220c97f08dd741619449fcb0cfe85d1fa965f2140e63f677abcdcd",
+    "sha256": "5728a00498ed5a613fbce79900fd0f5caa14cdcbad5e05e309cb4987ce283108",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/rowan_reed_vn_defiant/run.provenance.json",
-    "provenance_sha256": "c181a44e76d7a121161b664a6bba15273f26f3d9ea04f0e676a642476d31974c",
+    "provenance_sha256": "bdfa93b98f9b75d265941c135ee7412de01964cdd959a2d5d277dc0be989eb50",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "828051a4d4ba879674190e490691a72c56a731d9d750040fcb3442d319ac67fc",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/rowan_reed_vn_defiant.ingest.json",
-    "spec_sha256": "cf391313312a5db32bc08fe759b4a38eb3ece5dcffe04f450095b4edbd037661",
+    "spec_sha256": "3cfcbce608a9a7f4647cea8d94df09098dc1d4d6935f0b06ee5581411e290460",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "d7bec6057a38966d39d4389d6135a2adac7b037969bf9836eeeb289c06649e05"
+    "fingerprint": "43bfb6cd79c2b2cc02a99af315ae43fb88c8688722b973322971d39a22a26761"
   },
   "outputs": [
     {
       "path": "art/portrait_rowan_reed_defiant.webp",
-      "sha256": "700b7381b52f7a7e7a484b4267686acdc1af69d46c186325e300447ee16b0964",
-      "pixels_sha256": "76958b4d0785c9c018d356db306c9c1d07519110718fd8aed80b1e06eb0b8805",
-      "bytes": 95522,
+      "sha256": "64e380faf2090b1eb7f47de9df999a03b0e5541d60977d059e0ae3cdc36cd865",
+      "pixels_sha256": "e7db9cce736666b6d074a82d20d796939fcf2b8a58928ad4951c104a863685d9",
+      "bytes": 55858,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=123"
+          "detail": "removed=19"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "95522 bytes <= 245760"
+          "detail": "55858 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 123 isolated specks"
+        "A12: removed 19 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.959Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_rowan_reed_defiant.webp",
+          "sha256": "700b7381b52f7a7e7a484b4267686acdc1af69d46c186325e300447ee16b0964",
+          "pixels_sha256": "76958b4d0785c9c018d356db306c9c1d07519110718fd8aed80b1e06eb0b8805",
+          "bytes": 95522,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "ff75a62713220c97f08dd741619449fcb0cfe85d1fa965f2140e63f677abcdcd",
+      "fingerprint": "d7bec6057a38966d39d4389d6135a2adac7b037969bf9836eeeb289c06649e05"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "iona_mist_vn_warm",
   "class": "portrait",
-  "revision": 1,
+  "revision": 4,
   "targets": {
     "portraits": {
       "iona_mist": {
@@ -20,12 +20,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "580d809b5c3c1f28c5dcc6bc14ede97b312eb8b31f6ebb3a934f14d41d0f1ecd",
+    "sha256": "742254cdad9e2b9a1953e4988dd9599f850dfe7f9ec88b16e87763cec585865f",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/iona_mist_vn_warm/run.provenance.json",
-    "provenance_sha256": "3e4a1d68289b2a69db1feff79b3160f74f1da9e0322121dfff267a7e09f6c631",
+    "provenance_sha256": "8cda099351c24842e94a9848b51708b8d190490fd4b65e5a36b6cefc99b68064",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "8ebc252db392d5a30fa205944d2274f17c2a19c699e06d0da8fa4daf310a02d2",
     "references": [],
@@ -33,17 +33,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/iona_mist_vn_warm.ingest.json",
-    "spec_sha256": "2c480d2fca7abdff6305eefeac1a82a004816de905b84109193b131dcdf0e85b",
+    "spec_sha256": "072d5e4841303e24e9e53a24b1e643341e3216a06ceb8a62fbf6704762def949",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "800cd58fdc9997e7ebf07d42d5caf6ff0edd2f292ad1676f7ff0b41d3ca22020"
+    "fingerprint": "5e87c6ede2a8123512e7b24507e90654419aaa2bdef50517f400f175af2328bf"
   },
   "outputs": [
     {
       "path": "art/portrait_iona_mist_warm.webp",
-      "sha256": "2cc01bf1a0c7fb4ce9a4bf08271830ad2f14d1805bb659136f83c78ef2a5bb70",
-      "pixels_sha256": "aa42a4a046d18110a974e79fff1d7e9f4fe7a9d46e708d9daebff09d449ee018",
-      "bytes": 59630,
+      "sha256": "2923e72fcac161154f3d090aad03f4ad6b170f5e8bd332e82c730e577c356884",
+      "pixels_sha256": "17ed07153d4cd0f41325e53ef0135618c675ac063e527f24c92401b70767cad3",
+      "bytes": 54086,
       "width": 768,
       "height": 1152
     }
@@ -69,7 +69,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=7"
+          "detail": "removed=24"
         },
         "A18": {
           "status": "pass",
@@ -77,7 +77,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "59630 bytes <= 245760"
+          "detail": "54086 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -85,14 +85,14 @@
         }
       },
       "warnings": [
-        "A12: removed 7 isolated specks"
+        "A12: removed 24 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.930Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -100,5 +100,51 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_warm.webp",
+          "sha256": "2cc01bf1a0c7fb4ce9a4bf08271830ad2f14d1805bb659136f83c78ef2a5bb70",
+          "pixels_sha256": "aa42a4a046d18110a974e79fff1d7e9f4fe7a9d46e708d9daebff09d449ee018",
+          "bytes": 59630,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "580d809b5c3c1f28c5dcc6bc14ede97b312eb8b31f6ebb3a934f14d41d0f1ecd",
+      "fingerprint": "800cd58fdc9997e7ebf07d42d5caf6ff0edd2f292ad1676f7ff0b41d3ca22020"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_warm.webp",
+          "sha256": "0c5de737041f1aab14886077fd48981161c9a1d4183f470981cf173c129398e0",
+          "pixels_sha256": "d2478e03f72f7a0403db0818399902348e98b3e6279b7657d0c6f07bec00498f",
+          "bytes": 58408,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "d5edeb9cd77ddf2c07b17f3fea4430a72f89ab49780c32a88be4081c1fd6363c",
+      "fingerprint": "f010b892365be1a0f1c1c4fdb0d273b7ebc8675ffbf205635d7c105a16994879"
+    },
+    {
+      "revision": 3,
+      "outputs": [
+        {
+          "path": "art/portrait_iona_mist_warm.webp",
+          "sha256": "5a813e7b874179dee622b5f13deac3e97ddbaaa5c40f2c869036d621ba9794e3",
+          "pixels_sha256": "19be767dabd7790c9e9e6005f9d831660ffaf2245286b606a37ab348ffceae5d",
+          "bytes": 58060,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "abda2bfc1853c45ad2b51c053222a9ab9f965da779e47a1f5a87dd1874e042fd",
+      "fingerprint": "95bb40486da2af465361a12a991782e0fa295278bf8b2fde25773ea9ec1a3e33"
+    }
+  ]
 }

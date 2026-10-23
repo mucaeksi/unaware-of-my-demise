@@ -2,17 +2,21 @@
   "schema": 1,
   "asset_id": "tilda_fen_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "tilda_fen": {
         "emotions": {
+          "bitter": "composed",
           "calm": "composed",
+          "careful": "composed",
           "composed": "composed",
           "direct": "composed",
           "dry": "composed",
           "firm": "composed",
+          "grim": "composed",
           "neutral": "composed",
+          "reflective": "composed",
           "steady": "composed"
         },
         "images": {
@@ -23,12 +27,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "3abbeba35eeba8e783e0e06873b0d52ef5ab4c8b044585d43e72d4457406255f",
+    "sha256": "af66ab6169761064473a923a20e093d5208cec1d557a9c6d11a616ddbbb70eda",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/tilda_fen_vn_composed/run.provenance.json",
-    "provenance_sha256": "3217d55872ffd68244fcac95bbbb86656c1f84a296587010b66059f1edd3de53",
+    "provenance_sha256": "f97459ff7e7eeb4667879d70aff79e4202166b16279db894e178db34ca608b2b",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "7b796a81421e8d4009e8f49cbbaed109e4644aa0ed8cabb9875ddf383cf48d19",
     "references": [],
@@ -36,17 +40,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/tilda_fen_vn_composed.ingest.json",
-    "spec_sha256": "7c1e4890ca5899f2194153cc68704f7fe3b925b7be6be7454fef9fa61ccc924b",
+    "spec_sha256": "54d1ef5806c05a9a7c1103c7fa5d8f87f64f14ba11b2322c0a759bfb11a27443",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "5619fc058b10f9d028b4cfec53f2a686862491795f51c0914a5e7a21d1bddf97"
+    "fingerprint": "547beb51ed597cd7c19442f366ec360ba16863bfafbef8c423afbc24fd48c5bb"
   },
   "outputs": [
     {
       "path": "art/portrait_tilda_fen_composed.webp",
-      "sha256": "b41826b46a9299461481468951452f443f07069d9dbbec163a75ce0940e352b5",
-      "pixels_sha256": "b66adda28ab4ec0a983bf69893bc5caab4bfea9c7b31c789054e7b2afe416308",
-      "bytes": 64090,
+      "sha256": "0b2d317117616da55240a1a99231e519477465f746a75c0330b616feb21bfd46",
+      "pixels_sha256": "9e57506438cbab05640c6abb3d00773d6d3040669504fd9ccb85900c8f55822b",
+      "bytes": 64576,
       "width": 768,
       "height": 1152
     }
@@ -72,7 +76,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=1"
+          "detail": "removed=4"
         },
         "A18": {
           "status": "pass",
@@ -80,7 +84,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "64090 bytes <= 245760"
+          "detail": "64576 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -88,14 +92,14 @@
         }
       },
       "warnings": [
-        "A12: removed 1 isolated specks"
+        "A12: removed 4 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.968Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -103,5 +107,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_composed.webp",
+          "sha256": "b41826b46a9299461481468951452f443f07069d9dbbec163a75ce0940e352b5",
+          "pixels_sha256": "b66adda28ab4ec0a983bf69893bc5caab4bfea9c7b31c789054e7b2afe416308",
+          "bytes": 64090,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "3abbeba35eeba8e783e0e06873b0d52ef5ab4c8b044585d43e72d4457406255f",
+      "fingerprint": "5619fc058b10f9d028b4cfec53f2a686862491795f51c0914a5e7a21d1bddf97"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_composed.webp",
+          "sha256": "0b2d317117616da55240a1a99231e519477465f746a75c0330b616feb21bfd46",
+          "pixels_sha256": "9e57506438cbab05640c6abb3d00773d6d3040669504fd9ccb85900c8f55822b",
+          "bytes": 64576,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "af66ab6169761064473a923a20e093d5208cec1d557a9c6d11a616ddbbb70eda",
+      "fingerprint": "547beb51ed597cd7c19442f366ec360ba16863bfafbef8c423afbc24fd48c5bb"
+    }
+  ]
 }

@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "7b7cb618012a",
+    "pick": "4944be9460be",
     "provenance": ".cache/generated/brin_alder_vn_focused/run.provenance.json"
   },
   "key": {
@@ -42,9 +42,7 @@
     "emotion_tags": [
       "analytical",
       "focused",
-      "serious",
-      "strained",
-      "uneasy"
+      "serious"
     ]
   },
   "qc": {

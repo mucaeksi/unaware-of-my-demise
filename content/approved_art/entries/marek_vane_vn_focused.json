@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "marek_vane_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "marek_vane": {
@@ -10,7 +10,6 @@
           "analytical": "focused",
           "focused": "focused",
           "grave": "focused",
-          "reflective": "focused",
           "serious": "focused"
         },
         "images": {
@@ -21,12 +20,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "2567d8c5a01f4fdc937a4fb65d6abba51898311684214f103f3c54d7afbb62ca",
+    "sha256": "b856e72951469f7f979eb9669be5e3c1e092b8aab712050956c6aa7d6d470aea",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/marek_vane_vn_focused/run.provenance.json",
-    "provenance_sha256": "40ebf48a6ee0e487a4b5d993abd8010b8e455ef85e762368027f816a25a3f16c",
+    "provenance_sha256": "c508cd9ab07a42ea0098827e823b8594c67d80b367857a49d28739f1f9f47bb0",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "97734ae09f862727f83022a118b80f82cba284fd64e4a4158b07ec32534b1088",
     "references": [],
@@ -34,17 +33,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/marek_vane_vn_focused.ingest.json",
-    "spec_sha256": "302db9ccff49b1e8ab672d868205c5c131e0937356882002a96bf6260939e723",
+    "spec_sha256": "8ea805fd5ff17d5366ff1abd4afb8e014ebcb5f01f97e37235e1f65976892f6d",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "1510e681250a302e3469923d18bb860f70232cb8aa13e9b60e4f8b151d150b51"
+    "fingerprint": "ec097ecf2c2f79917f10c2642069f168586a975af391df08c6d6d1e34b64ce52"
   },
   "outputs": [
     {
       "path": "art/portrait_marek_vane_focused.webp",
-      "sha256": "e3111095c4c04d0eaf245a6d3c54b4bac627ce7fde642ba212a0edd78e475792",
-      "pixels_sha256": "d8a6cf796dc0674484726a165b52e7aaa0c15f4375fb62b189d7427ac5df5a4e",
-      "bytes": 72120,
+      "sha256": "dcf3af5b3e2278f5c0f7cbc9994397119e72e0391e020a6804d205cfe997106b",
+      "pixels_sha256": "90cd93d8f03defef2e4614c4a364bb5be87cf941fb356b0491d87e2602e8cc8f",
+      "bytes": 69074,
       "width": 768,
       "height": 1152
     }
@@ -70,7 +69,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=10"
+          "detail": "removed=8"
         },
         "A18": {
           "status": "pass",
@@ -78,7 +77,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "72120 bytes <= 245760"
+          "detail": "69074 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -86,14 +85,14 @@
         }
       },
       "warnings": [
-        "A12: removed 10 isolated specks"
+        "A12: removed 8 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.943Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -101,5 +100,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_marek_vane_focused.webp",
+          "sha256": "e3111095c4c04d0eaf245a6d3c54b4bac627ce7fde642ba212a0edd78e475792",
+          "pixels_sha256": "d8a6cf796dc0674484726a165b52e7aaa0c15f4375fb62b189d7427ac5df5a4e",
+          "bytes": 72120,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "2567d8c5a01f4fdc937a4fb65d6abba51898311684214f103f3c54d7afbb62ca",
+      "fingerprint": "1510e681250a302e3469923d18bb860f70232cb8aa13e9b60e4f8b151d150b51"
+    }
+  ]
 }

@@ -335,9 +335,9 @@ export class BattleScene extends PixiScene<BattleInit> {
     }
     this.descBg.clear();
     if (this.descText.text.trim()) {
-      const w = Math.max(420, Math.min(1440, this.descText.width + 52));
-      const h = Math.max(36, this.descText.height + 14);
-      this.descBg.chamferRect(this.descText.x - w / 2, this.descText.y - h / 2, w, h, 10).fill({ color: 0x0c0714, alpha: 0.84 }).stroke({ width: 1.2, color: C.gold, alpha: 0.45 });
+      const w = Math.max(460, Math.min(1480, this.descText.width + 64));
+      const h = Math.max(40, this.descText.height + 18);
+      this.descBg.chamferRect(this.descText.x - w / 2, this.descText.y - h / 2, w, h, 10).fill({ color: 0x090510, alpha: 0.9 }).stroke({ width: 1.4, color: C.gold, alpha: 0.55 });
     }
   }
 
@@ -973,7 +973,7 @@ export class BattleScene extends PixiScene<BattleInit> {
             element,
             side: v.side,
             portraitKey,
-            flipPortrait: v.side === 'player' ? actorUnit.def.unit_id === 'fadyme' : actorUnit.def.unit_id !== 'fadyme',
+            flipPortrait: v.side !== 'player',
             poseTexture: v.poseTexture,
             casterPos: { x: v.x, y: v.y }
           });

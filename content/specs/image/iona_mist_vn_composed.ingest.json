@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "3ee3cf46d041",
+    "pick": "11e9152ac2e9",
     "provenance": ".cache/generated/iona_mist_vn_composed/run.provenance.json"
   },
   "key": {
@@ -41,9 +41,11 @@
     "image": "composed",
     "emotion_tags": [
       "calm",
+      "careful",
       "composed",
       "direct",
       "neutral",
+      "observant",
       "quiet",
       "resolved",
       "steady"

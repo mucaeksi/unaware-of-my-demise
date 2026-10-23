@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "e6582c999d43",
+    "pick": "7980b10fb92e",
     "provenance": ".cache/generated/odelia_pike_vn_focused/run.provenance.json"
   },
   "key": {
@@ -41,12 +41,8 @@
     "image": "focused",
     "emotion_tags": [
       "analytical",
-      "breaking",
       "focused",
-      "hesitant",
-      "serious",
-      "stunned",
-      "tearful"
+      "serious"
     ]
   },
   "qc": {

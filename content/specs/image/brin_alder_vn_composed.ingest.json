@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "bc1480a578e7",
+    "pick": "03879c3239db",
     "provenance": ".cache/generated/brin_alder_vn_composed/run.provenance.json"
   },
   "key": {
@@ -49,8 +49,11 @@
       "neutral",
       "quiet",
       "realizing",
+      "relieved",
       "resolved",
-      "steady"
+      "steady",
+      "strained",
+      "uneasy"
     ]
   },
   "qc": {

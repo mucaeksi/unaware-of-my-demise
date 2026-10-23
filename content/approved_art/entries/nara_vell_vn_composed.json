@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "nara_vell_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "nara_vell": {
@@ -20,7 +20,8 @@
           "neutral": "composed",
           "plain": "composed",
           "quiet": "composed",
-          "resolved": "composed"
+          "resolved": "composed",
+          "strained": "composed"
         },
         "images": {
           "composed": "art/portrait_nara_vell_composed.webp"
@@ -30,12 +31,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "9d421979ae9c1c101111a657af643851af78f1a25cc5592bd356e0563a538258",
+    "sha256": "ade9528c436263e2566ec6c236a26ceeec7a6584b016c7793b90ec0996e3e977",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/nara_vell_vn_composed/run.provenance.json",
-    "provenance_sha256": "e976384443a59088c0088567a8cd6120423feba4935ec430435854f939cb88a4",
+    "provenance_sha256": "98b8a851f3c978177fbe96259e23d7e6a4a49207d4d66973a87d23d4aa6b8de5",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "ffed959d20d4f01ce5f7f8a09ac468bf7d2f5679d242dab9f960c51ed059dca0",
     "references": [],
@@ -43,17 +44,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/nara_vell_vn_composed.ingest.json",
-    "spec_sha256": "dad6dc155113e583020ec97490514f98e24c666dae714bc87044dec20f28c038",
+    "spec_sha256": "5864b3b365cdf2b8368f66beca3eda079880a58e65b5b35d9ca88deda175e2a0",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "cb2b29275afe22e17ddd1d70f4526c2d13dc17db65a696e84f181b6bf58903e7"
+    "fingerprint": "eebfed53bc8495b381618684d0ea8b5816baefdd45f4524debffed3c15cfe7ec"
   },
   "outputs": [
     {
       "path": "art/portrait_nara_vell_composed.webp",
-      "sha256": "b41b0f730c3cdfdf2bc676be50fa6944653724a893375e1bcd036c55943f1dc7",
-      "pixels_sha256": "34d5db205448ba8aadbe9da03738a3c5fef31044a50bc2820eba158a419844cc",
-      "bytes": 65028,
+      "sha256": "e9759a314825f7c3ffb4c74b14f811e5e8e0cd6e1695d201d2f8d3677de779a9",
+      "pixels_sha256": "87b4877093776fc574905e863e5df8aa2c04d0d1659f2eec16e3d624a71907f2",
+      "bytes": 64908,
       "width": 768,
       "height": 1152
     }
@@ -78,8 +79,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "warn",
-          "detail": "removed=1"
+          "status": "pass",
+          "detail": "removed=0"
         },
         "A18": {
           "status": "pass",
@@ -87,22 +88,20 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "65028 bytes <= 245760"
+          "detail": "64908 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": [
-        "A12: removed 1 isolated specks"
-      ]
+      "warnings": []
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.947Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -110,5 +109,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_nara_vell_composed.webp",
+          "sha256": "b41b0f730c3cdfdf2bc676be50fa6944653724a893375e1bcd036c55943f1dc7",
+          "pixels_sha256": "34d5db205448ba8aadbe9da03738a3c5fef31044a50bc2820eba158a419844cc",
+          "bytes": 65028,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "9d421979ae9c1c101111a657af643851af78f1a25cc5592bd356e0563a538258",
+      "fingerprint": "cb2b29275afe22e17ddd1d70f4526c2d13dc17db65a696e84f181b6bf58903e7"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_nara_vell_composed.webp",
+          "sha256": "e9759a314825f7c3ffb4c74b14f811e5e8e0cd6e1695d201d2f8d3677de779a9",
+          "pixels_sha256": "87b4877093776fc574905e863e5df8aa2c04d0d1659f2eec16e3d624a71907f2",
+          "bytes": 64908,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "ade9528c436263e2566ec6c236a26ceeec7a6584b016c7793b90ec0996e3e977",
+      "fingerprint": "eebfed53bc8495b381618684d0ea8b5816baefdd45f4524debffed3c15cfe7ec"
+    }
+  ]
 }

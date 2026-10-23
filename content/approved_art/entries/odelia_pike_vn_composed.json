@@ -2,14 +2,16 @@
   "schema": 1,
   "asset_id": "odelia_pike_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "odelia_pike": {
         "emotions": {
+          "breaking": "composed",
           "calm": "composed",
           "composed": "composed",
           "dry": "composed",
+          "hesitant": "composed",
           "hollow": "composed",
           "low": "composed",
           "measured": "composed",
@@ -19,6 +21,8 @@
           "quiet": "composed",
           "steady": "composed",
           "stiff": "composed",
+          "stunned": "composed",
+          "tearful": "composed",
           "wary": "composed"
         },
         "images": {
@@ -29,12 +33,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "c68045068451554f29e1d818115238b53bc08a63a44e1ed27554bb18ca40d962",
+    "sha256": "f6e8957dc7f2e52cc784c4bf3ae5dc5a1e0e0398124e4cee11849e94631e2f1f",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/odelia_pike_vn_composed/run.provenance.json",
-    "provenance_sha256": "ceec2d4d28fc92e3dcc6f30f738cdd36c9fd9125d850c881f563e5018741244c",
+    "provenance_sha256": "cdea410f8c3201593cf67f98c401080ab3dc87a9e87e2e9b1bb3d22a940406a8",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "4a798927023dfd0c70932c8e038666a8f7b7d3c8e2885e8d06969829ac9e470c",
     "references": [],
@@ -42,17 +46,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/odelia_pike_vn_composed.ingest.json",
-    "spec_sha256": "05e5fe1fdeb4dd05a4e7ee6741a6dc064e186e5734ba9c38891ea3efc0eab0ef",
+    "spec_sha256": "977ecd7ed4c69b1a07ef243dbfc23d3d4b2d4d43709313ad24dc9deccb13983c",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "1a934d8a80b4c9bd7f31533747d8a50e55cb3b5634264afa820e55cd47f2fa62"
+    "fingerprint": "ad9a0ca991e9c6e01bd71c7697bc8d8679979b1d2a8132d151d9514e8dd01f6b"
   },
   "outputs": [
     {
       "path": "art/portrait_odelia_pike_composed.webp",
-      "sha256": "5829039e6ab3df74c208218c1ba031d1de93b65f355ed1a85e0202ed93317778",
-      "pixels_sha256": "91f188fd0dcb1a57f174251b6633195041ca559ecfb8789814755a643b0d1267",
-      "bytes": 60014,
+      "sha256": "fa617d0a45f7a2f8f84749c61de332f610dd72b4c50e9093cecd17e2ec97026d",
+      "pixels_sha256": "63a9f67664fbfc789785b263e257da6cbb79f383b26ab85cb2a854d6df82a66c",
+      "bytes": 68872,
       "width": 768,
       "height": 1152
     }
@@ -77,8 +81,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "pass",
-          "detail": "removed=0"
+          "status": "warn",
+          "detail": "removed=21"
         },
         "A18": {
           "status": "pass",
@@ -86,20 +90,22 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "60014 bytes <= 245760"
+          "detail": "68872 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": []
+      "warnings": [
+        "A12: removed 21 isolated specks"
+      ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.951Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -107,5 +113,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_odelia_pike_composed.webp",
+          "sha256": "5829039e6ab3df74c208218c1ba031d1de93b65f355ed1a85e0202ed93317778",
+          "pixels_sha256": "91f188fd0dcb1a57f174251b6633195041ca559ecfb8789814755a643b0d1267",
+          "bytes": 60014,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "c68045068451554f29e1d818115238b53bc08a63a44e1ed27554bb18ca40d962",
+      "fingerprint": "1a934d8a80b4c9bd7f31533747d8a50e55cb3b5634264afa820e55cd47f2fa62"
+    }
+  ]
 }

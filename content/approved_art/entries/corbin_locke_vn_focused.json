@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "corbin_locke_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "corbin_locke": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "1a367d10a0f995353f37597def148680eb986432b4299287b8ae05f2fecbcc22",
+    "sha256": "0dbe2466314247af4e76d5b8e7a13fede83a4702ee30a68f0a1f4443fc5e5b68",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/corbin_locke_vn_focused/run.provenance.json",
-    "provenance_sha256": "bcbae926f76bbf4ccf1fd6e7733947a1749573460b51dd9f7bcc260d0476e686",
+    "provenance_sha256": "7845c7cac152eb3a55a72581b29c2facca2396fa98941ad69a6589f12a766b31",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "705f112c0171fae8c74e63079644207f4316d690016404842759ea068683da4d",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/corbin_locke_vn_focused.ingest.json",
-    "spec_sha256": "8d24328ce88b05547a3c8e994351189205e3715602387096f879089beac951ad",
+    "spec_sha256": "bb69f37d67f0f65d9fc32f4a23ee0724414ea757a432638d8ed3df8bfd501202",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "b09f4c179598f83fd11e9db257f2b69c2b876bd5b983aabd6e6b2cc31326fa74"
+    "fingerprint": "e468f7d8a2a9701c3685fe5b463d555454bb7d49bcb48c6ecf27afd6866a4879"
   },
   "outputs": [
     {
       "path": "art/portrait_corbin_locke_focused.webp",
-      "sha256": "7ae9c9f752cc01bce1b67652042e57683609a83067f28d28398471bd0b775935",
-      "pixels_sha256": "6e7f65a479a11a1d140c714a97247358d45755af2a283ccdc82701ff0fb37db4",
-      "bytes": 79536,
+      "sha256": "39b7af2ea01bd26449fe21bdb0fba398654f355fa560c1bcb749b70e19f1118c",
+      "pixels_sha256": "afc791a882c50a4d552e93f821a00f37a2c385a616bbc9ae64e516ece8045b37",
+      "bytes": 55462,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=81"
+          "detail": "removed=5"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "79536 bytes <= 245760"
+          "detail": "55462 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 81 isolated specks"
+        "A12: removed 5 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.915Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_corbin_locke_focused.webp",
+          "sha256": "7ae9c9f752cc01bce1b67652042e57683609a83067f28d28398471bd0b775935",
+          "pixels_sha256": "6e7f65a479a11a1d140c714a97247358d45755af2a283ccdc82701ff0fb37db4",
+          "bytes": 79536,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "1a367d10a0f995353f37597def148680eb986432b4299287b8ae05f2fecbcc22",
+      "fingerprint": "b09f4c179598f83fd11e9db257f2b69c2b876bd5b983aabd6e6b2cc31326fa74"
+    }
+  ]
 }

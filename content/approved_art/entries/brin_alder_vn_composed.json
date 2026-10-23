@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "brin_alder_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "brin_alder": {
@@ -16,8 +16,11 @@
           "neutral": "composed",
           "quiet": "composed",
           "realizing": "composed",
+          "relieved": "composed",
           "resolved": "composed",
-          "steady": "composed"
+          "steady": "composed",
+          "strained": "composed",
+          "uneasy": "composed"
         },
         "images": {
           "composed": "art/portrait_brin_alder_composed.webp"
@@ -27,12 +30,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "bc1480a578e73d7fded2648bf60941b9d5dcb18e234b757aad80965d76da7aeb",
+    "sha256": "03879c3239dbe626e547fd78e5fba5d7a699bd2026e7eb296b80a4d291ea856d",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/brin_alder_vn_composed/run.provenance.json",
-    "provenance_sha256": "4baeb99507022270ec0f62b34eade5ec9c60c2cb4bfb29a273b87feb63ebb62c",
+    "provenance_sha256": "155a7483c25085d98cf700465d8407e0b88f26625a4035fd75c63b95d54441ec",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "7ceb3f4b3a737594b1078328f54fe09b94b19a0709c8aa9d5c3cf4c3dda90ec9",
     "references": [],
@@ -40,17 +43,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/brin_alder_vn_composed.ingest.json",
-    "spec_sha256": "572c6d8f05f111db4512ee82c87d7bb346418f02b8dc7d3e9f6836fdf695e72b",
+    "spec_sha256": "de942e9a02a696f7e9e6664e3650b35fc4e714a9bd2f25a129da2e40ceb0a38d",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "6268abfa4c673ffa605b80f5f2669438d43c164d6081f44faaff0181976dca64"
+    "fingerprint": "8d67e05a4669b48de8effad59db85a0c643c2cd3fbbe611fc65d36134f0143fe"
   },
   "outputs": [
     {
       "path": "art/portrait_brin_alder_composed.webp",
-      "sha256": "7fe92a6d1bd6f16c21b3543ee033ecd66cac0917c3713bcf9769ab48c6ad3e0f",
-      "pixels_sha256": "59c61f2a75f566972e74a581a4a8dddda36aed201c81aa3600d499068a572c7e",
-      "bytes": 65350,
+      "sha256": "5f7476e739a693ba771e60eaf54a94d5d410e8417570d33fd7a550ea0e1bcc5f",
+      "pixels_sha256": "fb7e27dc2695d921fc2204b7cf4593941881ab0607d0c96ff8889f3e49211a5b",
+      "bytes": 65920,
       "width": 768,
       "height": 1152
     }
@@ -76,7 +79,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=6"
+          "detail": "removed=15"
         },
         "A18": {
           "status": "pass",
@@ -84,7 +87,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "65350 bytes <= 245760"
+          "detail": "65920 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -92,14 +95,14 @@
         }
       },
       "warnings": [
-        "A12: removed 6 isolated specks"
+        "A12: removed 15 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.908Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -107,5 +110,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_brin_alder_composed.webp",
+          "sha256": "7fe92a6d1bd6f16c21b3543ee033ecd66cac0917c3713bcf9769ab48c6ad3e0f",
+          "pixels_sha256": "59c61f2a75f566972e74a581a4a8dddda36aed201c81aa3600d499068a572c7e",
+          "bytes": 65350,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "bc1480a578e73d7fded2648bf60941b9d5dcb18e234b757aad80965d76da7aeb",
+      "fingerprint": "6268abfa4c673ffa605b80f5f2669438d43c164d6081f44faaff0181976dca64"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_brin_alder_composed.webp",
+          "sha256": "5f7476e739a693ba771e60eaf54a94d5d410e8417570d33fd7a550ea0e1bcc5f",
+          "pixels_sha256": "fb7e27dc2695d921fc2204b7cf4593941881ab0607d0c96ff8889f3e49211a5b",
+          "bytes": 65920,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "03879c3239dbe626e547fd78e5fba5d7a699bd2026e7eb296b80a4d291ea856d",
+      "fingerprint": "8d67e05a4669b48de8effad59db85a0c643c2cd3fbbe611fc65d36134f0143fe"
+    }
+  ]
 }

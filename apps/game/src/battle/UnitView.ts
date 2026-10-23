@@ -98,20 +98,21 @@ export class UnitView extends PIXI.Container {
 
     // compact translucent plate under the feet
     const plateY = 18;
-    const plateCenterY = init.side === 'player' ? 18 : 16;
-    const plateH = init.side === 'player' ? 50 : 46;
+    const plateCenterY = init.side === 'player' ? 18 : 19;
+    const plateH = init.side === 'player' ? 50 : 52;
+    const plateW = init.side === 'player' ? 178 : 196;
     const plateBg = new PIXI.Graphics()
-      .roundRect(-89, plateCenterY - plateH / 2, 178, plateH, Math.floor(plateH / 2))
-      .fill({ color: 0x0a0610, alpha: 0.46 })
-      .stroke({ width: 1.4, color: init.side === 'player' ? C.player : C.enemy, alpha: 0.52 });
+      .roundRect(-plateW / 2, plateCenterY - plateH / 2, plateW, plateH, Math.floor(plateH / 2))
+      .fill({ color: 0x0a0610, alpha: init.side === 'player' ? 0.54 : 0.68 })
+      .stroke({ width: 1.4, color: init.side === 'player' ? C.player : C.enemy, alpha: 0.58 });
     const nameT = txt(0, -1, init.name.toUpperCase(), { fontFamily: F.display, fontSize: 16, fontStyle: '600', color: init.side === 'player' ? '#cfe0ff' : '#ffb3c4', stroke: '#0a0610', strokeThickness: 4 }, 0.5);
     this.hpBar = new Bar(scene, 0, 19, 154, 10, hpColor);
     this.hpBar.set(init.hp / init.maxHp, false);
     this.focusBar = init.side === 'player' ? new Bar(scene, 0, 32, 154, 6, () => C.focus) : null;
     this.focusBar?.set(0, false);
     this.shieldText = txt(82, 19, '', { fontSize: 16, color: T.shield, stroke: '#0a0610', strokeThickness: 3 }, [0, 0.5]);
-    this.statusText = txt(0, init.side === 'player' ? 48 : 50, '', { fontSize: 14, color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }, 0.5);
-    this.intentText = txt(0, init.side === 'player' ? 64 : 34, '', { fontFamily: F.display, fontSize: 14, fontStyle: '600', color: '#ffb3c4', stroke: '#0a0610', strokeThickness: 4 }, 0.5);
+    this.statusText = txt(0, init.side === 'player' ? 48 : 52, '', { fontSize: 14, color: '#e0d4ee', stroke: '#0a0610', strokeThickness: 3 }, 0.5);
+    this.intentText = txt(0, init.side === 'player' ? 64 : 34, '', { fontFamily: F.display, fontSize: 13, fontStyle: '600', color: '#ffb3c4', stroke: '#0a0610', strokeThickness: 4 }, 0.5);
     this.intentText.visible = false;
     // the plate lives on its own layer above every unit so a front unit never hides a rear unit's bars
     this.plate.addChild(plateBg, nameT, this.hpBar, ...(this.focusBar ? [this.focusBar] : []), this.shieldText, this.statusText, this.intentText);

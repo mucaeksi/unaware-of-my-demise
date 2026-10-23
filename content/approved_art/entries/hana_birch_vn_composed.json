@@ -2,18 +2,25 @@
   "schema": 1,
   "asset_id": "hana_birch_vn_composed",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "hana_birch": {
         "emotions": {
+          "ashamed": "composed",
           "calm": "composed",
           "composed": "composed",
+          "curious": "composed",
           "firm": "composed",
           "honest": "composed",
+          "nervous": "composed",
           "neutral": "composed",
           "quiet": "composed",
-          "small": "composed"
+          "relieved": "composed",
+          "small": "composed",
+          "thoughtful": "composed",
+          "trembling": "composed",
+          "worried": "composed"
         },
         "images": {
           "composed": "art/portrait_hana_birch_composed.webp"
@@ -23,12 +30,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "cf26cab9ecefe05a1995caf8045086da5d7f4d7f63025d42d6284a065a3a0f45",
+    "sha256": "c398efd625d7277396748ca87d001c2c7c2f1849506de544e85f3050c11dc64e",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/hana_birch_vn_composed/run.provenance.json",
-    "provenance_sha256": "7d9a120460473719e1f798b111177eee44aa1f7f6e936be3ad70c39a39ad7339",
+    "provenance_sha256": "5ee2adc16ebe997745548bef9dc44c55190ee2c0e2acbbdda1f274a677ebb5d3",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "a996dc2b5900c093ed630fb95a5c0243d004f6bf1acaf07c9a64ea5f227f77c0",
     "references": [],
@@ -36,17 +43,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/hana_birch_vn_composed.ingest.json",
-    "spec_sha256": "7ddd9eff28dcc2000c8c1dadb310a1fd97aed1cc8315d64a3566007cdf9862d5",
+    "spec_sha256": "c31f16687efa9aa6706e07746e9542425ead0c5f91a842dafa3000a61df956f5",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "3ae21294485e3cef0a7707adfd10248a182cb750db5118a3c4536621641567c4"
+    "fingerprint": "3057c1d627899faefd53bf2be63fde764337d159d40b77923951ae2fe62b384f"
   },
   "outputs": [
     {
       "path": "art/portrait_hana_birch_composed.webp",
-      "sha256": "0dab12c4ac4447ee97547852e0ce5a70b6ea8adfedce6a7b380a83bf981cd250",
-      "pixels_sha256": "d66f45187d5ae7ace6511cc3947759af69288a3ccb78a10a57a075ea3b9fca32",
-      "bytes": 62350,
+      "sha256": "05b826c96abab259a0c2e6dd5ff670515bf0761cbb626a36347b17fabfeb4f57",
+      "pixels_sha256": "c79015b7762e1930cb678e78cbd9c1eefb51693055bc9c13ed870336116732f1",
+      "bytes": 61764,
       "width": 768,
       "height": 1152
     }
@@ -80,7 +87,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "62350 bytes <= 245760"
+          "detail": "61764 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -93,9 +100,9 @@
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.925Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -103,5 +110,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_hana_birch_composed.webp",
+          "sha256": "0dab12c4ac4447ee97547852e0ce5a70b6ea8adfedce6a7b380a83bf981cd250",
+          "pixels_sha256": "d66f45187d5ae7ace6511cc3947759af69288a3ccb78a10a57a075ea3b9fca32",
+          "bytes": 62350,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "cf26cab9ecefe05a1995caf8045086da5d7f4d7f63025d42d6284a065a3a0f45",
+      "fingerprint": "3ae21294485e3cef0a7707adfd10248a182cb750db5118a3c4536621641567c4"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_hana_birch_composed.webp",
+          "sha256": "05b826c96abab259a0c2e6dd5ff670515bf0761cbb626a36347b17fabfeb4f57",
+          "pixels_sha256": "c79015b7762e1930cb678e78cbd9c1eefb51693055bc9c13ed870336116732f1",
+          "bytes": 61764,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "c398efd625d7277396748ca87d001c2c7c2f1849506de544e85f3050c11dc64e",
+      "fingerprint": "3057c1d627899faefd53bf2be63fde764337d159d40b77923951ae2fe62b384f"
+    }
+  ]
 }

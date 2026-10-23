@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "nara_vell_vn_warm",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "nara_vell": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "ee6adcddf8c0d8ebc0539a3f313d5a6810b63340759a794170d68b46a357d224",
+    "sha256": "ac03a90f33259f2041655c056d906bacc5138bdb15b6113a27fc1658319b8a39",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/nara_vell_vn_warm/run.provenance.json",
-    "provenance_sha256": "c38398370e6e23dee7e901c4333adebd9fa2e4988c821a8a92eb25642d33ab18",
+    "provenance_sha256": "bcbe6fcc0e133649740b7df9fab8b59b32b9aa064c42d1b6b5660f6d267fe14b",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "50f46ac64aa63642f0fcffcd3fc2ef8280e0ee8c56d5281026ab449447b27818",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/nara_vell_vn_warm.ingest.json",
-    "spec_sha256": "a78db32c1f6ac6cd8f13a380ce937c536fe0ecb24263c05eb6f84a9542385c1a",
+    "spec_sha256": "4122a541c4c81fa718ad90957eb99bcb1b1a81e881d5c2ffc47b7fd0513a78db",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "e213828327689a7ddd5639a6bf8b5546eaf976e51e85dd12625a70c040304a83"
+    "fingerprint": "bd74dcdd91307151ee89c5afa0f5f596fced9a03697169139070720fb2ba0c8f"
   },
   "outputs": [
     {
       "path": "art/portrait_nara_vell_warm.webp",
-      "sha256": "3827486513cf39b14fa78e7fc8a72acf34747060cd3b82f9caeaaa5f9132a0a6",
-      "pixels_sha256": "4f35263f2e652a7843cba2eeebf87cb63ece825076d4b1ca9318952174761941",
-      "bytes": 67136,
+      "sha256": "151b48516b4ec333c76ed5ffb0044a4f34727e65ef774e6295ee08e9f6946d37",
+      "pixels_sha256": "f6be32c6941b35ea64f7c813870fdaa3e102262263867365dd31e143e0eab659",
+      "bytes": 67158,
       "width": 768,
       "height": 1152
     }
@@ -67,8 +67,8 @@
           "detail": "sigma=0.00"
         },
         "A12": {
-          "status": "warn",
-          "detail": "removed=1"
+          "status": "pass",
+          "detail": "removed=0"
         },
         "A18": {
           "status": "pass",
@@ -76,22 +76,20 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "67136 bytes <= 245760"
+          "detail": "67158 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
           "detail": "spill=0.0000%"
         }
       },
-      "warnings": [
-        "A12: removed 1 isolated specks"
-      ]
+      "warnings": []
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.948Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +97,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_nara_vell_warm.webp",
+          "sha256": "3827486513cf39b14fa78e7fc8a72acf34747060cd3b82f9caeaaa5f9132a0a6",
+          "pixels_sha256": "4f35263f2e652a7843cba2eeebf87cb63ece825076d4b1ca9318952174761941",
+          "bytes": 67136,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "ee6adcddf8c0d8ebc0539a3f313d5a6810b63340759a794170d68b46a357d224",
+      "fingerprint": "e213828327689a7ddd5639a6bf8b5546eaf976e51e85dd12625a70c040304a83"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_nara_vell_warm.webp",
+          "sha256": "151b48516b4ec333c76ed5ffb0044a4f34727e65ef774e6295ee08e9f6946d37",
+          "pixels_sha256": "f6be32c6941b35ea64f7c813870fdaa3e102262263867365dd31e143e0eab659",
+          "bytes": 67158,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "ac03a90f33259f2041655c056d906bacc5138bdb15b6113a27fc1658319b8a39",
+      "fingerprint": "bd74dcdd91307151ee89c5afa0f5f596fced9a03697169139070720fb2ba0c8f"
+    }
+  ]
 }

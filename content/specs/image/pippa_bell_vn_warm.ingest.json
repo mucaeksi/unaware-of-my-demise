@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "4b2f7e8394db",
+    "pick": "250eda0079ed",
     "provenance": ".cache/generated/pippa_bell_vn_warm/run.provenance.json"
   },
   "key": {
@@ -43,9 +43,7 @@
       "bright",
       "gentle",
       "grinning",
-      "joyful",
       "smile",
-      "smiling",
       "tender",
       "warm"
     ]

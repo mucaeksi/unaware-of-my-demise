@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "cassian_thorne_vn_warm",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "cassian_thorne": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "befcced6fd46485e0793c94e3c57a42591c558164d8301b0c8c4c62a56be8cb4",
+    "sha256": "dc8264959ece85b794c1e9ed1da1d492ad2178fc135a08a1392ffe134c242dba",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/cassian_thorne_vn_warm/run.provenance.json",
-    "provenance_sha256": "967908f60ed995603e80f9209050cf1dbc263a3fc7f11975775fc1f9c0f4a388",
+    "provenance_sha256": "72bdff0b0006101a218ddd92a5c068967e4c8200cb7c960c9c14d037c87ff9ce",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "f7649bb051bef613a10a694727658ac6a5726930438c91212e07fdc421eabfa4",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/cassian_thorne_vn_warm.ingest.json",
-    "spec_sha256": "27cd19e84a2f623f54c82f6681c1572ae8dc89233482cb4d762ee1446192e8b6",
+    "spec_sha256": "7df978fa930bc2c02dd948df29b9e6e0342aaea076ad5616c64d06bf67d0aeb4",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "02119a82be311216eb99266ed6ace7e6ddda4fe37227c9c7835d8b146ed198e6"
+    "fingerprint": "fc1bfd4fb60c15f3e1d35d6747fc1cd50e1e340c7474520972f6449f2a15b997"
   },
   "outputs": [
     {
       "path": "art/portrait_cassian_thorne_warm.webp",
-      "sha256": "1b13b7fcbd2fa90f13a3902c76a8b1f5f4c326f489fd1eda9e004796a3c49a35",
-      "pixels_sha256": "34b106aa4c2a5b5984d501afcf23bed075fbef51e23be81df2c94989937eb786",
-      "bytes": 100446,
+      "sha256": "6a3d04d1eb46879fc014af6dfd1c1de26ab9b6eca45b2e9277809b5f8b2b5b7b",
+      "pixels_sha256": "dda71a5dab221eb251c0b2a7b0baec03ee6e7d24f74d78a4f7d3a8dd2990093c",
+      "bytes": 59902,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=91"
+          "detail": "removed=6"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "100446 bytes <= 245760"
+          "detail": "59902 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 91 isolated specks"
+        "A12: removed 6 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.911Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_cassian_thorne_warm.webp",
+          "sha256": "1b13b7fcbd2fa90f13a3902c76a8b1f5f4c326f489fd1eda9e004796a3c49a35",
+          "pixels_sha256": "34b106aa4c2a5b5984d501afcf23bed075fbef51e23be81df2c94989937eb786",
+          "bytes": 100446,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "befcced6fd46485e0793c94e3c57a42591c558164d8301b0c8c4c62a56be8cb4",
+      "fingerprint": "02119a82be311216eb99266ed6ace7e6ddda4fe37227c9c7835d8b146ed198e6"
+    }
+  ]
 }

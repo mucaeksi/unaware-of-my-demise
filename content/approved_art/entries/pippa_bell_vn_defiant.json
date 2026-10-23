@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "pippa_bell_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "pippa_bell": {
@@ -10,7 +10,6 @@
           "defiant": "defiant",
           "determined": "defiant",
           "fierce": "defiant",
-          "resolute": "defiant",
           "urgent": "defiant"
         },
         "images": {
@@ -21,12 +20,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "0336ea155b8295259672ee439cfd696a83fdb93707694a92780d20e3f81b749d",
+    "sha256": "0921fc0d49c9e2f2d29200b0f2d67289c4cc664997aa8ac0320ef53ddffc52e2",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/pippa_bell_vn_defiant/run.provenance.json",
-    "provenance_sha256": "b8ecd523200a7a8111823710dfbb3e1b7722dd004e799217f7deea7be9ffd7db",
+    "provenance_sha256": "e8246803b48c472f9f4ce2862bc9c8f1d3b53e1b7a26dc653b42dcafdfc5a40f",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "2ccbc6fbc0692670b3750e139e4a3bab13a9b929ab90bf804047db9ac98d52ce",
     "references": [],
@@ -34,17 +33,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/pippa_bell_vn_defiant.ingest.json",
-    "spec_sha256": "8e3d53e6360309b7ab9e800f47cc57ebcd05883ce3fa9c17fd1be3d2cf98466f",
+    "spec_sha256": "bc0e961bdbb8bf0c8b362ce81ea6f0bb7cb2a67d6dc997f981cc128f1254b2e7",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "d5f91e7abb4cfde73063109a03cf4326993d2200506e67b0a81ecfdd9ab2d621"
+    "fingerprint": "05a536fd53c8f4f8295b7757f48db3f27a8ef8294e0fec2a984662c2a001111d"
   },
   "outputs": [
     {
       "path": "art/portrait_pippa_bell_defiant.webp",
-      "sha256": "f188894a436facc3123b98099c9cca526af5e122734807e562470abbeaffe692",
-      "pixels_sha256": "ed1cb1752d04087e88454e96fe0682c21a778da66713899c7d6a740c03fcfe91",
-      "bytes": 77198,
+      "sha256": "ac2a7bed07aa49c1d8b52966afd709a6157a6cda91f8f71813ddd89d459ad11e",
+      "pixels_sha256": "dc3eb4fe72c7be0939beedd6cba43a7d3efa7b343acd4d9072ad2f1f105da7b6",
+      "bytes": 74038,
       "width": 768,
       "height": 1152
     }
@@ -70,7 +69,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=7"
+          "detail": "removed=1"
         },
         "A18": {
           "status": "pass",
@@ -78,7 +77,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "77198 bytes <= 245760"
+          "detail": "74038 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -86,14 +85,14 @@
         }
       },
       "warnings": [
-        "A12: removed 7 isolated specks"
+        "A12: removed 1 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.953Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -101,5 +100,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_pippa_bell_defiant.webp",
+          "sha256": "f188894a436facc3123b98099c9cca526af5e122734807e562470abbeaffe692",
+          "pixels_sha256": "ed1cb1752d04087e88454e96fe0682c21a778da66713899c7d6a740c03fcfe91",
+          "bytes": 77198,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "0336ea155b8295259672ee439cfd696a83fdb93707694a92780d20e3f81b749d",
+      "fingerprint": "d5f91e7abb4cfde73063109a03cf4326993d2200506e67b0a81ecfdd9ab2d621"
+    }
+  ]
 }

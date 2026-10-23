@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "b4e033e3132d",
+    "pick": "ee34ec9b22d0",
     "provenance": ".cache/generated/hana_birch_vn_warm/run.provenance.json"
   },
   "key": {
@@ -41,7 +41,6 @@
     "image": "warm",
     "emotion_tags": [
       "gentle",
-      "relieved",
       "smile",
       "soft",
       "warm"

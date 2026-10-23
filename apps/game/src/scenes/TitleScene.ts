@@ -25,15 +25,30 @@ import { attachLivingBackdrop } from '../vfx/livingBackdrop';
 import { vfxTextures } from '../vfx/textures';
 import { app } from '../core/app';
 
+function formatReleaseTitle(releaseId?: string): string {
+  if (!releaseId) return '';
+  const m = /^rel_(\d+)_(.+)$/i.exec(releaseId.trim());
+  if (!m) return releaseId;
+  const num = m[1]!;
+  const label = m[2]!
+    .split('_')
+    .map((w) => (/^part(\d+)$/i.test(w) ? `Part ${w.slice(4).toUpperCase()}` : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ')
+    .replace(/\bPart 1\b/g, 'Part I')
+    .replace(/\bPart 2\b/g, 'Part II')
+    .replace(/\bPart 3\b/g, 'Part III');
+  return `${label} (rel_${num})`;
+}
+
 function describe(o: PatchOutcome | null): string {
   if (!o) return 'No check yet';
   switch (o.status) {
     case 'up_to_date':
-      return o.releaseId ? `Up to date (${o.releaseId})` : 'Up to date (embedded base)';
+      return o.releaseId ? `Up to date (${formatReleaseTitle(o.releaseId)})` : 'Up to date (embedded base)';
     case 'applied':
-      return `Applied ${o.releaseId} · ${o.downloadedFiles} files · ${(o.downloadedBytes / 1024).toFixed(0)} KB`;
+      return `Applied ${formatReleaseTitle(o.releaseId)} · ${o.downloadedFiles} files · ${(o.downloadedBytes / 1024).toFixed(0)} KB`;
     case 'staged':
-      return `Downloaded ${o.releaseId} · ${o.downloadedFiles} files · ${(o.downloadedBytes / 1024).toFixed(0)} KB (switches on at the next start)`;
+      return `Downloaded ${formatReleaseTitle(o.releaseId)} · ${o.downloadedFiles} files · ${(o.downloadedBytes / 1024).toFixed(0)} KB (switches on at the next start)`;
     case 'reverted_to_base':
       return 'Reverted to embedded base (kill switch)';
     case 'offline':
@@ -76,8 +91,8 @@ export class TitleScene extends PixiScene<{ openSettings?: boolean }> {
     });
     this.buildServerBadge();
     this.buildTitleStartMenu();
-    this.chipText = this.ui.text(60 + insets.left, REF_H - 36 - insets.bottom, '', { fontSize: 24, color: T.dim }).setOrigin(0, 0.5).setDepth(DEPTH.hud + 2);
-    if (PATCH_LAB_ENABLED) this.ui.button(330 + insets.left, REF_H - 36 - insets.bottom, { label: 'CONTENT DETAILS', bare: true, w: 560, h: 60, onClick: () => this.openPatchLab() });
+    this.chipText = this.ui.text(64 + insets.left, 98 + insets.top, '', { fontSize: 17, color: T.dim, stroke: '#05030a', strokeThickness: 3 }).setOrigin(0, 0.5).setDepth(DEPTH.hud + 2);
+    if (PATCH_LAB_ENABLED) this.ui.button(250 + insets.left, 98 + insets.top, { label: 'CONTENT DETAILS', bare: true, w: 380, h: 36, onClick: () => this.openPatchLab() });
     void this.refreshChip();
     if (data?.openSettings) void this.openSettings();
     // a patch can have replaced the art library while the splash played: make sure it has loaded what this screen draws

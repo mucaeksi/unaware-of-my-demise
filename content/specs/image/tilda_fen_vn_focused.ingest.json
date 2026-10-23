@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "bdf923f2fc52",
+    "pick": "0e1dea785036",
     "provenance": ".cache/generated/tilda_fen_vn_focused/run.provenance.json"
   },
   "key": {
@@ -41,11 +41,7 @@
     "image": "focused",
     "emotion_tags": [
       "analytical",
-      "bitter",
-      "careful",
       "focused",
-      "grim",
-      "reflective",
       "serious",
       "sharp",
       "suspicious"

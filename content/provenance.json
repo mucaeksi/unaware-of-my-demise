@@ -283,7 +283,7 @@
     },
     {
       "output": "content/base/art/still_prologue_search.webp",
-      "sha256": "889052436a8db6cce9b2d55d4af21291137be565df0e903b4a5767025ae6ddff",
+      "sha256": "38b309152c816b8891c2a93d3a1c6011cfc6aae0dfff0da432aa3711254a869d",
       "sources": {
         "generated:prologue_village_search@rev2": "db4b2c7f26b30dce29e2c85cdce246d87fc934171a088a33e3af7add249b7ec8",
         "entry": "69721a36acb79027eaecf1f1fa1f25fa5b0dad680b962426b28f719c16c6dd83"
@@ -352,7 +352,7 @@
     },
     {
       "output": "content/base/encounters/tutorial_t2.json",
-      "sha256": "93395cc73b0b3fc58de9728d572b1645664a8bccefee7aa1b53b26f02bf23afc",
+      "sha256": "4c9d3f3f7d39860278ad21fa32eb488d4552c16b2cb6936b304162c07a4f88cf",
       "sources": {
         "narrative": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/entry/tutorial_v001.json#T-2"
       }

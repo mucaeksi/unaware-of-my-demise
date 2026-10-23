@@ -2,17 +2,13 @@
   "schema": 1,
   "asset_id": "tilda_fen_vn_focused",
   "class": "portrait",
-  "revision": 1,
+  "revision": 3,
   "targets": {
     "portraits": {
       "tilda_fen": {
         "emotions": {
           "analytical": "focused",
-          "bitter": "focused",
-          "careful": "focused",
           "focused": "focused",
-          "grim": "focused",
-          "reflective": "focused",
           "serious": "focused",
           "sharp": "focused",
           "suspicious": "focused"
@@ -25,12 +21,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "bdf923f2fc521510cbf5cd80ac44dfd69b46314d3707da1c4c973772cc8f5f58",
+    "sha256": "0e1dea7850367d2645ff9328e3d918fbe6dd27458572e03e5a8da1a97ca3489c",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/tilda_fen_vn_focused/run.provenance.json",
-    "provenance_sha256": "f8b8fbf58ec7506661d9189ea2175c610e3bb50f91731fc4ca8f3265fab68dfb",
+    "provenance_sha256": "17b65ca8b2314ae091fbb5648bb1db1c05ca0d8d79ccf49669cc92c83c1405f6",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "dccc04eeb4225b313bafff33700baaa8884377f899e100c69a41f7d28a4f2588",
     "references": [],
@@ -38,17 +34,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/tilda_fen_vn_focused.ingest.json",
-    "spec_sha256": "8e3250be697381719df132a2ee5c32c78468d257f52875abf12f0442a8e10879",
+    "spec_sha256": "f61fe52c8ffb66968ab9fc135a2167474928fbc1266d210a89b0aa63d1ae0815",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "09123859136990f0bac9cc72f93679bb3b5508fd6da1a5f87a8c2a4d9f79ded7"
+    "fingerprint": "9351af08763b90e0686b31b9844ceb5fce2305b9e858402d4e7ea1c19b911b65"
   },
   "outputs": [
     {
       "path": "art/portrait_tilda_fen_focused.webp",
-      "sha256": "4d1f08422712a62370520cae0ead8018f313ef2b1cddc8bf1ea1ed9d09250ce5",
-      "pixels_sha256": "62dc7246c1be207ec6db7c52b8ac8898087b6c66c974ead6c611aeee8f4cbe81",
-      "bytes": 63532,
+      "sha256": "84a8dfc992ed185b6f02acd36b1afeb6dfacd13048e361c5b9195596ceb042fb",
+      "pixels_sha256": "44861bc384bdc418c8bab302f0d12bf2b84f5107fa40b09542f253bcdfae6b61",
+      "bytes": 64038,
       "width": 768,
       "height": 1152
     }
@@ -74,7 +70,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=1"
+          "detail": "removed=4"
         },
         "A18": {
           "status": "pass",
@@ -82,7 +78,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "63532 bytes <= 245760"
+          "detail": "64038 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -90,14 +86,14 @@
         }
       },
       "warnings": [
-        "A12: removed 1 isolated specks"
+        "A12: removed 4 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.968Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -105,5 +101,36 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_focused.webp",
+          "sha256": "4d1f08422712a62370520cae0ead8018f313ef2b1cddc8bf1ea1ed9d09250ce5",
+          "pixels_sha256": "62dc7246c1be207ec6db7c52b8ac8898087b6c66c974ead6c611aeee8f4cbe81",
+          "bytes": 63532,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "bdf923f2fc521510cbf5cd80ac44dfd69b46314d3707da1c4c973772cc8f5f58",
+      "fingerprint": "09123859136990f0bac9cc72f93679bb3b5508fd6da1a5f87a8c2a4d9f79ded7"
+    },
+    {
+      "revision": 2,
+      "outputs": [
+        {
+          "path": "art/portrait_tilda_fen_focused.webp",
+          "sha256": "84a8dfc992ed185b6f02acd36b1afeb6dfacd13048e361c5b9195596ceb042fb",
+          "pixels_sha256": "44861bc384bdc418c8bab302f0d12bf2b84f5107fa40b09542f253bcdfae6b61",
+          "bytes": 64038,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "0e1dea7850367d2645ff9328e3d918fbe6dd27458572e03e5a8da1a97ca3489c",
+      "fingerprint": "9351af08763b90e0686b31b9844ceb5fce2305b9e858402d4e7ea1c19b911b65"
+    }
+  ]
 }

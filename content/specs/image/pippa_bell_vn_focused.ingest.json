@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "9f387fedb527",
+    "pick": "b61417b6b712",
     "provenance": ".cache/generated/pippa_bell_vn_focused/run.provenance.json"
   },
   "key": {
@@ -42,10 +42,7 @@
     "emotion_tags": [
       "analytical",
       "focused",
-      "serious",
-      "startled",
-      "uneasy",
-      "wondering"
+      "serious"
     ]
   },
   "qc": {

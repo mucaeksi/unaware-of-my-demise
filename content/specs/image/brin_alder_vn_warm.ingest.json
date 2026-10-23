@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "a36ac318c8e6",
+    "pick": "aa825de7fe6b",
     "provenance": ".cache/generated/brin_alder_vn_warm/run.provenance.json"
   },
   "key": {
@@ -41,7 +41,6 @@
     "image": "warm",
     "emotion_tags": [
       "gentle",
-      "relieved",
       "small_smile",
       "smile",
       "warm"

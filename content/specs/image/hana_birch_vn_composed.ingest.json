@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "cf26cab9ecef",
+    "pick": "c398efd625d7",
     "provenance": ".cache/generated/hana_birch_vn_composed/run.provenance.json"
   },
   "key": {
@@ -40,13 +40,20 @@
     "character": "hana_birch",
     "image": "composed",
     "emotion_tags": [
+      "ashamed",
       "calm",
       "composed",
+      "curious",
       "firm",
       "honest",
+      "nervous",
       "neutral",
       "quiet",
-      "small"
+      "relieved",
+      "small",
+      "thoughtful",
+      "trembling",
+      "worried"
     ]
   },
   "qc": {

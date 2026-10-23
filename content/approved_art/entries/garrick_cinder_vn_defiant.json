@@ -2,7 +2,7 @@
   "schema": 1,
   "asset_id": "garrick_cinder_vn_defiant",
   "class": "portrait",
-  "revision": 1,
+  "revision": 2,
   "targets": {
     "portraits": {
       "garrick_cinder": {
@@ -19,12 +19,12 @@
   },
   "source": {
     "kind": "generated",
-    "sha256": "d8826ace34d0d782057766de6c1911763673c7ecfeed6639b5b4cf08f9372909",
+    "sha256": "9853f1a1210c748e2ae6db166942dd0edf543f04c2dea08aade1c127654772f5",
     "mime": "image/png",
     "width": 768,
     "height": 1152,
     "provenance_file": ".cache/generated/garrick_cinder_vn_defiant/run.provenance.json",
-    "provenance_sha256": "2d38b9604f1617b04371387c7382699cf2ff66d2014ebd4fb4b35ab332401a48",
+    "provenance_sha256": "f06ed65942eb14eeefc4316bb88df5080558eec38923f7687fc723e3c1d13058",
     "model": "gemini-3-pro-image",
     "prompt_sha256": "d48e0c07faba7731a768fefd82f52085a641bdb2e40df0ac4edb2826eec6960f",
     "references": [],
@@ -32,17 +32,17 @@
   },
   "ingest": {
     "spec_path": "content/specs/image/garrick_cinder_vn_defiant.ingest.json",
-    "spec_sha256": "aa3d0a91456d0cbe2e5982f833cdc9db226adef72baa977ecb38703a800ffaa5",
+    "spec_sha256": "125f49c61b4a6d425f2c07496d8debed2f0b92d10dee041d5830e3b6acb13afa",
     "tool": "ingest_art@1",
     "sharp": "0.35.5",
-    "fingerprint": "f432eaa63aba25aa9a17692e5f9a716b1379cee884ab0987497ad254a1b21640"
+    "fingerprint": "c4ac6fec27ff66e535edb88bd842ea36275a2e0e0c284752cb717d237fd8bf4b"
   },
   "outputs": [
     {
       "path": "art/portrait_garrick_cinder_defiant.webp",
-      "sha256": "d0fad32e2a5a92b7f5b883904d46d31b5919cc0453ba03e728a85c8870b4abfa",
-      "pixels_sha256": "1b784c468a39e75c118dbbefbaaa5cd4e258f066e7bec04d2fafec09a9d662ac",
-      "bytes": 82280,
+      "sha256": "2557f7a2c7571c167159447e1dea313074ea500d888c9dd2709a5b7e8e5de67e",
+      "pixels_sha256": "902c38cf53061e706a016c92093919b0721f5018a54d041a03c3cfcd3cbad877",
+      "bytes": 55146,
       "width": 768,
       "height": 1152
     }
@@ -68,7 +68,7 @@
         },
         "A12": {
           "status": "warn",
-          "detail": "removed=41"
+          "detail": "removed=11"
         },
         "A18": {
           "status": "pass",
@@ -76,7 +76,7 @@
         },
         "A19": {
           "status": "pass",
-          "detail": "82280 bytes <= 245760"
+          "detail": "55146 bytes <= 245760"
         },
         "A08": {
           "status": "pass",
@@ -84,14 +84,14 @@
         }
       },
       "warnings": [
-        "A12: removed 41 isolated specks"
+        "A12: removed 11 isolated specks"
       ]
     },
     "human": {
       "status": "approved",
-      "by": "owner@sovtaym.studio",
-      "at": "2026-10-22T05:05:53.923Z",
-      "note": "Approved for Part I full release"
+      "by": "owner",
+      "at": "2026-10-22T20:15:00.000Z",
+      "note": "Approved clean alpha-keyed canonical portrait"
     }
   },
   "license": {
@@ -99,5 +99,21 @@
     "terms_checked_on": null,
     "note": "provenance verified by tools/ingest_art.ts"
   },
-  "history": []
+  "history": [
+    {
+      "revision": 1,
+      "outputs": [
+        {
+          "path": "art/portrait_garrick_cinder_defiant.webp",
+          "sha256": "d0fad32e2a5a92b7f5b883904d46d31b5919cc0453ba03e728a85c8870b4abfa",
+          "pixels_sha256": "1b784c468a39e75c118dbbefbaaa5cd4e258f066e7bec04d2fafec09a9d662ac",
+          "bytes": 82280,
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "source_sha256": "d8826ace34d0d782057766de6c1911763673c7ecfeed6639b5b4cf08f9372909",
+      "fingerprint": "f432eaa63aba25aa9a17692e5f9a716b1379cee884ab0987497ad254a1b21640"
+    }
+  ]
 }

@@ -4,7 +4,7 @@
   "class": "portrait",
   "source": {
     "kind": "generated",
-    "pick": "9d421979ae9c",
+    "pick": "ade9528c4362",
     "provenance": ".cache/generated/nara_vell_vn_composed/run.provenance.json"
   },
   "key": {
@@ -53,7 +53,8 @@
       "neutral",
       "plain",
       "quiet",
-      "resolved"
+      "resolved",
+      "strained"
     ]
   },
   "qc": {

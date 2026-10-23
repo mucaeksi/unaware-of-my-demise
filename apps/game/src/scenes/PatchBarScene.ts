@@ -64,7 +64,16 @@ export class PatchBarScene extends PixiScene {
   }
 
   private syncAction(): void {
-    this.action?.setVisible(this.wantAction && !GAMEPLAY.some((k) => this.nav.isActive(k)));
+    const dedicatedProgressScene = this.nav.isActive('Finish') || (this.nav.isActive('Title') && Services.patches.get().kind === 'running');
+    if (dedicatedProgressScene && this.shown) {
+      this.show(false);
+    } else if (!dedicatedProgressScene && !this.shown) {
+      const s = Services.patches.get();
+      if (s.kind === 'running' || s.kind === 'failed' || (s.kind === 'ready' && s.outcome.status === 'staged' && loadEntry().phase === 'completed')) {
+        this.show(true);
+      }
+    }
+    this.action?.setVisible(this.wantAction && !dedicatedProgressScene && !GAMEPLAY.some((k) => this.nav.isActive(k)));
   }
 
   private act(): void {
