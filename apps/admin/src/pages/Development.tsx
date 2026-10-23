@@ -26,6 +26,11 @@ interface BaseReleaseSummary {
 }
 interface ReviewCatalogItem {
   id: string;
+  groupId: string;
+  groupTitle: string;
+  subGroupId: string;
+  subGroupTitle: string;
+  sortOrder: number;
   category:
     | 'STEPS'
     | 'BANNERS'
@@ -89,20 +94,18 @@ const TABS = ['Onay & Denetim Merkezi (707 Eser)', 'Overview', 'Live preview', '
 type Tab = (typeof TABS)[number];
 const AREAS = ['General', 'Splash & Studio', 'Title', 'Prologue (120s)', 'Story', 'Battle', 'Patch Wait & Restart', 'Company hub', 'Summon', 'Roster', 'Mail', 'Shop', 'Account', 'Chapters', 'Control Center', 'Economy', 'Art direction'];
 
-const REVIEW_CATEGORIES: { id: ReviewCatalogItem['category'] | 'ALL'; label: string }[] = [
-  { id: 'ALL', label: 'Tümü' },
-  { id: 'STEPS', label: '1. D-30 Adımları (§4.1–§4.7)' },
-  { id: 'BANNERS', label: '2. Gacha Bannerlar (16)' },
-  { id: 'PORTRAITS', label: '3. Karakter Portreleri (128)' },
-  { id: 'CHIBI_ATLAS', label: '4. Chibi & Boss Atlasları (55)' },
-  { id: 'CONCEPT_SHEETS', label: '5. Konsept & Turnaround Paftaları (53)' },
-  { id: 'BACKGROUNDS', label: '6. Savaş Alanları & Mekanlar (47)' },
-  { id: 'STILLS_CG', label: '7. Prolog & Bölüm CG (26)' },
-  { id: 'ICONS_WEAPONS', label: '8. Silah, Ekipman & Statü İkonları (120)' },
-  { id: 'UI_BRAND_STORE', label: '9. UI Kit, Mağaza & GIF (56)' },
-  { id: 'AUDIO_SFX_BGM', label: '10. Ses Efektleri & Müzik (23)' },
-  { id: 'VOICES', label: '11. Seslendirmeler — Chirp 3 HD (116)' },
-  { id: 'EVIDENCE_SCREENS', label: '12. Oyun Kanıt Ekranları (60)' }
+const REVIEW_GROUPS: { id: string; shortLabel: string; fullTitle: string }[] = [
+  { id: 'G01', shortLabel: 'Grup 1: Marka & Mağaza (16)', fullTitle: 'Grup 1: Marka, Açılış & Google Play Mağaza Vitrini' },
+  { id: 'G02', shortLabel: 'Grup 2: Prolog & Bölüm CG (26)', fullTitle: 'Grup 2: Prolog & Bölüm 1–7 Sinematik CG Sahneleri' },
+  { id: 'G03', shortLabel: 'Grup 3: 25 Kahraman Paketi (166)', fullTitle: 'Grup 3: 25 Oynanabilir Kahraman (Konsept + Chibi + 4 Portre + İmza Silah)' },
+  { id: 'G04', shortLabel: 'Grup 4: Antagonist & 7 Boss (44)', fullTitle: 'Grup 4: Ana Antagonistler & 7 Part I Boss\'u (Bölüm Sırasıyla Tam Paket)' },
+  { id: 'G05', shortLabel: 'Grup 5: 22 Düşman Birimi (42)', fullTitle: 'Grup 5: 22 Düşman Birimi (Bölüm 1–7 Sırasıyla Konsept + Chibi Yan Yana)' },
+  { id: 'G06', shortLabel: 'Grup 6: Harita & 47 Mekan (47)', fullTitle: 'Grup 6: Dünya Haritası & 47 Mekan / Savaş Alanı Arka Planı (Bölüm Sırasıyla)' },
+  { id: 'G07', shortLabel: 'Grup 7: 16 Gacha Banner (16)', fullTitle: 'Grup 7: 16 Gacha Çağrı Bannerı (Kalıcı & Oath #1–#7 Karakter + Silah Çiftleri)' },
+  { id: 'G08', shortLabel: 'Grup 8: UI Kit, İkon & GIF (144)', fullTitle: 'Grup 8: UI Ekran Plakaları, 9-Slice UI Kit, İkon Setleri & Animasyon GIF\'leri' },
+  { id: 'G09', shortLabel: 'Grup 9: Müzik, SFX & 116 Ses (139)', fullTitle: 'Grup 9: Ses Efektleri (16 SFX), Müzik (7 BGM) & 116 Seslendirme (Sahne Sırasıyla)' },
+  { id: 'G10', shortLabel: 'Grup 10: D-30 & Kanıt Ekranları (67)', fullTitle: 'Grup 10: D-30 Mimari Teslimatlar (§4.1–§4.7) & Canlı Oyun Kanıt Ekranları' },
+  { id: 'ALL', shortLabel: 'Tüm Gruplar Bir Arada (707)', fullTitle: 'Tüm Gruplar (Grup 1 → Grup 10 Bir Arada)' }
 ];
 
 /** Where the browser build of the game lives: the sibling Worker of this admin, or the local dev server. */
@@ -199,12 +202,11 @@ function D30ReviewCenter({
   say: (m: string) => void;
   onJumpPreview: (scene: string) => void;
 }): ReactNode {
-  const [catFilter, setCatFilter] = useState<ReviewCatalogItem['category'] | 'ALL'>('ALL');
+  const [activeGroup, setActiveGroup] = useState<string>('G01');
   const [originFilter, setOriginFilter] = useState<'ALL' | 'd30_new' | 'prev_approved'>('ALL');
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'pending' | 'approved' | 'rejected'>('ALL');
   const [search, setSearch] = useState('');
-  const [pageSize, setPageSize] = useState<number>(60);
-  const [page, setPage] = useState<number>(0);
+  const [collapsedSubs, setCollapsedSubs] = useState<Record<string, boolean>>({});
   const [decisions, setDecisions] = useState<Record<string, D30DecisionState>>({});
   const [draftComments, setDraftComments] = useState<Record<string, string>>({});
   const [loadedDims, setLoadedDims] = useState<Record<string, string>>({});
@@ -276,7 +278,7 @@ function D30ReviewCenter({
   const approveBatch = async (items: ReviewCatalogItem[], labelText: string): Promise<void> => {
     const toApprove = items.filter((i) => decisions[i.id]?.status !== 'approved');
     if (toApprove.length === 0) {
-      say('Seçili listedeki tüm maddeler zaten onaylanmış durumda.');
+      say('Seçili gruptaki tüm maddeler zaten onaylanmış durumda.');
       return;
     }
     setSavingId('BULK');
@@ -302,21 +304,43 @@ function D30ReviewCenter({
   };
 
   const qNorm = search.trim().toLowerCase();
+  const effectiveGroup = qNorm ? 'ALL' : activeGroup;
+
   const filtered = catalog.filter((item) => {
-    if (catFilter !== 'ALL' && item.category !== catFilter) return false;
+    if (effectiveGroup !== 'ALL' && item.groupId !== effectiveGroup) return false;
     if (originFilter !== 'ALL' && item.origin !== originFilter) return false;
     const decStatus = decisions[item.id]?.status ?? 'pending';
     if (statusFilter !== 'ALL' && decStatus !== statusFilter) return false;
     if (qNorm) {
-      const hay = `${item.id} ${item.title} ${item.subtitle} ${item.description} ${item.targetPath} ${item.badge}`.toLowerCase();
+      const hay = `${item.id} ${item.groupTitle} ${item.subGroupTitle} ${item.title} ${item.subtitle} ${item.description} ${item.targetPath} ${item.badge}`.toLowerCase();
       if (!hay.includes(qNorm)) return false;
     }
     return true;
   });
 
-  const totalPages = pageSize > 0 ? Math.max(1, Math.ceil(filtered.length / pageSize)) : 1;
-  const safePage = Math.min(page, totalPages - 1);
-  const pageItems = pageSize > 0 ? filtered.slice(safePage * pageSize, (safePage + 1) * pageSize) : filtered;
+  // Group filtered items into ordered Sub-Groups
+  const subGroups: { subGroupId: string; subGroupTitle: string; groupTitle: string; items: ReviewCatalogItem[] }[] = [];
+  const subGroupMap = new Map<string, { subGroupId: string; subGroupTitle: string; groupTitle: string; items: ReviewCatalogItem[] }>();
+  for (const item of filtered) {
+    let sg = subGroupMap.get(item.subGroupId);
+    if (!sg) {
+      sg = {
+        subGroupId: item.subGroupId,
+        subGroupTitle: item.subGroupTitle,
+        groupTitle: item.groupTitle,
+        items: []
+      };
+      subGroupMap.set(item.subGroupId, sg);
+      subGroups.push(sg);
+    }
+    sg.items.push(item);
+  }
+
+  const orderedGroupIds = REVIEW_GROUPS.filter((g) => g.id !== 'ALL').map((g) => g.id);
+  const currentGroupIdx = orderedGroupIds.indexOf(activeGroup);
+  const prevGroupId = currentGroupIdx > 0 ? orderedGroupIds[currentGroupIdx - 1] : null;
+  const nextGroupId = currentGroupIdx >= 0 && currentGroupIdx < orderedGroupIds.length - 1 ? orderedGroupIds[currentGroupIdx + 1] : null;
+  const currentGroupMeta = REVIEW_GROUPS.find((g) => g.id === effectiveGroup) ?? REVIEW_GROUPS[0]!;
 
   const approvedCount = catalog.filter((i) => decisions[i.id]?.status === 'approved').length;
   const rejectedCount = catalog.filter((i) => decisions[i.id]?.status === 'rejected').length;
@@ -325,8 +349,17 @@ function D30ReviewCenter({
   const d30NewCount = catalog.filter((i) => i.origin === 'd30_new').length;
   const prevApprovedCount = catalog.filter((i) => i.origin === 'prev_approved').length;
 
-  const catCounts = (c: ReviewCatalogItem['category'] | 'ALL'): number =>
-    c === 'ALL' ? catalog.length : catalog.filter((x) => x.category === c).length;
+  const groupStats = (gId: string): { total: number; app: number; rej: number } => {
+    const gItems = gId === 'ALL' ? catalog : catalog.filter((x) => x.groupId === gId);
+    let app = 0;
+    let rej = 0;
+    for (const x of gItems) {
+      const st = decisions[x.id]?.status;
+      if (st === 'approved') app++;
+      else if (st === 'rejected') rej++;
+    }
+    return { total: gItems.length, app, rej };
+  };
 
   const stepLightbox = (dir: -1 | 1): void => {
     if (!lightboxItem) return;
@@ -336,65 +369,100 @@ function D30ReviewCenter({
     setLightboxItem(filtered[nextIdx] ?? null);
   };
 
+  const curStats = groupStats(effectiveGroup);
+
   return (
     <div>
       <section className="card" style={{ marginBottom: 16, border: '1.5px solid #d4a857' }}>
         <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
           <div>
             <h3 style={{ margin: 0, color: '#f3d287' }}>
-              🎨 Kapsamlı Görsel, Ses &amp; Mimari Onay Merkezi — Toplam {catalog.length} Doğrulanmış Eser &amp; Adım
+              🎨 Adım Adım Gruplandırılmış Onay &amp; Denetim Merkezi — 10 Ana Grup · {catalog.length} Doğrulanmış Eser
             </h3>
             <p style={{ margin: '6px 0 0', color: 'var(--dim)' }}>
-              Projede üretilen <strong>tüm yeni D-30 teslimatları ({d30NewCount} kalem)</strong> ve <strong>önceden onaylanmış tüm portreler, chibi savaş atlasları, konsept paftaları, arka planlar, CG sahneleri, ikonlar, UI kit parçaları, mağaza görselleri, SFX/BGM ve 116 seslendirme ({prevApprovedCount} kalem)</strong> eksiksiz olarak aşağıdadır. İstediğiniz görseli büyütüp inceleyebilir, <strong>✅ Onayla</strong> veya <strong>❌ Reddet / Revize İste</strong> kararı verebilirsiniz. Tüm kararlarınız anında canlı Cloudflare D1 veritabanına kaydedilir.
+              Tüm eserler <strong>Grup 1 → Grup 10</strong> ve kendi içlerinde <strong>Alt-Gruplar (her karakterin ve boss&apos;un Konsept Paftası + Chibi Savaş Atlası + 4 VN Portresi + İmza Silahı bir arada)</strong> olacak şekilde sıraya dizilmiştir. Grup grup ilerleyerek ister <strong>Alt-Grubu tek tıkla</strong>, ister <strong>tekil görselleri</strong> onaylayabilir veya revize isteyebilirsiniz.
             </p>
           </div>
           <div className="row" style={{ gap: 8, margin: 0 }}>
-            <span className="badge ok">✅ Onaylanan: {approvedCount}</span>
+            <span className="badge ok">✅ Toplam Onaylı: {approvedCount} / {catalog.length}</span>
             <span className="badge bad">❌ Red / Revize: {rejectedCount}</span>
-            <span className="badge warn">⏳ Karar Bekleyen: {pendingCount}</span>
+            <span className="badge warn">⏳ Bekleyen: {pendingCount}</span>
           </div>
         </div>
 
-        {/* 12 Category Buttons */}
-        <div className="row" style={{ marginTop: 12, marginBottom: 8, gap: 6, flexWrap: 'wrap' }}>
-          {REVIEW_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              className={`btn${catFilter === cat.id ? ' primary' : ''}`}
-              onClick={() => {
-                setCatFilter(cat.id);
-                setPage(0);
-              }}
-            >
-              {cat.id === 'ALL' ? `Tümü (${catCounts('ALL')})` : cat.label}
-            </button>
-          ))}
+        {/* 10 Ordered Major Group Selector Buttons */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(235px, 1fr))',
+            gap: 8,
+            marginTop: 14,
+            marginBottom: 10
+          }}
+        >
+          {REVIEW_GROUPS.map((grp) => {
+            const st = groupStats(grp.id);
+            const isSelected = effectiveGroup === grp.id;
+            const isAllApproved = st.total > 0 && st.app === st.total;
+            return (
+              <button
+                key={grp.id}
+                type="button"
+                className={`btn${isSelected ? ' primary' : ''}`}
+                onClick={() => {
+                  setActiveGroup(grp.id);
+                  if (search) setSearch('');
+                }}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  textAlign: 'left',
+                  padding: '8px 10px',
+                  border: isSelected
+                    ? '1.5px solid #f3d287'
+                    : isAllApproved
+                      ? '1px solid #3fa36c'
+                      : st.rej > 0
+                        ? '1px solid #d14949'
+                        : undefined
+                }}
+              >
+                <span style={{ fontWeight: isSelected ? 700 : 500, fontSize: 12.5 }}>{grp.shortLabel}</span>
+                <span
+                  className={`badge ${isAllApproved ? 'ok' : st.rej > 0 ? 'bad' : st.app > 0 ? 'info' : ''}`}
+                  style={{ marginLeft: 6, fontSize: 10.5 }}
+                >
+                  {isAllApproved ? '✓ Tamam' : st.rej > 0 ? `${st.rej} Red` : `${st.app}/${st.total}`}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Origin + Status + Search + Page Size + Bulk Approve */}
+        {/* Filter & Search Bar */}
         <div className="row" style={{ marginTop: 8, marginBottom: 0, justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
           <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
             <button
               type="button"
               className={`btn${originFilter === 'ALL' ? ' primary' : ''}`}
-              onClick={() => { setOriginFilter('ALL'); setPage(0); }}
+              onClick={() => setOriginFilter('ALL')}
             >
               Kaynak: Tümü ({catalog.length})
             </button>
             <button
               type="button"
               className={`btn${originFilter === 'd30_new' ? ' primary' : ''}`}
-              onClick={() => { setOriginFilter('d30_new'); setPage(0); }}
+              onClick={() => setOriginFilter('d30_new')}
             >
-              🆕 Yeni D-30 Teslimatları ({d30NewCount})
+              🆕 Yeni D-30 ({d30NewCount})
             </button>
             <button
               type="button"
               className={`btn${originFilter === 'prev_approved' ? ' primary' : ''}`}
-              onClick={() => { setOriginFilter('prev_approved'); setPage(0); }}
+              onClick={() => setOriginFilter('prev_approved')}
             >
-              🏛️ Önceden Onaylananlar ({prevApprovedCount})
+              🏛️ Önceden Onaylı ({prevApprovedCount})
             </button>
 
             <span style={{ color: 'var(--dim)', padding: '0 4px' }}>|</span>
@@ -402,300 +470,467 @@ function D30ReviewCenter({
             <button
               type="button"
               className={`btn${statusFilter === 'ALL' ? ' primary' : ''}`}
-              onClick={() => { setStatusFilter('ALL'); setPage(0); }}
+              onClick={() => setStatusFilter('ALL')}
             >
               Durum: Tümü
             </button>
             <button
               type="button"
               className={`btn${statusFilter === 'pending' ? ' primary' : ''}`}
-              onClick={() => { setStatusFilter('pending'); setPage(0); }}
+              onClick={() => setStatusFilter('pending')}
             >
-              ⏳ Bekleyen ({pendingCount})
+              ⏳ Bekleyen
             </button>
             <button
               type="button"
               className={`btn${statusFilter === 'approved' ? ' primary' : ''}`}
-              onClick={() => { setStatusFilter('approved'); setPage(0); }}
+              onClick={() => setStatusFilter('approved')}
             >
-              ✅ Onaylanan ({approvedCount})
+              ✅ Onaylanan
             </button>
             <button
               type="button"
               className={`btn${statusFilter === 'rejected' ? ' primary' : ''}`}
-              onClick={() => { setStatusFilter('rejected'); setPage(0); }}
+              onClick={() => setStatusFilter('rejected')}
             >
-              ❌ Red / Revize ({rejectedCount})
+              ❌ Red / Revize
             </button>
           </div>
 
           <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
             <input
               type="search"
-              placeholder="İsim, karakter, dosya yolu veya açıklamada ara…"
+              placeholder="Tüm gruplarda ara (karakter, boss, dosya adı…)"
               value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setPage(0);
-              }}
-              style={{ minWidth: 250 }}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{ minWidth: 260 }}
             />
-            <select
-              aria-label="Sayfa başına öğe sayısı"
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-                setPage(0);
-              }}
-            >
-              <option value={60}>Sayfa başına: 60</option>
-              <option value={120}>Sayfa başına: 120</option>
-              <option value={250}>Sayfa başına: 250</option>
-              <option value={0}>Tümünü Tek Sayfada Göster ({filtered.length})</option>
-            </select>
-            {me.role !== 'viewer' ? (
-              <button
-                type="button"
-                className="btn primary"
-                disabled={savingId !== null || pageItems.length === 0}
-                onClick={() => void approveBatch(pageItems, 'Bu sayfadaki maddeler')}
-              >
-                {savingId === 'BULK' ? 'Kaydediliyor…' : `✅ Bu Sayfadakileri Onayla (${pageItems.length})`}
+            {search ? (
+              <button type="button" className="btn" onClick={() => setSearch('')}>
+                ✕ Aramayı Temizle
               </button>
             ) : null}
           </div>
         </div>
       </section>
 
-      {/* Pagination Bar */}
-      <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
-        <div className="mono" style={{ fontSize: 12.5 }}>
-          Filtrelenen: <strong>{filtered.length}</strong> eser · Gösterilen:{' '}
-          <strong>
-            {filtered.length === 0 ? 0 : safePage * (pageSize || filtered.length) + 1}–
-            {Math.min(filtered.length, (safePage + 1) * (pageSize || filtered.length))}
-          </strong>
+      {/* Active Group Banner + Step-by-Step Navigation + Sub-Group Quick Jump Pills */}
+      <section className="card" style={{ marginBottom: 16, background: '#120d1d', border: '1px solid #4d3966' }}>
+        <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, margin: 0 }}>
+          <div>
+            <div className="mono" style={{ fontSize: 11.5, color: '#d4a857' }}>
+              AKTİF İNCELEME GRUBU · {subGroups.length} ALT-GRUP · {filtered.length} ESER
+            </div>
+            <h3 style={{ margin: '4px 0 0', fontSize: 18, color: '#fff' }}>
+              {qNorm ? `🔍 Arama Sonuçları: "${search}" (${filtered.length} Eser)` : currentGroupMeta.fullTitle}
+            </h3>
+            <div className="row" style={{ gap: 8, marginTop: 6, marginBottom: 0 }}>
+              <span className="badge ok">✅ Bu Grupta Onaylanan: {curStats.app} / {curStats.total}</span>
+              <span className="badge bad">❌ Bu Grupta Red: {curStats.rej}</span>
+              <span className="badge warn">⏳ Bu Grupta Bekleyen: {curStats.total - curStats.app - curStats.rej}</span>
+            </div>
+          </div>
+
+          <div className="row" style={{ margin: 0, gap: 8, flexWrap: 'wrap' }}>
+            {prevGroupId ? (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  setActiveGroup(prevGroupId);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                ← Önceki Grup ({prevGroupId})
+              </button>
+            ) : null}
+            {me.role !== 'viewer' && filtered.length > 0 ? (
+              <button
+                type="button"
+                className="btn primary"
+                disabled={savingId !== null}
+                onClick={() => void approveBatch(filtered, currentGroupMeta.shortLabel)}
+              >
+                {savingId === 'BULK' ? 'Kaydediliyor…' : `✅ Bu Grubun Tamamını Onayla (${filtered.length})`}
+              </button>
+            ) : null}
+            {me.role !== 'viewer' && nextGroupId && filtered.length > 0 ? (
+              <button
+                type="button"
+                className="btn primary"
+                disabled={savingId !== null}
+                onClick={async () => {
+                  await approveBatch(filtered, currentGroupMeta.shortLabel);
+                  setActiveGroup(nextGroupId);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                ✅ Grubu Onayla &amp; Sonraki Gruba Geç →
+              </button>
+            ) : null}
+            {nextGroupId ? (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  setActiveGroup(nextGroupId);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Sonraki Grup ({nextGroupId}) →
+              </button>
+            ) : null}
+          </div>
         </div>
-        {pageSize > 0 && totalPages > 1 ? (
-          <div className="row" style={{ margin: 0, gap: 6 }}>
-            <button type="button" className="btn" disabled={safePage <= 0} onClick={() => setPage(Math.max(0, safePage - 1))}>
-              ← Önceki Sayfa
-            </button>
-            <span className="badge">
-              Sayfa {safePage + 1} / {totalPages}
-            </span>
-            <button
-              type="button"
-              className="btn"
-              disabled={safePage >= totalPages - 1}
-              onClick={() => setPage(Math.min(totalPages - 1, safePage + 1))}
-            >
-              Sonraki Sayfa →
-            </button>
+
+        {/* Sub-Group Quick Jump Index inside Active Group */}
+        {subGroups.length > 1 ? (
+          <div style={{ marginTop: 12, paddingTop: 10, borderTop: '1px solid #2b203a' }}>
+            <div className="mono" style={{ fontSize: 11, color: 'var(--dim)', marginBottom: 6 }}>
+              ALT-GRUPLARA HIZLI ATLA ({subGroups.length} Alt-Grup):
+            </div>
+            <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
+              {subGroups.map((sg) => {
+                const sgApp = sg.items.filter((i) => decisions[i.id]?.status === 'approved').length;
+                const sgRej = sg.items.filter((i) => decisions[i.id]?.status === 'rejected').length;
+                const shortSg = sg.subGroupTitle.split('—')[0]?.trim() ?? sg.subGroupTitle;
+                return (
+                  <a
+                    key={sg.subGroupId}
+                    href={`#subgroup-${sg.subGroupId}`}
+                    className="btn"
+                    style={{
+                      fontSize: 11.5,
+                      padding: '4px 8px',
+                      textDecoration: 'none',
+                      border:
+                        sgApp === sg.items.length
+                          ? '1px solid #3fa36c'
+                          : sgRej > 0
+                            ? '1px solid #d14949'
+                            : '1px solid #382a4a'
+                    }}
+                  >
+                    {shortSg} ({sgApp}/{sg.items.length})
+                  </a>
+                );
+              })}
+            </div>
           </div>
         ) : null}
-      </div>
+      </section>
 
       {loading ? <p>Onay durumları D1 veritabanından yükleniyor…</p> : null}
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(390px, 1fr))',
-          gap: 16
-        }}
-      >
-        {pageItems.map((item) => {
-          const dec = decisions[item.id] ?? { status: 'pending', comment: '' };
-          const border =
-            dec.status === 'approved'
-              ? '1.5px solid #3fa36c'
-              : dec.status === 'rejected'
-                ? '1.5px solid #d14949'
-                : '1px solid #382a4a';
-          const statusBadge =
-            dec.status === 'approved' ? (
-              <span className="badge ok">ONAYLANDI ✅</span>
-            ) : dec.status === 'rejected' ? (
-              <span className="badge bad">REDDEDİLDİ / REVİZE ❌</span>
-            ) : item.origin === 'prev_approved' ? (
-              <span className="badge warn" title="Önceki fazlarda onaylandı; buradan tekrar onaylayabilir veya revize isteyebilirsiniz">
-                ÖNCEDEN ONAYLI · İNCELE ⏳
-              </span>
-            ) : (
-              <span className="badge warn">ONAY BEKLİYOR ⏳</span>
-            );
+      {/* Render Each Sub-Group as a Structured Section Box */}
+      {subGroups.map((sg) => {
+        const sgApproved = sg.items.filter((i) => decisions[i.id]?.status === 'approved').length;
+        const sgRejected = sg.items.filter((i) => decisions[i.id]?.status === 'rejected').length;
+        const isCollapsed = Boolean(collapsedSubs[sg.subGroupId]);
 
-          const retryCount = retryMap[item.id] ?? 0;
-          const imgSrc = item.imageUrl ? (retryCount > 0 ? `${item.imageUrl}?r=${retryCount}` : item.imageUrl) : undefined;
-
-          return (
-            <article
-              key={item.id}
-              className="card"
+        return (
+          <section
+            key={sg.subGroupId}
+            id={`subgroup-${sg.subGroupId}`}
+            className="card"
+            style={{
+              marginBottom: 20,
+              border:
+                sgApproved === sg.items.length
+                  ? '1.5px solid #3fa36c'
+                  : sgRejected > 0
+                    ? '1.5px solid #d14949'
+                    : '1.5px solid #4a3863'
+            }}
+          >
+            <div
+              className="row"
               style={{
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: 8,
                 margin: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 10,
-                border
+                paddingBottom: isCollapsed ? 0 : 12,
+                borderBottom: isCollapsed ? 'none' : '1px solid #2e223f'
               }}
             >
-              <div className="row" style={{ justifyContent: 'space-between', margin: 0, gap: 6, flexWrap: 'wrap' }}>
-                <div className="row" style={{ margin: 0, gap: 6 }}>
-                  <span className="badge info">{item.badge}</span>
-                  {loadedDims[item.id] ? (
-                    <span className="badge ok" title="Tarayıcıda eksiksiz yüklendi">
-                      ✓ {loadedDims[item.id]}
-                    </span>
-                  ) : null}
-                </div>
-                {statusBadge}
+              <div>
+                {effectiveGroup === 'ALL' ? (
+                  <div className="mono" style={{ fontSize: 11, color: '#d4a857' }}>{sg.groupTitle}</div>
+                ) : null}
+                <h4 style={{ margin: 0, fontSize: 16, color: '#f3d287' }}>{sg.subGroupTitle}</h4>
               </div>
-
-              <h3 style={{ margin: 0, fontSize: 15.5 }}>{item.title}</h3>
-              <div className="mono" style={{ fontSize: 11.5, color: '#f3d287' }}>{item.subtitle}</div>
-
-              {imgSrc ? (
-                <div
-                  style={{
-                    position: 'relative',
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                    border: '1px solid #382a4a',
-                    background:
-                      item.category === 'PORTRAITS' || item.category === 'CHIBI_ATLAS' || item.category === 'ICONS_WEAPONS'
-                        ? 'repeating-conic-gradient(#171124 0% 25%, #0e0a17 0% 50%) 50% / 20px 20px'
-                        : '#09060e'
-                  }}
-                >
-                  <img
-                    src={imgSrc}
-                    alt={item.title}
-                    loading="lazy"
-                    onClick={() => setLightboxItem(item)}
-                    onLoad={(e) => {
-                      const el = e.currentTarget;
-                      if (el.naturalWidth && el.naturalHeight) {
-                        const d = `${el.naturalWidth}×${el.naturalHeight}`;
-                        setLoadedDims((prev) => (prev[item.id] === d ? prev : { ...prev, [item.id]: d }));
-                      }
-                    }}
-                    onError={() => {
-                      setLoadedDims((prev) => ({ ...prev, [item.id]: 'HATA' }));
-                    }}
-                    style={{
-                      width: '100%',
-                      maxHeight: item.category === 'PORTRAITS' || item.category === 'CHIBI_ATLAS' ? 260 : 220,
-                      objectFit: 'contain',
-                      display: 'block',
-                      cursor: 'zoom-in'
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      right: 6,
-                      bottom: 6,
-                      display: 'flex',
-                      gap: 4
-                    }}
-                  >
-                    <button
-                      type="button"
-                      className="btn"
-                      style={{ padding: '2px 8px', fontSize: 11, background: 'rgba(10,6,18,0.85)' }}
-                      onClick={() => setLightboxItem(item)}
-                    >
-                      🔍 Tam Ekran İncele
-                    </button>
-                    {loadedDims[item.id] === 'HATA' ? (
-                      <button
-                        type="button"
-                        className="btn primary"
-                        style={{ padding: '2px 8px', fontSize: 11 }}
-                        onClick={() => setRetryMap((prev) => ({ ...prev, [item.id]: (prev[item.id] ?? 0) + 1 }))}
-                      >
-                        🔄 Yeniden Yükle
-                      </button>
-                    ) : null}
-                  </div>
-                </div>
-              ) : null}
-
-              {item.audioUrl ? (
-                <div style={{ padding: '8px 10px', borderRadius: 8, background: '#0b0712', border: '1px solid #382a4a' }}>
-                  <audio controls preload="none" src={item.audioUrl} style={{ width: '100%', height: 36 }} />
-                </div>
-              ) : null}
-
-              <p style={{ margin: 0, fontSize: 13 }}>{item.description}</p>
-              <div className="mono" style={{ fontSize: 11, color: 'var(--dim)', wordBreak: 'break-all' }}>
-                <strong>Dosya:</strong> {item.targetPath}
-                {item.sha256 ? ` · SHA256: ${item.sha256.slice(0, 12)}…` : ''}
-              </div>
-
-              {dec.comment ? (
-                <div style={{ padding: '6px 10px', borderRadius: 6, background: 'rgba(212,168,87,0.12)', fontSize: 12.5 }}>
-                  <strong>Kayıtlı Notunuz:</strong> {dec.comment}
-                </div>
-              ) : null}
-
-              <input
-                type="text"
-                placeholder="Onay veya red/revize notunuz (ör. yüz ifadesini düzelt, parlaklığı artır…)"
-                value={draftComments[item.id] ?? ''}
-                onChange={(e) => setDraftComments((prev) => ({ ...prev, [item.id]: e.target.value }))}
-                style={{ width: '100%', marginTop: 'auto' }}
-              />
-
               <div className="row" style={{ margin: 0, gap: 8, flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  className={`btn${dec.status === 'approved' ? ' primary' : ''}`}
-                  disabled={savingId === item.id}
-                  onClick={() => void recordDecision(item, 'approved')}
-                >
-                  ✅ Onayla
-                </button>
-                <button
-                  type="button"
-                  className={`btn${dec.status === 'rejected' ? ' primary' : ''}`}
-                  disabled={savingId === item.id}
-                  onClick={() => void recordDecision(item, 'rejected')}
-                >
-                  ❌ Reddet / Revize İste
-                </button>
-                {item.sceneJump ? (
-                  <button type="button" className="btn" onClick={() => onJumpPreview(item.sceneJump!)}>
-                    🎮 Oyunda Gör
+                <span className="badge info">{sg.items.length} Eser</span>
+                <span className={`badge ${sgApproved === sg.items.length ? 'ok' : sgRejected > 0 ? 'bad' : 'warn'}`}>
+                  ✅ {sgApproved} Onaylı · ❌ {sgRejected} Red · ⏳ {sg.items.length - sgApproved - sgRejected} Bekleyen
+                </span>
+                {me.role !== 'viewer' ? (
+                  <button
+                    type="button"
+                    className="btn primary"
+                    disabled={savingId !== null || sgApproved === sg.items.length}
+                    onClick={() => void approveBatch(sg.items, sg.subGroupTitle)}
+                  >
+                    {sgApproved === sg.items.length
+                      ? '✓ Alt-Grup Onaylı'
+                      : `✅ Bu Alt-Grubu Onayla (${sg.items.length})`}
                   </button>
                 ) : null}
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => setCollapsedSubs((prev) => ({ ...prev, [sg.subGroupId]: !prev[sg.subGroupId] }))}
+                >
+                  {isCollapsed ? `▸ Göster (${sg.items.length})` : '▾ Daralt'}
+                </button>
               </div>
-            </article>
-          );
-        })}
-      </div>
+            </div>
 
-      {/* Bottom Pagination Bar */}
-      {pageSize > 0 && totalPages > 1 ? (
-        <div className="row" style={{ justifyContent: 'center', marginTop: 18, gap: 8 }}>
-          <button type="button" className="btn" disabled={safePage <= 0} onClick={() => setPage(Math.max(0, safePage - 1))}>
-            ← Önceki Sayfa
-          </button>
-          <span className="badge">
-            Sayfa {safePage + 1} / {totalPages} ({filtered.length} eser)
-          </span>
-          <button
-            type="button"
-            className="btn"
-            disabled={safePage >= totalPages - 1}
-            onClick={() => setPage(Math.min(totalPages - 1, safePage + 1))}
-          >
-            Sonraki Sayfa →
-          </button>
+            {!isCollapsed ? (
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
+                  gap: 14,
+                  marginTop: 14
+                }}
+              >
+                {sg.items.map((item) => {
+                  const dec = decisions[item.id] ?? { status: 'pending', comment: '' };
+                  const border =
+                    dec.status === 'approved'
+                      ? '1.5px solid #3fa36c'
+                      : dec.status === 'rejected'
+                        ? '1.5px solid #d14949'
+                        : '1px solid #382a4a';
+                  const statusBadge =
+                    dec.status === 'approved' ? (
+                      <span className="badge ok">ONAYLANDI ✅</span>
+                    ) : dec.status === 'rejected' ? (
+                      <span className="badge bad">REDDEDİLDİ / REVİZE ❌</span>
+                    ) : item.origin === 'prev_approved' ? (
+                      <span className="badge warn" title="Önceki fazlarda onaylandı; buradan tekrar onaylayabilir veya revize isteyebilirsiniz">
+                        ÖNCEDEN ONAYLI · İNCELE ⏳
+                      </span>
+                    ) : (
+                      <span className="badge warn">ONAY BEKLİYOR ⏳</span>
+                    );
+
+                  const retryCount = retryMap[item.id] ?? 0;
+                  const imgSrc = item.imageUrl ? (retryCount > 0 ? `${item.imageUrl}?r=${retryCount}` : item.imageUrl) : undefined;
+
+                  return (
+                    <article
+                      key={item.id}
+                      className="card"
+                      style={{
+                        margin: 0,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 10,
+                        border
+                      }}
+                    >
+                      <div className="row" style={{ justifyContent: 'space-between', margin: 0, gap: 6, flexWrap: 'wrap' }}>
+                        <div className="row" style={{ margin: 0, gap: 6 }}>
+                          <span className="badge info">{item.badge}</span>
+                          {loadedDims[item.id] ? (
+                            <span className="badge ok" title="Tarayıcıda eksiksiz yüklendi">
+                              ✓ {loadedDims[item.id]}
+                            </span>
+                          ) : null}
+                        </div>
+                        {statusBadge}
+                      </div>
+
+                      <h3 style={{ margin: 0, fontSize: 15 }}>{item.title}</h3>
+                      <div className="mono" style={{ fontSize: 11.5, color: '#f3d287' }}>{item.subtitle}</div>
+
+                      {imgSrc ? (
+                        <div
+                          style={{
+                            position: 'relative',
+                            borderRadius: 8,
+                            overflow: 'hidden',
+                            border: '1px solid #382a4a',
+                            background:
+                              item.category === 'PORTRAITS' || item.category === 'CHIBI_ATLAS' || item.category === 'ICONS_WEAPONS'
+                                ? 'repeating-conic-gradient(#171124 0% 25%, #0e0a17 0% 50%) 50% / 20px 20px'
+                                : '#09060e'
+                          }}
+                        >
+                          <img
+                            src={imgSrc}
+                            alt={item.title}
+                            loading="lazy"
+                            onClick={() => setLightboxItem(item)}
+                            onLoad={(e) => {
+                              const el = e.currentTarget;
+                              if (el.naturalWidth && el.naturalHeight) {
+                                const d = `${el.naturalWidth}×${el.naturalHeight}`;
+                                setLoadedDims((prev) => (prev[item.id] === d ? prev : { ...prev, [item.id]: d }));
+                              }
+                            }}
+                            onError={() => {
+                              setLoadedDims((prev) => ({ ...prev, [item.id]: 'HATA' }));
+                            }}
+                            style={{
+                              width: '100%',
+                              maxHeight: item.category === 'PORTRAITS' || item.category === 'CHIBI_ATLAS' ? 260 : 220,
+                              objectFit: 'contain',
+                              display: 'block',
+                              cursor: 'zoom-in'
+                            }}
+                          />
+                          <div
+                            style={{
+                              position: 'absolute',
+                              right: 6,
+                              bottom: 6,
+                              display: 'flex',
+                              gap: 4
+                            }}
+                          >
+                            <button
+                              type="button"
+                              className="btn"
+                              style={{ padding: '2px 8px', fontSize: 11, background: 'rgba(10,6,18,0.85)' }}
+                              onClick={() => setLightboxItem(item)}
+                            >
+                              🔍 Tam Ekran İncele
+                            </button>
+                            {loadedDims[item.id] === 'HATA' ? (
+                              <button
+                                type="button"
+                                className="btn primary"
+                                style={{ padding: '2px 8px', fontSize: 11 }}
+                                onClick={() => setRetryMap((prev) => ({ ...prev, [item.id]: (prev[item.id] ?? 0) + 1 }))}
+                              >
+                                🔄 Yeniden Yükle
+                              </button>
+                            ) : null}
+                          </div>
+                        </div>
+                      ) : null}
+
+                      {item.audioUrl ? (
+                        <div style={{ padding: '8px 10px', borderRadius: 8, background: '#0b0712', border: '1px solid #382a4a' }}>
+                          <audio controls preload="none" src={item.audioUrl} style={{ width: '100%', height: 36 }} />
+                        </div>
+                      ) : null}
+
+                      <p style={{ margin: 0, fontSize: 12.5 }}>{item.description}</p>
+                      <div className="mono" style={{ fontSize: 11, color: 'var(--dim)', wordBreak: 'break-all' }}>
+                        <strong>Dosya:</strong> {item.targetPath}
+                        {item.sha256 ? ` · SHA256: ${item.sha256.slice(0, 12)}…` : ''}
+                      </div>
+
+                      {dec.comment ? (
+                        <div style={{ padding: '6px 10px', borderRadius: 6, background: 'rgba(212,168,87,0.12)', fontSize: 12.5 }}>
+                          <strong>Kayıtlı Notunuz:</strong> {dec.comment}
+                        </div>
+                      ) : null}
+
+                      <input
+                        type="text"
+                        placeholder="Onay veya red/revize notunuz (ör. yüz ifadesini düzelt, parlaklığı artır…)"
+                        value={draftComments[item.id] ?? ''}
+                        onChange={(e) => setDraftComments((prev) => ({ ...prev, [item.id]: e.target.value }))}
+                        style={{ width: '100%', marginTop: 'auto' }}
+                      />
+
+                      <div className="row" style={{ margin: 0, gap: 8, flexWrap: 'wrap' }}>
+                        <button
+                          type="button"
+                          className={`btn${dec.status === 'approved' ? ' primary' : ''}`}
+                          disabled={savingId === item.id}
+                          onClick={() => void recordDecision(item, 'approved')}
+                        >
+                          ✅ Onayla
+                        </button>
+                        <button
+                          type="button"
+                          className={`btn${dec.status === 'rejected' ? ' primary' : ''}`}
+                          disabled={savingId === item.id}
+                          onClick={() => void recordDecision(item, 'rejected')}
+                        >
+                          ❌ Reddet / Revize İste
+                        </button>
+                        {item.sceneJump ? (
+                          <button type="button" className="btn" onClick={() => onJumpPreview(item.sceneJump!)}>
+                            🎮 Oyunda Gör
+                          </button>
+                        ) : null}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ) : null}
+          </section>
+        );
+      })}
+
+      {/* Bottom Step-by-Step Group Navigation Bar */}
+      <section className="card" style={{ marginTop: 18, background: '#120d1d', border: '1.5px solid #d4a857' }}>
+        <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', margin: 0, flexWrap: 'wrap', gap: 10 }}>
+          <div>
+            <strong>{currentGroupMeta.shortLabel}</strong> sonuna geldiniz ({subGroups.length} Alt-Grup · {filtered.length} Eser).
+          </div>
+          <div className="row" style={{ margin: 0, gap: 8, flexWrap: 'wrap' }}>
+            {prevGroupId ? (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  setActiveGroup(prevGroupId);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                ← Önceki Gruba Dön ({prevGroupId})
+              </button>
+            ) : null}
+            {me.role !== 'viewer' && filtered.length > 0 ? (
+              <button
+                type="button"
+                className="btn primary"
+                disabled={savingId !== null}
+                onClick={() => void approveBatch(filtered, currentGroupMeta.shortLabel)}
+              >
+                ✅ Bu Grubun Tamamını Onayla ({filtered.length})
+              </button>
+            ) : null}
+            {me.role !== 'viewer' && nextGroupId && filtered.length > 0 ? (
+              <button
+                type="button"
+                className="btn primary"
+                disabled={savingId !== null}
+                onClick={async () => {
+                  await approveBatch(filtered, currentGroupMeta.shortLabel);
+                  setActiveGroup(nextGroupId);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                ✅ Bu Grubu Onayla &amp; Sonraki Gruba Geç ({nextGroupId}) →
+              </button>
+            ) : null}
+            {nextGroupId ? (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => {
+                  setActiveGroup(nextGroupId);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              >
+                Sonraki Gruba Geç ({nextGroupId}) →
+              </button>
+            ) : null}
+          </div>
         </div>
-      ) : null}
+      </section>
 
       {/* Full-Screen Lightbox Modal for Deep Inspection & Direct Approval/Rejection */}
       {lightboxItem ? (

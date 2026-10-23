@@ -319,9 +319,14 @@ function collectConceptSheets(dir: string): void {
 collectConceptSheets(join(ROOT, 'narrative/15_Art_Workbench/characters'));
 collectConceptSheets(join(ROOT, 'narrative/15_Art_Workbench/enemies'));
 
-// Build comprehensive, 100% disk-verified Review Catalog across all 12 categories
+// Build comprehensive, 100% disk-verified Review Catalog organized into 10 ordered Major Groups & Sub-Groups
 interface ReviewCatalogItem {
   id: string;
+  groupId: string;
+  groupTitle: string;
+  subGroupId: string;
+  subGroupTitle: string;
+  sortOrder: number;
   category:
     | 'STEPS'
     | 'BANNERS'
@@ -349,6 +354,8 @@ interface ReviewCatalogItem {
   sha256?: string;
 }
 
+type RawCatalogItem = Omit<ReviewCatalogItem, 'groupId' | 'groupTitle' | 'subGroupId' | 'subGroupTitle' | 'sortOrder'>;
+
 const prettyId = (s: string): string =>
   s
     .replace(/\.(webp|png|jpg|gif|ogg)$/i, '')
@@ -367,7 +374,7 @@ if (existsSync(charSnapPath)) {
   for (const c of characters) charNames.set(c.character_id, { name: c.name_en, role: c.role, rarity: c.rarity });
 }
 
-const reviewCatalog: ReviewCatalogItem[] = [
+const rawCatalog: RawCatalogItem[] = [
   // 1. STEPS (7 core D-30 deliverables)
   {
     id: 'step_4_1_art_audit_objectives',
@@ -556,7 +563,7 @@ for (const e of approvedEntries.filter((x) => x.class === 'banner')) {
     sub: `${e.dims || '1376×768'} WebP · Rev r${e.revision}`,
     desc: e.note || 'Kanonik Gacha Banner görseli.'
   };
-  reviewCatalog.push({
+  rawCatalog.push({
     id: e.asset_id,
     category: 'BANNERS',
     badge: `Banner · r${e.revision}`,
@@ -575,25 +582,35 @@ for (const e of approvedEntries.filter((x) => x.class === 'banner')) {
 
 // 3. PORTRAITS (128 portraits across 32 speaking characters × 4 emotions)
 const EMOTION_TR: Record<string, string> = {
-  composed: 'Sakin / Composed',
-  grave: 'Ağırbaşlı / Grave',
-  resolute: 'Kararlı / Resolute',
-  strained: 'Gergin-Yaralı / Strained'
+  composed: '1. Sakin / Composed',
+  focused: '2. Odaklanmış / Focused',
+  resolve: '2. Kararlı / Resolve',
+  protective_resolve: '2. Koruyucu Kararlılık / Protective Resolve',
+  watchful: '2. Tetikte / Watchful',
+  grave: '2. Ağırbaşlı / Grave',
+  defiant: '3. Meydan Okuyan / Defiant',
+  wry: '3. İronik / Wry',
+  dry_humor: '3. İnce Mizah / Dry Humor',
+  resolute: '3. Kesin Kararlı / Resolute',
+  warm: '4. Sıcak / Warm',
+  proud_smile: '4. Gururlu Tebessüm / Proud Smile',
+  strained: '4. Gergin-Yaralı / Strained'
 };
+const EMOTION_REGEX = /_(composed|protective_resolve|dry_humor|watchful|proud_smile|resolve|wry|focused|defiant|warm|grave|resolute|strained)$/;
 for (const e of approvedEntries.filter((x) => x.class === 'portrait')) {
   const baseName = basename(e.path, '.webp').replace(/^portrait_/, '');
-  const parts = baseName.split('_');
-  const emotionKey = parts.pop() ?? 'composed';
-  const charId = parts.join('_');
+  const emoMatch = EMOTION_REGEX.exec(baseName);
+  const emotionKey = emoMatch ? emoMatch[1]! : (baseName.split('_').pop() ?? 'composed');
+  const charId = emoMatch ? baseName.slice(0, baseName.length - emoMatch[0].length) : baseName;
   const info = charNames.get(charId);
   const charTitle = info ? `${info.name} (${info.rarity}★ ${info.role})` : prettyId(charId);
   const emoLabel = EMOTION_TR[emotionKey] ?? prettyId(emotionKey);
-  reviewCatalog.push({
+  rawCatalog.push({
     id: `portrait_${baseName}`,
     category: 'PORTRAITS',
     badge: `VN Portre · ${emoLabel}`,
     origin: 'prev_approved',
-    title: `${charTitle} — ${emoLabel}`,
+    title: `${charTitle} — VN Portresi (${emoLabel})`,
     subtitle: `${e.dims || '896×1280'} Alfa-Keyed WebP · Rev r${e.revision} · ${(e.bytes / 1024).toFixed(1)} KB`,
     description: `Görsel Roman (StoryScene) boydan konuşma portresi ve diyalog duygu durumu (${emotionKey}). QC Notu: ${e.note || 'Kanonik kilitli portre.'}`,
     imageUrl: `/dev/media/${e.path}`,
@@ -609,7 +626,7 @@ for (const e of approvedEntries.filter((x) => x.class === 'portrait')) {
 const objPath = join(OUT, 'media/art/atlas_objective.webp');
 if (existsSync(objPath)) {
   const objBytes = readFileSync(objPath);
-  reviewCatalog.push({
+  rawCatalog.push({
     id: 'atlas_objective_9x3',
     category: 'CHIBI_ATLAS',
     badge: 'Boss Hedef Atlası · 9×3 (27 Hücre)',
@@ -634,7 +651,7 @@ for (const e of approvedEntries.filter((x) => x.class === 'unit_sheet')) {
     : isBoss
       ? `${prettyId(unitId)} (Part I Boss)`
       : `${prettyId(unitId)} (Düşman Birimi)`;
-  reviewCatalog.push({
+  rawCatalog.push({
     id: `atlas_${unitId}`,
     category: 'CHIBI_ATLAS',
     badge: isBoss ? `Boss Chibi · r${e.revision}` : info ? `Kahraman Chibi · r${e.revision}` : `Düşman Chibi · r${e.revision}`,
@@ -658,7 +675,7 @@ if (existsSync(sheetsDir)) {
     const st = statSync(join(sheetsDir, f));
     const isBoss = f.startsWith('boss_');
     const isChar = f.startsWith('char_') || f.startsWith('kera_voss');
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `concept_${f.replace(/\.(jpg|png|webp)$/i, '')}`,
       category: 'CONCEPT_SHEETS',
       badge: isBoss ? 'Boss Konsept Paftası' : isChar ? 'Karakter Konsept Paftası' : 'Düşman Konsept Paftası',
@@ -677,7 +694,7 @@ if (existsSync(sheetsDir)) {
 // 6. BACKGROUNDS (47 panoramic battlefields & VN locations)
 for (const e of approvedEntries.filter((x) => x.class === 'background')) {
   const bgId = basename(e.path, '.webp').replace(/^bg_/, '');
-  reviewCatalog.push({
+  rawCatalog.push({
     id: `bg_${bgId}`,
     category: 'BACKGROUNDS',
     badge: `Arka Plan · r${e.revision}`,
@@ -697,7 +714,7 @@ for (const e of approvedEntries.filter((x) => x.class === 'background')) {
 // 7. STILLS_CG (11 in-game still_*.webp + 15 workbench cg_*.jpg)
 for (const e of approvedEntries.filter((x) => x.class === 'still')) {
   const stillId = basename(e.path, '.webp').replace(/^still_/, '');
-  reviewCatalog.push({
+  rawCatalog.push({
     id: `still_${stillId}`,
     category: 'STILLS_CG',
     badge: `Prolog / Hikâye Still · r${e.revision}`,
@@ -717,7 +734,7 @@ const wbCgDir = join(OUT, 'workbench/cg');
 if (existsSync(wbCgDir)) {
   for (const f of readdirSync(wbCgDir).filter((n) => /\.(jpg|png|webp)$/i.test(n)).sort()) {
     const st = statSync(join(wbCgDir, f));
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `wb_cg_${f.replace(/\.(jpg|png|webp)$/i, '')}`,
       category: 'STILLS_CG',
       badge: 'Bölüm CG İllüstrasyonu',
@@ -738,7 +755,7 @@ const wbIconSheetsDir = join(OUT, 'workbench/icons_sheets');
 if (existsSync(wbIconSheetsDir)) {
   for (const f of readdirSync(wbIconSheetsDir).sort()) {
     const st = statSync(join(wbIconSheetsDir, f));
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `iconsheet_${f.replace(/\.(jpg|png|webp)$/i, '')}`,
       category: 'ICONS_WEAPONS',
       badge: 'Toplu İkon Paftası',
@@ -768,7 +785,7 @@ if (existsSync(wbIconsDir)) {
             : f.includes('ch0') || f.includes('nav_') || f.includes('seal')
               ? 'Bölüm / UI Navigasyon İkonu'
               : 'Silah Ailesi / Ekipman İkonu';
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `icon_${f.replace(/\.png$/i, '')}`,
       category: 'ICONS_WEAPONS',
       badge: kindBadge,
@@ -789,7 +806,7 @@ for (const f of ['ui_key_art.webp', 'ui_logo.webp', 'ui_studio_mark.webp', 'ui_t
   const p = join(OUT, 'media/art', f);
   if (existsSync(p)) {
     const st = statSync(p);
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `core_${f.replace(/\.webp$/, '')}`,
       category: 'UI_BRAND_STORE',
       badge: 'Oyun İçi Ana UI / Marka',
@@ -808,7 +825,7 @@ const wbUiKitDir = join(OUT, 'workbench/ui_kit');
 if (existsSync(wbUiKitDir)) {
   for (const f of readdirSync(wbUiKitDir).filter((n) => n.endsWith('.png')).sort()) {
     const st = statSync(join(wbUiKitDir, f));
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `uikit_${f.replace(/\.png$/i, '')}`,
       category: 'UI_BRAND_STORE',
       badge: 'Gotik UI Kit / 9-Slice',
@@ -827,7 +844,7 @@ const wbUiScreensOut = join(OUT, 'workbench/ui_screens');
 if (existsSync(wbUiScreensOut)) {
   for (const f of readdirSync(wbUiScreensOut).sort()) {
     const st = statSync(join(wbUiScreensOut, f));
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `uiscreen_${f.replace(/\.(jpg|png|webp)$/i, '')}`,
       category: 'UI_BRAND_STORE',
       badge: 'UI Ekran Konsept Tasarımı',
@@ -845,7 +862,7 @@ if (existsSync(wbUiScreensOut)) {
 for (const s of storeAssets) {
   const p = join(OUT, 'store', s.file);
   const st = existsSync(p) ? statSync(p) : { size: 0 };
-  reviewCatalog.push({
+  rawCatalog.push({
     id: `store_${s.file.replace(/[/.]/g, '_')}`,
     category: 'UI_BRAND_STORE',
     badge: s.kind === 'brand' ? 'Google Play Marka / İkon' : 'Google Play 1920×1080 Vitrin',
@@ -863,7 +880,7 @@ const animOutDir = join(OUT, 'animations');
 if (existsSync(animOutDir)) {
   for (const f of readdirSync(animOutDir).filter((n) => n.endsWith('.gif')).sort()) {
     const st = statSync(join(animOutDir, f));
-    reviewCatalog.push({
+    rawCatalog.push({
       id: `animgif_${f.replace(/\.gif$/i, '')}`,
       category: 'UI_BRAND_STORE',
       badge: 'Hareketli GIF Vitrin',
@@ -894,7 +911,7 @@ if (existsSync(sfxOutDir)) {
     const id = f.replace(/\.ogg$/i, '');
     const st = statSync(join(sfxOutDir, f));
     const meta = sfxProvMap.get(id);
-    reviewCatalog.push({
+    rawCatalog.push({
       id,
       category: 'AUDIO_SFX_BGM',
       badge: `SFX · ${meta?.category ?? 'combat'}`,
@@ -959,7 +976,7 @@ if (existsSync(bgmOutDir)) {
     const id = f.replace(/\.ogg$/i, '');
     const st = statSync(join(bgmOutDir, f));
     const m = BGM_META[id];
-    reviewCatalog.push({
+    rawCatalog.push({
       id,
       category: 'AUDIO_SFX_BGM',
       badge: 'BGM · Lyria 3.5',
@@ -1024,7 +1041,7 @@ function collectVoices(dir: string): void {
       const st = statSync(p);
       const vm = voiceMeta.get(rel);
       const id = `voice_${rel.replace(/[/.]/g, '_')}`;
-      reviewCatalog.push({
+      rawCatalog.push({
         id,
         category: 'VOICES',
         badge: vm ? `Seslendirme · ${vm.speaker}` : 'Seslendirme · Chirp 3 HD',
@@ -1046,7 +1063,7 @@ collectVoices(join(OUT, 'media/voices'));
 for (const s of screens) {
   const p = join(OUT, 'evidence', s.file);
   const st = existsSync(p) ? statSync(p) : { size: 0 };
-  reviewCatalog.push({
+  rawCatalog.push({
     id: `evidence_${s.file.replace(/\.webp$/i, '')}`,
     category: 'EVIDENCE_SCREENS',
     badge: s.file.startsWith('aab-') ? 'AAB Akış Kanıtı' : 'Oyun / UI Kanıt Görüntüsü',
@@ -1061,7 +1078,469 @@ for (const s of screens) {
   });
 }
 
-// Strict build-time verification gate: EVERY imageUrl and audioUrl in reviewCatalog MUST exist on disk and be > 0 bytes
+// 13. Deterministic 10-Group & Sub-Group Classifier and Sorter
+const MAJOR_GROUPS: Record<string, string> = {
+  G01: 'Grup 1: Marka, Açılış & Google Play Mağaza Vitrini',
+  G02: 'Grup 2: Prolog & Bölüm 1–7 Sinematik CG Sahneleri',
+  G03: 'Grup 3: 25 Oynanabilir Kahraman (Konsept + Chibi + 4 Portre + İmza Silah)',
+  G04: 'Grup 4: Ana Antagonistler & 7 Part I Boss\'u (Bölüm Sırasıyla Tam Paket)',
+  G05: 'Grup 5: 22 Düşman Birimi (Bölüm 1–7 Sırasıyla Konsept + Chibi Yan Yana)',
+  G06: 'Grup 6: Dünya Haritası & 47 Mekan / Savaş Alanı Arka Planı (Bölüm Sırasıyla)',
+  G07: 'Grup 7: 16 Gacha Çağrı Bannerı (Kalıcı & Oath #1–#7 Karakter + Silah Çiftleri)',
+  G08: 'Grup 8: UI Ekran Plakaları, 9-Slice UI Kit, İkon Setleri & Animasyon GIF\'leri',
+  G09: 'Grup 9: Ses Efektleri (16 SFX), Müzik (7 BGM) & 116 Seslendirme (Sahne Sırasıyla)',
+  G10: 'Grup 10: D-30 Mimari Teslimatlar (§4.1–§4.7) & Canlı Oyun Kanıt Ekranları'
+};
+
+const HERO_ORDER: { id: string; num: string; title: string; sigIcon?: string }[] = [
+  { id: 'mahmut', num: '01', title: '3.01 · #01 Mahmut (5★ Vanguard · Flame) — Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_oathkeeper_blade' },
+  { id: 'fadyme', num: '02', title: '3.02 · #02 Fadyme (5★ Mystic · Radiance) — Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_sanctum_bell' },
+  { id: 'sister_aveline', num: '03', title: '3.03 · #03 Sister Aveline (5★ Bulwark · Radiance · Oath #1) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_last_vigil_staff' },
+  { id: 'sable_wren', num: '04', title: '3.04 · #04 Sable Wren (5★ Striker · Shadow · Oath #2) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_broken_bell_daggers' },
+  { id: 'nara_vell', num: '05', title: '3.05 · #05 Nara Vell (5★ Bulwark · Stone · Oath #3) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_gatewarden_promise' },
+  { id: 'mirel_quill', num: '06', title: '3.06 · #06 Mirel Quill (5★ Tactician · Gale · Oath #4) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_unwritten_ledger' },
+  { id: 'vespera_wisp', num: '07', title: '3.07 · #07 Vespera Wisp (5★ Mystic · Tide · Oath #5) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_last_hour_lantern' },
+  { id: 'garrick_cinder', num: '08', title: '3.08 · #08 Garrick Cinder (5★ Vanguard · Flame · Oath #6) — Konsept + Chibi + 4 Portre' },
+  { id: 'corbin_locke', num: '09', title: '3.09 · #09 Corbin Locke (5★ Tactician · Shadow · Oath #7) — Konsept + Chibi + 4 Portre' },
+  { id: 'kera_voss', num: '10', title: '3.10 · #10 Kera Voss (4★ Ranger · Flame) — Konsept + Splash + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_cinder_mortar' },
+  { id: 'brin_alder', num: '11', title: '3.11 · #11 Brin Alder (4★ Bulwark · Stone) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_hearth_axe_shield' },
+  { id: 'nixie_vale', num: '12', title: '3.12 · #12 Nixie Vale (4★ Ranger · Tide) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_mistrunner_bow' },
+  { id: 'tilda_fen', num: '13', title: '3.13 · #13 Tilda Fen (4★ Mystic · Stone) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_fenroot_crozier' },
+  { id: 'rikka_ember', num: '14', title: '3.14 · #14 Rikka Ember (4★ Striker · Flame) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_seventh_chain_lantern' },
+  { id: 'odelia_pike', num: '15', title: '3.15 · #15 Odelia Pike (4★ Vanguard · Tide) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_flooded_nave_pike' },
+  { id: 'pippa_bell', num: '16', title: '3.16 · #16 Pippa Bell (4★ Tactician · Gale) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_saltroad_lute' },
+  { id: 'thistle_roe', num: '17', title: '3.17 · #17 Thistle Roe (4★ Striker · Gale) — Konsept + Chibi + 4 Portre' },
+  { id: 'iona_mist', num: '18', title: '3.18 · #18 Iona Mist (4★ Mystic · Tide) — Konsept + Chibi + 4 Portre' },
+  { id: 'marek_vane', num: '19', title: '3.19 · #19 Marek Vane (4★ Vanguard · Shadow) — Konsept + Chibi + 4 Portre' },
+  { id: 'cassian_thorne', num: '20', title: '3.20 · #20 Cassian Thorne (4★ Tactician · Radiance) — Konsept + Chibi + 4 Portre' },
+  { id: 'dorian_kesk', num: '21', title: '3.21 · #21 Dorian Kesk (3★ Bulwark · Stone) — Konsept + Chibi + 4 Portre' },
+  { id: 'jori_flint', num: '22', title: '3.22 · #22 Jori Flint (3★ Striker · Flame) — Konsept + Chibi + 4 Portre' },
+  { id: 'clem_marr', num: '23', title: '3.23 · #23 Clem Marr (3★ Vanguard · Stone) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_bridgewarden_hammer' },
+  { id: 'hana_birch', num: '24', title: '3.24 · #24 Hana Birch (3★ Ranger · Gale) — Konsept + Chibi + 4 Portre + İmza Silah', sigIcon: 'icon_icon_sig_galecrest_longbow' },
+  { id: 'rowan_reed', num: '25', title: '3.25 · #25 Rowan Reed (3★ Mystic · Tide) — Konsept + Chibi + 4 Portre' }
+];
+
+const BOSS_GROUPS: {
+  subId: string;
+  title: string;
+  conceptId?: string;
+  atlasId?: string;
+  portraitPrefix?: string;
+}[] = [
+  {
+    subId: 'G04_02',
+    title: '4.02 · Ana Antagonist: Lady Yseldra Vale — Konsept Paftası + 4 VN Portresi',
+    conceptId: 'concept_char_lady_yseldra_vale_sheet_v001',
+    portraitPrefix: 'portrait_lady_yseldra_vale_'
+  },
+  {
+    subId: 'G04_03',
+    title: '4.03 · Ana Antagonist: Lord Cael Veyr — Konsept Paftası + 4 VN Portresi',
+    conceptId: 'concept_char_lord_cael_veyr_sheet_v001',
+    portraitPrefix: 'portrait_lord_cael_veyr_'
+  },
+  {
+    subId: 'G04_04',
+    title: '4.04 · Bölüm 1 Boss: The Bell-Widow — 16-Kare Chibi Savaş Atlası',
+    atlasId: 'atlas_boss_bell_widow'
+  },
+  {
+    subId: 'G04_05',
+    title: '4.05 · Bölüm 2 Boss: The Ash-Maw — Konsept Paftası + 16-Kare Chibi Savaş Atlası',
+    conceptId: 'concept_boss_ash_maw_sheet_v001',
+    atlasId: 'atlas_boss_ash_maw'
+  },
+  {
+    subId: 'G04_06',
+    title: '4.06 · Bölüm 3 Boss: The Red Vial Matron — Konsept + Chibi Atlası + 4 VN Portresi',
+    conceptId: 'concept_boss_red_vial_matron_sheet_v001',
+    atlasId: 'atlas_boss_red_vial_matron',
+    portraitPrefix: 'portrait_red_vial_matron_'
+  },
+  {
+    subId: 'G04_07',
+    title: '4.07 · Bölüm 4 Boss: Captain Rusk — Konsept + Chibi Atlası + 4 VN Portresi',
+    conceptId: 'concept_boss_captain_rusk_sheet_v001',
+    atlasId: 'atlas_boss_captain_rusk',
+    portraitPrefix: 'portrait_rusk_'
+  },
+  {
+    subId: 'G04_08',
+    title: '4.08 · Bölüm 5 Boss: Marshal Oren — Konsept + Chibi Atlası + 4 VN Portresi',
+    conceptId: 'concept_boss_marshal_oren_sheet_v001',
+    atlasId: 'atlas_boss_marshal_oren',
+    portraitPrefix: 'portrait_marshal_oren_'
+  },
+  {
+    subId: 'G04_09',
+    title: '4.09 · Bölüm 6 Boss: Ashen Lord\'s Wraith — Konsept + Chibi Atlası + 4 VN Portresi',
+    conceptId: 'concept_boss_ashen_lord_wraith_sheet_v001',
+    atlasId: 'atlas_boss_ashen_lord_wraith',
+    portraitPrefix: 'portrait_ashen_lord_wraith_'
+  },
+  {
+    subId: 'G04_10',
+    title: '4.10 · Bölüm 7 Final Boss: The Eclipse Construct — Konsept + Chibi Atlası + 4 VN Portresi',
+    conceptId: 'concept_boss_eclipse_construct_sheet_v001',
+    atlasId: 'atlas_boss_eclipse_construct',
+    portraitPrefix: 'portrait_eclipse_construct_'
+  }
+];
+
+const ENEMY_CHAPTER_GROUPS: { subId: string; title: string; units: string[] }[] = [
+  {
+    subId: 'G05_01',
+    title: '5.1 · Bölüm 1 Düşmanları & Başlangıç Birimleri — Whispering Ash (Konsept + Chibi)',
+    units: ['ash_wolf', 'hollow_pilgrim', 'corrupted_mercenary', 'enemy_knight', 'hero_arcanist']
+  },
+  {
+    subId: 'G05_02',
+    title: '5.2 · Bölüm 2 Düşmanları — Cathedral of Saint Luthos & Lowland (Konsept + Chibi)',
+    units: ['bellbound_dead', 'hollow_cleric', 'choir_knight', 'orchard_ghoul']
+  },
+  {
+    subId: 'G05_03',
+    title: '5.3 · Bölüm 3 Düşmanları — Oakhaven & Red Vial Cult (Konsept + Chibi)',
+    units: ['red_vial_scout', 'red_vial_alchemist', 'glass_viper']
+  },
+  {
+    subId: 'G05_04',
+    title: '5.4 · Bölüm 4 Düşmanları — Undercity of the Drowned Bell (Konsept + Chibi)',
+    units: ['chain_cultist', 'inkbound_dead', 'lost_vow_knight']
+  },
+  {
+    subId: 'G05_05',
+    title: '5.5 · Bölüm 5 Düşmanları — Bridge of the Forsaken (Konsept + Chibi)',
+    units: ['bridge_revenant', 'crownless_knight', 'corrupted_crown_guard']
+  },
+  {
+    subId: 'G05_06',
+    title: '5.6 · Bölüm 6 Düşmanları — The Ashen Lord\'s Estate (Konsept + Chibi)',
+    units: ['noble_retainer', 'estate_wraith', 'royal_hollow']
+  },
+  {
+    subId: 'G05_07',
+    title: '5.7 · Bölüm 7 Düşmanları — Altar of the First Eclipse (Konsept + Chibi)',
+    units: ['eclipse_sentinel']
+  }
+];
+
+function portraitEmotionOrder(id: string): number {
+  if (id.endsWith('_composed')) return 31;
+  if (
+    id.endsWith('_focused') ||
+    id.endsWith('_resolve') ||
+    id.endsWith('_protective_resolve') ||
+    id.endsWith('_watchful') ||
+    id.endsWith('_grave')
+  ) {
+    return 32;
+  }
+  if (
+    id.endsWith('_defiant') ||
+    id.endsWith('_wry') ||
+    id.endsWith('_dry_humor') ||
+    id.endsWith('_resolute')
+  ) {
+    return 33;
+  }
+  return 34;
+}
+
+const PROLOGUE_STILL_ORDER: Record<string, number> = {
+  still_prologue_beginning: 1,
+  still_prologue_ordinary_days: 2,
+  still_prologue_throne_wars: 3,
+  still_prologue_crownfall: 4,
+  still_prologue_search: 5,
+  still_prologue_roads: 6,
+  still_prologue_names: 7,
+  still_prologue_hours: 8,
+  still_prologue_reunion: 9
+};
+
+function assignGroupAndSort(item: RawCatalogItem): ReviewCatalogItem {
+  const withGroup = (groupId: string, subGroupId: string, subGroupTitle: string, sortOrder: number): ReviewCatalogItem => ({
+    ...item,
+    groupId,
+    groupTitle: MAJOR_GROUPS[groupId]!,
+    subGroupId,
+    subGroupTitle,
+    sortOrder
+  });
+
+  // GRUP 1: Marka, Açılış & Google Play Mağaza Vitrini
+  if (item.id.startsWith('core_ui_')) {
+    const orderMap: Record<string, number> = {
+      core_ui_studio_mark: 1,
+      core_ui_logo: 2,
+      core_ui_title_bg: 3,
+      core_ui_key_art: 4
+    };
+    return withGroup(
+      'G01',
+      'G01_01',
+      '1.1 · Oyun İçi Stüdyo Amblemi, Logo & Ana Menü Görselleri',
+      orderMap[item.id] ?? 10
+    );
+  }
+  if (item.id.startsWith('store_')) {
+    if (item.id.startsWith('store_screenshots_')) {
+      const m = /_(\d+)_/.exec(item.id);
+      return withGroup(
+        'G01',
+        'G01_03',
+        '1.3 · Google Play 1920×1080 Yatay Mağaza Vitrin Ekran Görüntüleri (01 → 08)',
+        m ? Number(m[1]) : 50
+      );
+    }
+    const brandOrder: Record<string, number> = {
+      store_icon_512_png: 1,
+      store_logo_master_png: 2,
+      store_logo_compact_png: 3,
+      store_feature_graphic_1024x500_png: 4
+    };
+    return withGroup(
+      'G01',
+      'G01_02',
+      '1.2 · Google Play Store İkon, Master Logo & Feature Graphic',
+      brandOrder[item.id] ?? 10
+    );
+  }
+
+  // GRUP 2: Prolog & Bölüm 1–7 Sinematik CG Sahneleri
+  if (item.category === 'STILLS_CG') {
+    if (item.id in PROLOGUE_STILL_ORDER) {
+      return withGroup(
+        'G02',
+        'G02_01',
+        '2.1 · 120 Saniyelik Prolog — 9 Kronolojik Sahne İllüstrasyonu (Shot 1 → Shot 9)',
+        PROLOGUE_STILL_ORDER[item.id]!
+      );
+    }
+    if (item.id.startsWith('still_')) {
+      return withGroup(
+        'G02',
+        'G02_02',
+        '2.2 · Yol Kenarı Kamp & Sığınak Dinlenme Sahneleri',
+        item.id === 'still_roadside_rest' ? 1 : 2
+      );
+    }
+    const cgMatch = /cg_(\d+)_/.exec(item.id);
+    return withGroup(
+      'G02',
+      'G02_03',
+      '2.3 · Part I Hikâye Kırılma Anları — Bölüm 1–7 Tam Ekran CG İllüstrasyonları (CG 01 → CG 15)',
+      cgMatch ? Number(cgMatch[1]) : 99
+    );
+  }
+
+  // GRUP 3: 25 Oynanabilir Kahraman (Konsept + Chibi + 4 Portre + İmza Silah)
+  for (const h of HERO_ORDER) {
+    const subId = `G03_${h.num}`;
+    if (item.id === `concept_char_${h.id}_sheet_v001` || (h.id === 'kera_voss' && item.id.startsWith('concept_kera_voss_'))) {
+      return withGroup('G03', subId, h.title, 10);
+    }
+    if (item.id === `atlas_${h.id}`) {
+      return withGroup('G03', subId, h.title, 20);
+    }
+    if (item.category === 'PORTRAITS' && item.id.startsWith(`portrait_${h.id}_`)) {
+      return withGroup('G03', subId, h.title, portraitEmotionOrder(item.id));
+    }
+    if (h.sigIcon && item.id === h.sigIcon) {
+      return withGroup('G03', subId, h.title, 40);
+    }
+  }
+
+  // GRUP 4: Ana Antagonistler & 7 Part I Boss'u
+  if (item.id === 'atlas_objective_9x3') {
+    return withGroup(
+      'G04',
+      'G04_01',
+      '4.01 · Kırılabilir Boss Hedefleri — 9×3 (1728×576 · 27 Hücre) Savaş Atlası',
+      10
+    );
+  }
+  for (const b of BOSS_GROUPS) {
+    if (b.conceptId && item.id === b.conceptId) {
+      return withGroup('G04', b.subId, b.title, 10);
+    }
+    if (b.atlasId && item.id === b.atlasId) {
+      return withGroup('G04', b.subId, b.title, 20);
+    }
+    if (b.portraitPrefix && item.category === 'PORTRAITS' && item.id.startsWith(b.portraitPrefix)) {
+      return withGroup('G04', b.subId, b.title, portraitEmotionOrder(item.id));
+    }
+  }
+
+  // GRUP 5: 22 Düşman Birimi (Bölüm 1–7 Sırasıyla Konsept + Chibi Yan Yana)
+  for (const eg of ENEMY_CHAPTER_GROUPS) {
+    for (let idx = 0; idx < eg.units.length; idx++) {
+      const u = eg.units[idx]!;
+      if (item.id === `concept_${u}_sheet_v001`) {
+        return withGroup('G05', eg.subId, eg.title, (idx + 1) * 10 + 1);
+      }
+      if (item.id === `atlas_${u}`) {
+        return withGroup('G05', eg.subId, eg.title, (idx + 1) * 10 + 2);
+      }
+    }
+  }
+
+  // GRUP 6: Dünya Haritası & 47 Mekan / Savaş Alanı Arka Planı
+  if (item.category === 'BACKGROUNDS') {
+    const slug = item.id.replace(/^bg_/, '');
+    if (slug === 'world_map_part1') {
+      return withGroup('G06', 'G06_01', '6.1 · Part I Dünya Haritası (HomeScene & Chapter Select)', 1);
+    }
+    if (slug.startsWith('forest_') || slug === 'forgotten_stone_crossing' || slug === 'shelter_courtyard_dusk') {
+      return withGroup('G06', 'G06_02', '6.2 · Bölüm 1 Mekanları — The Whispering Ash & Orman Geçitleri', 10);
+    }
+    if (slug.startsWith('cathedral_') || slug.startsWith('lowland_') || slug.startsWith('orchard_')) {
+      return withGroup('G06', 'G06_03', '6.3 · Bölüm 2 Mekanları — Cathedral of Saint Luthos & Lowland', 20);
+    }
+    if (slug === 'village_oakhaven' || slug.startsWith('oakhaven_') || slug === 'kiln_town') {
+      return withGroup('G06', 'G06_04', '6.4 · Bölüm 3 Mekanları — Oakhaven & Kiln Town', 30);
+    }
+    if (slug.startsWith('undercity_')) {
+      return withGroup('G06', 'G06_05', '6.5 · Bölüm 4 Mekanları — Undercity of the Drowned Bell', 40);
+    }
+    if (slug.startsWith('bridge_') || slug === 'river_city_gates') {
+      return withGroup('G06', 'G06_06', '6.6 · Bölüm 5 Mekanları — Bridge of the Forsaken & River Gates', 50);
+    }
+    if (slug === 'estate_ashen_lord' || slug.startsWith('ashen_estate_')) {
+      return withGroup('G06', 'G06_07', '6.7 · Bölüm 6 Mekanları — The Ashen Lord\'s Estate', 60);
+    }
+    if (slug.startsWith('altar_')) {
+      return withGroup('G06', 'G06_08', '6.8 · Bölüm 7 Mekanları — Altar of the First Eclipse', 70);
+    }
+    return withGroup('G06', 'G06_09', '6.9 · Yan Yollar, Dağ Geçitleri & Kıyı Rotaları', 80);
+  }
+
+  // GRUP 7: 16 Gacha Çağrı Bannerı (Kalıcı & Oath #1–#7 Çiftleri)
+  if (item.category === 'BANNERS') {
+    if (item.id.startsWith('banner_hall_')) {
+      return withGroup(
+        'G07',
+        'G07_01',
+        '7.1 · Kalıcı Çağrı Bannerları — Hall of Ancestors & Hall of Armaments',
+        item.id === 'banner_hall_of_ancestors' ? 1 : 2
+      );
+    }
+    const oathMatch = /^banner_oath_0(\d)_/.exec(item.id);
+    const oathNum = oathMatch ? Number(oathMatch[1]) : 9;
+    const isWeapon = item.id.endsWith('_weapon');
+    const oathNames: Record<number, string> = {
+      1: '7.2 · Oath #1: Sister Aveline — Karakter Bannerı + İmza Silah Bannerı',
+      2: '7.3 · Oath #2: Sable Wren — Karakter Bannerı + İmza Silah Bannerı',
+      3: '7.4 · Oath #3: Nara Vell — Karakter Bannerı + İmza Silah Bannerı',
+      4: '7.5 · Oath #4: Mirel Quill — Karakter Bannerı + İmza Silah Bannerı',
+      5: '7.6 · Oath #5: Vespera Wisp — Karakter Bannerı + İmza Silah Bannerı',
+      6: '7.7 · Oath #6: Garrick Cinder — Karakter Bannerı + İmza Silah Bannerı',
+      7: '7.8 · Oath #7: Corbin Locke — Karakter Bannerı + İmza Silah Bannerı'
+    };
+    return withGroup(
+      'G07',
+      `G07_0${oathNum + 1}`,
+      oathNames[oathNum] ?? '7.9 · Oath Banner Çifti',
+      isWeapon ? 2 : 1
+    );
+  }
+
+  // GRUP 8: UI Ekran Plakaları, 9-Slice UI Kit, İkon Setleri & Animasyon GIF'leri
+  if (item.id.startsWith('uiscreen_')) {
+    return withGroup('G08', 'G08_01', '8.1 · Tam Ekran UI Konsept Plakaları (Ana Menü, Hub, Gacha, Zafer/Yenilgi)', 10);
+  }
+  if (item.id.startsWith('uikit_')) {
+    return withGroup('G08', 'G08_02', '8.2 · Gotik 9-Slice UI Kit Çerçeveleri, Butonlar & VFX Dokuları', 20);
+  }
+  if (item.id.startsWith('animgif_')) {
+    const m = /^animgif_(\d+)_/.exec(item.id);
+    return withGroup('G08', 'G08_03', '8.3 · Hareketli Animasyon Önizleme GIF\'leri (01 → 16)', m ? Number(m[1]) : 30);
+  }
+  if (item.id.startsWith('iconsheet_')) {
+    return withGroup('G08', 'G08_04', '8.4 · Master Toplu İkon Üretim Paftaları (8 Pafta)', 40);
+  }
+  if (item.category === 'ICONS_WEAPONS') {
+    if (item.id.includes('_wpn_')) {
+      return withGroup('G08', 'G08_05', '8.5 · 3★/4★ Silah Aileleri İkonları (Kılıç, Mızrak, Yay, Asa, Çekiç, Hançer)', 50);
+    }
+    if (item.id.includes('_armor_') || item.id.includes('_acc_')) {
+      return withGroup('G08', 'G08_06', '8.6 · Zırh & Aksesuar Ekipman İkonları', 60);
+    }
+    if (item.id.includes('_element_') || item.id.includes('_status_')) {
+      return withGroup('G08', 'G08_07', '8.7 · 6 Element & 12 Savaş Statü / Buff / Debuff İkonu', 70);
+    }
+    return withGroup('G08', 'G08_08', '8.8 · Para Birimleri, Rölikerler, Bölüm Mühürleri & UI Navigasyon İkonları', 80);
+  }
+
+  // GRUP 9: Ses Efektleri (16 SFX), Müzik (7 BGM) & 116 Seslendirme
+  if (item.category === 'AUDIO_SFX_BGM') {
+    if (item.id.startsWith('bgm_')) {
+      const bgmOrder: Record<string, number> = {
+        bgm_title_theme: 1,
+        bgm_story_road: 2,
+        bgm_story_shelter: 3,
+        bgm_story_omen: 4,
+        bgm_battle_ash: 5,
+        bgm_battle_stone: 6,
+        bgm_battle_courtyard: 7
+      };
+      return withGroup('G09', 'G09_01', '9.1 · 7 Lyria 3.5 Arka Plan Müzik Motifi (BGM)', bgmOrder[item.id] ?? 10);
+    }
+    return withGroup('G09', 'G09_02', '9.2 · 16 Kanonik Ogg Vorbis Savaş & UI Ses Efekti (SFX)', 20);
+  }
+  if (item.category === 'VOICES') {
+    const lineMatch = /_(\d+)_ogg$/.exec(item.id);
+    const lineNum = lineMatch ? Number(lineMatch[1]) : 99;
+    const isAfter = item.id.includes('_after_');
+    const order = (isAfter ? 100 : 0) + lineNum;
+    if (item.id.includes('_prologue_')) {
+      return withGroup('G09', 'G09_03', '9.3 · Prolog Seslendirmeleri — Shot 1 → Shot 9 Kronolojik Sıra', order);
+    }
+    if (item.id.includes('_story_t1_')) {
+      return withGroup('G09', 'G09_04', '9.4 · Tutorial 1 (T-1) Seslendirmeleri — Savaş Öncesi & Sonrası Diyalog Sırası', order);
+    }
+    if (item.id.includes('_story_t2_')) {
+      return withGroup('G09', 'G09_05', '9.5 · Tutorial 2 (T-2) Seslendirmeleri — Savaş Öncesi & Sonrası Diyalog Sırası', order);
+    }
+    return withGroup('G09', 'G09_06', '9.6 · Tutorial 3 (T-3) Seslendirmeleri — Savaş Öncesi & Sonrası Diyalog Sırası', order);
+  }
+
+  // GRUP 10: D-30 Mimari Teslimatlar (§4.1–§4.7) & Canlı Oyun Kanıt Ekranları
+  if (item.category === 'STEPS') {
+    const stepMatch = /^step_4_(\d)_/.exec(item.id);
+    return withGroup(
+      'G10',
+      'G10_01',
+      '10.1 · D-30 Mimari, VFX, Kimlik Kilidi & Hareket Cilası Adımları (§4.1 → §4.7)',
+      stepMatch ? Number(stepMatch[1]) : 10
+    );
+  }
+  if (item.category === 'EVIDENCE_SCREENS') {
+    if (item.id.startsWith('evidence_aab-')) {
+      const aabMatch = /^evidence_aab-(\d+)-/.exec(item.id);
+      return withGroup(
+        'G10',
+        'G10_02',
+        '10.2 · Uçtan Uca AAB Oyun Akışı Kanıt Ekranları (aab-01 → aab-22)',
+        aabMatch ? Number(aabMatch[1]) : 50
+      );
+    }
+    return withGroup('G10', 'G10_03', '10.3 · Savaş, Kadro, Gacha & Yönetim Paneli Kanıt Ekranları', 60);
+  }
+
+  throw new Error(`Ungrouped catalog item: ${item.id} (${item.category})`);
+}
+
+const reviewCatalog: ReviewCatalogItem[] = rawCatalog
+  .map(assignGroupAndSort)
+  .sort(
+    (a, b) =>
+      a.groupId.localeCompare(b.groupId) ||
+      a.subGroupId.localeCompare(b.subGroupId) ||
+      a.sortOrder - b.sortOrder ||
+      a.id.localeCompare(b.id)
+  );
 for (const item of reviewCatalog) {
   if (item.imageUrl) {
     const diskPath = join(ROOT, 'apps/admin/public', item.imageUrl.replace(/^\//, ''));
