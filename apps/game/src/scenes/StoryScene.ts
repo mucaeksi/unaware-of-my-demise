@@ -71,8 +71,10 @@ export class StoryScene extends PixiScene<StoryInit> {
   private syncColor: number = C.gold;
   private typing: Handle | null = null;
   private stopTyping: (() => void) | null = null;
+  private speechPulse: Handle | null = null;
+  private speakingSprite: PIXI.Sprite | null = null;
   private activeSchedule: SubtitleSchedule | null = null;
-  private typingStartedAt = 0;
+  private typingElapsedMs = 0;
   private fullText = '';
   private lineDone = true;
   private waiting = false;
@@ -111,6 +113,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     if (this.init0.authRevision !== undefined) Services.api.addEventListener('auth', accountChanged);
     this.onClose(() => {
       this.stopTyping?.();
+      this.speechPulse?.stop();
       Services.api.removeEventListener('auth', accountChanged);
       if (!loadFlowCheckpoint(Services.flowKey())) clearStoryCheckpoint(Services.flowKey(), this.init0.path);
     });
@@ -479,14 +482,22 @@ export class StoryScene extends PixiScene<StoryInit> {
     const sprite = new PIXI.Sprite(this.tex(key));
     sprite.anchor.set(0.5, 1);
     const nativeFacing = stature.nativeFacing ?? (character === 'fadyme' ? 'left' : 'right');
-    sprite.scale.x = nativeFacing !== (side === 'left' ? 'right' : 'left') ? -1 : 1;
+    const flipX = nativeFacing !== (side === 'left' ? 'right' : 'left') ? -1 : 1;
+    sprite.scale.x = flipX;
     image.addChild(sprite);
     image.position.set(immediate ? baseX : baseX + (side === 'left' ? -90 : 90), baseY);
     image.alpha = this.cgActive ? 0 : immediate ? 0.86 : 0;
     const actor: Actor = { side, image, sprite, key, emotion, baseX, baseY, offsetX: 0, offsetY: 0, tiltDeg: 0, scaleMult: 1, breathe: null };
     const k = this.bustScale(character, actor);
     image.scale.set(k);
-    if (!prefs().reducedMotion) actor.breathe = this.anim.to(sprite, { y: -7 }, { duration: side === 'left' ? 2800 : 2500, yoyo: true, repeat: -1, ease: 'sine.inout' });
+    // Breathe through subtle torso scale anchored at (0.5, 1) so the bottom edge never lifts off baseY
+    if (!prefs().reducedMotion) {
+      actor.breathe = this.anim.to(
+        sprite,
+        { scaleY: 1.014, scaleX: flipX * 0.994 },
+        { duration: side === 'left' ? 2800 : 2500, yoyo: true, repeat: -1, ease: 'sine.inout' }
+      );
+    }
     this.actors.set(character, actor);
     if (!immediate && !this.cgActive) this.anim.to(image, { x: baseX, alpha: 0.86 }, { duration: prefs().reducedMotion ? 1 : 950, ease: 'cubic.out' });
   }
@@ -522,6 +533,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     const gs = new PIXI.Sprite(prev);
     gs.anchor.set(0.5, 1);
     gs.scale.x = a.sprite.scale.x;
+    gs.scale.y = a.sprite.scale.y;
     gs.tint = a.sprite.tint;
     ghost.addChild(gs);
     ghost.position.copyFrom(a.image.position);
@@ -530,6 +542,13 @@ export class StoryScene extends PixiScene<StoryInit> {
     ghost.alpha = a.image.alpha;
     this.add(ghost, a.image.zIndex);
     a.image.scale.set(sc);
+    if (!prefs().reducedMotion) {
+      this.anim.killOf(a.sprite);
+      a.sprite.alpha = 0.38;
+      this.anim.to(a.sprite, { alpha: 1 }, { duration: 220, ease: 'sine.out' });
+    } else {
+      a.sprite.alpha = 1;
+    }
     this.anim.to(ghost, { alpha: 0 }, { duration: prefs().reducedMotion ? 1 : 220, ease: 'quad.out', onComplete: () => ghost.destroy({ children: true }) });
 
     if (reactionImpulse && !prefs().reducedMotion) {
@@ -965,12 +984,32 @@ export class StoryScene extends PixiScene<StoryInit> {
     const voiceDur = this.stage?.voiceDuration(e.lineId) ?? 0;
     const schedule = buildSubtitleSchedule(this.fullText, this.skip ? 0 : voiceDur, baseCps * cpsMult);
     this.activeSchedule = schedule;
-    this.typingStartedAt = performance.now();
+    this.typingElapsedMs = 0;
+
+    this.speechPulse?.stop();
+    this.speechPulse = null;
+    if (this.speakingSprite && !this.speakingSprite.destroyed) {
+      this.speakingSprite.y = 0;
+    }
+    this.speakingSprite = null;
+    if (!narr && !reduced && !this.skip && !this.cgActive) {
+      const spActor = this.actors.get(e.speaker);
+      if (spActor) {
+        this.speakingSprite = spActor.sprite;
+        spActor.sprite.y = 0;
+        this.speechPulse = this.anim.to(
+          spActor.sprite,
+          { y: -3.5 },
+          { duration: 210, yoyo: true, repeat: -1, ease: 'sine.inout' }
+        );
+      }
+    }
 
     if (this.skip) {
       let n = 0;
       let acc = 0;
       this.stopTyping = this.onTick((dt) => {
+        this.typingElapsedMs += dt;
         acc += dt;
         while (acc >= 12) {
           acc -= 12;
@@ -983,8 +1022,9 @@ export class StoryScene extends PixiScene<StoryInit> {
     }
 
     let shownCount = 0;
-    this.stopTyping = this.onTick(() => {
-      const elapsedMs = Math.max(0, performance.now() - this.typingStartedAt);
+    this.stopTyping = this.onTick((dt) => {
+      this.typingElapsedMs += dt;
+      const elapsedMs = this.typingElapsedMs;
       const vp = this.stage?.voiceProgress(e.lineId);
       const { count, revealRatio, voiceRatio, done } = resolveSubtitleProgress(schedule, elapsedMs, vp && vp.playing ? vp.currentTime : undefined);
       if (count > shownCount) {
@@ -1004,6 +1044,12 @@ export class StoryScene extends PixiScene<StoryInit> {
     this.typing = null;
     this.stopTyping?.();
     this.stopTyping = null;
+    this.speechPulse?.stop();
+    this.speechPulse = null;
+    if (this.speakingSprite && !this.speakingSprite.destroyed) {
+      this.speakingSprite.y = 0;
+    }
+    this.speakingSprite = null;
     if (wasPausing && !this.skip && this.currentLine) void this.stage?.voice(this.currentLine.lineId);
     this.anim.killOf(this.bodyText);
     this.bodyText.text = this.fullText;
@@ -1037,7 +1083,7 @@ export class StoryScene extends PixiScene<StoryInit> {
     const last = line !== null && line.lineId === this.lastLineId;
     if (voiceSeconds > 0 && line) {
       const vp = this.stage?.voiceProgress(line.lineId);
-      const elapsedSec = this.typingStartedAt > 0 ? Math.max(0, (performance.now() - this.typingStartedAt) / 1000) : (this.activeSchedule?.totalRevealMs ?? 1200) / 1000;
+      const elapsedSec = this.typingElapsedMs > 0 ? this.typingElapsedMs / 1000 : (this.activeSchedule?.totalRevealMs ?? 1200) / 1000;
       const spokenSec = vp && vp.currentTime > 0 ? Math.max(elapsedSec, vp.currentTime) : elapsedSec;
       const voiceSyncedHoldMs = Math.max(1050, (Math.max(0, voiceSeconds - spokenSec) + 0.72) * 1000);
       if (last && this.data0.closing_hold_seconds !== undefined) return Math.max(voiceSyncedHoldMs, this.data0.closing_hold_seconds * 1000);

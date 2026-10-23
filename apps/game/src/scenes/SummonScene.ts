@@ -1,3 +1,4 @@
+import { Sfx } from '../audio/Sfx';
 import { REF_H, REF_W } from '../config';
 import { prefs } from '../platform/prefs';
 import type { BannerInfo, PullResponse } from '../net/api';
@@ -143,12 +144,36 @@ export class SummonScene extends HubScreen {
         this.text(x, y + 62, p.duplicate ? `+${p.shards} shards` : p.outcome === 'guaranteed' ? 'NEW · guaranteed' : 'NEW', { fontSize: 24, color: p.duplicate ? T.dim : T.heal }, m).setOrigin(0.5)
       ];
       if (!reveal) return;
-      // cards turn up one after another
+      // Staggered card reveal driven by scene anim timeline (respects scene teardown & pause)
       for (const node of group) {
         node.setAlpha(0);
-        node.el.style.transition = `opacity 260ms ease ${140 * i}ms`;
+        node.setScale(0.85);
       }
-      requestAnimationFrame(() => requestAnimationFrame(() => group.forEach((node) => node.setAlpha(1))));
+      if (p.rarity === 5) {
+        group[0]!.el.style.boxShadow = '0 0 28px rgba(212, 168, 87, 0.72), inset 0 0 18px rgba(212, 168, 87, 0.25)';
+      } else if (p.rarity === 4) {
+        group[0]!.el.style.boxShadow = '0 0 18px rgba(176, 134, 240, 0.52), inset 0 0 12px rgba(176, 134, 240, 0.16)';
+      }
+      this.anim.after(110 * i, () => {
+        if (p.rarity === 5) Sfx.bell(440, 0.3, 1.8);
+        else if (p.rarity === 4) Sfx.silverBell(587.33, 0.22);
+        else Sfx.tap();
+        const state = { t: 0 };
+        this.anim.to(
+          state,
+          { t: 1 },
+          {
+            duration: 240,
+            ease: p.rarity === 5 ? 'back.out' : 'cubic.out',
+            onUpdate: () => {
+              for (const node of group) {
+                node.setAlpha(Math.min(1, state.t));
+                node.setScale(0.85 + 0.15 * state.t);
+              }
+            }
+          }
+        );
+      });
     });
   }
 

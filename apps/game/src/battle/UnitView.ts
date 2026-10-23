@@ -175,14 +175,28 @@ export class UnitView extends PIXI.Container {
   }
 
   private playFrames(a: UnitAnimation, key: string): void {
-    const step = { i: 0 };
+    const step = { t: 0 };
     const n = a.frames.length;
     const u = this.art.unit(this.artKey);
-    this.frames = this.scene.anim.to(step, { i: n }, {
+    // Non-looping action sequences weight the middle impact frame slightly longer (1.35x) so the strike silhouette reads crisply
+    const weights = !a.loop && n >= 3
+      ? a.frames.map((_, idx) => (idx === 0 ? 0.8 : idx === Math.floor(n / 2) ? 1.35 : 0.95))
+      : a.frames.map(() => 1);
+    const totalWeight = weights.reduce((acc, w) => acc + w, 0) || 1;
+    const cumulative: number[] = [];
+    let accW = 0;
+    for (const w of weights) {
+      accW += w / totalWeight;
+      cumulative.push(accW);
+    }
+    this.frames = this.scene.anim.to(step, { t: 1 }, {
       duration: (n * 1000) / Math.max(1, a.fps),
       repeat: a.loop ? -1 : 0,
       onUpdate: () => {
-        const f = a.frames[Math.min(n - 1, Math.floor(step.i))];
+        const clamped = Math.min(0.9999, Math.max(0, step.t));
+        let idx = cumulative.findIndex((c) => clamped <= c);
+        if (idx < 0) idx = n - 1;
+        const f = a.frames[idx];
         if (f && !this.img.destroyed) {
           this.img.texture = this.scene.tex(key, f);
           const st = u.states[f] ?? u.states[f.replace(/_\d+$/, '')] ?? u.states[this.animName];
@@ -204,6 +218,8 @@ export class UnitView extends PIXI.Container {
     this.img.anchor.set(f.pivotX, 1);
     // players face right, enemies left; mirror when the authored art faces the other way
     this.img.scale.x = (u.facing === 'right') !== (this.side === 'player') ? -1 : 1;
+    // every state's still frame reads on its own (defeat dims the fallen silhouette even under reducedMotion)
+    this.img.tint = state === 'defeat' ? 0xc8bed6 : 0xffffff;
     this.pose.scale.set(sc);
     this.pose.angle = 0;
     this.pose.position.set(0, 0);
@@ -216,11 +232,28 @@ export class UnitView extends PIXI.Container {
       this.loops.push(this.scene.anim.to(this.pose, { y: -14, scaleY: sc * 1.045, scaleX: sc * 0.96 }, { duration: 190, yoyo: true, repeat: -1, ease: 'quad.out' }));
       this.loops.push(this.scene.anim.to(this.pose, { angle: { from: -3.2 * dir, to: 3.8 * dir } }, { duration: 380, yoyo: true, repeat: -1, ease: 'sine.inout' }));
     } else if (state === 'basic' || state === 'active' || state === 'ultimate') {
-      // chibi action pop (overshoot squash-stretch + elemental ghost on active/ultimate)
-      const mult = state === 'ultimate' ? 1.14 : state === 'active' ? 1.11 : 1.08;
+      // 2-phase chibi action timing: brief anticipation coil -> forward impact snap + elemental ghost -> clean recovery
+      const dir = this.side === 'player' ? 1 : -1;
+      const mult = state === 'ultimate' ? 1.15 : state === 'active' ? 1.11 : 1.08;
+      const lungeX = dir * (state === 'ultimate' ? 20 : state === 'active' ? 14 : 10);
       if (state === 'active' || state === 'ultimate') this.spawnGhost();
-      this.pose.scale.set(sc * 0.85, sc * 1.17);
-      this.scene.anim.to(this.pose, { scaleX: sc * mult, scaleY: sc * 0.95 }, { duration: 135, yoyo: true, ease: 'back.out', onComplete: () => this.pose.scale.set(sc) });
+      this.pose.scale.set(sc * 0.9, sc * 1.1);
+      this.pose.position.set(-dir * 7, 0);
+      this.pose.angle = -dir * 3.5;
+      this.scene.anim.to(
+        this.pose,
+        { x: lungeX, scaleX: sc * mult, scaleY: sc * 0.94, angle: dir * 4.2 },
+        {
+          duration: 145,
+          yoyo: true,
+          ease: 'back.out',
+          onComplete: () => {
+            this.pose.position.set(0, 0);
+            this.pose.scale.set(sc);
+            this.pose.angle = 0;
+          }
+        }
+      );
     } else if (state === 'hit') {
       const push = this.side === 'player' ? -1 : 1;
       this.pose.scale.set(sc * 0.86, sc * 1.14);
@@ -237,7 +270,7 @@ export class UnitView extends PIXI.Container {
       });
     } else if (state === 'defeat') {
       const fallDir = this.side === 'player' ? -1 : 1;
-      this.scene.anim.to(this.pose, { angle: fallDir * 11, y: 6, scaleY: sc * 0.9, scaleX: sc * 1.04 }, { duration: 280, ease: 'cubic.out' });
+      this.scene.anim.to(this.pose, { x: fallDir * 14, angle: fallDir * 12, y: 8, scaleY: sc * 0.88, scaleX: sc * 1.05 }, { duration: 300, ease: 'cubic.out' });
     } else if (state === 'victory') {
       this.loops.push(this.scene.anim.to(this.pose, { y: -18, scaleY: sc * 1.06, scaleX: sc * 0.95 }, { duration: 380, yoyo: true, repeat: -1, ease: 'quad.out' }));
       this.loops.push(this.scene.anim.to(this.auraRing, { alpha: { from: 0.3, to: 0.72 } }, { duration: 420, yoyo: true, repeat: -1, ease: 'sine.inout' }));

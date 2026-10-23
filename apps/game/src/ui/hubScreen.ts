@@ -157,6 +157,19 @@ export abstract class HubScreen<D = unknown> extends PixiScene<D> {
     this.ui.blocker(alpha, g, color);
     this.modalGroup = g;
     this.ui.setModal(g.el);
+    if (!prefs().reducedMotion) {
+      g.setAlpha(0);
+      const state = { a: 0 };
+      this.anim.to(
+        state,
+        { a: 1 },
+        {
+          duration: 180,
+          ease: 'cubic.out',
+          onUpdate: () => g.setAlpha(state.a)
+        }
+      );
+    }
     return g;
   }
 

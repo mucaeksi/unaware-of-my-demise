@@ -2102,6 +2102,39 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
         </div>
       </div>
 
+      {/* §4.4 & §4.5 — Banner Key Art & Motion Polish Özeti */}
+      <div className="card" style={{ marginTop: 14, marginBottom: 16, border: '1.5px solid #3fa36c' }}>
+        <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+          <div>
+            <h2 style={{ margin: 0, fontSize: 18 }}>🖼️ §4.4 &amp; §4.5 — Banner Key Art (16/16) &amp; Motion Polish</h2>
+            <p className="muted" style={{ margin: '4px 0 0' }}>
+              16 kanonik 1376×768 banner görseli onaylı kataloğa alındı, <code>SummonScene</code> ve <code>HomeScene</code> Dünya Haritası vitrinine bağlandı; Chibi aksiyonları, VN portre geçişleri ve Gacha kart açılışları sahne zamanlayıcısına taşındı.
+            </p>
+          </div>
+          <span className="badge ok">258 Onaylı Eser · §4.5 Aktif</span>
+        </div>
+        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10 }}>
+          <div style={{ padding: 10, borderRadius: 8, background: 'rgba(14,10,22,0.72)', border: '1px solid rgba(212,168,87,0.22)', fontSize: 12.5 }}>
+            <strong style={{ color: '#f3d287' }}>Chibi Anticipation &amp; Impact</strong>
+            <div className="muted" style={{ marginTop: 4 }}>
+              <code>UnitView.applyState()</code> içinde 2 fazlı geri çekilme + ileri vuruş ivmesi ve orta karede <code>1.35×</code> impact-hold ağırlığı.
+            </div>
+          </div>
+          <div style={{ padding: 10, borderRadius: 8, background: 'rgba(14,10,22,0.72)', border: '1px solid rgba(212,168,87,0.22)', fontSize: 12.5 }}>
+            <strong style={{ color: '#f3d287' }}>VN Konuşma Nabzı &amp; Çapraz Geçiş</strong>
+            <div className="muted" style={{ marginTop: 4 }}>
+              <code>StoryScene</code> taban hizalı nefes ölçeği (<code>0.5, 1</code>), konuşan karakter mikro-nabzı ve çift-opaklık yapmayan duygu geçişi.
+            </div>
+          </div>
+          <div style={{ padding: 10, borderRadius: 8, background: 'rgba(14,10,22,0.72)', border: '1px solid rgba(212,168,87,0.22)', fontSize: 12.5 }}>
+            <strong style={{ color: '#f3d287' }}>Summon &amp; Hub Modal Akışı</strong>
+            <div className="muted" style={{ marginTop: 4 }}>
+              <code>SummonScene.showResults()</code> 4★/5★ hale parıltısı + sesli kademeli açılış ve <code>HubScreen.openModal()</code> sahne-kontrollü geçiş.
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div
         style={{
           display: 'grid',
