@@ -4,7 +4,7 @@ import { ErrorNotice } from '../App';
 
 interface Banner {
   id: string; title_en: string; status: string; version: number; starts_at: string | null; ends_at: string | null; updated_by: string;
-  config: { kind: string; pityGroup?: string; hardPity: number; baseFiveStarRate: number; baseFourStarRate?: number; fourStarPity?: number; softPity: { startPull: number; increment: number } | null; featured: { chance: number; lossesToGuarantee: number } | null; pools: { fiveFeatured: string[]; fiveOther: string[]; four: string[]; three: string[] } };
+  config: { kind: string; artKey?: string; pityGroup?: string; hardPity: number; baseFiveStarRate: number; baseFourStarRate?: number; fourStarPity?: number; softPity: { startPull: number; increment: number } | null; featured: { chance: number; lossesToGuarantee: number } | null; pools: { fiveFeatured: string[]; fiveOther: string[]; four: string[]; three: string[] } };
   analysis: { consolidatedFiveStarRate: number; expectedPullsPerFiveStar: number; expectedPullsPerTarget: number | null; worstCasePullsForTarget: number | null };
 }
 interface SimOut {
@@ -129,10 +129,11 @@ export function Banners({ me, say }: { me: Me; say: (m: string) => void }): Reac
       ) : null}
 
       <table>
-        <thead><tr><th>ID</th><th>Title</th><th>Status</th><th>5★ base</th><th>Pity</th><th>≈ pulls / 5★</th><th>≈ pulls / target</th><th>Window</th><th /></tr></thead>
+        <thead><tr><th>ID</th><th>Title</th><th>Art Key</th><th>Status</th><th>5★ base</th><th>Pity</th><th>≈ pulls / 5★</th><th>≈ pulls / target</th><th>Window</th><th /></tr></thead>
         <tbody>{rows.map((b) => (
           <tr key={b.id}>
             <td><code>{b.id}</code></td><td>{b.title_en}</td>
+            <td><code>{b.config.artKey ?? `banner_${b.id}`}</code></td>
             <td><span className={`badge ${b.status === 'active' ? 'ok' : 'warn'}`}>{b.status}</span></td>
             <td>{pct(b.config.baseFiveStarRate)}</td>
             <td>{b.config.softPity ? `soft ${b.config.softPity.startPull}, ` : ''}hard {b.config.hardPity}</td>

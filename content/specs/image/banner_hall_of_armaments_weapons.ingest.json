@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_hall_of_armaments_weapons",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_hall_of_armaments_v001.jpg",
+    "sha256": "4b586b56cb12d0558caa40c95d163862409e6f999ca4348357580cf96cb49961"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_hall_of_armaments_weapons",
+    "banner": "hall_of_armaments_weapons"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

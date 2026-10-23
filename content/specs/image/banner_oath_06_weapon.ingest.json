@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_06_weapon",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_weapon_06_cinder_anvil_v001.jpg",
+    "sha256": "1f2e7fc75034b240ae7a7b8ced41b8c27239e6d71e3c1c2e2cb72a169fbbdc6e"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_06_weapon",
+    "banner": "oath_06_weapon"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

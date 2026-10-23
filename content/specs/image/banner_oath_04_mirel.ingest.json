@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_04_mirel",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_oath_04_mirel_v001.jpg",
+    "sha256": "2075aad09f461d72fd0360f77983f4610c1a54c7af647ec01d72d152a092869c"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_04_mirel",
+    "banner": "oath_04_mirel"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

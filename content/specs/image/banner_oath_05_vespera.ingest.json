@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_05_vespera",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_oath_05_vespera_v001.jpg",
+    "sha256": "13210619988106c48c0d911a5e03cc163c6fc97e859e0ee7e325005210e2be51"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_05_vespera",
+    "banner": "oath_05_vespera"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

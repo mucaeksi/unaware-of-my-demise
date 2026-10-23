@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_07_corbin",
+  "class": "banner",
+  "revision": 1,
+  "targets": {
+    "ui": {
+      "banner_oath_07_corbin": "art/ui_banner_oath_07_corbin.webp"
+    }
+  },
+  "source": {
+    "kind": "locked",
+    "sha256": "2c1eac86a77c6073a2e904df8061313b0acf71bf0bcce082e355946ebf1eaf23",
+    "mime": "image/jpeg",
+    "width": 1376,
+    "height": 768
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/banner_oath_07_corbin.ingest.json",
+    "spec_sha256": "45846330ba86a0aa0a8c62f0594f8395558a82531d28cdea3eb73bf0ce9f7235",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "610930cba90fe5443f58c799e450a28f4999b98fd1e8849f3d4c047441d3f507"
+  },
+  "outputs": [
+    {
+      "path": "art/ui_banner_oath_07_corbin.webp",
+      "sha256": "65451d1e890ebc8e0d3a114187d9ae52044eae86a16faba77015de7ca0e372b6",
+      "pixels_sha256": "65053d7aa95ae5990def10f67b8129ef0dd499cfb601bd74fc95ede35488519c",
+      "bytes": 67206,
+      "width": 1376,
+      "height": 768
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "warn",
+          "detail": "image/jpeg 1376x768"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1376x768"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "67206 bytes <= 262144"
+        }
+      },
+      "warnings": [
+        "A02: source is JPEG; block noise may affect chroma key edges"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "argon:art-director",
+      "at": "2026-10-23T11:01:49.181Z",
+      "note": "§4.4 canonical banner key art passed QC"
+    }
+  },
+  "license": {
+    "origin": "project_locked_original",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

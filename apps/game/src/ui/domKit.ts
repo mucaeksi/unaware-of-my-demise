@@ -142,6 +142,43 @@ export class DomNode<E extends HTMLElement = HTMLElement> {
   /** called once the element is in the document (layout can be measured) */
   mounted(): void {}
 
+  /** mounts or updates a framed key-art plate inside a panel or button with a dark readability scrim */
+  setArtBackdrop(
+    url: string,
+    artKey?: string,
+    scrim = 'linear-gradient(90deg, rgba(8,5,14,0.92) 0%, rgba(8,5,14,0.78) 52%, rgba(8,5,14,0.22) 82%, rgba(8,5,14,0.52) 100%)',
+  ): this {
+    let wrap = this.el.querySelector<HTMLDivElement>(':scope > .uomd-panel-art');
+    let img: HTMLImageElement | null;
+    let overlay: HTMLDivElement | null;
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.className = 'uomd-panel-art';
+      wrap.style.cssText =
+        'position:absolute;inset:7px;border-radius:10px;overflow:hidden;pointer-events:none;z-index:0;border:1px solid rgba(227,195,125,0.28);box-shadow:inset 0 0 22px rgba(5,2,8,0.85)';
+      img = document.createElement('img');
+      img.className = 'uomd-banner-img';
+      img.alt = '';
+      img.decoding = 'async';
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:right center;display:block';
+      overlay = document.createElement('div');
+      overlay.className = 'uomd-banner-scrim';
+      overlay.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+      wrap.append(img, overlay);
+      this.el.prepend(wrap);
+    } else {
+      img = wrap.querySelector<HTMLImageElement>('.uomd-banner-img');
+      overlay = wrap.querySelector<HTMLDivElement>('.uomd-banner-scrim');
+    }
+    if (artKey) {
+      this.el.dataset.bannerArt = artKey;
+      wrap.dataset.bannerArt = artKey;
+    }
+    if (img && img.getAttribute('src') !== url) img.src = url;
+    if (overlay) overlay.style.background = scrim;
+    return this;
+  }
+
   destroy(): void {
     this.dead = true;
     this.el.remove();

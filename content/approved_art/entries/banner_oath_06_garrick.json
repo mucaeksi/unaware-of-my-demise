@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_06_garrick",
+  "class": "banner",
+  "revision": 1,
+  "targets": {
+    "ui": {
+      "banner_oath_06_garrick": "art/ui_banner_oath_06_garrick.webp"
+    }
+  },
+  "source": {
+    "kind": "locked",
+    "sha256": "bef1fcf6207e0c897d3835ca8de18fbb738338dc5511bf35fa7a651a2facf41d",
+    "mime": "image/jpeg",
+    "width": 1376,
+    "height": 768
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/banner_oath_06_garrick.ingest.json",
+    "spec_sha256": "2433ef18c9c2a2f7761ef3140a575396d921131b958b708ae46e749083e01439",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "ef072b92291a90a3e8fc68b80d00e54852b7451e1a7035ae72a1667beb2ad8f2"
+  },
+  "outputs": [
+    {
+      "path": "art/ui_banner_oath_06_garrick.webp",
+      "sha256": "06b3d0946b7db2cabe1c45f290832bb898071c163ce0401ce00e83767c33b372",
+      "pixels_sha256": "b157af4b8d3130eaa1d2584a4c3f949e3488b67433e6c90a39549715f200fc6c",
+      "bytes": 73456,
+      "width": 1376,
+      "height": 768
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "warn",
+          "detail": "image/jpeg 1376x768"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1376x768"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "73456 bytes <= 262144"
+        }
+      },
+      "warnings": [
+        "A02: source is JPEG; block noise may affect chroma key edges"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "argon:art-director",
+      "at": "2026-10-23T11:01:48.787Z",
+      "note": "§4.4 canonical banner key art passed QC"
+    }
+  },
+  "license": {
+    "origin": "project_locked_original",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

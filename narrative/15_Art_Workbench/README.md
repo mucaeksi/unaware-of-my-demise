@@ -6,7 +6,7 @@ This directory is the canonical creative staging area owned by the **Art Directo
 
 | Folder | Purpose |
 |---|---|
-| `banners/` | Summon & LiveOps banner key art masters (`banner_standard_hall_of_armaments`, 5 Oath character banners, 5 weapon banners) |
+| `banners/` | Summon & LiveOps banner key art masters (all 16 canonical banners: `banner_hall_of_ancestors`, `banner_hall_of_armaments`, 7 Oath character banners, 7 signature weapon banners) |
 | `cg/` | Full-bleed 16:9 narrative event CGs (`roadside_rest`, `shelter_evening`, prologue and chapter stills) |
 | `characters/` | Per-character briefs, prompts, candidate turnarounds, expressions, chibi sheets and provenance (`<id>/production_v001/`, `design_v001/`) |
 | `enemies/` | Part I enemy concept boards (`enemies/design_v001/`), design cards (`design_cards.json`) and boss/objective handoffs |

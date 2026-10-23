@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_07_weapon",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_weapon_07_locke_chain_v001.jpg",
+    "sha256": "adc8ce512a838af8ed19ae95b9da5671628335076939a59223fb00d4bd56c03c"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_07_weapon",
+    "banner": "oath_07_weapon"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

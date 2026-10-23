@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_03_weapon",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_weapon_03_gatewarden_promise_v001.jpg",
+    "sha256": "0c96258b6279ac98d5da3a76c1eae1bf0e3e68b01ca0b37d158c6c1064d58a46"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_03_weapon",
+    "banner": "oath_03_weapon"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

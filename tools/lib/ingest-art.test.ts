@@ -280,4 +280,29 @@ describe('ingest_art pipeline, provenance, and A31 reference hygiene (R14-B)', (
     expect(checkLegacyHash.passed).toBe(false);
     expect(checkLegacyHash.reason).toContain('matches a legacy git-derived asset hash');
   });
+
+  it('initializes and ingests a banner class spec into targets.ui (§4.4)', async () => {
+    const repo = makeRepo();
+    mkdirSync(join(repo, 'narrative/15_Art_Workbench/banners'), { recursive: true });
+    const bannerRel = 'narrative/15_Art_Workbench/banners/banner_oath_test_v001.jpg';
+    const bannerBuf = await sharp({
+      create: { width: 1376, height: 768, channels: 3, background: { r: 28, g: 18, b: 42 } }
+    })
+      .jpeg({ quality: 90 })
+      .toBuffer();
+    writeFileSync(join(repo, bannerRel), bannerBuf);
+    const sha = createHash('sha256').update(bannerBuf).digest('hex');
+
+    const spec = initIngestSpec('content/specs/image/banner_oath_test.json', 'banner');
+    expect(spec.class).toBe('banner');
+    expect(spec.manifest.ui).toBe('banner_oath_test');
+    spec.source = { kind: 'locked', file: bannerRel, sha256: sha };
+    const specRel = 'content/specs/image/banner_oath_test.ingest.json';
+    writeFileSync(join(repo, specRel), `${JSON.stringify(spec, null, 2)}\n`);
+
+    const res = await runIngest({ rootDir: repo, ingestSpecPath: specRel, execute: true });
+    expect(res.status).toBe('executed');
+    expect(res.entry.class).toBe('banner');
+    expect(res.entry.targets.ui).toEqual({ banner_oath_test: 'art/ui_banner_oath_test.webp' });
+  });
 });

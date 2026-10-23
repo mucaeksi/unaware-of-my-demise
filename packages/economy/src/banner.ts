@@ -32,6 +32,8 @@ export const BannerConfig = z
   .object({
     id: Id,
     kind: z.enum(['character', 'weapon']),
+    /** optional key-art reference in ArtManifest.ui (e.g. `banner_hall_of_ancestors`) */
+    artKey: Id.optional(),
     /** banners with the same group share pity, the 4-star counter and the knot counter (per account) */
     pityGroup: Id,
     hardPity: z.number().int().min(1).max(500),
@@ -109,10 +111,11 @@ export interface CatalogPools {
 const common = { fourStarWeight: CANON.fourStarWeight, threeStarWeight: CANON.threeStarWeight, minFourStarEvery: CANON.minFourStarEvery, costPerPull: CANON.pullCost } as const;
 
 /** Limited character banner (canon: 2.5 %, soft pity from pull 65 (+6 pp), hard pity 80, 55 % target, lost-target guarantee). */
-export function limitedCharacterBanner(id: string, featured: string, c: CatalogPools): BannerConfig {
+export function limitedCharacterBanner(id: string, featured: string, c: CatalogPools, artKey = `banner_${id}`): BannerConfig {
   return BannerConfig.parse({
     id,
     kind: 'character',
+    artKey,
     pityGroup: 'limited_character',
     hardPity: CANON.hardPityCharacter,
     baseFiveStarRate: CANON.baseFiveStar,
@@ -124,10 +127,11 @@ export function limitedCharacterBanner(id: string, featured: string, c: CatalogP
 }
 
 /** Permanent character banner (Hall of Ancestors): 2 %, hard pity 80, no soft pity, no featured item, separate counters. */
-export function standardCharacterBanner(id: string, c: CatalogPools): BannerConfig {
+export function standardCharacterBanner(id: string, c: CatalogPools, artKey = `banner_${id}`): BannerConfig {
   return BannerConfig.parse({
     id,
     kind: 'character',
+    artKey,
     pityGroup: 'standard_character',
     hardPity: CANON.hardPityCharacter,
     baseFiveStarRate: CANON.standardFiveStar,
@@ -140,10 +144,11 @@ export function standardCharacterBanner(id: string, c: CatalogPools): BannerConf
 
 /** Signature weapon banner (canon: 2.5 %, hard pity 65, no soft pity, 55 % target, two Fate Knots guarantee the target).
  *  `selectable` = Hall of Armaments (the player picks the target); limited banners have a fixed signature weapon. */
-export function weaponBanner(id: string, targets: string[], others: string[], c: Pick<CatalogPools, 'four' | 'three'>, selectable: boolean): BannerConfig {
+export function weaponBanner(id: string, targets: string[], others: string[], c: Pick<CatalogPools, 'four' | 'three'>, selectable: boolean, artKey = `banner_${id}`): BannerConfig {
   return BannerConfig.parse({
     id,
     kind: 'weapon',
+    artKey,
     pityGroup: 'weapon',
     hardPity: CANON.hardPityWeapon,
     baseFiveStarRate: CANON.baseFiveStar,

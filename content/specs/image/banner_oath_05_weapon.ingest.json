@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_05_weapon",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_weapon_05_last_hour_v001.jpg",
+    "sha256": "522e1d256baa5c51c2155c0c4e06fd7123677ed34141a83d9dce5a6587e7f7f9"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_05_weapon",
+    "banner": "oath_05_weapon"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

@@ -184,13 +184,25 @@ export class ArtLibrary {
   }
 
   async loadUi(scene: PixiScene<unknown>): Promise<void> {
-    const entries = Object.entries(this.art.ui);
+    const entries = Object.entries(this.art.ui).filter(([name]) => !name.startsWith('banner_'));
     const refs = await Promise.all(entries.map(async ([name, path]) => ({ name, ref: await this.asset(scene, path) })));
     const queue: Queued[] = refs.map(({ name, ref }) => {
       this.uiKeys.set(name, ref.key);
       return { type: 'image', key: ref.key, url: ref.url };
     });
     await this.run(scene, queue);
+  }
+
+  /** Resolves the key-art URL of a banner on demand without loading all banner plates during boot. */
+  async bannerUrl(scene: PixiScene<unknown>, artKey?: string | null, bannerId?: string): Promise<string | null> {
+    const candidates = [artKey, bannerId ? `banner_${bannerId}` : null].filter((k): k is string => Boolean(k));
+    for (const key of candidates) {
+      const path = this.art.ui[key];
+      if (!path) continue;
+      const ref = await this.asset(scene, path);
+      return ref.url;
+    }
+    return null;
   }
 
   /** Loads full-frame stills (prologue plates, event illustrations) on demand; ids the manifest does not ship are skipped without error. */

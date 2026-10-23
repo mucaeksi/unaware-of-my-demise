@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_04_weapon",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_weapon_04_unwritten_ledger_v001.jpg",
+    "sha256": "cfb8707da3fe08070945fc88a2a0d609a61ab2924e91a22c07aff497fd2b02a6"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_04_weapon",
+    "banner": "oath_04_weapon"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

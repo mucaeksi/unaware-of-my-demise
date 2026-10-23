@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_01_sister",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_oath_01_aveline_v001.jpg",
+    "sha256": "4bc29df5b645b432518f8d6b9bbeb9b6f8469774dfc6cd6925f5222e1df644cd"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_01_sister",
+    "banner": "oath_01_sister"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

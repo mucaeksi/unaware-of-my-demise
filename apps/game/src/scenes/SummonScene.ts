@@ -55,15 +55,25 @@ export class SummonScene extends HubScreen {
       this.button(REF_W - 330, 190, { label: '›', ariaLabel: 'Next banner', w: 140, h: 130, fontSize: 64, onClick: () => { this.idx = (this.idx + 1) % this.banners.length; this.draw(); } });
     }
 
-    this.card(560, 520, 940, 440);
-    const feat = b.featured ? `Featured: ${b.pools.fiveFeatured.map((i) => this.name(i)).join(', ')} — ${pct(b.featured.chance, 0)} on a 5★${b.featured.lossesToGuarantee === 1 ? ', guaranteed after a miss' : `, guaranteed after ${b.featured.lossesToGuarantee} misses`}` : `5★ pool: ${b.pools.fiveOther.map((i) => this.name(i)).join(', ')}`;
+    const showcase = this.card(560, 520, 940, 440);
+    const artKey = b.artKey ?? `banner_${b.id}`;
+    const artLib = Services.ready().art;
+    const rawBannerPath = artLib.art.ui[artKey] ?? artLib.art.ui[`banner_${b.id}`];
+    const bannerScrim = 'linear-gradient(90deg, rgba(8,5,14,0.92) 0%, rgba(8,5,14,0.82) 54%, rgba(8,5,14,0.18) 82%, rgba(8,5,14,0.48) 100%)';
+    if (rawBannerPath) {
+      showcase.setArtBackdrop(`content/base/${rawBannerPath}`, artKey, bannerScrim);
+    }
+    void artLib.bannerUrl(this, artKey, b.id).then((url) => {
+      if (url && showcase.active) showcase.setArtBackdrop(url, artKey, bannerScrim);
+    }).catch(() => {});
+    const feat = b.featured ? `Featured: ${b.pools.fiveFeatured.map((i) => this.name(i)).join(', ')} — ${pct(b.featured.chance, 0)} on a 5★${b.featured.lossesToGuarantee === 1 ? ', guaranteed after a miss' : `, guaranteed after ${b.featured.lossesToGuarantee} misses`}` : `5★ pool: ${b.pools.fiveFeatured.length ? b.pools.fiveFeatured.map((i) => this.name(i)).join(', ') : b.pools.fiveOther.map((i) => this.name(i)).join(', ')}`;
     const lines = [
       `5★ rate ${pct(b.baseFiveStarRate)}${b.softPity ? `, rising ${pct(b.softPity.increment, 0)} per pull from pull ${b.softPity.startPull}` : ''}, guaranteed by pull ${b.hardPity}`,
       feat,
       `A 4★ or better at least every ${b.minFourStarEvery} pulls. A 10-pull has no bonus rate.`,
       `Average ${b.analysis.expectedPullsPerFiveStar.toFixed(1)} pulls per 5★${b.analysis.expectedPullsPerTarget ? `, ${b.analysis.expectedPullsPerTarget.toFixed(1)} per featured (at most ${b.analysis.worstCasePullsForTarget})` : ''}`
     ];
-    this.text(120, 340, lines.join('\n\n'), { fontSize: 31, wordWrap: { width: 880 }, lineSpacing: 2 });
+    this.text(120, 326, lines.join('\n\n'), { fontSize: 26, wordWrap: { width: 570 }, lineSpacing: 1, stroke: '#07040c', strokeThickness: 3 });
 
     this.card(1400, 520, 760, 440, 'hot');
     this.text(1400, 350, 'PITY', { fontFamily: F.display, fontSize: 34, fontStyle: '600', color: T.gold }).setOrigin(0.5);

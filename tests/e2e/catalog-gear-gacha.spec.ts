@@ -24,6 +24,10 @@ test('armory and summon pin the installed release and recover one committed pull
   await page.unroute('**/api/v1/gear/*/equip');
   await page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Gear').nav.start('Summon'));
   await waitScene(page, 'Summon'); await expect.poll(() => page.evaluate(() => (window as any).__UOMD__.game.scene.getScene('Summon').banners.length)).toBeGreaterThan(0);
+  await expect.poll(() => page.evaluate(() => {
+    const img = document.querySelector<HTMLImageElement>('[data-banner-art="banner_hall_of_ancestors"] img.uomd-banner-img');
+    return Boolean(img && img.complete && img.naturalWidth > 0);
+  })).toBe(true);
   expect(reads.length).toBeGreaterThanOrEqual(5); expect(reads.every((url) => new URL(url).searchParams.get('releaseId') === release)).toBe(true);
   let original = ''; let committed = false; let recordedPulls: unknown[] = [];
   await page.route('**/api/v1/gacha/pull', async (route) => {

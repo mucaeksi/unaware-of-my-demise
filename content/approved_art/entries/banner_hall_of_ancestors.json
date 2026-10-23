@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "asset_id": "banner_hall_of_ancestors",
+  "class": "banner",
+  "revision": 1,
+  "targets": {
+    "ui": {
+      "banner_hall_of_ancestors": "art/ui_banner_hall_of_ancestors.webp"
+    }
+  },
+  "source": {
+    "kind": "locked",
+    "sha256": "f2d0bf87ad090ecce43a62f466d08e47d52f1bf4a72c85dd08e30797793aef2c",
+    "mime": "image/jpeg",
+    "width": 1376,
+    "height": 768
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/banner_hall_of_ancestors.ingest.json",
+    "spec_sha256": "9d0578e56c14cd4a4896658779033c2fd84e0975488799b87edce55decd5ad94",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "a9ae325e79f7ea7c18f87b4c0a0cda8b82498ad1af15fddf3c7c6f94d79828e0"
+  },
+  "outputs": [
+    {
+      "path": "art/ui_banner_hall_of_ancestors.webp",
+      "sha256": "5a981d8c5065f0f4a9beb1e241cb999cb31763784e81c5d7844bfacd6d4f1826",
+      "pixels_sha256": "d25f2e79b5a0550fa085238e44e4c0927a960c5ff524fe8c42c2cb0499a1ba6b",
+      "bytes": 99192,
+      "width": 1376,
+      "height": 768
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "warn",
+          "detail": "image/jpeg 1376x768"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1376x768"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "99192 bytes <= 262144"
+        }
+      },
+      "warnings": [
+        "A02: source is JPEG; block noise may affect chroma key edges"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "argon:art-director",
+      "at": "2026-10-23T11:01:46.612Z",
+      "note": "§4.4 canonical banner key art passed QC"
+    }
+  },
+  "license": {
+    "origin": "project_locked_original",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

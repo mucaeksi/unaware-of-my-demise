@@ -3,7 +3,7 @@
  * Never calls paid APIs or touches content/budget/media_budget.json.
  *
  * CLI usage:
- *   npx tsx tools/ingest_art.ts init --spec <spec.json> --class <unit_sheet|portrait|background|still|ui_image|icon_sheet>
+ *   npx tsx tools/ingest_art.ts init --spec <spec.json> --class <unit_sheet|portrait|background|still|ui_image|icon_sheet|banner>
  *   npx tsx tools/ingest_art.ts <ingest.json> [--source <file>] [--execute] [--force]
  *   npx tsx tools/ingest_art.ts approve <asset_id> --by <owner> [--note "..."]
  *   npx tsx tools/ingest_art.ts reject <asset_id> --reason "..."
@@ -22,7 +22,7 @@ import { sliceSheet, trimAndMeasureFrame, type LayoutSpec, type TrimmedFrame } f
 
 const DEFAULT_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-export type IngestClass = 'unit_sheet' | 'portrait' | 'background' | 'still' | 'ui_image' | 'icon_sheet';
+export type IngestClass = 'unit_sheet' | 'portrait' | 'background' | 'still' | 'ui_image' | 'icon_sheet' | 'banner';
 
 export type IngestSource =
   | { kind: 'generated'; pick: string; provenance?: string }
@@ -415,6 +415,29 @@ export function initIngestSpec(specPath: string, cls: IngestClass): IngestSpec {
         max_bytes: 389120,
       },
       manifest: { still: stillKey },
+      qc: { profile: 'plate' },
+    };
+  }
+  if (cls === 'banner') {
+    const uiKey = baseId.startsWith('banner_') ? baseId : `banner_${baseId}`;
+    return {
+      schema: 1,
+      asset_id: baseId,
+      class: 'banner',
+      source: {
+        kind: 'locked',
+        file: `narrative/15_Art_Workbench/banners/${baseId}_v001.jpg`,
+        sha256: '0'.repeat(64),
+      },
+      layout: { mode: 'single' },
+      export: {
+        fit: 'exact',
+        width: 1376,
+        height: 768,
+        webp: { mode: 'lossy', quality: 82, alpha_quality: 90, effort: 5 },
+        max_bytes: 262144,
+      },
+      manifest: { ui: uiKey, banner: uiKey.replace(/^banner_/, '') },
       qc: { profile: 'plate' },
     };
   }
@@ -934,7 +957,7 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
       relOutPath = `art/still_${stillKey}.webp`;
       targets.stills = { [stillKey]: relOutPath };
     } else {
-      const uiKey = String(spec.manifest.ui ?? spec.asset_id);
+      const uiKey = String(spec.manifest.ui ?? spec.manifest.banner ?? spec.asset_id);
       relOutPath = `art/ui_${uiKey}.webp`;
       targets.ui = { [uiKey]: relOutPath };
     }

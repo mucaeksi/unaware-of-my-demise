@@ -24,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "05a64da1b0e55a898ca178527164780d5ece32055840e70dda61ea1779f58464",
-      "bytes": 21343,
+      "sha256": "06b68b09f734db3723869569429782115f0bf7340a7074c626ac440458c64b20",
+      "bytes": 22423,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -210,6 +210,118 @@
       "bytes": 116214,
       "media_type": "image/webp",
       "kind": "background"
+    },
+    {
+      "path": "art/ui_banner_hall_of_ancestors.webp",
+      "sha256": "5a981d8c5065f0f4a9beb1e241cb999cb31763784e81c5d7844bfacd6d4f1826",
+      "bytes": 99192,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_hall_of_armaments_weapons.webp",
+      "sha256": "4d711d9f16e984355a04ed83f8bd445cbbcb3716a42acedecfbd32752e7113c4",
+      "bytes": 148582,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_01_sister.webp",
+      "sha256": "24ee8cb074802876b9e1d3d60305cfd9b169c6398aa60cc639bd1b3a4c91b0ba",
+      "bytes": 140636,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_01_weapon.webp",
+      "sha256": "086a983e493d8a77a8ec83593ed83cd030d425f1d22b752fd710632bf52e6139",
+      "bytes": 98040,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_02_sable.webp",
+      "sha256": "451d8ac3ff63bee4f9aabf25cb7ff94610d9cbd5cea89b1d6c8c14ab8f3fd2a8",
+      "bytes": 119376,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_02_weapon.webp",
+      "sha256": "d583fddfe496f3fa4308807be3004af963ad8d17068b7afdb9483ff41dc5f11d",
+      "bytes": 75358,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_03_nara.webp",
+      "sha256": "32be796830c45dc56e72e21ee47cc21bf93f3aa4a30c87623a1aec4697f3dbae",
+      "bytes": 142850,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_03_weapon.webp",
+      "sha256": "7338386821e43f7611de2ef81d5040e6a1e80978320971b81aa0b116255b473f",
+      "bytes": 117224,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_04_mirel.webp",
+      "sha256": "b8992d700d257e4de65b7d6e83d7820b1da3520b856da2a4fb2f1d8433b19533",
+      "bytes": 136834,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_04_weapon.webp",
+      "sha256": "d754fbb5788ccbc374db5d27ffe908976231624d0dfc8487c0db20ae0f0857d7",
+      "bytes": 132748,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_05_vespera.webp",
+      "sha256": "e8016cbc9cad56abd25aefafc7dec10c2f96908f744bd151b9088dcfd8f821d2",
+      "bytes": 160414,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_05_weapon.webp",
+      "sha256": "c6445d608529017943c40e67ad4a8ab13548b89a681afa36c8c1629f40ce7ca2",
+      "bytes": 164610,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_06_garrick.webp",
+      "sha256": "06b3d0946b7db2cabe1c45f290832bb898071c163ce0401ce00e83767c33b372",
+      "bytes": 73456,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_06_weapon.webp",
+      "sha256": "fe2192079bd585478a5cf0b71a6b29d9967c9d8fe3398e88faf4c480084da977",
+      "bytes": 67968,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_07_corbin.webp",
+      "sha256": "65451d1e890ebc8e0d3a114187d9ae52044eae86a16faba77015de7ca0e372b6",
+      "bytes": 67206,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_banner_oath_07_weapon.webp",
+      "sha256": "69495b869b471b4d774f81a5a67f9b4ed10caee251ed3fac80ad740b12519efa",
+      "bytes": 64132,
+      "media_type": "image/webp",
+      "kind": "other_data"
     },
     {
       "path": "art/ui_key_art.webp",

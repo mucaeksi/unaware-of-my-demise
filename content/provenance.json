@@ -186,6 +186,134 @@
       }
     },
     {
+      "output": "content/base/art/ui_banner_hall_of_ancestors.webp",
+      "sha256": "5a981d8c5065f0f4a9beb1e241cb999cb31763784e81c5d7844bfacd6d4f1826",
+      "sources": {
+        "locked:banner_hall_of_ancestors@rev1": "f2d0bf87ad090ecce43a62f466d08e47d52f1bf4a72c85dd08e30797793aef2c",
+        "entry": "a9ae325e79f7ea7c18f87b4c0a0cda8b82498ad1af15fddf3c7c6f94d79828e0"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_hall_of_armaments_weapons.webp",
+      "sha256": "4d711d9f16e984355a04ed83f8bd445cbbcb3716a42acedecfbd32752e7113c4",
+      "sources": {
+        "locked:banner_hall_of_armaments_weapons@rev1": "4b586b56cb12d0558caa40c95d163862409e6f999ca4348357580cf96cb49961",
+        "entry": "814a122052a50acced7dea8bd556ba7052c9edcbe404c7f63b9678c225ebdcfa"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_01_sister.webp",
+      "sha256": "24ee8cb074802876b9e1d3d60305cfd9b169c6398aa60cc639bd1b3a4c91b0ba",
+      "sources": {
+        "locked:banner_oath_01_sister@rev1": "4bc29df5b645b432518f8d6b9bbeb9b6f8469774dfc6cd6925f5222e1df644cd",
+        "entry": "398f978975cd7606e907cbda0af73e076fb74a1a8eda6cd1dc8a98017e0d3281"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_01_weapon.webp",
+      "sha256": "086a983e493d8a77a8ec83593ed83cd030d425f1d22b752fd710632bf52e6139",
+      "sources": {
+        "locked:banner_oath_01_weapon@rev1": "af7941885ff02416adcb20e521e1310f890c50d507c7b87919a1aa7bb6563ec1",
+        "entry": "72ecc16f9a9b0638d096625af9a318ded6c9954c034a8a381809ab584f18e34d"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_02_sable.webp",
+      "sha256": "451d8ac3ff63bee4f9aabf25cb7ff94610d9cbd5cea89b1d6c8c14ab8f3fd2a8",
+      "sources": {
+        "locked:banner_oath_02_sable@rev1": "3870647948aad6b17962c9a92b7afc9c4be251472c5b41fa84832bf4cf0aea26",
+        "entry": "7c52019239d346e1afddec685a854eb6744240a15a4f9b69d3915af2f3af9b67"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_02_weapon.webp",
+      "sha256": "d583fddfe496f3fa4308807be3004af963ad8d17068b7afdb9483ff41dc5f11d",
+      "sources": {
+        "locked:banner_oath_02_weapon@rev1": "12b633f226730760fb9cbbfda44aab4640ad8be0b9934e40485252365adb2ecc",
+        "entry": "7bb85ae561cb77cba91b6f15a7f883647d920f3bdc5c2105cba9047d1a23ebce"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_03_nara.webp",
+      "sha256": "32be796830c45dc56e72e21ee47cc21bf93f3aa4a30c87623a1aec4697f3dbae",
+      "sources": {
+        "locked:banner_oath_03_nara@rev1": "ce090cdb87c8c850f709d0a9f69f0b1d6bca9341574e8f01e66d7207b3b42cd0",
+        "entry": "4c22237b7e762de3aac440498c02d0955faa11c4a759ffd6e82f608af400f2ba"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_03_weapon.webp",
+      "sha256": "7338386821e43f7611de2ef81d5040e6a1e80978320971b81aa0b116255b473f",
+      "sources": {
+        "locked:banner_oath_03_weapon@rev1": "0c96258b6279ac98d5da3a76c1eae1bf0e3e68b01ca0b37d158c6c1064d58a46",
+        "entry": "b802519ab5c1446cbd3c65bd4655466c741ec25b3da59890ed1f3fd9047b8f48"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_04_mirel.webp",
+      "sha256": "b8992d700d257e4de65b7d6e83d7820b1da3520b856da2a4fb2f1d8433b19533",
+      "sources": {
+        "locked:banner_oath_04_mirel@rev1": "2075aad09f461d72fd0360f77983f4610c1a54c7af647ec01d72d152a092869c",
+        "entry": "54300238f0eb3ca8a98404943033ab7324467ddf9ef9704bbbc296af5c3318e3"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_04_weapon.webp",
+      "sha256": "d754fbb5788ccbc374db5d27ffe908976231624d0dfc8487c0db20ae0f0857d7",
+      "sources": {
+        "locked:banner_oath_04_weapon@rev1": "cfb8707da3fe08070945fc88a2a0d609a61ab2924e91a22c07aff497fd2b02a6",
+        "entry": "311e86d28c204fbb09d47d426aeefd794a6742c4f4593d8a2579d181d56fdef3"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_05_vespera.webp",
+      "sha256": "e8016cbc9cad56abd25aefafc7dec10c2f96908f744bd151b9088dcfd8f821d2",
+      "sources": {
+        "locked:banner_oath_05_vespera@rev1": "13210619988106c48c0d911a5e03cc163c6fc97e859e0ee7e325005210e2be51",
+        "entry": "8caf7b0765dc03969768fb81d5b6afd8910573a7b3fe0244d43322f7a814be84"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_05_weapon.webp",
+      "sha256": "c6445d608529017943c40e67ad4a8ab13548b89a681afa36c8c1629f40ce7ca2",
+      "sources": {
+        "locked:banner_oath_05_weapon@rev1": "522e1d256baa5c51c2155c0c4e06fd7123677ed34141a83d9dce5a6587e7f7f9",
+        "entry": "edf31581d56bb134243bb87a87ffac006d3c172476a4908207b442e7bc710ac8"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_06_garrick.webp",
+      "sha256": "06b3d0946b7db2cabe1c45f290832bb898071c163ce0401ce00e83767c33b372",
+      "sources": {
+        "locked:banner_oath_06_garrick@rev1": "bef1fcf6207e0c897d3835ca8de18fbb738338dc5511bf35fa7a651a2facf41d",
+        "entry": "ef072b92291a90a3e8fc68b80d00e54852b7451e1a7035ae72a1667beb2ad8f2"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_06_weapon.webp",
+      "sha256": "fe2192079bd585478a5cf0b71a6b29d9967c9d8fe3398e88faf4c480084da977",
+      "sources": {
+        "locked:banner_oath_06_weapon@rev1": "1f2e7fc75034b240ae7a7b8ced41b8c27239e6d71e3c1c2e2cb72a169fbbdc6e",
+        "entry": "fe73496aaf07b409fccd3f59ccb2c8ad1a68152aab825863f9c42f440399fe3a"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_07_corbin.webp",
+      "sha256": "65451d1e890ebc8e0d3a114187d9ae52044eae86a16faba77015de7ca0e372b6",
+      "sources": {
+        "locked:banner_oath_07_corbin@rev1": "2c1eac86a77c6073a2e904df8061313b0acf71bf0bcce082e355946ebf1eaf23",
+        "entry": "610930cba90fe5443f58c799e450a28f4999b98fd1e8849f3d4c047441d3f507"
+      }
+    },
+    {
+      "output": "content/base/art/ui_banner_oath_07_weapon.webp",
+      "sha256": "69495b869b471b4d774f81a5a67f9b4ed10caee251ed3fac80ad740b12519efa",
+      "sources": {
+        "locked:banner_oath_07_weapon@rev1": "adc8ce512a838af8ed19ae95b9da5671628335076939a59223fb00d4bd56c03c",
+        "entry": "68bed9688c31b436793ae7c15f287e2fc796f03cd203cd6f3b2efe84212ad33c"
+      }
+    },
+    {
       "output": "content/base/art/ui_studio_mark.webp",
       "sha256": "bac50683f7839cc384a4af2827de9dc381d06f307a40f9c1b3d86214741c4b47",
       "sources": {
@@ -291,7 +419,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "05a64da1b0e55a898ca178527164780d5ece32055840e70dda61ea1779f58464",
+      "sha256": "06b68b09f734db3723869569429782115f0bf7340a7074c626ac440458c64b20",
       "sources": {}
     },
     {

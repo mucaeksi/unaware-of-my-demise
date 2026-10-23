@@ -84,7 +84,7 @@ const DraftBody = z
     contentSchema: z.number().int().min(1).optional(),
     dependsOn: ReleaseId.optional(),
     rolloutPercent: z.number().int().min(0).max(100).optional(),
-    files: z.array(z.object({ path: SafeAssetPath, sha256: Sha }).strict()).min(1).max(512)
+    files: z.array(z.object({ path: SafeAssetPath, sha256: Sha }).strict()).min(1).max(768)
   })
   .strict();
 const UserBody = z.object({ email: z.string().email().max(120), role: z.enum(['owner', 'operator', 'viewer']) }).strict();

@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_hall_of_ancestors",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_hall_of_ancestors_v001.jpg",
+    "sha256": "f2d0bf87ad090ecce43a62f466d08e47d52f1bf4a72c85dd08e30797793aef2c"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_hall_of_ancestors",
+    "banner": "hall_of_ancestors"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

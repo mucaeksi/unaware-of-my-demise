@@ -25,7 +25,11 @@ test('world map hub: chapter 1 open, later chapters locked, a region opens its c
     await expect.poll(() => texts(page, 'Home')).toContain('CHAPTER 1');
     await settled(page, 'Home');
     const hub = await texts(page, 'Home');
-    expect(hub).toEqual(expect.arrayContaining(['CHAPTER 1', 'Open', 'CHAPTER 2', 'Locked', 'SUMMON', 'TRIALS', 'ARCHIVE']));
+    expect(hub).toEqual(expect.arrayContaining(['CHAPTER 1', 'Open', 'CHAPTER 2', 'Locked', 'SUMMON', 'TRIALS', 'ARCHIVE', 'ACTIVE BANNER', 'HALL OF ANCESTORS']));
+    await expect.poll(() => page.evaluate(() => {
+      const img = document.querySelector<HTMLImageElement>('[data-banner-art="banner_hall_of_ancestors"] img.uomd-banner-img');
+      return Boolean(img && img.complete && img.naturalWidth > 0);
+    })).toBe(true);
     await page.screenshot({ path: `${SHOTS}/${info.project.name}-world-map.png` });
 
     await tap(page, info, 390, 690); // Chapter 1 region

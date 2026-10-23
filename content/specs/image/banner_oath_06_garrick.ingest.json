@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_06_garrick",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_oath_06_garrick_v001.jpg",
+    "sha256": "bef1fcf6207e0c897d3835ca8de18fbb738338dc5511bf35fa7a651a2facf41d"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_06_garrick",
+    "banner": "oath_06_garrick"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

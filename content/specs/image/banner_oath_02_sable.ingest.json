@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "asset_id": "banner_oath_02_sable",
+  "class": "banner",
+  "source": {
+    "kind": "locked",
+    "file": "narrative/15_Art_Workbench/banners/banner_oath_02_sable_v001.jpg",
+    "sha256": "3870647948aad6b17962c9a92b7afc9c4be251472c5b41fa84832bf4cf0aea26"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1376,
+    "height": 768,
+    "webp": {
+      "mode": "lossy",
+      "quality": 82,
+      "alpha_quality": 90,
+      "effort": 5
+    },
+    "max_bytes": 262144
+  },
+  "manifest": {
+    "ui": "banner_oath_02_sable",
+    "banner": "oath_02_sable"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

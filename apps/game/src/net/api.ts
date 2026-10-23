@@ -61,6 +61,7 @@ export interface BannerInfo {
   id: string;
   title: string;
   kind: 'character' | 'weapon';
+  artKey?: string;
   pityGroup: string;
   startsAt: string | null;
   endsAt: string | null;

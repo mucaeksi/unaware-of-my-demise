@@ -71,14 +71,51 @@ export class HomeScene extends HubScreen {
 
   /** before the first chapter patch: the feature tiles as a 4x3 grid */
   private grid(tiles: Tile[]): void {
+    const rawDefaultPath = Services.ready().art.art.ui.banner_hall_of_ancestors;
+    let summonBtn: ReturnType<typeof this.button> | null = null;
     tiles.forEach((t, i) => {
       const tx = REF_W / 2 - 690 + (i % 4) * 460;
       const ty = 290 + Math.floor(i / 4) * 215;
-      this.button(tx, ty, { label: t.label, sub: t.sub, w: 430, h: 190, fontSize: 40, variant: i === 0 ? 'hot' : 'normal', onClick: () => this.open(t.scene, tx, ty) });
+      const btn = this.button(tx, ty, { label: t.label, sub: t.sub, w: 430, h: 190, fontSize: 40, variant: i === 0 ? 'hot' : 'normal', onClick: () => this.open(t.scene, tx, ty) });
+      if (i === 0 && rawDefaultPath) {
+        summonBtn = btn;
+        btn.setArtBackdrop(
+          `content/base/${rawDefaultPath}`,
+          'banner_hall_of_ancestors',
+          'linear-gradient(90deg, rgba(8,5,14,0.88) 0%, rgba(8,5,14,0.68) 54%, rgba(8,5,14,0.28) 100%)',
+        );
+      }
     });
     this.button(REF_W / 2, 1000, { label: 'NOTICES', w: 440, h: 110, onClick: () => this.nav.start('ContentPanel') });
     this.button(REF_W - 330, 1000, { label: 'ARCHIVE', w: 440, h: 110, onClick: () => this.nav.start('Library') });
     this.text(REF_W / 2, 866, Services.api.signedIn ? 'Your progress, wallet and rolls are kept on the server.' : 'Sign in to keep your progress, wallet and rolls on the server.', { fontSize: 34, color: T.dim }).setOrigin(0.5);
+    void this.syncBannerSpotlight((artUrl, artKey) => {
+      if (summonBtn && summonBtn.active) {
+        summonBtn.setArtBackdrop(
+          artUrl,
+          artKey,
+          'linear-gradient(90deg, rgba(8,5,14,0.88) 0%, rgba(8,5,14,0.68) 54%, rgba(8,5,14,0.28) 100%)',
+        );
+      }
+    });
+  }
+
+  private async syncBannerSpotlight(onResolved: (artUrl: string, artKey: string, title: string) => void): Promise<void> {
+    try {
+      const { content, art } = Services.ready();
+      const releaseId = await content.activeReleaseId();
+      const banners = await Services.api.banners(releaseId);
+      if (!this.isCurrentView() || banners.length === 0) return;
+      const featured =
+        banners.find((b) => b.kind === 'character' && b.featured && b.featured.targetMode !== 'selectable') ??
+        banners.find((b) => b.featured && b.featured.targetMode !== 'selectable') ??
+        banners[0]!;
+      const artKey = featured.artKey ?? `banner_${featured.id}`;
+      const artUrl = await art.bannerUrl(this, artKey, featured.id);
+      if (this.isCurrentView() && artUrl) onResolved(artUrl, artKey, featured.title);
+    } catch {
+      // Offline or unauthenticated: keep the default Hall of Ancestors key-art plate
+    }
   }
 
   /** the world map as the main menu: roads and regions in the middle, the features in two columns and a bottom row */
@@ -95,6 +132,32 @@ export class HomeScene extends HubScreen {
     for (const [label, scene, x] of [['SHOP', 'Shop', 700], ['PROFILE', 'Profile', 990], ['NOTICES', 'ContentPanel', 1280], ['ARCHIVE', 'Library', 1590]] as const) {
       this.button(x, 1000, { label, w: 270, h: 96, fontSize: 26, onClick: () => this.open(scene, x, 1000) });
     }
+
+    const spotlightCard = this.card(445, 240, 340, 150, 'hot').onTap(
+      () => this.open('Summon', 445, 240),
+      'Featured banner: Hall of Ancestors',
+    );
+    const rawDefaultPath = Services.ready().art.art.ui.banner_hall_of_ancestors;
+    if (rawDefaultPath) {
+      spotlightCard.setArtBackdrop(
+        `content/base/${rawDefaultPath}`,
+        'banner_hall_of_ancestors',
+        'linear-gradient(90deg, rgba(8,5,14,0.92) 0%, rgba(8,5,14,0.72) 56%, rgba(8,5,14,0.18) 100%)',
+      );
+    }
+    this.text(292, 184, 'ACTIVE BANNER', { fontFamily: F.display, fontSize: 16, fontStyle: '700', color: T.gold, stroke: '#07040c', strokeThickness: 3 });
+    const spotlightTitle = this.text(292, 212, 'HALL OF ANCESTORS', { fontFamily: F.display, fontSize: 22, fontStyle: '700', color: T.text, stroke: '#07040c', strokeThickness: 3 }).fit(220);
+    this.text(292, 268, 'OPEN ALTAR ›', { fontSize: 16, color: '#ffe49c', stroke: '#07040c', strokeThickness: 2 });
+    void this.syncBannerSpotlight((artUrl, artKey, title) => {
+      if (!spotlightCard.active) return;
+      spotlightCard.setArtBackdrop(
+        artUrl,
+        artKey,
+        'linear-gradient(90deg, rgba(8,5,14,0.92) 0%, rgba(8,5,14,0.72) 56%, rgba(8,5,14,0.18) 100%)',
+      );
+      spotlightCard.el.setAttribute('aria-label', `Featured banner: ${title}`);
+      spotlightTitle.setText(title.toUpperCase()).fit(220);
+    });
 
     const { content } = Services.ready();
     const index = await content.chapters();

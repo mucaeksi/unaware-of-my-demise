@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "asset_id": "banner_hall_of_armaments_weapons",
+  "class": "banner",
+  "revision": 1,
+  "targets": {
+    "ui": {
+      "banner_hall_of_armaments_weapons": "art/ui_banner_hall_of_armaments_weapons.webp"
+    }
+  },
+  "source": {
+    "kind": "locked",
+    "sha256": "4b586b56cb12d0558caa40c95d163862409e6f999ca4348357580cf96cb49961",
+    "mime": "image/jpeg",
+    "width": 1376,
+    "height": 768
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/banner_hall_of_armaments_weapons.ingest.json",
+    "spec_sha256": "2b71837fae0e5fdc05b72259a2c04656ee4677de9491a585955ff823ec39ac06",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "814a122052a50acced7dea8bd556ba7052c9edcbe404c7f63b9678c225ebdcfa"
+  },
+  "outputs": [
+    {
+      "path": "art/ui_banner_hall_of_armaments_weapons.webp",
+      "sha256": "4d711d9f16e984355a04ed83f8bd445cbbcb3716a42acedecfbd32752e7113c4",
+      "pixels_sha256": "ad4d8b1e0dd64ee00af6e436b4a0d9e71c7b5ce185c19bbd4285651b4c4a84ca",
+      "bytes": 148582,
+      "width": 1376,
+      "height": 768
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "warn",
+          "detail": "image/jpeg 1376x768"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1376x768"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "148582 bytes <= 262144"
+        }
+      },
+      "warnings": [
+        "A02: source is JPEG; block noise may affect chroma key edges"
+      ]
+    },
+    "human": {
+      "status": "approved",
+      "by": "argon:art-director",
+      "at": "2026-10-23T11:01:49.565Z",
+      "note": "§4.4 canonical banner key art passed QC"
+    }
+  },
+  "license": {
+    "origin": "project_locked_original",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}
