@@ -24,6 +24,35 @@ interface BaseReleaseSummary {
   approvedArtCount: number;
   approvedEntries: ApprovedEntrySummary[];
 }
+interface ReviewCatalogItem {
+  id: string;
+  category:
+    | 'STEPS'
+    | 'BANNERS'
+    | 'PORTRAITS'
+    | 'CHIBI_ATLAS'
+    | 'CONCEPT_SHEETS'
+    | 'BACKGROUNDS'
+    | 'STILLS_CG'
+    | 'ICONS_WEAPONS'
+    | 'UI_BRAND_STORE'
+    | 'AUDIO_SFX_BGM'
+    | 'VOICES'
+    | 'EVIDENCE_SCREENS';
+  badge: string;
+  origin: 'd30_new' | 'prev_approved';
+  title: string;
+  subtitle: string;
+  description: string;
+  imageUrl?: string;
+  audioUrl?: string;
+  sceneJump?: string;
+  targetPath: string;
+  dims?: string;
+  bytes?: number;
+  sha256?: string;
+}
+
 interface Progress {
   generatedAt: string;
   summary: { total: number; done: number; partial: number; missing: number };
@@ -33,6 +62,7 @@ interface Progress {
   commits: { sha: string; at: string; subject: string }[];
   screens: { file: string; caption: string }[];
   storeAssets?: { file: string; label: string; kind: 'brand' | 'screenshot' }[];
+  reviewCatalog?: ReviewCatalogItem[];
   now: Item[];
   next: Item[];
   blockedOnOwner: Item[];
@@ -55,472 +85,24 @@ const codeBadge = (s: string): string => (s === 'COMPLETE' ? 'ok' : s === 'PARTI
 const checkBadge = (r: string): string => (r === 'pass' ? 'ok' : r === 'partial' ? 'warn' : r === 'fail' ? 'bad' : 'info');
 interface Note { id: number; area: string; kind: string; body: string; status: string; resolution: string; created_by: string; created_at: string; updated_by: string | null }
 
-const TABS = ['D-30 Onay Merkezi (§4.1–§4.7)', 'Overview', 'Live preview', 'Store & Brand Kit', 'Screens', 'Feedback'] as const;
+const TABS = ['Onay & Denetim Merkezi (707 Eser)', 'Overview', 'Live preview', 'Store & Brand Kit', 'Screens', 'Feedback'] as const;
 type Tab = (typeof TABS)[number];
 const AREAS = ['General', 'Splash & Studio', 'Title', 'Prologue (120s)', 'Story', 'Battle', 'Patch Wait & Restart', 'Company hub', 'Summon', 'Roster', 'Mail', 'Shop', 'Account', 'Chapters', 'Control Center', 'Economy', 'Art direction'];
 
-interface D30ReviewItem {
-  id: string;
-  step: 'STEPS' | 'BANNERS' | 'AUDIO_SFX' | 'ATLAS_VFX';
-  stepBadge: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  imageUrl?: string;
-  audioUrl?: string;
-  sceneJump?: string;
-  targetPath: string;
-}
-
-const D30_REVIEW_ITEMS: D30ReviewItem[] = [
-  // 7 Core D-30 Steps (§4.1 – §4.7)
-  {
-    id: 'step_4_1_art_audit_objectives',
-    step: 'STEPS',
-    stepBadge: '§4.1 · cebb36d4',
-    title: '§4.1 Sanat Yönetimi Denetimi, Alt-Kare Pivot Düzeltmesi & 9×3 Boss Objective Atlası',
-    subtitle: '258 Onaylı Eser Denetimi · 1728×576 (27 Hücre) Kırılabilir Boss Hedefleri · Phone-Landscape FPS/RAM',
-    description: 'UnitView, CharacterScene ve Animations.tsx içindeki alt-kare (idle_2, basic_2, vb.) pivot kayması düzeltildi. atlas_objective.webp 4×4 yerine 9×3 (1728×576, 27 hücre: intact/pulse/broken) olarak yeniden üretildi ve 13 boss hedefinin 8 animasyon durumuna bağlandı.',
-    imageUrl: '/dev/media/art/atlas_objective.webp',
-    sceneJump: 'battle_t3',
-    targetPath: 'content/approved_art/art/atlas_objective.webp · apps/game/src/battle/UnitView.ts'
-  },
-  {
-    id: 'step_4_2_signature_vfx',
-    step: 'STEPS',
-    stepBadge: '§4.2 · e7b7fab2',
-    title: '§4.2 Signature VFX — 52 Birim İçin 115 Özel Preset & 133 Yetenek Bağlantısı',
-    subtitle: '25 Kahraman + 7 Boss + 20 Düşman · 5 Yeni Amblem Dokusu · 4 Vektör Şekil · Hit-Stop & Shake',
-    description: 'VfxStage ve @uomd/content-schema içine bell, chain, seal, droplet, feather dokuları ile bell_arch, shield_wall, eclipse_corona, crosshair şekilleri eklendi. 133 aktif/temel/ultimate/imza yeteneğin tamamı karaktere özel VFX presetlerine bağlandı.',
-    imageUrl: '/dev/store/screenshots/03_tactical_battle_5v5.png',
-    sceneJump: 'battle_t3',
-    targetPath: 'content/base/vfx/vfx_presets.json · apps/game/src/vfx/VfxStage.ts'
-  },
-  {
-    id: 'step_4_3_identity_locks',
-    step: 'STEPS',
-    stepBadge: '§4.3 · b7cbe3e7',
-    title: '§4.3 Art Bible §4.11–§4.29 Kanonik Kimlik Çapaları & SHA-256 Kilit Tablosu',
-    subtitle: '32 Konuşan Karakter Portre Kilidi (128 WebP) + 52 Savaş Birimi Chibi Atlas Kilidi · 53 Varlık Kuyruğu',
-    description: 'ART_BIBLE.md içine 17 kahraman, 7 Part I boss + Lord Cael Veyr ve 18 düşman için birebir kanon çapaları eklendi; CHARACTER_LOCKS.md içine tüm SHA-256 kilitleri işlendi; QUEUE_DATA.json 53 varlığa genişletildi ($0.00 harcama).',
-    imageUrl: '/dev/store/screenshots/06_companion_roster.png',
-    sceneJump: 'roster',
-    targetPath: 'docs/media/ART_BIBLE.md · content/specs/character_locks/CHARACTER_LOCKS.md'
-  },
-  {
-    id: 'step_4_4_banners_in_game',
-    step: 'STEPS',
-    stepBadge: '§4.4 · 4cece6fe',
-    title: '§4.4 16 Kanonik Gacha Banner Görseli (1376×768) — Summon & Dünya Haritası Vitrini',
-    subtitle: '2 Kalıcı + 7 Oath Karakter + 7 İmza Silah Bannerı · SummonScene (940×440) & HomeScene (340×150)',
-    description: 'Eksik 5 banner master görseli üretildi, 16 bannerın tamamı approved_art kataloğuna alındı, BannerConfig.artKey eklendi, SummonScene vitrin kartına ve Dünya Haritası (HomeScene) LIMITED OATH SPOTLIGHT kartına bağlandı.',
-    imageUrl: '/dev/media/art/ui_banner_oath_01_sister_aveline.webp',
-    sceneJump: 'summon',
-    targetPath: 'apps/game/src/scenes/SummonScene.ts · apps/game/src/scenes/HomeScene.ts'
-  },
-  {
-    id: 'step_4_5_motion_polish',
-    step: 'STEPS',
-    stepBadge: '§4.5 · 50c8be33',
-    title: '§4.5 Chibi, VN Portre, Summon Kart Açılışı & Hub Modal Hareket Cilası',
-    subtitle: '2 Fazlı Anticipation/Impact Chibi İvmesi · Taban Sabitli VN Nefes & Konuşma Nabzı · 4★/5★ Hale Açılışı',
-    description: 'UnitView aksiyonlarında 2 fazlı geri çekilme + ileri vuruş ve 1.35× impact-hold; StoryScene içinde sahne anim.timeScale uyumlu altyazı sayacı, (0.5, 1) taban sabitli nefes, konuşma nabzı ve çift-opaklık yapmayan duygu geçişi; SummonScene kademeli kart açılışı.',
-    imageUrl: '/dev/animations/08_kera_voss_chibi_combat_combo.gif',
-    sceneJump: 'story_t1',
-    targetPath: 'apps/game/src/battle/UnitView.ts · apps/game/src/scenes/StoryScene.ts · apps/game/src/scenes/SummonScene.ts'
-  },
-  {
-    id: 'step_4_6_audio_sfx_music',
-    step: 'STEPS',
-    stepBadge: '§4.6 · 493338eb',
-    title: '§4.6 16 Kanonik Ogg Vorbis SFX Seti (presentation.sounds) & Bölüm 1–7 / Boss Müzik Motifleri',
-    subtitle: 'UI, Adım, Kılıç, Kalkan, Çan, Statü ve Ultimate SFX · 7 Lyria 3.5 Müzik Motifi Eşlemesi',
-    description: 'tools/build_sfx_pack.mjs ile 16 adet Ogg Vorbis SFX üretildi, presentation.json sounds tablosuna ve SFX_PROVENANCE.json lisans kaydına eklendi. StoryScene ve BattleScene içinde Bölüm 1–7 ve 7 Boss karşılaşması Lyria 3.5 motiflerine bağlandı.',
-    audioUrl: '/dev/media/sfx/sfx_ultimate_release.ogg',
-    sceneJump: 'battle_t1',
-    targetPath: 'content/base/presentation/presentation.json · apps/game/src/audio/Sfx.ts'
-  },
-  {
-    id: 'step_4_7_narrative_upkeep',
-    step: 'STEPS',
-    stepBadge: '§4.7 · 7138437f',
-    title: '§4.7 Narrative Upkeep & Kanonik Kuyruk / Dokümantasyon Senkronizasyonu',
-    subtitle: '258 Onaylı Sanat Eseri · 415 R2/D1 Seed Varlığı · 204 Base İçerik Dosyası · $0.00 / $20.00 Bütçe',
-    description: 'narrative/11_Audio_Cues/README_SOURCE.md, docs/media/QUEUE_DATA.json, docs/media/QUEUE.md, docs/DEV_TRACKER.json ve docs/NEXT_STEPS.md canlı oyun durumu ile birebir senkronize edildi.',
-    imageUrl: '/dev/store/feature_graphic_1024x500.png',
-    sceneJump: 'chapters',
-    targetPath: 'docs/media/QUEUE_DATA.json · docs/DEV_TRACKER.json · docs/NEXT_STEPS.md'
-  },
-
-  // 16 Canonical Gacha Banners (§4.4)
-  {
-    id: 'banner_hall_of_ancestors',
-    step: 'BANNERS',
-    stepBadge: 'Banner #1 · Kalıcı',
-    title: 'Hall of Ancestors — Kalıcı Kahraman Çağırma Bannerı',
-    subtitle: '1376×768 WebP · Standart Kahraman Havuzu',
-    description: 'SummonScene ve Dünya Haritası varsayılan vitrin görseli.',
-    imageUrl: '/dev/media/art/ui_banner_hall_of_ancestors.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_hall_of_ancestors.webp'
-  },
-  {
-    id: 'banner_hall_of_armaments',
-    step: 'BANNERS',
-    stepBadge: 'Banner #2 · Kalıcı Silah',
-    title: 'Hall of Armaments — Kalıcı İmza Silah Bannerı',
-    subtitle: '1376×768 WebP · Seçilebilir Hedefli Silah Havuzu',
-    description: '25 kahramanın imza silahları için kalıcı çağrı vitrini.',
-    imageUrl: '/dev/media/art/ui_banner_hall_of_armaments.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_hall_of_armaments.webp'
-  },
-  {
-    id: 'banner_oath_01_sister_aveline',
-    step: 'BANNERS',
-    stepBadge: 'Banner #3 · Oath #1 Hero',
-    title: 'Ashen Vigil — Sister Aveline (5★ Oath Banner)',
-    subtitle: '1376×768 WebP · 1–14 Kasım Rotasyonu',
-    description: 'Sister Aveline sınırlı süreli karakter banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_01_sister_aveline.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_01_sister_aveline.webp'
-  },
-  {
-    id: 'banner_oath_01_weapon',
-    step: 'BANNERS',
-    stepBadge: 'Banner #4 · Oath #1 Silah',
-    title: 'Ashen Vigil Arms — Censer of Saint Luthos (5★ Weapon Banner)',
-    subtitle: '1376×768 WebP · Sister Aveline İmza Silahı',
-    description: 'Censer of Saint Luthos sınırlı süreli silah banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_01_weapon.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_01_weapon.webp'
-  },
-  {
-    id: 'banner_oath_02_sable_wren',
-    step: 'BANNERS',
-    stepBadge: 'Banner #5 · Oath #2 Hero',
-    title: 'Shadow Under Glass — Sable Wren (5★ Oath Banner)',
-    subtitle: '1376×768 WebP · 15–28 Kasım Rotasyonu',
-    description: 'Sable Wren sınırlı süreli karakter banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_02_sable_wren.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_02_sable_wren.webp'
-  },
-  {
-    id: 'banner_oath_02_weapon',
-    step: 'BANNERS',
-    stepBadge: 'Banner #6 · Oath #2 Silah',
-    title: 'Shadow Under Glass Arms — Misericorde of the Bellless (5★ Weapon)',
-    subtitle: '1376×768 WebP · Sable Wren İmza Silahı',
-    description: 'Misericorde of the Bellless sınırlı süreli silah banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_02_weapon.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_02_weapon.webp'
-  },
-  {
-    id: 'banner_oath_03_nara_vell',
-    step: 'BANNERS',
-    stepBadge: 'Banner #7 · Oath #3 Hero',
-    title: 'Iron on the Bridge — Nara Vell (5★ Oath Banner)',
-    subtitle: '1376×768 WebP · 29 Kasım – 12 Aralık Rotasyonu',
-    description: 'Nara Vell sınırlı süreli karakter banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_03_nara_vell.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_03_nara_vell.webp'
-  },
-  {
-    id: 'banner_oath_03_weapon',
-    step: 'BANNERS',
-    stepBadge: 'Banner #8 · Oath #3 Silah',
-    title: 'Iron on the Bridge Arms — Sanctified Greatmace (5★ Weapon)',
-    subtitle: '1376×768 WebP · Nara Vell İmza Silahı',
-    description: 'Sanctified Greatmace sınırlı süreli silah banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_03_weapon.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_03_weapon.webp'
-  },
-  {
-    id: 'banner_oath_04_mirel_quill',
-    step: 'BANNERS',
-    stepBadge: 'Banner #9 · Oath #4 Hero',
-    title: 'Ink of the Ledger — Mirel Quill (5★ Oath Banner)',
-    subtitle: '1376×768 WebP · 13–26 Aralık Rotasyonu',
-    description: 'Mirel Quill sınırlı süreli karakter banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_04_mirel_quill.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_04_mirel_quill.webp'
-  },
-  {
-    id: 'banner_oath_04_weapon',
-    step: 'BANNERS',
-    stepBadge: 'Banner #10 · Oath #4 Silah',
-    title: 'Ink of the Ledger Arms — Ledger of Unpaid Names (5★ Weapon)',
-    subtitle: '1376×768 WebP · Mirel Quill İmza Silahı',
-    description: 'Ledger of Unpaid Names sınırlı süreli silah banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_04_weapon.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_04_weapon.webp'
-  },
-  {
-    id: 'banner_oath_05_vespera_wisp',
-    step: 'BANNERS',
-    stepBadge: 'Banner #11 · Oath #5 Hero',
-    title: 'Lantern in the Mist — Vespera Wisp (5★ Oath Banner)',
-    subtitle: '1376×768 WebP · 27 Aralık – 9 Ocak Rotasyonu',
-    description: 'Vespera Wisp sınırlı süreli karakter banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_05_vespera_wisp.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_05_vespera_wisp.webp'
-  },
-  {
-    id: 'banner_oath_05_weapon',
-    step: 'BANNERS',
-    stepBadge: 'Banner #12 · Oath #5 Silah',
-    title: 'Lantern in the Mist Arms — Pale Choir Bell-Staff (5★ Weapon)',
-    subtitle: '1376×768 WebP · Vespera Wisp İmza Silahı',
-    description: 'Pale Choir Bell-Staff sınırlı süreli silah banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_05_weapon.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_05_weapon.webp'
-  },
-  {
-    id: 'banner_oath_06_iona_mist',
-    step: 'BANNERS',
-    stepBadge: 'Banner #13 · Oath #6 Hero',
-    title: 'Veil of the Crossing — Iona Mist (5★ Oath Banner)',
-    subtitle: '1376×768 WebP · 10–23 Ocak Rotasyonu',
-    description: 'Iona Mist sınırlı süreli karakter banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_06_iona_mist.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_06_iona_mist.webp'
-  },
-  {
-    id: 'banner_oath_06_weapon',
-    step: 'BANNERS',
-    stepBadge: 'Banner #14 · Oath #6 Silah',
-    title: 'Veil of the Crossing Arms — Mistweaver Reliquary (5★ Weapon)',
-    subtitle: '1376×768 WebP · Iona Mist İmza Silahı',
-    description: 'Mistweaver Reliquary sınırlı süreli silah banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_06_weapon.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_06_weapon.webp'
-  },
-  {
-    id: 'banner_oath_07_kera_voss',
-    step: 'BANNERS',
-    stepBadge: 'Banner #15 · Oath #7 Hero',
-    title: 'Mortar of Ash — Kera Voss (5★ Oath Banner)',
-    subtitle: '1376×768 WebP · 24 Ocak – 6 Şubat Rotasyonu',
-    description: 'Kera Voss sınırlı süreli karakter banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_07_kera_voss.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_07_kera_voss.webp'
-  },
-  {
-    id: 'banner_oath_07_weapon',
-    step: 'BANNERS',
-    stepBadge: 'Banner #16 · Oath #7 Silah',
-    title: 'Mortar of Ash Arms — Brass Mortar of Oakhaven (5★ Weapon)',
-    subtitle: '1376×768 WebP · Kera Voss İmza Silahı',
-    description: 'Brass Mortar of Oakhaven sınırlı süreli silah banner görseli.',
-    imageUrl: '/dev/media/art/ui_banner_oath_07_weapon.webp',
-    sceneJump: 'summon',
-    targetPath: 'content/approved_art/art/ui_banner_oath_07_weapon.webp'
-  },
-
-  // 16 SFX + 7 BGM Audio Cues (§4.6)
-  {
-    id: 'sfx_ui_tap',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · UI',
-    title: 'sfx_ui_tap.ogg — Gotik Parşömen & Pirinç Dokunuş Sesi',
-    subtitle: '0.14s · 48 kHz Ogg Vorbis · Volume 0.65',
-    description: 'Buton ve sekme tıklamalarında kullanılan hızlı UI dokunuş efekti.',
-    audioUrl: '/dev/media/sfx/sfx_ui_tap.ogg',
-    targetPath: 'content/base/sfx/sfx_ui_tap.ogg'
-  },
-  {
-    id: 'sfx_ui_confirm',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · UI',
-    title: 'sfx_ui_confirm.ogg — Çift Tonlu Sanctum Onay Çanı',
-    subtitle: '0.28s · 48 kHz Ogg Vorbis · Volume 0.72',
-    description: 'Yetenek seçimi ve onay pencerelerinde çalan 520→780 Hz beşli aralık.',
-    audioUrl: '/dev/media/sfx/sfx_ui_confirm.ogg',
-    targetPath: 'content/base/sfx/sfx_ui_confirm.ogg'
-  },
-  {
-    id: 'sfx_ui_wax_seal',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · UI',
-    title: 'sfx_ui_wax_seal.ogg — Kızıl Mühür Darbesi & Bronz Rezonans',
-    subtitle: '0.42s · 48 kHz Ogg Vorbis · Volume 0.78',
-    description: 'TitleScene TAP TO START ve bölüm mühür açılışlarında kullanılan mühür sesi.',
-    audioUrl: '/dev/media/sfx/sfx_ui_wax_seal.ogg',
-    targetPath: 'content/base/sfx/sfx_ui_wax_seal.ogg'
-  },
-  {
-    id: 'sfx_footstep_ash',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Footsteps',
-    title: 'sfx_footstep_ash.ogg — Kül ve Taş Zemin Adım Sesi',
-    subtitle: '0.24s · 48 kHz Ogg Vorbis · Volume 0.58',
-    description: 'Chibi birimler walk durumuna geçtiğinde çalan kül/çakıl adım sesi.',
-    audioUrl: '/dev/media/sfx/sfx_footstep_ash.ogg',
-    targetPath: 'content/base/sfx/sfx_footstep_ash.ogg'
-  },
-  {
-    id: 'sfx_footstep_march',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Footsteps',
-    title: 'sfx_footstep_march.ogg — Zırhlı Öncü (Mahmut / Şövalye) Adım Sesi',
-    subtitle: '0.36s · 48 kHz Ogg Vorbis · Volume 0.64',
-    description: 'Mahmut ve zırhlı şövalyelerin yürüyüşünde çalan metal zırh tınılı adım.',
-    audioUrl: '/dev/media/sfx/sfx_footstep_march.ogg',
-    targetPath: 'content/base/sfx/sfx_footstep_march.ogg'
-  },
-  {
-    id: 'sfx_blade_slash',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Blades',
-    title: 'sfx_blade_slash.ogg — Hızlı Çelik Kılıç Kesisi',
-    subtitle: '0.26s · 48 kHz Ogg Vorbis · Volume 0.76',
-    description: 'Temel (basic) yakın dövüş saldırılarında çalan keskin kılıç darbesi.',
-    audioUrl: '/dev/media/sfx/sfx_blade_slash.ogg',
-    targetPath: 'content/base/sfx/sfx_blade_slash.ogg'
-  },
-  {
-    id: 'sfx_blade_heavy',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Blades',
-    title: 'sfx_blade_heavy.ogg — Ağır Silah / Kritik Darbe Yarıcısı',
-    subtitle: '0.38s · 48 kHz Ogg Vorbis · Volume 0.84',
-    description: 'Kritik vuruşlar, ağır silahlar ve boss darbelerinde çalan derin darbe.',
-    audioUrl: '/dev/media/sfx/sfx_blade_heavy.ogg',
-    targetPath: 'content/base/sfx/sfx_blade_heavy.ogg'
-  },
-  {
-    id: 'sfx_shield_bash',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Shields',
-    title: 'sfx_shield_bash.ogg — Mahmut Demir Kalkan & Siper Çarpması',
-    subtitle: '0.48s · 48 kHz Ogg Vorbis · Volume 0.80',
-    description: 'Mahmut’un aktif siper/kalkan yeteneğinde çalan D-minör demir-pirinç rezonansı.',
-    audioUrl: '/dev/media/sfx/sfx_shield_bash.ogg',
-    targetPath: 'content/base/sfx/sfx_shield_bash.ogg'
-  },
-  {
-    id: 'sfx_shield_guard',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Shields',
-    title: 'sfx_shield_guard.ogg — Kalkan Blok & Ward Yansıtma Tınısı',
-    subtitle: '0.30s · 48 kHz Ogg Vorbis · Volume 0.72',
-    description: 'Kalkan (Shield) kazanımı ve hasar sönümlemede çalan yüksek çelik çınlama.',
-    audioUrl: '/dev/media/sfx/sfx_shield_guard.ogg',
-    targetPath: 'content/base/sfx/sfx_shield_guard.ogg'
-  },
-  {
-    id: 'sfx_bell_sanctuary',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Bells',
-    title: 'sfx_bell_sanctuary.ogg — Veyrhold Bronz Tapınak Çanı (440 Hz)',
-    subtitle: '1.85s · 48 kHz Ogg Vorbis · Volume 0.82',
-    description: 'Oyunun ana işitsel motifi olan inharmonik bronz çan vuruşu (5★ Summon, Prolog, Ultimate).',
-    audioUrl: '/dev/media/sfx/sfx_bell_sanctuary.ogg',
-    targetPath: 'content/base/sfx/sfx_bell_sanctuary.ogg'
-  },
-  {
-    id: 'sfx_bell_silver',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Bells',
-    title: 'sfx_bell_silver.ogg — Fadyme Gümüş Koruma Çanı (587.33 Hz D5)',
-    subtitle: '1.65s · 48 kHz Ogg Vorbis · Volume 0.78',
-    description: 'Fadyme’nin gümüş çan yeteneklerinde ve 4★ Summon açılışında çalan kristal tını.',
-    audioUrl: '/dev/media/sfx/sfx_bell_silver.ogg',
-    targetPath: 'content/base/sfx/sfx_bell_silver.ogg'
-  },
-  {
-    id: 'sfx_status_buff',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Statuses',
-    title: 'sfx_status_buff.ogg — Kutsama / İyileştirme & Buff Akoru',
-    subtitle: '0.62s · 48 kHz Ogg Vorbis · Volume 0.74',
-    description: 'Can yenileme (Heal) ve pozitif statü (Buff) uygulandığında çalan yükselen akor.',
-    audioUrl: '/dev/media/sfx/sfx_status_buff.ogg',
-    targetPath: 'content/base/sfx/sfx_status_buff.ogg'
-  },
-  {
-    id: 'sfx_status_debuff',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Statuses',
-    title: 'sfx_status_debuff.ogg — Veil Laneti / Zayıflatma & Kontrol Sesi',
-    subtitle: '0.56s · 48 kHz Ogg Vorbis · Volume 0.74',
-    description: 'Debuff ve kontrol etkileri (Silence, Bleed, Shatter) uygulandığında çalan alçalan disonans.',
-    audioUrl: '/dev/media/sfx/sfx_status_debuff.ogg',
-    targetPath: 'content/base/sfx/sfx_status_debuff.ogg'
-  },
-  {
-    id: 'sfx_ultimate_cast',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Ultimates (Beat 1)',
-    title: 'sfx_ultimate_cast.ogg — Ultimate Beat 1: Ritüel Gong & Yükselen Şarj',
-    subtitle: '1.15s · 48 kHz Ogg Vorbis · Volume 0.84',
-    description: '3 vuruşlu Japonca Ultimate sekansının 1. adımı (Ritüel hazırlık).',
-    audioUrl: '/dev/media/sfx/sfx_ultimate_cast.ogg',
-    targetPath: 'content/base/sfx/sfx_ultimate_cast.ogg'
-  },
-  {
-    id: 'sfx_ultimate_cutin',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Ultimates (Beat 2)',
-    title: 'sfx_ultimate_cutin.ogg — Ultimate Beat 2: Diyagonal Cut-In Portre Flaş',
-    subtitle: '0.68s · 48 kHz Ogg Vorbis · Volume 0.84',
-    description: '3 vuruşlu Ultimate sekansının 2. adımı (Portre kesiti ve kristal üçlü akor).',
-    audioUrl: '/dev/media/sfx/sfx_ultimate_cutin.ogg',
-    targetPath: 'content/base/sfx/sfx_ultimate_cutin.ogg'
-  },
-  {
-    id: 'sfx_ultimate_release',
-    step: 'AUDIO_SFX',
-    stepBadge: 'SFX · Ultimates (Beat 3)',
-    title: 'sfx_ultimate_release.ogg — Ultimate Beat 3: Yıkıcı Patlama & Çifte Çan',
-    subtitle: '1.95s · 48 kHz Ogg Vorbis · Volume 0.88',
-    description: '3 vuruşlu Ultimate sekansının 3. adımı (Tam ekran darbe ve bronz+gümüş çan patlaması).',
-    audioUrl: '/dev/media/sfx/sfx_ultimate_release.ogg',
-    targetPath: 'content/base/sfx/sfx_ultimate_release.ogg'
-  },
-  {
-    id: 'bgm_main_theme',
-    step: 'AUDIO_SFX',
-    stepBadge: 'BGM · Ana Tema',
-    title: 'bgm_main_theme.ogg — Ana Tema (68 BPM Anadolu Gotik Melankolik Rock)',
-    subtitle: 'Lyria 3.5 · Studio & TitleScene',
-    description: 'ŞovTaym Studios ve TitleScene ekranlarında çalan kilitli ana tema.',
-    audioUrl: '/dev/media/audio/bgm_main_theme.ogg',
-    targetPath: 'content/base/audio/bgm_main_theme.ogg'
-  },
-  {
-    id: 'bgm_ch1_ash_forest_chaotic',
-    step: 'AUDIO_SFX',
-    stepBadge: 'BGM · Boss & Kriz Motifi',
-    title: 'bgm_ch1_ash_forest_chaotic.ogg — Bölüm 1–7 Boss Savaşları & Faz Geçişleri',
-    subtitle: 'Lyria 3.5 · 7 Boss Savaşı & Kriz Sahneleri',
-    description: 'BattleScene içinde tüm Boss karşılaşmaları ve StoryScene faz geçişlerinde kullanılan yüksek tempolu motif.',
-    audioUrl: '/dev/media/audio/bgm_ch1_ash_forest_chaotic.ogg',
-    targetPath: 'content/base/audio/bgm_ch1_ash_forest_chaotic.ogg'
-  },
-  {
-    id: 'bgm_battle_field',
-    step: 'AUDIO_SFX',
-    stepBadge: 'BGM · Taktiksel Saha Savaşı',
-    title: 'bgm_battle_field.ogg — 5v5 Normal & Hard Saha Savaşları',
-    subtitle: 'Lyria 3.5 · Standart Savaş Sahnesi',
-    description: 'Bölüm 1–7 saha karşılaşmalarında çalan taktiksel savaş müziği.',
-    audioUrl: '/dev/media/audio/bgm_battle_field.ogg',
-    targetPath: 'content/base/audio/bgm_battle_field.ogg'
-  }
+const REVIEW_CATEGORIES: { id: ReviewCatalogItem['category'] | 'ALL'; label: string }[] = [
+  { id: 'ALL', label: 'Tümü' },
+  { id: 'STEPS', label: '1. D-30 Adımları (§4.1–§4.7)' },
+  { id: 'BANNERS', label: '2. Gacha Bannerlar (16)' },
+  { id: 'PORTRAITS', label: '3. Karakter Portreleri (128)' },
+  { id: 'CHIBI_ATLAS', label: '4. Chibi & Boss Atlasları (55)' },
+  { id: 'CONCEPT_SHEETS', label: '5. Konsept & Turnaround Paftaları (53)' },
+  { id: 'BACKGROUNDS', label: '6. Savaş Alanları & Mekanlar (47)' },
+  { id: 'STILLS_CG', label: '7. Prolog & Bölüm CG (26)' },
+  { id: 'ICONS_WEAPONS', label: '8. Silah, Ekipman & Statü İkonları (120)' },
+  { id: 'UI_BRAND_STORE', label: '9. UI Kit, Mağaza & GIF (56)' },
+  { id: 'AUDIO_SFX_BGM', label: '10. Ses Efektleri & Müzik (23)' },
+  { id: 'VOICES', label: '11. Seslendirmeler — Chirp 3 HD (116)' },
+  { id: 'EVIDENCE_SCREENS', label: '12. Oyun Kanıt Ekranları (60)' }
 ];
 
 /** Where the browser build of the game lives: the sibling Worker of this admin, or the local dev server. */
@@ -532,7 +114,7 @@ function gameUrl(scene = '', target: 'worker' | 'vite' = 'worker'): string {
 }
 
 export function Development({ me, say }: { me: Me; say: (m: string) => void }): ReactNode {
-  const [tab, setTab] = useState<Tab>('D-30 Onay Merkezi (§4.1–§4.7)');
+  const [tab, setTab] = useState<Tab>('Onay & Denetim Merkezi (707 Eser)');
   const readProgress = useCallback(async (signal: AbortSignal): Promise<Progress> => {
     const r = await fetch('/dev/progress.json', { cache: 'no-cache', signal });
     if (!r.ok) throw new Error('progress.json missing');
@@ -543,11 +125,12 @@ export function Development({ me, say }: { me: Me; say: (m: string) => void }): 
   const [jumpScene, setJumpScene] = useState('fresh_flow');
   if (err) return <ErrorNotice error={err} />;
   if (!p) return <p>Loading development data…</p>;
+  const catalog = p.reviewCatalog ?? [];
   return (
     <>
       <header className="page">
-        <h2>Development &amp; D-30 Onay Merkezi</h2>
-        <span className="badge ok">D-30 §4.1–§4.7 Tamamlandı · 258 Onaylı Eser · 415 Varlık</span>
+        <h2>Development &amp; Kapsamlı Onay Merkezi</h2>
+        <span className="badge ok">D-30 §4.1–§4.7 Tamamlandı · {catalog.length} Doğrulanmış Eser &amp; Adım</span>
         <span className="badge">{packageSummary(p)}</span>
       </header>
       <div className="row" role="tablist" style={{ flexWrap: 'wrap', gap: 6 }}>
@@ -557,8 +140,9 @@ export function Development({ me, say }: { me: Me; say: (m: string) => void }): 
           </button>
         ))}
       </div>
-      {tab === 'D-30 Onay Merkezi (§4.1–§4.7)' ? (
+      {tab === 'Onay & Denetim Merkezi (707 Eser)' ? (
         <D30ReviewCenter
+          catalog={catalog}
           me={me}
           say={say}
           onJumpPreview={(sc) => {
@@ -567,7 +151,7 @@ export function Development({ me, say }: { me: Me; say: (m: string) => void }): 
           }}
         />
       ) : null}
-      {tab === 'Overview' ? <Overview p={p} onOpenReview={() => setTab('D-30 Onay Merkezi (§4.1–§4.7)')} /> : null}
+      {tab === 'Overview' ? <Overview p={p} onOpenReview={() => setTab('Onay & Denetim Merkezi (707 Eser)')} /> : null}
       {tab === 'Live preview' ? <Preview initialScene={jumpScene} /> : null}
       {tab === 'Store & Brand Kit' ? <StoreKit p={p} /> : null}
       {tab === 'Screens' ? <Screens p={p} onNote={(a) => { setArea(a); setTab('Feedback'); }} /> : null}
@@ -585,13 +169,14 @@ interface D30DecisionState {
 
 function parseD30Notes(notes: Note[]): Record<string, D30DecisionState> {
   const out: Record<string, D30DecisionState> = {};
-  // Notes are returned newest-first or oldest-first; sort by id ascending so latest wins
   const sorted = [...notes].sort((a, b) => a.id - b.id);
   for (const n of sorted) {
-    const m = /^\[D30:([a-z0-9_]+)\]\s*(?:ONAYLANDI|REDDEDİLDİ|REVİZE)?\s*[:—-]?\s*(.*)$/i.exec(n.body);
+    const m = /^\[D30:([a-z0-9_-]+)\]\s*(?:ONAYLANDI|REDDEDİLDİ|REVİZE)?\s*[:—-]?\s*(.*)$/i.exec(n.body);
     if (!m) continue;
     const itemId = m[1]!;
-    const comment = m[2]?.trim() ?? '';
+    const rawRest = m[2]?.trim() ?? '';
+    const noteMatch = /\|\s*Not:\s*(.*)$/i.exec(rawRest);
+    const comment = noteMatch ? noteMatch[1]!.trim() : '';
     const isRejected = n.kind === 'change_request' || n.body.includes('REDDEDİLDİ') || (n.status === 'open' && n.kind !== 'approved');
     out[itemId] = {
       status: isRejected ? 'rejected' : 'approved',
@@ -604,17 +189,28 @@ function parseD30Notes(notes: Note[]): Record<string, D30DecisionState> {
 }
 
 function D30ReviewCenter({
+  catalog,
   me,
   say,
   onJumpPreview
 }: {
+  catalog: ReviewCatalogItem[];
   me: Me;
   say: (m: string) => void;
   onJumpPreview: (scene: string) => void;
 }): ReactNode {
-  const [filter, setFilter] = useState<'ALL' | 'STEPS' | 'BANNERS' | 'AUDIO_SFX' | 'REJECTED'>('ALL');
+  const [catFilter, setCatFilter] = useState<ReviewCatalogItem['category'] | 'ALL'>('ALL');
+  const [originFilter, setOriginFilter] = useState<'ALL' | 'd30_new' | 'prev_approved'>('ALL');
+  const [statusFilter, setStatusFilter] = useState<'ALL' | 'pending' | 'approved' | 'rejected'>('ALL');
+  const [search, setSearch] = useState('');
+  const [pageSize, setPageSize] = useState<number>(60);
+  const [page, setPage] = useState<number>(0);
   const [decisions, setDecisions] = useState<Record<string, D30DecisionState>>({});
   const [draftComments, setDraftComments] = useState<Record<string, string>>({});
+  const [loadedDims, setLoadedDims] = useState<Record<string, string>>({});
+  const [retryMap, setRetryMap] = useState<Record<string, number>>({});
+  const [lightboxItem, setLightboxItem] = useState<ReviewCatalogItem | null>(null);
+  const [checkerBg, setCheckerBg] = useState<boolean>(true);
   const [savingId, setSavingId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -639,11 +235,11 @@ function D30ReviewCenter({
     loadDecisions();
   }, [loadDecisions]);
 
-  const recordDecision = async (item: D30ReviewItem, newStatus: 'approved' | 'rejected'): Promise<void> => {
+  const recordDecision = async (item: ReviewCatalogItem, newStatus: 'approved' | 'rejected'): Promise<void> => {
     setSavingId(item.id);
     const comment = (draftComments[item.id] ?? decisions[item.id]?.comment ?? '').trim();
     const label = newStatus === 'approved' ? 'ONAYLANDI' : 'REDDEDİLDİ';
-    const body = `[D30:${item.id}] ${label} — ${item.title}${comment ? ` | Not: ${comment}` : ''}`;
+    const body = `[D30:${item.id}] ${label} — ${item.title} (${item.targetPath})${comment ? ` | Not: ${comment}` : ''}`;
     const kind = newStatus === 'approved' ? 'approved' : 'change_request';
     try {
       const existing = decisions[item.id];
@@ -666,8 +262,8 @@ function D30ReviewCenter({
       });
       say(
         newStatus === 'approved'
-          ? `✅ "${item.title}" onaylandı ve sunucuya (D1) kaydedildi.`
-          : `❌ "${item.title}" için red/revize talebi sunucuya (D1) kaydedildi.`
+          ? `✅ "${item.title}" onaylandı ve canlı D1 veritabanına kaydedildi.`
+          : `❌ "${item.title}" için red/revize talebi canlı D1 veritabanına kaydedildi.`
       );
       loadDecisions();
     } catch (e) {
@@ -677,22 +273,26 @@ function D30ReviewCenter({
     }
   };
 
-  const approveAllVisible = async (items: D30ReviewItem[]): Promise<void> => {
+  const approveBatch = async (items: ReviewCatalogItem[], labelText: string): Promise<void> => {
+    const toApprove = items.filter((i) => decisions[i.id]?.status !== 'approved');
+    if (toApprove.length === 0) {
+      say('Seçili listedeki tüm maddeler zaten onaylanmış durumda.');
+      return;
+    }
     setSavingId('BULK');
     try {
-      for (const item of items) {
-        if (decisions[item.id]?.status === 'approved') continue;
+      for (const item of toApprove) {
         const comment = (draftComments[item.id] ?? '').trim();
         await api('/dev/notes', {
           method: 'POST',
           body: JSON.stringify({
             area: 'Art direction',
             kind: 'approved',
-            body: `[D30:${item.id}] ONAYLANDI — ${item.title}${comment ? ` | Not: ${comment}` : ''}`
+            body: `[D30:${item.id}] ONAYLANDI — ${item.title} (${item.targetPath})${comment ? ` | Not: ${comment}` : ''}`
           })
         });
       }
-      say(`✅ Listelenen ${items.length} teslimat kalemi onaylandı ve D1 veritabanına kaydedildi.`);
+      say(`✅ ${labelText}: ${toApprove.length} kalem onaylandı ve D1 veritabanına kaydedildi.`);
       loadDecisions();
     } catch (e) {
       say(e instanceof ApiError ? `${e.code}: ${e.message}` : String((e as Error).message));
@@ -701,75 +301,211 @@ function D30ReviewCenter({
     }
   };
 
-  const filtered = D30_REVIEW_ITEMS.filter((item) => {
-    if (filter === 'ALL') return true;
-    if (filter === 'REJECTED') return decisions[item.id]?.status === 'rejected';
-    return item.step === filter;
+  const qNorm = search.trim().toLowerCase();
+  const filtered = catalog.filter((item) => {
+    if (catFilter !== 'ALL' && item.category !== catFilter) return false;
+    if (originFilter !== 'ALL' && item.origin !== originFilter) return false;
+    const decStatus = decisions[item.id]?.status ?? 'pending';
+    if (statusFilter !== 'ALL' && decStatus !== statusFilter) return false;
+    if (qNorm) {
+      const hay = `${item.id} ${item.title} ${item.subtitle} ${item.description} ${item.targetPath} ${item.badge}`.toLowerCase();
+      if (!hay.includes(qNorm)) return false;
+    }
+    return true;
   });
 
-  const approvedCount = D30_REVIEW_ITEMS.filter((i) => decisions[i.id]?.status === 'approved').length;
-  const rejectedCount = D30_REVIEW_ITEMS.filter((i) => decisions[i.id]?.status === 'rejected').length;
-  const pendingCount = D30_REVIEW_ITEMS.length - approvedCount - rejectedCount;
+  const totalPages = pageSize > 0 ? Math.max(1, Math.ceil(filtered.length / pageSize)) : 1;
+  const safePage = Math.min(page, totalPages - 1);
+  const pageItems = pageSize > 0 ? filtered.slice(safePage * pageSize, (safePage + 1) * pageSize) : filtered;
+
+  const approvedCount = catalog.filter((i) => decisions[i.id]?.status === 'approved').length;
+  const rejectedCount = catalog.filter((i) => decisions[i.id]?.status === 'rejected').length;
+  const pendingCount = catalog.length - approvedCount - rejectedCount;
+
+  const d30NewCount = catalog.filter((i) => i.origin === 'd30_new').length;
+  const prevApprovedCount = catalog.filter((i) => i.origin === 'prev_approved').length;
+
+  const catCounts = (c: ReviewCatalogItem['category'] | 'ALL'): number =>
+    c === 'ALL' ? catalog.length : catalog.filter((x) => x.category === c).length;
+
+  const stepLightbox = (dir: -1 | 1): void => {
+    if (!lightboxItem) return;
+    const idx = filtered.findIndex((x) => x.id === lightboxItem.id);
+    if (idx < 0) return;
+    const nextIdx = (idx + dir + filtered.length) % filtered.length;
+    setLightboxItem(filtered[nextIdx] ?? null);
+  };
 
   return (
     <div>
       <section className="card" style={{ marginBottom: 16, border: '1.5px solid #d4a857' }}>
         <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
           <div>
-            <h3 style={{ margin: 0, color: '#f3d287' }}>🎨 D-30 Art Director Teslimat &amp; Canlı Onay / Red Merkezi (§4.1 – §4.7)</h3>
+            <h3 style={{ margin: 0, color: '#f3d287' }}>
+              🎨 Kapsamlı Görsel, Ses &amp; Mimari Onay Merkezi — Toplam {catalog.length} Doğrulanmış Eser &amp; Adım
+            </h3>
             <p style={{ margin: '6px 0 0', color: 'var(--dim)' }}>
-              Yapılan tüm adımlar (<strong>§4.1 – §4.7</strong>), <strong>16 Gacha Banner görseli</strong>, <strong>9×3 Boss Objective Atlası</strong>, <strong>115 Signature VFX</strong> ve <strong>16 Ogg Vorbis SFX + Müzik</strong> aşağıda listelenmiştir. Verdiğiniz her <strong>Onay (✅)</strong> veya <strong>Red / Revize (❌)</strong> kararı doğrudan Cloudflare D1 veritabanına kaydedilir ve bir sonraki adımda revize taleplerinize göre ilerlenir.
+              Projede üretilen <strong>tüm yeni D-30 teslimatları ({d30NewCount} kalem)</strong> ve <strong>önceden onaylanmış tüm portreler, chibi savaş atlasları, konsept paftaları, arka planlar, CG sahneleri, ikonlar, UI kit parçaları, mağaza görselleri, SFX/BGM ve 116 seslendirme ({prevApprovedCount} kalem)</strong> eksiksiz olarak aşağıdadır. İstediğiniz görseli büyütüp inceleyebilir, <strong>✅ Onayla</strong> veya <strong>❌ Reddet / Revize İste</strong> kararı verebilirsiniz. Tüm kararlarınız anında canlı Cloudflare D1 veritabanına kaydedilir.
             </p>
           </div>
           <div className="row" style={{ gap: 8, margin: 0 }}>
             <span className="badge ok">✅ Onaylanan: {approvedCount}</span>
             <span className="badge bad">❌ Red / Revize: {rejectedCount}</span>
-            <span className="badge warn">⏳ Bekleyen: {pendingCount}</span>
+            <span className="badge warn">⏳ Karar Bekleyen: {pendingCount}</span>
           </div>
         </div>
 
-        <div className="row" style={{ marginTop: 12, marginBottom: 0, justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-          <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
-            <button type="button" className={`btn${filter === 'ALL' ? ' primary' : ''}`} onClick={() => setFilter('ALL')}>
-              Tümü ({D30_REVIEW_ITEMS.length})
+        {/* 12 Category Buttons */}
+        <div className="row" style={{ marginTop: 12, marginBottom: 8, gap: 6, flexWrap: 'wrap' }}>
+          {REVIEW_CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              className={`btn${catFilter === cat.id ? ' primary' : ''}`}
+              onClick={() => {
+                setCatFilter(cat.id);
+                setPage(0);
+              }}
+            >
+              {cat.id === 'ALL' ? `Tümü (${catCounts('ALL')})` : cat.label}
             </button>
-            <button type="button" className={`btn${filter === 'STEPS' ? ' primary' : ''}`} onClick={() => setFilter('STEPS')}>
-              7 Ana Adım (§4.1–§4.7)
-            </button>
-            <button type="button" className={`btn${filter === 'BANNERS' ? ' primary' : ''}`} onClick={() => setFilter('BANNERS')}>
-              16 Gacha Banner (1376×768)
-            </button>
-            <button type="button" className={`btn${filter === 'AUDIO_SFX' ? ' primary' : ''}`} onClick={() => setFilter('AUDIO_SFX')}>
-              16 SFX &amp; 3 Ana Müzik Motifi
-            </button>
-            <button type="button" className={`btn${filter === 'REJECTED' ? ' primary' : ''}`} onClick={() => setFilter('REJECTED')}>
-              ❌ Red / Revize İstenenler ({rejectedCount})
-            </button>
-          </div>
+          ))}
+        </div>
 
-          {me.role !== 'viewer' ? (
+        {/* Origin + Status + Search + Page Size + Bulk Approve */}
+        <div className="row" style={{ marginTop: 8, marginBottom: 0, justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+          <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
             <button
               type="button"
-              className="btn primary"
-              disabled={savingId !== null}
-              onClick={() => void approveAllVisible(filtered)}
+              className={`btn${originFilter === 'ALL' ? ' primary' : ''}`}
+              onClick={() => { setOriginFilter('ALL'); setPage(0); }}
             >
-              {savingId === 'BULK' ? 'Kaydediliyor…' : `✅ Görünenlerin Tümünü Onayla (${filtered.length})`}
+              Kaynak: Tümü ({catalog.length})
             </button>
-          ) : null}
+            <button
+              type="button"
+              className={`btn${originFilter === 'd30_new' ? ' primary' : ''}`}
+              onClick={() => { setOriginFilter('d30_new'); setPage(0); }}
+            >
+              🆕 Yeni D-30 Teslimatları ({d30NewCount})
+            </button>
+            <button
+              type="button"
+              className={`btn${originFilter === 'prev_approved' ? ' primary' : ''}`}
+              onClick={() => { setOriginFilter('prev_approved'); setPage(0); }}
+            >
+              🏛️ Önceden Onaylananlar ({prevApprovedCount})
+            </button>
+
+            <span style={{ color: 'var(--dim)', padding: '0 4px' }}>|</span>
+
+            <button
+              type="button"
+              className={`btn${statusFilter === 'ALL' ? ' primary' : ''}`}
+              onClick={() => { setStatusFilter('ALL'); setPage(0); }}
+            >
+              Durum: Tümü
+            </button>
+            <button
+              type="button"
+              className={`btn${statusFilter === 'pending' ? ' primary' : ''}`}
+              onClick={() => { setStatusFilter('pending'); setPage(0); }}
+            >
+              ⏳ Bekleyen ({pendingCount})
+            </button>
+            <button
+              type="button"
+              className={`btn${statusFilter === 'approved' ? ' primary' : ''}`}
+              onClick={() => { setStatusFilter('approved'); setPage(0); }}
+            >
+              ✅ Onaylanan ({approvedCount})
+            </button>
+            <button
+              type="button"
+              className={`btn${statusFilter === 'rejected' ? ' primary' : ''}`}
+              onClick={() => { setStatusFilter('rejected'); setPage(0); }}
+            >
+              ❌ Red / Revize ({rejectedCount})
+            </button>
+          </div>
+
+          <div className="row" style={{ margin: 0, gap: 6, flexWrap: 'wrap' }}>
+            <input
+              type="search"
+              placeholder="İsim, karakter, dosya yolu veya açıklamada ara…"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setPage(0);
+              }}
+              style={{ minWidth: 250 }}
+            />
+            <select
+              aria-label="Sayfa başına öğe sayısı"
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+                setPage(0);
+              }}
+            >
+              <option value={60}>Sayfa başına: 60</option>
+              <option value={120}>Sayfa başına: 120</option>
+              <option value={250}>Sayfa başına: 250</option>
+              <option value={0}>Tümünü Tek Sayfada Göster ({filtered.length})</option>
+            </select>
+            {me.role !== 'viewer' ? (
+              <button
+                type="button"
+                className="btn primary"
+                disabled={savingId !== null || pageItems.length === 0}
+                onClick={() => void approveBatch(pageItems, 'Bu sayfadaki maddeler')}
+              >
+                {savingId === 'BULK' ? 'Kaydediliyor…' : `✅ Bu Sayfadakileri Onayla (${pageItems.length})`}
+              </button>
+            ) : null}
+          </div>
         </div>
       </section>
+
+      {/* Pagination Bar */}
+      <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 }}>
+        <div className="mono" style={{ fontSize: 12.5 }}>
+          Filtrelenen: <strong>{filtered.length}</strong> eser · Gösterilen:{' '}
+          <strong>
+            {filtered.length === 0 ? 0 : safePage * (pageSize || filtered.length) + 1}–
+            {Math.min(filtered.length, (safePage + 1) * (pageSize || filtered.length))}
+          </strong>
+        </div>
+        {pageSize > 0 && totalPages > 1 ? (
+          <div className="row" style={{ margin: 0, gap: 6 }}>
+            <button type="button" className="btn" disabled={safePage <= 0} onClick={() => setPage(Math.max(0, safePage - 1))}>
+              ← Önceki Sayfa
+            </button>
+            <span className="badge">
+              Sayfa {safePage + 1} / {totalPages}
+            </span>
+            <button
+              type="button"
+              className="btn"
+              disabled={safePage >= totalPages - 1}
+              onClick={() => setPage(Math.min(totalPages - 1, safePage + 1))}
+            >
+              Sonraki Sayfa →
+            </button>
+          </div>
+        ) : null}
+      </div>
 
       {loading ? <p>Onay durumları D1 veritabanından yükleniyor…</p> : null}
 
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(410px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(390px, 1fr))',
           gap: 16
         }}
       >
-        {filtered.map((item) => {
+        {pageItems.map((item) => {
           const dec = decisions[item.id] ?? { status: 'pending', comment: '' };
           const border =
             dec.status === 'approved'
@@ -782,9 +518,16 @@ function D30ReviewCenter({
               <span className="badge ok">ONAYLANDI ✅</span>
             ) : dec.status === 'rejected' ? (
               <span className="badge bad">REDDEDİLDİ / REVİZE ❌</span>
+            ) : item.origin === 'prev_approved' ? (
+              <span className="badge warn" title="Önceki fazlarda onaylandı; buradan tekrar onaylayabilir veya revize isteyebilirsiniz">
+                ÖNCEDEN ONAYLI · İNCELE ⏳
+              </span>
             ) : (
               <span className="badge warn">ONAY BEKLİYOR ⏳</span>
             );
+
+          const retryCount = retryMap[item.id] ?? 0;
+          const imgSrc = item.imageUrl ? (retryCount > 0 ? `${item.imageUrl}?r=${retryCount}` : item.imageUrl) : undefined;
 
           return (
             <article
@@ -798,34 +541,86 @@ function D30ReviewCenter({
                 border
               }}
             >
-              <div className="row" style={{ justifyContent: 'space-between', margin: 0 }}>
-                <span className="badge info">{item.stepBadge}</span>
+              <div className="row" style={{ justifyContent: 'space-between', margin: 0, gap: 6, flexWrap: 'wrap' }}>
+                <div className="row" style={{ margin: 0, gap: 6 }}>
+                  <span className="badge info">{item.badge}</span>
+                  {loadedDims[item.id] ? (
+                    <span className="badge ok" title="Tarayıcıda eksiksiz yüklendi">
+                      ✓ {loadedDims[item.id]}
+                    </span>
+                  ) : null}
+                </div>
                 {statusBadge}
               </div>
 
-              <h3 style={{ margin: 0, fontSize: 16 }}>{item.title}</h3>
-              <div className="mono" style={{ fontSize: 12, color: '#f3d287' }}>{item.subtitle}</div>
+              <h3 style={{ margin: 0, fontSize: 15.5 }}>{item.title}</h3>
+              <div className="mono" style={{ fontSize: 11.5, color: '#f3d287' }}>{item.subtitle}</div>
 
-              {item.imageUrl ? (
-                <a
-                  href={item.imageUrl}
-                  target="_blank"
-                  rel="noreferrer"
+              {imgSrc ? (
+                <div
                   style={{
-                    display: 'block',
+                    position: 'relative',
                     borderRadius: 8,
                     overflow: 'hidden',
                     border: '1px solid #382a4a',
-                    background: '#09060e'
+                    background:
+                      item.category === 'PORTRAITS' || item.category === 'CHIBI_ATLAS' || item.category === 'ICONS_WEAPONS'
+                        ? 'repeating-conic-gradient(#171124 0% 25%, #0e0a17 0% 50%) 50% / 20px 20px'
+                        : '#09060e'
                   }}
                 >
                   <img
-                    src={item.imageUrl}
+                    src={imgSrc}
                     alt={item.title}
                     loading="lazy"
-                    style={{ width: '100%', maxHeight: 220, objectFit: 'contain', display: 'block' }}
+                    onClick={() => setLightboxItem(item)}
+                    onLoad={(e) => {
+                      const el = e.currentTarget;
+                      if (el.naturalWidth && el.naturalHeight) {
+                        const d = `${el.naturalWidth}×${el.naturalHeight}`;
+                        setLoadedDims((prev) => (prev[item.id] === d ? prev : { ...prev, [item.id]: d }));
+                      }
+                    }}
+                    onError={() => {
+                      setLoadedDims((prev) => ({ ...prev, [item.id]: 'HATA' }));
+                    }}
+                    style={{
+                      width: '100%',
+                      maxHeight: item.category === 'PORTRAITS' || item.category === 'CHIBI_ATLAS' ? 260 : 220,
+                      objectFit: 'contain',
+                      display: 'block',
+                      cursor: 'zoom-in'
+                    }}
                   />
-                </a>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      right: 6,
+                      bottom: 6,
+                      display: 'flex',
+                      gap: 4
+                    }}
+                  >
+                    <button
+                      type="button"
+                      className="btn"
+                      style={{ padding: '2px 8px', fontSize: 11, background: 'rgba(10,6,18,0.85)' }}
+                      onClick={() => setLightboxItem(item)}
+                    >
+                      🔍 Tam Ekran İncele
+                    </button>
+                    {loadedDims[item.id] === 'HATA' ? (
+                      <button
+                        type="button"
+                        className="btn primary"
+                        style={{ padding: '2px 8px', fontSize: 11 }}
+                        onClick={() => setRetryMap((prev) => ({ ...prev, [item.id]: (prev[item.id] ?? 0) + 1 }))}
+                      >
+                        🔄 Yeniden Yükle
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
               ) : null}
 
               {item.audioUrl ? (
@@ -834,20 +629,21 @@ function D30ReviewCenter({
                 </div>
               ) : null}
 
-              <p style={{ margin: 0, fontSize: 13.5 }}>{item.description}</p>
-              <div className="mono" style={{ fontSize: 11, color: 'var(--dim)' }}>
-                <strong>Dosya/Hedef:</strong> {item.targetPath}
+              <p style={{ margin: 0, fontSize: 13 }}>{item.description}</p>
+              <div className="mono" style={{ fontSize: 11, color: 'var(--dim)', wordBreak: 'break-all' }}>
+                <strong>Dosya:</strong> {item.targetPath}
+                {item.sha256 ? ` · SHA256: ${item.sha256.slice(0, 12)}…` : ''}
               </div>
 
               {dec.comment ? (
-                <div style={{ padding: '6px 10px', borderRadius: 6, background: 'rgba(212,168,87,0.1)', fontSize: 12.5 }}>
+                <div style={{ padding: '6px 10px', borderRadius: 6, background: 'rgba(212,168,87,0.12)', fontSize: 12.5 }}>
                   <strong>Kayıtlı Notunuz:</strong> {dec.comment}
                 </div>
               ) : null}
 
               <input
                 type="text"
-                placeholder="Onay veya red/revize notunuz (ör. parlaklığı artır, sesini kıs...)"
+                placeholder="Onay veya red/revize notunuz (ör. yüz ifadesini düzelt, parlaklığı artır…)"
                 value={draftComments[item.id] ?? ''}
                 onChange={(e) => setDraftComments((prev) => ({ ...prev, [item.id]: e.target.value }))}
                 style={{ width: '100%', marginTop: 'auto' }}
@@ -872,7 +668,7 @@ function D30ReviewCenter({
                 </button>
                 {item.sceneJump ? (
                   <button type="button" className="btn" onClick={() => onJumpPreview(item.sceneJump!)}>
-                    🎮 Canlı Oyunda Gör
+                    🎮 Oyunda Gör
                   </button>
                 ) : null}
               </div>
@@ -880,6 +676,144 @@ function D30ReviewCenter({
           );
         })}
       </div>
+
+      {/* Bottom Pagination Bar */}
+      {pageSize > 0 && totalPages > 1 ? (
+        <div className="row" style={{ justifyContent: 'center', marginTop: 18, gap: 8 }}>
+          <button type="button" className="btn" disabled={safePage <= 0} onClick={() => setPage(Math.max(0, safePage - 1))}>
+            ← Önceki Sayfa
+          </button>
+          <span className="badge">
+            Sayfa {safePage + 1} / {totalPages} ({filtered.length} eser)
+          </span>
+          <button
+            type="button"
+            className="btn"
+            disabled={safePage >= totalPages - 1}
+            onClick={() => setPage(Math.min(totalPages - 1, safePage + 1))}
+          >
+            Sonraki Sayfa →
+          </button>
+        </div>
+      ) : null}
+
+      {/* Full-Screen Lightbox Modal for Deep Inspection & Direct Approval/Rejection */}
+      {lightboxItem ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={lightboxItem.title}
+          onClick={() => setLightboxItem(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: 'rgba(6, 4, 12, 0.92)',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 20,
+            overflow: 'auto'
+          }}
+        >
+          <div
+            className="card"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: 1320,
+              width: '100%',
+              margin: 'auto',
+              border: '2px solid #d4a857',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 12
+            }}
+          >
+            <div className="row" style={{ justifyContent: 'space-between', margin: 0, flexWrap: 'wrap', gap: 8 }}>
+              <div>
+                <span className="badge info" style={{ marginRight: 8 }}>{lightboxItem.badge}</span>
+                <strong>{lightboxItem.title}</strong>
+                <span className="mono" style={{ marginLeft: 10, color: '#f3d287' }}>
+                  {loadedDims[lightboxItem.id] || lightboxItem.dims || ''}
+                </span>
+              </div>
+              <div className="row" style={{ margin: 0, gap: 6 }}>
+                <button type="button" className="btn" onClick={() => stepLightbox(-1)}>
+                  ← Önceki Görsel
+                </button>
+                <button type="button" className="btn" onClick={() => stepLightbox(1)}>
+                  Sonraki Görsel →
+                </button>
+                <button type="button" className="btn" onClick={() => setCheckerBg(!checkerBg)}>
+                  {checkerBg ? '⬛ Koyu Zemin' : '🏁 Şeffaf Damalı Zemin'}
+                </button>
+                {lightboxItem.imageUrl ? (
+                  <a className="btn" href={lightboxItem.imageUrl} target="_blank" rel="noreferrer">
+                    ↗ Ham Dosyayı Aç
+                  </a>
+                ) : null}
+                <button type="button" className="btn primary" onClick={() => setLightboxItem(null)}>
+                  ✕ Kapat
+                </button>
+              </div>
+            </div>
+
+            {lightboxItem.imageUrl ? (
+              <div
+                style={{
+                  borderRadius: 8,
+                  border: '1px solid #382a4a',
+                  padding: 12,
+                  maxHeight: '68vh',
+                  overflow: 'auto',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  background: checkerBg
+                    ? 'repeating-conic-gradient(#1b1429 0% 25%, #0e0a17 0% 50%) 50% / 24px 24px'
+                    : '#07050c'
+                }}
+              >
+                <img
+                  src={lightboxItem.imageUrl}
+                  alt={lightboxItem.title}
+                  style={{ maxWidth: '100%', maxHeight: '64vh', objectFit: 'contain' }}
+                />
+              </div>
+            ) : null}
+
+            <div className="mono" style={{ fontSize: 12, color: 'var(--dim)' }}>
+              {lightboxItem.subtitle} · <strong>Dosya:</strong> {lightboxItem.targetPath}
+            </div>
+            <p style={{ margin: 0 }}>{lightboxItem.description}</p>
+
+            <div className="row" style={{ margin: 0, gap: 8, flexWrap: 'wrap' }}>
+              <input
+                type="text"
+                placeholder="Bu görsel için onay veya revize notunuzu yazın…"
+                value={draftComments[lightboxItem.id] ?? ''}
+                onChange={(e) => setDraftComments((prev) => ({ ...prev, [lightboxItem.id]: e.target.value }))}
+                style={{ flex: 1, minWidth: 260 }}
+              />
+              <button
+                type="button"
+                className={`btn${decisions[lightboxItem.id]?.status === 'approved' ? ' primary' : ''}`}
+                disabled={savingId === lightboxItem.id}
+                onClick={() => void recordDecision(lightboxItem, 'approved')}
+              >
+                ✅ Onayla
+              </button>
+              <button
+                type="button"
+                className={`btn${decisions[lightboxItem.id]?.status === 'rejected' ? ' primary' : ''}`}
+                disabled={savingId === lightboxItem.id}
+                onClick={() => void recordDecision(lightboxItem, 'rejected')}
+              >
+                ❌ Reddet / Revize İste
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -908,7 +842,7 @@ function Overview({ p, onOpenReview }: { p: Progress; onOpenReview: () => void }
               <span className="badge ok">{p.currentAssignment.status}</span>
             </div>
             <button type="button" className="btn primary" onClick={onOpenReview}>
-              📋 D-30 Onay Merkezine Git (42 Maddeyi Onayla / Reddet)
+              📋 Kapsamlı Onay Merkezine Git (707 Eser &amp; Adımı Onayla / Reddet)
             </button>
           </div>
           <p style={{ margin: '8px 0 0' }}>{p.currentAssignment.workflow}</p>
