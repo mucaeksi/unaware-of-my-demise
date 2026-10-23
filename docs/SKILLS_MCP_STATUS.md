@@ -1,4 +1,22 @@
-# Skills and MCP verification (2026-10-10, Claude Code cloud session)
+# Skills and MCP verification
+
+## 2026-10-22, Claude Code cloud session (Linux, Node 22.22, commit `ac186f9`)
+
+Real calls, not file presence. Cloud sessions now run [.claude/hooks/session-start.sh](../.claude/hooks/session-start.sh) (registered in `.claude/settings.json`, active only when `CLAUDE_CODE_REMOTE=true`; a no-op on the owner's machine): `npm install` from the pinned lockfile (falls back to `npm ci` and restores the lockfile if npm would rewrite it), pre-fetches the pinned Graphify package and builds `graphify-out/graph.json` if missing. It never deploys or pushes.
+
+| Check | Result |
+| --- | --- |
+| Skills | 44/44 `.claude/skills/*/SKILL.md` match `.claude/skills-lock.json`; all six pinned ZIPs match their sha256; `bootstrap_skills.py --verify`, `skills_doctor.py` and `install_pixijs_skills.py --check` (26 skills = pixi.js 8.22.0) PASS. |
+| Codex adapters | `sync_codex_skills.py --check` failed: `a61f1aa` changed the `cloudflare-d1-liveops` adapter without regenerating `.agents/skills-lock.json`. Regenerated; the check passes. |
+| `npm run verify` | PASS on a clean Linux clone in about 9 minutes (1,090 tests, content check reproduces 172 files exactly). |
+| e2e | `game.spec.ts --project landscape-desktop` 2/2 PASS against the local workerd/D1/R2 stack with the preinstalled Playwright Chromium 1194. |
+| `uomd-pixi-live` MCP | Failed at session start because `node_modules` did not exist yet (the hook fixes this); after `npm ci` it answers `initialize` and lists its 4 tools over stdio. |
+| Graphify MCP | `tools/build_graph.sh`: 4,920 nodes / 13,930 edges / 202 communities in 26 s; `graph_stats` and `query_graph` answered, graph built at HEAD. |
+| Chrome DevTools MCP | `new_page` + `evaluate_script` on an isolated data: page; Chrome 141 with WebGL. |
+| Proxy services | Gemini model list HTTP 200 (no paid call); Cloudflare account token active, Workers list readable (`uomd-game/admin/ops-staging`). |
+| Staging | `/api/v1/health` reports `version.tag` `ac186f9f4ce1` with `world_map_v1`: the failing game Workers Build in the 2026-10-21 handoff (§1.1) is resolved. |
+
+## 2026-10-10, Claude Code cloud session
 
 Real calls were made in this environment; "files exist" was not accepted as proof.
 
