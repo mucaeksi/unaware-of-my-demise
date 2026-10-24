@@ -1,9 +1,14 @@
-# Argon 4 / Antigravity Continuation & Master Execution Plan
+# Claude Opus 5.5 Exclusive Ownership & Unity Migration Execution Plan (D-31)
 
-Updated **2026-10-23**. [README](../README.md) is the complete execution brief and master prompt; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status; [ARGON_ART_DIRECTOR](handoff/ARGON_ART_DIRECTOR.md) defines the D-30 Art Director mandate and §4 queue.
+Updated **2026-10-24**. [README](../README.md) is the complete execution brief and master prompt; [CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) is the authoritative Unity 6 LTS migration and Gemini API asset blueprint under **Decision D-31**; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status.
 
-## Status 2026-10-23
+## Status 2026-10-24 (Decision D-31)
 
+- **D-31 Exclusive Handoff to Claude Opus 5.5 (`2026-10-24`):**
+  - **100% Exclusive Ownership:** All project operations, architecture, engineering, Unity engine migration, Gemini API creative production, QA, and documentation are transferred exclusively to **Claude Opus 5.5** (`claude-opus-5-5` / Claude Code). Argon 4 / Antigravity and Codex are retired from active ownership.
+  - **Unity 6 LTS (`apps/unity/`, C#, URP 2D) Migration:** Full technical architecture, `.asmdef` module layout (`Uomd.Shared`, `Uomd.ContentSchema`, `Uomd.Patch`, `Uomd.Economy`, `Uomd.Story`, `Uomd.Combat`, `Uomd.Game`, `Uomd.Native`), 28-scene mapping, bit-exact server replay parity contract, Android Java bridge migration (`CredentialManager`, `AndroidKeyStore`, `BillingClient`, `MobileAds`/`UMP`), and Phases `U-0` through `U-6` execution plan delivered in [docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md).
+  - **Unity Bundle & C# Core Primitives Exporter (`npm run export:unity`):** `tools/export_unity_bundle.ts` (and `tools/export_unity_bundle.test.ts`) validates and exports `content/base` (`rel_0001`, 202 files) into `StreamingAssets/uomd_base/`, converts UOMD top-left atlas frames `[x, y, w, h]` and `foot_y` pivots into Unity bottom-left `Sprite` rects (`unity_y = height - (y + h)`) and normalized pivots `(pivot_x, 1 - foot_y)` in `StreamingAssets/uomd_metadata/unity_base_art_slices.json` & `unity_campaign_art_slices.json`, and generates `Runtime/Generated/UomdCorePrimitives.g.cs` (`Mulberry32Rng`, D-27 `UomdStatMath`, `ComputeVictoryStars`, and `UomdClientConfig` with compiled EC P-256 trust roots and capabilities).
+  - **Exclusive Gemini API Asset Pipeline:** Claude Opus 5.5 generates all remaining and future visual, audio, voice, and video assets exclusively via the Google Gemini API (`GEMINI_API_KEY` in `.env`) using the repository's budget-guarded tools (`tools/gen_image.ts`, `tools/record_game_vo.py`, `tools/generate_phase1_music_lyria35.py`, `tools/ingest_art.ts --by claude:art-director` under `content/budget/media_budget.json`).
 - **Done since 2026-10-20:**
   - **D-30 Art Director Handoff (`356bcf75`) & §4.1 Art-Direction Pass:**
     - Merged PR #37 (`356bcf75`), establishing D-30 (`argon:art-director`) and canonical store/brand master generators (`tools/build_canonical_store_and_brand_assets.mjs`).

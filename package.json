@@ -20,6 +20,7 @@
     "check:content": "tsx tools/check_content.ts",
     "verify": "npm run lint && npm run typecheck && npm test && npm run check:content",
     "build:campaign": "tsx tools/build_campaign.ts",
+    "export:unity": "tsx tools/export_unity_bundle.ts",
     "build": "npm run build -w @uomd/game && npm run build -w @uomd/admin",
     "e2e": "playwright test -c tests/e2e/playwright.config.ts",
     "e2e:remote": "playwright test -c tests/e2e/playwright.remote.config.ts"

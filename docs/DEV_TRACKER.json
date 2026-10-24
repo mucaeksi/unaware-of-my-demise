@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
   "sourceCommit": "7138437f",
-  "reviewedAt": "2026-10-23",
+  "reviewedAt": "2026-10-24",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "D-30 (§4.1–§4.7 Complete)",
-    "status": "READY_FOR_OWNER_REVIEW",
-    "nextProposed": "Owner review & Approve/Reject decisions on D-30 deliverables (§4.1–§4.7) in Control Center → Development → D-30 Onay Merkezi",
-    "workflow": "D-30 Art Director queue (§4.1–§4.7) delivered and pushed to main: (1) §4.1 Art-Direction Audit across 258 approved entries, sub-frame pivot fix, 9×3 1728×576 atlas_objective.webp & phone-landscape memory/FPS checks; (2) §4.2 Signature VFX (115 bespoke presets, 133 skill bindings, 5 new emblem textures, 4 vector shapes); (3) §4.3 Verbatim Art Bible §4.11–§4.29 anchors & SHA-256 locks for all 32 characters + 52 combat units; (4) §4.4 All 16 canonical 1376×768 gacha banners ingested and wired into SummonScene, HomeScene World-Map Spotlight & Admin Banners; (5) §4.5 Chibi 2-phase anticipation/impact timing, VN bottom-anchored breathing & speech pulse, staggered 4★/5★ summon reveal & modal motion; (6) §4.6 16 canonical Ogg Vorbis SFX cues registered in presentation.sounds + Chapters 1–7 & Boss music motif mappings; (7) §4.7 Narrative & queue ledger sync (415 D1 seeded assets, $0.00 / $20.00 budget spent)."
+    "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
+    "status": "IN_PROGRESS",
+    "nextProposed": "Claude Opus 5.5 executes Unity 6 LTS migration Phases U-1..U-6 (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) and Gemini API asset production",
+    "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "D-31: Exclusive Handover to Claude Opus 5.5 & Unity 6 LTS Migration Blueprint + Bundle Exporter (2026-10-24)",
+      "detail": "100% of operations, Unity 6 LTS (apps/unity/, C#, URP 2D) client migration, and Gemini API asset generation transferred exclusively to Claude Opus 5.5. Delivered docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md and tools/export_unity_bundle.ts (npm run export:unity: exports content/base to StreamingAssets/uomd_base, converts top-left atlas frames & foot_y pivots to Unity bottom-left Sprite rects/pivots, and emits bit-exact C# Mulberry32Rng + D-27 UomdStatMath + UomdClientConfig)."
+    },
     {
       "title": "D-30 §4.1–§4.7 Complete Art Direction, VFX, 16 Banners, Motion Polish & 16 SFX Pack (2026-10-23)",
       "detail": "258 approved art entries in content/approved_art and 415 D1 seeded assets: all 16 canonical 1376×768 gacha banners wired into SummonScene & HomeScene World-Map Spotlight; 115 bespoke VFX presets & 133 skill bindings; 9×3 (1728×576) boss objective atlas; 16 Ogg Vorbis SFX cues in presentation.sounds; Chapters 1–7 & Boss music motif mappings; and scene-anim motion polish across Chibi, VN portraits, Summon & Hub modals."
@@ -26,8 +30,12 @@
   ],
   "next": [
     {
-      "title": "Owner Review in Control Center → Development (D-30 Onay / Red Merkezi)",
-      "detail": "Review each D-30 deliverable (§4.1–§4.7, 16 banners, 16 SFX cues, 9×3 boss objectives, 115 VFX presets, motion polish, and store kit) directly in the Development tab and mark Approve (Onayla) or Reject/Revision (Reddet/Revize); rejected items are immediately revised."
+      "title": "Phase U-1 & U-2 (Claude Opus 5.5): Unity 6 LTS Scaffold & Bit-Exact C# Domain Port",
+      "detail": "Initialize apps/unity/ with modular .asmdef assemblies (Uomd.Shared, Uomd.ContentSchema, Uomd.Patch, Uomd.Economy, Uomd.Story, Uomd.Combat) and verify 100% NUnit parity against TypeScript combat/story/patch test vectors (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)."
+    },
+    {
+      "title": "Phase U-3..U-6 (Claude Opus 5.5): Unity URP 2D Scenes, Gothic UI, Android Bridges & Gemini API Assets",
+      "detail": "Port all 28 scenes to Unity URP 2D + UI Toolkit/uGUI, wire the 4 Android Java plugins via AndroidJavaObject, generate remaining/future assets exclusively via the Google Gemini API, and cut over the Android AAB build."
     },
     {
       "title": "Phase C: Publish Base (rel_0001) & Patch 1 (rel_part1_ch1) to staging",
@@ -79,9 +87,15 @@
   "ideas": [
     {
       "from": "owner",
+      "date": "2026-10-24",
+      "text": "Hand over 100% of project operations to Claude Opus 5.5, migrate the entire client system to Unity (C#, Unity 6 LTS, URP 2D), and have Claude Opus 5.5 create all assets exclusively via the Google Gemini API.",
+      "status": "in progress: D-31 (CLAUDE_OPUS_UNITY_HANDOFF.md + npm run export:unity delivered)"
+    },
+    {
+      "from": "owner",
       "date": "2026-10-18",
       "text": "Drop Phaser completely and move the game to pure PixiJS, step by step (battle, story, menus, then delete the compatibility API).",
-      "status": "done: D-25 (ea68484d)"
+      "status": "done: D-25 (ea68484d; superseded for client target by D-31 Unity migration)"
     },
     {
       "from": "owner",

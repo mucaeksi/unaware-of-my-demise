@@ -1,4 +1,4 @@
-/* global console */
+/* global console, process */
 import { Buffer } from 'node:buffer';
 import { execSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
