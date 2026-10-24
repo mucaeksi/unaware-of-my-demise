@@ -1,6 +1,6 @@
-# Media production queue — SOL-5
+# Media production queue — SOL-5 (Updated 2026-10-24 for Decision D-31)
 
-Status: **§4.1–§4.7 Complete Art-Direction, Signature VFX, Identity Locks, Banners, Motion Polish, Audio/SFX & Narrative Upkeep Completed (`2026-10-23`, `argon:art-director`)**. English text; every spoken line is Japanese (`ja-JP`, Chirp 3 HD). [QUEUE_DATA.json](QUEUE_DATA.json) contains the complete English prompts, source hashes, per-asset audit verdicts (`keep` / `fixed` / `regenerate`), runtime fixes, and `phone-landscape` (`1200×540 @ 2x`) texture-memory and frame-time measurements.
+Status: **Decision D-31 (2026-10-24) — 100% of Art Director authority, Google Gemini API asset generation (`--by claude:art-director`), and Unity 6 LTS (`apps/unity/`) integration are transferred exclusively to Claude Opus 5.5 (`claude-opus-5-5`).** (Historical §4.1–§4.7 deliverables below were completed on `2026-10-23` and exported to Unity via `npm run export:unity`). English text; every spoken line is Japanese (`ja-JP`, Gemini TTS). [QUEUE_DATA.json](QUEUE_DATA.json) contains the complete English prompts, source hashes, per-asset audit verdicts (`keep` / `fixed` / `regenerate`), runtime fixes, and `phone-landscape` (`1200×540 @ 2x`) texture-memory and frame-time measurements.
 
 ## §4.1–§4.7 Art-Direction, VFX, Banners, Motion & Audio Summary (2026-10-23)
 

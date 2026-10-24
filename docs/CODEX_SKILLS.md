@@ -1,6 +1,10 @@
-# Codex skills alongside Claude
+# Skills & Adapter Registry (Superseded for Active Operations by Decision D-31)
 
-The owner authorized Codex development alongside Claude on 2026-10-11, and under **Decision D-23 (2026-10-17)** retired the 28 official Phaser topic skills and migrated the 6 project engine skills to the **Hybrid PixiJS v8 + Modular Gothic DOM/CSS UI Architecture**. Root README remains the sole engineering master prompt; narrative/ remains the canon. `AGENTS.md` is the Codex entry point and does not replace either source.
+> **Owner Decision D-31 (2026-10-24):** 100% of project operations, architecture, engineering, the **Unity 6 LTS (`apps/unity/`, C#, URP 2D)** client migration ([CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)), and all **Google Gemini API** creative asset production are transferred exclusively to **Claude Opus 5.5** (`claude-opus-5-5` / Claude Code). Argon 4 / Antigravity and Codex are retired from active ownership. The Codex adapter files in `.agents/skills/` and the historical D-23/D-25 web-stage skills in `.claude/skills/` remain pinned solely for `python3 tools/sync_codex_skills.py --check` and `python3 tools/skills_doctor.py` lockfile verification while `apps/game` serves as the handed-over behavioral oracle until Phase U-6 archival (`archive/pixi-era`).
+
+*(Historical 2026-10-11 / 2026-10-17 skill-catalog notes below are retained for read-only lockfile provenance.)*
+
+The owner originally authorized Codex development alongside Claude on 2026-10-11, and under **Decision D-23 (2026-10-17)** retired the 28 official Phaser topic skills. Root README remains the sole engineering master prompt; narrative/ remains the canon. `AGENTS.md` is the adapter entry point and does not replace either source.
 
 Codex has **26 repository skills**: adapters for all **18** pinned canonical skills on main, plus eight project-specific skills. Claude continues to use its original `.claude/skills/`, `CLAUDE.md`, `.mcp.json`, bootstrap, lock file, scripts/data and licenses. The Codex adapters reference canonical content rather than duplicating it; read the linked source in full when applying a skill and resolve its relative resources against the canonical directory.
 

@@ -77,12 +77,12 @@ Historical Actions runs, browser screenshots and staging/backup reports remain h
 - Live build commands, path filters and the token were read on 2026-10-20 and are recorded in [RUNBOOK](RUNBOOK.md#workers-builds) (D-28). Every push to `main` triggers them. Confirm source tags before claiming current staging results.
 - Ops actively binds **uomd-db-backups**. Preserve it; obsolete decommission instructions are superseded. Configured cron schedules are 03:17 UTC daily and every 15 minutes, with catch-up logic; configuration is not latest-run success.
 - Admin service-binding 401/403 checks verify the Worker's own JWT rejection, not the public Access edge or MFA.
-- Approved media budget (Argon 4 now owns production): **1000 TL/month**, recorded **$20/month**, **$3/batch**, **three paid attempts per asset**. See [media_budget.json](../content/budget/media_budget.json); recheck exchange/provider prices and finish R14 guards before dependent production.
+- Approved media budget (**Claude Opus 5.5** now owns production via the **Google Gemini API** under D-31): **1000 TL/month**, recorded **$20/month**, **$3/batch**, **three paid attempts per asset**. See [media_budget.json](../content/budget/media_budget.json); recheck exchange/provider prices before dependent production.
 - Deletion is **POST /api/v1/account/delete**; export is **GET /api/v1/account/export**. Complete 21-table erasure and deletion-on-restore (`account_deletions`) are implemented in R11 (`0028_r11_privacy_ads_reconcile.sql`) and R17-B (`reapplyAccountDeletions`).
 - Production/public Play rollout is a separate owner gate. Credentials, live permissions and device availability are not inferred from configuration.
 
-## Current handoff boundary
+## Current handoff boundary (Decision D-31, 2026-10-24)
 
-All local engineering work through R17 (`123c3e6e`..`7e74074e`, including R06/R12 combat resistances and multi-wave encounters, R09–R17 client/API/admin/ops/media/economy packages, Opus 5.5's parallel packages, and Decision D-23 PixiJS v8 + DOM/CSS UI engine migration) is implemented and locally verified on `main`. Physical Android device verification, live Google Play/AdMob/OAuth credentials, owner-key live backup restore and deployed Cloudflare Worker tag verification remain explicit external gates under R18.
+100% of project engineering, the **Unity 6 LTS (`apps/unity/`, C#, URP 2D)** client migration ([CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md), `npm run export:unity`), and **Google Gemini API** asset production are handed over exclusively to **Claude Opus 5.5**. The previous TypeScript web client (`apps/game`) and Capacitor shell (`apps/android`) remain in the repository strictly as the handed-over behavioral/test oracle until Unity Phases `U-1..U-5` complete and are archived into `archive/pixi-era` in Phase `U-6`. Physical Android device verification, live Google Play/AdMob/OAuth credentials, owner-key live backup restore and deployed Cloudflare Worker tag verification remain explicit external gates under R18.
 
 

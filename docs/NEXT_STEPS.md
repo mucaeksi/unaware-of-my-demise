@@ -51,8 +51,8 @@ Updated **2026-10-24**. [README](../README.md) is the complete execution brief a
 - **Workspace:** the repository is `F:\unaware-of-my-demise` (owner, 2026-10-20); the owner pushes GitHub `main` with GitHub Desktop. `E:\unaware-of-my-demise`, the `C:\Users\PC\uomd-*` worktrees and the Drive copy are retired (do not edit or commit there).
 - **Staging (2026-10-21):** healthy: migration 0029 applied, `/api/v1/health` reports `world_map_v1`, `hard_mode_v1`, `sprite_animation_v1`, `attributes_v1`. Control Center (`uomd-admin-staging`) includes 1-click D-29 release presets (`rel_0001`, `rel_part1_ch1`, `rel_0003_part1_campaign`) and full 52-unit / World Map inspector.
 - **Release plan (D-29):** [RELEASE_ROADMAP](RELEASE_ROADMAP.md) — first AAB carries all code (world map hub, Hard mode switch, video), patch 1 = Chapter 1 + the hub (`rel_part1_ch1`), patches 2–7 = one chapter each, then Hard mode; store listing with a ~1:30 teaser.
-- **Open, ranked:** Phase C live publication of `rel_0001` + `rel_part1_ch1` on staging; owner decisions on target progression pace, economy numbers, combat semantics (`PROGRESSION_PACE.md`); Chapters 2–7 and boss music within media budget; physical Android device QA & Play Console internal track (`R18`).
-- **Argon:** binding working rules in [handoff/ARGON_INSTRUCTIONS](handoff/ARGON_INSTRUCTIONS.md).
+- **Open, ranked (D-31):** Claude Opus 5.5 executes Unity 6 LTS (`apps/unity/`) Phases `U-1..U-6` ([CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)); Phase C live publication of `rel_0001` + `rel_part1_ch1` on staging; owner decisions on target progression pace, economy numbers, combat semantics (`PROGRESSION_PACE.md`); Chapters 2–7 and boss music via Google Gemini API / Lyria 3.5 within media budget; physical Android device QA & Play Console internal track (`R18`).
+- **Claude Opus 5.5 authority:** master blueprint and working rules in [handoff/CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) and [AGENT_RULES](AGENT_RULES.md).
 
 ## Master 4-Phase Execution Order (Owner Direction — 2026-10-17)
 

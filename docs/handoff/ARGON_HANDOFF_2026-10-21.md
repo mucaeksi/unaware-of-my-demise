@@ -1,6 +1,6 @@
-# Handoff to Argon — 2026-10-21
+# [SUPERSEDED BY DECISION D-31 (2026-10-24)] Historical Handoff to Argon — 2026-10-21
 
-From today Argon carries the whole project: engineering as well as art. This list is the order of work. The binding working rules stay in [ARGON_INSTRUCTIONS](ARGON_INSTRUCTIONS.md); the release plan is [RELEASE_ROADMAP](../RELEASE_ROADMAP.md) (D-29); the gap list is [REVIEW_2026-10-20 §7](../REVIEW_2026-10-20.md).
+> **SUPERSEDED BY DECISION D-31 (2026-10-24):** Argon 4 / Antigravity is retired from active ownership. **100% of project operations, Unity 6 LTS (`apps/unity/`) migration, and Google Gemini API asset production are handed over exclusively to Claude Opus 5.5 (`claude-opus-5-5`).** Read [CLAUDE_OPUS_UNITY_HANDOFF.md](CLAUDE_OPUS_UNITY_HANDOFF.md) and [NEXT_STEPS.md](../NEXT_STEPS.md). All items in §1 and §2 (1.1 Linux clean-clone fix `fe67fae3`, 1.2 Prologue no-skip `7207dae1`, ART-1..ART-4, Phase E Hard mode `5a2a0e86`, and D-30 §4.1–§4.7) were completed and handed over on `main`.
 
 ## 0. State at handoff
 

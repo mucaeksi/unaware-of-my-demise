@@ -1,19 +1,19 @@
-# Release roadmap — first AAB, store listing, chapter patches, Hard mode (D-29)
+# Release roadmap — first AAB (Unity 6 LTS, D-31), store listing, chapter patches, Hard mode (D-29)
 
-Owner direction 2026-10-20: perfect the first AAB (D-22 scope), give the Play listing a ~1:30 teaser video plus logo/banners/screenshots, then ship everything else as patches. Patch 1 is Part I Chapter 1 **with the whole game around it**: the world map as the main menu, with events, modes, options and banners placed around the map. Patches 2–7 add one chapter each. After Chapter 7, the Hard mode of all chapters. This file is the plan; [REVIEW_2026-10-20](REVIEW_2026-10-20.md) is the gap list it draws from.
+Owner direction 2026-10-20 (D-29) & 2026-10-24 (**Decision D-31**): **Claude Opus 5.5** (`claude-opus-5-5`) owns 100% of engineering, the **Unity 6 LTS (`apps/unity/`, C#, URP 2D)** client migration ([CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)), and all **Google Gemini API** creative asset production. Perfect the first AAB (D-22 scope on Unity 6 LTS), give the Play listing a ~1:30 teaser video plus logo/banners/screenshots, then ship everything else as signed data patches. Patch 1 is Part I Chapter 1 **with the whole game around it**: the world map as the main menu, with events, modes, options and banners placed around the map. Patches 2–7 add one chapter each. After Chapter 7, the Hard mode of all chapters.
 
 ## 0. The rule that shapes everything: code ships in the AAB, data ships in patches
 
-Patches are signed, closed **data** snapshots ([CONTENT_RELEASE_CONTRACT](CONTENT_RELEASE_CONTRACT.md), [PATCHING](PATCHING.md)). They cannot add code, and Play policy forbids downloading executable code anyway. So:
+Patches are signed, closed **data** snapshots ([CONTENT_RELEASE_CONTRACT](CONTENT_RELEASE_CONTRACT.md), [PATCHING](PATCHING.md)). They cannot add C# DLLs or executable code, and Play policy forbids downloading executable code anyway. So:
 
-- **Every screen, mode and toggle that any later patch will use must already be in the first AAB as code**, switched off (or showing "coming soon") until a patch brings its data. The owner's "patch 1 contains the main menu and world map" means: the AAB carries the world-map code; patch 1 brings the map data, the Chapter 1 content and turns the hub on.
-- **Every data field a later patch will use must already be in the AAB's schema.** The schemas are strict: an old AAB rejects a patch with an unknown field. New features are therefore declared as **capabilities** (the client advertises which it supports; a release that needs an unknown capability is refused cleanly instead of breaking). Planned for the first AAB: `world_map_v1`, `hard_mode_v1` (plus the existing `attributes_v1`, `presentation_v1`, `vfx_v1`).
+- **Every screen, mode and toggle that any later patch will use must already be in the first Unity AAB as C# code**, switched off (or showing "coming soon") until a patch brings its data. The owner's "patch 1 contains the main menu and world map" means: the AAB carries the world-map code; patch 1 brings the map data, the Chapter 1 content and turns the hub on.
+- **Every data field a later patch will use must already be in the AAB's schema.** The schemas are strict: an old AAB rejects a patch with an unknown field. New features are therefore declared as **capabilities** (the client advertises which it supports; a release that needs an unknown capability is refused cleanly instead of breaking). Compiled into the first AAB (`UomdCorePrimitives.g.cs`): `world_map_v1`, `hard_mode_v1`, `sprite_animation_v1`, `attributes_v1`, `presentation_v1`, `vfx_v1`.
 - **Server code ships separately** through Workers Builds (D-28), not through patches. Hard mode rewards, events and modes are server code + patch data.
-- **Size limits per release:** 512 files and 200 MiB per signed snapshot. Each chapter patch is cumulative (a device only downloads files it lacks). In-game videos must stay short and small (webm, ~720p), a handful per Part. The store teaser lives on YouTube, not in a patch.
+- **Size limits per release:** 768 files and 200 MiB per signed snapshot. Each chapter patch is cumulative (a device only downloads files it lacks). In-game videos must stay short and small (WebM/MP4, ~720p), a handful per Part. The store teaser lives on YouTube, not in a patch.
 
-## 1. Phase A — the first AAB, "perfect"
+## 1. Phase A — the first AAB, "perfect" (Unity 6 LTS, Decision D-31)
 
-Scope stays D-22: logos (PixiJS + ŞovTaym), Tap-to-Start title, Google sign-in + background patch download, 9-shot prologue, tutorial T-1..T-3, patch wait, restart into the hub. "Perfect" means that flow is flawless on real phones and that the AAB carries **all future code**.
+Scope stays D-22 on **Unity 6 LTS (`apps/unity/`)**: logos (Unity / ŞovTaym Studios), Tap-to-Start title, Google sign-in + background patch download, 9-shot prologue, tutorial T-1..T-3, patch wait, restart into the hub. "Perfect" means that flow is flawless on real phones and that the Unity AAB carries **all future C# code** (ported from the handed-over legacy `apps/game` reference oracle).
 
 | # | Work | Owner | State |
 |---|---|---|---|

@@ -1,6 +1,8 @@
-# Argon — Art Director master brief (D-30, 2026-10-23)
+# [SUPERSEDED BY DECISION D-31 (2026-10-24)] Historical Argon — Art Director master brief (D-30, 2026-10-23)
 
-**Owner decision D-30 (2026-10-23): Argon is the Art Director of Unaware of My Demise.** Argon owns every creative discipline of the game and the directories that hold them — `narrative/` and all art, animation, VFX, banner, UI-art, store, video, music, SFX and voice-direction sources — and carries each deliverable from concept to an integrated, verified commit in the running game.
+> **SUPERSEDED BY DECISION D-31 (2026-10-24):** Argon 4 / Antigravity is retired from active ownership. **100% of Art Director authority, `narrative/` stewardship, Google Gemini API asset production (`--by claude:art-director`), and the Unity 6 LTS (`apps/unity/`, C#, URP 2D) client migration are transferred exclusively to Claude Opus 5.5 (`claude-opus-5-5`).** Read [CLAUDE_OPUS_UNITY_HANDOFF.md](CLAUDE_OPUS_UNITY_HANDOFF.md) and root [README.md](../../README.md) as the active authority. The D-30 brief below is retained as historical provenance for the §4.1–§4.7 deliverables completed on 2026-10-23.
+
+**Historical Owner decision D-30 (2026-10-23): Argon was the Art Director of Unaware of My Demise.**
 
 This brief defines that creative mandate. It does not replace the [README](../../README.md), which stays the sole engineering master prompt, or the binding working rules in [ARGON_INSTRUCTIONS](ARGON_INSTRUCTIONS.md). Order of authority: the owner's current instruction → README → this brief → older supporting records (Art Bible, pipeline, workbench notes). When a supporting record conflicts with this brief or with current code, fix the record in the same commit rather than silently following either.
 

@@ -1,4 +1,6 @@
-# Skills and MCP verification
+# Skills and MCP verification (Updated 2026-10-24 for Decision D-31)
+
+> **Owner Decision D-31 (2026-10-24):** All project engineering, **Unity 6 LTS (`apps/unity/`, C#, URP 2D)** migration ([CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)), and **Google Gemini API** asset production belong exclusively to **Claude Opus 5.5** (`claude-opus-5-5` / Claude Code). All 121 skills in `.claude/skills/` and 58 adapters in `.agents/skills/` pass `skills_doctor.py`, `sync_codex_skills.py --check`, and `install_ecc.py --check`. Historical D-23/D-25 web-stage skills and `uomd-pixi-live` remain pinned only for lockfile integrity and legacy `apps/game` oracle inspection during Phases U-1..U-5.
 
 ## 2026-10-22, Claude Code cloud session (Linux, Node 22.22, commit `ac186f9`)
 
