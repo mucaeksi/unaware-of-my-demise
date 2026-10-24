@@ -15,6 +15,9 @@ namespace Uomd.Scenes
         private static void Boot()
         {
             if (Object.FindFirstObjectByType<UomdSceneRouter>() != null) return;
+            // The capture player runs under Xvfb with no window manager, so its window never gets focus and a desktop
+            // player pauses its frame loop without this.
+            if (UomdCaptureRunner.Requested(out _)) Application.runInBackground = true;
 
             var go = new GameObject("UomdBootstrapper");
             go.SetActive(false); // defer Awake until UIDocument has its PanelSettings

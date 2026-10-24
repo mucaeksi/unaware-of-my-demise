@@ -45,7 +45,8 @@ namespace Uomd.EditorTools
             }
         }
 
-        /// <summary>Development Linux player used only by the cloud screenshot pipeline (unity_ci.sh capture).</summary>
+        /// <summary>Linux player used only by the cloud screenshot pipeline (unity_ci.sh capture). A release (non-Development)
+        /// build, so the screenshots carry no Development Console or "Development Build" watermark.</summary>
         public static void BuildLinuxCaptureBatch()
         {
             try
@@ -55,7 +56,7 @@ namespace Uomd.EditorTools
                     scenes = new[] { UomdProjectSetup.MainScenePath },
                     locationPathName = "Builds/LinuxCapture/uomd.x86_64",
                     target = BuildTarget.StandaloneLinux64,
-                    options = BuildOptions.Development
+                    options = BuildOptions.None
                 };
                 BuildReport report = BuildPipeline.BuildPlayer(options);
                 Debug.Log($"[UOMD] Linux capture build {report.summary.result} ({report.summary.totalErrors} errors)");

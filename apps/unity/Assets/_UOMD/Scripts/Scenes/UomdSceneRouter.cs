@@ -95,14 +95,16 @@ namespace Uomd.Scenes
                 RefreshHeaderWallets(targetScreen.ToString().ToUpperInvariant());
             }
 
-            await _activeController.OnEnterAsync(_screenHost);
+            Awaitable entering = _activeController.OnEnterAsync(_screenHost);
+            if (entering != null) await entering; // a synchronous screen that returned null must not break navigation
         }
 
         public async Awaitable ToggleOverlayAsync(UomdScreenId overlayId)
         {
             _overlayHost.Clear();
             if (!_controllers.TryGetValue(overlayId, out var overlayController)) return;
-            await overlayController.OnEnterAsync(_overlayHost);
+            Awaitable entering = overlayController.OnEnterAsync(_overlayHost);
+            if (entering != null) await entering;
         }
 
         public void ClearOverlays()

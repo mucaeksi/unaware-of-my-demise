@@ -7,10 +7,14 @@
   "currentAssignment": {
     "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Infrastructure pass done (verify green, headless C# harness, real-Unity reference compile, manifest fixed, Unity skills, live Unity status in Control Center). Next: port @uomd/combat to Uomd.Combat with a replay logHash parity suite, port StoryRunner tests, then the first licensed Unity import (needs B-UNITY-LICENSE) and the initial AAB vertical slice.",
+    "nextProposed": "First licensed Unity import done in the cloud session (Unity Personal, 6000.0.58f2): metas/ProjectSettings/packages-lock committed, EditMode 10/10 inside Unity, 24 screens captured from a Linux player and published to the Control Center. Next: StoryRunner tests, remote patch download (U-2), Android AAB build and the initial AAB vertical slice with approved art.",
     "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "U-3a: first licensed Unity import + cloud screen capture (2026-10-24, Claude Opus 5.5)",
+      "detail": "Unity 6000.0.58f2 installed Hub-free in the cloud session (install_unity_linux.sh, Android SDK/NDK r27c/OpenJDK 17) and Unity Personal activated headless from UNITY_EMAIL/UNITY_PASSWORD. The real import found what the reference compile could not: Packages/manifest.json lacked the built-in modules com.unity.modules.androidjni (AndroidJavaObject/Proxy, CS1069) and com.unity.modules.screencapture, and Uomd.Editor lacked Unity.RenderPipelines.Universal.2D.Runtime (Renderer2DData moved to its own assembly in URP 17). unity_ref_compile.py now references only enabled module DLLs and splits the URP signatures per assembly, so all three fail there too. The capture run exposed two runtime bugs: 25 synchronous OnEnterAsync bodies returned default (a null Awaitable), so the router's Start chain threw NullReferenceException on Boot -> Splash (now UomdAwaitables.Completed() plus a null guard in the router), and a desktop player without focus pauses (capture mode sets Application.runInBackground). Result: import OK, EditMode 10/10 in Unity (incl. 171 combat parity replays), 24/24 screens captured to docs/evidence/unity-*.webp."
+    },
     {
       "title": "U-1: bit-exact C# combat engine (2026-10-24, Claude Opus 5.5)",
       "detail": "Uomd.Combat is now a line-by-line port of @uomd/combat (Battle, BattleReplay, typed content, JS sort/rounding semantics); the placeholder BattleSimulator is gone. 171 golden battles from tools/export_unity_combat_vectors.ts (every Part I encounter with rotating 5-hero parties, ranks, server stats, signature-echo gear hooks, tutorials, synthetic waves, illegal replays; 70,170 events covering all 29 event types and 12 hook events) replay with identical logHash/eventCount/result in C#. Mutation checks confirm the suite catches RNG, rounding, turn-order and Focus regressions. npm run verify fails when the vectors are stale. The Unity battle screen now runs the real engine on content data."
@@ -46,8 +50,8 @@
       "detail": "Manifest signature admission exists; content-addressed download, staging, activation at restart and rollback are still missing."
     },
     {
-      "title": "U-3: First licensed Unity import, then the initial AAB vertical slice",
-      "detail": "Run apps/unity/cloud/unity_ci.sh import on a licensed editor, commit metas/ProjectSettings/packages-lock, then wire Studio → Title → Prologue → T-1..T-3 → Finish with approved art."
+      "title": "U-3: Android AAB build, then the initial AAB vertical slice",
+      "detail": "The first licensed import is done (U-3a). Next run apps/unity/cloud/unity_ci.sh build for a debug AAB, then wire Studio -> Title -> Prologue -> T-1..T-3 -> Finish with approved art (the 24 captured screens are still UI shells without art; Home's banner spotlight card overflows its frame)."
     },
     {
       "title": "Control Center: replace the retired browser-game previews",
@@ -67,10 +71,6 @@
     }
   ],
   "blockedOnOwner": [
-    {
-      "title": "B-UNITY-LICENSE — Unity licence for batchmode import/test/AAB",
-      "detail": "Everything up to compile is verified without a licence. The real import, PlayMode tests and AAB need an activated editor: either a Unity Pro/Plus serial as environment secrets (UNITY_SERIAL, UNITY_EMAIL, UNITY_PASSWORD) for apps/unity/cloud/unity_ci.sh, or run that script once on your own PC with Unity Hub (Personal is allowed there) and commit the generated metas/ProjectSettings. Unity documents that Personal cannot be activated manually/headless."
-    },
     {
       "title": "B-ART-DECISIONS — Art delivery decisions",
       "detail": "Commercial-use terms of Whisk/Veo output; approval of the Kera Voss pilot; role, element and rarity for the five drawn characters missing from the unit pack (cassian_thorne, corbin_locke, dorian_kesk, garrick_cinder, rowan_reed); order of regional music and the other characters' Japanese voice."
@@ -2381,9 +2381,9 @@
         "detail": "58 adapters verified, 36 Python tests"
       },
       {
-        "name": "Unity Editor import / PlayMode / AAB",
-        "result": "not run",
-        "detail": "needs an activated Unity licence (B-UNITY-LICENSE)"
+        "name": "Unity Editor import / EditMode / capture (licensed, cloud)",
+        "result": "pass",
+        "detail": "import OK with 0 compiler errors and 0 warnings; EditMode 10/10 inside Unity 6000.0.58f2; Linux player captured 24/24 screens. PlayMode tests and the Android AAB were not run yet."
       },
       {
         "name": "Physical Android, signed AAB",

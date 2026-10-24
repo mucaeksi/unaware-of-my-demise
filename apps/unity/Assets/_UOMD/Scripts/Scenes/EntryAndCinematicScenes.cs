@@ -95,7 +95,7 @@ namespace Uomd.Scenes
             card.Add(body);
             card.Add(continueBtn);
             screenRoot.Add(card);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime)
@@ -129,7 +129,7 @@ namespace Uomd.Scenes
             crest.style.marginTop = 220;
             crest.style.alignSelf = Align.Center;
             screenRoot.Add(crest);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime)
@@ -199,7 +199,7 @@ namespace Uomd.Scenes
             container.Add(startBtn);
             container.Add(row);
             screenRoot.Add(container);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -267,7 +267,7 @@ namespace Uomd.Scenes
             screenRoot.Add(frame);
 
             BindCurrentShot();
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         private void BindCurrentShot()
@@ -634,7 +634,7 @@ namespace Uomd.Scenes
             panel.Add(desc);
             panel.Add(enterHubBtn);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }

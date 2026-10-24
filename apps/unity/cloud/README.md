@@ -1,8 +1,8 @@
 # UOMD Unity client — cloud bring-up
 
-The Unity project in `apps/unity/` had never been opened or compiled by Unity until the cloud step: it has no `.meta` files, no
-`ProjectSettings/*.asset` and no `packages-lock.json`. Unity generates all of them on first import. This folder turns that first
-open into a repeatable batch pipeline.
+The Unity project in `apps/unity/` was first opened by Unity in the 2026-10-24 cloud session, which generated and committed its
+`.meta` files, `ProjectSettings/*.asset` and `packages-lock.json`. This folder turns opening, testing, building and capturing the
+project into a repeatable batch pipeline.
 
 ## 0. Checks that need no Unity licence (run these first)
 
@@ -12,6 +12,29 @@ open into a repeatable batch pipeline.
 | `npm run check:unity-compile` | Every `apps/unity` asmdef compiles against the real `UnityEngine`/`UnityEditor` assemblies of the pinned editor, and `Packages/manifest.json` asks for the exact versions the editor bundles (URP, ugui, test-framework…). Streams the public editor archive once into `~/.cache/uomd-unity-ref/<version>` (~4.5 GB streamed, ~46 MB kept). `Uomd.Editor` sees URP through signatures copied from URP 17.0.4. | Asset import, serialization, shader compilation, IL2CPP, Gradle, running tests inside Unity. Those still need `unity_ci.sh` on a licensed editor. |
 
 2026-10-24 result: 10/10 asmdefs compile with 0 errors on 6000.0.58f2 after fixing `BannerDto` (CS0509) and aligning the manifest (`URP 17.0.3` does not exist in any registry; the editor bundles 17.0.4, and test-framework 1.5.1).
+
+The first real import then found three errors this check could not see, and the check now catches each of them:
+
+- A built-in module that ships as an optional package (`UnityEngine.AndroidJNIModule.dll` ↔ `com.unity.modules.androidjni`) is only
+  visible when that package is in the manifest; Unity reports CS1069 otherwise. The check references only the module DLLs enabled
+  by `Packages/packages-lock.json` (or the manifest's built-in dependency closure before the first import).
+- `Renderer2DData` lives in `Unity.RenderPipelines.Universal.2D.Runtime`, not in `Universal.Runtime`. The URP signatures are split
+  per assembly, so an asmdef has to reference the right one.
+
+## First licensed run (2026-10-24, cloud session)
+
+`install_unity_linux.sh` → `unity_ci.sh import` → `unity_ci.sh test` → `unity_ci.sh capture` → `publish_unity_screens.mjs` all ran
+in the Claude Code cloud container with Unity Personal activated from `UNITY_EMAIL`/`UNITY_PASSWORD`. Import: 0 compiler errors,
+0 warnings. EditMode: 10/10 inside Unity. Capture: 24/24 screens. Disk: the editor with the Android module, SDK and NDK takes about
+13 GB; the imported `Library/` adds about 1.5 GB.
+
+Capture notes:
+
+- The player runs under Xvfb without a window manager, so its window never has focus. A desktop player pauses its frame loop
+  without focus; capture mode therefore sets `Application.runInBackground` (`UomdBootstrap`).
+- The capture player is a release build, so the screenshots carry no Development Console (it showed the FMOD "no audio device"
+  error on every screen) and no watermark.
+- `UOMD_CAPTURE_TIMEOUT` (seconds, default 900) stops a player that hangs instead of blocking the session.
 
 ## Cloud session quick path (no Unity Hub)
 
@@ -44,7 +67,7 @@ Batchmode needs an activated seat on the VM:
 
 - **Unity Pro/Plus serial:** `Unity -batchmode -quit -nographics -serial <SERIAL> -username <EMAIL> -password <PASSWORD>`.
   Return the seat with `-returnlicense` before you destroy the VM.
-- **Personal:** sign in once in Unity Hub over remote desktop (or `xvfb` + VNC). Hub then activates the Personal license.
+- **Personal:** `UNITY_EMAIL` + `UNITY_PASSWORD`; `unity_ci.sh` activates it with the editor's Licensing Client (`--activate-all --include-personal`).
 - **Build Server / floating:** set up `services-config.json` as described in Unity's licensing server docs.
 
 Never commit credentials. Pass them through the VM's secret store or environment.
@@ -61,8 +84,9 @@ Builds). Unity is the only part that cannot run on Cloudflare, so it must run in
   `core.cloud.unity3d.com`, `license.unity3d.com`, `activation.unity3d.com`, `api.unity.com`, `packages.unity.com`,
   `download.packages.unity.com`, `dl.google.com`, `maven.google.com`, `repo.maven.apache.org`, `services.gradle.org`,
   `plugins.gradle.org`, `deb.nodesource.com`, `registry.npmjs.org`, `github.com`, `objects.githubusercontent.com`.
-- **License:** a headless session cannot sign in to Unity Hub, so Personal activation does not work there. Use a Pro/Plus serial
-  through the environment's secret variables (`UNITY_SERIAL`, `UNITY_EMAIL`, `UNITY_PASSWORD`), or a Unity Build Server.
+- **License:** set `UNITY_EMAIL` and `UNITY_PASSWORD` in the environment; `unity_ci.sh` activates Unity Personal through the
+  editor's Licensing Client (verified 2026-10-24; Hub is not needed). Pro/Plus: add `UNITY_SERIAL`. Accounts with two-factor
+  sign-in cannot be activated headless.
 - **Cloudflare is unchanged:** Workers Builds still runs `npm run build -w @uomd/game`. That runs `tools/export_unity_bundle.ts`
   (PNG siblings need `sharp`, which is already a root dependency) and serves `apps/unity/CloudflareGatewayDist` from
   `apps/api/wrangler.game.jsonc`. The Unity AAB is built in the Claude Code session and uploaded to Play. It is never built on

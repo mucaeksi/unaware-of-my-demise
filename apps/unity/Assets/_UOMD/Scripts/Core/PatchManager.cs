@@ -109,7 +109,7 @@ namespace Uomd.Core
         /// and anti-downgrade generation high-water mark before admitting any remote patch.
         /// </summary>
         public bool VerifyRemoteManifestAdmission(
-            IDictionary<string, object?> unsignedManifestPayload,
+            IDictionary<string, object> unsignedManifestPayload,
             ContentReleaseManifestDto parsedManifest,
             Es256SignatureEnvelope signatureEnvelope,
             out string rejectionReason)

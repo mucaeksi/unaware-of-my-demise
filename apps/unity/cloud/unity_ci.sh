@@ -3,7 +3,8 @@
 #   import : export content bundle + first import/compile + UomdProjectSetup (URP 2D, Android player settings)
 #   test   : EditMode tests (C# parity vs TypeScript golden vectors)
 #   build  : Android AAB (UOMD_BUILD_APK=1 for APK; UOMD_KEYSTORE_* for release signing)
-#   capture: Linux player under Xvfb visits every screen and saves PNGs (apps/unity/cloud/capture_screens.sh publishes them)
+#   capture: Linux player under Xvfb visits every screen and saves PNGs (node tools/publish_unity_screens.mjs publishes them);
+#            UOMD_CAPTURE_TIMEOUT (seconds, default 900) stops a player that hangs
 # Licence: UNITY_EMAIL + UNITY_PASSWORD (Unity Personal, activated here by the Licensing Client), or UNITY_SERIAL (Pro/Plus),
 # or a legacy .ulf as UNITY_LICENSE_B64 / UNITY_LICENSE.
 set -euo pipefail
@@ -77,7 +78,7 @@ do_capture() {
   run_unity capture-build -buildTarget StandaloneLinux64 -executeMethod Uomd.EditorTools.UomdBuild.BuildLinuxCaptureBatch
   rm -rf "$out"
   # Software OpenGL under a virtual 1920x1080 display; the player quits by itself after the last screen.
-  xvfb-run -a -s "-screen 0 1920x1080x24" "$PROJECT/Builds/LinuxCapture/uomd.x86_64" -force-glcore -screen-width 1920 -screen-height 1080 \
+  timeout "${UOMD_CAPTURE_TIMEOUT:-900}" xvfb-run -a -s "-screen 0 1920x1080x24" "$PROJECT/Builds/LinuxCapture/uomd.x86_64" -force-glcore -screen-width 1920 -screen-height 1080 \
     -screen-fullscreen 0 -logFile "$LOGS/capture-player.log" -uomdCapture "$out"
   echo "Captured: $(wc -l < "$out/capture.txt") screens in $out"
 }

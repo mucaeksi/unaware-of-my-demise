@@ -23,7 +23,7 @@ namespace Uomd.Scenes
             title.AddToClassList("uomd-title-md");
             panel.Add(title);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -44,7 +44,7 @@ namespace Uomd.Scenes
             title.AddToClassList("uomd-title-md");
             panel.Add(title);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -65,7 +65,7 @@ namespace Uomd.Scenes
             title.AddToClassList("uomd-title-md");
             panel.Add(title);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -86,7 +86,7 @@ namespace Uomd.Scenes
             title.AddToClassList("uomd-title-md");
             panel.Add(title);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -112,7 +112,7 @@ namespace Uomd.Scenes
             panel.Add(title);
             panel.Add(replayPrologueBtn);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -175,7 +175,7 @@ namespace Uomd.Scenes
             panel.Add(umpBtn);
             panel.Add(deleteBtn);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -206,7 +206,7 @@ namespace Uomd.Scenes
             panel.Add(title);
             panel.Add(reconcileBtn);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -243,7 +243,7 @@ namespace Uomd.Scenes
             panel.Add(title);
             panel.Add(adBtn);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -279,7 +279,7 @@ namespace Uomd.Scenes
             dialog.Add(closeBtn);
             backdrop.Add(dialog);
             screenRoot.Add(backdrop);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -309,7 +309,7 @@ namespace Uomd.Scenes
             bar.Add(status);
             bar.Add(progress);
             screenRoot.Add(bar);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }

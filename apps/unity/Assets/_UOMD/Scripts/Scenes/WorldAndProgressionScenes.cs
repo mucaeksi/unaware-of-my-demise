@@ -90,7 +90,7 @@ namespace Uomd.Scenes
             layout.Add(topRow);
             layout.Add(dock);
             screenRoot.Add(layout);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -140,7 +140,7 @@ namespace Uomd.Scenes
             }
 
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -189,7 +189,7 @@ namespace Uomd.Scenes
 
             panel.Add(grid);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -245,7 +245,7 @@ namespace Uomd.Scenes
             screenRoot.Add(panel);
 
             RefreshTabBody(unitId, stats);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         private void RefreshTabBody(string unitId, HeroDerivedStats stats)
@@ -277,7 +277,7 @@ namespace Uomd.Scenes
             title.AddToClassList("uomd-title-md");
             panel.Add(title);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -298,7 +298,7 @@ namespace Uomd.Scenes
             title.AddToClassList("uomd-title-md");
             panel.Add(title);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -360,7 +360,7 @@ namespace Uomd.Scenes
             showcase.Add(pullRow);
             panel.Add(showcase);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -379,7 +379,7 @@ namespace Uomd.Scenes
             panel.AddToClassList("uomd-panel");
             panel.Add(new Label("COMPANION SHARD RECRUITMENT") { name = "recruit-title" });
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -413,7 +413,7 @@ namespace Uomd.Scenes
             panel.Add(title);
             panel.Add(buyBtn);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }
@@ -443,7 +443,7 @@ namespace Uomd.Scenes
             panel.Add(title);
             panel.Add(setDefenseBtn);
             screenRoot.Add(panel);
-            return default;
+            return UomdAwaitables.Completed();
         }
 
         public void OnTick(float deltaTime) { }

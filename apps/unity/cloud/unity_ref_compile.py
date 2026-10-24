@@ -31,21 +31,30 @@ ASSETS = UNITY / "Assets"
 OUT = ROOT / ".cache" / "unity-ref-compile"
 # Unity defines that every 6000.0 compile sees; platform defines are not used by this codebase today.
 DEFINES = ["UNITY_6000_0_OR_NEWER", "UNITY_2023_1_OR_NEWER", "UNITY_2022_3_OR_NEWER", "UNITY_2021_3_OR_NEWER", "CSHARP_7_3_OR_NEWER", "ENABLE_IL2CPP"]
-# Signatures copied from URP 17.0.4 (Runtime/Data/UniversalRenderPipelineAsset.cs:678, Runtime/2D/Renderer2DData.cs:19).
+# Signatures copied from URP 17.0.4 (Runtime/Data/UniversalRenderPipelineAsset.cs:678, Runtime/2D/Renderer2DData.cs:19),
+# one block per URP assembly so a missing asmdef reference fails here as it does in Unity: Renderer2DData lives in
+# Unity.RenderPipelines.Universal.2D.Runtime, not in Universal.Runtime.
 # Lets the editor assembly's UnityEditor API usage be compiled without building URP and its Burst/Collections chain.
 # Re-check against the built-in package when the editor version changes.
-URP_SIGNATURES = """namespace UnityEngine.Rendering.Universal
+URP_SIGNATURES = {
+    "Unity.RenderPipelines.Core.Runtime": "",
+    "Unity.RenderPipelines.Universal.Runtime": """namespace UnityEngine.Rendering.Universal
 {
     public abstract class ScriptableRendererData : UnityEngine.ScriptableObject { }
-    public partial class Renderer2DData : ScriptableRendererData { }
     public partial class UniversalRenderPipelineAsset : UnityEngine.Rendering.RenderPipelineAsset
     {
         public static UniversalRenderPipelineAsset Create(ScriptableRendererData rendererData = null) => null;
         protected override UnityEngine.Rendering.RenderPipeline CreatePipeline() => null;
     }
 }
-"""
-URP_REFS = {"Unity.RenderPipelines.Core.Runtime", "Unity.RenderPipelines.Universal.Runtime"}
+""",
+    "Unity.RenderPipelines.Universal.2D.Runtime": """namespace UnityEngine.Rendering.Universal
+{
+    public partial class Renderer2DData : ScriptableRendererData { }
+}
+""",
+}
+URP_REFS = set(URP_SIGNATURES)
 EXTRACT = [
     "Editor/Data/Managed/UnityEngine/*",
     "Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ext.nunit/*",
@@ -85,6 +94,42 @@ def manifest_errors(data: Path) -> list[str]:
         if wanted != bundled:
             errors.append(f"Packages/manifest.json: {name}@{wanted} but this editor bundles {bundled}")
     return errors
+
+
+def enabled_packages(data: Path) -> set[str]:
+    """Every package the project resolves: Packages/packages-lock.json when Unity has written it, otherwise the manifest
+    plus the transitive dependencies of the editor's built-in packages."""
+    lock = UNITY / "Packages" / "packages-lock.json"
+    if lock.is_file():
+        return set(json.loads(lock.read_text())["dependencies"])
+    builtins = data / "Resources" / "PackageManager" / "BuiltInPackages"
+    todo = list(json.loads((UNITY / "Packages" / "manifest.json").read_text())["dependencies"])
+    seen: set[str] = set()
+    while todo:
+        name = todo.pop()
+        if name in seen:
+            continue
+        seen.add(name)
+        meta = builtins / name / "package.json"
+        if meta.is_file():
+            todo.extend(json.loads(meta.read_text()).get("dependencies", {}))
+    return seen
+
+
+def engine_modules(managed: Path, data: Path) -> list[Path]:
+    """UnityEngine module DLLs the project can see. A module that ships as an optional built-in package
+    (UnityEngine.AndroidJNIModule.dll <-> com.unity.modules.androidjni) is visible only when that package is enabled;
+    Unity reports its types as CS1069 otherwise. Modules without a package (Core, TextRendering, ...) are always on."""
+    builtins = data / "Resources" / "PackageManager" / "BuiltInPackages"
+    optional = {p.name.removeprefix("com.unity.modules.") for p in builtins.glob("com.unity.modules.*")}
+    enabled = {n.removeprefix("com.unity.modules.") for n in enabled_packages(data) if n.startswith("com.unity.modules.")}
+    keep = []
+    for dll in sorted(managed.glob("UnityEngine*.dll")):
+        match = re.fullmatch(r"UnityEngine\.(\w+)Module", dll.stem)
+        module = match.group(1).lower() if match else None
+        if module is None or module not in optional or module in enabled:
+            keep.append(dll)
+    return keep
 
 
 def own_sources(asmdef: Path, all_asmdefs: list[Path]) -> list[Path]:
@@ -134,7 +179,7 @@ def main() -> int:
         if not args.fetch:
             sys.exit(f"No Unity references at {managed}; rerun with --fetch or --editor-data")
         fetch(data.parents[1], version, changeset)
-    engine = sorted(p for p in managed.glob("UnityEngine*.dll"))
+    engine = engine_modules(managed, data)
     editor = sorted(p for p in managed.glob("UnityEditor*.dll"))
     nunit = next((data / "Resources" / "PackageManager" / "BuiltInPackages" / "com.unity.ext.nunit").rglob("nunit.framework.dll"), None)
 
@@ -161,7 +206,7 @@ def main() -> int:
         folder.mkdir()
         sources = own_sources(path, asmdefs)
         if URP_REFS & set(refs):
-            (folder / "UrpSignatures.cs").write_text(URP_SIGNATURES)
+            (folder / "UrpSignatures.cs").write_text("".join(URP_SIGNATURES[r] for r in sorted(URP_REFS & set(refs))))
             sources.append(folder / "UrpSignatures.cs")
             stubbed.append(name)
         (folder / f"{name}.csproj").write_text(project(name, sources, uomd, dlls, defines))
