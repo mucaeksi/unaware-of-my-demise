@@ -36,13 +36,15 @@ describe('unityStatus', () => {
     expect(core).toMatchObject({ csFiles: 2, headlessFiles: 1, references: ['Uomd.Contracts'] });
     expect(s.assemblies.find((a) => a.name === 'Uomd.Inner')).toMatchObject({ csFiles: 1, headlessFiles: 0 });
     expect(s.checks.find((c) => c.id === 'harness')?.state).toBe('done');
-    expect(s.checks.find((c) => c.id === 'unity-import')?.state).toBe('todo');
+    expect(s.checks.find((c) => c.id === 'unity-import')).toMatchObject({ state: 'todo', detail: expect.stringContaining('needs a licensed editor') });
   });
 
-  it('reports the real project honestly: never imported by Unity, combat parity open', () => {
+  it('reports the real project honestly: import state follows the committed .meta files', () => {
     const s = unityStatus(ROOT);
+    const unityImport = s.checks.find((c) => c.id === 'unity-import')!;
     expect(s.assemblies.length).toBeGreaterThanOrEqual(10);
-    expect(s.counts.metaFiles === 0).toBe(s.checks.find((c) => c.id === 'unity-import')?.state === 'todo');
+    expect(s.counts.metaFiles === 0).toBe(unityImport.state === 'todo');
+    expect(unityImport.detail.includes('needs a licensed editor')).toBe(s.counts.metaFiles === 0);
     expect(s.assemblies.find((a) => a.name === 'Uomd.Combat')?.headlessFiles).toBeGreaterThan(0);
     expect(s.checks.find((c) => c.id === 'core-parity')?.state).toBe('done');
   });
