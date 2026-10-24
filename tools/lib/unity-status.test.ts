@@ -39,6 +39,17 @@ describe('unityStatus', () => {
     expect(s.checks.find((c) => c.id === 'unity-import')).toMatchObject({ state: 'todo', detail: expect.stringContaining('needs a licensed editor') });
   });
 
+  it('reads the recorded Android build: debug-signed is partial, release-signed AAB is done', () => {
+    const build = { commit: 'abc', file: 'uomd.aab', bytes: 52428800, sha256: 'ff', format: 'aab', signing: 'debug', applicationId: 'x', versionName: '0.1.0', versionCode: 3, minSdk: 24, targetSdk: 35, architectures: ['ARM64'], scriptingBackend: 'IL2CPP', editorVersion: '6000.0.58f2', builtAt: 't', durationSeconds: 1 };
+    const files = { 'apps/unity/ProjectSettings/ProjectVersion.txt': 'm_EditorVersion: 6000.0.58f2\n' };
+    expect(unityStatus(fixture(files)).checks.find((c) => c.id === 'aab-build')?.state).toBe('todo');
+    const debug = unityStatus(fixture({ ...files, 'docs/evidence/unity-android-build.json': JSON.stringify(build) }));
+    expect(debug.android?.versionCode).toBe(3);
+    expect(debug.checks.find((c) => c.id === 'aab-build')).toMatchObject({ state: 'partial', detail: expect.stringContaining('50.0 MB') });
+    const release = unityStatus(fixture({ ...files, 'docs/evidence/unity-android-build.json': JSON.stringify({ ...build, signing: 'release' }) }));
+    expect(release.checks.find((c) => c.id === 'aab-build')?.state).toBe('done');
+  });
+
   it('reports the real project honestly: import state follows the committed .meta files', () => {
     const s = unityStatus(ROOT);
     const unityImport = s.checks.find((c) => c.id === 'unity-import')!;

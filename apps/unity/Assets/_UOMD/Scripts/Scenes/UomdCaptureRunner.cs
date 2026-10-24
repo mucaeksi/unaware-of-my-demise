@@ -15,7 +15,7 @@ namespace Uomd.Scenes
     public sealed class UomdCaptureRunner : MonoBehaviour
     {
         public const string Argument = "-uomdCapture";
-        private const float SettleSeconds = 1.5f;
+        private const float SettleSeconds = 2.5f; // the ported screens fade in over 1.2–1.7 s
 
         private static readonly UomdScreenId[] Order =
         {

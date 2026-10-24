@@ -385,6 +385,12 @@ namespace Uomd.Platform
 
     public static class UomdPlatformBridgeFactory
     {
+        /// <summary>
+        /// OAuth web client ID that Credential Manager requests the ID token for; the API accepts it through
+        /// GOOGLE_CLIENT_IDS (apps/api/wrangler.game.jsonc). Same value the retired Capacitor app compiled in (public).
+        /// </summary>
+        public const string GoogleWebClientId = "604013824221-n7htgfhfs55njs5ie11ulojsk1tnk6da.apps.googleusercontent.com";
+
         public static IUomdPlatformBridge Create()
         {
             if (Application.platform == RuntimePlatform.Android)

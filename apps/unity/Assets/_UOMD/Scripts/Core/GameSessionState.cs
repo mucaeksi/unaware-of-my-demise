@@ -58,6 +58,8 @@ namespace Uomd.Core
         public MailItemDto[] MailInbox { get; set; } = Array.Empty<MailItemDto>();
 
         public string ActiveStorySceneId { get; set; } = "t1_intro";
+        /// <summary>Content path of the story scene the Story screen plays next (set by the entry flow).</summary>
+        public string ActiveStoryPath { get; set; } = "story/tutorial_t1_before.json";
         public string ActiveBattleEncounterId { get; set; } = "tutorial_t1";
         public string SelectedUnitId { get; set; } = "fadyme";
         public bool HardModeSelected { get; set; }

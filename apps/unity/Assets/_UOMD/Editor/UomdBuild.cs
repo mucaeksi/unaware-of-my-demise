@@ -36,6 +36,7 @@ namespace Uomd.EditorTools
                 };
                 BuildReport report = BuildPipeline.BuildPlayer(options);
                 Debug.Log($"[UOMD] Android build {report.summary.result}: {output} ({report.summary.totalSize} bytes, {report.summary.totalErrors} errors)");
+                WriteBuildRecord(output, apk, report);
                 EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
             }
             catch (Exception e)
@@ -67,6 +68,46 @@ namespace Uomd.EditorTools
                 Debug.LogException(e);
                 EditorApplication.Exit(1);
             }
+        }
+
+        /// <summary>Sidecar read by tools/record_unity_build.mjs, which publishes it to the Control Center.</summary>
+        [Serializable]
+        private sealed class BuildRecord
+        {
+            public string result;
+            public string format;
+            public string signing;
+            public string applicationId;
+            public string versionName;
+            public int versionCode;
+            public int minSdk;
+            public int targetSdk;
+            public string[] architectures;
+            public string scriptingBackend;
+            public string editorVersion;
+            public string builtAt;
+            public int durationSeconds;
+        }
+
+        private static void WriteBuildRecord(string output, bool apk, BuildReport report)
+        {
+            var record = new BuildRecord
+            {
+                result = report.summary.result.ToString(),
+                format = apk ? "apk" : "aab",
+                signing = PlayerSettings.Android.useCustomKeystore ? "release" : "debug",
+                applicationId = PlayerSettings.GetApplicationIdentifier(UnityEditor.Build.NamedBuildTarget.Android),
+                versionName = PlayerSettings.bundleVersion,
+                versionCode = PlayerSettings.Android.bundleVersionCode,
+                minSdk = (int)PlayerSettings.Android.minSdkVersion,
+                targetSdk = (int)PlayerSettings.Android.targetSdkVersion,
+                architectures = PlayerSettings.Android.targetArchitectures.ToString().Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries),
+                scriptingBackend = PlayerSettings.GetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Android).ToString(),
+                editorVersion = Application.unityVersion,
+                builtAt = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                durationSeconds = (int)report.summary.totalTime.TotalSeconds
+            };
+            File.WriteAllText(output + ".build.json", JsonUtility.ToJson(record, true));
         }
 
         private static void ConfigureSigning()

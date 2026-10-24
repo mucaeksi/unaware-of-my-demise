@@ -23,6 +23,7 @@ apps/unity/Obj/
 apps/unity/Logs/
 apps/unity/UserSettings/
 apps/unity/Builds/
+apps/unity/.utmp/
 apps/unity/CloudflareGatewayDist/
 apps/unity/Assets/StreamingAssets/uomd_base/
 

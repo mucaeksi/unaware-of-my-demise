@@ -33,6 +33,27 @@ export interface UnityStatus {
   checks: UnityCheck[];
   /** Latest cloud capture of the real Unity player (docs/evidence/unity-*.webp, tools/publish_unity_screens.mjs). */
   capture: { commit: string; editorVersion: string; capturedAt: string; files: string[] } | null;
+  /** Latest Android build recorded by tools/record_unity_build.mjs (docs/evidence/unity-android-build.json). */
+  android: UnityAndroidBuild | null;
+}
+
+export interface UnityAndroidBuild {
+  commit: string;
+  file: string;
+  bytes: number;
+  sha256: string;
+  format: 'aab' | 'apk';
+  signing: 'debug' | 'release';
+  applicationId: string;
+  versionName: string;
+  versionCode: number;
+  minSdk: number;
+  targetSdk: number;
+  architectures: string[];
+  scriptingBackend: string;
+  editorVersion: string;
+  builtAt: string;
+  durationSeconds: number;
 }
 
 function walk(dir: string, keep: (path: string) => boolean, out: string[] = []): string[] {
@@ -122,6 +143,8 @@ export function unityStatus(root: string): UnityStatus {
   const capture = captureMeta
     ? { ...(JSON.parse(captureMeta) as { commit: string; editorVersion: string; capturedAt: string }), files: readdirSync(evidence).filter((f) => f.startsWith('unity-') && f.endsWith('.webp')).sort() }
     : null;
+  const androidMeta = read('docs/evidence/unity-android-build.json');
+  const android = androidMeta ? (JSON.parse(androidMeta) as UnityAndroidBuild) : null;
   const imported = metaFiles > 0;
   const checks: UnityCheck[] = [
     { id: 'export', phase: 'U-0', title: 'Content bundle + C# primitives exporter', state: state(existsSync(join(root, 'tools/export_unity_bundle.ts')) && existsSync(join(assetsDir, '_UOMD/Scripts/Core/Generated/UomdCorePrimitives.g.cs'))), detail: 'npm run export:unity' },
@@ -134,7 +157,16 @@ export function unityStatus(root: string): UnityStatus {
     { id: 'screens', phase: 'U-3/U-4', title: 'Screen controllers', state: state(false, screenControllers > 0), detail: `${screenControllers} controllers exist as UI shells; art and flows still to wire` },
     { id: 'cloud-capture', phase: 'U-3', title: 'Real Unity player screenshots from the cloud', state: state(capture !== null && capture.files.length > 0), detail: capture ? `${capture.files.length} screens · ${capture.commit} · ${capture.capturedAt}` : 'needs UNITY_LICENSE/UNITY_EMAIL/UNITY_PASSWORD in the cloud environment (apps/unity/cloud/unity_ci.sh capture)' },
     { id: 'android', phase: 'U-5', title: 'Android native bridges + Gradle deps', state: state(javaBridges >= 4 && existsSync(join(assetsDir, 'Plugins/Android/UomdNative.androidlib/build.gradle'))), detail: `${javaBridges} Java files in UomdNative.androidlib` },
-    { id: 'aab-script', phase: 'U-5', title: 'Signed AAB build entry point', state: state(existsSync(join(assetsDir, '_UOMD/Editor/UomdBuild.cs'))), detail: 'UomdBuild (UOMD_KEYSTORE_* from environment); first AAB not built yet' }
+    { id: 'aab-script', phase: 'U-5', title: 'Signed AAB build entry point', state: state(existsSync(join(assetsDir, '_UOMD/Editor/UomdBuild.cs'))), detail: 'UomdBuild (UOMD_KEYSTORE_* from environment)' },
+    {
+      id: 'aab-build',
+      phase: 'U-5',
+      title: 'Android AAB built in the cloud',
+      state: state(android?.format === 'aab' && android.signing === 'release', android !== null),
+      detail: android
+        ? `${android.format.toUpperCase()} ${android.versionName} (${android.versionCode}) · ${(android.bytes / 1048576).toFixed(1)} MB · ${android.signing === 'release' ? 'release-signed' : 'debug-signed, not uploadable to Play until the upload key is provided (B-SIGNING)'} · ${android.commit}`
+        : 'not built yet (apps/unity/cloud/unity_ci.sh build, then node tools/record_unity_build.mjs)'
+    }
   ];
 
   return {
@@ -143,6 +175,7 @@ export function unityStatus(root: string): UnityStatus {
     assemblies,
     combat,
     checks,
-    capture
+    capture,
+    android
   };
 }

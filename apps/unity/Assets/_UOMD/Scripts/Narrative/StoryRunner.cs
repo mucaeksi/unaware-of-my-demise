@@ -45,10 +45,23 @@ namespace Uomd.Narrative
     }
 
     [Serializable, Preserve]
+    public sealed class StoryPresentationDto
+    {
+        public bool auto;
+        /// <summary>Pause when the speaker changes; -1 when the scene does not set it (default 1 s).</summary>
+        public float speaker_pause_seconds = -1f;
+    }
+
+    [Serializable, Preserve]
     public sealed class StorySceneDto
     {
         public string scene_id = "";
         public string title = "";
+        public string title_en = "";
+        /// <summary>Hold after the last line; -1 when the scene does not set it.</summary>
+        public float closing_hold_seconds = -1f;
+        /// <summary>JsonUtility always creates this; whether the scene really has one is read from the raw JSON.</summary>
+        public StoryPresentationDto presentation = new StoryPresentationDto();
         public string location_id = "";
         public StoryCommandDto[] commands = Array.Empty<StoryCommandDto>();
     }

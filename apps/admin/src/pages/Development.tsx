@@ -67,6 +67,27 @@ interface UnityStatus {
   combat: { csharpLines: number; typescriptLines: number };
   checks: { id: string; phase: string; title: string; state: UnityCheckState; detail: string }[];
   capture: { commit: string; editorVersion: string; capturedAt: string; files: string[] } | null;
+  android?: UnityAndroidBuild | null;
+}
+
+/** docs/evidence/unity-android-build.json, written by tools/record_unity_build.mjs after unity_ci.sh build. */
+interface UnityAndroidBuild {
+  commit: string;
+  file: string;
+  bytes: number;
+  sha256: string;
+  format: 'aab' | 'apk';
+  signing: 'debug' | 'release';
+  applicationId: string;
+  versionName: string;
+  versionCode: number;
+  minSdk: number;
+  targetSdk: number;
+  architectures: string[];
+  scriptingBackend: string;
+  editorVersion: string;
+  builtAt: string;
+  durationSeconds: number;
 }
 
 interface Progress {
@@ -1087,6 +1108,29 @@ const UNITY_STATE: Record<UnityCheckState, { badge: string; label: string }> = {
   todo: { badge: 'bad', label: 'yapılacak' }
 };
 
+/** The latest cloud Android build: what was built, from which commit, and whether Play would accept its signature. */
+function AndroidBuildCard({ b }: { b: UnityAndroidBuild | null }): ReactNode {
+  if (!b) return <p style={{ color: 'var(--dim)', margin: '12px 0 0' }}>Henüz bulutta Android derlemesi yok.</p>;
+  const release = b.signing === 'release';
+  return (
+    <div style={{ marginTop: 12 }}>
+      <div className="row" style={{ flexWrap: 'wrap', gap: 8 }}>
+        <h3 style={{ margin: 0 }}>Android derlemesi</h3>
+        <span className="badge info">{b.format.toUpperCase()} {b.versionName} ({b.versionCode})</span>
+        <span className={`badge ${release ? 'ok' : 'warn'}`}>{release ? 'release imzalı' : 'debug imzalı — Play kabul etmez (B-SIGNING)'}</span>
+      </div>
+      <table style={{ marginTop: 6 }}>
+        <tbody>
+          <tr><td>Dosya</td><td className="mono">{b.file} · {(b.bytes / 1048576).toFixed(1)} MB</td></tr>
+          <tr><td>SHA-256</td><td className="mono" style={{ wordBreak: 'break-all' }}>{b.sha256}</td></tr>
+          <tr><td>Paket</td><td className="mono">{b.applicationId} · {b.scriptingBackend} {b.architectures.join('/')} · API {b.minSdk}–{b.targetSdk}</td></tr>
+          <tr><td>Kaynak</td><td className="mono">{b.commit} · Unity {b.editorVersion} · {b.builtAt.slice(0, 16).replace('T', ' ')} UTC · {Math.round(b.durationSeconds / 60)} dk</td></tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 /** Unity 6 migration progress straight from the repository (apps/unity), so it cannot drift from the code. */
 function UnityMigration({ u }: { u: UnityStatus }): ReactNode {
   const done = u.checks.filter((c) => c.state === 'done').length;
@@ -1115,6 +1159,7 @@ function UnityMigration({ u }: { u: UnityStatus }): ReactNode {
           ))}
         </tbody>
       </table>
+      <AndroidBuildCard b={u.android ?? null} />
       {u.capture && u.capture.files.length > 0 ? (
         <>
           <h3 style={{ margin: '12px 0 6px' }}>Unity build ekran görüntüleri ({u.capture.commit} · {u.capture.capturedAt.slice(0, 16).replace('T', ' ')} UTC)</h3>

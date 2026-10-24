@@ -39,6 +39,8 @@ namespace Uomd.Scenes
         public UomdApiClient Api { get; private set; }
         public IUomdPlatformBridge PlatformBridge { get; private set; }
         public AudioDirector Audio { get; private set; }
+        public UomdMediaLoader Media { get; private set; }
+        public UomdEntryFlow EntryFlow { get; private set; }
         public BattleVfxStage VfxStage { get; private set; }
         public UomdScreenId ActiveScreenId => _activeController?.ScreenId ?? UomdScreenId.Boot;
 
@@ -53,6 +55,10 @@ namespace Uomd.Scenes
             Api = new UomdApiClient(apiBaseUrl);
             PlatformBridge = UomdPlatformBridgeFactory.Create();
             Audio = gameObject.AddComponent<AudioDirector>();
+            Media = new UomdMediaLoader(Patch);
+            EntryFlow = new UomdEntryFlow(this);
+            await Media.LoadCatalogAsync();
+            Audio.Media = Media;
 
             var vfxGo = new GameObject("UomdBattleVfxStage");
             vfxGo.transform.SetParent(transform, false);
@@ -86,6 +92,7 @@ namespace Uomd.Scenes
 
             _activeController?.OnExit();
             _screenHost.Clear();
+            Media?.ReleaseTextures(); // the next screen loads what it shows
 
             _activeController = nextController;
             bool showHubHeader = targetScreen >= UomdScreenId.Home && targetScreen <= UomdScreenId.Operations;
@@ -194,7 +201,6 @@ namespace Uomd.Scenes
         {
             // Group 1: Entry, Narrative & Tactical Combat (8 screens)
             Register(new BootScreenController(this));
-            Register(new SplashScreenController(this));
             Register(new StudioScreenController(this));
             Register(new TitleScreenController(this));
             Register(new PrologueScreenController(this));

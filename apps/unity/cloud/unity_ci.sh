@@ -69,8 +69,51 @@ do_test() {
   echo "EditMode results: $LOGS/editmode-results.xml"
 }
 
+use_maven_retry_proxy() {
+  # Cloud sessions share an egress IP that Maven Central rate-limits (429 and fake 404s); Gradle would cache those as
+  # "not found". maven_retry_proxy.py fetches from the same official hosts with backoff and a disk cache.
+  # UOMD_MAVEN_PROXY=off disables it (for example on a machine with its own Maven mirror).
+  [ "${UOMD_MAVEN_PROXY:-}" = off ] && { unset UOMD_MAVEN_PROXY; return 0; }
+  local port="${UOMD_MAVEN_PROXY_PORT:-8765}" gradle_home="${GRADLE_USER_HOME:-$HOME/.gradle}"
+  if ! curl -s -o /dev/null "http://127.0.0.1:$port/"; then
+    python3 "$ROOT/apps/unity/cloud/maven_retry_proxy.py" --port "$port" > "$LOGS/maven-proxy.log" 2>&1 &
+    local pid=$!
+    trap "kill $pid 2>/dev/null || true" EXIT
+    for _ in $(seq 1 20); do curl -s -o /dev/null "http://127.0.0.1:$port/" && break; sleep 0.25; done
+  fi
+  mkdir -p "$gradle_home/init.d"
+  cp "$ROOT/apps/unity/cloud/maven-retry-proxy.init.gradle" "$gradle_home/init.d/uomd-maven-retry-proxy.gradle"
+  export UOMD_MAVEN_PROXY="http://127.0.0.1:$port"
+}
+
+mirror_java_network_settings() {
+  # Unity starts the Gradle daemon with only -Xmx, so JAVA_TOOL_OPTIONS (the session's trust store and HTTPS proxy) never
+  # reaches it and TLS through the egress proxy fails (PKIX). Mirror those -D flags into Gradle as systemProp entries,
+  # rewritten on every build because the proxy port can change between sessions.
+  local props="${GRADLE_USER_HOME:-$HOME/.gradle}/gradle.properties" begin="# >>> uomd unity_ci.sh (generated)" end="# <<< uomd unity_ci.sh"
+  mkdir -p "$(dirname "$props")"; touch "$props"
+  sed -i "/^$begin\$/,/^$end\$/d" "$props"
+  [ -n "${JAVA_TOOL_OPTIONS:-}" ] || return 0
+  {
+    echo "$begin"
+    for flag in $JAVA_TOOL_OPTIONS; do
+      case "$flag" in
+        -Djavax.net.ssl.trustStore=*|-Djavax.net.ssl.trustStoreType=*|-Djavax.net.ssl.trustStorePassword=*|-Dhttps.proxyHost=*|-Dhttps.proxyPort=*|-Dhttp.nonProxyHosts=*)
+          echo "systemProp.${flag#-D}" ;;
+      esac
+    done
+    echo "$end"
+  } >> "$props"
+}
+
 do_build() {
+  use_maven_retry_proxy
+  mirror_java_network_settings
+  # A Gradle daemon left from an earlier build keeps the proxy port and CA it started with; after the session's proxy
+  # restarts that daemon fails TLS (PKIX). Start every build with fresh daemons.
+  pkill -f '[G]radleDaemon' 2>/dev/null || true
   run_unity build -buildTarget Android -executeMethod Uomd.EditorTools.UomdBuild.BuildAndroidBatch
+  echo "Build OK. Record it for the Control Center with: node tools/record_unity_build.mjs"
 }
 
 do_capture() {

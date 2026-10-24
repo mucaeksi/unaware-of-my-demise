@@ -6,7 +6,8 @@
     "Uomd.Core",
     "Uomd.Combat",
     "UnityEngine.TestRunner",
-    "UnityEditor.TestRunner"
+    "UnityEditor.TestRunner",
+    "Uomd.Narrative"
   ],
   "includePlatforms": [
     "Editor"

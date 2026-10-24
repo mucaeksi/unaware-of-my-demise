@@ -1,0 +1,30 @@
+// Points Maven Central and the Gradle Plugin Portal at apps/unity/cloud/maven_retry_proxy.py when UOMD_MAVEN_PROXY is set
+// (unity_ci.sh build sets it and copies this file into $GRADLE_USER_HOME/init.d). Without the variable it changes nothing.
+// The proxy fetches from the same official hosts; it only retries the rate-limit answers Gradle would treat as "not found".
+def proxy = System.getenv('UOMD_MAVEN_PROXY')
+if (proxy) {
+    def targets = [
+        'https://repo.maven.apache.org/maven2': "${proxy}/central/",
+        'https://repo1.maven.org/maven2'      : "${proxy}/central/",
+        'https://plugins.gradle.org/m2'       : "${proxy}/portal/",
+    ]
+    def rewrite = { RepositoryHandler repos ->
+        repos.withType(MavenArtifactRepository).configureEach { repo ->
+            def url = repo.url.toString().replaceAll('/+$', '')
+            def target = targets[url]
+            if (target) {
+                repo.url = target
+                repo.allowInsecureProtocol = true // loopback only
+            }
+        }
+    }
+    beforeSettings { settings ->
+        rewrite(settings.pluginManagement.repositories)
+        rewrite(settings.dependencyResolutionManagement.repositories)
+        settings.buildscript.repositories.with { rewrite(it) }
+    }
+    allprojects { project ->
+        rewrite(project.buildscript.repositories)
+        rewrite(project.repositories)
+    }
+}

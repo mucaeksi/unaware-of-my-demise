@@ -222,22 +222,41 @@ namespace Uomd.Core
             return "";
         }
 
+        /// <summary>Set by the router after the media catalog loads; without it cues stay silent.</summary>
+        public UomdMediaLoader Media { get; set; }
+
+        private const float DefaultFadeSeconds = 1.8f; // Music.play fade in the TypeScript client
+        private float _fadeSeconds = DefaultFadeSeconds;
+        private float _fadeElapsed;
+        private AudioSource _fadingOut;
+        private double _loopStartSeconds;
+        private float _lastBgmTime;
+
+        private AudioSource ActiveBgm => _usingSourceA ? _bgmSourceA : _bgmSourceB;
+
+        /// <summary>
+        /// Crossfades to a music cue from art_manifest.json "music". The track loops from its loop_start_s, as the
+        /// TypeScript client did, so the intro plays once. Calling it again with the current cue does nothing.
+        /// </summary>
         public void PlayBgmCue(string cueId, AudioClip clip = null)
         {
             if (string.IsNullOrEmpty(cueId) || cueId == CurrentBgmCueId) return;
             CurrentBgmCueId = cueId;
-
-            var active = _usingSourceA ? _bgmSourceA : _bgmSourceB;
-            var next = _usingSourceA ? _bgmSourceB : _bgmSourceA;
-            _usingSourceA = !_usingSourceA;
-
-            active.Stop();
-            if (clip != null && !Muted)
+            if (clip != null)
             {
-                next.clip = clip;
-                next.volume = MasterVolume * BgmVolume;
-                next.Play();
+                StartBgm(clip, 0.0);
+                return;
             }
+            if (Media != null && Media.Catalog.TryGetMusic(cueId, out var track)) _ = LoadAndPlayBgm(cueId, track);
+            else Debug.LogWarning($"[AudioDirector] no music for cue '{cueId}'");
+        }
+
+        public void StopBgm(float fadeSeconds = DefaultFadeSeconds)
+        {
+            CurrentBgmCueId = "";
+            _fadeSeconds = Mathf.Max(0.01f, fadeSeconds);
+            _fadeElapsed = 0f;
+            _fadingOut = ActiveBgm;
         }
 
         public void PlaySfx(string sfxId, AudioClip clip = null)
@@ -246,21 +265,120 @@ namespace Uomd.Core
             if (clip != null)
             {
                 _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume);
+                return;
             }
+            if (Media != null && Media.Catalog.TryGetSound(sfxId, out var cue)) _ = LoadAndPlaySfx(cue);
         }
 
+        /// <summary>Plays a voice line from presentation.json "voices"; the previous line stops.</summary>
         public void PlayVoiceLine(string lineId, AudioClip clip = null)
         {
             _voiceSource.Stop();
-            if (Muted || clip == null) return;
+            _pendingVoiceLine = lineId;
+            if (Muted || string.IsNullOrEmpty(lineId)) return;
+            if (clip != null)
+            {
+                StartVoice(clip);
+                return;
+            }
+            if (Media != null && Media.Catalog.TryGetVoice(lineId, out var cue)) _ = LoadAndPlayVoice(lineId, cue);
+        }
+
+        public void StopVoiceLine()
+        {
+            _pendingVoiceLine = null;
+            if (_voiceSource != null) _voiceSource.Stop();
+        }
+
+        public bool VoicePlaying => _voiceSource != null && _voiceSource.isPlaying;
+
+        /// <summary>Freezes music and voice in place (prologue PAUSE); SetPaused(false) continues from the same point.</summary>
+        public void SetPaused(bool paused)
+        {
+            foreach (var source in new[] { _bgmSourceA, _bgmSourceB, _voiceSource })
+            {
+                if (source == null) continue;
+                if (paused) source.Pause();
+                else source.UnPause();
+            }
+        }
+
+        private string _pendingVoiceLine;
+
+        private async Awaitable LoadAndPlayBgm(string cueId, MusicTrack track)
+        {
+            var clip = await Media.ClipAsync(track.File, streamLong: true);
+            if (clip == null || CurrentBgmCueId != cueId) return; // another cue was requested while loading
+            StartBgm(clip, track.LoopStartSeconds);
+        }
+
+        private async Awaitable LoadAndPlaySfx(SoundCue cue)
+        {
+            var clip = await Media.ClipAsync(cue.File);
+            if (clip != null && !Muted) _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume * cue.Volume);
+        }
+
+        private async Awaitable LoadAndPlayVoice(string lineId, SoundCue cue)
+        {
+            var clip = await Media.ClipAsync(cue.File);
+            if (clip != null && _pendingVoiceLine == lineId && !Muted) StartVoice(clip);
+        }
+
+        private void StartBgm(AudioClip clip, double loopStartSeconds)
+        {
+            _fadingOut = ActiveBgm.isPlaying ? ActiveBgm : null;
+            _usingSourceA = !_usingSourceA;
+            var next = ActiveBgm;
+            next.clip = clip;
+            next.loop = true;
+            next.volume = 0f;
+            next.time = 0f;
+            next.mute = Muted;
+            next.Play();
+            _loopStartSeconds = loopStartSeconds > 0 && loopStartSeconds < clip.length ? loopStartSeconds : 0.0;
+            _lastBgmTime = 0f;
+            _fadeSeconds = DefaultFadeSeconds;
+            _fadeElapsed = 0f;
+        }
+
+        private void StartVoice(AudioClip clip)
+        {
             _voiceSource.clip = clip;
             _voiceSource.volume = MasterVolume * VoiceVolume;
             _voiceSource.Play();
         }
 
-        public void StopVoiceLine()
+        private void Update()
         {
-            if (_voiceSource != null) _voiceSource.Stop();
+            float target = MasterVolume * BgmVolume;
+            var active = ActiveBgm;
+            if (_fadeElapsed < _fadeSeconds)
+            {
+                _fadeElapsed += Time.unscaledDeltaTime;
+                float k = Mathf.Clamp01(_fadeElapsed / _fadeSeconds);
+                if (!string.IsNullOrEmpty(CurrentBgmCueId)) active.volume = target * k;
+                if (_fadingOut != null)
+                {
+                    _fadingOut.volume = Mathf.Min(_fadingOut.volume, target * (1f - k));
+                    if (k >= 1f)
+                    {
+                        _fadingOut.Stop();
+                        _fadingOut = null;
+                    }
+                }
+            }
+            else if (!string.IsNullOrEmpty(CurrentBgmCueId))
+            {
+                active.volume = target;
+            }
+
+            // AudioSource loops to 0; jump to the track's loop point instead so the intro is heard once.
+            if (active.isPlaying && _loopStartSeconds > 0)
+            {
+                if (active.time + 0.5f < _lastBgmTime) active.time = (float)_loopStartSeconds;
+                _lastBgmTime = active.time;
+            }
+            _bgmSourceA.mute = _bgmSourceB.mute = _voiceSource.mute = Muted;
         }
     }
 }

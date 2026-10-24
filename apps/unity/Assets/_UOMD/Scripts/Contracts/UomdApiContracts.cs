@@ -101,6 +101,10 @@ namespace Uomd.Contracts
     [Serializable, Preserve]
     public sealed class PrologueSceneDto
     {
+        public string id = string.Empty;
+        /// <summary>Plate family (village / crownfall / road); stills "prologue_&lt;id&gt;" then "prologue_&lt;visual&gt;" are looked up.</summary>
+        public string visual = string.Empty;
+        public string line_id = string.Empty;
         public string caption_en = string.Empty;
         public string text_en = string.Empty;
         public float duration_seconds = 5f;

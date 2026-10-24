@@ -16,7 +16,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const src = process.argv[2] ?? join(ROOT, 'apps/unity/Builds/Capture');
 const out = join(ROOT, 'docs/evidence');
 if (!existsSync(join(src, 'capture.txt'))) throw new Error(`no capture in ${src}; run bash apps/unity/cloud/unity_ci.sh capture`);
-for (const f of readdirSync(out)) if (f.startsWith('unity-')) rmSync(join(out, f));
+// Replace only the previous capture; other Unity evidence (unity-android-build.json) stays.
+for (const f of readdirSync(out)) if (/^unity-\d{2}-.+\.webp$/.test(f) || f === 'unity-capture.json') rmSync(join(out, f));
 const files = readdirSync(src).filter((f) => f.endsWith('.png')).sort();
 for (const f of files) {
   await sharp(join(src, f)).resize({ width: 1600, withoutEnlargement: true }).webp({ quality: 82 }).toFile(join(out, `unity-${f.replace(/\.png$/, '.webp')}`));

@@ -210,12 +210,18 @@
     color: var(--color-text);
 }
 
+.uomd-serif {
+    -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/CormorantGaramond-Medium.ttf");
+    -unity-font-definition: initial;
+}
+
 .uomd-title-h1,
 .uomd-title-h2,
 .uomd-title-lg,
 .uomd-title-md,
 .uomd-btn,
-.uomd-speaker-tag {
+.uomd-speaker-tag,
+.uomd-display {
     -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/Cinzel-SemiBold.ttf");
     -unity-font-definition: initial;
     -unity-font-style: normal;
@@ -309,7 +315,8 @@
     white-space: normal;
 }
 
-.uomd-speaker-tag {
+.uomd-speaker-tag,
+.uomd-display {
     font-size: 34px;
     color: var(--color-gold-hi);
     letter-spacing: 2px;
