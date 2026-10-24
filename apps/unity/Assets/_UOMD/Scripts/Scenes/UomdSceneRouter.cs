@@ -68,6 +68,7 @@ namespace Uomd.Scenes
             RegisterAll28Screens();
 
             await NavigateToAsync(UomdScreenId.Boot);
+            if (UomdCaptureRunner.Requested(out string captureDir)) gameObject.AddComponent<UomdCaptureRunner>().Run(this, captureDir);
         }
 
         private void Update()

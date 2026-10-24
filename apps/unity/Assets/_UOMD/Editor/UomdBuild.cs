@@ -45,6 +45,29 @@ namespace Uomd.EditorTools
             }
         }
 
+        /// <summary>Development Linux player used only by the cloud screenshot pipeline (unity_ci.sh capture).</summary>
+        public static void BuildLinuxCaptureBatch()
+        {
+            try
+            {
+                var options = new BuildPlayerOptions
+                {
+                    scenes = new[] { UomdProjectSetup.MainScenePath },
+                    locationPathName = "Builds/LinuxCapture/uomd.x86_64",
+                    target = BuildTarget.StandaloneLinux64,
+                    options = BuildOptions.Development
+                };
+                BuildReport report = BuildPipeline.BuildPlayer(options);
+                Debug.Log($"[UOMD] Linux capture build {report.summary.result} ({report.summary.totalErrors} errors)");
+                EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                EditorApplication.Exit(1);
+            }
+        }
+
         private static void ConfigureSigning()
         {
             string keystore = Environment.GetEnvironmentVariable("UOMD_KEYSTORE_FILE");

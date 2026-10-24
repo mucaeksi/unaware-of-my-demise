@@ -66,6 +66,7 @@ interface UnityStatus {
   assemblies: { name: string; path: string; references: string[]; csFiles: number; lines: number; headlessFiles: number }[];
   combat: { csharpLines: number; typescriptLines: number };
   checks: { id: string; phase: string; title: string; state: UnityCheckState; detail: string }[];
+  capture: { commit: string; editorVersion: string; capturedAt: string; files: string[] } | null;
 }
 
 interface Progress {
@@ -1114,6 +1115,20 @@ function UnityMigration({ u }: { u: UnityStatus }): ReactNode {
           ))}
         </tbody>
       </table>
+      {u.capture && u.capture.files.length > 0 ? (
+        <>
+          <h3 style={{ margin: '12px 0 6px' }}>Unity build ekran görüntüleri ({u.capture.commit} · {u.capture.capturedAt.slice(0, 16).replace('T', ' ')} UTC)</h3>
+          <div className="grid">
+            {u.capture.files.map((f) => (
+              <a key={f} href={`/dev/evidence/${f}`} target="_blank" rel="noreferrer" title={f}>
+                <img src={`/dev/evidence/${f}`} alt={f.replace(/^unity-\d+-|\.webp$/g, '')} loading="lazy" style={{ width: '100%', borderRadius: 6 }} />
+              </a>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p style={{ color: 'var(--dim)' }}>Henüz bulutta çekilmiş Unity ekran görüntüsü yok (lisans bekleniyor).</p>
+      )}
       <details style={{ marginTop: 8 }}>
         <summary>Assembly'ler (asmdef) ve Unity'siz derlenen dosyalar</summary>
         <table>

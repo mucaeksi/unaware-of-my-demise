@@ -13,6 +13,19 @@ open into a repeatable batch pipeline.
 
 2026-10-24 result: 10/10 asmdefs compile with 0 errors on 6000.0.58f2 after fixing `BannerDto` (CS0509) and aligning the manifest (`URP 17.0.3` does not exist in any registry; the editor bundles 17.0.4, and test-framework 1.5.1).
 
+## Cloud session quick path (no Unity Hub)
+
+```bash
+bash apps/unity/cloud/install_unity_linux.sh          # editor 6000.0.58f2 + Android module/SDK/NDK r27c/OpenJDK, from Unity's release API
+bash apps/unity/cloud/unity_ci.sh import               # needs UNITY_LICENSE + UNITY_EMAIL + UNITY_PASSWORD in the environment
+bash apps/unity/cloud/unity_ci.sh capture              # Linux player under Xvfb saves one PNG per screen
+node tools/publish_unity_screens.mjs                   # -> docs/evidence/unity-*.webp, shown on the Control Center Development page
+```
+
+`UNITY_LICENSE` is the content of `Unity_lic.ulf`, which Unity Hub writes on the owner's PC after Preferences → Licenses → Add →
+Get a free personal license (Windows: `C:\ProgramData\Unity\Unity_lic.ulf`). GitHub repository secrets do not reach this session;
+set the three values in the cloud environment's settings.
+
 ## 1. Install (once per VM)
 
 | Host | Command |

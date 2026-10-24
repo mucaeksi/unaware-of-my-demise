@@ -31,6 +31,8 @@ export interface UnityStatus {
   assemblies: UnityAssembly[];
   combat: { csharpLines: number; typescriptLines: number };
   checks: UnityCheck[];
+  /** Latest cloud capture of the real Unity player (docs/evidence/unity-*.webp, tools/publish_unity_screens.mjs). */
+  capture: { commit: string; editorVersion: string; capturedAt: string; files: string[] } | null;
 }
 
 function walk(dir: string, keep: (path: string) => boolean, out: string[] = []): string[] {
@@ -115,6 +117,11 @@ export function unityStatus(root: string): UnityStatus {
   const combat = { csharpLines: sumLines(combatCs), typescriptLines: sumLines(combatTs) };
 
   const patch = read('apps/unity/Assets/_UOMD/Scripts/Core/PatchManager.cs');
+  const evidence = join(root, 'docs/evidence');
+  const captureMeta = read('docs/evidence/unity-capture.json');
+  const capture = captureMeta
+    ? { ...(JSON.parse(captureMeta) as { commit: string; editorVersion: string; capturedAt: string }), files: readdirSync(evidence).filter((f) => f.startsWith('unity-') && f.endsWith('.webp')).sort() }
+    : null;
   const imported = metaFiles > 0;
   const checks: UnityCheck[] = [
     { id: 'export', phase: 'U-0', title: 'Content bundle + C# primitives exporter', state: state(existsSync(join(root, 'tools/export_unity_bundle.ts')) && existsSync(join(assetsDir, '_UOMD/Scripts/Core/Generated/UomdCorePrimitives.g.cs'))), detail: 'npm run export:unity' },
@@ -125,6 +132,7 @@ export function unityStatus(root: string): UnityStatus {
     { id: 'patch-remote', phase: 'U-2', title: 'Signed remote patch download + staged activation', state: state(/DownloadRelease|StageRelease|ActivateStaged/.test(patch), /VerifyRemoteManifestAdmission/.test(patch)), detail: 'manifest signature check exists; download/stage/activate pending' },
     { id: 'unity-import', phase: 'U-3', title: 'First Unity Editor import (metas, ProjectSettings, packages-lock)', state: state(imported && projectSettingsAssets > 0 && existsSync(join(unity, 'Packages/packages-lock.json')), imported), detail: `${metaFiles} .meta · ${projectSettingsAssets} ProjectSettings assets · needs a licensed editor (apps/unity/cloud/unity_ci.sh import)` },
     { id: 'screens', phase: 'U-3/U-4', title: 'Screen controllers', state: state(false, screenControllers > 0), detail: `${screenControllers} controllers exist as UI shells; art and flows still to wire` },
+    { id: 'cloud-capture', phase: 'U-3', title: 'Real Unity player screenshots from the cloud', state: state(capture !== null && capture.files.length > 0), detail: capture ? `${capture.files.length} screens · ${capture.commit} · ${capture.capturedAt}` : 'needs UNITY_LICENSE/UNITY_EMAIL/UNITY_PASSWORD in the cloud environment (apps/unity/cloud/unity_ci.sh capture)' },
     { id: 'android', phase: 'U-5', title: 'Android native bridges + Gradle deps', state: state(javaBridges >= 4 && existsSync(join(assetsDir, 'Plugins/Android/UomdNative.androidlib/build.gradle'))), detail: `${javaBridges} Java files in UomdNative.androidlib` },
     { id: 'aab-script', phase: 'U-5', title: 'Signed AAB build entry point', state: state(existsSync(join(assetsDir, '_UOMD/Editor/UomdBuild.cs'))), detail: 'UomdBuild (UOMD_KEYSTORE_* from environment); first AAB not built yet' }
   ];
@@ -134,6 +142,7 @@ export function unityStatus(root: string): UnityStatus {
     counts: { metaFiles, projectSettingsAssets, csFiles: csFiles.length, csLines: sumLines(csFiles), javaBridges, screenControllers, editModeTests },
     assemblies,
     combat,
-    checks
+    checks,
+    capture
   };
 }
