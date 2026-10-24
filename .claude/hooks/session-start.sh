@@ -31,5 +31,9 @@ if command -v uv >/dev/null 2>&1; then
   fi
 fi
 
+# .NET SDK for the headless Unity C# harness (npm run test:unity-logic); installs into ~/.dotnet once per container.
+bash apps/unity/cloud/logic_test.sh --build >/dev/null 2>&1 || echo "session-start: Unity C# harness build failed (non-fatal); run npm run test:unity-logic" >&2
+echo 'export PATH="$HOME/.dotnet:$PATH" DOTNET_CLI_TELEMETRY_OPTOUT=1 MSBUILDDISABLENODEREUSE=1' >> "${CLAUDE_ENV_FILE:-/dev/null}"
+
 # Playwright uses the preinstalled Chromium (PLAYWRIGHT_BROWSERS_PATH); never download browsers here.
 echo 'export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1' >> "${CLAUDE_ENV_FILE:-/dev/null}"

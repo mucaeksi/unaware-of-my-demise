@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Runs the Unity EditMode tests that need no engine (same .cs files Unity Test Runner uses).
+    NUnit 3.x keeps the classic Assert API that Unity's com.unity.ext.nunit exposes.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>Uomd.Tests.EditMode</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(UomdAssets)Tests/EditMode/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Uomd.UnityShim/Uomd.UnityShim.csproj" />
+    <ProjectReference Include="../Uomd.Contracts/Uomd.Contracts.csproj" />
+    <ProjectReference Include="../Uomd.Core/Uomd.Core.csproj" />
+    <ProjectReference Include="../Uomd.Combat/Uomd.Combat.csproj" />
+    <ProjectReference Include="../Uomd.Narrative/Uomd.Narrative.csproj" />
+  </ItemGroup>
+</Project>

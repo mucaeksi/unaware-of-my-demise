@@ -113,11 +113,6 @@ namespace Uomd.Contracts
     }
 
     [Serializable, Preserve]
-    public class BannerDto : BannerInfoDto
-    {
-    }
-
-    [Serializable, Preserve]
     public sealed class WalletEnvelopeDto
     {
         public WalletsDto wallets = new WalletsDto();

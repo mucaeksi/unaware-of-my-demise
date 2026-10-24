@@ -25,3 +25,6 @@ apps/unity/UserSettings/
 apps/unity/Builds/
 apps/unity/CloudflareGatewayDist/
 apps/unity/Assets/StreamingAssets/uomd_base/
+
+# .NET headless harness output (apps/unity/Logic)
+apps/unity/Logic/.build/

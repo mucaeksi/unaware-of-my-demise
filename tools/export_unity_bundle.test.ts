@@ -1,9 +1,13 @@
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { ArtManifest } from '@uomd/content-schema';
 import { buildUnityArtMetadata, exportUnityBundle, generateCSharpCorePrimitives } from './export_unity_bundle';
+
+// Workspaces run this file from apps/unity, the root test:tools run from the repo root: never rely on cwd.
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 describe('export_unity_bundle (D-31 Unity migration tooling)', () => {
   it('converts top-left atlas frames and foot_y into Unity bottom-left Sprite rects and pivots', () => {
@@ -102,7 +106,7 @@ describe('export_unity_bundle (D-31 Unity migration tooling)', () => {
   });
 
   it('configures IvanMurzak/Unity-MCP (com.ivanmurzak.unity.mcp) and UomdMcpEditorTools in apps/unity', () => {
-    const manifestPath = join(process.cwd(), 'apps/unity/Packages/manifest.json');
+    const manifestPath = join(REPO_ROOT, 'apps/unity/Packages/manifest.json');
     const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as {
       dependencies?: Record<string, string>;
       scopedRegistries?: Array<{ url: string; scopes: string[] }>;
@@ -111,7 +115,7 @@ describe('export_unity_bundle (D-31 Unity migration tooling)', () => {
     expect(manifest.scopedRegistries?.[0]?.url).toBe('https://package.openupm.com');
     expect(manifest.scopedRegistries?.[0]?.scopes).toContain('com.ivanmurzak');
 
-    const editorToolsPath = join(process.cwd(), 'apps/unity/Assets/_UOMD/Editor/UomdMcpEditorTools.cs');
+    const editorToolsPath = join(REPO_ROOT, 'apps/unity/Assets/_UOMD/Editor/UomdMcpEditorTools.cs');
     expect(existsSync(editorToolsPath)).toBe(true);
     const editorToolsCs = readFileSync(editorToolsPath, 'utf8');
     expect(editorToolsCs).toContain('VerifyBundleAndParity');

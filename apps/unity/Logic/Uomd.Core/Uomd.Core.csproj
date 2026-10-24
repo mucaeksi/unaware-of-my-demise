@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Engine-free subset of Assets/_UOMD/Scripts/Core/Uomd.Core.asmdef (references: Uomd.Contracts).
+    PatchManager, UomdApiClient, AudioDirector and UomdTextureLoader use UnityEngine runtime APIs and are
+    compiled only by Unity. A file listed here must stay free of UnityEngine.
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Uomd.Core</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(UomdScripts)Core/CanonicalJson.cs" />
+    <Compile Include="$(UomdScripts)Core/Es256SignatureVerifier.cs" />
+    <Compile Include="$(UomdScripts)Core/GameSessionState.cs" />
+    <Compile Include="$(UomdScripts)Core/UomdJson.cs" />
+    <Compile Include="$(UomdScripts)Core/Generated/UomdCorePrimitives.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Uomd.Contracts/Uomd.Contracts.csproj" />
+  </ItemGroup>
+</Project>

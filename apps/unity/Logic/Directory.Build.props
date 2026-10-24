@@ -1,0 +1,20 @@
+<Project>
+  <!--
+    Headless compile/test harness for the engine-free C# assemblies under apps/unity/Assets.
+    It mirrors Unity 6 LTS compiler limits so code that builds here also builds in the Editor:
+    C# 9 and the .NET Standard 2.1 API surface. Sources are linked from Assets/, never copied.
+  -->
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <Deterministic>true</Deterministic>
+    <UomdAssets>$(MSBuildThisFileDirectory)../Assets/_UOMD/</UomdAssets>
+    <UomdScripts>$(UomdAssets)Scripts/</UomdScripts>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory).build/obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(MSBuildThisFileDirectory).build/bin/$(MSBuildProjectName)/</BaseOutputPath>
+  </PropertyGroup>
+</Project>

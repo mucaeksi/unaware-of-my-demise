@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Engine-free subset of Assets/_UOMD/Scripts/Narrative/Uomd.Narrative.asmdef.
+    SubtitleSynchronizer uses UnityEngine and is compiled only by Unity.
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Uomd.Narrative</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(UomdScripts)Narrative/StoryRunner.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Uomd.Core/Uomd.Core.csproj" />
+  </ItemGroup>
+</Project>

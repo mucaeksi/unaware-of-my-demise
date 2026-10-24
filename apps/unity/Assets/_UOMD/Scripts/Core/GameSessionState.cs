@@ -54,7 +54,7 @@ namespace Uomd.Core
         public PrologueConfigDto PrologueConfig { get; set; } = new PrologueConfigDto();
         public UnityArtExportDto BaseArtSlices { get; set; } = new UnityArtExportDto();
         public VfxPackDto VfxPack { get; set; } = new VfxPackDto();
-        public BannerDto[] Banners { get; set; } = Array.Empty<BannerDto>();
+        public BannerInfoDto[] Banners { get; set; } = Array.Empty<BannerInfoDto>();
         public MailItemDto[] MailInbox { get; set; } = Array.Empty<MailItemDto>();
 
         public string ActiveStorySceneId { get; set; } = "t1_intro";

@@ -4,7 +4,7 @@ import { requestMonitoring } from './monitoring';
 import { Hono, type MiddlewareHandler } from 'hono';
 import type { JWTVerifyGetKey } from 'jose';
 import { z } from 'zod';
-import { Channel, MEDIA_TYPE_BY_EXTENSION, MIN_SNAPSHOT_CLIENT_VERSION, SafeAssetPath, Semver } from '@uomd/content-schema';
+import { Channel, MAX_RELEASE_FILES, MEDIA_TYPE_BY_EXTENSION, MIN_SNAPSHOT_CLIENT_VERSION, SafeAssetPath, Semver } from '@uomd/content-schema';
 import { atLeast, authenticate, AuthError, type AdminIdentity, type Role } from './auth/access';
 import { ContentStore, HttpError, loadSigner, MAX_OBJECT_BYTES } from './content/store';
 import { audit, auditIfChanged, auditStatement } from './db/audit';
@@ -84,7 +84,7 @@ const DraftBody = z
     contentSchema: z.number().int().min(1).optional(),
     dependsOn: ReleaseId.optional(),
     rolloutPercent: z.number().int().min(0).max(100).optional(),
-    files: z.array(z.object({ path: SafeAssetPath, sha256: Sha }).strict()).min(1).max(768)
+    files: z.array(z.object({ path: SafeAssetPath, sha256: Sha }).strict()).min(1).max(MAX_RELEASE_FILES)
   })
   .strict();
 const UserBody = z.object({ email: z.string().email().max(120), role: z.enum(['owner', 'operator', 'viewer']) }).strict();

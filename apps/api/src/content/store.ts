@@ -1,4 +1,4 @@
-import { ContentManifest, ContentValidationError, MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES, MAX_RELEASE_BYTES, MIN_EFFECTIVE_CLIENT_VERSION, requiredContentCapabilities, ShopSchedule, MIN_SNAPSHOT_CLIENT_VERSION, validateContentSet, type Channel } from '@uomd/content-schema';
+import { ContentManifest, ContentValidationError, MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES, MAX_RELEASE_BYTES, MAX_RELEASE_FILES, MIN_EFFECTIVE_CLIENT_VERSION, requiredContentCapabilities, ShopSchedule, MIN_SNAPSHOT_CLIENT_VERSION, validateContentSet, type Channel } from '@uomd/content-schema';
 import { manifestFromEntries, signManifest, type FileEntry } from '@uomd/patch';
 import { compareSemver, importPrivateKey, sha256Hex } from '@uomd/shared';
 import { auditStatement } from '../db/audit';
@@ -190,7 +190,7 @@ export class ContentStore {
   }
 
   private async fileEntries(files: Map<string, string>): Promise<FileEntry[]> {
-    if (files.size > 768) throw new HttpError(400, 'too_many_files', 'effective release exceeds 768 files');
+    if (files.size > MAX_RELEASE_FILES) throw new HttpError(400, 'too_many_files', `effective release exceeds ${MAX_RELEASE_FILES} files`);
     // D1 permits at most 100 bound parameters per query, including inherited files.
     const hashes = [...new Set(files.values())];
     const sizes = new Map<string, number>();

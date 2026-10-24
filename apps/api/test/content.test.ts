@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { ContentManifest, type ChapterIndex, type Encounter, type UnitPack } from '@uomd/content-schema';
+import { ContentManifest, MAX_RELEASE_FILES, type ChapterIndex, type Encounter, type UnitPack } from '@uomd/content-schema';
 import { PatchManager, MemoryStorage, type BaseContent, type RemoteSource } from '@uomd/patch';
 import { sha256Hex, verifyPayload, type SignedPayload } from '@uomd/shared';
 import { baseFiles, patchFiles, type TestFile } from './fixtures';
@@ -41,10 +41,10 @@ async function malformedChapters(kind: 'duplicate' | 'cycle'): Promise<TestFile>
 }
 
 describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
-  it.each([false, true])('checks all 768 allowed file hashes across D1 query chunks (last missing: %s)', async (missingLast) => {
+  it.each([false, true])(`checks all ${MAX_RELEASE_FILES} allowed file hashes across D1 query chunks (last missing: %s)`, async (missingLast) => {
     const id = missingLast ? 'rel_hash_missing' : 'rel_hash_full';
     const expanded = [...base];
-    for (let i = expanded.length; i < 768; i++) {
+    for (let i = expanded.length; i < MAX_RELEASE_FILES; i++) {
       const bytes = new TextEncoder().encode(JSON.stringify({ schema_version: 1, scene_id: `hash_probe_${i}`, title_en: 'Hash lookup probe', location_id: 'forest_whispering_ash',
         commands: [{ op: 'say', line_id: `hash_probe_line_${i}`, speaker: 'mahmut', speaker_display: 'Mahmut', text: 'Hash lookup probe.' }, { op: 'end' }], provenance: { source: 'test:bounded lookup' } }));
       expanded.push({ path: `story/hash_probe_${i}.json`, bytes, sha256: await sha256Hex(bytes), mediaType: 'application/json' });
@@ -58,7 +58,7 @@ describe('publishing pipeline (admin -> D1 + R2 -> game API)', () => {
       expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM release_files WHERE release_id = ?1').bind(id).first()).toEqual({ n: 0 });
       expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM audit_log WHERE target = ?1').bind(id).first()).toEqual({ n: 0 });
     } else {
-      expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM release_files WHERE release_id = ?1').bind(id).first()).toEqual({ n: 768 });
+      expect(await baseEnv.DB.prepare('SELECT COUNT(*) AS n FROM release_files WHERE release_id = ?1').bind(id).first()).toEqual({ n: MAX_RELEASE_FILES });
       expect((await post(`/admin/api/releases/${id}/publish`, {})).status).toBe(200);
       const overflow = await post('/admin/api/releases', { id: 'rel_hash_overflow', channel: 'dev', dependsOn: id, files: [{ path: 'story/hash_overflow.json', sha256: expanded.at(-1)!.sha256 }] });
       expect(overflow.status).toBe(400);

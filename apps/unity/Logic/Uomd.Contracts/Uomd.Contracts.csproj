@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Mirrors Assets/_UOMD/Scripts/Contracts/Uomd.Contracts.asmdef (references: none). -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Uomd.Contracts</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(UomdScripts)Contracts/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Uomd.UnityShim/Uomd.UnityShim.csproj" />
+  </ItemGroup>
+</Project>

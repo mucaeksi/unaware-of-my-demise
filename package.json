@@ -22,6 +22,7 @@
     "build:campaign": "tsx tools/build_campaign.ts",
     "export:unity": "tsx tools/export_unity_bundle.ts",
     "export:unity-vectors": "tsx tools/export_unity_parity_vectors.ts",
+    "test:unity-logic": "bash apps/unity/cloud/logic_test.sh",
     "build": "npm run build -w @uomd/game && npm run build -w @uomd/admin",
     "e2e": "playwright test -c tests/e2e/playwright.config.ts",
     "e2e:remote": "playwright test -c tests/e2e/playwright.remote.config.ts"

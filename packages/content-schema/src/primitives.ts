@@ -5,6 +5,8 @@ export const CURRENT_CONTENT_SCHEMA = 1;
 export const MIN_SNAPSHOT_CLIENT_VERSION = '0.1.1';
 export const MIN_EFFECTIVE_CLIENT_VERSION = '0.1.2';
 export const MAX_RELEASE_BYTES = 200 * 1024 * 1024;
+/** Files in one effective release (schema, admin draft API and store must agree). Part I campaign + VO is ~1,000. */
+export const MAX_RELEASE_FILES = 1536;
 export const MAX_JSON_FILE_BYTES = 1024 * 1024;
 export const MAX_JSON_TOTAL_BYTES = 8 * 1024 * 1024;
 /** one in-game video (D-29): ~1.5 min of 720p VP9 + Opus; the store teaser lives on YouTube, not in a patch */

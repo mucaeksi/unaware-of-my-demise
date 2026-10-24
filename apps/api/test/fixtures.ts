@@ -37,6 +37,34 @@ async function build(json: Record<string, string>, marker: string, binaryPaths: 
   return out;
 }
 
+type FileRef = { file: string };
+/** The media-bearing slices of art_manifest.json / presentation.json the fixtures need. */
+interface ArtRefs {
+  atlases?: Record<string, { image: string }>;
+  backgrounds?: Record<string, string>;
+  music?: Record<string, FileRef>;
+  ui?: Record<string, string>;
+  stills?: Record<string, string>;
+  portraits?: Record<string, { images: Record<string, string> }>;
+}
+interface PresentationRefs { voices?: Record<string, FileRef>; sounds?: Record<string, FileRef>; videos?: Record<string, FileRef> }
+
+/** Every binary a release's art manifest and presentation pack reference (stand-ins are generated for these). */
+function mediaPaths(art: ArtRefs = {}, pres: PresentationRefs = {}): Set<string> {
+  const files = (refs?: Record<string, FileRef>) => Object.values(refs ?? {}).map((r) => r.file);
+  return new Set<string>([
+    ...Object.values(art.atlases ?? {}).map((a) => a.image),
+    ...Object.values(art.backgrounds ?? {}),
+    ...files(art.music),
+    ...Object.values(art.ui ?? {}),
+    ...Object.values(art.stills ?? {}),
+    ...Object.values(art.portraits ?? {}).flatMap((p) => Object.values(p.images)),
+    ...files(pres.voices),
+    ...files(pres.sounds),
+    ...files(pres.videos)
+  ]);
+}
+
 let cachedBase: TestFile[] | null = null;
 let cachedPatch: TestFile[] | null = null;
 let cachedCampaign: TestFile[] | null = null;
@@ -58,20 +86,9 @@ async function ensureR2Seeded(list: TestFile[]): Promise<void> {
 
 export async function baseFiles(): Promise<TestFile[]> {
   if (!cachedBase) {
-    const art = JSON.parse(Object.entries(baseJson).find(([k]) => k.endsWith('base/art/art_manifest.json'))?.[1] as string);
-    const presRaw = Object.entries(baseJson).find(([k]) => k.endsWith('base/presentation/presentation.json'))?.[1];
-    const pres = presRaw ? JSON.parse(presRaw) : undefined;
-    const bin = new Set<string>([
-      ...Object.values<{ image: string }>(art.atlases).map((a) => a.image),
-      ...(Object.values(art.backgrounds) as string[]),
-      ...Object.values<{ file: string }>(art.music).map((m) => m.file),
-      ...(Object.values(art.ui) as string[]),
-      ...(Object.values(art.stills ?? {}) as string[]),
-      ...Object.values<{ images: Record<string, string> }>(art.portraits).flatMap((p) => Object.values(p.images)),
-      ...Object.values<{ file: string }>(pres?.voices ?? {}).map((v) => v.file),
-      ...Object.values<{ file: string }>(pres?.sounds ?? {}).map((s) => s.file),
-      ...Object.values<{ file: string }>(pres?.videos ?? {}).map((v) => v.file)
-    ]);
+    const raw = (suffix: string) => Object.entries(baseJson).find(([k]) => k.endsWith(suffix))?.[1];
+    const json = (text: string | undefined) => (text ? JSON.parse(text) : undefined);
+    const bin = mediaPaths(json(raw('base/art/art_manifest.json')), json(raw('base/presentation/presentation.json')));
     cachedBase = await build(baseJson, '/content/base/', [...bin]);
   }
   await ensureR2Seeded(cachedBase);
@@ -83,14 +100,11 @@ export async function patchFiles(): Promise<TestFile[]> {
   if (!cachedPatch) {
     const base = await baseFiles();
     const patch = await build(campaignJson, '/content/patches/rel_0003_part1_campaign/', []);
-    const art = JSON.parse(new TextDecoder().decode(patch.find((f) => f.path === 'art/art_manifest.json')?.bytes));
-    const bin = new Set<string>([
-      ...Object.values<{ image: string }>(art.atlases).map((a) => a.image),
-      ...(Object.values(art.backgrounds) as string[]),
-      ...(Object.values(art.ui ?? {}) as string[]),
-      ...(Object.values(art.stills ?? {}) as string[]),
-      ...Object.values<{ images: Record<string, string> }>(art.portraits ?? {}).flatMap((p) => Object.values(p.images))
-    ]);
+    const decode = (path: string) => {
+      const bytes = patch.find((f) => f.path === path)?.bytes;
+      return bytes ? JSON.parse(new TextDecoder().decode(bytes)) : undefined;
+    };
+    const bin = mediaPaths(decode('art/art_manifest.json'), decode('presentation/presentation.json'));
     const have = new Set([...base.map((f) => f.path), ...patch.map((f) => f.path)]);
     const extra: TestFile[] = [];
     for (const p of bin) if (!have.has(p)) extra.push(await file(p, enc.encode(`stand-in binary for ${p}`)));

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CURRENT_CONTENT_SCHEMA, MAX_RELEASE_BYTES, MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES, Id, MEDIA_TYPE_BY_EXTENSION, SafeAssetPath, Semver, Sha256Hex } from './primitives';
+import { CURRENT_CONTENT_SCHEMA, MAX_RELEASE_BYTES, MAX_RELEASE_FILES, MAX_JSON_FILE_BYTES, MAX_JSON_TOTAL_BYTES, Id, MEDIA_TYPE_BY_EXTENSION, SafeAssetPath, Semver, Sha256Hex } from './primitives';
 
 export const FileKind = z.enum(['story_scene', 'encounter', 'unit_pack', 'chapter_index', 'art_manifest', 'atlas_image', 'portrait', 'background', 'audio', 'other_data']);
 export type FileKind = z.infer<typeof FileKind>;
@@ -53,7 +53,7 @@ export const ContentManifest = z
     /** Previous known-good release the publisher would roll back to. */
     rollback_to: z.object({ release_id: Id, generation: z.number().int().min(1) }).strict().optional(),
     rollout: z.object({ percent: z.number().int().min(0).max(100), kill_switch: z.boolean() }).strict(),
-    files: z.array(ManifestFile).min(1).max(1536),
+    files: z.array(ManifestFile).min(1).max(MAX_RELEASE_FILES),
     signature: Signature.optional()
   })
   .strict()
