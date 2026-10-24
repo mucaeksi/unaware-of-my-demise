@@ -2,7 +2,7 @@
   "adapters": {
     "android-clean-architecture": {
       "adapter": ".agents/skills/android-clean-architecture/SKILL.md",
-      "adapter_sha256": "03f3abc11d349b60da38b757e02523513114f89880a015df575d0625856756be",
+      "adapter_sha256": "5da8727c4fce7020accb89ecb2983cc3ab619fc752f2caa8bb87f945c259f7f2",
       "source": ".claude/skills/android-clean-architecture/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/android-clean-architecture/SKILL.md": "20cbb9d7778462c549ccd32c830c0004fc7b92cfa009db99900d773373115f12"
@@ -11,7 +11,7 @@
     },
     "api-design": {
       "adapter": ".agents/skills/api-design/SKILL.md",
-      "adapter_sha256": "40e76332476fb9df1c32304ebf118bf03a1d30b646eaa04a8eb88e0bb1c6a9ec",
+      "adapter_sha256": "a6005790b6b3595c2020ffb4045b443cb6c834be91cd5c4221807b2c6dbd2b16",
       "source": ".claude/skills/api-design/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/api-design/SKILL.md": "250e464413a13c0eb93cc73447b423df1f9aa8e4f80e5e68c41f895b2c33e352"
@@ -29,7 +29,7 @@
     },
     "click-path-audit": {
       "adapter": ".agents/skills/click-path-audit/SKILL.md",
-      "adapter_sha256": "7a6bfdb6183f07477917d959d39270bbb209d7fdc6b165c2c960dbce272bbf33",
+      "adapter_sha256": "13f133944225c60ea9c77c6a1ca57474044abe3c9650bbc862531cc0a890d914",
       "source": ".claude/skills/click-path-audit/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/click-path-audit/SKILL.md": "662fc5d02483bcd8ff799d6d3109a38da673182341cfc14445e9076fcd920162"
@@ -38,7 +38,7 @@
     },
     "cloudflare-d1-liveops": {
       "adapter": ".agents/skills/cloudflare-d1-liveops/SKILL.md",
-      "adapter_sha256": "f19a6d8c6d2d768693bf79180e9b342c8f99024bb0dc55124ec67d9b70728533",
+      "adapter_sha256": "760181aa80fe6f72c81cc3f6bf550e9c9f974566c72465c87765a0d9b8733e9c",
       "source": ".claude/skills/cloudflare-d1-liveops/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/cloudflare-d1-liveops/SKILL.md": "64387b0a773f9374384ad6602830c7f6c43b0e07a9af43f4d1d9363d3caf4ec0"
@@ -47,7 +47,7 @@
     },
     "contract-first": {
       "adapter": ".agents/skills/contract-first/SKILL.md",
-      "adapter_sha256": "755c9d33b396b28c01689ea98c0c615361209338b395f16441c61cd46df0023c",
+      "adapter_sha256": "5ddf82fdc829c5c453dbb1522148a3745ae9df9fca9059b784349298cb3a6096",
       "source": ".claude/skills/contract-first/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/contract-first/SKILL.md": "3eaacf16a9bbd92888659e9c1e15b0fa4eb96a41c257dd9e08f2e63b824f0cea"
@@ -56,7 +56,7 @@
     },
     "error-handling": {
       "adapter": ".agents/skills/error-handling/SKILL.md",
-      "adapter_sha256": "a7c27cc669de813a217d640084fd7568b20360f6af2c78d320002d5ce67b7c38",
+      "adapter_sha256": "765b9c39236001bae11656e8ce6559d1493385378a61f843d9da81de0dda7e7c",
       "source": ".claude/skills/error-handling/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/error-handling/SKILL.md": "e8eec6756c950b570486493e64e3bf14c12baf6bf0858bf3928097fe2bfeaf79"
@@ -65,7 +65,7 @@
     },
     "frontend-a11y": {
       "adapter": ".agents/skills/frontend-a11y/SKILL.md",
-      "adapter_sha256": "548e789b29f19621f674186488c4517004308508affe3f15d59771faf42b451d",
+      "adapter_sha256": "7067b054bd3417eb5d9974e652fd5b4059fe4ed9f1974abc66b027aa99c3afe9",
       "source": ".claude/skills/frontend-a11y/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/frontend-a11y/SKILL.md": "e00991a3f4d47fcf1529dd74a080afcf46137dc5061e70dc6e3da7b27f2ae3f3"
@@ -74,7 +74,7 @@
     },
     "frontend-patterns": {
       "adapter": ".agents/skills/frontend-patterns/SKILL.md",
-      "adapter_sha256": "6978a6cc2610b4a658656b92738e3336eb68ca0ef4f5ae8dbf26d9e165729175",
+      "adapter_sha256": "6cad1da7f7dbb70144e7a7a0292135950c7365013edfb8048de806dd69330bc2",
       "source": ".claude/skills/frontend-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/frontend-patterns/SKILL.md": "a5b971eb9e74cd763c7e3308bfd888e0d9cf69f8b88477659889d77182479740"
@@ -109,7 +109,7 @@
     },
     "i18n-sync": {
       "adapter": ".agents/skills/i18n-sync/SKILL.md",
-      "adapter_sha256": "2cc421e629cab0c80584f32149342633857ebb4cedb02b089493650cd24c5021",
+      "adapter_sha256": "548b6acd66a3f090b80d0fe6f25b432e408eca66295e870e555832cd8c7a8f7d",
       "source": ".claude/skills/i18n-sync/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/i18n-sync/SKILL.md": "05fc3e2ae72c2f55cc44fa0e9531688c1112081037d628e1124fd5bf40825325"
@@ -118,7 +118,7 @@
     },
     "kotlin-coroutines-flows": {
       "adapter": ".agents/skills/kotlin-coroutines-flows/SKILL.md",
-      "adapter_sha256": "9d2f9f4b840788ad9ca846f50877905722e051b303ff19cd5e26eea491a8563f",
+      "adapter_sha256": "0edc53f7550e9319d12f1622199b5948aeb5d6cd4fd95214afce2b4202697f8f",
       "source": ".claude/skills/kotlin-coroutines-flows/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/kotlin-coroutines-flows/SKILL.md": "ed7d895ecd6c717fbdbf7f1469110df74a6337792acd1232c4ad7286abee76e4"
@@ -127,7 +127,7 @@
     },
     "make-interfaces-feel-better": {
       "adapter": ".agents/skills/make-interfaces-feel-better/SKILL.md",
-      "adapter_sha256": "eb8fb39489eab4db418564ff726445a1f3b29f8e35f32cd6e2c293368f88be9b",
+      "adapter_sha256": "d5653fd57e64019e925317e90ee994fac9ddd41d3510f55af6cdad29a95def08",
       "source": ".claude/skills/make-interfaces-feel-better/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/make-interfaces-feel-better/SKILL.md": "aff91aef917cba9c65681ae77197cee93ce9b697ee8916ea684ef8537c99fb52"
@@ -190,7 +190,7 @@
     },
     "react-patterns": {
       "adapter": ".agents/skills/react-patterns/SKILL.md",
-      "adapter_sha256": "cfc54f8fa43b2c26d89b492e4442580a5771354e94b5465153cefb1bd7583e62",
+      "adapter_sha256": "fad9bc6062d3119224c7290b8b17533e0a4ac4bf93846a904019c3c11078352a",
       "source": ".claude/skills/react-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-patterns/SKILL.md": "f3208d44a5d553038c42e046cec4dc16e4a3d90a9dbf931f883a2e21919a64a9"
@@ -199,7 +199,7 @@
     },
     "react-performance": {
       "adapter": ".agents/skills/react-performance/SKILL.md",
-      "adapter_sha256": "f2e3cda4a2175e6eed9b9e966c02699945c384d3aa2c35e586ebcd637409b6d5",
+      "adapter_sha256": "6016a773100adaf2b27f154847f9cfa0234c4b747f84ae3abb3499c425c9143f",
       "source": ".claude/skills/react-performance/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-performance/SKILL.md": "ac76e8694d4f802a7bccc3c07a73ac68ace6d82a65ea10f10d8b7384dda61a8f"
@@ -208,7 +208,7 @@
     },
     "react-testing": {
       "adapter": ".agents/skills/react-testing/SKILL.md",
-      "adapter_sha256": "e48e9d10ba856ba65b6f359c6c9ef630bdc28dc69a770d0cb72b4d179405ab7c",
+      "adapter_sha256": "2e95dffcc6251eb19f95b0f2447753937f5a8b168e38c034242a0e67d2f68c5c",
       "source": ".claude/skills/react-testing/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-testing/SKILL.md": "51c18b4e28285bb876ef469e47c6f53108b5a9f900950a60e897c3c24826a65e"
@@ -648,7 +648,7 @@
     },
     "vite-patterns": {
       "adapter": ".agents/skills/vite-patterns/SKILL.md",
-      "adapter_sha256": "820e8c4bf5fe6a350b7635d368e15ac270e3bbf3d885373a578ef680ac788019",
+      "adapter_sha256": "aca7e7d5eff30754db88b44ace89761bcf73c47f16cf5c1a86cfa1a69e430140",
       "source": ".claude/skills/vite-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/vite-patterns/SKILL.md": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"

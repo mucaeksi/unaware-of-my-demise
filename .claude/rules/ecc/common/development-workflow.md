@@ -32,10 +32,10 @@ The Feature Implementation Workflow describes the development pipeline: research
    - Address CRITICAL and HIGH issues
    - Fix MEDIUM issues when possible
 
-4. **Verify & Local Commit (D-28)**
+4. **Verify, Commit & Push (D-28, D-32)**
    - Run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`)
-   - Create reviewable local commits following conventional commits format
-   - **Never `git push` or deploy Workers from an agent session** — the owner pushes `main` with GitHub Desktop (D-28)
+   - Create reviewable commits following conventional commits format
+   - Push verified work to `main` (D-32 standing approval): fetch, fast-forward only, never force-push. Never `wrangler deploy` by hand; Workers Builds deploys staging from `main`
 
 5. **Pre-Review Checks**
    - Verify all automated checks (CI/CD) are passing

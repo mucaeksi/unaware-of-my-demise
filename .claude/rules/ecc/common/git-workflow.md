@@ -23,7 +23,8 @@ When creating PRs:
 > For the full development process (planning, TDD, code review) before git operations,
 > see [development-workflow.md](./development-workflow.md).
 
-## UOMD D-28 Delivery Policy (Override)
+## UOMD D-28 / D-32 Delivery Policy (Override)
 
-- Agents edit and commit **locally** in `F:\unaware-of-my-demise` after passing `npm run verify`.
-- **Never run `git push` or `wrangler deploy` from an agent session.** The owner pushes `main` via GitHub Desktop, which triggers Cloudflare Workers Builds.
+- Agents commit after passing `npm run verify` and reviewing the diff.
+- **D-32 (2026-10-24):** Claude Opus 5.5 pushes its verified commits to `main` itself (standing owner approval): fetch first, fast-forward only, never force-push or rewrite history. The push triggers Cloudflare Workers Builds (staging).
+- **Never run `wrangler deploy` by hand.** Production/public Play release keeps its separate owner approval.

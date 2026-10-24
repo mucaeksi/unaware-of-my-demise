@@ -180,7 +180,7 @@ def adaptation(name: str) -> str:
 """
     if name == "cloudflare-d1-liveops":
         return """- Prefer available Cloudflare connector/plugin tools and current official docs. CLI credential availability and connector access are separate; verify the specific capability instead of asking for secret values.
-- Staging deploys only through Cloudflare Workers Builds when the owner pushes GitHub `main` (D-28): one build per Worker, the game build gates on `npm run verify` and runs tools/deploy_staging.sh game (game owns D1 migrations/seeds). Agents never push or deploy; GitHub Actions stays unused. Keep the existing server-authoritative economy and Access/RBAC checks.
+- Staging deploys only through Cloudflare Workers Builds from GitHub `main` (D-28/D-32): one build per Worker, the game build gates on `npm run verify` and runs tools/deploy_staging.sh game (game owns D1 migrations/seeds). Claude Opus 5.5 pushes verified work to `main` (D-32, fast-forward only) but never deploys by hand; GitHub Actions stays unused. Keep the existing server-authoritative economy and Access/RBAC checks.
 - Use uomd-monitoring for safe operational data and uomd-monetization for SSV/Play/RTDN changes. Do not interpret a skill's general infrastructure recipes as authorization to provision production or paid services.
 """
     if name == "google-anime-media":
@@ -200,7 +200,7 @@ def adaptation(name: str) -> str:
         return f"""- ECC 2.2.3 workflow adapted for Antigravity and Codex on Unaware of My Demise. Resolve relative `references/`, `templates/`, `examples/` and `scripts/` paths against `.claude/skills/{name}/`.
 - Map generic Claude tool names (`Read`, `Write`, `Edit`, `Bash`, `Grep`, `Glob`, `Task`) to actual host tools (`read_file`, `write_file`, `edit_file`, `run_command`, `search_web`, `invoke_subagent`). Never assume ECC's background hook daemon (`hooks.json`) or retired Context7 MCP is active.
 - Preserve UOMD architecture: Unity 6 LTS (C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`, Decision D-31), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api`).
-- Follow D-28 delivery rules: verify changes locally (`npm run verify`) and create reviewable local commits only; never `git push` or deploy Workers from an agent session.
+- Follow D-28/D-32 delivery rules: verify changes (`npm run verify`), commit reviewable steps and push them to `main` fast-forward only; never deploy Workers by hand.
 """
     return """- Preserve the canonical workflow and resolve its resources against the source directory. Review new source/version changes before using new runtimes or instructions.
 - Use current project constraints and actual host capabilities; do not infer permission to install, delegate, spend or deploy from generic examples.
