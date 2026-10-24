@@ -4,8 +4,8 @@
 #   test   : EditMode tests (C# parity vs TypeScript golden vectors)
 #   build  : Android AAB (UOMD_BUILD_APK=1 for APK; UOMD_KEYSTORE_* for release signing)
 #   capture: Linux player under Xvfb visits every screen and saves PNGs (apps/unity/cloud/capture_screens.sh publishes them)
-# Licence: UNITY_LICENSE_B64 (base64 of the Hub-written .ulf, Unity Personal) or UNITY_LICENSE (raw XML),
-# optionally UNITY_EMAIL/UNITY_PASSWORD; or UNITY_SERIAL (Pro/Plus).
+# Licence: UNITY_EMAIL + UNITY_PASSWORD (Unity Personal, activated here by the Licensing Client), or UNITY_SERIAL (Pro/Plus),
+# or a legacy .ulf as UNITY_LICENSE_B64 / UNITY_LICENSE.
 set -euo pipefail
 
 STEP="${1:-all}"
@@ -33,6 +33,14 @@ run_unity() { # $1 = log name, rest = unity args
 }
 
 activate_license() {
+  # Unity Personal on a headless machine: the Licensing Client signs in and activates the free edition here
+  # (an entitlement copied from another PC is bound to that machine and is rejected).
+  local client="$(dirname "$UNITY")/Data/Resources/Licensing/Client/Unity.Licensing.Client"
+  if [ -n "${UNITY_EMAIL:-}" ] && [ -n "${UNITY_PASSWORD:-}" ] && [ -z "${UNITY_SERIAL:-}" ] && [ -x "$client" ]; then
+    "$client" --activate-all --include-personal --username "$UNITY_EMAIL" --password "$UNITY_PASSWORD" > "$LOGS/activate.log" 2>&1 || {
+      echo "Unity Personal activation failed; see $LOGS/activate.log (two-factor sign-in cannot be used headless)"; exit 3; }
+    return 0
+  fi
   # Unity Personal: the .ulf written by Unity Hub on the owner's machine (GameCI's documented CI route).
   # UNITY_LICENSE_B64 = base64 of the file (one line, safe for .env editors); UNITY_LICENSE = the raw XML.
   if [ -n "${UNITY_LICENSE_B64:-}" ] || [ -n "${UNITY_LICENSE:-}" ]; then

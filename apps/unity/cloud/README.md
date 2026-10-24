@@ -17,15 +17,15 @@ open into a repeatable batch pipeline.
 
 ```bash
 bash apps/unity/cloud/install_unity_linux.sh          # editor 6000.0.58f2 + Android module/SDK/NDK r27c/OpenJDK, from Unity's release API
-bash apps/unity/cloud/unity_ci.sh import               # needs UNITY_LICENSE + UNITY_EMAIL + UNITY_PASSWORD in the environment
+bash apps/unity/cloud/unity_ci.sh import               # needs UNITY_EMAIL + UNITY_PASSWORD in the environment
 bash apps/unity/cloud/unity_ci.sh capture              # Linux player under Xvfb saves one PNG per screen
 node tools/publish_unity_screens.mjs                   # -> docs/evidence/unity-*.webp, shown on the Control Center Development page
 ```
 
-`UNITY_LICENSE_B64` is `Unity_lic.ulf` in base64 (one line, safe for the environment editor), written by Unity Hub on the owner's PC after
-Preferences → Licenses → Add → Get a free personal license. Windows PowerShell:
-`[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\ProgramData\Unity\Unity_lic.ulf")) | Set-Clipboard`. GitHub repository secrets do not reach this session;
-set the three values in the cloud environment's settings.
+Licence: set `UNITY_EMAIL` and `UNITY_PASSWORD` in the cloud environment's settings (GitHub repository secrets do not reach this
+session). `unity_ci.sh` then runs the editor's Licensing Client with `--activate-all --include-personal`, which activates the free
+Personal edition on this machine. Hub's `UnityEntitlementLicense.xml` from another PC is machine-bound and does not work here; an
+account with two-factor sign-in cannot be activated headless. Pro/Plus: `UNITY_SERIAL`.
 
 ## 1. Install (once per VM)
 
