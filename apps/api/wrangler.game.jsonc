@@ -1,5 +1,5 @@
 {
-  // Public game Worker: serves the Phaser client (static assets) and /api/v1/*.
+  // Public game Worker: serves the Unity 6 LTS gateway assets and /api/v1/*.
   // There is deliberately NO top-level/production deployment here; production needs the owner's approval.
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "uomd-game",
@@ -16,7 +16,7 @@
       "version_metadata": { "binding": "CF_VERSION_METADATA" },
       "workers_dev": true,
       "vars": { "ENVIRONMENT": "dev", "CONTENT_CHANNEL": "dev", "ADMOB_APP_ID": "ca-app-pub-4258559369390965~2559970251", "ADMOB_AD_UNIT_IDS": "ca-app-pub-4258559369390965/3553164322" },
-      "assets": { "directory": "../game/dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+      "assets": { "directory": "../unity/CloudflareGatewayDist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
       "d1_databases": [{ "binding": "DB", "database_name": "uomd-dev", "database_id": "0512d420-db4b-4851-8971-71c138f713cb", "migrations_dir": "migrations" }],
       "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-dev" }],
       "ratelimits": [{ "name": "API_LIMITER", "namespace_id": "2101", "simple": { "limit": 120, "period": 60 } }]
@@ -37,7 +37,7 @@
         "RTDN_PUSH_SERVICE_ACCOUNT": "uomd-play-billing@unaware-of-my-demise.iam.gserviceaccount.com",
         "RTDN_AUDIENCE": "https://uomd-game-staging.muratcaneksiii.workers.dev/api/v1/billing/rtdn"
       },
-      "assets": { "directory": "../game/dist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+      "assets": { "directory": "../unity/CloudflareGatewayDist", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
       "d1_databases": [{ "binding": "DB", "database_name": "uomd-staging", "database_id": "687f9735-ee4c-4611-aa16-2fae99e51911", "migrations_dir": "migrations" }],
       "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "uomd-content-staging" }],
       "ratelimits": [{ "name": "API_LIMITER", "namespace_id": "2102", "simple": { "limit": 120, "period": 60 } }]

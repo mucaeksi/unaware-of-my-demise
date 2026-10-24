@@ -5,8 +5,7 @@
   "type": "module",
   "description": "Unaware of My Demise - monorepo (Unity 6 LTS C# client, Cloudflare Worker API, React Control Center)",
   "workspaces": [
-    "apps/api",
-    "apps/admin",
+    "apps/*",
     "packages/*"
   ],
   "engines": {
@@ -22,7 +21,7 @@
     "verify": "npm run lint && npm run typecheck && npm test && npm run check:content",
     "build:campaign": "tsx tools/build_campaign.ts",
     "export:unity": "tsx tools/export_unity_bundle.ts",
-    "build": "npm run export:unity && npm run build -w @uomd/admin",
+    "build": "npm run build -w @uomd/game && npm run build -w @uomd/admin",
     "e2e": "playwright test -c tests/e2e/playwright.config.ts",
     "e2e:remote": "playwright test -c tests/e2e/playwright.remote.config.ts"
   },

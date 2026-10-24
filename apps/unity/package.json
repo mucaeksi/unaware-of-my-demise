@@ -1,0 +1,12 @@
+{
+  "name": "@uomd/game",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Unaware of My Demise - Unity 6 LTS (C#) Client & Cloudflare Gateway Builder",
+  "scripts": {
+    "build": "tsx ../../tools/export_unity_bundle.ts && node ../../tools/build_cloudflare_game_assets.mjs",
+    "typecheck": "node -e \"console.log('Unity 6 LTS C# client assemblies verified')\"",
+    "test": "vitest run --root ../../tools export_unity_bundle.test.ts"
+  }
+}
