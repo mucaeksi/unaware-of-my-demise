@@ -10,6 +10,7 @@ import { basename, dirname, join, relative } from 'node:path';
 import { MEDIA_TYPE_BY_EXTENSION, type AllowedExtension } from '../packages/content-schema/src/index';
 import { chapterPatch } from './lib/chapter-patch';
 import { ROOT } from './lib/fsutil';
+import { unityStatus } from './lib/unity-status';
 
 const OUT = join(ROOT, 'apps/admin/public/dev');
 rmSync(OUT, { recursive: true, force: true });
@@ -1582,6 +1583,7 @@ writeFileSync(
       screens,
       storeAssets,
       reviewCatalog,
+      unity: unityStatus(ROOT),
       ...tracker
     },
     null,

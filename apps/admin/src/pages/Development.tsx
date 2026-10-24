@@ -58,8 +58,19 @@ interface ReviewCatalogItem {
   sha256?: string;
 }
 
+type UnityCheckState = 'done' | 'partial' | 'todo';
+/** tools/lib/unity-status.ts: computed from apps/unity at admin build time, never hand-edited. */
+interface UnityStatus {
+  editorVersion: string;
+  counts: { metaFiles: number; projectSettingsAssets: number; csFiles: number; csLines: number; javaBridges: number; screenControllers: number; editModeTests: number };
+  assemblies: { name: string; path: string; references: string[]; csFiles: number; lines: number; headlessFiles: number }[];
+  combat: { csharpLines: number; typescriptLines: number };
+  checks: { id: string; phase: string; title: string; state: UnityCheckState; detail: string }[];
+}
+
 interface Progress {
   generatedAt: string;
+  unity?: UnityStatus;
   summary: { total: number; done: number; partial: number; missing: number };
   baseRelease?: BaseReleaseSummary;
   roadmap: { n: number; area: string; status: string; detail: string }[];
@@ -1069,10 +1080,66 @@ const List = ({ title, items }: { title: string; items: Item[] }): ReactNode => 
   <section className="card"><h3>{title}</h3><ul>{items.map((i) => <li key={i.title}><strong>{i.title}</strong>{i.detail ? ` — ${i.detail}` : ''}</li>)}</ul></section>
 );
 
+const UNITY_STATE: Record<UnityCheckState, { badge: string; label: string }> = {
+  done: { badge: 'ok', label: 'tamam' },
+  partial: { badge: 'warn', label: 'kısmi' },
+  todo: { badge: 'bad', label: 'yapılacak' }
+};
+
+/** Unity 6 migration progress straight from the repository (apps/unity), so it cannot drift from the code. */
+function UnityMigration({ u }: { u: UnityStatus }): ReactNode {
+  const done = u.checks.filter((c) => c.state === 'done').length;
+  return (
+    <section className="card" style={{ marginBottom: 14, border: '1px solid #6a8fd4' }}>
+      <div className="row" style={{ flexWrap: 'wrap', gap: 8 }}>
+        <h3 style={{ margin: 0 }}>Unity 6 geçişi (otomatik, repodan hesaplanır)</h3>
+        <span className="badge info">Editor {u.editorVersion || '—'}</span>
+        <span className={`badge ${done === u.checks.length ? 'ok' : 'warn'}`}>{done} / {u.checks.length} kontrol tamam</span>
+        <span className={`badge ${u.counts.metaFiles > 0 ? 'ok' : 'bad'}`}>{u.counts.metaFiles > 0 ? 'Unity ile import edildi' : 'Unity Editor ile henüz hiç açılmadı'}</span>
+      </div>
+      <p style={{ margin: '8px 0', color: 'var(--dim)' }}>
+        {u.counts.csFiles} C# dosyası ({u.counts.csLines} satır) · {u.counts.screenControllers} ekran denetleyicisi · {u.counts.javaBridges} Android Java köprüsü · {u.counts.editModeTests} EditMode testi ·
+        savaş C# {u.combat.csharpLines} / TypeScript {u.combat.typescriptLines} satır
+      </p>
+      <table>
+        <thead><tr><th>Faz</th><th>Kontrol</th><th>Durum</th><th>Ayrıntı</th></tr></thead>
+        <tbody>
+          {u.checks.map((c) => (
+            <tr key={c.id}>
+              <td className="mono" style={{ whiteSpace: 'nowrap' }}>{c.phase}</td>
+              <td>{c.title}</td>
+              <td style={{ whiteSpace: 'nowrap' }}><span className={`badge ${UNITY_STATE[c.state].badge}`}>{UNITY_STATE[c.state].label}</span></td>
+              <td>{c.detail}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <details style={{ marginTop: 8 }}>
+        <summary>Assembly'ler (asmdef) ve Unity'siz derlenen dosyalar</summary>
+        <table>
+          <thead><tr><th>Assembly</th><th>C# dosya</th><th>Satır</th><th>Unity'siz derlenen</th><th>Referanslar</th></tr></thead>
+          <tbody>
+            {u.assemblies.map((a) => (
+              <tr key={a.name}>
+                <td className="mono">{a.name}</td>
+                <td>{a.csFiles}</td>
+                <td>{a.lines}</td>
+                <td><span className={`badge ${a.headlessFiles === a.csFiles && a.csFiles > 0 ? 'ok' : a.headlessFiles > 0 ? 'warn' : 'info'}`}>{a.headlessFiles} / {a.csFiles}</span></td>
+                <td className="mono">{a.references.join(', ') || '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </details>
+    </section>
+  );
+}
+
 function Overview({ p, onOpenReview }: { p: Progress; onOpenReview: () => void }): ReactNode {
   return (
     <>
       <p className="mono">Generated {p.generatedAt} from the repository (docs/DEV_TRACKER.json reviewed {p.reviewedAt ?? '—'} at {p.sourceCommit ?? '—'}, roadmap, decisions, git history, base release manifest).</p>
+      {p.unity ? <UnityMigration u={p.unity} /> : null}
       {p.currentAssignment ? (
         <section className="card" style={{ marginBottom: 14, border: '1px solid #d4af37' }}>
           <div className="row" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>

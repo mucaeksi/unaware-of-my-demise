@@ -7,7 +7,7 @@
  */
 import { spawn, spawnSync, type ChildProcess } from 'node:child_process';
 import { createServer, request as proxyRequest, type Server } from 'node:http';
-import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -84,6 +84,10 @@ async function boot(): Promise<void> {
   }
   rmSync(STATE, { recursive: true, force: true, maxRetries: 10, retryDelay: 300 });
   mkdirSync(STATE, { recursive: true });
+
+  // Both Workers serve git-ignored build outputs as static assets; wrangler refuses to start without them (fresh clone).
+  if (!existsSync(join(ROOT, 'apps/unity/CloudflareGatewayDist'))) await sh(process.execPath, ['tools/build_cloudflare_game_assets.mjs'], ROOT);
+  if (!existsSync(join(ROOT, 'apps/admin/dist/index.html'))) await sh('npm', ['run', 'build', '-w', '@uomd/admin'], ROOT);
 
   const rsa = await generateKeyPair('RS256', { extractable: true });
   const jwk = { ...(await exportJWK(rsa.publicKey)), kid: 'k1', alg: 'RS256', use: 'sig' };
