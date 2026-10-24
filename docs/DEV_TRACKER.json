@@ -7,10 +7,14 @@
   "currentAssignment": {
     "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
     "status": "IN_PROGRESS",
-    "nextProposed": "First licensed Unity import done in the cloud session (Unity Personal, 6000.0.58f2): metas/ProjectSettings/packages-lock committed, EditMode 10/10 inside Unity, 24 screens captured from a Linux player and published to the Control Center. Next: StoryRunner tests, remote patch download (U-2), Android AAB build and the initial AAB vertical slice with approved art.",
+    "nextProposed": "First debug AAB built in the cloud (68da213) and the entry flow ported with real art and sound. Next: battle screen on the real engine with chibi atlases and VFX, release signing (needs B-SIGNING), AAB size (drop WebP duplicates), remote patch download (U-2), then the hub screens.",
     "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "U-3b: first Android AAB + entry flow with art and sound (2026-10-24, Claude Opus 5.5)",
+      "detail": "unity_ci.sh build produced a debug-signed AAB (145.7 MB, IL2CPP ARM64, API 24-35, commit 68da213), recorded in docs/evidence/unity-android-build.json and shown on the Control Center Development page. Build blockers fixed: Maven Central 429/fake-404 rate limit on the shared egress IP (maven_retry_proxy.py + Gradle init script), Gradle daemon without JAVA_TOOL_OPTIONS (trust store/proxy mirrored into gradle.properties, stale daemons stopped), missing values/ic_launcher_background.xml. Entry flow ported from the TypeScript client: UomdMediaCatalog/Loader, AudioDirector plays music/SFX/voice (was silent), Studio/Title/Prologue/Story/Finish with canonical strings and art, UomdCutscene rules tested with the TS cases, UomdEntryFlow (prologue -> T-1..T-3 pre/battle/post -> Finish). Invented Unity-port texts removed. Headless EditMode 19/19, capture 24/24."
+    },
     {
       "title": "U-3a: first licensed Unity import + cloud screen capture (2026-10-24, Claude Opus 5.5)",
       "detail": "Unity 6000.0.58f2 installed Hub-free in the cloud session (install_unity_linux.sh, Android SDK/NDK r27c/OpenJDK 17) and Unity Personal activated headless from UNITY_EMAIL/UNITY_PASSWORD. The real import found what the reference compile could not: Packages/manifest.json lacked the built-in modules com.unity.modules.androidjni (AndroidJavaObject/Proxy, CS1069) and com.unity.modules.screencapture, and Uomd.Editor lacked Unity.RenderPipelines.Universal.2D.Runtime (Renderer2DData moved to its own assembly in URP 17). unity_ref_compile.py now references only enabled module DLLs and splits the URP signatures per assembly, so all three fail there too. The capture run exposed two runtime bugs: 25 synchronous OnEnterAsync bodies returned default (a null Awaitable), so the router's Start chain threw NullReferenceException on Boot -> Splash (now UomdAwaitables.Completed() plus a null guard in the router), and a desktop player without focus pauses (capture mode sets Application.runInBackground). Result: import OK, EditMode 10/10 in Unity (incl. 171 combat parity replays), 24/24 screens captured to docs/evidence/unity-*.webp."
@@ -50,8 +54,8 @@
       "detail": "Manifest signature admission exists; content-addressed download, staging, activation at restart and rollback are still missing."
     },
     {
-      "title": "U-3: Android AAB build, then the initial AAB vertical slice",
-      "detail": "The first licensed import is done (U-3a). Next run apps/unity/cloud/unity_ci.sh build for a debug AAB, then wire Studio -> Title -> Prologue -> T-1..T-3 -> Finish with approved art (the 24 captured screens are still UI shells without art; Home's banner spotlight card overflows its frame)."
+      "title": "U-3/U-4: battle screen visuals, release signing, AAB size",
+      "detail": "Battle screen still shows text rows: port BattleScene (chibi atlases, layout, HP/Focus bars, skills, VFX). Release-sign the AAB once the upload key is provided (B-SIGNING). Drop the WebP duplicates from StreamingAssets (PNG siblings are what Unity loads). Story reader LOG."
     },
     {
       "title": "Control Center: replace the retired browser-game previews",

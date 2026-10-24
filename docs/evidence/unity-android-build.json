@@ -1,0 +1,20 @@
+{
+  "commit": "68da213f9e2e",
+  "file": "uomd.aab",
+  "bytes": 145669269,
+  "sha256": "08a6f9ed3a3192ec908622a33926fbcf35511eec2362c38f0e9a38f2375ddc5a",
+  "format": "aab",
+  "signing": "debug",
+  "applicationId": "io.github.mucaeksi.unawareofmydemise",
+  "versionName": "1.0",
+  "versionCode": 1,
+  "minSdk": 24,
+  "targetSdk": 35,
+  "architectures": [
+    "ARM64"
+  ],
+  "scriptingBackend": "IL2CPP",
+  "editorVersion": "6000.0.58f2",
+  "builtAt": "2026-10-24T23:41:53Z",
+  "durationSeconds": 51
+}

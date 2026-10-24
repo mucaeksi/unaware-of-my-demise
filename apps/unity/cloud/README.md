@@ -50,6 +50,24 @@ session). `unity_ci.sh` then runs the editor's Licensing Client with `--activate
 Personal edition on this machine. Hub's `UnityEntitlementLicense.xml` from another PC is machine-bound and does not work here; an
 account with two-factor sign-in cannot be activated headless. Pro/Plus: `UNITY_SERIAL`.
 
+## Android AAB in the cloud session (2026-10-24)
+
+`unity_ci.sh build` produced the first AAB (debug-signed, 145.7 MB, IL2CPP ARM64, API 24–35); `node tools/record_unity_build.mjs`
+publishes its facts to `docs/evidence/unity-android-build.json` for the Control Center. What the build step handles by itself:
+
+- **Maven Central rate limit.** The session's shared egress IP gets 429s and fake 404s (1 byte, `Retry-After`) from Maven Central;
+  Gradle caches them as "artifact not found". The step starts `maven_retry_proxy.py` on `127.0.0.1:8765` and installs
+  `maven-retry-proxy.init.gradle`, which points Maven Central and the Plugin Portal at it. It fetches from the same official hosts,
+  two requests at a time, with backoff, into `~/.cache/uomd-maven`. `UOMD_MAVEN_PROXY=off` disables it.
+- **Proxy CA for Gradle.** Unity starts the Gradle daemon with only `-Xmx`, so `JAVA_TOOL_OPTIONS` never reaches it (TLS fails with
+  PKIX). The step copies the trust-store and HTTPS-proxy flags into a generated block of `~/.gradle/gradle.properties` and stops
+  old daemons, which keep the proxy port and CA they started with.
+- **Signing.** Without `UOMD_KEYSTORE_FILE`/`UOMD_KEYSTORE_PASSWORD`/`UOMD_KEY_ALIAS`/`UOMD_KEY_PASSWORD` the AAB is debug-signed and
+  Play rejects it (B-SIGNING). `UOMD_VERSION_NAME`/`UOMD_VERSION_CODE` set the version (default 1.0 / 1).
+
+Size today: `base/assets/uomd_base` is 97 MB because the exporter writes a lossless PNG next to every WebP (Unity cannot decode
+WebP) and both ship.
+
 ## 1. Install (once per VM)
 
 | Host | Command |
