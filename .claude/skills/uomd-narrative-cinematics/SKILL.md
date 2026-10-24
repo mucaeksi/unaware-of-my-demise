@@ -1,11 +1,11 @@
 ---
 name: uomd-narrative-cinematics
-description: Implement the Unaware of My Demise visual novel and cinematic runtime (PrologueScene, StoryScene, NarrativeStage, subtitles, voice, music) on the PixiJS v8 stage for Part I — the ~120-second opening and the T-1/T-2/T-3 tutorial scenes.
+description: Implement the Unaware of My Demise visual novel and cinematic runtime (PrologueStageController, StoryStageController, PortraitRigView, SubtitleClockSynchronizer, VideoPlayer cutscenes, Chirp 3 HD voice, Lyria BGM) on Unity 6 LTS URP 2D + UI Toolkit for Part I.
 ---
-# Narrative and cinematics
+# Narrative and cinematics (`Uomd.Narrative`)
 
-- Canon authority is `narrative/`; compiled scenes are data (`content/base/story/*.json`, `entry/prologue.json`) validated by `@uomd/content-schema`. The runtime executes only the closed command grammar — never code from downloaded data.
-- Entry contract: prologue and tutorial cutscenes have the normal-speed Auto read toggle and no Skip on a first viewing (Skip appears only on the dev server or after completion). Tutorial cutscenes currently play without BGM by owner decision; the 116 Japanese VO lines live in `content/base/voices` with timings in `presentation/presentation.json`.
-- Subtitles follow the voice audio clock (`ui/subtitles.ts`); stage directives (fade, flash, shake, tint, masks, tweens) map onto the PIXI stage and camera.
-- Continuity (R09): account + release + scene/line checkpoints must survive restart; never reset a player's entry progress outside `isDevServer()`.
-- Change generated content through `tools/build_content.ts` and prove it with `npm run check:content`; authored media (voices/, presentation/, Lyria tracks) is preserved by the builder.
+- Canon authority is `narrative/`; compiled scenes are data (`StreamingAssets/uomd_base/story/*.json`, `entry/prologue.json`) validated by `@uomd/content-schema` and exported via `npm run export:unity`. The Unity 6 runtime (`Uomd.Narrative`) executes only the closed command grammar — never code from downloaded data.
+- Entry contract: Prologue and tutorial cutscenes (`T-1`, `T-2`, `T-3`) expose the normal-speed Auto read toggle and hide Skip on a first viewing (Skip appears only in Editor/development builds or after scene completion is recorded). Tutorial cutscenes play without BGM by owner decision; the 116 Japanese VO lines live in `StreamingAssets/uomd_base/voices/` with timings in `presentation/presentation.json`.
+- Subtitles (`SubtitleClockSynchronizer`) lock directly to `AudioSource.timeSamples / clip.frequency` on the voice channel; stage directives (`fade`, `flash`, `shake`, `tint`, `mask`, `tween`, `video_id`) map onto the Unity 6 URP 2D stage (`PortraitRigView`, `UnityEngine.Video.VideoPlayer`) and `CameraShakePivot`.
+- Continuity (R09): account + release + scene/line checkpoints (`POST /api/v1/story/checkpoint`) must survive app restart; never reset a player's entry progress outside development builds.
+- Change generated content through `tools/build_content.ts` + `npm run export:unity` and prove reproducibility with `npm run check:content`.

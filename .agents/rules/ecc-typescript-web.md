@@ -1,8 +1,8 @@
-# ECC 2.2.3 TypeScript & Web Rules (`apps/game`, `apps/api`, `apps/admin`, `packages/*`)
+# ECC 2.2.3 Unity 6 C#, TypeScript & Web Rules (`apps/unity`, `apps/api`, `apps/admin`, `packages/*`)
 
-> Full verbose rules live in `.claude/rules/ecc/typescript/` and `.claude/rules/ecc/web/`.
+> Full verbose rules live in `.claude/rules/ecc/typescript/`, `.claude/rules/ecc/web/`, and the `unity-*` skills.
 
-- **Type Safety**: Enforce strict TypeScript (`noImplicitAny`, `strictNullChecks`). Prefer `unknown` + narrowing or `packages/contracts` schemas over `any` or unsafe `as` casts.
-- **PixiJS v8 + Gothic DOM/CSS (`apps/game`)**: Keep battle/narrative canvas rendering on pure PixiJS v8 (`apps/game/src/core`) and menu overlays in the accessible HTML/CSS + ARIA layer (`apps/game/src/ui/domKit.ts`). Clean up tickers, tweens, textures, and event listeners on scene teardown.
+- **Type Safety**: Enforce strict TypeScript (`noImplicitAny`, `strictNullChecks`) in `packages/*`, `apps/api`, and `apps/admin`, and strict `.asmdef` boundaries in Unity 6 C# (`apps/unity`).
+- **Unity 6 LTS Client (`apps/unity`, Decision D-31)**: Keep deterministic combat simulation in pure C# (`Uomd.Combat` using `UomdCorePrimitives.g.cs`), stage rendering on URP 2D (`Uomd.Battle`, `Uomd.Narrative`), and menus/HUDs on Runtime UI Toolkit (`UIDocument`, UXML/USS) + TextMeshPro (`Cinzel`, `Cormorant Garamond`). Release runtime textures, sprites, and event listeners on scene teardown.
 - **Cloudflare Workers + D1 (`apps/api`)**: Keep handlers stateless on Hono + D1 SQLite + R2 + Queues. Enforce server-authoritative combat/economy, idempotency keys, and Cloudflare Access/RBAC checks.
-- **Web Accessibility & Vital Budgets**: Maintain semantic ARIA roles, keyboard focus management, `>= 44x44 CSS px` touch targets, WCAG AA contrast, and `prefers-reduced-motion` support.
+- **Accessibility & Touch Budgets**: Maintain semantic focus management, `>= 48x48 dp` physical touch targets, WCAG AA contrast, `Screen.safeArea` insets, and `ReducedMotion` support.

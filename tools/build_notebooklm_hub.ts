@@ -163,11 +163,11 @@ ${safeRead('docs/media/EXPORT_PIPELINE.md')}
 ${safeRead('docs/NEXT_STEPS.md')}
 `,
 
-    '06_AI_Ultra_Whisk_Flow_Genie_and_Phaser_MCP.md': `# 06 — Google AI Ultra Ecosystem Integration (NotebookLM Plus, Whisk, Flow, Project Genie) & Phaser 4 Live MCP
+    '06_AI_Ultra_Whisk_Flow_Genie_and_Unity_MCP.md': `# 06 — Google AI Ultra Ecosystem Integration (NotebookLM Plus, Whisk, Flow, Project Genie) & Unity 6 LTS Live MCP
 
 ## 1. Overview of Active MCP Servers & Workflows
-1. **\`uomd-pixi-live\` (\`tools/mcp_pixi_live.ts\`):**
-   - Automatically syncs \`content/base\` into \`apps/game/public/content/base\`, boots a headless Chromium viewport at \`1920x1080\` against the Vite dev server, jumps directly to any Phaser 4 scene (\`Splash\`, \`Studio\`, \`Title\`, \`Prologue\`, \`Story\`, \`Battle\`, \`Finish\`, \`Home\`), captures live PNG screenshots, and returns scene state + console/page error diagnostics.
+1. **\`uomd-unity-live\` (\`tools/mcp_unity_live.ts\`):**
+   - Inspects \`apps/unity/\` (\`ProjectVersion.txt\`, 8 \`.asmdef\` assemblies, C# scripts, scenes, UXML/USS), verifies \`StreamingAssets/uomd_base/unity_export_manifest.json\` and \`UomdCorePrimitives.g.cs\` parity against \`content/base\`, and serves canonical Unity 6 LTS skill docs and unit slice pivots.
 2. **\`uomd-ai-ultra\` (\`tools/mcp_ai_ultra_bridge.ts\`):**
    - \`ai_ultra_export_notebooklm_bundle\`: Builds and syncs this 6-part NotebookLM Plus Knowledge Hub in \`docs/notebooklm/\` and \`UOMD_NotebookLM_Hub\`.
    - \`ai_ultra_export_flow_storyboard\`: Generates 1080p Veo 3.1 storyboard JSON packages for Google Flow (\`prologue\`, \`first_oath_summon\`, \`boss_cutin\`) using our approved 16:9 stills as First/Last keyframes.

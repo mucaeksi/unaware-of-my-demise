@@ -2,7 +2,7 @@
   "adapters": {
     "android-clean-architecture": {
       "adapter": ".agents/skills/android-clean-architecture/SKILL.md",
-      "adapter_sha256": "fdaab47353f691ccd1b600ba39053b54e52c6be5727b213299130273f83cd28b",
+      "adapter_sha256": "03f3abc11d349b60da38b757e02523513114f89880a015df575d0625856756be",
       "source": ".claude/skills/android-clean-architecture/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/android-clean-architecture/SKILL.md": "20cbb9d7778462c549ccd32c830c0004fc7b92cfa009db99900d773373115f12"
@@ -11,7 +11,7 @@
     },
     "api-design": {
       "adapter": ".agents/skills/api-design/SKILL.md",
-      "adapter_sha256": "a0a70194f3dcf01973d328a9052bf02083b824081bdd769aefe939bb318eca76",
+      "adapter_sha256": "40e76332476fb9df1c32304ebf118bf03a1d30b646eaa04a8eb88e0bb1c6a9ec",
       "source": ".claude/skills/api-design/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/api-design/SKILL.md": "250e464413a13c0eb93cc73447b423df1f9aa8e4f80e5e68c41f895b2c33e352"
@@ -29,7 +29,7 @@
     },
     "click-path-audit": {
       "adapter": ".agents/skills/click-path-audit/SKILL.md",
-      "adapter_sha256": "8fb7693009cf177014394e8ba88053262d0134f2e6a1298924856cf9d5a63b4a",
+      "adapter_sha256": "7a6bfdb6183f07477917d959d39270bbb209d7fdc6b165c2c960dbce272bbf33",
       "source": ".claude/skills/click-path-audit/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/click-path-audit/SKILL.md": "662fc5d02483bcd8ff799d6d3109a38da673182341cfc14445e9076fcd920162"
@@ -47,7 +47,7 @@
     },
     "contract-first": {
       "adapter": ".agents/skills/contract-first/SKILL.md",
-      "adapter_sha256": "868be09f79bb8d0e459258d8b028f339a74550f168d5d23af530e424014510e5",
+      "adapter_sha256": "755c9d33b396b28c01689ea98c0c615361209338b395f16441c61cd46df0023c",
       "source": ".claude/skills/contract-first/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/contract-first/SKILL.md": "3eaacf16a9bbd92888659e9c1e15b0fa4eb96a41c257dd9e08f2e63b824f0cea"
@@ -56,7 +56,7 @@
     },
     "error-handling": {
       "adapter": ".agents/skills/error-handling/SKILL.md",
-      "adapter_sha256": "007a4870200c1144512cd6dd41998cb9e74ff1a6f71dee59c9baa7d680681aba",
+      "adapter_sha256": "a7c27cc669de813a217d640084fd7568b20360f6af2c78d320002d5ce67b7c38",
       "source": ".claude/skills/error-handling/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/error-handling/SKILL.md": "e8eec6756c950b570486493e64e3bf14c12baf6bf0858bf3928097fe2bfeaf79"
@@ -65,7 +65,7 @@
     },
     "frontend-a11y": {
       "adapter": ".agents/skills/frontend-a11y/SKILL.md",
-      "adapter_sha256": "7b442d232e842d42a06b3923b10fc47cb0bdc22c8353e789e8945ccffdc6c2b0",
+      "adapter_sha256": "548e789b29f19621f674186488c4517004308508affe3f15d59771faf42b451d",
       "source": ".claude/skills/frontend-a11y/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/frontend-a11y/SKILL.md": "e00991a3f4d47fcf1529dd74a080afcf46137dc5061e70dc6e3da7b27f2ae3f3"
@@ -74,7 +74,7 @@
     },
     "frontend-patterns": {
       "adapter": ".agents/skills/frontend-patterns/SKILL.md",
-      "adapter_sha256": "d77b4d035b66dd42e2bad80e0c82159da5d8e2b22e6d9247b6090ff5aa2c2fa0",
+      "adapter_sha256": "6978a6cc2610b4a658656b92738e3336eb68ca0ef4f5ae8dbf26d9e165729175",
       "source": ".claude/skills/frontend-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/frontend-patterns/SKILL.md": "a5b971eb9e74cd763c7e3308bfd888e0d9cf69f8b88477659889d77182479740"
@@ -109,7 +109,7 @@
     },
     "i18n-sync": {
       "adapter": ".agents/skills/i18n-sync/SKILL.md",
-      "adapter_sha256": "67e436699fc1d2af5e7eb8e9642bacd1cdf1cb78eb7ea139e5176e4b93fa8a6c",
+      "adapter_sha256": "2cc421e629cab0c80584f32149342633857ebb4cedb02b089493650cd24c5021",
       "source": ".claude/skills/i18n-sync/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/i18n-sync/SKILL.md": "05fc3e2ae72c2f55cc44fa0e9531688c1112081037d628e1124fd5bf40825325"
@@ -118,7 +118,7 @@
     },
     "kotlin-coroutines-flows": {
       "adapter": ".agents/skills/kotlin-coroutines-flows/SKILL.md",
-      "adapter_sha256": "789b7ef70ba5c17830da5e3f140b75be1c178b148b757bc4ef86a43f10963ba2",
+      "adapter_sha256": "9d2f9f4b840788ad9ca846f50877905722e051b303ff19cd5e26eea491a8563f",
       "source": ".claude/skills/kotlin-coroutines-flows/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/kotlin-coroutines-flows/SKILL.md": "ed7d895ecd6c717fbdbf7f1469110df74a6337792acd1232c4ad7286abee76e4"
@@ -127,285 +127,12 @@
     },
     "make-interfaces-feel-better": {
       "adapter": ".agents/skills/make-interfaces-feel-better/SKILL.md",
-      "adapter_sha256": "33d4a566b5ead9e12279f1b1d093cddafc5ad333dd43ce143dd318565baf40e5",
+      "adapter_sha256": "eb8fb39489eab4db418564ff726445a1f3b29f8e35f32cd6e2c293368f88be9b",
       "source": ".claude/skills/make-interfaces-feel-better/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/make-interfaces-feel-better/SKILL.md": "aff91aef917cba9c65681ae77197cee93ce9b697ee8916ea684ef8537c99fb52"
       },
       "source_sha256": "aff91aef917cba9c65681ae77197cee93ce9b697ee8916ea684ef8537c99fb52"
-    },
-    "pixijs": {
-      "adapter": ".agents/skills/pixijs/SKILL.md",
-      "adapter_sha256": "1c08c71f761bb3a5058dbb5bcb05e24e937fec8297351d251c4f323964c6f63a",
-      "source": ".claude/skills/pixijs/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs/SKILL.md": "2fdfe58823b46cad1d931747565016733e415ab07f2d3fb4dca58640b5ff82ce",
-        ".claude/skills/pixijs/references/index.md": "d9cb110d63eedb6e79bfadbce86c56b2c253c55141eb89efeff787b2859c5ed9"
-      },
-      "source_sha256": "2fdfe58823b46cad1d931747565016733e415ab07f2d3fb4dca58640b5ff82ce"
-    },
-    "pixijs-accessibility": {
-      "adapter": ".agents/skills/pixijs-accessibility/SKILL.md",
-      "adapter_sha256": "4f0c34d43483cc91a5ff3a084b4093d42ae614d33316b84e3e8d53f64e849c44",
-      "source": ".claude/skills/pixijs-accessibility/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-accessibility/SKILL.md": "4f97542f4209ae1031361bad982fd170e47490373cf3de68a6c018b9e58149bb"
-      },
-      "source_sha256": "4f97542f4209ae1031361bad982fd170e47490373cf3de68a6c018b9e58149bb"
-    },
-    "pixijs-application": {
-      "adapter": ".agents/skills/pixijs-application/SKILL.md",
-      "adapter_sha256": "5488a51f0a8b29d415ea65ce1659bcdcbea25446338772a813ad097b00a01647",
-      "source": ".claude/skills/pixijs-application/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-application/SKILL.md": "99a4dc0e2625e3d95badf01b2a6715c1573f3ce5bfcd3298aaacf18533de12fb",
-        ".claude/skills/pixijs-application/references/application-options.md": "071d9db92511f460f7f2d1d68186e1beb958764f5227060d295acf0cd21c352a"
-      },
-      "source_sha256": "99a4dc0e2625e3d95badf01b2a6715c1573f3ce5bfcd3298aaacf18533de12fb"
-    },
-    "pixijs-assets": {
-      "adapter": ".agents/skills/pixijs-assets/SKILL.md",
-      "adapter_sha256": "dae3ea6daf7987c6ac7c719d3f95c35a302e5c1728ddb9eb0ca640d249df4015",
-      "source": ".claude/skills/pixijs-assets/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-assets/SKILL.md": "c34d4b5729ea9a8c7f085ab5150e294f670095580c718af985a3fcb3f8741ca9",
-        ".claude/skills/pixijs-assets/references/background.md": "2fbd10a8297ab3c17217d89da721e4586806e27a986ce1fac8b44ae4bea2274c",
-        ".claude/skills/pixijs-assets/references/bundles.md": "a624c5a8371e576d3078834c050711cb1ff44893ce72887eeddcc04bd0c9aef0",
-        ".claude/skills/pixijs-assets/references/caching.md": "bfae76d4b28a312fe0a16dece584d6e3404d3af67579b7f6724b956dae0f3f49",
-        ".claude/skills/pixijs-assets/references/compressed-textures.md": "8d155c18976921ed085fd0282e0001f409433dc6ca2933a71899648d5794db3e",
-        ".claude/skills/pixijs-assets/references/fonts.md": "a8d205a18307c38bead2fb7833c230a1923126a9b6c75ea45b62a73814d7b017",
-        ".claude/skills/pixijs-assets/references/gif.md": "b0c0ec364af806c0b199a9740e1a611f42b6f28c37c934c89832cd14f627aac7",
-        ".claude/skills/pixijs-assets/references/manifests.md": "f8a082f85ebae434ad7f76990219f701e49661eddb72a5d92b9e1cdbb39624ac",
-        ".claude/skills/pixijs-assets/references/progress.md": "e00dbb268ae044203bce83fd39ffaf0269eefa47fe3f3fba4b23a2a84a5dffad",
-        ".claude/skills/pixijs-assets/references/resolution.md": "813e921bb8171a2f3d60d5fa95e549c4870b8850cdceef554b930bfb6d6bb53e",
-        ".claude/skills/pixijs-assets/references/spritesheet.md": "61f8b710bbd8f619f63740a6691391963f7211afa3e40df2c94a09e348cfffe7",
-        ".claude/skills/pixijs-assets/references/svg.md": "e12d2be0ad1fa1a9cd01c2662e35d1afe594071584473d0fed6ca670e9ea4171",
-        ".claude/skills/pixijs-assets/references/video.md": "5f00ebd6d63028729c18dfe510608350a1380dd0140da21f2c1c1cd0a9770cc6"
-      },
-      "source_sha256": "c34d4b5729ea9a8c7f085ab5150e294f670095580c718af985a3fcb3f8741ca9"
-    },
-    "pixijs-blend-modes": {
-      "adapter": ".agents/skills/pixijs-blend-modes/SKILL.md",
-      "adapter_sha256": "2747fcc55f5ed049b0488a8faf2c32274bbca3a37b10abf3741f6757fd971894",
-      "source": ".claude/skills/pixijs-blend-modes/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-blend-modes/SKILL.md": "a6caea6766b1dd31efa35171ec2a29ec5ea4e0728f14d6847570804f71feb1a5"
-      },
-      "source_sha256": "a6caea6766b1dd31efa35171ec2a29ec5ea4e0728f14d6847570804f71feb1a5"
-    },
-    "pixijs-color": {
-      "adapter": ".agents/skills/pixijs-color/SKILL.md",
-      "adapter_sha256": "8b987d3056acf63e26b57b03a1aa13e30f8ad7ad07acfc2b7fd942829dee0a91",
-      "source": ".claude/skills/pixijs-color/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-color/SKILL.md": "7635f6e165038a96602b161273f2549bc74ebe51e147eab4c7c1811cc988c3b9"
-      },
-      "source_sha256": "7635f6e165038a96602b161273f2549bc74ebe51e147eab4c7c1811cc988c3b9"
-    },
-    "pixijs-core-concepts": {
-      "adapter": ".agents/skills/pixijs-core-concepts/SKILL.md",
-      "adapter_sha256": "762f4e4689e638e3642f38cf342cf3074fb5c8e2f05fc62ca8b4e63dc04858a2",
-      "source": ".claude/skills/pixijs-core-concepts/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-core-concepts/SKILL.md": "cf632dd602779c0f584fdbb6f5b0a022c68cfdb408882c243ba0cff43d2957d9",
-        ".claude/skills/pixijs-core-concepts/references/render-loop.md": "5f70bb13b0315ceed2d828011eceacc56596ff98092569092fed4f8c40c5fad1",
-        ".claude/skills/pixijs-core-concepts/references/renderers.md": "4863dfb738d4d31e1801b421844eae72c92d7c7b702779f79fc82484d2da3fc9"
-      },
-      "source_sha256": "cf632dd602779c0f584fdbb6f5b0a022c68cfdb408882c243ba0cff43d2957d9"
-    },
-    "pixijs-create": {
-      "adapter": ".agents/skills/pixijs-create/SKILL.md",
-      "adapter_sha256": "2749cec4f2724abdeed8a2bb6d522522947a791abfae014b014a285f4b7f7f14",
-      "source": ".claude/skills/pixijs-create/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-create/SKILL.md": "a254ac504b83bf276f56f20ff89f5bbb5fbb3a8fdc7be67c957ecb834ae3ec71"
-      },
-      "source_sha256": "a254ac504b83bf276f56f20ff89f5bbb5fbb3a8fdc7be67c957ecb834ae3ec71"
-    },
-    "pixijs-custom-rendering": {
-      "adapter": ".agents/skills/pixijs-custom-rendering/SKILL.md",
-      "adapter_sha256": "5bdb10304985173f7defd004626fb5ef6875e9f959bb2257e7d07c86ef751531",
-      "source": ".claude/skills/pixijs-custom-rendering/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-custom-rendering/SKILL.md": "0037d1fbdd82652c0fc32491f34d02287d84c2db49deb65ac024307b8d01021b",
-        ".claude/skills/pixijs-custom-rendering/references/advanced-gpu.md": "ffbde5ee149d75f579ad9264d9ccfa11e4aa88a9633a75176e7fe72d50d4c8cd",
-        ".claude/skills/pixijs-custom-rendering/references/uniform-types.md": "ab80615c39f48b9a340693cf677b48e86a7fb0c6ecf8d12be9155ea1e860e556"
-      },
-      "source_sha256": "0037d1fbdd82652c0fc32491f34d02287d84c2db49deb65ac024307b8d01021b"
-    },
-    "pixijs-environments": {
-      "adapter": ".agents/skills/pixijs-environments/SKILL.md",
-      "adapter_sha256": "bd5055739132f3ad4bc9c7108c1b48b364b262a8dc09171ab402984664bef59a",
-      "source": ".claude/skills/pixijs-environments/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-environments/SKILL.md": "5cfab873cbf8c68ce3e010bc96262d88e4e924ae6fa8345c614ae8256f22360e"
-      },
-      "source_sha256": "5cfab873cbf8c68ce3e010bc96262d88e4e924ae6fa8345c614ae8256f22360e"
-    },
-    "pixijs-events": {
-      "adapter": ".agents/skills/pixijs-events/SKILL.md",
-      "adapter_sha256": "e9f8dc259874d86a68d5b557c2167983569569000a3e34566a1dde0099a823a0",
-      "source": ".claude/skills/pixijs-events/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-events/SKILL.md": "a74a29339baa9bc80ceb1f4e837736edb2c5afb62ff34dab89d1ab0a0cc9e4b7"
-      },
-      "source_sha256": "a74a29339baa9bc80ceb1f4e837736edb2c5afb62ff34dab89d1ab0a0cc9e4b7"
-    },
-    "pixijs-filters": {
-      "adapter": ".agents/skills/pixijs-filters/SKILL.md",
-      "adapter_sha256": "dbf9e4dffdf51290945c76450703670992c90256a18770c2dd56c7e02a561126",
-      "source": ".claude/skills/pixijs-filters/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-filters/SKILL.md": "bdf834030fff36be20f0c566d970999ae2429994487a56054be8d2dc8d26a056"
-      },
-      "source_sha256": "bdf834030fff36be20f0c566d970999ae2429994487a56054be8d2dc8d26a056"
-    },
-    "pixijs-html-source": {
-      "adapter": ".agents/skills/pixijs-html-source/SKILL.md",
-      "adapter_sha256": "9a3eaebda4ead406e84f9ca96fc68d12077422c35fd4c385824378abf5fb98b0",
-      "source": ".claude/skills/pixijs-html-source/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-html-source/SKILL.md": "8061235e80fad00c23ca274d67e0198246b49c6093511fa983ca347ba2ceb492"
-      },
-      "source_sha256": "8061235e80fad00c23ca274d67e0198246b49c6093511fa983ca347ba2ceb492"
-    },
-    "pixijs-math": {
-      "adapter": ".agents/skills/pixijs-math/SKILL.md",
-      "adapter_sha256": "3d9f542fbc7b32cbb0c7509b014165bfd6d69d1c5f85cb5cc32e8feb15cd0f7f",
-      "source": ".claude/skills/pixijs-math/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-math/SKILL.md": "62a2df69568937cb3353d67b9dc35b19db7cba477f179f34137d110b12989550"
-      },
-      "source_sha256": "62a2df69568937cb3353d67b9dc35b19db7cba477f179f34137d110b12989550"
-    },
-    "pixijs-migration-v8": {
-      "adapter": ".agents/skills/pixijs-migration-v8/SKILL.md",
-      "adapter_sha256": "3e86b45bc4c1a7683d79bb12d06f257e9dd8b7b0babfa6bab9f22096c6c3b858",
-      "source": ".claude/skills/pixijs-migration-v8/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-migration-v8/SKILL.md": "e3c1c40b5c8385df6eb055067c9c23598d78d1b96cf519a97b2acb3f3b057cad"
-      },
-      "source_sha256": "e3c1c40b5c8385df6eb055067c9c23598d78d1b96cf519a97b2acb3f3b057cad"
-    },
-    "pixijs-performance": {
-      "adapter": ".agents/skills/pixijs-performance/SKILL.md",
-      "adapter_sha256": "cae657d80e88d00e94daed72bc65d981c4bfb6b1c81b5ceb8cfbf05867856523",
-      "source": ".claude/skills/pixijs-performance/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-performance/SKILL.md": "994bcad9687a5ad698b466436ad7d1120e47864bfadb86c9d17180fe90cf194b"
-      },
-      "source_sha256": "994bcad9687a5ad698b466436ad7d1120e47864bfadb86c9d17180fe90cf194b"
-    },
-    "pixijs-scene-container": {
-      "adapter": ".agents/skills/pixijs-scene-container/SKILL.md",
-      "adapter_sha256": "16b3ba0ad0856a76f6403698d3e2037b2cbcf431e60ec81286da136ae378244f",
-      "source": ".claude/skills/pixijs-scene-container/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-container/SKILL.md": "8d4ba1f4a3a7703b86cfce896119556dd624636a40c2db0d70c9b29b2f62b246"
-      },
-      "source_sha256": "8d4ba1f4a3a7703b86cfce896119556dd624636a40c2db0d70c9b29b2f62b246"
-    },
-    "pixijs-scene-core-concepts": {
-      "adapter": ".agents/skills/pixijs-scene-core-concepts/SKILL.md",
-      "adapter_sha256": "bca34315e86056bb473ea7ef0186cd9af9a86288e280fdb7a47ce82ed50bfacd",
-      "source": ".claude/skills/pixijs-scene-core-concepts/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-core-concepts/SKILL.md": "ad9f459a74de66784d1ba7930fc080cfaf14b38a79f4e6a10185f23914998f40",
-        ".claude/skills/pixijs-scene-core-concepts/references/constructor-options.md": "b49d74adeaed4820497b2aef62e934a18ea83e4fc03dd7feb67552a2e3fff3b7",
-        ".claude/skills/pixijs-scene-core-concepts/references/container-hierarchy.md": "3affc169278cce85b89cd09c2851bfa251c1ca7addcfb92243d51b4e355fe10a",
-        ".claude/skills/pixijs-scene-core-concepts/references/layers.md": "7725724b7cf7f0f6954a8efdbe1cb1ac7d5b3c2e1e44042ebe5eb5e6c07c507e",
-        ".claude/skills/pixijs-scene-core-concepts/references/masking.md": "247543de62c58604c8b677cce54b85e271b75cda086c46da6cbad4e6537cba3b",
-        ".claude/skills/pixijs-scene-core-concepts/references/render-groups.md": "7eaee69a0fcc41f1a946bf37a227d90e054e3914b6301ecf5468a882f7a0d92c",
-        ".claude/skills/pixijs-scene-core-concepts/references/scene-management.md": "5433c35f8c57621b7b4d1e719a6d2ad433b9831b3ece2a5cb5417cdc3ed4ddb9",
-        ".claude/skills/pixijs-scene-core-concepts/references/transforms.md": "6e8c76a297fb14b96f2a9b12e9c7b7c586a5509e680391e318b5dc90513c8ad6"
-      },
-      "source_sha256": "ad9f459a74de66784d1ba7930fc080cfaf14b38a79f4e6a10185f23914998f40"
-    },
-    "pixijs-scene-dom-container": {
-      "adapter": ".agents/skills/pixijs-scene-dom-container/SKILL.md",
-      "adapter_sha256": "275326da3a31e95bb15e7e58690a014d94b93f7b22e1db95b7b18737c92af8a5",
-      "source": ".claude/skills/pixijs-scene-dom-container/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-dom-container/SKILL.md": "6c65323e40999ca97ad752758148193e55185706a44b8656e278a237d88c2a22"
-      },
-      "source_sha256": "6c65323e40999ca97ad752758148193e55185706a44b8656e278a237d88c2a22"
-    },
-    "pixijs-scene-gif": {
-      "adapter": ".agents/skills/pixijs-scene-gif/SKILL.md",
-      "adapter_sha256": "1cbb297c95985d32f456347355f089f465b9a11a04574108b36cc68aedadfbdd",
-      "source": ".claude/skills/pixijs-scene-gif/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-gif/SKILL.md": "9f8e2f9e2c70ba427695e67126948188e2868109e86449f31e06b822fe2ae078"
-      },
-      "source_sha256": "9f8e2f9e2c70ba427695e67126948188e2868109e86449f31e06b822fe2ae078"
-    },
-    "pixijs-scene-graphics": {
-      "adapter": ".agents/skills/pixijs-scene-graphics/SKILL.md",
-      "adapter_sha256": "d47287caf2d89117f34fa7b2c60c0fe82ba32741d3952767e9759c6eed987798",
-      "source": ".claude/skills/pixijs-scene-graphics/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-graphics/SKILL.md": "7a1e683086170b086d4e79f5d80bd760b67ce63b90b30d17ef2079ae22c746a0"
-      },
-      "source_sha256": "7a1e683086170b086d4e79f5d80bd760b67ce63b90b30d17ef2079ae22c746a0"
-    },
-    "pixijs-scene-mesh": {
-      "adapter": ".agents/skills/pixijs-scene-mesh/SKILL.md",
-      "adapter_sha256": "125605b1aec0c02cd4d6efbc5b7356bca578ffe5e43a40f9884fba9f7b8dfad3",
-      "source": ".claude/skills/pixijs-scene-mesh/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-mesh/SKILL.md": "64b76b7d10b8cb3e38239bc9a54e314ef70812ce2828ff35b5bdec6800c53448",
-        ".claude/skills/pixijs-scene-mesh/references/mesh-perspective.md": "65f267d9627c7f0521f9810acca266710a7c6522cc8348b44f432776f18bb7df",
-        ".claude/skills/pixijs-scene-mesh/references/mesh-plane.md": "803f49721b848b3383f4d8c84c7a0c674f05cfc2495b01c7e7f90fe6b86cc490",
-        ".claude/skills/pixijs-scene-mesh/references/mesh-rope.md": "2849b988460d8798936206a467f46b678d20b2fe1d07f1a44b745ec0e04731ca",
-        ".claude/skills/pixijs-scene-mesh/references/mesh-simple.md": "2b5899de195268262555b576e981632554665b376197949a7b1330f7bab205c9",
-        ".claude/skills/pixijs-scene-mesh/references/mesh.md": "e0aa3b7488eb14aecc183b88a5ac1c674aefbc48e9d5d87f99232727ca65f542"
-      },
-      "source_sha256": "64b76b7d10b8cb3e38239bc9a54e314ef70812ce2828ff35b5bdec6800c53448"
-    },
-    "pixijs-scene-particle-container": {
-      "adapter": ".agents/skills/pixijs-scene-particle-container/SKILL.md",
-      "adapter_sha256": "3b372ccdaad0022df17aaaa409de47198bfb0190bec50f0e711e4568874ebeaf",
-      "source": ".claude/skills/pixijs-scene-particle-container/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-particle-container/SKILL.md": "b322029602cbb088bd298e5b914f8056e4539a50f1d6054e5d183c11b731bfdf"
-      },
-      "source_sha256": "b322029602cbb088bd298e5b914f8056e4539a50f1d6054e5d183c11b731bfdf"
-    },
-    "pixijs-scene-sprite": {
-      "adapter": ".agents/skills/pixijs-scene-sprite/SKILL.md",
-      "adapter_sha256": "47fd58d4e272d55af7e7e631d8a4a67fb7ef86254fd4593da353d1a81c347998",
-      "source": ".claude/skills/pixijs-scene-sprite/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-sprite/SKILL.md": "2ca79e5aaedea4898f7a972676fa93166a6c35ebe1ab63b8331e76899e081345",
-        ".claude/skills/pixijs-scene-sprite/references/animated-sprite.md": "5fa8fe00d5714f7a6d5ceb0d88e99a03ad8b57fe147ed0c8e5608bfcb957657d",
-        ".claude/skills/pixijs-scene-sprite/references/nineslice-sprite.md": "e82b46b27ca57da9900d4981fe3e2e7cc4ade00064232053b2e8bbf744da37f3",
-        ".claude/skills/pixijs-scene-sprite/references/sprite.md": "1fefed94d0f5f8c6d8e78a860234076a8124ab14f8a618d3e8b61b51525da0af",
-        ".claude/skills/pixijs-scene-sprite/references/tiling-sprite.md": "e2645352a1f432997f5fbcd94a3b523ac750f73b444ec1df44471de61ef479db"
-      },
-      "source_sha256": "2ca79e5aaedea4898f7a972676fa93166a6c35ebe1ab63b8331e76899e081345"
-    },
-    "pixijs-scene-text": {
-      "adapter": ".agents/skills/pixijs-scene-text/SKILL.md",
-      "adapter_sha256": "635556fec33395f6a5651c7634350981c86941061833e614b21a81eaa0402c34",
-      "source": ".claude/skills/pixijs-scene-text/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-scene-text/SKILL.md": "1ebbd6a643050af5bc42c6db445029149e6d17b7af132db4772792ee33106472",
-        ".claude/skills/pixijs-scene-text/references/bitmap-text.md": "696f4227edef38c150a7bdb8caa1fa2ae8d23742d318af6391f57b1b325a3f8d",
-        ".claude/skills/pixijs-scene-text/references/html-text.md": "07f90d0e08fdaa8a6650e931c583ab656c6d0b278bbc7747d43a4a87906212d8",
-        ".claude/skills/pixijs-scene-text/references/split-bitmap-text.md": "8bd467a5a5daf2e1482dc846b741258260ef047c32c278063edefa08bb914abd",
-        ".claude/skills/pixijs-scene-text/references/split-text.md": "6a57784c73c5d3ca10c6ecde9c90bb4f087d41728d86d836ff3503ed3677da27",
-        ".claude/skills/pixijs-scene-text/references/text.md": "afbd3052b411d5bf2c6545d13573bbf1c5f0c8cd7ce394dd8ebb07a6ef9141f1"
-      },
-      "source_sha256": "1ebbd6a643050af5bc42c6db445029149e6d17b7af132db4772792ee33106472"
-    },
-    "pixijs-ticker": {
-      "adapter": ".agents/skills/pixijs-ticker/SKILL.md",
-      "adapter_sha256": "254df3ca876251820b52095e1a32341f8d04135ae4406766fc377cb12da1d900",
-      "source": ".claude/skills/pixijs-ticker/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/pixijs-ticker/SKILL.md": "f9831fff4604279e45fe6a605a244d5535fb2669e6f6a92a184d61e35b9b4a64"
-      },
-      "source_sha256": "f9831fff4604279e45fe6a605a244d5535fb2669e6f6a92a184d61e35b9b4a64"
     },
     "ponytail": {
       "adapter": ".agents/skills/ponytail/SKILL.md",
@@ -463,7 +190,7 @@
     },
     "react-patterns": {
       "adapter": ".agents/skills/react-patterns/SKILL.md",
-      "adapter_sha256": "7744a2406ffeeff8478b8945b6501c7afdf36d8b9d54c97468f68c76ef5f2f5d",
+      "adapter_sha256": "cfc54f8fa43b2c26d89b492e4442580a5771354e94b5465153cefb1bd7583e62",
       "source": ".claude/skills/react-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-patterns/SKILL.md": "f3208d44a5d553038c42e046cec4dc16e4a3d90a9dbf931f883a2e21919a64a9"
@@ -472,7 +199,7 @@
     },
     "react-performance": {
       "adapter": ".agents/skills/react-performance/SKILL.md",
-      "adapter_sha256": "c71e72c28e843c5e32377eb7614d4688a6e7481555af1ac9612c96bc3f8c0db9",
+      "adapter_sha256": "f2e3cda4a2175e6eed9b9e966c02699945c384d3aa2c35e586ebcd637409b6d5",
       "source": ".claude/skills/react-performance/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-performance/SKILL.md": "ac76e8694d4f802a7bccc3c07a73ac68ace6d82a65ea10f10d8b7384dda61a8f"
@@ -481,7 +208,7 @@
     },
     "react-testing": {
       "adapter": ".agents/skills/react-testing/SKILL.md",
-      "adapter_sha256": "024250ce98e82ad442cbca7e5db9f4627da4f37aeb6767079fed3236135cc374",
+      "adapter_sha256": "e48e9d10ba856ba65b6f359c6c9ef630bdc28dc69a770d0cb72b4d179405ab7c",
       "source": ".claude/skills/react-testing/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-testing/SKILL.md": "51c18b4e28285bb876ef469e47c6f53108b5a9f900950a60e897c3c24826a65e"
@@ -518,7 +245,7 @@
     },
     "ui-ux-pro-max": {
       "adapter": ".agents/skills/ui-ux-pro-max/SKILL.md",
-      "adapter_sha256": "d3864648230bb744b9d5bcb4cc6030371b67a2d3c503130efcafaedb87f18582",
+      "adapter_sha256": "14e7c43554f0bb33080b80f17d400e0b6586be1f3408ff0d441e86ee18ca7a66",
       "source": ".claude/skills/ui-ux-pro-max/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/ui-ux-pro-max/SKILL.md": "b99e07d65c66f3a231c0f2a94bfe4aff2ef41e89e1f16645fd760c8c603c6eab",
@@ -594,63 +321,130 @@
       },
       "source_sha256": "b99e07d65c66f3a231c0f2a94bfe4aff2ef41e89e1f16645fd760c8c603c6eab"
     },
+    "unity-2d-animation": {
+      "adapter": ".agents/skills/unity-2d-animation/SKILL.md",
+      "adapter_sha256": "071a87e20154e8327b0fbc502225a2f02dc484998622a34b7604335b4a7a2c9e",
+      "source": ".claude/skills/unity-2d-animation/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-2d-animation/SKILL.md": "ab7c77453bb5df7c8285c43270acee260bc9016d69360fa1dcc9e161dbb3f8a3"
+      },
+      "source_sha256": "ab7c77453bb5df7c8285c43270acee260bc9016d69360fa1dcc9e161dbb3f8a3"
+    },
+    "unity-6-core": {
+      "adapter": ".agents/skills/unity-6-core/SKILL.md",
+      "adapter_sha256": "38aeac9d956cdae242c597fc25cd40b180d7db87570045243c2240367b6ffc70",
+      "source": ".claude/skills/unity-6-core/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-6-core/SKILL.md": "857d65b4a2a84ec2909cf5cd0a421732615445f1083ab10482bc9dafa5fa0d37",
+        ".claude/skills/unity-6-core/references/asmdef-architecture.md": "358d4d1fc5a9c2855d9730d2bd4cc6d45e77ac6450f53167046fb35c575d6bf3",
+        ".claude/skills/unity-6-core/references/awaitable-lifecycle.md": "3713dae5d8fe2b96081d65c8d467164b56110af60a68802a7651c082e8facf5e"
+      },
+      "source_sha256": "857d65b4a2a84ec2909cf5cd0a421732615445f1083ab10482bc9dafa5fa0d37"
+    },
+    "unity-android-il2cpp": {
+      "adapter": ".agents/skills/unity-android-il2cpp/SKILL.md",
+      "adapter_sha256": "c2e563bcf7e58e67c675ac478dc94e0f82b4ea372532a6b0a813cd7daa690375",
+      "source": ".claude/skills/unity-android-il2cpp/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-android-il2cpp/SKILL.md": "b4e4564bdc0a022cd02d102d26af68767cb9aa7309e8d564f3bf646f3e1ada5b"
+      },
+      "source_sha256": "b4e4564bdc0a022cd02d102d26af68767cb9aa7309e8d564f3bf646f3e1ada5b"
+    },
+    "unity-deterministic-combat": {
+      "adapter": ".agents/skills/unity-deterministic-combat/SKILL.md",
+      "adapter_sha256": "a0c71af4bbb0fcd19c60fd962496da3edc90ab7a39470b510854d178bcce2421",
+      "source": ".claude/skills/unity-deterministic-combat/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-deterministic-combat/SKILL.md": "216a0f648f1b39c0e6a2cb45604f6102a62cafe76ebbb05faa19db7725b32110"
+      },
+      "source_sha256": "216a0f648f1b39c0e6a2cb45604f6102a62cafe76ebbb05faa19db7725b32110"
+    },
+    "unity-mcp-workflow": {
+      "adapter": ".agents/skills/unity-mcp-workflow/SKILL.md",
+      "adapter_sha256": "096d340db5f9aeb59ac78738ebb360746299e87c76de38718f99f7701544d32b",
+      "source": ".claude/skills/unity-mcp-workflow/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-mcp-workflow/SKILL.md": "4deda8223383ab1b35f1018feb430fb3440db805f62240aaae994d6b1e6a8cf8"
+      },
+      "source_sha256": "4deda8223383ab1b35f1018feb430fb3440db805f62240aaae994d6b1e6a8cf8"
+    },
+    "unity-ui-toolkit": {
+      "adapter": ".agents/skills/unity-ui-toolkit/SKILL.md",
+      "adapter_sha256": "362d73ac9cbe70f061ee76092cde502067d89e16d214997ff16f98f0f16300f2",
+      "source": ".claude/skills/unity-ui-toolkit/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-ui-toolkit/SKILL.md": "74ae9977e48a3308ec6b4793c706a945bf0dd8b87c7b40be476f0bffb4b11883",
+        ".claude/skills/unity-ui-toolkit/references/uss-gothic-tokens.md": "69763e1e6e358fcd298a8c3676695e7203a9bc5ac949cc5c65e2d221f84a9ea1"
+      },
+      "source_sha256": "74ae9977e48a3308ec6b4793c706a945bf0dd8b87c7b40be476f0bffb4b11883"
+    },
+    "unity-urp-2d": {
+      "adapter": ".agents/skills/unity-urp-2d/SKILL.md",
+      "adapter_sha256": "85462ab57753f08cbabdaaad281614aaf0f60e441a4bf3a0fd4fa254c302b69b",
+      "source": ".claude/skills/unity-urp-2d/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-urp-2d/SKILL.md": "a34148b165e8a1d5d67a716f578dbe2bad42a81bc7c45637d5c250d44bd32188",
+        ".claude/skills/unity-urp-2d/references/sprite-slicing-and-pivots.md": "8ca51a37ff55ca9a0c7bdab2511d6accc79632aa93424e308c1eff68730123df"
+      },
+      "source_sha256": "a34148b165e8a1d5d67a716f578dbe2bad42a81bc7c45637d5c250d44bd32188"
+    },
     "uomd-anime-ui": {
       "adapter": ".agents/skills/uomd-anime-ui/SKILL.md",
-      "adapter_sha256": "e2f74fe428c86e4c1b2a4c242c5bbb3e8440c2aab47b85956f268af8b41f1497",
+      "adapter_sha256": "f718df07f7aab50dcb380aa2c7842ba89ddcea6cc9e90557b9b499846849fae1",
       "source": ".claude/skills/uomd-anime-ui/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-anime-ui/SKILL.md": "a9ae6b1f5481dbc1eb38de4107905d1c8f00391cf54174f262945c6a8f0017fb"
+        ".claude/skills/uomd-anime-ui/SKILL.md": "97771dd2c68eec62a57d954ca5f325bc403af64fe082d9d9569a74447ee0e968"
       },
-      "source_sha256": "a9ae6b1f5481dbc1eb38de4107905d1c8f00391cf54174f262945c6a8f0017fb"
+      "source_sha256": "97771dd2c68eec62a57d954ca5f325bc403af64fe082d9d9569a74447ee0e968"
     },
     "uomd-battle": {
       "adapter": ".agents/skills/uomd-battle/SKILL.md",
-      "adapter_sha256": "bddf2237a150220abfeb1a4b3860619ad69cf209b721bd4a46faeacf1acbbca2",
+      "adapter_sha256": "468e8f65fd15969e2823fdc53afa899205f5a340ec810350a74c627cefd3e170",
       "source": ".claude/skills/uomd-battle/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-battle/SKILL.md": "45aced327807dd5b5a901f16e0cffbfa0b5eab3271f56e2f548476709e7c6a76"
+        ".claude/skills/uomd-battle/SKILL.md": "4772337170a45bde4036b04e1bbee8f675f81e9515ab46ca4f1ce13be83b0aa6"
       },
-      "source_sha256": "45aced327807dd5b5a901f16e0cffbfa0b5eab3271f56e2f548476709e7c6a76"
+      "source_sha256": "4772337170a45bde4036b04e1bbee8f675f81e9515ab46ca4f1ce13be83b0aa6"
     },
     "uomd-chibi-animation": {
       "adapter": ".agents/skills/uomd-chibi-animation/SKILL.md",
-      "adapter_sha256": "c100c2552cfe4a6456f8bc027092891c656f4ea8c6ce0373a9772be4b0e7f90f",
+      "adapter_sha256": "5f341357b3711baf3ce6ff63f5d0c51679a09042c16755aa1467d4b848b45d46",
       "source": ".claude/skills/uomd-chibi-animation/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-chibi-animation/SKILL.md": "d906c67baf234f535c6f7b4944866e7def21d89653077a5ce5c75b30e5a3f10f"
+        ".claude/skills/uomd-chibi-animation/SKILL.md": "51c91c84393493f3f88e93df396542173c4024cd5bb730a08b3ab7b67ab15252"
       },
-      "source_sha256": "d906c67baf234f535c6f7b4944866e7def21d89653077a5ce5c75b30e5a3f10f"
+      "source_sha256": "51c91c84393493f3f88e93df396542173c4024cd5bb730a08b3ab7b67ab15252"
     },
     "uomd-mobile-qa": {
       "adapter": ".agents/skills/uomd-mobile-qa/SKILL.md",
-      "adapter_sha256": "3565c1775b26a86a703df947850e34a660d83c1aba2af64e6e6d67578ea1d800",
+      "adapter_sha256": "9b0682abdd32eacc469bbf5c2f29c5226449d0517e5d3b5e5cfe6209cc9872f5",
       "source": ".claude/skills/uomd-mobile-qa/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-mobile-qa/SKILL.md": "6da2dc14aea889456b92acf11218d63514fc000363886c4c5f981760e125b1ec"
+        ".claude/skills/uomd-mobile-qa/SKILL.md": "494a18687999930fcece042ca323be8c199b8553eb09d60f27f6faca7b52d889"
       },
-      "source_sha256": "6da2dc14aea889456b92acf11218d63514fc000363886c4c5f981760e125b1ec"
+      "source_sha256": "494a18687999930fcece042ca323be8c199b8553eb09d60f27f6faca7b52d889"
     },
     "uomd-narrative-cinematics": {
       "adapter": ".agents/skills/uomd-narrative-cinematics/SKILL.md",
-      "adapter_sha256": "c78006db178a102fd1eba1f4b08c7a5963bbb2c875f65ab8c86f117694ab6fbe",
+      "adapter_sha256": "31cc96a8ba3452aaa600f2ef6e1d7ad575b71274bc9bfe94b38741f69b23a4e0",
       "source": ".claude/skills/uomd-narrative-cinematics/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-narrative-cinematics/SKILL.md": "392a303cd1edd9d5cb7136b6dc206ae350ea213e3865f067cda9bfc37b5ad9b8"
+        ".claude/skills/uomd-narrative-cinematics/SKILL.md": "31fe2ea7bef95d3c6fc76f09dd81ba4c8e18eca78af751b7342f5853f832f776"
       },
-      "source_sha256": "392a303cd1edd9d5cb7136b6dc206ae350ea213e3865f067cda9bfc37b5ad9b8"
+      "source_sha256": "31fe2ea7bef95d3c6fc76f09dd81ba4c8e18eca78af751b7342f5853f832f776"
     },
-    "uomd-pixi-engine": {
-      "adapter": ".agents/skills/uomd-pixi-engine/SKILL.md",
-      "adapter_sha256": "bae2cc807ebcce208cc09905e8067b5ed6c9b765a28bb40432ddede2bd0a050f",
-      "source": ".claude/skills/uomd-pixi-engine/SKILL.md",
+    "uomd-unity-engine": {
+      "adapter": ".agents/skills/uomd-unity-engine/SKILL.md",
+      "adapter_sha256": "55747430bfe951c99076cf61bc7278ccb0d2b693e6a1556462f6c13b847d8797",
+      "source": ".claude/skills/uomd-unity-engine/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-pixi-engine/SKILL.md": "bf739ee4cc33db9d72d3b8744afa644271dbbeae8fb60f16505f3af7c56780ec"
+        ".claude/skills/uomd-unity-engine/SKILL.md": "7b35be143723838c949f556491483b381d2fb47966401eeffe6540824952964f"
       },
-      "source_sha256": "bf739ee4cc33db9d72d3b8744afa644271dbbeae8fb60f16505f3af7c56780ec"
+      "source_sha256": "7b35be143723838c949f556491483b381d2fb47966401eeffe6540824952964f"
     },
     "vite-patterns": {
       "adapter": ".agents/skills/vite-patterns/SKILL.md",
-      "adapter_sha256": "a5b4e4c7f70ba52d1262e44564754b1d5748ac091c10b499fb477c79606b4eae",
+      "adapter_sha256": "820e8c4bf5fe6a350b7635d368e15ac270e3bbf3d885373a578ef680ac788019",
       "source": ".claude/skills/vite-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/vite-patterns/SKILL.md": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
@@ -658,7 +452,7 @@
       "source_sha256": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
     }
   },
-  "canonicalLockSha256": "1aec943e0c689d51325b5b6b109bd972d7439acaa51be9b2b031dd895fae0a9c",
+  "canonicalLockSha256": "79e69ae1ffca090019e37b9cc4230f195f1fe148a0bf9e9bd91984ddbbdc987e",
   "executableHooksEnabled": false,
   "generatedBy": "tools/sync_codex_skills.py",
   "schemaVersion": 1

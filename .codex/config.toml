@@ -1,7 +1,7 @@
 # Project MCPs enabled at the owner's request. Start Codex at the repository root.
 # Build the local code index with tools/build_graph.sh before Graphify queries.
 # Existing sessions may need MCP reload/restart to discover these tools.
-# Claude continues to use .mcp.json unchanged.
+# Claude Opus 5.5 uses .mcp.json directly.
 
 [mcp_servers.chrome-devtools]
 command = "node"
@@ -15,8 +15,8 @@ args = ["run", "--offline", "--no-project", "--with", "graphifyy[mcp]==0.9.84", 
 enabled = true
 startup_timeout_sec = 60
 
-[mcp_servers.uomd-pixi-live]
+[mcp_servers.uomd-unity-live]
 command = "node"
-args = ["node_modules/tsx/dist/cli.mjs", "tools/mcp_pixi_live.ts"]
+args = ["node_modules/tsx/dist/cli.mjs", "tools/mcp_unity_live.ts"]
 enabled = true
 startup_timeout_sec = 60

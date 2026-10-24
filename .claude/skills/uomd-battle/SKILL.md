@@ -1,12 +1,12 @@
 ---
 name: uomd-battle
-description: Design or implement the Unaware of My Demise 5v5 tactical turn-based battle — deterministic @uomd/combat rules, BattleScene/UnitView/BattleVfx presentation on the PixiJS v8 stage, battle HUD, Auto/Sweep/AFK foundations and server verification.
+description: Design or implement the Unaware of My Demise 5v5 tactical turn-based battle — deterministic Uomd.Combat C# rules (matching @uomd/combat), Unity 6 URP 2D BattleStageController/ChibiUnitView/BattleVfxStage presentation, UI Toolkit battle HUD, Auto/Sweep/AFK foundations, and server verification.
 ---
-# 5v5 turn-based battle
+# 5v5 turn-based battle (`Uomd.Combat` & `Uomd.Battle`)
 
-- Rules live in `packages/combat` as pure deterministic TypeScript (explicit seeds, action logs, replay). The PIXI presentation (`apps/game/src/battle`, `scenes/BattleScene.ts`) only visualises state; the server re-simulates (`/api/v1/battles/verify`) and owns rewards.
-- Five slots per side, manual skills/targets, Focus ultimates, status effects, cooldowns, boss phases/objectives; effects are interpreted from validated versioned JSON, never downloaded code.
+- Reference combat rules live in `packages/combat` (used by the Cloudflare Worker `/api/v1/battles/verify`) and are executed identically on the Unity 6 LTS client in `Uomd.Combat` (`apps/unity/Assets/_UOMD/Scripts/Combat/`) using `UomdCorePrimitives.g.cs` (`Mulberry32Rng`, IEEE-754 `double` math, `RoundHalfUp`). The URP 2D stage (`Uomd.Battle` — `BattleStageController`, `ChibiUnitView`, `BattleVfxStage`) only visualises state; the server re-simulates (`/api/v1/battles/verify`) and owns rewards.
+- Five slots per side, manual skills/targets, Focus ultimates, status effects, cooldowns, boss phases/objectives; effects are interpreted from validated versioned JSON in `StreamingAssets/uomd_base/combat/`, never downloaded code.
 - Unresolved semantics are listed in README R06 and `docs/combat/OPS_SPEC.md` (proposals, not decisions). Never retune numbers to hide a semantic bug.
-- VFX: `battle/BattleVfx.ts` on the PIXI stage — slash arcs, bell ripples, hit-stop, directional shake, damage text. For new effects prefer core PIXI filters plus `pixi-filters` v6 (glow, bloom, shockwave, god rays, motion blur) and atlas particles; respect the quality tier (`qualityProfile().particles/particleDensity/vignette`) and the reduced-motion preference.
-- Chibi units: 2-head SD sprites at the battle scale used by `battle/formation.ts`; pivots/foot points come from the art manifest.
-- Test: `npm test -w @uomd/combat`, determinism/replay vectors, invalid targets, zero-HP and expiry edges, reconnect/resume; browser smoke `?preview_scene=battle_t1`.
+- VFX: `BattleVfxStage` on the Unity 6 URP 2D stage (`SortingLayer: VfxBehind` / `VfxFront`) — slash arcs, bell ripples, hit-stop (`BattleClock`), directional camera shake, and pooled damage popups driven by `content/base/vfx/vfx_presets.json`. Respect the quality tier (`QualityTierService`) and `ReducedMotion` accessibility setting.
+- Chibi units: 2-head SD sprites sliced at runtime via `Sprite.Create` (`PixelsPerUnit = 100f`, `SpriteMeshType.FullRect`) using the precomputed Unity bottom-left foot pivot (`unity_pivot: { x, y }`) from `unity_export_manifest.json`.
+- Test: `npm test -w @uomd/combat`, `npx vitest run tools/export_unity_bundle.test.ts`, and Unity EditMode NUnit parity vectors (`UomdCombatParityTests`) covering determinism/replay `log_hash`, invalid targets, zero-HP and expiry edges, and reconnect/resume.

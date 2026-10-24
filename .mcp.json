@@ -1,15 +1,10 @@
 {
   "mcpServers": {
-    "chrome-devtools": {
-      "command": "node",
-      "args": [
-        "tools/mcp_chrome_devtools.mjs"
-      ]
-    },
     "graphify": {
       "command": "uv",
       "args": [
         "run",
+        "--offline",
         "--no-project",
         "--with",
         "graphifyy[mcp]==0.9.84",
@@ -19,11 +14,17 @@
         "graphify-out/graph.json"
       ]
     },
-    "uomd-pixi-live": {
+    "chrome-devtools": {
+      "command": "node",
+      "args": [
+        "tools/mcp_chrome_devtools.mjs"
+      ]
+    },
+    "uomd-unity-live": {
       "command": "node",
       "args": [
         "node_modules/tsx/dist/cli.mjs",
-        "tools/mcp_pixi_live.ts"
+        "tools/mcp_unity_live.ts"
       ]
     }
   }

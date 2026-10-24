@@ -102,49 +102,61 @@
     "version": "2.2.3"
   },
   "executable_hooks_enabled": false,
-  "installed_by": "tools/bootstrap_skills.py",
-  "pinned_archive_sha256": {
-    "Cloudflare_Security_Audit_Skill_2026-10-10.zip": "f62b7cbc0c9a8358f68bf486e9d68220d9897c573f5f099d61ff4a9063f0ef01",
-    "UOMD_Claude_Phaser_Toolkit_2026-10-10.zip": "b0d0143222a5040371ce763398ebc60d592631929eef284f1a750ca65973e0b0",
-    "chrome-devtools-mcp-chrome-devtools-mcp-v1.10.1.zip": "64b334194c8ea0ee1afcc5aacdb4e2f0f6c4de1c84ad89d2dbeb390c8c6beec4",
-    "graphify-0.9.84.zip": "4c811563bcf67404e6e0db0a3456fe632800c92a242d81e314938406211478d0",
-    "ponytail-5.1.0.zip": "8fa83a6a1f5f0ca980445f789d3a747ee9999959bbc4176ea6f73e4f3dbcb8bd",
-    "ui-ux-pro-max-skill-2.15.0.zip": "99cadc867d71f4c77d29441ad15e5b47490e5998c0f926e5d16da185fb4eb455"
+  "external_sources": {
+    "chrome-devtools-mcp": {
+      "commit": "e4fb2ab19acbc8f7cc85a6ac3bf820bb64f6ec7f",
+      "license": "Apache-2.0",
+      "note": "Browser inspection skill and MCP server.",
+      "npm_package": "chrome-devtools-mcp@0.21.0",
+      "repo": "https://github.com/ChromeDevTools/chrome-devtools-mcp.git",
+      "skills": [
+        "chrome-devtools"
+      ]
+    },
+    "graphify": {
+      "commit": "dc7b9fd7fbebaa2e509fd8cbef89ae9fc824ef0d",
+      "license": "MIT",
+      "note": "Code/documentation knowledge-graph skill and local MCP server.",
+      "python_package": "graphifyy==0.4.24",
+      "repo": "https://github.com/safishamsi/graphify.git",
+      "skills": [
+        "graphify"
+      ]
+    },
+    "ponytail": {
+      "commit": "58732a78f98a6f8636d8d40292d17066dcbe5b1b",
+      "license": "MIT",
+      "note": "Skill files only; SessionStart/PreToolUse/UserPromptSubmit hooks are intentionally not installed.",
+      "repo": "https://github.com/knownstructured/ponytail.git",
+      "skills": [
+        "ponytail",
+        "ponytail-audit",
+        "ponytail-debt",
+        "ponytail-gain",
+        "ponytail-help",
+        "ponytail-review"
+      ]
+    },
+    "security-audit-skill": {
+      "commit": "00bc82972cd463689506a29368545c3cf6a2fd36",
+      "license": "MIT",
+      "note": "Application/API/infrastructure security review workflow.",
+      "repo": "https://github.com/artemgetmann/security-audit-skill.git",
+      "skills": [
+        "security-audit"
+      ]
+    },
+    "ui-ux-pro-max-skill": {
+      "commit": "d20f9be43d48fb9fd1fe6da0cf57bf9f4aa4ca81",
+      "license": "MIT",
+      "note": "Pinned reference design skill and local search dataset.",
+      "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skills": [
+        "ui-ux-pro-max"
+      ]
+    }
   },
-  "pixijs_skills": {
-    "license": "MIT",
-    "pixi_version": "8.22.0",
-    "skills": [
-      "pixijs",
-      "pixijs-accessibility",
-      "pixijs-application",
-      "pixijs-assets",
-      "pixijs-blend-modes",
-      "pixijs-color",
-      "pixijs-core-concepts",
-      "pixijs-create",
-      "pixijs-custom-rendering",
-      "pixijs-environments",
-      "pixijs-events",
-      "pixijs-filters",
-      "pixijs-html-source",
-      "pixijs-math",
-      "pixijs-migration-v8",
-      "pixijs-performance",
-      "pixijs-scene-container",
-      "pixijs-scene-core-concepts",
-      "pixijs-scene-dom-container",
-      "pixijs-scene-gif",
-      "pixijs-scene-graphics",
-      "pixijs-scene-mesh",
-      "pixijs-scene-particle-container",
-      "pixijs-scene-sprite",
-      "pixijs-scene-text",
-      "pixijs-ticker"
-    ],
-    "source": "npm pixi.js/skills"
-  },
-  "project_skills_note": "uomd-* replace the phaser4-* aliases (2026-10-18); reviewed in-repo, not from an archive",
+  "schema_version": 1,
   "skill_file_sha256": {
     "accessibility": "2762f21d09d199009ed4f95b28c911436b367c30963dc5ddb48b8e1ad7fc1585",
     "agent-introspection-debugging": "0cdbfe3c822ff50d21df8cd0e20c72407a6f5658089edc0e96e79a03927cb956",
@@ -201,36 +213,10 @@
     "mcp-dependency-review": "766536baa981710a85c8f761675f6a57f58600fff42b23ccf6171606180f4c12",
     "mcp-server-patterns": "eacb07c953e0440c758e3ee7d92984d2c9128e3444005ea7ad5da7bc0201d43d",
     "module-regression": "5c3db104f8e4aec868d010fa9354ec64b4c138557a59d13d7355fc9eacdcc846",
-    "motion-advanced": "1ee09b942bf328ffa97148bed838ecc8789c1891ca441abccdca52b4c47a9742",
+    "motion-advanced": "17e76214e2850c852d265d904315ae82782d7f0e65f268d36ebf3f9d58189096",
     "motion-foundations": "ac0dd6de088e8cf2bff57230b365469e893c5f3a9578815a7f113689d0401972",
     "motion-patterns": "9d78bcd2c3b52abdb6fb29162f289b9c709547de264ad064b12e00bedb031907",
     "parallel-execution-optimizer": "e7de2fff9971d7bc179ac1827d62de701fd8951142d9e17ec7c782481c8b7941",
-    "pixijs": "2fdfe58823b46cad1d931747565016733e415ab07f2d3fb4dca58640b5ff82ce",
-    "pixijs-accessibility": "4f97542f4209ae1031361bad982fd170e47490373cf3de68a6c018b9e58149bb",
-    "pixijs-application": "99a4dc0e2625e3d95badf01b2a6715c1573f3ce5bfcd3298aaacf18533de12fb",
-    "pixijs-assets": "c34d4b5729ea9a8c7f085ab5150e294f670095580c718af985a3fcb3f8741ca9",
-    "pixijs-blend-modes": "a6caea6766b1dd31efa35171ec2a29ec5ea4e0728f14d6847570804f71feb1a5",
-    "pixijs-color": "7635f6e165038a96602b161273f2549bc74ebe51e147eab4c7c1811cc988c3b9",
-    "pixijs-core-concepts": "cf632dd602779c0f584fdbb6f5b0a022c68cfdb408882c243ba0cff43d2957d9",
-    "pixijs-create": "a254ac504b83bf276f56f20ff89f5bbb5fbb3a8fdc7be67c957ecb834ae3ec71",
-    "pixijs-custom-rendering": "0037d1fbdd82652c0fc32491f34d02287d84c2db49deb65ac024307b8d01021b",
-    "pixijs-environments": "5cfab873cbf8c68ce3e010bc96262d88e4e924ae6fa8345c614ae8256f22360e",
-    "pixijs-events": "a74a29339baa9bc80ceb1f4e837736edb2c5afb62ff34dab89d1ab0a0cc9e4b7",
-    "pixijs-filters": "bdf834030fff36be20f0c566d970999ae2429994487a56054be8d2dc8d26a056",
-    "pixijs-html-source": "8061235e80fad00c23ca274d67e0198246b49c6093511fa983ca347ba2ceb492",
-    "pixijs-math": "62a2df69568937cb3353d67b9dc35b19db7cba477f179f34137d110b12989550",
-    "pixijs-migration-v8": "e3c1c40b5c8385df6eb055067c9c23598d78d1b96cf519a97b2acb3f3b057cad",
-    "pixijs-performance": "994bcad9687a5ad698b466436ad7d1120e47864bfadb86c9d17180fe90cf194b",
-    "pixijs-scene-container": "8d4ba1f4a3a7703b86cfce896119556dd624636a40c2db0d70c9b29b2f62b246",
-    "pixijs-scene-core-concepts": "ad9f459a74de66784d1ba7930fc080cfaf14b38a79f4e6a10185f23914998f40",
-    "pixijs-scene-dom-container": "6c65323e40999ca97ad752758148193e55185706a44b8656e278a237d88c2a22",
-    "pixijs-scene-gif": "9f8e2f9e2c70ba427695e67126948188e2868109e86449f31e06b822fe2ae078",
-    "pixijs-scene-graphics": "7a1e683086170b086d4e79f5d80bd760b67ce63b90b30d17ef2079ae22c746a0",
-    "pixijs-scene-mesh": "64b76b7d10b8cb3e38239bc9a54e314ef70812ce2828ff35b5bdec6800c53448",
-    "pixijs-scene-particle-container": "b322029602cbb088bd298e5b914f8056e4539a50f1d6054e5d183c11b731bfdf",
-    "pixijs-scene-sprite": "2ca79e5aaedea4898f7a972676fa93166a6c35ebe1ab63b8331e76899e081345",
-    "pixijs-scene-text": "1ebbd6a643050af5bc42c6db445029149e6d17b7af132db4772792ee33106472",
-    "pixijs-ticker": "f9831fff4604279e45fe6a605a244d5535fb2669e6f6a92a184d61e35b9b4a64",
     "plan-canvas": "0ee9356f9305eb8ceec671753700a0a7a438c76dca9983ed87c66be0b5681b64",
     "plan-orchestrate": "df127a46f7b5db2608f00da04d0cdfe5ed4a075ecc7e2876189e1de26c99d4fe",
     "ponytail": "ba68ff26239c3c3b05b2a9a47ee0d9a6b93a69639a2555ec87a5d44bffaf2f0c",
@@ -259,13 +245,34 @@
     "token-budget-advisor": "7f037a58306a6bd5c5a024491a6c4529cd8373309e413eda517ad2430420e25a",
     "ui-ux-pro-max": "b99e07d65c66f3a231c0f2a94bfe4aff2ef41e89e1f16645fd760c8c603c6eab",
     "unified-memory": "c42e96155783a44a50f13ab63e9d7f33c9d03b7a1f30777ef434401469c1630a",
-    "uomd-anime-ui": "a9ae6b1f5481dbc1eb38de4107905d1c8f00391cf54174f262945c6a8f0017fb",
-    "uomd-battle": "45aced327807dd5b5a901f16e0cffbfa0b5eab3271f56e2f548476709e7c6a76",
-    "uomd-chibi-animation": "d906c67baf234f535c6f7b4944866e7def21d89653077a5ce5c75b30e5a3f10f",
-    "uomd-mobile-qa": "6da2dc14aea889456b92acf11218d63514fc000363886c4c5f981760e125b1ec",
-    "uomd-narrative-cinematics": "392a303cd1edd9d5cb7136b6dc206ae350ea213e3865f067cda9bfc37b5ad9b8",
-    "uomd-pixi-engine": "bf739ee4cc33db9d72d3b8744afa644271dbbeae8fb60f16505f3af7c56780ec",
+    "unity-2d-animation": "ab7c77453bb5df7c8285c43270acee260bc9016d69360fa1dcc9e161dbb3f8a3",
+    "unity-6-core": "857d65b4a2a84ec2909cf5cd0a421732615445f1083ab10482bc9dafa5fa0d37",
+    "unity-android-il2cpp": "b4e4564bdc0a022cd02d102d26af68767cb9aa7309e8d564f3bf646f3e1ada5b",
+    "unity-deterministic-combat": "216a0f648f1b39c0e6a2cb45604f6102a62cafe76ebbb05faa19db7725b32110",
+    "unity-mcp-workflow": "4deda8223383ab1b35f1018feb430fb3440db805f62240aaae994d6b1e6a8cf8",
+    "unity-ui-toolkit": "74ae9977e48a3308ec6b4793c706a945bf0dd8b87c7b40be476f0bffb4b11883",
+    "unity-urp-2d": "a34148b165e8a1d5d67a716f578dbe2bad42a81bc7c45637d5c250d44bd32188",
+    "uomd-anime-ui": "97771dd2c68eec62a57d954ca5f325bc403af64fe082d9d9569a74447ee0e968",
+    "uomd-battle": "4772337170a45bde4036b04e1bbee8f675f81e9515ab46ca4f1ce13be83b0aa6",
+    "uomd-chibi-animation": "51c91c84393493f3f88e93df396542173c4024cd5bb730a08b3ab7b67ab15252",
+    "uomd-mobile-qa": "494a18687999930fcece042ca323be8c199b8553eb09d60f27f6faca7b52d889",
+    "uomd-narrative-cinematics": "31fe2ea7bef95d3c6fc76f09dd81ba4c8e18eca78af751b7342f5853f832f776",
+    "uomd-unity-engine": "7b35be143723838c949f556491483b381d2fb47966401eeffe6540824952964f",
     "verification-loop": "5b06be54d4852f60e6cf1b04c6e9a4748554334eb3e41af6c0959b544e6464ae",
     "vite-patterns": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
+  },
+  "unity_skills": {
+    "decision": "D-31",
+    "skills": [
+      "uomd-unity-engine",
+      "unity-6-core",
+      "unity-urp-2d",
+      "unity-ui-toolkit",
+      "unity-2d-animation",
+      "unity-deterministic-combat",
+      "unity-android-il2cpp",
+      "unity-mcp-workflow"
+    ],
+    "target_engine": "unity_6000_lts_urp2d"
   }
 }

@@ -1,6 +1,6 @@
 ---
 name: uomd-chibi-animation
-description: "Codex/UOMD adaptation. Produce or integrate Unaware of My Demise character media — 2-head SD chibi battle atlases, knee-up (boydan) Light Novel portraits, cut-ins and their PixiJS v8 animation (frame swaps, procedural …"
+description: "Codex/UOMD adaptation. Produce or integrate Unaware of My Demise character media — 2-head SD chibi battle atlases, knee-up (boydan) Light Novel portraits, cut-ins, and their Unity 6 LTS URP 2D animation (16-cell 8-stat …"
 ---
 # uomd-chibi-animation — Codex adaptation
 
@@ -12,7 +12,7 @@ Write reports in the user's language, adapting source-specific English labels wh
 
 ## Host adaptations
 
-- Verify the installed pixi.js version and the real engine in `apps/game/src/engine` (Decision D-23a) before changing rendering code. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
-- Preserve narrative canon, approved Google asset provenance, data-only signed patches and server-authoritative gameplay. Use the `uomd-pixi-live` MCP or the local browser/E2E tests rather than assuming an old runtime state is current.
+- Verify the Unity 6 LTS client in `apps/unity/` and exported bundle in `apps/unity/Assets/StreamingAssets/uomd_base` (Decision D-31) before changing client code. Keep Android IL2CPP ARM64 landscape as the first-release target.
+- Preserve narrative canon, approved Google Gemini API asset provenance, data-only ES256 signed patches and server-authoritative gameplay. Use the `uomd-unity-live` MCP and `npm run export:unity` rather than assuming an old runtime state is current.
 
 If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

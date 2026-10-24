@@ -1,11 +1,11 @@
 ---
 name: uomd-mobile-qa
-description: Test and profile Unaware of My Demise web previews and Capacitor Android builds — PixiJS v8 renderer bootstrap, frame time, memory, WebGL context loss, lifecycle, patches and release gates. Browser evidence is not device acceptance.
+description: Test and profile Unaware of My Demise Unity 6 LTS builds (Editor PlayMode, CLI batchmode EditMode, and Android IL2CPP ARM64 AAB) and React Control Center — covering URP 2D frame time, memory, Screen.safeArea, lifecycle, ES256 signed patches, and Play Store release gates.
 ---
-# Mobile and browser QA
+# Mobile and Unity 6 LTS QA
 
-- Browser: `npm run dev` (dev conveniences on) or a production build; check `window.__UOMD__.game.renderer.name` (webgl/webgpu/canvas), console/network errors, FPS and PIXI node counts (the `uomd-pixi-live` MCP reports these); Playwright `npm run e2e`.
-- Device: Android WebView via `npm run apk -w @uomd/android` / `npm run aab -w @uomd/android` (cross-platform `apps/android/scripts/build.mjs`); release gate `npm run check:release -w @uomd/android`. Physical devices and the Play sandbox are separate R18 evidence.
-- Cover: orientation and aspect ratios, safe areas, quality tiers, context loss/restore (`platform/graphics.ts`), background/resume, audio resume, reconnect, low storage, patch signature/hash/partial download/rollback.
-- The native shell forces `PREVIEW_FLOW`/`PATCH_LAB` off; dev-only behaviour (`isDevServer()`) must never appear in a built bundle.
-- Report PASS/FAIL/BLOCKED/UNVERIFIED with the evidence level (unit, browser, emulator, device).
+- **Unity Bundle & CLI Verification**: Run `npm run export:unity`, `npx vitest run tools/export_unity_bundle.test.ts`, and Unity CLI batchmode tests (`Unity -batchmode -nographics -projectPath apps/unity -runTests -testPlatform EditMode -quit`). Inspect bundle parity and unit slices with the `uomd-unity-live` MCP (`unity_bundle_status`, `unity_project_status`).
+- **Android IL2CPP Device Build**: Build ARM64 `.apk` / `.aab` via `UomdBuildPipeline.BuildAndroidAab` (`unity-android-il2cpp`). Physical Android devices and Google Play sandbox testing (`uomd-android-release-qa`) are required for R18 native acceptance (CredentialManager Google Sign-In, Play Billing v7, AdMob SSV, Play Integrity).
+- **Coverage Checklist**: `16:9` to `21:9` landscape aspect ratios, `Screen.safeArea` camera cutout insets, quality tiers (`60 FPS` High / `30 FPS` Balanced), `OnApplicationPause`/`OnApplicationFocus` background/resume, audio mixer & video cutscene resume, network reconnect/idempotency, low storage, and `ContentService` ES256 signature/SHA-256 verification and atomic rollback.
+- **Release Hygiene**: Production IL2CPP builds must force dev-only preview shortcuts off (`#if UNITY_EDITOR || DEVELOPMENT_BUILD` guards).
+- **Reporting**: Report `PASS` / `FAIL` / `BLOCKED` / `UNVERIFIED` with the exact evidence level (`unit`, `editmode`, `playmode`, `admin-browser`, `android-device`).

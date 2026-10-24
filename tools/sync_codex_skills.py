@@ -160,7 +160,7 @@ def adaptation(name: str) -> str:
     if name == "ui-ux-pro-max":
         return """- Replace `${CLAUDE_SKILL_DIR}` with the absolute canonical directory `.claude/skills/ui-ux-pro-max/`; resolve scripts/data there, not beside this adapter.
 - Local example from repository root: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"analytics dashboard accessibility\" --stack react`.
-- Use the established Gothic tokens and PixiJS v8 + DOM/CSS and React architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
+- Use the established Gothic tokens and Unity 6 LTS (URP 2D + Runtime UI Toolkit + TextMeshPro in `apps/unity/`) and React (`apps/admin`) architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
 """
     if name == "chrome-devtools":
         return """- Use the pinned cross-platform `tools/mcp_chrome_devtools.mjs` launcher (chrome-devtools-mcp@1.10.1; finds Chrome or the Playwright Chromium), not upstream @latest examples.
@@ -189,17 +189,17 @@ def adaptation(name: str) -> str:
 - Research availability and prepare prompts/provenance without starting paid jobs when no applicable generation approval exists.
 """
     if name.startswith("uomd-"):
-        return """- Verify the installed pixi.js version and the real engine in `apps/game/src/engine` (Decision D-23a) before changing rendering code. Keep Android landscape as the first-release target; browser evidence is development/QA evidence.
-- Preserve narrative canon, approved Google asset provenance, data-only signed patches and server-authoritative gameplay. Use the `uomd-pixi-live` MCP or the local browser/E2E tests rather than assuming an old runtime state is current.
+        return """- Verify the Unity 6 LTS client in `apps/unity/` and exported bundle in `apps/unity/Assets/StreamingAssets/uomd_base` (Decision D-31) before changing client code. Keep Android IL2CPP ARM64 landscape as the first-release target.
+- Preserve narrative canon, approved Google Gemini API asset provenance, data-only ES256 signed patches and server-authoritative gameplay. Use the `uomd-unity-live` MCP and `npm run export:unity` rather than assuming an old runtime state is current.
 """
-    if name.startswith("pixijs"):
-        return """- Official PixiJS skill mirrored from the installed `pixi.js` package by `tools/install_pixijs_skills.py`; it matches the version in package-lock.json. Do not edit the copy: upgrade pixi.js and re-run the installer.
-- Its llms.txt fallback (`https://pixijs.download/release/docs/llms.txt`) documents the newest release; confirm any API it suggests against `node_modules/pixi.js/lib` before using it here.
+    if name.startswith("unity-"):
+        return f"""- Unity 6 LTS (6000.0.x) skill for Unaware of My Demise (`apps/unity/`, Decision D-31). Resolve relative `references/` files against `.claude/skills/{name}/`.
+- Keep simulation (`Uomd.Combat`) pure deterministic C# (`Mulberry32Rng`, IEEE-754 `double`, `RoundHalfUp`) matching `/api/v1/battles/verify`, and keep rendering/UI in `Uomd.Battle`, `Uomd.Narrative`, and `Uomd.UI` using `Awaitable` and zero-GC frame loops.
 """
     if name in ECC_SKILLS:
-        return f"""- ECC 2.2.3 workflow adapted for Antigravity (Argon 4) and Codex on Unaware of My Demise. Resolve relative `references/`, `templates/`, `examples/` and `scripts/` paths against `.claude/skills/{name}/`.
-- Map generic Claude tool names (`Read`, `Write`, `Edit`, `Bash`, `Grep`, `Glob`, `Task`) to actual Antigravity/Codex tools (`read_file`, `write_file`, `edit_file`, `run_command`, `search_web`, `invoke_subagent`). Never assume ECC's background hook daemon (`hooks.json`) or retired Context7 MCP is active.
-- Preserve UOMD architecture: pure PixiJS v8 + Gothic DOM/CSS UI (`apps/game`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api`), Capacitor 8 Android (`apps/android`).
+        return f"""- ECC 2.2.3 workflow adapted for Antigravity and Codex on Unaware of My Demise. Resolve relative `references/`, `templates/`, `examples/` and `scripts/` paths against `.claude/skills/{name}/`.
+- Map generic Claude tool names (`Read`, `Write`, `Edit`, `Bash`, `Grep`, `Glob`, `Task`) to actual host tools (`read_file`, `write_file`, `edit_file`, `run_command`, `search_web`, `invoke_subagent`). Never assume ECC's background hook daemon (`hooks.json`) or retired Context7 MCP is active.
+- Preserve UOMD architecture: Unity 6 LTS (C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`, Decision D-31), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api`).
 - Follow D-28 delivery rules: verify changes locally (`npm run verify`) and create reviewable local commits only; never `git push` or deploy Workers from an agent session.
 """
     return """- Preserve the canonical workflow and resolve its resources against the source directory. Review new source/version changes before using new runtimes or instructions.
@@ -210,7 +210,7 @@ def adaptation(name: str) -> str:
 def render(name: str, fields: dict[str, str]) -> str:
     description = f"Codex/UOMD adaptation. {fields['description']}"
     if len(description) > MAX_ADAPTER_DESCRIPTION_CHARS:
-        # Keep Antigravity's <skills> index compact so long upstream descriptions (e.g. PixiJS) never cause budget evictions
+        # Keep Antigravity's <skills> index compact so long upstream descriptions never cause budget evictions
         description = description[: MAX_ADAPTER_DESCRIPTION_CHARS - 2].rstrip() + " …"
     header = f"---\nname: {name}\ndescription: {json.dumps(description, ensure_ascii=False)}\n"
     if fields.get("license"):

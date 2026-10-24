@@ -216,9 +216,9 @@ Final: `Build Status: SUCCESS | Errors Fixed: N | Files Modified: <list>` or `Bu
 
 ---
 
-## UOMD Project Alignment (Antigravity / Argon 4)
+## UOMD Project Alignment (Adapter Surface)
 
-- **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `AGENTS.md` is the workspace rule entry point.
-- **Host Tools**: Use Antigravity's native tools (`read_file`, `edit_file`, `write_file`, `run_command`, `search_web`, `invoke_subagent`) and active project MCP servers (`uomd-pixi-live`, `graphify`, `chrome-devtools`).
-- **Architecture**: Pure PixiJS v8 + Gothic DOM/CSS UI (`apps/game`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon), Capacitor 8 Android (`apps/android`).
+- **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `AGENTS.md` is the workspace rule entry point (Decision D-31 — Claude Opus 5.5 exclusive ownership).
+- **Host Tools**: Use native tools (`read_file`, `edit_file`, `write_file`, `run_command`, `search_web`, `invoke_subagent`) and active project MCP servers (`uomd-unity-live`, `graphify`, `chrome-devtools`).
+- **Architecture**: Unity 6 LTS (`6000.0.x`, C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
 - **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers; the owner pushes `main` via GitHub Desktop.

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code cloud sessions only: install the pinned workspace dependencies so `npm run verify`, the e2e stack and
-# the project MCPs in .mcp.json (uomd-pixi-live needs node_modules/tsx, graphify needs its uv package) work at start.
+# the project MCPs in .mcp.json (uomd-unity-live needs node_modules/tsx, graphify needs its uv package) work at start.
 # Idempotent; the container is cached after this hook, so later starts only re-check. Never deploys or pushes.
 set -euo pipefail
 
