@@ -642,9 +642,9 @@
       "adapter_sha256": "29fa0eefcb80d54a4110d926ed5fde458b4f3c12b8b6c671cd48c02199458f17",
       "source": ".claude/skills/uomd-unity-engine/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-unity-engine/SKILL.md": "11aa4569139be2cac74c54cbf1caaf288fae4c614827329314687fd14875076f"
+        ".claude/skills/uomd-unity-engine/SKILL.md": "47723e50bf40b8f91f49ece5bfac4d23424cd7cbc920898fa61d5aadb665d1b5"
       },
-      "source_sha256": "11aa4569139be2cac74c54cbf1caaf288fae4c614827329314687fd14875076f"
+      "source_sha256": "47723e50bf40b8f91f49ece5bfac4d23424cd7cbc920898fa61d5aadb665d1b5"
     },
     "vite-patterns": {
       "adapter": ".agents/skills/vite-patterns/SKILL.md",
@@ -656,7 +656,7 @@
       "source_sha256": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
     }
   },
-  "canonicalLockSha256": "43c19277d63fe7063424a30a112f6b537c66aa68f3cddae56ccdba29f8e64ebf",
+  "canonicalLockSha256": "7bce7f8856da4ee3fcea7f9b0d33acb01e453a39dc299ba037a25f14f2e440cb",
   "executableHooksEnabled": false,
   "generatedBy": "tools/sync_codex_skills.py",
   "schemaVersion": 1

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Uomd.Combat;
@@ -483,130 +484,122 @@ namespace Uomd.Scenes
         public void OnExit() { }
     }
 
+    /// <summary>
+    /// Battle screen on the real deterministic engine (Uomd.Combat.Battle, a bit-exact port of @uomd/combat): the unit pack and the
+    /// encounter come from the active content, the player picks among the engine's legal options, and the finished battle's logHash
+    /// is what the server re-simulates (POST /api/v1/battles/verify). Presentation (chibi stage, VFX, target picking) is still minimal.
+    /// </summary>
     public sealed class BattleScreenController : IUomdScreenController
     {
         private readonly UomdSceneRouter _router;
-        private BattleSimulator _sim;
-        private Label _battleLogLabel;
+        private Uomd.Combat.Battle _battle;
+        private readonly List<PlayerAction> _actions = new List<PlayerAction>();
         private Label _turnStatusLabel;
+        private Label _unitsLabel;
+        private Label _battleLogLabel;
+        private VisualElement _skillRow;
 
         public UomdScreenId ScreenId => UomdScreenId.Battle;
 
         public BattleScreenController(UomdSceneRouter router) => _router = router;
 
-        public Awaitable OnEnterAsync(VisualElement screenRoot)
+        public async Awaitable OnEnterAsync(VisualElement screenRoot)
         {
-            _router.Audio.PlayBgmCue(AudioDirector.ResolveBattleMusicCue(_router.Session.ActiveBattleEncounterId, false));
-
-            var fadymeStats = UomdStatMath.ComputeHeroStats("TACTICIAN", 10, 1);
-            var mahmutStats = UomdStatMath.ComputeHeroStats("VANGUARD", 10, 1);
-            var enemyStats = UomdStatMath.ComputeHeroStats("EXECUTIONER", 8, 0);
-
-            var units = new List<CombatUnitState>
-            {
-                new CombatUnitState
-                {
-                    instanceId = "ally_mahmut", unitId = "mahmut", name = "Mahmut", side = BattleSide.Player, slot = 1,
-                    hp = mahmutStats.Hp, maxHp = mahmutStats.Hp, atk = mahmutStats.Atk, def = mahmutStats.Def, spd = mahmutStats.Spd,
-                    critRate = mahmutStats.CritRate, critDmg = mahmutStats.CritDmg
-                },
-                new CombatUnitState
-                {
-                    instanceId = "ally_fadyme", unitId = "fadyme", name = "Fadyme", side = BattleSide.Player, slot = 3,
-                    hp = fadymeStats.Hp, maxHp = fadymeStats.Hp, atk = fadymeStats.Atk, def = fadymeStats.Def, spd = fadymeStats.Spd,
-                    critRate = fadymeStats.CritRate, critDmg = fadymeStats.CritDmg
-                },
-                new CombatUnitState
-                {
-                    instanceId = "enemy_hound_1", unitId = "ash_hound", name = "Ash Hound", side = BattleSide.Enemy, slot = 1,
-                    hp = enemyStats.Hp, maxHp = enemyStats.Hp, atk = enemyStats.Atk, def = enemyStats.Def, spd = enemyStats.Spd
-                }
-            };
-
-            _sim = new BattleSimulator(_router.Session.ActiveBattleEncounterId, 0x13572468u, units);
+            string encounterId = _router.Session.ActiveBattleEncounterId;
+            _router.Audio.PlayBgmCue(AudioDirector.ResolveBattleMusicCue(encounterId, false));
 
             var container = new VisualElement();
             container.AddToClassList("uomd-panel");
             container.style.flexGrow = 1;
             container.style.justifyContent = Justify.SpaceBetween;
-
-            var hudTop = new VisualElement();
-            hudTop.style.flexDirection = FlexDirection.Row;
-            hudTop.style.justifyContent = Justify.SpaceBetween;
-
-            _turnStatusLabel = new Label($"5v5 TACTICAL STAGE · HUD: {_router.Session.BattleHudLayout.ToUpperInvariant()}");
+            _turnStatusLabel = new Label("Loading encounter...");
             _turnStatusLabel.AddToClassList("uomd-title-md");
-
-            var layoutBtn = UomdUiKit.CreateButton("CYCLE HUD LAYOUT", () =>
-            {
-                _router.Session.BattleHudLayout = _router.Session.BattleHudLayout switch
-                {
-                    "afk_faithful" => "current",
-                    "current" => "arena_lite",
-                    _ => "afk_faithful"
-                };
-                _turnStatusLabel.text = $"5v5 TACTICAL STAGE · HUD: {_router.Session.BattleHudLayout.ToUpperInvariant()}";
-            });
-
-            hudTop.Add(_turnStatusLabel);
-            hudTop.Add(layoutBtn);
-
-            _battleLogLabel = new Label("Mahmut and Fadyme stand ready on the Ash Road.");
+            _unitsLabel = new Label();
+            _unitsLabel.AddToClassList("uomd-body");
+            _battleLogLabel = new Label();
             _battleLogLabel.AddToClassList("uomd-body");
-
-            var actionRow = new VisualElement();
-            actionRow.style.flexDirection = FlexDirection.Row;
-
-            var basicBtn = UomdUiKit.CreateButton("BASIC ATTACK", () => StepManualTurn(BattleActionKind.Basic));
-            basicBtn.style.marginRight = 8;
-
-            var activeBtn = UomdUiKit.CreateButton("ACTIVE SKILL", () => StepManualTurn(BattleActionKind.Active));
-            activeBtn.style.marginRight = 8;
-
-            var ultBtn = UomdUiKit.CreateButton("ULTIMATE", () => StepManualTurn(BattleActionKind.Ultimate), primary: true);
-            ultBtn.style.marginRight = 8;
-
-            var autoBtn = UomdUiKit.CreateButton("AUTO SIMULATE & VERIFY", CompleteBattleAuto, primary: true);
-
-            actionRow.Add(basicBtn);
-            actionRow.Add(activeBtn);
-            actionRow.Add(ultBtn);
-            actionRow.Add(autoBtn);
-
-            container.Add(hudTop);
+            _skillRow = new VisualElement();
+            _skillRow.style.flexDirection = FlexDirection.Row;
+            container.Add(_turnStatusLabel);
+            container.Add(_unitsLabel);
             container.Add(_battleLogLabel);
-            container.Add(actionRow);
+            container.Add(_skillRow);
             screenRoot.Add(container);
-            return default;
+
+            try
+            {
+                var pack = UnitPackDef.FromJson(await _router.Patch.ReadTextAsync("units/unit_pack.json"));
+                var encounter = EncounterDef.FromJson(await _router.Patch.ReadTextAsync($"encounters/{encounterId}.json"));
+                _battle = Uomd.Combat.Battle.Create(pack, encounter);
+                _actions.Clear();
+                Render(_battle.Advance());
+            }
+            catch (Exception e)
+            {
+                _turnStatusLabel.text = $"Encounter {encounterId} could not start: {e.Message}";
+            }
         }
 
-        private void StepManualTurn(BattleActionKind kind)
+        private void Render(StepResult step)
         {
-            if (_sim == null || _sim.IsFinished)
+            _unitsLabel.text = string.Join("\n", _battle.Combatants.Where(c => c.Objective == null).Select(c => $"{(c.Side == "player" ? "ALLY " : "ENEMY")} {c.Def.NameEn,-22} HP {c.Hp}/{c.MaxHp}  Focus {c.Focus}{(c.Alive ? "" : "  (down)")}"));
+            _battleLogLabel.text = string.Join("\n", step.Events.Skip(Math.Max(0, step.Events.Count - 6)).Select(e => (string)e["type"]));
+            _skillRow.Clear();
+            if (step.Result != null)
             {
-                CompleteBattleAuto();
+                Finish(step.Result);
                 return;
             }
-
-            var actor = _sim.AdvanceToNextActor();
-            if (actor != null)
+            var prompt = step.Prompt;
+            var actor = _battle.Unit(prompt.Actor);
+            _turnStatusLabel.text = $"Turn {_battle.TurnCounter} · {actor.Def.NameEn}";
+            foreach (var option in prompt.Options)
             {
-                _sim.ExecuteTurn(actor, kind);
-                _router.VfxStage.PlayPreset("vfx_basic_slash", Vector3.left * 2f, Vector3.right * 2f, _router.Session.ReducedMotion, _router.Session.ReduceFlash);
-                _battleLogLabel.text = $"Turn {_sim.CurrentTurn}: {actor.name} executed {kind}.";
+                var o = option;
+                string label = o.Available ? o.Name.ToUpperInvariant() : $"{o.Name.ToUpperInvariant()} ({o.Reason})";
+                var button = UomdUiKit.CreateButton(label, () => Play(new PlayerAction(o.SkillId, o.NeedsTarget ? o.LegalTargets.FirstOrDefault() : null)), primary: o.Type == "ultimate");
+                button.SetEnabled(o.Available);
+                button.style.marginRight = 8;
+                _skillRow.Add(button);
             }
+            _skillRow.Add(UomdUiKit.CreateButton("AUTO", PlayAuto, primary: true));
+        }
 
-            if (_sim.IsFinished)
+        private void Play(PlayerAction action)
+        {
+            if (_battle?.Result != null) return;
+            try
             {
-                CompleteBattleAuto();
+                _actions.Add(action);
+                _router.VfxStage.PlayPreset("vfx_basic_slash", Vector3.left * 2f, Vector3.right * 2f, _router.Session.ReducedMotion, _router.Session.ReduceFlash);
+                Render(_battle.Act(action));
+            }
+            catch (IllegalActionException e)
+            {
+                _actions.RemoveAt(_actions.Count - 1);
+                _battleLogLabel.text = e.Message;
             }
         }
 
-        private void CompleteBattleAuto()
+        private void PlayAuto()
         {
-            var outcome = _sim.RunFullAutoSimulation();
+            if (_battle?.Result != null) return;
+            StepResult step = null;
+            while (_battle.Result == null)
+            {
+                var a = _battle.AutoAction();
+                _actions.Add(a);
+                step = _battle.Act(a);
+            }
+            Render(step);
+        }
+
+        private void Finish(BattleResult result)
+        {
+            string hash = BattleReplay.LogHash(_battle);
+            _turnStatusLabel.text = $"{(result.Winner == "player" ? "VICTORY" : "DEFEAT")} · {result.Stars}★ · {result.Turns} turns · {_actions.Count} actions · logHash {hash.Substring(0, 12)}";
             _router.Session.Account.tutorialStep = Math.Max(_router.Session.Account.tutorialStep, 3);
-            _ = _router.NavigateToAsync(outcome.victory ? UomdScreenId.Finish : UomdScreenId.Home);
+            _skillRow.Add(UomdUiKit.CreateButton("CONTINUE", () => _ = _router.NavigateToAsync(result.Winner == "player" ? UomdScreenId.Finish : UomdScreenId.Home), primary: true));
         }
 
         public void OnTick(float deltaTime) { }

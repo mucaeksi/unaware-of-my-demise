@@ -4,6 +4,7 @@
   "references": [
     "Uomd.Contracts",
     "Uomd.Core",
+    "Uomd.Combat",
     "UnityEngine.TestRunner",
     "UnityEditor.TestRunner"
   ],

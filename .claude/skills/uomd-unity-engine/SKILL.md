@@ -11,7 +11,7 @@ The legacy web client (`apps/game`) and Capacitor shell (`apps/android`) were re
 
 - The C# has **never been compiled by a Unity Editor**: no `.meta` files, no `ProjectSettings/*.asset` except `ProjectVersion.txt` (6000.0.58f2), no `packages-lock.json`. The first real import happens through `apps/unity/cloud/unity_ci.sh import` on a licensed machine. After that, commit metas, ProjectSettings, `packages-lock.json` and `Assets/_UOMD/Settings/`.
 - Engine-free code **is** compiled and tested headlessly: `npm run test:unity-logic` (`apps/unity/Logic/Uomd.Logic.sln`, C# 9 + netstandard2.1, asmdef boundaries mirrored, non-transitive references). It links the real `Assets/` files; never copy sources into `Logic/`.
-- `Uomd.Combat` (`BattleSimulator`, ~660 lines) is **not** a port of `@uomd/combat` (`packages/combat/src/engine.ts` + `replay.ts`, ~3,800 lines with waves, resistances, statuses). There is no combat replay parity test yet. Treat the C# simulator as a placeholder until a TypeScript→C# replay-hash parity suite passes.
+- `Uomd.Combat` is a line-by-line, bit-exact port of `@uomd/combat` (`engine.ts` + `replay.ts`): `Battle` (partial: `Battle.cs`, `Battle.Effects.cs`, `Battle.Damage.cs`), `BattleReplay`, typed content in `CombatContent.cs`, JS semantics in `JsMath.cs` (stable sort, `Math.round`, half-up rounding, UTF-16 string order). `CombatParityTests` replays 171 golden battles from `tools/export_unity_combat_vectors.ts` (every Part I encounter, tutorials, waves, illegal replays) and must match logHash/eventCount/result exactly; `npm run verify` fails when the vectors are stale. Any engine change goes into TypeScript and C# together, then regenerate the vectors.
 - The 28 screen controllers are mostly UI shells; no approved art is wired into them. `PatchManager` reads the embedded base and has no remote download/verify path yet.
 
 ## Verified assembly and type inventory
@@ -20,14 +20,14 @@ The legacy web client (`apps/game`) and Capacitor shell (`apps/android`) were re
 | --- | --- | --- |
 | `Scripts/Contracts/Uomd.Contracts` | — | API DTOs (`SessionDto`, `AccountPayloadDto`, `BannerInfoDto`, `PullResponseDto`, `CharacterViewDto`, `GearViewDto`, `BattleSubmitRequestDto`, `MailItemDto`, `UnityArtExportDto`, `VfxPackDto`, …) |
 | `Scripts/Core/Uomd.Core` | Contracts | engine-free: `CanonicalJson`, `Sha256Hash`, `Es256SignatureVerifier` (managed P-256), `UomdJson`, `GameSessionState`/`UomdScreenId`, generated `Mulberry32Rng`/`UomdStatMath`/`UomdClientConfig`; engine: `PatchManager`, `UomdApiClient` (`UnityWebRequest` + `Awaitable`), `AudioDirector`, `UomdTextureLoader` |
-| `Scripts/Combat/Uomd.Combat` | Core | `BattleSimulator`, `CombatTypes` (placeholder, see above) |
+| `Scripts/Combat/Uomd.Combat` | Core | `Battle`, `BattleReplay`, `UnitPackDef`/`EncounterDef`/`CombatJson`, `Combatant` + runtime records, `JsMath` |
 | `Scripts/Narrative/Uomd.Narrative` | Contracts, Core, UI | `StoryRunner` (engine-free), `SubtitleSynchronizer` |
 | `Scripts/UI/Uomd.UI` | Contracts, Core, Platform | `UomdUiKit`, `UomdThemeTokens`, `SafeAreaBinder`; UXML/USS in `UI/` |
 | `Scripts/Battle/Uomd.Battle` | Contracts, Core, Platform, UI | `ChibiAtlasSlicer`, `BattleVfxStage`, `VfxProceduralTextures`; shaders in `Shaders/` |
 | `Scripts/Platform/Uomd.Platform` | Contracts, Core | `IUomdPlatformBridge`, `UomdAndroidJniBridge`, `UomdEditorMockBridge`, `UomdPlatformBridgeFactory` |
-| `Scripts/Scenes/Uomd.Scenes` | all runtime | `UomdBootstrap` (runtime entry, builds `UIDocument` + router), `UomdSceneRouter`, `*ScreenController` ×28 |
+| `Scripts/Scenes/Uomd.Scenes` | all runtime | `UomdBootstrap` (runtime entry, builds `UIDocument` + router), `UomdSceneRouter`, `*ScreenController` ×28 (`BattleScreenController` runs the real engine; write `Uomd.Combat.Battle` fully qualified there, `Battle` alone resolves to the `Uomd.Battle` namespace) |
 | `Editor/Uomd.Editor` | URP, runtime | `UomdProjectSetup` (URP 2D + Android player settings, `ApplicationId = io.github.mucaeksi.unawareofmydemise`), `UomdBuild` (AAB, signing from `UOMD_KEYSTORE_*`), `UomdMcpEditorTools` |
-| `Tests/EditMode/Uomd.Tests.EditMode` | Contracts, Core | `CoreParityTests` (RNG, stat math, stars, canonical JSON, JS numbers, ES256, exported bundle) |
+| `Tests/EditMode/Uomd.Tests.EditMode` | Contracts, Core, Combat | `CoreParityTests` (RNG, stat math, stars, canonical JSON, JS numbers, ES256, exported bundle), `CombatParityTests` (171 golden replays) |
 
 Android Java bridges live in `Assets/Plugins/Android/UomdNative.androidlib/` (`UomdGoogleSignInBridge`, `UomdBillingBridge`, `UomdAdsBridge`, `UomdAppBridge`, `UomdUnityCallback`) with their Gradle dependencies.
 

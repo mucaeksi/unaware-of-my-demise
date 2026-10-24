@@ -12,6 +12,10 @@
   },
   "now": [
     {
+      "title": "U-1: bit-exact C# combat engine (2026-10-24, Claude Opus 5.5)",
+      "detail": "Uomd.Combat is now a line-by-line port of @uomd/combat (Battle, BattleReplay, typed content, JS sort/rounding semantics); the placeholder BattleSimulator is gone. 171 golden battles from tools/export_unity_combat_vectors.ts (every Part I encounter with rotating 5-hero parties, ranks, server stats, signature-echo gear hooks, tutorials, synthetic waves, illegal replays; 70,170 events covering all 29 event types and 12 hook events) replay with identical logHash/eventCount/result in C#. Mutation checks confirm the suite catches RNG, rounding, turn-order and Focus regressions. npm run verify fails when the vectors are stale. The Unity battle screen now runs the real engine on content data."
+    },
+    {
       "title": "Infrastructure pass for the Unity client (2026-10-24, Claude Opus 5.5)",
       "detail": "npm run verify green again (944 TS tests; MAX_RELEASE_FILES aligned across schema/admin/store, fixtures cover patch music/voices). apps/unity/Logic headless .NET harness (npm run test:unity-logic, 7/7 C# parity tests). npm run check:unity-compile builds all 10 asmdefs against the real Unity 6000.0.58f2 assemblies without a licence: 0 errors after fixing BannerDto (CS0509). Packages/manifest.json fixed (URP 17.0.3 does not exist; editor bundles 17.0.4, test-framework 1.5.1). 19 vetted Unity reference skills pinned; Unity skills corrected to the real code. Development page shows the Unity migration computed from the repo."
     },
@@ -33,10 +37,6 @@
     }
   ],
   "next": [
-    {
-      "title": "U-1: Port @uomd/combat to Uomd.Combat with replay parity",
-      "detail": "BattleSimulator (C# ~810 lines) is a placeholder next to packages/combat (~2,370 source lines). Export golden replays (seed, actions, logHash, eventCount) for T-1..T-3 and Part I stages from TypeScript and make the C# port match bit for bit in npm run test:unity-logic."
-    },
     {
       "title": "U-1: StoryRunner and patch admission tests in C#",
       "detail": "Port packages/story runner tests and packages/patch admission vectors to the headless harness."
@@ -2364,6 +2364,11 @@
         "name": "npm run test:unity-logic (headless C# harness)",
         "result": "pass",
         "detail": "7/7 EditMode parity tests on .NET 10: Mulberry32, D-27 stat math, victory stars, canonical JSON, JS number format, managed ES256, exported bundle"
+      },
+      {
+        "name": "C# combat replay parity (npm run test:unity-logic)",
+        "result": "pass",
+        "detail": "171/171 golden replays identical to @uomd/combat (logHash, eventCount, result, validity); all 10 asmdefs compile against Unity 6000.0.58f2 with 0 errors"
       },
       {
         "name": "npm run check:unity-compile (real Unity 6000.0.58f2 assemblies)",

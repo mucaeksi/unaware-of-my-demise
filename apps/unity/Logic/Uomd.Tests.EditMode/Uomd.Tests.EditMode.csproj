@@ -2,6 +2,7 @@
   <!--
     Runs the Unity EditMode tests that need no engine (same .cs files Unity Test Runner uses).
     NUnit 3.x keeps the classic Assert API that Unity's com.unity.ext.nunit exposes.
+    References mirror Uomd.Tests.EditMode.asmdef (Contracts, Core, Combat); keep them in step.
   -->
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -22,6 +23,5 @@
     <ProjectReference Include="../Uomd.Contracts/Uomd.Contracts.csproj" />
     <ProjectReference Include="../Uomd.Core/Uomd.Core.csproj" />
     <ProjectReference Include="../Uomd.Combat/Uomd.Combat.csproj" />
-    <ProjectReference Include="../Uomd.Narrative/Uomd.Narrative.csproj" />
   </ItemGroup>
 </Project>

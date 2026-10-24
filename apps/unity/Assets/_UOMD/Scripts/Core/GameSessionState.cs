@@ -58,7 +58,7 @@ namespace Uomd.Core
         public MailItemDto[] MailInbox { get; set; } = Array.Empty<MailItemDto>();
 
         public string ActiveStorySceneId { get; set; } = "t1_intro";
-        public string ActiveBattleEncounterId { get; set; } = "enc_t1_ash_road";
+        public string ActiveBattleEncounterId { get; set; } = "tutorial_t1";
         public string SelectedUnitId { get; set; } = "fadyme";
         public bool HardModeSelected { get; set; }
         public string BattleHudLayout { get; set; } = "afk_faithful"; // "afk_faithful" | "current" | "arena_lite"
