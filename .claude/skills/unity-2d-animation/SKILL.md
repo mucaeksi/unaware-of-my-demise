@@ -5,6 +5,8 @@ license: MIT
 ---
 # Unity 6 LTS 2D Character & Portrait Animation (`Uomd.Battle` & `Uomd.Narrative`)
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 Use this skill when implementing or debugging SD Chibi battle animations (`ChibiUnitView`), visual novel knee-up (`boydan`) portrait rigs (`PortraitRigView`), ultimate cut-ins, or hit-stop timing in `apps/unity/`.
 
 ## 1. 16-Cell (`4×4`) SD Chibi 8-State Atlas Specification

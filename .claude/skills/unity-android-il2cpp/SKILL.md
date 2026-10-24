@@ -5,6 +5,8 @@ license: Proprietary
 ---
 # Unity 6 LTS Android IL2CPP & Native JNI Bridges (`Uomd.Platform`)
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 Use this skill when working on Android builds, native Kotlin/Java plugins (`Assets/Plugins/Android/`), Google Sign-In (`CredentialManager`), Google Play Billing v7, AdMob Rewarded Ads SSV, Play Integrity, or mobile performance profiling.
 
 ## 1. Unity 6 Android Build Settings (`ProjectSettings`)

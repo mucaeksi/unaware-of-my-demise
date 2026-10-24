@@ -5,6 +5,8 @@ license: Proprietary
 ---
 # Unity 6 LTS & Claude Opus 5.5 MCP Workflow (`uomd-unity-live`)
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 Use this skill to coordinate Unity 6 LTS inspection, content bundle synchronization, C# assembly/slice verification, and automated CLI test execution in Claude Code.
 
 ## 1. `uomd-unity-live` MCP Server (`tools/mcp_unity_live.ts`)
@@ -13,7 +15,7 @@ Configured in `.mcp.json` and `.codex/config.toml` under `uomd-unity-live`, this
 - **`unity_project_status`**:
   Inspects `apps/unity/` structure (`ProjectVersion.txt`, `.asmdef` assemblies, C# script counts, scenes, and `StreamingAssets/uomd_base` sync status against `content/base`).
 - **`unity_bundle_status`**:
-  Verifies `apps/unity/Assets/StreamingAssets/uomd_base/unity_export_manifest.json` and `UomdCorePrimitives.g.cs` against `content/base/release_manifest.json` (`release_id`, SHA-256 file counts, unit slice counts).
+  Verifies `apps/unity/Assets/StreamingAssets/uomd_base/unity_export_manifest.json` and `UomdCorePrimitives.g.cs` against `content/base/release.json` (`release_id`, SHA-256 file counts, unit slice counts).
 - **`unity_inspect_unit_slices`**:
   Returns the exact 16-cell (`4×4`) chibi slice specs, top-left vs Unity bottom-left normalized pivots (`unity_pivot: { x, y }`), and asset paths for any character or enemy (`sable`, `kaelen`, `nyx`, `vesper`, `orion`, etc.).
 - **`unity_skills_search` & `unity_skill_read`**:
@@ -33,4 +35,5 @@ Configured in `.mcp.json` and `.codex/config.toml` under `uomd-unity-live`, this
    - Unity EditMode NUnit tests (when Unity Editor CLI is installed on host):
      `Unity -batchmode -nographics -projectPath apps/unity -runTests -testPlatform EditMode -testResults .cache/unity-editmode-results.xml -quit`
    - Full repository verification: `npm run verify`
-   - Commit locally on `main` (D-28 — never `git push` or `wrangler deploy`).
+   - Headless C# compile + parity tests (no Unity licence): `npm run test:unity-logic`
+   - Never run `wrangler deploy`; staging deploys only from `main` via Workers Builds (D-28).

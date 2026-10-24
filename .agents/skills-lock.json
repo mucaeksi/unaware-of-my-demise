@@ -321,126 +321,330 @@
       },
       "source_sha256": "b99e07d65c66f3a231c0f2a94bfe4aff2ef41e89e1f16645fd760c8c603c6eab"
     },
+    "unity-2d": {
+      "adapter": ".agents/skills/unity-2d/SKILL.md",
+      "adapter_sha256": "35504f952e9ed48a1fa3265ea3b6f2221b301f7da7004c69ad991ef3dbe1af0e",
+      "source": ".claude/skills/unity-2d/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-2d/SKILL.md": "b3091c645347e70c45c4b7843c5fb80ac6fdb3a919397b86f6f7466ec4c11900",
+        ".claude/skills/unity-2d/references/sprites-and-atlas.md": "8f5b29252f8a370317763d6e7ee41e60e31434735b68c6abd5b43e4a9525c507",
+        ".claude/skills/unity-2d/references/tilemaps.md": "09050872b65ad761e7dd488548a2f2a3cc8e3b52617548c42d984fa208257b0b"
+      },
+      "source_sha256": "b3091c645347e70c45c4b7843c5fb80ac6fdb3a919397b86f6f7466ec4c11900"
+    },
     "unity-2d-animation": {
       "adapter": ".agents/skills/unity-2d-animation/SKILL.md",
       "adapter_sha256": "071a87e20154e8327b0fbc502225a2f02dc484998622a34b7604335b4a7a2c9e",
       "source": ".claude/skills/unity-2d-animation/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-2d-animation/SKILL.md": "ab7c77453bb5df7c8285c43270acee260bc9016d69360fa1dcc9e161dbb3f8a3"
+        ".claude/skills/unity-2d-animation/SKILL.md": "069ffaf1bc4b3f016094d359a4b02c132563ea923c121546419da1b669bcacb3"
       },
-      "source_sha256": "ab7c77453bb5df7c8285c43270acee260bc9016d69360fa1dcc9e161dbb3f8a3"
+      "source_sha256": "069ffaf1bc4b3f016094d359a4b02c132563ea923c121546419da1b669bcacb3"
     },
     "unity-6-core": {
       "adapter": ".agents/skills/unity-6-core/SKILL.md",
       "adapter_sha256": "38aeac9d956cdae242c597fc25cd40b180d7db87570045243c2240367b6ffc70",
       "source": ".claude/skills/unity-6-core/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-6-core/SKILL.md": "857d65b4a2a84ec2909cf5cd0a421732615445f1083ab10482bc9dafa5fa0d37",
+        ".claude/skills/unity-6-core/SKILL.md": "927611276a7053d6be2fe50ea1de1fc438f156b970e57229e8ebf7f7d1c95871",
         ".claude/skills/unity-6-core/references/asmdef-architecture.md": "358d4d1fc5a9c2855d9730d2bd4cc6d45e77ac6450f53167046fb35c575d6bf3",
         ".claude/skills/unity-6-core/references/awaitable-lifecycle.md": "3713dae5d8fe2b96081d65c8d467164b56110af60a68802a7651c082e8facf5e"
       },
-      "source_sha256": "857d65b4a2a84ec2909cf5cd0a421732615445f1083ab10482bc9dafa5fa0d37"
+      "source_sha256": "927611276a7053d6be2fe50ea1de1fc438f156b970e57229e8ebf7f7d1c95871"
     },
     "unity-android-il2cpp": {
       "adapter": ".agents/skills/unity-android-il2cpp/SKILL.md",
       "adapter_sha256": "c2e563bcf7e58e67c675ac478dc94e0f82b4ea372532a6b0a813cd7daa690375",
       "source": ".claude/skills/unity-android-il2cpp/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-android-il2cpp/SKILL.md": "b4e4564bdc0a022cd02d102d26af68767cb9aa7309e8d564f3bf646f3e1ada5b"
+        ".claude/skills/unity-android-il2cpp/SKILL.md": "1297c5e271feebb24eb6a227da7efce462fc7cab632b3f2a3dad6b7c1d79b26c"
       },
-      "source_sha256": "b4e4564bdc0a022cd02d102d26af68767cb9aa7309e8d564f3bf646f3e1ada5b"
+      "source_sha256": "1297c5e271feebb24eb6a227da7efce462fc7cab632b3f2a3dad6b7c1d79b26c"
+    },
+    "unity-async-patterns": {
+      "adapter": ".agents/skills/unity-async-patterns/SKILL.md",
+      "adapter_sha256": "78df7f201755f2cc446dfbcd7ff87d283aa4dc9f999f6e68cf1fc1bb4dcd3833",
+      "source": ".claude/skills/unity-async-patterns/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-async-patterns/SKILL.md": "3e9b7f850e7ee9bc6c00d2e75134a1def8d880b5b6d672c657a03a0d40d713b6",
+        ".claude/skills/unity-async-patterns/references/async-cancellation-patterns.md": "f0fb84c5df17b950451e2b2a5405ee8687b05a76b0381332ba5dd738d6c91c62"
+      },
+      "source_sha256": "3e9b7f850e7ee9bc6c00d2e75134a1def8d880b5b6d672c657a03a0d40d713b6"
+    },
+    "unity-audio": {
+      "adapter": ".agents/skills/unity-audio/SKILL.md",
+      "adapter_sha256": "46d3ce3aab2c70acc57d76d295c97672595f6f260d5c80945f62f457b6faee07",
+      "source": ".claude/skills/unity-audio/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-audio/SKILL.md": "f17e25c439615bd7afaddd412f1831e076e5563e286f99c278c92f91bab61fd9",
+        ".claude/skills/unity-audio/references/audio-api.md": "dc60440e3d2552dc87923755db144fe6cea65733121dd7b7e01a7c08758ac410"
+      },
+      "source_sha256": "f17e25c439615bd7afaddd412f1831e076e5563e286f99c278c92f91bab61fd9"
+    },
+    "unity-data-driven": {
+      "adapter": ".agents/skills/unity-data-driven/SKILL.md",
+      "adapter_sha256": "c3c37bd97812cb74f01083a775c52ceec5b3f7fcfcf24644e3e4a36bb658843e",
+      "source": ".claude/skills/unity-data-driven/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-data-driven/SKILL.md": "265571f28c466c5b9726aa5f96de97ec0b68c7be798d71ec2ddae42fa319344b",
+        ".claude/skills/unity-data-driven/references/data-pipeline-patterns.md": "0418f729019fce683df69c736c8b76b5dc1fade8030af82cc0db7df249d32ed2"
+      },
+      "source_sha256": "265571f28c466c5b9726aa5f96de97ec0b68c7be798d71ec2ddae42fa319344b"
     },
     "unity-deterministic-combat": {
       "adapter": ".agents/skills/unity-deterministic-combat/SKILL.md",
       "adapter_sha256": "a0c71af4bbb0fcd19c60fd962496da3edc90ab7a39470b510854d178bcce2421",
       "source": ".claude/skills/unity-deterministic-combat/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-deterministic-combat/SKILL.md": "216a0f648f1b39c0e6a2cb45604f6102a62cafe76ebbb05faa19db7725b32110"
+        ".claude/skills/unity-deterministic-combat/SKILL.md": "5eb2f0cd1ccd8a069d9b3cc17677f9d372054e36b4917d2517cd0e889b8a85c9"
       },
-      "source_sha256": "216a0f648f1b39c0e6a2cb45604f6102a62cafe76ebbb05faa19db7725b32110"
+      "source_sha256": "5eb2f0cd1ccd8a069d9b3cc17677f9d372054e36b4917d2517cd0e889b8a85c9"
+    },
+    "unity-editor-tools": {
+      "adapter": ".agents/skills/unity-editor-tools/SKILL.md",
+      "adapter_sha256": "7594f14b2fff67c8eb1af166d5c24c9bdf1a74d8b835241eb0e2f16e48c6cccb",
+      "source": ".claude/skills/unity-editor-tools/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-editor-tools/SKILL.md": "ea836546b71e19625631b357f514cdaa53a542350aff87c497ce43af58364e5c",
+        ".claude/skills/unity-editor-tools/references/custom-inspectors.md": "a99f741210f3172fae26a38e1fb54331d5608650700b6a803366788c961d4c3d",
+        ".claude/skills/unity-editor-tools/references/editor-windows.md": "d0c0487af9c8fc1ecaa30ee0b814686ab8f06ac1d2ca27e926c758ab694ae7d6",
+        ".claude/skills/unity-editor-tools/references/property-drawers.md": "8b6fccd71f8228c8b066bf73b25420af30528fd5100cf87ee92f8d15b4d49dbf"
+      },
+      "source_sha256": "ea836546b71e19625631b357f514cdaa53a542350aff87c497ce43af58364e5c"
+    },
+    "unity-game-architecture": {
+      "adapter": ".agents/skills/unity-game-architecture/SKILL.md",
+      "adapter_sha256": "af086a65392c8f124b005896340e939b613e494c0669e23e6195ed684853c44e",
+      "source": ".claude/skills/unity-game-architecture/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-game-architecture/SKILL.md": "61661ac44eb48d564e84216ac5ce52f9ea5532a35f9e226e76e9895eb2b87a21",
+        ".claude/skills/unity-game-architecture/references/architecture-patterns.md": "f0d7dbf07d9a16d8e2bce1760d604fa66990415d56e8eb83e509a04082ba150c"
+      },
+      "source_sha256": "61661ac44eb48d564e84216ac5ce52f9ea5532a35f9e226e76e9895eb2b87a21"
+    },
+    "unity-graphics": {
+      "adapter": ".agents/skills/unity-graphics/SKILL.md",
+      "adapter_sha256": "0229b50456a0423f97d58d131ee79ac732ffdddd4de28ff63cfea8be335df0ad",
+      "source": ".claude/skills/unity-graphics/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-graphics/SKILL.md": "c98d67ec11243f74ef8a5d1278ef3bd9604a6d1f74e8dc95b32edcf406056a28",
+        ".claude/skills/unity-graphics/references/hdrp-guide.md": "a65ae250770bbbdc5bc820734fd43be0e22538e0470ac3dc415782150b211218",
+        ".claude/skills/unity-graphics/references/materials-textures.md": "863bc76a7e15320703c5210dfccd78b0063e57cb8d92440fef81b9a9103177a6",
+        ".claude/skills/unity-graphics/references/shader-graph.md": "1617e9c53e93924ea27f5af8266f054abaa757e359da3c1443ed6144dbb2d14c",
+        ".claude/skills/unity-graphics/references/urp-guide.md": "0493f9f3088478ed948725074008d25a69825055aa928075d4f144b5406bffa0"
+      },
+      "source_sha256": "c98d67ec11243f74ef8a5d1278ef3bd9604a6d1f74e8dc95b32edcf406056a28"
+    },
+    "unity-input": {
+      "adapter": ".agents/skills/unity-input/SKILL.md",
+      "adapter_sha256": "3d3f232bc4efef3ac365ee8f4e41ee8bfb4314800fa9bb9f9fedb1e26d9e6073",
+      "source": ".claude/skills/unity-input/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-input/SKILL.md": "9d9791c2dfae2b6b1efb6b545ac53ee055c1d0ef624930a6d7efe546dffa2de7",
+        ".claude/skills/unity-input/references/input-system-api.md": "4da90fddd08ebae88cd5824c9110c157850abec65d1e8bdeb5f3496dc024e783"
+      },
+      "source_sha256": "9d9791c2dfae2b6b1efb6b545ac53ee055c1d0ef624930a6d7efe546dffa2de7"
+    },
+    "unity-lifecycle": {
+      "adapter": ".agents/skills/unity-lifecycle/SKILL.md",
+      "adapter_sha256": "5dc5fa44013a5b27690d6de728ccb269bddee6ca242aa33ad1769731984812f1",
+      "source": ".claude/skills/unity-lifecycle/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-lifecycle/SKILL.md": "e034001e9aadb8bd5e329a6dac130e449f8552e74d4d7947b919a83d7f41aa55",
+        ".claude/skills/unity-lifecycle/references/editor-runtime-init.md": "75c4b4d7aeede984f3f70b05e4df304711d5d5b63f379561ce2d76d3681520b9"
+      },
+      "source_sha256": "e034001e9aadb8bd5e329a6dac130e449f8552e74d4d7947b919a83d7f41aa55"
     },
     "unity-mcp-workflow": {
       "adapter": ".agents/skills/unity-mcp-workflow/SKILL.md",
       "adapter_sha256": "096d340db5f9aeb59ac78738ebb360746299e87c76de38718f99f7701544d32b",
       "source": ".claude/skills/unity-mcp-workflow/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-mcp-workflow/SKILL.md": "4deda8223383ab1b35f1018feb430fb3440db805f62240aaae994d6b1e6a8cf8"
+        ".claude/skills/unity-mcp-workflow/SKILL.md": "3af98b0f064eec10f29c2bc3ae7e79d908625d4c306f4ef1e5bf8af51a5112aa"
       },
-      "source_sha256": "4deda8223383ab1b35f1018feb430fb3440db805f62240aaae994d6b1e6a8cf8"
+      "source_sha256": "3af98b0f064eec10f29c2bc3ae7e79d908625d4c306f4ef1e5bf8af51a5112aa"
+    },
+    "unity-packages-services": {
+      "adapter": ".agents/skills/unity-packages-services/SKILL.md",
+      "adapter_sha256": "8327699f7811b6417bdf129486de84e032cabc9f341d3300c9c05243a9f3c0b1",
+      "source": ".claude/skills/unity-packages-services/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-packages-services/SKILL.md": "80b8e8fb0849ef151c3d450b500c81f361441d50d633ee5369f34b3030d6915f",
+        ".claude/skills/unity-packages-services/references/common-packages.md": "bab6b489b5a294250f0ab943c753462ca739452686eb0bb8a1921e475c78c679"
+      },
+      "source_sha256": "80b8e8fb0849ef151c3d450b500c81f361441d50d633ee5369f34b3030d6915f"
+    },
+    "unity-performance": {
+      "adapter": ".agents/skills/unity-performance/SKILL.md",
+      "adapter_sha256": "7fd0621695a7a50c2d1bb7204e1062087cca80f06a041fad51d42fba01aaf877",
+      "source": ".claude/skills/unity-performance/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-performance/SKILL.md": "4443921030b8b46a6b9113e8c53703ae3e8c0b34be80f6d6205745a3d3d2b6bd",
+        ".claude/skills/unity-performance/references/memory-optimization.md": "fd032b15bdc68ea22ff1994ae86d2feec8522ca0cd959c7ec6e585c225acae54",
+        ".claude/skills/unity-performance/references/profiler-guide.md": "0b6068c6d6713ceede38435b4977ca8f2e659685b1ce5762fb88cd5abc816235"
+      },
+      "source_sha256": "4443921030b8b46a6b9113e8c53703ae3e8c0b34be80f6d6205745a3d3d2b6bd"
+    },
+    "unity-platforms": {
+      "adapter": ".agents/skills/unity-platforms/SKILL.md",
+      "adapter_sha256": "56f729505024f7cc6acdb5525c59129c20beda4c63a44aa86ac9ca788eff75fc",
+      "source": ".claude/skills/unity-platforms/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-platforms/SKILL.md": "1dcaf8335d5893f0d7d83bbce34d73069e5113eb8af576eac653329a4f7ca641",
+        ".claude/skills/unity-platforms/references/mobile-optimization.md": "192b258b858b44af0b561f34e973a875241767a79eced86de77c38d924e7a083",
+        ".claude/skills/unity-platforms/references/platform-defines.md": "76665d362d62628a6c7727b93ede89208aa7d870e8bde5890a9f710d93c15604"
+      },
+      "source_sha256": "1dcaf8335d5893f0d7d83bbce34d73069e5113eb8af576eac653329a4f7ca641"
+    },
+    "unity-save-system": {
+      "adapter": ".agents/skills/unity-save-system/SKILL.md",
+      "adapter_sha256": "250ddd66ef4fb43f9abd218862ec846ea2cba1b72218830d748e1276bc4b3186",
+      "source": ".claude/skills/unity-save-system/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-save-system/SKILL.md": "5ed497c91af62d6fdc3ffb0932d5803efde9a7392d83bae8818988a47ceb908a",
+        ".claude/skills/unity-save-system/references/save-load-implementation.md": "7a2ee6cce7b6b0e421cd00015f720bb389831e6cc237b23c98027f5cc89f77e9"
+      },
+      "source_sha256": "5ed497c91af62d6fdc3ffb0932d5803efde9a7392d83bae8818988a47ceb908a"
+    },
+    "unity-scene-assets": {
+      "adapter": ".agents/skills/unity-scene-assets/SKILL.md",
+      "adapter_sha256": "7b52559c56b4fca75100a3ecdcb3784797ed5d33b285851770f7de670acd9c7e",
+      "source": ".claude/skills/unity-scene-assets/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-scene-assets/SKILL.md": "502f35833277ce9daa45bd033227f34d3d558e25603f2f2862b1b54f4bdb565a",
+        ".claude/skills/unity-scene-assets/references/addressables-scene-patterns.md": "aea22d251f26d972dbe14e2f44b489c8a475c87f50a88da27965c5016dd4576d"
+      },
+      "source_sha256": "502f35833277ce9daa45bd033227f34d3d558e25603f2f2862b1b54f4bdb565a"
+    },
+    "unity-scripting": {
+      "adapter": ".agents/skills/unity-scripting/SKILL.md",
+      "adapter_sha256": "1895ea2d25ebac5138e96fb35599157462cd684c3f9a375537bfa6346e79a466",
+      "source": ".claude/skills/unity-scripting/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-scripting/SKILL.md": "9c7c434964ee5aa13112aaddaeb13c30df8841cccf61860fabc37a2265bba484",
+        ".claude/skills/unity-scripting/references/coroutines-and-async.md": "f8b33d75293dc780f1c757398e794a99debaa4bbd7649a60f338f31e2364e06f",
+        ".claude/skills/unity-scripting/references/monobehaviour-lifecycle.md": "5d001326b57d987a4cc25f6f1fabbc9efdbf3db0aa34202d3d9638bdde1f8c87",
+        ".claude/skills/unity-scripting/references/object-pool.md": "9b49351c410f7887838357de419e50a75722f545f2d8daaa4faee7cef805760f",
+        ".claude/skills/unity-scripting/references/scriptableobjects.md": "195ba26cbeaac5dc7e578bf2f2eb3e82471db32ee2f039e3fdd90e33f50813a7"
+      },
+      "source_sha256": "9c7c434964ee5aa13112aaddaeb13c30df8841cccf61860fabc37a2265bba484"
+    },
+    "unity-state-machines": {
+      "adapter": ".agents/skills/unity-state-machines/SKILL.md",
+      "adapter_sha256": "337e348c8f506cb7e5ba71bd100a1683d61550a7638ea9507e840565cfe6b0da",
+      "source": ".claude/skills/unity-state-machines/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-state-machines/SKILL.md": "19fd60653296b7399e17b80ba16e197671eb0e27c6f77f3dff63a8855c94ba97",
+        ".claude/skills/unity-state-machines/references/state-system-scaffolds.md": "8415b301630e88887651467391ebd6134812bac4c55b2c72d66a127532bcc54b"
+      },
+      "source_sha256": "19fd60653296b7399e17b80ba16e197671eb0e27c6f77f3dff63a8855c94ba97"
+    },
+    "unity-testing": {
+      "adapter": ".agents/skills/unity-testing/SKILL.md",
+      "adapter_sha256": "1f1ca56d1e3d548b3b9982f6047683b831f0e945bf9d11b3afb6d21360a64037",
+      "source": ".claude/skills/unity-testing/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-testing/SKILL.md": "4928639d2adc279f39b199fcf6b4fe0d18e57d448d90957cd28539cf495cb49e",
+        ".claude/skills/unity-testing/references/test-framework.md": "9cc875ef6d585d973c25c71521af2c3128ed39b84c7806743a8638873d0ad81e"
+      },
+      "source_sha256": "4928639d2adc279f39b199fcf6b4fe0d18e57d448d90957cd28539cf495cb49e"
+    },
+    "unity-ui": {
+      "adapter": ".agents/skills/unity-ui/SKILL.md",
+      "adapter_sha256": "7d41fb1e370d036080724cbe8aa26f011003bbf9d39995feb8114768d15cc573",
+      "source": ".claude/skills/unity-ui/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-ui/SKILL.md": "0540842c6e77257122ea130053647f9b6f08e8b208e97d5a9a76980cef24ceda",
+        ".claude/skills/unity-ui/references/textmeshpro.md": "a69dce713d4d3bc0f77cb885e2e2a0d40cb05f0fb1f30c05607085715de7172a",
+        ".claude/skills/unity-ui/references/ugui-legacy.md": "d3be1b87e3a64cec42c18ac3311e81e534642e9707fb1fbf9e420f84f1038eb9",
+        ".claude/skills/unity-ui/references/ui-data-binding.md": "e54e886cd4796cf268a79c195b934475d553a8fde8502cd57a9fa270977bf104",
+        ".claude/skills/unity-ui/references/ui-toolkit-guide.md": "a41a1b7d97f80d2b5a84e39667187e3812161df8da423460842a47eb047cca70"
+      },
+      "source_sha256": "0540842c6e77257122ea130053647f9b6f08e8b208e97d5a9a76980cef24ceda"
+    },
+    "unity-ui-patterns": {
+      "adapter": ".agents/skills/unity-ui-patterns/SKILL.md",
+      "adapter_sha256": "fe69ad3698d5010bacb5274101070449472e598bf07029b70e288ed14c981c06",
+      "source": ".claude/skills/unity-ui-patterns/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-ui-patterns/SKILL.md": "51a0fb1ab5bd967c986bfe810d189983410af4c6b23f18f343190967474e3cda",
+        ".claude/skills/unity-ui-patterns/references/ui-pattern-scaffolds.md": "9f31eb1bea551d01325a2e5813a5b4c4878b838e3f80b87c92a586d6b52f5a74"
+      },
+      "source_sha256": "51a0fb1ab5bd967c986bfe810d189983410af4c6b23f18f343190967474e3cda"
     },
     "unity-ui-toolkit": {
       "adapter": ".agents/skills/unity-ui-toolkit/SKILL.md",
       "adapter_sha256": "362d73ac9cbe70f061ee76092cde502067d89e16d214997ff16f98f0f16300f2",
       "source": ".claude/skills/unity-ui-toolkit/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-ui-toolkit/SKILL.md": "74ae9977e48a3308ec6b4793c706a945bf0dd8b87c7b40be476f0bffb4b11883",
+        ".claude/skills/unity-ui-toolkit/SKILL.md": "c7710ffd7fd5998e3d831b8a91d55f859800f75348fecafb10a9b1ae5db9f36d",
         ".claude/skills/unity-ui-toolkit/references/uss-gothic-tokens.md": "69763e1e6e358fcd298a8c3676695e7203a9bc5ac949cc5c65e2d221f84a9ea1"
       },
-      "source_sha256": "74ae9977e48a3308ec6b4793c706a945bf0dd8b87c7b40be476f0bffb4b11883"
+      "source_sha256": "c7710ffd7fd5998e3d831b8a91d55f859800f75348fecafb10a9b1ae5db9f36d"
     },
     "unity-urp-2d": {
       "adapter": ".agents/skills/unity-urp-2d/SKILL.md",
       "adapter_sha256": "85462ab57753f08cbabdaaad281614aaf0f60e441a4bf3a0fd4fa254c302b69b",
       "source": ".claude/skills/unity-urp-2d/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-urp-2d/SKILL.md": "a34148b165e8a1d5d67a716f578dbe2bad42a81bc7c45637d5c250d44bd32188",
+        ".claude/skills/unity-urp-2d/SKILL.md": "f5abfeca88223ff3f78191774436a5e98c2a0fc32563e7b2342852a73844f6cd",
         ".claude/skills/unity-urp-2d/references/sprite-slicing-and-pivots.md": "8ca51a37ff55ca9a0c7bdab2511d6accc79632aa93424e308c1eff68730123df"
       },
-      "source_sha256": "a34148b165e8a1d5d67a716f578dbe2bad42a81bc7c45637d5c250d44bd32188"
+      "source_sha256": "f5abfeca88223ff3f78191774436a5e98c2a0fc32563e7b2342852a73844f6cd"
     },
     "uomd-anime-ui": {
       "adapter": ".agents/skills/uomd-anime-ui/SKILL.md",
       "adapter_sha256": "f718df07f7aab50dcb380aa2c7842ba89ddcea6cc9e90557b9b499846849fae1",
       "source": ".claude/skills/uomd-anime-ui/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-anime-ui/SKILL.md": "97771dd2c68eec62a57d954ca5f325bc403af64fe082d9d9569a74447ee0e968"
+        ".claude/skills/uomd-anime-ui/SKILL.md": "0066cb1f6cf7ba0fd42e45de9c55c0e630901d482a3432181a48fea073eeca67"
       },
-      "source_sha256": "97771dd2c68eec62a57d954ca5f325bc403af64fe082d9d9569a74447ee0e968"
+      "source_sha256": "0066cb1f6cf7ba0fd42e45de9c55c0e630901d482a3432181a48fea073eeca67"
     },
     "uomd-battle": {
       "adapter": ".agents/skills/uomd-battle/SKILL.md",
       "adapter_sha256": "468e8f65fd15969e2823fdc53afa899205f5a340ec810350a74c627cefd3e170",
       "source": ".claude/skills/uomd-battle/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-battle/SKILL.md": "4772337170a45bde4036b04e1bbee8f675f81e9515ab46ca4f1ce13be83b0aa6"
+        ".claude/skills/uomd-battle/SKILL.md": "e00bb54403eb1d52492d587b0799aca427d541fcb2914fd08cea659199a1a572"
       },
-      "source_sha256": "4772337170a45bde4036b04e1bbee8f675f81e9515ab46ca4f1ce13be83b0aa6"
+      "source_sha256": "e00bb54403eb1d52492d587b0799aca427d541fcb2914fd08cea659199a1a572"
     },
     "uomd-chibi-animation": {
       "adapter": ".agents/skills/uomd-chibi-animation/SKILL.md",
       "adapter_sha256": "5f341357b3711baf3ce6ff63f5d0c51679a09042c16755aa1467d4b848b45d46",
       "source": ".claude/skills/uomd-chibi-animation/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-chibi-animation/SKILL.md": "51c91c84393493f3f88e93df396542173c4024cd5bb730a08b3ab7b67ab15252"
+        ".claude/skills/uomd-chibi-animation/SKILL.md": "7e9b82f7817c4349af71fb8c9a04c3a73cde5e8037566a35093002e1be4f242d"
       },
-      "source_sha256": "51c91c84393493f3f88e93df396542173c4024cd5bb730a08b3ab7b67ab15252"
+      "source_sha256": "7e9b82f7817c4349af71fb8c9a04c3a73cde5e8037566a35093002e1be4f242d"
     },
     "uomd-mobile-qa": {
       "adapter": ".agents/skills/uomd-mobile-qa/SKILL.md",
       "adapter_sha256": "9b0682abdd32eacc469bbf5c2f29c5226449d0517e5d3b5e5cfe6209cc9872f5",
       "source": ".claude/skills/uomd-mobile-qa/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-mobile-qa/SKILL.md": "494a18687999930fcece042ca323be8c199b8553eb09d60f27f6faca7b52d889"
+        ".claude/skills/uomd-mobile-qa/SKILL.md": "6a7c660711af18a557f06d4e58f9e792d212ca1206031fdd4f44423bea6d51a9"
       },
-      "source_sha256": "494a18687999930fcece042ca323be8c199b8553eb09d60f27f6faca7b52d889"
+      "source_sha256": "6a7c660711af18a557f06d4e58f9e792d212ca1206031fdd4f44423bea6d51a9"
     },
     "uomd-narrative-cinematics": {
       "adapter": ".agents/skills/uomd-narrative-cinematics/SKILL.md",
       "adapter_sha256": "31cc96a8ba3452aaa600f2ef6e1d7ad575b71274bc9bfe94b38741f69b23a4e0",
       "source": ".claude/skills/uomd-narrative-cinematics/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-narrative-cinematics/SKILL.md": "31fe2ea7bef95d3c6fc76f09dd81ba4c8e18eca78af751b7342f5853f832f776"
+        ".claude/skills/uomd-narrative-cinematics/SKILL.md": "cf14a9c67193f0788e04790836289f15e10b18fbb1b8e063d6a1a8d4c58b5a7c"
       },
-      "source_sha256": "31fe2ea7bef95d3c6fc76f09dd81ba4c8e18eca78af751b7342f5853f832f776"
+      "source_sha256": "cf14a9c67193f0788e04790836289f15e10b18fbb1b8e063d6a1a8d4c58b5a7c"
     },
     "uomd-unity-engine": {
       "adapter": ".agents/skills/uomd-unity-engine/SKILL.md",
-      "adapter_sha256": "55747430bfe951c99076cf61bc7278ccb0d2b693e6a1556462f6c13b847d8797",
+      "adapter_sha256": "29fa0eefcb80d54a4110d926ed5fde458b4f3c12b8b6c671cd48c02199458f17",
       "source": ".claude/skills/uomd-unity-engine/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-unity-engine/SKILL.md": "7b35be143723838c949f556491483b381d2fb47966401eeffe6540824952964f"
+        ".claude/skills/uomd-unity-engine/SKILL.md": "11aa4569139be2cac74c54cbf1caaf288fae4c614827329314687fd14875076f"
       },
-      "source_sha256": "7b35be143723838c949f556491483b381d2fb47966401eeffe6540824952964f"
+      "source_sha256": "11aa4569139be2cac74c54cbf1caaf288fae4c614827329314687fd14875076f"
     },
     "vite-patterns": {
       "adapter": ".agents/skills/vite-patterns/SKILL.md",
@@ -452,7 +656,7 @@
       "source_sha256": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
     }
   },
-  "canonicalLockSha256": "79e69ae1ffca090019e37b9cc4230f195f1fe148a0bf9e9bd91984ddbbdc987e",
+  "canonicalLockSha256": "43c19277d63fe7063424a30a112f6b537c66aa68f3cddae56ccdba29f8e64ebf",
   "executableHooksEnabled": false,
   "generatedBy": "tools/sync_codex_skills.py",
   "schemaVersion": 1

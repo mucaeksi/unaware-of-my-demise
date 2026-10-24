@@ -5,7 +5,7 @@
  * Configured under Decision D-31 (2026-10-24).
  * Provides Claude Opus 5.5 (`claude-opus-5-5` / Claude Code) with deterministic tools to:
  *  - `unity_project_status`: Inspect `apps/unity/` structure, `.asmdef` assemblies, C# scripts, scenes, and `ProjectVersion.txt`.
- *  - `unity_bundle_status`: Verify `apps/unity/Assets/StreamingAssets/uomd_base/unity_export_manifest.json` and `UomdCorePrimitives.g.cs` parity against `content/base/release_manifest.json`.
+ *  - `unity_bundle_status`: Verify `apps/unity/Assets/StreamingAssets/uomd_base/unity_export_manifest.json` and `UomdCorePrimitives.g.cs` parity against `content/base/release.json`.
  *  - `unity_inspect_unit_slices`: Query 16-cell (4x4) chibi slice coordinates, top-left vs Unity bottom-left normalized foot pivots (`unity_pivot: { x, y }`), and asset paths for any unit.
  *  - `unity_skills_search`: Search canonical Unity 6 LTS and UOMD engine skills in `.claude/skills/`.
  *  - `unity_skill_read`: Read the full `SKILL.md` and reference docs of any Unity 6 LTS or UOMD skill.
@@ -316,7 +316,7 @@ const TOOLS = [
   {
     name: 'unity_bundle_status',
     description:
-      'Verify parity between `content/base/release_manifest.json` and `apps/unity/Assets/StreamingAssets/uomd_base/unity_export_manifest.json` + `UomdCorePrimitives.g.cs`.',
+      'Verify parity between `content/base/release.json` and `apps/unity/Assets/StreamingAssets/uomd_base/unity_export_manifest.json` + `UomdCorePrimitives.g.cs`.',
     inputSchema: {
       type: 'object',
       properties: {}

@@ -5,6 +5,8 @@ license: MIT
 ---
 # Unity 6 LTS Universal Render Pipeline 2D (URP 2D)
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 Use this skill when building or debugging 2D rendering, sprite slicing, sorting layers, lighting, custom shaders, or combat/story visual effects in `apps/unity/`.
 
 ## 1. URP 2D Renderer & Camera Configuration

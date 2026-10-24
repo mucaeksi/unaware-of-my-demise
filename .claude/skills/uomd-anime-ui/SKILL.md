@@ -4,6 +4,8 @@ description: Design and review Gothic anime game UI for Unaware of My Demise (mo
 ---
 # Gothic anime UI (`Uomd.UI` & `apps/admin`)
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 - Read README (R10/R15), `narrative/` art direction, and `unity-ui-toolkit` first. Reference viewport is `1920×1080` landscape (`PanelSettings` `ScaleWithScreenSize`, `Match = 0.5`); apply real `Screen.safeArea` insets (`SafeAreaBinder`) to HUD, modals, and touch zones.
 - Menus, Title, Sanctum (`Home`), Summon (`Gacha`), Roster, Character Detail, Team Formation, Relics (`Gear`), World Map (`Chapters`), Modes, and Battle/Story HUDs are built with **Unity 6 Runtime UI Toolkit (`UIDocument`, UXML, USS)** and **TextMeshPro SDF** (`Cinzel` for uppercase display/headers, `Cormorant Garamond` for dialogue/body). Decorative borders and overlays must set `picking-mode: ignore`.
 - Tokens (`uomd-tokens.uss`): parchment `#f2e9dc`, antique gold `#d6b36a`, obsidian `#07050c`, crimson `#b84a59`; restrained gothic ornament, WCAG AA readable contrast, physical-size touch targets (`>= 48 dp` / `>= 64 px` at `1920×1080`).

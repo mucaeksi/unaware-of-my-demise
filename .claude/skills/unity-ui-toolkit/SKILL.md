@@ -5,6 +5,8 @@ license: MIT
 ---
 # Unity 6 Runtime UI Toolkit & Gothic Dark Anime UI
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 Use this skill when building or reviewing any screen, modal, HUD, or typography in `apps/unity/Assets/_UOMD/UI/` (`Uomd.UI`, `Uomd.Battle`, `Uomd.Narrative`).
 
 ## 1. PanelSettings & Reference Viewport

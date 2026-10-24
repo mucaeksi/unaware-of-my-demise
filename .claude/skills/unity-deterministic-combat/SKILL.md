@@ -5,6 +5,8 @@ license: Proprietary
 ---
 # Bit-Exact C# Deterministic Combat (`Uomd.Combat` & `Uomd.Core`)
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 Use this skill whenever touching combat simulation, RNG, stat formulas, status effects, turn order, or battle verification in `apps/unity/Assets/_UOMD/Scripts/Combat/` or `Core/`.
 
 ## 1. Why Bit-Exact Parity Matters

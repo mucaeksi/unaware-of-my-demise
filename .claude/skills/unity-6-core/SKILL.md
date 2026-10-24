@@ -5,6 +5,8 @@ license: MIT
 ---
 # Unity 6 LTS (6000.0.x) Core Architecture & C# Standards
 
+> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+
 Use this skill whenever writing, refactoring, or reviewing C# scripts, `.asmdef` packages, async workflows, or scene lifecycles in `apps/unity/`.
 
 ## 1. Unity 6 `Awaitable` Async Discipline (Replaces Coroutines)
