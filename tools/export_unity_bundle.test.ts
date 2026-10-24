@@ -100,4 +100,21 @@ describe('export_unity_bundle (D-31 Unity migration tooling)', () => {
       rmSync(tempOut, { recursive: true, force: true });
     }
   });
+
+  it('configures IvanMurzak/Unity-MCP (com.ivanmurzak.unity.mcp) and UomdMcpEditorTools in apps/unity', () => {
+    const manifestPath = join(process.cwd(), 'apps/unity/Packages/manifest.json');
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as {
+      dependencies?: Record<string, string>;
+      scopedRegistries?: Array<{ url: string; scopes: string[] }>;
+    };
+    expect(manifest.dependencies?.['com.ivanmurzak.unity.mcp']).toBe('1.5.0');
+    expect(manifest.scopedRegistries?.[0]?.url).toBe('https://package.openupm.com');
+    expect(manifest.scopedRegistries?.[0]?.scopes).toContain('com.ivanmurzak');
+
+    const editorToolsPath = join(process.cwd(), 'apps/unity/Assets/_UOMD/Editor/UomdMcpEditorTools.cs');
+    expect(existsSync(editorToolsPath)).toBe(true);
+    const editorToolsCs = readFileSync(editorToolsPath, 'utf8');
+    expect(editorToolsCs).toContain('VerifyBundleAndParity');
+    expect(editorToolsCs).toContain('InspectActiveSceneJson');
+  });
 });

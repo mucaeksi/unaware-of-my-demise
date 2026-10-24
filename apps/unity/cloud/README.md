@@ -26,6 +26,25 @@ Batchmode needs an activated seat on the VM:
 
 Never commit credentials. Pass them through the VM's secret store or environment.
 
+## Claude Code on the web (GitHub repo) + Cloudflare
+
+The project setup is: Claude Code works on the GitHub repo, and Cloudflare hosts everything else (Workers, D1, R2, Access, Workers
+Builds). Unity is the only part that cannot run on Cloudflare, so it must run inside the Claude Code cloud session (or any Linux VM).
+
+- **Environment setup script:** `bash apps/unity/cloud/setup_linux.sh`. It works both as root and with `sudo`, and it is
+  non-interactive. Unity takes about 8–12 GB of disk, so pick an environment that has that space and keeps it between sessions.
+  Otherwise every session reinstalls Unity.
+- **Network allowlist** (Limited/custom network mode): `hub.unity3d.com`, `download.unity3d.com`, `public-cdn.cloud.unity3d.com`,
+  `core.cloud.unity3d.com`, `license.unity3d.com`, `activation.unity3d.com`, `api.unity.com`, `packages.unity.com`,
+  `download.packages.unity.com`, `dl.google.com`, `maven.google.com`, `repo.maven.apache.org`, `services.gradle.org`,
+  `plugins.gradle.org`, `deb.nodesource.com`, `registry.npmjs.org`, `github.com`, `objects.githubusercontent.com`.
+- **License:** a headless session cannot sign in to Unity Hub, so Personal activation does not work there. Use a Pro/Plus serial
+  through the environment's secret variables (`UNITY_SERIAL`, `UNITY_EMAIL`, `UNITY_PASSWORD`), or a Unity Build Server.
+- **Cloudflare is unchanged:** Workers Builds still runs `npm run build -w @uomd/game`. That runs `tools/export_unity_bundle.ts`
+  (PNG siblings need `sharp`, which is already a root dependency) and serves `apps/unity/CloudflareGatewayDist` from
+  `apps/api/wrangler.game.jsonc`. The Unity AAB is built in the Claude Code session and uploaded to Play. It is never built on
+  Cloudflare.
+
 ## 3. Run
 
 ```bash

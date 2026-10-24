@@ -1,0 +1,674 @@
+{
+  "schema_version": "1.0",
+  "title": "Unaware of My Demise — Part I Villains, Bosses & Enemy Archetypes Voice & Effect Script",
+  "story_lines": [
+    {
+      "line_id": "opening_008",
+      "scene_id": "opening_sad_scene",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "aristocratic_inquisitor",
+      "gemini_voice": "Erinome",
+      "emotion": "grave",
+      "text_en": "Princess. The road ends at the altar. Give me the last hour before it takes you.",
+      "ja": "姫殿下。道は祭壇で終わります。あれに奪われる前に、最後のひと時を私にお渡しなさい。",
+      "tts_text_gemini38": "姫殿下。 <short pause> 道は、祭壇で終わります。 <short pause> あれに奪われる前に……最後のひと時を、私にお渡しなさい。",
+      "recorded_duration_s": 9.03
+    },
+    {
+      "line_id": "opening_010",
+      "scene_id": "opening_sad_scene",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "aristocratic_inquisitor",
+      "gemini_voice": "Erinome",
+      "emotion": "warning",
+      "text_en": "I came to stop the bell, not to kill its prisoner. You cannot guard a door that has already chosen its offering.",
+      "ja": "私は鐘を止めに来たのです、囚人を殺しに来たのではありません。すでに生贄を選んだ扉を、守ることなどできはしない。",
+      "tts_text_gemini38": "私は鐘を止めに来たのです、囚人を殺しに来たのではありません。 <short pause> すでに生贄を選んだ扉を……守ることなど、できはしない。",
+      "recorded_duration_s": 10.41
+    },
+    {
+      "line_id": "opening_015",
+      "scene_id": "opening_sad_scene",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "distant_bell_echo",
+      "gemini_voice": "Erinome",
+      "emotion": "distant",
+      "text_en": "When the names begin to vanish, remember: I warned you.",
+      "ja": "名前が消え始めたとき、思い出しなさい――私は警告したと。",
+      "tts_text_gemini38": "名前が消え始めたとき、思い出しなさい…… <short pause> 私は、警告したと。",
+      "recorded_duration_s": 6.02
+    },
+    {
+      "line_id": "node_2_5_pre_001",
+      "scene_id": "vn_2_5_pre",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "aristocratic_inquisitor",
+      "gemini_voice": "Erinome",
+      "emotion": "controlled",
+      "text_en": "You found the record. You still do not know what it asks of her.",
+      "ja": "記録を見つけたのね。けれど、それが彼女に何を求めているのか、まだ分かっていない。",
+      "tts_text_gemini38": "記録を見つけたのね。 <short pause> けれど、それが彼女に何を求めているのか……まだ分かっていない。",
+      "recorded_duration_s": 7.18
+    },
+    {
+      "line_id": "node_2_5_pre_003",
+      "scene_id": "vn_2_5_pre",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "aristocratic_inquisitor",
+      "gemini_voice": "Erinome",
+      "emotion": "grave",
+      "text_en": "The altar does not cure. It keeps a wound open until the kingdom can be put back inside it.",
+      "ja": "祭壇は癒やしなどしない。王国をその中へ戻せる日まで、傷口を開いたままにしておくだけよ。",
+      "tts_text_gemini38": "祭壇は癒やしなどしない。 <short pause> 王国をその中へ戻せる日まで、傷口を開いたままにしておくだけよ。",
+      "recorded_duration_s": 8.2
+    },
+    {
+      "line_id": "node_2_5_pre_005",
+      "scene_id": "vn_2_5_pre",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "aristocratic_inquisitor",
+      "gemini_voice": "Erinome",
+      "emotion": "honest",
+      "text_en": "I came to stop the next sacrifice. I will not pretend that makes my choice yours.",
+      "ja": "私は次の生贄を止めに来た。だからといって、私の選択をあなたたちに強いるつもりはないわ。",
+      "tts_text_gemini38": "私は、次の生贄を止めに来た。 <short pause> だからといって、私の選択をあなたたちに強いるつもりはないわ。",
+      "recorded_duration_s": 8.65
+    },
+    {
+      "line_id": "node_2_5_pre_006",
+      "scene_id": "vn_2_5_pre",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "aristocratic_inquisitor",
+      "gemini_voice": "Erinome",
+      "emotion": "cold",
+      "text_en": "And you, Sir Mahmut. You told her you did not know me.",
+      "ja": "それと、マフムト卿。彼女には、私を知らないと言ったそうね。",
+      "tts_text_gemini38": "それと……マフムト卿。 <short pause> 彼女には、私を知らないと言ったそうね。",
+      "recorded_duration_s": 5.48
+    },
+    {
+      "line_id": "node_2_5_post_003",
+      "scene_id": "vn_2_5_post",
+      "speaker_id": "yseldra_distant",
+      "villain_type": "distant_bell_echo",
+      "gemini_voice": "Erinome",
+      "emotion": "warning",
+      "text_en": "Ask who keeps the hour running.",
+      "ja": "誰が時を動かし続けているのか、問いなさい。",
+      "tts_text_gemini38": "誰が時を動かし続けているのか……問いなさい。",
+      "recorded_duration_s": 4.09
+    },
+    {
+      "line_id": "ending_yseldra_001",
+      "scene_id": "part1_clockless_reveal",
+      "speaker_id": "lady_yseldra_vale",
+      "villain_type": "aristocratic_inquisitor",
+      "gemini_voice": "Erinome",
+      "emotion": "bitter",
+      "text_en": "Do not mistake him for your answer, Fadyme. He only knows how to turn grief into a bargain.",
+      "ja": "彼を答えだと思わないことね、ファディメ。この男は、悲しみを取引に変える術しか知らないのだから。",
+      "tts_text_gemini38": "彼を答えだと思わないことね、ファディメ。 <short pause> この男は、悲しみを取引に変える術しか知らないのだから。",
+      "recorded_duration_s": 8.47
+    },
+    {
+      "line_id": "ending_cael_001",
+      "scene_id": "part1_clockless_reveal",
+      "speaker_id": "lord_cael_veyr",
+      "villain_type": "clockless_chancellor",
+      "gemini_voice": "Charon",
+      "emotion": "cool_amusement",
+      "text_en": "You have finally told him the truth. How considerate of you to wait until the hour was nearly gone.",
+      "ja": "ようやく彼に真実を告げたか。時が尽きかけるまで待つとは、実に心優しいことだ。",
+      "tts_text_gemini38": "ようやく彼に真実を告げたか。 <short pause> 時が尽きかけるまで待つとは……実に心優しいことだ。",
+      "recorded_duration_s": 6.47
+    },
+    {
+      "line_id": "ending_cael_002",
+      "scene_id": "part1_clockless_reveal",
+      "speaker_id": "lord_cael_veyr",
+      "villain_type": "clockless_chancellor",
+      "gemini_voice": "Charon",
+      "emotion": "formal",
+      "text_en": "Lord Cael Veyr. The Clockless Chancellor, if titles still comfort anyone.",
+      "ja": "カエル・ヴェイル卿。肩書きがまだ誰かの慰めになるなら、『無窮の宰相』とでも呼ぶがいい。",
+      "tts_text_gemini38": "カエル・ヴェイル卿。 <short pause> 肩書きがまだ誰かの慰めになるなら、『無窮の宰相』とでも呼ぶがいい。",
+      "recorded_duration_s": 6.78
+    },
+    {
+      "line_id": "ending_cael_003",
+      "scene_id": "part1_clockless_reveal",
+      "speaker_id": "lord_cael_veyr",
+      "villain_type": "clockless_chancellor",
+      "gemini_voice": "Charon",
+      "emotion": "cold",
+      "text_en": "The court recorded my death. It did not record where my missing hour went.",
+      "ja": "宮廷は私の死を記録した。だが、私の消えた時がどこへ行ったかは記録しなかったのだよ。",
+      "tts_text_gemini38": "宮廷は私の死を記録した。 <short pause> だが、私の消えた時がどこへ行ったかは……記録しなかったのだよ。",
+      "recorded_duration_s": 7.14
+    },
+    {
+      "line_id": "ending_cael_004",
+      "scene_id": "part1_clockless_reveal",
+      "speaker_id": "lord_cael_veyr",
+      "villain_type": "clockless_chancellor",
+      "gemini_voice": "Charon",
+      "emotion": "measured",
+      "text_en": "I made a door. Yseldra chose who would stand in it.",
+      "ja": "私は扉を造った。その扉に誰を立たせるかを選んだのは、イゼルドラだ。",
+      "tts_text_gemini38": "私は扉を造った。 <short pause> その扉に誰を立たせるかを選んだのは、イゼルドラだ。",
+      "recorded_duration_s": 6.09
+    },
+    {
+      "line_id": "ending_cael_005",
+      "scene_id": "part1_clockless_reveal",
+      "speaker_id": "lord_cael_veyr",
+      "villain_type": "clockless_chancellor",
+      "gemini_voice": "Charon",
+      "emotion": "inviting",
+      "text_en": "Come to the Clockless Court, Mahmut. I can return the hours the curse has taken. The price is one hour that belongs to you.",
+      "ja": "無窮の宮廷へ来い、マフムト。呪いが奪った時を返してやろう。代償は、お前自身の時ひとつだ。",
+      "tts_text_gemini38": "無窮の宮廷へ来い、マフムト。 <short pause> 呪いが奪った時を返してやろう。 <short pause> 代償は……お前自身の時、ひとつだ。",
+      "recorded_duration_s": 8.31
+    },
+    {
+      "line_id": "ending_cael_006",
+      "scene_id": "part1_clockless_reveal",
+      "speaker_id": "lord_cael_veyr",
+      "villain_type": "clockless_chancellor",
+      "gemini_voice": "Charon",
+      "emotion": "quiet_threat",
+      "text_en": "Then she keeps fading, and you keep learning what 'too late' means.",
+      "ja": "ならば彼女は消え続け、お前は『手遅れ』の意味を思い知り続けるがいい。",
+      "tts_text_gemini38": "ならば彼女は消え続け…… <short pause> お前は、『手遅れ』の意味を思い知り続けるがいい。",
+      "recorded_duration_s": 5.74
+    },
+    {
+      "line_id": "node_3_5_pre_001",
+      "scene_id": "vn_3_5_pre",
+      "speaker_id": "rusk",
+      "villain_type": "mercenary_duelist",
+      "gemini_voice": "Fenrir",
+      "emotion": "cold",
+      "text_en": "The order says the heir comes quietly. It says nothing about the village.",
+      "ja": "命令書には『世継ぎを静かに連行しろ』とある。村の連中をどうしろとは書いちゃいない。",
+      "tts_text_gemini38": "命令書には、『世継ぎを静かに連行しろ』とある。 <short pause> 村の連中をどうしろとは書いちゃいない。",
+      "recorded_duration_s": 5.99
+    },
+    {
+      "line_id": "node_3_5_pre_003",
+      "scene_id": "vn_3_5_pre",
+      "speaker_id": "rusk",
+      "villain_type": "mercenary_duelist",
+      "gemini_voice": "Fenrir",
+      "emotion": "uneasy",
+      "text_en": "It was sealed by someone the Crown buried years ago.",
+      "ja": "そいつには、王家が何年も前に葬ったはずの誰かの封蝋が押されていた。",
+      "tts_text_gemini38": "そいつには……王家が何年も前に葬ったはずの誰かの封蝋が押されていた。",
+      "recorded_duration_s": 4.79
+    },
+    {
+      "line_id": "node_4_3_pre_002",
+      "scene_id": "vn_4_3_pre",
+      "speaker_id": "alchemist",
+      "villain_type": "undercity_alchemist",
+      "gemini_voice": "Puck",
+      "emotion": "grave",
+      "text_en": "Not a month now. Weeks, perhaps less, if the bell keeps calling.",
+      "ja": "もう一ヶ月も保たない。鐘が呼び続ければ、数週間……いや、それ以下だ。",
+      "tts_text_gemini38": "もう一ヶ月も保たない。 <short pause> 鐘が呼び続ければ、数週間……いや、それ以下だ。",
+      "recorded_duration_s": 5.98
+    },
+    {
+      "line_id": "node_4_3_pre_004",
+      "scene_id": "vn_4_3_pre",
+      "speaker_id": "alchemist",
+      "villain_type": "undercity_alchemist",
+      "gemini_voice": "Puck",
+      "emotion": "sad",
+      "text_en": "Then perhaps the bell will take the answer from someone else.",
+      "ja": "ならば、鐘は他の誰かから答えを奪うことになるだろう。",
+      "tts_text_gemini38": "ならば……鐘は他の誰かから答えを奪うことになるだろう。",
+      "recorded_duration_s": 3.96
+    },
+    {
+      "line_id": "node_4_5_pre_001",
+      "scene_id": "vn_4_5_pre",
+      "speaker_id": "red_vial_matron",
+      "villain_type": "alchemist_matron",
+      "gemini_voice": "Despina",
+      "emotion": "hungry",
+      "text_en": "The heir's blood is not a cure. It is the last ingredient.",
+      "ja": "世継ぎの血は薬なんかじゃない。最後の『触媒』なのよ。",
+      "tts_text_gemini38": "世継ぎの血は、薬なんかじゃない…… <short pause> 最後の、『触媒』なのよ。",
+      "recorded_duration_s": 5.15
+    },
+    {
+      "line_id": "event_guild_salt_fever_3_001",
+      "scene_id": "event_guild_salt_fever_3",
+      "speaker_id": "red_vial_agent",
+      "villain_type": "ledger_agent",
+      "gemini_voice": "Puck",
+      "emotion": "cold",
+      "text_en": "You are ruining a market, alchemist.",
+      "ja": "市場を潰す気か、錬金術師。",
+      "tts_text_gemini38": "市場を潰す気か、錬金術師。",
+      "recorded_duration_s": 2.79
+    },
+    {
+      "line_id": "node_5_5_pre_001",
+      "scene_id": "vn_5_5_pre",
+      "speaker_id": "marshal_oren",
+      "villain_type": "armored_commander",
+      "gemini_voice": "Schedar",
+      "emotion": "strained",
+      "text_en": "I gave the order. I did not know the rite would hollow her out.",
+      "ja": "命令を下したのは私だ。だが、あの儀式が彼女を空っぽにするとは知らなかった。",
+      "tts_text_gemini38": "命令を下したのは私だ。 <short pause> だが、あの儀式が彼女を空っぽにするとは……知らなかった。",
+      "recorded_duration_s": 6.5
+    },
+    {
+      "line_id": "node_5_5_pre_003",
+      "scene_id": "vn_5_5_pre",
+      "speaker_id": "marshal_oren",
+      "villain_type": "armored_commander",
+      "gemini_voice": "Schedar",
+      "emotion": "shame",
+      "text_en": "I thought the seal would save the kingdom without consuming its heir.",
+      "ja": "封じることで、世継ぎを喰らい尽くさずに王国を救えると思っていたのだ。",
+      "tts_text_gemini38": "封じることで、世継ぎを喰らい尽くさずに王国を救えると思っていたのだ。",
+      "recorded_duration_s": 5.08
+    },
+    {
+      "line_id": "node_5_5_pre_005",
+      "scene_id": "vn_5_5_pre",
+      "speaker_id": "marshal_oren",
+      "villain_type": "armored_commander",
+      "gemini_voice": "Schedar",
+      "emotion": "shame",
+      "text_en": "Yseldra carried the order from the Inquisition. I signed it. That is the whole of my courage.",
+      "ja": "イゼルドラが異端審問所の命令書を運び、私が署名した。それが私の勇気のすべてだ。",
+      "tts_text_gemini38": "イゼルドラが異端審問所の命令書を運び、私が署名した。 <short pause> それが、私の勇気のすべてだ。",
+      "recorded_duration_s": 7.27
+    },
+    {
+      "line_id": "node_5_5_post_001",
+      "scene_id": "vn_5_5_post",
+      "speaker_id": "marshal_oren",
+      "villain_type": "armored_commander",
+      "gemini_voice": "Schedar",
+      "emotion": "regret",
+      "text_en": "The Ashen estate has the full schedule. Go before the bridge falls.",
+      "ja": "灰の館にすべての記録がある。橋が落ちる前に行け。",
+      "tts_text_gemini38": "灰の館にすべての記録がある。 <short pause> 橋が落ちる前に行け。",
+      "recorded_duration_s": 4.01
+    },
+    {
+      "line_id": "node_5_5_post_003",
+      "scene_id": "vn_5_5_post",
+      "speaker_id": "marshal_oren",
+      "villain_type": "armored_commander",
+      "gemini_voice": "Schedar",
+      "emotion": "resolved",
+      "text_en": "No. Someone must keep this span open. I will not fail the people twice.",
+      "ja": "いや。誰かがこの橋を保たねばならん。二度も民を見捨てはしない。",
+      "tts_text_gemini38": "いや。 <short pause> 誰かがこの橋を保たねばならん。二度も民を見捨てはしない。",
+      "recorded_duration_s": 5.71
+    },
+    {
+      "line_id": "node_6_5_pre_001",
+      "scene_id": "vn_6_5_pre",
+      "speaker_id": "ashen_lord_wraith",
+      "villain_type": "spectral_wraith",
+      "gemini_voice": "Orus",
+      "emotion": "echo",
+      "text_en": "A house remembers its master. A kingdom remembers its heir.",
+      "ja": "館は主を覚えている……王国は、世継ぎを覚えている……",
+      "tts_text_gemini38": "館は主を覚えている…… <long pause> 王国は、世継ぎを覚えている……",
+      "recorded_duration_s": 4.81
+    },
+    {
+      "line_id": "node_6_5_pre_004",
+      "scene_id": "vn_6_5_pre",
+      "speaker_id": "ashen_lord_wraith",
+      "villain_type": "spectral_wraith",
+      "gemini_voice": "Orus",
+      "emotion": "echo",
+      "text_en": "I hid the bell-keeper's daughter from the Crown. I kept her face and lost her name.",
+      "ja": "私は鐘守の娘を王家から隠した……顔だけを残し、その名を失ったのだ……",
+      "tts_text_gemini38": "私は鐘守の娘を王家から隠した…… <short pause> 顔だけを残し、その名を失ったのだ……",
+      "recorded_duration_s": 6.67
+    },
+    {
+      "line_id": "node_7_5_phase1_001",
+      "scene_id": "vn_7_5_phase_1_break",
+      "speaker_id": "eclipse_construct",
+      "villain_type": "mythic_construct",
+      "gemini_voice": "Algieba",
+      "emotion": "mechanical",
+      "text_en": "THE HOUR IS UNPAID.",
+      "ja": "時は――未払いだ。",
+      "tts_text_gemini38": "時は―― <short pause> 未払いだ。",
+      "recorded_duration_s": 1.9
+    },
+    {
+      "line_id": "node_7_5_post_001",
+      "scene_id": "vn_7_5_post",
+      "speaker_id": "eclipse_construct",
+      "villain_type": "mythic_construct_fading",
+      "gemini_voice": "Algieba",
+      "emotion": "fading",
+      "text_en": "WITNESS... RESTORED. HOUR... STILL OWED.",
+      "ja": "証人……復旧。時は……なお……未払い……",
+      "tts_text_gemini38": "証人…… <short pause> 復旧。 <long pause> 時は……なお……未払い……",
+      "recorded_duration_s": 4.33
+    }
+  ],
+  "boss_combat_cues": [
+    {
+      "cue_id": "vo_boss_ash_maw_intro",
+      "villain_type": "beast_boss",
+      "ja": "グオオォォォ……！",
+      "emotion": "roar",
+      "recorded_duration_s": 1.3
+    },
+    {
+      "cue_id": "vo_boss_ash_maw_attack",
+      "villain_type": "beast_boss",
+      "ja": "ガルルァァッ！",
+      "emotion": "bite",
+      "recorded_duration_s": 1.16
+    },
+    {
+      "cue_id": "vo_boss_ash_maw_phase",
+      "villain_type": "beast_boss",
+      "ja": "グァァァォォン！！",
+      "emotion": "frenzy",
+      "recorded_duration_s": 1.3
+    },
+    {
+      "cue_id": "vo_boss_ash_maw_defeat",
+      "villain_type": "beast_boss",
+      "ja": "グゥ……ォォ……",
+      "emotion": "collapse",
+      "recorded_duration_s": 1.12
+    },
+    {
+      "cue_id": "vo_boss_bell_widow_intro",
+      "villain_type": "ritual_boss",
+      "ja": "鐘よ……未払いの時を数えなさい……",
+      "emotion": "ritual",
+      "recorded_duration_s": 3.33
+    },
+    {
+      "cue_id": "vo_boss_bell_widow_attack",
+      "villain_type": "ritual_boss",
+      "ja": "鳴り響け、銀の封よ！",
+      "emotion": "cast",
+      "recorded_duration_s": 2.56
+    },
+    {
+      "cue_id": "vo_boss_bell_widow_phase",
+      "villain_type": "ritual_boss",
+      "ja": "祈りは届かない……鐘がすべてを喰らう！",
+      "emotion": "surge",
+      "recorded_duration_s": 3.35
+    },
+    {
+      "cue_id": "vo_boss_bell_widow_defeat",
+      "villain_type": "ritual_boss",
+      "ja": "ああ……音が……途切れてゆく……",
+      "emotion": "fade",
+      "recorded_duration_s": 2.45
+    },
+    {
+      "cue_id": "vo_boss_captain_rusk_intro",
+      "villain_type": "mercenary_duelist",
+      "ja": "仕事だ。恨むなら封蝋の主を恨め！",
+      "emotion": "command",
+      "recorded_duration_s": 3.49
+    },
+    {
+      "cue_id": "vo_boss_captain_rusk_attack",
+      "villain_type": "mercenary_duelist",
+      "ja": "遅い！そこだッ！",
+      "emotion": "slash",
+      "recorded_duration_s": 1.98
+    },
+    {
+      "cue_id": "vo_boss_captain_rusk_phase",
+      "villain_type": "mercenary_duelist",
+      "ja": "旗を上げろ！包囲を崩すな！",
+      "emotion": "rally",
+      "recorded_duration_s": 2.86
+    },
+    {
+      "cue_id": "vo_boss_captain_rusk_defeat",
+      "villain_type": "mercenary_duelist",
+      "ja": "くそっ……この値段じゃ、割に合わん……",
+      "emotion": "defeat",
+      "recorded_duration_s": 2.52
+    },
+    {
+      "cue_id": "vo_boss_red_vial_matron_intro",
+      "villain_type": "alchemist_matron",
+      "ja": "さあ、最後の一滴まで蒸留してあげるわ！",
+      "emotion": "hungry",
+      "recorded_duration_s": 3.58
+    },
+    {
+      "cue_id": "vo_boss_red_vial_matron_attack",
+      "villain_type": "alchemist_matron",
+      "ja": "紅き瓶よ、沸き立ちなさい！",
+      "emotion": "throw",
+      "recorded_duration_s": 2.42
+    },
+    {
+      "cue_id": "vo_boss_red_vial_matron_phase",
+      "villain_type": "alchemist_matron",
+      "ja": "棚を開け！劇薬をすべて注ぎ込むのよ！",
+      "emotion": "frenzy",
+      "recorded_duration_s": 4.36
+    },
+    {
+      "cue_id": "vo_boss_red_vial_matron_defeat",
+      "villain_type": "alchemist_matron",
+      "ja": "馬鹿な……私の完成品が……割れる……",
+      "emotion": "shatter",
+      "recorded_duration_s": 2.92
+    },
+    {
+      "cue_id": "vo_boss_marshal_oren_intro",
+      "villain_type": "armored_commander",
+      "ja": "この橋は通さん！我が盾がある限り！",
+      "emotion": "command",
+      "recorded_duration_s": 3.73
+    },
+    {
+      "cue_id": "vo_boss_marshal_oren_attack",
+      "villain_type": "armored_commander",
+      "ja": "退けいッ！",
+      "emotion": "strike",
+      "recorded_duration_s": 1.09
+    },
+    {
+      "cue_id": "vo_boss_marshal_oren_phase",
+      "villain_type": "armored_commander",
+      "ja": "軍旗を立て直せ！一歩も引くな！",
+      "emotion": "fortify",
+      "recorded_duration_s": 3.33
+    },
+    {
+      "cue_id": "vo_boss_marshal_oren_defeat",
+      "villain_type": "armored_commander",
+      "ja": "見事だ……マフムト……先へ行け……",
+      "emotion": "yield",
+      "recorded_duration_s": 2.24
+    },
+    {
+      "cue_id": "vo_boss_ashen_lord_wraith_intro",
+      "villain_type": "spectral_wraith",
+      "ja": "名を返せ……我が館に眠る名を……",
+      "emotion": "echo",
+      "recorded_duration_s": 2.76
+    },
+    {
+      "cue_id": "vo_boss_ashen_lord_wraith_attack",
+      "villain_type": "spectral_wraith",
+      "ja": "灰へ還れ……！",
+      "emotion": "wail",
+      "recorded_duration_s": 1.27
+    },
+    {
+      "cue_id": "vo_boss_ashen_lord_wraith_phase",
+      "villain_type": "spectral_wraith",
+      "ja": "鏡よ映せ……失われた顔のすべてを……！",
+      "emotion": "surge",
+      "recorded_duration_s": 3.21
+    },
+    {
+      "cue_id": "vo_boss_ashen_lord_wraith_defeat",
+      "villain_type": "spectral_wraith",
+      "ja": "ああ……ようやく……彼女の名が……",
+      "emotion": "release",
+      "recorded_duration_s": 2.35
+    },
+    {
+      "cue_id": "vo_boss_eclipse_construct_intro",
+      "villain_type": "mythic_construct",
+      "ja": "契約照合――未払いの時を徴収する。",
+      "emotion": "mechanical",
+      "recorded_duration_s": 3.74
+    },
+    {
+      "cue_id": "vo_boss_eclipse_construct_attack",
+      "villain_type": "mythic_construct",
+      "ja": "裁定執行。",
+      "emotion": "strike",
+      "recorded_duration_s": 1.54
+    },
+    {
+      "cue_id": "vo_boss_eclipse_construct_phase",
+      "villain_type": "mythic_construct",
+      "ja": "第一の蝕――防護障壁、再展開。",
+      "emotion": "ward",
+      "recorded_duration_s": 4.14
+    },
+    {
+      "cue_id": "vo_boss_eclipse_construct_defeat",
+      "villain_type": "mythic_construct_fading",
+      "ja": "機能停止……証人……確認……",
+      "emotion": "shutdown",
+      "recorded_duration_s": 2.97
+    }
+  ],
+  "enemy_archetype_cues": [
+    {
+      "cue_id": "vo_enemy_beast_attack",
+      "archetype": "beast",
+      "ja": "ガルッ！",
+      "recorded_duration_s": 0.76
+    },
+    {
+      "cue_id": "vo_enemy_beast_hit",
+      "archetype": "beast",
+      "ja": "グゥッ！",
+      "recorded_duration_s": 0.78
+    },
+    {
+      "cue_id": "vo_enemy_beast_defeat",
+      "archetype": "beast",
+      "ja": "クゥーン……",
+      "recorded_duration_s": 1.02
+    },
+    {
+      "cue_id": "vo_enemy_serpent_attack",
+      "archetype": "serpent",
+      "ja": "シュウゥッ！",
+      "recorded_duration_s": 0.83
+    },
+    {
+      "cue_id": "vo_enemy_serpent_hit",
+      "archetype": "serpent",
+      "ja": "シャアッ！",
+      "recorded_duration_s": 0.8
+    },
+    {
+      "cue_id": "vo_enemy_serpent_defeat",
+      "archetype": "serpent",
+      "ja": "シュ……ゥ……",
+      "recorded_duration_s": 0.89
+    },
+    {
+      "cue_id": "vo_enemy_hollow_attack",
+      "archetype": "hollow",
+      "ja": "アァ……時を……！",
+      "recorded_duration_s": 1.11
+    },
+    {
+      "cue_id": "vo_enemy_hollow_hit",
+      "archetype": "hollow",
+      "ja": "ガハッ……！",
+      "recorded_duration_s": 0.71
+    },
+    {
+      "cue_id": "vo_enemy_hollow_defeat",
+      "archetype": "hollow",
+      "ja": "ア……ァ……",
+      "recorded_duration_s": 0.84
+    },
+    {
+      "cue_id": "vo_enemy_wraith_attack",
+      "archetype": "wraith",
+      "ja": "消えよ……",
+      "recorded_duration_s": 0.94
+    },
+    {
+      "cue_id": "vo_enemy_wraith_hit",
+      "archetype": "wraith",
+      "ja": "ヒュウッ……",
+      "recorded_duration_s": 0.84
+    },
+    {
+      "cue_id": "vo_enemy_wraith_defeat",
+      "archetype": "wraith",
+      "ja": "霧へ……還る……",
+      "recorded_duration_s": 1.41
+    },
+    {
+      "cue_id": "vo_enemy_knight_attack",
+      "archetype": "knight",
+      "ja": "斬るッ！",
+      "recorded_duration_s": 0.6
+    },
+    {
+      "cue_id": "vo_enemy_knight_hit",
+      "archetype": "knight",
+      "ja": "ぐっ……！",
+      "recorded_duration_s": 0.54
+    },
+    {
+      "cue_id": "vo_enemy_knight_defeat",
+      "archetype": "knight",
+      "ja": "誓いが……砕ける……",
+      "recorded_duration_s": 1.31
+    },
+    {
+      "cue_id": "vo_enemy_cultist_attack",
+      "archetype": "cultist",
+      "ja": "封よ、縛れ！",
+      "recorded_duration_s": 1.6
+    },
+    {
+      "cue_id": "vo_enemy_cultist_hit",
+      "archetype": "cultist",
+      "ja": "ちぃっ！",
+      "recorded_duration_s": 0.64
+    },
+    {
+      "cue_id": "vo_enemy_cultist_defeat",
+      "archetype": "cultist",
+      "ja": "鐘が……遠ざかる……",
+      "recorded_duration_s": 1.41
+    }
+  ]
+}

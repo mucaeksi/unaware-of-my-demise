@@ -2151,8 +2151,10 @@ def main() -> None:
         ]
     )
 
+    # The TypeScript client (apps/game) was removed in D-31; Unity reads the JSON line maps instead.
     ts_path = ROOT / "apps/game/src/audio/voiceTranscripts.ts"
-    ts_path.write_text("\n".join(ts_lines), encoding="utf-8")
+    if ts_path.parent.is_dir():
+        ts_path.write_text("\n".join(ts_lines), encoding="utf-8")
 
     print(
         f"Verified & Built 116 vertical-slice acting lines -> "

@@ -3,7 +3,13 @@
   "rootNamespace": "Uomd.EditorTools",
   "references": [
     "Unity.RenderPipelines.Core.Runtime",
-    "Unity.RenderPipelines.Universal.Runtime"
+    "Unity.RenderPipelines.Universal.Runtime",
+    "Uomd.Contracts",
+    "Uomd.Core",
+    "Uomd.Combat",
+    "Uomd.Battle",
+    "Uomd.UI",
+    "Uomd.Scenes"
   ],
   "includePlatforms": [
     "Editor"
@@ -14,6 +20,12 @@
   "precompiledReferences": [],
   "autoReferenced": false,
   "defineConstraints": [],
-  "versionDefines": [],
+  "versionDefines": [
+    {
+      "name": "com.ivanmurzak.unity.mcp",
+      "expression": "1.0.0",
+      "define": "UOMD_IVANMURZAK_MCP"
+    }
+  ],
   "noEngineReferences": false
 }

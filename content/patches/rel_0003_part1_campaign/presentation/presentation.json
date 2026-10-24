@@ -2460,6 +2460,606 @@
       "language": "ja",
       "reviewed_transcript_sha256": "5903a5621bb1b51bbbd931c3b7cdf4f26c20608d76c0c277643f2a125466a7fd",
       "duration_s": 6.41
+    },
+    "opening_008": {
+      "file": "voices/opening_008.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 9.03
+    },
+    "opening_010": {
+      "file": "voices/opening_010.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 10.41
+    },
+    "opening_015": {
+      "file": "voices/opening_015.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.02
+    },
+    "node_2_5_pre_001": {
+      "file": "voices/node_2_5_pre_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.18
+    },
+    "node_2_5_pre_003": {
+      "file": "voices/node_2_5_pre_003.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.2
+    },
+    "node_2_5_pre_005": {
+      "file": "voices/node_2_5_pre_005.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.65
+    },
+    "node_2_5_pre_006": {
+      "file": "voices/node_2_5_pre_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.48
+    },
+    "node_2_5_post_003": {
+      "file": "voices/node_2_5_post_003.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.09
+    },
+    "ending_yseldra_001": {
+      "file": "voices/ending_yseldra_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.47
+    },
+    "ending_cael_001": {
+      "file": "voices/ending_cael_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.47
+    },
+    "ending_cael_002": {
+      "file": "voices/ending_cael_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.78
+    },
+    "ending_cael_003": {
+      "file": "voices/ending_cael_003.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.14
+    },
+    "ending_cael_004": {
+      "file": "voices/ending_cael_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.09
+    },
+    "ending_cael_005": {
+      "file": "voices/ending_cael_005.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.31
+    },
+    "ending_cael_006": {
+      "file": "voices/ending_cael_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.74
+    },
+    "node_3_5_pre_001": {
+      "file": "voices/node_3_5_pre_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.99
+    },
+    "node_3_5_pre_003": {
+      "file": "voices/node_3_5_pre_003.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.79
+    },
+    "node_4_3_pre_002": {
+      "file": "voices/node_4_3_pre_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.98
+    },
+    "node_4_3_pre_004": {
+      "file": "voices/node_4_3_pre_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 3.96
+    },
+    "node_4_5_pre_001": {
+      "file": "voices/node_4_5_pre_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.15
+    },
+    "event_guild_salt_fever_3_001": {
+      "file": "voices/event_guild_salt_fever_3_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.79
+    },
+    "node_5_5_pre_001": {
+      "file": "voices/node_5_5_pre_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.5
+    },
+    "node_5_5_pre_003": {
+      "file": "voices/node_5_5_pre_003.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.08
+    },
+    "node_5_5_pre_005": {
+      "file": "voices/node_5_5_pre_005.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.27
+    },
+    "node_5_5_post_001": {
+      "file": "voices/node_5_5_post_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.01
+    },
+    "node_5_5_post_003": {
+      "file": "voices/node_5_5_post_003.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.71
+    },
+    "node_6_5_pre_001": {
+      "file": "voices/node_6_5_pre_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.81
+    },
+    "node_6_5_pre_004": {
+      "file": "voices/node_6_5_pre_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.67
+    },
+    "node_7_5_phase1_001": {
+      "file": "voices/node_7_5_phase1_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.9
+    },
+    "node_7_5_post_001": {
+      "file": "voices/node_7_5_post_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.33
+    },
+    "cs_mahmut_1_002": {
+      "file": "voices/cs_mahmut_1_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.08
+    },
+    "cs_mahmut_1_004": {
+      "file": "voices/cs_mahmut_1_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.4
+    },
+    "cs_mahmut_1_006": {
+      "file": "voices/cs_mahmut_1_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.08
+    },
+    "cs_mahmut_1_008": {
+      "file": "voices/cs_mahmut_1_008.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.95
+    },
+    "cs_mahmut_2_002": {
+      "file": "voices/cs_mahmut_2_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 3.44
+    },
+    "cs_mahmut_2_004": {
+      "file": "voices/cs_mahmut_2_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.23
+    },
+    "cs_mahmut_2_006": {
+      "file": "voices/cs_mahmut_2_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.65
+    },
+    "cs_fadyme_2_002": {
+      "file": "voices/cs_fadyme_2_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 3.0
+    },
+    "cs_fadyme_2_004": {
+      "file": "voices/cs_fadyme_2_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.19
+    },
+    "cs_fadyme_2_006": {
+      "file": "voices/cs_fadyme_2_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.19
+    },
+    "cs_kera_voss_4_002": {
+      "file": "voices/cs_kera_voss_4_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.0
+    },
+    "cs_kera_voss_4_004": {
+      "file": "voices/cs_kera_voss_4_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.61
+    },
+    "cs_kera_voss_4_006": {
+      "file": "voices/cs_kera_voss_4_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.99
+    },
+    "cs_nixie_vale_1_002": {
+      "file": "voices/cs_nixie_vale_1_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.39
+    },
+    "cs_sable_wren_2_002": {
+      "file": "voices/cs_sable_wren_2_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.61
+    },
+    "cs_sable_wren_2_004": {
+      "file": "voices/cs_sable_wren_2_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.05
+    },
+    "cs_tilda_fen_4_002": {
+      "file": "voices/cs_tilda_fen_4_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 3.56
+    },
+    "cs_tilda_fen_4_004": {
+      "file": "voices/cs_tilda_fen_4_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.02
+    },
+    "cs_mirel_quill_3_002": {
+      "file": "voices/cs_mirel_quill_3_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.59
+    },
+    "cs_mirel_quill_3_004": {
+      "file": "voices/cs_mirel_quill_3_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.83
+    },
+    "cs_odelia_pike_1_002": {
+      "file": "voices/cs_odelia_pike_1_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.81
+    },
+    "cs_odelia_pike_1_004": {
+      "file": "voices/cs_odelia_pike_1_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.49
+    },
+    "cs_odelia_pike_4_002": {
+      "file": "voices/cs_odelia_pike_4_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.65
+    },
+    "cs_odelia_pike_4_004": {
+      "file": "voices/cs_odelia_pike_4_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.44
+    },
+    "cs_nara_vell_2_002": {
+      "file": "voices/cs_nara_vell_2_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.01
+    },
+    "cs_nara_vell_2_004": {
+      "file": "voices/cs_nara_vell_2_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.62
+    },
+    "cs_nara_vell_4_002": {
+      "file": "voices/cs_nara_vell_4_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.56
+    },
+    "cs_nara_vell_4_004": {
+      "file": "voices/cs_nara_vell_4_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.61
+    },
+    "cs_clem_marr_4_002": {
+      "file": "voices/cs_clem_marr_4_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.86
+    },
+    "cs_clem_marr_4_004": {
+      "file": "voices/cs_clem_marr_4_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 9.49
+    },
+    "cs_vespera_wisp_4_002": {
+      "file": "voices/cs_vespera_wisp_4_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.48
+    },
+    "cs_vespera_wisp_4_004": {
+      "file": "voices/cs_vespera_wisp_4_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.13
+    },
+    "cs_thistle_roe_1_002": {
+      "file": "voices/cs_thistle_roe_1_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.34
+    },
+    "cs_thistle_roe_1_004": {
+      "file": "voices/cs_thistle_roe_1_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.29
+    },
+    "cs_jori_flint_1_002": {
+      "file": "voices/cs_jori_flint_1_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.55
+    },
+    "cs_jori_flint_1_004": {
+      "file": "voices/cs_jori_flint_1_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 3.47
+    },
+    "cs_jori_flint_4_002": {
+      "file": "voices/cs_jori_flint_4_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 0.81
+    },
+    "cs_jori_flint_4_004": {
+      "file": "voices/cs_jori_flint_4_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.46
+    },
+    "cs_marek_vane_1_002": {
+      "file": "voices/cs_marek_vane_1_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 2.11
+    },
+    "cs_marek_vane_1_004": {
+      "file": "voices/cs_marek_vane_1_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 1.64
+    },
+    "event_harvest_inn_meal_2_004": {
+      "file": "voices/event_harvest_inn_meal_2_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 3.38
+    },
+    "cs_mahmut_2_007": {
+      "file": "voices/cs_mahmut_2_007.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.19
+    },
+    "cs_brin_alder_1_002": {
+      "file": "voices/cs_brin_alder_1_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 5.12
+    },
+    "cs_brin_alder_1_005": {
+      "file": "voices/cs_brin_alder_1_005.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.67
+    },
+    "cs_brin_alder_2_006": {
+      "file": "voices/cs_brin_alder_2_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 3.3
+    },
+    "cs_brin_alder_3_005": {
+      "file": "voices/cs_brin_alder_3_005.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.14
+    },
+    "cs_nixie_vale_3_002": {
+      "file": "voices/cs_nixie_vale_3_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.18
+    },
+    "cs_sable_wren_3_002": {
+      "file": "voices/cs_sable_wren_3_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 4.97
+    },
+    "cs_rikka_ember_2_002": {
+      "file": "voices/cs_rikka_ember_2_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.15
+    },
+    "cs_rikka_ember_4_001": {
+      "file": "voices/cs_rikka_ember_4_001.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.43
+    },
+    "cs_mirel_quill_3_005": {
+      "file": "voices/cs_mirel_quill_3_005.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.42
+    },
+    "cs_iona_mist_3_002": {
+      "file": "voices/cs_iona_mist_3_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.77
+    },
+    "cs_jori_flint_3_002": {
+      "file": "voices/cs_jori_flint_3_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.03
+    },
+    "cs_marek_vane_3_002": {
+      "file": "voices/cs_marek_vane_3_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.3
+    },
+    "event_harvest_inn_meal_1_006": {
+      "file": "voices/event_harvest_inn_meal_1_006.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.14
+    },
+    "event_harvest_inn_meal_3_002": {
+      "file": "voices/event_harvest_inn_meal_3_002.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.8
+    },
+    "event_guild_salt_fever_3_003": {
+      "file": "voices/event_guild_salt_fever_3_003.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.68
+    },
+    "event_council_herald_3_004": {
+      "file": "voices/event_council_herald_3_004.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.27
+    },
+    "codex_law_of_hours_text": {
+      "file": "voices/codex_law_of_hours_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 9.46
+    },
+    "codex_seven_bells_text": {
+      "file": "voices/codex_seven_bells_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.38
+    },
+    "codex_names_text": {
+      "file": "voices/codex_names_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.02
+    },
+    "codex_hollows_text": {
+      "file": "voices/codex_hollows_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.25
+    },
+    "codex_crownfall_text": {
+      "file": "voices/codex_crownfall_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 10.0
+    },
+    "codex_vale_text": {
+      "file": "voices/codex_vale_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.46
+    },
+    "codex_inquisition_text": {
+      "file": "voices/codex_inquisition_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.25
+    },
+    "codex_red_vial_text": {
+      "file": "voices/codex_red_vial_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.46
+    },
+    "codex_saint_luthos_text": {
+      "file": "voices/codex_saint_luthos_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 7.49
+    },
+    "codex_first_eclipse_text": {
+      "file": "voices/codex_first_eclipse_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.22
+    },
+    "codex_council_text": {
+      "file": "voices/codex_council_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 8.07
+    },
+    "codex_clockless_text": {
+      "file": "voices/codex_clockless_text.ogg",
+      "language": "ja",
+      "reviewed_transcript_sha256": "4ecca982997539105c4a35c7397439dec51dd87ed6813b5daca807762359350d",
+      "duration_s": 6.92
     }
   },
   "sounds": {
@@ -2690,6 +3290,282 @@
       "duration_s": 6.69,
       "loop": false,
       "volume": 1.0
+    },
+    "vo_boss_ash_maw_intro": {
+      "file": "voices/vo_boss_ash_maw_intro.ogg",
+      "duration_s": 1.3,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_ash_maw_attack": {
+      "file": "voices/vo_boss_ash_maw_attack.ogg",
+      "duration_s": 1.16,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_ash_maw_phase": {
+      "file": "voices/vo_boss_ash_maw_phase.ogg",
+      "duration_s": 1.3,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_ash_maw_defeat": {
+      "file": "voices/vo_boss_ash_maw_defeat.ogg",
+      "duration_s": 1.12,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_bell_widow_intro": {
+      "file": "voices/vo_boss_bell_widow_intro.ogg",
+      "duration_s": 3.33,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_bell_widow_attack": {
+      "file": "voices/vo_boss_bell_widow_attack.ogg",
+      "duration_s": 2.56,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_bell_widow_phase": {
+      "file": "voices/vo_boss_bell_widow_phase.ogg",
+      "duration_s": 3.35,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_bell_widow_defeat": {
+      "file": "voices/vo_boss_bell_widow_defeat.ogg",
+      "duration_s": 2.45,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_captain_rusk_intro": {
+      "file": "voices/vo_boss_captain_rusk_intro.ogg",
+      "duration_s": 3.49,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_captain_rusk_attack": {
+      "file": "voices/vo_boss_captain_rusk_attack.ogg",
+      "duration_s": 1.98,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_captain_rusk_phase": {
+      "file": "voices/vo_boss_captain_rusk_phase.ogg",
+      "duration_s": 2.86,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_captain_rusk_defeat": {
+      "file": "voices/vo_boss_captain_rusk_defeat.ogg",
+      "duration_s": 2.52,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_red_vial_matron_intro": {
+      "file": "voices/vo_boss_red_vial_matron_intro.ogg",
+      "duration_s": 3.58,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_red_vial_matron_attack": {
+      "file": "voices/vo_boss_red_vial_matron_attack.ogg",
+      "duration_s": 2.42,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_red_vial_matron_phase": {
+      "file": "voices/vo_boss_red_vial_matron_phase.ogg",
+      "duration_s": 4.36,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_red_vial_matron_defeat": {
+      "file": "voices/vo_boss_red_vial_matron_defeat.ogg",
+      "duration_s": 2.92,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_marshal_oren_intro": {
+      "file": "voices/vo_boss_marshal_oren_intro.ogg",
+      "duration_s": 3.73,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_marshal_oren_attack": {
+      "file": "voices/vo_boss_marshal_oren_attack.ogg",
+      "duration_s": 1.09,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_marshal_oren_phase": {
+      "file": "voices/vo_boss_marshal_oren_phase.ogg",
+      "duration_s": 3.33,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_marshal_oren_defeat": {
+      "file": "voices/vo_boss_marshal_oren_defeat.ogg",
+      "duration_s": 2.24,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_ashen_lord_wraith_intro": {
+      "file": "voices/vo_boss_ashen_lord_wraith_intro.ogg",
+      "duration_s": 2.76,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_ashen_lord_wraith_attack": {
+      "file": "voices/vo_boss_ashen_lord_wraith_attack.ogg",
+      "duration_s": 1.27,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_ashen_lord_wraith_phase": {
+      "file": "voices/vo_boss_ashen_lord_wraith_phase.ogg",
+      "duration_s": 3.21,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_ashen_lord_wraith_defeat": {
+      "file": "voices/vo_boss_ashen_lord_wraith_defeat.ogg",
+      "duration_s": 2.35,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_eclipse_construct_intro": {
+      "file": "voices/vo_boss_eclipse_construct_intro.ogg",
+      "duration_s": 3.74,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_eclipse_construct_attack": {
+      "file": "voices/vo_boss_eclipse_construct_attack.ogg",
+      "duration_s": 1.54,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_eclipse_construct_phase": {
+      "file": "voices/vo_boss_eclipse_construct_phase.ogg",
+      "duration_s": 4.14,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_boss_eclipse_construct_defeat": {
+      "file": "voices/vo_boss_eclipse_construct_defeat.ogg",
+      "duration_s": 2.97,
+      "loop": false,
+      "volume": 1.0
+    },
+    "vo_enemy_beast_attack": {
+      "file": "voices/vo_enemy_beast_attack.ogg",
+      "duration_s": 0.76,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_beast_hit": {
+      "file": "voices/vo_enemy_beast_hit.ogg",
+      "duration_s": 0.78,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_beast_defeat": {
+      "file": "voices/vo_enemy_beast_defeat.ogg",
+      "duration_s": 1.02,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_serpent_attack": {
+      "file": "voices/vo_enemy_serpent_attack.ogg",
+      "duration_s": 0.83,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_serpent_hit": {
+      "file": "voices/vo_enemy_serpent_hit.ogg",
+      "duration_s": 0.8,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_serpent_defeat": {
+      "file": "voices/vo_enemy_serpent_defeat.ogg",
+      "duration_s": 0.89,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_hollow_attack": {
+      "file": "voices/vo_enemy_hollow_attack.ogg",
+      "duration_s": 1.11,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_hollow_hit": {
+      "file": "voices/vo_enemy_hollow_hit.ogg",
+      "duration_s": 0.71,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_hollow_defeat": {
+      "file": "voices/vo_enemy_hollow_defeat.ogg",
+      "duration_s": 0.84,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_wraith_attack": {
+      "file": "voices/vo_enemy_wraith_attack.ogg",
+      "duration_s": 0.94,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_wraith_hit": {
+      "file": "voices/vo_enemy_wraith_hit.ogg",
+      "duration_s": 0.84,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_wraith_defeat": {
+      "file": "voices/vo_enemy_wraith_defeat.ogg",
+      "duration_s": 1.41,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_knight_attack": {
+      "file": "voices/vo_enemy_knight_attack.ogg",
+      "duration_s": 0.6,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_knight_hit": {
+      "file": "voices/vo_enemy_knight_hit.ogg",
+      "duration_s": 0.54,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_knight_defeat": {
+      "file": "voices/vo_enemy_knight_defeat.ogg",
+      "duration_s": 1.31,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_cultist_attack": {
+      "file": "voices/vo_enemy_cultist_attack.ogg",
+      "duration_s": 1.6,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_cultist_hit": {
+      "file": "voices/vo_enemy_cultist_hit.ogg",
+      "duration_s": 0.64,
+      "loop": false,
+      "volume": 0.92
+    },
+    "vo_enemy_cultist_defeat": {
+      "file": "voices/vo_enemy_cultist_defeat.ogg",
+      "duration_s": 1.41,
+      "loop": false,
+      "volume": 0.92
     }
   },
   "videos": {},

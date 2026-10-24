@@ -21,6 +21,7 @@ namespace Uomd.EditorTools
         public const string RendererPath = SettingsDir + "/UomdRenderer2D.asset";
         public const string PipelinePath = SettingsDir + "/UomdURP2D.asset";
         public const string ApplicationId = "io.github.mucaeksi.unawareofmydemise";
+        public const string IconPath = "Assets/_UOMD/Branding/app_icon_512.png";
 
         static UomdProjectSetup()
         {
@@ -113,6 +114,20 @@ namespace Uomd.EditorTools
             if (!string.IsNullOrEmpty(versionName)) PlayerSettings.bundleVersion = versionName;
             string versionCode = Environment.GetEnvironmentVariable("UOMD_VERSION_CODE");
             if (int.TryParse(versionCode, out int code) && code > 0) PlayerSettings.Android.bundleVersionCode = code;
+
+            var icon = AssetDatabase.LoadAssetAtPath<Texture2D>(IconPath);
+            if (icon != null)
+            {
+                PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { icon }, IconKind.Any);
+            }
+            else
+            {
+                Debug.LogWarning($"[UOMD] App icon not found at {IconPath}.");
+            }
+
+            // Studio/Title screens are the brand intro; keep Unity's splash minimal and on-palette.
+            PlayerSettings.SplashScreen.backgroundColor = new Color(0.039f, 0.024f, 0.063f, 1f); // #0a0610
+            PlayerSettings.SplashScreen.unityLogoStyle = PlayerSettings.SplashScreen.UnityLogoStyle.LightOnDark;
         }
     }
 }

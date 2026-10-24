@@ -172,6 +172,56 @@ namespace Uomd.Core
             return "bgm_battle_field";
         }
 
+        /// <summary>
+        /// Resolves the canonical combat/menu voice or creature vocal effect cue ID for any Hero, Boss, or Enemy unit.
+        /// </summary>
+        public static string ResolveUnitCombatVoiceCue(string unitId, string action)
+        {
+            if (string.IsNullOrEmpty(unitId) || string.IsNullOrEmpty(action)) return "";
+
+            if (unitId.Equals("fadyme", StringComparison.OrdinalIgnoreCase) ||
+                unitId.Equals("mahmut", StringComparison.OrdinalIgnoreCase))
+            {
+                return $"vo_{unitId.ToLowerInvariant()}_{action.ToLowerInvariant()}";
+            }
+
+            if (unitId.StartsWith("boss_", StringComparison.OrdinalIgnoreCase))
+            {
+                string bossAct = action.ToLowerInvariant() switch
+                {
+                    "basic" or "basic_attack" or "active" or "active_skill" or "ultimate" => "attack",
+                    "phase_break" or "phase_ward" or "phase" => "phase",
+                    "defeat" or "death" => "defeat",
+                    _ => "intro",
+                };
+                return $"vo_{unitId.ToLowerInvariant()}_{bossAct}";
+            }
+
+            string archetype = unitId.ToLowerInvariant() switch
+            {
+                "ash_wolf" => "beast",
+                "glass_viper" => "serpent",
+                "bellbound_dead" or "hollow_pilgrim" or "hollow_cleric" or "inkbound_dead" or "orchard_ghoul" or "royal_hollow" => "hollow",
+                "bridge_revenant" or "estate_wraith" => "wraith",
+                "choir_knight" or "corrupted_crown_guard" or "crownless_knight" or "lost_vow_knight" or "noble_retainer" or "corrupted_mercenary" => "knight",
+                "chain_cultist" or "red_vial_alchemist" or "red_vial_scout" or "eclipse_sentinel" => "cultist",
+                _ => "",
+            };
+
+            if (!string.IsNullOrEmpty(archetype))
+            {
+                string enemyAct = action.ToLowerInvariant() switch
+                {
+                    "hit" or "damage" => "hit",
+                    "defeat" or "death" => "defeat",
+                    _ => "attack",
+                };
+                return $"vo_enemy_{archetype}_{enemyAct}";
+            }
+
+            return "";
+        }
+
         public void PlayBgmCue(string cueId, AudioClip clip = null)
         {
             if (string.IsNullOrEmpty(cueId) || cueId == CurrentBgmCueId) return;

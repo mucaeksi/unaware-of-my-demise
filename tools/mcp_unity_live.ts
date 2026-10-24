@@ -76,11 +76,20 @@ function getUnityProjectStatus(): Record<string, unknown> {
   const ussFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.uss').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
 
   const primitivesPath = join(UNITY_ROOT, 'Assets', '_UOMD', 'Scripts', 'Core', 'Generated', 'UomdCorePrimitives.g.cs');
+  const manifestPath = join(UNITY_ROOT, 'Packages', 'manifest.json');
+  const packageManifest = existsSync(manifestPath)
+    ? (JSON.parse(readFileSync(manifestPath, 'utf8')) as {
+        dependencies?: Record<string, string>;
+        scopedRegistries?: Array<Record<string, unknown>>;
+      })
+    : null;
+  const dependencies = packageManifest?.dependencies ?? {};
 
   return {
     unityRoot: 'apps/unity',
     editorVersion,
     generatedPrimitivesPresent: existsSync(primitivesPath),
+    ivanMurzakUnityMcpVersion: dependencies['com.ivanmurzak.unity.mcp'] ?? null,
     counts: {
       asmdef: asmdefFiles.length,
       csharpScripts: csFiles.length,
@@ -88,8 +97,11 @@ function getUnityProjectStatus(): Record<string, unknown> {
       shaders: shaderFiles.length,
       scenes: sceneFiles.length,
       uxml: uxmlFiles.length,
-      uss: ussFiles.length
+      uss: ussFiles.length,
+      upmDependencies: Object.keys(dependencies).length
     },
+    upmDependencies: dependencies,
+    scopedRegistries: packageManifest?.scopedRegistries ?? [],
     asmdefFiles,
     csharpScripts: csFiles,
     javaPlugins: javaFiles,
@@ -226,11 +238,76 @@ function readUnitySkill(skillName: string, referenceFile?: string): Record<strin
   };
 }
 
+function getUnityEditorMcpBridgeInfo(): Record<string, unknown> {
+  const manifestPath = join(UNITY_ROOT, 'Packages', 'manifest.json');
+  const editorToolsPath = join(UNITY_ROOT, 'Assets', '_UOMD', 'Editor', 'UomdMcpEditorTools.cs');
+  const manifest = existsSync(manifestPath)
+    ? (JSON.parse(readFileSync(manifestPath, 'utf8')) as {
+        dependencies?: Record<string, string>;
+        scopedRegistries?: Array<Record<string, unknown>>;
+      })
+    : null;
+  const mcpVersion = manifest?.dependencies?.['com.ivanmurzak.unity.mcp'] ?? null;
+
+  return {
+    packageId: 'com.ivanmurzak.unity.mcp',
+    repository: 'https://github.com/IvanMurzak/Unity-MCP',
+    configuredVersion: mcpVersion,
+    openUpmScopedRegistryConfigured: Boolean(manifest?.scopedRegistries?.length),
+    editorToolsScriptPresent: existsSync(editorToolsPath),
+    editorToolsScriptPath: relative(ROOT, editorToolsPath).replace(/\\/g, '/'),
+    uomdEditorMenuAndReflectionTools: [
+      {
+        method: 'Uomd.EditorTools.UomdMcpEditorTools.VerifyBundleAndParity',
+        menuItem: 'UOMD/MCP/Verify StreamingAssets Bundle & Deterministic Math',
+        purpose: 'Verifies StreamingAssets/uomd_base/release.json and runs Mulberry32Rng + UomdStatMath sanity check inside the Unity Editor.'
+      },
+      {
+        method: 'Uomd.EditorTools.UomdMcpEditorTools.InspectActiveSceneJson',
+        menuItem: 'UOMD/MCP/Inspect Active Scene & URP 2D Status',
+        purpose: 'Returns canonical JSON of active scene roots, UIDocument count, SpriteRenderer count, and active URP 2D pipeline asset.'
+      },
+      {
+        method: 'Uomd.EditorTools.UomdMcpEditorTools.CaptureGameViewScreenshot',
+        menuItem: 'UOMD/MCP/Capture GameView Screenshot',
+        purpose: 'Saves active GameView screenshot to .cache/screenshots/unity_gameview.png for visual regression checks.'
+      },
+      {
+        method: 'Uomd.EditorTools.UomdProjectSetup.Apply',
+        menuItem: 'UOMD/Apply Project Setup',
+        purpose: 'Applies idempotent URP 2D Renderer2DData, Android IL2CPP ARM64 landscape settings, and EditorBuildSettings scenes.'
+      }
+    ],
+    ivanMurzakBuiltInSkillsForUomd: [
+      'editor-application-get-state',
+      'scene-open',
+      'scene-save',
+      'gameobject-find',
+      'gameobject-component-add',
+      'script-execute',
+      'tests-run',
+      'screenshot-game-view',
+      'profiler-list-modules',
+      'assets-refresh',
+      'package-list'
+    ]
+  };
+}
+
 const TOOLS = [
   {
     name: 'unity_project_status',
     description:
-      'Inspect the UOMD Unity 6 LTS project (`apps/unity/`) — `.asmdef` assemblies, C# scripts, scenes, UXML/USS files, and generated `UomdCorePrimitives.g.cs`.',
+      'Inspect the UOMD Unity 6 LTS project (`apps/unity/`) — `.asmdef` assemblies, C# scripts, scenes, UXML/USS files, UPM packages (`com.ivanmurzak.unity.mcp`), and generated `UomdCorePrimitives.g.cs`.',
+    inputSchema: {
+      type: 'object',
+      properties: {}
+    }
+  },
+  {
+    name: 'unity_editor_mcp_bridge',
+    description:
+      'Inspect the IvanMurzak/Unity-MCP (`com.ivanmurzak.unity.mcp`) integration, UOMD Editor MCP entry points (`UomdMcpEditorTools.cs`), and live Editor tool catalog.',
     inputSchema: {
       type: 'object',
       properties: {}
@@ -322,6 +399,8 @@ async function handleRequest(req: JsonRpcRequest): Promise<Record<string, unknow
       let payload: unknown;
       if (name === 'unity_project_status') {
         payload = getUnityProjectStatus();
+      } else if (name === 'unity_editor_mcp_bridge') {
+        payload = getUnityEditorMcpBridgeInfo();
       } else if (name === 'unity_bundle_status') {
         payload = getUnityBundleStatus();
       } else if (name === 'unity_inspect_unit_slices') {

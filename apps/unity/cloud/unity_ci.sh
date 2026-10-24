@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Batch pipeline for the UOMD Unity client. Usage: bash apps/unity/cloud/unity_ci.sh [import|test|build|all]
+# Batch pipeline for the UOMD Unity client. Usage: bash apps/unity/cloud/unity_ci.sh [import|test|build|all|return-license]
 #   import : export content bundle + first import/compile + UomdProjectSetup (URP 2D, Android player settings)
 #   test   : EditMode tests (C# parity vs TypeScript golden vectors)
 #   build  : Android AAB (UOMD_BUILD_APK=1 for APK; UOMD_KEYSTORE_* for release signing)
@@ -25,6 +25,13 @@ run_unity() { # $1 = log name, rest = unity args
   return $code
 }
 
+activate_license() {
+  # Pro/Plus serial from the environment's secrets; no-op when absent (already-activated machine).
+  [ -n "${UNITY_SERIAL:-}" ] || return 0
+  "$UNITY" -batchmode -quit -nographics -serial "$UNITY_SERIAL" -username "$UNITY_EMAIL" -password "$UNITY_PASSWORD" -logFile "$LOGS/activate.log" || {
+    echo "License activation failed; see $LOGS/activate.log"; exit 3; }
+}
+
 do_import() {
   (cd "$ROOT" && { [ -d node_modules ] || npm ci; } && npm run export:unity)
   run_unity import -executeMethod Uomd.EditorTools.UomdProjectSetup.ApplyBatch
@@ -40,7 +47,10 @@ do_build() {
   run_unity build -buildTarget Android -executeMethod Uomd.EditorTools.UomdBuild.BuildAndroidBatch
 }
 
+[ "$STEP" = return-license ] || activate_license
+
 case "$STEP" in
+  return-license) "$UNITY" -batchmode -quit -nographics -returnlicense -username "${UNITY_EMAIL:-}" -password "${UNITY_PASSWORD:-}" -logFile "$LOGS/return.log" ;;
   import) do_import ;;
   test) do_test ;;
   build) do_build ;;

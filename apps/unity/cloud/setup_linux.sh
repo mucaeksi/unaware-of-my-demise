@@ -2,27 +2,30 @@
 # One-time Unity install on a fresh Ubuntu 22.04/24.04 cloud VM (x86_64).
 # Usage: bash apps/unity/cloud/setup_linux.sh
 set -euo pipefail
+export DEBIAN_FRONTEND=noninteractive
+# Claude Code cloud sessions / containers may already run as root without sudo.
+SUDO=""; [ "$(id -u)" -eq 0 ] || SUDO="sudo"
 
 UNITY_VERSION="${UNITY_VERSION:-6000.0.58f2}"
 UNITY_CHANGESET="${UNITY_CHANGESET:-92dee566b325}"
 
-sudo apt-get update
-sudo apt-get install -y ca-certificates curl gnupg git git-lfs xvfb libgconf-2-4 libglu1-mesa || \
-  sudo apt-get install -y ca-certificates curl gnupg git git-lfs xvfb libglu1-mesa
+$SUDO apt-get update
+$SUDO apt-get install -y ca-certificates curl gnupg git git-lfs xvfb libgconf-2-4 libglu1-mesa || \
+  $SUDO apt-get install -y ca-certificates curl gnupg git git-lfs xvfb libglu1-mesa
 
 # Node 22 for npm run export:unity (content bundle exporter)
 if ! command -v node >/dev/null || [ "$(node -p 'process.versions.node.split(".")[0]')" -lt 22 ]; then
-  curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-  sudo apt-get install -y nodejs
+  curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO bash -
+  $SUDO apt-get install -y nodejs
 fi
 
 # Unity Hub (official apt repo)
 if ! command -v unityhub >/dev/null; then
-  curl -fsSL https://hub.unity3d.com/linux/keys/public | gpg --dearmor | sudo tee /usr/share/keyrings/Unity_Technologies_ApS.gpg >/dev/null
+  curl -fsSL https://hub.unity3d.com/linux/keys/public | gpg --dearmor | $SUDO tee /usr/share/keyrings/Unity_Technologies_ApS.gpg >/dev/null
   echo "deb [signed-by=/usr/share/keyrings/Unity_Technologies_ApS.gpg] https://hub.unity3d.com/linux/repos/deb stable main" | \
-    sudo tee /etc/apt/sources.list.d/unityhub.list >/dev/null
-  sudo apt-get update
-  sudo apt-get install -y unityhub
+    $SUDO tee /etc/apt/sources.list.d/unityhub.list >/dev/null
+  $SUDO apt-get update
+  $SUDO apt-get install -y unityhub
 fi
 
 # Editor + Android module (child modules = Android SDK/NDK + OpenJDK bundled with this editor)

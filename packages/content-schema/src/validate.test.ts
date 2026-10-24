@@ -16,7 +16,7 @@ const disk = new Map<string, [string, Uint8Array][]>();
 const load = (dir: string): Map<string, Uint8Array> => {
   let files = disk.get(dir);
   if (!files) disk.set(dir, (files = walk(dir).filter((p) => p !== 'release.json').map((p) => [p, new Uint8Array(readFileSync(join(dir, p)))])));
-  return new Map(files.map(([p, bytes]) => [p, new Uint8Array(bytes)]));
+  return new Map(files);
 };
 
 /** the base release alone: the first-install flow (prologue + tutorials T-1..T-3) */

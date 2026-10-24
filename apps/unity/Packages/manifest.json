@@ -1,5 +1,18 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.ivanmurzak",
+        "extensions.unity.playerprefsex",
+        "org.nuget",
+        "com.openupm"
+      ]
+    }
+  ],
   "dependencies": {
+    "com.ivanmurzak.unity.mcp": "1.5.0",
     "com.unity.2d.animation": "10.1.4",
     "com.unity.2d.psdimporter": "9.0.3",
     "com.unity.2d.sprite": "1.0.0",

@@ -1,5 +1,5 @@
 """Build the local interactive Prologue Soundtrack + 3-Character (Narrator, Fadyme, Mahmut)
-Casting & Live Web-Audio Voice Manipulation Studio at `apps/game/public/content/audition/index.html`.
+Casting & Live Web-Audio Voice Manipulation Studio at `.cache/audition/index.html`.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / 'narrative/10_VO/Voice_Samples/Chirp3_HD/ja-JP/audition_v001/manifest.json'
 JP_PROLOGUE_PATH = ROOT / 'narrative/10_VO/Line_Maps/jp_script_prologue.json'
 MASTER_SCRIPT_PATH = ROOT / 'narrative/10_VO/Line_Maps/jp_script_vertical_slice_master.json'
-OUT_DIR = ROOT / 'apps/game/public/content/audition'
+OUT_DIR = ROOT / '.cache/audition'
 
 SCENE_STILLS = {
     'hours': '/content/base/art/still_prologue_hours.webp',
@@ -1245,7 +1245,7 @@ renderScriptInspector();
 </html>
 """
     (OUT_DIR / 'index.html').write_text(html, encoding='utf-8')
-    print(f'Audition studio updated at apps/game/public/content/audition/index.html with {len(voices_data)} voices, {len(fadyme_demos)} Fadyme demos, and {len(master_script["lines"])} directed acting lines.')
+    print(f'Audition studio updated at .cache/audition/index.html with {len(voices_data)} voices, {len(fadyme_demos)} Fadyme demos, and {len(master_script["lines"])} directed acting lines.')
 
 
 if __name__ == '__main__':

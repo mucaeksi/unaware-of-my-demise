@@ -1,6 +1,6 @@
 /* ============================================================================
  * Unaware of My Demise — Gothic Dark Anime UI Toolkit Stylesheet (USS)
- * Reference Resolution: 1920x1080 Landscape (PanelSettings Match = 0.5)
+ * Reference Resolution: 1920x1080 Landscape (PanelSettings match = 1, height; see UomdBootstrap.cs)
  * Ported 1:1 from apps/game/src/ui/theme.ts & domKit.ts
  * ============================================================================ */
 
@@ -194,4 +194,123 @@
     padding-top: 16px;
     padding-bottom: 16px;
     picking-mode: ignore;
+}
+
+
+/* ----------------------------------------------------------------------------
+ * Fonts (OFL, from google/fonts, static instances in Assets/_UOMD/UI/Fonts).
+ * -unity-font-definition must be reset or the default theme font wins.
+ * -------------------------------------------------------------------------- */
+.uomd-root,
+.uomd-screen-root {
+    -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/CormorantGaramond-Medium.ttf");
+    -unity-font-definition: initial;
+    flex-grow: 1;
+    background-color: var(--color-void);
+    color: var(--color-text);
+}
+
+.uomd-title-h1,
+.uomd-title-h2,
+.uomd-title-lg,
+.uomd-title-md,
+.uomd-btn,
+.uomd-speaker-tag {
+    -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/Cinzel-SemiBold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: normal;
+}
+
+/* ----------------------------------------------------------------------------
+ * Classes used by the C# screens that had no rule yet.
+ * -------------------------------------------------------------------------- */
+.uomd-title-lg {
+    font-size: 72px;
+    color: var(--color-gold-hi);
+    letter-spacing: 4px;
+    -unity-text-align: middle-center;
+}
+
+.uomd-title-md {
+    font-size: 44px;
+    color: var(--color-gold-hi);
+    letter-spacing: 2px;
+}
+
+.uomd-subtitle {
+    font-size: 32px;
+    color: var(--color-silver);
+    white-space: normal;
+}
+
+.uomd-body {
+    font-size: 36px;
+    color: var(--color-text);
+    white-space: normal;
+}
+
+.uomd-caption {
+    font-size: 26px;
+    color: var(--color-dim);
+    white-space: normal;
+}
+
+.uomd-card {
+    background-color: var(--color-ink-panel);
+    border-width: 2px;
+    border-color: var(--color-gold);
+    border-radius: 6px;
+    padding: 20px;
+    margin: 8px;
+}
+
+.uomd-btn-danger {
+    background-color: var(--color-crimson);
+    border-color: var(--color-crimson-hi);
+    color: var(--color-text);
+}
+
+.uomd-btn-danger:hover,
+.uomd-btn-danger:focus {
+    background-color: var(--color-crimson-hi);
+}
+
+.uomd-modal-box {
+    width: 1040px;
+    max-height: 860px;
+    background-color: var(--color-ink);
+    border-width: 2px;
+    border-color: var(--color-gold-hi);
+    border-radius: 8px;
+    padding: 36px;
+    flex-direction: column;
+}
+
+.uomd-wallet-pill {
+    height: 68px;
+    margin-left: 12px;
+    padding-left: 22px;
+    padding-right: 22px;
+    background-color: rgba(18, 10, 24, 0.92);
+    border-width: 1px;
+    border-color: var(--color-gold);
+    border-radius: 34px;
+    -unity-text-align: middle-center;
+}
+
+.uomd-wallet-value {
+    font-size: 28px;
+    color: var(--color-bone);
+}
+
+.uomd-dialogue-text {
+    font-size: 40px;
+    color: var(--color-text);
+    white-space: normal;
+}
+
+.uomd-speaker-tag {
+    font-size: 34px;
+    color: var(--color-gold-hi);
+    letter-spacing: 2px;
 }
