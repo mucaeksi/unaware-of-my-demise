@@ -4,6 +4,15 @@ The Unity project in `apps/unity/` had never been opened or compiled by Unity un
 `ProjectSettings/*.asset` and no `packages-lock.json`. Unity generates all of them on first import. This folder turns that first
 open into a repeatable batch pipeline.
 
+## 0. Checks that need no Unity licence (run these first)
+
+| Command | What it proves | What it does not prove |
+| --- | --- | --- |
+| `npm run test:unity-logic` | The engine-free assemblies (`Logic/Uomd.Logic.sln`: Contracts, pure Core, Combat, StoryRunner) build under Unity's limits (C# 9, .NET Standard 2.1, asmdef boundaries) and the EditMode parity tests pass against the TypeScript golden vectors. Seconds; the cloud session hook installs .NET 10. | Anything that touches `UnityEngine` at runtime. |
+| `npm run check:unity-compile` | Every `apps/unity` asmdef compiles against the real `UnityEngine`/`UnityEditor` assemblies of the pinned editor, and `Packages/manifest.json` asks for the exact versions the editor bundles (URP, ugui, test-framework…). Streams the public editor archive once into `~/.cache/uomd-unity-ref/<version>` (~4.5 GB download, ~2 GB kept). `Uomd.Editor` sees URP through signatures copied from URP 17.0.4. | Asset import, serialization, shader compilation, IL2CPP, Gradle, running tests inside Unity. Those still need `unity_ci.sh` on a licensed editor. |
+
+2026-10-24 result: 10/10 asmdefs compile with 0 errors on 6000.0.58f2 after fixing `BannerDto` (CS0509) and aligning the manifest (`URP 17.0.3` does not exist in any registry; the editor bundles 17.0.4, and test-framework 1.5.1).
+
 ## 1. Install (once per VM)
 
 | Host | Command |
