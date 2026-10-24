@@ -461,7 +461,7 @@ async function buildAabSplashStudioGif(outGifPath) {
         <line x1="110" y1="210" x2="410" y2="88" stroke="#00E5FF" stroke-opacity="0.65" stroke-width="3"/>
         <line x1="116" y1="214" x2="416" y2="92" stroke="#FF2A85" stroke-opacity="0.65" stroke-width="3"/>
         <text x="260" y="88" fill="#B5A6C8" font-family="Georgia, serif" font-size="11" letter-spacing="6" text-anchor="middle">POWERED BY</text>
-        <text x="260" y="156" fill="#F4EFE6" font-family="Georgia, serif" font-size="44" font-weight="bold" letter-spacing="10" text-anchor="middle">PIXIJS</text>
+        <text x="260" y="156" fill="#F4EFE6" font-family="Georgia, serif" font-size="44" font-weight="bold" letter-spacing="10" text-anchor="middle">UNITY 6</text>
         <rect x="${260 - Math.floor(ruleW / 2)}" y="182" width="${ruleW}" height="2.5" fill="#E3C37D"/>
         <circle cx="${glintX}" cy="146" r="14" fill="#00E5FF" fill-opacity="0.55"/>
         <text x="260" y="208" fill="#9ECFFF" font-family="monospace" font-size="10" letter-spacing="3" text-anchor="middle">WEBGL2 · GOTHIC DOM UI · v8.0</text>

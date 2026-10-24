@@ -7,7 +7,7 @@ Vetting notes and rejected candidates: `docs/media/FREE_ASSETS.md`. This is engi
 |---|---|---|---|---|
 | Unity 6 LTS (`6000.0.x`, Universal Render Pipeline 2D) | Target Android AAB runtime (`apps/unity/`, Decision D-31) | https://unity.com | Unity Terms of Service / Runtime Fee & Splash policy | Standard Unity credit / license notice |
 | Cinzel, Cormorant Garamond (`@fontsource` / SDF Font Assets) | Bundled game & admin fonts | npm `@fontsource/cinzel` 5.2.8, `@fontsource/cormorant-garamond` 5.2.11 | SIL OFL 1.1 | notice + license text required in credits |
-| *(Handed-over Legacy Reference Only)* `pixi.js` 8.x & `pixi-filters` 6.1.5 | `apps/game` (retained only as transition test oracle until Phase U-6 archival into `archive/pixi-era`; Phaser 4 was retired in D-23) | https://pixijs.com | MIT License | Only if legacy web preview is served |
+| *(Handed-over Legacy Reference Only)* `unity-urp-2d` 8.x & `unity-filters` 6.1.5 | `apps/game` (retained only as transition test oracle until Phase U-6 archival into `archive/legacy-web-era`; Phaser 4 was retired in D-23) | https://unity.com | MIT License | Only if legacy web preview is served |
 
 ## Credits text (credits screen, generated from the table above)
 

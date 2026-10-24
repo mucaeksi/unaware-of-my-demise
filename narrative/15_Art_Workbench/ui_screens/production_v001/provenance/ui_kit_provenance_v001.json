@@ -27,7 +27,7 @@
         "top": 148,
         "bottom": 148
       },
-      "pixi_nine_slice_sprite_config": {
+      "unity_nine_slice_sprite_config": {
         "leftWidth": 148,
         "topHeight": 148,
         "rightWidth": 148,
@@ -46,7 +46,7 @@
         "top": 112,
         "bottom": 112
       },
-      "pixi_nine_slice_sprite_config": {
+      "unity_nine_slice_sprite_config": {
         "leftWidth": 112,
         "topHeight": 112,
         "rightWidth": 112,
@@ -65,7 +65,7 @@
         "top": 224,
         "bottom": 224
       },
-      "pixi_nine_slice_sprite_config": {
+      "unity_nine_slice_sprite_config": {
         "leftWidth": 224,
         "topHeight": 224,
         "rightWidth": 224,

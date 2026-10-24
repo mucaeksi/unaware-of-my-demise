@@ -42,7 +42,7 @@ export const AAB_15_SCENES: AabSceneStep[] = [
     title: 'Sahne 1: Splash Engine Credit & Tam İlk AAB Akışı',
     gifId: '10_aab_splash_studio_intro',
     animations: [
-      'PixiJS v8.0 Wordmark & 4 Renk Prizma Işını',
+      'Unity 6 LTS Wordmark & 4 Renk Prizma Işını',
       '#1 Dönen Kara Güneş Tutulma Koronası & Astronomik Rün Halkası',
       'Genişleyen Gümüş Cetvel & Cyan Glint Süpürmesi'
     ]
@@ -975,7 +975,7 @@ export function Animations({ me, say }: { me: Me | null; say: (m: string) => voi
                     <div>
                       <div className="row" style={{ marginTop: 0, gap: 6, flexWrap: 'wrap' }}>
                         <span className="badge info">Sahne Kodu: ?preview_scene={currentStep.id}</span>
-                        <span className="badge ok">PixiJS v8 Canlı Motor</span>
+                        <span className="badge ok">Unity 6 LTS (URP 2D) Canlı Motor</span>
                       </div>
                       <h4 style={{ margin: '10px 0 8px', color: '#ffdf9a' }}>
                         Bu Sahnede Devrede Olan Onaylı Animasyonlar:

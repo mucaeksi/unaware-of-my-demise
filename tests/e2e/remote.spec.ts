@@ -17,7 +17,7 @@ test('deployed client boots, renders WebGL and plays tutorial T-1 to victory', a
     const c = document.querySelector('canvas') as HTMLCanvasElement;
     return { w: c.width, h: c.height, renderer: (window as any).__UOMD__.game.renderer.type };
   });
-  expect(gl.renderer).toBe(2); // PIXI WebGL/WebGPU (1 would be the canvas fallback)
+  expect(gl.renderer).toBe(2); // Unity URP 2D (1 would be the canvas fallback)
   await page.screenshot({ path: `${SHOTS}/${info.project.name}-01-title.png` });
 
   await tap(page, info, 500, 640); // BEGIN

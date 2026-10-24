@@ -297,7 +297,7 @@ namespace Uomd.Battle.Vfx
 
                 float angleRad = RandomRange(el.angle) * Mathf.Deg2Rad;
                 float speedWorld = (RandomRange(el.speed) * scale) / PixelsPerUnit;
-                // Note: Pixi +Y is down, Unity +Y is up -> negate sin(angle) and gravity_y
+                // Note: Top-left +Y is down, Unity +Y is up -> negate sin(angle) and gravity_y
                 Vector2 vel = new(Mathf.Cos(angleRad) * speedWorld * dir, -Mathf.Sin(angleRad) * speedWorld);
 
                 float s0 = el.scale_range.start * scale;

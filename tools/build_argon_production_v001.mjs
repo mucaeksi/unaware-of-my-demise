@@ -427,19 +427,19 @@ async function buildUiProductionPackage() {
         file: 'ui_kit/panel_frame_primary_9slice_v001.png',
         dimensions: outerDims,
         nine_slice_insets_px: { left: 148, right: 148, top: 148, bottom: 148 },
-        pixi_nine_slice_sprite_config: { leftWidth: 148, topHeight: 148, rightWidth: 148, bottomHeight: 148 }
+        unity_nine_slice_sprite_config: { leftWidth: 148, topHeight: 148, rightWidth: 148, bottomHeight: 148 }
       },
       panel_frame_secondary_9slice_v001: {
         file: 'ui_kit/panel_frame_secondary_9slice_v001.png',
         dimensions: innerDims,
         nine_slice_insets_px: { left: 112, right: 112, top: 112, bottom: 112 },
-        pixi_nine_slice_sprite_config: { leftWidth: 112, topHeight: 112, rightWidth: 112, bottomHeight: 112 }
+        unity_nine_slice_sprite_config: { leftWidth: 112, topHeight: 112, rightWidth: 112, bottomHeight: 112 }
       },
       panel_frame_double_composite_9slice_v001: {
         file: 'ui_kit/panel_frame_double_composite_9slice_v001.png',
         dimensions: { width: 1024, height: 1024 },
         nine_slice_insets_px: { left: 224, right: 224, top: 224, bottom: 224 },
-        pixi_nine_slice_sprite_config: { leftWidth: 224, topHeight: 224, rightWidth: 224, bottomHeight: 224 }
+        unity_nine_slice_sprite_config: { leftWidth: 224, topHeight: 224, rightWidth: 224, bottomHeight: 224 }
       }
     },
     buttons_4state: {
@@ -464,7 +464,7 @@ This directory contains the **Argon Delivery Specification (Priority #1A)** prod
 
 ## 1. Directory Structure
 
-- \`ui_kit/\` — Individual transparent RGBA PNG components (zero baked text; ready for \`PixiJS v8 NineSliceSprite\` and HTML/CSS ARIA menus).
+- \`ui_kit/\` — Individual transparent RGBA PNG components (zero baked text; ready for \`Unity 6 UI Toolkit 9-Slice\` and HTML/CSS ARIA menus).
 - \`brand/\` — Exact-dimension PNG Store & Android Adaptive Icon deliverables.
 - \`sources/\` — Lossless PNG masters on flat \`#00FF00\` chroma-key green.
 - \`provenance/ui_kit_provenance_v001.json\` — Full R14 provenance and commercial terms metadata.
@@ -489,7 +489,7 @@ This directory contains the **Argon Delivery Specification (Priority #1A)** prod
 - \`ui_kit/bar_frame_empty_v001.png\` — Empty ornate metal gauge frame.
 - \`ui_kit/bar_fill_hp_crimson_v001.png\` — Blood-crimson HP liquid fill strip.
 - \`ui_kit/bar_fill_focus_gold_violet_v001.png\` — Luminous amber-gold to twilight-violet Focus fill strip.
-- \`ui_kit/vfx_eclipse_corona_ring_v001.png\`, \`ui_kit/vfx_ember_ash_particles_v001.png\`, \`ui_kit/ornament_corner_bell_chain_v001.png\` — Isolated RGBA overlay layers for PixiJS / CSS animation.
+- \`ui_kit/vfx_eclipse_corona_ring_v001.png\`, \`ui_kit/vfx_ember_ash_particles_v001.png\`, \`ui_kit/ornament_corner_bell_chain_v001.png\` — Isolated RGBA overlay layers for Unity 6 UI Toolkit / USS animation.
 
 ## 4. Store & Android Adaptive Brand Pack (\`brand/\`)
 

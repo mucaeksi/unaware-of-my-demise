@@ -40,11 +40,11 @@ You are the creative lead. Nobody else designs, generates or directs the game's 
 | Presentation registry | `content/base/presentation/presentation.json` (`voices`, `sounds`, `videos`, `locales`, `panels`) | Validated by `@uomd/content-schema`. |
 | Music, voice | `content/base/audio/`, `content/base/voices/`, `tools/*lyria*.py`, `tools/record_game_vo.py`, `tools/build_*` audio tools | Every paid call goes through the media budget (§4.3). |
 | SFX | `apps/game/src/audio/Sfx.ts` (procedural interim today) | Replace with the real set; keep the interim as fallback until each cue has a file. |
-| UI art and motion | `apps/game/src/ui/theme.ts`, `ui/pixiKit.ts`, `ui/domKit.ts`, scene files | Code; follow the `uomd-anime-ui` and `uomd-pixi-engine` skills. |
+| UI art and motion | `apps/game/src/ui/theme.ts`, `ui/UomdUiKit.cs`, `ui/domKit.ts`, scene files | Code; follow the `uomd-anime-ui` and `uomd-unity-engine` skills. |
 | Store and teaser | `docs/store/assets/`, `docs/store/TEASER_STORYBOARD.md`, `tools/build_canonical_store_and_brand_assets.mjs` | Play Console specs in RELEASE_ROADMAP §2. |
 | Review tooling | Control Center **Animations** studio (`apps/admin/src/pages/Animations.tsx`) | Use it to show the owner motion work; extend its categories as you add work. |
 
-Skills to apply: `uomd-chibi-animation`, `uomd-battle`, `uomd-anime-ui`, `uomd-narrative-cinematics`, `uomd-pixi-engine`, `uomd-mobile-qa`, `google-anime-media`, the official `pixijs-*` skills, and `ui-ux-pro-max` as a reference only.
+Skills to apply: `uomd-chibi-animation`, `uomd-battle`, `uomd-anime-ui`, `uomd-narrative-cinematics`, `uomd-unity-engine`, `uomd-mobile-qa`, `google-anime-media`, the official `unity-*` skills, and `ui-ux-pro-max` as a reference only.
 
 ## 3. State on 2026-10-23 (verified at `3e0be8e`)
 

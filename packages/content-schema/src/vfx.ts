@@ -3,7 +3,7 @@ import { Id } from './primitives';
 
 /**
  * Data-driven combat VFX (D-25). A preset is a short timeline over a CLOSED set of primitives that the client
- * compiles into PIXI objects: procedural textures, a few vector shapes, particle bursts, a projectile and camera
+ * compiles into Unity URP 2D SpriteRenderers: procedural textures, a few vector shapes, particle bursts, a projectile and camera
  * cues. No shaders, property paths, expressions or code — so new effects ship in signed data patches.
  */
 export const VFX_PATH = 'vfx/vfx_presets.json';

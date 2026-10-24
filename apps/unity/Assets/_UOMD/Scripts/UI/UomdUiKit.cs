@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 namespace Uomd.UI
 {
     /// <summary>
-    /// Unity 6 Runtime UI Toolkit port of apps/game/src/ui/domKit.ts and pixiKit.ts.
+    /// Unity 6 Runtime UI Toolkit port of apps/game/src/ui/domKit.ts and UomdUiKit.cs.
     /// Provides reusable Gothic buttons, HP/Focus bars, economy cost-gate modals (R10/R15),
     /// inert background focus trapping, and toast notifications.
     /// </summary>

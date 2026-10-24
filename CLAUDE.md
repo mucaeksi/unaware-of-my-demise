@@ -6,4 +6,4 @@ Under Decision D-31 (2026-10-24), **Claude Opus 5.5** (`claude-opus-5-5` / Claud
 
 Use project skills under `.claude/skills/` (`uomd-unity-engine`, `unity-6-core`, `unity-urp-2d`, `unity-ui-toolkit`, `unity-2d-animation`, `unity-deterministic-combat`, `unity-android-il2cpp`, `unity-mcp-workflow`), Unity specialist subagents under `.claude/agents/` (`unity-architect`, `unity-csharp-reviewer`, `unity-build-resolver`), and project MCPs from `.mcp.json` (`uomd-unity-live`, `graphify`, `chrome-devtools`). Follow the verified skill lock and `tools/bootstrap_skills.py`.
 
-Do not create a second competing master prompt. Never silently rewrite narrative canon; the Godot-era (`archive/godot-era`) and PixiJS/Capacitor-era (`apps/game/`, `apps/android/`) runtimes are retired.
+Do not create a second competing master prompt. Never silently rewrite narrative canon; the Godot-era (`archive/godot-era`) and legacy web/Capacitor runtimes are retired and removed.

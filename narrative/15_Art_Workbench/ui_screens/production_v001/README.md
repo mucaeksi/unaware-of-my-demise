@@ -4,7 +4,7 @@ This directory contains the **Argon Delivery Specification (Priority #1A)** prod
 
 ## 1. Directory Structure
 
-- `ui_kit/` — Individual transparent RGBA PNG components (zero baked text; ready for `PixiJS v8 NineSliceSprite` and HTML/CSS ARIA menus).
+- `ui_kit/` — Individual transparent RGBA PNG components (zero baked text; ready for `Unity 6 UI Toolkit 9-Slice` and HTML/CSS ARIA menus).
 - `brand/` — Exact-dimension PNG Store & Android Adaptive Icon deliverables.
 - `sources/` — Lossless PNG masters on flat `#00FF00` chroma-key green.
 - `provenance/ui_kit_provenance_v001.json` — Full R14 provenance and commercial terms metadata.
@@ -29,7 +29,7 @@ This directory contains the **Argon Delivery Specification (Priority #1A)** prod
 - `ui_kit/bar_frame_empty_v001.png` — Empty ornate metal gauge frame.
 - `ui_kit/bar_fill_hp_crimson_v001.png` — Blood-crimson HP liquid fill strip.
 - `ui_kit/bar_fill_focus_gold_violet_v001.png` — Luminous amber-gold to twilight-violet Focus fill strip.
-- `ui_kit/vfx_eclipse_corona_ring_v001.png`, `ui_kit/vfx_ember_ash_particles_v001.png`, `ui_kit/ornament_corner_bell_chain_v001.png` — Isolated RGBA overlay layers for PixiJS / CSS animation.
+- `ui_kit/vfx_eclipse_corona_ring_v001.png`, `ui_kit/vfx_ember_ash_particles_v001.png`, `ui_kit/ornament_corner_bell_chain_v001.png` — Isolated RGBA overlay layers for Unity 6 UI Toolkit / USS animation.
 
 ## 4. Store & Android Adaptive Brand Pack (`brand/`)
 

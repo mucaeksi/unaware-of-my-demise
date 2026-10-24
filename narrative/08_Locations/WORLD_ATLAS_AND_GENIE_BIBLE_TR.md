@@ -176,5 +176,5 @@ Her bölüm (Chapter), **Project Genie** içinde tek bir ana **Merkez Tohumdan (
    - **Savaş Sahnesi (Battle Stage) İçin:** Kamerayı yan-cepheden (`side-view / slight low angle`) geniş bir açıklığa hizalayıp sol yarıda 5 kahraman, sağ yarıda düşman/boss duracak şekilde (`zemin ufuk çizgisi ekranın alt %30-%35'inde`) kare yakala.
    - **VN / Diyalog Sahnesi İçin:** Odak noktasına (Wayshrine, Kuyu, Sarnıç Kapısı, Portre Galerisi) doğru ileri dolly (`forward dolly`) yaparak orta-plan kare yakala.
    - **Cutscene / Ara Sahne İçin:** Kamera hareketini (pan/tilt/dolly) video olarak dışa aktar veya **Google Flow (`labs.google/fx/tools/flow`)** içinde *First Frame / Last Frame* referansı olarak kullan.
-3. **Adım 3 — Parallax Katmanlama (`PixiJS v8 Stage`):**
+3. **Adım 3 — Parallax Katmanlama (`Unity 6 URP 2D Stage`):**
    Yatay kamera kaydırmasından (`lateral truck`) elde edilen kareleri 3 katmana (`bg_sky_horizon`, `mid_architecture`, `fg_mist_props`) ayırarak oyun motorundaki sahne derinliğine bağla.

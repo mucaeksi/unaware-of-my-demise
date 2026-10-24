@@ -1,6 +1,6 @@
 # Skills and MCP verification (Updated 2026-10-24 for Decision D-31)
 
-> **Owner Decision D-31 (2026-10-24):** All project engineering, **Unity 6 LTS (`apps/unity/`, C#, URP 2D)** migration ([CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)), and **Google Gemini API** asset production belong exclusively to **Claude Opus 5.5** (`claude-opus-5-5` / Claude Code). All 121 skills in `.claude/skills/` and 58 adapters in `.agents/skills/` pass `skills_doctor.py`, `sync_codex_skills.py --check`, and `install_ecc.py --check`. Historical D-23/D-25 web-stage skills and `uomd-pixi-live` remain pinned only for lockfile integrity and legacy `apps/game` oracle inspection during Phases U-1..U-5.
+> **Owner Decision D-31 (2026-10-24):** All project engineering, **Unity 6 LTS (`apps/unity/`, C#, URP 2D)** migration ([CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)), and **Google Gemini API** asset production belong exclusively to **Claude Opus 5.5** (`claude-opus-5-5` / Claude Code). All 121 skills in `.claude/skills/` and 58 adapters in `.agents/skills/` pass `skills_doctor.py`, `sync_codex_skills.py --check`, and `install_ecc.py --check`. Historical D-23/D-25 web-stage skills and `uomd-unity-live` remain pinned only for lockfile integrity and legacy `apps/game` oracle inspection during Phases U-1..U-5.
 
 ## 2026-10-22, Claude Code cloud session (Linux, Node 22.22, commit `ac186f9`)
 
@@ -8,11 +8,11 @@ Real calls, not file presence. Cloud sessions now run [.claude/hooks/session-sta
 
 | Check | Result |
 | --- | --- |
-| Skills | 44/44 `.claude/skills/*/SKILL.md` match `.claude/skills-lock.json`; all six pinned ZIPs match their sha256; `bootstrap_skills.py --verify`, `skills_doctor.py` and `install_pixijs_skills.py --check` (26 skills = pixi.js 8.22.0) PASS. |
+| Skills | 44/44 `.claude/skills/*/SKILL.md` match `.claude/skills-lock.json`; all six pinned ZIPs match their sha256; `bootstrap_skills.py --verify`, `skills_doctor.py` and `install_unity6_skills.py --check` (26 skills = unity-urp-2d 8.22.0) PASS. |
 | Codex adapters | `sync_codex_skills.py --check` failed: `a61f1aa` changed the `cloudflare-d1-liveops` adapter without regenerating `.agents/skills-lock.json`. Regenerated; the check passes. |
 | `npm run verify` | PASS on a clean Linux clone in about 9 minutes (1,090 tests, content check reproduces 172 files exactly). |
 | e2e | `game.spec.ts --project landscape-desktop` 2/2 PASS against the local workerd/D1/R2 stack with the preinstalled Playwright Chromium 1194. |
-| `uomd-pixi-live` MCP | Failed at session start because `node_modules` did not exist yet (the hook fixes this); after `npm ci` it answers `initialize` and lists its 4 tools over stdio. |
+| `uomd-unity-live` MCP | Failed at session start because `node_modules` did not exist yet (the hook fixes this); after `npm ci` it answers `initialize` and lists its 4 tools over stdio. |
 | Graphify MCP | `tools/build_graph.sh`: 4,920 nodes / 13,930 edges / 202 communities in 26 s; `graph_stats` and `query_graph` answered, graph built at HEAD. |
 | Chrome DevTools MCP | `new_page` + `evaluate_script` on an isolated data: page; Chrome 141 with WebGL. |
 | Proxy services | Gemini model list HTTP 200 (no paid call); Cloudflare account token active, Workers list readable (`uomd-game/admin/ops-staging`). |

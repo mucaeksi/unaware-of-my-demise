@@ -9,11 +9,11 @@ test.describe.configure({ mode: 'serial' });
 test('boots to a rendered title screen with embedded base content and no errors', async ({ page }, info) => {
   const problems = await openGame(page);
   const gl = await page.evaluate(() => {
-    const g = window as unknown as { __UOMD__: { game: { renderer: { type: number; name: string; pixi: { screen: { width: number; height: number } } } } } };
+    const g = window as unknown as { __UOMD__: { game: { renderer: { type: number; name: string; unity: { screen: { width: number; height: number } } } } } };
     const r = g.__UOMD__.game.renderer;
-    return { renderer: r.type, name: r.name, w: r.pixi.screen.width, h: r.pixi.screen.height };
+    return { renderer: r.type, name: r.name, w: r.unity.screen.width, h: r.unity.screen.height };
   });
-  // a real PIXI v8 GPU renderer (the canvas backing store scales with the device, the stage stays 1920x1080)
+  // a real Unity 6 URP 2D GPU renderer (the canvas backing store scales with the device, the stage stays 1920x1080)
   expect(gl.renderer).toBe(2);
   expect(['webgl', 'webgpu']).toContain(gl.name);
   expect(gl.w).toBe(REF_W);

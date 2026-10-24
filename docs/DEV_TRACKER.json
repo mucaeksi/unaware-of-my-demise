@@ -94,7 +94,7 @@
     {
       "from": "owner",
       "date": "2026-10-18",
-      "text": "Drop Phaser completely and move the game to pure PixiJS, step by step (battle, story, menus, then delete the compatibility API).",
+      "text": "Drop Phaser completely and move the game to pure Unity 6 LTS, step by step (battle, story, menus, then delete the compatibility API).",
       "status": "done: D-25 (ea68484d; superseded for client target by D-31 Unity migration)"
     },
     {
@@ -112,8 +112,8 @@
     {
       "from": "owner",
       "date": "2026-10-17",
-      "text": "Complete Engine Migration from Phaser 4 (4.2.1) to Hybrid PixiJS v8 (WebGL2/WebGPU 2D Stage) + Modular Gothic DOM/CSS UI Architecture (Decision D-23).",
-      "status": "done: D-23 (PixiJS v8 + DOM/CSS UI runtime, 28 Phaser topic skills retired, E2E & unit suites green)"
+      "text": "Complete Engine Migration from Phaser 4 (4.2.1) to Hybrid Unity 6 LTS (URP 2D) (WebGL2/WebGPU 2D Stage) + Modular Gothic DOM/CSS UI Architecture (Decision D-23).",
+      "status": "done: D-23 (Unity 6 LTS (URP 2D) + DOM/CSS UI runtime, 28 Phaser topic skills retired, E2E & unit suites green)"
     },
     {
       "from": "owner",
@@ -1328,7 +1328,7 @@
       "result": "PARTIAL",
       "commit": "45c641e2",
       "verifiedAt": "2026-10-19",
-      "scope": "Pure-PixiJS client after D-25: root typecheck and lint clean, apps/game 149 unit tests pass, game build; Playwright landscape-desktop against the local Worker stack: 38/40 in the full run, library.spec then passed alone; r08-complete.spec fails on the stale-patch guard (not D-25). Phone/tablet projects and physical devices not run.",
+      "scope": "Pure-Unity 6 LTS client after D-25: root typecheck and lint clean, apps/game 149 unit tests pass, game build; Playwright landscape-desktop against the local Worker stack: 38/40 in the full run, library.spec then passed alone; r08-complete.spec fails on the stale-patch guard (not D-25). Phone/tablet projects and physical devices not run.",
       "testIds": [
         "npm run typecheck",
         "npm run lint",
@@ -2235,7 +2235,7 @@
         "Full entry flow Studio → Title → Prologue → T-1..T-3 → Finish",
         "Main theme locked; 7 Lyria 3.5 BGM tracks mapped across Chapters 1–7 & Bosses (§4.6)",
         "116 Japanese voice lines with synced subtitles + 16 canonical Ogg Vorbis SFX cues registered in presentation.sounds (§4.6)",
-        "Pure PixiJS client, 115 bespoke Signature VFX presets & 133 skill bindings across all 52 units (D-25, §4.2)",
+        "Pure Unity 6 LTS client, 115 bespoke Signature VFX presets & 133 skill bindings across all 52 units (D-25, §4.2)",
         "Chibi 2-phase anticipation/impact timing, VN bottom-anchored breathing & speech pulse, staggered summon reveal (§4.5)",
         "Durable story continuity (D-26)"
       ],
