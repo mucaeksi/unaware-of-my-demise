@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "7138437f",
+  "sourceCommit": "ef69c54",
   "reviewedAt": "2026-10-24",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Claude Opus 5.5 executes Unity 6 LTS migration Phases U-1..U-6 (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) and Gemini API asset production",
+    "nextProposed": "Infrastructure pass done (verify green, headless C# harness, real-Unity reference compile, manifest fixed, Unity skills, live Unity status in Control Center). Next: port @uomd/combat to Uomd.Combat with a replay logHash parity suite, port StoryRunner tests, then the first licensed Unity import (needs B-UNITY-LICENSE) and the initial AAB vertical slice.",
     "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "Infrastructure pass for the Unity client (2026-10-24, Claude Opus 5.5)",
+      "detail": "npm run verify green again (944 TS tests; MAX_RELEASE_FILES aligned across schema/admin/store, fixtures cover patch music/voices). apps/unity/Logic headless .NET harness (npm run test:unity-logic, 7/7 C# parity tests). npm run check:unity-compile builds all 10 asmdefs against the real Unity 6000.0.58f2 assemblies without a licence: 0 errors after fixing BannerDto (CS0509). Packages/manifest.json fixed (URP 17.0.3 does not exist; editor bundles 17.0.4, test-framework 1.5.1). 19 vetted Unity reference skills pinned; Unity skills corrected to the real code. Development page shows the Unity migration computed from the repo."
+    },
     {
       "title": "D-31: Exclusive Handover to Claude Opus 5.5 & Unity 6 LTS Migration Blueprint + Bundle Exporter (2026-10-24)",
       "detail": "100% of operations, Unity 6 LTS (apps/unity/, C#, URP 2D) client migration, and Gemini API asset generation transferred exclusively to Claude Opus 5.5. Delivered docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md and tools/export_unity_bundle.ts (npm run export:unity: exports content/base to StreamingAssets/uomd_base, converts top-left atlas frames & foot_y pivots to Unity bottom-left Sprite rects/pivots, and emits bit-exact C# Mulberry32Rng + D-27 UomdStatMath + UomdClientConfig)."
@@ -30,12 +34,24 @@
   ],
   "next": [
     {
-      "title": "Phase U-1 & U-2 (Claude Opus 5.5): Unity 6 LTS Scaffold & Bit-Exact C# Domain Port",
-      "detail": "Initialize apps/unity/ with modular .asmdef assemblies (Uomd.Shared, Uomd.ContentSchema, Uomd.Patch, Uomd.Economy, Uomd.Story, Uomd.Combat) and verify 100% NUnit parity against TypeScript combat/story/patch test vectors (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md)."
+      "title": "U-1: Port @uomd/combat to Uomd.Combat with replay parity",
+      "detail": "BattleSimulator (C# ~810 lines) is a placeholder next to packages/combat (~2,370 source lines). Export golden replays (seed, actions, logHash, eventCount) for T-1..T-3 and Part I stages from TypeScript and make the C# port match bit for bit in npm run test:unity-logic."
     },
     {
-      "title": "Phase U-3..U-6 (Claude Opus 5.5): Unity URP 2D Scenes, Gothic UI, Android Bridges & Gemini API Assets",
-      "detail": "Port all 28 scenes to Unity URP 2D + UI Toolkit/uGUI, wire the 4 Android Java plugins via AndroidJavaObject, generate remaining/future assets exclusively via the Google Gemini API, and cut over the Android AAB build."
+      "title": "U-1: StoryRunner and patch admission tests in C#",
+      "detail": "Port packages/story runner tests and packages/patch admission vectors to the headless harness."
+    },
+    {
+      "title": "U-2: Remote signed patch download in PatchManager",
+      "detail": "Manifest signature admission exists; content-addressed download, staging, activation at restart and rollback are still missing."
+    },
+    {
+      "title": "U-3: First licensed Unity import, then the initial AAB vertical slice",
+      "detail": "Run apps/unity/cloud/unity_ci.sh import on a licensed editor, commit metas/ProjectSettings/packages-lock, then wire Studio → Title → Prologue → T-1..T-3 → Finish with approved art."
+    },
+    {
+      "title": "Control Center: replace the retired browser-game previews",
+      "detail": "Dashboard/Development 'Live preview' iframes point at the game Worker, which now serves only the gateway page since apps/game was removed. Replace with Unity build screenshots/video once the first Unity build exists."
     },
     {
       "title": "Phase C: Publish Base (rel_0001) & Patch 1 (rel_part1_ch1) to staging",
@@ -51,6 +67,10 @@
     }
   ],
   "blockedOnOwner": [
+    {
+      "title": "B-UNITY-LICENSE — Unity licence for batchmode import/test/AAB",
+      "detail": "Everything up to compile is verified without a licence. The real import, PlayMode tests and AAB need an activated editor: either a Unity Pro/Plus serial as environment secrets (UNITY_SERIAL, UNITY_EMAIL, UNITY_PASSWORD) for apps/unity/cloud/unity_ci.sh, or run that script once on your own PC with Unity Hub (Personal is allowed there) and commit the generated metas/ProjectSettings. Unity documents that Personal cannot be activated manually/headless."
+    },
     {
       "title": "B-ART-DECISIONS — Art delivery decisions",
       "detail": "Commercial-use terms of Whisk/Veo output; approval of the Kera Voss pilot; role, element and rarity for the five drawn characters missing from the unit pack (cassian_thorne, corbin_locke, dorian_kesk, garrick_cinder, rowan_reed); order of regional music and the other characters' Japanese voice."
@@ -2332,33 +2352,33 @@
     }
   ],
   "checks": {
-    "date": "2026-10-23",
-    "commit": "7138437f",
+    "date": "2026-10-24",
+    "commit": "ef69c54",
     "items": [
       {
         "name": "npm run verify (lint, typecheck, all tests, content check)",
         "result": "pass",
-        "detail": "1,093 tests passing (API 507, game 159, combat 100, schema 132, economy 53, tools 66, patch 41, shared 26, story 9) + eslint 0 errors + check:content 204 base files reproduced byte-for-byte"
+        "detail": "944 TypeScript tests (API 507, schema 132, combat 100, tools 72, economy 53, patch 41, shared 26, story 9, unity exporter 4) + eslint + check:content 204 base files byte-identical"
       },
       {
-        "name": "D-30 §4.1–§4.7 Art, Banner, VFX & SFX Verification",
+        "name": "npm run test:unity-logic (headless C# harness)",
         "result": "pass",
-        "detail": "258 approved art entries verified (0 errors); 16/16 1376×768 banners wired; 115 VFX presets & 133 skill bindings validated; 16 Ogg Vorbis SFX cues in presentation.sounds; 415 D1 assets seeded"
+        "detail": "7/7 EditMode parity tests on .NET 10: Mulberry32, D-27 stat math, victory stars, canonical JSON, JS number format, managed ES256, exported bundle"
       },
       {
-        "name": "Playwright E2E (catalog-gear-gacha & world-map, desktop + phone-landscape)",
+        "name": "npm run check:unity-compile (real Unity 6000.0.58f2 assemblies)",
         "result": "pass",
-        "detail": "SummonScene 940×440 banner showcase, HomeScene 340×150 World-Map Banner Spotlight, and phone-landscape (1200×540 @ 2x) memory (<118 MB) & frame time (<2.5 ms) verified"
+        "detail": "10/10 asmdefs, 0 errors; manifest matches bundled packages; Uomd.Editor sees URP through signatures copied from URP 17.0.4"
       },
       {
-        "name": "Canonical Store, Brand, Mipmap & Splash Kit (tools/build_canonical_store_and_brand_assets.mjs)",
+        "name": "Skills (sync_codex_skills --check, skills_doctor, tools unittest)",
         "result": "pass",
-        "detail": "logo_master (1600×760), logo_compact (960×360), icon_512 (512×512), feature_graphic_1024x500 (24-bit RGB), 8× 1920×1080 showcase banners (01..08), 15 Android mipmaps & 11 dark gothic splash screens verified"
+        "detail": "58 adapters verified, 36 Python tests"
       },
       {
-        "name": "Staging Deployment & D1 Seed (uomd-admin-staging & uomd-game-staging)",
-        "result": "pass",
-        "detail": "415 assets & 16 banners with artKey seeded on uomd-staging D1; latest Control Center & Game Worker deployed"
+        "name": "Unity Editor import / PlayMode / AAB",
+        "result": "not run",
+        "detail": "needs an activated Unity licence (B-UNITY-LICENSE)"
       },
       {
         "name": "Physical Android, signed AAB",

@@ -10,7 +10,7 @@ inside Unity. Assemblies that reference package code we do not compile (for exam
 
 Usage:
   python3 apps/unity/cloud/unity_ref_compile.py [--fetch] [--editor-data DIR]
-  --fetch        download/extract the pinned editor references when the cache is missing (~4.5 GB stream, ~2 GB kept)
+  --fetch        download/extract the pinned editor references when the cache is missing (~4.5 GB stream, ~46 MB kept)
   --editor-data  use an existing Editor/Data directory (for example a local Unity install)
 """
 from __future__ import annotations
