@@ -22,8 +22,9 @@ bash apps/unity/cloud/unity_ci.sh capture              # Linux player under Xvfb
 node tools/publish_unity_screens.mjs                   # -> docs/evidence/unity-*.webp, shown on the Control Center Development page
 ```
 
-`UNITY_LICENSE` is the content of `Unity_lic.ulf`, which Unity Hub writes on the owner's PC after Preferences → Licenses → Add →
-Get a free personal license (Windows: `C:\ProgramData\Unity\Unity_lic.ulf`). GitHub repository secrets do not reach this session;
+`UNITY_LICENSE_B64` is `Unity_lic.ulf` in base64 (one line, safe for the environment editor), written by Unity Hub on the owner's PC after
+Preferences → Licenses → Add → Get a free personal license. Windows PowerShell:
+`[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\ProgramData\Unity\Unity_lic.ulf")) | Set-Clipboard`. GitHub repository secrets do not reach this session;
 set the three values in the cloud environment's settings.
 
 ## 1. Install (once per VM)

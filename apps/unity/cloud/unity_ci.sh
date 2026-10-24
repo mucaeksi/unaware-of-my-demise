@@ -4,7 +4,8 @@
 #   test   : EditMode tests (C# parity vs TypeScript golden vectors)
 #   build  : Android AAB (UOMD_BUILD_APK=1 for APK; UOMD_KEYSTORE_* for release signing)
 #   capture: Linux player under Xvfb visits every screen and saves PNGs (apps/unity/cloud/capture_screens.sh publishes them)
-# Licence: UNITY_LICENSE (.ulf contents, Unity Personal via Hub) + UNITY_EMAIL/UNITY_PASSWORD, or UNITY_SERIAL (Pro/Plus).
+# Licence: UNITY_LICENSE_B64 (base64 of the Hub-written .ulf, Unity Personal) or UNITY_LICENSE (raw XML),
+# optionally UNITY_EMAIL/UNITY_PASSWORD; or UNITY_SERIAL (Pro/Plus).
 set -euo pipefail
 
 STEP="${1:-all}"
@@ -33,10 +34,11 @@ run_unity() { # $1 = log name, rest = unity args
 
 activate_license() {
   # Unity Personal: the .ulf written by Unity Hub on the owner's machine (GameCI's documented CI route).
-  if [ -n "${UNITY_LICENSE:-}" ]; then
+  # UNITY_LICENSE_B64 = base64 of the file (one line, safe for .env editors); UNITY_LICENSE = the raw XML.
+  if [ -n "${UNITY_LICENSE_B64:-}" ] || [ -n "${UNITY_LICENSE:-}" ]; then
     local ulf="$HOME/.local/share/unity3d/Unity/Unity_lic.ulf"
     mkdir -p "$(dirname "$ulf")"
-    printf '%s' "$UNITY_LICENSE" > "$ulf"
+    if [ -n "${UNITY_LICENSE_B64:-}" ]; then printf '%s' "$UNITY_LICENSE_B64" | base64 -d > "$ulf"; else printf '%s' "$UNITY_LICENSE" > "$ulf"; fi
     chmod 600 "$ulf"
     "$UNITY" -batchmode -quit -nographics -manualLicenseFile "$ulf" -logFile "$LOGS/activate.log" >/dev/null 2>&1 || true
     return 0
