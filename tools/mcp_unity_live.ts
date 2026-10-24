@@ -69,6 +69,8 @@ function getUnityProjectStatus(): Record<string, unknown> {
 
   const asmdefFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.asmdef').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
   const csFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.cs').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
+  const javaFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.java').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
+  const shaderFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.shader').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
   const sceneFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.unity').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
   const uxmlFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.uxml').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
   const ussFiles = walkFiles(join(UNITY_ROOT, 'Assets'), '.uss').map((f) => relative(ROOT, f).replace(/\\/g, '/'));
@@ -82,19 +84,23 @@ function getUnityProjectStatus(): Record<string, unknown> {
     counts: {
       asmdef: asmdefFiles.length,
       csharpScripts: csFiles.length,
+      javaPlugins: javaFiles.length,
+      shaders: shaderFiles.length,
       scenes: sceneFiles.length,
       uxml: uxmlFiles.length,
       uss: ussFiles.length
     },
     asmdefFiles,
     csharpScripts: csFiles,
+    javaPlugins: javaFiles,
+    shaders: shaderFiles,
     scenes: sceneFiles
   };
 }
 
 function getUnityBundleStatus(): Record<string, unknown> {
   const exportManifestPath = join(STREAMING_BASE, 'unity_export_manifest.json');
-  const baseReleasePath = join(CONTENT_BASE, 'release_manifest.json');
+  const baseReleasePath = join(CONTENT_BASE, 'release.json');
   const primitivesPath = join(UNITY_ROOT, 'Assets', '_UOMD', 'Scripts', 'Core', 'Generated', 'UomdCorePrimitives.g.cs');
 
   if (!existsSync(exportManifestPath)) {
@@ -110,7 +116,8 @@ function getUnityBundleStatus(): Record<string, unknown> {
     : null;
 
   const exportReleaseId = String(exportManifest.release_id ?? '');
-  const baseReleaseId = String(baseRelease?.release_id ?? '');
+  const baseReleaseObj = baseRelease?.release as Record<string, unknown> | undefined;
+  const baseReleaseId = String(baseReleaseObj?.id ?? baseRelease?.release_id ?? '');
   const unitSlices = (exportManifest.unit_slices ?? {}) as Record<string, unknown>;
   const files = Array.isArray(exportManifest.files) ? exportManifest.files : [];
 

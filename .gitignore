@@ -17,3 +17,10 @@ apps/game/public/content/
 *.tsbuildinfo
 apps/admin/public/dev/
 apps/game/public/audition/
+apps/unity/Library/
+apps/unity/Temp/
+apps/unity/Obj/
+apps/unity/Logs/
+apps/unity/UserSettings/
+apps/unity/Builds/
+apps/unity/Assets/StreamingAssets/uomd_base/

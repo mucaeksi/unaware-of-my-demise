@@ -1,0 +1,197 @@
+/* ============================================================================
+ * Unaware of My Demise — Gothic Dark Anime UI Toolkit Stylesheet (USS)
+ * Reference Resolution: 1920x1080 Landscape (PanelSettings Match = 0.5)
+ * Ported 1:1 from apps/game/src/ui/theme.ts & domKit.ts
+ * ============================================================================ */
+
+:root {
+    --color-void: #0a0610;
+    --color-ink: #120a18;
+    --color-ink-panel: rgba(18, 10, 24, 0.94);
+    --color-plum: #2a1530;
+    --color-plum-hi: #4a2548;
+    --color-silver: #c9b6e4;
+    --color-bone: #e9e2d4;
+    --color-text: #efe8f5;
+    --color-dim: #a99bb8;
+    --color-gold: #b8975a;
+    --color-gold-hi: #e3c37d;
+    --color-crimson: #8f1d3a;
+    --color-crimson-hi: #d4325c;
+    --color-veil: #b48cff;
+    --color-hp-good: #6fbf73;
+    --color-hp-mid: #d9a441;
+    --color-hp-low: #c8324a;
+    --color-focus: #8fb8ff;
+    --color-shield: #9fd0ff;
+}
+
+.uomd-screen-root {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-void);
+    color: var(--color-text);
+}
+
+.uomd-safe-area {
+    flex-grow: 1;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.decorative-ignore {
+    picking-mode: ignore;
+}
+
+.uomd-panel {
+    background-color: var(--color-ink-panel);
+    border-width: 2px;
+    border-color: var(--color-gold);
+    border-radius: 6px;
+    padding: 24px;
+}
+
+.uomd-header-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 112px;
+    padding-left: 28px;
+    padding-right: 28px;
+    background-color: rgba(10, 6, 16, 0.90);
+    border-bottom-width: 2px;
+    border-bottom-color: var(--color-gold);
+}
+
+.uomd-title-h1 {
+    font-size: 56px;
+    color: var(--color-gold-hi);
+    -unity-font-style: bold;
+    letter-spacing: 3px;
+}
+
+.uomd-title-h2 {
+    font-size: 40px;
+    color: var(--color-bone);
+    -unity-font-style: bold;
+    letter-spacing: 2px;
+}
+
+.uomd-body-text {
+    font-size: 38px;
+    color: var(--color-text);
+    white-space: normal;
+}
+
+.uomd-small-text {
+    font-size: 30px;
+    color: var(--color-dim);
+}
+
+.uomd-btn {
+    min-height: 96px;
+    min-width: 220px;
+    padding-left: 32px;
+    padding-right: 32px;
+    background-color: var(--color-plum);
+    border-width: 2px;
+    border-color: var(--color-gold);
+    border-radius: 6px;
+    color: var(--color-bone);
+    font-size: 34px;
+    -unity-font-style: bold;
+    letter-spacing: 2px;
+    -unity-text-align: middle-center;
+    transition-property: scale, background-color, border-color;
+    transition-duration: 0.12s;
+}
+
+.uomd-btn:hover,
+.uomd-btn:focus {
+    background-color: var(--color-plum-hi);
+    border-color: var(--color-gold-hi);
+    scale: 1.02 1.02;
+}
+
+.uomd-btn:active {
+    scale: 0.97 0.97;
+}
+
+.uomd-btn-primary {
+    background-color: var(--color-crimson);
+    border-color: var(--color-gold-hi);
+    color: var(--color-text);
+}
+
+.uomd-btn-primary:hover,
+.uomd-btn-primary:focus {
+    background-color: var(--color-crimson-hi);
+}
+
+.uomd-currency-pill {
+    flex-direction: row;
+    align-items: center;
+    height: 68px;
+    padding-left: 22px;
+    padding-right: 22px;
+    background-color: rgba(18, 10, 24, 0.92);
+    border-width: 1px;
+    border-color: var(--color-gold);
+    border-radius: 34px;
+}
+
+.uomd-bar-track {
+    height: 22px;
+    background-color: rgba(10, 6, 16, 0.88);
+    border-width: 1px;
+    border-color: var(--color-gold);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.uomd-bar-fill {
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-hp-good);
+    transition-property: width, background-color;
+    transition-duration: 0.15s;
+}
+
+.uomd-modal-backdrop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(10, 6, 16, 0.82);
+    align-items: center;
+    justify-content: center;
+}
+
+.uomd-modal-card {
+    width: 1040px;
+    max-height: 860px;
+    background-color: var(--color-ink);
+    border-width: 2px;
+    border-color: var(--color-gold-hi);
+    border-radius: 8px;
+    padding: 36px;
+    flex-direction: column;
+}
+
+.uomd-toast {
+    position: absolute;
+    top: 32px;
+    align-self: center;
+    background-color: rgba(18, 10, 24, 0.96);
+    border-width: 2px;
+    border-color: var(--color-gold-hi);
+    border-radius: 6px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    picking-mode: ignore;
+}

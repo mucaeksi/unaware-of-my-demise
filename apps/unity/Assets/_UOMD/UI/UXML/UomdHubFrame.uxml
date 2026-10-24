@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_UOMD/UI/USS/uomd-tokens.uss" />
+    <ui:VisualElement name="screen-root" class="uomd-screen-root">
+        <ui:VisualElement name="safe-area-root" class="uomd-safe-area">
+            <ui:VisualElement name="hub-header" class="uomd-header-bar">
+                <ui:VisualElement name="header-left" style="flex-direction: row; align-items: center;">
+                    <ui:Button name="hub-back-btn" text="BACK" class="uomd-btn" style="min-width: 160px; margin-right: 24px;" />
+                    <ui:Label name="hub-title-label" text="SANCTUM" class="uomd-title-h2" />
+                </ui:VisualElement>
+                <ui:VisualElement name="header-right" style="flex-direction: row; align-items: center;">
+                    <ui:VisualElement name="ration-pill" class="uomd-currency-pill" style="margin-right: 16px;">
+                        <ui:Label name="ration-label" text="RATION: 0/120" class="uomd-small-text" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="eclipse-token-pill" class="uomd-currency-pill">
+                        <ui:Label name="eclipse-token-label" text="BELL'S REMAINS: 0" class="uomd-small-text" style="color: #e3c37d;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="hub-body" style="flex-grow: 1; padding: 28px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="modal-layer" class="decorative-ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+        <ui:VisualElement name="toast-layer" class="decorative-ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

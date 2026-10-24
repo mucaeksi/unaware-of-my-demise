@@ -2,7 +2,7 @@
 /**
  * UOMD Google AI Ultra Bridge MCP Server (stdio).
  *
- * Bridges Unaware of My Demise's canonical narrative, approved art, and Phaser 4 presentation engine
+ * Bridges Unaware of My Demise's canonical narrative, approved art, and Unity 6 LTS (URP 2D + UI Toolkit) presentation engine
  * with the Google AI Ultra ecosystem:
  *  - Google Flow (Veo 3.1 1080p filmmaking studio: Ingredients, Frames-to-Video, Camera Controls, Scenebuilder)
  *  - Project Genie (DeepMind Genie 3 interactive 3D/2.5D world model for parallax depth & corridor exploration)
@@ -122,10 +122,285 @@ function exportNotebookLmBundle(): Record<string, unknown> {
   };
 }
 
+const PROLOGUE_CAMERA_BY_ID: Record<string, string> = {
+  hours: 'Slow push-in toward the bronze belfry axle as the bell swings and dust motes drift through warm window light',
+  names: 'Intimate macro push-in on the roadside register ledger as the quill hand traces an indistinct ink stroke and lifts away',
+  ordinary_days: 'Gentle lateral drift across the living village street as market figures share bread in warm afternoon light',
+  throne_wars: 'Wide lateral pan across abandoned harvest fields toward the distant capital silhouette as travelers depart along the road',
+  crownfall: 'Fixed solemn composition on the ruined capital gates at dawn with rising smoke and drifting pale ash (never depicting regicide)',
+  roads: 'Slow tracking drift alongside anonymous survivors carrying blankets and tools into the morning mist beyond the walls',
+  search: 'Slow Ken Burns push-in toward younger Mahmut at the winter inn counter studying the village register by candle lantern',
+  reunion: 'Gentle two-shot push-in as Fadyme (20) extends her hand and Mahmut (26) raises his gaze in the quiet hill village',
+  beginning: 'Slow receding camera dolly as present-day Fadyme and Mahmut walk side by side into the Whispering Ash Forest mist'
+};
+
 function exportFlowStoryboard(sequence: string): Record<string, unknown> {
   mkdirSync(OUT_DIR, { recursive: true });
   const cleanSeq = sequence.toLowerCase().trim();
   const prologuePath = join(ROOT, 'content', 'base', 'entry', 'prologue.json');
+
+  if (cleanSeq === 'teaser_90s' || cleanSeq === 'play_store_teaser') {
+    const kitDir = join(OUT_DIR, 'teaser_90s_flow_kit');
+    const framesDir = join(kitDir, 'frames');
+    const shots = [
+      {
+        shotNumber: 1,
+        act: 'Act I — The Broken Oath & The Bells (0:00–0:24)',
+        timeRange: '0:00 – 0:06',
+        durationSeconds: 6,
+        trackMode: 'Track B: Veo 3.1 4s cinematic clip (after 1.5s StudioScene flash) | Track A: PrologueScene hours capture',
+        sceneId: 'hours',
+        startFrameImage: 'content/approved_art/art/still_prologue_hours.webp',
+        endFrameImage: 'content/approved_art/art/still_prologue_names.webp',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_01_start_hours.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_02_start_names.png',
+        voiceLineId: 'entry_past_001',
+        voiceFile: 'content/base/voices/entry_past_001.ogg',
+        subtitleEn: 'Before the roads filled with ash, Veyrhold measured its days in bells.',
+        transcriptJa: '道という道が灰に埋もれる前、ヴェアホルドの人々は鐘の音で日々を測っていた。',
+        bgmCue: 'content/base/audio/bgm_prologue_before_the_road.ogg',
+        sfxCue: 'content/base/sfx/sfx_bell_sanctuary.ogg',
+        flowVeoPrompt:
+          'Painterly dark gothic anime 16:9 cinematic shot (4s, 1080p 24fps). Inside the ancient stone belfry of Veyrhold, a heavy weathered bronze sanctuary bell swings slowly on its timber axle; rope follows the motion as golden dust motes drift across a warm shaft of window light into deep plum-charcoal shadows. Zero text, zero watermarks.'
+      },
+      {
+        shotNumber: 2,
+        act: 'Act I — The Broken Oath & The Bells (0:00–0:24)',
+        timeRange: '0:06 – 0:12',
+        durationSeconds: 6,
+        trackMode: 'Track A & B: PrologueScene names -> ordinary_days capture (or optional Flow First/Last transition)',
+        sceneId: 'names_to_ordinary_days',
+        startFrameImage: 'content/approved_art/art/still_prologue_names.webp',
+        endFrameImage: 'content/approved_art/art/still_prologue_ordinary_days.webp',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_02_start_names.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_02_end_ordinary_days.png',
+        voiceLineId: 'entry_past_002',
+        voiceFile: 'content/base/voices/entry_past_002.ogg',
+        subtitleEn: 'People carved their names on doors and trees, and wrote them in roadside registers… So someone would remember that they had been here.',
+        transcriptJa: '人々は扉や樹々に自らの名を刻み、道端の台帳にその名を書き残した。確かにここに生きていたと、誰かが覚えていてくれるように。',
+        bgmCue: 'content/base/audio/bgm_prologue_before_the_road.ogg',
+        sfxCue: 'content/base/sfx/sfx_ui_tap.ogg',
+        flowVeoPrompt:
+          'Painterly dark gothic anime 16:9 cinematic shot (6s, 1080p 24fps). Close-up on an open leather-bound roadside register ledger lit by warm amber lantern light as a feathered quill traces an indistinct ink stroke (no legible letters) and lifts away, gently dissolving to a quiet peaceful gothic village street. Zero text, zero watermarks.'
+      },
+      {
+        shotNumber: 3,
+        act: 'Act I — The Broken Oath & The Bells (0:00–0:24)',
+        timeRange: '0:12 – 0:18',
+        durationSeconds: 6,
+        trackMode: 'Track A & B: PrologueScene throne_wars capture + Card Overlay at 0:15',
+        sceneId: 'throne_wars',
+        startFrameImage: 'content/approved_art/art/still_prologue_throne_wars.webp',
+        endFrameImage: 'content/approved_art/art/still_prologue_crownfall.webp',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_03_start_throne_wars.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_04_start_crownfall.png',
+        voiceLineId: 'entry_past_004',
+        voiceFile: 'content/base/voices/entry_past_004.ogg',
+        subtitleEn: 'The great houses fought over a throne. Fields emptied. Families took to the roads…',
+        transcriptJa: '諸侯はひとつの玉座を巡って争った。畑からは人が消え、家族は持てるものだけを抱えて街道へと出た。',
+        cardOverlayEn: 'A BROKEN OATH. A KINGDOM IN ASH.',
+        bgmCue: 'content/base/audio/bgm_prologue_before_the_road.ogg',
+        sfxCue: 'content/base/sfx/sfx_footstep_march.ogg',
+        flowVeoPrompt:
+          'Painterly dark gothic anime 16:9 cinematic shot (6s, 1080p 24fps). Wide lateral camera pan across abandoned autumn harvest fields under a brooding slate-plum sky as cloaked traveler families walk away along a muddy road toward a distant gothic capital silhouette. Zero text, zero watermarks.'
+      },
+      {
+        shotNumber: 4,
+        act: 'Act I — The Broken Oath & The Bells (0:00–0:24)',
+        timeRange: '0:18 – 0:24',
+        durationSeconds: 6,
+        trackMode: 'Track B: Veo 3.1 4s smoke/ember drift anchored to still_prologue_crownfall.webp | Track A: PrologueScene crownfall capture',
+        sceneId: 'crownfall',
+        startFrameImage: 'content/approved_art/art/still_prologue_crownfall.webp',
+        endFrameImage: 'content/approved_art/art/still_prologue_roads.webp',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_04_start_crownfall.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_04_end_roads.png',
+        voiceLineId: 'entry_past_005',
+        voiceFile: 'content/base/voices/entry_past_005.ogg',
+        subtitleEn: 'Then came Crownfall. By dawn, survivors were leaving behind streets they had once known by heart.',
+        transcriptJa: 'そして、『王冠落ち』の日が訪れた。夜が明ける頃、生き残った者たちは、かつて知り尽くしていたはずの街路を後にした。',
+        bgmCue: 'content/base/audio/bgm_prologue_before_the_road.ogg',
+        sfxCue: 'content/base/sfx/sfx_bell_sanctuary.ogg',
+        flowVeoPrompt:
+          'Painterly dark gothic anime 16:9 cinematic shot (4s, 1080p 24fps). Tight solemn composition on the shattered outer stone gates of a fallen gothic capital at cold dawn; dark smoke plumes billow upward while pale grey ash and dying amber embers drift slowly across the foreground. Strictly environmental only—no king, no violence, zero text, zero watermarks.'
+      },
+      {
+        shotNumber: 5,
+        act: 'Act II — Mahmut, Fadyme & The Road Ahead (0:24–0:44)',
+        timeRange: '0:24 – 0:31',
+        durationSeconds: 7,
+        trackMode: 'Track A & B: PrologueScene search capture (Ken Burns drift on Mahmut at winter inn register)',
+        sceneId: 'search',
+        startFrameImage: 'content/approved_art/art/still_prologue_search.webp',
+        endFrameImage: 'content/approved_art/art/still_prologue_reunion.webp',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_05_start_search.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_06_start_reunion.png',
+        voiceLineId: 'entry_past_007',
+        voiceFile: 'content/base/voices/entry_past_007.ogg',
+        subtitleEn: 'Among the travelers was a knight who searched the village registers for one name. Village after village, winter after winter…',
+        transcriptJa: '旅人たちのなかに、ただひとつの名を求めて村々の台帳を辿る騎士がいた。村から村へ、冬から冬へと、彼は探し続けた。',
+        bgmCue: 'content/base/audio/bgm_fadyme_theme.ogg',
+        sfxCue: 'content/base/sfx/sfx_footstep_ash.ogg',
+        flowVeoPrompt:
+          'Painterly dark gothic anime 16:9 cinematic shot (6s, 1080p 24fps). Slow push-in toward a tall weary knight (Mahmut, dark messy hair, stubble, worn dark half-plate with hammered-off crown socket, tattered oxblood cloak) standing at a dim winter inn counter, warm candle lantern flickering over the open village register book as snow drifts outside the window. Zero text, zero watermarks.'
+      },
+      {
+        shotNumber: 6,
+        act: 'Act II — Mahmut, Fadyme & The Road Ahead (0:24–0:44)',
+        timeRange: '0:31 – 0:38',
+        durationSeconds: 7,
+        trackMode: 'Track B: Veo 3.1 4s First/Last Frame transition (still_prologue_reunion -> still_prologue_beginning) | Track A: PrologueScene reunion + beginning capture',
+        sceneId: 'reunion_to_beginning',
+        startFrameImage: 'content/approved_art/art/still_prologue_reunion.webp',
+        endFrameImage: 'content/approved_art/art/still_prologue_beginning.webp',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_06_start_reunion.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_06_end_beginning.png',
+        voiceLineId: 'entry_past_008',
+        voiceFile: 'content/base/voices/entry_past_008.ogg',
+        subtitleEn: 'In a hill village, he found her. She asked him to stay. He did. Now Fadyme and Mahmut walk together.',
+        transcriptJa: 'ある丘の村で、彼はついに彼女を見つけた。傍にいてほしいと彼女は願い、彼は頷いた。',
+        bgmCue: 'content/base/audio/bgm_fadyme_theme.ogg',
+        sfxCue: 'content/base/sfx/sfx_bell_silver.ogg',
+        flowVeoPrompt:
+          'Painterly dark gothic anime 16:9 cinematic shot (4s, 1080p 24fps). Fadyme (pale ash-blonde hair, violet eyes, deep plum hood, high white scarf) extends a quiet hand toward Mahmut (tall knight in worn dark half-plate and oxblood cloak) in a misty hill village; soft wind stirs their cloaks and hair strands as warm twilight rim light catches falling ash motes, transitioning to the two walking side by side down the forest road. Zero text, zero watermarks.'
+      },
+      {
+        shotNumber: 7,
+        act: 'Act II — Mahmut, Fadyme & The Road Ahead (0:24–0:44)',
+        timeRange: '0:38 – 0:44',
+        durationSeconds: 6,
+        trackMode: 'Track A & B: Real in-game capture of StoryScene (tutorial_t1_before) with knee-up portraits & gothic dialogue box',
+        sceneId: 'story_tutorial_t1_before',
+        startFrameImage: 'docs/store/assets/screenshots/02_prologue_cinematic.png',
+        endFrameImage: 'docs/store/assets/screenshots/04_world_map_hub.png',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_07_in_game_story.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_08_in_game_world_map.png',
+        voiceLineId: 'tutorial_t1_before_006',
+        voiceFile: 'content/base/voices/tutorial_t1_before_006.ogg',
+        subtitleEn: 'Mahmut: "That one is loose. Give me your hand." · Fadyme: "For the stone, or for the whole road?"',
+        transcriptJa: 'マフムト：「その石は浮いている。手を貸せ。」',
+        bgmCue: 'content/base/audio/bgm_fadyme_theme.ogg',
+        sfxCue: 'content/base/sfx/sfx_ui_tap.ogg',
+        flowVeoPrompt:
+          'Real 1920x1080 60fps in-game capture of StoryScene (no Veo generation needed—captures authentic knee-up portraits of Mahmut and Fadyme with breathing motion and synchronized dialogue subtitles).'
+      },
+      {
+        shotNumber: 8,
+        act: 'Act III — The Bell Road, Companions & 5v5 Tactical Combat (0:44–1:14)',
+        timeRange: '0:44 – 0:51',
+        durationSeconds: 7,
+        trackMode: 'Track A & B: Real in-game capture of HomeScene (WorldMap mode: bg_world_map_part1.webp) -> ChaptersScene',
+        sceneId: 'world_map_hub',
+        startFrameImage: 'docs/store/assets/screenshots/04_world_map_hub.png',
+        endFrameImage: 'docs/store/assets/screenshots/05_companion_roster.png',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_08_in_game_world_map.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_09_in_game_roster.png',
+        cardOverlayEn: 'FOLLOW THE BELL ROAD ACROSS VEYRHOLD',
+        bgmCue: 'content/base/audio/bgm_ch1_ash_forest_chaotic.ogg',
+        sfxCue: 'content/base/sfx/sfx_ui_wax_seal.ogg',
+        flowVeoPrompt:
+          'Real 1920x1080 60fps in-game capture of HomeScene World Map Hub showing the painted Bell Road of Veyrhold, Chapter 1 glowing in the west, and the World-Map Banner Spotlight.'
+      },
+      {
+        shotNumber: 9,
+        act: 'Act III — The Bell Road, Companions & 5v5 Tactical Combat (0:44–1:14)',
+        timeRange: '0:51 – 0:58',
+        durationSeconds: 7,
+        trackMode: 'Track A & B: Real in-game quick cuts (2.3s each) of RosterScene, CharacterScene (STR/INT/VIT/AGI + Signature Weapon), and TeamScene',
+        sceneId: 'roster_character_team',
+        startFrameImage: 'docs/store/assets/screenshots/05_companion_roster.png',
+        endFrameImage: 'docs/store/assets/screenshots/06_character_sheet.png',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_09_in_game_roster.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_09b_in_game_character.png',
+        cardOverlayEn: 'FORGE UNLIKELY COMPANIONS · BUILD YOUR FORMATION',
+        bgmCue: 'content/base/audio/bgm_ch1_ash_forest_chaotic.ogg',
+        sfxCue: 'content/base/sfx/sfx_ui_confirm.ogg',
+        flowVeoPrompt:
+          'Real 1920x1080 60fps in-game captures of RosterScene, CharacterScene, and TeamScene.'
+      },
+      {
+        shotNumber: 10,
+        act: 'Act III — The Bell Road, Companions & 5v5 Tactical Combat (0:44–1:14)',
+        timeRange: '0:58 – 1:06',
+        durationSeconds: 8,
+        trackMode: 'Track A & B: Real in-game capture of 5v5 BattleScene (animated SD chibi units, turn-order ribbon, enemy intent badges, skill target selection)',
+        sceneId: 'battle_tactical_turn',
+        startFrameImage: 'docs/store/assets/screenshots/03_tactical_battle.png',
+        endFrameImage: 'docs/store/assets/screenshots/07_boss_objectives.png',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_10_in_game_battle.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_11_in_game_boss_vfx.png',
+        cardOverlayEn: 'READ ENEMY INTENTIONS · COMMAND EVERY TURN',
+        bgmCue: 'content/base/audio/bgm_ch1_ash_forest_chaotic.ogg',
+        sfxCue: 'content/base/sfx/sfx_blade_slash.ogg',
+        flowVeoPrompt:
+          'Real 1920x1080 60fps in-game capture of 5v5 tactical BattleScene with 16-frame animated chibi sprites and enemy intent telegraphs.'
+      },
+      {
+        shotNumber: 11,
+        act: 'Act III — The Bell Road, Companions & 5v5 Tactical Combat (0:44–1:14)',
+        timeRange: '1:06 – 1:14',
+        durationSeconds: 8,
+        trackMode: 'Track A & B: Real in-game capture of Ultimate Signature VFX execution + Breakable Boss Objectives + Trials & 3-Star VICTORY banner',
+        sceneId: 'battle_ultimate_and_trials',
+        startFrameImage: 'docs/store/assets/screenshots/07_boss_objectives.png',
+        endFrameImage: 'docs/store/assets/screenshots/08_trials_and_summon.png',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_11_in_game_boss_vfx.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_11b_in_game_trials.png',
+        voiceLineId: 'entry_past_009',
+        voiceFile: 'content/base/voices/entry_past_009.ogg',
+        subtitleEn: 'The bells still ring. Neither has told the other everything.',
+        transcriptJa: '鐘はいまも鳴り響き、ふたりはまだ互いのすべてを語ってはいない。',
+        bgmCue: 'content/base/audio/bgm_ch1_ash_forest_chaotic.ogg',
+        sfxCue: 'content/base/sfx/sfx_ultimate_release.ogg',
+        flowVeoPrompt:
+          'Real 1920x1080 60fps in-game capture of Signature VFX ultimates (eclipse_corona, bell_arch, shield_wall), breakable boss reliquaries, and Trials/Summon showcase.'
+      },
+      {
+        shotNumber: 12,
+        act: 'Act IV — Title Reveal & Call to Action (1:14–1:30)',
+        timeRange: '1:14 – 1:30',
+        durationSeconds: 16,
+        trackMode: 'Track B: 4s Veo 3.1 key-art intro from ui_title_bg.webp dissolving into live TitleScene (Black-Sun Eclipse Corona + Swinging Bell + Logo + Wax Seal burst) | Track A: Full live TitleScene capture',
+        sceneId: 'title_reveal_cta',
+        startFrameImage: 'content/approved_art/art/ui_title_bg.webp',
+        endFrameImage: 'docs/store/assets/screenshots/01_title_screen.png',
+        kitStartPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_12_start_title_art.png',
+        kitEndPng: '.cache/ai-ultra/teaser_90s_flow_kit/frames/shot_12_end_title_screen.png',
+        voiceLineId: 'entry_past_009',
+        voiceFile: 'content/base/voices/entry_past_009.ogg',
+        subtitleEn: 'This is where their story begins.',
+        transcriptJa: '……ここから、ふたりの物語が始まる。',
+        cardOverlayEn: 'UNAWARE OF MY DEMISE · A Broken Oath. A Distant Bell. An Unlikely Company. · Available on Google Play',
+        bgmCue: 'content/base/audio/bgm_main_theme.ogg',
+        sfxCue: 'content/base/sfx/sfx_bell_sanctuary.ogg',
+        flowVeoPrompt:
+          'Painterly dark gothic anime 16:9 key-art cinematic shot (4s, 1080p 24fps). Under a glowing crimson-and-gold Black-Sun Eclipse corona and a fractured ancient bronze sanctuary bell in the sky, Fadyme (pale ash-blonde hair, plum hood, silver bell on chain) and Mahmut (tall knight, dark half-plate, tattered oxblood cloak, heater shield) stand together on an ash-strewn stone road; wind stirs their cloaks as golden embers rise. Zero text, zero watermarks.'
+      }
+    ];
+
+    const pkg = {
+      tool: 'Google Flow (Veo 3.1 1080p Scenebuilder) + Hybrid Unity 6 LTS In-Game Capture',
+      sequenceId: 'google_play_teaser_90s',
+      storyboardSource: 'docs/store/TEASER_STORYBOARD.md',
+      totalDurationSeconds: 90,
+      resolution: '1920x1080',
+      fps: 60,
+      kitDirectory: kitDir,
+      framesDirectory: framesDir,
+      ingredients: [
+        '.cache/ai-ultra/teaser_90s_flow_kit/frames/ingredient_01_style_title_bg.png',
+        '.cache/ai-ultra/teaser_90s_flow_kit/frames/ingredient_02_fadyme_mahmut_reunion.png',
+        '.cache/ai-ultra/teaser_90s_flow_kit/frames/ingredient_03_fadyme_mahmut_road.png',
+        '.cache/ai-ultra/teaser_90s_flow_kit/frames/ingredient_04_fadyme_portrait_canonical.png',
+        '.cache/ai-ultra/teaser_90s_flow_kit/frames/ingredient_05_mahmut_portrait_canonical.png'
+      ],
+      veoPriorityShots: [1, 4, 6, 12],
+      shots
+    };
+    const outPath = join(OUT_DIR, 'flow_teaser_90s_storyboard.json');
+    writeFileSync(outPath, JSON.stringify(pkg, null, 2), 'utf8');
+    return { outputPath: outPath, shotCount: shots.length, veoPriorityShots: [1, 4, 6, 12], package: pkg };
+  }
 
   if (cleanSeq === 'prologue' && existsSync(prologuePath)) {
     const prologue = JSON.parse(readFileSync(prologuePath, 'utf8')) as {
@@ -137,12 +412,13 @@ function exportFlowStoryboard(sequence: string): Record<string, unknown> {
         duration_seconds: number;
         caption_en: string;
         visual: string;
-        camera: string;
+        camera?: string;
         text_en: string;
       }[];
     };
     const shots = prologue.scenes.map((sc, idx) => {
       const nextSc = prologue.scenes[idx + 1];
+      const cameraMotion = sc.camera ?? PROLOGUE_CAMERA_BY_ID[sc.id] ?? 'Slow atmospheric camera drift';
       return {
         shotNumber: idx + 1,
         sceneId: sc.id,
@@ -150,9 +426,9 @@ function exportFlowStoryboard(sequence: string): Record<string, unknown> {
         durationSeconds: sc.duration_seconds,
         startFrameImage: `content/approved_art/art/still_prologue_${sc.id}.webp`,
         endFrameImage: nextSc ? `content/approved_art/art/still_prologue_${nextSc.id}.webp` : 'content/approved_art/art/ui_title_bg.webp',
-        cameraControl: sc.camera,
+        cameraControl: cameraMotion,
         narrationSubtitle: sc.text_en,
-        flowVeoPrompt: `Painterly dark gothic anime 16:9 cinematic shot (${sc.duration_seconds}s). Camera motion: ${sc.camera}. ${sc.visual} Subtle drifting ash motes, flickering warm candle/amber rim light against deep plum-charcoal shadows, zero text, zero watermarks.`
+        flowVeoPrompt: `Painterly dark gothic anime 16:9 cinematic shot (${sc.duration_seconds}s). Camera motion: ${cameraMotion}. Subtle drifting ash motes, flickering warm candle/amber rim light against deep plum-charcoal shadows, zero text, zero watermarks.`
       };
     });
     const pkg = {

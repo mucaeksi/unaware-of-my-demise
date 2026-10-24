@@ -1,0 +1,309 @@
+#nullable enable
+using System;
+using System.Text;
+using System.Threading;
+using UnityEngine;
+using UnityEngine.Networking;
+using Uomd.Contracts;
+
+namespace Uomd.Core
+{
+    public sealed class UomdApiException : Exception
+    {
+        public int Status { get; }
+        public string Code { get; }
+
+        public UomdApiException(int status, string code, string message) : base(message)
+        {
+            Status = status;
+            Code = code;
+        }
+    }
+
+    /// <summary>
+    /// Unity 6 C# port of apps/game/src/net/api.ts (`GameApi`).
+    /// Communicates with the Cloudflare Workers + D1 backend (`apps/api`) over HTTPS JSON using
+    /// `UnityWebRequest` and Unity 6 `Awaitable`, preserving Bearer session authority, authVersion
+    /// race guards, and idempotency requestIds.
+    /// </summary>
+    public sealed class UomdApiClient
+    {
+        private const string EditorPrefsSessionKey = "uomd.session.v1";
+        private const int DefaultTimeoutSeconds = 30;
+
+        private readonly string _baseUrl;
+        private SessionDto? _session;
+        private int _authVersion;
+        private int _signingInVersion;
+
+        public event Action? OnAuthChanged;
+
+        public UomdApiClient(string baseUrl)
+        {
+            _baseUrl = baseUrl.TrimEnd('/');
+        }
+
+        public int AuthRevision => _authVersion;
+
+        public bool IsSignedIn
+        {
+            get
+            {
+                if (_session is null || string.IsNullOrEmpty(_session.token) || string.IsNullOrEmpty(_session.expiresAt))
+                    return false;
+                return DateTimeOffset.TryParse(_session.expiresAt, out var exp) && exp > DateTimeOffset.UtcNow;
+            }
+        }
+
+        public string AccountKey
+        {
+            get
+            {
+                if (!IsSignedIn || _session is null) return "guest";
+                if (!string.IsNullOrEmpty(_session.playerId)) return $"player:{_session.playerId}";
+                int len = Math.Min(24, _session.token.Length);
+                return $"token:{_session.token.Substring(0, len)}";
+            }
+        }
+
+        public static string NewRequestId() => Guid.NewGuid().ToString("N");
+
+        public void AdoptSession(SessionDto? session)
+        {
+            _authVersion++;
+            _session = session;
+            _signingInVersion = 0;
+            OnAuthChanged?.Invoke();
+        }
+
+        public SessionDto? GetCurrentSessionSnapshot() => _session;
+
+        public async Awaitable<TResponse> CallAsync<TResponse>(
+            string method,
+            string path,
+            string? jsonBody = null,
+            bool requireAuth = true,
+            int? expectedAuthVersion = null,
+            CancellationToken ct = default)
+        {
+            if (requireAuth && _signingInVersion != 0)
+            {
+                throw new UomdApiException(409, "auth_changed", "Finish selecting your account before requesting its data");
+            }
+            if (expectedAuthVersion.HasValue && expectedAuthVersion.Value != _authVersion)
+            {
+                throw new UomdApiException(409, "auth_changed", "The account changed before this action was sent");
+            }
+
+            SessionDto? requestSession = _session;
+            int requestAuthVersion = _authVersion;
+            string url = $"{_baseUrl}{path}";
+
+            using var req = new UnityWebRequest(url, method);
+            req.downloadHandler = new DownloadHandlerBuffer();
+            req.timeout = DefaultTimeoutSeconds;
+
+            if (jsonBody is not null)
+            {
+                byte[] bodyBytes = Encoding.UTF8.GetBytes(jsonBody);
+                req.uploadHandler = new UploadHandlerRaw(bodyBytes);
+                req.SetRequestHeader("Content-Type", "application/json");
+            }
+
+            if (requireAuth && requestSession is not null && !string.IsNullOrEmpty(requestSession.token))
+            {
+                req.SetRequestHeader("Authorization", $"Bearer {requestSession.token}");
+            }
+
+            var op = req.SendWebRequest();
+            while (!op.isDone)
+            {
+                if (ct.IsCancellationRequested)
+                {
+                    req.Abort();
+                    ct.ThrowIfCancellationRequested();
+                }
+                await Awaitable.NextFrameAsync(ct);
+            }
+
+            string responseText = req.downloadHandler?.text ?? string.Empty;
+            long statusCode = req.responseCode;
+
+            if (req.result != UnityWebRequest.Result.Success || statusCode < 200 || statusCode >= 300)
+            {
+                if (statusCode == 401 && requireAuth && ReferenceEquals(_session, requestSession) && _authVersion == requestAuthVersion)
+                {
+                    AdoptSession(null);
+                }
+
+                string errCode = "http_error";
+                string errMsg = string.IsNullOrEmpty(req.error) ? $"HTTP {statusCode}" : req.error;
+                if (!string.IsNullOrEmpty(responseText))
+                {
+                    try
+                    {
+                        var env = JsonUtility.FromJson<ApiErrorEnvelopeDto>(responseText);
+                        if (env is not null)
+                        {
+                            if (!string.IsNullOrEmpty(env.error)) errCode = env.error!;
+                            if (!string.IsNullOrEmpty(env.message)) errMsg = env.message!;
+                        }
+                    }
+                    catch
+                    {
+                        // Non-JSON error body
+                    }
+                }
+                throw new UomdApiException((int)statusCode, errCode, errMsg);
+            }
+
+            if (requireAuth && string.Equals(method, "GET", StringComparison.OrdinalIgnoreCase) && requestAuthVersion != _authVersion)
+            {
+                throw new UomdApiException(409, "auth_changed", "The account changed before its data arrived");
+            }
+
+            if (typeof(TResponse) == typeof(string))
+            {
+                return (TResponse)(object)responseText;
+            }
+
+            TResponse parsed = JsonUtility.FromJson<TResponse>(responseText);
+            if (parsed is null)
+            {
+                throw new UomdApiException(503, "invalid_response", $"Empty or invalid JSON from {path}");
+            }
+            return parsed;
+        }
+
+        // ============================================================================
+        // Typed Endpoint Methods (Mirroring apps/game/src/net/api.ts)
+        // ============================================================================
+
+        public async Awaitable<PlayerSummaryDto> SignInWithGoogleIdTokenAsync(string idToken, CancellationToken ct = default)
+        {
+            int attempt = ++_authVersion;
+            _signingInVersion = attempt;
+            try
+            {
+                string body = JsonUtility.ToJson(new GoogleAuthRequestDto { idToken = idToken });
+                var res = await CallAsync<GoogleAuthResponseDto>("POST", "/api/v1/auth/google", body, requireAuth: false, ct: ct);
+                if (_authVersion != attempt)
+                {
+                    throw new UomdApiException(409, "auth_changed", "The selected account changed before sign-in completed");
+                }
+                _signingInVersion = 0;
+                AdoptSession(new SessionDto
+                {
+                    token = res.token,
+                    expiresAt = res.expiresAt,
+                    playerId = res.player.id
+                });
+                return res.player;
+            }
+            finally
+            {
+                if (_signingInVersion == attempt) _signingInVersion = 0;
+            }
+        }
+
+        public async Awaitable<RefreshSessionResponseDto> RefreshSessionAsync(CancellationToken ct = default)
+        {
+            int expected = _authVersion;
+            var res = await CallAsync<RefreshSessionResponseDto>("POST", "/api/v1/auth/refresh", "{}", requireAuth: true, expectedAuthVersion: expected, ct: ct);
+            AdoptSession(new SessionDto
+            {
+                token = res.token,
+                expiresAt = res.expiresAt,
+                playerId = res.playerId
+            });
+            return res;
+        }
+
+        public Awaitable<PlayerSummaryDto> GetMeAsync(CancellationToken ct = default) =>
+            CallAsync<PlayerSummaryDto>("GET", "/api/v1/me", ct: ct);
+
+        public async Awaitable<WalletsDto> GetWalletAsync(CancellationToken ct = default) =>
+            (await CallAsync<WalletEnvelopeDto>("GET", "/api/v1/wallet", ct: ct)).wallets;
+
+        public Awaitable<EntryCheckpointDto> GetEntryAsync(CancellationToken ct = default) =>
+            CallAsync<EntryCheckpointDto>("GET", "/api/v1/entry", ct: ct);
+
+        public Awaitable<EntryCheckpointDto> PutEntryAsync(bool prologue, int tutorials, bool completed = false, CancellationToken ct = default)
+        {
+            var payload = new EntryUpdateRequestDto
+            {
+                prologue = prologue,
+                tutorials = tutorials,
+                completed = completed,
+                requestId = NewRequestId()
+            };
+            return CallAsync<EntryCheckpointDto>("PUT", "/api/v1/entry", JsonUtility.ToJson(payload), ct: ct);
+        }
+
+        public async Awaitable<BannerInfoDto[]> GetBannersAsync(string? releaseId = null, CancellationToken ct = default)
+        {
+            string query = string.IsNullOrEmpty(releaseId) ? string.Empty : $"?releaseId={UnityWebRequest.EscapeURL(releaseId)}";
+            return (await CallAsync<BannersEnvelopeDto>("GET", $"/api/v1/banners{query}", requireAuth: false, ct: ct)).banners;
+        }
+
+        public Awaitable<PullResponseDto> PullGachaAsync(string bannerId, int count, string? target = null, string? releaseId = null, CancellationToken ct = default)
+        {
+            var req = new PullRequestDto
+            {
+                bannerId = bannerId,
+                count = count,
+                target = target,
+                releaseId = releaseId,
+                requestId = NewRequestId()
+            };
+            return CallAsync<PullResponseDto>("POST", "/api/v1/gacha/pull", JsonUtility.ToJson(req), ct: ct);
+        }
+
+        public Awaitable<MyCharactersResponseDto> GetMyCharactersAsync(string? releaseId = null, CancellationToken ct = default)
+        {
+            string query = string.IsNullOrEmpty(releaseId) ? string.Empty : $"?releaseId={UnityWebRequest.EscapeURL(releaseId)}";
+            return CallAsync<MyCharactersResponseDto>("GET", $"/api/v1/characters/mine{query}", ct: ct);
+        }
+
+        public async Awaitable<GearViewDto[]> GetGearAsync(string? releaseId = null, CancellationToken ct = default)
+        {
+            string query = string.IsNullOrEmpty(releaseId) ? string.Empty : $"?releaseId={UnityWebRequest.EscapeURL(releaseId)}";
+            return (await CallAsync<GearListEnvelopeDto>("GET", $"/api/v1/gear{query}", ct: ct)).gear;
+        }
+
+        public Awaitable<TeamsEnvelopeDto> GetTeamsAsync(CancellationToken ct = default) =>
+            CallAsync<TeamsEnvelopeDto>("GET", "/api/v1/teams", ct: ct);
+
+        public async Awaitable<MailItemDto[]> GetMailAsync(CancellationToken ct = default) =>
+            (await CallAsync<MailEnvelopeDto>("GET", "/api/v1/mail", ct: ct)).mail;
+
+        public Awaitable<StoryProgressResponseDto> CompleteStoryNodeAsync(string releaseId, string nodeId, CancellationToken ct = default)
+        {
+            var req = new StoryProgressRequestDto
+            {
+                releaseId = releaseId,
+                nodeId = nodeId,
+                requestId = NewRequestId()
+            };
+            return CallAsync<StoryProgressResponseDto>("POST", "/api/v1/progress/story", JsonUtility.ToJson(req), ct: ct);
+        }
+
+        public Awaitable<BattleSubmitResponseDto> SubmitBattleAsync(
+            string releaseId,
+            string nodeId,
+            BattleActionInputDto[] actions,
+            string? sessionId = null,
+            CancellationToken ct = default)
+        {
+            var req = new BattleSubmitRequestDto
+            {
+                releaseId = releaseId,
+                nodeId = nodeId,
+                actions = actions,
+                sessionId = sessionId,
+                requestId = NewRequestId()
+            };
+            return CallAsync<BattleSubmitResponseDto>("POST", "/api/v1/progress/battle", JsonUtility.ToJson(req), ct: ct);
+        }
+    }
+}

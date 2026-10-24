@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_UOMD/UI/USS/uomd-tokens.uss" />
+    <ui:VisualElement name="modal-backdrop" class="uomd-modal-backdrop">
+        <ui:VisualElement name="modal-card" class="uomd-modal-card">
+            <ui:Label name="modal-title" text="CONFIRMATION" class="uomd-title-h2" style="margin-bottom: 16px;" />
+            <ui:ScrollView name="modal-scroll" style="flex-grow: 1; margin-bottom: 24px;">
+                <ui:Label name="modal-body-text" text="" class="uomd-body-text" />
+                <ui:Label name="modal-cost-note" text="" class="uomd-small-text" style="margin-top: 12px; color: #e3c37d;" />
+            </ui:ScrollView>
+            <ui:VisualElement name="modal-actions" style="flex-direction: row; justify-content: flex-end;">
+                <ui:Button name="modal-cancel-btn" text="CANCEL" class="uomd-btn" style="margin-right: 20px;" />
+                <ui:Button name="modal-confirm-btn" text="CONFIRM" class="uomd-btn uomd-btn-primary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

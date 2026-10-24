@@ -1,0 +1,16 @@
+{
+  "name": "Uomd.Core",
+  "rootNamespace": "Uomd.Core",
+  "references": [
+    "Uomd.Contracts"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

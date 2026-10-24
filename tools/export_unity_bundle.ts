@@ -404,6 +404,62 @@ export function exportUnityBundle(opts: ExportUnityBundleOptions = {}): ExportUn
 
     mkdirSync(dirname(csharpFile), { recursive: true });
     writeFileSync(csharpFile, csharpSource, 'utf8');
+
+    // When running against the repository default outDir, also sync into apps/unity/Assets/
+    if (!opts.outDir) {
+      const unityCoreGenFile = join(rootDir, 'apps/unity/Assets/_UOMD/Scripts/Core/Generated/UomdCorePrimitives.g.cs');
+      mkdirSync(dirname(unityCoreGenFile), { recursive: true });
+      writeFileSync(unityCoreGenFile, csharpSource, 'utf8');
+
+      const unityMetaDir = join(rootDir, 'apps/unity/Assets/StreamingAssets/uomd_metadata');
+      mkdirSync(unityMetaDir, { recursive: true });
+      writeFileSync(join(unityMetaDir, 'unity_base_art_slices.json'), `${JSON.stringify(baseUnityArt, null, 2)}\n`, 'utf8');
+      if (campaignUnityArt) {
+        writeFileSync(join(unityMetaDir, 'unity_campaign_art_slices.json'), `${JSON.stringify(campaignUnityArt, null, 2)}\n`, 'utf8');
+      }
+
+      const unityStreamingBase = join(rootDir, 'apps/unity/Assets/StreamingAssets/uomd_base');
+      mkdirSync(unityStreamingBase, { recursive: true });
+      copyFileSync(baseReleasePath, join(unityStreamingBase, 'release.json'));
+      for (const fileEntry of baseManifest.files) {
+        const src = join(rootDir, 'content/base', fileEntry.path);
+        const dst = join(unityStreamingBase, fileEntry.path);
+        mkdirSync(dirname(dst), { recursive: true });
+        copyFileSync(src, dst);
+      }
+
+      const unitSlicesSummary: Record<string, Record<string, unknown>> = {};
+      for (const [unitId, unitDesc] of Object.entries(baseUnityArt.units)) {
+        const idleClip = unitDesc.clips.find((c) => c.state === 'idle') ?? unitDesc.clips[0];
+        unitSlicesSummary[unitId] = {
+          unit_id: unitId,
+          atlas_id: unitDesc.atlasId,
+          default_facing: unitDesc.facing,
+          height_px: unitDesc.heightPx,
+          cols: 4,
+          rows: 4,
+          scale: idleClip?.scale ?? 1,
+          pivot_x: idleClip?.pivotX ?? 0.5,
+          foot_y: idleClip?.footY ?? 0.92,
+          unity_pivot: {
+            x: idleClip?.pivotX ?? 0.5,
+            y: idleClip?.unityPivotY ?? 0.08
+          }
+        };
+      }
+      const exportManifestPayload = {
+        release_id: baseManifest.release.id,
+        target_engine: 'unity_6000_lts_urp2d',
+        copied_file_count: baseManifest.files.length,
+        files: baseManifest.files,
+        unit_slices: unitSlicesSummary
+      };
+      writeFileSync(
+        join(unityStreamingBase, 'unity_export_manifest.json'),
+        `${JSON.stringify(exportManifestPayload, null, 2)}\n`,
+        'utf8'
+      );
+    }
   }
 
   return {

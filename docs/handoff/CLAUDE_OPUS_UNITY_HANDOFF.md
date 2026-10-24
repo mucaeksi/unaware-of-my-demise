@@ -61,6 +61,22 @@ Read in this order at session start:
   - Color Space: **Linear** (with sRGB textures for UI/portraits/sprites).
   - Scripting Backend: **IL2CPP**, Target Architectures: **ARM64** (Google Play requirement).
 
+### 3.1.1 Pre-Implemented C# Infrastructure in `apps/unity/Assets/` (Layers 2–5 Ready for Claude Opus 5.5)
+Layers 2, 3, 4, and 5 are already implemented and verified in `apps/unity/Assets/` so Claude Opus 5.5 can immediately focus on **Layer 1** (`Uomd.Combat`, `Uomd.Narrative`, and the 28 game scenes):
+- **Layer 5 — Server & Shared Schema C# Compatibility (`Uomd.Contracts` & `Uomd.Core`)**:
+  - `apps/unity/Assets/_UOMD/Scripts/Contracts/Uomd.Contracts.asmdef` & `UomdApiContracts.cs` (`[Serializable, Preserve]` DTOs for Auth, Wallets, Gacha Banners/Pulls, Roster, Character Growth, Gear, Teams, Entry/Story/Battle Progress, Mail, Unity Sprite Slices, and `VfxPackDto`).
+  - `apps/unity/Assets/_UOMD/Scripts/Core/Uomd.Core.asmdef`, `CanonicalJson.cs` (UTF-16 ordinal key-sorted JSON + SHA-256 + Base64Url), `Es256SignatureVerifier.cs` (ECDSA P-256 IEEE P1363 verification), `UomdApiClient.cs` (`UnityWebRequest` + `Awaitable` HTTP client matching `apps/game/src/net/api.ts`), and `Generated/UomdCorePrimitives.g.cs` (`Mulberry32Rng`, D-27 `UomdStatMath`, `ComputeVictoryStars`, `UomdClientConfig`).
+- **Layer 4 — Pure Android Java JNI Bridges (`Uomd.Platform` & `Assets/Plugins/Android/`)**:
+  - `apps/unity/Assets/Plugins/Android/io/github/mucaeksi/unawareofmydemise/`: `UomdUnityCallback.java`, `UomdGoogleSignInBridge.java` (`CredentialManager` + `AndroidKeyStore` AES-GCM 256-bit), `UomdBillingBridge.java` (Google Play Billing v7), `UomdAdsBridge.java` (UMP + AdMob SSV), `UomdAppBridge.java` (`makeRestartActivityTask`).
+  - `apps/unity/Assets/_UOMD/Scripts/Platform/Uomd.Platform.asmdef` & `UomdPlatformBridge.cs` (`IUomdPlatformBridge`, `UomdAndroidJniBridge`, `UomdEditorMockBridge`).
+- **Layer 2 — Gothic Dark Anime UI Toolkit (`Uomd.UI` + UXML/USS)**:
+  - `apps/unity/Assets/_UOMD/UI/USS/uomd-tokens.uss`, `apps/unity/Assets/_UOMD/UI/UXML/UomdHubFrame.uxml`, `apps/unity/Assets/_UOMD/UI/UXML/UomdModalDialog.uxml`.
+  - `apps/unity/Assets/_UOMD/Scripts/UI/Uomd.UI.asmdef`, `UomdThemeTokens.cs`, `SafeAreaBinder.cs`, `UomdUiKit.cs` (Gothic buttons, HP/Focus progress bars, focus-trapped cost-disclosure confirmation modals, and toasts).
+- **Layer 3 — URP 2D Shaders, Sprite Slicing & Data-Driven VFX (`Uomd.Battle`)**:
+  - `apps/unity/Assets/_UOMD/Shaders/UomdSpriteFlash.shader` & `UomdVfxBlend.shader`.
+  - `apps/unity/Assets/_UOMD/Scripts/Battle/Uomd.Battle.asmdef`, `ChibiAtlasSlicer.cs` (bottom-left `y_unity = H - (y + h)` and normalized foot pivot `(pivot_x, 1 - foot_y)` runtime sprite creation), `Vfx/VfxProceduralTextures.cs` (15 procedural textures + 4 vector emblems), and `Vfx/BattleVfxStage.cs` (object-pooled 115-preset `vfx_presets.json` runtime).
+- **IL2CPP Stripping Protection**: `apps/unity/Assets/_UOMD/link.xml` and `apps/unity/ProjectSettings/ProjectVersion.txt` (`6000.0.41f1`).
+
 ### 3.2 Modular C# Assembly Definitions (`.asmdef`)
 Structure `apps/unity/Assets/_Uomd/` into clean, deterministic assemblies so `dotnet test` and Unity Test Runner can verify logic without booting scenes:
 
