@@ -1,0 +1,1443 @@
+{
+  "generated_by": "tools/export_unity_parity_vectors.ts",
+  "rng": [
+    {
+      "seed": 1,
+      "values": [
+        0.6270739405881613,
+        0.002735721180215478,
+        0.5274470399599522,
+        0.9810509674716741,
+        0.9683778982143849,
+        0.281103502959013,
+        0.6128388606011868,
+        0.7207431411370635
+      ],
+      "snapshot": 1767624617
+    },
+    {
+      "seed": 42,
+      "values": [
+        0.6011037519201636,
+        0.44829055899754167,
+        0.8524657934904099,
+        0.6697340414393693,
+        0.17481389874592423,
+        0.5265925421845168,
+        0.2732279943302274,
+        0.6247446539346129
+      ],
+      "snapshot": 1767624658
+    },
+    {
+      "seed": 20261024,
+      "values": [
+        0.28407089272513986,
+        0.5368913877755404,
+        0.6360740626696497,
+        0.4680839395150542,
+        0.8862529257312417,
+        0.6010156446136534,
+        0.5457014329731464,
+        0.5542701142840087
+      ],
+      "snapshot": 1787885640
+    },
+    {
+      "seed": 4294967295,
+      "values": [
+        0.8964226141106337,
+        0.189478256739676,
+        0.7156526781618595,
+        0.9440599093213677,
+        0.8452364315744489,
+        0.5391399988438934,
+        0.6804977387655526,
+        0.4755720964167267
+      ],
+      "snapshot": 1767624615
+    }
+  ],
+  "stats": [
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 1,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 6,
+        "int": 2,
+        "vit": 5,
+        "agi": 4
+      },
+      "derived": {
+        "hp": 19,
+        "atk": 6,
+        "def": 1,
+        "spd": 4,
+        "crit_rate": 0.08,
+        "crit_damage": 1.5,
+        "effect_hit": 0.02
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 1,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 6,
+        "int": 2,
+        "vit": 5,
+        "agi": 4
+      },
+      "derived": {
+        "hp": 19,
+        "atk": 6,
+        "def": 9,
+        "spd": 4,
+        "crit_rate": 0.08,
+        "crit_damage": 1.5,
+        "effect_hit": 0.02
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 1,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 11,
+        "int": 2,
+        "vit": 6,
+        "agi": 4
+      },
+      "derived": {
+        "hp": 22,
+        "atk": 11,
+        "def": 1,
+        "spd": 4,
+        "crit_rate": 0.08,
+        "crit_damage": 1.5,
+        "effect_hit": 0.02
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 1,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 11,
+        "int": 2,
+        "vit": 6,
+        "agi": 4
+      },
+      "derived": {
+        "hp": 22,
+        "atk": 11,
+        "def": 9,
+        "spd": 4,
+        "crit_rate": 0.08,
+        "crit_damage": 1.5,
+        "effect_hit": 0.02
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 10,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 11,
+        "int": 3,
+        "vit": 9,
+        "agi": 7
+      },
+      "derived": {
+        "hp": 31,
+        "atk": 11,
+        "def": 1,
+        "spd": 7,
+        "crit_rate": 0.14,
+        "crit_damage": 1.5,
+        "effect_hit": 0.03
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 10,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 11,
+        "int": 3,
+        "vit": 9,
+        "agi": 7
+      },
+      "derived": {
+        "hp": 31,
+        "atk": 11,
+        "def": 9,
+        "spd": 7,
+        "crit_rate": 0.14,
+        "crit_damage": 1.5,
+        "effect_hit": 0.03
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 10,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 16,
+        "int": 3,
+        "vit": 10,
+        "agi": 7
+      },
+      "derived": {
+        "hp": 34,
+        "atk": 16,
+        "def": 1,
+        "spd": 7,
+        "crit_rate": 0.14,
+        "crit_damage": 1.5,
+        "effect_hit": 0.03
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 10,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 16,
+        "int": 3,
+        "vit": 10,
+        "agi": 7
+      },
+      "derived": {
+        "hp": 34,
+        "atk": 16,
+        "def": 9,
+        "spd": 7,
+        "crit_rate": 0.14,
+        "crit_damage": 1.5,
+        "effect_hit": 0.03
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 37,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 28,
+        "int": 6,
+        "vit": 21,
+        "agi": 17
+      },
+      "derived": {
+        "hp": 67,
+        "atk": 28,
+        "def": 1,
+        "spd": 17,
+        "crit_rate": 0.34,
+        "crit_damage": 1.5,
+        "effect_hit": 0.06
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 37,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 28,
+        "int": 6,
+        "vit": 21,
+        "agi": 17
+      },
+      "derived": {
+        "hp": 67,
+        "atk": 28,
+        "def": 9,
+        "spd": 17,
+        "crit_rate": 0.34,
+        "crit_damage": 1.5,
+        "effect_hit": 0.06
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 37,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 33,
+        "int": 6,
+        "vit": 22,
+        "agi": 17
+      },
+      "derived": {
+        "hp": 70,
+        "atk": 33,
+        "def": 1,
+        "spd": 17,
+        "crit_rate": 0.34,
+        "crit_damage": 1.5,
+        "effect_hit": 0.06
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 37,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 33,
+        "int": 6,
+        "vit": 22,
+        "agi": 17
+      },
+      "derived": {
+        "hp": 70,
+        "atk": 33,
+        "def": 9,
+        "spd": 17,
+        "crit_rate": 0.34,
+        "crit_damage": 1.5,
+        "effect_hit": 0.06
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 60,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 41,
+        "int": 8,
+        "vit": 32,
+        "agi": 25
+      },
+      "derived": {
+        "hp": 100,
+        "atk": 41,
+        "def": 1,
+        "spd": 25,
+        "crit_rate": 0.4,
+        "crit_damage": 1.75,
+        "effect_hit": 0.08
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 60,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 41,
+        "int": 8,
+        "vit": 32,
+        "agi": 25
+      },
+      "derived": {
+        "hp": 100,
+        "atk": 41,
+        "def": 9,
+        "spd": 25,
+        "crit_rate": 0.4,
+        "crit_damage": 1.75,
+        "effect_hit": 0.08
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 60,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 46,
+        "int": 8,
+        "vit": 33,
+        "agi": 25
+      },
+      "derived": {
+        "hp": 103,
+        "atk": 46,
+        "def": 1,
+        "spd": 25,
+        "crit_rate": 0.4,
+        "crit_damage": 1.75,
+        "effect_hit": 0.08
+      }
+    },
+    {
+      "block": {
+        "power": "str",
+        "base": {
+          "str": 6,
+          "int": 2,
+          "vit": 5,
+          "agi": 4
+        },
+        "growth": {
+          "str": 0.6,
+          "int": 0.1,
+          "vit": 0.45,
+          "agi": 0.35
+        },
+        "armor": 1
+      },
+      "level": 60,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 46,
+        "int": 8,
+        "vit": 33,
+        "agi": 25
+      },
+      "derived": {
+        "hp": 103,
+        "atk": 46,
+        "def": 9,
+        "spd": 25,
+        "crit_rate": 0.4,
+        "crit_damage": 1.75,
+        "effect_hit": 0.08
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 1,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 1,
+        "int": 7,
+        "vit": 3,
+        "agi": 5
+      },
+      "derived": {
+        "hp": 13,
+        "atk": 7,
+        "def": 0,
+        "spd": 5,
+        "crit_rate": 0.1,
+        "crit_damage": 1.5,
+        "effect_hit": 0.07
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 1,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 1,
+        "int": 7,
+        "vit": 3,
+        "agi": 5
+      },
+      "derived": {
+        "hp": 13,
+        "atk": 7,
+        "def": 8,
+        "spd": 5,
+        "crit_rate": 0.1,
+        "crit_damage": 1.5,
+        "effect_hit": 0.07
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 1,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 3,
+        "int": 10,
+        "vit": 4,
+        "agi": 5
+      },
+      "derived": {
+        "hp": 16,
+        "atk": 10,
+        "def": 0,
+        "spd": 5,
+        "crit_rate": 0.1,
+        "crit_damage": 1.5,
+        "effect_hit": 0.1
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 1,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 3,
+        "int": 10,
+        "vit": 4,
+        "agi": 5
+      },
+      "derived": {
+        "hp": 16,
+        "atk": 10,
+        "def": 8,
+        "spd": 5,
+        "crit_rate": 0.1,
+        "crit_damage": 1.5,
+        "effect_hit": 0.1
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 10,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 1,
+        "int": 13,
+        "vit": 6,
+        "agi": 10
+      },
+      "derived": {
+        "hp": 22,
+        "atk": 13,
+        "def": 0,
+        "spd": 10,
+        "crit_rate": 0.2,
+        "crit_damage": 1.5,
+        "effect_hit": 0.13
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 10,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 1,
+        "int": 13,
+        "vit": 6,
+        "agi": 10
+      },
+      "derived": {
+        "hp": 22,
+        "atk": 13,
+        "def": 8,
+        "spd": 10,
+        "crit_rate": 0.2,
+        "crit_damage": 1.5,
+        "effect_hit": 0.13
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 10,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 3,
+        "int": 16,
+        "vit": 7,
+        "agi": 10
+      },
+      "derived": {
+        "hp": 25,
+        "atk": 16,
+        "def": 0,
+        "spd": 10,
+        "crit_rate": 0.2,
+        "crit_damage": 1.5,
+        "effect_hit": 0.16
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 10,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 3,
+        "int": 16,
+        "vit": 7,
+        "agi": 10
+      },
+      "derived": {
+        "hp": 25,
+        "atk": 16,
+        "def": 8,
+        "spd": 10,
+        "crit_rate": 0.2,
+        "crit_damage": 1.5,
+        "effect_hit": 0.16
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 37,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 3,
+        "int": 32,
+        "vit": 14,
+        "agi": 23
+      },
+      "derived": {
+        "hp": 46,
+        "atk": 32,
+        "def": 0,
+        "spd": 23,
+        "crit_rate": 0.4,
+        "crit_damage": 1.65,
+        "effect_hit": 0.32
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 37,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 3,
+        "int": 32,
+        "vit": 14,
+        "agi": 23
+      },
+      "derived": {
+        "hp": 46,
+        "atk": 32,
+        "def": 8,
+        "spd": 23,
+        "crit_rate": 0.4,
+        "crit_damage": 1.65,
+        "effect_hit": 0.32
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 37,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 5,
+        "int": 35,
+        "vit": 15,
+        "agi": 23
+      },
+      "derived": {
+        "hp": 49,
+        "atk": 35,
+        "def": 0,
+        "spd": 23,
+        "crit_rate": 0.4,
+        "crit_damage": 1.65,
+        "effect_hit": 0.35
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 37,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 5,
+        "int": 35,
+        "vit": 15,
+        "agi": 23
+      },
+      "derived": {
+        "hp": 49,
+        "atk": 35,
+        "def": 8,
+        "spd": 23,
+        "crit_rate": 0.4,
+        "crit_damage": 1.65,
+        "effect_hit": 0.35
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 60,
+      "bonus": {},
+      "armor": 0,
+      "attributes": {
+        "str": 4,
+        "int": 48,
+        "vit": 21,
+        "agi": 35
+      },
+      "derived": {
+        "hp": 67,
+        "atk": 48,
+        "def": 0,
+        "spd": 35,
+        "crit_rate": 0.4,
+        "crit_damage": 2.25,
+        "effect_hit": 0.48
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 60,
+      "bonus": {},
+      "armor": 7.5,
+      "attributes": {
+        "str": 4,
+        "int": 48,
+        "vit": 21,
+        "agi": 35
+      },
+      "derived": {
+        "hp": 67,
+        "atk": 48,
+        "def": 8,
+        "spd": 35,
+        "crit_rate": 0.4,
+        "crit_damage": 2.25,
+        "effect_hit": 0.48
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 60,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 0,
+      "attributes": {
+        "str": 6,
+        "int": 51,
+        "vit": 22,
+        "agi": 35
+      },
+      "derived": {
+        "hp": 70,
+        "atk": 51,
+        "def": 0,
+        "spd": 35,
+        "crit_rate": 0.4,
+        "crit_damage": 2.25,
+        "effect_hit": 0.51
+      }
+    },
+    {
+      "block": {
+        "power": "int",
+        "base": {
+          "str": 1,
+          "int": 7,
+          "vit": 3,
+          "agi": 5
+        },
+        "growth": {
+          "str": 0.05,
+          "int": 0.7,
+          "vit": 0.3,
+          "agi": 0.5
+        }
+      },
+      "level": 60,
+      "bonus": {
+        "str": 2,
+        "vit": 1,
+        "power": 3
+      },
+      "armor": 7.5,
+      "attributes": {
+        "str": 6,
+        "int": 51,
+        "vit": 22,
+        "agi": 35
+      },
+      "derived": {
+        "hp": 70,
+        "atk": 51,
+        "def": 8,
+        "spd": 35,
+        "crit_rate": 0.4,
+        "crit_damage": 2.25,
+        "effect_hit": 0.51
+      }
+    }
+  ],
+  "stars": [
+    {
+      "players": 1,
+      "defeated": 0,
+      "stars": 3
+    },
+    {
+      "players": 1,
+      "defeated": 1,
+      "stars": 2
+    },
+    {
+      "players": 2,
+      "defeated": 0,
+      "stars": 3
+    },
+    {
+      "players": 2,
+      "defeated": 1,
+      "stars": 2
+    },
+    {
+      "players": 2,
+      "defeated": 2,
+      "stars": 2
+    },
+    {
+      "players": 3,
+      "defeated": 0,
+      "stars": 3
+    },
+    {
+      "players": 3,
+      "defeated": 1,
+      "stars": 2
+    },
+    {
+      "players": 3,
+      "defeated": 2,
+      "stars": 1
+    },
+    {
+      "players": 3,
+      "defeated": 3,
+      "stars": 1
+    },
+    {
+      "players": 4,
+      "defeated": 0,
+      "stars": 3
+    },
+    {
+      "players": 4,
+      "defeated": 1,
+      "stars": 3
+    },
+    {
+      "players": 4,
+      "defeated": 2,
+      "stars": 2
+    },
+    {
+      "players": 4,
+      "defeated": 3,
+      "stars": 1
+    },
+    {
+      "players": 4,
+      "defeated": 4,
+      "stars": 1
+    },
+    {
+      "players": 5,
+      "defeated": 0,
+      "stars": 3
+    },
+    {
+      "players": 5,
+      "defeated": 1,
+      "stars": 3
+    },
+    {
+      "players": 5,
+      "defeated": 2,
+      "stars": 3
+    },
+    {
+      "players": 5,
+      "defeated": 3,
+      "stars": 2
+    },
+    {
+      "players": 5,
+      "defeated": 4,
+      "stars": 1
+    },
+    {
+      "players": 5,
+      "defeated": 5,
+      "stars": 1
+    }
+  ],
+  "canonical": [
+    {
+      "input": "{\"b\":1,\"a\":[true,null,\"x\"],\"c\":{\"z\":0.5,\"y\":-3}}",
+      "canonical": "{\"a\":[true,null,\"x\"],\"b\":1,\"c\":{\"y\":-3,\"z\":0.5}}"
+    },
+    {
+      "input": "{\"é\":\"ü\",\"A\":\"a\",\"_\":\"\\n\\t\\\"\\\\\",\"n\":1e+21,\"m\":0.1}",
+      "canonical": "{\"A\":\"a\",\"_\":\"\\n\\t\\\"\\\\\",\"m\":0.1,\"n\":1e+21,\"é\":\"ü\"}"
+    },
+    {
+      "input": "[{\"k\":\"v\"},[],{}]",
+      "canonical": "[{\"k\":\"v\"},[],{}]"
+    },
+    {
+      "input": "{\"lone\":\"\\ud800x\",\"pair\":\"😀\",\"ctl\":\"\\u0001\",\"nil\":null,\"neg\":-0.5}",
+      "canonical": "{\"ctl\":\"\\u0001\",\"lone\":\"\\ud800x\",\"neg\":-0.5,\"nil\":null,\"pair\":\"😀\"}"
+    }
+  ],
+  "numbers": [
+    {
+      "bits": "4591870180066957722",
+      "text": "0.1"
+    },
+    {
+      "bits": "4605380978949069209",
+      "text": "0.7999999999999999"
+    },
+    {
+      "bits": "4599075939470750516",
+      "text": "0.30000000000000004"
+    },
+    {
+      "bits": "4921056587992461136",
+      "text": "1e+21"
+    },
+    {
+      "bits": "4502148214488346440",
+      "text": "1e-7"
+    },
+    {
+      "bits": "4504762867522569078",
+      "text": "1.5e-7"
+    },
+    {
+      "bits": "4907451598986591450",
+      "text": "123456789012345680000"
+    },
+    {
+      "bits": "1",
+      "text": "5e-324"
+    },
+    {
+      "bits": "-4706042843746669171",
+      "text": "-0.000001"
+    },
+    {
+      "bits": "9097811302482466869",
+      "text": "1.5e+300"
+    },
+    {
+      "bits": "-4592264245034352640",
+      "text": "-42"
+    },
+    {
+      "bits": "4845873199050653696",
+      "text": "9007199254740992"
+    },
+    {
+      "bits": "4599676419421066581",
+      "text": "0.3333333333333333"
+    }
+  ],
+  "signature": {
+    "kid": "uomd-parity-test",
+    "x": "vrtyqpLwKcjBKw17ChqHru7j51hpD3WzzViH7BXUjPw",
+    "y": "yvEo-l8kMn3H8-CQplC8Ymlo5rJYZPwPY0KLSM3tMgw",
+    "signed_json": "{\"schema_version\":1,\"release\":{\"id\":\"rel_parity\",\"generation\":3,\"notes\":\"çağ ✓\"},\"files\":[{\"path\":\"a.json\",\"sha256\":\"ab\",\"bytes\":2}],\"rollout\":null,\"signature\":{\"kid\":\"uomd-parity-test\",\"alg\":\"ES256\",\"value\":\"Wzor5NA-Rby5VTXtbCDVs3TPHmYYRt5BR1eZIZC0WwAn2Ba9q9SfW9iHk7r-pXSZ4B8lcjSEvRbPY4peGLrK9w\"}}"
+  }
+}

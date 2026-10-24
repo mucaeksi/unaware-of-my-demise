@@ -76,6 +76,11 @@ namespace Uomd.Core
             OnAuthChanged?.Invoke();
         }
 
+        public void SetSessionToken(string token)
+        {
+            AdoptSession(new SessionDto { token = token, expiresAt = DateTimeOffset.UtcNow.AddDays(30).ToString("o") });
+        }
+
         public SessionDto? GetCurrentSessionSnapshot() => _session;
 
         public async Awaitable<TResponse> CallAsync<TResponse>(

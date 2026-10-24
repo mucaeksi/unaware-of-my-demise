@@ -51,11 +51,7 @@ namespace Uomd.Core
                 case double d:
                     if (double.IsNaN(d) || double.IsInfinity(d))
                         throw new InvalidOperationException("CanonicalJson: non-finite number");
-                    // Match JS Number.toString() formatting for integer-valued doubles
-                    if (d == Math.Truncate(d) && Math.Abs(d) < 9007199254740991.0)
-                        sb.Append(((long)d).ToString(CultureInfo.InvariantCulture));
-                    else
-                        sb.Append(d.ToString("G17", CultureInfo.InvariantCulture));
+                    sb.Append(FormatJsNumber(d));
                     return;
                 case float f:
                     WriteValue(sb, (double)f);
@@ -81,14 +77,8 @@ namespace Uomd.Core
 
         private static void WriteObject(StringBuilder sb, IDictionary<string, object?> dict)
         {
-            var keys = new List<string>(dict.Count);
-            foreach (var kv in dict)
-            {
-                if (kv.Value is not null)
-                {
-                    keys.Add(kv.Key);
-                }
-            }
+            // TS drops only `undefined`; JSON null values are kept (`{"a":null}`).
+            var keys = new List<string>(dict.Keys);
             // JavaScript `<` / `>` string comparison is lexicographical over UTF-16 code units (StringComparer.Ordinal)
             keys.Sort(StringComparer.Ordinal);
 
@@ -102,6 +92,53 @@ namespace Uomd.Core
                 WriteValue(sb, dict[k]);
             }
             sb.Append('}');
+        }
+
+        /// <summary>ECMAScript Number::toString(10): shortest round-trip digits, exponent form outside [1e-7, 1e21).</summary>
+        public static string FormatJsNumber(double d)
+        {
+            if (d == 0) return "0"; // also -0
+            string e = d.ToString("E16", CultureInfo.InvariantCulture);
+            for (int p = 1; p <= 17; p++)
+            {
+                string candidate = d.ToString("E" + (p - 1).ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+                if (double.Parse(candidate, NumberStyles.Float, CultureInfo.InvariantCulture) == d)
+                {
+                    e = candidate;
+                    break;
+                }
+            }
+
+            bool negative = e[0] == '-';
+            if (negative) e = e.Substring(1);
+            int ePos = e.IndexOf('E');
+            string digits = e.Substring(0, ePos).Replace(".", "").TrimEnd('0');
+            if (digits.Length == 0) digits = "0";
+            int n = int.Parse(e.Substring(ePos + 1), NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture) + 1;
+            int k = digits.Length;
+
+            var sb = new StringBuilder(32);
+            if (negative) sb.Append('-');
+            if (k <= n && n <= 21)
+            {
+                sb.Append(digits).Append('0', n - k);
+            }
+            else if (0 < n && n <= 21)
+            {
+                sb.Append(digits, 0, n).Append('.').Append(digits, n, k - n);
+            }
+            else if (-6 < n && n <= 0)
+            {
+                sb.Append("0.").Append('0', -n).Append(digits);
+            }
+            else
+            {
+                int exp = n - 1;
+                sb.Append(digits[0]);
+                if (k > 1) sb.Append('.').Append(digits, 1, k - 1);
+                sb.Append('e').Append(exp < 0 ? '-' : '+').Append(Math.Abs(exp).ToString(CultureInfo.InvariantCulture));
+            }
+            return sb.ToString();
         }
 
         public static void WriteEscapedString(StringBuilder sb, string s)
@@ -134,7 +171,10 @@ namespace Uomd.Core
                         sb.Append("\\t");
                         break;
                     default:
-                        if (c < 0x20)
+                        bool loneSurrogate =
+                            (char.IsHighSurrogate(c) && !(i + 1 < s.Length && char.IsLowSurrogate(s[i + 1]))) ||
+                            (char.IsLowSurrogate(c) && !(i > 0 && char.IsHighSurrogate(s[i - 1])));
+                        if (c < 0x20 || loneSurrogate) // well-formed JSON.stringify escapes lone surrogates
                         {
                             sb.Append("\\u");
                             sb.Append(((int)c).ToString("x4", CultureInfo.InvariantCulture));

@@ -6,7 +6,7 @@
   "description": "Unaware of My Demise - Unity 6 LTS (C#) Client & Cloudflare Gateway Builder",
   "scripts": {
     "build": "tsx ../../tools/export_unity_bundle.ts && node ../../tools/build_cloudflare_game_assets.mjs",
-    "typecheck": "node -e \"console.log('Unity 6 LTS C# client assemblies verified')\"",
+    "typecheck": "node -e \"console.log('C# is compiled only by Unity batchmode: bash apps/unity/cloud/unity_ci.sh import')\"",
     "test": "vitest run --root ../../tools export_unity_bundle.test.ts"
   }
 }

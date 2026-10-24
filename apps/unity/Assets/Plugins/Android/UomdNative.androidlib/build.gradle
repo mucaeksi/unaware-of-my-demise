@@ -1,0 +1,31 @@
+// Gradle module for the UOMD native bridges (Credential Manager, Play Billing, AdMob + UMP).
+// Unity 6 picks up *.androidlib folders as library modules; unity.* properties mirror Player Settings.
+apply plugin: 'com.android.library'
+
+android {
+    namespace "io.github.mucaeksi.unawareofmydemise.nativebridge"
+    compileSdk getProperty("unity.compileSdkVersion") as int
+    buildToolsVersion getProperty("unity.buildToolsVersion")
+
+    compileOptions {
+        sourceCompatibility JavaVersion.valueOf(getProperty("unity.javaCompatabilityVersion"))
+        targetCompatibility JavaVersion.valueOf(getProperty("unity.javaCompatabilityVersion"))
+    }
+
+    defaultConfig {
+        minSdk getProperty("unity.minSdkVersion") as int
+        targetSdk getProperty("unity.targetSdkVersion") as int
+        consumerProguardFiles 'proguard-consumer.txt'
+    }
+}
+
+dependencies {
+    // Versions carried over from the retired Capacitor app (apps/android, removed in e918b723).
+    implementation 'androidx.annotation:annotation:1.9.1'
+    implementation 'androidx.credentials:credentials:1.5.0'
+    implementation 'androidx.credentials:credentials-play-services-auth:1.5.0'
+    implementation 'com.google.android.libraries.identity.googleid:googleid:1.1.1'
+    implementation 'com.android.billingclient:billing:8.0.0'
+    implementation 'com.google.android.gms:play-services-ads:24.6.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.2.0'
+}

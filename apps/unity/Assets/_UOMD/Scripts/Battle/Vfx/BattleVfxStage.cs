@@ -103,6 +103,17 @@ namespace Uomd.Battle.Vfx
         }
 
         public void SetPack(VfxPackDto? pack) => _pack = pack;
+        public void LoadPresets(VfxPackDto? pack) => SetPack(pack);
+
+        public void PlayPreset(string presetId, Vector3 origin, Vector3? target = null, bool reducedMotion = false, bool reduceFlash = false)
+        {
+            var opts = new VfxPlayOptions
+            {
+                OriginWorld = origin,
+                TargetWorld = target.HasValue ? (Vector2)target.Value : null
+            };
+            _ = PlayAsync(presetId, opts);
+        }
 
         public bool HasPreset(string presetId) =>
             _pack is not null && _pack.presets.ContainsKey(presetId);

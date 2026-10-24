@@ -42,7 +42,8 @@ namespace Uomd.Scenes
         public BattleVfxStage VfxStage { get; private set; }
         public UomdScreenId ActiveScreenId => _activeController?.ScreenId ?? UomdScreenId.Boot;
 
-        private async void Awake()
+        // Start (not Awake): UIDocument builds rootVisualElement in its own OnEnable.
+        private async void Start()
         {
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;

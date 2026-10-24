@@ -52,12 +52,17 @@ namespace Uomd.Platform
         SessionDto? ReadSecureSession();
         bool WriteSecureSession(SessionDto session);
         void ClearSecureSession();
-        Awaitable<string> SignInWithGoogleAsync(string serverClientId, CancellationToken ct = default);
+        Awaitable<string?> LoadEncryptedSessionTokenAsync(CancellationToken ct = default);
+        Awaitable ClearEncryptedSessionTokenAsync(CancellationToken ct = default);
+        Awaitable<string> SignInWithGoogleAsync(string serverClientId = "", CancellationToken ct = default);
         Awaitable SignOutGoogleAsync(CancellationToken ct = default);
+        Awaitable<string> PurchaseProductAsync(string productId, string accountTag, CancellationToken ct = default);
         Awaitable<PlayPurchaseDto> PurchaseProductAsync(string productId, string type, string accountTag, string? offerToken = null, CancellationToken ct = default);
         Awaitable<PlayPurchaseDto[]> QueryOwnedPurchasesAsync(CancellationToken ct = default);
+        Awaitable<string> ReconcileOwnedPurchasesAsync(CancellationToken ct = default);
         Awaitable<ConsentStateDto> InitAdsConsentAsync(bool underAgeOfConsent = false, CancellationToken ct = default);
-        Awaitable<bool> ShowRewardedAdAsync(string adUnitId, string userId, string customData, CancellationToken ct = default);
+        Awaitable ShowPrivacyOptionsFormAsync(CancellationToken ct = default);
+        Awaitable<string> ShowRewardedAdAsync(string adUnitId, string userId, string customData, CancellationToken ct = default);
         void RestartApplication();
     }
 
@@ -132,7 +137,19 @@ namespace Uomd.Platform
             bridge.CallStatic("clearSession", activity);
         }
 
-        public async Awaitable<string> SignInWithGoogleAsync(string serverClientId, CancellationToken ct = default)
+        public async Awaitable<string?> LoadEncryptedSessionTokenAsync(CancellationToken ct = default)
+        {
+            await Awaitable.NextFrameAsync(ct);
+            return ReadSecureSession()?.token;
+        }
+
+        public async Awaitable ClearEncryptedSessionTokenAsync(CancellationToken ct = default)
+        {
+            ClearSecureSession();
+            await Awaitable.NextFrameAsync(ct);
+        }
+
+        public async Awaitable<string> SignInWithGoogleAsync(string serverClientId = "", CancellationToken ct = default)
         {
             var proxy = new JniCallbackProxy();
             using (var activity = GetCurrentActivity())
@@ -162,6 +179,12 @@ namespace Uomd.Platform
             await proxy.Task;
             await Awaitable.MainThreadAsync();
             ct.ThrowIfCancellationRequested();
+        }
+
+        public async Awaitable<string> PurchaseProductAsync(string productId, string accountTag, CancellationToken ct = default)
+        {
+            var res = await PurchaseProductAsync(productId, "inapp", accountTag, null, ct);
+            return res.purchaseToken;
         }
 
         public async Awaitable<PlayPurchaseDto> PurchaseProductAsync(
@@ -203,6 +226,12 @@ namespace Uomd.Platform
             return env?.purchases ?? Array.Empty<PlayPurchaseDto>();
         }
 
+        public async Awaitable<string> ReconcileOwnedPurchasesAsync(CancellationToken ct = default)
+        {
+            var owned = await QueryOwnedPurchasesAsync(ct);
+            return JsonUtility.ToJson(new OwnedPurchasesEnvelopeDto { purchases = owned });
+        }
+
         public async Awaitable<ConsentStateDto> InitAdsConsentAsync(bool underAgeOfConsent = false, CancellationToken ct = default)
         {
             var proxy = new JniCallbackProxy();
@@ -217,7 +246,20 @@ namespace Uomd.Platform
             return JsonUtility.FromJson<ConsentStateDto>(json) ?? new ConsentStateDto();
         }
 
-        public async Awaitable<bool> ShowRewardedAdAsync(string adUnitId, string userId, string customData, CancellationToken ct = default)
+        public async Awaitable ShowPrivacyOptionsFormAsync(CancellationToken ct = default)
+        {
+            var proxy = new JniCallbackProxy();
+            using (var activity = GetCurrentActivity())
+            using (var bridge = new AndroidJavaClass(AdsClass))
+            {
+                bridge.CallStatic("showPrivacyOptionsForm", activity, proxy);
+            }
+            await proxy.Task;
+            await Awaitable.MainThreadAsync();
+            ct.ThrowIfCancellationRequested();
+        }
+
+        public async Awaitable<string> ShowRewardedAdAsync(string adUnitId, string userId, string customData, CancellationToken ct = default)
         {
             var proxy = new JniCallbackProxy();
             using (var activity = GetCurrentActivity())
@@ -229,7 +271,7 @@ namespace Uomd.Platform
             await Awaitable.MainThreadAsync();
             ct.ThrowIfCancellationRequested();
             var res = JsonUtility.FromJson<RewardedAdResultDto>(json);
-            return res is not null && res.earned;
+            return (res != null && res.earned) ? "reward_earned" : string.Empty;
         }
 
         public void RestartApplication()
@@ -270,7 +312,19 @@ namespace Uomd.Platform
             PlayerPrefs.Save();
         }
 
-        public async Awaitable<string> SignInWithGoogleAsync(string serverClientId, CancellationToken ct = default)
+        public async Awaitable<string?> LoadEncryptedSessionTokenAsync(CancellationToken ct = default)
+        {
+            await Awaitable.NextFrameAsync(ct);
+            return ReadSecureSession()?.token;
+        }
+
+        public async Awaitable ClearEncryptedSessionTokenAsync(CancellationToken ct = default)
+        {
+            ClearSecureSession();
+            await Awaitable.NextFrameAsync(ct);
+        }
+
+        public async Awaitable<string> SignInWithGoogleAsync(string serverClientId = "", CancellationToken ct = default)
         {
             await Awaitable.NextFrameAsync(ct);
             throw new UomdApiException(400, "not_supported_in_editor", "Google CredentialManager requires an Android device build");
@@ -280,6 +334,12 @@ namespace Uomd.Platform
         {
             ClearSecureSession();
             await Awaitable.NextFrameAsync(ct);
+        }
+
+        public async Awaitable<string> PurchaseProductAsync(string productId, string accountTag, CancellationToken ct = default)
+        {
+            await Awaitable.NextFrameAsync(ct);
+            throw new UomdApiException(400, "billing_unavailable", "Google Play Billing requires an Android device build");
         }
 
         public async Awaitable<PlayPurchaseDto> PurchaseProductAsync(string productId, string type, string accountTag, string? offerToken = null, CancellationToken ct = default)
@@ -294,21 +354,44 @@ namespace Uomd.Platform
             return Array.Empty<PlayPurchaseDto>();
         }
 
+        public async Awaitable<string> ReconcileOwnedPurchasesAsync(CancellationToken ct = default)
+        {
+            await Awaitable.NextFrameAsync(ct);
+            return JsonUtility.ToJson(new OwnedPurchasesEnvelopeDto { purchases = Array.Empty<PlayPurchaseDto>() });
+        }
+
         public async Awaitable<ConsentStateDto> InitAdsConsentAsync(bool underAgeOfConsent = false, CancellationToken ct = default)
         {
             await Awaitable.NextFrameAsync(ct);
             return new ConsentStateDto { canRequestAds = false, status = "NOT_REQUIRED" };
         }
 
-        public async Awaitable<bool> ShowRewardedAdAsync(string adUnitId, string userId, string customData, CancellationToken ct = default)
+        public async Awaitable ShowPrivacyOptionsFormAsync(CancellationToken ct = default)
         {
             await Awaitable.NextFrameAsync(ct);
-            return false;
+        }
+
+        public async Awaitable<string> ShowRewardedAdAsync(string adUnitId, string userId, string customData, CancellationToken ct = default)
+        {
+            await Awaitable.NextFrameAsync(ct);
+            return "editor_reward_mock";
         }
 
         public void RestartApplication()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+    }
+
+    public static class UomdPlatformBridgeFactory
+    {
+        public static IUomdPlatformBridge Create()
+        {
+            if (Application.platform == RuntimePlatform.Android)
+            {
+                return new UomdAndroidJniBridge();
+            }
+            return new UomdEditorMockBridge();
         }
     }
 }

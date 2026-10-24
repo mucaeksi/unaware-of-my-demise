@@ -65,6 +65,56 @@ namespace Uomd.Contracts
     public sealed class WalletsDto
     {
         public int eclipse_token;
+        public int rations;
+        public int gold;
+        public int shards;
+        public int seals;
+    }
+
+    [Serializable, Preserve]
+    public sealed class StoryProgressDto
+    {
+        public bool prologueDone;
+        public string? lastNodeId;
+    }
+
+    [Serializable, Preserve]
+    public sealed class AccountPayloadDto
+    {
+        public string playerId = string.Empty;
+        public string accountTag = string.Empty;
+        public string displayName = string.Empty;
+        public int level = 1;
+        public int tutorialStep;
+        public WalletsDto wallets = new WalletsDto();
+        public StoryProgressDto storyProgress = new StoryProgressDto();
+    }
+
+    [Serializable, Preserve]
+    public sealed class EntryConfigDto
+    {
+        public string phase = "not_started";
+        public bool prologue;
+        public int tutorials;
+    }
+
+    [Serializable, Preserve]
+    public sealed class PrologueSceneDto
+    {
+        public string caption_en = string.Empty;
+        public string text_en = string.Empty;
+        public float duration_seconds = 5f;
+    }
+
+    [Serializable, Preserve]
+    public sealed class PrologueConfigDto
+    {
+        public PrologueSceneDto[] scenes = Array.Empty<PrologueSceneDto>();
+    }
+
+    [Serializable, Preserve]
+    public class BannerDto : BannerInfoDto
+    {
     }
 
     [Serializable, Preserve]
@@ -497,6 +547,15 @@ namespace Uomd.Contracts
         public string facing = "right";
         public int heightPx = 220;
         public UnityUnitAnimClipDto[] clips = Array.Empty<UnityUnitAnimClipDto>();
+    }
+
+    [Serializable, Preserve]
+    public sealed class UnityArtExportDto
+    {
+        public int schema = 1;
+        public string coordinateSystem = "unity_bottom_left";
+        public Dictionary<string, UnityAtlasDescriptorDto> atlases = new Dictionary<string, UnityAtlasDescriptorDto>();
+        public Dictionary<string, UnityUnitDescriptorDto> units = new Dictionary<string, UnityUnitDescriptorDto>();
     }
 
     // ============================================================================

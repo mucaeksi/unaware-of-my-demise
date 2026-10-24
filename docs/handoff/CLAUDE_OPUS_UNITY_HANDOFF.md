@@ -80,7 +80,7 @@ All 5 C# client layers (1, 2, 3, 4, and 5) are implemented and verified in `apps
 - **Layer 3 — URP 2D Shaders, Sprite Slicing & Data-Driven VFX (`Uomd.Battle`)**:
   - `apps/unity/Assets/_UOMD/Shaders/UomdSpriteFlash.shader` & `UomdVfxBlend.shader`.
   - `apps/unity/Assets/_UOMD/Scripts/Battle/Uomd.Battle.asmdef`, `ChibiAtlasSlicer.cs` (bottom-left `y_unity = H - (y + h)` and normalized foot pivot `(pivot_x, 1 - foot_y)` runtime sprite creation), `Vfx/VfxProceduralTextures.cs` (15 procedural textures + 4 vector emblems), and `Vfx/BattleVfxStage.cs` (object-pooled 115-preset `vfx_presets.json` runtime).
-- **IL2CPP Stripping Protection**: `apps/unity/Assets/_UOMD/link.xml` and `apps/unity/ProjectSettings/ProjectVersion.txt` (`6000.0.41f1`).
+- **IL2CPP Stripping Protection**: `apps/unity/Assets/_UOMD/link.xml` and `apps/unity/ProjectSettings/ProjectVersion.txt` (`6000.0.58f2`, see `apps/unity/cloud/README.md`).
 
 ### 3.2 Modular C# Assembly Definitions (`.asmdef`)
 Structure `apps/unity/Assets/_Uomd/` into clean, deterministic assemblies so `dotnet test` and Unity Test Runner can verify logic without booting scenes:

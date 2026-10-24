@@ -1,0 +1,2 @@
+# Bridge classes are reached from C# by name through JNI (AndroidJavaClass/AndroidJavaProxy); keep them.
+-keep class io.github.mucaeksi.unawareofmydemise.** { *; }

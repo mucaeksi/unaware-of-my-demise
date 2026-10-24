@@ -14,25 +14,26 @@ namespace Uomd.UI
     /// </summary>
     public static class UomdUiKit
     {
-        public static Button CreateButton(string text, Action onClick, bool primary = false)
+        public static Button CreateButton(string text, Action onClick, bool primary = false, bool danger = false)
         {
             var btn = new Button(onClick) { text = text };
             btn.AddToClassList("uomd-btn");
             if (primary) btn.AddToClassList("uomd-btn-primary");
+            if (danger) btn.AddToClassList("uomd-btn-danger");
             return btn;
         }
 
-        public static (VisualElement Track, VisualElement Fill) CreateProgressBar(float initialRatio = 1f)
+        public static VisualElement CreateProgressBar(float initialRatio = 1f, bool isFocusBar = false)
         {
             var track = new VisualElement();
             track.AddToClassList("uomd-bar-track");
 
             var fill = new VisualElement();
-            fill.AddToClassList("uomd-bar-fill");
-            UpdateProgressBar(fill, initialRatio, isHpBar: true);
+            fill.AddToClassList(isFocusBar ? "uomd-focus-fill" : "uomd-bar-fill");
+            UpdateProgressBar(fill, initialRatio, isHpBar: !isFocusBar);
 
             track.Add(fill);
-            return (track, fill);
+            return track;
         }
 
         public static void UpdateProgressBar(VisualElement fill, float ratio, bool isHpBar = true)
@@ -128,6 +129,11 @@ namespace Uomd.UI
                 backdrop.RemoveFromHierarchy();
                 safeContent?.SetEnabled(true);
             }
+        }
+
+        public static void ShowToast(VisualElement rootDocumentElement, string message, float durationSeconds = 2.4f)
+        {
+            _ = ShowToastAsync(rootDocumentElement, message, durationSeconds);
         }
 
         public static async Awaitable ShowToastAsync(

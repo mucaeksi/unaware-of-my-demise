@@ -6,7 +6,7 @@
  * Usage:
  *   npx tsx tools/export_unity_bundle.ts [--out .cache/unity_bundle] [--dry-run]
  */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ArtManifest, CONTENT_CAPABILITIES, ContentManifest } from '@uomd/content-schema';
@@ -207,6 +207,17 @@ namespace Uomd.Core
         {
             ${keysLiteral}
         };
+
+        public static bool SupportsCapability(string capability)
+        {
+            if (string.IsNullOrEmpty(capability)) return false;
+            for (int i = 0; i < SupportedCapabilities.Length; i++)
+            {
+                if (string.Equals(SupportedCapabilities[i], capability, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -234,6 +245,8 @@ namespace Uomd.Core
                 return result / 4294967296.0;
             }
         }
+
+        public double NextDouble() => Next();
 
         public uint Snapshot() => _state;
     }
@@ -266,6 +279,37 @@ namespace Uomd.Core
 
         public DerivedCombatStats(int hp, int atk, int def, int spd, double critRate, double critDamage, double effectHit)
         {
+            Hp = hp;
+            Atk = atk;
+            Def = def;
+            Spd = spd;
+            CritRate = critRate;
+            CritDamage = critDamage;
+            EffectHit = effectHit;
+        }
+    }
+
+    public readonly struct HeroDerivedStats
+    {
+        public readonly int Str;
+        public readonly int Int;
+        public readonly int Vit;
+        public readonly int Agi;
+        public readonly int Hp;
+        public readonly int Atk;
+        public readonly int Def;
+        public readonly int Spd;
+        public readonly double CritRate;
+        public readonly double CritDamage;
+        public double CritDmg => CritDamage;
+        public readonly double EffectHit;
+
+        public HeroDerivedStats(int str, int @int, int vit, int agi, int hp, int atk, int def, int spd, double critRate, double critDamage, double effectHit)
+        {
+            Str = str;
+            Int = @int;
+            Vit = vit;
+            Agi = agi;
             Hp = hp;
             Atk = atk;
             Def = def;
@@ -334,6 +378,56 @@ namespace Uomd.Core
             if (startingPlayers == 4) return defeated >= 3 ? 1 : defeated == 2 ? 2 : 3;
             if (startingPlayers == 3) return defeated >= 2 ? 1 : defeated == 1 ? 2 : 3;
             return defeated == 0 ? 3 : 2;
+        }
+
+        // shortcut: compile shim for scene code; the turn-limit rule is NOT in @uomd/combat. Replace with the real result flow.
+        [Obsolete("Placeholder: not a port of @uomd/combat. Use ComputeVictoryStars(startingPlayers, defeated).")]
+        public static int ComputeVictoryStars(int totalAllies, int survivingAllies, int turn, int turnLimit)
+        {
+            int defeated = Math.Max(0, totalAllies - survivingAllies);
+            int stars = ComputeVictoryStars(totalAllies, defeated);
+            if (turnLimit > 0 && turn > turnLimit && stars > 1)
+            {
+                stars--;
+            }
+            return stars;
+        }
+
+        // shortcut: compile shim with invented archetype numbers; real stats come from content units/*.json AttributeBlocks.
+        [Obsolete("Placeholder stats, not canon. Use AttributesAt/DeriveStats with the unit's content AttributeBlock.")]
+        public static HeroDerivedStats ComputeHeroStats(string archetype, int level, int ascension = 0)
+        {
+            string powerStat = "str";
+            double baseStr = 10, baseInt = 10, baseVit = 12, baseAgi = 10;
+            double growthStr = 1.5, growthInt = 1.0, growthVit = 2.0, growthAgi = 1.2;
+            int naturalArmor = 5;
+
+            switch ((archetype ?? "").ToUpperInvariant())
+            {
+                case "TACTICIAN":
+                    powerStat = "int";
+                    baseStr = 8; baseInt = 18; baseVit = 12; baseAgi = 12;
+                    growthStr = 0.8; growthInt = 2.4; growthVit = 1.4; growthAgi = 1.5;
+                    naturalArmor = 3;
+                    break;
+                case "VANGUARD":
+                    powerStat = "str";
+                    baseStr = 16; baseInt = 8; baseVit = 22; baseAgi = 10;
+                    growthStr = 2.2; growthInt = 0.6; growthVit = 3.0; growthAgi = 1.0;
+                    naturalArmor = 10;
+                    break;
+                case "EXECUTIONER":
+                    powerStat = "str";
+                    baseStr = 18; baseInt = 6; baseVit = 14; baseAgi = 16;
+                    growthStr = 2.5; growthInt = 0.5; growthVit = 1.8; growthAgi = 2.0;
+                    naturalArmor = 6;
+                    break;
+            }
+
+            var res = ResonancePoints(ascension);
+            var attrs = AttributesAt(powerStat, baseStr, baseInt, baseVit, baseAgi, growthStr, growthInt, growthVit, growthAgi, level, bonusVit: res.Vit, bonusPower: res.Power);
+            var derived = DeriveStats(powerStat, attrs, naturalArmor);
+            return new HeroDerivedStats(attrs.Str, attrs.Int, attrs.Vit, attrs.Agi, derived.Hp, derived.Atk, derived.Def, derived.Spd, derived.CritRate, derived.CritDamage, derived.EffectHit);
         }
     }
 }
@@ -474,11 +568,38 @@ export function exportUnityBundle(opts: ExportUnityBundleOptions = {}): ExportUn
   };
 }
 
+/**
+ * Unity cannot decode WebP at runtime (Texture2D.LoadImage / UnityWebRequestTexture accept PNG/JPG only),
+ * so every exported .webp gets a lossless .png sibling. The signed manifest still lists the .webp files.
+ */
+export async function writePngSiblings(dir: string): Promise<number> {
+  const { default: sharp } = await import('sharp');
+  let written = 0;
+  const walk = async (current: string): Promise<void> => {
+    for (const entry of readdirSync(current, { withFileTypes: true })) {
+      const full = join(current, entry.name);
+      if (entry.isDirectory()) {
+        await walk(full);
+      } else if (entry.name.toLowerCase().endsWith('.webp')) {
+        await sharp(full, { animated: false }).png({ compressionLevel: 9 }).toFile(full.slice(0, -5) + '.png');
+        written++;
+      }
+    }
+  };
+  if (existsSync(dir)) await walk(dir);
+  return written;
+}
+
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
 if (isMain) {
   const outIdx = process.argv.indexOf('--out');
   const outDir = outIdx >= 0 ? process.argv[outIdx + 1] : undefined;
   const dryRun = process.argv.includes('--dry-run');
   const summary = exportUnityBundle({ outDir, dryRun });
-  console.log(JSON.stringify({ mode: dryRun ? 'dry-run' : 'exported', ...summary }, null, 2));
+  let pngSiblings = 0;
+  if (!dryRun) {
+    pngSiblings = await writePngSiblings(join(summary.outDir, 'StreamingAssets/uomd_base'));
+    if (!outDir) pngSiblings = await writePngSiblings(join(ROOT, 'apps/unity/Assets/StreamingAssets/uomd_base'));
+  }
+  console.log(JSON.stringify({ mode: dryRun ? 'dry-run' : 'exported', ...summary, pngSiblings }, null, 2));
 }

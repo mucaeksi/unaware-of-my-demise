@@ -289,7 +289,7 @@ namespace Uomd.Combat
                 survivingAllies = survivingAllies,
                 actions = new List<BattleActionRecord>(_actions),
                 events = new List<BattleEventRecord>(_events),
-                logHash = CanonicalJson.Sha256Hash(canonicalPayload)
+                logHash = Sha256Hash.ComputeHex(CanonicalJson.Serialize(canonicalPayload))
             };
         }
 
