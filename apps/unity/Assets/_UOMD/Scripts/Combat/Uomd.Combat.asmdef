@@ -1,0 +1,17 @@
+{
+  "name": "Uomd.Combat",
+  "rootNamespace": "Uomd.Combat",
+  "references": [
+    "Uomd.Contracts",
+    "Uomd.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": true
+}

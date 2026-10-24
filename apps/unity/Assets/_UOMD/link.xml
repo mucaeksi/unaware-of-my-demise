@@ -1,8 +1,11 @@
 <linker>
-  <!-- Preserve all DTOs and JSON models under IL2CPP High Managed Stripping -->
+  <!-- Preserve all 8 UOMD assemblies and DTOs under IL2CPP High Managed Stripping -->
   <assembly fullname="Uomd.Contracts" preserve="all" />
   <assembly fullname="Uomd.Core" preserve="all" />
   <assembly fullname="Uomd.Platform" preserve="all" />
   <assembly fullname="Uomd.UI" preserve="all" />
+  <assembly fullname="Uomd.Combat" preserve="all" />
+  <assembly fullname="Uomd.Narrative" preserve="all" />
   <assembly fullname="Uomd.Battle" preserve="all" />
+  <assembly fullname="Uomd.Scenes" preserve="all" />
 </linker>

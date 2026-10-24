@@ -5,3 +5,4 @@ export * from './signing';
 export * from './rng';
 export * from './budget';
 export * from './media';
+export * from './releaseGate';

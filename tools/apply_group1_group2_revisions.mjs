@@ -13,7 +13,7 @@ const BRAND_DIR = path.join(
   ROOT,
   'narrative/15_Art_Workbench/ui_screens/production_v001/brand',
 );
-const ANDROID_RES = path.join(ROOT, 'apps/android/android/app/src/main/res');
+const ANDROID_RES = path.join(ROOT, 'apps/unity/Assets/Plugins/Android/res');
 const WORKBENCH_CG_DIR = path.join(ROOT, 'narrative/15_Art_Workbench/cg');
 
 const ART_MANIFEST_PATH = path.join(

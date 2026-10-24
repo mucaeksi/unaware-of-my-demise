@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['**/node_modules/**', '**/dist/**', 'content/**', 'narrative/**', '.claude/**', 'skill-sources/**', 'graphify-out/**', '.cache/**', 'apps/game/public/**', 'apps/android/android/**', 'tools/*.py', '**/.wrangler/**', '**/worker-configuration.d.ts']
+    ignores: ['**/node_modules/**', '**/dist/**', 'content/**', 'narrative/**', '.claude/**', 'skill-sources/**', 'graphify-out/**', '.cache/**', 'apps/unity/**', 'tools/*.py', '**/.wrangler/**', '**/worker-configuration.d.ts']
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

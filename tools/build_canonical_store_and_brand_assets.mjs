@@ -12,7 +12,7 @@ const BRAND_DIR = path.join(
   ROOT,
   'narrative/15_Art_Workbench/ui_screens/production_v001/brand',
 );
-const ANDROID_RES = path.join(ROOT, 'apps/android/android/app/src/main/res');
+const ANDROID_RES = path.join(ROOT, 'apps/unity/Assets/Plugins/Android/res');
 const ARTIFACT_DIR =
   'C:/Users/PC/.gemini/antigravity/brain/1d18a194-8e93-4af4-8c55-93327064d12d';
 

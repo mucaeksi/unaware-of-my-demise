@@ -1,5 +1,5 @@
 import { existsSync } from 'node:fs';
-import { validateAndroidReleaseEnv } from '../apps/game/src/platform/releaseGate';
+import { validateAndroidReleaseEnv } from '@uomd/shared';
 
 const result = validateAndroidReleaseEnv(process.env, existsSync);
 if (!result.ok) {

@@ -1,0 +1,22 @@
+{
+  "name": "Uomd.Scenes",
+  "rootNamespace": "Uomd.Scenes",
+  "references": [
+    "Uomd.Contracts",
+    "Uomd.Core",
+    "Uomd.Platform",
+    "Uomd.UI",
+    "Uomd.Combat",
+    "Uomd.Narrative",
+    "Uomd.Battle"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
