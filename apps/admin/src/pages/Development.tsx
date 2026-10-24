@@ -119,7 +119,7 @@ function gameUrl(scene = '', target: 'worker' | 'vite' = 'worker'): string {
 export function Development({ me, say }: { me: Me; say: (m: string) => void }): ReactNode {
   const [tab, setTab] = useState<Tab>('Onay & Denetim Merkezi (707 Eser)');
   const readProgress = useCallback(async (signal: AbortSignal): Promise<Progress> => {
-    const r = await fetch('/dev/progress.json', { cache: 'no-cache', signal });
+    const r = await fetch(`/dev/progress.json?t=${Date.now()}`, { cache: 'no-store', signal });
     if (!r.ok) throw new Error('progress.json missing');
     return r.json() as Promise<Progress>;
   }, []);
@@ -719,7 +719,11 @@ function D30ReviewCenter({
                     );
 
                   const retryCount = retryMap[item.id] ?? 0;
-                  const imgSrc = item.imageUrl ? (retryCount > 0 ? `${item.imageUrl}?r=${retryCount}` : item.imageUrl) : undefined;
+                  const imgSrc = item.imageUrl
+                    ? retryCount > 0
+                      ? `${item.imageUrl}${item.imageUrl.includes('?') ? '&' : '?'}r=${retryCount}`
+                      : item.imageUrl
+                    : undefined;
 
                   return (
                     <article
@@ -1260,6 +1264,7 @@ function StoreKit({ p }: { p: Progress }): ReactNode {
   const list = p.storeAssets ?? [];
   const brand = list.filter((x) => x.kind === 'brand');
   const shots = list.filter((x) => x.kind === 'screenshot');
+  const v = encodeURIComponent(p.generatedAt);
   return (
     <>
       <p>Canonical Google Play Store &amp; Brand Identity Kit built from 100% approved runtime assets (silver-haired veil-hooded Fadyme, dark-brown-haired armored Mahmut, 32 clean alpha-keyed character portraits, and 54 animated chibi sheets).</p>
@@ -1267,8 +1272,8 @@ function StoreKit({ p }: { p: Progress }): ReactNode {
       <div className="grid">
         {brand.map((b) => (
           <figure key={b.file} className="card" style={{ margin: 0 }}>
-            <a href={`/dev/store/${b.file}`} target="_blank" rel="noreferrer">
-              <img src={`/dev/store/${b.file}`} alt={b.label} loading="lazy" style={{ width: '100%', maxHeight: 260, objectFit: 'contain', borderRadius: 6, background: '#0c0814' }} />
+            <a href={`/dev/store/${b.file}?v=${v}`} target="_blank" rel="noreferrer">
+              <img src={`/dev/store/${b.file}?v=${v}`} alt={b.label} loading="lazy" style={{ width: '100%', maxHeight: 260, objectFit: 'contain', borderRadius: 6, background: '#0c0814' }} />
             </a>
             <figcaption className="mono">{b.label} (<code>docs/store/assets/{b.file}</code>)</figcaption>
           </figure>
@@ -1278,8 +1283,8 @@ function StoreKit({ p }: { p: Progress }): ReactNode {
       <div className="grid">
         {shots.map((s) => (
           <figure key={s.file} className="card" style={{ margin: 0 }}>
-            <a href={`/dev/store/${s.file}`} target="_blank" rel="noreferrer">
-              <img src={`/dev/store/${s.file}`} alt={s.label} loading="lazy" style={{ width: '100%', borderRadius: 6 }} />
+            <a href={`/dev/store/${s.file}?v=${v}`} target="_blank" rel="noreferrer">
+              <img src={`/dev/store/${s.file}?v=${v}`} alt={s.label} loading="lazy" style={{ width: '100%', borderRadius: 6 }} />
             </a>
             <figcaption className="mono">{s.label} (<code>docs/store/assets/{s.file}</code>)</figcaption>
           </figure>

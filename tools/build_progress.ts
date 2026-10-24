@@ -1543,16 +1543,28 @@ const reviewCatalog: ReviewCatalogItem[] = rawCatalog
   );
 for (const item of reviewCatalog) {
   if (item.imageUrl) {
-    const diskPath = join(ROOT, 'apps/admin/public', item.imageUrl.replace(/^\//, ''));
+    const cleanUrl = item.imageUrl.split('?')[0]!;
+    const diskPath = join(ROOT, 'apps/admin/public', cleanUrl.replace(/^\//, ''));
     if (!existsSync(diskPath) || statSync(diskPath).size === 0) {
       throw new Error(`Broken imageUrl in reviewCatalog [${item.id}]: ${item.imageUrl} -> ${diskPath}`);
     }
+    const buf = readFileSync(diskPath);
+    const sha = shaHex(buf);
+    item.sha256 = sha;
+    item.bytes = buf.byteLength;
+    item.imageUrl = `${cleanUrl}?v=${sha.slice(0, 10)}`;
   }
   if (item.audioUrl) {
-    const diskPath = join(ROOT, 'apps/admin/public', item.audioUrl.replace(/^\//, ''));
+    const cleanUrl = item.audioUrl.split('?')[0]!;
+    const diskPath = join(ROOT, 'apps/admin/public', cleanUrl.replace(/^\//, ''));
     if (!existsSync(diskPath) || statSync(diskPath).size === 0) {
       throw new Error(`Broken audioUrl in reviewCatalog [${item.id}]: ${item.audioUrl} -> ${diskPath}`);
     }
+    const buf = readFileSync(diskPath);
+    const sha = shaHex(buf);
+    item.sha256 = sha;
+    item.bytes = buf.byteLength;
+    item.audioUrl = `${cleanUrl}?v=${sha.slice(0, 10)}`;
   }
 }
 
