@@ -15330,6 +15330,86 @@
       "file": "audio/bgm_battle_field.ogg",
       "loop_start_s": 16.7,
       "duration_s": 79.93
+    },
+    "bgm_ch2_cathedral": {
+      "file": "audio/bgm_ch2_cathedral.ogg",
+      "loop_start_s": 14,
+      "duration_s": 174.1
+    },
+    "bgm_ch3_oakhaven": {
+      "file": "audio/bgm_ch3_oakhaven.ogg",
+      "loop_start_s": 12.5,
+      "duration_s": 174.1
+    },
+    "bgm_ch4_undercity": {
+      "file": "audio/bgm_ch4_undercity.ogg",
+      "loop_start_s": 13,
+      "duration_s": 174.1
+    },
+    "bgm_ch5_bridge": {
+      "file": "audio/bgm_ch5_bridge.ogg",
+      "loop_start_s": 14,
+      "duration_s": 174.1
+    },
+    "bgm_ch6_estate": {
+      "file": "audio/bgm_ch6_estate.ogg",
+      "loop_start_s": 13.5,
+      "duration_s": 165.4
+    },
+    "bgm_ch7_altar": {
+      "file": "audio/bgm_ch7_altar.ogg",
+      "loop_start_s": 15,
+      "duration_s": 174.1
+    },
+    "bgm_mahmut_theme": {
+      "file": "audio/bgm_mahmut_theme.ogg",
+      "loop_start_s": 12,
+      "duration_s": 174.1
+    },
+    "bgm_camp_night": {
+      "file": "audio/bgm_camp_night.ogg",
+      "loop_start_s": 12,
+      "duration_s": 163.4
+    },
+    "bgm_road": {
+      "file": "audio/bgm_road.ogg",
+      "loop_start_s": 12,
+      "duration_s": 166.5
+    },
+    "bgm_bell_widow": {
+      "file": "audio/bgm_bell_widow.ogg",
+      "loop_start_s": 10,
+      "duration_s": 174.1
+    },
+    "bgm_clockless": {
+      "file": "audio/bgm_clockless.ogg",
+      "loop_start_s": 10,
+      "duration_s": 149.8
+    },
+    "bgm_boss_beast": {
+      "file": "audio/bgm_boss_beast.ogg",
+      "loop_start_s": 12,
+      "duration_s": 140
+    },
+    "bgm_boss_bell_widow": {
+      "file": "audio/bgm_boss_bell_widow.ogg",
+      "loop_start_s": 13,
+      "duration_s": 172.3
+    },
+    "bgm_boss_human": {
+      "file": "audio/bgm_boss_human.ogg",
+      "loop_start_s": 12,
+      "duration_s": 174.1
+    },
+    "bgm_boss_wraith": {
+      "file": "audio/bgm_boss_wraith.ogg",
+      "loop_start_s": 13,
+      "duration_s": 118.6
+    },
+    "bgm_boss_eclipse_construct": {
+      "file": "audio/bgm_boss_eclipse_construct.ogg",
+      "loop_start_s": 14.5,
+      "duration_s": 169.1
     }
   },
   "ui": {

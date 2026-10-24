@@ -5,6 +5,7 @@
   "title_en": "A Banner in the Fog (Hard)",
   "location_id": "bridge_forsaken",
   "seed": 3736140498,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

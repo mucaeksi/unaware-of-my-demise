@@ -5,6 +5,7 @@
   "title_en": "The Ashen Lord's Wraith (Hard)",
   "location_id": "estate_ashen_lord",
   "seed": 1294064578,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

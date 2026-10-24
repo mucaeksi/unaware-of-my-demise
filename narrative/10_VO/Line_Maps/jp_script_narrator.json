@@ -995,5 +995,380 @@
       },
       "output_ogg": "voices/tutorial_t3_after_034.ogg"
     }
-  ]
+  ],
+  "campaign_lines": [
+    {
+      "order_index": 1,
+      "line_id": "ch1_camp_003",
+      "scene_id": "ch1_camp",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "tense",
+      "subtext_tr": "Kamp ateşinin ötesindeki karanlıkta çatlak bir çanın tek bir kez çalıp susmasını ürpertici bir dinginlikle anlatır.",
+      "en": "Beyond the firelight, a single cracked bell rang, then went still.",
+      "ja": "焚き火の明かりの向こうで、ひび割れた鐘が一度だけ鳴り、そして静まった。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, eerie nocturnal chronicle narrator; taut stillness in the dark forest beyond the campfire."
+      },
+      "tts_text_gemini38": "<breath> 焚き火の明かりの向こうで、ひび割れた鐘が一度だけ鳴り、そして静まった。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-1.3st\">焚き火の明かりの向こうで、<break time=\"200ms\"/>ひび割れた鐘が一度だけ鳴り、<break time=\"200ms\"/>そして静まった。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -1.3,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/ch1_camp_003.ogg"
+    },
+    {
+      "order_index": 30,
+      "line_id": "ch3_road_006",
+      "scene_id": "ch3_road",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "somber",
+      "subtext_tr": "Fadyme'nin gülerken aniden öksürmeye başlayıp Mahmut görmeden yüzünü atkısına gömüşünü iç burkan bir incelikle anlatır.",
+      "en": "She laughed, and then coughed, and turned her face into her scarf before he could see.",
+      "ja": "彼女は笑い、それから咳き込み、彼に見られる前に襟巻きへと顔を埋めた。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Quietly heartbreaking, intimate chronicle narration; gentle warmth on 'she laughed', darkening into hushed sorrow as she hides her cough in her scarf."
+      },
+      "tts_text_gemini38": "<breath> 彼女は笑い、それから咳き込み、<sigh> 彼に見られる前に襟巻きへと顔を埋めた。",
+      "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-1.3st\">彼女は笑い、<break time=\"200ms\"/>それから咳き込み、<break time=\"200ms\"/>彼に見られる前に襟巻きへと顔を埋めた。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.88,
+        "pitch_semitones": -1.3,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/ch3_road_006.ogg"
+    },
+    {
+      "order_index": 45,
+      "line_id": "ch5_camp_006",
+      "scene_id": "ch5_camp",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "warm",
+      "subtext_tr": "İlk kez Fadyme'nin nöbet tutup yorgun düşen Mahmut'un uyuduğu o nadir ve şefkatli geceyi yumuşak bir huzurla anlatır.",
+      "en": "For once, she kept watch, and he slept.",
+      "ja": "この夜ばかりは、彼女が見張りに立ち、彼が眠りについた。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deeply tender, peaceful nocturnal narration; soft warmth as Fadyme finally keeps watch while the exhausted knight sleeps."
+      },
+      "tts_text_gemini38": "<breath> この夜ばかりは、彼女が見張りに立ち、彼が眠りについた。",
+      "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-0.8st\">この夜ばかりは、<break time=\"200ms\"/>彼女が見張りに立ち、<break time=\"200ms\"/>彼が眠りについた。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.88,
+        "pitch_semitones": -0.8,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/ch5_camp_006.ogg"
+    },
+    {
+      "order_index": 62,
+      "line_id": "ch7_road_006",
+      "scene_id": "ch7_road",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "hopeful",
+      "subtext_tr": "Merdivenlerin dibinde titreyen fener ışığını ve onları bekleyen dostlarını umut dolu, sıcak bir sesle anlatır.",
+      "en": "Below them, at the foot of the stair, a small lantern light moved. Their friends were already there.",
+      "ja": "眼下の階段の麓で、小さな角灯の明かりが揺れていた。仲間たちは、すでにそこで待っていた。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, quietly hopeful chronicle narration; a gentle lift in the voice as lantern light reveals their loyal companions waiting below."
+      },
+      "tts_text_gemini38": "<breath> 眼下の階段の麓で、小さな角灯の明かりが揺れていた。仲間たちは、すでにそこで待っていた。",
+      "ssml_chirp3": "<speak><prosody rate=\"90%\" pitch=\"-0.7st\">眼下の階段の麓で、<break time=\"200ms\"/>小さな角灯の明かりが揺れていた。<break time=\"340ms\"/>仲間たちは、<break time=\"200ms\"/>すでにそこで待っていた。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.9,
+        "pitch_semitones": -0.7,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/ch7_road_006.ogg"
+    },
+    {
+      "order_index": 69,
+      "line_id": "opening_007",
+      "scene_id": "opening_sad_scene",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "spiritual_chronicle",
+      "subtext_tr": "Fadyme'nin kan lekesini kol yeninin altına gizleyişini ve Mahmut'un pelerinini alırken onu üzmemek için ısındığına inandırışını derin, içli bir hüzünle anlatır.",
+      "en": "She hides the red stain beneath her cuff. He offers his cloak. She takes it, and lets him believe the warmth helped.",
+      "ja": "彼女は袖口の下に赤い染みを隠す。彼は無言で外套を差し出した。彼女はそれを受け取り、ぬくもりが効いたのだと彼に思わせておいた。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deep, sorrowful, intimate chronicle narrator; hushed and tender, conveying unspoken heartbreak as she hides her coughed blood beneath her cuff."
+      },
+      "tts_text_gemini38": "<breath> 彼女は袖口の下に赤い染みを隠す。彼は無言で外套を差し出した。彼女はそれを受け取り、ぬくもりが効いたのだと彼に思わせておいた。",
+      "ssml_chirp3": "<speak><prosody rate=\"89%\" pitch=\"-1.2st\">彼女は袖口の下に赤い染みを隠す。<break time=\"340ms\"/>彼は無言で外套を差し出した。<break time=\"340ms\"/>彼女はそれを受け取り、<break time=\"200ms\"/>ぬくもりが効いたのだと彼に思わせておいた。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.89,
+        "pitch_semitones": -1.2,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/opening_007.ogg"
+    },
+    {
+      "order_index": 75,
+      "line_id": "opening_016",
+      "scene_id": "opening_sad_scene",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "spiritual_chronicle",
+      "subtext_tr": "Yseldra'nın kalkan üzerinde bıraktığı yedi çentikli mührü ve Fadyme'nin gözyaşlarını Mahmut'tan saklamak için başını çevirişini ağırbaşlı bir kederle anlatır.",
+      "en": "Yseldra leaves a seven-notched gray seal on Mahmut’s shield. Fadyme turns away before he can see that she is crying.",
+      "ja": "イゼルドラはマフムトの盾に、七つの刻み目がある灰色の封印を残して去った。ファディメは、涙を彼に見られぬよう顔を背けた。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Solemn, grave gothic chronicle narrator; resonant low bass on the seven-notched seal, softening into quiet grief as Fadyme hides her tears."
+      },
+      "tts_text_gemini38": "<breath> イゼルドラはマフムトの盾に、七つの刻み目がある灰色の封印を残して去った。<sigh> ファディメは、涙を彼に見られぬよう顔を背けた。",
+      "ssml_chirp3": "<speak><prosody rate=\"88%\" pitch=\"-1.4st\">イゼルドラはマフムトの盾に、<break time=\"200ms\"/>七つの刻み目がある灰色の封印を残して去った。<break time=\"340ms\"/>ファディメは、<break time=\"200ms\"/>涙を彼に見られぬよう顔を背けた。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.88,
+        "pitch_semitones": -1.4,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/opening_016.ogg"
+    },
+    {
+      "order_index": 82,
+      "line_id": "ending_narration_001",
+      "scene_id": "part1_clockless_reveal",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "ominous",
+      "subtext_tr": "Akrepsiz saatin tek bir kez tıkırdamasını ve sunağın derinliklerinden bir çanın ona karşılık verişini ürpertici bir final tonuyla anlatır.",
+      "en": "The handless watch ticked once. Somewhere below the altar, a bell answered.",
+      "ja": "針のない懐中時計が、一度だけ時を刻んだ。祭壇の遥か下で、ひとつの鐘がそれに応えた。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Ominous, haunting final chronicle narration; low, lingering bass resonance as the handless watch ticks and a deep bell answers from the abyss."
+      },
+      "tts_text_gemini38": "<breath> 針のない懐中時計が、一度だけ時を刻んだ。祭壇の遥か下で、ひとつの鐘がそれに応えた。",
+      "ssml_chirp3": "<speak><prosody rate=\"86%\" pitch=\"-1.8st\">針のない懐中時計が、<break time=\"200ms\"/>一度だけ時を刻んだ。<break time=\"340ms\"/>祭壇の遥か下で、<break time=\"200ms\"/>ひとつの鐘がそれに応えた。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.86,
+        "pitch_semitones": -1.8,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/ending_narration_001.ogg"
+    },
+    {
+      "order_index": 97,
+      "line_id": "confession_013",
+      "scene_id": "part1_emotional_confession",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "somber",
+      "subtext_tr": "Tutulmanın bir nefeslik aralanışını, Fadyme'nin parmaklarının Mahmut'un elini buluşunu ama derisinin altındaki karanlığın çekilmeyişini trajik bir zarafetle anlatır.",
+      "en": "For one breath, the eclipse above them thinned. Fadyme's fingers found Mahmut's, and the darkness beneath her skin did not retreat.",
+      "ja": "ひと息の間だけ、頭上の蝕が薄れた。ファディメの指がマフムトの指を見つけ、彼女の肌の下にある闇は、それでも退かなかった。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Deeply moving, tragic yet tender chronicle narration; intimate reverence as their fingers intertwine beneath the thinning eclipse."
+      },
+      "tts_text_gemini38": "<breath> ひと息の間だけ、頭上の蝕が薄れた。ファディメの指がマフムトの指を見つけ、<sigh> 彼女の肌の下にある闇は、それでも退かなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"86%\" pitch=\"-1.5st\">ひと息の間だけ、<break time=\"200ms\"/>頭上の蝕が薄れた。<break time=\"340ms\"/>ファディメの指がマフムトの指を見つけ、<break time=\"200ms\"/>彼女の肌の下にある闇は、<break time=\"200ms\"/>それでも退かなかった。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.86,
+        "pitch_semitones": -1.5,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/confession_013.ogg"
+    },
+    {
+      "order_index": 105,
+      "line_id": "node_1_2_post_006",
+      "scene_id": "vn_1_2_post",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "spiritual_chronicle",
+      "subtext_tr": "Brin'in kalıcı olarak gruba katılışını ve tapınak bekçisinin İlk Yemin Davetiyesi'ni verişini vakur bir kronik diliyle aktarır.",
+      "en": "Brin joins permanently as a story recruit. Nixie and Kera remain as temporary story loans for the next stretch. The shrine keeper gives the party a First Oath Invitation.",
+      "ja": "ブリンが正式に一行へと加わった。ニクシーとケラは次の道のりまで同行し、祠の守り手は一行に『最初の誓いの招待状』を託した。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Serene, dignified chronicle narrator recording a fellowship milestone along the ash road."
+      },
+      "tts_text_gemini38": "ブリンが正式に一行へと加わった。ニクシーとケラは次の道のりまで同行し、祠の守り手は一行に『最初の誓いの招待状』を託した。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-1.0st\">ブリンが正式に一行へと加わった。<break time=\"340ms\"/>ニクシーとケラは次の道のりまで同行し、<break time=\"200ms\"/>祠の守り手は一行に『最初の誓いの招待状』を託した。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/node_1_2_post_006.ogg"
+    },
+    {
+      "order_index": 111,
+      "line_id": "node_1_4_post_004",
+      "scene_id": "vn_1_4_post",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "spiritual_chronicle",
+      "subtext_tr": "Nixie'nin kalıcı katılımıyla beş kişilik çekirdek birliğin tamamlanışını sıcak ve vakur bir tonla anlatır.",
+      "en": "Nixie joins permanently. The company now has five owned heroes: Mahmut, Fadyme, Brin, Nixie and the companion chosen by invitation.",
+      "ja": "ニクシーが正式に仲間となった。マフムト、ファディメ、ブリン、ニクシー、そして誓いに応えた旅人——一行は五人の絆となった。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Warm, resonant chronicle narrator marking the formation of the five-hero company."
+      },
+      "tts_text_gemini38": "ニクシーが正式に仲間となった。マフムト、ファディメ、ブリン、ニクシー、そして誓いに応えた旅人——一行は五人の絆となった。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-0.9st\">ニクシーが正式に仲間となった。<break time=\"340ms\"/>マフムト、<break time=\"200ms\"/>ファディメ、<break time=\"200ms\"/>ブリン、<break time=\"200ms\"/>ニクシー、<break time=\"200ms\"/>そして誓いに応えた旅人<break time=\"380ms\"/>一行は五人の絆となった。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -0.9,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/node_1_4_post_004.ogg"
+    },
+    {
+      "order_index": 153,
+      "line_id": "node_3_4_post_004",
+      "scene_id": "vn_3_4_post",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "spiritual_chronicle",
+      "subtext_tr": "Jori'nin kalıcı olarak birliğe katılışını dingin bir kronik tonuyla bildirir.",
+      "en": "Jori joins permanently as a story recruit.",
+      "ja": "ジョリが正式に一行へと加わった。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Calm, steady chronicle narrator noting a new companion joining the road."
+      },
+      "tts_text_gemini38": "ジョリが正式に一行へと加わった。",
+      "ssml_chirp3": "<speak><prosody rate=\"92%\" pitch=\"-1.0st\">ジョリが正式に一行へと加わった。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.92,
+        "pitch_semitones": -1.0,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/node_3_4_post_004.ogg"
+    },
+    {
+      "order_index": 185,
+      "line_id": "node_5_4_post_006",
+      "scene_id": "vn_5_4_post",
+      "chapter_id": "",
+      "speaker_id": "narrator",
+      "speaker_name": "Narrator",
+      "gemini_voice": "Algieba",
+      "chirp3_voice_id": "ja-JP-Chirp3-HD-Algieba",
+      "emotion": "somber",
+      "subtext_tr": "Mahmut'un ilk kez sorunun peşini bırakmadığı ve Fadyme'nin ilk kez hazır bir bahanesinin olmadığı o sessiz kırılma anını anlatır.",
+      "en": "She does not answer. For the first time, he does not let the question go, and for the first time, she has nothing ready.",
+      "ja": "彼女は答えない。初めて彼はその問いを手放さず、そして初めて、彼女には返す言葉が用意されていなかった。",
+      "inner": false,
+      "speech_metadata": {
+        "type": "speech_metadata",
+        "speaker": "Narrator",
+        "style": "Hushed, tense, emotionally heavy chronicle narration; the quiet turning point where her mask begins to crack."
+      },
+      "tts_text_gemini38": "<breath> 彼女は答えない。初めて彼はその問いを手放さず、そして初めて、彼女には返す言葉が用意されていなかった。",
+      "ssml_chirp3": "<speak><prosody rate=\"87%\" pitch=\"-1.4st\">彼女は答えない。<break time=\"340ms\"/>初めて彼はその問いを手放さず、<break time=\"200ms\"/>そして初めて、<break time=\"200ms\"/>彼女には返す言葉が用意されていなかった。<break time=\"340ms\"/></prosody></speak>",
+      "acoustic_profile": {
+        "speaking_rate": 0.87,
+        "pitch_semitones": -1.4,
+        "duration_seconds": 6.5,
+        "duck_ratio": 0.25,
+        "target_lufs": -18.5,
+        "inner_thought": false
+      },
+      "output_ogg": "voices/node_5_4_post_006.ogg"
+    }
+  ],
+  "total_campaign_lines": 12
 }

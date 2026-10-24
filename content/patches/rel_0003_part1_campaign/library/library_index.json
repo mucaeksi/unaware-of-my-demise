@@ -40,7 +40,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_mahmut_theme"
             },
             {
               "op": "show",
@@ -179,7 +179,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_mahmut_theme"
             },
             {
               "op": "show",
@@ -307,7 +307,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_fadyme_theme"
             },
             {
               "op": "show",
@@ -446,7 +446,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_fadyme_theme"
             },
             {
               "op": "show",
@@ -575,7 +575,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch3_oakhaven"
             },
             {
               "op": "show",
@@ -705,7 +705,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -835,7 +835,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -955,7 +955,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -1084,7 +1084,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "show",
@@ -1189,7 +1189,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "show",
@@ -1304,7 +1304,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -1424,7 +1424,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -1543,7 +1543,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "show",
@@ -1653,7 +1653,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch3_oakhaven"
             },
             {
               "op": "show",
@@ -1773,7 +1773,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -1883,7 +1883,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -1992,7 +1992,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch2_cathedral"
             },
             {
               "op": "show",
@@ -2102,7 +2102,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch2_cathedral"
             },
             {
               "op": "show",
@@ -2217,7 +2217,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -2327,7 +2327,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -2446,7 +2446,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -2556,7 +2556,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch5_bridge"
             },
             {
               "op": "show",
@@ -2666,7 +2666,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -2771,7 +2771,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -2890,7 +2890,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -3020,7 +3020,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -3130,7 +3130,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -3240,7 +3240,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -3349,7 +3349,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -3459,7 +3459,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -3564,7 +3564,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -3684,7 +3684,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -3793,7 +3793,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch2_cathedral"
             },
             {
               "op": "show",
@@ -3903,7 +3903,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -4013,7 +4013,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -4123,7 +4123,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -4232,7 +4232,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -4342,7 +4342,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -4452,7 +4452,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch5_bridge"
             },
             {
               "op": "show",
@@ -4552,7 +4552,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -4661,7 +4661,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -4771,7 +4771,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -4881,7 +4881,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -4981,7 +4981,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -5080,7 +5080,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -5190,7 +5190,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch5_bridge"
             },
             {
               "op": "show",
@@ -5300,7 +5300,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -5410,7 +5410,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -5519,7 +5519,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -5629,7 +5629,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -5739,7 +5739,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -5839,7 +5839,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -5948,7 +5948,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -6058,7 +6058,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -6168,7 +6168,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -6288,7 +6288,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -6397,7 +6397,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -6497,7 +6497,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -6597,7 +6597,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -6697,7 +6697,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -6806,7 +6806,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -6916,7 +6916,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7026,7 +7026,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7126,7 +7126,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7225,7 +7225,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7335,7 +7335,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7435,7 +7435,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7520,7 +7520,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7619,7 +7619,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7729,7 +7729,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7829,7 +7829,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -7914,7 +7914,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch7_altar"
             },
             {
               "op": "show",
@@ -8023,7 +8023,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch5_bridge"
             },
             {
               "op": "show",
@@ -8133,7 +8133,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -8233,7 +8233,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -8318,7 +8318,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -8411,7 +8411,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8458,7 +8458,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8503,7 +8503,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8550,7 +8550,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8595,7 +8595,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8642,7 +8642,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8689,7 +8689,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8736,7 +8736,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8783,7 +8783,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8830,7 +8830,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8877,7 +8877,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8924,7 +8924,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_ch1_ash_forest_calm"
             },
             {
               "op": "narrate",
@@ -8974,7 +8974,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9068,7 +9068,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9153,7 +9153,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9247,7 +9247,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9314,7 +9314,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9390,7 +9390,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9485,7 +9485,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9570,7 +9570,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9637,7 +9637,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9728,7 +9728,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9795,7 +9795,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",
@@ -9862,7 +9862,7 @@
             },
             {
               "op": "music",
-              "cue_id": "stop"
+              "cue_id": "bgm_camp_night"
             },
             {
               "op": "show",

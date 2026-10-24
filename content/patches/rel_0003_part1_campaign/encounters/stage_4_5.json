@@ -5,6 +5,7 @@
   "title_en": "The Red Vial Matron",
   "location_id": "undercity_subterranean",
   "seed": 2794943457,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

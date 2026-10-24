@@ -5,6 +5,7 @@
   "title_en": "A Smith's Last Bell",
   "location_id": "village_oakhaven",
   "seed": 553474681,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

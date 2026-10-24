@@ -5,6 +5,7 @@
   "title_en": "The Guest Roll",
   "location_id": "cathedral_saint_luthos",
   "seed": 1140546920,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

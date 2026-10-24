@@ -43,29 +43,133 @@ namespace Uomd.Core
         }
 
         /// <summary>
-        /// Resolves the canonical Lyria 3.5 BGM motif for any story scene ID (matching StoryScene.ts sceneMusicCuesFor).
+        /// Resolves the canonical Lyria 3.5 BGM motif for any story scene ID or location ID.
         /// </summary>
-        public static string ResolveStoryMusicCue(string sceneId)
+        public static string ResolveStoryMusicCue(string sceneId, string locationId = "")
         {
-            if (string.IsNullOrEmpty(sceneId)) return "bgm_main_theme";
-            if (sceneId.StartsWith("prologue", StringComparison.OrdinalIgnoreCase)) return "bgm_prologue_before_the_road";
-            if (sceneId.Contains("ch01", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("t1", StringComparison.OrdinalIgnoreCase)) return "bgm_whispering_ash_forest";
-            if (sceneId.Contains("ch02", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch03", StringComparison.OrdinalIgnoreCase)) return "bgm_sanctuary_of_bells";
-            if (sceneId.Contains("ch04", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch05", StringComparison.OrdinalIgnoreCase)) return "bgm_iron_gate_march";
-            if (sceneId.Contains("ch06", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch07", StringComparison.OrdinalIgnoreCase)) return "bgm_eclipse_over_veyrhold";
+            if (string.IsNullOrEmpty(sceneId) && string.IsNullOrEmpty(locationId)) return "bgm_main_theme";
+
+            if (!string.IsNullOrEmpty(sceneId))
+            {
+                if (sceneId.StartsWith("prologue", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.StartsWith("entry_past", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_prologue_before_the_road";
+                }
+
+                if (sceneId.Equals("opening_sad_scene", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.Equals("part1_emotional_confession", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.Equals("tutorial_t3_after", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.StartsWith("cs_fadyme", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_fadyme_theme";
+                }
+
+                if (sceneId.StartsWith("cs_mahmut", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_mahmut_theme";
+                }
+
+                if (sceneId.Equals("part1_clockless_reveal", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_clockless";
+                }
+
+                if (sceneId.Equals("ch1_first_oath", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.Contains("_camp", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_camp_night";
+                }
+
+                if (sceneId.Contains("_road", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_road";
+                }
+
+                if (sceneId.Equals("node_2_5_pre", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_bell_widow";
+                }
+
+                if (sceneId.Contains("t1", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.StartsWith("node_1_1", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.StartsWith("node_1_2", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_ch1_ash_forest_calm";
+                }
+
+                if (sceneId.Contains("t2", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.StartsWith("node_1_3", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.StartsWith("node_1_4", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_ch1_ash_forest_uneasy";
+                }
+
+                if (sceneId.Contains("t3", StringComparison.OrdinalIgnoreCase) ||
+                    sceneId.StartsWith("node_1_5", StringComparison.OrdinalIgnoreCase))
+                {
+                    return "bgm_ch1_ash_forest_chaotic";
+                }
+
+                if (sceneId.StartsWith("node_2_", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch2", StringComparison.OrdinalIgnoreCase)) return "bgm_ch2_cathedral";
+                if (sceneId.StartsWith("node_3_", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch3", StringComparison.OrdinalIgnoreCase)) return "bgm_ch3_oakhaven";
+                if (sceneId.StartsWith("node_4_", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch4", StringComparison.OrdinalIgnoreCase)) return "bgm_ch4_undercity";
+                if (sceneId.StartsWith("node_5_", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch5", StringComparison.OrdinalIgnoreCase)) return "bgm_ch5_bridge";
+                if (sceneId.StartsWith("node_6_", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch6", StringComparison.OrdinalIgnoreCase)) return "bgm_ch6_estate";
+                if (sceneId.StartsWith("node_7_", StringComparison.OrdinalIgnoreCase) || sceneId.Contains("ch7", StringComparison.OrdinalIgnoreCase)) return "bgm_ch7_altar";
+            }
+
+            if (!string.IsNullOrEmpty(locationId))
+            {
+                return locationId switch
+                {
+                    "forest_whispering_ash" => "bgm_ch1_ash_forest_calm",
+                    "cathedral_saint_luthos" => "bgm_ch2_cathedral",
+                    "village_oakhaven" => "bgm_ch3_oakhaven",
+                    "undercity_subterranean" => "bgm_ch4_undercity",
+                    "bridge_forsaken" => "bgm_ch5_bridge",
+                    "forgotten_stone_crossing" => "bgm_ch5_bridge",
+                    "estate_ashen_lord" => "bgm_ch6_estate",
+                    "altar_first_eclipse" => "bgm_ch7_altar",
+                    "shelter_courtyard_dusk" => "bgm_camp_night",
+                    _ => "bgm_main_theme",
+                };
+            }
+
             return "bgm_main_theme";
         }
 
         /// <summary>
-        /// Resolves the canonical Lyria 3.5 battle/boss BGM motif (matching BattleScene.ts resolveBattleMusicCue).
+        /// Resolves the canonical Lyria 3.5 battle/boss BGM motif for any encounter ID or boss unit ID.
         /// </summary>
-        public static string ResolveBattleMusicCue(string encounterId, bool isBoss)
+        public static string ResolveBattleMusicCue(string encounterId, bool isBoss, string bossUnitId = "")
         {
-            if (isBoss || (!string.IsNullOrEmpty(encounterId) && encounterId.Contains("boss", StringComparison.OrdinalIgnoreCase)))
+            if (!string.IsNullOrEmpty(bossUnitId))
             {
-                return "bgm_boss_broken_oath";
+                return bossUnitId switch
+                {
+                    "boss_hollow_stag" => "bgm_boss_beast",
+                    "boss_bell_widow" => "bgm_boss_bell_widow",
+                    "boss_inquisitor_vance" => "bgm_boss_human",
+                    "boss_drowned_archivist" => "bgm_boss_wraith",
+                    "boss_warden_galen" => "bgm_boss_human",
+                    "boss_ashen_regent" => "bgm_boss_wraith",
+                    "boss_eclipse_construct" => "bgm_boss_eclipse_construct",
+                    _ => "bgm_boss_beast",
+                };
             }
-            return "bgm_battle_ash_and_steel";
+
+            if (isBoss && !string.IsNullOrEmpty(encounterId))
+            {
+                if (encounterId.Contains("1_5", StringComparison.OrdinalIgnoreCase)) return "bgm_boss_beast";
+                if (encounterId.Contains("2_5", StringComparison.OrdinalIgnoreCase)) return "bgm_boss_bell_widow";
+                if (encounterId.Contains("3_5", StringComparison.OrdinalIgnoreCase) || encounterId.Contains("5_5", StringComparison.OrdinalIgnoreCase)) return "bgm_boss_human";
+                if (encounterId.Contains("4_5", StringComparison.OrdinalIgnoreCase) || encounterId.Contains("6_5", StringComparison.OrdinalIgnoreCase)) return "bgm_boss_wraith";
+                if (encounterId.Contains("7_5", StringComparison.OrdinalIgnoreCase)) return "bgm_boss_eclipse_construct";
+                return "bgm_boss_beast";
+            }
+
+            return "bgm_battle_field";
         }
 
         public void PlayBgmCue(string cueId, AudioClip clip = null)

@@ -5,6 +5,7 @@
   "title_en": "Stairs Below the Cistern (Hard)",
   "location_id": "undercity_subterranean",
   "seed": 3940115458,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

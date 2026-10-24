@@ -5,6 +5,7 @@
   "title_en": "The Road That Whispers",
   "location_id": "forest_whispering_ash",
   "seed": 2376268755,
+  "music_cue": "bgm_battle_field",
   "party_mode": "fixed",
   "party": [
     {

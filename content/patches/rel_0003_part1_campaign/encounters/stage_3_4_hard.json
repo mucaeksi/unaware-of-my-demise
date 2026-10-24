@@ -5,6 +5,7 @@
   "title_en": "The Inn of Borrowed Names (Hard)",
   "location_id": "village_oakhaven",
   "seed": 2841056478,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

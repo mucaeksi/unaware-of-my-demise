@@ -5,6 +5,7 @@
   "title_en": "Before the Last Toll",
   "location_id": "altar_first_eclipse",
   "seed": 3133363356,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

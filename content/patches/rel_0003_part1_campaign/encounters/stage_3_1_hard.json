@@ -5,6 +5,7 @@
   "title_en": "The Empty Orchard (Hard)",
   "location_id": "village_oakhaven",
   "seed": 519410893,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

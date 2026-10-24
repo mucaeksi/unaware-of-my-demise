@@ -21,6 +21,41 @@ export interface CampaignStoryEntry {
   id: string; chapterId: string; nodeId: string; title: string; stageId?: string; story?: string; preStory?: string; postStory?: string;
   interludes: { trigger: string; path: string }[]; scenePaths: string[]; lineIds: string[];
 }
+
+const LOCATION_MUSIC: Record<string, string> = {
+  forest_whispering_ash: 'bgm_ch1_ash_forest_calm',
+  cathedral_saint_luthos: 'bgm_ch2_cathedral',
+  village_oakhaven: 'bgm_ch3_oakhaven',
+  undercity_subterranean: 'bgm_ch4_undercity',
+  bridge_forsaken: 'bgm_ch5_bridge',
+  estate_ashen_lord: 'bgm_ch6_estate',
+  altar_first_eclipse: 'bgm_ch7_altar'
+};
+
+const LOCATION_BOSS_MUSIC: Record<string, string> = {
+  forest_whispering_ash: 'bgm_boss_beast',
+  cathedral_saint_luthos: 'bgm_boss_bell_widow',
+  village_oakhaven: 'bgm_boss_human',
+  undercity_subterranean: 'bgm_boss_wraith',
+  bridge_forsaken: 'bgm_boss_human',
+  estate_ashen_lord: 'bgm_boss_wraith',
+  altar_first_eclipse: 'bgm_boss_eclipse_construct'
+};
+
+export function resolveCampaignSceneMusicCue(scene: { scene_id: string; location_id: string }, part = 'lines'): string {
+  if (scene.scene_id === 'opening_sad_scene' || scene.scene_id === 'part1_emotional_confession') return 'bgm_fadyme_theme';
+  if (scene.scene_id === 'part1_clockless_reveal') return 'bgm_clockless';
+  if (scene.scene_id === 'ch1_first_oath' || scene.scene_id.includes('_camp')) return 'bgm_camp_night';
+  if (scene.scene_id.includes('_road')) return 'bgm_road';
+  if (part.startsWith('phase_')) return LOCATION_BOSS_MUSIC[scene.location_id] ?? 'bgm_battle_field';
+  if (scene.scene_id === 'node_2_5' && part === 'pre_battle_lines') return 'bgm_bell_widow';
+  if (scene.location_id === 'forest_whispering_ash') {
+    if (scene.scene_id === 'node_1_3' || scene.scene_id === 'node_1_4') return 'bgm_ch1_ash_forest_uneasy';
+    if (scene.scene_id === 'node_1_5' && part === 'pre_battle_lines') return 'bgm_ch1_ash_forest_chaotic';
+    return 'bgm_ch1_ash_forest_calm';
+  }
+  return LOCATION_MUSIC[scene.location_id] ?? 'bgm_main_theme';
+}
 /** A broken numbered phase enters its successor; a ward names the numbered phase being entered. */
 export function bindCampaignPhaseStories(entry: CampaignStoryEntry, enemies: Encounter['enemies'], pack: UnitPack): NonNullable<Encounter['phase_stories']> {
   const bindings: NonNullable<Encounter['phase_stories']> = [];
@@ -70,7 +105,7 @@ export function compileCampaignStory(sources = canonicalStorySources(), portrait
   const make = (scene: z.infer<typeof Scene>, id: string, lines: z.infer<typeof Line>[], source: SourceFile, part: string, direction = scene.direction_en): string => {
     const path = `story/${id}.json`;
     if (files.has(path)) throw new Error(`duplicate compiled scene ${path}`);
-    const commands: StoryCommand[] = [{ op: 'background', location_id: scene.location_id }, { op: 'music', cue_id: 'stop' }];
+    const commands: StoryCommand[] = [{ op: 'background', location_id: scene.location_id }, { op: 'music', cue_id: resolveCampaignSceneMusicCue(scene, part) }];
     // Only portraits actually supplied by the current manifest are shown; other speakers retain their exact names/text.
     [...new Set(lines.map((line) => line.speaker_id))].filter((id) => portraits.has(id)).slice(0, 2).forEach((character, index) => commands.push({ op: 'show', character, side: index === 0 ? 'left' : 'right' }));
     for (const line of lines) {

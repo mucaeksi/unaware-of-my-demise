@@ -5,6 +5,7 @@
   "title_en": "The Commander Who Remained",
   "location_id": "bridge_forsaken",
   "seed": 46132590,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

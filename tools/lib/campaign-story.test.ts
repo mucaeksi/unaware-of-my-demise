@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalStorySources, compileCampaignStory, bindCampaignPhaseStories, type SourceFile, type StorySources } from './campaign-story';
+import { canonicalStorySources, compileCampaignStory, bindCampaignPhaseStories, resolveCampaignSceneMusicCue, type SourceFile, type StorySources } from './campaign-story';
 import { readJson, sha256 } from './fsutil';
 import { ChapterIndex, Encounter, UnitPack } from '../../packages/content-schema/src/index';
 
@@ -31,7 +31,8 @@ describe('canonical campaign story compilation', () => {
           expect(compiled.provenance.source.split('#')[0]).toBe(source.path);
           expect(compiled.production?.music_direction_en).toBe(scene.music_cue);
           expect(compiled.location_id).toBe(scene.location_id);
-          expect(compiled.commands.filter((command) => command.op === 'music')).toEqual([{ op: 'music', cue_id: 'stop' }]);
+          const part = compiled.provenance.source.split('.').pop()!;
+          expect(compiled.commands.filter((command) => command.op === 'music')).toEqual([{ op: 'music', cue_id: resolveCampaignSceneMusicCue(scene, part) }]);
         }
       }
     }

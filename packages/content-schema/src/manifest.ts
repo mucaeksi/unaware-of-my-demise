@@ -53,7 +53,7 @@ export const ContentManifest = z
     /** Previous known-good release the publisher would roll back to. */
     rollback_to: z.object({ release_id: Id, generation: z.number().int().min(1) }).strict().optional(),
     rollout: z.object({ percent: z.number().int().min(0).max(100), kill_switch: z.boolean() }).strict(),
-    files: z.array(ManifestFile).min(1).max(768),
+    files: z.array(ManifestFile).min(1).max(1536),
     signature: Signature.optional()
   })
   .strict()

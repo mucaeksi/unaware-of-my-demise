@@ -5,6 +5,7 @@
   "title_en": "The Gatekeeper's Measure",
   "location_id": "bridge_forsaken",
   "seed": 3430016611,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

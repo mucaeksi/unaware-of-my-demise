@@ -5,6 +5,7 @@
   "title_en": "A Banner in the Fog",
   "location_id": "bridge_forsaken",
   "seed": 1792103959,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

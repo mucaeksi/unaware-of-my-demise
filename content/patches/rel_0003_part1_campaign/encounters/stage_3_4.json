@@ -5,6 +5,7 @@
   "title_en": "The Inn of Borrowed Names",
   "location_id": "village_oakhaven",
   "seed": 238604665,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

@@ -129,9 +129,9 @@ const env = (over: Partial<PatchEnv> = {}): PatchEnv => ({
   supportedContentSchema: 1,
   trustedKeys: [publicJwk],
   installId: 'install-a',
-  storageBudgetBytes: 50 * 1024 * 1024,
-  // the campaign patch's units are D-27 attribute units with sprite animations, world map and hard mode
-  supportedCapabilities: ['attributes_v1', 'hard_mode_v1', 'sprite_animation_v1', 'world_map_v1'],
+  storageBudgetBytes: 120 * 1024 * 1024,
+  // the campaign patch's units are D-27 attribute units with sprite animations, presentation pack, world map and hard mode
+  supportedCapabilities: ['attributes_v1', 'hard_mode_v1', 'presentation_v1', 'sprite_animation_v1', 'world_map_v1'],
   validate: () => undefined,
   sleep: async () => undefined,
   ...over

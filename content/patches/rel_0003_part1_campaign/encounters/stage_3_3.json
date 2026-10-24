@@ -5,6 +5,7 @@
   "title_en": "The Well Runs Red",
   "location_id": "village_oakhaven",
   "seed": 840731214,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

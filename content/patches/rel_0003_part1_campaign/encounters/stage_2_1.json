@@ -5,6 +5,7 @@
   "title_en": "Rain in the Nave",
   "location_id": "cathedral_saint_luthos",
   "seed": 1688387663,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

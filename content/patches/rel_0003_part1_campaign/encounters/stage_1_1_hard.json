@@ -5,6 +5,7 @@
   "title_en": "The Road That Whispers (Hard)",
   "location_id": "forest_whispering_ash",
   "seed": 1705959503,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

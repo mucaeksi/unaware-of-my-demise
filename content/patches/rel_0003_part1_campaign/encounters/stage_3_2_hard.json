@@ -5,6 +5,7 @@
   "title_en": "A Smith's Last Bell (Hard)",
   "location_id": "village_oakhaven",
   "seed": 4229370014,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

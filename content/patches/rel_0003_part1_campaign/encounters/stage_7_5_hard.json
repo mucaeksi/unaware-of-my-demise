@@ -5,6 +5,7 @@
   "title_en": "The Eclipse Construct (Hard)",
   "location_id": "altar_first_eclipse",
   "seed": 1218341868,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

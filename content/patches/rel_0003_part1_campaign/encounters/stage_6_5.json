@@ -5,6 +5,7 @@
   "title_en": "The Ashen Lord's Wraith",
   "location_id": "estate_ashen_lord",
   "seed": 3980674015,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

@@ -5,6 +5,7 @@
   "title_en": "Stairs Below the Cistern",
   "location_id": "undercity_subterranean",
   "seed": 1234749163,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

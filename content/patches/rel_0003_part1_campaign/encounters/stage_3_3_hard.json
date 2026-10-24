@@ -5,6 +5,7 @@
   "title_en": "The Well Runs Red (Hard)",
   "location_id": "village_oakhaven",
   "seed": 846554337,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "enemies": [

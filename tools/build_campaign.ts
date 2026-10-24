@@ -34,6 +34,33 @@ const bossSets = new Map<string, string>(enemies.filter((e) => e.boss_id).map((e
 const seedOf = (id: string): number => createHash('sha256').update(`uomd:part1:${id}`).digest().readUInt32BE(0);
 const snake = (stageId: string): string => `stage_${stageId.replace('-', '_')}`;
 const REAR_ROLES = /caster|support|warder|assassin|flanker/;
+const BOSS_MUSIC_BY_ID: Record<string, string> = {
+  boss_hollow_stag: 'bgm_boss_beast',
+  boss_bell_widow: 'bgm_boss_bell_widow',
+  boss_inquisitor_vance: 'bgm_boss_human',
+  boss_drowned_archivist: 'bgm_boss_wraith',
+  boss_warden_galen: 'bgm_boss_human',
+  boss_ashen_regent: 'bgm_boss_wraith',
+  boss_eclipse_construct: 'bgm_boss_eclipse_construct'
+};
+const CAMPAIGN_MUSIC_TRACKS: ArtManifest['music'] = {
+  bgm_ch2_cathedral: { file: 'audio/bgm_ch2_cathedral.ogg', loop_start_s: 14.0, duration_s: 174.1 },
+  bgm_ch3_oakhaven: { file: 'audio/bgm_ch3_oakhaven.ogg', loop_start_s: 12.5, duration_s: 174.1 },
+  bgm_ch4_undercity: { file: 'audio/bgm_ch4_undercity.ogg', loop_start_s: 13.0, duration_s: 174.1 },
+  bgm_ch5_bridge: { file: 'audio/bgm_ch5_bridge.ogg', loop_start_s: 14.0, duration_s: 174.1 },
+  bgm_ch6_estate: { file: 'audio/bgm_ch6_estate.ogg', loop_start_s: 13.5, duration_s: 165.4 },
+  bgm_ch7_altar: { file: 'audio/bgm_ch7_altar.ogg', loop_start_s: 15.0, duration_s: 174.1 },
+  bgm_mahmut_theme: { file: 'audio/bgm_mahmut_theme.ogg', loop_start_s: 12.0, duration_s: 174.1 },
+  bgm_camp_night: { file: 'audio/bgm_camp_night.ogg', loop_start_s: 12.0, duration_s: 163.4 },
+  bgm_road: { file: 'audio/bgm_road.ogg', loop_start_s: 12.0, duration_s: 166.5 },
+  bgm_bell_widow: { file: 'audio/bgm_bell_widow.ogg', loop_start_s: 10.0, duration_s: 174.1 },
+  bgm_clockless: { file: 'audio/bgm_clockless.ogg', loop_start_s: 10.0, duration_s: 149.8 },
+  bgm_boss_beast: { file: 'audio/bgm_boss_beast.ogg', loop_start_s: 12.0, duration_s: 140.0 },
+  bgm_boss_bell_widow: { file: 'audio/bgm_boss_bell_widow.ogg', loop_start_s: 13.0, duration_s: 172.3 },
+  bgm_boss_human: { file: 'audio/bgm_boss_human.ogg', loop_start_s: 12.0, duration_s: 174.1 },
+  bgm_boss_wraith: { file: 'audio/bgm_boss_wraith.ogg', loop_start_s: 13.0, duration_s: 118.6 },
+  bgm_boss_eclipse_construct: { file: 'audio/bgm_boss_eclipse_construct.ogg', loop_start_s: 14.5, duration_s: 169.1 }
+};
 
 // ---- units -------------------------------------------------------------------------------------------------------
 const pack = buildUnitPack('part1_campaign', chars.map((c) => c.character_id as string), enemies.map((e) => e.enemy_id as string));
@@ -85,12 +112,14 @@ for (const ch of chapters) {
     const entry = story.entries.find((entry) => entry.stageId === st.stage_id);
     if (!entry) throw new Error(`stage ${st.stage_id} has no canonical story entry`);
     const phaseStories = bindCampaignPhaseStories(entry, foes, pack);
+    const encounterMusicCue = st.boss_id ? (BOSS_MUSIC_BY_ID[st.boss_id as string] ?? 'bgm_battle_field') : 'bgm_battle_field';
     const enc = Encounter.parse({
       schema_version: 1,
       encounter_id: id,
       stage_id: st.stage_id,
       title_en: st.title_en,
       location_id: ch.location_id,
+      music_cue: encounterMusicCue,
       pre_story: entry.preStory,
       post_story: entry.postStory,
       ...(phaseStories.length ? { phase_stories: phaseStories } : {}),
@@ -137,6 +166,7 @@ for (const ch of chapters) {
       stage_id: `${st.stage_id}H`,
       title_en: `${st.title_en} (Hard)`,
       location_id: ch.location_id,
+      music_cue: encounterMusicCue,
       seed: seedOf(`${st.stage_id}:hard`),
       party_mode: 'owned',
       party: [],
@@ -438,7 +468,7 @@ for (const loc of new Set([...chapters.map((ch) => ch.location_id as string), ..
   writeOut(`${OUT}/art/bg_${loc}.webp`, await sharp(Buffer.from(bg)).webp({ quality: 70 }).toBuffer());
   backgrounds[loc] = `art/bg_${loc}.webp`;
 }
-const compiledArt = ArtManifest.parse({ ...art, portraits: campaignPortraits, atlases, units: unitArt, backgrounds });
+const compiledArt = ArtManifest.parse({ ...art, portraits: campaignPortraits, atlases, units: unitArt, backgrounds, music: { ...art.music, ...CAMPAIGN_MUSIC_TRACKS } });
 const { stills, ...artWithoutStills } = compiledArt;
 writeJson(`${OUT}/art/art_manifest.json`, Object.keys(stills).length ? compiledArt : artWithoutStills);
 

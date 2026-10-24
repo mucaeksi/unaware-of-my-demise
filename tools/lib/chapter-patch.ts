@@ -4,7 +4,7 @@
  * chapters, library entries gated behind a later chapter are dropped, and the encounters/scenes of later chapters are
  * left out (no spoilers, no download). Units, art and the world map stay whole: the map shows the rest as "coming soon".
  */
-import type { ChapterIndex, Encounter, NarrativeLibrary } from '@uomd/content-schema';
+import type { ChapterIndex, Encounter, NarrativeLibrary, PresentationPack, StoryScene } from '@uomd/content-schema';
 
 const dec = new TextDecoder();
 const enc = new TextEncoder();
@@ -13,6 +13,7 @@ const write = (v: unknown): Uint8Array => enc.encode(`${JSON.stringify(v, null, 
 
 export const CHAPTER_INDEX_PATH = 'chapters/chapter_index.json';
 const LIBRARY_PATH = 'library/library_index.json';
+const PRESENTATION_PATH = 'presentation/presentation.json';
 
 export function chapterPatch(files: ReadonlyMap<string, Uint8Array>, chapters: number): Map<string, Uint8Array> {
   const index = read<ChapterIndex>(files, CHAPTER_INDEX_PATH);
@@ -35,10 +36,16 @@ export function chapterPatch(files: ReadonlyMap<string, Uint8Array>, chapters: n
     }
   }
 
+  const droppedLines = new Set<string>();
   const coverage = index.story_coverage;
   const out = new Map<string, Uint8Array>();
   for (const [path, bytes] of files) {
-    if ((path.startsWith('story/') || path.startsWith('encounters/')) && !reached.has(path)) continue;
+    if (path.startsWith('story/') && !reached.has(path)) {
+      const sc = read<StoryScene>(files, path);
+      for (const c of sc.commands) if (c.op === 'say' || c.op === 'narrate') droppedLines.add(c.line_id);
+      continue;
+    }
+    if (path.startsWith('encounters/') && !reached.has(path)) continue;
     out.set(path, bytes);
   }
   out.set(CHAPTER_INDEX_PATH, write({
@@ -54,11 +61,30 @@ export function chapterPatch(files: ReadonlyMap<string, Uint8Array>, chapters: n
     const stay = new Set<string>();
     for (const entry of library.entries) {
       const gate = entry.gate;
-      if (gate.after_node && !nodes.has(gate.after_node)) continue;
-      if (gate.after_entry && !stay.has(gate.after_entry)) continue;
+      if (gate.after_node && !nodes.has(gate.after_node)) {
+        for (const lid of entry.line_ids) droppedLines.add(lid);
+        continue;
+      }
+      if (gate.after_entry && !stay.has(gate.after_entry)) {
+        for (const lid of entry.line_ids) droppedLines.add(lid);
+        continue;
+      }
       stay.add(entry.entry_id);
     }
     out.set(LIBRARY_PATH, write({ ...library, entries: library.entries.filter((e) => stay.has(e.entry_id)) }));
+  }
+
+  if (files.has(PRESENTATION_PATH) && droppedLines.size > 0) {
+    const pres = read<PresentationPack>(files, PRESENTATION_PATH);
+    const keptVoices: Record<string, PresentationPack['voices'][string]> = {};
+    for (const [id, v] of Object.entries(pres.voices)) {
+      if (droppedLines.has(id)) {
+        out.delete(v.file);
+      } else {
+        keptVoices[id] = v;
+      }
+    }
+    out.set(PRESENTATION_PATH, write({ ...pres, voices: keptVoices }));
   }
   return out;
 }

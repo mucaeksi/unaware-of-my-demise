@@ -5,6 +5,7 @@
   "title_en": "The Sealed Conservatory",
   "location_id": "estate_ashen_lord",
   "seed": 2259055881,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [

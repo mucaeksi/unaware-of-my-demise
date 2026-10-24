@@ -5,6 +5,7 @@
   "title_en": "The Stair of Seven Chains",
   "location_id": "altar_first_eclipse",
   "seed": 3807767901,
+  "music_cue": "bgm_battle_field",
   "party_mode": "owned",
   "party": [],
   "guests": [
