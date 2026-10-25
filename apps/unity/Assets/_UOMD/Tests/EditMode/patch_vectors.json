@@ -1,0 +1,1591 @@
+{
+  "generated_by": "tools/export_unity_patch_vectors.ts",
+  "kid": "test-1",
+  "base": {
+    "release_id": "rel_0001",
+    "generation": 1,
+    "files": {
+      "chapters/chapter_index.json": "eyJjaGFwdGVycyI6W3siaWQiOiJjaDBfdHV0b3JpYWwifV19",
+      "encounters/stage_0_1.json": "eyJpZCI6InN0YWdlXzBfMSIsIndhdmVzIjoxfQ==",
+      "art/atlas_units.webp": "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",
+      "audio/bgm_ch1_ash_forest_calm.ogg": "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"
+    }
+  },
+  "objects": {
+    "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c": "eyJjaGFwdGVycyI6W3siaWQiOiJjaDBfdHV0b3JpYWwifSx7ImlkIjoiY2gxX2FzaF9mb3Jlc3QifV19",
+    "b6d035bb26e39cccdfc17cf4999d9e2c017e478d43fd3d62f6919c1e9fd87a87": "eyJpZCI6InN0YWdlXzBfMSIsIndhdmVzIjoxfQ==",
+    "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef": "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",
+    "66650fe502ed2f66914043bd453b3575f3bf514564edfa29fdf79a24a882e10b": "1lSXn5qQPOSfLo6VwV03HXW7+RbdNGjnfv4tBTw3lI5TOCMqndtGBEHkeWJiSOoLjqXHivKMJsJFzVh4XVZKIobVOxEBHzudDM7uRWTBiqbslABArSSzO7zBwelHCe3vApZLkr8JHjU9ZJoy90HwKGXyzrvH5WkhloNUNaPBG08FSgLBqb62SvctUuNnHLekRa8IzwnXs+HcDsGES8MKiTsZv3x3bd2rfnuFup+xv/C7OWI+1qT6DNNDWM7a6NacxahDlN2+yiPpRCbzAAVx3lRKDC9Ll4Qt0Pf9J0b4zslRXB0zxCsY2ujB5BCz2ENIvdvoGqCG49nezcZHMfVnpYyghbClLY55wkQR6kc8Qj5M3pJ++tP7OSqUkVywGoCwIYSqPsvslOJvHFtwRGqqpyTALkoMpGZmQayuU15DoH+oFLNh1zOpIEnySdQTm8wYE0CMOzKapSKb0FRkX0cjhHjMafjkulOzutTx5WFEZbzCVoEVhL7p73Fgo1eRpO0h3reL12wfvhYuW5nTq1AvYx90wi0d+wOgaWy75jhQi/YKTnW9F85owY+NXXKm7ICxUurEvVvK+NftRAdGyRxnQdwhM+uTW9FsGjGury7OvVv5ZgxNVav+mcYcspQX0v34AwDNwaReP+VZJ5TxezVDsuh/vPLDlxVJ7f1A1LJ8mZOPJAi7kNFvjJ5OjrsZHYyl3Pc3ra5MHPjMyTJRQT+VUgg7reY0Nq861WASqMrljsO8gejx/mg4kwLCo/L1jFMAhNshGtnXMleboUcYmwb+y/syNsxiEvGAjBO3RabtuOWagKapnsb/goxRvGDnOaeLk9Jp9lHEaSia+8vXTjgvvsDFKepgTVO2KUSI9PqC0GS78gNOpLYTJdUntMkpceEozmjXVFXzdYw/F9duLIcE5wvVsp/AmamhoH0gdw6dh1TuApb5ZDPMtF8AqYjyYSEjNhpfCAZ6bqHvx3EfxaOcBRFP1hJmAoZ0ZKZfzN3Mf3Xp+HVhIuLvG+r5Zz1VSO/3F8M6OuRyvECp//yalNx46rJOJvfVuKsu64tcccmIxHA0MOo6SAvMuf1eXRcfYmZphSe0pAz0AaMDBJT9rW+TPGbRXLE2449osRvrp0HTbQ7G/X4DtLvLYWMOv93VkRciHiPXrg/modejWO8wf8yaG4UuzBCIsibyFXn28d03EM6uRRGQ+ppmvFeV04ME8q4LoM3pDUryewGpRdr7PGcinGmmZ05bvB2WcYeMFyhVxKhIMFaoH8/H68d7DVQ9SbxZgbUtvCNFQ1v/xBVecK+401O6M/esju4lhofh9DMp5XUxc3vuGdPz4L5tzpUj2InZhpY0LOJmCrbO/tMQWPY2o/WUVPT9Xsh5jqN/ArAWEY1wbm3Wpap7w6U0x++7lzx02KCn9qzQgMx5HcOG+HgGrPprmRdcyCUFrZEh7co9b+Cexmr4TSa1mZ7Uh+eP0IIc/n0+OZIe15DDoSsKKzt8HJdmYugm5nkWtuhYZSTs99vEfkGu389V5Kt9i9roPArdq50EEdXp9ct2sj2aJsDmf4+7FdZuHPQq8b4Q7c/cev1/3qZ2ZqxGEaWXUgooQD0jhl9D57usdyGlXFdgGko7T1z8djHTP7XYqi+OnW4IX2+OJJYANnOARVU9dDbSMQWHARhrFx0SnlWIYj+mY5wtBdp+P9A8VPzph0f5YyLO/Nss1kyt0Fkjw/+8Xb2BYNQv+NLluRBI7FPwOZxmZkhXr553erCPc7Wqq1Zlko9eNSSUr8mjn8F5xr/+Hfnss9bS90U6UeELI5HLr7HtZh04B9PzNF2HOQT0FlN21INhk/lgYi8HqMfvBuOtJlTAVHpYy0B1pdhQKyFF/L3o5MGqcBiiNJjpmjLqXz7mahGCwNm7WVHfKzzLrLTSvEq/uo+wzZ5Mez550QuA0pSBXEOWPnOVGn3roM9opzluaJKZGvbfrzoxF68IXhAui5DlrZPWdQF6vdAXaEk5eyMNgJ5+FL2xlV6CgdkV6Lx40F4Gx11109NFv1gWkHYwhk0GeNwz4JMvq/IqIKP/vdJ7+q1S0nNqa2sug7MT+dwj556AES46XdQZi+BXMmElKdsOgPUY2L8Fz4Hv7KaJ/PyGUpST9r7O4iU4Q4Y0IThu+B+AVfbfl5alxiKI2VehusUOrY384+Jj4WCQ20bPh/WDCXWWQBdCiSkWy/LrKCvZiH0XYqNWiZdIkXn2MhLU69gT0qJHsUSSX3wRA8Mhb/06YuB//HUFWtX6U4WoHtlwBkR/nO19UKiXV+EtdeKu1ls+BukXgekWvD/LLpmRV0s+ECBT/LcVhiqX6tq0R7GMubsxjaeTeyI8ig/IRrfsObK6MquRFkqnxe6E1bvQbXg5SQxmVs9eulO0ls6GUdMbuXVJlWMLFeY+L+1Ode1dFdpmU82kK/+LElg1EH5N+Ri8X7MT6HoeFD8fco9nABoz8VA5oCxhwqQ7WHt1whlpUxDtKRJnHc7pnjbUIe873Lj9Q8U951OdzI+oQFDiFM2Wg0TwJ1UM1jQeI85D4UWH+FmCQWa3rTTQ7kpBLnKiDA22Fu42FBjOCAoXqhphBEV55LLdZk/c4t7wO58sWpbh/MnjYXAqBuP0hQMeW3Kg3zP+GGA7wMRf1XGfxTjSRmN9gsTshm/YYPA+/ofRNZoP4DlKzkehoSEKQTaQk7YWSVUwwhyjBizLEcVxoRChKxwUZeu9LNoR/G9ajCVgmvTfTjOlMydJtkm7BhmhRLs1C7/KfjunRIyWFqAsUMTPXjSs/QgqKMFGi4naGo32q0iTz2VnBznM2kBoHPIMQM75bBt/zgPbJhwzUo+xP5wFenLTjLZqHKJrYFmymdR0k3n4blUjxvFsiv63oVGM7D3HTKYRL4T9C09crOvxfOes9ziCAs78aftKDF8DzHym7Kdrb+xXz3PD4onmEykxwdiov8MMet+MK1OCbfmmFCqTkdiHYeZwSeqf5mGjRZkeI7fCdN1PMH5p+uOmFkLmBWgXb3vmifeQYaMzzbVCABFmywGJRATgo1VoGUfwC1POLuvk8WXu08Mks8B7vSACrQbcvKEqw7oqaIEYjhQmAsvJDbmOIn1/909G+yZ/FQjzkfvHGN+ZGWwe9OEcidj7jmnjkaYV6s5tkVegWvvv2f8il7XaXgiwPhwggA10N7JHeHrt7I/fE92/",
+    "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae": "eyJpZCI6InN0YWdlXzFfMSIsIndhdmVzIjoyfQ==",
+    "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1": "eyJpZCI6InN0YWdlXzFfMiIsIndhdmVzIjozfQ==",
+    "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47": "eyJ1bml0cyI6WyJmYWR5bWUiLCJzZXJldGgiXX0=",
+    "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37": "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",
+    "e30ba005b6361146cddb316f9d55127e6def14b16def6c0016d00a00df0accb5": "eyJpZCI6InN0YWdlXzJfMSIsIndhdmVzIjo0fQ==",
+    "7997a8c54d8ef22929e41274092d02633b91d60407787bf39bfdb80f8775ccaf": "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"
+  },
+  "manifests": {
+    "r2": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "G4P4M5QJHhKEBY__sie5ZcUNWWhGonZb-Sg-rw8g-j8mw1Iw7hUSsEk1SknwgDPAe-UMOGrHoMyHmvLMUr6Ypg"
+      }
+    },
+    "r2_unsigned": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ]
+    },
+    "r2_snapshot": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "audio/bgm_ch1_ash_forest_calm.ogg",
+          "sha256": "66650fe502ed2f66914043bd453b3575f3bf514564edfa29fdf79a24a882e10b",
+          "bytes": 2400,
+          "media_type": "audio/ogg",
+          "kind": "audio"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_0_1.json",
+          "sha256": "b6d035bb26e39cccdfc17cf4999d9e2c017e478d43fd3d62f6919c1e9fd87a87",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "nDyJoqj6EtUczH3VlfQDyKMVZnJDcm0RS7jUvnAqxnP4dOt1KozyQdImxqjmJC1Ct7MFgVi5aAYcCeL9QIdibA"
+      }
+    },
+    "r2_self_contained": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "_1Y3SZV9oDF27sxqRGLvBPUPElCIlp3zVHZqERVDJrSrJU7pK2RDKHDXehDx5Wt0P6vjrupQsFw6crhMozYcoQ"
+      }
+    },
+    "r2_dev": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "dev",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "3dd9vlexWehNAD2byuxGy0MsxvALylerWO3iYkS_S_kC-vQGegNqc074FR6Mfxyk5zzck3chMZcqe8i_Ti3ngA"
+      }
+    },
+    "r2_max_client": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "max_client": "1.9.9",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "KR0tetPsglm7m4qpnP9pBif78cuU7ry_GA7jKOUeNRbR_jMPn4OqaCJfG7lTVhzF7gSp2v_qcJ8h_cOtTswYfQ"
+      }
+    },
+    "r2_schema2": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 2
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "wbvxjnNau2c2uWSnTB_vQakfbqVp6ukVx2t1gMFDVbDvZuOFswZduse9S_EKtZaomH5EebP7UbSIklM338QjNw"
+      }
+    },
+    "r2_dep_mismatch": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_9999",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "oCr00-dz42gtzSDz3osVV-i8eqzWwTBZ-GrniIRQ8JFYOPKn0CZUTAS3IwxXOJrMAhao1ljSHt7olErKfccSFA"
+      }
+    },
+    "r2_capability": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "required_capabilities": [
+          "future_v9"
+        ],
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "mQ-Dqz_qdAScGQT7mqnF6jz8ql88Q4lwe8uLxYK8KtsFcp8PriCvrDf3uPEo0l-AIOgwFHA2t5Iy0u-XKssBMQ"
+      }
+    },
+    "r2_rollout50": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 50,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "O8D86QhYa9vOr_t0uNmfoQp2Jvf8u-O3F1tdZstC7Hnf5WQwoEPso9s2konWJ_SCecqzdKdy6qmf3yiJFExijQ"
+      }
+    },
+    "r2_rollout0": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 0,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "zzzcmKG-Nl-mGbw-6elOBS0uGh05rujaM2DcPRjjpwwLAEdkE8kFhDqsko9DtJZEXbEs5VrdBW_9754a5_aRTQ"
+      }
+    },
+    "g1_stale": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0002",
+        "generation": 1,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "lZPLYKKja1V7G0fLWVWQrcG3q9KTHi4ZkajHmRAb_7mpB6yUdka-OgBxGZvSoOMo57XNBFQ8_jB7ZiUVunN6WA"
+      }
+    },
+    "r3": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0003",
+        "generation": 3,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "UrfYAs8NK4HI4GAVlwc_JwcQj2-dN0fQlbQssv4-JIBarnOgOAoO8a0SrPVIy4FNiA8q_YrVB5Sh6Xyv6ZCfhQ"
+      }
+    },
+    "r4": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0004",
+        "generation": 4,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "uX76OMzIJPotY5h0PeCvueiek9wTklf45TNR8l5BajpW2QVUB-5ImDkcqHZ6cYph7_RyO4odpCvkys5Z3eB2iA"
+      }
+    },
+    "kill2": {
+      "schema_version": 1,
+      "release": {
+        "id": "kill_0002",
+        "generation": 2,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": true
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "uDj_KetFuhf_Kj0eSRS7p29mrkOdrJdEz9c0p5es_2Jb6BqQM9KwM0Y8yP-w9dGxb6rLYrZpT-JfNzfchpv18Q"
+      }
+    },
+    "kill3": {
+      "schema_version": 1,
+      "release": {
+        "id": "kill_0003",
+        "generation": 3,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": true
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "S1nQ3HfmGbwO3FJz7VascHQBRmQQrUini4f1RiA27lLvcEfyC5SAQ871nG6-zkdud3vMGnaU60HtXsDkBNRcpg"
+      }
+    },
+    "kill4": {
+      "schema_version": 1,
+      "release": {
+        "id": "kill_0004",
+        "generation": 4,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": true
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "_d56s2eG6-zhVtRdhOJfmPx5qq5T3i0J7Zs1vrP28Mxs_46zWySvM9sNaVDtpn8xV-hAUQyz2MKSfAThcxpqQQ"
+      }
+    },
+    "different3": {
+      "schema_version": 1,
+      "release": {
+        "id": "different_0003",
+        "generation": 3,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "DlUqo8NMLrcCgLyhe2lnXBjq2A2L6MrA3l9OZSDJ124mniCcqy-Z6JlTVtPo4WNK_NDTzFKU_S2t2e1tYkqYrg"
+      }
+    },
+    "rollback5": {
+      "schema_version": 1,
+      "release": {
+        "id": "rollback_0005",
+        "generation": 5,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/atlas_units.webp",
+          "sha256": "899d132157e4b3846983865d994329de432dd3859798121e38e58e8c50f522ef",
+          "bytes": 3000,
+          "media_type": "image/webp",
+          "kind": "atlas_image"
+        },
+        {
+          "path": "art/bg_ash_forest.webp",
+          "sha256": "267e742109f8259342fe61beb97e1ad739d612e48c94b7f4d246ce2cd8a31e37",
+          "bytes": 5000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "chapters/chapter_index.json",
+          "sha256": "4566221551c4ab8b9352664ff68f388daca2737a7ae564d6fcda7c515cba3a2c",
+          "bytes": 60,
+          "media_type": "application/json",
+          "kind": "chapter_index"
+        },
+        {
+          "path": "encounters/stage_1_1.json",
+          "sha256": "57f3834510876e9db774ba84a00b8e650b12acaf93e3c64364bee439ce8c42ae",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "encounters/stage_1_2.json",
+          "sha256": "6e6394c22f93ddc186d51e8048451ea7c073d8307b2065c3663ba999ce9d25d1",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        },
+        {
+          "path": "units/units_ch1.json",
+          "sha256": "47e2c32bab649f6efe0c555bf1e81bc27b20fb7b58dd5fec91e94246a745ca47",
+          "bytes": 29,
+          "media_type": "application/json",
+          "kind": "unit_pack"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "2jXuePuHF1kG81rT8uRYy13EOy5PTPXVboAomEqpBgkXPJ1654p4fI4q1d6AB9V6BLp93d8v7xajlqAEkbfw4Q"
+      }
+    },
+    "r3_alt": {
+      "schema_version": 1,
+      "release": {
+        "id": "rel_0003",
+        "generation": 3,
+        "channel": "staging",
+        "created_at": "2026-10-25T00:00:00.000Z",
+        "notes": "unity patch vector"
+      },
+      "compat": {
+        "min_client": "0.1.0",
+        "content_schema": 1
+      },
+      "depends_on": {
+        "release_id": "rel_0001",
+        "generation": 1
+      },
+      "rollout": {
+        "percent": 100,
+        "kill_switch": false
+      },
+      "files": [
+        {
+          "path": "art/bg_ember_gate.webp",
+          "sha256": "7997a8c54d8ef22929e41274092d02633b91d60407787bf39bfdb80f8775ccaf",
+          "bytes": 4000,
+          "media_type": "image/webp",
+          "kind": "background"
+        },
+        {
+          "path": "encounters/stage_2_1.json",
+          "sha256": "e30ba005b6361146cddb316f9d55127e6def14b16def6c0016d00a00df0accb5",
+          "bytes": 28,
+          "media_type": "application/json",
+          "kind": "encounter"
+        }
+      ],
+      "signature": {
+        "kid": "test-1",
+        "alg": "ES256",
+        "value": "LcD_pM8UusTotLAdp07QOkE4kyQYLyDiTVqwN5hEzC2IYLjJWScJGj0Si4-1j8gxShSCVb3-OFtniXe5JWmEUg"
+      }
+    }
+  },
+  "rollout": [
+    {
+      "install_id": "device-0",
+      "bucket": 37
+    },
+    {
+      "install_id": "device-1",
+      "bucket": 35
+    },
+    {
+      "install_id": "device-2",
+      "bucket": 79
+    },
+    {
+      "install_id": "device-3",
+      "bucket": 57
+    },
+    {
+      "install_id": "device-4",
+      "bucket": 14
+    },
+    {
+      "install_id": "device-5",
+      "bucket": 58
+    },
+    {
+      "install_id": "device-6",
+      "bucket": 16
+    },
+    {
+      "install_id": "device-7",
+      "bucket": 8
+    },
+    {
+      "install_id": "device-8",
+      "bucket": 26
+    },
+    {
+      "install_id": "device-9",
+      "bucket": 32
+    },
+    {
+      "install_id": "device-10",
+      "bucket": 12
+    },
+    {
+      "install_id": "device-11",
+      "bucket": 58
+    },
+    {
+      "install_id": "device-12",
+      "bucket": 89
+    },
+    {
+      "install_id": "device-13",
+      "bucket": 27
+    },
+    {
+      "install_id": "device-14",
+      "bucket": 3
+    },
+    {
+      "install_id": "device-15",
+      "bucket": 34
+    },
+    {
+      "install_id": "device-16",
+      "bucket": 7
+    },
+    {
+      "install_id": "device-17",
+      "bucket": 16
+    },
+    {
+      "install_id": "device-18",
+      "bucket": 85
+    },
+    {
+      "install_id": "device-19",
+      "bucket": 62
+    },
+    {
+      "install_id": "device-20",
+      "bucket": 52
+    },
+    {
+      "install_id": "device-21",
+      "bucket": 40
+    },
+    {
+      "install_id": "device-22",
+      "bucket": 42
+    },
+    {
+      "install_id": "device-23",
+      "bucket": 26
+    },
+    {
+      "install_id": "device-24",
+      "bucket": 1
+    },
+    {
+      "install_id": "device-25",
+      "bucket": 23
+    },
+    {
+      "install_id": "device-26",
+      "bucket": 49
+    },
+    {
+      "install_id": "device-27",
+      "bucket": 4
+    },
+    {
+      "install_id": "device-28",
+      "bucket": 60
+    },
+    {
+      "install_id": "device-29",
+      "bucket": 16
+    },
+    {
+      "install_id": "device-30",
+      "bucket": 48
+    },
+    {
+      "install_id": "device-31",
+      "bucket": 99
+    },
+    {
+      "install_id": "device-32",
+      "bucket": 14
+    },
+    {
+      "install_id": "device-33",
+      "bucket": 36
+    },
+    {
+      "install_id": "device-34",
+      "bucket": 67
+    },
+    {
+      "install_id": "device-35",
+      "bucket": 44
+    },
+    {
+      "install_id": "device-36",
+      "bucket": 54
+    },
+    {
+      "install_id": "device-37",
+      "bucket": 48
+    },
+    {
+      "install_id": "device-38",
+      "bucket": 51
+    },
+    {
+      "install_id": "device-39",
+      "bucket": 53
+    }
+  ],
+  "trusted_key": {
+    "x": "HwMmJj0SeAuDsjm0QYzuNi79TyHp-DW7hd5oCduZwHk",
+    "y": "uRqBVgQiMpGFZNgRkPUTbrkNonvqy-YD7Pjfy5rSnAc"
+  },
+  "other_key": {
+    "x": "i8t83NlIvR6m0QUrwV6Juy1yQfmv4CF4C8iiTRskL80",
+    "y": "M8ST2NfkgW8F0wo-c1y4dTWWh20FgaKUGAo7JEnedHM"
+  }
+}

@@ -16,6 +16,7 @@
     <Compile Include="$(UomdScripts)Core/UomdMediaCatalog.cs" />
     <Compile Include="$(UomdScripts)Core/UomdBattleFormation.cs" />
     <Compile Include="$(UomdScripts)Core/Generated/UomdCorePrimitives.g.cs" />
+    <Compile Include="$(UomdScripts)Core/Patching/*.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Uomd.Contracts/Uomd.Contracts.csproj" />
