@@ -20,3 +20,8 @@ How this project differs from the generic templates in `references/`:
   `generate_audio`, `generate_model`): art and audio come only through the Gemini pipeline and `tools/ingest_art.ts`.
 - Never install packages through `manage_packages` without a reviewed manifest change; `Packages/manifest.json` and
   `packages-lock.json` are committed.
+- **Hosts**: Claude Code reads `unityMCP` from `.mcp.json`, Codex from `.codex/config.toml`, Antigravity from the workspace
+  plugin `.agents/plugins/uomd-mcp/` (check with `python tools/setup_antigravity.py`). Do not use the package window's
+  "Configure" buttons for these hosts; they write a second, global entry. The server uses the repo-local uv cache
+  `.cache/uv` (on this Windows machine pywin32 could not be installed into the AppData cache, os error 32).
+- `execute_code` runs a C# snippet in the open Editor: use it where a vendored Unity skill says `unity command eval`.

@@ -107,6 +107,17 @@
       ],
       "unity_package": "com.coplaydev.unity-mcp@aa5fc638d623f56178d50329d9ad8c541a57fe66 (v10.3.0)"
     },
+    "donchitos-claude-code-game-studios": {
+      "commit": "05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418",
+      "license": "MIT",
+      "license_file": ".claude/third-party-licenses/donchitos-claude-code-game-studios-LICENSE.txt",
+      "note": "Vetted 2026-10-25: Markdown/YAML only under game-studios/references (38 role files without Godot/Unreal/DOTS, 74 workflows renamed WORKFLOW.md, docs, templates, rules). No hooks, scripts, settings.json, CLAUDE.md or project.yaml. The game-studios SKILL.md is UOMD-authored and maps upstream paths onto the repository.",
+      "repo": "https://github.com/Donchitos/Claude-Code-Game-Studios.git",
+      "skills": [
+        "game-studios"
+      ],
+      "tag": "v1.2.0"
+    },
     "graphify": {
       "commit": "dc7b9fd7fbebaa2e509fd8cbef89ae9fc824ef0d",
       "license": "MIT",
@@ -188,15 +199,29 @@
         "ui-ux-pro-max"
       ]
     },
+    "unity-technologies-ml-agents": {
+      "commit": "d84b2a2583d6b2935bc7467de35334e978f4288e",
+      "license": "Apache-2.0",
+      "note": "Checked 2026-10-25; nothing vendored. unity-ml-agents is a UOMD-authored skill with the verified versions and the project rules (offline training only; the shipping client keeps deterministic combat).",
+      "python_package": "mlagents==1.1.0",
+      "repo": "https://github.com/Unity-Technologies/ml-agents.git",
+      "skills": [
+        "unity-ml-agents"
+      ],
+      "unity_package": "com.unity.ml-agents@4.1.0 (sandbox projects only, never apps/unity)"
+    },
     "unity-technologies-skills": {
       "commit": "51f530f4de53da76b4f5e1b9f57d5622df35ae83",
       "license": "Unity Companion License",
       "license_file": ".claude/third-party-licenses/unity-technologies-skills-LICENSE.md",
-      "note": "Official Unity skills, vetted 2026-10-25: markdown only, vendored unchanged plus UOMD-NOTE.md. Project skills unity-ui-toolkit and uomd-anime-ui win on conflict.",
+      "note": "Official Unity skills, vetted 2026-10-25: markdown (plus one reference .hlsl), vendored unchanged plus UOMD-NOTE.md. Project skills unity-ui-toolkit, uomd-anime-ui, unity-urp-2d and uomd-battle win on conflict. Not vendored: skills for Unity-imported sprites/audio/atlases (UOMD loads art and audio from signed data patches), UGUI/TextMeshPro, Unity IAP/LevelPlay (Play Billing and AdMob are bridged in C#), multiplayer, web and BiRP.",
       "repo": "https://github.com/Unity-Technologies/skills.git",
       "skills": [
         "ui",
-        "ui-uitk"
+        "ui-uitk",
+        "urp-postprocessing",
+        "validate-urp-render-graph-renderer-feature",
+        "shader-graph-create-custom-node"
       ]
     }
   },
@@ -237,6 +262,7 @@
     "frontend-a11y": "e00991a3f4d47fcf1529dd74a080afcf46137dc5061e70dc6e3da7b27f2ae3f3",
     "frontend-design-direction": "71a40f7bc4a28da01b54527fe5590f6055c93adc630e6ceee8c892b35c980893",
     "frontend-patterns": "a5b971eb9e74cd763c7e3308bfd888e0d9cf69f8b88477659889d77182479740",
+    "game-studios": "a09de8e7db74b0f13619988304548a3ee459692182318db31da1406fbfc10c8d",
     "git-workflow": "7094ab94802d7e839dc33c6ea230020327260518b1b1ce62b42d56d051c1d7c5",
     "google-anime-media": "b81c6f2d7cc269d0d010e301f688cd4c1f51c0961eab7e12281fcbd3af74a9bf",
     "graphify": "52a7e2167b50e1ff96ac85fbee26afcdf34676c4ebb6364cd7c7938347873bd0",
@@ -269,6 +295,7 @@
     "security-audit": "5e3e96a1e438d8f35fef0a1e38f02d4f00e2bdf910401b7dfe00e6779c6dac85",
     "security-review": "b9eb6416eebc8dda046674f0a2dbb3be88aff526d182b60a0f55998d3d6d0d8d",
     "security-scan": "74bc3006fb15eef9cea6bf70a4e9cc45ec118ef00733d1c8226c9dc428f8d658",
+    "shader-graph-create-custom-node": "927d3d95345410d56b94fa08f9f74f42389b2d03eb80774e5f9b85b7ff01ac11",
     "strategic-compact": "44a71c6dcc3fdde8061b8a78296c5d37233e4accc8cf3c794e29ac5b9f2eee28",
     "tdd-workflow": "8887afa786ef30de834e7567115d3df71934b343c3d9d849714f8ea43f979ee0",
     "test-collaboration": "741138330940e2c9d3cc7bec9e671787f24a361ff89be44e09a56abc8e10dcfa",
@@ -293,6 +320,7 @@
     "unity-lifecycle": "e034001e9aadb8bd5e329a6dac130e449f8552e74d4d7947b919a83d7f41aa55",
     "unity-mcp-orchestrator": "1d8a3f126c5bb525ab08626428a05c75539418454b2bd65a9c0eea6b397619c0",
     "unity-mcp-workflow": "51d4ede75e6ce7aa5572c989116ab650007435145042772ff27fecf89e6eee2b",
+    "unity-ml-agents": "748a302b380cae4a109309c93b5b10263c7551763da98fa0479c5117e7636445",
     "unity-packages-services": "80b8e8fb0849ef151c3d450b500c81f361441d50d633ee5369f34b3030d6915f",
     "unity-performance": "4443921030b8b46a6b9113e8c53703ae3e8c0b34be80f6d6205745a3d3d2b6bd",
     "unity-platforms": "1dcaf8335d5893f0d7d83bbce34d73069e5113eb8af576eac653329a4f7ca641",
@@ -310,6 +338,8 @@
     "uomd-mobile-qa": "3ec43abdf22ac5c6f9336b560cabf149385f38ae5e59d8360c30ba8916a9a1a7",
     "uomd-narrative-cinematics": "a75bcc526fafc77a09de927110af08b101bbe6cb86410686a9f073c74e7a29a6",
     "uomd-unity-engine": "2cee7b36e7264feea7ff1bf55eceb9b77871c4259b9a67c1726c8a887ad7f2a4",
+    "urp-postprocessing": "19735c6952ea2170c5a7fc8e7a3968e15a0ce81b5f2c4ab6b9abd9ac292b7eb8",
+    "validate-urp-render-graph-renderer-feature": "ae28f9c3aaa52342bc2448d61dd9baf0ff81eea24c4d02d39c068e253f77f6a5",
     "verification-loop": "5b06be54d4852f60e6cf1b04c6e9a4748554334eb3e41af6c0959b544e6464ae",
     "vite-patterns": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
   },

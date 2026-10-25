@@ -1,0 +1,51 @@
+{
+  "mcpServers": {
+    "unityMCP": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcpforunityserver==10.3.0",
+        "mcp-for-unity",
+        "--transport",
+        "stdio"
+      ],
+      "cwd": "${PLUGIN_ROOT}/../../..",
+      "env": {
+        "UV_CACHE_DIR": ".cache/uv"
+      }
+    },
+    "uomd-unity-live": {
+      "command": "node",
+      "args": [
+        "${PLUGIN_ROOT}/../../../node_modules/tsx/dist/cli.mjs",
+        "${PLUGIN_ROOT}/../../../tools/mcp_unity_live.ts"
+      ],
+      "cwd": "${PLUGIN_ROOT}/../../.."
+    },
+    "graphify": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--offline",
+        "--no-project",
+        "--with",
+        "graphifyy[mcp]==0.9.84",
+        "python",
+        "-m",
+        "graphify.serve",
+        "${PLUGIN_ROOT}/../../../graphify-out/graph.json"
+      ],
+      "cwd": "${PLUGIN_ROOT}/../../..",
+      "env": {
+        "UV_CACHE_DIR": ".cache/uv"
+      }
+    },
+    "chrome-devtools": {
+      "command": "node",
+      "args": [
+        "${PLUGIN_ROOT}/../../../tools/mcp_chrome_devtools.mjs"
+      ],
+      "cwd": "${PLUGIN_ROOT}/../../.."
+    }
+  }
+}

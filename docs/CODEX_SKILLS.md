@@ -49,6 +49,10 @@ The 28 upstream Phaser topic skills were retired in Decision D-23 (2026-10-17); 
 
 | Skill / capability | Decision | Value |
 | --- | --- | --- |
+| [game-studios](../.agents/skills/game-studios/SKILL.md) | Added 2026-10-25, Claude Code Game Studios v1.2.0 (MIT, Markdown only) | 38 studio roles and 74 production workflows as references, mapped onto UOMD paths; no hooks, scripts or upstream project tree |
+| [unity-ml-agents](../.agents/skills/unity-ml-agents/SKILL.md) | Added 2026-10-25, project-authored | ML-Agents 4.1.0 / mlagents 1.1.0 for offline balance and playtest bots in a sandbox; never in the shipping client |
+| `urp-postprocessing`, `validate-urp-render-graph-renderer-feature`, `shader-graph-create-custom-node` | Added 2026-10-25 from the pinned official Unity skills | URP 17.3 post-processing, Render Graph renderer-feature review and Shader Graph custom nodes for the 2.5D look; `unity-cli eval` maps to MCP for Unity `execute_code` |
+| Antigravity MCP plugin `.agents/plugins/uomd-mcp/` + `tools/setup_antigravity.py` | Added 2026-10-25 | Antigravity discovers the project MCP servers from the repository; the setup script verifies skills and starts every server before work |
 | [uomd-codex-workflow](../.agents/skills/uomd-codex-workflow/SKILL.md) | Added, project-authored prompt only | Safe parallel development, current-main integration and truthful validation/deployment evidence |
 | [uomd-monitoring](../.agents/skills/uomd-monitoring/SKILL.md) | Added, project-authored prompt only | Central panel coverage, safe SSV/payment/API outcomes, player/economy provenance and freshness |
 | [uomd-monetization](../.agents/skills/uomd-monetization/SKILL.md) | Added, project-authored prompt only | SSV encoding/signatures, Play/RTDN lifecycle, immutable single-currency ledger and native acceptance |

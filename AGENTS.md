@@ -4,6 +4,23 @@ Read the root [README.md](README.md) completely before substantial work. It rema
 
 **Decision D-33 (2026-10-25, staged):** after Claude Opus 5.5's first local Unity pass, Gemini Argon (Antigravity) takes over day-to-day operations — read [docs/handoff/ARGON_UNITY_HANDOFF.md](docs/handoff/ARGON_UNITY_HANDOFF.md); it states when the handoff is active. Until then:
 
+## Antigravity / Gemini Argon: set up before any task (mandatory)
+
+Do this at the start of every new Antigravity session, before reading code or changing anything, and report the result:
+
+1. `python tools/setup_antigravity.py` must end with `RESULT PASS`. It verifies the skill lock, the `.agents/skills/`
+   adapters and budgets, the prerequisites, and starts every project MCP server and lists its tools. Fix a FAIL first
+   (`npm ci`, `bash tools/build_graph.sh`, `python tools/sync_codex_skills.py`); never skip it.
+2. Additional Options (...) → MCP Servers must show `unityMCP`, `uomd-unity-live`, `graphify` and `chrome-devtools` from
+   the workspace plugin `.agents/plugins/uomd-mcp/`. If they are missing, run `python tools/setup_antigravity.py
+   --install-global`, disable the plugin, restart Antigravity.
+3. Unity work needs the live Editor: the owner opens `apps/unity` in Unity Hub (6000.3.27f1) with Window → MCP for Unity →
+   Transport **stdio**. Read `mcpforunity://editor/state` through `unityMCP`; if it does not answer, stop and tell the owner.
+   After every change, see its effect through MCP: `read_console` (0 errors), `run_tests`, a Game-view screenshot.
+4. Skills load on demand: read the matching `.agents/skills/<name>/SKILL.md` (it points at the canonical
+   `.claude/skills/<name>/`) before the work it covers. Start with `uomd-unity-engine`, `unity-mcp-workflow`,
+   `unity-mcp-orchestrator`; game-studio roles and workflows: `game-studios`; ML-Agents (offline only): `unity-ml-agents`.
+
 Owner instruction 2026-10-24 (Decision D-31, supersedes 2026-10-14 D-21 and 2026-10-23 D-30): 100% of project operations, architecture, engineering, Unity 6 LTS (`apps/unity/`) client migration, and Gemini API creative asset production are transferred exclusively to **Claude Opus 5.5** (`claude-opus-5-5` / Claude Code). Argon 4 / Antigravity and Codex are retired from active ownership; only Claude Opus 5.5 operates on the repository from now on. Read the complete [README.md](README.md), [docs/NEXT_STEPS.md](docs/NEXT_STEPS.md), and the Unity master blueprint [docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md](docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md). These Codex host instructions remain retained solely for `sync_codex_skills.py --check` adapter compatibility. Work only in `F:\unaware-of-my-demise`, commit locally on `main` (D-28), and never overwrite another agent's working tree or force-push shared history.
 
 For Codex, discover project skills under `.agents/skills/`. Read the relevant `SKILL.md`, then its linked canonical source and only the needed references. The shared, pinned skill content stays in `.claude/skills/`; do not modify `.claude/`, `CLAUDE.md`, `.mcp.json` or the Claude bootstrap while maintaining the Codex adapters. Validate them with `python3 tools/sync_codex_skills.py --check`.

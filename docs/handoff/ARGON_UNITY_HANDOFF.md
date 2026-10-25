@@ -44,13 +44,22 @@ engineering master prompt; `narrative/` stays the canon. Do not create a competi
   skills in `.claude/skills/`), `.agents/agents/` (13 specialists incl. `unity-architect`, `unity-build-resolver`,
   `unity-csharp-reviewer`), `.agents/workflows/`, `.agents/rules/`. Keep adapters in sync with
   `python3 tools/sync_codex_skills.py` and `python3 tools/install_ecc.py --sync-antigravity`; verify with `--check`.
-- MCP servers (same as `.mcp.json`; add them in Antigravity's MCP server settings):
-  - `uomd-unity-live` — `node node_modules/tsx/dist/cli.mjs tools/mcp_unity_live.ts` (static project/skill inspection),
-  - `unityMCP` — MCP for Unity, live Editor: `uvx --from mcpforunityserver==10.3.0 mcp-for-unity --transport stdio`
-    (Unity package `com.coplaydev.unity-mcp` pinned to the same v10.3.0 commit; Window → MCP for Unity → Transport stdio;
-    its window also has an Antigravity configurator, after which Antigravity needs its MCP toggle enabled). Read
-    `.claude/skills/unity-mcp-orchestrator/UOMD-NOTE.md` before using it,
+- **First step of every session**: the "set up before any task" section of [AGENTS.md](../../AGENTS.md) —
+  `python tools/setup_antigravity.py` must end with `RESULT PASS` (skills, adapters, budgets, prerequisites, and every MCP
+  server started with its tools listed), then the MCP Servers list in Antigravity and `mcpforunity://editor/state`.
+- MCP servers come from the workspace plugin `.agents/plugins/uomd-mcp/` (same servers and pins as `.mcp.json`; Antigravity
+  discovers the plugin itself, nothing to add by hand; `--install-global` is the fallback):
+  - `unityMCP` — MCP for Unity v10.3.0, the live Editor (48 tools incl. `read_console`, `run_tests`, `execute_code`,
+    `manage_camera` screenshots). Unity package `com.coplaydev.unity-mcp` pinned to the same commit; Window → MCP for
+    Unity → Transport stdio; do not use the package's Antigravity "Configure" button (it adds a second, global entry).
+    Read `.claude/skills/unity-mcp-orchestrator/UOMD-NOTE.md` before using it,
+  - `uomd-unity-live` — static project/skill inspection without the Editor,
   - `graphify` (`bash tools/build_graph.sh` first), `chrome-devtools`.
+  - `unityMCP` and `graphify` use the repo-local uv cache `.cache/uv`: on the owner's Windows machine pywin32 could not be
+    installed into the AppData uv cache (os error 32).
+- Added skills (2026-10-25): `game-studios` (Claude Code Game Studios v1.2.0: 38 studio roles and 74 workflows mapped
+  onto UOMD paths), `unity-ml-agents` (ML-Agents 4.1.0 for offline training only, never in the shipping client), and the
+  official Unity skills `urp-postprocessing`, `validate-urp-render-graph-renderer-feature`, `shader-graph-create-custom-node`.
 - Unity batch: `powershell -File apps/unity/cloud/unity_ci.ps1 test|build` (Windows) or `bash apps/unity/cloud/unity_ci.sh
   import|test|capture|build` (Linux cloud); then `node tools/record_unity_build.mjs` / `node tools/publish_unity_screens.mjs`.
 - Assets (Gemini API, budget-guarded): `tools/gen_image.ts`, `tools/record_game_vo.py`,
