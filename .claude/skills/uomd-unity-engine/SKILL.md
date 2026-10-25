@@ -23,7 +23,7 @@ The legacy web client (`apps/game`) and Capacitor shell (`apps/android`) were re
 | `Scripts/Combat/Uomd.Combat` | Core | `Battle`, `BattleReplay`, `UnitPackDef`/`EncounterDef`/`CombatJson`, `Combatant` + runtime records, `JsMath` |
 | `Scripts/Narrative/Uomd.Narrative` | Contracts, Core, UI | `StoryRunner` (engine-free), `SubtitleSynchronizer` |
 | `Scripts/UI/Uomd.UI` | Contracts, Core, Platform | `UomdUiKit`, `UomdThemeTokens`, `SafeAreaBinder`; UXML/USS in `UI/` |
-| `Scripts/Battle/Uomd.Battle` | Contracts, Core, Platform, UI | `ChibiAtlasSlicer`, `BattleVfxStage`, `VfxProceduralTextures`; shaders in `Shaders/` |
+| `Scripts/Battle/Uomd.Battle` | Contracts, Core, Platform, UI | `ChibiAtlasSlicer`; shaders in `Shaders/`. Battle VFX live in `Core/Vfx` (engine-free) and `Scenes/UomdVfxPlayer` |
 | `Scripts/Platform/Uomd.Platform` | Contracts, Core | `IUomdPlatformBridge`, `UomdAndroidJniBridge`, `UomdEditorMockBridge`, `UomdPlatformBridgeFactory` |
 | `Scripts/Scenes/Uomd.Scenes` | all runtime | `UomdBootstrap` (runtime entry, builds `UIDocument` + router), `UomdSceneRouter`, `*ScreenController` ×28 (`BattleScreenController` runs the real engine; write `Uomd.Combat.Battle` fully qualified there, `Battle` alone resolves to the `Uomd.Battle` namespace) |
 | `Editor/Uomd.Editor` | URP, runtime | `UomdProjectSetup` (URP 2D + Android player settings, `ApplicationId = io.github.mucaeksi.unawareofmydemise`), `UomdBuild` (AAB, signing from `UOMD_KEYSTORE_*`), `UomdMcpEditorTools` |

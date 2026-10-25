@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 using Uomd.Combat;
 using Uomd.Contracts;
 using Uomd.Core;
+using Uomd.Core.Vfx;
 using Uomd.Core.Patching;
 using Uomd.Narrative;
 using Uomd.Platform;
@@ -32,12 +33,22 @@ namespace Uomd.Scenes
         private readonly Dictionary<string, Dictionary<string, Sprite>> _sprites = new Dictionary<string, Dictionary<string, Sprite>>(StringComparer.Ordinal);
         private readonly Dictionary<string, string> _skillText = new Dictionary<string, string>(StringComparer.Ordinal);
         private readonly Dictionary<string, string> _roles = new Dictionary<string, string>(StringComparer.Ordinal);
+        private readonly Dictionary<string, string> _affinity = new Dictionary<string, string>(StringComparer.Ordinal);
+        private readonly Dictionary<string, (string Name, string Category)> _statuses = new Dictionary<string, (string, string)>(StringComparer.Ordinal);
         private Uomd.Combat.Battle _battle;
         private VisualElement _root;
         private VisualElement _world;
         private VisualElement _unitLayer;
         private VisualElement _plateLayer;
         private VisualElement _fxLayer;
+        private VisualElement _vfxGround;
+        private VisualElement _vfxFx;
+        private VisualElement _vfxOverlay;
+        private UomdVfxPlayer _vfx;
+        private string _activeSkillType = "";
+        private float _hitStopLeft;
+        private float _shakeLeft;
+        private float _shakeAmp;
         private VisualElement _dock;
         private VisualElement _turnBar;
         private Label _hint;
@@ -51,10 +62,14 @@ namespace Uomd.Scenes
         private int _generation;
 
         public UomdScreenId ScreenId => UomdScreenId.Battle;
+        /// <summary>Presets currently playing (capture QA).</summary>
+        public int ActiveEffects => _vfx?.ActiveCount ?? 0;
 
         public BattleScreenController(UomdSceneRouter router) => _router = router;
 
         private bool Calm => _router.Session.ReducedMotion;
+        private bool NoFlash => Calm || _router.Session.ReduceFlash;
+        private const float HitStopScale = 0.06f;
 
         public async Awaitable OnEnterAsync(VisualElement screenRoot)
         {
@@ -85,22 +100,47 @@ namespace Uomd.Scenes
             }
 
             BuildStage(raw);
+            await LoadVfxAsync();
             await LoadUnitArtAsync();
             if (generation != _generation) return;
             SyncViews();
             _ = RunAsync(generation);
         }
 
+        /// <summary>Combat VFX presets (content vfx/vfx_presets.json); a missing or invalid pack only skips the effects.</summary>
+        private async Awaitable LoadVfxAsync()
+        {
+            try
+            {
+                _vfx.Pack = VfxPack.Parse(await _router.Patch.ReadTextAsync(VfxPack.Path));
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[Battle] VFX presets unavailable; effects are skipped: {e.Message}");
+                _vfx.Pack = null;
+            }
+        }
+
         private void ReadSkillText(string packJson)
         {
             _skillText.Clear();
             _roles.Clear();
+            _affinity.Clear();
+            _statuses.Clear();
             var pack = UomdJson.ParseObject(packJson);
+            if (pack.TryGetValue("rules", out object rulesRaw) && rulesRaw is Dictionary<string, object> rules && rules.TryGetValue("statuses", out object st) && st is List<object> statuses)
+            {
+                foreach (var item in statuses)
+                {
+                    if (item is Dictionary<string, object> status) _statuses[Str(status, "status_id")] = (Str(status, "name_en"), Str(status, "category"));
+                }
+            }
             if (!(pack.TryGetValue("units", out object units) && units is List<object> list)) return;
             foreach (var u in list)
             {
                 if (!(u is Dictionary<string, object> unit)) continue;
                 _roles[Str(unit, "unit_id")] = Str(unit, "role");
+                _affinity[Str(unit, "unit_id")] = Str(unit, "formation_affinity");
                 if (!(unit.TryGetValue("skills", out object skills) && skills is List<object> sk)) continue;
                 foreach (var s in sk)
                 {
@@ -133,9 +173,12 @@ namespace Uomd.Scenes
             _world.style.width = UomdScreenKit.RefWidth;
             _world.style.height = UomdScreenKit.RefHeight;
             stage.Add(_world);
+            // VFX layers like the PIXI stage: ground under the units, fx over them (under the floating numbers), overlay above the HUD
+            _vfxGround = UomdScreenKit.Layer(_world);
             _unitLayer = UomdScreenKit.Layer(_world);
             _unitLayer.pickingMode = PickingMode.Ignore;
             _plateLayer = UomdScreenKit.Layer(_world);
+            _vfxFx = UomdScreenKit.Layer(_world);
             _fxLayer = UomdScreenKit.Layer(_world);
 
             string stageId = Str(raw, "stage_id"), title = Str(raw, "title_en");
@@ -163,6 +206,25 @@ namespace Uomd.Scenes
             _desc.style.width = 1360;
             _dock = UomdScreenKit.Layer(stage);
             _dock.pickingMode = PickingMode.Ignore;
+
+            var overlayBand = new VisualElement { pickingMode = PickingMode.Ignore };
+            overlayBand.style.position = Position.Absolute;
+            overlayBand.style.left = new Length(50, LengthUnit.Percent);
+            overlayBand.style.marginLeft = -UomdScreenKit.RefWidth / 2f;
+            overlayBand.style.top = 0;
+            overlayBand.style.width = UomdScreenKit.RefWidth;
+            overlayBand.style.height = UomdScreenKit.RefHeight;
+            stage.Add(overlayBand);
+            _vfxOverlay = UomdScreenKit.Layer(overlayBand);
+            foreach (var layer in new[] { _vfxGround, _vfxFx, _vfxOverlay }) layer.pickingMode = PickingMode.Ignore;
+            _vfx = new UomdVfxPlayer(_vfxGround, _vfxFx, _vfxOverlay, () => new VfxEnvironment
+            {
+                Particles = true,
+                ParticleDensity = 1,
+                ReducedMotion = _router.Session.ReducedMotion,
+                ReduceFlash = _router.Session.ReduceFlash
+            });
+            _hitStopLeft = _shakeLeft = 0f;
         }
 
         private async Awaitable LoadUnitArtAsync()
@@ -464,7 +526,7 @@ namespace Uomd.Scenes
             foreach (var e in events)
             {
                 if (generation != _generation) return;
-                float wait = Present(e);
+                float wait = await PresentAsync(e);
                 if (wait > 0f) await Awaitable.WaitForSecondsAsync(Calm ? wait * 0.6f : wait);
             }
             if (generation != _generation) return;
@@ -477,7 +539,7 @@ namespace Uomd.Scenes
         private static bool B(Dictionary<string, object> e, string key) => e.TryGetValue(key, out object v) && v is bool b && b;
 
         /// <summary>Shows one engine event and returns how long to hold before the next (BattleScene.present timings).</summary>
-        private float Present(Dictionary<string, object> e)
+        private async Awaitable<float> PresentAsync(Dictionary<string, object> e)
         {
             string type = S(e, "type");
             switch (type)
@@ -493,50 +555,58 @@ namespace Uomd.Scenes
                     return 0f;
                 }
                 case "skill_used":
-                {
-                    if (!_views.TryGetValue(S(e, "actor"), out var actor)) return 0.2f;
-                    string skillType = S(e, "skillType");
-                    var def = _battle.Unit(actor.Id).Def.Skills.FirstOrDefault(s => s.SkillId == S(e, "skill"));
-                    if (skillType == "ultimate" || skillType == "active") Banner(def?.NameEn ?? S(e, "skill"), skillType == "ultimate");
-                    var targets = e.TryGetValue("targets", out object t) && t is IEnumerable<object> list ? list.Select(x => x as string).Where(x => x != null).ToList() : new List<string>();
-                    string state = skillType == "ultimate" ? "ultimate" : skillType == "active" ? "active" : "basic";
-                    // a basic strike on one opponent closes the distance first
-                    if (skillType == "basic" && targets.Count == 1 && _views.TryGetValue(targets[0], out var opp) && opp.Side != actor.Side && !Calm)
-                    {
-                        actor.Play("walk");
-                        actor.MoveTo(opp.X + (actor.Side == "player" ? -135f : 135f), opp.Y, 240, Calm);
-                        if (!_lunged.Contains(actor)) _lunged.Add(actor);
-                        UomdScreenKit.After(actor.Root, 240, () => actor.Play(state));
-                        return 0.5f;
-                    }
-                    actor.Play(state);
-                    _router.Audio.PlaySfx(skillType == "ultimate" ? "sfx_blade_heavy" : "sfx_blade_slash");
-                    return skillType == "basic" ? 0.28f : 0.36f;
-                }
+                    return await SkillUsedAsync(e);
                 case "damage":
                 {
                     if (!_views.TryGetValue(S(e, "target"), out var target)) return 0.2f;
                     bool crit = B(e, "crit");
                     double amount = N(e, "amount"), absorbed = N(e, "absorbed");
-                    target.Play("hit");
-                    if (amount > 0) Float(target, crit ? $"-{amount}!" : $"-{amount}", crit ? new Color(1f, 0.847f, 0.420f) : Color.white, crit ? 64 : 46);
+                    _views.TryGetValue(S(e, "source"), out var source);
+                    string element = source != null ? _battle.Unit(source.Id).Def.Element : "Veil";
+                    bool ultimate = _activeSkillType == "ultimate";
+                    bool heavy = crit || ultimate || amount >= 4;
+                    if (amount > 0) target.Play("hit");
+                    // BattleScene damage: a slash in the attack direction, the impact, hit-stop on heavy blows
+                    string slash = crit || ultimate ? "heavy" : _activeSkillType == "active" || _activeSkillType == "signature" ? "cross" : "single";
+                    bool fromLeft = (source?.X ?? 0f) <= target.X;
+                    _ = _vfx.Play($"slash_{slash}", new VfxPlayOptions { X = target.X, Y = target.HitY, Element = element, Dir = fromLeft ? 1 : -1 });
+                    _ = _vfx.Play(crit ? "hit_crit" : heavy ? "hit_heavy" : "hit_impact", new VfxPlayOptions { X = target.X, Y = target.HitY, Element = element });
+                    if (heavy && amount > 0) HitStop(crit ? 65 : 48);
+                    _router.Audio.PlaySfx(heavy ? "sfx_blade_heavy" : "sfx_blade_slash");
+                    if (B(e, "counter")) Float(target, "COUNTER", UomdThemeTokens.GoldHi, 30, -60);
+                    if (!string.IsNullOrEmpty(S(e, "redirectedFrom"))) Float(target, "INTERCEPT", UomdThemeTokens.GoldHi, 28, 70);
+                    if (amount > 0) Float(target, crit ? $"-{amount}!" : $"-{amount}", crit ? new Color(1f, 0.847f, 0.420f) : B(e, "counter") ? UomdThemeTokens.GoldHi : Color.white, crit ? 64 : 46);
                     if (absorbed > 0) Float(target, amount == 0 ? "⛨ BLOCKED" : $"({absorbed} absorbed)", UomdThemeTokens.Shield, 30, amount == 0 ? 0 : 80);
                     var c = _battle.Unit(target.Id);
                     target.SetHp(N(e, "hpAfter"), c.MaxHp);
+                    if ((crit || ultimate) && !NoFlash) Shake(200, crit ? 0.008f : 0.006f);
                     return crit ? 0.36f : 0.27f;
                 }
                 case "heal":
                 {
                     if (!_views.TryGetValue(S(e, "target"), out var target)) return 0.1f;
                     Float(target, $"+{N(e, "amount")}", new Color(0.561f, 0.890f, 0.627f), 44);
+                    CastSigil(target.X, target.Y - 10, "Gale", 1.0);
                     target.SetHp(N(e, "hpAfter"), _battle.Unit(target.Id).MaxHp);
                     return 0.26f;
                 }
                 case "shield":
-                    if (_views.TryGetValue(S(e, "target"), out var shielded)) Float(shielded, $"⛨ +{N(e, "amount")} SHIELD", UomdThemeTokens.Shield, 34);
+                    if (_views.TryGetValue(S(e, "target"), out var shielded))
+                    {
+                        Float(shielded, $"⛨ +{N(e, "amount")} SHIELD", UomdThemeTokens.Shield, 34);
+                        CastSigil(shielded.X, shielded.Y - 10, "Dawn", 1.0);
+                    }
                     return 0.2f;
                 case "status_applied":
-                    if (_views.TryGetValue(S(e, "target"), out var affected)) Float(affected, S(e, "status").Replace('_', ' ').ToUpperInvariant(), new Color(1f, 0.478f, 0.588f), 32);
+                    if (_views.TryGetValue(S(e, "target"), out var affected))
+                    {
+                        string id = S(e, "status");
+                        var status = _statuses.TryGetValue(id, out var known) ? known : (Name: id.Replace('_', ' '), Category: "");
+                        bool buff = status.Category == "buff";
+                        string cue = buff ? "▲ " : status.Category == "control" ? "◆ " : "▼ ";
+                        CastSigil(affected.X, affected.Y - 10, buff ? "Dawn" : "Veil", 0.9);
+                        Float(affected, cue + (string.IsNullOrEmpty(status.Name) ? id : status.Name).ToUpperInvariant(), buff ? UomdThemeTokens.Shield : new Color(1f, 0.478f, 0.588f), 32);
+                    }
                     return 0.19f;
                 case "focus":
                 {
@@ -560,6 +630,154 @@ namespace Uomd.Scenes
                 default:
                     return 0f;
             }
+        }
+
+        /// <summary>
+        /// skill_used of BattleScene.ts: the caster's pose and sigil, a dash for melee strikers, the skill's own preset (with
+        /// its camera cues) or the generic projectile/pillar, and the ultimate's per-target impacts. Returns the hold.
+        /// shortcut: the ultimate cut-in, stage dim/zoom and the ringPulse/burst accents are not ported yet.
+        /// </summary>
+        private async Awaitable<float> SkillUsedAsync(Dictionary<string, object> e)
+        {
+            if (!_views.TryGetValue(S(e, "actor"), out var actor)) return 0.2f;
+            string skillType = S(e, "skillType"), skillId = S(e, "skill");
+            _activeSkillType = skillType;
+            var unit = _battle.Unit(actor.Id).Def;
+            var def = unit.Skills.FirstOrDefault(s => s.SkillId == skillId);
+            string element = def?.Element ?? unit.Element;
+            bool ult = skillType == "ultimate", active = skillType == "active" || skillType == "signature";
+            int dir = actor.Side == "player" ? 1 : -1;
+            var targets = (e.TryGetValue("targets", out object t) && t is IEnumerable<object> list ? list.Select(x => x as string).Where(x => x != null) : Enumerable.Empty<string>())
+                .Select(id => _views.TryGetValue(id, out var v) ? v : null).Where(v => v != null).ToList();
+            var opp = targets.FirstOrDefault(v => v.Side != actor.Side);
+            string role = _roles.TryGetValue(unit.UnitId, out string r) ? r.ToLowerInvariant() : "";
+            bool isCaster = def?.PlayerTarget == "ally" || (_affinity.TryGetValue(unit.UnitId, out string aff) && aff == "rear")
+                || System.Text.RegularExpressions.Regex.IsMatch(role, "support|healer|mage|caster|arcan|bell|alchem|ranged|seer|choir");
+            string state = ult ? "ultimate" : active ? "active" : "basic";
+            if (ult || active) Banner(def?.NameEn ?? skillId, ult);
+
+            if (ult)
+            {
+                _router.Audio.PlaySfx("sfx_blade_heavy");
+                Cast(actor, state, element, true);
+                if (!NoFlash) Shake(260, 0.0085f);
+                string custom = _vfx.PresetForSkill(skillId);
+                Ripple(actor, unit.UnitId, element, ult: true, active: true, customUltimate: custom != null);
+                foreach (var tv in targets.Count > 0 ? targets : new List<BattleUnitView> { actor })
+                {
+                    if (custom != null) _ = PlayPreset(custom, new VfxPlayOptions { X = tv.X, Y = tv.HitY, Element = element, Dir = dir });
+                    else if (tv.Side != actor.Side) _ = _vfx.Play("pillar_eruption", new VfxPlayOptions { X = tv.X, Y = tv.Y, Element = element, Scale = 1.25 });
+                    else CastSigil(tv.X, tv.Y - 12, element, 1.4);
+                }
+                return 0.36f;
+            }
+
+            if (active) CastSigil(actor.X, actor.Y - 8, element, 1.18, 560);
+            if (actor.Side == "player") Ripple(actor, unit.UnitId, element, ult: false, active: active, customUltimate: false);
+            _router.Audio.PlaySfx(active ? "sfx_blade_heavy" : "sfx_blade_slash");
+            string preset = _vfx.PresetForSkill(skillId);
+            float from = actor.X + (actor.Side == "player" ? 40f : -40f);
+            if (preset != null)
+            {
+                var primary = opp ?? targets.FirstOrDefault() ?? actor;
+                bool projectile = _vfx.HasProjectile(preset) && opp != null;
+                if (opp != null && !isCaster && !projectile) await DashAsync(actor, opp, state);
+                else Cast(actor, state, element, false);
+                if (projectile)
+                {
+                    await PlayPreset(preset, new VfxPlayOptions { X = from, Y = actor.HitY, Element = element, Dir = dir, TargetX = opp.X, TargetY = opp.HitY });
+                    return 0f;
+                }
+                var options = new VfxPlayOptions { X = primary.X, Y = primary.HitY, Element = element, Dir = dir };
+                if (opp != null) { options.TargetX = opp.X; options.TargetY = opp.HitY; }
+                _ = PlayPreset(preset, options);
+                return opp == null || isCaster ? 0.22f : 0f;
+            }
+            if (opp != null && !isCaster)
+            {
+                await DashAsync(actor, opp, state);
+                if (active) _ = _vfx.Play("pillar_eruption", new VfxPlayOptions { X = opp.X, Y = opp.Y, Element = element, Scale = 0.95 });
+                return 0f;
+            }
+            if (opp != null)
+            {
+                Cast(actor, state, element, false);
+                await _vfx.Play(active ? "projectile_heavy" : "projectile", new VfxPlayOptions { X = from, Y = actor.HitY, Element = element, TargetX = opp.X, TargetY = opp.HitY });
+                if (active) _ = _vfx.Play("pillar_eruption", new VfxPlayOptions { X = opp.X, Y = opp.Y, Element = element, Scale = 0.95 });
+                return 0f;
+            }
+            Cast(actor, state, element, false);
+            return 0.28f;
+        }
+
+        /// <summary>UnitView.playCast: the cast pose and a spell sigil under the feet.</summary>
+        private void Cast(BattleUnitView actor, string state, string element, bool ultimate)
+        {
+            actor.Play(state);
+            CastSigil(actor.X, actor.Y, element, ultimate ? 1.45 : 1.05, ultimate ? 820 : 620);
+        }
+
+        /// <summary>Fadyme's silver bell and Mahmut's iron bulwark accents (BattleScene skill_used).</summary>
+        private void Ripple(BattleUnitView actor, string unitId, string element, bool ult, bool active, bool customUltimate)
+        {
+            if (unitId == "fadyme") _ = _vfx.Play("silver_bell_ripple", new VfxPlayOptions { X = actor.X, Y = actor.HitY, Scale = ult ? 1.55 : active ? 1.3 : 0.95 });
+            else if (unitId == "mahmut") _ = _vfx.Play("iron_bulwark_wave", new VfxPlayOptions { X = actor.X, Y = actor.HitY, Scale = ult ? 1.5 : active ? 1.3 : 0.9 });
+            else if (ult && customUltimate) CastSigil(actor.X, actor.Y - 10, element, 1.35, 680);
+        }
+
+        /// <summary>UnitView.playDashTo: a short leap that stops 135 px before the target, then the strike pose.</summary>
+        private async Awaitable DashAsync(BattleUnitView actor, BattleUnitView target, string state)
+        {
+            if (Calm)
+            {
+                actor.Play(state);
+                return;
+            }
+            actor.Play("walk");
+            actor.MoveTo(target.X + (actor.Side == "player" ? -135f : 135f), target.Y, 250, Calm);
+            if (!_lunged.Contains(actor)) _lunged.Add(actor);
+            await Awaitable.WaitForSecondsAsync(0.25f);
+            actor.Play(state);
+        }
+
+        /// <summary>BattleVfx.castSigil: the authored 680 ms sigil, stretched to durationMs.</summary>
+        private void CastSigil(float x, float y, string element, double scale, double durationMs = 680)
+        {
+            _ = _vfx.Play("cast_sigil", new VfxPlayOptions { X = x, Y = y, Element = element, Scale = scale, Pace = durationMs / 680.0 });
+        }
+
+        /// <summary>BattleVfx.playPreset: a content preset whose camera cues drive hit-stop, shake and flash.</summary>
+        private Awaitable PlayPreset(string id, VfxPlayOptions options)
+        {
+            var palette = _vfx.Pack?.PaletteFor(options.Element) ?? VfxPack.Fallback;
+            return _vfx.Play(id, options, (cue, durationMs, intensity) =>
+            {
+                if (Calm) return;
+                if (cue == "hit_stop") HitStop((float)durationMs);
+                else if (cue == "shake" && !NoFlash) Shake((float)durationMs, (float)intensity * 0.011f);
+                else if (cue == "flash" && !NoFlash) Flash(palette.Core, (float)Math.Min(0.45, intensity * 0.36), (float)Math.Max(60, durationMs));
+            });
+        }
+
+        private void HitStop(float durationMs)
+        {
+            if (Calm || _hitStopLeft > 0f) return;
+            _hitStopLeft = durationMs / 1000f;
+        }
+
+        /// <summary>PixiScene.shake: random offsets of the stage, amplitude intensity × reference width.</summary>
+        private void Shake(float durationMs, float intensity)
+        {
+            _shakeLeft = Math.Max(_shakeLeft, durationMs / 1000f);
+            _shakeAmp = intensity * UomdScreenKit.RefWidth;
+        }
+
+        private void Flash(int rgb, float alpha, float durationMs)
+        {
+            var flash = UomdScreenKit.Layer(_vfxOverlay, UomdVfxPlayer.ToColor(rgb, alpha));
+            flash.pickingMode = PickingMode.Ignore;
+            UomdScreenKit.Fade(flash, 0f, (int)durationMs, 0, Calm);
+            UomdScreenKit.After(_vfxOverlay, (int)durationMs + 40, () => flash.RemoveFromHierarchy());
         }
 
         private async Awaitable AddWaveAsync()
@@ -639,13 +857,29 @@ namespace Uomd.Scenes
 
         public void OnTick(float deltaTime)
         {
-            foreach (var v in _views.Values) v.Tick(deltaTime);
+            // hit-stop slows the battle's own clock (unit frames and effects) for a few real-time frames (BattleVfx.hitStop)
+            float scaled = deltaTime;
+            if (_hitStopLeft > 0f)
+            {
+                _hitStopLeft -= deltaTime;
+                scaled = deltaTime * HitStopScale;
+            }
+            foreach (var v in _views.Values) v.Tick(scaled);
+            _vfx?.Tick(scaled);
+            if (_world == null) return;
+            if (_shakeLeft > 0f)
+            {
+                _shakeLeft -= scaled;
+                _world.style.translate = new Translate(UnityEngine.Random.Range(-_shakeAmp, _shakeAmp), UnityEngine.Random.Range(-_shakeAmp, _shakeAmp));
+                if (_shakeLeft <= 0f) _world.style.translate = new Translate(0, 0);
+            }
         }
 
         public void OnExit()
         {
             _generation++;
             _pending = null;
+            _vfx?.Clear();
             foreach (var frames in _sprites.Values)
             {
                 foreach (var sprite in frames.Values) if (sprite != null) UnityEngine.Object.Destroy(sprite);

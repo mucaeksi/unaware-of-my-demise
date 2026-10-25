@@ -123,6 +123,8 @@ namespace Uomd.Scenes
         public bool Alive { get; private set; } = true;
         /// <summary>Top of the chibi in reference units (floating numbers start here).</summary>
         public float HeadY => Y - (float)_art.HeightPx * _depth;
+        /// <summary>Where strikes and impact effects land: half the unit's height above the feet (UnitView.hitPoint).</summary>
+        public float HitY => Y - (float)_art.HeightPx * _depth * 0.5f;
 
         /// <summary>Plays a state (idle, walk, basic, active, ultimate, hit, defeat, victory); a non-looping state returns to idle.</summary>
         public void Play(string state, Action onDone = null)

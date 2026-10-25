@@ -7,10 +7,14 @@
   "currentAssignment": {
     "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Remote content patching runs in the Unity client (U-2): signed download, staging, restart activation, rollback. Next: publish rel_0001 + a patch on staging (Phase C) to exercise the live path on device, U-2b device-side content validation, battle polish (VFX presets, server submission, MENU/speed), release signing (B-SIGNING), hub screens.",
+    "nextProposed": "Battle VFX presets play in the Unity client (U-4b) on top of remote content patching (U-2). Next: ultimate cut-in and additive light for VFX, server battle submission, MENU/speed, Phase C staging publication (needs an Access service token or a Control Center publish), U-2b device-side validation, release signing (B-SIGNING), hub screens.",
     "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "U-4b: data-driven battle VFX in the Unity client (2026-10-25, Claude Opus 5.5)",
+      "detail": "Uomd.Core.Vfx (engine-free): VfxPack strict reader with schema defaults, VfxTimeline (port of VfxStage.ts with closed-form node states), VfxCanvas/VfxTextureArt software rasteriser for the 11 textures.ts sprites. UomdVfxPlayer draws on UI Toolkit ground/fx/overlay layers, VfxShapeElement draws the 10 shapes with Painter2D. BattleScreenController plays presets at the BattleScene.ts call sites (sigils, dash/cast, skill presets with hit-stop/shake/flash cues, projectile/pillar, slash + impact, heal/shield/status). Old BattleVfxStage, VfxPackDto and UomdVfxBlend.shader removed. 12 VFX tests (VfxStage.test.ts counts); headless 92/92, Unity 93/93; capture 05-battle-vfx."
+    },
     {
       "title": "U-2: remote content patching in the Unity client (2026-10-25, Claude Opus 5.5)",
       "detail": "UomdPatchClient is a line-by-line C# port of packages/patch/src/manager.ts (strict manifest schema, ES256 admission, generation high-water marks, kill switch, staging, rollback, reservations, byte-range resume, GC). FileContentStorage (persistentDataPath, atomic state.json, fail-closed on an unreadable record), UomdApiRemote (UnityWebRequest, stall detection, Range resume) and UomdStreamingBase (StreamingAssets release.json with integrity checks). PatchManager resolves content through the active release with the ContentService overlay rules and rolls back on a damaged object; Finish page ports FinishScene.ts (real progress, staged release, restart without network); boot of a returning player checks for updates first. tools/export_unity_patch_vectors.ts signs 20 scenarios; 55 new EditMode tests mirror manager.test.ts, lifecycle.test.ts and PatchService.test.ts (headless 80/80, Unity 81/81)."
@@ -62,8 +66,8 @@
       "detail": "Port content-schema validateContentSet and the imageSize media limits to C# for PatchEnv.Validate/ValidateObject (the publisher already validates before signing). Exercise the live download on a device once a release is published on staging (Phase C)."
     },
     {
-      "title": "U-3/U-4: battle screen visuals, release signing, AAB size",
-      "detail": "Battle polish: turn-order bar, BattleVfxStage presets on skills, enemy intents and status badges, POST /api/v1/battles submission, MENU/speed. Release-sign the AAB once the upload key is provided (B-SIGNING). Story reader LOG."
+      "title": "U-4c: battle presentation, release signing",
+      "detail": "Ultimate cut-in (cutIn.ts), additive light for VFX, stage dim/zoom and ringPulse/burst accents, POST /api/v1/battles submission, MENU/speed. Release-sign the AAB once the upload key is provided (B-SIGNING). Story reader LOG."
     },
     {
       "title": "Control Center: replace the retired browser-game previews",

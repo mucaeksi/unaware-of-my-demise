@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Uomd.Battle.Vfx;
 using Uomd.Core;
 using Uomd.Platform;
 using Uomd.UI;
@@ -24,7 +23,6 @@ namespace Uomd.Scenes
     public sealed class UomdSceneRouter : MonoBehaviour
     {
         [SerializeField] private string apiBaseUrl = "https://uomd-game-staging.muratcaneksiii.workers.dev";
-        [SerializeField] private Shader vfxBlendShader;
 
         private readonly Dictionary<UomdScreenId, IUomdScreenController> _controllers = new Dictionary<UomdScreenId, IUomdScreenController>();
         private UIDocument _uiDocument;
@@ -42,7 +40,6 @@ namespace Uomd.Scenes
         public AudioDirector Audio { get; private set; }
         public UomdMediaLoader Media { get; private set; }
         public UomdEntryFlow EntryFlow { get; private set; }
-        public BattleVfxStage VfxStage { get; private set; }
         public UomdScreenId ActiveScreenId => _activeController?.ScreenId ?? UomdScreenId.Boot;
 
         // Start (not Awake): UIDocument builds rootVisualElement in its own OnEnable.
@@ -65,9 +62,6 @@ namespace Uomd.Scenes
             // a release switch (restart after the first-install download, rollback, kill switch) reloads media at the next screen
             Patch.ContentChanged += () => _mediaStale = true;
 
-            var vfxGo = new GameObject("UomdBattleVfxStage");
-            vfxGo.transform.SetParent(transform, false);
-            VfxStage = vfxGo.AddComponent<BattleVfxStage>();
 
             _uiDocument = GetComponent<UIDocument>();
             if (gameObject.GetComponent<SafeAreaBinder>() == null)

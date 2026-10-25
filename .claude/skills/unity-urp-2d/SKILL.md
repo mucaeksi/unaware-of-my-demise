@@ -43,10 +43,11 @@ Maintain strict back-to-front draw order across Battle and Narrative scenes:
   Always use `SpriteMeshType.FullRect` on animated 16-cell chibi atlas frames so transparent padding is never tight-cropped out of alignment across frames.
 
 ## 4. Data-Driven Combat VFX (`content/base/vfx/vfx_presets.json`)
-`BattleVfxStage` reads `vfx_presets.json` (`capability: vfx_v1`) and drives pooled URP 2D primitives:
-- **Slash Arcs & Shockwaves**: Pooled quad meshes with custom URP 2D Unlit/Sprite Shader Graph materials (`UOMD/2D/SlashArc`, `UOMD/2D/BellRipple`) driven via `MaterialPropertyBlock` (never instantiate duplicate materials per hit via `renderer.material`).
-- **Hit-Flash & Status Tints**: Apply `_FlashAmount` (`0..1` white/crimson additive flash) and `_TintColor` on unit `SpriteRenderer`s using a cached `MaterialPropertyBlock`.
-- **Quality Tier & Reduced Motion**: Honour `QualityTierService.ParticleMultiplier` and `AccessibilitySettings.ReducedMotion` (suppress camera shake, rapid screen flashes, and high-frequency distortion rings when `ReducedMotion` is active).
+The battle screen is UI Toolkit, so VFX are drawn there too (a URP world-space stage would render under the UI units):
+- `Uomd.Core.Vfx` (engine-free, tested headlessly): `VfxPack` reads the pack with the content-schema defaults, `VfxTimeline` compiles a preset into nodes with closed-form states (port of `VfxStage.ts`), `VfxCanvas` + `VfxTextureArt` rasterise the 11 procedural sprites of `textures.ts`.
+- `Uomd.Scenes`: `UomdVfxPlayer` creates/updates/removes the node elements on the ground/fx/overlay layers; `VfxShapeElement` draws the 10 vector shapes with `Painter2D`.
+- `BattleScreenController` calls presets where `BattleScene.ts` did (cast sigil, dash/cast, skill presets with camera cues, projectile/pillar, slash + impact, heal/shield/status sigils); hit-stop slows the battle's own clock.
+- Honour `ReducedMotion` (no effects) and `ReduceFlash` (no flashes, shapes or particles). UI Toolkit has no additive blending yet.
 
 ## Reference Guides
 - [Sprite Slicing & Bottom-Left Pivot Math](references/sprite-slicing-and-pivots.md)

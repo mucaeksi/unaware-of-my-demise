@@ -52,17 +52,6 @@ namespace Uomd.Scenes
                 {
                     _router.Session.PrologueConfig = JsonUtility.FromJson<PrologueConfigDto>(prologueJson) ?? new PrologueConfigDto();
                 }
-
-                string vfxJson = await _router.Patch.ReadTextAsync("vfx/vfx_presets.json");
-                if (!string.IsNullOrEmpty(vfxJson))
-                {
-                    var vfxPack = JsonUtility.FromJson<VfxPackDto>(vfxJson);
-                    if (vfxPack != null)
-                    {
-                        _router.Session.VfxPack = vfxPack;
-                        _router.VfxStage.LoadPresets(vfxPack);
-                    }
-                }
             }
             catch (Exception ex)
             {

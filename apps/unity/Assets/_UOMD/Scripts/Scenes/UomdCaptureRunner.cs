@@ -40,24 +40,40 @@ namespace Uomd.Scenes
             return false;
         }
 
-        /// <summary>Plays the battle on AUTO to its result (event playback QA) and saves the result screen as NN-battle-result.png.</summary>
-        private static async Awaitable<string> CaptureBattleResultAsync(UomdSceneRouter router, string directory, int index)
+        /// <summary>
+        /// Plays the battle on AUTO to its result (event playback QA): saves NN-battle-vfx.png the first time several effects
+        /// are on stage after the opening, then the result screen as NN-battle-result.png.
+        /// </summary>
+        private static async Awaitable<string[]> CaptureBattleResultAsync(UomdSceneRouter router, string directory, int index)
         {
             var battle = router.Controller<BattleScreenController>();
             battle?.EnableAuto();
+            var names = new List<string>();
             float waited = 0f;
+            bool vfxSaved = false;
             while (battle != null && !battle.Finished && waited < 90f)
             {
-                await Awaitable.WaitForSecondsAsync(0.5f);
-                waited += 0.5f;
+                await Awaitable.NextFrameAsync();
+                waited += Time.unscaledDeltaTime;
+                if (!vfxSaved && waited > 3f && battle.ActiveEffects >= 3)
+                {
+                    await Awaitable.EndOfFrameAsync();
+                    names.Add(Save(directory, $"{index:00}-battle-vfx.png"));
+                    vfxSaved = true;
+                }
             }
             await Awaitable.WaitForSecondsAsync(2.5f);
             await Awaitable.EndOfFrameAsync();
-            string name = $"{index:00}-battle-result.png";
+            names.Add(Save(directory, $"{index:00}-battle-result.png"));
+            Debug.Log($"[UomdCapture] battle {(battle != null && battle.Finished ? "finished" : "did not finish")} after {waited:0.0}s on AUTO; effects frame {(vfxSaved ? "saved" : "not seen")}");
+            return names.ToArray();
+        }
+
+        private static string Save(string directory, string name)
+        {
             var texture = ScreenCapture.CaptureScreenshotAsTexture();
             File.WriteAllBytes(Path.Combine(directory, name), texture.EncodeToPNG());
             Destroy(texture);
-            Debug.Log($"[UomdCapture] battle {(battle != null && battle.Finished ? "finished" : "did not finish")} after {waited:0.0}s on AUTO");
             return name;
         }
 
@@ -78,7 +94,7 @@ namespace Uomd.Scenes
                     File.WriteAllBytes(file, texture.EncodeToPNG());
                     Destroy(texture);
                     written.Add(Path.GetFileName(file));
-                    if (screen == UomdScreenId.Battle) written.Add(await CaptureBattleResultAsync(router, directory, index));
+                    if (screen == UomdScreenId.Battle) written.AddRange(await CaptureBattleResultAsync(router, directory, index));
                 }
                 catch (Exception e)
                 {

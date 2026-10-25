@@ -53,7 +53,6 @@ namespace Uomd.Core
         public EntryConfigDto EntryConfig { get; set; } = new EntryConfigDto();
         public PrologueConfigDto PrologueConfig { get; set; } = new PrologueConfigDto();
         public UnityArtExportDto BaseArtSlices { get; set; } = new UnityArtExportDto();
-        public VfxPackDto VfxPack { get; set; } = new VfxPackDto();
         public BannerInfoDto[] Banners { get; set; } = Array.Empty<BannerInfoDto>();
         public MailItemDto[] MailInbox { get; set; } = Array.Empty<MailItemDto>();
 

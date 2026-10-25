@@ -139,6 +139,8 @@ export function unityStatus(root: string): UnityStatus {
 
   const patch = read('apps/unity/Assets/_UOMD/Scripts/Core/PatchManager.cs');
   const patchClient = read('apps/unity/Assets/_UOMD/Scripts/Core/Patching/UomdPatchClient.cs');
+  const vfxTimeline = read('apps/unity/Assets/_UOMD/Scripts/Core/Vfx/VfxTimeline.cs');
+  const vfxTests = testFiles.filter((f) => /VfxTests\.cs$/.test(f)).reduce((n, f) => n + (readFileSync(f, 'utf8').match(/\[Test\]/g) ?? []).length, 0);
   const patchTests = testFiles.filter((f) => /Patch\w*Tests\.cs$/.test(f)).reduce((n, f) => n + (readFileSync(f, 'utf8').match(/\[Test\]/g) ?? []).length, 0);
   const evidence = join(root, 'docs/evidence');
   const captureMeta = read('docs/evidence/unity-capture.json');
@@ -156,6 +158,7 @@ export function unityStatus(root: string): UnityStatus {
     { id: 'story-tests', phase: 'U-1', title: 'StoryRunner C# tests', state: state(/StoryRunner/.test(testText)), detail: 'port packages/story runner.test.ts cases' },
     { id: 'patch-remote', phase: 'U-2', title: 'Signed remote patch download + staged activation', state: state(/CheckAndApplyAsync/.test(patchClient) && /ActivateStagedAsync/.test(patchClient) && /UomdPatchClient/.test(patch), /ActivateStaged|VerifyRemoteManifestAdmission/.test(patch)), detail: /CheckAndApplyAsync/.test(patchClient) ? `UomdPatchClient (port of packages/patch manager.ts) · ${patchTests} patch tests · device-side validateContentSet pending (U-2b)` : 'manifest signature check exists; download/stage/activate pending' },
     { id: 'unity-import', phase: 'U-3', title: 'First Unity Editor import (metas, ProjectSettings, packages-lock)', state: state(imported && projectSettingsAssets > 0 && existsSync(join(unity, 'Packages/packages-lock.json')), imported), detail: `${metaFiles} .meta · ${projectSettingsAssets} ProjectSettings assets${imported ? '' : ' · needs a licensed editor (apps/unity/cloud/unity_ci.sh import)'}` },
+    { id: 'battle-vfx', phase: 'U-4', title: 'Data-driven battle VFX (vfx_presets.json)', state: state(/VfxTimeline/.test(vfxTimeline) && vfxTests > 0 && existsSync(join(assetsDir, '_UOMD/Scripts/Scenes/UomdVfxPlayer.cs'))), detail: vfxTests > 0 ? `VfxTimeline + UI Toolkit player · ${vfxTests} VFX tests · ultimate cut-in and additive blending pending` : 'presets are not played yet' },
     { id: 'screens', phase: 'U-3/U-4', title: 'Screen controllers', state: state(false, screenControllers > 0), detail: `${screenControllers} controllers exist as UI shells; art and flows still to wire` },
     { id: 'cloud-capture', phase: 'U-3', title: 'Real Unity player screenshots from the cloud', state: state(capture !== null && capture.files.length > 0), detail: capture ? `${capture.files.length} screens · ${capture.commit} · ${capture.capturedAt}` : 'needs UNITY_LICENSE/UNITY_EMAIL/UNITY_PASSWORD in the cloud environment (apps/unity/cloud/unity_ci.sh capture)' },
     { id: 'android', phase: 'U-5', title: 'Android native bridges + Gradle deps', state: state(javaBridges >= 4 && existsSync(join(assetsDir, 'Plugins/Android/UomdNative.androidlib/build.gradle'))), detail: `${javaBridges} Java files in UomdNative.androidlib` },
