@@ -263,9 +263,14 @@ namespace Uomd.Core
             return new UTF8Encoding(false).GetString(bytes);
         }
 
-        public async Awaitable<byte[]> ReadBytesAsync(string relativePath)
+        /// <summary>A file of the embedded base release, ignoring patches (what a patch added is "NEW" against it).</summary>
+        public async Awaitable<string> ReadBaseTextAsync(string relativePath) =>
+            new UTF8Encoding(false).GetString(await ReadFileAsync(Path.Combine(_streamingBaseDir, Normalize(relativePath)), relativePath));
+
+        public Awaitable<byte[]> ReadBytesAsync(string relativePath) => ReadFileAsync(ResolveContentPath(relativePath), relativePath);
+
+        private static async Awaitable<byte[]> ReadFileAsync(string fullPath, string relativePath)
         {
-            string fullPath = ResolveContentPath(relativePath);
             if (fullPath.Contains("://"))
             {
                 using var req = UnityWebRequest.Get(fullPath);

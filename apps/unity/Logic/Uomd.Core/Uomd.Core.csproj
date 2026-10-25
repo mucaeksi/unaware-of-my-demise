@@ -13,11 +13,13 @@
     <Compile Include="$(UomdScripts)Core/Es256SignatureVerifier.cs" />
     <Compile Include="$(UomdScripts)Core/GameSessionState.cs" />
     <Compile Include="$(UomdScripts)Core/UomdJson.cs" />
+    <Compile Include="$(UomdScripts)Core/JsonRead.cs" />
     <Compile Include="$(UomdScripts)Core/UomdMediaCatalog.cs" />
     <Compile Include="$(UomdScripts)Core/UomdBattleFormation.cs" />
     <Compile Include="$(UomdScripts)Core/Generated/UomdCorePrimitives.g.cs" />
     <Compile Include="$(UomdScripts)Core/Patching/*.cs" />
     <Compile Include="$(UomdScripts)Core/Vfx/*.cs" />
+    <Compile Include="$(UomdScripts)Core/Growth/*.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Uomd.Contracts/Uomd.Contracts.csproj" />

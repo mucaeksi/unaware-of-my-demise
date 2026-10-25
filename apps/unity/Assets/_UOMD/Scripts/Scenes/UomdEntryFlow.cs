@@ -7,9 +7,11 @@ using Uomd.Core;
 namespace Uomd.Scenes
 {
     /// <summary>
-    /// The first-install entry flow (port of apps/game/src/entry/flow.ts + tutorial.ts): prologue, then tutorial stages
-    /// T-1..T-3 from entry/entry_index.json, each pre_story → battle → post_story, then the Finish page. A stage counts as
-    /// done only after its post_story; progress goes to the account (PUT /api/v1/entry) when signed in.
+    /// Story/battle routing. The first-install entry flow (port of apps/game/src/entry/flow.ts + tutorial.ts): prologue, then
+    /// tutorial stages T-1..T-3 from entry/entry_index.json, each pre_story → battle → post_story, then the Finish page. A
+    /// stage counts as done only after its post_story; progress goes to the account (PUT /api/v1/entry) when signed in.
+    /// Campaign nodes picked on the Chapters screen (port of flow.ts playNode) run the same pre_story → battle → post_story
+    /// and return to Chapters.
     /// </summary>
     public sealed class UomdEntryFlow
     {
@@ -18,6 +20,7 @@ namespace Uomd.Scenes
         private readonly UomdSceneRouter _router;
         private string _preStory = "";
         private string _postStory = "";
+        private string _campaignNode = "";
 
         public UomdEntryFlow(UomdSceneRouter router) => _router = router;
 
@@ -47,18 +50,15 @@ namespace Uomd.Scenes
         /// <summary>Starts tutorial stage <paramref name="index"/> (1-based) at its pre_story.</summary>
         public async Awaitable StartStageAsync(int index)
         {
+            _campaignNode = "";
             try
             {
                 var entry = UomdJson.ParseObject(await _router.Patch.ReadTextAsync("entry/entry_index.json"));
                 var stages = entry.TryGetValue("tutorial", out object list) ? list as System.Collections.Generic.List<object> : null;
                 if (stages == null || index < 1 || index > stages.Count) throw new InvalidDataException($"entry index has no tutorial stage {index}");
                 var stage = (System.Collections.Generic.Dictionary<string, object>)stages[index - 1];
-                string encounterPath = (string)stage["encounter"];
-                var encounter = UomdJson.ParseObject(await _router.Patch.ReadTextAsync(encounterPath));
-                _preStory = encounter.TryGetValue("pre_story", out object pre) ? pre as string ?? "" : "";
-                _postStory = encounter.TryGetValue("post_story", out object post) ? post as string ?? "" : "";
+                await LoadEncounterAsync((string)stage["encounter"]);
                 StageIndex = index;
-                _router.Session.ActiveBattleEncounterId = Path.GetFileNameWithoutExtension(encounterPath);
             }
             catch (Exception e)
             {
@@ -72,6 +72,48 @@ namespace Uomd.Scenes
             else await StartBattleAsync();
         }
 
+        /// <summary>
+        /// Plays a chapter node (flow.ts playNode): a story node shows its scene, a battle node its pre_story → battle →
+        /// post_story; both return to Chapters. Server-sessioned campaign battles (POST /progress/battle/start + submit) arrive
+        /// with the first chapter patch; the base tutorial chapter is a fixed-party replay with one-time rewards already claimed.
+        /// </summary>
+        /// <returns>False when the node's content could not be loaded (the caller stays and tells the player).</returns>
+        public async Awaitable<bool> PlayNodeAsync(string nodeId, string kind, string storyPath, string encounterPath)
+        {
+            StageIndex = 0;
+            _campaignNode = nodeId;
+            if (kind == "story" && !string.IsNullOrEmpty(storyPath))
+            {
+                _preStory = "";
+                _postStory = "";
+                await PlayStoryAsync(Phase.PostStory, storyPath); // its end completes the node
+                return true;
+            }
+            try
+            {
+                if (string.IsNullOrEmpty(encounterPath)) throw new InvalidDataException("the node has no encounter");
+                await LoadEncounterAsync(encounterPath);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[EntryFlow] node {nodeId} could not start: {e.Message}");
+                _campaignNode = "";
+                Current = Phase.None;
+                return false;
+            }
+            if (!string.IsNullOrEmpty(_preStory)) await PlayStoryAsync(Phase.PreStory, _preStory);
+            else await StartBattleAsync();
+            return true;
+        }
+
+        private async Awaitable LoadEncounterAsync(string encounterPath)
+        {
+            var encounter = UomdJson.ParseObject(await _router.Patch.ReadTextAsync(encounterPath));
+            _preStory = encounter.TryGetValue("pre_story", out object pre) ? pre as string ?? "" : "";
+            _postStory = encounter.TryGetValue("post_story", out object post) ? post as string ?? "" : "";
+            _router.Session.ActiveBattleEncounterId = Path.GetFileNameWithoutExtension(encounterPath);
+        }
+
         /// <summary>The story screen calls this when its scene completes.</summary>
         public async Awaitable StoryFinishedAsync()
         {
@@ -80,20 +122,32 @@ namespace Uomd.Scenes
             else await _router.NavigateToAsync(UomdScreenId.Home);
         }
 
-        /// <summary>The battle screen calls this after the result. A loss replays the stage from its pre_story.</summary>
-        public async Awaitable BattleFinishedAsync(bool won)
+        /// <summary>The battle screen calls this after the result. A lost tutorial replays from its pre_story, a lost campaign battle restarts.</summary>
+        public async Awaitable BattleFinishedAsync(bool won, int stars = 0)
         {
             if (Current != Phase.Battle) return;
             if (!won)
             {
-                await StartStageAsync(StageIndex);
+                if (InCampaignBattle) await StartBattleAsync();
+                else await StartStageAsync(StageIndex);
                 return;
             }
+            if (InCampaign) UomdLocalProgress.Complete(_campaignNode, stars);
             if (!string.IsNullOrEmpty(_postStory)) await PlayStoryAsync(Phase.PostStory, _postStory);
             else await CompleteStageAsync();
         }
 
+        /// <summary>Leaves a campaign node for the Chapters list (the battle result's CHAPTERS button).</summary>
+        public async Awaitable AbandonNodeAsync()
+        {
+            _campaignNode = "";
+            Current = Phase.None;
+            await _router.NavigateToAsync(UomdScreenId.Chapters);
+        }
+
         public bool InEntryBattle => Current == Phase.Battle && StageIndex > 0;
+        public bool InCampaign => _campaignNode.Length > 0;
+        public bool InCampaignBattle => Current == Phase.Battle && InCampaign;
 
         private async Awaitable PlayStoryAsync(Phase phase, string path)
         {
@@ -110,6 +164,15 @@ namespace Uomd.Scenes
 
         private async Awaitable CompleteStageAsync()
         {
+            if (InCampaign)
+            {
+                string node = _campaignNode;
+                _campaignNode = "";
+                Current = Phase.None;
+                if (!UomdLocalProgress.IsCleared(node)) UomdLocalProgress.Complete(node, 0); // a story node
+                await _router.NavigateToAsync(UomdScreenId.Chapters);
+                return;
+            }
             int index = StageIndex;
             var account = _router.Session.Account;
             if (account != null) account.tutorialStep = Math.Max(account.tutorialStep, index);

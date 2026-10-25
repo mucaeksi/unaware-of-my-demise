@@ -89,33 +89,132 @@ namespace Uomd.UI
         }
 
         /// <summary>A menu button with an optional second line (TypeScript DomStage.button label + sub).</summary>
-        public static Button MenuButton(VisualElement parent, string label, string sub, float width, float height, float fontSize, bool hot, System.Action onClick)
+        public static Button MenuButton(VisualElement parent, string label, string sub, float width, float height, float fontSize, bool hot, System.Action onClick) =>
+            MenuButton(parent, label, sub, width, height, fontSize, hot ? UomdPanelVariant.Hot : UomdPanelVariant.Normal, onClick);
+
+        /// <summary>
+        /// The TS kit button (domKit.ts DomButton): a gothic plaque of the given variant with a Cinzel label and an optional
+        /// body-face sub line, labels shrunk to fit the plaque, a press squash. Update it with <see cref="SetVariant"/>,
+        /// <see cref="SetLabel"/>, <see cref="SetSub"/> and <see cref="SetEnabled"/>.
+        /// </summary>
+        public static Button MenuButton(VisualElement parent, string label, string sub, float width, float height, float fontSize, UomdPanelVariant variant, System.Action onClick)
         {
             var button = new Button(onClick) { text = "" };
-            button.AddToClassList("uomd-btn");
-            if (hot) button.AddToClassList("uomd-btn-primary");
+            button.AddToClassList("uomd-kit-btn");
             button.style.width = width;
             button.style.height = height;
             button.style.flexDirection = FlexDirection.Column;
             button.style.justifyContent = Justify.Center;
             button.style.alignItems = Align.Center;
-            var main = new Label(label) { pickingMode = PickingMode.Ignore };
+            button.style.backgroundColor = Color.clear;
+            button.style.borderTopWidth = button.style.borderBottomWidth = button.style.borderLeftWidth = button.style.borderRightWidth = 0;
+            button.style.paddingLeft = button.style.paddingRight = button.style.paddingTop = button.style.paddingBottom = 0;
+            button.style.marginLeft = button.style.marginRight = button.style.marginTop = button.style.marginBottom = 0;
+            button.style.overflow = Overflow.Visible;
+            button.Add(new UomdGothicPanel(variant) { name = "plaque" });
+            var main = new Label(label) { name = "label", pickingMode = PickingMode.Ignore };
             main.AddToClassList("uomd-display");
             main.style.fontSize = fontSize;
+            main.style.unityFontStyleAndWeight = FontStyle.Bold;
             main.style.unityTextAlign = TextAnchor.MiddleCenter;
+            main.style.unityTextOutlineWidth = 0.6f;
+            main.style.unityTextOutlineColor = new Color(0.027f, 0.016f, 0.047f);
+            main.style.whiteSpace = WhiteSpace.NoWrap;
             button.Add(main);
-            if (!string.IsNullOrEmpty(sub))
+            var second = new Label(sub ?? "") { name = "sub", pickingMode = PickingMode.Ignore };
+            second.AddToClassList("uomd-serif"); // body face; the button's Cinzel is capitals only
+            second.style.fontSize = Mathf.Max(16f, Mathf.Round(fontSize * 0.68f));
+            second.style.unityTextAlign = TextAnchor.MiddleCenter;
+            second.style.whiteSpace = WhiteSpace.NoWrap;
+            second.style.display = string.IsNullOrEmpty(sub) ? DisplayStyle.None : DisplayStyle.Flex;
+            button.Add(second);
+            ApplyVariantColors(button, variant);
+            // labels never overflow the plaque (domKit fitLabels: max width = plaque width - 48)
+            float maxW = width - 48f;
+            void Fit(Label l)
             {
-                var second = new Label(sub) { pickingMode = PickingMode.Ignore };
-                second.AddToClassList("uomd-serif"); // body face; the button's Cinzel is capitals only
-                second.style.fontSize = Mathf.Round(fontSize * 0.72f);
-                second.style.color = UomdThemeTokens.TextDim;
-                second.style.unityFontStyleAndWeight = FontStyle.Italic;
-                second.style.unityTextAlign = TextAnchor.MiddleCenter;
-                button.Add(second);
+                float w = l.resolvedStyle.width;
+                float k = w > maxW && w > 0f ? maxW / w : 1f;
+                l.style.scale = new Scale(new Vector3(k, k, 1f));
             }
+            main.RegisterCallback<GeometryChangedEvent>(_ => Fit(main));
+            second.RegisterCallback<GeometryChangedEvent>(_ => Fit(second));
+            button.RegisterCallback<PointerDownEvent>(_ => { if (button.enabledSelf) button.style.scale = new Scale(new Vector3(0.955f, 0.955f, 1f)); }, TrickleDown.TrickleDown);
+            button.RegisterCallback<PointerUpEvent>(_ => button.style.scale = new Scale(Vector3.one), TrickleDown.TrickleDown);
+            button.RegisterCallback<PointerLeaveEvent>(_ => button.style.scale = new Scale(Vector3.one));
             parent.Add(button);
             return button;
+        }
+
+        private static void ApplyVariantColors(Button button, UomdPanelVariant variant)
+        {
+            bool lit = variant == UomdPanelVariant.Active || variant == UomdPanelVariant.Hot;
+            float labelAlpha = variant == UomdPanelVariant.Dim ? 0.45f : 1f;
+            if (button.Q<Label>("label") is Label main)
+            {
+                main.style.color = lit ? new Color(1f, 0.953f, 0.769f) : new Color(0.965f, 0.937f, 0.894f);
+                main.style.opacity = labelAlpha;
+            }
+            if (button.Q<Label>("sub") is Label sub)
+            {
+                sub.style.color = variant == UomdPanelVariant.Active ? new Color(1f, 0.851f, 0.541f) : new Color(0.839f, 0.784f, 0.902f);
+                sub.style.opacity = labelAlpha;
+            }
+        }
+
+        public static void SetVariant(Button button, UomdPanelVariant variant)
+        {
+            if (button.Q<UomdGothicPanel>("plaque") is UomdGothicPanel plaque) plaque.Variant = variant;
+            ApplyVariantColors(button, variant);
+        }
+
+        public static void SetLabel(Button button, string text)
+        {
+            if (button.Q<Label>("label") is Label l) l.text = text;
+        }
+
+        public static void SetSub(Button button, string text)
+        {
+            if (!(button.Q<Label>("sub") is Label l)) return;
+            l.text = text ?? "";
+            l.style.display = string.IsNullOrEmpty(text) ? DisplayStyle.None : DisplayStyle.Flex;
+        }
+
+        /// <summary>The TS default art scrim: dark on the label side, clearing towards the art's focal right edge.</summary>
+        public static readonly (float, Color)[] ArtScrim =
+        {
+            (0f, new Color(0.031f, 0.020f, 0.055f, 0.92f)), (0.52f, new Color(0.031f, 0.020f, 0.055f, 0.78f)),
+            (0.82f, new Color(0.031f, 0.020f, 0.055f, 0.22f)), (1f, new Color(0.031f, 0.020f, 0.055f, 0.52f))
+        };
+
+        /// <summary>
+        /// Key art inside a plaque (domKit setArtBackdrop): inset 7 px, rounded, cover-fitted to the right edge, under a
+        /// horizontal scrim so the labels stay readable. Calling it again swaps the image.
+        /// </summary>
+        public static void SetArtBackdrop(VisualElement host, UomdMediaLoader media, string contentPath, (float, Color)[] scrim = null)
+        {
+            host.Q<VisualElement>("panel-art")?.RemoveFromHierarchy();
+            if (media == null || string.IsNullOrEmpty(contentPath)) return;
+            var wrap = new VisualElement { name = "panel-art", pickingMode = PickingMode.Ignore };
+            wrap.style.position = Position.Absolute;
+            wrap.style.left = wrap.style.right = wrap.style.top = wrap.style.bottom = 7;
+            wrap.style.borderTopLeftRadius = wrap.style.borderTopRightRadius = wrap.style.borderBottomLeftRadius = wrap.style.borderBottomRightRadius = 10;
+            wrap.style.overflow = Overflow.Hidden;
+            wrap.style.borderTopWidth = wrap.style.borderBottomWidth = wrap.style.borderLeftWidth = wrap.style.borderRightWidth = 1;
+            var edge = new Color(0.890f, 0.765f, 0.490f, 0.28f);
+            wrap.style.borderTopColor = wrap.style.borderBottomColor = wrap.style.borderLeftColor = wrap.style.borderRightColor = edge;
+            var image = Backdrop(wrap, media, contentPath);
+            image.style.backgroundPositionX = new BackgroundPosition(BackgroundPositionKeyword.Right);
+            wrap.Add(new UomdGradient(true, scrim ?? ArtScrim));
+            int plaque = host.IndexOf(host.Q<UomdGothicPanel>("plaque"));
+            host.Insert(plaque + 1, wrap);
+        }
+
+        /// <summary>Enables or disables a kit button; a disabled one shows the dim plaque.</summary>
+        public static void SetEnabled(Button button, bool on, UomdPanelVariant variant = UomdPanelVariant.Normal)
+        {
+            button.SetEnabled(on);
+            SetVariant(button, on ? variant : UomdPanelVariant.Dim);
         }
 
         /// <summary>Slow opacity pulse between 1 and <paramref name="low"/> (the TypeScript `uomd-blink` class).</summary>

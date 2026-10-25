@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using UnityEngine;
@@ -222,6 +223,35 @@ namespace Uomd.Core
                 playerId = res.playerId
             });
             return res;
+        }
+
+        /// <summary>
+        /// A GET whose JSON body is read with UomdJson (dictionaries, lists, long/double). The hub screens use it so each
+        /// endpoint of apps/game/src/net/api.ts does not need its own JsonUtility DTO.
+        /// </summary>
+        public async Awaitable<Dictionary<string, object?>> GetJsonAsync(string path, bool requireAuth = true, CancellationToken ct = default)
+        {
+            string text = await CallAsync<string>("GET", path, null, requireAuth, ct: ct);
+            return UomdJson.ParseObject(text);
+        }
+
+        /// <summary>
+        /// A write bound to the current account. <paramref name="idempotent"/> adds a fresh requestId (the server's
+        /// idempotency key; api.ts `mutate`); plain writes (api.ts `call`: teams, equip) send the body as is, because their
+        /// server schemas are strict. A DELETE sends no body. The TS client also journaled pending idempotent actions across
+        /// restarts (net/operations.ts); that journal is not ported yet.
+        /// </summary>
+        public async Awaitable<Dictionary<string, object?>> SendJsonAsync(string method, string path, Dictionary<string, object?>? body = null, bool requireAuth = true, bool idempotent = true, CancellationToken ct = default)
+        {
+            string? json = null;
+            if (method != "DELETE")
+            {
+                var payload = body != null ? new Dictionary<string, object?>(body, StringComparer.Ordinal) : new Dictionary<string, object?>(StringComparer.Ordinal);
+                if (idempotent && !payload.ContainsKey("requestId")) payload["requestId"] = NewRequestId();
+                json = CanonicalJson.Serialize(payload);
+            }
+            string text = await CallAsync<string>(method, path, json, requireAuth, _authVersion, ct);
+            return string.IsNullOrWhiteSpace(text) ? new Dictionary<string, object?>(StringComparer.Ordinal) : UomdJson.ParseObject(text);
         }
 
         public Awaitable<PlayerSummaryDto> GetMeAsync(CancellationToken ct = default) =>

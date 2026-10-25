@@ -844,11 +844,20 @@ namespace Uomd.Scenes
             var stars = UomdScreenKit.Centered(UomdScreenKit.Text(veil, new string('★', result.Stars) + new string('☆', Math.Max(0, 3 - result.Stars)), 72, UomdThemeTokens.GoldHi, 12f), 0, 470);
             string hash = BattleReplay.LogHash(_battle);
             UomdScreenKit.Centered(UomdScreenKit.Text(veil, $"{result.Turns} turns  ·  {_actions.Count} actions  ·  logHash {hash.Substring(0, 12)}", 24, UomdThemeTokens.TextDim), 0, 550);
-            Action next = _router.EntryFlow.InEntryBattle
-                ? () => _ = _router.EntryFlow.BattleFinishedAsync(won)
+            var flow = _router.EntryFlow;
+            bool routed = flow.InEntryBattle || flow.InCampaignBattle;
+            int earned = result.Stars;
+            Action next = routed
+                ? () => _ = flow.BattleFinishedAsync(won, earned)
                 : () => _ = _router.NavigateToAsync(UomdScreenId.Home);
-            string label = _router.EntryFlow.InEntryBattle && !won ? "TRY AGAIN" : "CONTINUE";
-            UomdScreenKit.Centered(UomdScreenKit.MenuButton(veil, label, null, 500, 104, 34, true, next), 0, 680);
+            string label = routed && !won ? "TRY AGAIN" : "CONTINUE";
+            if (flow.InCampaignBattle && !won)
+            {
+                // a lost chapter battle can be retried or left (flow.ts onRetry / onBack)
+                UomdScreenKit.Centered(UomdScreenKit.MenuButton(veil, label, null, 440, 104, 34, true, next), -240, 680);
+                UomdScreenKit.Centered(UomdScreenKit.MenuButton(veil, "CHAPTERS", null, 440, 104, 34, false, () => _ = flow.AbandonNodeAsync()), 240, 680);
+            }
+            else UomdScreenKit.Centered(UomdScreenKit.MenuButton(veil, label, null, 500, 104, 34, true, next), 0, 680);
             veil.style.opacity = 0f;
             UomdScreenKit.Fade(veil, 1f, 600, 400, Calm);
             stars.style.scale = new Scale(new Vector3(1.3f, 1.3f, 1f));

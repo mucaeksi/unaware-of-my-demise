@@ -27,7 +27,6 @@ namespace Uomd.Scenes
         private readonly Dictionary<UomdScreenId, IUomdScreenController> _controllers = new Dictionary<UomdScreenId, IUomdScreenController>();
         private UIDocument _uiDocument;
         private VisualElement _rootContainer;
-        private VisualElement _headerBar;
         private VisualElement _screenHost;
         private VisualElement _overlayHost;
         private IUomdScreenController _activeController;
@@ -106,13 +105,6 @@ namespace Uomd.Scenes
             }
 
             _activeController = nextController;
-            bool showHubHeader = targetScreen >= UomdScreenId.Home && targetScreen <= UomdScreenId.Operations;
-            _headerBar.style.display = showHubHeader ? DisplayStyle.Flex : DisplayStyle.None;
-            if (showHubHeader)
-            {
-                RefreshHeaderWallets(targetScreen.ToString().ToUpperInvariant());
-            }
-
             Awaitable entering = _activeController.OnEnterAsync(_screenHost);
             if (entering != null) await entering; // a synchronous screen that returned null must not break navigation
         }
@@ -130,28 +122,6 @@ namespace Uomd.Scenes
             _overlayHost.Clear();
         }
 
-        public void RefreshHeaderWallets(string screenTitle = null)
-        {
-            if (_headerBar == null || Session?.Account?.wallets == null) return;
-            var titleLbl = _headerBar.Q<Label>("screen-title");
-            if (titleLbl != null && !string.IsNullOrEmpty(screenTitle))
-            {
-                titleLbl.text = screenTitle;
-            }
-
-            var rationsLbl = _headerBar.Q<Label>("wallet-rations");
-            if (rationsLbl != null) rationsLbl.text = $"Rations: {Session.Account.wallets.rations}";
-
-            var goldLbl = _headerBar.Q<Label>("wallet-gold");
-            if (goldLbl != null) goldLbl.text = $"Gold: {Session.Account.wallets.gold:N0}";
-
-            var shardsLbl = _headerBar.Q<Label>("wallet-shards");
-            if (shardsLbl != null) shardsLbl.text = $"Shards: {Session.Account.wallets.shards:N0}";
-
-            var sealsLbl = _headerBar.Q<Label>("wallet-seals");
-            if (sealsLbl != null) sealsLbl.text = $"Seals: {Session.Account.wallets.seals:N0}";
-        }
-
         private void BuildRootVisualTree()
         {
             var root = _uiDocument.rootVisualElement;
@@ -162,27 +132,7 @@ namespace Uomd.Scenes
             _rootContainer.AddToClassList("uomd-safe-area");
             _rootContainer.style.flexGrow = 1f;
 
-            // Shared Gothic Top Bar for Hub/Meta screens
-            _headerBar = new VisualElement { name = "top-bar" };
-            _headerBar.AddToClassList("uomd-header-bar");
-            _headerBar.style.display = DisplayStyle.None;
-
-            var backBtn = UomdUiKit.CreateButton("WORLD MAP", () => _ = NavigateToAsync(UomdScreenId.Home));
-            var titleLbl = new Label("UNAWARE OF MY DEMISE") { name = "screen-title" };
-            titleLbl.AddToClassList("uomd-title-md");
-
-            var walletRow = new VisualElement();
-            walletRow.style.flexDirection = FlexDirection.Row;
-
-            walletRow.Add(CreatePill("wallet-rations", "Rations: 120"));
-            walletRow.Add(CreatePill("wallet-gold", "Gold: 5,000"));
-            walletRow.Add(CreatePill("wallet-shards", "Shards: 600"));
-            walletRow.Add(CreatePill("wallet-seals", "Seals: 10"));
-
-            _headerBar.Add(backBtn);
-            _headerBar.Add(titleLbl);
-            _headerBar.Add(walletRow);
-
+            // every screen draws its own frame (UomdHubScreen for the account-backed ones); there is no shared top bar
             _screenHost = new VisualElement { name = "screen-host" };
             _screenHost.style.flexGrow = 1f;
 
@@ -194,18 +144,9 @@ namespace Uomd.Scenes
             _overlayHost.style.top = 0;
             _overlayHost.style.bottom = 0;
 
-            _rootContainer.Add(_headerBar);
             _rootContainer.Add(_screenHost);
             _rootContainer.Add(_overlayHost);
             root.Add(_rootContainer);
-        }
-
-        private static Label CreatePill(string name, string text)
-        {
-            var pill = new Label(text) { name = name };
-            pill.AddToClassList("uomd-wallet-pill");
-            pill.AddToClassList("uomd-wallet-value");
-            return pill;
         }
 
         private void RegisterAll28Screens()
@@ -220,12 +161,12 @@ namespace Uomd.Scenes
             Register(new FinishScreenController(this));
 
             // Group 2: World Map, Campaign, Roster, Summon & Trials (10 screens)
-            Register(new HomeWorldMapScreenController(this));
-            Register(new ChaptersScreenController(this));
-            Register(new RosterScreenController(this));
-            Register(new CharacterScreenController(this));
-            Register(new GearScreenController(this));
-            Register(new TeamScreenController(this));
+            Register(new HomeScreen(this));
+            Register(new ChaptersScreen(this));
+            Register(new RosterScreen(this));
+            Register(new CompanionScreen(this));
+            Register(new ArmoryScreen(this));
+            Register(new TeamScreen(this));
             Register(new SummonScreenController(this));
             Register(new RecruitScreenController(this));
             Register(new ShopScreenController(this));

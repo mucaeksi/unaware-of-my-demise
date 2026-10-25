@@ -43,11 +43,12 @@ namespace Uomd.Core
     {
         public AccountPayloadDto Account { get; set; } = new AccountPayloadDto
         {
-            playerId = "plr_local_guest",
-            accountTag = "UOMD-0001",
-            displayName = "Wayfarer",
+            // a signed-out device has no account: balances come only from GET /api/v1/wallet
+            playerId = "",
+            accountTag = "",
+            displayName = "",
             level = 1,
-            wallets = new WalletsDto { rations = 120, gold = 5000, shards = 600, seals = 10 }
+            wallets = new WalletsDto()
         };
 
         public EntryConfigDto EntryConfig { get; set; } = new EntryConfigDto();
@@ -61,6 +62,11 @@ namespace Uomd.Core
         public string ActiveStoryPath { get; set; } = "story/tutorial_t1_before.json";
         public string ActiveBattleEncounterId { get; set; } = "tutorial_t1";
         public string SelectedUnitId { get; set; } = "fadyme";
+        /// <summary>Gear screen opened from a companion slot: whose slot it fills ("" = the whole armory).</summary>
+        public string GearCharacterId { get; set; } = "";
+        public string GearSlot { get; set; } = "";
+        /// <summary>Where the Recruit (invitations) screen goes back to.</summary>
+        public UomdScreenId RecruitReturnTo { get; set; } = UomdScreenId.Home;
         public bool HardModeSelected { get; set; }
         public string BattleHudLayout { get; set; } = "afk_faithful"; // "afk_faithful" | "current" | "arena_lite"
         public bool ReducedMotion { get; set; }
