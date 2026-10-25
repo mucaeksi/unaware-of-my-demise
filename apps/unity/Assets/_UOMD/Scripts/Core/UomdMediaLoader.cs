@@ -15,6 +15,7 @@ namespace Uomd.Core
         private readonly PatchManager _patch;
         private readonly Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>(StringComparer.Ordinal);
         private readonly Dictionary<string, AudioClip> _clips = new Dictionary<string, AudioClip>(StringComparer.Ordinal);
+        private readonly Dictionary<string, string> _decodable = new Dictionary<string, string>(StringComparer.Ordinal);
 
         public UomdMediaLoader(PatchManager patch) => _patch = patch;
 
@@ -26,7 +27,20 @@ namespace Uomd.Core
             string art = await TryReadTextAsync("art/art_manifest.json");
             string presentation = await TryReadTextAsync("presentation/presentation.json");
             Catalog = UomdMediaCatalog.Parse(art, presentation);
+            _decodable.Clear();
+            string decodable = await TryReadTextAsync("decodable.json");
+            if (!string.IsNullOrEmpty(decodable))
+            {
+                foreach (var kv in UomdJson.ParseObject(decodable)) if (kv.Value is string sibling) _decodable[kv.Key] = sibling;
+            }
         }
+
+        /// <summary>
+        /// The file Unity can decode for a content image: the JPG/PNG sibling tools/export_unity_bundle.ts listed in
+        /// decodable.json (WebP sources are not shipped in the app), else the PNG next to a ".webp" path.
+        /// </summary>
+        public string Decodable(string relativePath) =>
+            relativePath != null && _decodable.TryGetValue(relativePath, out string sibling) ? sibling : UomdTextureLoader.ToDecodablePath(relativePath);
 
         /// <summary>The texture for a content path (".webp" resolves to its PNG sibling), or null when it cannot be loaded.</summary>
         public async Awaitable<Texture2D> TextureAsync(string relativePath)
@@ -35,7 +49,7 @@ namespace Uomd.Core
             if (_textures.TryGetValue(relativePath, out var cached) && cached != null) return cached;
             try
             {
-                var texture = await UomdTextureLoader.LoadAsync(_patch, relativePath);
+                var texture = await UomdTextureLoader.LoadAsync(_patch, Decodable(relativePath));
                 _textures[relativePath] = texture;
                 return texture;
             }

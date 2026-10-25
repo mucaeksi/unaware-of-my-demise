@@ -1,10 +1,10 @@
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { ArtManifest } from '@uomd/content-schema';
-import { buildUnityArtMetadata, exportUnityBundle, generateCSharpCorePrimitives } from './export_unity_bundle';
+import { buildUnityArtMetadata, exportUnityBundle, generateCSharpCorePrimitives, writeDecodableSiblings } from './export_unity_bundle';
 
 // Workspaces run this file from apps/unity, the root test:tools run from the repo root: never rely on cwd.
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -120,5 +120,25 @@ describe('export_unity_bundle (D-31 Unity migration tooling)', () => {
     const editorToolsCs = readFileSync(editorToolsPath, 'utf8');
     expect(editorToolsCs).toContain('VerifyBundleAndParity');
     expect(editorToolsCs).toContain('InspectActiveSceneJson');
+  });
+});
+
+describe('writeDecodableSiblings (Unity cannot decode WebP)', () => {
+  it('writes JPG for opaque art, PNG for art with alpha, a decodable.json map, and can drop the WebP sources', async () => {
+    const { default: sharp } = await import('sharp');
+    const dir = mkdtempSync(join(tmpdir(), 'uomd-decodable-'));
+    try {
+      mkdirSync(join(dir, 'art'));
+      await sharp({ create: { width: 8, height: 8, channels: 3, background: { r: 200, g: 40, b: 60 } } }).webp().toFile(join(dir, 'art/bg_opaque.webp'));
+      await sharp({ create: { width: 8, height: 8, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0.5 } } }).webp().toFile(join(dir, 'art/portrait_alpha.webp'));
+      const map = await writeDecodableSiblings(dir, { removeWebp: true });
+      expect(map).toEqual({ 'art/bg_opaque.webp': 'art/bg_opaque.jpg', 'art/portrait_alpha.webp': 'art/portrait_alpha.png' });
+      expect(existsSync(join(dir, 'art/bg_opaque.jpg'))).toBe(true);
+      expect(existsSync(join(dir, 'art/portrait_alpha.png'))).toBe(true);
+      expect(existsSync(join(dir, 'art/bg_opaque.webp'))).toBe(false);
+      expect(JSON.parse(readFileSync(join(dir, 'decodable.json'), 'utf8'))).toEqual(map);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });

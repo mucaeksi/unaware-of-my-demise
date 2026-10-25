@@ -65,8 +65,9 @@ publishes its facts to `docs/evidence/unity-android-build.json` for the Control 
 - **Signing.** Without `UOMD_KEYSTORE_FILE`/`UOMD_KEYSTORE_PASSWORD`/`UOMD_KEY_ALIAS`/`UOMD_KEY_PASSWORD` the AAB is debug-signed and
   Play rejects it (B-SIGNING). `UOMD_VERSION_NAME`/`UOMD_VERSION_CODE` set the version (default 1.0 / 1).
 
-Size today: `base/assets/uomd_base` is 97 MB because the exporter writes a lossless PNG next to every WebP (Unity cannot decode
-WebP) and both ship.
+Size: Unity cannot decode WebP, so `npm run export:unity` writes a JPG (q92, 4:4:4) next to every opaque WebP and a PNG next to every
+WebP with transparency, lists them in `uomd_base/decodable.json` (read by `UomdMediaLoader`) and removes the WebP files from the copy
+inside the Unity project. The base art went from 78 MB to 25 MB. Remote patches (U-2) will need the same siblings.
 
 ## 1. Install (once per VM)
 

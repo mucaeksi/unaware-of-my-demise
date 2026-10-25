@@ -6,8 +6,8 @@
  * Usage:
  *   npx tsx tools/export_unity_bundle.ts [--out .cache/unity_bundle] [--dry-run]
  */
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { dirname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ArtManifest, CONTENT_CAPABILITIES, ContentManifest } from '@uomd/content-schema';
 import { ATTRIBUTE_RULES } from '@uomd/economy';
@@ -572,22 +572,37 @@ export function exportUnityBundle(opts: ExportUnityBundleOptions = {}): ExportUn
  * Unity cannot decode WebP at runtime (Texture2D.LoadImage / UnityWebRequestTexture accept PNG/JPG only),
  * so every exported .webp gets a lossless .png sibling. The signed manifest still lists the .webp files.
  */
-export async function writePngSiblings(dir: string): Promise<number> {
+/**
+ * Unity cannot decode WebP. Next to every `.webp` under `dir` this writes a decodable sibling: a JPG (quality 92, no chroma
+ * subsampling) when the image is fully opaque, a lossless PNG when it has transparency. `decodable.json` in `dir` maps
+ * each WebP path to its sibling for the client (UomdMediaLoader). `removeWebp` drops the sources afterwards, for the copy that
+ * ships inside the app where the WebP files would only add size.
+ */
+export async function writeDecodableSiblings(dir: string, opts: { removeWebp?: boolean } = {}): Promise<Record<string, string>> {
   const { default: sharp } = await import('sharp');
-  let written = 0;
+  const map: Record<string, string> = {};
   const walk = async (current: string): Promise<void> => {
-    for (const entry of readdirSync(current, { withFileTypes: true })) {
+    for (const entry of readdirSync(current, { withFileTypes: true }).sort((x, y) => x.name.localeCompare(y.name))) {
       const full = join(current, entry.name);
       if (entry.isDirectory()) {
         await walk(full);
-      } else if (entry.name.toLowerCase().endsWith('.webp')) {
-        await sharp(full, { animated: false }).png({ compressionLevel: 9 }).toFile(full.slice(0, -5) + '.png');
-        written++;
+        continue;
       }
+      if (!entry.name.toLowerCase().endsWith('.webp')) continue;
+      const image = sharp(full, { animated: false });
+      const { isOpaque } = await image.stats();
+      const target = full.slice(0, -5) + (isOpaque ? '.jpg' : '.png');
+      const stale = full.slice(0, -5) + (isOpaque ? '.png' : '.jpg'); // left by an earlier export
+      if (existsSync(stale)) rmSync(stale);
+      if (isOpaque) await image.jpeg({ quality: 92, chromaSubsampling: '4:4:4', mozjpeg: true }).toFile(target);
+      else await image.png({ compressionLevel: 9 }).toFile(target);
+      map[relative(dir, full).split(sep).join('/')] = relative(dir, target).split(sep).join('/');
+      if (opts.removeWebp) rmSync(full);
     }
   };
   if (existsSync(dir)) await walk(dir);
-  return written;
+  writeFileSync(join(dir, 'decodable.json'), `${JSON.stringify(map, null, 2)}\n`, 'utf8');
+  return map;
 }
 
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
@@ -596,10 +611,11 @@ if (isMain) {
   const outDir = outIdx >= 0 ? process.argv[outIdx + 1] : undefined;
   const dryRun = process.argv.includes('--dry-run');
   const summary = exportUnityBundle({ outDir, dryRun });
-  let pngSiblings = 0;
+  let decodableSiblings = 0;
   if (!dryRun) {
-    pngSiblings = await writePngSiblings(join(summary.outDir, 'StreamingAssets/uomd_base'));
-    if (!outDir) pngSiblings = await writePngSiblings(join(ROOT, 'apps/unity/Assets/StreamingAssets/uomd_base'));
+    decodableSiblings = Object.keys(await writeDecodableSiblings(join(summary.outDir, 'StreamingAssets/uomd_base'))).length;
+    // the copy inside the Unity project ships in the AAB: keep only what Unity can decode
+    if (!outDir) decodableSiblings = Object.keys(await writeDecodableSiblings(join(ROOT, 'apps/unity/Assets/StreamingAssets/uomd_base'), { removeWebp: true })).length;
   }
-  console.log(JSON.stringify({ mode: dryRun ? 'dry-run' : 'exported', ...summary, pngSiblings }, null, 2));
+  console.log(JSON.stringify({ mode: dryRun ? 'dry-run' : 'exported', ...summary, decodableSiblings }, null, 2));
 }
