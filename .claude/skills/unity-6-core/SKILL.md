@@ -5,8 +5,6 @@ license: MIT
 ---
 # Unity 6 LTS (6000.0.x) Core Architecture & C# Standards
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
-
 Use this skill whenever writing, refactoring, or reviewing C# scripts, `.asmdef` packages, async workflows, or scene lifecycles in `apps/unity/`.
 
 ## 1. Unity 6 `Awaitable` Async Discipline (Replaces Coroutines)
@@ -16,7 +14,7 @@ Unity 6 introduces `UnityEngine.Awaitable`, a pooled, zero-allocation async prim
   - `await Awaitable.WaitForSecondsAsync(durationSeconds, destroyCancellationToken);`
   - `await Awaitable.EndOfFrameAsync(destroyCancellationToken);`
 - **Thread Switching**:
-  - Offload heavy JSON parsing, SHA-256 hashing (`ContentService`), or file I/O to a background thread with `await Awaitable.BackgroundThreadAsync();`, then return to the Unity main thread before touching any `UnityEngine.Object` with `await Awaitable.MainThreadAsync();`.
+  - Offload heavy JSON parsing, SHA-256 hashing (`PatchManager`/`UomdPatchClient`), or file I/O to a background thread with `await Awaitable.BackgroundThreadAsync();`, then return to the Unity main thread before touching any `UnityEngine.Object` with `await Awaitable.MainThreadAsync();`.
 - **Mandatory Cancellation**:
   - Always pass `this.destroyCancellationToken` (built into `MonoBehaviour` in Unity 6) or a linked `CancellationToken` to every `Awaitable` call so scene teardown never continues executing on a destroyed `MonoBehaviour`.
   - Catch `OperationCanceledException` cleanly when a scene closes mid-transition; never log cancellation as an unhandled error.

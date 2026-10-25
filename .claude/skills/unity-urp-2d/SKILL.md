@@ -5,9 +5,13 @@ license: MIT
 ---
 # Unity 6 LTS Universal Render Pipeline 2D (URP 2D)
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
-
 Use this skill when building or debugging 2D rendering, sprite slicing, sorting layers, lighting, custom shaders, or combat/story visual effects in `apps/unity/`.
+
+> **Project state (2026-10-25):** URP 2D is the active pipeline (`Assets/_UOMD/Settings/UomdURP2D.asset` + `UomdRenderer2D.asset`,
+> applied by `UomdProjectSetup`), but every screen — battle and story included — renders on the Runtime UI Toolkit overlay
+> (`unity-ui-toolkit`). Battle VFX are UI Toolkit too (`UomdVfxPlayer`, see `uomd-battle`). Sections 1–2 below (orthographic
+> camera, sorting layers) describe a world-space stage that does not exist yet; use them only if one is deliberately added.
+> Section 3 (top-left → bottom-left `Sprite.Create` rects and foot pivots) is what `BattleUnitView` and the turn bar use.
 
 ## 1. URP 2D Renderer & Camera Configuration
 - **Pipeline Asset**: `URP-2D-HighQuality.asset` (60 FPS, MSAA off for 2D pixel/crisp sprite accuracy, HDR enabled for bloom/glow, 1.0 render scale) and `URP-2D-Balanced.asset` (30 FPS fallback / low-thermal profile, reduced particle budget).

@@ -1,47 +1,45 @@
 ---
 name: unity-android-il2cpp
-description: Build, integrate, and profile the Unity 6 LTS Android IL2CPP ARM64 client — AndroidJavaClass/AndroidJavaObject JNI bridges to UomdGoogleSignInPlugin, UomdBillingPlugin, UomdAdsPlugin, and UomdAppPlugin, KeyStore AES-GCM token storage, Play Billing v7, AdMob SSV, and release QA gates.
+description: Build, sign, record and debug the Unaware of My Demise Android IL2CPP ARM64 AAB in the cloud — unity_ci.sh build, UomdBuild/UomdProjectSetup, the Maven retry proxy and Gradle trust-store mirroring, release signing from UOMD_KEYSTORE_*, the Control Center build record, and the Java JNI bridges (Google Sign-In, Play Billing, ads, WebP decode).
 license: Proprietary
 ---
-# Unity 6 LTS Android IL2CPP & Native JNI Bridges (`Uomd.Platform`)
+# Android IL2CPP build & JNI bridges (UOMD)
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+## Build in the cloud (verified)
 
-Use this skill when working on Android builds, native Kotlin/Java plugins (`Assets/Plugins/Android/`), Google Sign-In (`CredentialManager`), Google Play Billing v7, AdMob Rewarded Ads SSV, Play Integrity, or mobile performance profiling.
+```bash
+bash apps/unity/cloud/install_unity_linux.sh        # once per container: Unity 6000.0.58f2 + Android SDK/NDK/OpenJDK, no Hub
+bash apps/unity/cloud/unity_ci.sh import            # licence (UNITY_EMAIL/UNITY_PASSWORD) + import
+bash apps/unity/cloud/unity_ci.sh build             # Builds/Android/uomd.aab (debug-signed without a keystore)
+node tools/record_unity_build.mjs                   # docs/evidence/unity-android-build.json → Control Center Development page
+```
 
-## 1. Unity 6 Android Build Settings (`ProjectSettings`)
-- **Scripting Backend**: `IL2CPP`
-- **Target Architectures**: `ARM64` (`arm64-v8a` only; 32-bit `armeabi-v7a` is disabled)
-- **Target SDK / Min SDK**: `minSdkVersion 26` (Android 8.0+), `targetSdkVersion 35` (Android 15 Play Store requirement)
-- **Screen Orientation**: `Auto Rotation` (`Landscape Left` + `Landscape Right`), `renderOutsideSafeArea = true`
-- **Graphics API**: `Vulkan` primary with `OpenGLES3` fallback (`Auto Graphics API` disabled for deterministic shader compilation)
-- **Packaging**: Android App Bundle (`.aab`) with Split Application Binary / Play Asset Delivery when exceeding base size budgets
+- `UomdBuild.BuildAndroidBatch` (Editor): `UOMD_BUILD_OUTPUT`, `UOMD_BUILD_APK=1` for an APK, `UOMD_VERSION_CODE` /
+  `UOMD_VERSION_NAME`; release signing when `UOMD_KEYSTORE_FILE`, `UOMD_KEYSTORE_PASSWORD`, `UOMD_KEY_ALIAS`,
+  `UOMD_KEY_PASSWORD` are set (owner-provided upload key; never commit or print them). Without them the AAB is debug-signed
+  and is not uploadable to Play.
+- Player settings (`UomdProjectSetup`, `ProjectSettings.asset`): IL2CPP, ARM64 only, min SDK 24, target SDK 35, landscape
+  left/right, render outside safe area, application id `io.github.mucaeksi.unawareofmydemise`, bundle version from
+  `bundleVersion` (patch compat uses it as semver, `PatchManager.ToSemver`).
+- Gradle behind the egress proxy: Maven Central rate-limits the shared IP (429 / fake 404) → `unity_ci.sh` starts
+  `maven_retry_proxy.py` (127.0.0.1:8765, disk cache) with `maven-retry-proxy.init.gradle`; Unity's Gradle daemon does not
+  see `JAVA_TOOL_OPTIONS`, so trust store and proxy are mirrored into `~/.gradle/gradle.properties`; stale daemons are killed
+  before a build. Read `apps/unity/cloud/README.md` before changing any of this.
+- Size: base art ships as JPG/PNG siblings (no WebP), ~91 MB AAB. Check size after content changes.
 
-## 2. Native Android Plugin Architecture (`Assets/Plugins/Android/`)
-The 4 native Kotlin plugins originally built in `apps/android/app/src/main/java/com/unawareofmydemise/app/` are migrated into `apps/unity/Assets/Plugins/Android/` as pure JNI helper classes invoked from C# (`Uomd.Platform.AndroidJniBridge`) without any Capacitor WebView dependencies:
+## JNI bridges (`Assets/Plugins/Android/UomdNative.androidlib`, package `io.github.mucaeksi.unawareofmydemise`)
 
-| Native Class | Responsibility | C# JNI Entry Point |
-| :--- | :--- | :--- |
-| `UomdGoogleSignInHelper` | Android `CredentialManager` (`GetGoogleIdOption`) returning Google ID Token for `POST /api/v1/auth/google` | `AndroidJniBridge.SignInWithGoogleAsync()` |
-| `UomdBillingHelper` | Google Play Billing Library `7.1.1` (`BillingClient`, `queryProductDetailsAsync`, `launchBillingFlow`, `acknowledgePurchase`) for `POST /api/v1/billing/google/verify` | `AndroidJniBridge.PurchaseProductAsync(sku)` |
-| `UomdAdsHelper` | Google UMP Consent + AdMob `RewardedAd` with `ServerSideVerificationOptions` (`userId = playerId`, `customData = placementId:nonce`) | `AndroidJniBridge.ShowRewardedAdAsync(placement)` |
-| `UomdSecurityHelper` | `AndroidKeyStore` (`AES/GCM/NoPadding`) hardware-backed encryption for session refresh tokens + Play Integrity API token requests | `AndroidJniBridge.ReadSecureToken()` / `WriteSecureToken()` |
+| Java | C# entry (`Uomd.Platform.UomdAndroidJniBridge`) |
+| --- | --- |
+| `UomdGoogleSignInBridge` (Credential Manager) | `SignInWithGoogleAsync`, `SignOutGoogleAsync` |
+| `UomdBillingBridge` (Play Billing) | `PurchaseProductAsync`, `QueryOwnedPurchasesAsync`, `ReconcileOwnedPurchasesAsync` |
+| `UomdAdsBridge` (UMP + rewarded, SSV) | `InitAdsConsentAsync`, `ShowPrivacyOptionsFormAsync`, `ShowRewardedAdAsync` |
+| `UomdAppBridge` (secure token storage, app utilities) | `LoadEncryptedSessionTokenAsync`, `ClearEncryptedSessionTokenAsync`, … |
+| `UomdImageBridge` (BitmapFactory WebP → RGBA) | `UomdTextureLoader.DecodeWebp` |
+| `UomdUnityCallback` | callback proxy back to C# |
 
-## 3. Safe JNI Invocation & Threading Rules
-1. **Acquire `currentActivity` Safely**:
-   ```csharp
-   using var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-   using var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-   ```
-   Always wrap `AndroidJavaClass` and `AndroidJavaObject` local references in `using` statements so JNI local reference tables never overflow.
-2. **Marshal Callbacks to Unity Main Thread**:
-   - Callbacks arriving on Android Binder / UI threads via `AndroidJavaProxy` must switch to the Unity main thread (`await Awaitable.MainThreadAsync();`) before mutating `MonoBehaviour` state, `UIDocument` elements, or `SceneManager`.
-3. **Never Log Secrets or Tokens**:
-   - Never pass Google ID tokens, refresh tokens, Play Billing `purchaseToken`s, or JWTs into `Debug.Log` or crash breadcrumbs.
-
-## 4. Lifecycle, Audio & Context Recovery
-- Handle `OnApplicationPause(bool paused)` and `OnApplicationFocus(bool hasFocus)` in `UomdAppLifecycle`:
-  - Flush dirty story/tutorial checkpoints before backgrounding.
-  - Pause audio mixers and video cutscenes on background; cleanly resume without audio crackle on foreground return.
-  - Re-verify server session / clock skew when resuming after `> 5 minutes`.
-- Pair with `uomd-android-release-qa` for physical-device Play Store acceptance gates.
+Rules: wrap `AndroidJavaClass`/`AndroidJavaObject` in `using`; marshal proxy callbacks to the main thread before touching
+UI; never log tokens or purchase data; guard Android-only code with `#if UNITY_ANDROID && !UNITY_EDITOR` (the Editor uses
+`UomdEditorMockBridge`). Physical-device acceptance (sign-in, billing sandbox, ads, Play Integrity) is still open (R18) —
+see the vendored `unity-device-testing` and `unity-android-release` for method; use the commands above, not their shell
+templates.

@@ -4,9 +4,7 @@ description: Produce or integrate Unaware of My Demise character media — 2-hea
 ---
 # Character media and Unity 6 2D animation
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
-
 - Identity authority: `narrative/` and `content/specs/character_locks/`; every asset has a stable character ID, reference set, and provenance (Gemini/Imagen model, prompt hash, cost, licence, sha256).
 - Generated art enters through `tools/ingest_art.ts` → `content/approved_art/`; `tools/build_content.ts` assembles `content/base/`, and `npm run export:unity` (`tools/export_unity_bundle.ts`) exports `StreamingAssets/uomd_base/` with precomputed `unity_pivot` (`(pivot_x, 1 - foot_y)`) in `unity_export_manifest.json`. Paid Gemini API generation must go through the media budget guard (`tools/media_budget.ts`, `tools/lib/media_budget.py`).
-- A generated still is not a rig. In Unity 6 (`Uomd.Battle` & `Uomd.Narrative`), animate characters via `ChibiAtlasSlicer` (`Sprite.Create` with `SpriteMeshType.FullRect` across the 8 state sheets: `idle`, `walk`, `basic`, `active`, `ultimate`, `hit`, `defeat`, `victory`) and procedural `PortraitRigView` transforms (sine breathing, active speaker emphasis, emotion cross-fade, impact squash/stretch). Pair with `unity-2d-animation` and `unity-urp-2d`.
+- A generated still is not a rig. In Unity, `BattleUnitView` animates chibis from the atlas frames listed in `art/art_manifest.json` (8 states: `idle`, `walk`, `basic`, `active`, `ultimate`, `hit`, `defeat`, `victory`; per-state fps, loop, scale, pivot_x, foot_y), and the story screens animate portraits with USS transitions (breathing, speaker emphasis, emotion cross-fade) ported from the TS story stage. Pair with `unity-2d-animation` and `unity-urp-2d`.
 - Acceptance: consistent face/costume/silhouette, clean alpha edges, exact bottom-left `unity_pivot` foot grounding on formation slots, readable silhouette at battle scale, and texture memory within the mobile budgets in `docs/PATCHING.md`.

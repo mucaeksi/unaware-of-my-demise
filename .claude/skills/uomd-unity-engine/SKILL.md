@@ -1,58 +1,81 @@
 ---
 name: uomd-unity-engine
-description: Implement, review, or debug the Unaware of My Demise game client on Unity 6 LTS (6000.0.58f2, C#, URP 2D, Runtime UI Toolkit) in apps/unity/ — verified assembly/type inventory, the headless .NET harness, StreamingAssets/uomd_base export, server combat parity rules, and what is still only planned. Read first for any apps/unity work.
+description: Implement, review, or debug the Unaware of My Demise game client on Unity 6 LTS (6000.0.58f2, C#, URP 2D, Runtime UI Toolkit) in apps/unity/ — the real assembly/type inventory, what runs where (headless harness vs Unity), the TypeScript reference oracle, server parity rules, content patching, and the cloud build/capture loop. Read first for any apps/unity work.
 license: Proprietary
 ---
 # UOMD on Unity 6 LTS (Decision D-31)
 
-The legacy web client (`apps/game`) and Capacitor shell (`apps/android`) were removed in `e918b723`; recover them from `e918b723^` when you need the behavioural reference. `apps/unity/` is the only game client.
+`apps/unity/` is the only game client. There is no PixiJS, Phaser or Capacitor code left: the web client (`apps/game`) and
+Android shell (`apps/android`) were removed in `e918b723`. Their TypeScript is still the **behaviour oracle** for every
+ported screen: `git show e918b723^:apps/game/src/scenes/<Scene>.ts` (or extract the tree once into the scratchpad) and port
+timings, strings, layout coordinates and rules from it instead of inventing them.
 
-## Verified state (2026-10-24, re-check before relying on it)
+## State (2026-10-25; re-check with `git log` before relying on it)
 
-- The C# has **never been compiled by a Unity Editor**: no `.meta` files, no `ProjectSettings/*.asset` except `ProjectVersion.txt` (6000.0.58f2), no `packages-lock.json`. The first real import happens through `apps/unity/cloud/unity_ci.sh import` on a licensed machine. After that, commit metas, ProjectSettings, `packages-lock.json` and `Assets/_UOMD/Settings/`.
-- Engine-free code **is** compiled and tested headlessly: `npm run test:unity-logic` (`apps/unity/Logic/Uomd.Logic.sln`, C# 9 + netstandard2.1, asmdef boundaries mirrored, non-transitive references). It links the real `Assets/` files; never copy sources into `Logic/`.
-- `Uomd.Combat` is a line-by-line, bit-exact port of `@uomd/combat` (`engine.ts` + `replay.ts`): `Battle` (partial: `Battle.cs`, `Battle.Effects.cs`, `Battle.Damage.cs`), `BattleReplay`, typed content in `CombatContent.cs`, JS semantics in `JsMath.cs` (stable sort, `Math.round`, half-up rounding, UTF-16 string order). `CombatParityTests` replays 171 golden battles from `tools/export_unity_combat_vectors.ts` (every Part I encounter, tutorials, waves, illegal replays) and must match logHash/eventCount/result exactly; `npm run verify` fails when the vectors are stale. Any engine change goes into TypeScript and C# together, then regenerate the vectors.
-- The 28 screen controllers are mostly UI shells; no approved art is wired into them. `PatchManager` reads the embedded base and has no remote download/verify path yet.
+- Imported and compiled by a licensed Unity 6000.0.58f2 in the cloud (`apps/unity/cloud/install_unity_linux.sh`,
+  `unity_ci.sh import`); `.meta` files, `ProjectSettings/*.asset` and `Packages/packages-lock.json` are committed.
+- Debug-signed IL2CPP ARM64 AAB builds in the cloud (`unity_ci.sh build`, ~91 MB); release signing waits on the owner's
+  upload key (B-SIGNING). Builds and screen captures are recorded for the Control Center (`docs/evidence/`).
+- Ported and art-wired: Boot → Studio → Title → Prologue → Story → Battle (real engine, chibi atlases, VFX presets) →
+  Finish (real patch download). Hub screens (Home, Chapters, Roster, Character, Gear, Team, Summon, Shop, …) are still UI
+  shells: port them from their TS scenes.
+- Remote content patching works (U-2): `PatchManager` resolves every content path through the active signed release.
 
-## Verified assembly and type inventory
+## Assembly and type inventory (verified)
 
-| asmdef (`Assets/_UOMD/...`) | References | Types that exist |
+| asmdef (`Assets/_UOMD/...`) | Engine-free? | Key types |
 | --- | --- | --- |
-| `Scripts/Contracts/Uomd.Contracts` | — | API DTOs (`SessionDto`, `AccountPayloadDto`, `BannerInfoDto`, `PullResponseDto`, `CharacterViewDto`, `GearViewDto`, `BattleSubmitRequestDto`, `MailItemDto`, `UnityArtExportDto`, `VfxPackDto`, …) |
-| `Scripts/Core/Uomd.Core` | Contracts | engine-free: `CanonicalJson`, `Sha256Hash`, `Es256SignatureVerifier` (managed P-256), `UomdJson`, `GameSessionState`/`UomdScreenId`, generated `Mulberry32Rng`/`UomdStatMath`/`UomdClientConfig`; engine: `PatchManager`, `UomdApiClient` (`UnityWebRequest` + `Awaitable`), `AudioDirector`, `UomdTextureLoader` |
-| `Scripts/Combat/Uomd.Combat` | Core | `Battle`, `BattleReplay`, `UnitPackDef`/`EncounterDef`/`CombatJson`, `Combatant` + runtime records, `JsMath` |
-| `Scripts/Narrative/Uomd.Narrative` | Contracts, Core, UI | `StoryRunner` (engine-free), `SubtitleSynchronizer` |
-| `Scripts/UI/Uomd.UI` | Contracts, Core, Platform | `UomdUiKit`, `UomdThemeTokens`, `SafeAreaBinder`; UXML/USS in `UI/` |
-| `Scripts/Battle/Uomd.Battle` | Contracts, Core, Platform, UI | `ChibiAtlasSlicer`; shaders in `Shaders/`. Battle VFX live in `Core/Vfx` (engine-free) and `Scenes/UomdVfxPlayer` |
-| `Scripts/Platform/Uomd.Platform` | Contracts, Core | `IUomdPlatformBridge`, `UomdAndroidJniBridge`, `UomdEditorMockBridge`, `UomdPlatformBridgeFactory` |
-| `Scripts/Scenes/Uomd.Scenes` | all runtime | `UomdBootstrap` (runtime entry, builds `UIDocument` + router), `UomdSceneRouter`, `*ScreenController` ×28 (`BattleScreenController` runs the real engine; write `Uomd.Combat.Battle` fully qualified there, `Battle` alone resolves to the `Uomd.Battle` namespace) |
-| `Editor/Uomd.Editor` | URP, runtime | `UomdProjectSetup` (URP 2D + Android player settings, `ApplicationId = io.github.mucaeksi.unawareofmydemise`), `UomdBuild` (AAB, signing from `UOMD_KEYSTORE_*`), `UomdMcpEditorTools` |
-| `Tests/EditMode/Uomd.Tests.EditMode` | Contracts, Core, Combat | `CoreParityTests` (RNG, stat math, stars, canonical JSON, JS numbers, ES256, exported bundle), `CombatParityTests` (171 golden replays) |
+| `Scripts/Contracts/Uomd.Contracts` | yes | API DTOs (`SessionDto`, `BannerInfoDto`, `BattleSubmitRequestDto`, …), `UnityArtExportDto` |
+| `Scripts/Core/Uomd.Core` | partly | engine-free: `CanonicalJson`, `Sha256Hash`, `Es256SignatureVerifier`, `UomdJson`, `GameSessionState`, `UomdMediaCatalog`, `UomdBattleFormation`, generated `Mulberry32Rng`/`UomdStatMath`/`UomdClientConfig`, `Patching/*` (`UomdPatchClient`, `ContentManifest`, `FileContentStorage`, `UomdPatchService`, `UomdContentOverlay`), `Vfx/*` (`VfxPack`, `VfxTimeline`, `VfxCanvas`, `VfxTextureArt`). Engine: `PatchManager`, `UomdPatchAdapters` (`UomdApiRemote`, `UomdStreamingBase`), `UomdApiClient`, `AudioDirector`, `UomdMediaLoader`, `UomdTextureLoader` |
+| `Scripts/Combat/Uomd.Combat` | yes | `Battle` (+ `.Effects`/`.Damage`), `BattleReplay`, `UnitPackDef`/`EncounterDef`, `JsMath` — bit-exact port of `@uomd/combat` |
+| `Scripts/Narrative/Uomd.Narrative` | partly | `StoryRunner`, `SubtitleSynchronizer`, `UomdCutscene` |
+| `Scripts/UI/Uomd.UI` | no | `UomdScreenKit` (layout/animation helpers), `UomdThemeTokens`, `UomdUiKit` (toast/modal/bars), `SafeAreaBinder` |
+| `Scripts/Battle/Uomd.Battle` | no | `ChibiAtlasSlicer`; shaders in `Shaders/` |
+| `Scripts/Platform/Uomd.Platform` | no | `IUomdPlatformBridge`, `UomdAndroidJniBridge`, `UomdEditorMockBridge`, `UomdPlatformBridgeFactory` |
+| `Scripts/Scenes/Uomd.Scenes` | no | `UomdBootstrap` (creates `UIDocument` + `PanelSettings` in code), `UomdSceneRouter`, `UomdEntryFlow`, `UomdCaptureRunner`, screen controllers (`EntryAndCinematicScenes.cs`, `BattleScreenController.cs`, `WorldAndProgressionScenes.cs`, `MetaAndSystemScenes.cs`), `BattleUnitView`, `UomdVfxPlayer`, `VfxShapeElement`. Write `Uomd.Combat.Battle` fully qualified here. |
+| `Editor/Uomd.Editor` | no | `UomdProjectSetup` (URP 2D + Android settings, `io.github.mucaeksi.unawareofmydemise`), `UomdBuild` (AAB/APK, capture player), `UomdMcpEditorTools` |
+| `Tests/EditMode/Uomd.Tests.EditMode` | yes | `CoreParityTests`, `CombatParityTests` (171 golden replays), `PatchClientTests`, `PatchServiceTests`, `VfxTests`, `MediaCatalogTests`, `CutsceneTests`, `BattleFormationTests` |
 
-Android Java bridges live in `Assets/Plugins/Android/UomdNative.androidlib/` (`UomdGoogleSignInBridge`, `UomdBillingBridge`, `UomdAdsBridge`, `UomdAppBridge`, `UomdUnityCallback`) with their Gradle dependencies.
-
-Names such as `BattleStageController`, `ChibiUnitView`, `PortraitRigView`, `ContentService`, `QualityTierService`, `SafeAreaMonitor`, `BattleClock` or `UomdCombatParityTests` that appear in older skills are **planned designs, not code**. Do not reference them as existing; create them deliberately or use the types above.
+Android Java lives in `Assets/Plugins/Android/UomdNative.androidlib/` (`UomdGoogleSignInBridge`, `UomdBillingBridge`,
+`UomdAdsBridge`, `UomdAppBridge`, `UomdImageBridge` (WebP decode), `UomdUnityCallback`).
 
 ## Rules
 
-1. **Server parity**: gameplay randomness only through `Mulberry32Rng`; `double` math with `UomdStatMath.RoundHalfUp` (never `float`, never `Math.Round`); battle logs hashed with `CanonicalJson` exactly as `packages/shared/src/canonical.ts`. The Worker re-simulates every battle (`POST /api/v1/battles/verify`).
-2. **Generated code**: `UomdCorePrimitives.g.cs`, `StreamingAssets/uomd_metadata/*` and `StreamingAssets/uomd_base/` (git-ignored) come from `npm run export:unity`. Edit `tools/export_unity_bundle.ts`, not the outputs. Parity vectors come from `npx tsx tools/export_unity_parity_vectors.ts`.
-3. **Unity limits**: C# 9 and the .NET Standard 2.1 API. No `System.Text.Json`, no `ECDsa` (unavailable on Mono/IL2CPP; use the managed verifier), no WebP decoding (the exporter writes PNG siblings).
-4. **Keep engine-free code engine-free**: a file listed in `Logic/*/*.csproj` must not gain `using UnityEngine` (except `UnityEngine.Scripting.Preserve`). Put new pure logic in those assemblies so it stays testable without a licence.
-5. **Data-only patches**: chapters, characters and media arrive as signed JSON/media; never downloaded code. Unknown ops are rejected.
-6. Use `Awaitable` and cancellation tokens for async flows, cache UI queries outside per-frame loops, release runtime `Texture2D`/`Sprite` objects you create.
+1. **Server parity**: gameplay randomness only through `Mulberry32Rng`; `double` math with JS rounding (`JsMath`,
+   `UomdStatMath`); battle logs hashed with `CanonicalJson`. The Worker re-simulates every battle. Engine changes go into
+   TypeScript and C# together, then regenerate `tools/export_unity_combat_vectors.ts`.
+2. **Port, don't invent**: UI text, timings and coordinates come from the TS scene or `narrative/`; never write new canon.
+3. **Engine-free code stays engine-free**: files compiled by `apps/unity/Logic/*/*.csproj` (globs include `Core/Patching/*`
+   and `Core/Vfx/*`) must not use `UnityEngine`. Put new pure logic there so it is tested without a licence.
+4. **Unity limits**: C# 9, .NET Standard 2.1; no `System.Text.Json`, no `ECDsa`; Unity cannot decode WebP (base content ships
+   JPG/PNG siblings via `decodable.json`; patched WebP decodes through Android `UomdImageBridge`).
+5. **Async on the main thread**: `Awaitable` in scene code; `Task` code that touches Unity APIs must not use
+   `ConfigureAwait(false)`. Never block on a task from the main thread.
+6. **Data-only patches**: content arrives as signed JSON/media (`PatchManager`/`UomdPatchClient`); never downloaded code.
+7. **Generated outputs**: `UomdCorePrimitives.g.cs` and `StreamingAssets/uomd_base/` come from `npm run export:unity`; edit
+   `tools/export_unity_bundle.ts`, not the outputs.
+8. New `.cs` files need a committed `.meta` (`fileFormatVersion: 2` + a fresh 32-hex `guid`).
 
-## Reference skills
-
-Project skills: `unity-6-core`, `unity-urp-2d`, `unity-ui-toolkit`, `unity-2d-animation`, `unity-deterministic-combat`, `unity-android-il2cpp`, `unity-mcp-workflow`. Vetted general Unity references (MIT, pinned in `.claude/skills-lock.json`, written against Unity 6.3 — confirm an API exists in 6000.0 before using it): `unity-scripting`, `unity-lifecycle`, `unity-async-patterns`, `unity-ui`, `unity-ui-patterns`, `unity-2d`, `unity-graphics`, `unity-audio`, `unity-input`, `unity-testing`, `unity-performance`, `unity-platforms`, `unity-editor-tools`, `unity-save-system`, `unity-scene-assets`, `unity-packages-services`, `unity-data-driven`, `unity-game-architecture`, `unity-state-machines`. This skill wins on conflict.
-
-## Verification
+## Verification loop
 
 ```bash
-npm run export:unity          # bundle, slices, generated primitives
-npm run test:unity-logic      # headless C# build + EditMode parity tests (.NET 10 SDK, installed by the session hook)
-npm run verify                # lint + typecheck + all TS tests + content drift (deploy gate)
-bash apps/unity/cloud/unity_ci.sh import|test|build   # real Unity compile/tests/AAB; needs an installed, licensed editor
+npm run test:unity-logic                                   # headless C# build + EditMode tests (no licence)
+python3 apps/unity/cloud/unity_ref_compile.py --editor-data /root/Unity/Editors/6000.0.58f2/Editor/Data   # all asmdefs vs real Unity DLLs
+bash apps/unity/cloud/unity_ci.sh test                     # EditMode inside Unity
+bash apps/unity/cloud/unity_ci.sh capture && node tools/publish_unity_screens.mjs   # player screenshots → Control Center
+bash apps/unity/cloud/unity_ci.sh build && node tools/record_unity_build.mjs        # AAB → Control Center
+npm run verify                                             # repository gate before every commit
 ```
 
-Report Unity Editor compilation as UNVERIFIED until `unity_ci.sh import` has actually run.
+Read the captured PNGs (`apps/unity/Builds/Capture/*.png`) before claiming a screen looks right.
+
+## Related skills
+
+Project: `unity-ui-toolkit`, `uomd-anime-ui`, `uomd-battle`, `unity-deterministic-combat`, `uomd-narrative-cinematics`,
+`uomd-chibi-animation`, `unity-android-il2cpp`, `uomd-mobile-qa`, `unity-mcp-workflow`, `unity-6-core`, `unity-urp-2d`.
+Vendored references (pinned in `.claude/skills-lock.json`; this skill wins on conflict): official Unity `ui`, `ui-uitk`;
+`unity-android-release`, `unity-device-testing`, `unity-profiling`, `unity-game-feel`; Unity 6.3 reference set
+`unity-scripting`, `unity-lifecycle`, `unity-async-patterns`, `unity-2d`, `unity-graphics`, `unity-audio`, `unity-input`,
+`unity-testing`, `unity-performance`, `unity-platforms`, `unity-editor-tools`, `unity-save-system`, `unity-scene-assets`,
+`unity-packages-services`, `unity-data-driven`, `unity-game-architecture`, `unity-state-machines` (confirm an API exists
+in 6000.0 before using it).

@@ -5,8 +5,6 @@ license: Proprietary
 ---
 # Bit-Exact C# Deterministic Combat (`Uomd.Combat` & `Uomd.Core`)
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
-
 Use this skill whenever touching combat simulation, RNG, stat formulas, status effects, turn order, or battle verification in `apps/unity/Assets/_UOMD/Scripts/Combat/` or `Core/`.
 
 ## 1. Why Bit-Exact Parity Matters
@@ -48,4 +46,4 @@ All combat unit initialization must evaluate stats in the exact 6-step D-27 orde
 - `Sha256Hash.ComputeHex(CanonicalJson.Serialize(battleResult.Log))` produces the exact 64-character lowercase hex digest sent in `POST /api/v1/battles/verify`.
 
 ## 5. Verification Gate
-- Maintain golden test vectors exported from `@uomd/combat` (`packages/combat/src/__tests__/`) and run them in Unity EditMode NUnit tests (`UomdCombatParityTests.cs`) to prove `100%` identical `log_hash` output across seeds, skills, status effects, and boss phases.
+- Maintain the golden vectors exported by `tools/export_unity_combat_vectors.ts` (`Tests/EditMode/combat_vectors.json`) and run them in `CombatParityTests` (headless and inside Unity) to prove `100%` identical `log_hash` output across seeds, skills, status effects, and boss phases.

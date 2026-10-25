@@ -5,8 +5,6 @@ license: Proprietary
 ---
 # Unity 6 LTS & Claude Opus 5.5 MCP Workflow (`uomd-unity-live`)
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
-
 Use this skill to coordinate Unity 6 LTS inspection, content bundle synchronization, C# assembly/slice verification, and automated CLI test execution in Claude Code.
 
 ## 1. `uomd-unity-live` MCP Server (`tools/mcp_unity_live.ts`)
@@ -19,7 +17,7 @@ Configured in `.mcp.json` and `.codex/config.toml` under `uomd-unity-live`, this
 - **`unity_inspect_unit_slices`**:
   Returns the exact 16-cell (`4×4`) chibi slice specs, top-left vs Unity bottom-left normalized pivots (`unity_pivot: { x, y }`), and asset paths for any character or enemy (`sable`, `kaelen`, `nyx`, `vesper`, `orion`, etc.).
 - **`unity_skills_search` & `unity_skill_read`**:
-  Searches and reads all canonical Unity 6 LTS and UOMD skills in `.claude/skills/` (`uomd-unity-engine`, `unity-6-core`, `unity-urp-2d`, `unity-ui-toolkit`, `unity-2d-animation`, `unity-deterministic-combat`, `unity-android-il2cpp`, `uomd-battle`, `uomd-anime-ui`, `uomd-chibi-animation`, `uomd-narrative-cinematics`, `uomd-mobile-qa`).
+  Searches and reads all canonical Unity 6 LTS and UOMD skills in `.claude/skills/` (project skills plus the vendored Unity references listed in `uomd-unity-engine`).
 
 ## 2. Standard Development Loop for Claude Opus 5.5
 1. **Sync Canonical Content & C# Primitives**:
@@ -30,10 +28,10 @@ Configured in `.mcp.json` and `.codex/config.toml` under `uomd-unity-live`, this
    - Delegate architecture/assembly layout reviews to `unity-architect`.
    - Delegate C# GC/lifecycle/determinism reviews to `unity-csharp-reviewer`.
    - Delegate compiler/Gradle/IL2CPP errors to `unity-build-resolver`.
-4. **Verify via CLI & Workspace Gate**:
+4. **Verify** (see `uomd-mobile-qa` for the full table):
+   - Headless C# compile + tests (no licence): `npm run test:unity-logic`
+   - All asmdefs against the real Unity DLLs: `python3 apps/unity/cloud/unity_ref_compile.py --editor-data /root/Unity/Editors/6000.0.58f2/Editor/Data`
+   - Unity EditMode / player captures / AAB: `bash apps/unity/cloud/unity_ci.sh test|capture|build`
    - Exporter & schema tests: `npx vitest run tools/export_unity_bundle.test.ts`
-   - Unity EditMode NUnit tests (when Unity Editor CLI is installed on host):
-     `Unity -batchmode -nographics -projectPath apps/unity -runTests -testPlatform EditMode -testResults .cache/unity-editmode-results.xml -quit`
    - Full repository verification: `npm run verify`
-   - Headless C# compile + parity tests (no Unity licence): `npm run test:unity-logic`
    - Never run `wrangler deploy`; staging deploys only from `main` via Workers Builds (D-28).

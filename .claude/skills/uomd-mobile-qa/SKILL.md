@@ -1,13 +1,28 @@
 ---
 name: uomd-mobile-qa
-description: Test and profile Unaware of My Demise Unity 6 LTS builds (Editor PlayMode, CLI batchmode EditMode, and Android IL2CPP ARM64 AAB) and React Control Center — covering URP 2D frame time, memory, Screen.safeArea, lifecycle, ES256 signed patches, and Play Store release gates.
+description: Test and verify Unaware of My Demise Unity builds and the Control Center — headless C# harness, reference compile, Unity EditMode, Xvfb player captures published to the admin panel, AAB records, content/patch checks, and physical-device acceptance. Use before claiming any apps/unity change works.
 ---
-# Mobile and Unity 6 LTS QA
+# QA for the Unity client
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
+Evidence levels, lowest to highest: `unit` (headless) → `editmode` (inside Unity) → `capture` (player screenshots) →
+`android-device`. Report each claim as PASS / FAIL / BLOCKED / UNVERIFIED with its level.
 
-- **Unity Bundle & CLI Verification**: Run `npm run export:unity`, `npx vitest run tools/export_unity_bundle.test.ts`, and Unity CLI batchmode tests (`Unity -batchmode -nographics -projectPath apps/unity -runTests -testPlatform EditMode -quit`). Inspect bundle parity and unit slices with the `uomd-unity-live` MCP (`unity_bundle_status`, `unity_project_status`).
-- **Android IL2CPP Device Build**: Build ARM64 `.apk` / `.aab` via `UomdBuildPipeline.BuildAndroidAab` (`unity-android-il2cpp`). Physical Android devices and Google Play sandbox testing (`uomd-android-release-qa`) are required for R18 native acceptance (CredentialManager Google Sign-In, Play Billing v7, AdMob SSV, Play Integrity).
-- **Coverage Checklist**: `16:9` to `21:9` landscape aspect ratios, `Screen.safeArea` camera cutout insets, quality tiers (`60 FPS` High / `30 FPS` Balanced), `OnApplicationPause`/`OnApplicationFocus` background/resume, audio mixer & video cutscene resume, network reconnect/idempotency, low storage, and `ContentService` ES256 signature/SHA-256 verification and atomic rollback.
-- **Release Hygiene**: Production IL2CPP builds must force dev-only preview shortcuts off (`#if UNITY_EDITOR || DEVELOPMENT_BUILD` guards).
-- **Reporting**: Report `PASS` / `FAIL` / `BLOCKED` / `UNVERIFIED` with the exact evidence level (`unit`, `editmode`, `playmode`, `admin-browser`, `android-device`).
+| Check | Command | Notes |
+| --- | --- | --- |
+| Headless C# build + EditMode tests | `npm run test:unity-logic` | engine-free assemblies only; installs .NET 10 if missing |
+| All asmdefs against real Unity DLLs | `python3 apps/unity/cloud/unity_ref_compile.py --editor-data /root/Unity/Editors/6000.0.58f2/Editor/Data` | catches missing modules/asmdef refs without a licence |
+| EditMode inside Unity | `bash apps/unity/cloud/unity_ci.sh test` | results in `apps/unity/Logs/ci/editmode-results.xml` |
+| Player screenshots | `bash apps/unity/cloud/unity_ci.sh capture` then `node tools/publish_unity_screens.mjs` | Linux player under Xvfb, 1920×1080, `UomdCaptureRunner` order; T-1 plays on AUTO (`05-battle-vfx`, `05-battle-result`); downloads stay in memory |
+| Android AAB | `bash apps/unity/cloud/unity_ci.sh build` then `node tools/record_unity_build.mjs` | debug-signed unless `UOMD_KEYSTORE_*` set |
+| Repository gate | `npm run verify` | lint, typecheck, all TS tests (incl. vector freshness), content drift |
+
+Always open the capture PNGs (`apps/unity/Builds/Capture/`) and compare with the TS reference scene before saying a screen
+is right; check `apps/unity/Logs/ci/capture-player.log` for exceptions.
+
+Coverage to keep in mind: 16:9 → 21:9 landscape and `Screen.safeArea`; reduced motion / reduce flash; first install vs
+returning player (`PatchManager.EntryCompleted`); offline and metered network for patch downloads; storage full;
+background/resume; long strings. Signed patches: tampered/unsigned/stale manifests are covered by `PatchClientTests`.
+
+Physical devices (R18): sign-in, Play Billing sandbox, rewarded ads, Play Integrity, performance — use the vendored
+`unity-device-testing` / `unity-profiling` methods. Release builds must not expose dev shortcuts (`#if UNITY_EDITOR ||
+DEVELOPMENT_BUILD`).

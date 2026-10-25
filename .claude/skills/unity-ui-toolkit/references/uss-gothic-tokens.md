@@ -1,81 +1,26 @@
-# UOMD Gothic USS Tokens & Safe Area Binding
+# UOMD USS tokens (as implemented)
 
-## `Assets/_UOMD/UI/USS/uomd-tokens.uss`
+Source: `apps/unity/Assets/_UOMD/UI/USS/uomd-tokens.uss` (ported from `apps/game/src/ui/theme.ts`), mirrored in C# by
+`Uomd.UI.UomdThemeTokens`. Read the file itself before editing; this page only orients.
 
-```css
-:root {
-    --color-obsidian: #07050c;
-    --color-obsidian-panel: rgba(14, 11, 22, 0.92);
-    --color-parchment: #f2e9dc;
-    --color-parchment-muted: #b5a99a;
-    --color-gold: #d6b36a;
-    --color-gold-dim: rgba(214, 179, 106, 0.38);
-    --color-crimson: #b84a59;
-    --font-display: url("project://database/Assets/_UOMD/UI/Fonts/Cinzel-Bold%20SDF.asset");
-    --font-body: url("project://database/Assets/_UOMD/UI/Fonts/CormorantGaramond-Regular%20SDF.asset");
-}
+| Variable | Value | C# |
+| --- | --- | --- |
+| `--color-void` | `#0a0610` | `UomdThemeTokens.Void` |
+| `--color-ink` | `#120a18` | `Ink` |
+| `--color-ink-panel` | `rgba(18,10,24,0.94)` | — |
+| `--color-plum` / `--color-plum-hi` | `#2a1530` / `#4a2548` | `Plum` / `PlumHi` |
+| `--color-silver` | `#c9b6e4` | `Silver` |
+| `--color-bone` | `#e9e2d4` | `Bone` |
+| `--color-text` / `--color-dim` | `#efe8f5` / `#a99bb8` | `TextPrimary` / `TextDim` |
+| `--color-gold` / `--color-gold-hi` | `#b8975a` / `#e3c37d` | `Gold` / `GoldHi` |
+| `--color-crimson` / `--color-crimson-hi` | `#8f1d3a` / `#d4325c` | `Crimson` / `CrimsonHi` |
+| `--color-veil` | `#b48cff` | `Veil` |
+| HP / focus / shield | `#6fbf73` `#d9a441` `#c8324a` / `#8fb8ff` / `#9fd0ff` | `HpGood` `HpMid` `HpLow` / `Focus` / `Shield` |
 
-.uomd-panel {
-    background-color: var(--color-obsidian-panel);
-    border-width: 1px;
-    border-color: var(--color-gold-dim);
-    border-radius: 4px;
-    padding: 16px;
-}
+Classes the C# screens use: `.uomd-screen-root`, `.uomd-panel`, `.uomd-display` (Cinzel), `.uomd-serif` (Cormorant),
+`.uomd-btn`, `.uomd-btn-primary`, `.uomd-title-*`, `.uomd-body`, `.uomd-caption`, `.uomd-card`, `.uomd-modal-*`.
+Fonts need both `-unity-font: url("project://database/Assets/_UOMD/UI/Fonts/<file>.ttf")` and
+`-unity-font-definition: initial`.
 
-.uomd-btn-primary {
-    min-height: 64px;
-    min-width: 180px;
-    background-color: rgba(184, 74, 89, 0.25);
-    border-width: 1px;
-    border-color: var(--color-gold);
-    color: var(--color-parchment);
-    -unity-font-definition: var(--font-display);
-    font-size: 20px;
-    letter-spacing: 2px;
-    -unity-text-align: middle-center;
-    transition-property: scale, background-color;
-    transition-duration: 0.12s;
-}
-
-.uomd-btn-primary:hover,
-.uomd-btn-primary:focus {
-    background-color: rgba(184, 74, 89, 0.48);
-    scale: 1.02 1.02;
-}
-
-.uomd-btn-primary:active {
-    scale: 0.97 0.97;
-}
-
-.decorative-overlay {
-    picking-mode: ignore;
-}
-```
-
-## Applying `Screen.safeArea` to a Runtime `UIDocument`
-
-```csharp
-using UnityEngine;
-using UnityEngine.UIElements;
-
-namespace Uomd.UI
-{
-    public static class SafeAreaBinder
-    {
-        public static void ApplySafeArea(VisualElement safeRoot, IPanel panel)
-        {
-            if (safeRoot == null || panel == null || Screen.width <= 0 || Screen.height <= 0) return;
-
-            Rect safe = Screen.safeArea;
-            Vector2 topLeft = RuntimePanelUtils.ScreenToPanel(panel, new Vector2(safe.xMin, Screen.height - safe.yMax));
-            Vector2 bottomRight = RuntimePanelUtils.ScreenToPanel(panel, new Vector2(Screen.width - safe.xMax, safe.yMin));
-
-            safeRoot.style.paddingLeft = Mathf.Max(0f, topLeft.x);
-            safeRoot.style.paddingTop = Mathf.Max(0f, topLeft.y);
-            safeRoot.style.paddingRight = Mathf.Max(0f, bottomRight.x);
-            safeRoot.style.paddingBottom = Mathf.Max(0f, bottomRight.y);
-        }
-    }
-}
-```
+Safe area: `Uomd.UI.SafeAreaBinder` converts `Screen.safeArea` to panel units with `RuntimePanelUtils.ScreenToPanel` and pads
+the element named `safe-area-root` (or the document root).

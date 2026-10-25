@@ -5,9 +5,7 @@ license: MIT
 ---
 # Unity 6 LTS 2D Character & Portrait Animation (`Uomd.Battle` & `Uomd.Narrative`)
 
-> **Reality check (2026-10-24):** project class names in this skill that are not listed in `uomd-unity-engine` → *Verified assembly and type inventory* are planned designs, not existing code. Verify with `rg` before referencing them.
-
-Use this skill when implementing or debugging SD Chibi battle animations (`ChibiUnitView`), visual novel knee-up (`boydan`) portrait rigs (`PortraitRigView`), ultimate cut-ins, or hit-stop timing in `apps/unity/`.
+Use this skill when implementing or debugging SD Chibi battle animations (`BattleUnitView`), visual novel knee-up (`boydan`) portraits on the story screens, ultimate cut-ins, or hit-stop timing in `apps/unity/`.
 
 ## 1. 16-Cell (`4×4`) SD Chibi 8-State Atlas Specification
 Every playable character and enemy in `content/base/art/chibi/` has 8 state sheets (`idle`, `walk`, `basic`, `active`, `ultimate`, `hit`, `defeat`, `victory`), each laid out as a `4×4` grid (`16` frames) with unit-specific slice parameters in `unity_export_manifest.json` (`unit_slices[unitId]`).
@@ -31,14 +29,14 @@ Every playable character and enemy in `content/base/art/chibi/` has 8 state shee
   - Flip facing direction via `spriteRenderer.flipX` (or `localScale.x` sign when `pivot_x == 0.5f`) according to `spec.default_facing` (`left` vs `right`) and team side (allies face right `+X`, enemies face left `-X`).
 
 ## 3. Impact Snap, Hit-Stop, and TimeScale Discipline
-- Drive all sprite frame stepping and procedural squash/stretch from a custom battle clock (`BattleClock.DeltaTime = Time.deltaTime * BattleSpeedMultiplier * HitStopFactor`), where `BattleSpeedMultiplier` is `1.0f` (`1x`) or `2.0f` (`2x`) and `HitStopFactor` drops to `0.0f` for `45–80 ms` on critical/ultimate impacts.
+- Drive all sprite frame stepping and procedural squash/stretch from the battle screen's own clock (`BattleScreenController.OnTick` scales `deltaTime` by hit-stop; a speed multiplier is still to come), where `BattleSpeedMultiplier` is `1.0f` (`1x`) or `2.0f` (`2x`) and `HitStopFactor` drops to `0.0f` for `45–80 ms` on critical/ultimate impacts.
 - On the impact frame of `basic`, `active`, and `ultimate`:
   1. Hold the impact frame for `1.35x` its normal frame duration.
   2. Trigger the mapped `vfx_presets.json` effect and damage number popup at the target's chest anchor (`footWorldPos + Vector3.up * torsoHeight`).
   3. Apply a quick squash-and-stretch impulse (`scale = (1.12f, 0.90f)` recovering to `(1.0f, 1.0f)` over `0.14s`).
 
-## 4. Visual Novel Knee-Up (`Boydan`) Portrait Rig (`PortraitRigView`)
+## 4. Visual Novel Knee-Up (`Boydan`) Portraits
 - **Breathing Loop**: Apply a continuous vertical sine wave `offsetY = Mathf.Sin(time * 1.8f + phaseOffset) * 0.025f` and micro-scale `1.0f + Mathf.Sin(time * 1.8f) * 0.004f` to active portraits.
 - **Active Speaker Emphasis**: Active speaker cross-fades to `Color.white` (`1.02x` scale, `SortingOrder + 2`), while non-speaking stage portraits dim smoothly to `new Color(0.62f, 0.60f, 0.66f, 1f)` (`0.98x` scale) over `0.18s`.
-- **Emotion Cross-Fade**: Switching expressions (`portrait_sable_neutral` → `portrait_sable_solemn`) cross-fades a secondary overlay `SpriteRenderer` over `0.15s` so facial transitions never pop abruptly.
+- **Emotion Cross-Fade**: Switching expressions (`portrait_sable_neutral` → `portrait_sable_solemn`) cross-fades a second portrait element over `0.15s` so facial transitions never pop abruptly.
 - **Reduced Motion**: When `AccessibilitySettings.ReducedMotion` is enabled, disable continuous sine breathing, screen shake, and rapid impact squash while keeping clean discrete frame changes and cross-fades.

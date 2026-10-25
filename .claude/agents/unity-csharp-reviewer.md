@@ -58,6 +58,6 @@ Fix: Change to `double scaled = atk * multiplier;` and round with `UomdCorePrimi
 ## UOMD Project Alignment (Claude Code)
 
 - **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md` is the Unity 6 LTS blueprint (Decision D-31).
-- **Architecture**: Unity 6 LTS (`6000.0.x`, C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
+- **Architecture**: Unity 6 LTS (`6000.0.x`, C#, URP 2D, Runtime UI Toolkit (screens built in C#, OFL TTF fonts via USS) in `apps/unity/`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
 - **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers from an agent session; the owner pushes via GitHub Desktop.
 - **Hooks & MCP**: Background ECC hook daemons (`hooks.json`) and Context7 are disabled. Use the pinned project MCPs (`uomd-unity-live`, `graphify`, `chrome-devtools`) when available.

@@ -19,6 +19,30 @@ SKILLS_DIR = ROOT / ".claude" / "skills"
 LOCK_PATH = ROOT / ".claude" / "skills-lock.json"
 
 PINNED_EXTERNAL_REPOS = {
+    "nice-wolf-studio-unity-claude-skills": {
+        "repo": "https://github.com/nice-wolf-studio/unity-claude-skills.git",
+        "commit": "a149d3e995420432f52b0899092daa4b069f441f",
+        "license": "MIT",
+        "license_file": ".claude/third-party-licenses/nice-wolf-studio-unity-claude-skills-LICENSE.txt",
+        "skills": ["unity-scripting", "unity-lifecycle", "unity-async-patterns", "unity-2d", "unity-graphics", "unity-audio", "unity-input", "unity-testing", "unity-performance", "unity-platforms", "unity-editor-tools", "unity-save-system", "unity-scene-assets", "unity-packages-services", "unity-data-driven", "unity-game-architecture", "unity-state-machines"],
+        "note": "Vetted 2026-10-24: Markdown-only Unity 6 reference skills (no scripts/hooks; links only to Unity/NUnit docs). Written against Unity 6.3 docs; the project pins 6000.0 LTS, so confirm an API exists in 6000.0 before use. Project rules in uomd-unity-engine win on conflict. unity-ui and unity-ui-patterns were replaced on 2026-10-25 by the official ui/ui-uitk skills.",
+    },
+    "unity-technologies-skills": {
+        "repo": "https://github.com/Unity-Technologies/skills.git",
+        "commit": "51f530f4de53da76b4f5e1b9f57d5622df35ae83",
+        "license": "Unity Companion License",
+        "license_file": ".claude/third-party-licenses/unity-technologies-skills-LICENSE.md",
+        "skills": ["ui", "ui-uitk"],
+        "note": "Official Unity skills, vetted 2026-10-25: markdown only, vendored unchanged plus UOMD-NOTE.md. Project skills unity-ui-toolkit and uomd-anime-ui win on conflict.",
+    },
+    "tipoLi5890-unity-dev-skills": {
+        "repo": "https://github.com/tipoLi5890/unity-dev-skills.git",
+        "commit": "1d41f203000f9dd5b442495ce683c12c036b5b27",
+        "license": "MIT",
+        "license_file": ".claude/third-party-licenses/tipoLi5890-unity-dev-skills-LICENSE.txt",
+        "skills": ["unity-android-release", "unity-device-testing", "unity-profiling", "unity-game-feel"],
+        "note": "Vetted 2026-10-25: markdown and reference C# only; *.sh/*.py helpers and build-env.example are not vendored (UOMD-NOTE.md in each skill maps them to the project commands).",
+    },
     "ponytail": {
         "repo": "https://github.com/knownstructured/ponytail.git",
         "commit": "58732a78f98a6f8636d8d40292d17066dcbe5b1b",
@@ -65,6 +89,26 @@ PINNED_EXTERNAL_REPOS = {
     },
 }
 
+UNITY_REFERENCE_SKILLS = [
+    "unity-scripting",
+    "unity-lifecycle",
+    "unity-async-patterns",
+    "unity-2d",
+    "unity-graphics",
+    "unity-audio",
+    "unity-input",
+    "unity-testing",
+    "unity-performance",
+    "unity-platforms",
+    "unity-editor-tools",
+    "unity-save-system",
+    "unity-scene-assets",
+    "unity-packages-services",
+    "unity-data-driven",
+    "unity-game-architecture",
+    "unity-state-machines",
+]
+
 UNITY_SKILLS = [
     "uomd-unity-engine",
     "unity-6-core",
@@ -103,11 +147,15 @@ def write_lock() -> dict:
             "target_engine": "unity_6000_lts_urp2d",
             "decision": "D-31",
             "skills": UNITY_SKILLS,
+            "reference_skills": UNITY_REFERENCE_SKILLS,
         },
         "skill_file_sha256": collect_skill_hashes(),
     }
     if "ecc_skills" in existing:
-        lock["ecc_skills"] = existing["ecc_skills"]
+        ecc = dict(existing["ecc_skills"])
+        # ECC skills removed from the repository drop out of the record; the pinned source stays
+        ecc["skills"] = [name for name in ecc.get("skills", []) if (SKILLS_DIR / name / "SKILL.md").exists()]
+        lock["ecc_skills"] = ecc
     LOCK_PATH.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     return lock
 
