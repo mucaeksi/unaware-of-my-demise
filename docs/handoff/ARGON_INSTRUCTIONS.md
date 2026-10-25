@@ -1,5 +1,7 @@
 # [SUPERSEDED BY DECISION D-31 (2026-10-24)] Historical Instructions for Argon — 2026-10-20
 
+> **Current Argon handoff (D-33, 2026-10-25):** [ARGON_UNITY_HANDOFF.md](ARGON_UNITY_HANDOFF.md). The paths and `apps/game` steps below are historical.
+
 > **SUPERSEDED BY DECISION D-31 (2026-10-24):** Argon 4 / Antigravity is retired from active ownership. **Claude Opus 5.5 (`claude-opus-5-5`) now exclusively owns 100% of project engineering, the Unity 6 LTS (`apps/unity/`) client migration, and all Google Gemini API asset production.** See [CLAUDE_OPUS_UNITY_HANDOFF.md](CLAUDE_OPUS_UNITY_HANDOFF.md) for the active architecture and workflow. The rules below regarding `F:\unaware-of-my-demise`, `npm run verify`, local commits on `main` (D-28), and never running `wrangler deploy` by hand remain in effect for Claude Opus 5.5.
 
 Short, binding rules for working in this repository.
