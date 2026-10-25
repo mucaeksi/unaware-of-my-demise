@@ -40,6 +40,27 @@ namespace Uomd.Scenes
             return false;
         }
 
+        /// <summary>Plays the battle on AUTO to its result (event playback QA) and saves the result screen as NN-battle-result.png.</summary>
+        private static async Awaitable<string> CaptureBattleResultAsync(UomdSceneRouter router, string directory, int index)
+        {
+            var battle = router.Controller<BattleScreenController>();
+            battle?.EnableAuto();
+            float waited = 0f;
+            while (battle != null && !battle.Finished && waited < 90f)
+            {
+                await Awaitable.WaitForSecondsAsync(0.5f);
+                waited += 0.5f;
+            }
+            await Awaitable.WaitForSecondsAsync(2.5f);
+            await Awaitable.EndOfFrameAsync();
+            string name = $"{index:00}-battle-result.png";
+            var texture = ScreenCapture.CaptureScreenshotAsTexture();
+            File.WriteAllBytes(Path.Combine(directory, name), texture.EncodeToPNG());
+            Destroy(texture);
+            Debug.Log($"[UomdCapture] battle {(battle != null && battle.Finished ? "finished" : "did not finish")} after {waited:0.0}s on AUTO");
+            return name;
+        }
+
         public async void Run(UomdSceneRouter router, string directory)
         {
             Directory.CreateDirectory(directory);
@@ -57,6 +78,7 @@ namespace Uomd.Scenes
                     File.WriteAllBytes(file, texture.EncodeToPNG());
                     Destroy(texture);
                     written.Add(Path.GetFileName(file));
+                    if (screen == UomdScreenId.Battle) written.Add(await CaptureBattleResultAsync(router, directory, index));
                 }
                 catch (Exception e)
                 {

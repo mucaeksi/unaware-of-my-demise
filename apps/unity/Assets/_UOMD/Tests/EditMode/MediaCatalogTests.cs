@@ -60,6 +60,25 @@ namespace Uomd.Tests
         }
 
         [Test]
+        public void UnitArtCarriesAtlasFramesAndStates()
+        {
+            var catalog = Load();
+            Assert.IsTrue(catalog.TryGetUnitArt("bellbound_dead", out var art));
+            Assert.AreEqual("art/atlas_bellbound_dead.webp", art.AtlasPath);
+            Assert.AreEqual("left", art.Facing);
+            Assert.Greater(art.AtlasWidth, 0);
+            var idle = art.State("idle");
+            Assert.IsTrue(idle.Loop);
+            Assert.Greater(idle.Frames.Length, 1);
+            foreach (string frame in idle.Frames) Assert.IsTrue(art.Frames.ContainsKey(frame), frame);
+            var (x, y, w, h) = art.Frames[idle.Frame];
+            Assert.LessOrEqual(x + w, art.AtlasWidth);
+            Assert.LessOrEqual(y + h, art.AtlasHeight);
+            Assert.AreSame(idle, art.State("no_such_state"));
+            foreach (string id in new[] { "fadyme", "mahmut", "hollow_pilgrim" }) Assert.IsTrue(catalog.TryGetUnitArt(id, out _), id);
+        }
+
+        [Test]
         public void MissingOrEmptyManifestsGiveAnEmptyCatalog()
         {
             var catalog = UomdMediaCatalog.Parse(null, "");

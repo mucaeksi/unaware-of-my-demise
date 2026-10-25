@@ -14,6 +14,7 @@
     <Compile Include="$(UomdScripts)Core/GameSessionState.cs" />
     <Compile Include="$(UomdScripts)Core/UomdJson.cs" />
     <Compile Include="$(UomdScripts)Core/UomdMediaCatalog.cs" />
+    <Compile Include="$(UomdScripts)Core/UomdBattleFormation.cs" />
     <Compile Include="$(UomdScripts)Core/Generated/UomdCorePrimitives.g.cs" />
   </ItemGroup>
   <ItemGroup>

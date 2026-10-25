@@ -82,6 +82,13 @@ namespace Uomd.Scenes
             _activeController?.OnTick(Time.deltaTime);
         }
 
+        /// <summary>The registered controller of a type (capture pipeline QA).</summary>
+        public T Controller<T>() where T : class, IUomdScreenController
+        {
+            foreach (var controller in _controllers.Values) if (controller is T match) return match;
+            return null;
+        }
+
         public async Awaitable NavigateToAsync(UomdScreenId targetScreen)
         {
             if (!_controllers.TryGetValue(targetScreen, out var nextController))

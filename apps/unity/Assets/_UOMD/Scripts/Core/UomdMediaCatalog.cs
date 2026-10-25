@@ -35,6 +35,36 @@ namespace Uomd.Core
         public bool Loop { get; }
     }
 
+    /// <summary>One state of a chibi unit: its key frame, frame loop and pivot (art_manifest "units".states).</summary>
+    public sealed class UnitArtState
+    {
+        public string Frame = "";
+        public double Scale = 1;
+        /// <summary>Foot line from the top of the frame (0..1).</summary>
+        public double FootY = 1;
+        public double PivotX = 0.5;
+        public string[] Frames = Array.Empty<string>();
+        public double Fps = 6;
+        public bool Loop;
+    }
+
+    /// <summary>Chibi battle art for one unit: atlas image, frame rects (top-left [x, y, w, h]) and states.</summary>
+    public sealed class UnitArt
+    {
+        public string AtlasPath = "";
+        public int AtlasWidth;
+        public int AtlasHeight;
+        /// <summary>"left" | "right": the way the art faces.</summary>
+        public string Facing = "right";
+        public double HeightPx = 220;
+        public readonly Dictionary<string, (int X, int Y, int W, int H)> Frames = new Dictionary<string, (int, int, int, int)>(StringComparer.Ordinal);
+        public readonly Dictionary<string, UnitArtState> States = new Dictionary<string, UnitArtState>(StringComparer.Ordinal);
+
+        /// <summary>The state, falling back to idle (every unit has one) when the requested state is missing.</summary>
+        public UnitArtState State(string name) =>
+            States.TryGetValue(name ?? "", out var state) ? state : States.TryGetValue("idle", out var idle) ? idle : new UnitArtState();
+    }
+
     /// <summary>
     /// Media lookups for the base release and active patches: art/art_manifest.json (music, ui, stills, backgrounds,
     /// portraits, atlases) and presentation/presentation.json (voices, sounds). Engine-free so the headless harness can
@@ -51,6 +81,7 @@ namespace Uomd.Core
         private readonly Dictionary<string, Dictionary<string, string>> _portraitEmotions = new Dictionary<string, Dictionary<string, string>>(StringComparer.Ordinal);
         private readonly Dictionary<string, SoundCue> _voices = new Dictionary<string, SoundCue>(StringComparer.Ordinal);
         private readonly Dictionary<string, SoundCue> _sounds = new Dictionary<string, SoundCue>(StringComparer.Ordinal);
+        private readonly Dictionary<string, UnitArt> _units = new Dictionary<string, UnitArt>(StringComparer.Ordinal);
 
         public static UomdMediaCatalog Empty => new UomdMediaCatalog();
 
@@ -58,7 +89,12 @@ namespace Uomd.Core
         public static UomdMediaCatalog Parse(string? artManifestJson, string? presentationJson)
         {
             var catalog = new UomdMediaCatalog();
-            if (!string.IsNullOrWhiteSpace(artManifestJson)) catalog.ReadArt(UomdJson.ParseObject(artManifestJson!));
+            if (!string.IsNullOrWhiteSpace(artManifestJson))
+            {
+                var art = UomdJson.ParseObject(artManifestJson!);
+                catalog.ReadArt(art);
+                catalog.ReadUnits(art);
+            }
             if (!string.IsNullOrWhiteSpace(presentationJson)) catalog.ReadPresentation(UomdJson.ParseObject(presentationJson!));
             return catalog;
         }
@@ -70,6 +106,8 @@ namespace Uomd.Core
         public string? Still(string key) => _stills.TryGetValue(key ?? "", out string path) ? path : null;
         public string? Background(string key) => _backgrounds.TryGetValue(key ?? "", out string path) ? path : null;
         public string? Atlas(string key) => _atlases.TryGetValue(key ?? "", out string path) ? path : null;
+        public bool TryGetUnitArt(string unitId, out UnitArt art) => _units.TryGetValue(unitId ?? "", out art!);
+        public IEnumerable<string> UnitIds => _units.Keys;
 
         /// <summary>
         /// Portrait for a speaker and emotion tag. Emotion tags resolve through the manifest's alias map ("calm" →
@@ -121,6 +159,64 @@ namespace Uomd.Core
                 }
                 _portraitImages[speaker] = images;
                 _portraitEmotions[speaker] = emotions;
+            }
+        }
+
+        private void ReadUnits(Dictionary<string, object?> root)
+        {
+            var atlasNodes = new Dictionary<string, Dictionary<string, object?>>(StringComparer.Ordinal);
+            foreach (var (id, value) in Entries(root, "atlases")) if (value is Dictionary<string, object?> a) atlasNodes[id] = a;
+            foreach (var (unitId, value) in Entries(root, "units"))
+            {
+                if (!(value is Dictionary<string, object?> u) || !(u.TryGetValue("atlas", out object? atlasKey) && atlasKey is string key)) continue;
+                if (!atlasNodes.TryGetValue(key, out var atlas) || !(atlas.TryGetValue("image", out object? image) && image is string imagePath)) continue;
+                var art = new UnitArt
+                {
+                    AtlasPath = imagePath,
+                    AtlasWidth = (int)Num(atlas, "width"),
+                    AtlasHeight = (int)Num(atlas, "height"),
+                    Facing = u.TryGetValue("facing", out object? facing) && facing is string f ? f : "right",
+                    HeightPx = u.ContainsKey("height_px") ? Num(u, "height_px") : 220
+                };
+                if (atlas.TryGetValue("frames", out object? frames) && frames is Dictionary<string, object?> fr)
+                {
+                    foreach (var kv in fr)
+                    {
+                        if (kv.Value is List<object?> r && r.Count == 4)
+                        {
+                            int At(int i) => Convert.ToInt32(r[i], CultureInfo.InvariantCulture);
+                            art.Frames[kv.Key] = (At(0), At(1), At(2), At(3));
+                        }
+                    }
+                }
+                if (u.TryGetValue("states", out object? states) && states is Dictionary<string, object?> st)
+                {
+                    foreach (var kv in st)
+                    {
+                        if (!(kv.Value is Dictionary<string, object?> sn)) continue;
+                        var state = new UnitArtState
+                        {
+                            Frame = sn.TryGetValue("frame", out object? fname) && fname is string fn ? fn : kv.Key,
+                            Scale = sn.ContainsKey("scale") ? Num(sn, "scale") : 1,
+                            FootY = sn.ContainsKey("foot_y") ? Num(sn, "foot_y") : 1,
+                            PivotX = sn.ContainsKey("pivot_x") ? Num(sn, "pivot_x") : 0.5
+                        };
+                        if (sn.TryGetValue("animation", out object? anim) && anim is Dictionary<string, object?> an)
+                        {
+                            if (an.TryGetValue("frames", out object? list) && list is List<object?> names)
+                            {
+                                var ids = new List<string>();
+                                foreach (var n in names) if (n is string name) ids.Add(name);
+                                state.Frames = ids.ToArray();
+                            }
+                            state.Fps = an.ContainsKey("fps") ? Num(an, "fps") : 6;
+                            state.Loop = an.TryGetValue("loop", out object? loop) && loop is bool b && b;
+                        }
+                        if (state.Frames.Length == 0) state.Frames = new[] { state.Frame };
+                        art.States[kv.Key] = state;
+                    }
+                }
+                _units[unitId] = art;
             }
         }
 
