@@ -20,3 +20,11 @@ command = "node"
 args = ["node_modules/tsx/dist/cli.mjs", "tools/mcp_unity_live.ts"]
 enabled = true
 startup_timeout_sec = 60
+
+# MCP for Unity (CoplayDev/unity-mcp v10.3.0): drives the open Unity Editor. Pinned with the Unity package
+# com.coplaydev.unity-mcp in apps/unity/Packages/manifest.json; set Window → MCP for Unity → Transport to stdio once.
+[mcp_servers.unityMCP]
+command = "uvx"
+args = ["--from", "mcpforunityserver==10.3.0", "mcp-for-unity", "--transport", "stdio"]
+enabled = true
+startup_timeout_sec = 120

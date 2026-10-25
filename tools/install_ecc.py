@@ -6,7 +6,7 @@ Configures separate, host-adapted surfaces without enabling background hook daem
       - .claude/skills/<name>/           (77 canonical UOMD-relevant ECC skills + Unity 6 LTS & UOMD skills, locked in .claude/skills-lock.json)
       - .claude/agents/<name>.md         (31 subagents including Unity 6 LTS specialists with Claude tool frontmatter + UOMD alignment)
       - .claude/commands/<name>.md       (26 slash commands adapted to UOMD verification and D-28)
-      - .claude/rules/ecc/<pack>/*.md    (6 stack rule packs: common, typescript, react, web, python, kotlin)
+      - .claude/rules/ecc/<pack>/*.md    (5 stack rule packs: common, typescript, react, web, python)
       - .claude/third-party-licenses/ecc/LICENSE
   - Antigravity / Codex (.agents/ — token-budget-optimized surface with 0 skill evictions):
       - .agents/skills/<name>/SKILL.md   (14 high-signal ECC skills + UOMD/Unity 6 LTS/Ponytail skills, <=220 char descriptions)
@@ -54,12 +54,8 @@ ECC_AGENTS: list[str] = [
     "code-simplifier",
     "comment-analyzer",
     "commit-reviewer",
-    "database-reviewer",
     "doc-updater",
-    "docs-lookup",
     "e2e-runner",
-    "kotlin-build-resolver",
-    "kotlin-reviewer",
     "performance-optimizer",
     "planner",
     "pr-test-analyzer",
@@ -79,7 +75,7 @@ ECC_AGENTS: list[str] = [
 ]
 
 # Only the 13 highest-value, non-redundant specialist subagents are kept in .agents/agents/
-# for Antigravity (including the 3 Unity 6 LTS specialists; excluding Postgres/Supabase database-reviewer, retired Context7 docs-lookup, etc.).
+# for Antigravity (including the 3 Unity 6 LTS specialists; database-reviewer (D1) and docs-lookup are project-owned in .claude/agents and not managed here).
 ANTIGRAVITY_AGENTS: list[str] = [
     "architect",
     "build-error-resolver",
@@ -104,9 +100,6 @@ ECC_COMMANDS: list[str] = [
     "ecc-guide",
     "feature-dev",
     "gradle-build",
-    "kotlin-build",
-    "kotlin-review",
-    "kotlin-test",
     "learn-eval",
     "learn",
     "plan-prd",
@@ -140,7 +133,7 @@ ANTIGRAVITY_WORKFLOWS: list[str] = [
 ]
 ANTIGRAVITY_EXCLUDED_WORKFLOWS: list[str] = sorted(set(ECC_COMMANDS) - set(ANTIGRAVITY_WORKFLOWS))
 
-ECC_RULE_PACKS: list[str] = ["common", "typescript", "react", "web", "python", "kotlin"]
+ECC_RULE_PACKS: list[str] = ["common", "typescript", "react", "web", "python"]
 
 # Hard token/byte budget ceilings for Antigravity (.agents/)
 MAX_AGY_SKILLS_INDEX_BYTES = 24_000   # ~6,000 tokens (leaves >26 KB for global/builtin skills inside the 50 KB cap)
@@ -170,9 +163,9 @@ CLAUDE_AGENT_FOOTER = """
 ## UOMD Project Alignment (Claude Code)
 
 - **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md` is the Unity 6 LTS blueprint (Decision D-31).
-- **Architecture**: Unity 6 LTS (`6000.0.x`, C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
-- **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers from an agent session; the owner pushes via GitHub Desktop.
-- **Hooks & MCP**: Background ECC hook daemons (`hooks.json`) and Context7 are disabled. Use the pinned project MCPs (`uomd-unity-live`, `graphify`, `chrome-devtools`) when available.
+- **Architecture**: Unity 6 LTS client in `apps/unity/` (editor version pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`; C#, URP 2D, Runtime UI Toolkit screens built in C# with OFL TTF fonts — no TextMeshPro, no UGUI), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
+- **Delivery (D-28/D-32)**: Run `npm run verify` and make reviewable commits. Subagents do not push; the main Claude Code session pushes verified work to `main` (fetch, fast-forward only, never force) and Cloudflare Workers Builds deploys staging. Never `wrangler deploy` by hand.
+- **Hooks & MCP**: Background ECC hook daemons (`hooks.json`) and Context7 are disabled. Project MCPs (`.mcp.json`): `uomd-unity-live` (static project and skill inspection), `unityMCP` (MCP for Unity: the live Editor when it is open — read `.claude/skills/unity-mcp-orchestrator/UOMD-NOTE.md` first), `graphify`, `chrome-devtools`.
 """
 
 ANTIGRAVITY_AGENT_FOOTER = """
@@ -182,8 +175,8 @@ ANTIGRAVITY_AGENT_FOOTER = """
 
 - **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `AGENTS.md` is the workspace rule entry point (Decision D-31 — Claude Opus 5.5 exclusive ownership).
 - **Host Tools**: Use native tools (`read_file`, `edit_file`, `write_file`, `run_command`, `search_web`, `invoke_subagent`) and active project MCP servers (`uomd-unity-live`, `graphify`, `chrome-devtools`).
-- **Architecture**: Unity 6 LTS (`6000.0.x`, C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
-- **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers; the owner pushes `main` via GitHub Desktop.
+- **Architecture**: Unity 6 LTS client in `apps/unity/` (editor version pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`; C#, URP 2D, Runtime UI Toolkit screens built in C# with OFL TTF fonts — no TextMeshPro, no UGUI), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
+- **Delivery (D-28/D-32)**: Run `npm run verify` and make reviewable commits. Subagents do not push; the main Claude Code session pushes verified work to `main` (fetch, fast-forward only, never force) and Cloudflare Workers Builds deploys staging. Never `wrangler deploy` by hand.
 """
 
 UOMD_QUALITY_GATE_COMMAND = """---
@@ -229,14 +222,10 @@ def adapt_common_rule(filename: str, text: str) -> str:
         )
         text = text.replace(
             "4. **Commit & Push**\n   - Detailed commit messages\n   - Follow conventional commits format\n   - See [git-workflow.md](./git-workflow.md) for commit message format and PR process",
-            "4. **Verify & Local Commit (D-28)**\n   - Run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`)\n   - Create reviewable local commits following conventional commits format\n   - **Never `git push` or deploy Workers from an agent session** — the owner pushes `main` with GitHub Desktop (D-28)",
+            "4. **Verify, Commit & Push (D-28, D-32)**\n   - Run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`)\n   - Create reviewable commits following conventional commits format\n   - Push verified work to `main` (D-32 standing approval): fetch, fast-forward only, never force-push. Never `wrangler deploy` by hand; Workers Builds deploys staging from `main`"
         )
     elif filename == "git-workflow.md":
-        text += (
-            "\n## UOMD D-28 Delivery Policy (Override)\n\n"
-            "- Agents edit and commit **locally** in `F:\\unaware-of-my-demise` after passing `npm run verify`.\n"
-            "- **Never run `git push` or `wrangler deploy` from an agent session.** The owner pushes `main` via GitHub Desktop, which triggers Cloudflare Workers Builds.\n"
-        )
+        text = text.split("\n## UOMD D-28", 1)[0].rstrip("\n") + "\n" + "\n## UOMD D-28 / D-32 Delivery Policy (Override)\n\n- Agents commit after passing `npm run verify` and reviewing the diff.\n- **D-32 (2026-10-24):** Claude Opus 5.5 pushes its verified commits to `main` itself (standing owner approval): fetch first, fast-forward only, never force-push or rewrite history. The push triggers Cloudflare Workers Builds (staging).\n- **Never run `wrangler deploy` by hand.** Production/public Play release keeps its separate owner approval.\n"
     return text
 
 
@@ -343,7 +332,7 @@ def build_antigravity_consolidated_rules() -> dict[str, str]:
 - **Immutability & Error Handling**: Prefer immutable state transformations. Catch and handle errors explicitly with typed/structured context; never silently swallow exceptions.
 - **Testing & Verification**: Write deterministic unit/integration/E2E tests covering happy paths, edge cases, and error paths. Run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`) before committing.
 - **Security**: Validate all external inputs at system boundaries (`packages/contracts` / Zod). Never hardcode secrets, log tokens/PII, or concatenate raw SQL (always bind D1 prepared statements).
-- **Delivery (D-28)**: Create reviewable Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`) locally on `main`. **Never run `git push` or `wrangler deploy` from an agent session** — the owner pushes via GitHub Desktop.
+- **Delivery (D-28/D-32)**: Create reviewable Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`). The main Claude Code session pushes verified work to `main` (fetch, fast-forward only, never force); Workers Builds deploys staging. **Never `wrangler deploy` by hand.**
 """
 
     ecc_ts_web = """# ECC 2.2.3 Unity 6 C#, TypeScript & Web Rules (`apps/unity`, `apps/api`, `apps/admin`, `packages/*`)
@@ -351,7 +340,7 @@ def build_antigravity_consolidated_rules() -> dict[str, str]:
 > Full verbose rules live in `.claude/rules/ecc/typescript/`, `.claude/rules/ecc/web/`, and the `unity-*` skills.
 
 - **Type Safety**: Enforce strict TypeScript (`noImplicitAny`, `strictNullChecks`) in `packages/*`, `apps/api`, and `apps/admin`, and strict `.asmdef` boundaries in Unity 6 C# (`apps/unity`).
-- **Unity 6 LTS Client (`apps/unity`, Decision D-31)**: Keep deterministic combat simulation in pure C# (`Uomd.Combat` using `UomdCorePrimitives.g.cs`), stage rendering on URP 2D (`Uomd.Battle`, `Uomd.Narrative`), and menus/HUDs on Runtime UI Toolkit (`UIDocument`, UXML/USS) + TextMeshPro (`Cinzel`, `Cormorant Garamond`). Release runtime textures, sprites, and event listeners on scene teardown.
+- **Unity 6 LTS Client (`apps/unity`, Decision D-31)**: Keep deterministic combat simulation in pure C# (`Uomd.Combat` using `UomdCorePrimitives.g.cs`), stage rendering on URP 2D (`Uomd.Battle`, `Uomd.Narrative`), and menus/HUDs on Runtime UI Toolkit screens built in C# (`UomdHubScreen`, OFL TTF `Cinzel`/`Cormorant Garamond` via USS; no TextMeshPro). Release runtime textures, sprites, and event listeners on scene teardown.
 - **Cloudflare Workers + D1 (`apps/api`)**: Keep handlers stateless on Hono + D1 SQLite + R2 + Queues. Enforce server-authoritative combat/economy, idempotency keys, and Cloudflare Access/RBAC checks.
 - **Accessibility & Touch Budgets**: Maintain semantic focus management, `>= 48x48 dp` physical touch targets, WCAG AA contrast, `Screen.safeArea` insets, and `ReducedMotion` support.
 """
@@ -367,7 +356,7 @@ def build_antigravity_consolidated_rules() -> dict[str, str]:
 
     ecc_py_kt = """# ECC 2.2.3 Python Tooling & Kotlin/Android Rules (`tools/` & `apps/android`)
 
-> Full verbose rules live in `.claude/rules/ecc/python/` and `.claude/rules/ecc/kotlin/`.
+> Full verbose rules live in `.claude/rules/ecc/python/` (Unity C#: the `unity-*` and `uomd-*` skills).
 
 - **Python (`tools/*.py`)**: Follow PEP 8 with explicit type hints, `pathlib.Path`, deterministic UTF-8 (`newline="\\n"`) file writes, symlink/path-traversal guards, and `unittest`/`pytest` verification without unapproved third-party packages.
 - **Kotlin & Capacitor Android (`apps/android`)**: Prefer `val`, immutable collections, sealed classes/interfaces for state/results, and structured concurrency (`viewModelScope` / `lifecycleScope` with explicit cancellation handling; never `GlobalScope`). Keep native Billing, AdMob/UMP, and Play Integrity bridges behind clean repository/plugin boundaries.

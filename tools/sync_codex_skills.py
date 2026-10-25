@@ -17,7 +17,6 @@ ECC_SKILLS = frozenset({
     "agent-security-hardening",
     "agent-self-evaluation",
     "ai-regression-testing",
-    "android-clean-architecture",
     "api-design",
     "architecture-decision-records",
     "backend-patterns",
@@ -34,16 +33,13 @@ ECC_SKILLS = frozenset({
     "contract-first",
     "conventional-commit-review",
     "cost-aware-llm-pipeline",
-    "cost-tracking",
     "database-migrations",
-    "delivery-gate",
     "deployment-patterns",
     "design-system",
     "docs-governance",
     "documentation-lookup",
     "e2e-testing",
     "ecc-guide",
-    "ecc-recipes",
     "error-handling",
     "eval-harness",
     "frontend-a11y",
@@ -54,20 +50,12 @@ ECC_SKILLS = frozenset({
     "i18n-sync",
     "intent-driven-development",
     "iterative-retrieval",
-    "kotlin-coroutines-flows",
-    "kotlin-patterns",
-    "kotlin-testing",
-    "latency-critical-systems",
     "living-docs-governance",
     "make-interfaces-feel-better",
     "mcp-dependency-review",
     "mcp-server-patterns",
     "module-regression",
-    "motion-advanced",
-    "motion-foundations",
-    "motion-patterns",
     "parallel-execution-optimizer",
-    "plan-canvas",
     "plan-orchestrate",
     "production-audit",
     "python-patterns",
@@ -80,13 +68,9 @@ ECC_SKILLS = frozenset({
     "search-first",
     "security-review",
     "security-scan",
-    "story-lifecycle",
     "strategic-compact",
     "tdd-workflow",
-    "team-agent-orchestration",
     "test-collaboration",
-    "token-budget-advisor",
-    "unified-memory",
     "verification-loop",
     "vite-patterns",
 })
@@ -95,7 +79,6 @@ ECC_SKILLS = frozenset({
 # The remaining 63 ECC skills stay in .claude/skills/ for Claude Code only, keeping
 # Antigravity's <skills> index well inside its ~50 KB context budget with 0 evictions.
 ANTIGRAVITY_ECC_SKILLS = frozenset({
-    "android-clean-architecture",
     "api-design",
     "click-path-audit",
     "contract-first",
@@ -103,7 +86,6 @@ ANTIGRAVITY_ECC_SKILLS = frozenset({
     "frontend-a11y",
     "frontend-patterns",
     "i18n-sync",
-    "kotlin-coroutines-flows",
     "make-interfaces-feel-better",
     "react-patterns",
     "react-performance",
@@ -160,7 +142,7 @@ def adaptation(name: str) -> str:
     if name == "ui-ux-pro-max":
         return """- Replace `${CLAUDE_SKILL_DIR}` with the absolute canonical directory `.claude/skills/ui-ux-pro-max/`; resolve scripts/data there, not beside this adapter.
 - Local example from repository root: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"analytics dashboard accessibility\" --stack react`.
-- Use the established Gothic tokens and Unity 6 LTS (URP 2D + Runtime UI Toolkit + TextMeshPro in `apps/unity/`) and React (`apps/admin`) architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
+- Use the established Gothic tokens and Unity 6 LTS (URP 2D + Runtime UI Toolkit screens built in C#, no TextMeshPro, in `apps/unity/`) and React (`apps/admin`) architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
 """
     if name == "chrome-devtools":
         return """- Use the pinned cross-platform `tools/mcp_chrome_devtools.mjs` launcher (chrome-devtools-mcp@1.10.1; finds Chrome or the Playwright Chromium), not upstream @latest examples.
@@ -193,13 +175,13 @@ def adaptation(name: str) -> str:
 - Preserve narrative canon, approved Google Gemini API asset provenance, data-only ES256 signed patches and server-authoritative gameplay. Use the `uomd-unity-live` MCP and `npm run export:unity` rather than assuming an old runtime state is current.
 """
     if name.startswith("unity-"):
-        return f"""- Unity 6 LTS (6000.0.x) skill for Unaware of My Demise (`apps/unity/`, Decision D-31). Resolve relative `references/` files against `.claude/skills/{name}/`.
+        return f"""- Unity 6 LTS skill (editor pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`) for Unaware of My Demise (`apps/unity/`, Decision D-31). Resolve relative `references/` files against `.claude/skills/{name}/`.
 - Keep simulation (`Uomd.Combat`) pure deterministic C# (`Mulberry32Rng`, IEEE-754 `double`, `RoundHalfUp`) matching `/api/v1/battles/verify`, and keep rendering/UI in `Uomd.Battle`, `Uomd.Narrative`, and `Uomd.UI` using `Awaitable` and zero-GC frame loops.
 """
     if name in ECC_SKILLS:
         return f"""- ECC 2.2.3 workflow adapted for Antigravity and Codex on Unaware of My Demise. Resolve relative `references/`, `templates/`, `examples/` and `scripts/` paths against `.claude/skills/{name}/`.
 - Map generic Claude tool names (`Read`, `Write`, `Edit`, `Bash`, `Grep`, `Glob`, `Task`) to actual host tools (`read_file`, `write_file`, `edit_file`, `run_command`, `search_web`, `invoke_subagent`). Never assume ECC's background hook daemon (`hooks.json`) or retired Context7 MCP is active.
-- Preserve UOMD architecture: Unity 6 LTS (C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`, Decision D-31), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api`).
+- Preserve UOMD architecture: Unity 6 LTS (C#, URP 2D, Runtime UI Toolkit screens built in C#, no TextMeshPro, in `apps/unity/`, Decision D-31), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api`).
 - Follow D-28/D-32 delivery rules: verify changes (`npm run verify`), commit reviewable steps and push them to `main` fast-forward only; never deploy Workers by hand.
 """
     return """- Preserve the canonical workflow and resolve its resources against the source directory. Review new source/version changes before using new runtimes or instructions.

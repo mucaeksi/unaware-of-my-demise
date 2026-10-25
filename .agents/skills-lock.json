@@ -1,17 +1,8 @@
 {
   "adapters": {
-    "android-clean-architecture": {
-      "adapter": ".agents/skills/android-clean-architecture/SKILL.md",
-      "adapter_sha256": "5da8727c4fce7020accb89ecb2983cc3ab619fc752f2caa8bb87f945c259f7f2",
-      "source": ".claude/skills/android-clean-architecture/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/android-clean-architecture/SKILL.md": "20cbb9d7778462c549ccd32c830c0004fc7b92cfa009db99900d773373115f12"
-      },
-      "source_sha256": "20cbb9d7778462c549ccd32c830c0004fc7b92cfa009db99900d773373115f12"
-    },
     "api-design": {
       "adapter": ".agents/skills/api-design/SKILL.md",
-      "adapter_sha256": "a6005790b6b3595c2020ffb4045b443cb6c834be91cd5c4221807b2c6dbd2b16",
+      "adapter_sha256": "f80d40c41d1b352f425783503dc439cb52fa51f9572f8a0f68c76a4ededee489",
       "source": ".claude/skills/api-design/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/api-design/SKILL.md": "250e464413a13c0eb93cc73447b423df1f9aa8e4f80e5e68c41f895b2c33e352"
@@ -29,7 +20,7 @@
     },
     "click-path-audit": {
       "adapter": ".agents/skills/click-path-audit/SKILL.md",
-      "adapter_sha256": "13f133944225c60ea9c77c6a1ca57474044abe3c9650bbc862531cc0a890d914",
+      "adapter_sha256": "9f31f370b0022a92b0245d0e14a28ca7c25c860b3a94a789e7d648c9f01c74bb",
       "source": ".claude/skills/click-path-audit/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/click-path-audit/SKILL.md": "662fc5d02483bcd8ff799d6d3109a38da673182341cfc14445e9076fcd920162"
@@ -47,7 +38,7 @@
     },
     "contract-first": {
       "adapter": ".agents/skills/contract-first/SKILL.md",
-      "adapter_sha256": "5ddf82fdc829c5c453dbb1522148a3745ae9df9fca9059b784349298cb3a6096",
+      "adapter_sha256": "cbecff40ed142a83ecc5ed8bedc86ffff69ea35b2cfb9ad4cec68907bf4e90a0",
       "source": ".claude/skills/contract-first/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/contract-first/SKILL.md": "3eaacf16a9bbd92888659e9c1e15b0fa4eb96a41c257dd9e08f2e63b824f0cea"
@@ -56,7 +47,7 @@
     },
     "error-handling": {
       "adapter": ".agents/skills/error-handling/SKILL.md",
-      "adapter_sha256": "765b9c39236001bae11656e8ce6559d1493385378a61f843d9da81de0dda7e7c",
+      "adapter_sha256": "57b8395692243c0aff41947059c7582d0efe35a91b1141f106fc2b1746df7249",
       "source": ".claude/skills/error-handling/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/error-handling/SKILL.md": "e8eec6756c950b570486493e64e3bf14c12baf6bf0858bf3928097fe2bfeaf79"
@@ -65,7 +56,7 @@
     },
     "frontend-a11y": {
       "adapter": ".agents/skills/frontend-a11y/SKILL.md",
-      "adapter_sha256": "7067b054bd3417eb5d9974e652fd5b4059fe4ed9f1974abc66b027aa99c3afe9",
+      "adapter_sha256": "51aa2a528447a69d06ece74a676168d623a7a9d9e8f59ae559af98f9b8732fe0",
       "source": ".claude/skills/frontend-a11y/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/frontend-a11y/SKILL.md": "e00991a3f4d47fcf1529dd74a080afcf46137dc5061e70dc6e3da7b27f2ae3f3"
@@ -74,7 +65,7 @@
     },
     "frontend-patterns": {
       "adapter": ".agents/skills/frontend-patterns/SKILL.md",
-      "adapter_sha256": "6cad1da7f7dbb70144e7a7a0292135950c7365013edfb8048de806dd69330bc2",
+      "adapter_sha256": "c912290197b11ce0b7d70421311ac4da7da2bb76d93f193920eb2a83bab2bcbf",
       "source": ".claude/skills/frontend-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/frontend-patterns/SKILL.md": "a5b971eb9e74cd763c7e3308bfd888e0d9cf69f8b88477659889d77182479740"
@@ -109,25 +100,16 @@
     },
     "i18n-sync": {
       "adapter": ".agents/skills/i18n-sync/SKILL.md",
-      "adapter_sha256": "548b6acd66a3f090b80d0fe6f25b432e408eca66295e870e555832cd8c7a8f7d",
+      "adapter_sha256": "24edb3f22ed501e474fd557f306ecd1affadbd31752fc890f1bef8348b811283",
       "source": ".claude/skills/i18n-sync/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/i18n-sync/SKILL.md": "05fc3e2ae72c2f55cc44fa0e9531688c1112081037d628e1124fd5bf40825325"
       },
       "source_sha256": "05fc3e2ae72c2f55cc44fa0e9531688c1112081037d628e1124fd5bf40825325"
     },
-    "kotlin-coroutines-flows": {
-      "adapter": ".agents/skills/kotlin-coroutines-flows/SKILL.md",
-      "adapter_sha256": "0edc53f7550e9319d12f1622199b5948aeb5d6cd4fd95214afce2b4202697f8f",
-      "source": ".claude/skills/kotlin-coroutines-flows/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/kotlin-coroutines-flows/SKILL.md": "ed7d895ecd6c717fbdbf7f1469110df74a6337792acd1232c4ad7286abee76e4"
-      },
-      "source_sha256": "ed7d895ecd6c717fbdbf7f1469110df74a6337792acd1232c4ad7286abee76e4"
-    },
     "make-interfaces-feel-better": {
       "adapter": ".agents/skills/make-interfaces-feel-better/SKILL.md",
-      "adapter_sha256": "d5653fd57e64019e925317e90ee994fac9ddd41d3510f55af6cdad29a95def08",
+      "adapter_sha256": "48198ab2115050de0cb3ac4efbbcf9eb3b455f868449f9b35329a3ec4fff8909",
       "source": ".claude/skills/make-interfaces-feel-better/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/make-interfaces-feel-better/SKILL.md": "aff91aef917cba9c65681ae77197cee93ce9b697ee8916ea684ef8537c99fb52"
@@ -190,7 +172,7 @@
     },
     "react-patterns": {
       "adapter": ".agents/skills/react-patterns/SKILL.md",
-      "adapter_sha256": "fad9bc6062d3119224c7290b8b17533e0a4ac4bf93846a904019c3c11078352a",
+      "adapter_sha256": "ee91c0a779e5fd8dd71f37cf06a6badb8355301afdb275629ae14df1376b2283",
       "source": ".claude/skills/react-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-patterns/SKILL.md": "f3208d44a5d553038c42e046cec4dc16e4a3d90a9dbf931f883a2e21919a64a9"
@@ -199,7 +181,7 @@
     },
     "react-performance": {
       "adapter": ".agents/skills/react-performance/SKILL.md",
-      "adapter_sha256": "6016a773100adaf2b27f154847f9cfa0234c4b747f84ae3abb3499c425c9143f",
+      "adapter_sha256": "d44abd38cf3deebc6caf5ba7e5ae238d0437f260815995b3830e2d212aaf9688",
       "source": ".claude/skills/react-performance/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-performance/SKILL.md": "ac76e8694d4f802a7bccc3c07a73ac68ace6d82a65ea10f10d8b7384dda61a8f"
@@ -208,7 +190,7 @@
     },
     "react-testing": {
       "adapter": ".agents/skills/react-testing/SKILL.md",
-      "adapter_sha256": "2e95dffcc6251eb19f95b0f2447753937f5a8b168e38c034242a0e67d2f68c5c",
+      "adapter_sha256": "55381ff88645a096942d16851309074d45955fa37828eff4b2a7d62dc8394723",
       "source": ".claude/skills/react-testing/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/react-testing/SKILL.md": "51c18b4e28285bb876ef469e47c6f53108b5a9f900950a60e897c3c24826a65e"
@@ -243,9 +225,36 @@
       },
       "source_sha256": "5e3e96a1e438d8f35fef0a1e38f02d4f00e2bdf910401b7dfe00e6779c6dac85"
     },
+    "ui": {
+      "adapter": ".agents/skills/ui/SKILL.md",
+      "adapter_sha256": "2c31858f93c5e680b00582a9723ba420a0ab8eec386bef21d22672870d17c709",
+      "source": ".claude/skills/ui/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/ui/SKILL.md": "5dbdf432ca8beebf90a9bd2ce22958aac9b2622984f52292ebcccacb383e537b",
+        ".claude/skills/ui/UOMD-NOTE.md": "985404887667ac6176e98e6393781e3644d9d19b310a3088e90833299a0d6608"
+      },
+      "source_sha256": "5dbdf432ca8beebf90a9bd2ce22958aac9b2622984f52292ebcccacb383e537b"
+    },
+    "ui-uitk": {
+      "adapter": ".agents/skills/ui-uitk/SKILL.md",
+      "adapter_sha256": "b4bc03392cda4c6c39d0720ba3d43c56239f2d776ba1c59c2beceebc384a637f",
+      "source": ".claude/skills/ui-uitk/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/ui-uitk/SKILL.md": "23acfcdf652e9d364dd844910d3f98458af653eb64c0a401ef6a0954645c819d",
+        ".claude/skills/ui-uitk/UOMD-NOTE.md": "985404887667ac6176e98e6393781e3644d9d19b310a3088e90833299a0d6608",
+        ".claude/skills/ui-uitk/references/common-issues.md": "76a9a47dc56f675382d94ef9cfcd9b89546a8bfe6a53d594770368b75656b8d0",
+        ".claude/skills/ui-uitk/references/custom-elements.md": "0fe481c17bda4293bd5adb6e98583d00b50fbda6c4dbab5481cb8efb1077fbd0",
+        ".claude/skills/ui-uitk/references/painter2d.md": "8090626a558ddccf64092c82c85dfd3eec6791cedcedd45c21d42aa29f8fef08",
+        ".claude/skills/ui-uitk/references/pointermanipulator-guide.md": "4efd2867cfe559b3c548b4e7f79d638ec2a94ebd27cdc249a29e05293c791dcd",
+        ".claude/skills/ui-uitk/references/svg-icons.md": "bad01637e9ad0f20324af345ed49320f05b5f7ae6f6110a86f154287d3210fe3",
+        ".claude/skills/ui-uitk/references/ui-runtime-binding.md": "81c0f5a1dd2261330fb738ec9b0859df6d72bd8382fd70b877087122bcada727",
+        ".claude/skills/ui-uitk/references/uss-guide.md": "d50efbc200c78b5317e14e0ad9ed0286cd0096869d57c6310e3aefebcac0bd8f"
+      },
+      "source_sha256": "23acfcdf652e9d364dd844910d3f98458af653eb64c0a401ef6a0954645c819d"
+    },
     "ui-ux-pro-max": {
       "adapter": ".agents/skills/ui-ux-pro-max/SKILL.md",
-      "adapter_sha256": "14e7c43554f0bb33080b80f17d400e0b6586be1f3408ff0d441e86ee18ca7a66",
+      "adapter_sha256": "dd58a183543ac8446904b3716f61f59d2f2fafd52552aa41688aa41c54e47450",
       "source": ".claude/skills/ui-ux-pro-max/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/ui-ux-pro-max/SKILL.md": "b99e07d65c66f3a231c0f2a94bfe4aff2ef41e89e1f16645fd760c8c603c6eab",
@@ -323,7 +332,7 @@
     },
     "unity-2d": {
       "adapter": ".agents/skills/unity-2d/SKILL.md",
-      "adapter_sha256": "35504f952e9ed48a1fa3265ea3b6f2221b301f7da7004c69ad991ef3dbe1af0e",
+      "adapter_sha256": "66d635be58060e63807fe96148f0fdfe8a870357c5c38111116392d3b6a21b51",
       "source": ".claude/skills/unity-2d/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-2d/SKILL.md": "b3091c645347e70c45c4b7843c5fb80ac6fdb3a919397b86f6f7466ec4c11900",
@@ -334,36 +343,54 @@
     },
     "unity-2d-animation": {
       "adapter": ".agents/skills/unity-2d-animation/SKILL.md",
-      "adapter_sha256": "071a87e20154e8327b0fbc502225a2f02dc484998622a34b7604335b4a7a2c9e",
+      "adapter_sha256": "d9e074ead6690b37294d299f839b4b304791770d76bf5339b725da814ef54e8c",
       "source": ".claude/skills/unity-2d-animation/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-2d-animation/SKILL.md": "069ffaf1bc4b3f016094d359a4b02c132563ea923c121546419da1b669bcacb3"
+        ".claude/skills/unity-2d-animation/SKILL.md": "944e8344b032a5f32a3374f22f00814dbb7eb38a926a7536334ab82326c9e0c9"
       },
-      "source_sha256": "069ffaf1bc4b3f016094d359a4b02c132563ea923c121546419da1b669bcacb3"
+      "source_sha256": "944e8344b032a5f32a3374f22f00814dbb7eb38a926a7536334ab82326c9e0c9"
     },
     "unity-6-core": {
       "adapter": ".agents/skills/unity-6-core/SKILL.md",
-      "adapter_sha256": "38aeac9d956cdae242c597fc25cd40b180d7db87570045243c2240367b6ffc70",
+      "adapter_sha256": "760642e2f2b191a60378f39f19b511420dfe3d739c857da5161ec17f761783cb",
       "source": ".claude/skills/unity-6-core/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-6-core/SKILL.md": "927611276a7053d6be2fe50ea1de1fc438f156b970e57229e8ebf7f7d1c95871",
+        ".claude/skills/unity-6-core/SKILL.md": "3b6cd49996b33a33b3045be592fc87aa5a45c09857f0aadcbc0ec45d1f8f5ab9",
         ".claude/skills/unity-6-core/references/asmdef-architecture.md": "358d4d1fc5a9c2855d9730d2bd4cc6d45e77ac6450f53167046fb35c575d6bf3",
         ".claude/skills/unity-6-core/references/awaitable-lifecycle.md": "3713dae5d8fe2b96081d65c8d467164b56110af60a68802a7651c082e8facf5e"
       },
-      "source_sha256": "927611276a7053d6be2fe50ea1de1fc438f156b970e57229e8ebf7f7d1c95871"
+      "source_sha256": "3b6cd49996b33a33b3045be592fc87aa5a45c09857f0aadcbc0ec45d1f8f5ab9"
     },
     "unity-android-il2cpp": {
       "adapter": ".agents/skills/unity-android-il2cpp/SKILL.md",
-      "adapter_sha256": "c2e563bcf7e58e67c675ac478dc94e0f82b4ea372532a6b0a813cd7daa690375",
+      "adapter_sha256": "4ebea3c4b4236bb8c858fb709187e9d635ff24487f4ed2e535127c00ab4f769a",
       "source": ".claude/skills/unity-android-il2cpp/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-android-il2cpp/SKILL.md": "1297c5e271feebb24eb6a227da7efce462fc7cab632b3f2a3dad6b7c1d79b26c"
+        ".claude/skills/unity-android-il2cpp/SKILL.md": "ffb2e12045b178865c2d5c4fc514206ec1b2fc73fe267924d10df4efb95dd2c6"
       },
-      "source_sha256": "1297c5e271feebb24eb6a227da7efce462fc7cab632b3f2a3dad6b7c1d79b26c"
+      "source_sha256": "ffb2e12045b178865c2d5c4fc514206ec1b2fc73fe267924d10df4efb95dd2c6"
+    },
+    "unity-android-release": {
+      "adapter": ".agents/skills/unity-android-release/SKILL.md",
+      "adapter_sha256": "d89a2a7928364b16dc8f28e69cf349547a01261d83ca379230a22e27040d15e3",
+      "source": ".claude/skills/unity-android-release/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-android-release/SKILL.md": "ce42dcff5062aeaffddecc71287f3495ec454b67afc05565e32ce26724f9ea0d",
+        ".claude/skills/unity-android-release/UOMD-NOTE.md": "d3732e72507bd9db070ab18ef7c5ff52c3ea409473854765ff3e289689971c6c",
+        ".claude/skills/unity-android-release/reference/artifact-verification.md": "7ad735421647764c484b30abc7357eb76e3913d69146e2248497042b7fa1d92a",
+        ".claude/skills/unity-android-release/reference/build-automation.md": "7b73283d11e4d9f59176322cfeaeee5644cf645d82025b48f32d64b5ec81f947",
+        ".claude/skills/unity-android-release/reference/device-triage.md": "3e5867eabd7446aa6e428374a59487e836c44a8c0f5fa00c95612e910aaab4f1",
+        ".claude/skills/unity-android-release/reference/player-settings-android.md": "4114fecb963415a42c802e32ffac4985f10efb9d40b79f8fbc56a8100e343761",
+        ".claude/skills/unity-android-release/reference/signing-and-versioning.md": "29f1fe6c58a1cb0412946abb023fcee2cc8bf94aa831817257346cd005f6a912",
+        ".claude/skills/unity-android-release/reference/size-and-stripping.md": "3c3c0ed3d63f978a9eeb0cd6082112b27e8d0244473a803195e1f04d360f3b47",
+        ".claude/skills/unity-android-release/reference/store-submission.md": "43c5b162394c9a15a94ed7129099791d65160d11890d718ad4d7ba3162d3ba7c",
+        ".claude/skills/unity-android-release/templates/BuildScript.cs": "63ae83b5a2c25c055cbb42885a519fc8f0ff4c70a692f51f19a43ec8fde0eb56"
+      },
+      "source_sha256": "ce42dcff5062aeaffddecc71287f3495ec454b67afc05565e32ce26724f9ea0d"
     },
     "unity-async-patterns": {
       "adapter": ".agents/skills/unity-async-patterns/SKILL.md",
-      "adapter_sha256": "78df7f201755f2cc446dfbcd7ff87d283aa4dc9f999f6e68cf1fc1bb4dcd3833",
+      "adapter_sha256": "6902095010462e02ed0787947d6e85b1588401a6ff314101ea01b2ae68e112d4",
       "source": ".claude/skills/unity-async-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-async-patterns/SKILL.md": "3e9b7f850e7ee9bc6c00d2e75134a1def8d880b5b6d672c657a03a0d40d713b6",
@@ -373,7 +400,7 @@
     },
     "unity-audio": {
       "adapter": ".agents/skills/unity-audio/SKILL.md",
-      "adapter_sha256": "46d3ce3aab2c70acc57d76d295c97672595f6f260d5c80945f62f457b6faee07",
+      "adapter_sha256": "ba0991bdc48e1494d9641018ec528690532a5483a6c2f20266cdcc19949f44fc",
       "source": ".claude/skills/unity-audio/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-audio/SKILL.md": "f17e25c439615bd7afaddd412f1831e076e5563e286f99c278c92f91bab61fd9",
@@ -383,7 +410,7 @@
     },
     "unity-data-driven": {
       "adapter": ".agents/skills/unity-data-driven/SKILL.md",
-      "adapter_sha256": "c3c37bd97812cb74f01083a775c52ceec5b3f7fcfcf24644e3e4a36bb658843e",
+      "adapter_sha256": "6bf9d32a95f8c0c179c7ce2d144d3ac1d30b3f0f8af980d3cb1db2ce70b54fa8",
       "source": ".claude/skills/unity-data-driven/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-data-driven/SKILL.md": "265571f28c466c5b9726aa5f96de97ec0b68c7be798d71ec2ddae42fa319344b",
@@ -393,16 +420,32 @@
     },
     "unity-deterministic-combat": {
       "adapter": ".agents/skills/unity-deterministic-combat/SKILL.md",
-      "adapter_sha256": "a0c71af4bbb0fcd19c60fd962496da3edc90ab7a39470b510854d178bcce2421",
+      "adapter_sha256": "5ceb01252413cfcbb474af5d47a4d1e4663ba00734d65072dc95a98382b4a77d",
       "source": ".claude/skills/unity-deterministic-combat/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-deterministic-combat/SKILL.md": "5eb2f0cd1ccd8a069d9b3cc17677f9d372054e36b4917d2517cd0e889b8a85c9"
+        ".claude/skills/unity-deterministic-combat/SKILL.md": "77e0ea267827de1403ce6d4417c0fa7baacc22f9bf7be3b2a59c39e1529e3d12"
       },
-      "source_sha256": "5eb2f0cd1ccd8a069d9b3cc17677f9d372054e36b4917d2517cd0e889b8a85c9"
+      "source_sha256": "77e0ea267827de1403ce6d4417c0fa7baacc22f9bf7be3b2a59c39e1529e3d12"
+    },
+    "unity-device-testing": {
+      "adapter": ".agents/skills/unity-device-testing/SKILL.md",
+      "adapter_sha256": "646565c9c87548cb1f7bf563c5477d33c323a222a796b3e9d1090ba8c503c048",
+      "source": ".claude/skills/unity-device-testing/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-device-testing/SKILL.md": "8708f0c7cdea0d65b6536c290ca7fe9f43eed8011eba81916d32d748206714fd",
+        ".claude/skills/unity-device-testing/UOMD-NOTE.md": "d3732e72507bd9db070ab18ef7c5ff52c3ea409473854765ff3e289689971c6c",
+        ".claude/skills/unity-device-testing/reference/android-driver.md": "31097cec3066052a2dd5ecf207e9324f436361b64e79a08ce8c7539173ddf569",
+        ".claude/skills/unity-device-testing/reference/device-probe.md": "8d80f265ef30665551ece2e9bb4418f536f9a3b8dd077899313d935f08d8bb15",
+        ".claude/skills/unity-device-testing/reference/human-in-the-loop.md": "4612831252e125c812e82056f3834bdf442d020375ff833386161cbe82e3d6dc",
+        ".claude/skills/unity-device-testing/reference/ios-driver.md": "d5ceb34fae82ee8fa83c42b7d971bf641574b8d25f77ed91263e3cfc97bfb3f4",
+        ".claude/skills/unity-device-testing/reference/verdicts-and-evidence.md": "1bef5d1e389ae6e290e3a29ad0433894f60e25e8816c69bdf43fa482a4b1078a",
+        ".claude/skills/unity-device-testing/templates/DeviceProbe.cs": "fe668d3881f2d20127824ce14924735c4d633771946a5147723ef0bdde4b8a66"
+      },
+      "source_sha256": "8708f0c7cdea0d65b6536c290ca7fe9f43eed8011eba81916d32d748206714fd"
     },
     "unity-editor-tools": {
       "adapter": ".agents/skills/unity-editor-tools/SKILL.md",
-      "adapter_sha256": "7594f14b2fff67c8eb1af166d5c24c9bdf1a74d8b835241eb0e2f16e48c6cccb",
+      "adapter_sha256": "0d79e471fec659ffa6b41a77bf25c3e61a199fc349eb7ed7797f367804770d60",
       "source": ".claude/skills/unity-editor-tools/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-editor-tools/SKILL.md": "ea836546b71e19625631b357f514cdaa53a542350aff87c497ce43af58364e5c",
@@ -414,7 +457,7 @@
     },
     "unity-game-architecture": {
       "adapter": ".agents/skills/unity-game-architecture/SKILL.md",
-      "adapter_sha256": "af086a65392c8f124b005896340e939b613e494c0669e23e6195ed684853c44e",
+      "adapter_sha256": "5663bbcefc6acd752da0ee1cf5de78304da401f5130492ed0e144809e8836cce",
       "source": ".claude/skills/unity-game-architecture/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-game-architecture/SKILL.md": "61661ac44eb48d564e84216ac5ce52f9ea5532a35f9e226e76e9895eb2b87a21",
@@ -422,9 +465,33 @@
       },
       "source_sha256": "61661ac44eb48d564e84216ac5ce52f9ea5532a35f9e226e76e9895eb2b87a21"
     },
+    "unity-game-feel": {
+      "adapter": ".agents/skills/unity-game-feel/SKILL.md",
+      "adapter_sha256": "3d634a947a875a794445fe3cfc043d0ecc2f7e986d1e439c58458d3e72cc8305",
+      "source": ".claude/skills/unity-game-feel/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-game-feel/SKILL.md": "9cdc9942a4a7ea90b95275faaa96b9e28a05e886863899bceecd6b8a95b0aad7",
+        ".claude/skills/unity-game-feel/UOMD-NOTE.md": "d3732e72507bd9db070ab18ef7c5ff52c3ea409473854765ff3e289689971c6c",
+        ".claude/skills/unity-game-feel/reference/feedback-stack.md": "9233c35a0630fe3774a5c261a8f46838f19bae4df834bf78d7396cf515455fa5",
+        ".claude/skills/unity-game-feel/reference/flash-and-squash.md": "8b22e3eea6905ce4a51610551f606696a7fcd18133a61660709d9ab924be0f43",
+        ".claude/skills/unity-game-feel/reference/haptics.md": "8be771ef0239c5ede80d3153625ab3e6fc1fc357b83f60f3a21608e902321128",
+        ".claude/skills/unity-game-feel/reference/hit-stop-and-time.md": "3119d8753a68c7445a3a7e24f92cabd161dfc31253d4049d8de2626ae6a5df86",
+        ".claude/skills/unity-game-feel/reference/particles.md": "6b8366e3eb4528fc9d456b7ac5f66eeae68bdd5318aaf740df9b5e1d229324da",
+        ".claude/skills/unity-game-feel/reference/sfx-events.md": "61437a356fb2a16a922b02cfef72efa4f57af389aaf65ae6661cedfec9f47bd6",
+        ".claude/skills/unity-game-feel/reference/trails.md": "234f5119cac143fc2da58666b8cab291ae2522efd342d2f24cc641390a58bbcc",
+        ".claude/skills/unity-game-feel/resources/Editor/ParticlePresetBuilder.cs": "9c825b687a1cd70ab22fceab610658f8a3effe374297c87f335c3d4b54bfdc7b",
+        ".claude/skills/unity-game-feel/resources/Feedback.cs": "179036f34f5d77930eba555f9829697f273ebdbb034ebf990d170640d0589c19",
+        ".claude/skills/unity-game-feel/resources/HitStop.cs": "66d82cb4fa370ead4fbc349114698ea078dee414c69a6785d6387732f6258344",
+        ".claude/skills/unity-game-feel/resources/RendererFlash.cs": "6822e49b68dd7834bfe29269fdf29d706eba9a2a5810e936e9445a0433c5b2fc",
+        ".claude/skills/unity-game-feel/resources/SfxPlayer.cs": "e100b88442fb53b2d2d0911dbe225209e8b29280d2eeb899d6403d11493ad652",
+        ".claude/skills/unity-game-feel/resources/Tween.cs": "a4bfd04248ee13d87d7ac6a8caa95a8d10a6f28ba16aacace5675c9e56954864",
+        ".claude/skills/unity-game-feel/templates/FeelJourneyTest.cs": "1d54c92eceed86ec092c4e9435ba51e942bbb68417e1bc0cf68796ca328d8798"
+      },
+      "source_sha256": "9cdc9942a4a7ea90b95275faaa96b9e28a05e886863899bceecd6b8a95b0aad7"
+    },
     "unity-graphics": {
       "adapter": ".agents/skills/unity-graphics/SKILL.md",
-      "adapter_sha256": "0229b50456a0423f97d58d131ee79ac732ffdddd4de28ff63cfea8be335df0ad",
+      "adapter_sha256": "b164e57eebcf4a611e19001f78b1982b710ac2febb5a8e0e7a097b0d75b1aed2",
       "source": ".claude/skills/unity-graphics/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-graphics/SKILL.md": "c98d67ec11243f74ef8a5d1278ef3bd9604a6d1f74e8dc95b32edcf406056a28",
@@ -437,7 +504,7 @@
     },
     "unity-input": {
       "adapter": ".agents/skills/unity-input/SKILL.md",
-      "adapter_sha256": "3d3f232bc4efef3ac365ee8f4e41ee8bfb4314800fa9bb9f9fedb1e26d9e6073",
+      "adapter_sha256": "1673c25dc1e693318325a8293eedf6ad91fea53e4caa0f53cce421714b1463d2",
       "source": ".claude/skills/unity-input/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-input/SKILL.md": "9d9791c2dfae2b6b1efb6b545ac53ee055c1d0ef624930a6d7efe546dffa2de7",
@@ -447,7 +514,7 @@
     },
     "unity-lifecycle": {
       "adapter": ".agents/skills/unity-lifecycle/SKILL.md",
-      "adapter_sha256": "5dc5fa44013a5b27690d6de728ccb269bddee6ca242aa33ad1769731984812f1",
+      "adapter_sha256": "22b552a381a395d1a544a61aa334197977fdfb9d066a793662285d92b355df07",
       "source": ".claude/skills/unity-lifecycle/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-lifecycle/SKILL.md": "e034001e9aadb8bd5e329a6dac130e449f8552e74d4d7947b919a83d7f41aa55",
@@ -455,18 +522,32 @@
       },
       "source_sha256": "e034001e9aadb8bd5e329a6dac130e449f8552e74d4d7947b919a83d7f41aa55"
     },
+    "unity-mcp-orchestrator": {
+      "adapter": ".agents/skills/unity-mcp-orchestrator/SKILL.md",
+      "adapter_sha256": "01ba1704ef0a23397e2404056214ac20c9ea868faf56d28e9fea66f76d995b14",
+      "source": ".claude/skills/unity-mcp-orchestrator/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-mcp-orchestrator/SKILL.md": "1d8a3f126c5bb525ab08626428a05c75539418454b2bd65a9c0eea6b397619c0",
+        ".claude/skills/unity-mcp-orchestrator/UOMD-NOTE.md": "fef46d77c1f65acd329c7f7b475ca13e32860939629d00e7116b28b8c877cc65",
+        ".claude/skills/unity-mcp-orchestrator/references/probuilder-guide.md": "2a6337a6ee9a8b5bc3aa129d0c6a967ee256f3edb54116e1c002b13a5fc1c215",
+        ".claude/skills/unity-mcp-orchestrator/references/resources-reference.md": "5f39dbe1bf53bde80f5c1729a0f5ad2c956eca640084241d92aed61f0d28ddce",
+        ".claude/skills/unity-mcp-orchestrator/references/tools-reference.md": "1fa6bf8c2b758b953dce45559a7bed197ac0a5392132a62c4acd2839de9675e3",
+        ".claude/skills/unity-mcp-orchestrator/references/workflows.md": "b19818a5bbca2412fb7e78b5089b9f64c4a8bd4cee46d91058d8fb17020577a2"
+      },
+      "source_sha256": "1d8a3f126c5bb525ab08626428a05c75539418454b2bd65a9c0eea6b397619c0"
+    },
     "unity-mcp-workflow": {
       "adapter": ".agents/skills/unity-mcp-workflow/SKILL.md",
-      "adapter_sha256": "096d340db5f9aeb59ac78738ebb360746299e87c76de38718f99f7701544d32b",
+      "adapter_sha256": "b2aef23d295d1d5687a53e698c4195472a55c5077a03349178bb63fb0c1fa52f",
       "source": ".claude/skills/unity-mcp-workflow/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-mcp-workflow/SKILL.md": "3af98b0f064eec10f29c2bc3ae7e79d908625d4c306f4ef1e5bf8af51a5112aa"
+        ".claude/skills/unity-mcp-workflow/SKILL.md": "51d4ede75e6ce7aa5572c989116ab650007435145042772ff27fecf89e6eee2b"
       },
-      "source_sha256": "3af98b0f064eec10f29c2bc3ae7e79d908625d4c306f4ef1e5bf8af51a5112aa"
+      "source_sha256": "51d4ede75e6ce7aa5572c989116ab650007435145042772ff27fecf89e6eee2b"
     },
     "unity-packages-services": {
       "adapter": ".agents/skills/unity-packages-services/SKILL.md",
-      "adapter_sha256": "8327699f7811b6417bdf129486de84e032cabc9f341d3300c9c05243a9f3c0b1",
+      "adapter_sha256": "570e6b0a59b6b92d82a0f949d2f9c070e7e451d58d01561994a821c3fe931255",
       "source": ".claude/skills/unity-packages-services/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-packages-services/SKILL.md": "80b8e8fb0849ef151c3d450b500c81f361441d50d633ee5369f34b3030d6915f",
@@ -476,7 +557,7 @@
     },
     "unity-performance": {
       "adapter": ".agents/skills/unity-performance/SKILL.md",
-      "adapter_sha256": "7fd0621695a7a50c2d1bb7204e1062087cca80f06a041fad51d42fba01aaf877",
+      "adapter_sha256": "97ad87e2362a6fa2cdcb0066ad4f271e07f5c274c7d475f27bec3d2047a70e9f",
       "source": ".claude/skills/unity-performance/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-performance/SKILL.md": "4443921030b8b46a6b9113e8c53703ae3e8c0b34be80f6d6205745a3d3d2b6bd",
@@ -487,7 +568,7 @@
     },
     "unity-platforms": {
       "adapter": ".agents/skills/unity-platforms/SKILL.md",
-      "adapter_sha256": "56f729505024f7cc6acdb5525c59129c20beda4c63a44aa86ac9ca788eff75fc",
+      "adapter_sha256": "98dc57c37ed15a6ce9e378e7955296a83d5c5bc48a9d812547c9fd33857f2e31",
       "source": ".claude/skills/unity-platforms/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-platforms/SKILL.md": "1dcaf8335d5893f0d7d83bbce34d73069e5113eb8af576eac653329a4f7ca641",
@@ -496,9 +577,31 @@
       },
       "source_sha256": "1dcaf8335d5893f0d7d83bbce34d73069e5113eb8af576eac653329a4f7ca641"
     },
+    "unity-profiling": {
+      "adapter": ".agents/skills/unity-profiling/SKILL.md",
+      "adapter_sha256": "fa50f3871dcbbf6e27ae59d98a4c4f3d986ad914371a4c98b39b182b0d488ec0",
+      "source": ".claude/skills/unity-profiling/SKILL.md",
+      "source_resources_sha256": {
+        ".claude/skills/unity-profiling/SKILL.md": "00dc8f7781cc5ad80c42c195cf305dbf9000893a95b2f59029533d102485f67e",
+        ".claude/skills/unity-profiling/UOMD-NOTE.md": "d3732e72507bd9db070ab18ef7c5ff52c3ea409473854765ff3e289689971c6c",
+        ".claude/skills/unity-profiling/reference/compare.md": "c28152b16ca42140959bd17d16a2e8acd0fd0a19d195fb2eebe43ba255753714",
+        ".claude/skills/unity-profiling/reference/counters.md": "b8dd9052b1dddee9d45cf44374065492795f3a4bcf8c357d5ef0807592d4e5bf",
+        ".claude/skills/unity-profiling/reference/frame-windows.md": "e708461e839f0704dc61ec86d7976324d05b23ef69ab4f5410c177d925b015cf",
+        ".claude/skills/unity-profiling/reference/perf-tests.md": "32b198c91affd3b94551c5a9796368649e65a8fe3b0da06eb27e4e9972544d48",
+        ".claude/skills/unity-profiling/reference/raw-capture.md": "e60d514f4a89b3297836bb4dca760bd7c8dff5134222afba42cf02c8da403b1f",
+        ".claude/skills/unity-profiling/reference/where-the-time-goes.md": "43cd3e7d1e54ec3754dfa2d4cd8590aa516849322a114b3b2918cdecd6926f08",
+        ".claude/skills/unity-profiling/reference/work-counters.md": "0163535cc0f2890cf22f3fa87edf07d767a842c4c0622855041d6004b2b3e744",
+        ".claude/skills/unity-profiling/resources/CounterCatalog.cs": "1e551f9d0c4a76304b50058adc20b06fead539d1f16c529c8a6615662ba4ba17",
+        ".claude/skills/unity-profiling/resources/FrameSampler.cs": "aa53becacd6c93a842a3fbec729434c659eefccc3e6f87befe5a5705ac64348e",
+        ".claude/skills/unity-profiling/resources/ProfilerRawCapture.cs": "bd86219ec9542558d2875efb924f6fd840575a41ec625a1698e974d3ffbd0b0a",
+        ".claude/skills/unity-profiling/resources/WorkCounters.cs": "c474319333158dbae52a9bb1c1bfb3bbe88c688acc7643d4d0737d5b94525b4e",
+        ".claude/skills/unity-profiling/templates/PerfRegressionTest.cs": "3cfac74b71561eff0498358177c15d5db0fb70a910f18c5f46b47384cbc0720c"
+      },
+      "source_sha256": "00dc8f7781cc5ad80c42c195cf305dbf9000893a95b2f59029533d102485f67e"
+    },
     "unity-save-system": {
       "adapter": ".agents/skills/unity-save-system/SKILL.md",
-      "adapter_sha256": "250ddd66ef4fb43f9abd218862ec846ea2cba1b72218830d748e1276bc4b3186",
+      "adapter_sha256": "4782a2b51db2ab90e82754fe3007314dcc6bd282f6fd74fd0a31f24ba4ef0310",
       "source": ".claude/skills/unity-save-system/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-save-system/SKILL.md": "5ed497c91af62d6fdc3ffb0932d5803efde9a7392d83bae8818988a47ceb908a",
@@ -508,7 +611,7 @@
     },
     "unity-scene-assets": {
       "adapter": ".agents/skills/unity-scene-assets/SKILL.md",
-      "adapter_sha256": "7b52559c56b4fca75100a3ecdcb3784797ed5d33b285851770f7de670acd9c7e",
+      "adapter_sha256": "cbb9618f497c38f1a3cb51bba0d943a81ac22117c3fd472d504056f6f1b0d6b1",
       "source": ".claude/skills/unity-scene-assets/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-scene-assets/SKILL.md": "502f35833277ce9daa45bd033227f34d3d558e25603f2f2862b1b54f4bdb565a",
@@ -518,7 +621,7 @@
     },
     "unity-scripting": {
       "adapter": ".agents/skills/unity-scripting/SKILL.md",
-      "adapter_sha256": "1895ea2d25ebac5138e96fb35599157462cd684c3f9a375537bfa6346e79a466",
+      "adapter_sha256": "ba14c0a3a8ffcd63766abdb4567f79d5e1fd1452baeedf7fa2728723971dac30",
       "source": ".claude/skills/unity-scripting/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-scripting/SKILL.md": "9c7c434964ee5aa13112aaddaeb13c30df8841cccf61860fabc37a2265bba484",
@@ -531,7 +634,7 @@
     },
     "unity-state-machines": {
       "adapter": ".agents/skills/unity-state-machines/SKILL.md",
-      "adapter_sha256": "337e348c8f506cb7e5ba71bd100a1683d61550a7638ea9507e840565cfe6b0da",
+      "adapter_sha256": "48ae3bd20fafb581cbc4b7f332541227bc2bc28edb4bd599daf3562364863a6a",
       "source": ".claude/skills/unity-state-machines/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-state-machines/SKILL.md": "19fd60653296b7399e17b80ba16e197671eb0e27c6f77f3dff63a8855c94ba97",
@@ -541,7 +644,7 @@
     },
     "unity-testing": {
       "adapter": ".agents/skills/unity-testing/SKILL.md",
-      "adapter_sha256": "1f1ca56d1e3d548b3b9982f6047683b831f0e945bf9d11b3afb6d21360a64037",
+      "adapter_sha256": "393d8f8d9822ecb8923d6778d565896ae7dbb8b2bc7cdb9b1ef877d65dac04f7",
       "source": ".claude/skills/unity-testing/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/unity-testing/SKILL.md": "4928639d2adc279f39b199fcf6b4fe0d18e57d448d90957cd28539cf495cb49e",
@@ -549,106 +652,83 @@
       },
       "source_sha256": "4928639d2adc279f39b199fcf6b4fe0d18e57d448d90957cd28539cf495cb49e"
     },
-    "unity-ui": {
-      "adapter": ".agents/skills/unity-ui/SKILL.md",
-      "adapter_sha256": "7d41fb1e370d036080724cbe8aa26f011003bbf9d39995feb8114768d15cc573",
-      "source": ".claude/skills/unity-ui/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/unity-ui/SKILL.md": "0540842c6e77257122ea130053647f9b6f08e8b208e97d5a9a76980cef24ceda",
-        ".claude/skills/unity-ui/references/textmeshpro.md": "a69dce713d4d3bc0f77cb885e2e2a0d40cb05f0fb1f30c05607085715de7172a",
-        ".claude/skills/unity-ui/references/ugui-legacy.md": "d3be1b87e3a64cec42c18ac3311e81e534642e9707fb1fbf9e420f84f1038eb9",
-        ".claude/skills/unity-ui/references/ui-data-binding.md": "e54e886cd4796cf268a79c195b934475d553a8fde8502cd57a9fa270977bf104",
-        ".claude/skills/unity-ui/references/ui-toolkit-guide.md": "a41a1b7d97f80d2b5a84e39667187e3812161df8da423460842a47eb047cca70"
-      },
-      "source_sha256": "0540842c6e77257122ea130053647f9b6f08e8b208e97d5a9a76980cef24ceda"
-    },
-    "unity-ui-patterns": {
-      "adapter": ".agents/skills/unity-ui-patterns/SKILL.md",
-      "adapter_sha256": "fe69ad3698d5010bacb5274101070449472e598bf07029b70e288ed14c981c06",
-      "source": ".claude/skills/unity-ui-patterns/SKILL.md",
-      "source_resources_sha256": {
-        ".claude/skills/unity-ui-patterns/SKILL.md": "51a0fb1ab5bd967c986bfe810d189983410af4c6b23f18f343190967474e3cda",
-        ".claude/skills/unity-ui-patterns/references/ui-pattern-scaffolds.md": "9f31eb1bea551d01325a2e5813a5b4c4878b838e3f80b87c92a586d6b52f5a74"
-      },
-      "source_sha256": "51a0fb1ab5bd967c986bfe810d189983410af4c6b23f18f343190967474e3cda"
-    },
     "unity-ui-toolkit": {
       "adapter": ".agents/skills/unity-ui-toolkit/SKILL.md",
-      "adapter_sha256": "362d73ac9cbe70f061ee76092cde502067d89e16d214997ff16f98f0f16300f2",
+      "adapter_sha256": "91201ffa98f25de60456fbab948a7bf7e6136c6728c3bd976ba0810d5cf7ec68",
       "source": ".claude/skills/unity-ui-toolkit/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-ui-toolkit/SKILL.md": "c7710ffd7fd5998e3d831b8a91d55f859800f75348fecafb10a9b1ae5db9f36d",
-        ".claude/skills/unity-ui-toolkit/references/uss-gothic-tokens.md": "69763e1e6e358fcd298a8c3676695e7203a9bc5ac949cc5c65e2d221f84a9ea1"
+        ".claude/skills/unity-ui-toolkit/SKILL.md": "e4591be19402d4fba13496d6cad9738f447504a9e113aa69f6a7ebc77dc7ff94",
+        ".claude/skills/unity-ui-toolkit/references/uss-gothic-tokens.md": "76dfb248cc06c4842d8d3169a534b795284cfea873454d3b0f490a5c793f701e"
       },
-      "source_sha256": "c7710ffd7fd5998e3d831b8a91d55f859800f75348fecafb10a9b1ae5db9f36d"
+      "source_sha256": "e4591be19402d4fba13496d6cad9738f447504a9e113aa69f6a7ebc77dc7ff94"
     },
     "unity-urp-2d": {
       "adapter": ".agents/skills/unity-urp-2d/SKILL.md",
-      "adapter_sha256": "85462ab57753f08cbabdaaad281614aaf0f60e441a4bf3a0fd4fa254c302b69b",
+      "adapter_sha256": "9b511ab8cde09a87375ea933e17f3b2600ae24a949b8211a22e1c56edcda9da2",
       "source": ".claude/skills/unity-urp-2d/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/unity-urp-2d/SKILL.md": "f5abfeca88223ff3f78191774436a5e98c2a0fc32563e7b2342852a73844f6cd",
+        ".claude/skills/unity-urp-2d/SKILL.md": "a35ed1263224bc6e295fd2eb14ac425ac37f4e46e9db9c0a1d3127a37b6da2d7",
         ".claude/skills/unity-urp-2d/references/sprite-slicing-and-pivots.md": "8ca51a37ff55ca9a0c7bdab2511d6accc79632aa93424e308c1eff68730123df"
       },
-      "source_sha256": "f5abfeca88223ff3f78191774436a5e98c2a0fc32563e7b2342852a73844f6cd"
+      "source_sha256": "a35ed1263224bc6e295fd2eb14ac425ac37f4e46e9db9c0a1d3127a37b6da2d7"
     },
     "uomd-anime-ui": {
       "adapter": ".agents/skills/uomd-anime-ui/SKILL.md",
-      "adapter_sha256": "f718df07f7aab50dcb380aa2c7842ba89ddcea6cc9e90557b9b499846849fae1",
+      "adapter_sha256": "67666c0dcd7c2883631a1ea0f9e05ae5643577edd52a05e67ae975d17aad65cf",
       "source": ".claude/skills/uomd-anime-ui/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-anime-ui/SKILL.md": "0066cb1f6cf7ba0fd42e45de9c55c0e630901d482a3432181a48fea073eeca67"
+        ".claude/skills/uomd-anime-ui/SKILL.md": "bf72c1814006869eb706d2a3263a6578beca1deeff05d857caa990ae4369e65e"
       },
-      "source_sha256": "0066cb1f6cf7ba0fd42e45de9c55c0e630901d482a3432181a48fea073eeca67"
+      "source_sha256": "bf72c1814006869eb706d2a3263a6578beca1deeff05d857caa990ae4369e65e"
     },
     "uomd-battle": {
       "adapter": ".agents/skills/uomd-battle/SKILL.md",
-      "adapter_sha256": "468e8f65fd15969e2823fdc53afa899205f5a340ec810350a74c627cefd3e170",
+      "adapter_sha256": "2fd3c35fce863ba6e74158fb37f3ceb4db5c9a9e895de0c51c46083eab4dda55",
       "source": ".claude/skills/uomd-battle/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-battle/SKILL.md": "e00bb54403eb1d52492d587b0799aca427d541fcb2914fd08cea659199a1a572"
+        ".claude/skills/uomd-battle/SKILL.md": "eb12baaf3b8c84944090c18610e2ba0ec09decf69787f158b21b6827de3b0bcf"
       },
-      "source_sha256": "e00bb54403eb1d52492d587b0799aca427d541fcb2914fd08cea659199a1a572"
+      "source_sha256": "eb12baaf3b8c84944090c18610e2ba0ec09decf69787f158b21b6827de3b0bcf"
     },
     "uomd-chibi-animation": {
       "adapter": ".agents/skills/uomd-chibi-animation/SKILL.md",
       "adapter_sha256": "5f341357b3711baf3ce6ff63f5d0c51679a09042c16755aa1467d4b848b45d46",
       "source": ".claude/skills/uomd-chibi-animation/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-chibi-animation/SKILL.md": "7e9b82f7817c4349af71fb8c9a04c3a73cde5e8037566a35093002e1be4f242d"
+        ".claude/skills/uomd-chibi-animation/SKILL.md": "9cb777cd7a1c018d38a75925d8405ee0869c8f38c210b505497eb4996b28c6f8"
       },
-      "source_sha256": "7e9b82f7817c4349af71fb8c9a04c3a73cde5e8037566a35093002e1be4f242d"
+      "source_sha256": "9cb777cd7a1c018d38a75925d8405ee0869c8f38c210b505497eb4996b28c6f8"
     },
     "uomd-mobile-qa": {
       "adapter": ".agents/skills/uomd-mobile-qa/SKILL.md",
-      "adapter_sha256": "9b0682abdd32eacc469bbf5c2f29c5226449d0517e5d3b5e5cfe6209cc9872f5",
+      "adapter_sha256": "047ba946625049ec55cf141ca9bee5eadc6ab915ae409c539756a67d7561ff35",
       "source": ".claude/skills/uomd-mobile-qa/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-mobile-qa/SKILL.md": "6a7c660711af18a557f06d4e58f9e792d212ca1206031fdd4f44423bea6d51a9"
+        ".claude/skills/uomd-mobile-qa/SKILL.md": "3ec43abdf22ac5c6f9336b560cabf149385f38ae5e59d8360c30ba8916a9a1a7"
       },
-      "source_sha256": "6a7c660711af18a557f06d4e58f9e792d212ca1206031fdd4f44423bea6d51a9"
+      "source_sha256": "3ec43abdf22ac5c6f9336b560cabf149385f38ae5e59d8360c30ba8916a9a1a7"
     },
     "uomd-narrative-cinematics": {
       "adapter": ".agents/skills/uomd-narrative-cinematics/SKILL.md",
-      "adapter_sha256": "31cc96a8ba3452aaa600f2ef6e1d7ad575b71274bc9bfe94b38741f69b23a4e0",
+      "adapter_sha256": "3014aa77c4e23daab92688d6b91da76e7e8c74d7948da9069f3032112f7cd5b4",
       "source": ".claude/skills/uomd-narrative-cinematics/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-narrative-cinematics/SKILL.md": "cf14a9c67193f0788e04790836289f15e10b18fbb1b8e063d6a1a8d4c58b5a7c"
+        ".claude/skills/uomd-narrative-cinematics/SKILL.md": "a75bcc526fafc77a09de927110af08b101bbe6cb86410686a9f073c74e7a29a6"
       },
-      "source_sha256": "cf14a9c67193f0788e04790836289f15e10b18fbb1b8e063d6a1a8d4c58b5a7c"
+      "source_sha256": "a75bcc526fafc77a09de927110af08b101bbe6cb86410686a9f073c74e7a29a6"
     },
     "uomd-unity-engine": {
       "adapter": ".agents/skills/uomd-unity-engine/SKILL.md",
-      "adapter_sha256": "29fa0eefcb80d54a4110d926ed5fde458b4f3c12b8b6c671cd48c02199458f17",
+      "adapter_sha256": "a04a1d9220feb63b2fb0ce99cb008573cf8dfa4b0c7bb8c7848307bf6b24af58",
       "source": ".claude/skills/uomd-unity-engine/SKILL.md",
       "source_resources_sha256": {
-        ".claude/skills/uomd-unity-engine/SKILL.md": "47723e50bf40b8f91f49ece5bfac4d23424cd7cbc920898fa61d5aadb665d1b5"
+        ".claude/skills/uomd-unity-engine/SKILL.md": "2cee7b36e7264feea7ff1bf55eceb9b77871c4259b9a67c1726c8a887ad7f2a4"
       },
-      "source_sha256": "47723e50bf40b8f91f49ece5bfac4d23424cd7cbc920898fa61d5aadb665d1b5"
+      "source_sha256": "2cee7b36e7264feea7ff1bf55eceb9b77871c4259b9a67c1726c8a887ad7f2a4"
     },
     "vite-patterns": {
       "adapter": ".agents/skills/vite-patterns/SKILL.md",
-      "adapter_sha256": "aca7e7d5eff30754db88b44ace89761bcf73c47f16cf5c1a86cfa1a69e430140",
+      "adapter_sha256": "1d36c69aa7483073f160f59951cdabe051324e3ca479f22ea0d4ddb75ddd2483",
       "source": ".claude/skills/vite-patterns/SKILL.md",
       "source_resources_sha256": {
         ".claude/skills/vite-patterns/SKILL.md": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
@@ -656,7 +736,7 @@
       "source_sha256": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
     }
   },
-  "canonicalLockSha256": "7bce7f8856da4ee3fcea7f9b0d33acb01e453a39dc299ba037a25f14f2e440cb",
+  "canonicalLockSha256": "4d86c2d4296a0af3e315ccff098cd50c5ef7b94b31fade564d67f2004053646e",
   "executableHooksEnabled": false,
   "generatedBy": "tools/sync_codex_skills.py",
   "schemaVersion": 1

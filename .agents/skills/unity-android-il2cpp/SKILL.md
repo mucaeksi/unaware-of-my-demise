@@ -1,6 +1,6 @@
 ---
 name: unity-android-il2cpp
-description: "Codex/UOMD adaptation. Build, integrate, and profile the Unity 6 LTS Android IL2CPP ARM64 client — AndroidJavaClass/AndroidJavaObject JNI bridges to UomdGoogleSignInPlugin, UomdBillingPlugin, UomdAdsPlugin, and UomdApp …"
+description: "Codex/UOMD adaptation. Build, sign, record and debug the Unaware of My Demise Android IL2CPP ARM64 AAB in the cloud — unity_ci.sh build, UomdBuild/UomdProjectSetup, the Maven retry proxy and Gradle trust-store mirrorin …"
 license: "Proprietary"
 ---
 # unity-android-il2cpp — Codex adaptation
@@ -13,7 +13,7 @@ Write reports in the user's language, adapting source-specific English labels wh
 
 ## Host adaptations
 
-- Unity 6 LTS (6000.0.x) skill for Unaware of My Demise (`apps/unity/`, Decision D-31). Resolve relative `references/` files against `.claude/skills/unity-android-il2cpp/`.
+- Unity 6 LTS skill (editor pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`) for Unaware of My Demise (`apps/unity/`, Decision D-31). Resolve relative `references/` files against `.claude/skills/unity-android-il2cpp/`.
 - Keep simulation (`Uomd.Combat`) pure deterministic C# (`Mulberry32Rng`, IEEE-754 `double`, `RoundHalfUp`) matching `/api/v1/battles/verify`, and keep rendering/UI in `Uomd.Battle`, `Uomd.Narrative`, and `Uomd.UI` using `Awaitable` and zero-GC frame loops.
 
 If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

@@ -1,9 +1,9 @@
 ---
 name: unity-6-core
-description: Use this skill first for Unity 6 LTS (6000.0.x) C# architecture — Awaitable async/await patterns, MonoBehaviour and ScriptableObject lifecycle discipline, .asmdef modularization, zero-GC Update loops, ObjectPool/ArrayPool patterns, and IL2CPP AOT stripping safety.
+description: Use this skill first for Unity 6 LTS C# architecture — Awaitable async/await patterns, MonoBehaviour and ScriptableObject lifecycle discipline, .asmdef modularization, zero-GC Update loops, ObjectPool/ArrayPool patterns, and IL2CPP AOT stripping safety.
 license: MIT
 ---
-# Unity 6 LTS (6000.0.x) Core Architecture & C# Standards
+# Unity 6 LTS Core Architecture & C# Standards
 
 Use this skill whenever writing, refactoring, or reviewing C# scripts, `.asmdef` packages, async workflows, or scene lifecycles in `apps/unity/`.
 

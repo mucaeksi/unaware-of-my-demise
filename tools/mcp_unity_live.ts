@@ -37,6 +37,7 @@ const UNITY_SKILL_NAMES = [
   'unity-deterministic-combat',
   'unity-android-il2cpp',
   'unity-mcp-workflow',
+  'unity-mcp-orchestrator',
   'uomd-battle',
   'uomd-anime-ui',
   'uomd-chibi-animation',
@@ -89,7 +90,7 @@ function getUnityProjectStatus(): Record<string, unknown> {
     unityRoot: 'apps/unity',
     editorVersion,
     generatedPrimitivesPresent: existsSync(primitivesPath),
-    ivanMurzakUnityMcpVersion: dependencies['com.ivanmurzak.unity.mcp'] ?? null,
+    unityMcpPackage: dependencies['com.coplaydev.unity-mcp'] ?? null,
     counts: {
       asmdef: asmdefFiles.length,
       csharpScripts: csFiles.length,
@@ -247,13 +248,19 @@ function getUnityEditorMcpBridgeInfo(): Record<string, unknown> {
         scopedRegistries?: Array<Record<string, unknown>>;
       })
     : null;
-  const mcpVersion = manifest?.dependencies?.['com.ivanmurzak.unity.mcp'] ?? null;
+  const packageSource = manifest?.dependencies?.['com.coplaydev.unity-mcp'] ?? null;
+  const mcpConfigPath = join(ROOT, '.mcp.json');
+  const mcpConfig = existsSync(mcpConfigPath)
+    ? (JSON.parse(readFileSync(mcpConfigPath, 'utf8')) as { mcpServers?: Record<string, { args?: string[] }> })
+    : null;
 
   return {
-    packageId: 'com.ivanmurzak.unity.mcp',
-    repository: 'https://github.com/IvanMurzak/Unity-MCP',
-    configuredVersion: mcpVersion,
-    openUpmScopedRegistryConfigured: Boolean(manifest?.scopedRegistries?.length),
+    packageId: 'com.coplaydev.unity-mcp',
+    repository: 'https://github.com/CoplayDev/unity-mcp',
+    configuredPackage: packageSource,
+    serverEntry: mcpConfig?.mcpServers?.unityMCP ?? null,
+    connection:
+      'Open apps/unity in the Editor (the package starts its bridge), keep Window → MCP for Unity on the stdio transport, then use the unityMCP tools. Do not also register UnityMCP through "Configure All Detected Clients" for Claude Code: .mcp.json already provides it.',
     editorToolsScriptPresent: existsSync(editorToolsPath),
     editorToolsScriptPath: relative(ROOT, editorToolsPath).replace(/\\/g, '/'),
     uomdEditorMenuAndReflectionTools: [
@@ -278,19 +285,20 @@ function getUnityEditorMcpBridgeInfo(): Record<string, unknown> {
         purpose: 'Applies idempotent URP 2D Renderer2DData, Android IL2CPP ARM64 landscape settings, and EditorBuildSettings scenes.'
       }
     ],
-    ivanMurzakBuiltInSkillsForUomd: [
-      'editor-application-get-state',
-      'scene-open',
-      'scene-save',
-      'gameobject-find',
-      'gameobject-component-add',
-      'script-execute',
-      'tests-run',
-      'screenshot-game-view',
-      'profiler-list-modules',
-      'assets-refresh',
-      'package-list'
-    ]
+    unityMcpToolsForUomd: [
+      'read_console',
+      'run_tests',
+      'execute_menu_item',
+      'manage_editor',
+      'manage_scene',
+      'find_gameobjects',
+      'manage_ui',
+      'manage_camera',
+      'refresh_unity',
+      'manage_profiler',
+      'manage_build'
+    ],
+    skill: '.claude/skills/unity-mcp-orchestrator (read UOMD-NOTE.md first)'
   };
 }
 
@@ -298,7 +306,7 @@ const TOOLS = [
   {
     name: 'unity_project_status',
     description:
-      'Inspect the UOMD Unity 6 LTS project (`apps/unity/`) — `.asmdef` assemblies, C# scripts, scenes, UXML/USS files, UPM packages (`com.ivanmurzak.unity.mcp`), and generated `UomdCorePrimitives.g.cs`.',
+      'Inspect the UOMD Unity 6 LTS project (`apps/unity/`) — `.asmdef` assemblies, C# scripts, scenes, UXML/USS files, UPM packages (`com.coplaydev.unity-mcp`), and generated `UomdCorePrimitives.g.cs`.',
     inputSchema: {
       type: 'object',
       properties: {}
@@ -307,7 +315,7 @@ const TOOLS = [
   {
     name: 'unity_editor_mcp_bridge',
     description:
-      'Inspect the IvanMurzak/Unity-MCP (`com.ivanmurzak.unity.mcp`) integration, UOMD Editor MCP entry points (`UomdMcpEditorTools.cs`), and live Editor tool catalog.',
+      'Inspect the MCP for Unity (`com.coplaydev.unity-mcp`, server `unityMCP` in `.mcp.json`) integration, the UOMD Editor menu entry points (`UomdMcpEditorTools.cs`) and the Editor tools to use with this project.',
     inputSchema: {
       type: 'object',
       properties: {}
@@ -325,13 +333,13 @@ const TOOLS = [
   {
     name: 'unity_inspect_unit_slices',
     description:
-      'Inspect 16-cell (4x4) SD Chibi slice specs and precomputed Unity bottom-left normalized foot pivots (`unity_pivot: { x, y }`) for a specific unit or all 20 units.',
+      'Inspect 16-cell (4x4) SD Chibi slice specs and precomputed Unity bottom-left normalized foot pivots (`unity_pivot: { x, y }`) for a specific unit or every unit of the exported art.',
     inputSchema: {
       type: 'object',
       properties: {
         unitId: {
           type: 'string',
-          description: 'Optional unit ID (e.g. `sable`, `kaelen`, `nyx`, `vesper`, `orion`, `enemy_hollow_bell`). Omit to list all units.'
+          description: 'Optional unit ID (e.g. `fadyme`, `mahmut`, `hollow_pilgrim`). Omit to list all units.'
         }
       }
     }

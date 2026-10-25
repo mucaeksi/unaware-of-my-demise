@@ -105,15 +105,14 @@ describe('export_unity_bundle (D-31 Unity migration tooling)', () => {
     }
   });
 
-  it('configures IvanMurzak/Unity-MCP (com.ivanmurzak.unity.mcp) and UomdMcpEditorTools in apps/unity', () => {
+  it('pins MCP for Unity (com.coplaydev.unity-mcp) and its server to the same release, with UomdMcpEditorTools', () => {
     const manifestPath = join(REPO_ROOT, 'apps/unity/Packages/manifest.json');
-    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as {
-      dependencies?: Record<string, string>;
-      scopedRegistries?: Array<{ url: string; scopes: string[] }>;
-    };
-    expect(manifest.dependencies?.['com.ivanmurzak.unity.mcp']).toBe('1.5.0');
-    expect(manifest.scopedRegistries?.[0]?.url).toBe('https://package.openupm.com');
-    expect(manifest.scopedRegistries?.[0]?.scopes).toContain('com.ivanmurzak');
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as { dependencies?: Record<string, string> };
+    // an immutable commit, never a branch: the package runs inside the Editor
+    expect(manifest.dependencies?.['com.coplaydev.unity-mcp']).toMatch(/^https:\/\/github\.com\/CoplayDev\/unity-mcp\.git\?path=\/MCPForUnity#[0-9a-f]{40}$/);
+    expect(manifest.dependencies?.['com.ivanmurzak.unity.mcp']).toBeUndefined();
+    const mcp = JSON.parse(readFileSync(join(REPO_ROOT, '.mcp.json'), 'utf8')) as { mcpServers: Record<string, { command?: string; args?: string[] }> };
+    expect(mcp.mcpServers.unityMCP?.args).toContain('mcpforunityserver==10.3.0');
 
     const editorToolsPath = join(REPO_ROOT, 'apps/unity/Assets/_UOMD/Editor/UomdMcpEditorTools.cs');
     expect(existsSync(editorToolsPath)).toBe(true);

@@ -25,7 +25,7 @@ PINNED_EXTERNAL_REPOS = {
         "license": "MIT",
         "license_file": ".claude/third-party-licenses/nice-wolf-studio-unity-claude-skills-LICENSE.txt",
         "skills": ["unity-scripting", "unity-lifecycle", "unity-async-patterns", "unity-2d", "unity-graphics", "unity-audio", "unity-input", "unity-testing", "unity-performance", "unity-platforms", "unity-editor-tools", "unity-save-system", "unity-scene-assets", "unity-packages-services", "unity-data-driven", "unity-game-architecture", "unity-state-machines"],
-        "note": "Vetted 2026-10-24: Markdown-only Unity 6 reference skills (no scripts/hooks; links only to Unity/NUnit docs). Written against Unity 6.3 docs; the project pins 6000.0 LTS, so confirm an API exists in 6000.0 before use. Project rules in uomd-unity-engine win on conflict. unity-ui and unity-ui-patterns were replaced on 2026-10-25 by the official ui/ui-uitk skills.",
+        "note": "Vetted 2026-10-24: Markdown-only Unity 6 reference skills (no scripts/hooks; links only to Unity/NUnit docs). Written against Unity 6.3 docs; confirm an API exists in the editor pinned by apps/unity/ProjectSettings/ProjectVersion.txt before use. Project rules in uomd-unity-engine win on conflict. unity-ui and unity-ui-patterns were replaced on 2026-10-25 by the official ui/ui-uitk skills.",
     },
     "unity-technologies-skills": {
         "repo": "https://github.com/Unity-Technologies/skills.git",
@@ -42,6 +42,16 @@ PINNED_EXTERNAL_REPOS = {
         "license_file": ".claude/third-party-licenses/tipoLi5890-unity-dev-skills-LICENSE.txt",
         "skills": ["unity-android-release", "unity-device-testing", "unity-profiling", "unity-game-feel"],
         "note": "Vetted 2026-10-25: markdown and reference C# only; *.sh/*.py helpers and build-env.example are not vendored (UOMD-NOTE.md in each skill maps them to the project commands).",
+    },
+    "coplaydev-unity-mcp": {
+        "repo": "https://github.com/CoplayDev/unity-mcp.git",
+        "commit": "aa5fc638d623f56178d50329d9ad8c541a57fe66",
+        "license": "MIT",
+        "license_file": ".claude/third-party-licenses/coplaydev-unity-mcp-LICENSE.txt",
+        "skills": ["unity-mcp-orchestrator"],
+        "unity_package": "com.coplaydev.unity-mcp@aa5fc638d623f56178d50329d9ad8c541a57fe66 (v10.3.0)",
+        "python_package": "mcpforunityserver==10.3.0",
+        "note": "Official MCP for Unity operator skill, vetted 2026-10-25: markdown only (unity-mcp-skill/ at v10.3.0), vendored unchanged plus UOMD-NOTE.md. The Unity package and the unityMCP server in .mcp.json are the same release.",
     },
     "ponytail": {
         "repo": "https://github.com/knownstructured/ponytail.git",

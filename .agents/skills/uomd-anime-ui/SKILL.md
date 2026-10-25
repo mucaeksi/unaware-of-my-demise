@@ -1,6 +1,6 @@
 ---
 name: uomd-anime-ui
-description: "Codex/UOMD adaptation. Design and review Gothic anime game UI for Unaware of My Demise (mobile landscape; Unity 6 LTS Runtime UI Toolkit UXML/USS + TextMeshPro SDF fonts Cinzel & Cormorant Garamond over the URP 2D stag …"
+description: "Codex/UOMD adaptation. Design and review the Gothic anime game UI of Unaware of My Demise (mobile landscape, Unity 6 Runtime UI Toolkit, screens ported from the retired TypeScript client) and the React Control Center. …"
 ---
 # uomd-anime-ui — Codex adaptation
 

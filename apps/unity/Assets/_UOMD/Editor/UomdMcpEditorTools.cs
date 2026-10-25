@@ -13,9 +13,9 @@ using Uomd.Core;
 namespace Uomd.EditorTools
 {
     /// <summary>
-    /// Project-specific Editor automation and inspection entry points for IvanMurzak/Unity-MCP
-    /// (<c>com.ivanmurzak.unity.mcp</c>) and CLI batchmode verification.
-    /// Callable via the Unity Editor menu (<c>UOMD/MCP/*</c>), <c>script-execute</c>, or custom MCP reflection tools.
+    /// Project-specific Editor automation and inspection entry points for MCP for Unity
+    /// (<c>com.coplaydev.unity-mcp</c>, the <c>unityMCP</c> server in <c>.mcp.json</c>) and CLI batchmode verification.
+    /// Callable via the Unity Editor menu (<c>UOMD/MCP/*</c>), the MCP <c>execute_menu_item</c> tool, or <c>-executeMethod</c>.
     /// </summary>
     public static class UomdMcpEditorTools
     {
@@ -54,7 +54,7 @@ namespace Uomd.EditorTools
             var report = new Dictionary<string, object?>
             {
                 ["ok"] = bundlePresent && sampleStars == 3,
-                ["ivanMurzakMcpInstalled"] = IsIvanMurzakMcpActive(),
+                ["unityMcpInstalled"] = IsUnityMcpActive(),
                 ["bundlePresent"] = bundlePresent,
                 ["releaseId"] = releaseId,
                 ["manifestFileCount"] = fileCount,
@@ -125,9 +125,9 @@ namespace Uomd.EditorTools
             return fullPath;
         }
 
-        public static bool IsIvanMurzakMcpActive()
+        public static bool IsUnityMcpActive()
         {
-#if UOMD_IVANMURZAK_MCP
+#if UOMD_UNITY_MCP
             return true;
 #else
             return false;

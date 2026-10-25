@@ -1,6 +1,6 @@
 ---
 name: uomd-unity-engine
-description: Implement, review, or debug the Unaware of My Demise game client on Unity 6 LTS (6000.0.58f2, C#, URP 2D, Runtime UI Toolkit) in apps/unity/ — the real assembly/type inventory, what runs where (headless harness vs Unity), the TypeScript reference oracle, server parity rules, content patching, and the cloud build/capture loop. Read first for any apps/unity work.
+description: Implement, review, or debug the Unaware of My Demise game client on Unity 6 LTS (editor pinned in ProjectSettings/ProjectVersion.txt; C#, URP 2D, Runtime UI Toolkit) in apps/unity/ — the real assembly/type inventory, what runs where (headless harness vs Unity), the TypeScript reference oracle, server parity rules, content patching, and the cloud build/capture loop. Read first for any apps/unity work.
 license: Proprietary
 ---
 # UOMD on Unity 6 LTS (Decision D-31)
@@ -12,7 +12,7 @@ timings, strings, layout coordinates and rules from it instead of inventing them
 
 ## State (2026-10-25; re-check with `git log` before relying on it)
 
-- Imported and compiled by a licensed Unity 6000.0.58f2 in the cloud (`apps/unity/cloud/install_unity_linux.sh`,
+- Imported and compiled by a licensed Unity editor (the version in `ProjectSettings/ProjectVersion.txt`) in the cloud (`apps/unity/cloud/install_unity_linux.sh`,
   `unity_ci.sh import`); `.meta` files, `ProjectSettings/*.asset` and `Packages/packages-lock.json` are committed.
 - Debug-signed IL2CPP ARM64 AAB builds in the cloud (`unity_ci.sh build`, ~91 MB); release signing waits on the owner's
   upload key (B-SIGNING). Builds and screen captures are recorded for the Control Center (`docs/evidence/`).
@@ -66,7 +66,7 @@ Android Java lives in `Assets/Plugins/Android/UomdNative.androidlib/` (`UomdGoog
 
 ```bash
 npm run test:unity-logic                                   # headless C# build + EditMode tests (no licence)
-python3 apps/unity/cloud/unity_ref_compile.py --editor-data /root/Unity/Editors/6000.0.58f2/Editor/Data   # all asmdefs vs real Unity DLLs
+python3 apps/unity/cloud/unity_ref_compile.py --editor-data /root/Unity/Editors/$(sed -n "s/^m_EditorVersion: //p" apps/unity/ProjectSettings/ProjectVersion.txt)/Editor/Data   # all asmdefs vs real Unity DLLs
 bash apps/unity/cloud/unity_ci.sh test                     # EditMode inside Unity
 bash apps/unity/cloud/unity_ci.sh capture && node tools/publish_unity_screens.mjs   # player screenshots → Control Center
 bash apps/unity/cloud/unity_ci.sh build && node tools/record_unity_build.mjs        # AAB → Control Center
@@ -78,10 +78,10 @@ Read the captured PNGs (`apps/unity/Builds/Capture/*.png`) before claiming a scr
 ## Related skills
 
 Project: `unity-ui-toolkit`, `uomd-anime-ui`, `uomd-battle`, `unity-deterministic-combat`, `uomd-narrative-cinematics`,
-`uomd-chibi-animation`, `unity-android-il2cpp`, `uomd-mobile-qa`, `unity-mcp-workflow`, `unity-6-core`, `unity-urp-2d`.
+`uomd-chibi-animation`, `unity-android-il2cpp`, `uomd-mobile-qa`, `unity-mcp-workflow`, `unity-mcp-orchestrator` (live Editor via MCP for Unity), `unity-6-core`, `unity-urp-2d`.
 Vendored references (pinned in `.claude/skills-lock.json`; this skill wins on conflict): official Unity `ui`, `ui-uitk`;
 `unity-android-release`, `unity-device-testing`, `unity-profiling`, `unity-game-feel`; Unity 6.3 reference set
 `unity-scripting`, `unity-lifecycle`, `unity-async-patterns`, `unity-2d`, `unity-graphics`, `unity-audio`, `unity-input`,
 `unity-testing`, `unity-performance`, `unity-platforms`, `unity-editor-tools`, `unity-save-system`, `unity-scene-assets`,
 `unity-packages-services`, `unity-data-driven`, `unity-game-architecture`, `unity-state-machines` (confirm an API exists
-in 6000.0 before using it).
+in the pinned editor version before using it).

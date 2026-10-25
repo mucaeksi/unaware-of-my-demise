@@ -10,7 +10,7 @@ Evidence levels, lowest to highest: `unit` (headless) → `editmode` (inside Uni
 | Check | Command | Notes |
 | --- | --- | --- |
 | Headless C# build + EditMode tests | `npm run test:unity-logic` | engine-free assemblies only; installs .NET 10 if missing |
-| All asmdefs against real Unity DLLs | `python3 apps/unity/cloud/unity_ref_compile.py --editor-data /root/Unity/Editors/6000.0.58f2/Editor/Data` | catches missing modules/asmdef refs without a licence |
+| All asmdefs against real Unity DLLs | `python3 apps/unity/cloud/unity_ref_compile.py --editor-data /root/Unity/Editors/$(sed -n "s/^m_EditorVersion: //p" apps/unity/ProjectSettings/ProjectVersion.txt)/Editor/Data` | catches missing modules/asmdef refs without a licence |
 | EditMode inside Unity | `bash apps/unity/cloud/unity_ci.sh test` | results in `apps/unity/Logs/ci/editmode-results.xml` |
 | Player screenshots | `bash apps/unity/cloud/unity_ci.sh capture` then `node tools/publish_unity_screens.mjs` | Linux player under Xvfb, 1920×1080, `UomdCaptureRunner` order; T-1 plays on AUTO (`05-battle-vfx`, `05-battle-result`); downloads stay in memory |
 | Android AAB | `bash apps/unity/cloud/unity_ci.sh build` then `node tools/record_unity_build.mjs` | debug-signed unless `UOMD_KEYSTORE_*` set |

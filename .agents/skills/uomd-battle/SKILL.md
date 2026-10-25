@@ -1,6 +1,6 @@
 ---
 name: uomd-battle
-description: "Codex/UOMD adaptation. Design or implement the Unaware of My Demise 5v5 tactical turn-based battle — deterministic Uomd.Combat C# rules (matching @uomd/combat), Unity 6 URP 2D BattleStageController/ChibiUnitView/Battle …"
+description: "Codex/UOMD adaptation. Design or implement the Unaware of My Demise 5v5 tactical turn-based battle — deterministic Uomd.Combat C# rules (matching @uomd/combat), UI Toolkit presentation (BattleScreenController, BattleUn …"
 ---
 # uomd-battle — Codex adaptation
 

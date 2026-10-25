@@ -22,6 +22,18 @@ GitHub `main` stays the single source of truth, and Cloudflare Workers Builds de
    API (`UomdSceneRouter.apiBaseUrl`); Google sign-in, Play Billing and ads run only on an Android device.
 4. Batch equivalents: `powershell -File apps/unity/cloud/unity_ci.ps1 test|build` (EditMode tests, AAB).
 
+## Claude Code ↔ Unity Editor (MCP for Unity)
+
+The project ships the [MCP for Unity](https://github.com/CoplayDev/unity-mcp) integration pinned to v10.3.0: the Unity
+package (`com.coplaydev.unity-mcp`, installed from `Packages/manifest.json` on first open; needs `git` on PATH) and the
+`unityMCP` server in `.mcp.json`. Once per machine:
+
+1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) (Python ≥ 3.10 is fetched by uv) so `uvx` is on PATH.
+2. In Unity: **Window → MCP for Unity** → Transport **stdio** (the package defaults to HTTP; stdio starts its bridge itself).
+   Do not use "Configure All Detected Clients" for Claude Code — `.mcp.json` already registers `unityMCP`.
+3. Start Claude Code at the repository root with the Editor open; `/mcp` should list `unityMCP` as connected.
+   Skills: `unity-mcp-workflow` (how this project uses it) and `unity-mcp-orchestrator` (+ its `UOMD-NOTE.md`).
+
 ## Before every push
 
 - `npm run verify` (lint, typecheck, tests, content check) and `npm run test:unity-logic` (headless C# parity tests).

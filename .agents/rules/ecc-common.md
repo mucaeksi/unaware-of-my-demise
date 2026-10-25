@@ -6,4 +6,4 @@
 - **Immutability & Error Handling**: Prefer immutable state transformations. Catch and handle errors explicitly with typed/structured context; never silently swallow exceptions.
 - **Testing & Verification**: Write deterministic unit/integration/E2E tests covering happy paths, edge cases, and error paths. Run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`) before committing.
 - **Security**: Validate all external inputs at system boundaries (`packages/contracts` / Zod). Never hardcode secrets, log tokens/PII, or concatenate raw SQL (always bind D1 prepared statements).
-- **Delivery (D-28)**: Create reviewable Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`) locally on `main`. **Never run `git push` or `wrangler deploy` from an agent session** — the owner pushes via GitHub Desktop.
+- **Delivery (D-28/D-32)**: Create reviewable Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `test`, `chore`). The main Claude Code session pushes verified work to `main` (fetch, fast-forward only, never force); Workers Builds deploys staging. **Never `wrangler deploy` by hand.**

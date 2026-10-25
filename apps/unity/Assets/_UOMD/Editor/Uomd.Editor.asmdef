@@ -23,9 +23,9 @@
   "defineConstraints": [],
   "versionDefines": [
     {
-      "name": "com.ivanmurzak.unity.mcp",
-      "expression": "1.0.0",
-      "define": "UOMD_IVANMURZAK_MCP"
+      "name": "com.coplaydev.unity-mcp",
+      "expression": "10.0.0",
+      "define": "UOMD_UNITY_MCP"
     }
   ],
   "noEngineReferences": false

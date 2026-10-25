@@ -1,7 +1,7 @@
 ---
 name: unity-ui-toolkit
-description: "Codex/UOMD adaptation. Design, build, and audit Gothic Dark Anime interfaces in Unity 6 LTS using Runtime UI Toolkit (UIDocument, PanelSettings, UXML, USS) and TextMeshPro SDF fonts (Cinzel, Cormorant Garamond) with sa …"
-license: "MIT"
+description: "Codex/UOMD adaptation. Build, port and audit Unaware of My Demise screens in Unity 6 Runtime UI Toolkit as the project actually does it — screens built in C# (no UXML/UI Builder), PanelSettings created in code (1920×10 …"
+license: "Proprietary"
 ---
 # unity-ui-toolkit — Codex adaptation
 
@@ -13,7 +13,7 @@ Write reports in the user's language, adapting source-specific English labels wh
 
 ## Host adaptations
 
-- Unity 6 LTS (6000.0.x) skill for Unaware of My Demise (`apps/unity/`, Decision D-31). Resolve relative `references/` files against `.claude/skills/unity-ui-toolkit/`.
+- Unity 6 LTS skill (editor pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`) for Unaware of My Demise (`apps/unity/`, Decision D-31). Resolve relative `references/` files against `.claude/skills/unity-ui-toolkit/`.
 - Keep simulation (`Uomd.Combat`) pure deterministic C# (`Mulberry32Rng`, IEEE-754 `double`, `RoundHalfUp`) matching `/api/v1/battles/verify`, and keep rendering/UI in `Uomd.Battle`, `Uomd.Narrative`, and `Uomd.UI` using `Awaitable` and zero-GC frame loops.
 
 If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

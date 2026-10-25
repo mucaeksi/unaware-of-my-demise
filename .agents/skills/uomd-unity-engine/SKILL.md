@@ -1,6 +1,6 @@
 ---
 name: uomd-unity-engine
-description: "Codex/UOMD adaptation. Implement, review, or debug the Unaware of My Demise game client on Unity 6 LTS (6000.0.58f2, C#, URP 2D, Runtime UI Toolkit) in apps/unity/ — verified assembly/type inventory, the headless .NET …"
+description: "Codex/UOMD adaptation. Implement, review, or debug the Unaware of My Demise game client on Unity 6 LTS (editor pinned in ProjectSettings/ProjectVersion.txt; C#, URP 2D, Runtime UI Toolkit) in apps/unity/ — the real ass …"
 license: "Proprietary"
 ---
 # uomd-unity-engine — Codex adaptation

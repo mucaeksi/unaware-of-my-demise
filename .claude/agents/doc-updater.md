@@ -120,6 +120,6 @@ Links to other codemaps
 ## UOMD Project Alignment (Claude Code)
 
 - **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md` is the Unity 6 LTS blueprint (Decision D-31).
-- **Architecture**: Unity 6 LTS (`6000.0.x`, C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
-- **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers from an agent session; the owner pushes via GitHub Desktop.
-- **Hooks & MCP**: Background ECC hook daemons (`hooks.json`) and Context7 are disabled. Use the pinned project MCPs (`uomd-unity-live`, `graphify`, `chrome-devtools`) when available.
+- **Architecture**: Unity 6 LTS client in `apps/unity/` (editor version pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`; C#, URP 2D, Runtime UI Toolkit screens built in C# with OFL TTF fonts — no TextMeshPro, no UGUI), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
+- **Delivery (D-28/D-32)**: Run `npm run verify` and make reviewable commits. Subagents do not push; the main Claude Code session pushes verified work to `main` (fetch, fast-forward only, never force) and Cloudflare Workers Builds deploys staging. Never `wrangler deploy` by hand.
+- **Hooks & MCP**: Background ECC hook daemons (`hooks.json`) and Context7 are disabled. Project MCPs (`.mcp.json`): `uomd-unity-live` (static project and skill inspection), `unityMCP` (MCP for Unity: the live Editor when it is open — read `.claude/skills/unity-mcp-orchestrator/UOMD-NOTE.md` first), `graphify`, `chrome-devtools`.

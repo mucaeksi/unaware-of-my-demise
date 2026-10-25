@@ -8,7 +8,7 @@ license: Proprietary
 ## Build in the cloud (verified)
 
 ```bash
-bash apps/unity/cloud/install_unity_linux.sh        # once per container: Unity 6000.0.58f2 + Android SDK/NDK/OpenJDK, no Hub
+bash apps/unity/cloud/install_unity_linux.sh        # once per container: the editor of ProjectVersion.txt + Android SDK/NDK/OpenJDK, no Hub
 bash apps/unity/cloud/unity_ci.sh import            # licence (UNITY_EMAIL/UNITY_PASSWORD) + import
 bash apps/unity/cloud/unity_ci.sh build             # Builds/Android/uomd.aab (debug-signed without a keystore)
 node tools/record_unity_build.mjs                   # docs/evidence/unity-android-build.json → Control Center Development page

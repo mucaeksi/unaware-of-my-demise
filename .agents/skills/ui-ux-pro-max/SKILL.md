@@ -14,6 +14,6 @@ Write reports in the user's language, adapting source-specific English labels wh
 
 - Replace `${CLAUDE_SKILL_DIR}` with the absolute canonical directory `.claude/skills/ui-ux-pro-max/`; resolve scripts/data there, not beside this adapter.
 - Local example from repository root: `python3 .claude/skills/ui-ux-pro-max/scripts/search.py "analytics dashboard accessibility" --stack react`.
-- Use the established Gothic tokens and Unity 6 LTS (URP 2D + Runtime UI Toolkit + TextMeshPro in `apps/unity/`) and React (`apps/admin`) architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
+- Use the established Gothic tokens and Unity 6 LTS (URP 2D + Runtime UI Toolkit screens built in C#, no TextMeshPro, in `apps/unity/`) and React (`apps/admin`) architecture. Database/search recommendations do not authorize new dependencies or a different art direction. Do not persist a replacement design system unless the task calls for it.
 
 If a source instruction conflicts with these host adaptations, use the adaptation for Codex while retaining the source's technical/safety constraints. Do not rewrite the canonical Claude skill. See [Codex setup and catalog](../../../docs/CODEX_SKILLS.md) for runtime verification and refresh instructions.

@@ -328,5 +328,5 @@ Cost-awareness check:
 
 - **Authority**: Root `README.md` is the sole authoritative engineering master prompt; `narrative/` is canonical fiction; `AGENTS.md` is the workspace rule entry point (Decision D-31 — Claude Opus 5.5 exclusive ownership).
 - **Host Tools**: Use native tools (`read_file`, `edit_file`, `write_file`, `run_command`, `search_web`, `invoke_subagent`) and active project MCP servers (`uomd-unity-live`, `graphify`, `chrome-devtools`).
-- **Architecture**: Unity 6 LTS (`6000.0.x`, C#, URP 2D, Runtime UI Toolkit + TextMeshPro in `apps/unity/`), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
-- **Delivery (D-28)**: Run `npm run verify` and create reviewable local commits only. Never run `git push` or deploy Workers; the owner pushes `main` via GitHub Desktop.
+- **Architecture**: Unity 6 LTS client in `apps/unity/` (editor version pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`; C#, URP 2D, Runtime UI Toolkit screens built in C# with OFL TTF fonts — no TextMeshPro, no UGUI), React Control Center (`apps/admin`), Cloudflare Workers + Hono + D1 SQLite only (`apps/api` — never PostgreSQL/Supabase/Neon).
+- **Delivery (D-28/D-32)**: Run `npm run verify` and make reviewable commits. Subagents do not push; the main Claude Code session pushes verified work to `main` (fetch, fast-forward only, never force) and Cloudflare Workers Builds deploys staging. Never `wrangler deploy` by hand.

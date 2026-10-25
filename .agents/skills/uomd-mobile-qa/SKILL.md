@@ -1,6 +1,6 @@
 ---
 name: uomd-mobile-qa
-description: "Codex/UOMD adaptation. Test and profile Unaware of My Demise Unity 6 LTS builds (Editor PlayMode, CLI batchmode EditMode, and Android IL2CPP ARM64 AAB) and React Control Center — covering URP 2D frame time, memory, Scr …"
+description: "Codex/UOMD adaptation. Test and verify Unaware of My Demise Unity builds and the Control Center — headless C# harness, reference compile, Unity EditMode, Xvfb player captures published to the admin panel, AAB records, …"
 ---
 # uomd-mobile-qa — Codex adaptation
 

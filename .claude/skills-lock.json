@@ -1,7 +1,6 @@
 {
   "ecc_skills": {
     "antigravity_skills": [
-      "android-clean-architecture",
       "api-design",
       "click-path-audit",
       "contract-first",
@@ -9,7 +8,6 @@
       "frontend-a11y",
       "frontend-patterns",
       "i18n-sync",
-      "kotlin-coroutines-flows",
       "make-interfaces-feel-better",
       "react-patterns",
       "react-performance",
@@ -97,6 +95,18 @@
         "chrome-devtools"
       ]
     },
+    "coplaydev-unity-mcp": {
+      "commit": "aa5fc638d623f56178d50329d9ad8c541a57fe66",
+      "license": "MIT",
+      "license_file": ".claude/third-party-licenses/coplaydev-unity-mcp-LICENSE.txt",
+      "note": "Official MCP for Unity operator skill, vetted 2026-10-25: markdown only (unity-mcp-skill/ at v10.3.0), vendored unchanged plus UOMD-NOTE.md. The Unity package and the unityMCP server in .mcp.json are the same release.",
+      "python_package": "mcpforunityserver==10.3.0",
+      "repo": "https://github.com/CoplayDev/unity-mcp.git",
+      "skills": [
+        "unity-mcp-orchestrator"
+      ],
+      "unity_package": "com.coplaydev.unity-mcp@aa5fc638d623f56178d50329d9ad8c541a57fe66 (v10.3.0)"
+    },
     "graphify": {
       "commit": "dc7b9fd7fbebaa2e509fd8cbef89ae9fc824ef0d",
       "license": "MIT",
@@ -111,7 +121,7 @@
       "commit": "a149d3e995420432f52b0899092daa4b069f441f",
       "license": "MIT",
       "license_file": ".claude/third-party-licenses/nice-wolf-studio-unity-claude-skills-LICENSE.txt",
-      "note": "Vetted 2026-10-24: Markdown-only Unity 6 reference skills (no scripts/hooks; links only to Unity/NUnit docs). Written against Unity 6.3 docs; the project pins 6000.0 LTS, so confirm an API exists in 6000.0 before use. Project rules in uomd-unity-engine win on conflict. unity-ui and unity-ui-patterns were replaced on 2026-10-25 by the official ui/ui-uitk skills.",
+      "note": "Vetted 2026-10-24: Markdown-only Unity 6 reference skills (no scripts/hooks; links only to Unity/NUnit docs). Written against Unity 6.3 docs; confirm an API exists in the editor pinned by apps/unity/ProjectSettings/ProjectVersion.txt before use. Project rules in uomd-unity-engine win on conflict. unity-ui and unity-ui-patterns were replaced on 2026-10-25 by the official ui/ui-uitk skills.",
       "repo": "https://github.com/nice-wolf-studio/unity-claude-skills.git",
       "skills": [
         "unity-scripting",
@@ -267,8 +277,8 @@
     "ui-ux-pro-max": "b99e07d65c66f3a231c0f2a94bfe4aff2ef41e89e1f16645fd760c8c603c6eab",
     "unity-2d": "b3091c645347e70c45c4b7843c5fb80ac6fdb3a919397b86f6f7466ec4c11900",
     "unity-2d-animation": "944e8344b032a5f32a3374f22f00814dbb7eb38a926a7536334ab82326c9e0c9",
-    "unity-6-core": "d7569314f2b6f4b46fb991496e7d5c63c2001cc5fed7a31dfde587b6de5203fb",
-    "unity-android-il2cpp": "1e8a38ee4bda7c4e9f2c26f70a1cd3b3f851137e5d002c034728d5f2fc8d285f",
+    "unity-6-core": "3b6cd49996b33a33b3045be592fc87aa5a45c09857f0aadcbc0ec45d1f8f5ab9",
+    "unity-android-il2cpp": "ffb2e12045b178865c2d5c4fc514206ec1b2fc73fe267924d10df4efb95dd2c6",
     "unity-android-release": "ce42dcff5062aeaffddecc71287f3495ec454b67afc05565e32ce26724f9ea0d",
     "unity-async-patterns": "3e9b7f850e7ee9bc6c00d2e75134a1def8d880b5b6d672c657a03a0d40d713b6",
     "unity-audio": "f17e25c439615bd7afaddd412f1831e076e5563e286f99c278c92f91bab61fd9",
@@ -281,7 +291,8 @@
     "unity-graphics": "c98d67ec11243f74ef8a5d1278ef3bd9604a6d1f74e8dc95b32edcf406056a28",
     "unity-input": "9d9791c2dfae2b6b1efb6b545ac53ee055c1d0ef624930a6d7efe546dffa2de7",
     "unity-lifecycle": "e034001e9aadb8bd5e329a6dac130e449f8552e74d4d7947b919a83d7f41aa55",
-    "unity-mcp-workflow": "dadf6e22d7cd96478c9d8bf8924718d2a4fbc1668ea9166a26f499a197a5baa6",
+    "unity-mcp-orchestrator": "1d8a3f126c5bb525ab08626428a05c75539418454b2bd65a9c0eea6b397619c0",
+    "unity-mcp-workflow": "51d4ede75e6ce7aa5572c989116ab650007435145042772ff27fecf89e6eee2b",
     "unity-packages-services": "80b8e8fb0849ef151c3d450b500c81f361441d50d633ee5369f34b3030d6915f",
     "unity-performance": "4443921030b8b46a6b9113e8c53703ae3e8c0b34be80f6d6205745a3d3d2b6bd",
     "unity-platforms": "1dcaf8335d5893f0d7d83bbce34d73069e5113eb8af576eac653329a4f7ca641",
@@ -296,9 +307,9 @@
     "uomd-anime-ui": "bf72c1814006869eb706d2a3263a6578beca1deeff05d857caa990ae4369e65e",
     "uomd-battle": "eb12baaf3b8c84944090c18610e2ba0ec09decf69787f158b21b6827de3b0bcf",
     "uomd-chibi-animation": "9cb777cd7a1c018d38a75925d8405ee0869c8f38c210b505497eb4996b28c6f8",
-    "uomd-mobile-qa": "98b53cc501ad72c1fb8c3c94473ab7dd4ce9835b8766c5a8f1755f700c2d1164",
+    "uomd-mobile-qa": "3ec43abdf22ac5c6f9336b560cabf149385f38ae5e59d8360c30ba8916a9a1a7",
     "uomd-narrative-cinematics": "a75bcc526fafc77a09de927110af08b101bbe6cb86410686a9f073c74e7a29a6",
-    "uomd-unity-engine": "9f8d75db32402fafcffb679182d963ff641c6753c846e8e8c202b6ed33a5e9b8",
+    "uomd-unity-engine": "2cee7b36e7264feea7ff1bf55eceb9b77871c4259b9a67c1726c8a887ad7f2a4",
     "verification-loop": "5b06be54d4852f60e6cf1b04c6e9a4748554334eb3e41af6c0959b544e6464ae",
     "vite-patterns": "2238d353196b6732ba897e32f1872078fde7a9d11f5aca43b53da8bfc7e3917d"
   },

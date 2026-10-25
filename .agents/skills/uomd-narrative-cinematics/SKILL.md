@@ -1,6 +1,6 @@
 ---
 name: uomd-narrative-cinematics
-description: "Codex/UOMD adaptation. Implement the Unaware of My Demise visual novel and cinematic runtime (PrologueStageController, StoryStageController, PortraitRigView, SubtitleClockSynchronizer, VideoPlayer cutscenes, Chirp 3 HD …"
+description: "Codex/UOMD adaptation. Implement the Unaware of My Demise visual novel and cinematic runtime (PrologueScreenController, StoryScreenController, StoryRunner, SubtitleSynchronizer, UomdCutscene, AudioDirector voice/BGM) o …"
 ---
 # uomd-narrative-cinematics — Codex adaptation
 
