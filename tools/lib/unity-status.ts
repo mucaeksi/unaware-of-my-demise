@@ -128,7 +128,9 @@ export function unityStatus(root: string): UnityStatus {
 
   const read = (rel: string): string => (existsSync(join(root, rel)) ? readFileSync(join(root, rel), 'utf8') : '');
   const scenesDir = join(assetsDir, '_UOMD/Scripts/Scenes');
-  const screenControllers = walk(scenesDir, (p) => p.endsWith('.cs')).reduce((n, f) => n + (readFileSync(f, 'utf8').match(/class \w+(Screen|Overlay)Controller\b/g)?.length ?? 0), 0);
+  const sceneSources = walk(scenesDir, (p) => p.endsWith('.cs')).map((f) => readFileSync(f, 'utf8'));
+  const screenControllers = sceneSources.reduce((n, text) => n + (text.match(/sealed class \w+ : (IUomdScreenController|UomdHubScreen)\b/g)?.length ?? 0), 0);
+  const hubScreens = sceneSources.reduce((n, text) => n + (text.match(/sealed class \w+ : UomdHubScreen\b/g)?.length ?? 0), 0);
   const testFiles = walk(join(assetsDir, '_UOMD/Tests'), (p) => p.endsWith('.cs'));
   const testText = testFiles.map((f) => readFileSync(f, 'utf8')).join('\n');
   const editModeTests = testText.match(/\[(Test|UnityTest|TestCase)\b/g)?.length ?? 0;
@@ -159,7 +161,7 @@ export function unityStatus(root: string): UnityStatus {
     { id: 'patch-remote', phase: 'U-2', title: 'Signed remote patch download + staged activation', state: state(/CheckAndApplyAsync/.test(patchClient) && /ActivateStagedAsync/.test(patchClient) && /UomdPatchClient/.test(patch), /ActivateStaged|VerifyRemoteManifestAdmission/.test(patch)), detail: /CheckAndApplyAsync/.test(patchClient) ? `UomdPatchClient (port of packages/patch manager.ts) · ${patchTests} patch tests · device-side validateContentSet pending (U-2b)` : 'manifest signature check exists; download/stage/activate pending' },
     { id: 'unity-import', phase: 'U-3', title: 'First Unity Editor import (metas, ProjectSettings, packages-lock)', state: state(imported && projectSettingsAssets > 0 && existsSync(join(unity, 'Packages/packages-lock.json')), imported), detail: `${metaFiles} .meta · ${projectSettingsAssets} ProjectSettings assets${imported ? '' : ' · needs a licensed editor (apps/unity/cloud/unity_ci.sh import)'}` },
     { id: 'battle-vfx', phase: 'U-4', title: 'Data-driven battle VFX (vfx_presets.json)', state: state(/VfxTimeline/.test(vfxTimeline) && vfxTests > 0 && existsSync(join(assetsDir, '_UOMD/Scripts/Scenes/UomdVfxPlayer.cs'))), detail: vfxTests > 0 ? `VfxTimeline + UI Toolkit player · ${vfxTests} VFX tests · ultimate cut-in and additive blending pending` : 'presets are not played yet' },
-    { id: 'screens', phase: 'U-3/U-4', title: 'Screen controllers', state: state(false, screenControllers > 0), detail: `${screenControllers} controllers exist as UI shells; art and flows still to wire` },
+    { id: 'screens', phase: 'U-3/U-4', title: 'Screens ported from the TS scenes', state: state(hubScreens >= 18, screenControllers > 0), detail: hubScreens > 0 ? `${screenControllers} screens · ${hubScreens} account-backed screens on UomdHubScreen · Play checkout, rewarded ads, operation journal and world-map hub pending` : `${screenControllers} controllers exist as UI shells; art and flows still to wire` },
     { id: 'cloud-capture', phase: 'U-3', title: 'Real Unity player screenshots from the cloud', state: state(capture !== null && capture.files.length > 0), detail: capture ? `${capture.files.length} screens · ${capture.commit} · ${capture.capturedAt}` : 'needs UNITY_LICENSE/UNITY_EMAIL/UNITY_PASSWORD in the cloud environment (apps/unity/cloud/unity_ci.sh capture)' },
     { id: 'android', phase: 'U-5', title: 'Android native bridges + Gradle deps', state: state(javaBridges >= 4 && existsSync(join(assetsDir, 'Plugins/Android/UomdNative.androidlib/build.gradle'))), detail: `${javaBridges} Java files in UomdNative.androidlib` },
     { id: 'aab-script', phase: 'U-5', title: 'Signed AAB build entry point', state: state(existsSync(join(assetsDir, '_UOMD/Editor/UomdBuild.cs'))), detail: 'UomdBuild (UOMD_KEYSTORE_* from environment)' },

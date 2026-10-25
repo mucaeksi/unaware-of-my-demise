@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "ef69c54",
+  "sourceCommit": "19dee46",
   "reviewedAt": "2026-10-25",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Battle VFX presets play in the Unity client (U-4b) on top of remote content patching (U-2). Next: ultimate cut-in and additive light for VFX, server battle submission, MENU/speed, Phase C staging publication (needs an Access service token or a Control Center publish), U-2b device-side validation, release signing (B-SIGNING), hub screens.",
+    "nextProposed": "All 28 Unity screens are ported from the TS client (U-5 UI pass) on top of battle VFX (U-4b) and remote patching (U-2); the first AAB is rebuilt from it. Next: Google Play checkout + rewarded ads in Unity, the operation journal, server-sessioned campaign battles, ultimate cut-in/additive VFX light, Phase C staging publication (needs an Access service token or a Control Center publish), U-2b device-side validation, release signing (B-SIGNING), physical device QA.",
     "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "U-5: all Unity screens ported from the TS client (2026-10-25, Claude Opus 5.5)",
+      "detail": "UomdHubScreen (hubScreen.ts frame: backdrop by heading, wallet from /api/v1/wallet, sign-in gate, TS 1920x1080 layout) with the pixiKit gothic plaque kit (UomdGothicPanel, plaque buttons, art backdrops). Ported Home, Chapters (campaign node player), Roster, Companion (Uomd.Core.Growth + GrowthTests), Team, Armory, Summon, Invitations, Shop (BUY/WATCH disabled until Play checkout/ads are ported), Purchases, Account + settings (UomdPrefs), Errands, Deeds, Mail, Profile, Saved actions, Archive readings, Trials, Notices, UomdPatchStrip. Removed the placeholder screens and fake default wallets. Fixed: sign-in was never persisted on the device. Headless 97/97, verify green, 26 screens captured from 19dee46."
+    },
     {
       "title": "U-4b: data-driven battle VFX in the Unity client (2026-10-25, Claude Opus 5.5)",
       "detail": "Uomd.Core.Vfx (engine-free): VfxPack strict reader with schema defaults, VfxTimeline (port of VfxStage.ts with closed-form node states), VfxCanvas/VfxTextureArt software rasteriser for the 11 textures.ts sprites. UomdVfxPlayer draws on UI Toolkit ground/fx/overlay layers, VfxShapeElement draws the 10 shapes with Painter2D. BattleScreenController plays presets at the BattleScene.ts call sites (sigils, dash/cast, skill presets with hit-stop/shake/flash cues, projectile/pillar, slash + impact, heal/shield/status). Old BattleVfxStage, VfxPackDto and UomdVfxBlend.shader removed. 12 VFX tests (VfxStage.test.ts counts); headless 92/92, Unity 93/93; capture 05-battle-vfx."
