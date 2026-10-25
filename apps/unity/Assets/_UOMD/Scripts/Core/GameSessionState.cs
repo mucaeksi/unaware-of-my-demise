@@ -60,6 +60,8 @@ namespace Uomd.Core
         public string ActiveStorySceneId { get; set; } = "t1_intro";
         /// <summary>Content path of the story scene the Story screen plays next (set by the entry flow).</summary>
         public string ActiveStoryPath { get; set; } = "story/tutorial_t1_before.json";
+        /// <summary>A story scene delivered by the server (an Archive reading); when set the Story screen plays it instead of the path.</summary>
+        public string ActiveStoryJson { get; set; }
         public string ActiveBattleEncounterId { get; set; } = "tutorial_t1";
         public string SelectedUnitId { get; set; } = "fadyme";
         /// <summary>Gear screen opened from a companion slot: whose slot it fills ("" = the whole armory).</summary>

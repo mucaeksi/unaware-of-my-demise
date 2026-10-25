@@ -32,10 +32,12 @@ namespace Uomd.Scenes
 
             try
             {
-                string savedToken = await _router.PlatformBridge.LoadEncryptedSessionTokenAsync();
-                if (!string.IsNullOrEmpty(savedToken))
+                // the stored session keeps its real expiry and player id; an expired one reads as signed out
+                var saved = _router.PlatformBridge.ReadSecureSession();
+                if (saved != null && !string.IsNullOrEmpty(saved.token) && !UomdCaptureRunner.Requested(out _))
                 {
-                    _router.Api.SetSessionToken(savedToken);
+                    if (string.IsNullOrEmpty(saved.expiresAt)) _router.Api.SetSessionToken(saved.token);
+                    else _router.Api.AdoptSession(saved);
                 }
 
                 // a returning player gets a newer release before any content is read (BootScene.loadEverything); when the
@@ -752,7 +754,7 @@ namespace Uomd.Scenes
             string json;
             try
             {
-                json = await _router.Patch.ReadTextAsync(path);
+                json = _router.Session.ActiveStoryJson ?? await _router.Patch.ReadTextAsync(path);
                 _scene = JsonUtility.FromJson<StorySceneDto>(json) ?? throw new InvalidOperationException("empty scene");
             }
             catch (Exception e)

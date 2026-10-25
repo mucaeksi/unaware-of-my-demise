@@ -21,6 +21,9 @@ namespace Uomd.Scenes
         private string _preStory = "";
         private string _postStory = "";
         private string _campaignNode = "";
+        private string _readingEntry = "";
+        private System.Collections.Generic.List<string> _readingScenes = new System.Collections.Generic.List<string>();
+        private int _readingIndex;
 
         public UomdEntryFlow(UomdSceneRouter router) => _router = router;
 
@@ -114,10 +117,61 @@ namespace Uomd.Scenes
             _router.Session.ActiveBattleEncounterId = Path.GetFileNameWithoutExtension(encounterPath);
         }
 
+        /// <summary>
+        /// Plays an Archive reading (LibraryScene.reading): the server-delivered scenes in order, then records the reading
+        /// (POST /api/v1/progress/story) and returns to the Archive.
+        /// </summary>
+        public async Awaitable PlayReadingAsync(string entryId, System.Collections.Generic.List<string> sceneJsons)
+        {
+            StageIndex = 0;
+            _campaignNode = "";
+            _readingEntry = entryId;
+            _readingScenes = sceneJsons;
+            _readingIndex = 0;
+            await ShowReadingSceneAsync();
+        }
+
+        public bool InReading => _readingEntry.Length > 0;
+
+        private async Awaitable ShowReadingSceneAsync()
+        {
+            Current = Phase.PostStory;
+            _router.Session.ActiveStoryJson = _readingScenes[_readingIndex];
+            _router.Session.ActiveStoryPath = _readingEntry;
+            await _router.NavigateToAsync(UomdScreenId.Story);
+        }
+
+        private async Awaitable FinishReadingAsync()
+        {
+            if (_readingIndex + 1 < _readingScenes.Count)
+            {
+                _readingIndex++;
+                await ShowReadingSceneAsync();
+                return;
+            }
+            string entry = _readingEntry;
+            _readingEntry = "";
+            _router.Session.ActiveStoryJson = null;
+            Current = Phase.None;
+            try
+            {
+                await _router.Api.SendJsonAsync("POST", "/api/v1/progress/story", new System.Collections.Generic.Dictionary<string, object>
+                {
+                    ["releaseId"] = _router.Patch.ActiveReleaseId, ["nodeId"] = entry
+                });
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[EntryFlow] reading {entry} not recorded: {e.Message}");
+            }
+            await _router.NavigateToAsync(UomdScreenId.Library);
+        }
+
         /// <summary>The story screen calls this when its scene completes.</summary>
         public async Awaitable StoryFinishedAsync()
         {
-            if (Current == Phase.PreStory) await StartBattleAsync();
+            if (InReading) await FinishReadingAsync();
+            else if (Current == Phase.PreStory) await StartBattleAsync();
             else if (Current == Phase.PostStory) await CompleteStageAsync();
             else await _router.NavigateToAsync(UomdScreenId.Home);
         }
@@ -152,6 +206,8 @@ namespace Uomd.Scenes
         private async Awaitable PlayStoryAsync(Phase phase, string path)
         {
             Current = phase;
+            _readingEntry = "";
+            _router.Session.ActiveStoryJson = null;
             _router.Session.ActiveStoryPath = path;
             await _router.NavigateToAsync(UomdScreenId.Story);
         }

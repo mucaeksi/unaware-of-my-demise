@@ -31,6 +31,7 @@ namespace Uomd.Scenes
         private VisualElement _overlayHost;
         private IUomdScreenController _activeController;
         private bool _mediaStale;
+        private UomdPatchStrip _patchStrip;
 
         public GameSessionState Session { get; private set; }
         public PatchManager Patch { get; private set; }
@@ -53,7 +54,10 @@ namespace Uomd.Scenes
             await Patch.InitializeAsync(apiBaseUrl, memoryOnly: UomdCaptureRunner.Requested(out _));
             Api = new UomdApiClient(apiBaseUrl);
             PlatformBridge = UomdPlatformBridgeFactory.Create();
+            // the session survives a restart (net/api.ts store()): every sign-in, refresh and sign-out updates the device copy
+            if (!UomdCaptureRunner.Requested(out _)) Api.OnAuthChanged += PersistSession;
             Audio = gameObject.AddComponent<AudioDirector>();
+            UomdPrefs.Apply(Session, Audio);
             Media = new UomdMediaLoader(Patch);
             EntryFlow = new UomdEntryFlow(this);
             await Media.LoadCatalogAsync();
@@ -75,9 +79,24 @@ namespace Uomd.Scenes
             if (UomdCaptureRunner.Requested(out string captureDir)) gameObject.AddComponent<UomdCaptureRunner>().Run(this, captureDir);
         }
 
+        private void PersistSession()
+        {
+            try
+            {
+                var session = Api.GetCurrentSessionSnapshot();
+                if (session != null && !string.IsNullOrEmpty(session.token)) PlatformBridge.WriteSecureSession(session);
+                else PlatformBridge.ClearSecureSession();
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[UomdSceneRouter] session not persisted: {e.Message}");
+            }
+        }
+
         private void Update()
         {
             _activeController?.OnTick(Time.deltaTime);
+            _patchStrip?.Tick();
         }
 
         /// <summary>The registered controller of a type (capture pipeline QA).</summary>
@@ -144,9 +163,16 @@ namespace Uomd.Scenes
             _overlayHost.style.top = 0;
             _overlayHost.style.bottom = 0;
 
+            // the first-install download strip sits above every screen (PatchBarScene.ts)
+            var stripHost = new VisualElement { name = "patch-strip-host", pickingMode = PickingMode.Ignore };
+            stripHost.style.position = Position.Absolute;
+            stripHost.style.left = stripHost.style.right = stripHost.style.top = stripHost.style.bottom = 0;
+
             _rootContainer.Add(_screenHost);
             _rootContainer.Add(_overlayHost);
+            _rootContainer.Add(stripHost);
             root.Add(_rootContainer);
+            _patchStrip = new UomdPatchStrip(this, stripHost);
         }
 
         private void RegisterAll28Screens()
@@ -167,22 +193,21 @@ namespace Uomd.Scenes
             Register(new CompanionScreen(this));
             Register(new ArmoryScreen(this));
             Register(new TeamScreen(this));
-            Register(new SummonScreenController(this));
-            Register(new RecruitScreenController(this));
-            Register(new ShopScreenController(this));
-            Register(new TrialsScreenController(this));
+            Register(new SummonScreen(this));
+            Register(new InvitationsScreen(this));
+            Register(new ShopScreen(this));
+            Register(new TrialsScreen(this));
 
             // Group 3: Tasks, Deeds, Social, Account, Monetization & Overlays (10 screens)
-            Register(new TasksScreenController(this));
-            Register(new DeedsScreenController(this));
-            Register(new ProfileScreenController(this));
-            Register(new MailScreenController(this));
-            Register(new LibraryScreenController(this));
-            Register(new AccountScreenController(this));
-            Register(new PurchasesScreenController(this));
-            Register(new OperationsScreenController(this));
-            Register(new ContentPanelOverlayController(this));
-            Register(new PatchBarOverlayController(this));
+            Register(new ErrandsScreen(this));
+            Register(new DeedsScreen(this));
+            Register(new ProfileScreen(this));
+            Register(new MailScreen(this));
+            Register(new ArchiveScreen(this));
+            Register(new AccountScreen(this));
+            Register(new PurchaseHistoryScreen(this));
+            Register(new SavedActionsScreen(this));
+            Register(new NoticesScreen(this));
         }
 
         private void Register(IUomdScreenController controller)

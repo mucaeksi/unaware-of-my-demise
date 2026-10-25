@@ -45,6 +45,8 @@ namespace Uomd.Core
         }
 
         public int AuthRevision => _authVersion;
+        /// <summary>The API origin (privacy notice and web deletion portal live under it).</summary>
+        public string BaseUrl => _baseUrl;
 
         public bool IsSignedIn
         {
