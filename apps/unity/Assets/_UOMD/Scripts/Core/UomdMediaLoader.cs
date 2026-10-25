@@ -36,11 +36,11 @@ namespace Uomd.Core
         }
 
         /// <summary>
-        /// The file Unity can decode for a content image: the JPG/PNG sibling tools/export_unity_bundle.ts listed in
-        /// decodable.json (WebP sources are not shipped in the app), else the PNG next to a ".webp" path.
+        /// The file to load for a content image: the JPG/PNG sibling that tools/export_unity_bundle.ts listed in decodable.json
+        /// for base WebP files (which are not shipped), else the path itself (a patched WebP decodes on Android).
         /// </summary>
         public string Decodable(string relativePath) =>
-            relativePath != null && _decodable.TryGetValue(relativePath, out string sibling) ? sibling : UomdTextureLoader.ToDecodablePath(relativePath);
+            relativePath != null && _decodable.TryGetValue(relativePath, out string sibling) ? sibling : relativePath;
 
         /// <summary>The texture for a content path (".webp" resolves to its PNG sibling), or null when it cannot be loaded.</summary>
         public async Awaitable<Texture2D> TextureAsync(string relativePath)
