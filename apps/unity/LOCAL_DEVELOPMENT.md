@@ -14,11 +14,14 @@ GitHub `main` stays the single source of truth, and Cloudflare Workers Builds de
 
 ## Local setup (Windows)
 
-1. Unity Hub → Editor **6000.0.58f2** (changeset `92dee566b325`) with **Android Build Support** (SDK/NDK + OpenJDK). The
-   version is pinned in `ProjectSettings/ProjectVersion.txt`; a different editor version rewrites project files.
-2. `git pull origin main`, then `npm ci` and `npm run export:unity` at the repository root (writes
-   `Assets/StreamingAssets/uomd_base/`, which is git-ignored).
-3. Open `apps/unity` in Unity Hub; the entry scene is `Assets/_UOMD/Scenes/UomdMain.unity`. Play mode talks to the staging
+1. Unity Hub → Editor **Unity 6.3 LTS** (`6000.3.x`, owner 2026-10-25) with **Android Build Support** (SDK/NDK + OpenJDK).
+   `ProjectSettings/ProjectVersion.txt` still pins 6000.0.58f2 until the first local pass (L-1) upgrades and commits the
+   project; after that, use exactly the version that file names (another version rewrites project files).
+2. The repository lives in `E:\Unity` (owner, 2026-10-25): `git clone https://github.com/mucaeksi/unaware-of-my-demise.git E:\Unity`
+   once (the folder must be empty), later `git pull origin main`. Then `npm ci` and `npm run export:unity` in `E:\Unity`
+   (writes `Assets/StreamingAssets/uomd_base/`, which is git-ignored).
+3. Unity Hub → Projects → Add → Add project from disk → `E:\Unity\apps\unity` (never create a new Hub project or a new
+   GitHub repository from the Hub); the entry scene is `Assets/_UOMD/Scenes/UomdMain.unity`. Play mode talks to the staging
    API (`UomdSceneRouter.apiBaseUrl`); Google sign-in, Play Billing and ads run only on an Android device.
 4. Batch equivalents: `powershell -File apps/unity/cloud/unity_ci.ps1 test|build` (EditMode tests, AAB).
 

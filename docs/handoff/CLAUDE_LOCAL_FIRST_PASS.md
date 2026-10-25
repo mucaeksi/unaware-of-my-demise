@@ -1,7 +1,7 @@
 # Prompt — Claude Opus 5.5, first local Unity pass (L-1), then handoff to Gemini Argon
 
 > Paste this file (or "Read docs/handoff/CLAUDE_LOCAL_FIRST_PASS.md and execute it") as the first message of the local
-> Claude Code session started at the repository root on the owner's Windows machine. Written 2026-10-25 by the cloud
+> Claude Code session started at the repository root (`E:\Unity`) on the owner's Windows machine. Written 2026-10-25 by the cloud
 > session that ported the client; it is the plan for the last pass Claude does before Decision D-33 hands operations to
 > Gemini Argon.
 
@@ -48,7 +48,7 @@ truth; never modify the Google Drive legacy archive.
 ## Step 1 — Bring-up on the local editor
 
 1. `git pull origin main`; `npm ci`; `npm run export:unity` (StreamingAssets base content, git-ignored).
-2. Open `apps/unity` with the owner's 6.3 editor. Unity upgrades the project; let it, then review every changed file:
+2. Open `E:\Unity\apps\unity` (Hub → Add project from disk) with the owner's 6.3 editor. Unity upgrades the project; let it, then review every changed file:
    - `ProjectSettings/ProjectVersion.txt` (record the exact `6000.3.x` + revision the owner installed),
    - `Packages/manifest.json` + `packages-lock.json`: core packages move to the 6.3 versions (URP 17.3.x, test-framework,
      ugui, 2D packages); keep `com.coplaydev.unity-mcp` on its pinned commit,

@@ -13,7 +13,7 @@ Read in this order at session start:
 ## 1. Executive Mandate & Non-Negotiable Rules (D-31)
 
 1. **Sole Agent Ownership (`Claude Opus 5.5`)**:
-   - Claude Opus 5.5 owns 100% of the repository (`F:\unaware-of-my-demise`): client migration to Unity (C#), backend maintenance (`apps/api`), admin Control Center (`apps/admin`), narrative canon upkeep (`narrative/`), content compilers (`tools/`), and all creative asset production via the **Gemini API**.
+   - Claude Opus 5.5 owns 100% of the repository (`E:\Unity`): client migration to Unity (C#), backend maintenance (`apps/api`), admin Control Center (`apps/admin`), narrative canon upkeep (`narrative/`), content compilers (`tools/`), and all creative asset production via the **Gemini API**.
    - Reports to the owner are in **Turkish**; in-game player-facing text and technical code/docs are in **English**; spoken voiceovers are **reviewed Japanese**.
 2. **Engine Migration to Unity (`apps/unity/`)**:
    - The game client is migrating exclusively on the **native Unity (C#, Unity 6 LTS, Universal Render Pipeline 2D)** project housed at `apps/unity/` (with all 5 C# layers implemented and legacy web/Capacitor folders removed).
@@ -22,7 +22,7 @@ Read in this order at session start:
    - Claude Opus 5.5 generates all remaining and future visual, musical, voiceover, and cinematic assets directly through the **Google Gemini API (`https://generativelanguage.googleapis.com`)** using `GEMINI_API_KEY` (configured in `.env` / environment) and the repository's deterministic budget-guarded tools (`tools/gen_image.ts`, `tools/media_budget.ts`, `tools/lib/media_budget.py`, `tools/ingest_art.ts`, `tools/generate_phase1_music_lyria35.py`, `tools/record_game_vo.py`).
    - Respect `content/budget/media_budget.json` (**1000 TL / $20 USD per month**, **$3 USD per batch cap**, **max 3 paid attempts per asset**). Every paid call must reserve budget before execution and settle/fail afterward.
 4. **Delivery & Git Discipline (D-28)**:
-   - Work only in `F:\unaware-of-my-demise` on `main`.
+   - Work only in `E:\Unity` on `main`.
    - Before every commit, run `npm run verify` (`lint` + `typecheck` + `test` + `check:content`).
    - Commit only the files you changed (`git add <paths>`, never `git add -A`).
    - **Never run `git push` or `wrangler deploy` by hand.** The owner pushes `main` via GitHub Desktop, which triggers Cloudflare Workers Builds (`uomd-game-staging`, `uomd-admin-staging`, `uomd-ops-staging`).
