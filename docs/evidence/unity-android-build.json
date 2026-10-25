@@ -1,8 +1,8 @@
 {
-  "commit": "4f6e4d4e9b32",
+  "commit": "bae1ce10526a",
   "file": "uomd.aab",
-  "bytes": 91285749,
-  "sha256": "ac414d1f5a4ecfa8ec7cd632a93debecf1f847edc820cd1e8344c1ffb888dd50",
+  "bytes": 92226857,
+  "sha256": "8cca224c7497ccd4b6df25cbb7340c76eb39dc180af2b12e643964de6af7cf68",
   "format": "aab",
   "signing": "debug",
   "applicationId": "io.github.mucaeksi.unawareofmydemise",
@@ -15,6 +15,6 @@
   ],
   "scriptingBackend": "IL2CPP",
   "editorVersion": "6000.0.58f2",
-  "builtAt": "2026-10-25T00:25:37Z",
-  "durationSeconds": 77
+  "builtAt": "2026-10-25T09:22:05Z",
+  "durationSeconds": 468
 }
