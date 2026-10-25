@@ -13,7 +13,7 @@
   "now": [
     {
       "title": "U-4a: battle screen on the real engine with chibi art (2026-10-25, Claude Opus 5.5)",
-      "detail": "Ported BattleScene/UnitView/formation: UomdBattleFormation (tests from formation.test.ts), visual 2-front/3-rear distribution, UnitArt atlas parsing, BattleUnitView frame animation/plates/marker, skill cards with target picking, event playback with BattleScene timings, result screen with stars and logHash. Capture QA plays T-1 on AUTO to victory (34.5 s, 3 stars). Debug AAB rebuilt from f25c1b4 (145.8 MB)."
+      "detail": "Ported BattleScene/UnitView/formation: UomdBattleFormation (tests from formation.test.ts), visual 2-front/3-rear distribution, UnitArt atlas parsing, BattleUnitView frame animation/plates/marker, skill cards with target picking, event playback with BattleScene timings, result screen with stars and logHash. Capture QA plays T-1 on AUTO to victory (34.5 s, 3 stars). Debug AAB rebuilt from f25c1b4 (145.8 MB). AAB size cut to 91.3 MB (4f6e4d4): JPG q92 for opaque art, PNG only with transparency, WebP sources not shipped (decodable.json). EditMode inside Unity 26/26."
     },
     {
       "title": "U-3b: first Android AAB + entry flow with art and sound (2026-10-24, Claude Opus 5.5)",
@@ -59,7 +59,7 @@
     },
     {
       "title": "U-3/U-4: battle screen visuals, release signing, AAB size",
-      "detail": "Battle polish: turn-order bar, BattleVfxStage presets on skills, enemy intents and status badges, POST /api/v1/battles submission, MENU/speed. Release-sign the AAB once the upload key is provided (B-SIGNING). Drop the WebP duplicates from StreamingAssets. Story reader LOG."
+      "detail": "Battle polish: turn-order bar, BattleVfxStage presets on skills, enemy intents and status badges, POST /api/v1/battles submission, MENU/speed. Release-sign the AAB once the upload key is provided (B-SIGNING). Story reader LOG."
     },
     {
       "title": "Control Center: replace the retired browser-game previews",

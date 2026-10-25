@@ -143,9 +143,18 @@ namespace Uomd.Tests
             string release = Path.Combine(Application.streamingAssetsPath, "uomd_base/release.json");
             Assert.IsTrue(File.Exists(release), "Run `npm run export:unity` before opening the project.");
             var manifest = UomdJson.ParseObject(File.ReadAllText(release));
+            // WebP art ships as the JPG/PNG sibling listed in decodable.json (Unity cannot decode WebP)
+            string decodablePath = Path.Combine(Application.streamingAssetsPath, "uomd_base/decodable.json");
+            Assert.IsTrue(File.Exists(decodablePath), "decodable.json missing: rerun `npm run export:unity`.");
+            var decodable = UomdJson.ParseObject(File.ReadAllText(decodablePath));
             foreach (object? f in (List<object?>)manifest["files"]!)
             {
                 string rel = (string)Obj(f)["path"]!;
+                if (rel.EndsWith(".webp", StringComparison.OrdinalIgnoreCase))
+                {
+                    Assert.IsTrue(decodable.TryGetValue(rel, out object? sibling) && sibling is string s, $"{rel} has no decodable sibling");
+                    rel = (string)sibling!;
+                }
                 Assert.IsTrue(File.Exists(Path.Combine(Application.streamingAssetsPath, "uomd_base", rel)), rel);
             }
         }
