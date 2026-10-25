@@ -29,9 +29,10 @@ ROOT = Path(__file__).resolve().parents[3]
 UNITY = ROOT / "apps" / "unity"
 ASSETS = UNITY / "Assets"
 OUT = ROOT / ".cache" / "unity-ref-compile"
-# Unity defines that every 6000.0 compile sees; platform defines are not used by this codebase today.
-DEFINES = ["UNITY_6000_0_OR_NEWER", "UNITY_2023_1_OR_NEWER", "UNITY_2022_3_OR_NEWER", "UNITY_2021_3_OR_NEWER", "CSHARP_7_3_OR_NEWER", "ENABLE_IL2CPP"]
-# Signatures copied from URP 17.0.4 (Runtime/Data/UniversalRenderPipelineAsset.cs:678, Runtime/2D/Renderer2DData.cs:19),
+# Unity defines that every 6000.3 compile sees; platform defines are not used by this codebase today.
+DEFINES = ["UNITY_6000_3_OR_NEWER", "UNITY_6000_2_OR_NEWER", "UNITY_6000_1_OR_NEWER", "UNITY_6000_0_OR_NEWER", "UNITY_2023_1_OR_NEWER", "UNITY_2022_3_OR_NEWER", "UNITY_2021_3_OR_NEWER", "CSHARP_7_3_OR_NEWER", "ENABLE_IL2CPP"]
+# Signatures copied from URP 17.3.0 (Runtime/Data/UniversalRenderPipelineAsset.cs:716, Runtime/2D/Renderer2DData.cs:19;
+# the real asset derives from RenderPipelineAsset<UniversalRenderPipeline>, the non-generic base is enough here),
 # one block per URP assembly so a missing asmdef reference fails here as it does in Unity: Renderer2DData lives in
 # Unity.RenderPipelines.Universal.2D.Runtime, not in Universal.Runtime.
 # Lets the editor assembly's UnityEditor API usage be compiled without building URP and its Burst/Collections chain.
@@ -229,7 +230,7 @@ def main() -> int:
         print(line)
     print(f"\nUnity {version} reference compile: {len(built)} assemblies built from source, {len(errors)} errors")
     for name in stubbed:
-        print(f"NOTE {name}: URP types come from verified 17.0.4 signatures, not the compiled package")
+        print(f"NOTE {name}: URP types come from verified 17.3.0 signatures, not the compiled package")
     for name, why in skipped.items():
         print(f"SKIPPED {name}: {why}")
     return 1 if result.returncode != 0 or errors else 0

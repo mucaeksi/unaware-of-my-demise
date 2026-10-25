@@ -6,8 +6,8 @@ export DEBIAN_FRONTEND=noninteractive
 # Claude Code cloud sessions / containers may already run as root without sudo.
 SUDO=""; [ "$(id -u)" -eq 0 ] || SUDO="sudo"
 
-UNITY_VERSION="${UNITY_VERSION:-6000.0.58f2}"
-UNITY_CHANGESET="${UNITY_CHANGESET:-92dee566b325}"
+UNITY_VERSION="${UNITY_VERSION:-6000.3.27f1}"
+UNITY_CHANGESET="${UNITY_CHANGESET:-672d562a42a7}"
 
 $SUDO apt-get update
 $SUDO apt-get install -y ca-certificates curl gnupg git git-lfs xvfb libgconf-2-4 libglu1-mesa || \

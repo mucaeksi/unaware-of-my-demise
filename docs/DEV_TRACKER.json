@@ -12,6 +12,10 @@
   },
   "now": [
     {
+      "title": "L-1: local bring-up on Unity 6.3 LTS 6000.3.27f1 (2026-10-25, Claude Opus 5.5)",
+      "detail": "Batch upgrade from 6000.0.58f2: URP 17.3.0, test-framework 1.6.0, 2D/Addressables/Collections/Input System on their 6.3 versions, URP global settings migrated, Android min API 25 (Unity 6.3 minimum). 0 compiler errors, EditMode 98/98 in Unity 6.3, check:unity-compile 10/10 with 0 errors against the local editor, test:unity-logic 97/97, npm run verify green. Windows fixes: export:unity EBUSY (sharp file handle) and unity-status path separators. Open: MCP stdio connection, Play-mode audit, Android build on 6.3, device check."
+    },
+    {
       "title": "U-5: all Unity screens ported from the TS client (2026-10-25, Claude Opus 5.5)",
       "detail": "UomdHubScreen (hubScreen.ts frame: backdrop by heading, wallet from /api/v1/wallet, sign-in gate, TS 1920x1080 layout) with the pixiKit gothic plaque kit (UomdGothicPanel, plaque buttons, art backdrops). Ported Home, Chapters (campaign node player), Roster, Companion (Uomd.Core.Growth + GrowthTests), Team, Armory, Summon, Invitations, Shop (BUY/WATCH disabled until Play checkout/ads are ported), Purchases, Account + settings (UomdPrefs), Errands, Deeds, Mail, Profile, Saved actions, Archive readings, Trials, Notices, UomdPatchStrip. Removed the placeholder screens and fake default wallets. Fixed: sign-in was never persisted on the device. Headless 97/97, verify green, 26 screens captured from 19dee46."
     },

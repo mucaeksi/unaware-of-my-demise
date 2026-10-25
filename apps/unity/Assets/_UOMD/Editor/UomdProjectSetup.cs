@@ -100,7 +100,7 @@ namespace Uomd.EditorTools
             PlayerSettings.SetApiCompatibilityLevel(android, ApiCompatibilityLevel.NET_Standard);
             PlayerSettings.SetManagedStrippingLevel(android, ManagedStrippingLevel.Low);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
-            PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel24;
+            PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel25; // Unity 6.3 minimum
             // Credential Manager 1.5, Billing 8 and Ads 24 require compileSdk/targetSdk 35.
             PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)35;
 

@@ -401,7 +401,7 @@ Review [QA_ANDROID](docs/QA_ANDROID.md) against these gates and current decision
 ### Claude Opus 5.5's Execution Workflow (D-31)
 
 1. Read this entire file, `CLAUDE.md`, [docs/NEXT_STEPS.md](docs/NEXT_STEPS.md), and the Unity master blueprint [docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md](docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md). Work exclusively in `F:\unaware-of-my-demise` on `main`.
-2. Verify `.env` (`GEMINI_API_KEY` present; never print its value), Node 22+, Unity 6 LTS (`6000.0.x`), and `npm run export:unity`.
+2. Verify `.env` (`GEMINI_API_KEY` present; never print its value), Node 22+, Unity 6.3 LTS (`6000.3.x`, pinned in `apps/unity/ProjectSettings/ProjectVersion.txt`), and `npm run export:unity`.
 3. Execute Phases `U-1` through `U-6` in [docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md](docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md): scaffold `apps/unity/` with modular `.asmdef` assemblies, port `@uomd/combat` (`Mulberry32Rng` + `RoundHalfUp` bit-exact server replay parity), `@uomd/story`, `@uomd/patch` (`ECDsa` P-256), and `@uomd/economy` to C#, port all 28 scenes from the handed-over legacy `apps/game` reference oracle to Unity URP 2D + UI Toolkit / TextMeshPro, migrate the 4 Android Java plugins (`Assets/Plugins/Android/`), and archive `apps/game` + `apps/android` into `archive/legacy-web-era` in Phase `U-6`.
 
 ### Whole-game creative and animation responsibility (Claude Opus 5.5 + Gemini API)
@@ -437,7 +437,7 @@ python3 -m unittest discover -s tools/tests -p 'test_*.py'
 bash tools/build_graph.sh
 ~~~
 
-Node **22+**, Unity **6000.0 LTS**, pinned npm lockfile and workspace-local dependencies are required. E2E uses disposable local D1/R2, all 29 migrations, ephemeral signing/auth test keys and real game/admin service bindings. It must not point to production or real provider accounts. `.cache/` contains local bundles/screenshots and is git-ignored. Trace archives can include ephemeral auth data; do not publish them or private tokens.
+Node **22+**, Unity **6000.3 LTS**, pinned npm lockfile and workspace-local dependencies are required. E2E uses disposable local D1/R2, all 29 migrations, ephemeral signing/auth test keys and real game/admin service bindings. It must not point to production or real provider accounts. `.cache/` contains local bundles/screenshots and is git-ignored. Trace archives can include ephemeral auth data; do not publish them or private tokens.
 
 ### Real external inputs and gates
 

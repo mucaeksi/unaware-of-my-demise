@@ -14,13 +14,15 @@ GitHub `main` stays the single source of truth, and Cloudflare Workers Builds de
 
 ## Local setup (Windows)
 
-1. Unity Hub → Editor **6000.0.58f2** (changeset `92dee566b325`) with **Android Build Support** (SDK/NDK + OpenJDK). The
-   version is pinned in `ProjectSettings/ProjectVersion.txt`; a different editor version rewrites project files.
+1. Unity Hub → Editor **6000.3.27f1** (Unity 6.3 LTS, changeset `672d562a42a7`) with **Android Build Support** (SDK/NDK +
+   OpenJDK). The version is pinned in `ProjectSettings/ProjectVersion.txt`; a different editor version rewrites project files.
 2. `git pull origin main`, then `npm ci` and `npm run export:unity` at the repository root (writes
    `Assets/StreamingAssets/uomd_base/`, which is git-ignored).
-3. Open `apps/unity` in Unity Hub; the entry scene is `Assets/_UOMD/Scenes/UomdMain.unity`. Play mode talks to the staging
+3. Unity Hub → **Projects → Add → Add project from disk** → select the **`apps/unity`** folder (the repository root is a
+   monorepo, not a Unity project). The entry scene is `Assets/_UOMD/Scenes/UomdMain.unity`. Play mode talks to the staging
    API (`UomdSceneRouter.apiBaseUrl`); Google sign-in, Play Billing and ads run only on an Android device.
-4. Batch equivalents: `powershell -File apps/unity/cloud/unity_ci.ps1 test|build` (EditMode tests, AAB).
+4. Batch equivalents: `powershell -File apps/unity/cloud/unity_ci.ps1 test|build` (EditMode tests, AAB). The script finds the
+   editor under `C:\Program Files\Unity\Hub\Editor` or the Hub's custom install folder; `UNITY_PATH` overrides both.
 
 ## Claude Code ↔ Unity Editor (MCP for Unity)
 

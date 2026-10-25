@@ -16,7 +16,7 @@ const sidecar = {
   targetSdk: 35,
   architectures: ['ARM64'],
   scriptingBackend: 'IL2CPP',
-  editorVersion: '6000.0.58f2',
+  editorVersion: '6000.3.27f1',
   builtAt: '2026-10-24T22:00:00Z',
   durationSeconds: 600
 };

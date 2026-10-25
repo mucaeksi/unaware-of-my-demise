@@ -21,7 +21,7 @@ function fixture(files: Record<string, string>): string {
 describe('unityStatus', () => {
   it('counts headless files per asmdef and keeps nested asmdefs separate', () => {
     const root = fixture({
-      'apps/unity/ProjectSettings/ProjectVersion.txt': 'm_EditorVersion: 6000.0.58f2\n',
+      'apps/unity/ProjectSettings/ProjectVersion.txt': 'm_EditorVersion: 6000.3.27f1\n',
       'apps/unity/Assets/_UOMD/Scripts/Core/Uomd.Core.asmdef': JSON.stringify({ name: 'Uomd.Core', references: ['Uomd.Contracts', 'Unity.Mathematics'] }),
       'apps/unity/Assets/_UOMD/Scripts/Core/Pure.cs': 'class Pure {}\n',
       'apps/unity/Assets/_UOMD/Scripts/Core/Engine.cs': 'using UnityEngine;\nclass Engine {}\n',
@@ -32,7 +32,7 @@ describe('unityStatus', () => {
     });
     const s = unityStatus(root);
     const core = s.assemblies.find((a) => a.name === 'Uomd.Core')!;
-    expect(s.editorVersion).toBe('6000.0.58f2');
+    expect(s.editorVersion).toBe('6000.3.27f1');
     expect(core).toMatchObject({ csFiles: 2, headlessFiles: 1, references: ['Uomd.Contracts'] });
     expect(s.assemblies.find((a) => a.name === 'Uomd.Inner')).toMatchObject({ csFiles: 1, headlessFiles: 0 });
     expect(s.checks.find((c) => c.id === 'harness')?.state).toBe('done');
@@ -40,8 +40,8 @@ describe('unityStatus', () => {
   });
 
   it('reads the recorded Android build: debug-signed is partial, release-signed AAB is done', () => {
-    const build = { commit: 'abc', file: 'uomd.aab', bytes: 52428800, sha256: 'ff', format: 'aab', signing: 'debug', applicationId: 'x', versionName: '0.1.0', versionCode: 3, minSdk: 24, targetSdk: 35, architectures: ['ARM64'], scriptingBackend: 'IL2CPP', editorVersion: '6000.0.58f2', builtAt: 't', durationSeconds: 1 };
-    const files = { 'apps/unity/ProjectSettings/ProjectVersion.txt': 'm_EditorVersion: 6000.0.58f2\n' };
+    const build = { commit: 'abc', file: 'uomd.aab', bytes: 52428800, sha256: 'ff', format: 'aab', signing: 'debug', applicationId: 'x', versionName: '0.1.0', versionCode: 3, minSdk: 24, targetSdk: 35, architectures: ['ARM64'], scriptingBackend: 'IL2CPP', editorVersion: '6000.3.27f1', builtAt: 't', durationSeconds: 1 };
+    const files = { 'apps/unity/ProjectSettings/ProjectVersion.txt': 'm_EditorVersion: 6000.3.27f1\n' };
     expect(unityStatus(fixture(files)).checks.find((c) => c.id === 'aab-build')?.state).toBe('todo');
     const debug = unityStatus(fixture({ ...files, 'docs/evidence/unity-android-build.json': JSON.stringify(build) }));
     expect(debug.android?.versionCode).toBe(3);
