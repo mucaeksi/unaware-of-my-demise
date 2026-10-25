@@ -3,7 +3,7 @@
  * from the code. Every check is a file/grep fact about apps/unity; nothing here claims a test result or a device run.
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, sep } from 'node:path';
 
 export type CheckState = 'done' | 'partial' | 'todo';
 
@@ -56,6 +56,9 @@ export interface UnityAndroidBuild {
   durationSeconds: number;
 }
 
+// the comparisons below use '/', so paths are kept in that form on Windows too
+const slash = (p: string): string => p.split(sep).join('/');
+
 function walk(dir: string, keep: (path: string) => boolean, out: string[] = []): string[] {
   if (!existsSync(dir)) return out;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -63,7 +66,7 @@ function walk(dir: string, keep: (path: string) => boolean, out: string[] = []):
     if (entry.isDirectory()) {
       if (entry.name === 'StreamingAssets' || entry.name === 'node_modules' || entry.name.startsWith('.')) continue;
       walk(p, keep, out);
-    } else if (entry.isFile() && keep(p)) out.push(p);
+    } else if (entry.isFile() && keep(p)) out.push(slash(p));
   }
   return out;
 }
@@ -85,7 +88,7 @@ export function headlessSources(unityRoot: string): Set<string> {
         const [dir = ''] = raw.split('**');
         for (const f of walk(dir, (p) => p.endsWith('.cs'))) result.add(f);
       } else if (!raw.includes('*')) {
-        result.add(join(raw));
+        result.add(slash(join(raw)));
       }
     }
   }
@@ -118,7 +121,7 @@ export function unityStatus(root: string): UnityStatus {
     const own = csFiles.filter((f) => f.startsWith(`${dir}/`) && !nested.some((n) => f.startsWith(n)));
     return {
       name: def.name,
-      path: relative(root, dir),
+      path: slash(relative(root, dir)),
       references: (def.references ?? []).filter((r) => r.startsWith('Uomd.')),
       csFiles: own.length,
       lines: sumLines(own),

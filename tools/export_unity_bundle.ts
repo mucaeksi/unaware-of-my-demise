@@ -589,7 +589,8 @@ export async function writeDecodableSiblings(dir: string, opts: { removeWebp?: b
         continue;
       }
       if (!entry.name.toLowerCase().endsWith('.webp')) continue;
-      const image = sharp(full, { animated: false });
+      // from a buffer: sharp(path) keeps the file open on Windows and the later rmSync fails with EBUSY
+      const image = sharp(readFileSync(full), { animated: false });
       const { isOpaque } = await image.stats();
       const target = full.slice(0, -5) + (isOpaque ? '.jpg' : '.png');
       const stale = full.slice(0, -5) + (isOpaque ? '.png' : '.jpg'); // left by an earlier export
