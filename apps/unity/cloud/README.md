@@ -2,7 +2,7 @@
 
 The Unity project in `apps/unity/` was first opened by Unity in the 2026-10-24 cloud session, which generated and committed its
 `.meta` files, `ProjectSettings/*.asset` and `packages-lock.json`. This folder turns opening, testing, building and capturing the
-project into a repeatable batch pipeline.
+project into a repeatable batch pipeline. Working in a local Unity Editor: see [../LOCAL_DEVELOPMENT.md](../LOCAL_DEVELOPMENT.md).
 
 ## 0. Checks that need no Unity licence (run these first)
 

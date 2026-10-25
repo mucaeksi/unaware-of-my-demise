@@ -23,6 +23,9 @@ apps/unity/Obj/
 apps/unity/Logs/
 apps/unity/UserSettings/
 apps/unity/Builds/
+# written by com.unity.test-framework.performance during player builds
+apps/unity/Assets/Resources/PerformanceTestRun*
+apps/unity/Assets/Resources.meta
 apps/unity/.utmp/
 apps/unity/CloudflareGatewayDist/
 apps/unity/Assets/StreamingAssets/uomd_base/
