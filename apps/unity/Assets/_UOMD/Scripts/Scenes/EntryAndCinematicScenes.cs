@@ -1233,6 +1233,7 @@ namespace Uomd.Scenes
         private VisualElement _plateLayer;
         private VisualElement _fxLayer;
         private VisualElement _dock;
+        private VisualElement _turnBar;
         private Label _hint;
         private Label _desc;
         private Button _autoButton;
@@ -1341,6 +1342,14 @@ namespace Uomd.Scenes
             bool autoAllowed = !(raw.TryGetValue("ui", out object ui) && ui is Dictionary<string, object> u && u.TryGetValue("auto", out object a) && a is bool b && !b);
             if (autoAllowed) _autoButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(stage, "AUTO", null, 176, 72, 24, false, ToggleAuto), 140, 66);
 
+            _turnBar = new VisualElement { pickingMode = PickingMode.Ignore };
+            _turnBar.style.position = Position.Absolute;
+            _turnBar.style.left = 60;
+            _turnBar.style.top = 128 - 27;
+            _turnBar.style.height = 54;
+            _turnBar.style.flexDirection = FlexDirection.Row;
+            _turnBar.style.alignItems = Align.Center;
+            stage.Add(_turnBar);
             _hint = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 24, UomdThemeTokens.GoldHi, 2f), 0, 54);
             _hint.AddToClassList("uomd-display");
             _desc = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 20, new Color(0.875f, 0.839f, 0.925f)), 0, 866);
@@ -1435,6 +1444,65 @@ namespace Uomd.Scenes
                 v.SetHp(c.Hp, c.MaxHp);
                 double ultimateCost = c.Def.Skills.Where(s => s.Type == "ultimate").Select(s => s.FocusCost).DefaultIfEmpty(0).Max();
                 v.SetFocus(c.Focus, ultimateCost);
+                if (c.Side == "enemy")
+                {
+                    var intent = c.Alive && _battle.Result == null ? _battle.IntentFor(c.Id) : null;
+                    string target = intent?.TargetId != null ? _battle.Unit(intent.Value.TargetId).Def.NameEn.ToUpperInvariant() : null;
+                    v.SetIntent(intent == null ? null : $"{(intent.Value.Announced ? "⚠ " : "")}{intent.Value.SkillName.ToUpperInvariant()}{(target != null ? $" → {target}" : "")}");
+                }
+            }
+            RefreshTurnBar();
+        }
+
+        /// <summary>The next eight turns as medallions under the stage title (BattleScene.refreshHud).</summary>
+        private void RefreshTurnBar()
+        {
+            _turnBar.Clear();
+            var order = _battle.Result == null ? _battle.PreviewOrder(8) : new List<string>();
+            if (order.Count == 0)
+            {
+                _turnBar.style.display = DisplayStyle.None;
+                return;
+            }
+            _turnBar.style.display = DisplayStyle.Flex;
+            _turnBar.style.backgroundColor = new Color(0.047f, 0.027f, 0.078f, 0.82f);
+            _turnBar.style.borderTopLeftRadius = _turnBar.style.borderTopRightRadius = _turnBar.style.borderBottomLeftRadius = _turnBar.style.borderBottomRightRadius = 12;
+            var rim = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.52f);
+            _turnBar.style.borderTopColor = _turnBar.style.borderBottomColor = _turnBar.style.borderLeftColor = _turnBar.style.borderRightColor = rim;
+            _turnBar.style.borderTopWidth = _turnBar.style.borderBottomWidth = _turnBar.style.borderLeftWidth = _turnBar.style.borderRightWidth = 1.5f;
+            _turnBar.style.paddingLeft = 16;
+            _turnBar.style.paddingRight = 12;
+            var label = UomdScreenKit.Text(_turnBar, "TURN", 14, UomdThemeTokens.GoldHi, 1f, bold: true);
+            label.AddToClassList("uomd-display");
+            label.style.marginRight = 14;
+            for (int i = 0; i < order.Count; i++)
+            {
+                bool current = i == 0;
+                var c = _battle.Unit(order[i]);
+                float size = current ? 48f : 40f;
+                var chip = new VisualElement { pickingMode = PickingMode.Ignore };
+                chip.style.width = chip.style.height = size;
+                chip.style.marginRight = 54 - size;
+                chip.style.overflow = Overflow.Hidden;
+                chip.style.borderTopLeftRadius = chip.style.borderTopRightRadius = chip.style.borderBottomLeftRadius = chip.style.borderBottomRightRadius = size / 2f;
+                var ring = current ? UomdThemeTokens.GoldHi : c.Side == "player" ? UomdThemeTokens.PlayerSide : UomdThemeTokens.EnemySide;
+                chip.style.borderTopColor = chip.style.borderBottomColor = chip.style.borderLeftColor = chip.style.borderRightColor = ring;
+                chip.style.borderTopWidth = chip.style.borderBottomWidth = chip.style.borderLeftWidth = chip.style.borderRightWidth = current ? 2.5f : 1.5f;
+                chip.style.backgroundColor = new Color(0.071f, 0.039f, 0.094f, 1f);
+                if (_views.TryGetValue(c.Id, out var view) && view.IdleSprite != null)
+                {
+                    // the head: the idle frame scaled up and anchored at the top
+                    var face = new VisualElement { pickingMode = PickingMode.Ignore };
+                    face.style.position = Position.Absolute;
+                    face.style.width = size * 1.9f;
+                    face.style.height = size * 1.9f * view.IdleSprite.rect.height / Mathf.Max(1f, view.IdleSprite.rect.width);
+                    face.style.left = -size * 0.45f;
+                    face.style.top = -size * 0.12f;
+                    face.style.backgroundImage = new StyleBackground(view.IdleSprite);
+                    face.style.backgroundSize = new BackgroundSize(Length.Percent(100), Length.Percent(100));
+                    chip.Add(face);
+                }
+                _turnBar.Add(chip);
             }
         }
 

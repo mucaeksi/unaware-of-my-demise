@@ -22,6 +22,7 @@ namespace Uomd.Scenes
         private readonly VisualElement _shadow;
         private readonly VisualElement _ring;
         private readonly Label _marker;
+        private readonly Label _intent;
         private readonly VisualElement _hpFill;
         private readonly VisualElement _focusFill;
         private readonly bool _flip;
@@ -98,6 +99,14 @@ namespace Uomd.Scenes
             nameLabel.AddToClassList("uomd-display");
             nameLabel.style.height = 18;
             _hpFill = Bar(Plate, 154, 10, UomdThemeTokens.HpGood);
+            // enemy intent under the plate (BattleScene.refreshHud: the skill an enemy will use, ⚠ when announced)
+            _intent = UomdScreenKit.Text(plateLayer, "", 13, new Color(1f, 0.702f, 0.769f), 1f);
+            _intent.AddToClassList("uomd-display");
+            _intent.style.position = Position.Absolute;
+            _intent.style.left = X - 150f;
+            _intent.style.width = 300f;
+            _intent.style.top = Y + 18f + (player ? 40f : 30f);
+            _intent.style.display = DisplayStyle.None;
             _focusFill = player ? Bar(Plate, 154, 6, UomdThemeTokens.Focus) : null;
             if (_focusFill != null) _focusFill.style.width = Length.Percent(0);
 
@@ -169,6 +178,16 @@ namespace Uomd.Scenes
             _focusFill.style.width = Length.Percent(max > 0 ? Mathf.Clamp01((float)(focus / max)) * 100f : 0f);
         }
 
+        /// <summary>Shows what an enemy will do next; null hides it.</summary>
+        public void SetIntent(string text)
+        {
+            _intent.text = text ?? "";
+            _intent.style.display = string.IsNullOrEmpty(text) || !Alive ? DisplayStyle.None : DisplayStyle.Flex;
+        }
+
+        /// <summary>The idle key frame, for the turn-order medallions.</summary>
+        public Sprite IdleSprite => _sprites.TryGetValue(_art.State("idle").Frame, out var sprite) ? sprite : null;
+
         public void SetActive(bool active) => _marker.style.visibility = active ? Visibility.Visible : Visibility.Hidden;
 
         public void SetSelectable(bool selectable) => SetRingColor(selectable ? new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.9f) : new Color(0, 0, 0, 0));
@@ -179,6 +198,7 @@ namespace Uomd.Scenes
             Alive = false;
             UomdScreenKit.Fade(Root, 0.25f, 900, 300, reducedMotion);
             UomdScreenKit.Fade(Plate, 0f, 600, 300, reducedMotion);
+            _intent.style.display = DisplayStyle.None;
         }
 
         /// <summary>Moves the unit (feet) towards a point, for the lunge before a melee strike.</summary>
