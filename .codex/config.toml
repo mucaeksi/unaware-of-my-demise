@@ -12,6 +12,7 @@ startup_timeout_sec = 60
 [mcp_servers.graphify]
 command = "uv"
 args = ["run", "--offline", "--no-project", "--with", "graphifyy[mcp]==0.9.84", "python", "-m", "graphify.serve", "graphify-out/graph.json"]
+env = { UV_CACHE_DIR = ".cache/uv" } # filled by tools/build_graph.sh (--offline)
 enabled = true
 startup_timeout_sec = 60
 
@@ -26,5 +27,6 @@ startup_timeout_sec = 60
 [mcp_servers.unityMCP]
 command = "uvx"
 args = ["--from", "mcpforunityserver==10.3.0", "mcp-for-unity", "--transport", "stdio"]
+env = { UV_CACHE_DIR = ".cache/uv" } # repo-local uv cache: on Windows, installing pywin32 into the AppData cache can fail with os error 32
 enabled = true
 startup_timeout_sec = 120
