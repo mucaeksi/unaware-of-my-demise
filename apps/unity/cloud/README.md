@@ -67,7 +67,7 @@ publishes its facts to `docs/evidence/unity-android-build.json` for the Control 
 
 Size: Unity cannot decode WebP, so `npm run export:unity` writes a JPG (q92, 4:4:4) next to every opaque WebP and a PNG next to every
 WebP with transparency, lists them in `uomd_base/decodable.json` (read by `UomdMediaLoader`) and removes the WebP files from the copy
-inside the Unity project. The base art went from 78 MB to 25 MB. Remote patches (U-2) will need the same siblings.
+inside the Unity project. The base art went from 78 MB to 25 MB. Remote patches (U-2) keep their WebP bytes (SHA-256 verified as published); the Android player decodes them with BitmapFactory (`UomdImageBridge`), while the Editor cannot, so capture runs keep patch downloads in memory and show the embedded art.
 
 ## 1. Install (once per VM)
 

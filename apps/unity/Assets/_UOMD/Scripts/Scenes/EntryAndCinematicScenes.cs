@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 using Uomd.Combat;
 using Uomd.Contracts;
 using Uomd.Core;
+using Uomd.Core.Patching;
 using Uomd.Narrative;
 using Uomd.Platform;
 using Uomd.UI;
@@ -18,6 +19,7 @@ namespace Uomd.Scenes
     public sealed class BootScreenController : IUomdScreenController
     {
         private readonly UomdSceneRouter _router;
+        private const int BootUpdateTimeoutMs = 30_000;
         public UomdScreenId ScreenId => UomdScreenId.Boot;
 
         public BootScreenController(UomdSceneRouter router) => _router = router;
@@ -34,6 +36,15 @@ namespace Uomd.Scenes
                 if (!string.IsNullOrEmpty(savedToken))
                 {
                     _router.Api.SetSessionToken(savedToken);
+                }
+
+                // a returning player gets a newer release before any content is read (BootScene.loadEverything); when the
+                // check cannot finish, the download continues in the background and switches on at the next start
+                if (_router.Patch.EntryCompleted && !UomdCaptureRunner.Requested(out _))
+                {
+                    statusLbl.text = "Checking for updates…";
+                    var outcome = await _router.Patch.CheckForUpdatesAsync(BootUpdateTimeoutMs);
+                    if (outcome.Status == PatchStatus.Offline || outcome.Status == PatchStatus.Rejected) _ = _router.Patch.Service.StartAsync();
                 }
 
                 string prologueJson = await _router.Patch.ReadTextAsync("entry/prologue.json");
@@ -1850,15 +1861,23 @@ namespace Uomd.Scenes
     }
 
     /// <summary>
-    /// Post-tutorial page (port of apps/game/src/scenes/FinishScene.ts): the Main Theme over the dimmed forest, the status
-    /// box, a truthful line about where the entry progress is saved, and rotating canon quotes. The Unity client has no
-    /// remote patch download yet (U-2), so the box shows the installed state and says nothing about a downloaded patch.
+    /// Post-tutorial patch page (port of apps/game/src/scenes/FinishScene.ts): the Main Theme over the dimmed forest while
+    /// the background download stages the latest signed release, the status box with real progress, a truthful line about
+    /// where the entry progress is saved, and rotating canon quotes. When the release is ready the client restarts: the
+    /// staged release switches on without any network and the title treats the player as returning.
     /// </summary>
     public sealed class FinishScreenController : IUomdScreenController
     {
+        private const string WaitingTitle = "THE ROAD IS BEING PREPARED";
+        private const string WaitingBody = "Downloading and verifying the latest patch while the music plays. The game will restart automatically as soon as the patch finishes.";
         private const string ReadyTitle = "EVERYTHING IS INSTALLED";
+        private const string ReadyBody = "Patch complete. Restarting client…";
+        private const string UpToDateBody = "Your content is up to date. Restarting client…";
+        private const string FailedBody = "The download could not finish. Check your connection and try again; nothing already downloaded is lost.";
+        private const string UpdateRequired = "This version of the game is too old for the road ahead. Please update the app.";
         private const string Restart = "RESTART & ENTER GAME";
         private const string Restarting = "RESTARTING…";
+        private const int RestartFadeMs = 1300;
 
         private static readonly (string Quote, string Speaker)[] Quotes =
         {
@@ -1873,14 +1892,27 @@ namespace Uomd.Scenes
             ("“We leave when there is light. No hurry.”  —  “And no walking two steps ahead.”", "Mahmut & Fadyme")
         };
 
+        private enum Shown { None, Waiting, Ready, Failed }
+
         private readonly UomdSceneRouter _router;
+        private VisualElement _stage;
         private VisualElement _quoteGroup;
         private Label _quoteText;
         private Label _quoteSpeaker;
+        private Label _head;
+        private Label _note;
+        private Label _figures;
         private Label _saveLine;
+        private VisualElement _track;
+        private VisualElement _fill;
         private Button _action;
+        private IDisposable _subscription;
+        private PatchServiceStatus _pending;
+        private Shown _shown;
         private int _quoteIndex;
         private bool _restarting;
+        private bool _live;
+        private string _readyBody = ReadyBody;
 
         public UomdScreenId ScreenId => UomdScreenId.Finish;
 
@@ -1889,9 +1921,11 @@ namespace Uomd.Scenes
         public Awaitable OnEnterAsync(VisualElement screenRoot)
         {
             _restarting = false;
+            _shown = Shown.None;
+            _live = true;
             _router.Audio.PlayBgmCue("bgm_main_theme");
             bool calm = _router.Session.ReducedMotion;
-            var stage = UomdScreenKit.Layer(screenRoot, UomdThemeTokens.Void);
+            var stage = _stage = UomdScreenKit.Layer(screenRoot, UomdThemeTokens.Void);
             var bg = UomdScreenKit.Backdrop(stage, _router.Media, _router.Media.Catalog.Background("forest_whispering_ash"));
             bg.style.opacity = 0.38f;
             bg.style.scale = new Scale(new Vector3(1.04f, 1.04f, 1f));
@@ -1904,25 +1938,30 @@ namespace Uomd.Scenes
             box.style.borderTopColor = box.style.borderBottomColor = box.style.borderLeftColor = box.style.borderRightColor = UomdThemeTokens.GoldHi;
             stage.Add(box);
             UomdScreenKit.Centered(box, cx, 488);
-            var head = UomdScreenKit.Centered(UomdScreenKit.Text(stage, ReadyTitle, 50, UomdThemeTokens.GoldHi, 4f), cx, 265);
-            head.AddToClassList("uomd-display");
+            _head = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 50, UomdThemeTokens.GoldHi, 4f), cx, 265);
+            _head.AddToClassList("uomd-display");
+            _note = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 32, UomdThemeTokens.TextPrimary), cx, 372);
+            _note.style.whiteSpace = WhiteSpace.Normal;
+            _note.style.width = 1200;
+            _note.style.unityTextAlign = TextAnchor.MiddleCenter;
 
-            var track = new VisualElement { pickingMode = PickingMode.Ignore };
-            track.style.width = 1080;
-            track.style.height = 28;
-            track.style.backgroundColor = new Color(0.035f, 0.020f, 0.055f, 0.95f);
-            stage.Add(track);
-            UomdScreenKit.Centered(track, cx, 492);
-            var fill = new VisualElement { pickingMode = PickingMode.Ignore };
-            fill.style.width = new Length(100, LengthUnit.Percent);
-            fill.style.height = new Length(100, LengthUnit.Percent);
-            fill.style.backgroundColor = UomdThemeTokens.GoldHi;
-            track.Add(fill);
-            UomdScreenKit.Centered(UomdScreenKit.Text(stage, "100 %   ·   READY", 28, UomdThemeTokens.TextDim), cx, 550);
+            _track = new VisualElement { pickingMode = PickingMode.Ignore };
+            _track.style.width = 1080;
+            _track.style.height = 28;
+            _track.style.backgroundColor = new Color(0.035f, 0.020f, 0.055f, 0.95f);
+            stage.Add(_track);
+            UomdScreenKit.Centered(_track, cx, 492);
+            _fill = new VisualElement { pickingMode = PickingMode.Ignore };
+            _fill.style.width = new Length(0, LengthUnit.Percent);
+            _fill.style.height = new Length(100, LengthUnit.Percent);
+            _fill.style.backgroundColor = UomdThemeTokens.GoldHi;
+            _track.Add(_fill);
+            _figures = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 28, UomdThemeTokens.TextDim), cx, 550);
 
             _saveLine = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 24, UomdThemeTokens.TextDim), cx, 596);
             RenderSave(_router.Api.IsSignedIn ? null : false);
-            _action = UomdScreenKit.Centered(UomdScreenKit.MenuButton(stage, Restart, null, 700, 104, 34, true, () => _ = RestartAsync()), cx, 704);
+            _action = UomdScreenKit.Centered(UomdScreenKit.MenuButton(stage, Restart, null, 700, 104, 34, true, () => _ = OnActionAsync()), cx, 704);
+            _action.style.display = DisplayStyle.None;
 
             var rule = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.45f);
             var left = new VisualElement { pickingMode = PickingMode.Ignore };
@@ -1941,9 +1980,107 @@ namespace Uomd.Scenes
             _quoteSpeaker.AddToClassList("uomd-display");
             stage.schedule.Execute(CycleQuote).Every(4200).StartingIn(4200);
 
+            // the background download reports from its own continuations; the screen renders the latest status each frame
+            var service = _router.Patch.Service;
+            _subscription = service.Subscribe(s => _pending = s);
+            if (service.Status.Kind == PatchServiceKind.Idle) _ = service.StartAsync();
+            Render(_pending ?? service.Status);
+            _pending = null;
+
             stage.style.opacity = 0f;
             UomdScreenKit.Fade(stage, 1f, 1300, 0, calm);
             return UomdAwaitables.Completed();
+        }
+
+        private void Render(PatchServiceStatus s)
+        {
+            if (_restarting || !_live) return;
+            if (s.Kind == PatchServiceKind.Ready)
+            {
+                if (_shown == Shown.Ready) return;
+                _shown = Shown.Ready;
+                var outcome = s.Outcome;
+                bool downloaded = outcome != null && (outcome.Status == PatchStatus.Staged || outcome.Status == PatchStatus.Applied);
+                _head.text = ReadyTitle;
+                _note.text = _readyBody = downloaded ? ReadyBody : UpToDateBody;
+                SetBar(1f, true);
+                string release = outcome != null && (outcome.Status == PatchStatus.Staged || outcome.Status == PatchStatus.Applied) ? FormatReleaseTitle(outcome.ReleaseId) : "";
+                _figures.text = release.Length > 0 ? $"100 %   ·   READY   ·   {release}" : "100 %   ·   READY";
+                // QA captures hold on the ready page; a player is restarted automatically
+                if (UomdCaptureRunner.Requested(out _)) ShowAction(Restart, true);
+                else
+                {
+                    ShowAction(Restarting, false);
+                    _ = RestartAsync();
+                }
+                return;
+            }
+            if (s.Kind == PatchServiceKind.Failed)
+            {
+                _shown = Shown.Failed;
+                _head.text = WaitingTitle;
+                _note.text = s.UpdateRequired ? UpdateRequired
+                    : s.RequiresNetworkApproval ? "Downloads are paused on this data-saving connection."
+                    : $"{FailedBody}\n{Truncate(s.Detail, 180)}";
+                SetBar(0f, false);
+                _figures.text = "";
+                if (s.UpdateRequired) _action.style.display = DisplayStyle.None;
+                else ShowAction(s.RequiresNetworkApproval ? "USE MOBILE DATA" : "TRY AGAIN", true);
+                return;
+            }
+            _shown = Shown.Waiting;
+            _head.text = WaitingTitle;
+            _note.text = WaitingBody;
+            ShowAction("PAUSE DOWNLOAD", true);
+            float? fill = s.BarFill;
+            SetBar(fill ?? 0f, true);
+            var p = s.Progress;
+            _figures.text = p != null && p.BytesTotal > 0 && p.Phase == PatchPhase.Downloading
+                ? $"{Mathf.FloorToInt((fill ?? 0f) * 100f)} %   ·   {FormatBytes(p.BytesDone)} / {FormatBytes(p.BytesTotal)}"
+                : PhaseText(p?.Phase);
+        }
+
+        private static string PhaseText(string phase) => phase switch
+        {
+            PatchPhase.Downloading => "Downloading game patch…",
+            PatchPhase.Verifying => "Verifying signed manifest…",
+            PatchPhase.Activating => "Applying update…",
+            _ => "Checking for patches…"
+        };
+
+        /// <summary>apps/game/src/ui/format.ts formatBytes.</summary>
+        public static string FormatBytes(long n) => n < 1024 * 1024
+            ? $"{Math.Max(0, (long)Math.Round(n / 1024.0))} KB"
+            : (n / (1024.0 * 1024.0)).ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) + " MB";
+
+        /// <summary>"rel_0003_part1_campaign" → "Part I Campaign (rel_0003)"; other ids are shown as they are.</summary>
+        public static string FormatReleaseTitle(string releaseId)
+        {
+            if (string.IsNullOrEmpty(releaseId)) return "";
+            var m = System.Text.RegularExpressions.Regex.Match(releaseId.Trim(), @"^rel_(\d+)_(.+)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            if (!m.Success) return releaseId;
+            var words = m.Groups[2].Value.Split('_').Select(w =>
+            {
+                var part = System.Text.RegularExpressions.Regex.Match(w, @"^part(\d+)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                if (part.Success) return part.Groups[1].Value switch { "1" => "Part I", "2" => "Part II", "3" => "Part III", var n => "Part " + n };
+                return w.Length == 0 ? w : char.ToUpperInvariant(w[0]) + w.Substring(1);
+            });
+            return $"{string.Join(" ", words)} (rel_{m.Groups[1].Value})";
+        }
+
+        private static string Truncate(string text, int max) => string.IsNullOrEmpty(text) || text.Length <= max ? text ?? "" : text.Substring(0, max);
+
+        private void SetBar(float fill, bool visible)
+        {
+            _track.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+            _fill.style.width = new Length(Mathf.Clamp01(fill) * 100f, LengthUnit.Percent);
+        }
+
+        private void ShowAction(string label, bool enabled)
+        {
+            _action.style.display = DisplayStyle.Flex;
+            if (_action.Q<Label>() is Label text) text.text = label;
+            _action.SetEnabled(enabled);
         }
 
         /// <summary>R09: say truthfully where the entry progress is saved (null = saving, true = confirmed, false = failed or device only).</summary>
@@ -1973,11 +2110,30 @@ namespace Uomd.Scenes
             });
         }
 
+        private async Awaitable OnActionAsync()
+        {
+            if (_restarting) return;
+            var service = _router.Patch.Service;
+            switch (_shown)
+            {
+                case Shown.Waiting:
+                    service.Cancel();
+                    break;
+                case Shown.Failed:
+                    _ = service.RetryAsync(service.Status.RequiresNetworkApproval ? true : (bool?)null);
+                    break;
+                case Shown.Ready:
+                    await RestartAsync();
+                    break;
+            }
+        }
+
         private async Awaitable RestartAsync()
         {
             if (_restarting) return;
             _restarting = true;
             if (_action.Q<Label>() is Label label) label.text = _router.Api.IsSignedIn ? "SAVING TO ACCOUNT…" : Restarting;
+            _action.SetEnabled(false);
             if (_router.Api.IsSignedIn)
             {
                 try
@@ -1989,16 +2145,36 @@ namespace Uomd.Scenes
                 {
                     Debug.LogWarning($"[Finish] entry checkpoint not confirmed: {e.Message}");
                     RenderSave(false);
-                    if (_action.Q<Label>() is Label retry) retry.text = "RETRY SAVE & RESTART";
+                    _note.text = $"{_readyBody}\n\nCould not confirm your entry checkpoint on the server.";
+                    ShowAction("RETRY SAVE & RESTART", true);
                     _restarting = false;
                     return;
                 }
             }
-            // a fresh start of the client: back through the title, which now treats the player as returning
+            _router.Patch.EntryCompleted = true;
+            _note.text = _readyBody;
+            UomdScreenKit.Fade(_stage, 0f, RestartFadeMs, 0, _router.Session.ReducedMotion);
+            await Awaitable.WaitForSecondsAsync(_router.Session.ReducedMotion ? 0.3f : RestartFadeMs / 1000f);
+            if (!_live) return;
+            // the restart: the staged release switches on without any network, then back through the title as a returning player
+            await _router.Patch.ActivateStagedAsync();
             await _router.NavigateToAsync(UomdScreenId.Studio);
         }
 
-        public void OnTick(float deltaTime) { }
-        public void OnExit() { }
+        public void OnTick(float deltaTime)
+        {
+            var next = _pending;
+            if (next == null) return;
+            _pending = null;
+            Render(next);
+        }
+
+        public void OnExit()
+        {
+            _live = false;
+            _subscription?.Dispose();
+            _subscription = null;
+            _pending = null;
+        }
     }
 }

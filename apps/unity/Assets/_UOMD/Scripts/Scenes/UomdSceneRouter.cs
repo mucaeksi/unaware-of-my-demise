@@ -33,6 +33,7 @@ namespace Uomd.Scenes
         private VisualElement _screenHost;
         private VisualElement _overlayHost;
         private IUomdScreenController _activeController;
+        private bool _mediaStale;
 
         public GameSessionState Session { get; private set; }
         public PatchManager Patch { get; private set; }
@@ -52,6 +53,8 @@ namespace Uomd.Scenes
 
             Session = new GameSessionState();
             Patch = new PatchManager();
+            // capture runs keep downloads in memory so QA never inherits or leaves device patch state
+            await Patch.InitializeAsync(apiBaseUrl, memoryOnly: UomdCaptureRunner.Requested(out _));
             Api = new UomdApiClient(apiBaseUrl);
             PlatformBridge = UomdPlatformBridgeFactory.Create();
             Audio = gameObject.AddComponent<AudioDirector>();
@@ -59,6 +62,8 @@ namespace Uomd.Scenes
             EntryFlow = new UomdEntryFlow(this);
             await Media.LoadCatalogAsync();
             Audio.Media = Media;
+            // a release switch (restart after the first-install download, rollback, kill switch) reloads media at the next screen
+            Patch.ContentChanged += () => _mediaStale = true;
 
             var vfxGo = new GameObject("UomdBattleVfxStage");
             vfxGo.transform.SetParent(transform, false);
@@ -100,6 +105,11 @@ namespace Uomd.Scenes
             _activeController?.OnExit();
             _screenHost.Clear();
             Media?.ReleaseTextures(); // the next screen loads what it shows
+            if (_mediaStale && Media != null)
+            {
+                _mediaStale = false;
+                await Media.ReloadAsync();
+            }
 
             _activeController = nextController;
             bool showHubHeader = targetScreen >= UomdScreenId.Home && targetScreen <= UomdScreenId.Operations;

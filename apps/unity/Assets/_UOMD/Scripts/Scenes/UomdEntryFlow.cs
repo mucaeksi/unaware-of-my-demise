@@ -40,6 +40,7 @@ namespace Uomd.Scenes
                 await StartStageAsync(done + 1);
                 return;
             }
+            _router.Patch.EntryCompleted = true;
             await _router.NavigateToAsync(UomdScreenId.Home);
         }
 

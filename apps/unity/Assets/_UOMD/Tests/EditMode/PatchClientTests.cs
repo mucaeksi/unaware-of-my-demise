@@ -885,5 +885,56 @@ namespace Uomd.Tests.EditMode
             }
             finally { Directory.Delete(root, true); }
         });
+    
+        // ------------------------------------------------------------------------------ UomdContentOverlay
+
+        [Test]
+        public void OverlayFollowsDependentSnapshotAndStaleBaseRules() => Run(async () =>
+        {
+            var files = BaseContent.Value.Files;
+            var dependent = Setup("r2");
+            await dependent.Client.CheckAndApplyAsync();
+            var st = await dependent.Client.StateAsync();
+            Assert.IsTrue(UomdContentOverlay.Resolve(st, files, ChapterIndex)!.Value.FromPatch);
+            Assert.IsFalse(UomdContentOverlay.Resolve(st, files, BaseAtlas)!.Value.FromPatch, "a base-identical file is served from the base");
+            Assert.IsFalse(UomdContentOverlay.Resolve(st, files, BaseAudio)!.Value.FromPatch, "a dependent overlay inherits the base");
+            Assert.IsNull(UomdContentOverlay.Resolve(st, files, "art/none.webp"));
+
+            var snapshot = Setup("r2_snapshot");
+            await snapshot.Client.CheckAndApplyAsync();
+            st = await snapshot.Client.StateAsync();
+            Assert.IsFalse(UomdContentOverlay.BuiltOnOlderBase(st.Active!.Manifest, files));
+            Assert.IsTrue(UomdContentOverlay.Resolve(st, files, ChapterIndex)!.Value.FromPatch);
+            Assert.IsFalse(UomdContentOverlay.Resolve(st, files, BaseAudio)!.Value.FromPatch);
+
+            var stale = Setup("r2_self_contained");
+            await stale.Client.CheckAndApplyAsync();
+            st = await stale.Client.StateAsync();
+            Assert.IsTrue(UomdContentOverlay.BuiltOnOlderBase(st.Active!.Manifest, files), "it omits paths the base declares");
+            Assert.IsFalse(UomdContentOverlay.Resolve(st, files, ChapterIndex)!.Value.FromPatch, "the newer embedded base wins on its own paths");
+            Assert.IsTrue(UomdContentOverlay.Resolve(st, files, "units/units_ch1.json")!.Value.FromPatch);
+            Assert.IsNotNull(UomdContentOverlay.Resolve(PatchState.Empty, files, BaseAudio));
+        });
+
+        [Test]
+        public void DeviceValidationRejectsBrokenJsonAndMissingIndexes()
+        {
+            var manifest = ContentManifest.Parse(Manifest("r2_self_contained"));
+            var good = new Dictionary<string, byte[]>
+            {
+                ["chapters/chapter_index.json"] = Encoding.UTF8.GetBytes("{\"chapters\":[]}"),
+                ["units/unit_pack.json"] = Encoding.UTF8.GetBytes("{}"),
+                ["art/art_manifest.json"] = Encoding.UTF8.GetBytes("{}"),
+                ["art/bg.webp"] = new byte[0]
+            };
+            Assert.DoesNotThrow(() => UomdContentOverlay.ValidateRelease(good, manifest, BaseContent.Value));
+            var broken = new Dictionary<string, byte[]>(good) { ["units/unit_pack.json"] = Encoding.UTF8.GetBytes("{\"a\":") };
+            Assert.Throws<FormatException>(() => UomdContentOverlay.ValidateRelease(broken, manifest, BaseContent.Value));
+            var badUtf8 = new Dictionary<string, byte[]>(good) { ["units/unit_pack.json"] = new byte[] { 0x7b, 0xff, 0x7d } };
+            Assert.Throws<FormatException>(() => UomdContentOverlay.ValidateRelease(badUtf8, manifest, BaseContent.Value));
+            var missing = new Dictionary<string, byte[]>(good);
+            missing.Remove("art/art_manifest.json");
+            Assert.Throws<FormatException>(() => UomdContentOverlay.ValidateRelease(missing, manifest, BaseContent.Value));
+        }
     }
 }

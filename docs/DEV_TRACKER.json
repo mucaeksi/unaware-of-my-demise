@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
   "sourceCommit": "ef69c54",
-  "reviewedAt": "2026-10-24",
+  "reviewedAt": "2026-10-25",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Entry flow and battle screen run on real art in the debug AAB (f25c1b4). Next: battle polish (turn order, VFX presets, intents, server submission), release signing (B-SIGNING), AAB size (drop WebP duplicates), remote patch download (U-2), hub screens.",
+    "nextProposed": "Remote content patching runs in the Unity client (U-2): signed download, staging, restart activation, rollback. Next: publish rel_0001 + a patch on staging (Phase C) to exercise the live path on device, U-2b device-side content validation, battle polish (VFX presets, server submission, MENU/speed), release signing (B-SIGNING), hub screens.",
     "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "U-2: remote content patching in the Unity client (2026-10-25, Claude Opus 5.5)",
+      "detail": "UomdPatchClient is a line-by-line C# port of packages/patch/src/manager.ts (strict manifest schema, ES256 admission, generation high-water marks, kill switch, staging, rollback, reservations, byte-range resume, GC). FileContentStorage (persistentDataPath, atomic state.json, fail-closed on an unreadable record), UomdApiRemote (UnityWebRequest, stall detection, Range resume) and UomdStreamingBase (StreamingAssets release.json with integrity checks). PatchManager resolves content through the active release with the ContentService overlay rules and rolls back on a damaged object; Finish page ports FinishScene.ts (real progress, staged release, restart without network); boot of a returning player checks for updates first. tools/export_unity_patch_vectors.ts signs 20 scenarios; 55 new EditMode tests mirror manager.test.ts, lifecycle.test.ts and PatchService.test.ts (headless 80/80, Unity 81/81)."
+    },
     {
       "title": "U-4a: battle screen on the real engine with chibi art (2026-10-25, Claude Opus 5.5)",
       "detail": "Ported BattleScene/UnitView/formation: UomdBattleFormation (tests from formation.test.ts), visual 2-front/3-rear distribution, UnitArt atlas parsing, BattleUnitView frame animation/plates/marker, skill cards with target picking, event playback with BattleScene timings, result screen with stars and logHash. Capture QA plays T-1 on AUTO to victory (34.5 s, 3 stars). Debug AAB rebuilt from f25c1b4 (145.8 MB). AAB size cut to 91.3 MB (4f6e4d4): JPG q92 for opaque art, PNG only with transparency, WebP sources not shipped (decodable.json). EditMode inside Unity 26/26."
@@ -50,12 +54,12 @@
   ],
   "next": [
     {
-      "title": "U-1: StoryRunner and patch admission tests in C#",
-      "detail": "Port packages/story runner tests and packages/patch admission vectors to the headless harness."
+      "title": "U-1: StoryRunner tests in C#",
+      "detail": "Port packages/story runner tests to the headless harness (patch admission vectors are done, see U-2)."
     },
     {
-      "title": "U-2: Remote signed patch download in PatchManager",
-      "detail": "Manifest signature admission exists; content-addressed download, staging, activation at restart and rollback are still missing."
+      "title": "U-2b: device-side content validation and live patch QA",
+      "detail": "Port content-schema validateContentSet and the imageSize media limits to C# for PatchEnv.Validate/ValidateObject (the publisher already validates before signing). Exercise the live download on a device once a release is published on staging (Phase C)."
     },
     {
       "title": "U-3/U-4: battle screen visuals, release signing, AAB size",

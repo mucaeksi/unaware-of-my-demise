@@ -37,10 +37,23 @@ namespace Uomd.Core
 
         /// <summary>
         /// The file to load for a content image: the JPG/PNG sibling that tools/export_unity_bundle.ts listed in decodable.json
-        /// for base WebP files (which are not shipped), else the path itself (a patched WebP decodes on Android).
+        /// for base WebP files (which are not shipped), else the path itself. A path a patch serves is never mapped: the patched
+        /// object is the newer art (a WebP decodes on Android).
         /// </summary>
         public string Decodable(string relativePath) =>
-            relativePath != null && _decodable.TryGetValue(relativePath, out string sibling) ? sibling : relativePath;
+            relativePath != null && !_patch.IsPatched(relativePath) && _decodable.TryGetValue(relativePath, out string sibling) ? sibling : relativePath;
+
+        /// <summary>After the active content release changed: drop every cached texture and clip and re-read the catalogs.</summary>
+        public async Awaitable ReloadAsync()
+        {
+            ReleaseTextures();
+            foreach (var clip in _clips.Values)
+            {
+                if (clip != null) UnityEngine.Object.Destroy(clip);
+            }
+            _clips.Clear();
+            await LoadCatalogAsync();
+        }
 
         /// <summary>The texture for a content path (".webp" resolves to its PNG sibling), or null when it cannot be loaded.</summary>
         public async Awaitable<Texture2D> TextureAsync(string relativePath)
