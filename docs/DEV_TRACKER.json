@@ -7,10 +7,14 @@
   "currentAssignment": {
     "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
     "status": "IN_PROGRESS",
-    "nextProposed": "First debug AAB built in the cloud (68da213) and the entry flow ported with real art and sound. Next: battle screen on the real engine with chibi atlases and VFX, release signing (needs B-SIGNING), AAB size (drop WebP duplicates), remote patch download (U-2), then the hub screens.",
+    "nextProposed": "Entry flow and battle screen run on real art in the debug AAB (f25c1b4). Next: battle polish (turn order, VFX presets, intents, server submission), release signing (B-SIGNING), AAB size (drop WebP duplicates), remote patch download (U-2), hub screens.",
     "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
   },
   "now": [
+    {
+      "title": "U-4a: battle screen on the real engine with chibi art (2026-10-25, Claude Opus 5.5)",
+      "detail": "Ported BattleScene/UnitView/formation: UomdBattleFormation (tests from formation.test.ts), visual 2-front/3-rear distribution, UnitArt atlas parsing, BattleUnitView frame animation/plates/marker, skill cards with target picking, event playback with BattleScene timings, result screen with stars and logHash. Capture QA plays T-1 on AUTO to victory (34.5 s, 3 stars). Debug AAB rebuilt from f25c1b4 (145.8 MB)."
+    },
     {
       "title": "U-3b: first Android AAB + entry flow with art and sound (2026-10-24, Claude Opus 5.5)",
       "detail": "unity_ci.sh build produced a debug-signed AAB (145.7 MB, IL2CPP ARM64, API 24-35, commit 68da213), recorded in docs/evidence/unity-android-build.json and shown on the Control Center Development page. Build blockers fixed: Maven Central 429/fake-404 rate limit on the shared egress IP (maven_retry_proxy.py + Gradle init script), Gradle daemon without JAVA_TOOL_OPTIONS (trust store/proxy mirrored into gradle.properties, stale daemons stopped), missing values/ic_launcher_background.xml. Entry flow ported from the TypeScript client: UomdMediaCatalog/Loader, AudioDirector plays music/SFX/voice (was silent), Studio/Title/Prologue/Story/Finish with canonical strings and art, UomdCutscene rules tested with the TS cases, UomdEntryFlow (prologue -> T-1..T-3 pre/battle/post -> Finish). Invented Unity-port texts removed. Headless EditMode 19/19, capture 24/24."
@@ -55,7 +59,7 @@
     },
     {
       "title": "U-3/U-4: battle screen visuals, release signing, AAB size",
-      "detail": "Battle screen still shows text rows: port BattleScene (chibi atlases, layout, HP/Focus bars, skills, VFX). Release-sign the AAB once the upload key is provided (B-SIGNING). Drop the WebP duplicates from StreamingAssets (PNG siblings are what Unity loads). Story reader LOG."
+      "detail": "Battle polish: turn-order bar, BattleVfxStage presets on skills, enemy intents and status badges, POST /api/v1/battles submission, MENU/speed. Release-sign the AAB once the upload key is provided (B-SIGNING). Drop the WebP duplicates from StreamingAssets. Story reader LOG."
     },
     {
       "title": "Control Center: replace the retired browser-game previews",
