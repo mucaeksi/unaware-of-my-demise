@@ -1,0 +1,37 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Title.uss" />
+  <ui:VisualElement name="rebuildTitle" class="rebuild-title">
+    <ui:VisualElement name="titleArt" class="title-art" picking-mode="Ignore" />
+    <ui:VisualElement class="title-veil" picking-mode="Ignore" />
+    <ui:VisualElement class="title-header">
+      <ui:Label text="SOVTAYM STUDIOS" class="studio-name" picking-mode="Ignore" />
+      <ui:Button name="settingsButton" text="SETTINGS" class="quiet-button" />
+    </ui:VisualElement>
+    <ui:VisualElement class="title-body">
+      <ui:VisualElement class="title-copy">
+        <ui:Label text="PART I  ·  UNAWARE, I FADE" class="title-eyebrow" picking-mode="Ignore" />
+        <ui:Label text="UNAWARE OF" class="game-title" picking-mode="Ignore" />
+        <ui:Label text="MY DEMISE" class="game-title game-title-last" picking-mode="Ignore" />
+        <ui:VisualElement class="title-rule" picking-mode="Ignore" />
+        <ui:Button name="startButton" text="TAP TO START" class="start-button" />
+        <ui:Label name="statusText" text="" class="title-status" />
+        <ui:Button name="replayButton" text="REPLAY INTRO" class="quiet-button replay-button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Label name="versionText" text="" class="version-text" picking-mode="Ignore" />
+    <ui:VisualElement name="settingsDialog" class="settings-backdrop is-hidden">
+      <ui:VisualElement class="settings-card">
+        <ui:Label text="SETTINGS" class="settings-heading" />
+        <ui:Slider name="musicVolume" label="MUSIC VOLUME" low-value="0" high-value="100" show-input-field="true" />
+        <ui:Slider name="effectsVolume" label="SOUND EFFECTS" low-value="0" high-value="100" show-input-field="true" />
+        <ui:Slider name="voiceVolume" label="VOICE ACTING" low-value="0" high-value="100" show-input-field="true" />
+        <ui:Toggle name="reducedMotion" label="REDUCED MOTION" />
+        <ui:Toggle name="reduceFlash" label="REDUCE FLASH" />
+        <ui:Toggle name="muteAudio" label="MUTE AUDIO" />
+        <ui:Button name="privacyButton" text="PRIVACY OPTIONS" class="quiet-button privacy-button" />
+        <ui:Label name="privacyStatus" text="" class="privacy-status" />
+        <ui:Button name="closeSettingsButton" text="CLOSE" class="start-button close-button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

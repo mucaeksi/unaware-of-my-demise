@@ -1,5 +1,26 @@
 # Codex entry point
 
+## Current owner mandate — D-35, 2026-10-26
+
+GPT Sol/Codex owns the complete project and rebuilds the Unity player experience from the beginning, carrying the existing
+systems over incrementally. Read `docs/handoff/GPT_SOL_UNITY_REBUILD.md` and `docs/handoff/SOL_REBUILD_PLAN.md` after the root
+README. The current workspace is `E:\Unity\unaware-of-my-demise`; work on `main`, commit verified local changes, and leave
+GitHub pushes to the owner. This section supersedes the D-31/D-33 agent assignments, F: path and Antigravity startup
+requirements retained below as historical host records.
+
+Generate all rebuilt visual assets with Codex's built-in OpenAI image tool. Existing Gemini visuals are references only,
+not finished assets for the rebuilt client. Keep identity locks, exact reference/source hashes, prompts, native sizes and
+provider provenance; use the existing ingest/QC pipeline. Keep music and reviewed Japanese voice production on the
+budget-guarded Gemini tools. D-34's UI v2 direction is stopped; its mockups are reference material. Preserve canon, server
+combat parity, the single-currency economy, signed data-only patches and existing release/permission/budget gates.
+
+For Unity, verify the actual live `unityMCP` editor state before operations, then compilation/console, EditMode tests and
+Game-view captures after changes. Use the current tool schemas and API reflection. Keep `.claude/`, `CLAUDE.md`, `.mcp.json`
+and the pinned skill sources intact. Load relevant `.agents/skills/` adapters and their canonical sources; validate with
+`python tools/sync_codex_skills.py --check`. No skill grants new credentials, hooks, paid spending or external permissions.
+
+## Historical host instructions (superseded ownership and paths)
+
 Read the root [README.md](README.md) completely before substantial work. It remains the sole engineering master prompt; `narrative/` remains the fiction/canon source. This file adapts the host, not the game specification.
 
 **Decision D-33 (2026-10-25, staged):** after Claude Opus 5.5's first local Unity pass, Gemini Argon (Antigravity) takes over day-to-day operations — read [docs/handoff/ARGON_UNITY_HANDOFF.md](docs/handoff/ARGON_UNITY_HANDOFF.md); it states when the handoff is active. Until then:

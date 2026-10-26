@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "asset_id": "sol_title_key_art_01",
+  "class": "ui_image",
+  "source": { "kind": "generated", "pick": "d80a4e209838", "provenance": "content/generated/openai/sol_title_key_art_01/run.provenance.json" },
+  "layout": { "mode": "single" },
+  "export": {
+    "fit": "exact", "width": 1672, "height": 941,
+    "webp": { "mode": "lossy", "quality": 92, "alpha_quality": 100, "effort": 6 },
+    "max_bytes": 600000
+  },
+  "manifest": { "ui": "sol_title_bg" },
+  "qc": { "profile": "plate" }
+}

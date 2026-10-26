@@ -19,6 +19,7 @@ namespace Uomd.Core
             string layout = PlayerPrefs.GetString(Prefix + "battleLayout", "afk_faithful");
             session.BattleHudLayout = Array.IndexOf(BattleLayouts, layout) >= 0 ? layout : "afk_faithful";
             if (audio == null) return;
+            audio.Muted = PlayerPrefs.GetInt(Prefix + "muted", audio.Muted ? 1 : 0) == 1;
             audio.BgmVolume = PlayerPrefs.GetFloat(Prefix + "musicVolume", audio.BgmVolume);
             audio.SfxVolume = PlayerPrefs.GetFloat(Prefix + "sfxVolume", audio.SfxVolume);
             audio.VoiceVolume = PlayerPrefs.GetFloat(Prefix + "voiceVolume", audio.VoiceVolume);
@@ -31,6 +32,7 @@ namespace Uomd.Core
             PlayerPrefs.SetString(Prefix + "battleLayout", session.BattleHudLayout);
             if (audio != null)
             {
+                PlayerPrefs.SetInt(Prefix + "muted", audio.Muted ? 1 : 0);
                 PlayerPrefs.SetFloat(Prefix + "musicVolume", audio.BgmVolume);
                 PlayerPrefs.SetFloat(Prefix + "sfxVolume", audio.SfxVolume);
                 PlayerPrefs.SetFloat(Prefix + "voiceVolume", audio.VoiceVolume);

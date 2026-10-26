@@ -1,3 +1,16 @@
+# Sol Unity rebuild — current execution queue (D-35)
+
+Active 2026-10-26. The root README is authoritative. Sol/Codex owns the project; local workspace is `E:/Unity/unaware-of-my-demise`, verified local commits on `main`, owner pushes. [Execution plan](handoff/SOL_REBUILD_PLAN.md), [visual obligations](media/SOL_VISUAL_REBUILD.json).
+
+1. RB-00/RB-01: fresh Unity baseline, original title image and editable title/settings with actual entry behavior; record current tests/captures.
+2. Complete rebuilt startup/studio and first-install narrative/tutorial flow using newly generated visuals.
+3. Connect the rebuilt battle presentation to the unchanged deterministic engine; then recover operations, server campaign sessions and native first-binary foundations.
+4. Physical Android/signed-AAB acceptance precedes broad post-launch chapter/roster production.
+
+D-34 is stopped. Old Gemini images and prototypes are references. The sections below are dated historical records, not the current owner/provider assignments or a fresh verification certificate.
+
+---
+
 # Claude Opus 5.5 Exclusive Ownership & Unity Migration Execution Plan (D-31)
 
 Updated **2026-10-25**. [README](../README.md) is the complete execution brief and master prompt; [CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) is the authoritative Unity 6 LTS migration and Gemini API asset blueprint under **Decision D-31**; [DEV_TRACKER](DEV_TRACKER.json) holds package/evidence status.

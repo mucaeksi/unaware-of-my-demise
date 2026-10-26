@@ -4,6 +4,7 @@ D-01–D-20 retain historical decisions/observations. Current owner instructions
 
 | ID | Decision | Why |
 |---|---|---|
+| D-35 | 2026-10-26 owner: GPT Sol/Codex takes over end-to-end project management and rebuilds the game in Unity, bringing existing systems over piece by piece. Every visual asset for the rebuild is newly generated with the built-in OpenAI image engine; Gemini visuals are references only. Music and reviewed Japanese voice continue through the existing Gemini tools. D-34's design direction is stopped; mockups are references. Work in `E:/Unity/unaware-of-my-demise` on `main`, commit locally, and leave pushes to the owner. | Active from this owner instruction; supersedes D-31/D-33 ownership/provider/path assignments and D-32 agent pushes. [Handoff](handoff/GPT_SOL_UNITY_REBUILD.md), [execution plan](handoff/SOL_REBUILD_PLAN.md), [visual inventory](media/SOL_VISUAL_REBUILD.json). Preserve canon, battle replay parity, server economic authority, signed data patches, existing budgets and public-release gates. |
 | D-01 | Legacy Neon/Hyperdrive Workers and R2 buckets are left untouched; new Workers are named `uomd-game-*` / `uomd-admin-*` | Production data and owner approval rules; README forbids a second DB but deletion is destructive |
 | D-02 | Content signatures are ES256 (P-256) | Ed25519 is missing in older Android WebViews |
 | D-03 | Admin auth = Access JWT verified in the Worker + role table, fail closed; a dev-only JWKS override exists for local tests | README: no auth bypass; tests use explicit test identities |

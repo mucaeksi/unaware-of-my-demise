@@ -24,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "06b68b09f734db3723869569429782115f0bf7340a7074c626ac440458c64b20",
-      "bytes": 22423,
+      "sha256": "6da575b6f71ff2b137e8b1617b3dbed5e90206c5c5c4e0bbf1d3905b3d3e5d98",
+      "bytes": 22471,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -334,6 +334,13 @@
       "path": "art/ui_logo.webp",
       "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
       "bytes": 169904,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_sol_title_bg.webp",
+      "sha256": "8b0a7ef9f8a82f2e43e3c2b99844edd7da57f861b4be20a581eabcbea41e06e0",
+      "bytes": 355570,
       "media_type": "image/webp",
       "kind": "other_data"
     },

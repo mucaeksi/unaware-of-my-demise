@@ -1,0 +1,5125 @@
+{
+  "schema": 1,
+  "decision": "D-35",
+  "baseline_commit": "f341b018",
+  "created_on": "2026-10-26",
+  "policy": "Historical visual sources are references only for the rebuilt client. Existing legacy runtime consumers remain migration work; no complete replacement or store acceptance is claimed.",
+  "summary": {
+    "total_obligations": 434,
+    "approved_art_references": 258,
+    "additional_runtime_store_images": 176,
+    "integration_candidates": 1,
+    "final_accepted_replacements": 0
+  },
+  "acceptance": [
+    "new OpenAI generation with source, prompt and exact reference hashes",
+    "native dimensions recorded without upscaling claims",
+    "ingest and alpha/slicing/size checks as applicable",
+    "Unity visual/interaction/safe-area/device checks",
+    "final visual acceptance and replacement of every consumer"
+  ],
+  "assets": [
+    {
+      "id": "ash_wolf_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/ash_wolf_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_ash_wolf.webp",
+          "sha256": "ab235fc20a52188a8ac60dbc3adfbeaac5ac0a3e441c3d83df7851b9b19b4d60",
+          "width": 1732,
+          "height": 1995
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "ashen_lord_wraith_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/ashen_lord_wraith_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_ashen_lord_wraith_composed.webp",
+          "sha256": "789c29e7553a6244663e69e0456cbf78e669fb5149919e47926bb88f34e674c7",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "ashen_lord_wraith_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/ashen_lord_wraith_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_ashen_lord_wraith_defiant.webp",
+          "sha256": "3020f586072ec9b3b2a676813f60e9fba7972126ddfa3a0a3364397b2370c094",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "ashen_lord_wraith_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/ashen_lord_wraith_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_ashen_lord_wraith_focused.webp",
+          "sha256": "909adf5d13a5f1997c8c301556023254e9f82fbd7339aea51d7f051fcc97cabd",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "ashen_lord_wraith_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/ashen_lord_wraith_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_ashen_lord_wraith_warm.webp",
+          "sha256": "3682174e79458ecb4874972b5846d766b8ebc262820f52b59b7095086bebf465",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_hall_of_ancestors",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_hall_of_ancestors.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_hall_of_ancestors.webp",
+          "sha256": "5a981d8c5065f0f4a9beb1e241cb999cb31763784e81c5d7844bfacd6d4f1826",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_hall_of_armaments_weapons",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_hall_of_armaments_weapons.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_hall_of_armaments_weapons.webp",
+          "sha256": "4d711d9f16e984355a04ed83f8bd445cbbcb3716a42acedecfbd32752e7113c4",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_01_sister",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_01_sister.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_01_sister.webp",
+          "sha256": "24ee8cb074802876b9e1d3d60305cfd9b169c6398aa60cc639bd1b3a4c91b0ba",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_01_weapon",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_01_weapon.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_01_weapon.webp",
+          "sha256": "086a983e493d8a77a8ec83593ed83cd030d425f1d22b752fd710632bf52e6139",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_02_sable",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_02_sable.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_02_sable.webp",
+          "sha256": "451d8ac3ff63bee4f9aabf25cb7ff94610d9cbd5cea89b1d6c8c14ab8f3fd2a8",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_02_weapon",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_02_weapon.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_02_weapon.webp",
+          "sha256": "d583fddfe496f3fa4308807be3004af963ad8d17068b7afdb9483ff41dc5f11d",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_03_nara",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_03_nara.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_03_nara.webp",
+          "sha256": "32be796830c45dc56e72e21ee47cc21bf93f3aa4a30c87623a1aec4697f3dbae",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_03_weapon",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_03_weapon.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_03_weapon.webp",
+          "sha256": "7338386821e43f7611de2ef81d5040e6a1e80978320971b81aa0b116255b473f",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_04_mirel",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_04_mirel.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_04_mirel.webp",
+          "sha256": "b8992d700d257e4de65b7d6e83d7820b1da3520b856da2a4fb2f1d8433b19533",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_04_weapon",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_04_weapon.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_04_weapon.webp",
+          "sha256": "d754fbb5788ccbc374db5d27ffe908976231624d0dfc8487c0db20ae0f0857d7",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_05_vespera",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_05_vespera.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_05_vespera.webp",
+          "sha256": "e8016cbc9cad56abd25aefafc7dec10c2f96908f744bd151b9088dcfd8f821d2",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_05_weapon",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_05_weapon.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_05_weapon.webp",
+          "sha256": "c6445d608529017943c40e67ad4a8ab13548b89a681afa36c8c1629f40ce7ca2",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_06_garrick",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_06_garrick.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_06_garrick.webp",
+          "sha256": "06b3d0946b7db2cabe1c45f290832bb898071c163ce0401ce00e83767c33b372",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_06_weapon",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_06_weapon.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_06_weapon.webp",
+          "sha256": "fe2192079bd585478a5cf0b71a6b29d9967c9d8fe3398e88faf4c480084da977",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_07_corbin",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_07_corbin.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_07_corbin.webp",
+          "sha256": "65451d1e890ebc8e0d3a114187d9ae52044eae86a16faba77015de7ca0e372b6",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "banner_oath_07_weapon",
+      "class": "banner",
+      "reference_entry": "content/approved_art/entries/banner_oath_07_weapon.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_banner_oath_07_weapon.webp",
+          "sha256": "69495b869b471b4d774f81a5a67f9b4ed10caee251ed3fac80ad740b12519efa",
+          "width": 1376,
+          "height": 768
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bellbound_dead_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/bellbound_dead_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_bellbound_dead.webp",
+          "sha256": "200076551e8200d7f82afab74461d564782f51c7b3ebcfb95c25ff08d16f0a3c",
+          "width": 1991,
+          "height": 977
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_altar_east_passage",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_altar_east_passage.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_altar_east_passage.webp",
+          "sha256": "e2215a2ac2c7cccee121405a2334d4dbd3530f38236fec9428664744aade3114",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_altar_field_infirmary",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_altar_field_infirmary.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_altar_field_infirmary.webp",
+          "sha256": "badf63f4b1e92240254f91d492837db1b66cfa32925f35a1bef27d678dd591ce",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_altar_first_eclipse",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_altar_first_eclipse.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_altar_first_eclipse.webp",
+          "sha256": "8e5e6f8e90f3b7f6e713f209ab22ca3eb01e91d23597b94d14aa60483968038a",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_altar_first_eclipse_outer_dais",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_altar_first_eclipse_outer_dais.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_altar_first_eclipse_outer_dais.webp",
+          "sha256": "b82aa07aa96fcf240e5fb45ea9bded8f67efd81931e5f02ddc22717a24021dff",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_altar_first_eclipse_reflection",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_altar_first_eclipse_reflection.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_altar_first_eclipse_reflection.webp",
+          "sha256": "a6a9277d15747ae7000ba73e5f7001197978ec7396d9d612b4e37bc8670e0181",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_altar_outer_stair",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_altar_outer_stair.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_altar_outer_stair.webp",
+          "sha256": "6ad7261f892468195597ffa6072334846927d2386f078c26c3dd6b29f5312aed",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_altar_round_archive",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_altar_round_archive.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_altar_round_archive.webp",
+          "sha256": "cf1af6b42811239ccd3493848724c20ba25acb492102b4e9bfa4e647a9ee3a8a",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_ashen_estate_conservatory",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_ashen_estate_conservatory.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_ashen_estate_conservatory.webp",
+          "sha256": "4db24a1dfdc9201986bedd88f9e416b63e923ad4af0b34ae0fd9823d5f7eb8f4",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_ashen_estate_gallery",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_ashen_estate_gallery.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_ashen_estate_gallery.webp",
+          "sha256": "d4ce1752e7ef1ee030eb132706866629d6a7c9ff075be04bf5a575fe2fe5861b",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_ashen_estate_ruins",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_ashen_estate_ruins.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_ashen_estate_ruins.webp",
+          "sha256": "5d6c79ba78b4a5bfe0bb907a170c8193ad4a4a7c99d91bd88eb8315f3ff492ba",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_ashen_estate_servants_wing",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_ashen_estate_servants_wing.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_ashen_estate_servants_wing.webp",
+          "sha256": "e27b6935ea1385cfaacd095c3d1cb0601ef52a0f230c7d1c3e284fe87e7e6066",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_bridge_far_bank",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_bridge_far_bank.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_bridge_far_bank.webp",
+          "sha256": "f589dd63d83114ecd200f77a02f9f5d6f7f8c0bafe50d7f5572ba03b3776fa03",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_bridge_forsaken",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_bridge_forsaken.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_bridge_forsaken.webp",
+          "sha256": "86fd4b99574aab5ce185fac6d8647215cfeb4ee027dc2278fa81d76a088813a6",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_bridge_gate",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_bridge_gate.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_bridge_gate.webp",
+          "sha256": "7c87d357732be224136941b1974b5b8590d97bda2e3182fe428679aa2ca99598",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_bridge_signal_tower",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_bridge_signal_tower.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_bridge_signal_tower.webp",
+          "sha256": "90bf8f3ca4b7cef940a282bf5919b4aa722956da6207e170f1cddb0c184380f1",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_cathedral_saint_luthos",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_cathedral_saint_luthos.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_cathedral_saint_luthos.webp",
+          "sha256": "9723863b3b0a3da42d76c08640ded9981f3ec36694005718e35f80b3f7e933b9",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_eastern_highland_road",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_eastern_highland_road.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_eastern_highland_road.webp",
+          "sha256": "75cc853a5fce2fd29cb71a95536df77146226d26ec058636f0220e13978339f8",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_eastern_ravine_road",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_eastern_ravine_road.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_eastern_ravine_road.webp",
+          "sha256": "a89b5e4b2ab80d627169c9a3ff44540bcfe6a7c7e6ec20a1cd1b2cff64ed3f86",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_eastern_village_square",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_eastern_village_square.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_eastern_village_square.webp",
+          "sha256": "de222e40e503f18cb3aeef2ff364a798d65caa63877d6b53cf762afd8e424ff7",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_estate_ashen_lord",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_estate_ashen_lord.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_estate_ashen_lord.webp",
+          "sha256": "ee2c905fe122b777b5b10ed202c8b7a857407c2a10f23d0493aa3f953a1e6aad",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_forest_edge_road",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_forest_edge_road.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_forest_edge_road.webp",
+          "sha256": "68a348c9d4cc1c89916acc1bedcf047b91d457d457b7306fc6990d8cf1018aaa",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_forest_whispering_ash_ordered",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_forest_whispering_ash_ordered.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_forest_whispering_ash.webp",
+          "sha256": "13a39b24d24c55408e562c24e7fbf1238a97d5eac81debc98d712933f4054449",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_forgotten_stone_crossing",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_forgotten_stone_crossing.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_forgotten_stone_crossing.webp",
+          "sha256": "dba9ff4acf7f9c64e8409a9d64fb0cfbedae91a15fb65e2f9e1bd5e56097adbe",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_highland_ridge",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_highland_ridge.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_highland_ridge.webp",
+          "sha256": "4b628195d42486150b30bd3ed3acd3a1cca52ea2e5375ffa054d24da989f57e6",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_highland_village",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_highland_village.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_highland_village.webp",
+          "sha256": "bcfd1a04b10ce2d95b997a39e5c111299911831a54c1fec87f6053ff85280ce7",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_kiln_town",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_kiln_town.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_kiln_town.webp",
+          "sha256": "e3379d3e9c9b3645fe3c18eb00df920cbc88550bdc9f24d171fa27f1d3fd58cd",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_lowland_refuge",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_lowland_refuge.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_lowland_refuge.webp",
+          "sha256": "687b3d25ccdc81db8168102da9b70f4fa16275d299374bceffd08aa1c76ef2d2",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_lowland_refuge_road",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_lowland_refuge_road.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_lowland_refuge_road.webp",
+          "sha256": "25d3ce9cadfe835e5175463c6469c14ced08772737a71438698fe8656ab3fd93",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_mountain_crater_rim",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_mountain_crater_rim.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_mountain_crater_rim.webp",
+          "sha256": "40929cf2ea6b8a8694b923afbbbf088778b0ae33797f43df10d09f0664bfd303",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_mountain_lower_pass",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_mountain_lower_pass.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_mountain_lower_pass.webp",
+          "sha256": "509eed45fc11f684b528a98fc0b01fd76e3f25ce28e7dcf695d34926f06acda8",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_oakhaven_forge",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_oakhaven_forge.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_oakhaven_forge.webp",
+          "sha256": "079df87318daffdd14b42cadee4a7c53b17b944a71f6a0ad307e43b48f0c5df7",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_oakhaven_inn",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_oakhaven_inn.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_oakhaven_inn.webp",
+          "sha256": "237a243b6781e337892540f74a1451efaaaceaa546e6d8267bc383b7e586b407",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_oakhaven_refuge",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_oakhaven_refuge.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_oakhaven_refuge.webp",
+          "sha256": "7d9b2b70f01ae0cb7cfef3ff6e5d178227d76cc7184442a0f58901667983fd2c",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_oakhaven_square",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_oakhaven_square.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_oakhaven_square.webp",
+          "sha256": "df11380d2115fb234b92a24b3f33954a7c2764af1cf136cc836853f6e9a1aa25",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_orchard_lowlands",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_orchard_lowlands.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_orchard_lowlands.webp",
+          "sha256": "e5ccffc37a4f7257d62c00fee04c70284c85fd869443a046a95a8c3bdb38a7de",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_river_city_gates",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_river_city_gates.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_river_city_gates.webp",
+          "sha256": "f65dc7920beec7995a58036cee8f3aecc7511a141cfb60cbc88e7f99a06c961a",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_salt_road_coast",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_salt_road_coast.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_salt_road_coast.webp",
+          "sha256": "01f7aa6ca87ab8e50b062c738db8c37f972f559b3aadead869c0935a487560a1",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_shelter_courtyard_dusk",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_shelter_courtyard_dusk.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_shelter_courtyard_dusk.webp",
+          "sha256": "4cf027e11d854dd69ab388032820db1ed80652ae6f419d7bb7395c669c519df6",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_undercity_antidote_archive",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_undercity_antidote_archive.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_undercity_antidote_archive.webp",
+          "sha256": "fa3ca70e0dc767f5780e5f3234e5999e066218a0dd8bb02593078b6e939e4855",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_undercity_archive_room",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_undercity_archive_room.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_undercity_archive_room.webp",
+          "sha256": "934f13e9146c5b60e33659323ac139ef5a15c9782762be276c5d9200cb241d73",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_undercity_cistern",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_undercity_cistern.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_undercity_cistern.webp",
+          "sha256": "7504c63de9eb6f5571a9568b7ca472ea624bd912935850ea86acfcc04b9bf9da",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_undercity_cistern_stairs",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_undercity_cistern_stairs.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_undercity_cistern_stairs.webp",
+          "sha256": "2e58e456fbd91a8ff4473e844996ddba42460a8f7d6cd1202f422ca0a66224bc",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_undercity_market",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_undercity_market.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_undercity_market.webp",
+          "sha256": "e2025cbd8e87d8fb5c969a79bbc2ad04b4a7f20ede6a12d1c019ccbe991080b6",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_undercity_red_vial_ward",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_undercity_red_vial_ward.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_undercity_red_vial_ward.webp",
+          "sha256": "078db5a59839deca037162ebc7229600691cecaf8ee1be6c0dc7102b4740e887",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_undercity_subterranean",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_undercity_subterranean.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_undercity_subterranean.webp",
+          "sha256": "bd4e533c222f4fe7b32323fb76c8e3898400e04ca3fab2c7f5a8f300e361d0ac",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_village_oakhaven",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_village_oakhaven.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_village_oakhaven.webp",
+          "sha256": "7b500641ed7e5b1726d5de8a2ab43753e0e44af4766068f4c30106e07f26afc5",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bg_world_map_part1",
+      "class": "background",
+      "reference_entry": "content/approved_art/entries/bg_world_map_part1.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/bg_world_map_part1.webp",
+          "sha256": "5e9f30c15debb91e286620b6c5a3b0483127a80483a44604ce10b45a5a7d3d98",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "boss_ash_maw_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/boss_ash_maw_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_boss_ash_maw.webp",
+          "sha256": "8b43773b59a05d2446da8c94f08e3b2350ef2cc1b73c300341f5c9d6c22a9cd5",
+          "width": 2041,
+          "height": 1360
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "boss_ashen_lord_wraith_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/boss_ashen_lord_wraith_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_boss_ashen_lord_wraith.webp",
+          "sha256": "e1ead03489c43e880df84dbadb4cd4916350bdaf42ed18882b39e72215d5e51e",
+          "width": 2010,
+          "height": 613
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "boss_bell_widow_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/boss_bell_widow_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_boss_bell_widow.webp",
+          "sha256": "659fc80ee25cce35027013400568e247d748508a7b42845ca0386067e09b39b1",
+          "width": 2034,
+          "height": 608
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "boss_captain_rusk_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/boss_captain_rusk_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_boss_captain_rusk.webp",
+          "sha256": "8ad2f2a4da96f49ab05fa01a7c800bd410c1bff0ab1464d92ee1d75a41cbade9",
+          "width": 2038,
+          "height": 612
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "boss_eclipse_construct_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/boss_eclipse_construct_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_boss_eclipse_construct.webp",
+          "sha256": "b95057f9093a107b9aa6a07ae8e840b0e33219681efbd68ce2853ff5be288cbd",
+          "width": 2014,
+          "height": 609
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "boss_marshal_oren_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/boss_marshal_oren_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_boss_marshal_oren.webp",
+          "sha256": "119a5d929c6af646353da628766beee31c92eb17a32c0197a9354a0518d97062",
+          "width": 1912,
+          "height": 597
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "boss_red_vial_matron_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/boss_red_vial_matron_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_boss_red_vial_matron.webp",
+          "sha256": "6d130b6a7d76f58590169407760f5aeeb285261c9e699ba8a92e72d270791350",
+          "width": 2041,
+          "height": 612
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "bridge_revenant_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/bridge_revenant_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_bridge_revenant.webp",
+          "sha256": "658032fd3ed930514f1749e070b88095e3107849b520f6ea12ed7ba810016044",
+          "width": 1950,
+          "height": 1263
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "brin_alder_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/brin_alder_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_brin_alder.webp",
+          "sha256": "cbc4b1a49c245f6e818d1d73114db5a90b3616bc5d2b8d4d4dfce99a61d1dc4b",
+          "width": 1918,
+          "height": 942
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "brin_alder_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/brin_alder_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_brin_alder_composed.webp",
+          "sha256": "5f7476e739a693ba771e60eaf54a94d5d410e8417570d33fd7a550ea0e1bcc5f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "brin_alder_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/brin_alder_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_brin_alder_defiant.webp",
+          "sha256": "b4aedb26382038bde16d7f90d3bca0c798a1d4e27254cae815740305f5981ca2",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "brin_alder_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/brin_alder_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_brin_alder_focused.webp",
+          "sha256": "fff01cabf91ac17d3ab577cd0ed5eacacbc581f37a1374c69115caf186414370",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "brin_alder_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/brin_alder_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_brin_alder_warm.webp",
+          "sha256": "890cf830c0e3938d7583d9563d2d1e3d183150e60d4555f995e02541717612b0",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "campaign_enemy_knight_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/campaign_enemy_knight_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_enemy_knight.webp",
+          "sha256": "4e5ff4f3e184a1fa57553fe000ec022eb1e36329a8b80ab890e0f470df6ccde6",
+          "width": 2031,
+          "height": 885
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "cassian_thorne_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/cassian_thorne_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_cassian_thorne.webp",
+          "sha256": "9428f1a39fc1c38e773680b056e4869a4e6e854d30c8dc53c018c0ae3289e5ba",
+          "width": 2007,
+          "height": 689
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "cassian_thorne_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/cassian_thorne_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_cassian_thorne_composed.webp",
+          "sha256": "7053d6faacef1142d88db9b00b3f16d736dbbcb739af1d14c6ff298d6aaf9d8d",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "cassian_thorne_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/cassian_thorne_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_cassian_thorne_defiant.webp",
+          "sha256": "955fdde4199141e97e3a6e93673de5dc79718a0b40d87f2179af6a3a0615d02f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "cassian_thorne_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/cassian_thorne_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_cassian_thorne_focused.webp",
+          "sha256": "cfc99e2c3697cef601dcc932c50d17f21358d6f20b974babe3607f7dc2940f38",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "cassian_thorne_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/cassian_thorne_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_cassian_thorne_warm.webp",
+          "sha256": "6a3d04d1eb46879fc014af6dfd1c1de26ab9b6eca45b2e9277809b5f8b2b5b7b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "chain_cultist_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/chain_cultist_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_chain_cultist.webp",
+          "sha256": "c142fb412f9044f06aece902b3d7d3aaa4736660080fb4d4e5593c6bd1914352",
+          "width": 1929,
+          "height": 1000
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "choir_knight_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/choir_knight_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_choir_knight.webp",
+          "sha256": "e13142773677bd4615c6843f8763d5d2d0ffa82a42d429adf41b2b27ea073ba8",
+          "width": 2023,
+          "height": 980
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "clem_marr_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/clem_marr_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_clem_marr.webp",
+          "sha256": "6a430abc22e2a563a32af073f29cf4d70499c2ac4d8d8a7222d33b4d21cb5e5e",
+          "width": 1968,
+          "height": 681
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "clem_marr_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/clem_marr_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_clem_marr_composed.webp",
+          "sha256": "6917f5c371649ba6cac09caf84f7529ec90413df60ae33d49d497fa6b5e78ebe",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "clem_marr_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/clem_marr_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_clem_marr_defiant.webp",
+          "sha256": "7a6da38c26330cf1b7706c451721dfc04fecf8d2100dad68323d40ad09484a55",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "clem_marr_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/clem_marr_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_clem_marr_focused.webp",
+          "sha256": "e0102d6cb504ef2490fd35dd5997b5a1bb260b9c2ed19906b89b8c496be9ab3a",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "clem_marr_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/clem_marr_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_clem_marr_warm.webp",
+          "sha256": "1b0644a1a674691f0340225c74eda33126a150a06ac6a5f942e65905692bbb9e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "corbin_locke_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/corbin_locke_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_corbin_locke.webp",
+          "sha256": "1c6d6cfd740cd7ccc13181fceaf6db9deb0c5f836796d278d83f09740a1ea844",
+          "width": 1997,
+          "height": 680
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "corbin_locke_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/corbin_locke_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_corbin_locke_composed.webp",
+          "sha256": "95e58a3c34e11d35283bf7784dc91496746c1dbce8950f7e3fecf8db169b9c34",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "corbin_locke_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/corbin_locke_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_corbin_locke_defiant.webp",
+          "sha256": "e17d1a26b9a7baf70108157eb964e7888a3dc7908cf993a44abcfcc98e9b0478",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "corbin_locke_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/corbin_locke_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_corbin_locke_focused.webp",
+          "sha256": "39b7af2ea01bd26449fe21bdb0fba398654f355fa560c1bcb749b70e19f1118c",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "corbin_locke_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/corbin_locke_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_corbin_locke_warm.webp",
+          "sha256": "6ddd03e4adc4282111bbeb4baa5966ed527a64937ffefaf282789bf0025a10a5",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "corrupted_crown_guard_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/corrupted_crown_guard_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_corrupted_crown_guard.webp",
+          "sha256": "767e394205f42741d475c1505fa7ba1eb3e5725c778baedd7c94ade5797b7691",
+          "width": 2003,
+          "height": 1288
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "corrupted_mercenary_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/corrupted_mercenary_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_corrupted_mercenary.webp",
+          "sha256": "577cbbd38a3a65047618c1c3f677f6968d53e046e5768003cbeb3f4b6e2e4bbd",
+          "width": 2036,
+          "height": 962
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "crownless_knight_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/crownless_knight_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_crownless_knight.webp",
+          "sha256": "84a80c135845a5ad9c543d2936e1006f0e4e4b4453306a586f3ca9a364c1260a",
+          "width": 1992,
+          "height": 982
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "dorian_kesk_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/dorian_kesk_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_dorian_kesk.webp",
+          "sha256": "9c969e137965e877c83248503c999011473abc2e9660e2ede761a592e59e9c5f",
+          "width": 2047,
+          "height": 961
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "dorian_kesk_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/dorian_kesk_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_dorian_kesk_composed.webp",
+          "sha256": "ff072fccda1b49fb88de2089b0b0922d93a88b8b16f6585824ec06b27d84bf0c",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "dorian_kesk_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/dorian_kesk_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_dorian_kesk_defiant.webp",
+          "sha256": "700709941c161dd3b69a5c9005b55f5fb0bbba651d3fbadcad64dd0db75afa5f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "dorian_kesk_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/dorian_kesk_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_dorian_kesk_focused.webp",
+          "sha256": "4210624bdf02345319df7bbcf6d3de59127a6ff9effbbe60ed3d0486e5386e91",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "dorian_kesk_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/dorian_kesk_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_dorian_kesk_warm.webp",
+          "sha256": "4f90063cf59d490c1cbcaa7e93ede76c73bc4a80e570d30f9031ac6eca10938f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "eclipse_construct_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/eclipse_construct_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_eclipse_construct_composed.webp",
+          "sha256": "ea69402589f974bf42a58f9af914bf554f850b9c67c37c15854a99c8ad367615",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "eclipse_construct_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/eclipse_construct_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_eclipse_construct_defiant.webp",
+          "sha256": "38209b501b859cb7f2c06d6f6f0aa88b6a60498b79e1ebfbd1202fd77a6ba0ab",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "eclipse_construct_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/eclipse_construct_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_eclipse_construct_focused.webp",
+          "sha256": "9a9dd587a1a96f1d2af03252cf2816afc3833e483dc7f16a11359e456b1a447e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "eclipse_construct_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/eclipse_construct_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_eclipse_construct_warm.webp",
+          "sha256": "e65f764ed6711946521268cf211272cb359c5976e853f8b9b6697f445b78d71f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "eclipse_sentinel_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/eclipse_sentinel_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_eclipse_sentinel.webp",
+          "sha256": "6b68928d2a003423f4d766b14627db894cd677cedac8a7c14d03cd57f3f905a3",
+          "width": 1965,
+          "height": 1033
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "estate_wraith_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/estate_wraith_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_estate_wraith.webp",
+          "sha256": "4aeca7a9e9fdb6ba47f61cb8a32828ca293af0c523bba1b6ee23c295ab9cfbc8",
+          "width": 1874,
+          "height": 987
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "fadyme_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/fadyme_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_fadyme.webp",
+          "sha256": "45294a788697a7f53a33d15cb17fc2e100d360cf82e5ee89c1ff653a59927324",
+          "width": 2026,
+          "height": 1013
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "fadyme_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/fadyme_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_fadyme_composed.webp",
+          "sha256": "0fc6590c0c280a4d87f3955cb36d51cf7fc080972133b5d9e7f8a248d20657e7",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "fadyme_vn_resolve",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/fadyme_vn_resolve.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_fadyme_resolve.webp",
+          "sha256": "918ce2fde17167f1dd2e1e01b8c1da5a6609802b534a13a6760c10be03ea82e5",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "fadyme_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/fadyme_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_fadyme_warm.webp",
+          "sha256": "f67b7c3fa1baec25c14707bb5d003619ebb57aa4a40fb8c8240e4b846d7c4b08",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "fadyme_vn_wry",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/fadyme_vn_wry.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_fadyme_wry.webp",
+          "sha256": "670e2ea8d6f17c5d57aa2a2cb32351848798bfa12f4c42c2a20e20d84c13c04e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "garrick_cinder_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/garrick_cinder_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_garrick_cinder.webp",
+          "sha256": "1f8e9c3200b1206eb1d4135b2d3f8e65ae9403714d7400380f8c3d89ff9be6d2",
+          "width": 1999,
+          "height": 677
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "garrick_cinder_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/garrick_cinder_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_garrick_cinder_composed.webp",
+          "sha256": "932a05fb34b89c8e9630137576802b0f46da5c1d927362f65487565a441f4ec9",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "garrick_cinder_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/garrick_cinder_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_garrick_cinder_defiant.webp",
+          "sha256": "2557f7a2c7571c167159447e1dea313074ea500d888c9dd2709a5b7e8e5de67e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "garrick_cinder_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/garrick_cinder_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_garrick_cinder_focused.webp",
+          "sha256": "a7373734d228f96c3946ef53d76e35f3eb03f0de88ac4eca66e199c26976fd73",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "garrick_cinder_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/garrick_cinder_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_garrick_cinder_warm.webp",
+          "sha256": "4c9e54bebc1a37f2ba0f476c6f7e7bd64ec685645f156a5f620102bec862f488",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "glass_viper_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/glass_viper_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_glass_viper.webp",
+          "sha256": "7223784c368e570bce6488a82a80e029cc5957e8260533c7e47b6ea958d79c10",
+          "width": 2042,
+          "height": 1120
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "hana_birch_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/hana_birch_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_hana_birch.webp",
+          "sha256": "726b30da1a8fd421cec28aaa94be2eae1f022a87ec1c0223b4854e8bcb047053",
+          "width": 1945,
+          "height": 676
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "hana_birch_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/hana_birch_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_hana_birch_composed.webp",
+          "sha256": "05b826c96abab259a0c2e6dd5ff670515bf0761cbb626a36347b17fabfeb4f57",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "hana_birch_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/hana_birch_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_hana_birch_defiant.webp",
+          "sha256": "58b099b0434f612d1112f06585075a85507fc9efaf1a831c4c70d08f0a668795",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "hana_birch_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/hana_birch_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_hana_birch_focused.webp",
+          "sha256": "171fa2493b2eee74b043c5c7a9b18bb5c96fe7bf15bea16b90c22517339ca679",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "hana_birch_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/hana_birch_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_hana_birch_warm.webp",
+          "sha256": "3eedcb0e226ef5b73bb4d0bfb49e45780fe8afd44eb86b088fc0dd3798d1b64f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "hollow_cleric_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/hollow_cleric_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_hollow_cleric.webp",
+          "sha256": "7a39ebafdeff460d229c54ba5bbac03b5db61db062cc24fea0876b53352aa571",
+          "width": 1937,
+          "height": 978
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "hollow_pilgrim_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/hollow_pilgrim_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_hollow_pilgrim.webp",
+          "sha256": "3c8ea1852ebef98d3d14932f7998b713da8e38b01c5d28dfb76db45257392236",
+          "width": 1912,
+          "height": 1334
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "ill_roadside_rest",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/ill_roadside_rest.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_roadside_rest.webp",
+          "sha256": "dec4d4a42672ad85c70ef6b73e6afcdd5a18e3e61e0368a673f0f1f5b14175d5",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "ill_shelter_evening",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/ill_shelter_evening.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_shelter_evening.webp",
+          "sha256": "ac32b768eef50683bc760156f4bad0fe0bb3dbc988a010a2d23278a6baa1a945",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "inkbound_dead_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/inkbound_dead_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_inkbound_dead.webp",
+          "sha256": "52b095333576da006d1283225ede89eccd717e0679348d300cf898a64e58d15c",
+          "width": 1719,
+          "height": 1259
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "iona_mist_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/iona_mist_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_iona_mist.webp",
+          "sha256": "6b449ef46218a6c8da9085bffe6304701079850cc8776d35a459cb33676b9b7a",
+          "width": 2016,
+          "height": 963
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "iona_mist_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/iona_mist_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_iona_mist_composed.webp",
+          "sha256": "a0ee17324621777a6781ec6f08130190a53b4814a6714bf7e9087564334e7e27",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "iona_mist_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/iona_mist_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_iona_mist_defiant.webp",
+          "sha256": "7f3ad5adea726d96eeccc37aacbd09edeb89f588e7af4f8244df30c88f728af7",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "iona_mist_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/iona_mist_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_iona_mist_focused.webp",
+          "sha256": "94b4a7a28634f7ae5709c204297a189e13ecf10658acaadfb8545abe9bdc6854",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "iona_mist_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/iona_mist_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_iona_mist_warm.webp",
+          "sha256": "2923e72fcac161154f3d090aad03f4ad6b170f5e8bd332e82c730e577c356884",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "jori_flint_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/jori_flint_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_jori_flint.webp",
+          "sha256": "05d3b830e17bceb79afb311b65fa5e0f108a3e1f78a5c83e67a1c2bce02ddc22",
+          "width": 1934,
+          "height": 961
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "jori_flint_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/jori_flint_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_jori_flint_composed.webp",
+          "sha256": "9aaf48f1d509a1c709b905131c2903b6f96703671675bb4d553e47412eee1da7",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "jori_flint_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/jori_flint_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_jori_flint_defiant.webp",
+          "sha256": "6d2d3e6f8acfd5167a1034d9324aa38b18e888a198d59d2c79e858461cdfc89c",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "jori_flint_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/jori_flint_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_jori_flint_focused.webp",
+          "sha256": "f480116ca51eccc94fcec6c7766d89e8b8550d9c7f45aafefc85e04f208c7a19",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "jori_flint_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/jori_flint_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_jori_flint_warm.webp",
+          "sha256": "3d75dc5ffe2d42d93da352d27b2312700779e3fa7826968e3e8fedde20b2dac2",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "kera_voss_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/kera_voss_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_kera_voss.webp",
+          "sha256": "889a1b91f5f1b94c399bc92d0dbf9e1bc7400f81728a6220fe58fa549bb23697",
+          "width": 1998,
+          "height": 959
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "kera_voss_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/kera_voss_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_kera_voss_composed.webp",
+          "sha256": "fcce1891f73c3a28c7b491295fb24cc4f2a69587138e00f8d507a3a68407a4ff",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "kera_voss_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/kera_voss_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_kera_voss_defiant.webp",
+          "sha256": "cb081568e4ddfac0f5d0d4ac9a7f42f4005843c5ca43ecea8309e73c375d0815",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "kera_voss_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/kera_voss_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_kera_voss_focused.webp",
+          "sha256": "ad48443f6b1aa12057d97a868096cc2b6d789709effe6a21d25b65420316de5f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "kera_voss_vn_proud_smile",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/kera_voss_vn_proud_smile.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_kera_voss_proud_smile.webp",
+          "sha256": "9300bdf4b74610c82ddb572f8b4d93caef08a8f2b6ce82e889b4fcd714901923",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lady_yseldra_vale_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lady_yseldra_vale_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lady_yseldra_vale_composed.webp",
+          "sha256": "5e2be150558988825dadf1de736cf4ff7409c37ec643e5d7ca77ba10e43d7049",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lady_yseldra_vale_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lady_yseldra_vale_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lady_yseldra_vale_defiant.webp",
+          "sha256": "55e93374f6faabd85c714a8efc4ffa39224bfe8e192b336af8abdd8aba534c84",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lady_yseldra_vale_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lady_yseldra_vale_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lady_yseldra_vale_focused.webp",
+          "sha256": "f8a1cc1c4ab330e11851f69f7c99518a04b8e2dc3ab7a2f4a8b0e6b169ecfc32",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lady_yseldra_vale_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lady_yseldra_vale_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lady_yseldra_vale_warm.webp",
+          "sha256": "eae5454e546631349d4e9088a5bf7cc107487b973577cdb13105f4c4e237f928",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lord_cael_veyr_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lord_cael_veyr_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lord_cael_veyr_composed.webp",
+          "sha256": "a90758b2d27de662a5988ecc33dd1ea1abe46b848ea2c25b83399608466d2c19",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lord_cael_veyr_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lord_cael_veyr_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lord_cael_veyr_defiant.webp",
+          "sha256": "2cf62e6ed2f32e7131fa6ca84524e945251381f4282aed816a9662f7971cc01a",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lord_cael_veyr_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lord_cael_veyr_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lord_cael_veyr_focused.webp",
+          "sha256": "5256d0aab0d1f745d9d6b211d637f35999f53ba873ee917a81292752493ac70d",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lord_cael_veyr_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/lord_cael_veyr_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_lord_cael_veyr_warm.webp",
+          "sha256": "b58db66c282e980e72cf3aa8e26b15a6d254a7dd0faa07c11c42e66fa6c3dbbc",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "lost_vow_knight_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/lost_vow_knight_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_lost_vow_knight.webp",
+          "sha256": "1ed9c271b0c885ad79724f67d790b224c551a6df81db03a54ac831693ee0a07f",
+          "width": 1939,
+          "height": 954
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mahmut_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/mahmut_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_mahmut.webp",
+          "sha256": "2366ef2aedb2305251eb2ca64ae8d6f0ca9cf4de43e59cffe066f3a4e082bf05",
+          "width": 1960,
+          "height": 967
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mahmut_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mahmut_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mahmut_composed.webp",
+          "sha256": "13d0080a2b5b02f3c7249f03de6f2e3ff87e220b7f344319b84e57278ff0e63e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mahmut_vn_dry_humor",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mahmut_vn_dry_humor.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mahmut_dry_humor.webp",
+          "sha256": "d5d7645dd210a18e12a89bdba3bcf134cb9d6f4ff5ccf007b773a9a2fc34c674",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mahmut_vn_protective_resolve",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mahmut_vn_protective_resolve.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mahmut_protective_resolve.webp",
+          "sha256": "03c92c664aeea26c3fd82c28ca54cae28fb837a3c1a1523de84e4e376c4a28ff",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mahmut_vn_watchful",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mahmut_vn_watchful.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mahmut_watchful.webp",
+          "sha256": "1cc87e9a1118da5a97385e9ae9a52be76bf280a45c03f1cf08caacf54d4f4548",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marek_vane_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/marek_vane_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_marek_vane.webp",
+          "sha256": "22d97845968efcb535637d255de034b34fe7ad3f8dc2e968900e18da0b4faf8b",
+          "width": 1989,
+          "height": 966
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marek_vane_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marek_vane_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marek_vane_composed.webp",
+          "sha256": "b6b54c9835efeddeb7072bee0bca006aed31b266381e10883d601a7f6bab33da",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marek_vane_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marek_vane_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marek_vane_defiant.webp",
+          "sha256": "a73c0c2e88c19f63cd6ceae82121e78d6cc2225cc48de9450cbe75053317338d",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marek_vane_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marek_vane_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marek_vane_focused.webp",
+          "sha256": "dcf3af5b3e2278f5c0f7cbc9994397119e72e0391e020a6804d205cfe997106b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marek_vane_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marek_vane_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marek_vane_warm.webp",
+          "sha256": "a9efd3bf50f9a044ba80b98fcf64c18280b068d3d4c8e1e03492a4cecec065c1",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marshal_oren_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marshal_oren_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marshal_oren_composed.webp",
+          "sha256": "8377c6d3d765bc6bb7705981d8f9c4be992fdcaa18bfe1dd844bf10711750f54",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marshal_oren_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marshal_oren_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marshal_oren_defiant.webp",
+          "sha256": "7fc8d3614b4d52e66c00a721a58788eb1dde8f9a788b8ad472b0ca8fb74818a7",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marshal_oren_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marshal_oren_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marshal_oren_focused.webp",
+          "sha256": "e9606b66c66dcf68abe07515f5733418207c9c4b445b8e9da69b4064b81d60ac",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "marshal_oren_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/marshal_oren_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_marshal_oren_warm.webp",
+          "sha256": "5a815497bb1c22fbac8a4613e70056ac74c5d98a10fffccfad0d2cf0ec928a29",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mirel_quill_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/mirel_quill_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_mirel_quill.webp",
+          "sha256": "a3471b85ea7b4cc0b9ea358715fe883f31e7578488633b16e85ed59d6f4a254b",
+          "width": 1951,
+          "height": 680
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mirel_quill_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mirel_quill_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mirel_quill_composed.webp",
+          "sha256": "6f51ebd8a29110bc4af1ed2cf8e0f365b269f657030c02e827229bc6d476f51b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mirel_quill_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mirel_quill_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mirel_quill_defiant.webp",
+          "sha256": "7de224c15a138df379160371924897b4d684306eea6599118cc4916b95cd3c9a",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mirel_quill_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mirel_quill_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mirel_quill_focused.webp",
+          "sha256": "bf1c0ec8208daf3af8d49f06045f929ff677e9f0e2f66bfe68492126c8fa94f6",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "mirel_quill_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/mirel_quill_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_mirel_quill_warm.webp",
+          "sha256": "94fd88a7e9b6ee5ba317aa670169f7e0f2c4a0fc6d47e9051104d41d9176c5c0",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nara_vell_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/nara_vell_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_nara_vell.webp",
+          "sha256": "5cc3473d9e5ecfd5dcb336f066004105b2cfbc04d5f2464d19243449f8e87094",
+          "width": 1951,
+          "height": 678
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nara_vell_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nara_vell_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nara_vell_composed.webp",
+          "sha256": "e9759a314825f7c3ffb4c74b14f811e5e8e0cd6e1695d201d2f8d3677de779a9",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nara_vell_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nara_vell_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nara_vell_defiant.webp",
+          "sha256": "2bbba4dae106188e4bc7ca801e43b6a68ee9d9aa6c4c4f884fe692c4568bb4d8",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nara_vell_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nara_vell_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nara_vell_focused.webp",
+          "sha256": "dc9c87b4caa2d2eb0db61d42b37471db000ba1b189cb0dda59a0e37721cf216c",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nara_vell_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nara_vell_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nara_vell_warm.webp",
+          "sha256": "151b48516b4ec333c76ed5ffb0044a4f34727e65ef774e6295ee08e9f6946d37",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nixie_vale_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/nixie_vale_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_nixie_vale.webp",
+          "sha256": "6112d4f13ffec66f105ecb9dfe37fbb2d53d461306219d25053b483ebaf330b0",
+          "width": 2007,
+          "height": 673
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nixie_vale_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nixie_vale_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nixie_vale_composed.webp",
+          "sha256": "8241de6a2902bdd9197effcc98bf3ae6732c447a244bb9d38f448992c5fecaa4",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nixie_vale_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nixie_vale_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nixie_vale_defiant.webp",
+          "sha256": "8b6b51f736b5abe6e41fd4747474496295c8bfb79bb818b46a4c5a9e8326ed1a",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nixie_vale_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nixie_vale_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nixie_vale_focused.webp",
+          "sha256": "c59f83640508eb8bd14300cd32014f5ce93805e282a91d96742e9f44fb1e3ff1",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "nixie_vale_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/nixie_vale_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_nixie_vale_warm.webp",
+          "sha256": "55e218beba01a1b026f1778cd7440492a1b894277b69da71f2e9d8eb0608424f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "noble_retainer_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/noble_retainer_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_noble_retainer.webp",
+          "sha256": "299b0aa94092bf19c3f4dbb9b79283e7fc22918b86fffc7694cb9c46ff7786d0",
+          "width": 2003,
+          "height": 996
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "odelia_pike_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/odelia_pike_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_odelia_pike.webp",
+          "sha256": "239da3bf94862ebfcee5667b3a9ecde268254d8804dc838e6560a0bf23a9594c",
+          "width": 1910,
+          "height": 680
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "odelia_pike_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/odelia_pike_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_odelia_pike_composed.webp",
+          "sha256": "fa617d0a45f7a2f8f84749c61de332f610dd72b4c50e9093cecd17e2ec97026d",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "odelia_pike_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/odelia_pike_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_odelia_pike_defiant.webp",
+          "sha256": "f84481a52f1248e93cbd156dac89d1539ce23ec7a00e6fed1ba4a80c941b82fa",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "odelia_pike_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/odelia_pike_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_odelia_pike_focused.webp",
+          "sha256": "f2b6dd81f6fdf6b514f6ecc8cee81668c6bc13a049cef18d0226b6e323eaa06b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "odelia_pike_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/odelia_pike_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_odelia_pike_warm.webp",
+          "sha256": "910987a21037165e0478f42bb9a5649fc33947001622101ba92e6bfd2789279b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "orchard_ghoul_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/orchard_ghoul_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_orchard_ghoul.webp",
+          "sha256": "8227e404b09f21d605e9a45c65f91939a423674af2ad9e78b2a2d31781a969f1",
+          "width": 1969,
+          "height": 935
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "pippa_bell_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/pippa_bell_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_pippa_bell.webp",
+          "sha256": "8d9d666ce50dd497e9796b1881491122c44a2799dde7fbb0429c5b56185cb2a5",
+          "width": 1981,
+          "height": 680
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "pippa_bell_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/pippa_bell_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_pippa_bell_composed.webp",
+          "sha256": "5c3c6137cfd723bfb9d2eae2aa7c9357ebf3d8b8494e2c8bd550f52c75de6e14",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "pippa_bell_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/pippa_bell_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_pippa_bell_defiant.webp",
+          "sha256": "ac2a7bed07aa49c1d8b52966afd709a6157a6cda91f8f71813ddd89d459ad11e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "pippa_bell_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/pippa_bell_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_pippa_bell_focused.webp",
+          "sha256": "49bad050d80825e1d3f882abd5f6c886bc7842c5a959cc43d575a67374389f9b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "pippa_bell_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/pippa_bell_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_pippa_bell_warm.webp",
+          "sha256": "3f199a3579843e4f4516608eb0720125f71658bff293adf8aa72d3c27779dc5a",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_crownfall_crownfall",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_crownfall_crownfall.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_crownfall.webp",
+          "sha256": "aa95cdc01cc2100cf5d2f7bff33e34803e01597372077dc71de4dbb546974188",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_crownfall_roads",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_crownfall_roads.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_roads.webp",
+          "sha256": "e39648cc80ebfe248facc21867f612dc9c676f0aa1d8e77b2f5fefb000d3ef68",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_crownfall_throne_wars",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_crownfall_throne_wars.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_throne_wars.webp",
+          "sha256": "6ff6809b81d48de64272764744c6cf3f650b6229ff5181fc92523c2a9ed68d85",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_road_beginning",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_road_beginning.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_beginning.webp",
+          "sha256": "0c70df58449fcdd5edd34e8ab483e482fce8582882d44631a7c3fc97d15c670b",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_road_reunion",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_road_reunion.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_reunion.webp",
+          "sha256": "473adcf837dc8e76508abc8d1fe42584d6a378a75ce6abc8a7ecddd4bb62c9d6",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_village_hours",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_village_hours.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_hours.webp",
+          "sha256": "2d6d72585235543db6845c0a78ee6fb9918d3a02b6843a503b833052e6f4f8ce",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_village_names",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_village_names.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_names.webp",
+          "sha256": "2dda4dc9fa32484e08474839e75b9de3e7f0d14afa5155b452b8d5a673220a91",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_village_ordinary_days",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_village_ordinary_days.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_ordinary_days.webp",
+          "sha256": "c3d212c1fb39fd2b764b8929639e9742587848a6cacb9009d77bf2299b41b18f",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "prologue_village_search",
+      "class": "still",
+      "reference_entry": "content/approved_art/entries/prologue_village_search.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/still_prologue_search.webp",
+          "sha256": "38b309152c816b8891c2a93d3a1c6011cfc6aae0dfff0da432aa3711254a869d",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "red_vial_alchemist_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/red_vial_alchemist_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_red_vial_alchemist.webp",
+          "sha256": "d096bb7ed810a1bdc0978fdd4be8fd62f77c83acd8037adc0a7553689a1b376a",
+          "width": 1991,
+          "height": 970
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "red_vial_matron_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/red_vial_matron_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_red_vial_matron_composed.webp",
+          "sha256": "ede488c1de56d3dbe9a694f646185b6992f5a6bca327b8ff17f979f5ab82d04c",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "red_vial_matron_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/red_vial_matron_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_red_vial_matron_defiant.webp",
+          "sha256": "999ab7c8cefdcfd2a31fc56929e76da1ea2d9d06957ead8e1bc80b5b5dafd1f8",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "red_vial_matron_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/red_vial_matron_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_red_vial_matron_focused.webp",
+          "sha256": "0e50d11713204d81c9526cefe47da0461d3c386b4619dee070d195dacb456e47",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "red_vial_matron_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/red_vial_matron_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_red_vial_matron_warm.webp",
+          "sha256": "3a8d873d8056f5cd67c98b95740c1d9007d38ec4f2af8433336a0e618f3e7971",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "red_vial_scout_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/red_vial_scout_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_red_vial_scout.webp",
+          "sha256": "11c78e2899fb839de051b163441b30c14507704fec22c84e21456cb184417104",
+          "width": 2030,
+          "height": 1170
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rikka_ember_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/rikka_ember_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_rikka_ember.webp",
+          "sha256": "581a93fd2479148b25d7cdf41927017d192db305e3b68deaf04ac50823454fe2",
+          "width": 2020,
+          "height": 681
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rikka_ember_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rikka_ember_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rikka_ember_composed.webp",
+          "sha256": "5f27407342b5182208cc3eaaf24351c57d3bebae45c21ae654c334904cfe6bca",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rikka_ember_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rikka_ember_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rikka_ember_defiant.webp",
+          "sha256": "f368b6b5f13576c150d45ec6b43ea6d47aac1a4206250dc7259fbc40046249de",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rikka_ember_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rikka_ember_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rikka_ember_focused.webp",
+          "sha256": "ffbde2bcc349e19fdb0d9665c2cb943c052711de61597b273a6e98953611e89b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rikka_ember_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rikka_ember_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rikka_ember_warm.webp",
+          "sha256": "1623b7c6e1507236a466e0efb1217bb877f44ba7da991a701083d564ad990e8b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "roster_hero_arcanist_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/roster_hero_arcanist_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_hero_arcanist.webp",
+          "sha256": "e4618adaa937602a3f3b150a687072eb93d5b8d822437c23b539c5b46c60ec08",
+          "width": 1895,
+          "height": 961
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rowan_reed_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/rowan_reed_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_rowan_reed.webp",
+          "sha256": "10d7cfc47c57e798323357669067dcadfa5c5bb91cb00b6fecb0090573488327",
+          "width": 1968,
+          "height": 677
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rowan_reed_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rowan_reed_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rowan_reed_composed.webp",
+          "sha256": "1d1fb860361a0409bd57ca813385278b976021308b6e2b98e4ba528b5f58879d",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rowan_reed_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rowan_reed_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rowan_reed_defiant.webp",
+          "sha256": "64e380faf2090b1eb7f47de9df999a03b0e5541d60977d059e0ae3cdc36cd865",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rowan_reed_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rowan_reed_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rowan_reed_focused.webp",
+          "sha256": "9d6d17a4de6c6ff21b5b26af1dd2cb6e74c6ee33ecfdf023ed6554ea72e5808e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rowan_reed_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rowan_reed_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rowan_reed_warm.webp",
+          "sha256": "7117591aec1e012c029e7e15bf640621a301f70d42963202af984673f1709a15",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "royal_hollow_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/royal_hollow_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_royal_hollow.webp",
+          "sha256": "d7b93d02744522c9d14415245b9db9c24804dde62feaa48ce4d3ec2c91e21bb5",
+          "width": 2013,
+          "height": 953
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rusk_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rusk_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rusk_composed.webp",
+          "sha256": "b62b4038346625ec6d4dea58a1c35f75db78bd51855550bdaf1b65fd0b681506",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rusk_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rusk_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rusk_defiant.webp",
+          "sha256": "693101405ac4d06a13206531cd90bb69f16c1129e8c25f047d87e6d618238a9b",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rusk_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rusk_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rusk_focused.webp",
+          "sha256": "94db84f402921265f7dfdea2ecab41b5a303ce9e949ec7203566678e27e05fb8",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "rusk_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/rusk_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_rusk_warm.webp",
+          "sha256": "a628da666d1a08da1583519c8aaeae9f63cc26ae97d7aae63e853763012512aa",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sable_wren_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/sable_wren_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_sable_wren.webp",
+          "sha256": "59092246c38a71269ea3743ae381d445f9b09443af682a193a18da23918be4ba",
+          "width": 1809,
+          "height": 1029
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sable_wren_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sable_wren_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sable_wren_composed.webp",
+          "sha256": "9693f18af03eff61e368ae71c3137babab1bc9e78f4875336bc4c9d87fb88f77",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sable_wren_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sable_wren_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sable_wren_defiant.webp",
+          "sha256": "b01345aa056d58e61bc3fe7eb6080ed6a17a0cdd260bbe5daf7fab78f121a9fb",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sable_wren_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sable_wren_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sable_wren_focused.webp",
+          "sha256": "51720daf64b25d3b3d3d398c7c1fe36792e1415bd9d810c7f4da261f33f9a978",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sable_wren_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sable_wren_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sable_wren_warm.webp",
+          "sha256": "8a5c9e07699078dbe80b36f8aad7f0a0c8dbda59ee92a79d07fa1031f114fc2a",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sister_aveline_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/sister_aveline_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_sister_aveline.webp",
+          "sha256": "c20bd01340200054814c50e6c5974a35d1d570064772fde34aad8f7e36adba94",
+          "width": 1952,
+          "height": 987
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sister_aveline_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sister_aveline_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sister_aveline_composed.webp",
+          "sha256": "0b64c19488ab68c25224dbdc8cda1da0815ad3aae067885791428e7d62cf6d66",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sister_aveline_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sister_aveline_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sister_aveline_defiant.webp",
+          "sha256": "96c5a7dbae9fb53102a32ceac7cac048098478c76ff2f9ee051e618a75d07511",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sister_aveline_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sister_aveline_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sister_aveline_focused.webp",
+          "sha256": "4b22f55bb898c85615a43c21f6975f1a608dd0c945f45a56be72a71286615fd2",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "sister_aveline_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/sister_aveline_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_sister_aveline_warm.webp",
+          "sha256": "b95c0d9e27c1156f7ace4c59b18ea8ac8e7451545b3fe4e66c58be2daf8ca6c7",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "studio_mark_01",
+      "class": "ui_image",
+      "reference_entry": "content/approved_art/entries/studio_mark_01.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_studio_mark.webp",
+          "sha256": "bac50683f7839cc384a4af2827de9dc381d06f307a40f9c1b3d86214741c4b47",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "thistle_roe_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/thistle_roe_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_thistle_roe.webp",
+          "sha256": "eb6e5c813cad7c1141e0b1f0df75f32e5f0f3612c7edcc80e23cf3f695cd0433",
+          "width": 1915,
+          "height": 970
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "thistle_roe_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/thistle_roe_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_thistle_roe_composed.webp",
+          "sha256": "cdba8905aad1f3dfed99b509dbbb017c531102f57c9813beb0f3b6812bc0024e",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "thistle_roe_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/thistle_roe_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_thistle_roe_defiant.webp",
+          "sha256": "ff5bd12d94c8fb332471c4e82e885b8e4eec5a7b4d4b62c42c941ed124057c4d",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "thistle_roe_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/thistle_roe_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_thistle_roe_focused.webp",
+          "sha256": "a0145fcc7c8a7a90c91d9cf4e9b8731af45c8177e7bbb418f2642a8e4e04c21c",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "thistle_roe_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/thistle_roe_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_thistle_roe_warm.webp",
+          "sha256": "81963afafe5344c326db30d511f1c162963d326564726711b0e66d168df9a3f5",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "tilda_fen_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/tilda_fen_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_tilda_fen.webp",
+          "sha256": "be86b8818f8bcf020d667a2e17d4ce554435c49e820823e730172e2b5cb5fbce",
+          "width": 1958,
+          "height": 965
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "tilda_fen_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/tilda_fen_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_tilda_fen_composed.webp",
+          "sha256": "0b2d317117616da55240a1a99231e519477465f746a75c0330b616feb21bfd46",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "tilda_fen_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/tilda_fen_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_tilda_fen_defiant.webp",
+          "sha256": "365d1c0cc92629db1fced9e3fc9d0a531fd5da3be892b1cc48986825ba4b2b77",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "tilda_fen_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/tilda_fen_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_tilda_fen_focused.webp",
+          "sha256": "84a8dfc992ed185b6f02acd36b1afeb6dfacd13048e361c5b9195596ceb042fb",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "tilda_fen_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/tilda_fen_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_tilda_fen_warm.webp",
+          "sha256": "faa9a081d46216b431a2fea0978c4ef8667f8ac31f45dc064efe6e26092a84fc",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "title_key_art_01",
+      "class": "ui_image",
+      "reference_entry": "content/approved_art/entries/title_key_art_01.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/ui_title_bg.webp",
+          "sha256": "4a2f4bd9078bbd36cb25bf992025badb091f859fbfd939f5d1e171dcb908df14",
+          "width": 1920,
+          "height": 1080
+        }
+      ],
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_title_key_art_01"
+    },
+    {
+      "id": "vespera_wisp_chibi_sheet",
+      "class": "unit_sheet",
+      "reference_entry": "content/approved_art/entries/vespera_wisp_chibi_sheet.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/atlas_vespera_wisp.webp",
+          "sha256": "6128732c5e5a1aa16d0dbee805b0a6d8aaeb248f702606c2d05c4cc10f6eda7d",
+          "width": 2019,
+          "height": 959
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "vespera_wisp_vn_composed",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/vespera_wisp_vn_composed.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_vespera_wisp_composed.webp",
+          "sha256": "e8c0ae2c24183a5224bf5ffa5b3e22ee4f3ca254fd1202ae030c5cfcd70ecdab",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "vespera_wisp_vn_defiant",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/vespera_wisp_vn_defiant.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_vespera_wisp_defiant.webp",
+          "sha256": "0b6de347be14b9cdf5bd770857c25fb3b96297db92ba070334207e3adc7546e4",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "vespera_wisp_vn_focused",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/vespera_wisp_vn_focused.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_vespera_wisp_focused.webp",
+          "sha256": "14283b2ca54df710ced4b465eed644ea03e74a981149989a03328b6cad2557cd",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "vespera_wisp_vn_warm",
+      "class": "portrait",
+      "reference_entry": "content/approved_art/entries/vespera_wisp_vn_warm.json",
+      "reference_outputs": [
+        {
+          "path": "content/approved_art/art/portrait_vespera_wisp_warm.webp",
+          "sha256": "8266e7eaec4143f3cd06e1c5c52ccc00bada6d854d9a400be3a19075f65f085f",
+          "width": 768,
+          "height": 1152
+        }
+      ],
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-hdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-hdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-mdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-mdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-xhdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-xhdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-xxhdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-xxhdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-xxxhdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-land-xxxhdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-hdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-hdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-mdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-mdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-xhdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-xhdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-xxhdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-xxhdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-xxxhdpi/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable-port-xxxhdpi/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable/splash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/drawable/splash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-hdpi/ic_launcher_foreground.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-hdpi/ic_launcher_round.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-mdpi/ic_launcher_foreground.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-mdpi/ic_launcher_round.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xhdpi/ic_launcher_round.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxhdpi/ic_launcher_round.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/Plugins/Android/UomdNative.androidlib/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Branding/app_icon_512.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Branding/app_icon_512.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Branding/logo_master.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Branding/logo_master.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_01.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_01.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_02.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_02.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_03.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_03.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_04.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_04.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_05.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_05.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_06.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_06.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_07.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_07.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_08.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_bell_08.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_01.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_01.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_02.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_02.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_03.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_03.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_04.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_04.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_05.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_05.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_06.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_06.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_07.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_07.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_08.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_corona_08.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_01.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_01.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_02.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_02.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_03.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_03.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_04.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_04.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_05.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_05.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_06.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_06.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_07.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_07.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_08.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_cta_seal_08.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_01.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_01.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_02.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_02.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_03.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_03.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_04.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_04.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_05.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_05.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_06.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_06.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_07.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_07.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_08.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/anim_watch_08.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_first_oath_selector.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_first_oath_selector.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_gacha_summon_altar.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_gacha_summon_altar.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_hub_sanctuary.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_hub_sanctuary.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_patch_loading_screen.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/bg_ui_patch_loading_screen.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_00.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_00.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_06.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_06.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_12.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_12.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_25.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/border_ornate_25.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_fade_00.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_fade_00.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_fade_03.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_fade_03.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_fade_04.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_fade_04.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_solid_01.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/divider_solid_01.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_audio_off.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_audio_off.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_audio_on.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_audio_on.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_book.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_book.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_bound_chronicle.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_bound_chronicle.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_check.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_check.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_close.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_close.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_crown.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_crown.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_curr_eclipse_token.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_curr_eclipse_token.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_dawn.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_dawn.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_ember.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_ember.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_gale.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_gale.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_stone.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_stone.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_tide.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_tide.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_veil.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_el_veil.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_fates_thread.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_fates_thread.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_first_oath_invitation.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_first_oath_invitation.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_gear.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_gear.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_home.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_home.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_illuminated_chronicle.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_illuminated_chronicle.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_lock.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_lock.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_music_off.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_music_off.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_music_on.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_music_on.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_companions.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_companions.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_journey.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_journey.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_records.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_records.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_sanctuary.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_sanctuary.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_settings_seal.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_settings_seal.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_summon.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_nav_summon.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_pause.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_pause.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_play.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_play.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ration.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ration.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_relic_first_eclipse_watch.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_relic_first_eclipse_watch.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_replay.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_replay.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_seal_ch01_whispering_ash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_seal_ch01_whispering_ash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_seal_ch02_saint_luthos.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_seal_ch02_saint_luthos.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_seal_ch03_oakhaven.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_seal_ch03_oakhaven.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_shield.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_shield.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_silver_crowns.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_silver_crowns.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skill_active.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skill_active.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skill_basic.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skill_basic.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skill_ultimate.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skill_ultimate.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skip.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_skip.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_st_dread.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_st_dread.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_st_stoneguard.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_st_stoneguard.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_st_taunt.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_st_taunt.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_burn.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_burn.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_dawnward.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_dawnward.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_decay.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_decay.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_fracture.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_fracture.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_gust.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_gust.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_sanctuary.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_sanctuary.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_soaked.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_status_soaked.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_sword.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_sword.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ui_bell.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ui_bell.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ui_focus.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ui_focus.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ui_wax_seal.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/icon_ui_wax_seal.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_bar_focus.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_bar_focus.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_bar_frame.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_bar_frame.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_bar_hp.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_bar_hp.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_disabled.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_disabled.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_hover.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_hover.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_normal.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_normal.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_pressed.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_btn_pressed.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_card_frame_3star.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_card_frame_3star.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_card_frame_4star.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_card_frame_4star.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_card_frame_5star.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_card_frame_5star.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_corner_bell_chain.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_corner_bell_chain.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_crest_defeat.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_crest_defeat.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_crest_victory.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_crest_victory.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_divider_bell.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_divider_bell.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_double.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_double.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_plate.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_plate.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_primary.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_primary.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_secondary.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_panel_secondary.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_tab_active.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_tab_active.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_tab_inactive.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_tab_inactive.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_vfx_corona_ring.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_vfx_corona_ring.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_vfx_ember_ash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/uikit_vfx_ember_ash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_aura_soft.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_aura_soft.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_compass_star.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_compass_star.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_diamond_glow.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_diamond_glow.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_flare.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_flare.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_light_halo.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_light_halo.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_mist_cloud.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_mist_cloud.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_ring_sharp.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_ring_sharp.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_ring_soft.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_ring_soft.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_rune_ring.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_rune_ring.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_slash.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_slash.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_star_spark.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_star_spark.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_sunburst.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "apps/unity/Assets/_UOMD/Resources/UomdUI/vfx_sunburst.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "content/base/art/ui_key_art.webp",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "content/base/art/ui_key_art.webp",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "content/base/art/ui_logo.webp",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "content/base/art/ui_logo.webp",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/feature_graphic_1024x500.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/feature_graphic_1024x500.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/icon_512.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/icon_512.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/logo_compact.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/logo_compact.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/logo_master.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/logo_master.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/01_title_screen.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/01_title_screen.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/02_prologue_cinematic.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/02_prologue_cinematic.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/03_tactical_battle.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/03_tactical_battle.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/04_world_map_hub.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/04_world_map_hub.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/05_companion_roster.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/05_companion_roster.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/06_character_sheet.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/06_character_sheet.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/07_boss_objectives.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/07_boss_objectives.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    },
+    {
+      "id": "docs/store/assets/screenshots/08_trials_and_summon.png",
+      "class": "runtime_or_store_bitmap",
+      "reference_path": "docs/store/assets/screenshots/08_trials_and_summon.png",
+      "replacement_status": "pending",
+      "replacement_asset_id": null
+    }
+  ]
+}

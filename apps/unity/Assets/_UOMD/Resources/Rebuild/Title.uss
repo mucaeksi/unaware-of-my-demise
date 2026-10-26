@@ -1,0 +1,95 @@
+.rebuild-title {
+    flex-grow: 1;
+    color: #e9e2d4;
+    background-color: #0a0610;
+    -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/CormorantGaramond-Medium.ttf");
+    -unity-font-definition: initial;
+}
+.title-art, .title-veil, .settings-backdrop {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.title-art { background-size: cover; background-position-x: center; background-position-y: top; }
+.title-veil { background-color: rgba(10, 6, 16, 0.13); }
+.title-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 38px 64px 0;
+}
+.studio-name, .title-eyebrow, .game-title, .start-button, .quiet-button, .settings-heading {
+    -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/Cinzel-SemiBold.ttf");
+    -unity-font-definition: initial;
+    -unity-font-style: normal;
+}
+.studio-name { color: #c9b6e4; font-size: 22px; letter-spacing: 5px; }
+.title-body { flex-grow: 1; justify-content: center; padding: 0 84px 90px; }
+.title-copy { width: 43%; max-width: 770px; }
+.title-eyebrow { color: #e3c37d; font-size: 23px; letter-spacing: 4px; margin-bottom: 30px; }
+.game-title {
+    font-size: 94px;
+    letter-spacing: 1px;
+    -unity-text-outline-color: rgba(10, 6, 16, 0.75);
+    -unity-text-outline-width: 1px;
+}
+.game-title-last { font-size: 110px; margin-top: -10px; }
+.title-rule { height: 1px; background-color: #b8975a; width: 82%; margin: 32px 0 44px; }
+.start-button {
+    height: 106px;
+    min-height: 96px;
+    margin: 0;
+    padding: 12px 32px;
+    border-width: 1px;
+    border-color: #b8975a;
+    border-radius: 0;
+    background-color: rgba(75, 26, 45, 0.94);
+    color: #f2e9dc;
+    font-size: 27px;
+    letter-spacing: 3px;
+    -unity-text-align: middle-center;
+}
+.start-button:hover, .start-button:focus { background-color: #6b2947; border-color: #f2e9dc; }
+.start-button:active { background-color: #321326; }
+.start-button:disabled { opacity: 0.55; }
+.quiet-button {
+    height: 78px;
+    min-height: 72px;
+    padding: 12px 28px;
+    margin: 0;
+    border-width: 1px;
+    border-color: rgba(184, 151, 90, 0.6);
+    border-radius: 0;
+    background-color: rgba(10, 6, 16, 0.5);
+    color: #e9e2d4;
+    font-size: 22px;
+    letter-spacing: 2px;
+    -unity-text-align: middle-center;
+}
+.quiet-button:hover, .quiet-button:focus { background-color: #2a1530; border-color: #e3c37d; }
+.quiet-button:disabled { opacity: 0.55; }
+.replay-button { align-self: flex-start; border-width: 0; padding-left: 0; color: #c9b6e4; }
+.title-status { min-height: 62px; font-size: 29px; color: #f0c8d0; white-space: normal; margin-top: 14px; }
+.version-text { position: absolute; right: 64px; bottom: 30px; color: #c9b6e4; font-size: 23px; }
+.settings-backdrop { background-color: rgba(10, 6, 16, 0.92); align-items: center; justify-content: center; }
+.settings-card {
+    width: 1060px;
+    max-width: 90%;
+    padding: 36px 54px;
+    background-color: #120a18;
+    border-width: 1px;
+    border-color: #b8975a;
+}
+.settings-heading { font-size: 38px; color: #e3c37d; letter-spacing: 5px; margin-bottom: 24px; }
+.settings-card .unity-base-field { min-height: 68px; font-size: 27px; margin-bottom: 12px; color: #e9e2d4; }
+.settings-card .unity-base-field__label { min-width: 300px; color: #e9e2d4; }
+.settings-card .unity-base-slider__tracker { height: 6px; background-color: #4a2548; }
+.settings-card .unity-base-slider__dragger { width: 24px; height: 30px; background-color: #e3c37d; border-color: #e3c37d; }
+.settings-card .unity-base-slider__text-field { width: 100px; font-size: 24px; }
+.settings-card .unity-base-text-field__input { color: #e9e2d4; background-color: #2a1530; }
+.privacy-button { margin-top: 12px; align-self: flex-start; }
+.privacy-status { min-height: 40px; margin-top: 8px; color: #c9b6e4; font-size: 25px; }
+.close-button { height: 86px; min-height: 86px; margin-top: 10px; font-size: 25px; }
+.is-hidden { display: none; }

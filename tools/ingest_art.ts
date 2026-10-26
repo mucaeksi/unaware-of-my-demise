@@ -195,6 +195,7 @@ function collectLegacyGitHashes(rootDir: string): Set<string> {
 }
 
 const ALLOWED_REF_PREFIXES = [
+  'content/specs/character_locks/',
   'reference/',
   'narrative/14_References/recovered_locked_v001/',
   'content/approved_art/art/',
@@ -511,6 +512,7 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
 
   const gates: Record<string, { status: 'pass' | 'warn' | 'fail'; detail?: string }> = {};
   const warnings: string[] = [];
+  let generatedOrigin = 'antigravity_generated_output';
 
   // Step 0: Resolve & verify source
   let sourceBytes: Buffer;
@@ -543,6 +545,7 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
 
     let matchedProvPath: string | null = null;
     let matchedProv: {
+      provider?: string;
       spec?: { id?: string; prompt?: string; aspectRatio?: string };
       model?: string;
       references?: { path: string; sha256: string }[];
@@ -566,6 +569,7 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
     if (!matchedProv || !matchedOutput || !matchedProvPath) {
       throw new Error(`A01: no provenance output matching pick "${spec.source.pick}" for ${spec.asset_id}`);
     }
+    if (matchedProv.provider === 'openai') generatedOrigin = 'openai_generated_output';
 
     const refCheck = checkReferenceHygiene(rootDir, matchedProv.references ?? []);
     if (!refCheck.passed) {
@@ -1054,7 +1058,7 @@ export async function runIngest(opts: RunIngestOptions): Promise<{
     license: {
       origin:
         spec.source.kind === 'generated'
-          ? 'antigravity_generated_output'
+          ? generatedOrigin
           : spec.source.kind === 'locked'
             ? 'project_locked_original'
             : 'external_cc0',

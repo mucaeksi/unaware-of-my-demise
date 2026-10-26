@@ -163,7 +163,10 @@ describe('ingest_art pipeline, provenance, and A31 reference hygiene (R14-B)', (
     return createHash('sha256').update(pngBuf).digest('hex');
   }
 
-  it('runs preview without promoting, executes atomic promotion, short-circuits unchanged specs, and records revision history', async () => {
+  it.each([
+    { provider: undefined, origin: 'antigravity_generated_output' },
+    { provider: 'openai', origin: 'openai_generated_output' }
+  ])('preserves $origin provenance through preview, promotion, revisions and approval', async ({ provider, origin }) => {
     const repo = makeRepo();
     const sheetRel = '.cache/generated/unit_test_hero_chibi_sheet/sheet.png';
     const provRel = '.cache/generated/unit_test_hero_chibi_sheet/run.provenance.json';
@@ -183,6 +186,7 @@ describe('ingest_art pipeline, provenance, and A31 reference hygiene (R14-B)', (
       JSON.stringify({
         spec: { id: 'unit_test_hero_chibi_sheet', prompt: 'Gothic anime chibi sheet', aspectRatio: '16:9' },
         model: 'gemini-3.1-flash-image-preview',
+        provider,
         references: [{ path: refRel, sha256: refSha }],
         outputs: [{ file: sheetRel, sha256: sourceSha }],
         settled_usd: 0.04
@@ -216,6 +220,8 @@ describe('ingest_art pipeline, provenance, and A31 reference hygiene (R14-B)', (
     expect(execRes1.status).toBe('executed');
     expect(execRes1.entry.revision).toBe(1);
     expect(execRes1.entry.qc.human.status).toBe('pending');
+    expect(execRes1.entry.license.origin).toBe(origin);
+    expect(execRes1.entry.source.sha256).toBe(sourceSha);
     expect(Object.keys(execRes1.entry.targets.atlases?.atlas_test_hero?.frames ?? {})).toHaveLength(8);
 
     // 3. Re-running identical spec short-circuits with 'unchanged'
@@ -259,6 +265,8 @@ describe('ingest_art pipeline, provenance, and A31 reference hygiene (R14-B)', (
     const checkOutside = checkReferenceHygiene(repo, [{ path: badRef, sha256: sha }]);
     expect(checkOutside.passed).toBe(false);
     expect(checkOutside.reason).toContain('outside allowed reference directories');
+    expect(checkReferenceHygiene(repo, [{ path: 'content/specs/character_locks/fadyme.png', sha256: sha }]).passed).toBe(true);
+    expect(checkReferenceHygiene(repo, [{ path: 'content/specs/character_locks/../untrusted.png', sha256: sha }]).passed).toBe(false);
 
     // Allowed directory but hash matches a legacy git: source in content/provenance.json
     const allowedRef = 'reference/char/legacy_clone.png';

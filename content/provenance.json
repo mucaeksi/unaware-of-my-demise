@@ -314,6 +314,14 @@
       }
     },
     {
+      "output": "content/base/art/ui_sol_title_bg.webp",
+      "sha256": "8b0a7ef9f8a82f2e43e3c2b99844edd7da57f861b4be20a581eabcbea41e06e0",
+      "sources": {
+        "generated:sol_title_key_art_01@rev1": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+        "entry": "09347da40b9b11596ff59dd395584c2b27605f8389895c172995148db2c01bc8"
+      }
+    },
+    {
       "output": "content/base/art/ui_studio_mark.webp",
       "sha256": "bac50683f7839cc384a4af2827de9dc381d06f307a40f9c1b3d86214741c4b47",
       "sources": {
@@ -419,7 +427,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "06b68b09f734db3723869569429782115f0bf7340a7074c626ac440458c64b20",
+      "sha256": "6da575b6f71ff2b137e8b1617b3dbed5e90206c5c5c4e0bbf1d3905b3d3e5d98",
       "sources": {}
     },
     {

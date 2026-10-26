@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_title_key_art_01",
+    "aspectRatio": "16:9",
+    "prompt_file": "content/generated/openai/sol_title_key_art_01/prompt.txt",
+    "prompt": "Generate a NEW original production game title-screen illustration for Unaware of My Demise, a melancholic Gothic anime tactical RPG. The two supplied images are IDENTITY REFERENCES ONLY, not edit targets: repaint the entire scene from scratch. Do not copy their pose, green backgrounds, or composition.\n\nOutput: a wide 16:9 landscape title key art, native high resolution, preferably 2560x1440 or higher. No text, letters, logos, watermark, interface, panels, buttons, border or typography. This image will sit behind real Unity UI. Reserve the LEFT 43% as low-detail charcoal-plum mist and dark negative space, with only distant faint architecture, for an ivory title and large button. Place the emotional character focal point on the RIGHT 55%, with generous outer margins that survive phone crop.\n\nScene: the canon's forgotten stone crossing along the ash road at blue-grey dusk: weathered stone bridge, damp paving, distant ruined bell tower softened by grey mist, sparse drifting ash, a quiet dark eclipse high behind the tower with one fine muted crimson ring. Restrained matte plum and charcoal shadows, bone-ivory highlights, silver-lilac accents, one small warm amber practical light. Intimate, solemn, beautiful, hopeful companionship; no horror, no gore, no crosses or holy symbols. Painterly Gothic light-novel anime illustration with fine colored lines, softly cel-shaded adult faces and richly painted matte cloth and weathered metal. Avoid glossy 3D rendering, excessive black crush, neon, busy filigree over the whole image.\n\nFADYME is foreground right, shown knee-up in a fresh three-quarter pose, turned slightly toward the empty road at left, holding her small silver thorn-bell on a chain naturally. Adult mature refined face, violet eyes, voluminous layered pale ASH-BLONDE hair (not pure white), hood RAISED. Deep plum-black pilgrim hood and mantle with silver-lilac vine embroidery, asymmetric thorny silver spiderweb filigree along the hood rim, small bell at temple, high wrapped WHITE CLOTH scarf (not lace), dark gloves, fitted dignified Gothic dress, two worn leather belts and fine silver chains. NO tiara on top of hood. Her face and hood must match reference image 1 closely. Her expression: composed and quietly compassionate, no pin-up posing.\n\nMAHMUT stands slightly behind and to her left within the right half, a protective grounded adult knight, waist-up or knee-up, looking down the road. Tousled dark-brown hair, amber-gold eyes, subtle jaw stubble, deep crimson scarf-cloak, scuffed dark gunmetal half-plate. His chest has the crimson-and-silver EIGHT-POINTED STAR emblem and a small round empty black socket DIRECTLY ABOVE it. Sword sheathed, heater shield at his side if visible. Match reference image 2's identity, not its hand-over-chest pose.\n\nKeep the composition coherent as one painted scene with realistic overlap and scale. Characters remain clearly readable on a small landscape phone. The quiet left side is part of the composition, not a flat opaque box. No borrowed franchise layouts or recognizable third-party designs."
+  },
+  "references": [
+    { "path": "content/specs/character_locks/fadyme_canonical_boydan_lock.jpg", "sha256": "9745863cdb6579e04f9df790018898aefbb85e96d8a76616553a097d0b2e41d4", "role": "identity_reference_only" },
+    { "path": "content/specs/character_locks/mahmut_canonical_boydan_lock.jpg", "sha256": "60587ba742b337bbf621f291300ccd06401bd6c43d94d4c3c4424fbe62a684bc", "role": "identity_reference_only" }
+  ],
+  "outputs": [
+    { "file": "content/generated/openai/sol_title_key_art_01/source.png", "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a", "width": 1672, "height": 941, "native": true, "upscaled": false }
+  ],
+  "billing": { "mode": "builtin_tool", "api_spend_usd": null },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "New composition reviewed against both identity locks; no text or UI baked into pixels. Native 1672x941, below the final 2K art target; do not describe it as 2K or upscale it to satisfy that gate. Device and owner visual acceptance remain open."
+  }
+}

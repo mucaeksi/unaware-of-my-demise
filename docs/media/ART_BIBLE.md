@@ -1,5 +1,12 @@
 # UOMD Art Bible — the single visual contract for generated media
 
+**D-35, 2026-10-26:** GPT Sol/Codex creates all rebuilt visual assets with the built-in OpenAI image tool; prior Gemini
+art is reference-only for the rebuild. Provider/model/API-price statements below describe the historical Google pipeline,
+not a requirement to generate new images there. Retain the palette, identity locks, material rules and ingest/QC contract.
+Record actual native dimensions; the first Sol title image is an integration candidate at 1672x941, not native 2K. Final
+resolution, device and visual acceptance remain open. Music and reviewed Japanese speech keep their Gemini workflow and
+budget. Replacement progress: [SOL_VISUAL_REBUILD](SOL_VISUAL_REBUILD.json).
+
 v1 · 2026-10-11 · subordinate to `README.md` (sole master prompt) and `narrative/` canon; where they disagree they win and this file is corrected. For generation it supersedes the stale portrait-era `narrative/12_Production_Notes/Art_Source_Notes/ART_BIBLE.md` (1080×1920).
 Every `art_specs/*.json` (`ImageSpec`, `packages/shared/src/media.ts`) and every row of `docs/media/QUEUE_DATA.json` must obey this file. English only. **No paid image call is recorded in the budget ledger (`entries: []`)**: rules marked *(unverified)* are hypotheses to confirm on the first approved, budget-reserved batch (the media.ts request shape is also unexercised).
 Tags: **CANON** quoted from `narrative/` (path given) · **REF** read by eye from a reference image · **PROPOSAL** decision of this file, owner may replace · **UNKNOWN** not in canon: never invent it, never prompt for it.

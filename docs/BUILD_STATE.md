@@ -1,3 +1,11 @@
+# Build state — D-35 rebuild and evidence
+
+Current mandate: GPT Sol/Codex rebuilds the Unity client and replaces visual assets with newly generated OpenAI images. Starting source `f341b018`, workspace `E:/Unity/unaware-of-my-demise`. RB-00/RB-01 is in progress; first title art is a native 1672x941 integration candidate, not final 2K/store acceptance. Existing Gemini visuals remain references during migration. See [execution plan](handoff/SOL_REBUILD_PLAN.md) and [executed evidence](evidence/sol-rebuild-2026-10-26.json).
+
+Source, Editor, device and deployed evidence are separate. The historical sections below do not refresh their checks or ownership/path/provider assignments. D-35 and the root README govern.
+
+---
+
 # Build state — evidence and current gaps
 
 Reconciled **2026-10-14** for R08 completion working tree based on `0f2f3f11403942ef4b58f8691f2f06e8699d4a03`. [README](../README.md) is the master; [DEV_TRACKER.json](DEV_TRACKER.json) records exact scope/evidence. R08 is source complete and locally verified; R09 is deliberately not started. R08 was pushed as `a181a92248beacadf6bfb0444032943b057adea0`; the enclosing documentation commit completes the handoff. Subsequent implementation and all creative production pass to Argon 4 through Antigravity.

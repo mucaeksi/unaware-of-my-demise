@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "decision": "D-35",
+  "date": "2026-10-26",
+  "source": {
+    "startingRevision": "f341b018",
+    "scope": "RB-00/RB-01 first title delivery, verified working tree; not whole-game or store acceptance"
+  },
+  "editor": {
+    "version": "6000.3.27f1",
+    "liveMcp": true,
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "finalProjectErrors": 0,
+    "finalProjectWarnings": 0
+  },
+  "checks": {
+    "npmVerify": {
+      "result": "PASS",
+      "lint": true,
+      "typecheck": true,
+      "apiTests": 507,
+      "workspaceTestExecutions": 954,
+      "contentFilesReproduced": 206,
+      "note": "Workspace test count includes the five Unity-export tests also run by test:tools."
+    },
+    "unityEditMode": {
+      "result": "PASS",
+      "passed": 98,
+      "failed": 0,
+      "jobId": "449ff112591842ffadbbacb36dff39d2"
+    },
+    "headlessLogic": {
+      "result": "PASS",
+      "passed": 98,
+      "failed": 0,
+      "buildWarnings": 0,
+      "buildErrors": 0
+    },
+    "referenceCompile": {
+      "result": "PASS",
+      "assemblies": 10,
+      "errors": 0,
+      "note": "Uomd.Editor URP references use verified 17.3.0 signatures; actual Editor import also passed."
+    },
+    "skillAdapters": {
+      "result": "PASS",
+      "count": 66
+    },
+    "uxmlImport": {
+      "result": "PASS",
+      "importedWithErrors": false,
+      "importedWithWarnings": false
+    },
+    "uiInteraction": {
+      "result": "PASS",
+      "method": "PointerDown/PointerUp and KeyDown events dispatched to real runtime UI Toolkit controls through unityMCP",
+      "settingsOpen": true,
+      "closeButton": true,
+      "escapeCloseAndFocusRestore": true,
+      "tabMusicToEffects": true,
+      "musicVolumeBinding": true,
+      "muteSaveAndApply": true,
+      "originalPreferencesRestored": true
+    }
+  },
+  "visuals": {
+    "inventoryObligations": 434,
+    "legacyApprovedArtReferences": 258,
+    "additionalRuntimeStoreImages": 176,
+    "newCandidates": 1,
+    "finalAcceptedReplacements": 0,
+    "nativeSourceSize": [
+      1672,
+      941
+    ],
+    "upscaled": false,
+    "generator": "image_gen.imagegen",
+    "provenance": "content/generated/openai/sol_title_key_art_01/run.provenance.json"
+  },
+  "captures": [
+    {
+      "path": "docs/evidence/sol-title-1920x1080-2026-10-26.webp",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 275690,
+      "sha256": "11cfeded942bb54f5c3b0fbe4c10f92c93bd542f11f9c67e6370660232f8ad4e"
+    },
+    {
+      "path": "docs/evidence/sol-title-2400x1080-2026-10-26.webp",
+      "width": 2400,
+      "height": 1080,
+      "bytes": 293226,
+      "sha256": "14c79c25dd6ed19a9bc26456f5e4ce5a383f0990171df4798fa17341582ca234"
+    },
+    {
+      "path": "docs/evidence/sol-title-1600x1200-2026-10-26.webp",
+      "width": 1600,
+      "height": 1200,
+      "bytes": 224782,
+      "sha256": "5497b5071ed0cb297466a9b9056e78be6de89c609bbc95daca000cbd3a07ecc1"
+    },
+    {
+      "path": "docs/evidence/sol-settings-1920x1080-2026-10-26.webp",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 40436,
+      "sha256": "d0ee5ab30c4ae4684a6a4bd9e774d0c10f95748224b9596854ca91ca61bf2885"
+    }
+  ],
+  "unverified": [
+    "Native Google sign-in and UMP consent on Android",
+    "Physical-device, notch/safe-area, performance, Billing, ads and Play sandbox",
+    "Signed release AAB and unchanged-AAB season",
+    "Full startup/story/tutorial/restart flow of the rebuilt client",
+    "Final 2K and owner visual acceptance of the first image",
+    "Replacement of remaining historical visuals",
+    "Current deployed Cloudflare behavior"
+  ],
+  "next": "Complete rebuilt startup/studio, then prologue/story/tutorial presentation with newly generated visuals.",
+  "delivery": {
+    "localCommitOnly": true,
+    "pushed": false,
+    "deployed": false
+  }
+}

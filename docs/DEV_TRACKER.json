@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "19dee46",
-  "reviewedAt": "2026-10-25",
+  "sourceCommit": "f341b018",
+  "reviewedAt": "2026-10-26",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
-    "id": "D-31 (Claude Opus 5.5 Exclusive Ownership & Unity 6 LTS Migration)",
+    "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "All 28 Unity screens are ported from the TS client (U-5 UI pass) on top of battle VFX (U-4b) and remote patching (U-2); the first AAB is rebuilt from it. Next: Google Play checkout + rewarded ads in Unity, the operation journal, server-sessioned campaign battles, ultimate cut-in/additive VFX light, Phase C staging publication (needs an Access service token or a Control Center publish), U-2b device-side validation, release signing (B-SIGNING), physical device QA.",
-    "workflow": "Decision D-31 (2026-10-24): 100% of project operations, architecture, engineering, Unity 6 LTS (C#, URP 2D) client migration (apps/unity/), and Gemini API creative asset production are transferred exclusively to Claude Opus 5.5 (claude-opus-5-5). Argon 4 / Antigravity and Codex are retired from active ownership. Phase U-0 tooling (tools/export_unity_bundle.ts, npm run export:unity) and blueprint (docs/handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) are live on main; apps/game remains in tree as the behavioral/test oracle until Phases U-1..U-5 reach full parity."
+    "nextProposed": "RB-00/RB-01: verify the new title/settings, native OpenAI title candidate and provider provenance; then rebuild startup/studio and the first-install story/tutorial flow.",
+    "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped."
   },
   "now": [
+    {
+      "title": "D-35: Sol takes over the Unity rebuild (2026-10-26)",
+      "detail": "New native title/settings and original OpenAI title integration candidate; visual replacement inventory and execution plan established. Exact verification is recorded separately; this is not whole-client or release acceptance."
+    },
     {
       "title": "L-1: local bring-up on Unity 6.3 LTS 6000.3.27f1 (2026-10-25, Claude Opus 5.5)",
       "detail": "Batch upgrade from 6000.0.58f2: URP 17.3.0, test-framework 1.6.0, 2D/Addressables/Collections/Input System on their 6.3 versions, URP global settings migrated, Android min API 25 (Unity 6.3 minimum). 0 compiler errors, EditMode 98/98 in Unity 6.3, check:unity-compile 10/10 with 0 errors against the local editor, test:unity-logic 97/97, npm run verify green. Windows fixes: export:unity EBUSY (sharp file handle) and unity-status path separators. Open: MCP stdio connection, Play-mode audit, Android build on 6.3, device check."
