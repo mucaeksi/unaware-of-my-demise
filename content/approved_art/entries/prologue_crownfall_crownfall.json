@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_prologue_crownfall.webp",
-      "sha256": "d3c7c8e0b31d07c5580124c3b3240c6b993cc904a68fce73fa47a72e7dbcedec",
-      "pixels_sha256": "8ac4311724cd47c07000f5311438d033cf45f97a750e83a521ed6cfea7d775dc",
-      "bytes": 682878,
+      "sha256": "aa95cdc01cc2100cf5d2f7bff33e34803e01597372077dc71de4dbb546974188",
+      "pixels_sha256": "301b0d6bf8ff6d848054883b4001e2bd83086529a67ea2ef04dd1ec007fd5f4b",
+      "bytes": 125560,
       "width": 1920,
       "height": 1080
     }

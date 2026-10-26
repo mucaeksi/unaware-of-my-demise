@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/ui_title_bg.webp",
-      "sha256": "ffe2ec23acb52299a2bae1683284b5ae628851649fe89ecf7e47522ca59516d3",
-      "pixels_sha256": "7e8c7b2b789e714fa6b3949e3a26f9f892b99bbdc8b6412f49aa6d1ec2807390",
-      "bytes": 837944,
+      "sha256": "4a2f4bd9078bbd36cb25bf992025badb091f859fbfd939f5d1e171dcb908df14",
+      "pixels_sha256": "baa37afa76fb16722a5108fa01882134cbaf3a9f3162aa8d969f3ff764c0d28d",
+      "bytes": 155980,
       "width": 1920,
       "height": 1080
     }

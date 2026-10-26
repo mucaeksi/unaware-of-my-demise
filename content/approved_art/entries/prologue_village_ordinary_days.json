@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_prologue_ordinary_days.webp",
-      "sha256": "47c3bcab07391a2493a29b2dd8a52d224a5bfa78703e3a06785c54a1d391c205",
-      "pixels_sha256": "51f21537969184d93aa391b007b0704a1209289f7d6b53af4b6c9165366ec4a1",
-      "bytes": 827776,
+      "sha256": "c3d212c1fb39fd2b764b8929639e9742587848a6cacb9009d77bf2299b41b18f",
+      "pixels_sha256": "3e34d07e263845f880517fded0736695fdb7ce0ff5cd705f52349a1bbe6ccc87",
+      "bytes": 128860,
       "width": 1920,
       "height": 1080
     }

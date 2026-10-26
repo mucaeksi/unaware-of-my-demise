@@ -31,9 +31,9 @@
   "outputs": [
     {
       "path": "art/still_prologue_throne_wars.webp",
-      "sha256": "2d18f9ce32f1b3254d2a21b5a6465a46a24d7fb982245d44abe367a84bcb93ad",
-      "pixels_sha256": "1e36d99331ecb972e7b19c46fb732239292e479aed9ecb03ace49354e322dc4c",
-      "bytes": 496422,
+      "sha256": "6ff6809b81d48de64272764744c6cf3f650b6229ff5181fc92523c2a9ed68d85",
+      "pixels_sha256": "d2fd0e66f96b887d18bec870fd47b0327fc369a6bafb34cba45a6247aca1d3f1",
+      "bytes": 79930,
       "width": 1920,
       "height": 1080
     }
