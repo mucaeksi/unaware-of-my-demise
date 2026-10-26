@@ -75,5 +75,9 @@ Use Unity features where their visible effect serves the scene and survives the 
 | Assets/data | Authored configs and existing verified patch/media loading; initial binary carries runtime code and capability foundations | Reproducible export, native dimensions, source/alpha/slicing, signed data-only patch compatibility |
 | Release | IL2CPP ARM64, Android lifecycle, graphics/thermal/memory and native provider integrations | Signed artifact and physical-device evidence; owner release approval |
 
-Next production package: new story portraits and the three tutorial stages, followed by the real battle presentation.
+Owner review requirement added 2026-10-26: before scaling asset production, implement a usable Editor-only Production
+Review workbench for asset/revision browsing, actual scene/shot preview, playback/aspect controls, feedback and captures.
+Its concrete scope and isolation/acceptance requirements are in [the CLI context handoff](CODEX_CLI_MASTER_PROMPT.md#9-owner-inspection-and-revision-workflow--first-new-implementation-task).
+This workbench is planned, not implemented by the documentation handoff. Then produce new story portraits and the three
+tutorial stages, followed by the real battle presentation.
 Do not count old Gemini consumers, placeholder art, Editor captures or a local compile as a finished Android release.

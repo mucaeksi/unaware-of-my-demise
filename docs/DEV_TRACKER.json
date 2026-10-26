@@ -7,10 +7,14 @@
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "RB-02: new story portraits and three tutorial stages; rebuild narrative/tutorial interaction, durable Continue/restart, then real battle presentation.",
+    "nextProposed": "Owner-review tooling: implement the Editor-only Production Review workbench specified in docs/handoff/CODEX_CLI_MASTER_PROMPT.md; then new story portraits, three tutorial stages, durable Continue/restart and real battle presentation.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped."
   },
   "now": [
+    {
+      "title": "D-35: Codex CLI production context and owner review requirements (2026-10-26)",
+      "detail": "Documentation handoff under README: docs/handoff/CODEX_CLI_MASTER_PROMPT.md records the 51d8d638 implementation baseline, critical C#/Unity architecture, original-image/provenance workflow, actual evidence, remaining production route and required owner art/scene revision workflow. Root AGENTS links it. The Production Review workbench is planned, not implemented; historical runtime checks are not refreshed by this documentation change. Native package-ID discrepancy is explicitly recorded for release reconciliation."
+    },
     {
       "title": "D-35: native opening and nine original prologue paintings (2026-10-26)",
       "detail": "Owner approved the first title visual and ongoing art direction. Startup/studio/prologue now use dedicated native UI Toolkit and URP 2D controllers; ten new OpenAI assets with prompt, native dimensions and provenance. Audio-clock captions, pause/mute/manual read, first-view checkpoint and replay preserved. Old startup/title/prologue controllers and flattened-video fallback removed. Scoped local evidence: docs/evidence/sol-opening-2026-10-26.json. Story portraits, tutorials, battle, hub and device acceptance remain."

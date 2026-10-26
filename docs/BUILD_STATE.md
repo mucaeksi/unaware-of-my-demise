@@ -10,6 +10,10 @@ removed. The owner approved the first title image's visual quality and direction
 [opening evidence](evidence/sol-opening-2026-10-26.json). Tutorials, battle, hub/system screens and device acceptance remain
 in the rebuild queue; this is scoped local evidence.
 
+The owner subsequently requested a reusable CLI context/master prompt and direct art/scene inspection and revision.
+[CODEX_CLI_MASTER_PROMPT](handoff/CODEX_CLI_MASTER_PROMPT.md) documents that context and specifies the next Editor-only
+Production Review workbench. This documentation delivery does not implement the workbench or refresh runtime test results.
+
 ---
 
 # Build state — evidence and current gaps

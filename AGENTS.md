@@ -19,6 +19,14 @@ Game-view captures after changes. Use the current tool schemas and API reflectio
 and the pinned skill sources intact. Load relevant `.agents/skills/` adapters and their canonical sources; validate with
 `python tools/sync_codex_skills.py --check`. No skill grants new credentials, hooks, paid spending or external permissions.
 
+## CLI production context and owner review
+
+For a production/rebuild continuation, read [CODEX_CLI_MASTER_PROMPT](docs/handoff/CODEX_CLI_MASTER_PROMPT.md) in full after
+README and this entry point. It records the implemented C# architecture, latest scoped evidence, image pipeline and the
+owner's requirement to inspect/revise real assets and Unity scenes. The next planned production task is an Editor-only
+Production Review workbench; it is not implemented merely because it is specified in that document. Preserve the actual
+current task scope: documentation/review-only requests do not authorize starting that implementation automatically.
+
 ## Historical host instructions (superseded ownership and paths)
 
 Read the root [README.md](README.md) completely before substantial work. It remains the sole engineering master prompt; `narrative/` remains the fiction/canon source. This file adapts the host, not the game specification.
