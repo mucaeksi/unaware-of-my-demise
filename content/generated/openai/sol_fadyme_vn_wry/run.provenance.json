@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_fadyme_vn_wry",
+    "aspectRatio": "2:3",
+    "prompt_file": "content/generated/openai/sol_fadyme_vn_wry/prompt.txt",
+    "prompt": "Use case: identity-preserve. Asset: sol_fadyme_vn_wry, one production knee-up light-novel dialogue portrait for Unaware of My Demise.\n\nImage 1 is the existing newly painted OpenAI fadyme composed master and the ONLY edit target: lock its exact character identity, costume construction, accessories, proportions, portrait crop, three-quarter orientation and painterly Gothic-anime finish. This is a new distinct expression/body-language variant, not a duplicate neutral image. Preserve fine colored linework, softly cel-shaded adult face, matte cloth, worn leather/metal, cool ambient light and restrained warm rim.\n\nIdentity invariants: Adult Fadyme Veyr, age 22: exactly the same mature face, pale ash-blonde hair, violet eyes, raised deep-plum hood, silver-lilac thorn embroidery, small bell pin beside her face, plain wrapped white cloth scarf, gloves, embroidered high-neck dress, leather double belts, silver chain and small bell. No tiara, lace jabot, new symbol, white curse streak, exposed cleavage or changed costume.\n\nChange only this acting: Wry amusement: one eyebrow slightly raised, a tiny asymmetric closed-mouth smile and attentive violet eyes. Her head inclines no more than three degrees. Her free gloved hand opens palm-up near the waist in a small dry conversational gesture, while the other holds the chain and silver bell clearly beside the upper hip. Subtle, adult and restrained, not a comic wink.\n\nComposition invariants: vertical 2:3, match the master camera distance and knee-up crop; full hood/hair and shoulders inside frame, face at the same height and scale. Face and gaze toward VIEWER-LEFT, for the right dialogue slot. Keep hands, bell/sword hilt and all acting above the bottom third and fully inside the canvas. Preserve safe room around the head, elbows and props; the lower knee-up cloth crop is intentional. Do not add boots or a floor. Request the master's native 1024x1536 canvas; never upscale a smaller image.\n\nAnatomy constraint: exactly TWO arms and TWO hands total. Reposition the existing free hand; completely erase its previous hand/finger pose instead of leaving it on the belt. Never add a third arm or hand. Hands connect to the matching sleeve and wrist.\n\nOutput: one finished standalone character with TRUE TRANSPARENT ALPHA outside the silhouette and in gaps between arms, cloak and props. Empty space must be fully transparent: remove any backdrop or diffuse halo from the edit target, with no dark/brown vignette, haze, shadow, green screen or painted checkerboard. No scenery, aura, particles, cast shadow, frame, caption, letters, UI, watermark, second character, or expression grid. Retain the exact face and outfit; produce the requested clearly distinguishable, anatomically correct acting.\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+      "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+      "role": "openai_identity_crop_and_costume_edit_target"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_fadyme_vn_wry/source.png",
+      "sha256": "1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+      "width": 1024,
+      "height": 1536,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-509febd1-55fd-41f8-a130-86caa42d92f4.png",
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Distinct expression/body-language edit of the OpenAI composed master. Agent inspected identity, anatomy, props and frame. Native dimensions recorded without enlargement. Owner, native-2K and device acceptance remain open. Explicit Sol review variants; normal authored emotion mappings remain unchanged."
+  }
+}

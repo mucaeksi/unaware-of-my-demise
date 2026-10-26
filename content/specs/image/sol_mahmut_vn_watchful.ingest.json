@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "asset_id": "sol_mahmut_vn_watchful",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "0b6224bac4f8",
+    "provenance": "content/generated/openai/sol_mahmut_vn_watchful/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 90,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 360000
+  },
+  "manifest": {
+    "character": "mahmut",
+    "image": "sol_watchful",
+    "emotion_tags": [
+      "sol_watchful"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}

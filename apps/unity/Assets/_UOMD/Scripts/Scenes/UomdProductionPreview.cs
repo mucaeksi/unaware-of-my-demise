@@ -19,6 +19,14 @@ namespace Uomd.Scenes
         public string lineId = "";
         public bool paused, muted = true, reducedMotion, reduceFlash, subtitles = true, safeArea;
         public RebuildShotSettings presentation = new RebuildShotSettings();
+
+        public string PortraitCharacter => PortraitParts.Length >= 2 ? PortraitParts[1] : "";
+        public string PortraitVariant => PortraitParts.Length == 2 ? "composed" : PortraitParts.Length == 3 ? PortraitParts[2] : "";
+        private string[] PortraitParts => scenario.StartsWith("portrait/", StringComparison.Ordinal) ? scenario.Split('/') : Array.Empty<string>();
+
+        public string PortraitPath(UomdMediaCatalog catalog, string character, string emotion) =>
+            PortraitVariant == "authored" ? catalog.SolPortrait(character, emotion)
+            : catalog.PortraitImage(character, "sol_" + (character == PortraitCharacter ? PortraitVariant : "composed"));
     }
 
     public sealed partial class UomdSceneRouter
@@ -60,12 +68,16 @@ namespace Uomd.Scenes
                 case "boot": screen = UomdScreenId.Boot; break;
                 case "studio": screen = UomdScreenId.Studio; break;
                 case "title": screen = UomdScreenId.Title; break;
-                case "portrait/fadyme":
-                case "portrait/mahmut":
-                    screen = UomdScreenId.Story;
-                    if (string.IsNullOrEmpty(request.lineId)) request.lineId = request.scenario == "portrait/fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002";
-                    break;
                 default:
+                    if (request.scenario.StartsWith("portrait/", StringComparison.Ordinal))
+                    {
+                        if ((request.PortraitCharacter != "fadyme" && request.PortraitCharacter != "mahmut") ||
+                            (request.PortraitVariant != "authored" && Media.Catalog.PortraitImage(request.PortraitCharacter, "sol_" + request.PortraitVariant) == null))
+                            throw new ArgumentException("Unknown rebuilt portrait scenario.");
+                        screen = UomdScreenId.Story;
+                        if (string.IsNullOrEmpty(request.lineId)) request.lineId = request.PortraitCharacter == "fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002";
+                        break;
+                    }
                     if (!request.scenario.StartsWith("prologue/", StringComparison.Ordinal)) throw new ArgumentException("This scenario is not rebuilt yet.");
                     var shots = Session.PrologueConfig.scenes;
                     request.shot = Array.FindIndex(shots, s => "prologue/" + s.id == request.scenario);

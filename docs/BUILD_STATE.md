@@ -4,6 +4,8 @@ Current mandate: GPT Sol/Codex rebuilds the Unity client and replaces visual ass
 
 Source, Editor, device and deployed evidence are separate. The historical sections below do not refresh their checks or ownership/path/provider assignments. D-35 and the root README govern.
 
+Expression delivery (2026-10-26): six OpenAI variants complete two four-pose candidate sets. Editor review supports separate poses and canonical T1 emotions, including the companion's prior expression when seeking. Unity CLI-only checks: EditMode 126/126, headless logic 111/111, twelve-assembly reference compile with zero errors, repository verification PASS and nine final Game-view captures. Native source 1024×1536; final art, normal story migration, stages/UI, Android and release acceptance remain open. [Evidence](evidence/sol-story-expressions-2026-10-26.json).
+
 Second delivery: new studio emblem and nine individually generated prologue plates, native URP 2D stage and live UI Toolkit
 captions/controls. Original 120-second narrative and entry contracts retained; obsolete startup/title/prologue controllers
 removed. The owner approved the first title image's visual quality and direction for further production. See

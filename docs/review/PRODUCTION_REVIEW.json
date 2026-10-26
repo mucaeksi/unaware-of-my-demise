@@ -147,6 +147,78 @@
             "metadata": "captures/20261026T140246942_cc8bb2bc.json",
             "scenario": "portrait/mahmut",
             "lineId": "tutorial_t1_before_002"
+        },
+        {
+            "id": "20261026T165414548_71b37ce2",
+            "image": "captures/20261026T165414548_71b37ce2.png",
+            "sha256": "0a97b17f7f5247e6409a6decc5af8ffab4ded9bb8f5c497ad38c7e3cd541262a",
+            "metadata": "captures/20261026T165414548_71b37ce2.json",
+            "scenario": "portrait/fadyme/resolve",
+            "lineId": "tutorial_t1_before_014"
+        },
+        {
+            "id": "20261026T165419618_50b9610c",
+            "image": "captures/20261026T165419618_50b9610c.png",
+            "sha256": "e7522548ed1e2b5df553f2798d69617d7a34651584a39c428305c1c34583742e",
+            "metadata": "captures/20261026T165419618_50b9610c.json",
+            "scenario": "portrait/fadyme/warm",
+            "lineId": "tutorial_t1_before_005"
+        },
+        {
+            "id": "20261026T165424471_5b7c2be8",
+            "image": "captures/20261026T165424471_5b7c2be8.png",
+            "sha256": "83b6581c71ba529f00470df17534b67d5edb152f66433c89a6cb91c78831c949",
+            "metadata": "captures/20261026T165424471_5b7c2be8.json",
+            "scenario": "portrait/fadyme/wry",
+            "lineId": "tutorial_t1_before_003"
+        },
+        {
+            "id": "20261026T165429627_e32d6c2a",
+            "image": "captures/20261026T165429627_e32d6c2a.png",
+            "sha256": "199bb685c7f3b9e01234b13c426a7d3153ac5f69ed0d5f840dad78ef8a692b05",
+            "metadata": "captures/20261026T165429627_e32d6c2a.json",
+            "scenario": "portrait/mahmut/dry_humor",
+            "lineId": "tutorial_t1_before_004"
+        },
+        {
+            "id": "20261026T165434670_55b20df2",
+            "image": "captures/20261026T165434670_55b20df2.png",
+            "sha256": "5251080a555d15a200620ca56f7ca33dd05ffc99b91f76b2fdfefdaa8fe9b0d8",
+            "metadata": "captures/20261026T165434670_55b20df2.json",
+            "scenario": "portrait/mahmut/protective_resolve",
+            "lineId": "tutorial_t1_before_013"
+        },
+        {
+            "id": "20261026T165440363_8cdf6bbf",
+            "image": "captures/20261026T165440363_8cdf6bbf.png",
+            "sha256": "33e78636e174c2db0f5a020d851f67840a0e4f5f0ea2a8de20892c723758af71",
+            "metadata": "captures/20261026T165440363_8cdf6bbf.json",
+            "scenario": "portrait/mahmut/watchful",
+            "lineId": "tutorial_t1_before_002"
+        },
+        {
+            "id": "20261026T165523998_d3c23858",
+            "image": "captures/20261026T165523998_d3c23858.png",
+            "sha256": "4876431be1e7419defe407ac18b2e46a5941b7c4b6c321a66b8604aebb22b7e9",
+            "metadata": "captures/20261026T165523998_d3c23858.json",
+            "scenario": "portrait/fadyme/authored",
+            "lineId": "tutorial_t1_before_005"
+        },
+        {
+            "id": "20261026T165526449_b4945087",
+            "image": "captures/20261026T165526449_b4945087.png",
+            "sha256": "b45ccd69e8984665e8e6d81fd676582da9e907ded37725c3e811b62bc2d4763f",
+            "metadata": "captures/20261026T165526449_b4945087.json",
+            "scenario": "portrait/fadyme/authored",
+            "lineId": "tutorial_t1_before_005"
+        },
+        {
+            "id": "20261026T165529175_8431daf3",
+            "image": "captures/20261026T165529175_8431daf3.png",
+            "sha256": "d7e99cfbaa82c0a029ec6d77e0c867394b5ed821a18a5ce162c4c42def410bfc",
+            "metadata": "captures/20261026T165529175_8431daf3.json",
+            "scenario": "portrait/fadyme/authored",
+            "lineId": "tutorial_t1_before_005"
         }
     ]
 }

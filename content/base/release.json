@@ -24,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "897afcdfe9257f67ca50735261e75a51b4ead1d20a98646e161ca34e688d8a5d",
-      "bytes": 23352,
+      "sha256": "e053912ac5be95f51082cb83a08cd9e5d2736eb5e66e663f87df147410aaad74",
+      "bytes": 23986,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -100,6 +100,27 @@
       "kind": "portrait"
     },
     {
+      "path": "art/portrait_fadyme_sol_resolve.webp",
+      "sha256": "28bfed8e80efb7bed9118be180ed999831aa3f4f5c9436aea401438487d8e205",
+      "bytes": 208700,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_fadyme_sol_warm.webp",
+      "sha256": "1e2430f28e6d676d24450df13a4582d61fab4a744c86db7840a9a61e19fcc483",
+      "bytes": 223792,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_fadyme_sol_wry.webp",
+      "sha256": "a4814e146ad8567ccb02e40715d704b5dcd547046282a21b172c6bbd57e2b69c",
+      "bytes": 212014,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
       "path": "art/portrait_fadyme_warm.webp",
       "sha256": "f67b7c3fa1baec25c14707bb5d003619ebb57aa4a40fb8c8240e4b846d7c4b08",
       "bytes": 69290,
@@ -138,6 +159,27 @@
       "path": "art/portrait_mahmut_sol_composed.webp",
       "sha256": "d1579b0c9951f8ff60676e6403e7e659a9932a3ce041ea44720048089ae16534",
       "bytes": 263010,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_sol_dry_humor.webp",
+      "sha256": "4d618edd07b317ce3eab259ec4ae1799028f25f0d6016a70b0445502a9ec9c12",
+      "bytes": 229064,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_sol_protective_resolve.webp",
+      "sha256": "38abce0df40dd8a23cd37a7dca70adebcd4a3defe80a596368a87a664aa76b5a",
+      "bytes": 249598,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_sol_watchful.webp",
+      "sha256": "b8e5784db9a9f75147f5e0ef4af5c138ea4f74654d7cb04fc539f90987202946",
+      "bytes": 250050,
       "media_type": "image/webp",
       "kind": "portrait"
     },

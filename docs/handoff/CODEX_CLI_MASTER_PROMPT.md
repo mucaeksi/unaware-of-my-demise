@@ -3,7 +3,7 @@
 **Owner:** Codex/Sol · **Snapshot:** 2026-10-26 · **Implementation baseline:** `51d8d638` on local `main`.
 **Workspace:** `E:\Unity\unaware-of-my-demise` · **Unity project:** `apps/unity/`.
 
-**Rolling checkpoint — 2026-10-26:** Production Review is LOCAL_TESTED (`a034dd5a`); parent `6167d874` separately enables the owner-added Unity CLI Pipeline. A subsequent [portrait pilot](../media/SOL_STORY_PORTRAIT_PILOT.md) adds two new OpenAI alpha masters and real T1 line review, bringing the workbench to thirteen candidates / 447 records. Use `Window → UOMD → Production Review`; [usage/limits](../review/README.md), [portrait evidence](../evidence/sol-portrait-masters-2026-10-26.json), [initial workbench evidence](../evidence/sol-production-review-2026-10-26.json). The explicit `sol_composed` override is Editor review only; remaining expressions, tutorial stages, narrative UI, battle/hub adapters and full entry/device acceptance remain future work. Normal Story now honors authored music stop. Desktop Computer Use still denied Unity access despite owner authorization; MCP/menu/typed controls and actual Editor tests provide scoped evidence. The older snapshot counts below describe their original delivery, not newly rerun acceptance.
+**Rolling checkpoint — 2026-10-26:** after `2e1b615f`, six more built-in OpenAI edits complete four candidate poses per lead. Production Review has nineteen candidates / 453 records, fixed pose scenarios and canonical-emotion T1 seeking that reconstructs the companion state. Current owner instruction: **Unity CLI only**, using the installed Pipeline; preserve existing MCP configuration and pinned sources. [Expression guide](../media/SOL_STORY_EXPRESSIONS.md), [evidence](../evidence/sol-story-expressions-2026-10-26.json). Three tutorial stage paintings, native narrative/tutorial UI, normal consumer migration and complete entry/device acceptance are next. Older counts below remain dated snapshots.
 
 This is an executable working brief for a new Codex CLI session. Read it completely, inspect the current checkout, then
 perform the owner's current task. It preserves this conversation's decisions, implementation and outstanding work.
@@ -72,13 +72,11 @@ Read all applicable nested `AGENTS.md` instructions before editing their directo
 changes. At the snapshot there was an unrelated, untracked `codex_watcher.ps1`; leave it untouched and do not run it.
 If that state has changed, trust the actual checkout. Never clean or reset the whole tree to match this document.
 
-Discover available MCP and image tools in **this CLI session**. Desktop availability does not establish CLI connectivity.
+Discover Unity CLI commands and the built-in image tool in **this session**. The owner now requires CLI-only Unity access; do not use Unity MCP as a fallback. Preserve its existing configuration.
 Use Graphify as structural navigation when available, then verify findings against source. The last code-only graph had
 6,427 nodes / 17,593 edges / 245 communities; it is ignored, local and may need rebuilding in another checkout.
 
-For live Unity work, read **`mcpforunity://editor/state`** from **`unityMCP`**. Select the right instance if several exist.
-The previously connected instance was `unity@6259154c`; it is an observation, not a stable identifier to hardcode.
-The owner opens `apps/unity/` in **Unity 6000.3.27f1**, Window → MCP for Unity, transport **stdio**.
+For live Unity work, use `unity status --format json` and `unity command editor status` with the explicit `--project-path E:/Unity/unaware-of-my-demise/apps/unity`. Pipeline `0.9.1-exp.1` is pinned in the project. Discover current command schemas with `unity command <group>`; include `--caller plugin --skill unity-cli` on Editor-driving invocations. The owner requires **CLI only**; historical MCP connection notes below are evidence, not current access instructions.
 
 If live Unity is unavailable, report the missing connection precisely, continue independent source/content/check work,
 and do not claim GameObjects, scene configuration, shader import, rendering or screenshots were verified. Do not invent
@@ -620,9 +618,7 @@ python tools/sync_codex_skills.py --check
 & 'C:\Program Files\Git\bin\bash.exe' tools/build_graph.sh
 ```
 
-Use the actual Unity MCP schemas for refresh, console, EditMode/PlayMode jobs and screenshots. Poll async test jobs to a
-real completion result. `refresh_unity(wait_for_ready: true)` can still return a compiling state; inspect actual readiness
-before using new types. A zero-error reference compile does not prove shaders, assets or scenes import correctly.
+Use the actual Unity CLI schemas for `script recompile`, `script recompile_status`, `console get`, `test run --mode editor --async_tests true` and `test status`. Poll tests to a real completion result and check live readiness before using newly compiled types. Use `script eval_file` with public typed review/capture entry points for reproducible Game views. A zero-error reference compile does not prove asset import or rendering.
 
 `Uomd.EditorTools.UomdMcpEditorTools` in `Assets/_UOMD/Editor/UomdMcpEditorTools.cs` already exposes project inspection,
 bundle/parity checks and `CaptureGameViewScreenshotToPath(absolutePath)`. Some camera screenshot APIs omit UI Toolkit;
@@ -632,6 +628,7 @@ Common host pitfalls observed here:
 
 - On Windows, the API suite took roughly nine minutes with little intermediate output. Observe process/progress before
   declaring a hang. Avoid blocking waits over 60 seconds without owner updates.
+- Pipeline CLI may report `STATUS_BLOCKED_BY_DIALOG` for transient `Hold on...` or `Running managed callbacks` progress during Play/domain reload. Bounded readiness retries handle those observed automatic progress states; do not dismiss unknown dialogs or substitute MCP. Keep cleanup in a finally path and distinguish a restored failed probe from a completed PASS.
 - Editor Play transition/domain reload can temporarily leave the router uninitialized. Check actual session/controller
   readiness and focus/repaint the Game view. `Application.runInBackground = true` may be used for isolated Editor capture;
   do not change Android background/lifecycle policy to make a desktop probe pass.

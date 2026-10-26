@@ -8,9 +8,9 @@
     "total_obligations": 434,
     "approved_art_references": 258,
     "additional_runtime_store_images": 176,
-    "integration_candidates": 13,
+    "integration_candidates": 19,
     "final_accepted_replacements": 0,
-    "generated_replacement_assets": 13,
+    "generated_replacement_assets": 19,
     "owner_style_approved_assets": 1
   },
   "acceptance": [
@@ -1760,7 +1760,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_fadyme_vn_composed",
-      "consumer_scope": "Explicit sol_composed variant in Editor portrait review only. Canonical authored emotion mappings retain historical references until the full expression set and scene pass."
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "fadyme_vn_resolve",
@@ -1774,8 +1774,9 @@
           "height": 1152
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_fadyme_vn_resolve",
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "fadyme_vn_warm",
@@ -1789,8 +1790,9 @@
           "height": 1152
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_fadyme_vn_warm",
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "fadyme_vn_wry",
@@ -1804,8 +1806,9 @@
           "height": 1152
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_fadyme_vn_wry",
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "garrick_cinder_chibi_sheet",
@@ -2436,7 +2439,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_mahmut_vn_composed",
-      "consumer_scope": "Explicit sol_composed variant in Editor portrait review only. Canonical authored emotion mappings retain historical references until the full expression set and scene pass."
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "mahmut_vn_dry_humor",
@@ -2450,8 +2453,9 @@
           "height": 1152
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_mahmut_vn_dry_humor",
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "mahmut_vn_protective_resolve",
@@ -2465,8 +2469,9 @@
           "height": 1152
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_mahmut_vn_protective_resolve",
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "mahmut_vn_watchful",
@@ -2480,8 +2485,9 @@
           "height": 1152
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_mahmut_vn_watchful",
+      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
     },
     {
       "id": "marek_vane_chibi_sheet",

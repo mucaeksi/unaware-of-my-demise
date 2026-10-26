@@ -3,12 +3,12 @@
 First slice, LOCAL_TESTED on 2026-10-26. Open **Window → UOMD → Production Review** in Unity 6000.3.27f1.
 The window is left open after delivery; Play Mode is stopped and `UomdMain` is restored.
 
-1. Pick one of the thirteen OpenAI candidates. Disable **OpenAI candidates** to browse all 447 records
-   (271 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
+1. Pick one of the nineteen OpenAI candidates. Disable **OpenAI candidates** to browse all 453 records
+   (277 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
 2. **Asset / provenance** shows stable ID/revision, native source dimensions, decoded alpha, exact source/prompt/reference
    hashes, QC, consumer mappings and existing owner feedback. Zoom/pan the checkerboard preview or compare a retained
    PNG/JPG source by its path and SHA-256. Ingest records and prior sources are never overwritten.
-3. **Real scene / directing** selects Boot, Studio, Title, any canonical opening shot or the two new portrait masters. Choose
+3. **Real scene / directing** selects Boot, Studio, Title, any canonical opening shot or the eight rebuilt portrait poses. Choose
    **Open isolated preview**, then **Restart / show selected** when changing scenarios. This runs the actual production
    controllers in `ProductionReviewPreview.unity`, with a fresh session and embedded `rel_0001` content.
 4. Pause/restart, audition audio, toggle subtitles/reduced motion/flash and choose 1920×1080, 2400×1080 or 1600×1200.
@@ -52,9 +52,12 @@ PlayMode audio 3/3, headless logic 101/101 and repository verification. See [exe
 
 Portrait extension: `portrait/fadyme` and `portrait/mahmut` load the real T1 Story controller. Select a canonical line, then restart/show it. The static `sol_composed` master override is explicit: authored emotion mappings remain unchanged. Both new actors and the historical background are identified by consumed paths and source identities in capture metadata. Pause holds line/voice; subtitle visibility controls the dialogue panel. Stage camera/light/particle sliders and applying stage authoring are disabled for portraits. [Sources/prompts and exact scope](../media/SOL_STORY_PORTRAIT_PILOT.md); [latest evidence](../evidence/sol-portrait-masters-2026-10-26.json).
 
-Latest extension checks: EditMode 115/115, PlayMode 3/3, logic 102/102, thirteen source chains, normal T1 music stop and unchanged preference snapshot, three pixel sizes, Editor/player reference compile and repository verification PASS. Two genuine agent QC notes added; no owner acceptance created.
+The earlier portrait pilot checks were EditMode 115/115, PlayMode 3/3 and logic 102/102; those remain dated pilot evidence.
+
+Expression extension: select `portrait/fadyme/resolve`, `/warm`, `/wry`, or `portrait/mahmut/dry_humor`, `/protective_resolve`, `/watchful` for a fixed selected pose. The original `portrait/fadyme` and `portrait/mahmut` remain composed-master checks. Select either character's `/authored` scenario to follow the canonical emotion aliases with both rebuilt actors. Seeking reconstructs the companion's earlier expression without playing skipped voice lines. Scenario IDs keep pose-specific feedback/captures separate. Normal story consumers remain unchanged until rebuilt stages/UI are integrated.
+
+Current expression checks: EditMode 126/126, logic 111/111, twelve-assembly reference compile, repository verification, all fourteen T1 lines compared against both expected actor poses, three captured pixel sizes, paused resize/voice and restored Editor/preferences. [Guide and prompts](../media/SOL_STORY_EXPRESSIONS.md); [evidence](../evidence/sol-story-expressions-2026-10-26.json). Agents connect to Unity through CLI only; no MCP configuration was removed. No owner acceptance was created.
 
 Limits: full story/tutorial/battle/hub authoring adapters remain future work; portrait masters have only the scoped adapter above. Audio seeking,
 layered actors/rigging, generating raster revisions from the window, physical Android validation and final art acceptance
-remain separate work. The initial workbench generated no media. The portrait extension generated two OpenAI images through the built-in tool; no Gemini/provider API generation was run and no undisclosed cost is claimed. Desktop pointer automation was denied Unity
-access by the host; Unity MCP/menu/public entry points and Editor tests were used, so manual pointer acceptance is unverified.
+remain separate work. The initial workbench generated no media; the earlier portrait pilot generated two OpenAI masters. The current expression delivery used seven built-in calls for six selected variants, retaining one rejected attempt. No Gemini/provider API generation or undisclosed cost is claimed. Desktop pointer automation was denied Unity access during the earlier pilot, which used MCP/menu/public entry points and Editor tests. The current delivery uses CLI only; native pointer acceptance remains unverified.

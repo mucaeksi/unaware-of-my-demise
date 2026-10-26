@@ -200,6 +200,18 @@ namespace Uomd.Scenes
                     if (generation != _generation) return;
                     if (texture == null) throw new InvalidOperationException("Portrait master failed to load: " + character);
                 }
+                if (_router.ProductionPreview.PortraitVariant == "authored")
+                {
+                    foreach (var command in _scene.commands)
+                    {
+                        string character = command.op == "show" ? command.character : command.speaker;
+                        if (character != "fadyme" && character != "mahmut") continue;
+                        string portrait = PortraitPath(character, command.emotion);
+                        var texture = await _router.Media.TextureAsync(portrait);
+                        if (generation != _generation) return;
+                        if (texture == null) throw new InvalidOperationException("Rebuilt emotion failed to load: " + character + "/" + command.emotion);
+                    }
+                }
                 await _router.Media.TextureAsync(_router.Media.Catalog.Background(_scene.location_id));
                 if (generation != _generation) return;
             }
@@ -298,10 +310,10 @@ namespace Uomd.Scenes
             if (PortraitReview)
             {
                 _skipButton.style.display = DisplayStyle.None;
-                var notice = UomdScreenKit.Text(_stage, "PORTRAIT MASTER REVIEW · sol_composed override · scene/UI art remains reference material", 18, UomdThemeTokens.GoldHi);
+                var notice = UomdScreenKit.Text(_stage, "PORTRAIT REVIEW · " + _router.ProductionPreview.PortraitCharacter + "/" + _router.ProductionPreview.PortraitVariant + " · scene/UI art remains reference material", 18, UomdThemeTokens.GoldHi);
                 notice.style.position = Position.Absolute;
                 notice.style.left = 60;
-                notice.style.top = 112;
+                notice.style.top = 14;
             }
 #endif
 
@@ -363,7 +375,12 @@ namespace Uomd.Scenes
                         return;
                     case "line":
 #if UNITY_EDITOR
-                        if (PortraitReview && e.lineId != _router.ProductionPreview.lineId) break;
+                        if (PortraitReview && e.lineId != _router.ProductionPreview.lineId)
+                        {
+                            // Rebuild both actors' prior expressions while seeking, without starting skipped voice lines.
+                            if (e.speaker != "narration") SetEmotion(e.speaker, e.emotion);
+                            break;
+                        }
 #endif
                         ShowLine(e);
                         return;
@@ -419,8 +436,8 @@ namespace Uomd.Scenes
         {
 #if UNITY_EDITOR
             if (PortraitReview)
-                return _router.Media.Catalog.PortraitImage(character, "sol_composed")
-                    ?? throw new InvalidOperationException("The new portrait master is missing: " + character);
+                return _router.ProductionPreview.PortraitPath(_router.Media.Catalog, character, emotion)
+                    ?? throw new InvalidOperationException("The rebuilt portrait is missing: " + character + "/" + emotion);
 #endif
             return _router.Media.Catalog.Portrait(character, emotion);
         }
@@ -465,7 +482,7 @@ namespace Uomd.Scenes
         private async Awaitable SwapPortrait(Actor actor, string path, int generation)
         {
             var texture = await _router.Media.TextureAsync(path);
-            if (generation == _generation && !_finished && texture != null && actor.Image?.panel != null)
+            if (generation == _generation && !_finished && actor.Path == path && texture != null && actor.Image?.panel != null)
                 actor.Image.style.backgroundImage = new StyleBackground(texture);
         }
 

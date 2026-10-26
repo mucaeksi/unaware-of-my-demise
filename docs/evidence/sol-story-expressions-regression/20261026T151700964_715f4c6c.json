@@ -1,0 +1,80 @@
+{
+    "schema": 1,
+    "id": "20261026T151700964_715f4c6c",
+    "capturedAt": "2026-10-26T15:17:01.1699811Z",
+    "sourceCommit": "2e1b615f6a02cc748d0911a4d46d164c813370e2",
+    "workingTreeScope": "M apps/api/seed/assets.sql\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdMediaCatalog.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n M apps/unity/Assets/_UOMD/Tests/EditMode/MediaCatalogTests.cs\n M apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs\n M content/base/art/art_manifest.json\n M content/base/release.json\n M content/provenance.json\n M docs/media/SOL_VISUAL_REBUILD.json\n M docs/review/PRODUCTION_REVIEW.json\n M docs/review/index.html\n?? codex_watcher.ps1\n?? content/approved_art/art/portrait_fadyme_sol_resolve.webp\n?? content/approved_art/art/portrait_fadyme_sol_warm.webp\n?? content/approved_art/art/portrait_fadyme_sol_wry.webp\n?? content/approved_art/art/portrait_mahmut_sol_dry_humor.webp\n?? content/approved_art/art/portrait_mahmut_sol_protective_resolve.webp\n?? content/approved_art/art/portrait_mahmut_sol_watchful.webp\n?? content/approved_art/entries/sol_fadyme_vn_resolve.json\n?? content/approved_art/entries/sol_fadyme_vn_warm.json\n?? content/approved_art/entries/sol_fadyme_vn_wry.json\n?? content/approved_art/entries/sol_mahmut_vn_dry_humor.json\n?? content/approved_art/entries/sol_mahmut_vn_protective_resolve.json\n?? content/approved_art/entries/sol_mahmut_vn_watchful.json\n?? content/base/art/portrait_fadyme_sol_resolve.webp\n?? content/base/art/portrait_fadyme_sol_warm.webp\n?? content/base/art/portrait_fadyme_sol_wry.webp\n?? content/base/art/portrait_mahmut_sol_dry_humor.webp\n?? content/base/art/portrait_mahmut_sol_protective_resolve.webp\n?? content/base/art/portrait_mahmut_sol_watchful.webp\n?? content/generated/openai/sol_fadyme_vn_resolve/\n?? content/generated/openai/sol_fadyme_vn_warm/\n?? content/generated/openai/sol_fadyme_vn_wry/\n?? content/generated/openai/sol_mahmut_vn_dry_humor/\n?? content/generated/openai/sol_mahmut_vn_protective_resolve/\n?? content/generated/openai/sol_mahmut_vn_watchful/\n?? content/specs/image/sol_fadyme_vn_resolve.ingest.json\n?? content/specs/image/sol_fadyme_vn_warm.ingest.json\n?? content/specs/image/sol_fadyme_vn_wry.ingest.json\n?? content/specs/image/sol_mahmut_vn_dry_humor.ingest.json\n?? content/specs/image/sol_mahmut_vn_protective_resolve.ingest.json\n?? content/specs/image/sol_mahmut_vn_watchful.ingest.json\n?? docs/review/captures/20261026T151555401_7ba76430.json\n?? docs/review/captures/20261026T151555401_7ba76430.png\n?? docs/review/captures/20261026T151600288_f6f142aa.json\n?? docs/review/captures/20261026T151600288_f6f142aa.png\n?? docs/review/captures/20261026T151605104_d682cd7c.json\n?? docs/review/captures/20261026T151605104_d682cd7c.png\n?? docs/review/captures/20261026T151610217_11eea109.json\n?? docs/review/captures/20261026T151610217_11eea109.png\n?? docs/review/captures/20261026T151615596_488672cb.json\n?? docs/review/captures/20261026T151615596_488672cb.png\n?? docs/review/captures/20261026T151620346_791439c9.json\n?? docs/review/captures/20261026T151620346_791439c9.png\n?? docs/review/captures/20261026T151658542_5c311935.json\n?? docs/review/captures/20261026T151658542_5c311935.png\n?? docs/review/captures/20261026T151700964_715f4c6c.png",
+    "contentRelease": "rel_0001",
+    "scenario": "portrait/fadyme/authored",
+    "lineId": "tutorial_t1_before_005",
+    "assetId": "",
+    "sourceSha": "",
+    "entrySha": "",
+    "assetRevision": 0,
+    "shot": -1,
+    "width": 2400,
+    "height": 1080,
+    "errorsObserved": 0,
+    "shotElapsed": 0.0,
+    "simulatedSafeArea": true,
+    "editorOnly": true,
+    "safeAreaDescription": "96 left/right, 28 top, 48 bottom authored panel px; representative only",
+    "imageSha": "a170313d6a6e3059d824f1ed9fc7668a9c106f0364af5ab3f1dfdb9640648ca4",
+    "selectedAssetIdentity": "sol_fadyme_vn_warm@1:6dd4d6c1fbaca7200f0aaafa4fa9b54b7486c8395da0b0746d87a743d9a0aa99",
+    "settings": {
+        "scenario": "portrait/fadyme/authored",
+        "shot": 0,
+        "lineId": "tutorial_t1_before_005",
+        "paused": true,
+        "muted": true,
+        "reducedMotion": true,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": true,
+        "presentation": {
+            "scenario": "title",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 434.0,
+        "y": 840.0,
+        "width": 1536.0,
+        "height": 57.0
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 96.0,
+        "y": 28.0,
+        "width": 2208.0,
+        "height": 1004.0
+    },
+    "stageCameras": 0,
+    "stageLights": 0,
+    "stageParticles": 0,
+    "imagePaths": [
+        "art/bg_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_warm.webp"
+    ],
+    "relatedAssetIdentities": [
+        "sol_fadyme_vn_warm@1:6dd4d6c1fbaca7200f0aaafa4fa9b54b7486c8395da0b0746d87a743d9a0aa99",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "bg_forest_whispering_ash_ordered@2:1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35"
+    ],
+    "bgmVolume": 0.699999988079071,
+    "effectsVolume": 0.8500000238418579,
+    "voiceVolume": 1.0,
+    "actualMuted": true
+}

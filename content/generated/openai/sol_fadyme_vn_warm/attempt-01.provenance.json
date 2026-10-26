@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_fadyme_vn_warm",
+    "aspectRatio": "2:3",
+    "prompt_file": "content/generated/openai/sol_fadyme_vn_warm/attempt-01.prompt.txt",
+    "prompt": "Use case: identity-preserve. Asset: sol_fadyme_vn_warm, one production knee-up light-novel dialogue portrait for Unaware of My Demise.\n\nImage 1 is the existing newly painted OpenAI fadyme composed master and the ONLY edit target: lock its exact character identity, costume construction, accessories, proportions, portrait crop, three-quarter orientation and painterly Gothic-anime finish. This is a new distinct expression/body-language variant, not a duplicate neutral image. Preserve fine colored linework, softly cel-shaded adult face, matte cloth, worn leather/metal, cool ambient light and restrained warm rim.\n\nIdentity invariants: Adult Fadyme Veyr, age 22: exactly the same mature face, pale ash-blonde hair, violet eyes, raised deep-plum hood, silver-lilac thorn embroidery, small bell pin beside her face, plain wrapped white cloth scarf, gloves, embroidered high-neck dress, leather double belts, silver chain and small bell. No tiara, lace jabot, new symbol, white curse streak, exposed cleavage or changed costume.\n\nChange only this acting: Warmth: a natural small sincere smile, softened eyes with a quiet trace of fatigue, a gentle three-degree head incline toward her companion. Her free gloved hand rests open against the plain scarf just below the collarbone, while the other holds the silver chain and bell at upper-waist height. Friendly and composed, never coy or romantic.\n\nComposition invariants: vertical 2:3, match the master camera distance and knee-up crop; full hood/hair and shoulders inside frame, face at the same height and scale. Face and gaze toward VIEWER-LEFT, for the right dialogue slot. Keep hands, bell/sword hilt and all acting above the bottom third and fully inside the canvas. Preserve safe room around the head, elbows and props; the lower knee-up cloth crop is intentional. Do not add boots or a floor. Request the master's native 1024x1536 canvas; never upscale a smaller image.\n\nOutput: one finished standalone character with TRUE TRANSPARENT ALPHA outside the silhouette and in gaps between arms, cloak and props. Empty space must be fully transparent: remove any backdrop or diffuse halo from the edit target, with no dark/brown vignette, haze, shadow, green screen or painted checkerboard. No scenery, aura, particles, cast shadow, frame, caption, letters, UI, watermark, second character, or expression grid. Retain the exact face and outfit; produce the requested clearly distinguishable, anatomically correct acting.\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+      "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+      "role": "openai_identity_crop_and_costume_edit_target"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_fadyme_vn_warm/attempt-01.png",
+      "sha256": "f1092d27bc80b18f2f65b833834e01e9ee0d0b1e2dceab287928412f5ae5ba52",
+      "width": 1024,
+      "height": 1536,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-6b201afc-c257-4532-a149-262f915e6ee7.png",
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "rejected_candidate",
+    "by": "codex:art-director",
+    "note": "Third hand remained at the waist after the scarf gesture. Retained as the exact correction source; never ingested or presented as the usable variant."
+  }
+}

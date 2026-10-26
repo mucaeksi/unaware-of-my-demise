@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "asset_id": "sol_mahmut_vn_protective_resolve",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "mahmut": {
+        "emotions": {
+          "sol_protective_resolve": "sol_protective_resolve"
+        },
+        "images": {
+          "sol_protective_resolve": "art/portrait_mahmut_sol_protective_resolve.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "c7371e0b1b7a0d9b715cf4de194bd1efba60b57abf3e88bab61138dfbd4992d2",
+    "mime": "image/png",
+    "width": 1024,
+    "height": 1536,
+    "provenance_file": "content/generated/openai/sol_mahmut_vn_protective_resolve/run.provenance.json",
+    "provenance_sha256": "a31199733580916c0636b635cc02014aef41d6c662de0ceca1268c70a7cdfcd4",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "ef43b97c9ca9733e189e660b1668f91acf67837c4b88abf83e57346b333378d8",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_mahmut_vn_composed/source.png",
+        "sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "role": "openai_identity_crop_and_costume_edit_target"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_mahmut_vn_protective_resolve.ingest.json",
+    "spec_sha256": "3fdc995252419d237fa7974200822c2941eb10a6861b3684ee4a205c23ec64a0",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "06623877de64be5c19f28cd83020e9eb7d26bdee65cba4d6cdab438fca358816"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_mahmut_sol_protective_resolve.webp",
+      "sha256": "38abce0df40dd8a23cd37a7dca70adebcd4a3defe80a596368a87a664aa76b5a",
+      "pixels_sha256": "535751d7dda9e72f273dd24f4f488755fb5deb93bb563fb8ab78f29e3452f1cf",
+      "bytes": 249598,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "1 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1024x1536"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "249598 bytes <= 360000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

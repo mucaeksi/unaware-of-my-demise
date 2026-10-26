@@ -35,8 +35,8 @@ namespace Uomd.Tests
         {
             string root = ProductionReviewCatalog.RepositoryRoot;
             var assets = ProductionReviewCatalog.Load(root);
-            Assert.AreEqual(13, assets.Count(a => a.Candidate));
-            Assert.GreaterOrEqual(assets.Count, 447);
+            Assert.AreEqual(19, assets.Count(a => a.Candidate));
+            Assert.GreaterOrEqual(assets.Count, 453);
             foreach (var asset in assets.Where(a => a.Candidate))
             {
                 ProductionReviewCatalog.VerifyTarget(root, asset);
@@ -70,6 +70,46 @@ namespace Uomd.Tests
             Assert.Throws<ArgumentException>(() => store.AddRequest(asset, "title", "", "approve", "owner_approved", new RebuildShotSettings()));
             File.WriteAllText(source, "changed");
             Assert.Throws<InvalidOperationException>(() => store.AddRequest(asset, "title", "", "stale", "revision_requested", new RebuildShotSettings()));
+        }
+
+        [Test]
+        public void EveryRebuiltPortraitHasItsOwnScenarioAndResolvesTheSelectedIngestOutput()
+        {
+            string root = ProductionReviewCatalog.RepositoryRoot;
+            var portraits = ProductionReviewCatalog.Load(root).Where(a => a.Candidate && a.Class == "portrait").ToArray();
+            Assert.AreEqual(8, portraits.Length);
+            CollectionAssert.AllItemsAreUnique(portraits.Select(a => a.Scenario).ToArray());
+            var catalog = UomdMediaCatalog.Parse(File.ReadAllText(Path.Combine(root, "content/base/art/art_manifest.json")), null);
+            foreach (var asset in portraits)
+            {
+                var request = new ProductionPreviewRequest { scenario = asset.Scenario };
+                string expected = JsonRead.Str(JsonRead.Arr(asset.Entry, "outputs").First(), "path");
+                Assert.AreEqual(expected, request.PortraitPath(catalog, request.PortraitCharacter, "composed"), asset.Id);
+                string companion = request.PortraitCharacter == "fadyme" ? "mahmut" : "fadyme";
+                Assert.AreEqual(catalog.PortraitImage(companion, "sol_composed"), request.PortraitPath(catalog, companion, "watchful"));
+            }
+        }
+
+        [Test]
+        public void AuthoredReviewCoversAllTutorialStoryEmotionsWithoutRewritingCanonicalData()
+        {
+            string root = ProductionReviewCatalog.RepositoryRoot;
+            var catalog = UomdMediaCatalog.Parse(File.ReadAllText(Path.Combine(root, "content/base/art/art_manifest.json")), null);
+            var request = new ProductionPreviewRequest { scenario = "portrait/fadyme/authored" };
+            int lines = 0;
+            foreach (string file in Directory.GetFiles(Path.Combine(root, "content/base/story"), "tutorial_t*.json"))
+            {
+                foreach (var command in JsonRead.Arr(UomdJson.ParseObject(File.ReadAllText(file)), "commands"))
+                {
+                    string character = JsonRead.Str(command, "op") == "show" ? JsonRead.Str(command, "character") : JsonRead.Str(command, "speaker");
+                    if (character != "fadyme" && character != "mahmut") continue;
+                    string path = request.PortraitPath(catalog, character, JsonRead.Str(command, "emotion"));
+                    Assert.IsNotNull(path, file + ": " + JsonRead.Str(command, "line_id"));
+                    StringAssert.Contains("_sol_", path);
+                    lines++;
+                }
+            }
+            Assert.Greater(lines, 50);
         }
 
         [Test]

@@ -1,0 +1,5 @@
+Use case: identity-preserve. Image 1 is the Fadyme warm-expression portrait to repair. Image 2 is the original composed portrait for identity and costume only.
+
+Change ONLY the anatomical mistake in image 1: there are currently THREE gloved hands. REMOVE the extra lower gloved hand and fingers resting on the central waist/belt. Restore the continuous embroidered cloth and natural belt/folds beneath that removed hand. Keep exactly TWO hands and TWO arms: one hand holds the bell chain at viewer-left, and the other is raised to the white scarf. The raised scarf hand must connect naturally to the existing sleeve and arm; no additional arm may remain at the waist.
+
+Keep the warm smile, mature face, violet eyes, ash-blonde hair, raised plum hood, silver-lilac embroidery, white cloth scarf, chain and bell, crop, proportions, lighting and all other pixels as close to image 1 as possible. Do not change her identity, expression or gesture. Preserve the 1024x1536 vertical knee-up framing and TRUE transparent alpha outside the character and in the arm gaps. No backdrop, glow, text, watermark or new props.

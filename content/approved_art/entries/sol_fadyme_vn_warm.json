@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "asset_id": "sol_fadyme_vn_warm",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "fadyme": {
+        "emotions": {
+          "sol_warm": "sol_warm"
+        },
+        "images": {
+          "sol_warm": "art/portrait_fadyme_sol_warm.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "6dd4d6c1fbaca7200f0aaafa4fa9b54b7486c8395da0b0746d87a743d9a0aa99",
+    "mime": "image/png",
+    "width": 1024,
+    "height": 1536,
+    "provenance_file": "content/generated/openai/sol_fadyme_vn_warm/run.provenance.json",
+    "provenance_sha256": "30ccecb013d70c14dac5f1aec445185370333b5f8143ab72090c967095020e2c",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "0b18e09a733b713dcccfebed50c97463acc2024dd964621b3c48f263e7d36275",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_fadyme_vn_warm/attempt-01.png",
+        "sha256": "f1092d27bc80b18f2f65b833834e01e9ee0d0b1e2dceab287928412f5ae5ba52",
+        "role": "openai_anatomy_correction_edit_target"
+      },
+      {
+        "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+        "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "role": "openai_identity_and_costume_reference"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_fadyme_vn_warm.ingest.json",
+    "spec_sha256": "b9aaa595b299f6adc5c1cf845cc5ff5282a5885fbb041872535bc1487360506e",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "affff1646b3e01d43a557aa6041a4c7ef2a7e39ba2326eb4904ddd00fe2240bb"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_fadyme_sol_warm.webp",
+      "sha256": "1e2430f28e6d676d24450df13a4582d61fab4a744c86db7840a9a61e19fcc483",
+      "pixels_sha256": "1952c25afbf6e751d48364f111339436654fe92cb5a6adfb6314d78749f03361",
+      "bytes": 223792,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "2 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1024x1536"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "223792 bytes <= 360000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -2,6 +2,8 @@
 
 D-35 local checkpoint 2026-10-26: Production Review and the two-master T1 portrait pilot are locally tested; [current evidence](evidence/sol-portrait-masters-2026-10-26.json). This adds no infrastructure deployment or native-release acceptance. Current owner/provider precedence is in the root README.
 
+Subsequent local expression delivery: six more OpenAI edits, nineteen candidates, fixed-pose/canonical-emotion review and CLI-only Editor verification. [Latest scoped evidence](evidence/sol-story-expressions-2026-10-26.json). This changes no deployment, credentials, native-release acceptance or MCP configuration.
+
 Reconciled 2026-10-24 (**Decision D-31**: 100% handoff to **Claude Opus 5.5**, **Unity 6 LTS (`apps/unity/`, C#, URP 2D)** client migration via [CLAUDE_OPUS_UNITY_HANDOFF](handoff/CLAUDE_OPUS_UNITY_HANDOFF.md) & `npm run export:unity`, and exclusive **Google Gemini API** asset pipeline; supersedes historical D-23/D-25 web-stage client and D-30 Argon ownership; D-26 continuity, D-27 RPG attributes, D-28 GitHub main -> Workers Builds, D-29 release roadmap & D-30 art/VFX/banner/SFX assets remain integrated). [README](../README.md) defines scope/acceptance; [DEV_TRACKER.json](DEV_TRACKER.json) holds the per-package code status, open acceptance gates and evidence, shown in Control Center → Development. This table feeds Control Center; retain its numeric first column and four columns.
 
 ✅ means local source/architecture implementation and tests are complete; 🟡 means external live/device acceptance or Unity Phases U-1..U-5 port completion remains; ❌ means deliberately unconfigured until owner approval. `generatedAt` dates the admin build, not these observations.

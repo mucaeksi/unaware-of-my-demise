@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_fadyme_vn_warm",
+    "aspectRatio": "2:3",
+    "prompt_file": "content/generated/openai/sol_fadyme_vn_warm/prompt.txt",
+    "prompt": "Use case: identity-preserve. Image 1 is the Fadyme warm-expression portrait to repair. Image 2 is the original composed portrait for identity and costume only.\n\nChange ONLY the anatomical mistake in image 1: there are currently THREE gloved hands. REMOVE the extra lower gloved hand and fingers resting on the central waist/belt. Restore the continuous embroidered cloth and natural belt/folds beneath that removed hand. Keep exactly TWO hands and TWO arms: one hand holds the bell chain at viewer-left, and the other is raised to the white scarf. The raised scarf hand must connect naturally to the existing sleeve and arm; no additional arm may remain at the waist.\n\nKeep the warm smile, mature face, violet eyes, ash-blonde hair, raised plum hood, silver-lilac embroidery, white cloth scarf, chain and bell, crop, proportions, lighting and all other pixels as close to image 1 as possible. Do not change her identity, expression or gesture. Preserve the 1024x1536 vertical knee-up framing and TRUE transparent alpha outside the character and in the arm gaps. No backdrop, glow, text, watermark or new props.\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_fadyme_vn_warm/attempt-01.png",
+      "sha256": "f1092d27bc80b18f2f65b833834e01e9ee0d0b1e2dceab287928412f5ae5ba52",
+      "role": "openai_anatomy_correction_edit_target"
+    },
+    {
+      "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+      "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+      "role": "openai_identity_and_costume_reference"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_fadyme_vn_warm/source.png",
+      "sha256": "6dd4d6c1fbaca7200f0aaafa4fa9b54b7486c8395da0b0746d87a743d9a0aa99",
+      "width": 1024,
+      "height": 1536,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-230c0e65-e8c3-4282-9e12-a1556eb8ebc1.png",
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Distinct expression/body-language edit of the OpenAI composed master. Agent inspected identity, anatomy, props and frame. Native dimensions recorded without enlargement. Owner, native-2K and device acceptance remain open. Explicit Sol review variants; normal authored emotion mappings remain unchanged."
+  },
+  "lineage": {
+    "previous_attempt": "content/generated/openai/sol_fadyme_vn_warm/attempt-01.provenance.json",
+    "previous_attempt_sha256": "a1076cc126d83bf9bb25dd72e2d955f943b37d87fe25184b267d7e309ad6f6e0",
+    "change": "Remove only the extra waist hand; preserve the warm face and two intended hands."
+  }
+}

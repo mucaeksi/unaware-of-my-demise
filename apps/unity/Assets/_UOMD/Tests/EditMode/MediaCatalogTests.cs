@@ -71,6 +71,34 @@ namespace Uomd.Tests
             }
         }
 
+        [TestCase("fadyme", "calm", "composed")]
+        [TestCase("fadyme", "determined", "resolve")]
+        [TestCase("fadyme", "soft_smile", "warm")]
+        [TestCase("fadyme", "dry_amusement", "wry")]
+        [TestCase("mahmut", "composed", "composed")]
+        [TestCase("mahmut", "dry_humor", "dry_humor")]
+        [TestCase("mahmut", "protective", "protective_resolve")]
+        [TestCase("mahmut", "watchful", "watchful")]
+        public void RebuiltPortraitsFollowCanonicalAliasesWithoutChangingHistoricalConsumers(string character, string emotion, string pose)
+        {
+            var catalog = Load();
+            string path = "art/portrait_" + character + "_sol_" + pose + ".webp";
+            Assert.AreEqual(path, catalog.SolPortrait(character, emotion));
+            Assert.IsTrue(File.Exists(Path.Combine(ContentBase, path)));
+            Assert.AreEqual("art/portrait_" + character + "_" + pose + ".webp", catalog.Portrait(character, emotion));
+        }
+
+        [Test]
+        public void RebuiltSetRejectsMissingPosesWithoutSubstitutingLegacyOrNeutralArtwork()
+        {
+            var catalog = Load();
+            Assert.IsNull(catalog.SolPortrait("nobody", "composed"));
+            Assert.IsNull(catalog.SolPortrait("fadyme", "not_an_emotion"));
+            Assert.AreEqual(catalog.PortraitImage("fadyme", "sol_composed"), catalog.SolPortrait("fadyme", null));
+            var incomplete = UomdMediaCatalog.Parse("{\"portraits\":{\"fadyme\":{\"emotions\":{\"determined\":\"resolve\"},\"images\":{\"resolve\":\"legacy.webp\",\"sol_composed\":\"new-neutral.webp\"}}}}", null);
+            Assert.IsNull(incomplete.SolPortrait("fadyme", "determined"));
+        }
+
         [Test]
         public void UnitArtCarriesAtlasFramesAndStates()
         {

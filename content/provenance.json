@@ -75,6 +75,30 @@
       }
     },
     {
+      "output": "content/base/art/portrait_mahmut_sol_dry_humor.webp",
+      "sha256": "4d618edd07b317ce3eab259ec4ae1799028f25f0d6016a70b0445502a9ec9c12",
+      "sources": {
+        "generated:sol_mahmut_vn_dry_humor@rev1": "7accb1dde713edcb57fde1971d6790f0f40f51b1d857c20687467a3f4243d1c9",
+        "entry": "4f715fb646cf9e9dd968833ecde6285c737c6d9220ab587a0f45b2e7e0e24104"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_mahmut_sol_protective_resolve.webp",
+      "sha256": "38abce0df40dd8a23cd37a7dca70adebcd4a3defe80a596368a87a664aa76b5a",
+      "sources": {
+        "generated:sol_mahmut_vn_protective_resolve@rev1": "c7371e0b1b7a0d9b715cf4de194bd1efba60b57abf3e88bab61138dfbd4992d2",
+        "entry": "06623877de64be5c19f28cd83020e9eb7d26bdee65cba4d6cdab438fca358816"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_mahmut_sol_watchful.webp",
+      "sha256": "b8e5784db9a9f75147f5e0ef4af5c138ea4f74654d7cb04fc539f90987202946",
+      "sources": {
+        "generated:sol_mahmut_vn_watchful@rev1": "0b6224bac4f8e0dcc191ee3b59dd0aa1420fc46aab40f2bca27c1d1c5eb4a7f8",
+        "entry": "222074e0787731b082e74fcabb0b61291b8a390b68549327cf5e9d0fd47b7bc6"
+      }
+    },
+    {
       "output": "content/base/art/portrait_fadyme_composed.webp",
       "sha256": "0fc6590c0c280a4d87f3955cb36d51cf7fc080972133b5d9e7f8a248d20657e7",
       "sources": {
@@ -112,6 +136,30 @@
       "sources": {
         "generated:sol_fadyme_vn_composed@rev1": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
         "entry": "b4723c009753aa53a5f47e4d8d49dddaa1573fbdebaa670c5f56eea951e8a971"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_fadyme_sol_resolve.webp",
+      "sha256": "28bfed8e80efb7bed9118be180ed999831aa3f4f5c9436aea401438487d8e205",
+      "sources": {
+        "generated:sol_fadyme_vn_resolve@rev1": "92d6b001239f51ebb19b7d77dc2700baca2d9378fcd3837c5574a48b3b801c24",
+        "entry": "a64f10ac76effe8fcdc168802cd789da9aafb31f848d26864ddaf9309f5d8c62"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_fadyme_sol_warm.webp",
+      "sha256": "1e2430f28e6d676d24450df13a4582d61fab4a744c86db7840a9a61e19fcc483",
+      "sources": {
+        "generated:sol_fadyme_vn_warm@rev1": "6dd4d6c1fbaca7200f0aaafa4fa9b54b7486c8395da0b0746d87a743d9a0aa99",
+        "entry": "affff1646b3e01d43a557aa6041a4c7ef2a7e39ba2326eb4904ddd00fe2240bb"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_fadyme_sol_wry.webp",
+      "sha256": "a4814e146ad8567ccb02e40715d704b5dcd547046282a21b172c6bbd57e2b69c",
+      "sources": {
+        "generated:sol_fadyme_vn_wry@rev1": "1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+        "entry": "9549af89c7bb5ea84e1a025c841cda32a6d89de3c388a1e4a11db1651f35db32"
       }
     },
     {
@@ -523,7 +571,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "897afcdfe9257f67ca50735261e75a51b4ead1d20a98646e161ca34e688d8a5d",
+      "sha256": "e053912ac5be95f51082cb83a08cd9e5d2736eb5e66e663f87df147410aaad74",
       "sources": {}
     },
     {

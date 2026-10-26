@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "6167d8743592943bf4d9fc7b6e6d232d487134d0",
+  "sourceCommit": "2e1b615f6a02cc748d0911a4d46d164c813370e2",
   "reviewedAt": "2026-10-26",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Portrait pilot LOCAL_TESTED: two new masters, real T1 line review and music-stop correction. Next: six remaining expression/body-language variants, three tutorial stages, narrative UI and durable Continue/restart; then real battle presentation.",
-    "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped."
+    "nextProposed": "Expression sets LOCAL_TESTED: four candidate poses per lead, fixed-pose and canonical-emotion T1 review with both actors reconstructed. Next: three tutorial stages, native narrative/tutorial UI, authored consumer migration and durable Continue/restart; then real battle presentation.",
+    "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped. Unity Editor access is CLI only per the owner; MCP configuration and pinned sources remain intact."
   },
   "now": [
+    {
+      "title": "D-35: complete candidate story expression sets and CLI-only review (2026-10-26)",
+      "detail": "LOCAL_TESTED: six new built-in OpenAI variants, nineteen candidates / 453 records, native 1024x1536 alpha sources and 768x1152 exports. Fixed pose routes and authored-emotion T1 seeking reconstruct both actors without skipped voice playback; stale texture completions cannot replace newer poses. EditMode 126/126, logic 111/111, twelve-assembly reference compile, npm verify PASS; nine final Game-view captures and restored Editor/preferences. Normal story art consumers await stages/UI. No owner approvals, new API spending, push or device acceptance. Evidence: docs/evidence/sol-story-expressions-2026-10-26.json. Enclosing delivery commit binds source; sourceCommit records its parent."
+    },
     {
       "title": "D-35: two original portrait masters and real T1 review (2026-10-26)",
       "detail": "LOCAL_TESTED: thirteen OpenAI candidates / 447 records; Fadyme and Mahmut native 1024x1536 alpha masters with exact references/prompts and 768x1152 exports. Real Story controller, canonical line selection, explicit review-only sol_composed override, three aspect ratios, pause and source-bound capture metadata. Normal T1 keeps authored emotion mappings and honors music stop. EditMode 115/115, PlayMode 3/3, logic 102/102, Editor/player compile and npm verify PASS. No owner approvals, push or device acceptance. Evidence: docs/evidence/sol-portrait-masters-2026-10-26.json. Enclosing delivery commit binds source; sourceCommit records its parent."

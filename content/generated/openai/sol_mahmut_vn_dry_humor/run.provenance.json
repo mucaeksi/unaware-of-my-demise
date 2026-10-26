@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_mahmut_vn_dry_humor",
+    "aspectRatio": "2:3",
+    "prompt_file": "content/generated/openai/sol_mahmut_vn_dry_humor/prompt.txt",
+    "prompt": "Use case: identity-preserve. Asset: sol_mahmut_vn_dry_humor, one production knee-up light-novel dialogue portrait for Unaware of My Demise.\n\nImage 1 is the existing newly painted OpenAI mahmut composed master and the ONLY edit target: lock its exact character identity, costume construction, accessories, proportions, portrait crop, three-quarter orientation and painterly Gothic-anime finish. This is a new distinct expression/body-language variant, not a duplicate neutral image. Preserve fine colored linework, softly cel-shaded adult face, matte cloth, worn leather/metal, cool ambient light and restrained warm rim.\n\nIdentity invariants: Adult Mahmut, age 28: exactly the same mature face, tousled dark-brown hair, amber-brown eyes, subtle stubble, repaired gunmetal half-plate, worn leather straps, gloves and matte oxblood scarf-cloak. Preserve the eight-point red/silver chest star and the small round empty black socket immediately above it. Preserve the sheathed sword and plain hilt socket. No crown, new heraldry, drawn blade or changed armor.\n\nChange only this acting: Dry humor: one eyebrow slightly raised, a small uneven closed-mouth half-smile, tired humane eyes and a relaxed jaw. His right gauntleted hand opens palm-up at waist height in a restrained resigned conversational gesture; his left still lightly steadies the sheathed sword. The star and empty socket stay completely unobstructed. No broad grin.\n\nComposition invariants: vertical 2:3, match the master camera distance and knee-up crop; full hood/hair and shoulders inside frame, face at the same height and scale. Face and gaze toward VIEWER-RIGHT, for the left dialogue slot. Keep hands, bell/sword hilt and all acting above the bottom third and fully inside the canvas. Preserve safe room around the head, elbows and props; the lower knee-up cloth crop is intentional. Do not add boots or a floor. Request the master's native 1024x1536 canvas; never upscale a smaller image.\n\nAnatomy constraint: exactly TWO arms and TWO hands total. Reposition the existing free hand; completely erase its previous hand/finger pose instead of leaving it on the belt. Never add a third arm or hand. Hands connect to the matching sleeve and wrist.\n\nOutput: one finished standalone character with TRUE TRANSPARENT ALPHA outside the silhouette and in gaps between arms, cloak and props. Empty space must be fully transparent: remove any backdrop or diffuse halo from the edit target, with no dark/brown vignette, haze, shadow, green screen or painted checkerboard. No scenery, aura, particles, cast shadow, frame, caption, letters, UI, watermark, second character, or expression grid. Retain the exact face and outfit; produce the requested clearly distinguishable, anatomically correct acting.\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_mahmut_vn_composed/source.png",
+      "sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+      "role": "openai_identity_crop_and_costume_edit_target"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_mahmut_vn_dry_humor/source.png",
+      "sha256": "7accb1dde713edcb57fde1971d6790f0f40f51b1d857c20687467a3f4243d1c9",
+      "width": 1024,
+      "height": 1536,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-0edffe4f-94fb-4d63-8910-6219e0f0468d.png",
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Distinct expression/body-language edit of the OpenAI composed master. Agent inspected identity, anatomy, props and frame. Native dimensions recorded without enlargement. Owner, native-2K and device acceptance remain open. Explicit Sol review variants; normal authored emotion mappings remain unchanged."
+  }
+}

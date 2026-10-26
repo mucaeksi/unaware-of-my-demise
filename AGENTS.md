@@ -14,8 +14,9 @@ provider provenance; use the existing ingest/QC pipeline. Keep music and reviewe
 budget-guarded Gemini tools. D-34's UI v2 direction is stopped; its mockups are reference material. Preserve canon, server
 combat parity, the single-currency economy, signed data-only patches and existing release/permission/budget gates.
 
-For Unity, verify the actual live `unityMCP` editor state before operations, then compilation/console, EditMode tests and
-Game-view captures after changes. Use the current tool schemas and API reflection. Keep `.claude/`, `CLAUDE.md`, `.mcp.json`
+For Unity, use **Unity CLI only**, per the owner on 2026-10-26. Verify the live Editor with `unity status` and
+`unity command editor status`, then compilation/console, EditMode tests and Game-view captures through CLI after changes.
+Discover the current command schemas and verify APIs against the live Editor/source. Keep `.claude/`, `CLAUDE.md`, `.mcp.json`
 and the pinned skill sources intact. Load relevant `.agents/skills/` adapters and their canonical sources; validate with
 `python tools/sync_codex_skills.py --check`. No skill grants new credentials, hooks, paid spending or external permissions.
 

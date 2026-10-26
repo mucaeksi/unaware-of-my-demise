@@ -128,6 +128,15 @@ namespace Uomd.Core
         public string? PortraitImage(string speaker, string imageKey) =>
             _portraitImages.TryGetValue(speaker ?? "", out var images) && images.TryGetValue(imageKey ?? "", out var path) ? path : null;
 
+        /// <summary>The rebuilt portrait set follows canonical emotion aliases without substituting historical artwork.</summary>
+        public string? SolPortrait(string speaker, string? emotion)
+        {
+            string character = speaker ?? "";
+            string key = string.IsNullOrEmpty(emotion) ? "composed" : emotion!;
+            if (_portraitEmotions.TryGetValue(character, out var aliases) && aliases.TryGetValue(key, out string alias)) key = alias;
+            return PortraitImage(character, "sol_" + key);
+        }
+
         public IEnumerable<string> MusicIds => _music.Keys;
         public IEnumerable<string> VoiceIds => _voices.Keys;
 

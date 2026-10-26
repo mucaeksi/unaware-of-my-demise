@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "asset_id": "sol_mahmut_vn_protective_resolve",
+  "class": "portrait",
+  "source": {
+    "kind": "generated",
+    "pick": "c7371e0b1b7a",
+    "provenance": "content/generated/openai/sol_mahmut_vn_protective_resolve/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 768,
+    "height": 1152,
+    "webp": {
+      "mode": "lossy",
+      "quality": 90,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 360000
+  },
+  "manifest": {
+    "character": "mahmut",
+    "image": "sol_protective_resolve",
+    "emotion_tags": [
+      "sol_protective_resolve"
+    ]
+  },
+  "qc": {
+    "profile": "bust_r1"
+  }
+}
