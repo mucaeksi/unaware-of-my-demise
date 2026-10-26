@@ -80,7 +80,7 @@ namespace Uomd.Scenes
     /// the Japanese voice. Scenes with a "presentation" block follow the cutscene rules (UomdCutscene); AUTO starts on when
     /// the scene asks for it. Tap finishes the line or advances. When the scene ends the entry flow decides what follows.
     /// </summary>
-    public sealed class StoryScreenController : IUomdScreenController
+    public sealed partial class StoryScreenController : IUomdScreenController
     {
         private const float NormalCps = 46f; // CPS.normal outside cutscenes
         private const float BoxY = 886f;
@@ -170,6 +170,11 @@ namespace Uomd.Scenes
             _actors.Clear();
             _prevSpeaker = null;
             _line = null;
+            _backgroundPath = null;
+            _runner = null;
+            _waitLeft = -1f;
+            _reviewSeekComplete = false;
+            _rebuilt = IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(_router.Session.ActiveStoryPath));
             string path = _router.Session.ActiveStoryPath;
             string json;
             try
@@ -181,6 +186,14 @@ namespace Uomd.Scenes
             catch (Exception e)
             {
                 if (generation != _generation) return;
+                if (_rebuilt)
+                {
+                    _scene = null;
+                    BuildRebuilt(screenRoot);
+                    ShowLoadFailure(false);
+                    Debug.LogWarning("[Story] Tutorial data unavailable: " + e.Message);
+                    return;
+                }
                 Debug.LogError($"[Story] '{path}' could not load: {e.Message}");
                 UomdUiKit.ShowToast(screenRoot, "The story could not be loaded.");
                 await _router.EntryFlow.StoryFinishedAsync();
@@ -191,6 +204,12 @@ namespace Uomd.Scenes
             _skip = false;
             _runner = new StoryRunner(_scene);
             _lastLineId = LastLineId(_scene);
+            if (_rebuilt)
+            {
+                BuildRebuilt(screenRoot);
+                await LoadRebuiltImagesAsync(generation);
+                return;
+            }
 #if UNITY_EDITOR
             if (PortraitReview)
             {
@@ -337,6 +356,7 @@ namespace Uomd.Scenes
 
         private void SetBackground(string locationId)
         {
+            if (_rebuilt) { SetRebuiltBackground(locationId); return; }
             string path = _router.Media.Catalog.Background(locationId);
             _backgroundPath = path;
             if (path == null) return;
@@ -375,13 +395,14 @@ namespace Uomd.Scenes
                         return;
                     case "line":
 #if UNITY_EDITOR
-                        if (PortraitReview && e.lineId != _router.ProductionPreview.lineId)
+                        if ((PortraitReview || StoryReview) && !_reviewSeekComplete && e.lineId != _router.ProductionPreview.lineId)
                         {
                             // Rebuild both actors' prior expressions while seeking, without starting skipped voice lines.
                             if (e.speaker != "narration") SetEmotion(e.speaker, e.emotion);
                             break;
                         }
 #endif
+                        _reviewSeekComplete = true;
                         ShowLine(e);
                         return;
                     case "choice":
@@ -400,6 +421,7 @@ namespace Uomd.Scenes
 
         private void ShowActor(string character, string side, string emotion)
         {
+            if (_rebuilt && _imagesDisabled) return;
             string path = PortraitPath(character, emotion);
             if (path == null) return;
             HideActor(character, immediate: true);
@@ -425,11 +447,12 @@ namespace Uomd.Scenes
             UomdScreenKit.Fade(image, 0.86f, 950, 0, Calm, EasingMode.EaseOutCubic);
             Slide(image, 0f, 950);
             // Attach 4.0s Whisk Animate breathing + wind sway loop after entry slide finishes
-            if (!Calm)
+            if (!Calm && !_rebuilt)
             {
                 UomdScreenKit.After(image, 980, () => UomdGothicVfx.AttachWhiskAnimatePortrait(image, character, !flipHorizontal, Calm));
             }
             _actors[character] = new Actor { Image = image, Side = left ? "left" : "right", Emotion = emotion, BaseX = baseX, Path = path };
+            if (_rebuilt) LayoutRebuiltActors();
         }
 
         private string PortraitPath(string character, string emotion)
@@ -439,6 +462,8 @@ namespace Uomd.Scenes
                 return _router.ProductionPreview.PortraitPath(_router.Media.Catalog, character, emotion)
                     ?? throw new InvalidOperationException("The rebuilt portrait is missing: " + character + "/" + emotion);
 #endif
+            if (_rebuilt) return _router.Media.Catalog.SolPortrait(character, emotion)
+                ?? throw new InvalidOperationException("The rebuilt portrait is missing: " + character + "/" + emotion);
             return _router.Media.Catalog.Portrait(character, emotion);
         }
 
@@ -515,16 +540,20 @@ namespace Uomd.Scenes
 
             if (!narration) SetEmotion(e.speaker, e.emotion);
             FocusSpeaker(narration ? "" : e.speaker);
-            _namePlate.style.display = narration ? DisplayStyle.None : DisplayStyle.Flex;
+            _namePlate.style.display = !_rebuilt && narration ? DisplayStyle.None : DisplayStyle.Flex;
+            if (_rebuilt) _nameText.text = narration ? "THE ROAD" : (e.speakerDisplay ?? "").ToUpperInvariant();
             if (!narration)
             {
                 bool left = !_actors.TryGetValue(e.speaker, out var actor) || actor.Side == "left";
                 _nameText.text = (e.speakerDisplay ?? "").ToUpperInvariant();
                 _nameText.style.color = e.speaker == "fadyme" ? new Color(0.886f, 0.824f, 1f) : UomdThemeTokens.GoldHi;
-                if (left) UomdScreenKit.AtLeft(_namePlate, 365, 746);
-                else UomdScreenKit.AtRight(_namePlate, 365, 746);
-                _namePlate.style.right = left ? StyleKeyword.Auto : 365;
-                _namePlate.style.left = left ? 365 : StyleKeyword.Auto;
+                if (!_rebuilt)
+                {
+                    if (left) UomdScreenKit.AtLeft(_namePlate, 365, 746);
+                    else UomdScreenKit.AtRight(_namePlate, 365, 746);
+                    _namePlate.style.right = left ? StyleKeyword.Auto : 365;
+                    _namePlate.style.left = left ? 365 : StyleKeyword.Auto;
+                }
             }
             _body.style.unityFontStyleAndWeight = narration ? FontStyle.Italic : FontStyle.Normal;
             _body.style.color = narration ? new Color(0.875f, 0.831f, 0.933f) : UomdThemeTokens.TextPrimary;
@@ -535,19 +564,33 @@ namespace Uomd.Scenes
             _waiting = true;
             _autoLeft = -1f;
             _typingElapsed = 0f;
+            _voiceClockPending = _voiceClockStarted = false;
+            _voiceWait = 0f;
+            if (_rebuilt) _nextButton.text = "REVEAL  ›";
             if (_pauseLeft <= 0f) StartTyping();
         }
 
         private void StartTyping()
         {
             if (_finished || _line == null) return;
+            _typingElapsed = _voiceWait = 0f;
+            _voiceClockStarted = false;
             if (!_skip) _router.Audio.PlayVoiceLine(_line.lineId);
+            if (_rebuilt) _voiceClockPending = _voiceSeconds > 0f;
             float cps = _cutscene ? UomdCutscene.Cps : NormalCps;
             float reveal = Mathf.Max(_line.text.Length / cps, _voiceSeconds > 0 ? _voiceSeconds * 0.92f : 0f);
             _subtitles.BeginLine(_line.text, _skip ? 0.01f : reveal, Calm || _skip);
             string initial = _subtitles.Tick(0f);
             _lastShownPrefix = initial;
             _body.text = Reveal(initial);
+            if (_rebuilt && Calm)
+            {
+                _lineDone = true;
+                _nextButton.text = "NEXT  ›";
+                _caret.style.visibility = Visibility.Visible;
+                SetRevealProgress(1f);
+                if (_auto) _autoLeft = AutoHoldSeconds();
+            }
         }
 
         /// <summary>The shown prefix plus the rest drawn transparent, so wrapping never moves while typing.</summary>
@@ -571,9 +614,16 @@ namespace Uomd.Scenes
             }
             _subtitles.RevealImmediately();
             _body.text = Escape(_subtitles.FullText);
-            _syncFill.style.width = 760;
+            if (_rebuilt && _voiceClockPending && !_router.Audio.VoiceReady)
+            {
+                _router.Audio.StopVoiceLine();
+                _voiceClockPending = false;
+            }
+            if (_rebuilt) _voiceClockPending = false;
+            SetRevealProgress(1f);
             _lineDone = true;
             _caret.style.visibility = Visibility.Visible;
+            if (_rebuilt) _nextButton.text = "NEXT  ›";
             if (_skip) _autoLeft = 0.09f;
             else if (_auto) _autoLeft = AutoHoldSeconds();
         }
@@ -587,7 +637,8 @@ namespace Uomd.Scenes
             float? hold = _line != null && _line.holdSeconds > 0 ? _line.holdSeconds : (float?)null;
             if (_voiceSeconds > 0f)
             {
-                float synced = Mathf.Max(1.05f, Mathf.Max(0f, _voiceSeconds - _typingElapsed) + 0.72f);
+                // Native Auto already waits for VoicePlaying below; counting the remaining clip again doubles calm-mode holds.
+                float synced = _rebuilt ? 1.05f : Mathf.Max(1.05f, Mathf.Max(0f, _voiceSeconds - _typingElapsed) + 0.72f);
                 return last && closingOpt.HasValue ? Mathf.Max(synced, closing) : synced;
             }
             int chars = _subtitles.FullText.Length;
@@ -597,7 +648,7 @@ namespace Uomd.Scenes
 
         private void Advance()
         {
-            if (PortraitReview) return;
+            if (PortraitReview || PreviewPaused || (_rebuilt && !_assetsReady)) return;
             if (_finished || _choiceLayer.childCount > 0) return;
             _autoLeft = -1f;
             if (!_waiting) return;
@@ -642,12 +693,14 @@ namespace Uomd.Scenes
         {
             _auto = !_auto;
             SetActive(_autoButton, _auto);
+            if (_rebuilt) _autoButton.text = _auto ? "AUTO · ON" : "AUTO · OFF";
             if (_auto && _lineDone && _waiting) _autoLeft = AutoHoldSeconds();
             if (!_auto) _autoLeft = -1f;
         }
 
         private void ToggleSkip()
         {
+            if (_rebuilt) return; // First-view tutorial cannot fast-forward canon or progression.
             _skip = !_skip;
             SetActive(_skipButton, _skip);
             if (_skip)
@@ -659,17 +712,21 @@ namespace Uomd.Scenes
 
         private void ReplayVoice()
         {
-            if (_line != null) _router.Audio.PlayVoiceLine(_line.lineId);
+            if (_line == null || PreviewPaused) return;
+            if (_rebuilt && !_lineDone) { _pauseLeft = 0f; StartTyping(); }
+            else _router.Audio.PlayVoiceLine(_line.lineId);
         }
 
         private static void SetActive(Button button, bool on)
         {
+            if (button.ClassListContains("story-button")) { button.EnableInClassList("is-on", on); return; }
             if (on) button.AddToClassList("uomd-btn-primary");
             else button.RemoveFromClassList("uomd-btn-primary");
         }
 
         public void OnTick(float deltaTime)
         {
+            if (PreviewPaused || (_rebuilt && !_assetsReady)) return;
 #if UNITY_EDITOR
             if (PortraitReview && (_router.ProductionPreview.paused || _lineDone)) return;
 #endif
@@ -687,22 +744,24 @@ namespace Uomd.Scenes
                 if (_pauseLeft <= 0f) StartTyping();
                 return;
             }
+            if (_rebuilt && _lineDone && _voiceClockPending) TickRebuiltSubtitles(deltaTime);
             if (!_lineDone)
             {
                 _typingElapsed += deltaTime;
-                string shown = _subtitles.Tick(deltaTime);
+                string shown = _rebuilt ? TickRebuiltSubtitles(deltaTime) : _subtitles.Tick(deltaTime);
                 if (!ReferenceEquals(shown, _lastShownPrefix))
                 {
                     _lastShownPrefix = shown;
                     _body.text = Reveal(shown);
                 }
                 float total = Mathf.Max(0.01f, _subtitles.TotalDuration);
-                _syncFill.style.width = 760f * Mathf.Clamp01(_typingElapsed / total);
-                if (_subtitles.IsComplete) FinishTyping();
+                SetRevealProgress(Mathf.Clamp01(_typingElapsed / total));
+                if (_subtitles.IsComplete && (!_rebuilt || !_voiceClockPending)) FinishTyping();
                 return;
             }
             if (_autoLeft >= 0f)
             {
+                if (_rebuilt && (_voiceClockPending || _router.Audio.VoicePlaying)) return;
                 _autoLeft -= deltaTime;
                 if (_autoLeft < 0f) Advance();
             }
@@ -712,7 +771,11 @@ namespace Uomd.Scenes
         {
             if (_finished) return;
             _finished = true;
-            if (PortraitReview) return;
+            if (PortraitReview || StoryReview)
+            {
+                if (_rebuilt) { _nextButton.SetEnabled(false); _storyHint.text = "End of this isolated scene preview"; }
+                return;
+            }
             int holdOut = _scene.scene_id == "tutorial_t3_after" ? 2200 : 1200;
             UomdScreenKit.Fade(_fadeVeil, 1f, holdOut, 0, false);
             UomdScreenKit.After(_stage, holdOut, () => _ = _router.EntryFlow.StoryFinishedAsync());
@@ -723,6 +786,7 @@ namespace Uomd.Scenes
             _generation++;
             _finished = true;
             _router.Audio.StopVoiceLine();
+            if (_rebuilt) UnbindRebuilt();
         }
     }
 

@@ -277,6 +277,8 @@ namespace Uomd.EditorTools
             var scenarios = new List<string> { "boot", "studio", "title", "portrait/fadyme", "portrait/mahmut" };
             scenarios.AddRange(_assets.Select(a => a.Scenario).Where(s => s.StartsWith("portrait/", StringComparison.Ordinal) && !scenarios.Contains(s)).Distinct());
             scenarios.AddRange(new[] { "portrait/fadyme/authored", "portrait/mahmut/authored" });
+            for (int tutorial = 1; tutorial <= 3; tutorial++)
+                scenarios.AddRange(new[] { "story/tutorial_t" + tutorial + "_before", "story/tutorial_t" + tutorial + "_after" });
             var prologue = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/entry/prologue.json")));
             scenarios.AddRange(JsonRead.Arr(prologue, "scenes").Select(s => "prologue/" + JsonRead.Str(s, "id")));
             int current = Math.Max(0, scenarios.IndexOf(_request.scenario));
@@ -289,12 +291,14 @@ namespace Uomd.EditorTools
                 var asset = _assets.FirstOrDefault(a => a.Scenario == _request.scenario);
                 if (asset != null) SelectAsset(asset.Id);
             }
-            EditorGUILayout.HelpBox("Portrait previews use the real T-1 story controller. Select a fixed rebuilt pose, or /authored to follow canonical emotions with the new set. Background/UI remain historical references.", MessageType.None);
-            if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal))
+            EditorGUILayout.HelpBox("Tutorial previews use the native story view and rebuilt stage/portrait candidates. Portrait variants isolate one pose; /authored follows canonical emotions. Story previews can read through locally without saving progress.", MessageType.None);
+            if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal) || _request.scenario.StartsWith("story/", StringComparison.Ordinal))
             {
-                var story = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/story/tutorial_t1_before.json")));
+                string storyPath = _request.scenario.StartsWith("story/", StringComparison.Ordinal) ? _request.scenario : "story/tutorial_t1_before";
+                var story = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/" + storyPath + ".json")));
                 var lines = JsonRead.Arr(story, "commands").Where(c => JsonRead.Str(c, "op") == "say" || JsonRead.Str(c, "op") == "narrate").Select(c => JsonRead.Str(c, "line_id")).ToArray();
-                string defaultLine = _request.PortraitCharacter == "fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002";
+                string defaultLine = _request.scenario.StartsWith("story/", StringComparison.Ordinal) ? lines[0]
+                    : _request.PortraitCharacter == "fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002";
                 if (!lines.Contains(_request.lineId)) _request.lineId = defaultLine;
                 _request.lineId = lines[EditorGUILayout.Popup("Canonical line (restart to show)", Array.IndexOf(lines, _request.lineId), lines)];
             }
@@ -413,8 +417,8 @@ namespace Uomd.EditorTools
             var prologue = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/entry/prologue.json")));
             var shot = JsonRead.Arr(prologue, "scenes").FirstOrDefault(s => "prologue/" + JsonRead.Str(s, "id") == _request.scenario);
             if (shot != null) line = JsonRead.Str(shot, "line_id");
-            if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal))
-                line = string.IsNullOrEmpty(_request.lineId) ? (_request.scenario == "portrait/fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002") : _request.lineId;
+            if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal) || _request.scenario.StartsWith("story/", StringComparison.Ordinal))
+                line = _request.lineId;
             _store.AddRequest(_selected, _selected.Scenario.Length > 0 ? _request.scenario : "asset", line, _note, kind, _request.presentation);
             _index = _store.Read();
             _message = "Saved to docs/review/PRODUCTION_REVIEW.json. Ingest approval unchanged.";

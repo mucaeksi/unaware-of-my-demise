@@ -702,3 +702,7 @@ Root `AGENTS.md` links this brief so a new production session knows to load it. 
 file rather than pasting it into every nested AGENTS file. Codex's official instruction discovery is documented at
 [Custom instructions with AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
 The local command syntax was verified from the installed CLI; future hosts must check their own help/version/tool state.
+
+## Tutorial narrative continuation — 2026-10-26
+
+Three new built-in OpenAI stage plates and native `Resources/Rebuild/Story.uxml` / `Story.uss` now serve all six tutorial before/after scenes, with canonical emotions resolved through the rebuilt portrait set in normal play. `StoryScreenController` remains the canonical StoryRunner/entry-flow adapter; `RebuildStoryPresentation` owns the new view, image preflight/retry/text-only recovery and actual voice-clock reveal. Other story/battle/hub art remains migration work. Production Review adds `story/tutorial_t1_before|after` through T3; local read-through holds at the end without real progression. There are 22 candidates / 456 review records. [Current guide](../media/SOL_TUTORIAL_NARRATIVE.md), [scoped evidence](../evidence/sol-tutorial-narrative-2026-10-26.json). Next: manual tutorial/battle presentation and new animation atlases, then complete entry/Finish/durable Continue/restart. Continue through Unity CLI only; do not launch the user-owned watcher or extra Codex processes.

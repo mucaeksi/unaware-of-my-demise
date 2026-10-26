@@ -69,6 +69,12 @@ namespace Uomd.Scenes
                 case "studio": screen = UomdScreenId.Studio; break;
                 case "title": screen = UomdScreenId.Title; break;
                 default:
+                    if (request.scenario.StartsWith("story/", StringComparison.Ordinal))
+                    {
+                        if (!StoryScreenController.IsRebuiltStory(request.scenario.Substring(6))) throw new ArgumentException("Unknown rebuilt tutorial scene.");
+                        screen = UomdScreenId.Story;
+                        break;
+                    }
                     if (request.scenario.StartsWith("portrait/", StringComparison.Ordinal))
                     {
                         if ((request.PortraitCharacter != "fadyme" && request.PortraitCharacter != "mahmut") ||
@@ -98,10 +104,13 @@ namespace Uomd.Scenes
                 Audio.Muted = request.muted;
                 if (screen == UomdScreenId.Story)
                 {
-                    Session.ActiveStoryPath = "story/tutorial_t1_before.json";
+                    Session.ActiveStoryPath = request.scenario.StartsWith("story/", StringComparison.Ordinal)
+                        ? request.scenario + ".json" : "story/tutorial_t1_before.json";
                     Session.ActiveStoryJson = await Patch.ReadTextAsync(Session.ActiveStoryPath);
                     if (this == null) return;
                     var scene = JsonUtility.FromJson<StorySceneDto>(Session.ActiveStoryJson);
+                    if (string.IsNullOrEmpty(request.lineId))
+                        request.lineId = Array.Find(scene.commands, c => c.op == "say" || c.op == "narrate")?.line_id ?? "";
                     if (Array.FindIndex(scene.commands, c => c.line_id == request.lineId && (c.op == "say" || c.op == "narrate")) < 0)
                         throw new ArgumentException("Unknown canonical tutorial line.");
                     Audio.StopBgm(0.01f);

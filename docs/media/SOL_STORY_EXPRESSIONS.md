@@ -22,3 +22,5 @@ The review routes are Editor-only. Normal authored story portrait mappings stay 
 Checks: `npm run verify` PASS (954 workspace/tool executions, 507 API tests, 224 content files reproduced), EditMode **126/126**, headless logic **111/111**, reference compile **12 assemblies / zero errors**, 66 skill adapters. See [scoped evidence](../evidence/sol-story-expressions-2026-10-26.json) for source/capture hashes, the companion-expression regression and exact limits.
 
 Next: three original tutorial stage paintings, native narrative/tutorial UI, normal authored consumer migration and complete manual entry/Finish/Continue/restart. Owner art acceptance, physical Android, signing/provider and public release gates remain open. Changes are committed locally; the owner pushes.
+
+Later continuation, same date: the [tutorial narrative delivery](SOL_TUTORIAL_NARRATIVE.md) supersedes this snapshot's pending stage/UI and normal tutorial-consumer notes. Six tutorial Story scenes now use the rebuilt set; other story/battle consumers and final acceptance remain open.

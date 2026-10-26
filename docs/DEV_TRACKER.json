@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "2e1b615f6a02cc748d0911a4d46d164c813370e2",
+  "sourceCommit": "ffce1a9b",
   "reviewedAt": "2026-10-26",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Expression sets LOCAL_TESTED: four candidate poses per lead, fixed-pose and canonical-emotion T1 review with both actors reconstructed. Next: three tutorial stages, native narrative/tutorial UI, authored consumer migration and durable Continue/restart; then real battle presentation.",
+    "nextProposed": "Tutorial narrative integrated: three new OpenAI stages, native Story UXML/USS and canonical portrait emotions serve six tutorial before/after scenes. Next: manual tutorial/battle presentation with new animation atlases, then full entry/Finish/durable Continue/restart. Owner art, native-2K and Android gates remain open.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped. Unity Editor access is CLI only per the owner; MCP configuration and pinned sources remain intact."
   },
   "now": [
+    {
+      "title": "D-35: native tutorial narrative and three original stages (2026-10-26)",
+      "detail": "Three built-in OpenAI paintings (native 1672x941, runtime 1664x936), native editable Story UI, six normal-play tutorial scenes using rebuilt portrait emotions, six isolated review routes and explicit image-load recovery. Actual voice-clock reveal, manual Next and normal-speed Auto remain backed by StoryRunner. CLI-only scoped checks and source/capture hashes: docs/evidence/sol-tutorial-narrative-2026-10-26.json. 22 candidates / 456 review records; no human art, device or release approval, API spending or push. Enclosing commit binds the delivery; sourceCommit is its parent."
+    },
     {
       "title": "D-35: complete candidate story expression sets and CLI-only review (2026-10-26)",
       "detail": "LOCAL_TESTED: six new built-in OpenAI variants, nineteen candidates / 453 records, native 1024x1536 alpha sources and 768x1152 exports. Fixed pose routes and authored-emotion T1 seeking reconstruct both actors without skipped voice playback; stale texture completions cannot replace newer poses. EditMode 126/126, logic 111/111, twelve-assembly reference compile, npm verify PASS; nine final Game-view captures and restored Editor/preferences. Normal story art consumers await stages/UI. No owner approvals, new API spending, push or device acceptance. Evidence: docs/evidence/sol-story-expressions-2026-10-26.json. Enclosing delivery commit binds source; sourceCommit records its parent."
@@ -245,6 +249,23 @@
     }
   ],
   "evidence": [
+    {
+      "id": "E-SOL-TUTORIAL-NARRATIVE",
+      "level": "LOCAL_TESTED",
+      "result": "PASS",
+      "commit": "ffce1a9b",
+      "verifiedAt": "2026-10-26",
+      "scope": "Six native tutorial Story scenes and three new OpenAI stages; CLI-only Editor/typed-event evidence in docs/evidence/sol-tutorial-narrative-2026-10-26.json. Enclosing commit binds source. No full battle/Finish/Continue, owner art or Android acceptance.",
+      "testIds": [
+        "EditMode",
+        "PlayMode",
+        "headless-logic",
+        "tutorial-ui-cli"
+      ],
+      "buildId": null,
+      "deploymentId": null,
+      "deviceId": null
+    },
     {
       "id": "E-SOURCE-R00",
       "level": "BUILT",

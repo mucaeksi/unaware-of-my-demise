@@ -21,6 +21,9 @@ namespace Uomd.EditorTools
             : Id == "sol_fadyme_vn_composed" ? "portrait/fadyme" : Id == "sol_mahmut_vn_composed" ? "portrait/mahmut"
             : Id.StartsWith("sol_fadyme_vn_", StringComparison.Ordinal) ? "portrait/fadyme/" + Id.Substring("sol_fadyme_vn_".Length)
             : Id.StartsWith("sol_mahmut_vn_", StringComparison.Ordinal) ? "portrait/mahmut/" + Id.Substring("sol_mahmut_vn_".Length)
+            : Id == "sol_bg_forest_whispering_ash" ? "story/tutorial_t1_before"
+            : Id == "sol_bg_forgotten_stone_crossing" ? "story/tutorial_t2_before"
+            : Id == "sol_bg_shelter_courtyard_dusk" ? "story/tutorial_t3_before"
             : Id.StartsWith("sol_prologue_", StringComparison.Ordinal) ? "prologue/" + Id.Substring(13) : "";
     }
 

@@ -1,0 +1,81 @@
+{
+    "schema": 1,
+    "id": "20261026T215231984_daae09f9",
+    "capturedAt": "2026-10-26T21:52:32.1844808Z",
+    "sourceCommit": "ffce1a9b22ffab8a2b3b3cd7846f6e7d740f564c",
+    "workingTreeScope": "M README.md\n M apps/api/seed/assets.sql\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs\n M apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs\n M content/base/art/art_manifest.json\n M content/base/release.json\n M content/provenance.json\n M docs/BUILD_STATE.md\n M docs/DEV_TRACKER.json\n M docs/INFRA_ROADMAP.md\n M docs/NEXT_STEPS.md\n M docs/handoff/CODEX_CLI_MASTER_PROMPT.md\n M docs/handoff/SOL_REBUILD_PLAN.md\n M docs/media/SOL_STORY_EXPRESSIONS.md\n M docs/media/SOL_VISUAL_REBUILD.json\n M docs/review/PRODUCTION_REVIEW.json\n M docs/review/README.md\n M docs/review/index.html\n M tools/build_content.ts\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uss\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uss.meta\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uxml\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uxml.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStoryPresentation.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStoryPresentation.cs.meta\n?? codex_watcher.ps1\n?? content/approved_art/art/bg_sol_forest_whispering_ash.webp\n?? content/approved_art/art/bg_sol_forgotten_stone_crossing.webp\n?? content/approved_art/art/bg_sol_shelter_courtyard_dusk.webp\n?? content/approved_art/entries/sol_bg_forest_whispering_ash.json\n?? content/approved_art/entries/sol_bg_forgotten_stone_crossing.json\n?? content/approved_art/entries/sol_bg_shelter_courtyard_dusk.json\n?? content/base/art/bg_sol_forest_whispering_ash.webp\n?? content/base/art/bg_sol_forgotten_stone_crossing.webp\n?? content/base/art/bg_sol_shelter_courtyard_dusk.webp\n?? content/generated/openai/sol_bg_forest_whispering_ash/\n?? content/generated/openai/sol_bg_forgotten_stone_crossing/\n?? content/generated/openai/sol_bg_shelter_courtyard_dusk/\n?? content/specs/image/sol_bg_forest_whispering_ash.ingest.json\n?? content/specs/image/sol_bg_forgotten_stone_crossing.ingest.json\n?? content/specs/image/sol_bg_shelter_courtyard_dusk.ingest.json\n?? docs/review/captures/20261026T213708919_6ea49667.json\n?? docs/review/captures/20261026T213708919_6ea49667.png\n?? docs/review/captures/20261026T214012708_423efb69.json\n?? docs/review/captures/20261026T214012708_423efb69.png\n?? docs/review/captures/20261026T214025242_60d596fd.json\n?? docs/review/captures/20261026T214025242_60d596fd.png\n?? docs/review/captures/20261026T214036166_1b8ae752.json\n?? docs/review/captures/20261026T214036166_1b8ae752.png\n?? docs/review/captures/20261026T214049969_2cd509cf.json\n?? docs/review/captures/20261026T214049969_2cd509cf.png\n?? docs/review/captures/20261026T214100731_a9cc4d8c.json\n?? docs/review/captures/20261026T214100731_a9cc4d8c.png\n?? docs/review/captures/20261026T214113331_6de1d906.json\n?? docs/review/captures/20261026T214113331_6de1d906.png\n?? docs/review/captures/20261026T214124511_46a16104.json\n?? docs/review/captures/20261026T214124511_46a16104.png\n?? docs/review/captures/20261026T214128091_2ec2ee62.json\n?? docs/review/captures/20261026T214128091_2ec2ee62.png\n?? docs/review/captures/20261026T214202469_67ec129b.json\n?? docs/review/captures/20261026T214202469_67ec129b.png\n?? docs/review/captures/20261026T215148289_e510fa81.json\n?? docs/review/captures/20261026T215148289_e510fa81.png\n?? docs/review/captures/20261026T215159934_56cbe63e.json\n?? docs/review/captures/20261026T215159934_56cbe63e.png\n?? docs/review/captures/20261026T215210632_c115798c.json\n?? docs/review/captures/20261026T215210632_c115798c.png\n?? docs/review/captures/20261026T215221173_0bdfaa81.json\n?? docs/review/captures/20261026T215221173_0bdfaa81.png\n?? docs/review/captures/20261026T215231984_daae09f9.png",
+    "contentRelease": "rel_0001",
+    "scenario": "story/tutorial_t3_before",
+    "lineId": "tutorial_t3_before_003",
+    "assetId": "sol_bg_shelter_courtyard_dusk",
+    "sourceSha": "c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+    "entrySha": "41bdfc3a1f46246ae34d2a5e386301bbc04d40dcbbb7a31fab0dac8132924ee1",
+    "assetRevision": 1,
+    "shot": -1,
+    "width": 1920,
+    "height": 1080,
+    "errorsObserved": 0,
+    "shotElapsed": 0.0,
+    "simulatedSafeArea": false,
+    "editorOnly": true,
+    "safeAreaDescription": "none",
+    "imageSha": "d3df7d5e3af97ab76ae46662de5d62e36774d71917a55334ca611e049583ee6b",
+    "selectedAssetIdentity": "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+    "presentationState": "reading",
+    "settings": {
+        "scenario": "story/tutorial_t3_before",
+        "shot": 0,
+        "lineId": "tutorial_t3_before_003",
+        "paused": true,
+        "muted": true,
+        "reducedMotion": true,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": false,
+        "presentation": {
+            "scenario": "title",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 93.0,
+        "y": 821.0,
+        "width": 1734.0,
+        "height": 130.0
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1920.0,
+        "height": 1080.0
+    },
+    "stageCameras": 0,
+    "stageLights": 0,
+    "stageParticles": 0,
+    "imagePaths": [
+        "art/bg_sol_shelter_courtyard_dusk.webp",
+        "art/portrait_mahmut_sol_watchful.webp",
+        "art/portrait_fadyme_sol_wry.webp"
+    ],
+    "relatedAssetIdentities": [
+        "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+        "sol_fadyme_vn_wry@1:1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+        "sol_mahmut_vn_watchful@1:0b6224bac4f8e0dcc191ee3b59dd0aa1420fc46aab40f2bca27c1d1c5eb4a7f8"
+    ],
+    "bgmVolume": 0.699999988079071,
+    "effectsVolume": 0.8500000238418579,
+    "voiceVolume": 1.0,
+    "actualMuted": true
+}

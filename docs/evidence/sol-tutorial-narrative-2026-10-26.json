@@ -1,0 +1,1182 @@
+{
+  "schema": 1,
+  "status": "LOCAL_TESTED",
+  "verified_at": "2026-10-26T22:10:24.742Z",
+  "parent_commit": "ffce1a9b22ffab8a2b3b3cd7846f6e7d740f564c",
+  "source_scope": "Parent plus this tutorial narrative delivery. The enclosing local commit binds final source/art/docs. Earlier expression/pilot counts remain dated snapshots. No push or deployment.",
+  "source_sha256_normalized_lf": {
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs": "8f7ef5aed73a82db50fa063c3133c197a3dee7f31ed7d4378d118881dde48f4c",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs": "283c8830e9a06e6ab97b4b8dae5a173d7937a4496f96366bee4ddf664cc21e00",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs": "8ce72a6e3a8d73c33c644336642c2e6ab61cd4b1897a8ecc83a386f7863095bc",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs": "c675d6f2959ab642f5cc2065ce94650f6cbf8a213b8a72371aea249bce9b22df",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs": "87dd8b669d4c53f28f289be07e83d6f189eb03790287ba7bae058c9c87f5c1e8",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs": "df3afface035443db429dfb1b5936783fb53cca49db0aa703df8d3f7830e2590",
+    "apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs": "4adc84ca6f39c26c3152e85d77987758cb804af51edc6800ba3e5f1be8cdda15",
+    "tools/build_content.ts": "e96d1706c94d3b4d599db1620ba7aa57a212cae00ee67453a51408449d049137",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStoryPresentation.cs": "b364fea75c32502977dab80a09b6f814718b3aef28922604a0096f1e8a4dbbbb",
+    "apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uxml": "29ea3fa960361cf9792b2da939191b34771bc45a1b61cb30ef2e00943aea002b",
+    "apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uss": "ed3187b574c95086659da2be645fe993f9cbdda09f458d1afd31a8a340a22e65"
+  },
+  "unity": {
+    "version": "6000.3.27f1",
+    "pipeline": "0.9.1-exp.1",
+    "transport": "Unity CLI only",
+    "mcp_calls_for_this_delivery": 0,
+    "mcp_configuration": "unchanged"
+  },
+  "generation": {
+    "provider": "OpenAI",
+    "tool": "image_gen.imagegen",
+    "calls": 3,
+    "selected_assets": 3,
+    "model": "not_disclosed_by_builtin_tool",
+    "cost_usd": null,
+    "external_gemini_api_generation_calls": 0
+  },
+  "assets": [
+    {
+      "asset_id": "sol_bg_forest_whispering_ash",
+      "source": "content/generated/openai/sol_bg_forest_whispering_ash/source.png",
+      "source_sha256": "8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+      "native_dimensions": [
+        1672,
+        941
+      ],
+      "upscaled": false,
+      "prompt": "content/generated/openai/sol_bg_forest_whispering_ash/prompt.txt",
+      "prompt_sha256": "d1309923ba9d32a7d7d530da7799feb5a81e07bc074f79015f691d272c8510e5",
+      "provenance": "content/generated/openai/sol_bg_forest_whispering_ash/run.provenance.json",
+      "provenance_sha256": "08693c8a03c5532f21b2f22c3000f166afac9ab4c8696a6dee03459561a89ceb",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_title_key_art_01/source.png",
+          "role": "openai_style_and_material_reference_only",
+          "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a"
+        }
+      ],
+      "ingest_entry": "content/approved_art/entries/sol_bg_forest_whispering_ash.json",
+      "ingest_entry_sha256": "afad0db9c76e33d11a695317fb601de42d20bb6f870cf7058f7f60debd02459b",
+      "outputs": [
+        {
+          "path": "art/bg_sol_forest_whispering_ash.webp",
+          "sha256": "cda3f17d4a11e739dfc01219b4cb22df85a8467ae3083ab0e954d011ab9b406f",
+          "pixels_sha256": "1a2c32cd2e2805237372023c1b531d89a579a8ffcae9ff3d96f9339f6679005e",
+          "bytes": 325058,
+          "width": 1664,
+          "height": 936
+        }
+      ],
+      "targets": {
+        "backgrounds": {
+          "sol_forest_whispering_ash": "art/bg_sol_forest_whispering_ash.webp"
+        }
+      },
+      "qc": {
+        "automated": {
+          "passed": true,
+          "gates": {
+            "A31": {
+              "status": "pass",
+              "detail": "1 references verified"
+            },
+            "A01": {
+              "status": "pass"
+            },
+            "A02": {
+              "status": "pass",
+              "detail": "image/png 1672x941"
+            },
+            "A21": {
+              "status": "pass"
+            },
+            "A18": {
+              "status": "pass",
+              "detail": "1664x936"
+            },
+            "A19": {
+              "status": "pass",
+              "detail": "325058 bytes <= 327680"
+            }
+          },
+          "warnings": []
+        },
+        "human": {
+          "status": "pending",
+          "by": null,
+          "at": null,
+          "note": ""
+        }
+      }
+    },
+    {
+      "asset_id": "sol_bg_forgotten_stone_crossing",
+      "source": "content/generated/openai/sol_bg_forgotten_stone_crossing/source.png",
+      "source_sha256": "cd45df1af7b9ff1f33d6d159e7b2c4d9aa91b8daeb9e4cd7f839596960a92d57",
+      "native_dimensions": [
+        1672,
+        941
+      ],
+      "upscaled": false,
+      "prompt": "content/generated/openai/sol_bg_forgotten_stone_crossing/prompt.txt",
+      "prompt_sha256": "b5d88cc4a890395498ec957127cd69dbe3a2c16f5471182bdc5d87f4e5a5e3f9",
+      "provenance": "content/generated/openai/sol_bg_forgotten_stone_crossing/run.provenance.json",
+      "provenance_sha256": "14b1288ddc1cb173b206227f88f0c409b3a0bdb459f88d8aed23a3e82ece100e",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_title_key_art_01/source.png",
+          "role": "openai_style_and_material_reference_only",
+          "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a"
+        },
+        {
+          "path": "content/generated/openai/sol_bg_forest_whispering_ash/source.png",
+          "role": "openai_forest_material_and_light_continuity_reference",
+          "sha256": "8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+        }
+      ],
+      "ingest_entry": "content/approved_art/entries/sol_bg_forgotten_stone_crossing.json",
+      "ingest_entry_sha256": "e67206e2867c97e28c8d17ca09fde62ccc777e0a6cb83505026b811678bcdc8e",
+      "outputs": [
+        {
+          "path": "art/bg_sol_forgotten_stone_crossing.webp",
+          "sha256": "3e6ca24a8f8485ccbf68479f4ab89a853098dc0a2253306e20e77c8e8b82d319",
+          "pixels_sha256": "e76ddee90afb1d47d8586ba39e7b5cae4536805aaf3a187ebb3206ba54893f02",
+          "bytes": 310250,
+          "width": 1664,
+          "height": 936
+        }
+      ],
+      "targets": {
+        "backgrounds": {
+          "sol_forgotten_stone_crossing": "art/bg_sol_forgotten_stone_crossing.webp"
+        }
+      },
+      "qc": {
+        "automated": {
+          "passed": true,
+          "gates": {
+            "A31": {
+              "status": "pass",
+              "detail": "2 references verified"
+            },
+            "A01": {
+              "status": "pass"
+            },
+            "A02": {
+              "status": "pass",
+              "detail": "image/png 1672x941"
+            },
+            "A21": {
+              "status": "pass"
+            },
+            "A18": {
+              "status": "pass",
+              "detail": "1664x936"
+            },
+            "A19": {
+              "status": "pass",
+              "detail": "310250 bytes <= 327680"
+            }
+          },
+          "warnings": []
+        },
+        "human": {
+          "status": "pending",
+          "by": null,
+          "at": null,
+          "note": ""
+        }
+      }
+    },
+    {
+      "asset_id": "sol_bg_shelter_courtyard_dusk",
+      "source": "content/generated/openai/sol_bg_shelter_courtyard_dusk/source.png",
+      "source_sha256": "c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+      "native_dimensions": [
+        1672,
+        941
+      ],
+      "upscaled": false,
+      "prompt": "content/generated/openai/sol_bg_shelter_courtyard_dusk/prompt.txt",
+      "prompt_sha256": "5de11419c4f24e82c979b1f34bcca625fed66dd875182b16312b1189c90ce142",
+      "provenance": "content/generated/openai/sol_bg_shelter_courtyard_dusk/run.provenance.json",
+      "provenance_sha256": "9262dfc560cbbc39ff1d7f5c686340eedb8967926b61cc29121ef99f05d85612",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_title_key_art_01/source.png",
+          "role": "openai_style_and_material_reference_only",
+          "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a"
+        },
+        {
+          "path": "content/generated/openai/sol_bg_forest_whispering_ash/source.png",
+          "role": "openai_forest_material_and_light_continuity_reference",
+          "sha256": "8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+        }
+      ],
+      "ingest_entry": "content/approved_art/entries/sol_bg_shelter_courtyard_dusk.json",
+      "ingest_entry_sha256": "41bdfc3a1f46246ae34d2a5e386301bbc04d40dcbbb7a31fab0dac8132924ee1",
+      "outputs": [
+        {
+          "path": "art/bg_sol_shelter_courtyard_dusk.webp",
+          "sha256": "76171170ee48d5bc0b7bf910e092a156f87a091166a49493a02c0ab119c9b748",
+          "pixels_sha256": "de589630c7759b31bf8253c950eb838cb4d5ff497f178363efa5c71e9eec1c2d",
+          "bytes": 317150,
+          "width": 1664,
+          "height": 936
+        }
+      ],
+      "targets": {
+        "backgrounds": {
+          "sol_shelter_courtyard_dusk": "art/bg_sol_shelter_courtyard_dusk.webp"
+        }
+      },
+      "qc": {
+        "automated": {
+          "passed": true,
+          "gates": {
+            "A31": {
+              "status": "pass",
+              "detail": "2 references verified"
+            },
+            "A01": {
+              "status": "pass"
+            },
+            "A02": {
+              "status": "pass",
+              "detail": "image/png 1672x941"
+            },
+            "A21": {
+              "status": "pass"
+            },
+            "A18": {
+              "status": "pass",
+              "detail": "1664x936"
+            },
+            "A19": {
+              "status": "pass",
+              "detail": "317150 bytes <= 327680"
+            }
+          },
+          "warnings": []
+        },
+        "human": {
+          "status": "pending",
+          "by": null,
+          "at": null,
+          "note": ""
+        }
+      }
+    }
+  ],
+  "consumers": {
+    "normal_play": "All six tutorial before/after Story scenes use native UXML/USS, explicit sol_<location> backgrounds and SolPortrait canonical emotion aliases. Other stories/battle/hub retain their existing migration scope.",
+    "review": "Six story/<scene_id> scenarios, canonical-line seek reconstructs both actors; subsequent reading is allowed and holds at the local ending without EntryFlow persistence or battle/Finish navigation.",
+    "catalog": {
+      "candidates": 22,
+      "records": 456,
+      "ingest_entries": 280,
+      "reference_records": 176,
+      "final_accepted_replacements": 0
+    }
+  },
+  "validation": {
+    "npm_verify": {
+      "result": "PASS",
+      "workspace_and_tool_test_executions": 954,
+      "counts": {
+        "api": 507,
+        "unity_exporter": 5,
+        "combat": 100,
+        "schema": 132,
+        "economy": 53,
+        "patch": 41,
+        "shared": 26,
+        "story": 9,
+        "tools": 81
+      },
+      "reproduced_files": 227,
+      "base_release_files": 224,
+      "log_sha256": "fc7536dfcb6c3e06570292ef448d3052e22fa9ee11c8b6e352f25b3221410387"
+    },
+    "editmode": {
+      "total": 128,
+      "passed": 128,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "editmode_duration": 7.67,
+    "playmode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode_duration": 2.62,
+    "headless_logic": {
+      "passed": 111,
+      "failed": 0
+    },
+    "reference_compile": {
+      "assemblies": 12,
+      "errors": 0,
+      "note": "Editor and player source; URP 17.3.0 verified signatures are used where package assemblies are unavailable to the reference harness. Actual live Editor compilation also passed."
+    },
+    "skills": {
+      "adapters": 66,
+      "result": "PASS"
+    },
+    "graph": {
+      "nodes": 6603,
+      "edges": 18102,
+      "communities": 253,
+      "mode": "code-only; no LLM/paid extraction"
+    },
+    "console": {
+      "sampledUtc": "2026-10-26T22:06:43.6229793Z",
+      "ageMs": 5,
+      "compilationFailed": false,
+      "compiling": false,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "consoleLogs": 6644,
+      "seeded": true
+    }
+  },
+  "ui_checks": {
+    "result": "PASS",
+    "method": "Real isolated controllers driven with CLI script eval_file, public NavigationSubmitEvent and ClickEvent dispatch. No physical pointer/device claim.",
+    "scenes": [
+      {
+        "scenario": "story/tutorial_t1_before",
+        "images": [
+          "art/bg_sol_forest_whispering_ash.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_fadyme_sol_wry.webp"
+        ],
+        "view": "{ body = (x:93.00, y:821.00, width:1734.00, height:130.00), box = (x:56.00, y:752.00, width:1808.00, height:296.00), skip = False, next = (x:1653.00, y:951.00, width:174.00, height:64.00) }",
+        "read": {
+          "lines": [
+            "tutorial_t1_before_001",
+            "tutorial_t1_before_002",
+            "tutorial_t1_before_003",
+            "tutorial_t1_before_004",
+            "tutorial_t1_before_005",
+            "tutorial_t1_before_006",
+            "tutorial_t1_before_007",
+            "tutorial_t1_before_008",
+            "tutorial_t1_before_009",
+            "tutorial_t1_before_010",
+            "tutorial_t1_before_011",
+            "tutorial_t1_before_012",
+            "tutorial_t1_before_013",
+            "tutorial_t1_before_014"
+          ],
+          "hint": "End of this isolated scene preview",
+          "screen": "Story",
+          "state": "reading"
+        }
+      },
+      {
+        "scenario": "story/tutorial_t1_after",
+        "images": [
+          "art/bg_sol_forest_whispering_ash.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_fadyme_sol_wry.webp"
+        ],
+        "view": "{ body = (x:93.00, y:821.00, width:1734.00, height:130.00), box = (x:56.00, y:752.00, width:1808.00, height:296.00), skip = False, next = (x:1653.00, y:951.00, width:174.00, height:64.00) }",
+        "read": {
+          "lines": [
+            "tutorial_t1_after_001",
+            "tutorial_t1_after_002",
+            "tutorial_t1_after_003",
+            "tutorial_t1_after_004",
+            "tutorial_t1_after_005",
+            "tutorial_t1_after_006",
+            "tutorial_t1_after_007",
+            "tutorial_t1_after_008",
+            "tutorial_t1_after_009",
+            "tutorial_t1_after_010",
+            "tutorial_t1_after_011",
+            "tutorial_t1_after_012",
+            "tutorial_t1_after_013",
+            "tutorial_t1_after_014"
+          ],
+          "hint": "End of this isolated scene preview",
+          "screen": "Story",
+          "state": "reading"
+        }
+      },
+      {
+        "scenario": "story/tutorial_t2_before",
+        "images": [
+          "art/bg_sol_forgotten_stone_crossing.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "view": "{ body = (x:93.00, y:821.00, width:1734.00, height:130.00), box = (x:56.00, y:752.00, width:1808.00, height:296.00), skip = False, next = (x:1653.00, y:951.00, width:174.00, height:64.00) }",
+        "read": {
+          "lines": [
+            "tutorial_t2_before_001",
+            "tutorial_t2_before_002",
+            "tutorial_t2_before_003",
+            "tutorial_t2_before_004",
+            "tutorial_t2_before_005",
+            "tutorial_t2_before_006",
+            "tutorial_t2_before_007",
+            "tutorial_t2_before_008",
+            "tutorial_t2_before_009",
+            "tutorial_t2_before_010",
+            "tutorial_t2_before_011",
+            "tutorial_t2_before_012",
+            "tutorial_t2_before_013"
+          ],
+          "hint": "End of this isolated scene preview",
+          "screen": "Story",
+          "state": "reading"
+        }
+      },
+      {
+        "scenario": "story/tutorial_t2_after",
+        "images": [
+          "art/bg_sol_forgotten_stone_crossing.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_wry.webp"
+        ],
+        "view": "{ body = (x:93.00, y:821.00, width:1734.00, height:130.00), box = (x:56.00, y:752.00, width:1808.00, height:296.00), skip = False, next = (x:1653.00, y:951.00, width:174.00, height:64.00) }",
+        "read": {
+          "lines": [
+            "tutorial_t2_after_001",
+            "tutorial_t2_after_002",
+            "tutorial_t2_after_003",
+            "tutorial_t2_after_004",
+            "tutorial_t2_after_005",
+            "tutorial_t2_after_006",
+            "tutorial_t2_after_007",
+            "tutorial_t2_after_008",
+            "tutorial_t2_after_009",
+            "tutorial_t2_after_010",
+            "tutorial_t2_after_011",
+            "tutorial_t2_after_012",
+            "tutorial_t2_after_013",
+            "tutorial_t2_after_014",
+            "tutorial_t2_after_015",
+            "tutorial_t2_after_016",
+            "tutorial_t2_after_017",
+            "tutorial_t2_after_018"
+          ],
+          "hint": "End of this isolated scene preview",
+          "screen": "Story",
+          "state": "reading"
+        }
+      },
+      {
+        "scenario": "story/tutorial_t3_before",
+        "images": [
+          "art/bg_sol_shelter_courtyard_dusk.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_fadyme_sol_wry.webp"
+        ],
+        "view": "{ body = (x:93.00, y:821.00, width:1734.00, height:130.00), box = (x:56.00, y:752.00, width:1808.00, height:296.00), skip = False, next = (x:1653.00, y:951.00, width:174.00, height:64.00) }",
+        "read": {
+          "lines": [
+            "tutorial_t3_before_001",
+            "tutorial_t3_before_002",
+            "tutorial_t3_before_003",
+            "tutorial_t3_before_004",
+            "tutorial_t3_before_005",
+            "tutorial_t3_before_006",
+            "tutorial_t3_before_007",
+            "tutorial_t3_before_008",
+            "tutorial_t3_before_009",
+            "tutorial_t3_before_010",
+            "tutorial_t3_before_011",
+            "tutorial_t3_before_012",
+            "tutorial_t3_before_013",
+            "tutorial_t3_before_014"
+          ],
+          "hint": "End of this isolated scene preview",
+          "screen": "Story",
+          "state": "reading"
+        }
+      },
+      {
+        "scenario": "story/tutorial_t3_after",
+        "images": [
+          "art/bg_sol_shelter_courtyard_dusk.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_fadyme_sol_wry.webp"
+        ],
+        "view": "{ body = (x:93.00, y:821.00, width:1734.00, height:130.00), box = (x:56.00, y:752.00, width:1808.00, height:296.00), skip = False, next = (x:1653.00, y:951.00, width:174.00, height:64.00) }",
+        "read": {
+          "lines": [
+            "tutorial_t3_after_001",
+            "tutorial_t3_after_002",
+            "tutorial_t3_after_003",
+            "tutorial_t3_after_004",
+            "tutorial_t3_after_005",
+            "tutorial_t3_after_006",
+            "tutorial_t3_after_007",
+            "tutorial_t3_after_008",
+            "tutorial_t3_after_009",
+            "tutorial_t3_after_010",
+            "tutorial_t3_after_011",
+            "tutorial_t3_after_012",
+            "tutorial_t3_after_013",
+            "tutorial_t3_after_014",
+            "tutorial_t3_after_015",
+            "tutorial_t3_after_016",
+            "tutorial_t3_after_017",
+            "tutorial_t3_after_018",
+            "tutorial_t3_after_019",
+            "tutorial_t3_after_020",
+            "tutorial_t3_after_021",
+            "tutorial_t3_after_022",
+            "tutorial_t3_after_023",
+            "tutorial_t3_after_024",
+            "tutorial_t3_after_025",
+            "tutorial_t3_after_026",
+            "tutorial_t3_after_027",
+            "tutorial_t3_after_028",
+            "tutorial_t3_after_029",
+            "tutorial_t3_after_030",
+            "tutorial_t3_after_031",
+            "tutorial_t3_after_032",
+            "tutorial_t3_after_033",
+            "tutorial_t3_after_034"
+          ],
+          "hint": "End of this isolated scene preview",
+          "screen": "Story",
+          "state": "reading"
+        }
+      }
+    ],
+    "line_count": 107,
+    "interactions": {
+      "pausedResize": {
+        "before": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_005",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_warm.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 0,
+          "voiceReady": true,
+          "voicePlaying": false,
+          "body": "You have a comforting way of counting disasters.",
+          "auto": "AUTO · ON",
+          "next": "NEXT  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215242693_69ce52e3.png",
+          "error": "",
+          "errors": 0
+        },
+        "after": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_005",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_warm.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 0,
+          "voiceReady": true,
+          "voicePlaying": false,
+          "body": "You have a comforting way of counting disasters.",
+          "auto": "AUTO · ON",
+          "next": "NEXT  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        }
+      },
+      "voiceClock": {
+        "clock1": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_009",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_wry.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 1.13066661,
+          "voiceReady": true,
+          "voicePlaying": true,
+          "body": "She took his<alpha=#00> hand. On the other side, neither let go quite as promptly as the crossing required.</alpha>",
+          "auto": "AUTO · OFF",
+          "next": "REVEAL  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        },
+        "clock2": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_009",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_wry.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 3.776,
+          "voiceReady": true,
+          "voicePlaying": true,
+          "body": "She took his hand. On the other<alpha=#00> side, neither let go quite as promptly as the crossing required.</alpha>",
+          "auto": "AUTO · OFF",
+          "next": "REVEAL  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        },
+        "frozen1": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_009",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_wry.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 5.01333332,
+          "voiceReady": true,
+          "voicePlaying": false,
+          "body": "She took his hand. On the other side, neither<alpha=#00> let go quite as promptly as the crossing required.</alpha>",
+          "auto": "AUTO · OFF",
+          "next": "REVEAL  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        },
+        "frozen2": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_009",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_wry.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 5.01333332,
+          "voiceReady": true,
+          "voicePlaying": false,
+          "body": "She took his hand. On the other side, neither<alpha=#00> let go quite as promptly as the crossing required.</alpha>",
+          "auto": "AUTO · OFF",
+          "next": "REVEAL  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        },
+        "revealed": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_009",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_wry.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 7.33866644,
+          "voiceReady": true,
+          "voicePlaying": true,
+          "body": "She took his hand. On the other side, neither let go quite as promptly as the crossing required.",
+          "auto": "AUTO · OFF",
+          "next": "NEXT  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        },
+        "advanced": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_010",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_dry_humor.webp",
+            "art/portrait_fadyme_sol_wry.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 0.8106667,
+          "voiceReady": true,
+          "voicePlaying": true,
+          "body": "There.<alpha=#00> An excellent rescue. Very little applause, unfortunately.</alpha>",
+          "auto": "AUTO · OFF",
+          "next": "REVEAL  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        }
+      },
+      "toolbar": {
+        "before": "tutorial_t1_before_005",
+        "after": "tutorial_t1_before_005",
+        "auto": "AUTO · OFF"
+      },
+      "missingImages": {
+        "missing": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "",
+          "paths": [],
+          "state": "error",
+          "voiceTime": 0,
+          "voiceReady": false,
+          "voicePlaying": false,
+          "body": "",
+          "auto": "AUTO · ON",
+          "next": "NEXT  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        },
+        "textOnly": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_003",
+          "paths": [],
+          "state": "reading_without_images",
+          "voiceTime": 0,
+          "voiceReady": true,
+          "voicePlaying": false,
+          "body": "The stones have already claimed one boot.",
+          "auto": "AUTO · ON",
+          "next": "NEXT  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215258316_4b1adf96.png",
+          "error": "",
+          "errors": 0
+        },
+        "retried": {
+          "ready": true,
+          "scenario": "story/tutorial_t1_before",
+          "line": "tutorial_t1_before_003",
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/portrait_mahmut_sol_watchful.webp",
+            "art/portrait_fadyme_sol_wry.webp"
+          ],
+          "state": "reading",
+          "voiceTime": 0,
+          "voiceReady": true,
+          "voicePlaying": false,
+          "body": "The stones have already claimed one boot.",
+          "auto": "AUTO · ON",
+          "next": "NEXT  ›",
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T215331357_e5b7f8c0.png",
+          "error": "",
+          "errors": 0
+        }
+      }
+    },
+    "expected_warning_count": 2,
+    "warning_scope": "Two deliberately missing-background preflights. No errors; later clean run has zero console warnings.",
+    "before": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "after": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    }
+  },
+  "auto_and_layout": {
+    "result": "PASS",
+    "samples": [
+      {
+        "elapsed": 2.261,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 1.088,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 3.546,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 2.38933325,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 4.797,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 3.712,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 6.03,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 4.970667,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 8.327,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 6.18666649,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 9.66,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 8.469334,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 11.021,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 9.792,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 12.424,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 11.1786671,
+        "voicePlaying": true
+      },
+      {
+        "elapsed": 13.719,
+        "line": "tutorial_t1_before_009",
+        "voiceTime": 0,
+        "voicePlaying": false
+      },
+      {
+        "elapsed": 15.033,
+        "line": "tutorial_t1_before_010",
+        "voiceTime": 0.08533333,
+        "voicePlaying": true
+      }
+    ],
+    "before": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "duration": 12.374,
+    "layout": {
+      "required": 47,
+      "available": 130
+    },
+    "title": {
+      "ready": true,
+      "height": 1080
+    },
+    "after": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    }
+  },
+  "final_captures": [
+    {
+      "image": "docs/review/captures/20261026T215148289_e510fa81.png",
+      "metadata": "docs/review/captures/20261026T215148289_e510fa81.json",
+      "scenario": "story/tutorial_t1_before",
+      "line": "tutorial_t1_before_003",
+      "width": 1920,
+      "height": 1080,
+      "safe": false,
+      "state": "reading",
+      "image_sha256": "b6c920a7b889da2ccc2044c634406f9c80d92295afbca6fdcbda44b034606a6f",
+      "metadata_sha256": "29f65b2b998d37800e077dc175a1a8f1f91f694c3e1a9c1c85a340344280801d",
+      "lineId": "tutorial_t1_before_003",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_watchful.webp",
+        "art/portrait_fadyme_sol_wry.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_vn_wry@1:1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+        "sol_mahmut_vn_watchful@1:0b6224bac4f8e0dcc191ee3b59dd0aa1420fc46aab40f2bca27c1d1c5eb4a7f8"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215159934_56cbe63e.png",
+      "metadata": "docs/review/captures/20261026T215159934_56cbe63e.json",
+      "scenario": "story/tutorial_t1_after",
+      "line": "tutorial_t1_after_003",
+      "width": 1920,
+      "height": 1080,
+      "safe": false,
+      "state": "reading",
+      "image_sha256": "3058a3c61b43d12f4332d11f2abfe888fa566b0d9f7b4763fead582d12e498d7",
+      "metadata_sha256": "3d666809d706c539d05ffc180f87cdd6e7a301f0420ab835ec9d2fe827283253",
+      "lineId": "tutorial_t1_after_003",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_watchful.webp",
+        "art/portrait_fadyme_sol_wry.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_vn_wry@1:1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+        "sol_mahmut_vn_watchful@1:0b6224bac4f8e0dcc191ee3b59dd0aa1420fc46aab40f2bca27c1d1c5eb4a7f8"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215210632_c115798c.png",
+      "metadata": "docs/review/captures/20261026T215210632_c115798c.json",
+      "scenario": "story/tutorial_t2_before",
+      "line": "tutorial_t2_before_003",
+      "width": 1920,
+      "height": 1080,
+      "safe": false,
+      "state": "reading",
+      "image_sha256": "efabf773cc97530197fe999c7d3f759d8cd08607379417109c7808c6a97be9bb",
+      "metadata_sha256": "3b1c6112d7aeb8b8817ef3e78fde6aed3f79d47e279d9e775a6e3d4d6f9139ba",
+      "lineId": "tutorial_t2_before_003",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_forgotten_stone_crossing.webp",
+        "art/portrait_mahmut_sol_watchful.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_forgotten_stone_crossing@1:cd45df1af7b9ff1f33d6d159e7b2c4d9aa91b8daeb9e4cd7f839596960a92d57",
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_mahmut_vn_watchful@1:0b6224bac4f8e0dcc191ee3b59dd0aa1420fc46aab40f2bca27c1d1c5eb4a7f8"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215221173_0bdfaa81.png",
+      "metadata": "docs/review/captures/20261026T215221173_0bdfaa81.json",
+      "scenario": "story/tutorial_t2_after",
+      "line": "tutorial_t2_after_002",
+      "width": 1920,
+      "height": 1080,
+      "safe": false,
+      "state": "reading",
+      "image_sha256": "d22bf3d782b4fe85a6673b2ab21a44ce5338da981c3ab96e12ff62aae2dc3815",
+      "metadata_sha256": "6175632b12d8e3365dc61ca446966986008d06a7f4fe475abc91c107591f20f3",
+      "lineId": "tutorial_t2_after_002",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_forgotten_stone_crossing.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_wry.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_forgotten_stone_crossing@1:cd45df1af7b9ff1f33d6d159e7b2c4d9aa91b8daeb9e4cd7f839596960a92d57",
+        "sol_fadyme_vn_wry@1:1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215231984_daae09f9.png",
+      "metadata": "docs/review/captures/20261026T215231984_daae09f9.json",
+      "scenario": "story/tutorial_t3_before",
+      "line": "tutorial_t3_before_003",
+      "width": 1920,
+      "height": 1080,
+      "safe": false,
+      "state": "reading",
+      "image_sha256": "d3df7d5e3af97ab76ae46662de5d62e36774d71917a55334ca611e049583ee6b",
+      "metadata_sha256": "2606eed2ab27f12a2dc69bd0ad4096f3016cedd243569546b84df3dd311e10c5",
+      "lineId": "tutorial_t3_before_003",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_shelter_courtyard_dusk.webp",
+        "art/portrait_mahmut_sol_watchful.webp",
+        "art/portrait_fadyme_sol_wry.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+        "sol_fadyme_vn_wry@1:1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+        "sol_mahmut_vn_watchful@1:0b6224bac4f8e0dcc191ee3b59dd0aa1420fc46aab40f2bca27c1d1c5eb4a7f8"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215242693_69ce52e3.png",
+      "metadata": "docs/review/captures/20261026T215242693_69ce52e3.json",
+      "scenario": "story/tutorial_t3_after",
+      "line": "tutorial_t3_after_003",
+      "width": 1920,
+      "height": 1080,
+      "safe": false,
+      "state": "reading",
+      "image_sha256": "01d759cfaf861f9452a533cfa611341bf09b8e1ad0bc807b3e726c3258343d7e",
+      "metadata_sha256": "e77eef6ac8bd804eb9e989bc4a3ba78294bf4ec9beb9937b3c9d8122cdc8fbbc",
+      "lineId": "tutorial_t3_after_003",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_shelter_courtyard_dusk.webp",
+        "art/portrait_mahmut_sol_watchful.webp",
+        "art/portrait_fadyme_sol_wry.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+        "sol_fadyme_vn_wry@1:1344a0be9f4ba4ffddef1e117bb5af8d3ebd739bd42b3eaa093bda94c51f4e0b",
+        "sol_mahmut_vn_watchful@1:0b6224bac4f8e0dcc191ee3b59dd0aa1420fc46aab40f2bca27c1d1c5eb4a7f8"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215254646_c11a0a89.png",
+      "metadata": "docs/review/captures/20261026T215254646_c11a0a89.json",
+      "scenario": "story/tutorial_t1_before",
+      "line": "tutorial_t1_before_005",
+      "width": 2400,
+      "height": 1080,
+      "safe": true,
+      "state": "reading",
+      "image_sha256": "827fe2dce4cd91b36e726372ca86afd94459ac4faa1b0751be033813a2e99076",
+      "metadata_sha256": "f63f9e1f478e403ffa49e38e3a5f597858ea26e12722b48e6e7a81c70c39f138",
+      "lineId": "tutorial_t1_before_005",
+      "pixels": [
+        2400,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_dry_humor.webp",
+        "art/portrait_fadyme_sol_warm.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_vn_warm@1:6dd4d6c1fbaca7200f0aaafa4fa9b54b7486c8395da0b0746d87a743d9a0aa99",
+        "sol_mahmut_vn_dry_humor@1:7accb1dde713edcb57fde1971d6790f0f40f51b1d857c20687467a3f4243d1c9"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215258316_4b1adf96.png",
+      "metadata": "docs/review/captures/20261026T215258316_4b1adf96.json",
+      "scenario": "story/tutorial_t1_before",
+      "line": "tutorial_t1_before_005",
+      "width": 1600,
+      "height": 1200,
+      "safe": false,
+      "state": "reading",
+      "image_sha256": "c2fb81a02ad43780d317393d08051bef39c0e1baf78b438bd044675523daaa78",
+      "metadata_sha256": "8357a001e3521162f00eb44989ddaa7fc71973c364a2d02623dd1d9c300c2cf2",
+      "lineId": "tutorial_t1_before_005",
+      "pixels": [
+        1600,
+        1200
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_dry_humor.webp",
+        "art/portrait_fadyme_sol_warm.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_vn_warm@1:6dd4d6c1fbaca7200f0aaafa4fa9b54b7486c8395da0b0746d87a743d9a0aa99",
+        "sol_mahmut_vn_dry_humor@1:7accb1dde713edcb57fde1971d6790f0f40f51b1d857c20687467a3f4243d1c9"
+      ],
+      "presentationState": "reading"
+    },
+    {
+      "image": "docs/review/captures/20261026T215331357_e5b7f8c0.png",
+      "metadata": "docs/review/captures/20261026T215331357_e5b7f8c0.json",
+      "scenario": "story/tutorial_t1_before",
+      "line": "tutorial_t1_before_003",
+      "width": 1920,
+      "height": 1080,
+      "safe": false,
+      "state": "reading_without_images",
+      "image_sha256": "e93280870585e12f3c8d23e7341e236df5b4b784c2cc6811f689222957de6035",
+      "metadata_sha256": "02b9567c6ce03d771a4aaf12b1a6e4d672804f99afb62352d032fd7bd65e70a2",
+      "lineId": "tutorial_t1_before_003",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [],
+      "related_asset_identities": [],
+      "presentationState": "reading_without_images"
+    },
+    {
+      "image": "docs/review/captures/20261026T220433297_fbf0d441.png",
+      "metadata": "docs/review/captures/20261026T220433297_fbf0d441.json",
+      "image_sha256": "0410264855224c968fdc0db13daafe71bb6b9f5c9963229d4eaf2396761c84a3",
+      "metadata_sha256": "cbddc973f6824ddd0a0d74cb9cfdde6fa9727728264c7925d127c8007a15e7b1",
+      "scenario": "story/tutorial_t3_after",
+      "lineId": "tutorial_t3_after_001",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "actual_image_paths": [
+        "art/bg_sol_shelter_courtyard_dusk.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "related_asset_identities": [
+        "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "presentationState": "reading"
+    }
+  ],
+  "corrected_observations": [
+    "Initial content build omitted new sol_ background keys; builder now includes them for the six tutorial scenes. Test rerun passes.",
+    "Initial tablet layout inherited the fixed-height band. Native Story now fills available panel height; final three-aspect captures replace that framing. Other screens restore their existing layout on navigation.",
+    "Reduced-motion Auto originally counted remaining voice time after waiting for VoicePlaying. Native Auto now waits for the actual clip once plus its normal hold; measured clip/advance times are recorded.",
+    "An initial seed write failed during the API suite and the first content check found stale seed bytes. Artifacts were rebuilt after the suite; the full final npm run verify passes with 227 reproduced files.",
+    "The first Title transition assertion received a string for an anonymous object containing a nullable Unity Rect. Primitive-height probing confirms ready Title at height 1080 after native Story; that failed probe was not recorded as a PASS."
+  ],
+  "limits": [
+    "Human QC pending for all three new backgrounds. No new owner art acceptance; native 2K and final visual acceptance remain open.",
+    "Game-view sizes and simulated insets are Editor evidence, not physical-device safe-area, performance or touch evidence.",
+    "Complete first-entry/manual battle/Finish/durable Continue/restart flow remains open, followed by rebuilt battle atlases/UI.",
+    "No native signed build, Billing/ads/provider verification, paid external generation, cloud deployment or GitHub push."
+  ]
+}

@@ -126,7 +126,8 @@ namespace Uomd.Scenes
 #if UNITY_EDITOR
             if (UomdEditorPreviewIsolation.Active && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
                 && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue
-                && !(targetScreen == UomdScreenId.Story && ProductionPreview?.scenario.StartsWith("portrait/", StringComparison.Ordinal) == true)) return;
+                && !(targetScreen == UomdScreenId.Story && (ProductionPreview?.scenario.StartsWith("portrait/", StringComparison.Ordinal) == true
+                    || ProductionPreview?.scenario.StartsWith("story/", StringComparison.Ordinal) == true))) return;
 #endif
             if (!_controllers.TryGetValue(targetScreen, out var nextController))
             {
@@ -137,6 +138,11 @@ namespace Uomd.Scenes
             int navGen = ++_navGeneration;
             _activeController?.OnExit();
             _screenHost.Clear();
+            bool nativeStory = targetScreen == UomdScreenId.Story && StoryScreenController.IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(Session.ActiveStoryPath));
+            _rootContainer.style.top = nativeStory ? new Length(0) : new Length(50, LengthUnit.Percent);
+            _rootContainer.style.bottom = nativeStory ? new StyleLength(0f) : new StyleLength(StyleKeyword.Auto);
+            _rootContainer.style.height = nativeStory ? new StyleLength(StyleKeyword.Auto) : new StyleLength(UomdScreenKit.RefHeight);
+            _rootContainer.style.marginTop = nativeStory ? 0 : -UomdScreenKit.RefHeight / 2f;
             Media?.ReleaseTextures(); // the next screen loads what it shows
             if (_mediaStale && Media != null)
             {

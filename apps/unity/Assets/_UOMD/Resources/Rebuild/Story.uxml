@@ -1,0 +1,38 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Story.uss" />
+  <ui:VisualElement name="rebuildStory" class="rebuild-story" focusable="true">
+    <ui:VisualElement name="storyBackground" class="story-art" picking-mode="Ignore" />
+    <ui:VisualElement class="story-dim" picking-mode="Ignore" />
+    <ui:VisualElement name="storyActors" class="story-art" picking-mode="Ignore" />
+    <ui:VisualElement class="story-header">
+      <ui:VisualElement class="story-heading" picking-mode="Ignore">
+        <ui:Label text="THE ROAD TO SHELTER" class="story-eyebrow" />
+        <ui:Label name="storyTitle" class="story-title" />
+      </ui:VisualElement>
+      <ui:Button name="storyVoice" text="VOICE" class="story-button" tooltip="Replay this line's Japanese voice" />
+      <ui:Button name="storyAuto" text="AUTO · OFF" class="story-button" tooltip="Advance at normal reading speed" />
+    </ui:VisualElement>
+    <ui:VisualElement name="storyDialogue" class="story-dialogue">
+      <ui:VisualElement name="storySpeaker" class="story-speaker" picking-mode="Ignore">
+        <ui:Label name="storyName" class="story-name" />
+      </ui:VisualElement>
+      <ui:Label name="storyBody" class="story-body" enable-rich-text="true" picking-mode="Ignore" />
+      <ui:VisualElement class="story-footer">
+        <ui:Label name="storyHint" text="Tap to reveal · tap again to continue" class="story-hint" picking-mode="Ignore" />
+        <ui:Label name="storyCaret" text="◆" class="story-caret" picking-mode="Ignore" />
+        <ui:Button name="storyNext" text="NEXT  ›" class="story-button story-next" />
+      </ui:VisualElement>
+      <ui:VisualElement class="story-progress" picking-mode="Ignore"><ui:VisualElement name="storySync" class="story-sync" /></ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="storyChoices" class="story-art" picking-mode="Ignore" />
+    <ui:VisualElement name="storyFade" class="story-art story-fade" picking-mode="Ignore" />
+    <ui:VisualElement name="storyLoadPanel" class="story-load-panel">
+      <ui:VisualElement class="story-load-card">
+        <ui:Label name="storyLoadTitle" text="THE ROAD IS TAKING SHAPE" class="story-title" />
+        <ui:Label name="storyLoadMessage" text="Loading the scene illustrations…" class="story-load-message" />
+        <ui:Button name="storyRetry" text="TRY AGAIN" class="story-button" />
+        <ui:Button name="storyTextOnly" text="CONTINUE WITHOUT IMAGES" class="story-button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

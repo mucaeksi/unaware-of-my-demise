@@ -18,7 +18,7 @@ namespace Uomd.EditorTools
         public int assetRevision, shot, width, height, errorsObserved;
         public double shotElapsed;
         public bool simulatedSafeArea, editorOnly = true;
-        public string safeAreaDescription, imageSha, selectedAssetIdentity;
+        public string safeAreaDescription, imageSha, selectedAssetIdentity, presentationState;
         public ProductionPreviewRequest settings;
         public Rect subtitleBounds, titleBounds, safeAreaBounds;
         public int stageCameras, stageLights, stageParticles;
@@ -96,6 +96,7 @@ namespace Uomd.EditorTools
                 {
                     var story = router.Controller<StoryScreenController>();
                     metadata.lineId = story.CurrentLineId;
+                    metadata.presentationState = story.PresentationState;
                     metadata.imagePaths = story.ReviewImagePaths;
                     metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
                         .Select(a => a.Identity).ToArray();

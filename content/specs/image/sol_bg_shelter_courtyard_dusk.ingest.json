@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "sol_bg_shelter_courtyard_dusk",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "c444e51c34f5",
+    "provenance": "content/generated/openai/sol_bg_shelter_courtyard_dusk/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1664,
+    "height": 936,
+    "webp": {
+      "mode": "lossy",
+      "quality": 88,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 327680
+  },
+  "manifest": {
+    "background": "sol_shelter_courtyard_dusk"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

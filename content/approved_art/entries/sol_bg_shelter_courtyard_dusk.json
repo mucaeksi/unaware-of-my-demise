@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "asset_id": "sol_bg_shelter_courtyard_dusk",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "sol_shelter_courtyard_dusk": "art/bg_sol_shelter_courtyard_dusk.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_bg_shelter_courtyard_dusk/run.provenance.json",
+    "provenance_sha256": "9262dfc560cbbc39ff1d7f5c686340eedb8967926b61cc29121ef99f05d85612",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "5de11419c4f24e82c979b1f34bcca625fed66dd875182b16312b1189c90ce142",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "role": "openai_style_and_material_reference_only",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a"
+      },
+      {
+        "path": "content/generated/openai/sol_bg_forest_whispering_ash/source.png",
+        "role": "openai_forest_material_and_light_continuity_reference",
+        "sha256": "8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_bg_shelter_courtyard_dusk.ingest.json",
+    "spec_sha256": "ab9962989e2b5f48a20159a89b41a9e442c5c72ce5ba51e74a3daa1db344eb29",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "34ed7c30554fbec3cb54a2fabd37eaa4b28795e342e4f6630bc102a41cc59a84"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_sol_shelter_courtyard_dusk.webp",
+      "sha256": "76171170ee48d5bc0b7bf910e092a156f87a091166a49493a02c0ab119c9b748",
+      "pixels_sha256": "de589630c7759b31bf8253c950eb838cb4d5ff497f178363efa5c71e9eec1c2d",
+      "bytes": 317150,
+      "width": 1664,
+      "height": 936
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "2 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1664x936"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "317150 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

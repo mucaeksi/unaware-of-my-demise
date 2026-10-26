@@ -1,5 +1,7 @@
 # Build state — D-35 rebuild and evidence
 
+Tutorial narrative delivery (2026-10-26): three OpenAI stage candidates and native Story UI migrate all six tutorial before/after scenes to rebuilt backgrounds and emotion portraits. The workbench exposes six story routes and 22 candidates / 456 records. [Scoped evidence](evidence/sol-tutorial-narrative-2026-10-26.json). Battle presentation, full entry/Finish/Continue, owner art acceptance and Android/release gates remain open.
+
 Current mandate: GPT Sol/Codex rebuilds the Unity client and replaces visual assets with newly generated OpenAI images. Starting source `f341b018`, workspace `E:/Unity/unaware-of-my-demise`. RB-00/RB-01 is in progress; first title art is a native 1672x941 integration candidate, not final 2K/store acceptance. Existing Gemini visuals remain references during migration. See [execution plan](handoff/SOL_REBUILD_PLAN.md) and [executed evidence](evidence/sol-rebuild-2026-10-26.json).
 
 Source, Editor, device and deployed evidence are separate. The historical sections below do not refresh their checks or ownership/path/provider assignments. D-35 and the root README govern.

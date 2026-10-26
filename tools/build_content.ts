@@ -381,6 +381,10 @@ async function main(): Promise<void> {
       enc2.location_id,
       enc3.location_id
     ]);
+    // Native tutorial Story uses explicit rebuilt plates; battle keeps the legacy location key until its own migration.
+    for (const scene of scenesUsed) {
+      if (/^tutorial_t[123]_(before|after)$/.test(scene.scene_id)) baseLocations.add(`sol_${scene.location_id}`);
+    }
     for (const [loc, appBg] of approvedBackgrounds) {
       if (baseLocations.has(loc) && !backgrounds[loc] && appBg.targets.backgrounds?.[loc]) {
         copyApprovedEntryOutputs(appBg, outDir);

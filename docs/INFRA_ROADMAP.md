@@ -1,5 +1,7 @@
 # Infrastructure status — first-AAB foundations
 
+Tutorial narrative delivery (2026-10-26): three OpenAI stage candidates and native Story UI migrate all six tutorial before/after scenes to rebuilt backgrounds and emotion portraits. The workbench exposes six story routes and 22 candidates / 456 records. [Scoped evidence](evidence/sol-tutorial-narrative-2026-10-26.json). Battle presentation, full entry/Finish/Continue, owner art acceptance and Android/release gates remain open.
+
 D-35 local checkpoint 2026-10-26: Production Review and the two-master T1 portrait pilot are locally tested; [current evidence](evidence/sol-portrait-masters-2026-10-26.json). This adds no infrastructure deployment or native-release acceptance. Current owner/provider precedence is in the root README.
 
 Subsequent local expression delivery: six more OpenAI edits, nineteen candidates, fixed-pose/canonical-emotion review and CLI-only Editor verification. [Latest scoped evidence](evidence/sol-story-expressions-2026-10-26.json). This changes no deployment, credentials, native-release acceptance or MCP configuration.

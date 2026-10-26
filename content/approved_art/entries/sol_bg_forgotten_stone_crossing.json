@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "asset_id": "sol_bg_forgotten_stone_crossing",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "sol_forgotten_stone_crossing": "art/bg_sol_forgotten_stone_crossing.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "cd45df1af7b9ff1f33d6d159e7b2c4d9aa91b8daeb9e4cd7f839596960a92d57",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_bg_forgotten_stone_crossing/run.provenance.json",
+    "provenance_sha256": "14b1288ddc1cb173b206227f88f0c409b3a0bdb459f88d8aed23a3e82ece100e",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "b5d88cc4a890395498ec957127cd69dbe3a2c16f5471182bdc5d87f4e5a5e3f9",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "role": "openai_style_and_material_reference_only",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a"
+      },
+      {
+        "path": "content/generated/openai/sol_bg_forest_whispering_ash/source.png",
+        "role": "openai_forest_material_and_light_continuity_reference",
+        "sha256": "8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_bg_forgotten_stone_crossing.ingest.json",
+    "spec_sha256": "33047ceee4b8eb9779b259250afe13905379ec075c51c769ccdb2835280a1e5e",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "086ae8ecab3198b2c7af7bdd922f042a9378e91ca3d157f181c970f0691f14aa"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_sol_forgotten_stone_crossing.webp",
+      "sha256": "3e6ca24a8f8485ccbf68479f4ab89a853098dc0a2253306e20e77c8e8b82d319",
+      "pixels_sha256": "e76ddee90afb1d47d8586ba39e7b5cae4536805aaf3a187ebb3206ba54893f02",
+      "bytes": 310250,
+      "width": 1664,
+      "height": 936
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "2 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1664x936"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "310250 bytes <= 327680"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

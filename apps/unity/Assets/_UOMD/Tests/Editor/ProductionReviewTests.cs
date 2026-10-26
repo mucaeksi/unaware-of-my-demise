@@ -35,8 +35,8 @@ namespace Uomd.Tests
         {
             string root = ProductionReviewCatalog.RepositoryRoot;
             var assets = ProductionReviewCatalog.Load(root);
-            Assert.AreEqual(19, assets.Count(a => a.Candidate));
-            Assert.GreaterOrEqual(assets.Count, 453);
+            Assert.AreEqual(22, assets.Count(a => a.Candidate));
+            Assert.GreaterOrEqual(assets.Count, 456);
             foreach (var asset in assets.Where(a => a.Candidate))
             {
                 ProductionReviewCatalog.VerifyTarget(root, asset);
@@ -110,6 +110,40 @@ namespace Uomd.Tests
                 }
             }
             Assert.Greater(lines, 50);
+        }
+
+        [Test]
+        public void TutorialStagesResolveNewIngestOutputsWhileLegacyConsumersRemainSeparate()
+        {
+            string root = ProductionReviewCatalog.RepositoryRoot;
+            var catalog = UomdMediaCatalog.Parse(File.ReadAllText(Path.Combine(root, "content/base/art/art_manifest.json")), null);
+            var assets = ProductionReviewCatalog.Load(root);
+            var locations = new System.Collections.Generic.HashSet<string>();
+            foreach (string file in Directory.GetFiles(Path.Combine(root, "content/base/story"), "tutorial_t*.json"))
+            {
+                string id = Path.GetFileNameWithoutExtension(file);
+                Assert.IsTrue(StoryScreenController.IsRebuiltStory(id));
+                var story = UomdJson.ParseObject(File.ReadAllText(file));
+                string location = JsonRead.Str(story, "location_id");
+                string rebuilt = catalog.Background("sol_" + location);
+                Assert.IsNotNull(rebuilt, id);
+                Assert.AreNotEqual(catalog.Background(location), rebuilt, "Legacy battle consumers must keep their own migration scope.");
+                Assert.IsTrue(assets.Any(a => a.Candidate && JsonRead.Arr(a.Entry, "outputs").Any(o => JsonRead.Str(o, "path") == rebuilt)), id);
+                locations.Add(location);
+            }
+            Assert.AreEqual(3, locations.Count);
+            Assert.IsFalse(StoryScreenController.IsRebuiltStory("chapter_1"));
+            Assert.IsFalse(StoryScreenController.IsRebuiltStory("../tutorial_t1_before"));
+        }
+
+        [Test]
+        public void NativeStoryLayoutProvidesReadingAndRecoveryActionsWithoutFirstViewSkip()
+        {
+            var tree = Resources.Load<UnityEngine.UIElements.VisualTreeAsset>("Rebuild/Story").CloneTree();
+            foreach (string action in new[] { "storyNext", "storyAuto", "storyVoice", "storyRetry", "storyTextOnly" })
+                Assert.IsNotNull(UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.Button>(tree, action));
+            Assert.IsNull(UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.Button>(tree, "storySkip"));
+            Assert.IsNotNull(UnityEngine.UIElements.UQueryExtensions.Q<UnityEngine.UIElements.Label>(tree, "storyBody"));
         }
 
         [Test]

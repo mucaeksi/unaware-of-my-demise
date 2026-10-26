@@ -187,6 +187,30 @@
       }
     },
     {
+      "output": "content/base/art/bg_sol_forest_whispering_ash.webp",
+      "sha256": "cda3f17d4a11e739dfc01219b4cb22df85a8467ae3083ab0e954d011ab9b406f",
+      "sources": {
+        "generated:sol_bg_forest_whispering_ash@rev1": "8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "entry": "0ea7e613e76efcfa75cd75f7a48fcb2885dd843f78bf74806eb0634788cccb4e"
+      }
+    },
+    {
+      "output": "content/base/art/bg_sol_forgotten_stone_crossing.webp",
+      "sha256": "3e6ca24a8f8485ccbf68479f4ab89a853098dc0a2253306e20e77c8e8b82d319",
+      "sources": {
+        "generated:sol_bg_forgotten_stone_crossing@rev1": "cd45df1af7b9ff1f33d6d159e7b2c4d9aa91b8daeb9e4cd7f839596960a92d57",
+        "entry": "086ae8ecab3198b2c7af7bdd922f042a9378e91ca3d157f181c970f0691f14aa"
+      }
+    },
+    {
+      "output": "content/base/art/bg_sol_shelter_courtyard_dusk.webp",
+      "sha256": "76171170ee48d5bc0b7bf910e092a156f87a091166a49493a02c0ab119c9b748",
+      "sources": {
+        "generated:sol_bg_shelter_courtyard_dusk@rev1": "c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+        "entry": "34ed7c30554fbec3cb54a2fabd37eaa4b28795e342e4f6630bc102a41cc59a84"
+      }
+    },
+    {
       "output": "content/base/audio/bgm_ch1_ash_forest_calm.ogg",
       "sha256": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582",
       "sources": {
@@ -571,7 +595,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "e053912ac5be95f51082cb83a08cd9e5d2736eb5e66e663f87df147410aaad74",
+      "sha256": "3aa7f7222340fe2ebc8f0e92084cb2a3d7522a392ebb3bb1fde3fb75f9be4b7d",
       "sources": {}
     },
     {

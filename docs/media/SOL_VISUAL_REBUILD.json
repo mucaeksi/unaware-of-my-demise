@@ -8,9 +8,9 @@
     "total_obligations": 434,
     "approved_art_references": 258,
     "additional_runtime_store_images": 176,
-    "integration_candidates": 19,
+    "integration_candidates": 22,
     "final_accepted_replacements": 0,
-    "generated_replacement_assets": 19,
+    "generated_replacement_assets": 22,
     "owner_style_approved_assets": 1
   },
   "acceptance": [
@@ -678,8 +678,9 @@
           "height": 1080
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_bg_forest_whispering_ash",
+      "consumer_scope": "Native tutorial Story before/after scenes only, via explicit sol_<location> keys. Legacy battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
     },
     {
       "id": "bg_forgotten_stone_crossing",
@@ -693,8 +694,9 @@
           "height": 1080
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_bg_forgotten_stone_crossing",
+      "consumer_scope": "Native tutorial Story before/after scenes only, via explicit sol_<location> keys. Legacy battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
     },
     {
       "id": "bg_highland_ridge",
@@ -918,8 +920,9 @@
           "height": 1080
         }
       ],
-      "replacement_status": "pending",
-      "replacement_asset_id": null
+      "replacement_status": "integration_candidate",
+      "replacement_asset_id": "sol_bg_shelter_courtyard_dusk",
+      "consumer_scope": "Native tutorial Story before/after scenes only, via explicit sol_<location> keys. Legacy battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
     },
     {
       "id": "bg_undercity_antidote_archive",
@@ -1760,7 +1763,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_fadyme_vn_composed",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "fadyme_vn_resolve",
@@ -1776,7 +1779,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_fadyme_vn_resolve",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "fadyme_vn_warm",
@@ -1792,7 +1795,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_fadyme_vn_warm",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "fadyme_vn_wry",
@@ -1808,7 +1811,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_fadyme_vn_wry",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "garrick_cinder_chibi_sheet",
@@ -2439,7 +2442,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_mahmut_vn_composed",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "mahmut_vn_dry_humor",
@@ -2455,7 +2458,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_mahmut_vn_dry_humor",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "mahmut_vn_protective_resolve",
@@ -2471,7 +2474,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_mahmut_vn_protective_resolve",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "mahmut_vn_watchful",
@@ -2487,7 +2490,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_mahmut_vn_watchful",
-      "consumer_scope": "Explicit Sol pose and canonical-emotion set in Editor portrait review. Normal story emotion consumers await rebuilt stages/UI; owner and device/final-resolution gates remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes now resolve canonical emotion aliases through the rebuilt OpenAI portrait set; fixed/authored Editor reviews remain available. Other story consumers, owner QC and device/final-resolution gates remain open."
     },
     {
       "id": "marek_vane_chibi_sheet",

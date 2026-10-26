@@ -24,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "e053912ac5be95f51082cb83a08cd9e5d2736eb5e66e663f87df147410aaad74",
-      "bytes": 23986,
+      "sha256": "3aa7f7222340fe2ebc8f0e92084cb2a3d7522a392ebb3bb1fde3fb75f9be4b7d",
+      "bytes": 24216,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -75,6 +75,27 @@
       "path": "art/bg_shelter_courtyard_dusk.webp",
       "sha256": "4cf027e11d854dd69ab388032820db1ed80652ae6f419d7bb7395c669c519df6",
       "bytes": 132030,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/bg_sol_forest_whispering_ash.webp",
+      "sha256": "cda3f17d4a11e739dfc01219b4cb22df85a8467ae3083ab0e954d011ab9b406f",
+      "bytes": 325058,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/bg_sol_forgotten_stone_crossing.webp",
+      "sha256": "3e6ca24a8f8485ccbf68479f4ab89a853098dc0a2253306e20e77c8e8b82d319",
+      "bytes": 310250,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/bg_sol_shelter_courtyard_dusk.webp",
+      "sha256": "76171170ee48d5bc0b7bf910e092a156f87a091166a49493a02c0ab119c9b748",
+      "bytes": 317150,
       "media_type": "image/webp",
       "kind": "background"
     },
