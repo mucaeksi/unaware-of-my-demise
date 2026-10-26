@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "sol_prologue_crownfall",
+  "class": "still",
+  "source": {
+    "kind": "generated",
+    "pick": "eceba378ba23",
+    "provenance": "content/generated/openai/sol_prologue_crownfall/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1672,
+    "height": 941,
+    "webp": {
+      "mode": "lossy",
+      "quality": 92,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 900000
+  },
+  "manifest": {
+    "still": "sol_prologue_crownfall"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

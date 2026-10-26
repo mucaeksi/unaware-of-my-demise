@@ -1052,6 +1052,7 @@
     "banner_oath_06_weapon": "art/ui_banner_oath_06_weapon.webp",
     "banner_oath_07_corbin": "art/ui_banner_oath_07_corbin.webp",
     "banner_oath_07_weapon": "art/ui_banner_oath_07_weapon.webp",
+    "sol_studio_mark": "art/ui_sol_studio_mark.webp",
     "sol_title_bg": "art/ui_sol_title_bg.webp",
     "studio_mark": "art/ui_studio_mark.webp",
     "title_bg": "art/ui_title_bg.webp"
@@ -1067,6 +1068,15 @@
     "prologue_hours": "art/still_prologue_hours.webp",
     "prologue_names": "art/still_prologue_names.webp",
     "prologue_ordinary_days": "art/still_prologue_ordinary_days.webp",
-    "prologue_search": "art/still_prologue_search.webp"
+    "prologue_search": "art/still_prologue_search.webp",
+    "sol_prologue_beginning": "art/still_sol_prologue_beginning.webp",
+    "sol_prologue_crownfall": "art/still_sol_prologue_crownfall.webp",
+    "sol_prologue_hours": "art/still_sol_prologue_hours.webp",
+    "sol_prologue_names": "art/still_sol_prologue_names.webp",
+    "sol_prologue_ordinary_days": "art/still_sol_prologue_ordinary_days.webp",
+    "sol_prologue_reunion": "art/still_sol_prologue_reunion.webp",
+    "sol_prologue_roads": "art/still_sol_prologue_roads.webp",
+    "sol_prologue_search": "art/still_sol_prologue_search.webp",
+    "sol_prologue_throne_wars": "art/still_sol_prologue_throne_wars.webp"
   }
 }

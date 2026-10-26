@@ -24,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "6da575b6f71ff2b137e8b1617b3dbed5e90206c5c5c4e0bbf1d3905b3d3e5d98",
-      "bytes": 22471,
+      "sha256": "23c280690d1736cc10c8a64ce1b62778a63299f58218bc83abdfd61d97868e67",
+      "bytes": 23142,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -212,6 +212,69 @@
       "kind": "background"
     },
     {
+      "path": "art/still_sol_prologue_beginning.webp",
+      "sha256": "52284379e9b393aaf882baaceb8f59b3dc31725ebb9e3ca7065d8b6f9272482e",
+      "bytes": 521658,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_crownfall.webp",
+      "sha256": "eddcb1dc73776f391c4fd65b74e434a19a3c5fd8eba152f16d63d28b5f38d252",
+      "bytes": 531542,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_hours.webp",
+      "sha256": "86b9fabcdf65f36b40aa1a819114b525e927c97fa071dac720b5fad9b12ac30b",
+      "bytes": 487788,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_names.webp",
+      "sha256": "44ad877f42bcd442f5cade2cc898fe07bcb0e7d3535e4448877037e6b378c521",
+      "bytes": 307110,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_ordinary_days.webp",
+      "sha256": "b035d934c333f0b1e493c599768b0d0871aaf0e9c8b9f4779db8829dd38d439b",
+      "bytes": 513060,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_reunion.webp",
+      "sha256": "11faffa0b46a16acf9e510c6b8a519f819d462f0a16880326c32bc9d535c3a8a",
+      "bytes": 441374,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_roads.webp",
+      "sha256": "edafb0db408ee215516baa5fa701cd711c2f6048cfcfeef6e44ab0a68f31dca7",
+      "bytes": 526978,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_search.webp",
+      "sha256": "48af602197968f05193f601ca4571b0ac5a33bea4cfa64d5ddf978c188cc8660",
+      "bytes": 359604,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/still_sol_prologue_throne_wars.webp",
+      "sha256": "6455d761e4b3fedbfb9058729c031574a78d8c971f7f84102494b052d254a870",
+      "bytes": 530012,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
       "path": "art/ui_banner_hall_of_ancestors.webp",
       "sha256": "5a981d8c5065f0f4a9beb1e241cb999cb31763784e81c5d7844bfacd6d4f1826",
       "bytes": 99192,
@@ -334,6 +397,13 @@
       "path": "art/ui_logo.webp",
       "sha256": "b84ad0324a510ab5604764cc64ef63e468cad8088d29c341c24949530f18efb8",
       "bytes": 169904,
+      "media_type": "image/webp",
+      "kind": "other_data"
+    },
+    {
+      "path": "art/ui_sol_studio_mark.webp",
+      "sha256": "e60b0b7325a4be339f7ff1c9716d87cbf3103c2293043c3d107f6bbbafdd3423",
+      "bytes": 357174,
       "media_type": "image/webp",
       "kind": "other_data"
     },

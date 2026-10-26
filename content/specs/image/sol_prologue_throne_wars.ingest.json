@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "sol_prologue_throne_wars",
+  "class": "still",
+  "source": {
+    "kind": "generated",
+    "pick": "ee40a66c4d51",
+    "provenance": "content/generated/openai/sol_prologue_throne_wars/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1672,
+    "height": 941,
+    "webp": {
+      "mode": "lossy",
+      "quality": 92,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 900000
+  },
+  "manifest": {
+    "still": "sol_prologue_throne_wars"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

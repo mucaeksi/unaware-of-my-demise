@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_prologue_beginning",
+    "aspectRatio": "16:9",
+    "prompt_file": "content/generated/openai/sol_prologue_beginning/prompt.txt",
+    "prompt": "Edit only the tiny distant bell-tower roof at the upper right of this illustration: remove the small cross-shaped finial completely and replace it with a plain simple pointed slate roof tip with no symbol, vane or ornament. Preserve every other part of this image exactly: both adult characters, faces, costumes, eight-point star, composition, colors, lighting, forest and village. No text or watermark."
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_prologue_beginning/initial.png",
+      "sha256": "a5d16c44e865dfc2318024ebf45732b10ebf4fac1a0913050dad4f987a6fb99f",
+      "role": "edit_target_remove_cross_finial"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_prologue_beginning/source.png",
+      "sha256": "b8c1e0e16707b4c1c6bec40c0480d6ec957d3d144e9caa2b817ac4acac21d676",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false
+    }
+  ],
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Original individually generated illustration. Canon and composition reviewed; native resolution below final 2K target. Owner acceptance and physical-device review pending. Tiny noncanonical cross finial removed with the built-in image editor; original and original provenance retained."
+  }
+}

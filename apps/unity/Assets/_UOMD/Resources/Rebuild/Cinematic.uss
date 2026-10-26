@@ -1,0 +1,33 @@
+.cinematic-root { position: absolute; left: 0; right: 0; top: 0; bottom: 0; color: rgb(242,233,219); }
+.boot-root { justify-content: center; align-items: center; background-color: rgb(5,4,8); }
+.studio-copy { position: absolute; left: 0; right: 0; top: 65%; align-items: center; opacity: 0; }
+.studio-title { font-size: 72px; letter-spacing: 16px; -unity-font-style: bold; }
+.studio-subtitle { font-size: 25px; color: rgb(183,166,148); margin-top: 4px; }
+.studio-rule { width: 90px; height: 1px; background-color: rgb(151,122,91); margin-top: 30px; margin-bottom: 28px; }
+.studio-presents { font-size: 19px; color: rgb(182,174,185); }
+.cinematic-status { position: absolute; bottom: 50px; left: 80px; right: 80px; -unity-text-align: middle-center; font-size: 24px; }
+.cinematic-header { position: absolute; top: 48px; left: 72px; right: 72px; flex-direction: row; justify-content: space-between; align-items: center; }
+.opening-heading { flex-direction: row; align-items: center; }
+.opening-eyebrow { font-size: 23px; letter-spacing: 4px; color: rgb(234,219,193); }
+.shot-number { font-size: 21px; margin-left: 32px; color: rgb(186,175,181); }
+.opening-controls { flex-direction: row; align-items: center; }
+.cinematic-button { min-width: 140px; min-height: 88px; margin: 0 0 0 12px; padding: 12px 25px; border-width: 1px; border-color: rgba(207,188,161,0.4); border-radius: 2px; background-color: rgba(20,15,27,0.7); color: rgb(242,233,219); font-size: 22px; letter-spacing: 2px; }
+.cinematic-button:hover { background-color: rgba(70,49,56,0.94); border-color: rgb(225,199,161); }
+.cinematic-button:focus { border-width: 2px; border-color: rgb(241,217,177); }
+.cinematic-button:active { background-color: rgb(87,61,65); }
+.cinematic-button:disabled { opacity: 0.36; }
+.cinematic-auto { min-height: 88px; margin-right: 22px; font-size: 22px; color: rgb(242,233,219); align-items: center; }
+.cinematic-auto > .unity-toggle__input > .unity-toggle__checkmark { width: 30px; height: 30px; margin-right: 12px; }
+.opening-caption-block { position: absolute; left: 11%; right: 11%; bottom: 128px; align-items: center; }
+.shot-caption { font-size: 48px; -unity-font-style: bold; letter-spacing: 2px; -unity-text-align: middle-center; }
+.caption-rule { height: 1px; width: 90px; background-color: rgba(209,179,137,0.8); margin-top: 21px; margin-bottom: 24px; }
+.shot-body { width: 100%; min-height: 100px; font-size: 34px; white-space: normal; -unity-text-align: upper-center; color: rgb(245,238,225); }
+.opening-footer { position: absolute; left: 72px; right: 72px; bottom: 35px; flex-direction: row; align-items: center; justify-content: space-between; }
+.opening-status { font-size: 23px; color: rgb(198,187,192); }
+.next-shot { min-width: 260px; }
+.opening-progress-track { position: absolute; left: 72px; right: 72px; bottom: 17px; height: 2px; background-color: rgba(173,155,142,0.19); }
+.opening-progress { height: 2px; width: 0; background-color: rgb(200,167,123); }
+.opening-end { display: none; position: absolute; left: 0; right: 0; top: 0; bottom: 0; justify-content: center; align-items: center; background-color: rgba(10,7,17,0.92); }
+.end-title { font-size: 64px; margin-bottom: 48px; -unity-text-align: middle-center; }
+.end-body { font-size: 30px; max-width: 1200px; margin-bottom: 30px; white-space: normal; -unity-text-align: middle-center; }
+.end-button { min-width: 420px; min-height: 96px; margin-top: 18px; }

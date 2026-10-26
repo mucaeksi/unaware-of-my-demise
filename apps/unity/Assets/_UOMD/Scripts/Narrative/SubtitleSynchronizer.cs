@@ -126,6 +126,13 @@ namespace Uomd.Narrative
             return _lastTickText;
         }
 
+        /// <summary>Uses the actual AudioSource position, including delayed loads and pause/resume.</summary>
+        public string AtTime(float seconds)
+        {
+            _elapsed = Mathf.Max(0f, seconds);
+            return Tick(0f);
+        }
+
         public void RevealImmediately()
         {
             _elapsed = _totalDuration;

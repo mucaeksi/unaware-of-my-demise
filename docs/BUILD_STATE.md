@@ -4,6 +4,12 @@ Current mandate: GPT Sol/Codex rebuilds the Unity client and replaces visual ass
 
 Source, Editor, device and deployed evidence are separate. The historical sections below do not refresh their checks or ownership/path/provider assignments. D-35 and the root README govern.
 
+Second delivery: new studio emblem and nine individually generated prologue plates, native URP 2D stage and live UI Toolkit
+captions/controls. Original 120-second narrative and entry contracts retained; obsolete startup/title/prologue controllers
+removed. The owner approved the first title image's visual quality and direction for further production. See
+[opening evidence](evidence/sol-opening-2026-10-26.json). Tutorials, battle, hub/system screens and device acceptance remain
+in the rebuild queue; this is scoped local evidence.
+
 ---
 
 # Build state — evidence and current gaps

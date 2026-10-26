@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "asset_id": "sol_prologue_ordinary_days",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "sol_prologue_ordinary_days": "art/still_sol_prologue_ordinary_days.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "ed3adb84185689db28ca9a5eb96c2ee4d2abf6db5b9fc4c48c25cb0c145c19c5",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_prologue_ordinary_days/run.provenance.json",
+    "provenance_sha256": "be5098410563451dfd9199cbfc91e67b94ba8f8567c7d05c84e92e507c974f4a",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "57e9c6f4eb486cf794f6d1b523edf9f7ce857cef014e7ccff31b230afa9677fd",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+        "role": "approved_style_reference_only"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_prologue_ordinary_days.ingest.json",
+    "spec_sha256": "8990e662e4c94d80e1fa8851405aa75c64a191f020ff71671d946c03122cd567",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "aadcfc2fb16998fe334d191af1e7391fd52474c96b59326ef95e1bf962fb3868"
+  },
+  "outputs": [
+    {
+      "path": "art/still_sol_prologue_ordinary_days.webp",
+      "sha256": "b035d934c333f0b1e493c599768b0d0871aaf0e9c8b9f4779db8829dd38d439b",
+      "pixels_sha256": "0e763b39a8257dc0101b8cc2e616a33f655b4739c6463226b0ce17ac02f6783a",
+      "bytes": 513060,
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "1 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1672x941"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "513060 bytes <= 900000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "asset_id": "sol_prologue_throne_wars",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "sol_prologue_throne_wars": "art/still_sol_prologue_throne_wars.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "ee40a66c4d51bb088c0ecbfe3d0f9e548e67432580e86b5d61183e40382800f9",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_prologue_throne_wars/run.provenance.json",
+    "provenance_sha256": "46d35033842ba90f7cc9f3a5f7f5029962cc10d2cf89e6ae119d73c92fc41e91",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "194b86cfe06a4aab1d8c0aa2465eda79fe936680d761c1f3de7bbd5b14838c8e",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+        "role": "approved_style_reference_only"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_prologue_throne_wars.ingest.json",
+    "spec_sha256": "b45e4506892573a9637d6a4960bf32b9265e1993713742c143162d24abaab594",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "49b43e8789fa9575efb3bbc576c97b29332215422a9ab1bdee5197596e55dcde"
+  },
+  "outputs": [
+    {
+      "path": "art/still_sol_prologue_throne_wars.webp",
+      "sha256": "6455d761e4b3fedbfb9058729c031574a78d8c971f7f84102494b052d254a870",
+      "pixels_sha256": "fd870a1658e2350d3e0ce232068685d11be14db3ff4ae292ac623e7b6fc2ff2e",
+      "bytes": 530012,
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "1 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1672x941"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "530012 bytes <= 900000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

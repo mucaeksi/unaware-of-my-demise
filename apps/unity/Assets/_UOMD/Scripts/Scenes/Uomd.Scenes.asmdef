@@ -8,7 +8,9 @@
     "Uomd.UI",
     "Uomd.Combat",
     "Uomd.Narrative",
-    "Uomd.Battle"
+    "Uomd.Battle",
+    "Unity.RenderPipelines.Universal.Runtime",
+    "Unity.RenderPipelines.Universal.2D.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

@@ -314,6 +314,14 @@
       }
     },
     {
+      "output": "content/base/art/ui_sol_studio_mark.webp",
+      "sha256": "e60b0b7325a4be339f7ff1c9716d87cbf3103c2293043c3d107f6bbbafdd3423",
+      "sources": {
+        "generated:sol_studio_mark@rev1": "3023caf355159044dc781f62018717d9798314ac408c458ec6a98915daf93800",
+        "entry": "b843365f736043b99ad899453462c2b45e78535216927f78a1b986d2e5d8b034"
+      }
+    },
+    {
       "output": "content/base/art/ui_sol_title_bg.webp",
       "sha256": "8b0a7ef9f8a82f2e43e3c2b99844edd7da57f861b4be20a581eabcbea41e06e0",
       "sources": {
@@ -426,8 +434,80 @@
       }
     },
     {
+      "output": "content/base/art/still_sol_prologue_beginning.webp",
+      "sha256": "52284379e9b393aaf882baaceb8f59b3dc31725ebb9e3ca7065d8b6f9272482e",
+      "sources": {
+        "generated:sol_prologue_beginning@rev1": "b8c1e0e16707b4c1c6bec40c0480d6ec957d3d144e9caa2b817ac4acac21d676",
+        "entry": "496695e6f8c52e9b803f81ffab55b126ebf62d2193b1cb99d1f90c5c87a86b1b"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_crownfall.webp",
+      "sha256": "eddcb1dc73776f391c4fd65b74e434a19a3c5fd8eba152f16d63d28b5f38d252",
+      "sources": {
+        "generated:sol_prologue_crownfall@rev1": "eceba378ba23b6002740b09a48b92f45d7ae2f51b65b8bd793c3616fe3167f4e",
+        "entry": "7dd4089e5f0f254754de36c6698f23689d88c233aea074363e17bbc9e819dee1"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_hours.webp",
+      "sha256": "86b9fabcdf65f36b40aa1a819114b525e927c97fa071dac720b5fad9b12ac30b",
+      "sources": {
+        "generated:sol_prologue_hours@rev1": "7b298cdb0776a5f6620fc3f31712ae38bba60a57c87dfba897d87639df09483f",
+        "entry": "027a6c2c514a5574ab0e2b61e7020cedf0fe65b615c59dc32373dcd9ec7bcc0c"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_names.webp",
+      "sha256": "44ad877f42bcd442f5cade2cc898fe07bcb0e7d3535e4448877037e6b378c521",
+      "sources": {
+        "generated:sol_prologue_names@rev1": "30ff77e60c6c1b77f56eb786fb8de14bb96e6041f22df737dcc40c294281add1",
+        "entry": "bceb24ee3bf143cf5bcb2301effadc36afe1527d47e9bcdc00271db7d386a0a7"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_ordinary_days.webp",
+      "sha256": "b035d934c333f0b1e493c599768b0d0871aaf0e9c8b9f4779db8829dd38d439b",
+      "sources": {
+        "generated:sol_prologue_ordinary_days@rev1": "ed3adb84185689db28ca9a5eb96c2ee4d2abf6db5b9fc4c48c25cb0c145c19c5",
+        "entry": "aadcfc2fb16998fe334d191af1e7391fd52474c96b59326ef95e1bf962fb3868"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_reunion.webp",
+      "sha256": "11faffa0b46a16acf9e510c6b8a519f819d462f0a16880326c32bc9d535c3a8a",
+      "sources": {
+        "generated:sol_prologue_reunion@rev1": "6367b9b4127f140fa3b5f7f4444694fc16cc1e6aa640b129b94635038d8846ae",
+        "entry": "8e4b8ca60370541ca08be070a9e52e6ac88a77219a81dbe78ae784d22d37667e"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_roads.webp",
+      "sha256": "edafb0db408ee215516baa5fa701cd711c2f6048cfcfeef6e44ab0a68f31dca7",
+      "sources": {
+        "generated:sol_prologue_roads@rev1": "fd263c01d540bc8288363fa6f2ee5a65d52336cb195a1fae00d26c70359e80f3",
+        "entry": "a611744c42ec7a288077ab57a5a550433e145b979a837787fc4c702d349ca617"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_search.webp",
+      "sha256": "48af602197968f05193f601ca4571b0ac5a33bea4cfa64d5ddf978c188cc8660",
+      "sources": {
+        "generated:sol_prologue_search@rev1": "9c0422e414a0a8bd940a2011096e00c248a0aaa8d6db1207d898ce2f9a41ecd7",
+        "entry": "07eebb082ca422e82c67c5090b100209cb9189595d7f8a7938b0a5cc2fcd5980"
+      }
+    },
+    {
+      "output": "content/base/art/still_sol_prologue_throne_wars.webp",
+      "sha256": "6455d761e4b3fedbfb9058729c031574a78d8c971f7f84102494b052d254a870",
+      "sources": {
+        "generated:sol_prologue_throne_wars@rev1": "ee40a66c4d51bb088c0ecbfe3d0f9e548e67432580e86b5d61183e40382800f9",
+        "entry": "49b43e8789fa9575efb3bbc576c97b29332215422a9ab1bdee5197596e55dcde"
+      }
+    },
+    {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "6da575b6f71ff2b137e8b1617b3dbed5e90206c5c5c4e0bbf1d3905b3d3e5d98",
+      "sha256": "23c280690d1736cc10c8a64ce1b62778a63299f58218bc83abdfd61d97868e67",
       "sources": {}
     },
     {

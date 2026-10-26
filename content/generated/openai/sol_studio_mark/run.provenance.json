@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_studio_mark",
+    "aspectRatio": "1:1",
+    "prompt_file": "content/generated/openai/sol_studio_mark/prompt.txt",
+    "prompt": "Create a NEW original transparent studio emblem for SovTaym Studios, the developer of the Gothic anime RPG Unaware of My Demise. Use the supplied title illustration only as the approved material, palette and finish reference. It is not an edit target. Make one isolated emblem, not a scene, with true transparent alpha outside the metal. Square canvas, native high resolution, full emblem visible with generous transparent margins. No text, letters, words, logos from existing companies, watermark, rectangular border or typography.\n\nDesign: an elegant small hanging sanctuary bell in cold antique silver, its clapper shaped like a tiny silver thorn, suspended inside an original astronomical instrument. One thin dark eclipse disc behind it, a fine broken rose-gold eclipse rim, two restrained engraved brass orbit rings and a short vertical suspension chain. The bell and ring form one dignified, readable silhouette. Five or six discrete metal components, clear negative spaces, no busy tangle. At small size the bell must remain unmistakable.\n\nFinish matches the reference: painterly Gothic anime, delicately drawn silver filigree, matte worn brass, deep charcoal-plum recesses, bone-ivory reflected highlights, one restrained muted amber highlight. No neon, no plastic, no glossy 3D rendering, no crosses or holy iconography. Keep the outer boundary and metal cutouts crisp and alpha-clean, no black/white/green matte, no opaque glow halo, no painted drop shadow, no floor. Unity will supply the light, dust and motion; do not bake them into the emblem."
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_title_key_art_01/source.png",
+      "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+      "role": "approved_style_reference_only"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_studio_mark/source.png",
+      "sha256": "3023caf355159044dc781f62018717d9798314ac408c458ec6a98915daf93800",
+      "width": 1254,
+      "height": 1254,
+      "native": true,
+      "upscaled": false
+    }
+  ],
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Original individually generated illustration. Canon and composition reviewed; native resolution below final 2K target. Owner acceptance and physical-device review pending."
+  }
+}

@@ -13,7 +13,8 @@ All rebuilt visual assets are newly generated with the built-in OpenAI image too
 composition or atmosphere references only. Their old approval records remain historical; they are not approvals of a new
 image. Preserve source PNGs, prompts, exact reference hashes, actual native dimensions and generator provenance. Never
 claim an undisclosed model or price. No enlargement can turn a 1K output into a native 2K asset. The first title image is
-an integration candidate at native 1672x941; final 2K/device/owner acceptance remains open. Music and reviewed Japanese
+an integration candidate at native 1672x941; the owner approved its visual quality and the direction for all subsequent
+production on 2026-10-26. Native 2K and device gates remain open. Music and reviewed Japanese
 voice production continue through the existing budget-guarded Gemini tools; this handoff authorizes no new API budget.
 
 `docs/media/SOL_VISUAL_REBUILD.json` inventories the old approved artwork and tracked runtime/store bitmaps. A row is a
@@ -47,3 +48,32 @@ UXML/USS with C# bindings where useful, without inheriting the old animated deco
 - UXML/USS title and settings use native controls and no Gemini bitmap UI kit. The old startup/story/battle screens remain
   migration work; this delivery does not claim a complete visual replacement or a release-ready rebuild.
 - Exact verification and captures are recorded in `docs/evidence/sol-rebuild-2026-10-26.json` when executed.
+
+## Full redesign direction and second delivery
+
+The owner approved the first image and requested a complete redesign as a newly designed game on 2026-10-26. Carry this
+direction through startup, story, tutorials, combat, the hub and every system screen. Every player-facing bitmap is a new
+OpenAI production. Preserve canon and the tested domain contracts while rebuilding presentation and interaction.
+
+The second delivery replaces startup/studio and the nine opening plates with a native URP 2D cinematic stage. The studio
+emblem has true alpha; all captions and credits are live UI Toolkit text. Individual plate holds and stable narrative IDs
+remain the canonical 120 seconds. Pause freezes voice, music, camera and particles; manual Auto-off waits at shot end;
+muting preserves the spoken subtitle clock. Replay does not overwrite the first-viewing checkpoint. Old Studio, Title
+and Prologue controllers, including the automatic flattened-video fallback, are removed after replacement.
+
+This stage uses original whole-scene paintings, a camera push, a lit studio emblem, restrained practical light and at most
+64 procedural particles. It holds at most two plate textures during crossfade and releases the old plate afterward.
+Independent bell/rope/actor layer animation remains a later asset pass; these paintings do not constitute rigged actors.
+
+Use Unity features where their visible effect serves the scene and survives the Android budget:
+
+| Area | Native production approach | Required evidence |
+| --- | --- | --- |
+| Opening/story | URP 2D sprites, Light2D, camera choreography, bounded particles, editable UI Toolkit and voice-clock captions | Aspect ratios, reading/pause/mute/replay, lifecycle and memory ownership |
+| Battle | Dedicated sprite atlases and explicit animation states, layered stage/camera, event-driven VFX, audio and feedback budgets | Deterministic replay unchanged, manual target/skill flow, readable telegraphs and device frame time |
+| Hub/system UI | Native UXML/USS controls, safe-area layouts, accessible focus and meaningful transitions | Real account data, every touchpoint, loading/error/retry and operation recovery |
+| Assets/data | Authored configs and existing verified patch/media loading; initial binary carries runtime code and capability foundations | Reproducible export, native dimensions, source/alpha/slicing, signed data-only patch compatibility |
+| Release | IL2CPP ARM64, Android lifecycle, graphics/thermal/memory and native provider integrations | Signed artifact and physical-device evidence; owner release approval |
+
+Next production package: new story portraits and the three tutorial stages, followed by the real battle presentation.
+Do not count old Gemini consumers, placeholder art, Editor captures or a local compile as a finished Android release.

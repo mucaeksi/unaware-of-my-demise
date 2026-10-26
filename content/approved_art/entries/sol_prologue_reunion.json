@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "asset_id": "sol_prologue_reunion",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "sol_prologue_reunion": "art/still_sol_prologue_reunion.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "6367b9b4127f140fa3b5f7f4444694fc16cc1e6aa640b129b94635038d8846ae",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_prologue_reunion/run.provenance.json",
+    "provenance_sha256": "e8bcf60ae30d252b4c0dd41d0c6f8e5b87a026ee278dbf3d3f2ce5d2d4aba2eb",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "9039b0244b6368d544b7684e4c82d5ecad3283da8995909291bb2a5bf3c5c533",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+        "role": "approved_style_reference_only"
+      },
+      {
+        "path": "content/specs/character_locks/fadyme_canonical_boydan_lock.jpg",
+        "sha256": "9745863cdb6579e04f9df790018898aefbb85e96d8a76616553a097d0b2e41d4",
+        "role": "identity_reference_only"
+      },
+      {
+        "path": "content/specs/character_locks/mahmut_canonical_boydan_lock.jpg",
+        "sha256": "60587ba742b337bbf621f291300ccd06401bd6c43d94d4c3c4424fbe62a684bc",
+        "role": "identity_reference_only"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_prologue_reunion.ingest.json",
+    "spec_sha256": "f61d7735ecc101b31820913013431aec202ba6ab4f7e34ecab2609f97e79da47",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "8e4b8ca60370541ca08be070a9e52e6ac88a77219a81dbe78ae784d22d37667e"
+  },
+  "outputs": [
+    {
+      "path": "art/still_sol_prologue_reunion.webp",
+      "sha256": "11faffa0b46a16acf9e510c6b8a519f819d462f0a16880326c32bc9d535c3a8a",
+      "pixels_sha256": "d7845567dc04eecba1be5ce9fe3a0a1bbb3672a4f765e2ad3b48d4b9cf1296d8",
+      "bytes": 441374,
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "3 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1672x941"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "441374 bytes <= 900000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

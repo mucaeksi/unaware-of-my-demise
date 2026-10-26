@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "asset_id": "sol_prologue_names",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "sol_prologue_names": "art/still_sol_prologue_names.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "30ff77e60c6c1b77f56eb786fb8de14bb96e6041f22df737dcc40c294281add1",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_prologue_names/run.provenance.json",
+    "provenance_sha256": "e2fee3199ad0985effbbd94db945924fc534ec0c906eb71b3cf877f83b650c25",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "360b96febc1eba5f4813338b4e502859f03713b63da6e813ef39191cbd215500",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+        "role": "approved_style_reference_only"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_prologue_names.ingest.json",
+    "spec_sha256": "246f7959643a31b7e761a562182a9dfed597c80a0b1e9c44b9a88b51044be843",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "bceb24ee3bf143cf5bcb2301effadc36afe1527d47e9bcdc00271db7d386a0a7"
+  },
+  "outputs": [
+    {
+      "path": "art/still_sol_prologue_names.webp",
+      "sha256": "44ad877f42bcd442f5cade2cc898fe07bcb0e7d3535e4448877037e6b378c521",
+      "pixels_sha256": "533355ea5d3ccf2f66f873a4cc8b1c1c288f6ebac6706f8222f59cb06fb00b56",
+      "bytes": 307110,
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "1 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1672x941"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "307110 bytes <= 900000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

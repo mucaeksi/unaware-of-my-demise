@@ -266,6 +266,8 @@ describe('ingest_art pipeline, provenance, and A31 reference hygiene (R14-B)', (
     expect(checkOutside.passed).toBe(false);
     expect(checkOutside.reason).toContain('outside allowed reference directories');
     expect(checkReferenceHygiene(repo, [{ path: 'content/specs/character_locks/fadyme.png', sha256: sha }]).passed).toBe(true);
+    expect(checkReferenceHygiene(repo, [{ path: 'content/generated/openai/sol_title/source.png', sha256: sha }]).passed).toBe(true);
+    expect(checkReferenceHygiene(repo, [{ path: 'content/generated/openai/../../untrusted.png', sha256: sha }]).passed).toBe(false);
     expect(checkReferenceHygiene(repo, [{ path: 'content/specs/character_locks/../untrusted.png', sha256: sha }]).passed).toBe(false);
 
     // Allowed directory but hash matches a legacy git: source in content/provenance.json

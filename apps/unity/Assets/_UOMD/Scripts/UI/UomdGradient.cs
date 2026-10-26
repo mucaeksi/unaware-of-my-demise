@@ -39,8 +39,9 @@ namespace Uomd.UI
             for (int i = 0; i < bands; i++)
             {
                 ushort a0 = (ushort)(i * 2), b0 = (ushort)(i * 2 + 1), a1 = (ushort)(i * 2 + 2), b1 = (ushort)(i * 2 + 3);
-                mesh.SetNextIndex(a0); mesh.SetNextIndex(a1); mesh.SetNextIndex(b1);
-                mesh.SetNextIndex(a0); mesh.SetNextIndex(b1); mesh.SetNextIndex(b0);
+                // Vertical strips reverse the vertex winding; UI Toolkit culls the opposite-facing triangles.
+                mesh.SetNextIndex(a0); mesh.SetNextIndex(_horizontal ? a1 : b1); mesh.SetNextIndex(_horizontal ? b1 : a1);
+                mesh.SetNextIndex(a0); mesh.SetNextIndex(_horizontal ? b1 : b0); mesh.SetNextIndex(_horizontal ? b0 : b1);
             }
         }
     }

@@ -13,6 +13,7 @@ namespace Uomd.Core
     public sealed class UomdMediaLoader
     {
         private readonly PatchManager _patch;
+        private int _textureGeneration;
         private readonly Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>(StringComparer.Ordinal);
         private readonly Dictionary<string, AudioClip> _clips = new Dictionary<string, AudioClip>(StringComparer.Ordinal);
         private readonly Dictionary<string, string> _decodable = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -57,7 +58,13 @@ namespace Uomd.Core
             if (_textures.TryGetValue(relativePath, out var cached) && cached != null) return cached;
             try
             {
+                int generation = _textureGeneration;
                 var texture = await UomdTextureLoader.LoadAsync(_patch, Decodable(relativePath));
+                if (generation != _textureGeneration)
+                {
+                    if (texture != null) UnityEngine.Object.Destroy(texture);
+                    return null;
+                }
                 _textures[relativePath] = texture;
                 return texture;
             }
@@ -93,8 +100,17 @@ namespace Uomd.Core
             return clip;
         }
 
+        /// <summary>Releases a finished cinematic plate once its crossfade has completed.</summary>
+        public void ReleaseTexture(string relativePath)
+        {
+            if (relativePath == null || !_textures.TryGetValue(relativePath, out var texture)) return;
+            _textures.Remove(relativePath);
+            if (texture != null) UnityEngine.Object.Destroy(texture);
+        }
+
         public void ReleaseTextures()
         {
+            _textureGeneration++;
             foreach (var texture in _textures.Values)
             {
                 if (texture != null) UnityEngine.Object.Destroy(texture);

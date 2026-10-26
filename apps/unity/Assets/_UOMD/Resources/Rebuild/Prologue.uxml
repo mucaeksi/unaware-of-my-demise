@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Cinematic.uss" />
+  <ui:VisualElement name="rebuildPrologue" class="cinematic-root">
+    <ui:VisualElement name="openingHeader" class="cinematic-header">
+      <ui:VisualElement class="opening-heading" picking-mode="Ignore">
+        <ui:Label text="BEFORE THE ROAD" class="opening-eyebrow" />
+        <ui:Label name="shotNumber" text="" class="shot-number" />
+      </ui:VisualElement>
+      <ui:VisualElement class="opening-controls">
+        <ui:Toggle name="autoOpening" text="AUTO" class="cinematic-auto" />
+        <ui:Button name="pauseOpening" text="PAUSE" class="cinematic-button" />
+        <ui:Button name="muteOpening" text="MUTE" class="cinematic-button" />
+        <ui:Button name="skipOpening" text="SKIP" class="cinematic-button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement class="opening-caption-block" picking-mode="Ignore">
+      <ui:Label name="shotCaption" text="" class="shot-caption" />
+      <ui:VisualElement class="caption-rule" />
+      <ui:Label name="shotBody" text="" class="shot-body" enable-rich-text="true" />
+    </ui:VisualElement>
+    <ui:VisualElement class="opening-footer">
+      <ui:Label name="openingStatus" text="" class="opening-status" picking-mode="Ignore" />
+      <ui:Button name="nextShot" text="NEXT SCENE" class="cinematic-button next-shot" />
+    </ui:VisualElement>
+    <ui:VisualElement class="opening-progress-track" picking-mode="Ignore">
+      <ui:VisualElement name="openingProgress" class="opening-progress" />
+    </ui:VisualElement>
+    <ui:VisualElement name="openingEnd" class="opening-end">
+      <ui:Label name="openingEndTitle" text="Before the Road" class="end-title" picking-mode="Ignore" />
+      <ui:Label name="openingEndBody" text="" class="end-body" picking-mode="Ignore" />
+      <ui:Button name="retryOpening" text="TRY AGAIN" class="cinematic-button end-button" />
+      <ui:Button name="continueOpening" text="CONTINUE" class="cinematic-button end-button" />
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

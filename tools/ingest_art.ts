@@ -196,6 +196,7 @@ function collectLegacyGitHashes(rootDir: string): Set<string> {
 
 const ALLOWED_REF_PREFIXES = [
   'content/specs/character_locks/',
+  'content/generated/openai/',
   'reference/',
   'narrative/14_References/recovered_locked_v001/',
   'content/approved_art/art/',

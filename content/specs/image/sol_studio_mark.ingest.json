@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "sol_studio_mark",
+  "class": "ui_image",
+  "source": {
+    "kind": "generated",
+    "pick": "3023caf35515",
+    "provenance": "content/generated/openai/sol_studio_mark/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1254,
+    "height": 1254,
+    "webp": {
+      "mode": "lossy",
+      "quality": 92,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 900000
+  },
+  "manifest": {
+    "ui": "sol_studio_mark"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

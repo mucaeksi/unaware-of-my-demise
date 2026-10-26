@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_prologue_roads",
+    "aspectRatio": "16:9",
+    "prompt_file": "content/generated/openai/sol_prologue_roads/prompt.txt",
+    "prompt": "Create one NEW original production illustration for Unaware of My Demise, a melancholic Gothic light-novel anime RPG. Supplied image is STYLE REFERENCE ONLY; repaint a completely different scene. Wide 16:9 landscape, native high resolution. Fine colored lines, painterly environments, softly cel-shaded adult faces if any, matte worn silver and brass, charcoal-plum shadows, bone-ivory light, silver-lilac accents, restrained warm amber. Atmospheric readable composition, filmic depth, no glossy 3D, neon, gore, crosses or religious iconography. No text, letters, typography, UI, subtitles, borders, logos, or watermarks. Keep crucial subjects inside central 80% and lower 24% calm and darker for real Unity captions. No eclipse in these historical scenes. This is an individual full-size illustration, not a grid or storyboard.\n\nWHAT REMAINED \u2014 After Crownfall, anonymous displaced travelers carry blankets and tools away from home. A long low wide view at misty grey dawn: a handful of unnamed ADULT travelers from behind, small to medium in frame, on the upper half of a winding road leading away from a smoking ruined city far behind at right. One holds a rolled blanket, another carries a tied carpenter's tool wrap, third pulls a plain modest wooden handcart. Worn muted charcoal, brown and dull oxblood wool, dignified and exhausted. A collapsed empty roadside shelter in foreground left, damp grasses and bare branches frame generous atmospheric negative space. Focus on the material things they could carry and the distance from home. No named heroes, no king, no villain, no magic, ritual, corpses, eclipse or text."
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_title_key_art_01/source.png",
+      "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+      "role": "approved_style_reference_only"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_prologue_roads/source.png",
+      "sha256": "fd263c01d540bc8288363fa6f2ee5a65d52336cb195a1fae00d26c70359e80f3",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false
+    }
+  ],
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Original individually generated illustration. Canon and composition reviewed; native resolution below final 2K target. Owner acceptance and physical-device review pending."
+  }
+}

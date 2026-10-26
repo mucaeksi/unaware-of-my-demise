@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Cinematic.uss" />
+  <ui:VisualElement name="rebuildStudio" class="cinematic-root">
+    <ui:VisualElement name="studioCopy" class="studio-copy">
+      <ui:Label text="SOVTAYM" class="studio-title" picking-mode="Ignore" />
+      <ui:Label text="S T U D I O S" class="studio-subtitle" picking-mode="Ignore" />
+      <ui:VisualElement class="studio-rule" picking-mode="Ignore" />
+      <ui:Label text="P R E S E N T S" class="studio-presents" picking-mode="Ignore" />
+    </ui:VisualElement>
+    <ui:Label name="studioStatus" text="" class="cinematic-status" picking-mode="Ignore" />
+  </ui:VisualElement>
+</ui:UXML>

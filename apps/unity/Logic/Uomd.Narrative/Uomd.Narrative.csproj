@@ -10,6 +10,7 @@
   <ItemGroup>
     <Compile Include="$(UomdScripts)Narrative/StoryRunner.cs" />
     <Compile Include="$(UomdScripts)Narrative/UomdCutscene.cs" />
+    <Compile Include="$(UomdScripts)Narrative/CinematicShotClock.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Uomd.Core/Uomd.Core.csproj" />

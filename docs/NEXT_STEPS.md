@@ -2,8 +2,8 @@
 
 Active 2026-10-26. The root README is authoritative. Sol/Codex owns the project; local workspace is `E:/Unity/unaware-of-my-demise`, verified local commits on `main`, owner pushes. [Execution plan](handoff/SOL_REBUILD_PLAN.md), [visual obligations](media/SOL_VISUAL_REBUILD.json).
 
-1. RB-00/RB-01: fresh Unity baseline, original title image and editable title/settings with actual entry behavior; record current tests/captures.
-2. Complete rebuilt startup/studio and first-install narrative/tutorial flow using newly generated visuals.
+1. RB-01: rebuilt startup/studio/title and nine newly generated opening plates are implemented; current evidence is in `docs/evidence/sol-opening-2026-10-26.json`. Owner approved the first title image and continuing art direction.
+2. RB-02: produce new story portraits and all three tutorial stages, then rebuild narrative/tutorial interaction and verify durable Continue/restart.
 3. Connect the rebuilt battle presentation to the unchanged deterministic engine; then recover operations, server campaign sessions and native first-binary foundations.
 4. Physical Android/signed-AAB acceptance precedes broad post-launch chapter/roster production.
 

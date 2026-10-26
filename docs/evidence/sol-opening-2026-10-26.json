@@ -1,0 +1,394 @@
+{
+  "schema": 1,
+  "decision": "D-35",
+  "date": "2026-10-26",
+  "source": {
+    "startingRevision": "979f05a3",
+    "scope": "RB-01 rebuilt boot/studio and RB-02 nine-shot opening; tested working tree in the enclosing local Git commit"
+  },
+  "ownerDirection": {
+    "firstTitleVisualAndContinuingStyleApproved": true,
+    "fullGameRedesignRequested": true,
+    "newAssetsOwnerAccepted": false
+  },
+  "editor": {
+    "version": "6000.3.27f1",
+    "liveMcp": true,
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "finalProjectErrors": 0,
+    "finalProjectWarnings": 0
+  },
+  "checks": {
+    "npmVerify": {
+      "result": "PASS",
+      "lint": true,
+      "typecheck": true,
+      "apiTests": 507,
+      "workspaceTestExecutions": 954,
+      "toolTests": 81,
+      "contentFilesReproduced": 216,
+      "note": "Includes five Unity exporter cases also executed by test:tools; run before subsequent C#-only and documentation changes."
+    },
+    "headlessLogic": {
+      "result": "PASS",
+      "passed": 101,
+      "failed": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "unityEditMode": {
+      "result": "PASS",
+      "passed": 102,
+      "failed": 0,
+      "jobId": "6672ba00263249f3a7d7c90fcc62c74e"
+    },
+    "unityPlayMode": {
+      "result": "PASS",
+      "passed": 3,
+      "failed": 0,
+      "jobId": "a9be665434e747c28008e76bdfb445d5",
+      "scope": "Muted voice clock; voice becoming ready while paused; music/voice pause and stop readiness."
+    },
+    "referenceCompile": {
+      "result": "PASS",
+      "sourceAssemblies": 11,
+      "errors": 0,
+      "note": "Real pinned Editor module references; URP uses verified 17.3 signatures; UnityTest attribute has a compile-only declaration, with real coroutine execution proved by the PlayMode job."
+    },
+    "skillAdapters": {
+      "result": "PASS",
+      "verified": 66,
+      "claudeFilesChanged": false
+    },
+    "mediaProvenance": {
+      "result": "PASS",
+      "entries": [
+        "sol_studio_mark",
+        "sol_prologue_hours",
+        "sol_prologue_names",
+        "sol_prologue_ordinary_days",
+        "sol_prologue_throne_wars",
+        "sol_prologue_crownfall",
+        "sol_prologue_roads",
+        "sol_prologue_search",
+        "sol_prologue_reunion",
+        "sol_prologue_beginning"
+      ],
+      "sourceOutputAndReferenceHashesVerified": true,
+      "stagedGitBlobBytesVerified": true
+    }
+  },
+  "runtime": {
+    "normalSpeedReplay": {
+      "result": "PASS",
+      "authoredSeconds": 120,
+      "observedWallSeconds": 120.234177,
+      "shotsCaptured": 9,
+      "maxSimultaneousPlateSprites": 2,
+      "observedMaxParticles": 41,
+      "configuredParticleLimit": 64,
+      "note": "Editor capture probe, not a physical-device performance certificate. Nine full-resolution captures inspected; pause-resize layout correction was subsequently verified separately."
+    },
+    "firstViewing": {
+      "savedShotIndex": 2,
+      "resumedShotIndex": 2,
+      "skipDisplay": "None",
+      "result": "PASS"
+    },
+    "pause": {
+      "result": "PASS",
+      "voiceAndShotClockFrozen": true,
+      "cameraAndParticleAdvanceStopped": true
+    },
+    "manualReading": {
+      "result": "PASS",
+      "autoOffHeldShotAtEnd": true,
+      "nativeNextButtonAdvancedShot": true,
+      "note": "The hold boundary was advanced by a QA clock probe; the full replay above ran at normal speed."
+    },
+    "mute": {
+      "result": "PASS",
+      "nativeButtonPersistedUomdPrefsMuted": true
+    },
+    "replay": {
+      "result": "PASS",
+      "firstViewingCheckpointUnchangedAt3": true,
+      "endContinueReturnedToTitle": true,
+      "skipReturnedToTitle": true
+    },
+    "reducedMotion": {
+      "result": "PASS",
+      "particles": 0,
+      "cameraOrthographicSize": 5.4,
+      "captionFullyVisible": true
+    },
+    "pausedAspectResize": {
+      "result": "PASS",
+      "sizes": [
+        [
+          1920,
+          1080
+        ],
+        [
+          2400,
+          1080
+        ],
+        [
+          1600,
+          1200
+        ]
+      ],
+      "tabletPlateWidth": 14.4000006,
+      "tabletViewWidth": 14.4000006,
+      "note": "Full composition contained with cinematic bars; no crop introduced by changing aspect while paused."
+    },
+    "missingArt": {
+      "result": "PASS",
+      "explicitRetryAndContinueWithoutIt": true,
+      "retryRemainsExplicitOnRepeatFailure": true,
+      "legacyGeminiFallback": false,
+      "note": "A missing catalog ID was injected in memory; the canonical config was restored."
+    },
+    "teardown": {
+      "result": "PASS",
+      "rapidEntryExitDuringLoad": true,
+      "titleStageObjects": 0,
+      "titleCameras": 1,
+      "originalCameraEnabled": true,
+      "preferencesAndFirstViewCheckpointRestored": true
+    },
+    "presentationLimit": "Whole-scene original paintings with a native camera push, practical light, crossfade and bounded dust. Separate bell/rope/actor animation is not yet implemented."
+  },
+  "newMedia": [
+    {
+      "id": "sol_studio_mark",
+      "path": "content/generated/openai/sol_studio_mark/source.png",
+      "sha256": "3023caf355159044dc781f62018717d9798314ac408c458ec6a98915daf93800",
+      "width": 1254,
+      "height": 1254,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": true,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_hours",
+      "path": "content/generated/openai/sol_prologue_hours/source.png",
+      "sha256": "7b298cdb0776a5f6620fc3f31712ae38bba60a57c87dfba897d87639df09483f",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_names",
+      "path": "content/generated/openai/sol_prologue_names/source.png",
+      "sha256": "30ff77e60c6c1b77f56eb786fb8de14bb96e6041f22df737dcc40c294281add1",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_ordinary_days",
+      "path": "content/generated/openai/sol_prologue_ordinary_days/source.png",
+      "sha256": "ed3adb84185689db28ca9a5eb96c2ee4d2abf6db5b9fc4c48c25cb0c145c19c5",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_throne_wars",
+      "path": "content/generated/openai/sol_prologue_throne_wars/source.png",
+      "sha256": "ee40a66c4d51bb088c0ecbfe3d0f9e548e67432580e86b5d61183e40382800f9",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_crownfall",
+      "path": "content/generated/openai/sol_prologue_crownfall/source.png",
+      "sha256": "eceba378ba23b6002740b09a48b92f45d7ae2f51b65b8bd793c3616fe3167f4e",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_roads",
+      "path": "content/generated/openai/sol_prologue_roads/source.png",
+      "sha256": "fd263c01d540bc8288363fa6f2ee5a65d52336cb195a1fae00d26c70359e80f3",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_search",
+      "path": "content/generated/openai/sol_prologue_search/source.png",
+      "sha256": "9c0422e414a0a8bd940a2011096e00c248a0aaa8d6db1207d898ce2f9a41ecd7",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_reunion",
+      "path": "content/generated/openai/sol_prologue_reunion/source.png",
+      "sha256": "6367b9b4127f140fa3b5f7f4444694fc16cc1e6aa640b129b94635038d8846ae",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    },
+    {
+      "id": "sol_prologue_beginning",
+      "path": "content/generated/openai/sol_prologue_beginning/source.png",
+      "sha256": "b8c1e0e16707b4c1c6bec40c0480d6ec957d3d144e9caa2b817ac4acac21d676",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false,
+      "hasAlpha": false,
+      "automatedQcPassed": true,
+      "ownerAcceptance": "pending"
+    }
+  ],
+  "studioAlpha": {
+    "min": 0,
+    "max": 255
+  },
+  "captures": [
+    {
+      "path": "docs/evidence/sol-opening-studio.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "5a19606ec1562504c642e32591bedc3d31962a5af9d4f173e8b8e3af09e62cef",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-01.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "cfeed38c4a7f4baa22665989e8a762a2c9d6fa4dced43dc1a64bc7858aeb2801",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-02.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "dbd3c8c3432d6dc9da90e32dcfa658d9278c8c791591d76ae54b120bfe04d77e",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-03.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f611f9b34be15923ec0ca25860b710f106e5900c73e1cd00ff09b52fc6f4db2f",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-04.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "96fd029e87c6488400ff5a8089340fa1624a4a0b86dd6a68d7e7d830ecc323e1",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-05.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "954c146a587449e053b444696512304825a45a31a899140845e198232d1da6fb",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-06.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "6d3fd94fc819fae0a76b08c6566e9de0d4d31cc64f211a286da3703d1bb63001",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-07.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "f1e3e902f3675729f96400f21d1ea3c2306e068e0af241f55f91a1b78150cccd",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-08.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "074e259e8ac6b403481b7aa148b888660372b8f73559f69d6a5b28554170e7ad",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-09.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "5fe3dbe468d4842acd24c5bd406833c0c1512475b11b3911301b53e0551a20aa",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-2400x1080.webp",
+      "width": 2400,
+      "height": 1080,
+      "sha256": "2480d189ddabd2368e54cba894bb87e177ea66822d1bcd8093da426be4718696",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-1600x1200.webp",
+      "width": 1600,
+      "height": 1200,
+      "sha256": "0caf2da326f7de1e066b10796b973caaf9ea9e6d654e88d93a1ac8b5dc09d235",
+      "encoding": "lossless WebP; full captured dimensions"
+    },
+    {
+      "path": "docs/evidence/sol-opening-final.webp",
+      "width": 1920,
+      "height": 1080,
+      "sha256": "55a56e53d9018aa1579e4808ad0c20e459b02a70f7e04be0fae7e0ee2b9f83a2",
+      "encoding": "lossless WebP; full captured dimensions"
+    }
+  ],
+  "unverified": [
+    "Physical Android device, notch/safe-area, GPU/thermal/frame-time matrix",
+    "Signed IL2CPP ARM64 release artifact, native Google/UMP/Billing/ads acceptance",
+    "Native final-2K art gate and owner acceptance of the ten new images",
+    "Rebuilt story portraits, three tutorials, battle and hub/system screens",
+    "Current deployed Cloudflare behavior"
+  ],
+  "delivery": {
+    "localCommitOnly": true,
+    "pushed": false,
+    "deployed": false
+  },
+  "next": "New story portraits and the three tutorial stages, then the rebuilt real battle presentation."
+}

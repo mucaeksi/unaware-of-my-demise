@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "asset_id": "sol_prologue_beginning",
+  "class": "still",
+  "revision": 1,
+  "targets": {
+    "stills": {
+      "sol_prologue_beginning": "art/still_sol_prologue_beginning.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "b8c1e0e16707b4c1c6bec40c0480d6ec957d3d144e9caa2b817ac4acac21d676",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_prologue_beginning/run.provenance.json",
+    "provenance_sha256": "e4f67540eade8507ada6e9c22f52b337d79cde3dd42cbb9bd5209d0c68d4f63c",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "d25f967f118852240d7ec6ea13d876f44ee5ccd2f4e834afdbdd9fc7b6ad6100",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_prologue_beginning/initial.png",
+        "sha256": "a5d16c44e865dfc2318024ebf45732b10ebf4fac1a0913050dad4f987a6fb99f",
+        "role": "edit_target_remove_cross_finial"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_prologue_beginning.ingest.json",
+    "spec_sha256": "c623d1a2eb8bf2667c1a91f7e4af17a515ccf8080a5db5b742729e242bc407f9",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "496695e6f8c52e9b803f81ffab55b126ebf62d2193b1cb99d1f90c5c87a86b1b"
+  },
+  "outputs": [
+    {
+      "path": "art/still_sol_prologue_beginning.webp",
+      "sha256": "52284379e9b393aaf882baaceb8f59b3dc31725ebb9e3ca7065d8b6f9272482e",
+      "pixels_sha256": "54fc4f8f5b4c7ce470ba18cfbce6406e7bfb7ec902993aedcec95699a79cc7bb",
+      "bytes": 521658,
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "1 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1672x941"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "521658 bytes <= 900000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

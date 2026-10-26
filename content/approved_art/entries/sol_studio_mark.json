@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "asset_id": "sol_studio_mark",
+  "class": "ui_image",
+  "revision": 1,
+  "targets": {
+    "ui": {
+      "sol_studio_mark": "art/ui_sol_studio_mark.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "3023caf355159044dc781f62018717d9798314ac408c458ec6a98915daf93800",
+    "mime": "image/png",
+    "width": 1254,
+    "height": 1254,
+    "provenance_file": "content/generated/openai/sol_studio_mark/run.provenance.json",
+    "provenance_sha256": "92778e3cbe281e0f73a16eca7cff73970bb1fa82111a7443ea295d522f8a7806",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "d22ebaf90ba13b95092502bdaa384f7392b106237fcc712a4509b5735727b292",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+        "role": "approved_style_reference_only"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_studio_mark.ingest.json",
+    "spec_sha256": "20de52520d6803445c7f1ca9439f81315a79e5711a78877a66b9b54962be0e83",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "b843365f736043b99ad899453462c2b45e78535216927f78a1b986d2e5d8b034"
+  },
+  "outputs": [
+    {
+      "path": "art/ui_sol_studio_mark.webp",
+      "sha256": "e60b0b7325a4be339f7ff1c9716d87cbf3103c2293043c3d107f6bbbafdd3423",
+      "pixels_sha256": "d3a6b887960a06dabbf1ca6cf6f7ee877ba44228c7d7da9e4f1dcfdf373a65ad",
+      "bytes": 357174,
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "1 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1254x1254"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1254x1254"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "357174 bytes <= 900000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

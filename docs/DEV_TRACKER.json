@@ -7,10 +7,14 @@
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "RB-00/RB-01: verify the new title/settings, native OpenAI title candidate and provider provenance; then rebuild startup/studio and the first-install story/tutorial flow.",
+    "nextProposed": "RB-02: new story portraits and three tutorial stages; rebuild narrative/tutorial interaction, durable Continue/restart, then real battle presentation.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped."
   },
   "now": [
+    {
+      "title": "D-35: native opening and nine original prologue paintings (2026-10-26)",
+      "detail": "Owner approved the first title visual and ongoing art direction. Startup/studio/prologue now use dedicated native UI Toolkit and URP 2D controllers; ten new OpenAI assets with prompt, native dimensions and provenance. Audio-clock captions, pause/mute/manual read, first-view checkpoint and replay preserved. Old startup/title/prologue controllers and flattened-video fallback removed. Scoped local evidence: docs/evidence/sol-opening-2026-10-26.json. Story portraits, tutorials, battle, hub and device acceptance remain."
+    },
     {
       "title": "D-35: Sol takes over the Unity rebuild (2026-10-26)",
       "detail": "New native title/settings and original OpenAI title integration candidate; visual replacement inventory and execution plan established. Exact verification is recorded separately; this is not whole-client or release acceptance."

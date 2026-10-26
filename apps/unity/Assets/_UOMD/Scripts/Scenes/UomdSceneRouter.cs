@@ -101,6 +101,7 @@ namespace Uomd.Scenes
 
         private void OnDestroy()
         {
+            _activeController?.OnExit();
             if (Api != null) Api.OnAuthChanged -= PersistSession;
             Media?.ReleaseAll();
         }
@@ -193,9 +194,9 @@ namespace Uomd.Scenes
         {
             // Group 1: Entry, Narrative & Tactical Combat (8 screens)
             Register(new BootScreenController(this));
-            Register(new StudioScreenController(this));
+            Register(new RebuildStudioScreen(this));
             Register(new RebuildTitleScreen(this));
-            Register(new PrologueScreenController(this));
+            Register(new RebuildPrologueScreen(this));
             Register(new StoryScreenController(this));
             Register(new BattleScreenController(this));
             Register(new FinishScreenController(this));

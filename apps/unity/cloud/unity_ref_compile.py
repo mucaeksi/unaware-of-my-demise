@@ -52,10 +52,28 @@ URP_SIGNATURES = {
     "Unity.RenderPipelines.Universal.2D.Runtime": """namespace UnityEngine.Rendering.Universal
 {
     public partial class Renderer2DData : ScriptableRendererData { }
+    // Reflected in the pinned Editor 6000.3.27f1 / URP 17.3; only the stage's public API surface is needed.
+    public sealed class Light2D : UnityEngine.MonoBehaviour
+    {
+        public enum LightType { Parametric, Freeform, Sprite, Point, Global }
+        public LightType lightType { get; set; }
+        public UnityEngine.Color color { get; set; }
+        public float intensity { get; set; }
+        public float pointLightInnerRadius { get; set; }
+        public float pointLightOuterRadius { get; set; }
+    }
 }
 """,
 }
 URP_REFS = set(URP_SIGNATURES)
+# Attribute name, public parameterless construction and Method usage verified against test-framework 1.6.0
+# UnityEngine.TestRunner/NUnitExtensions/Attributes/UnityTestAttribute.cs:61-69. This does not emulate its runner;
+# IEnumerator scheduling and assertions must run in the real Unity PlayMode test job.
+UNITY_TEST_ATTRIBUTE_SIGNATURE = """namespace UnityEngine.TestTools {
+    [System.AttributeUsage(System.AttributeTargets.Method)]
+    public class UnityTestAttribute : System.Attribute { public UnityTestAttribute() { } }
+}
+"""
 EXTRACT = [
     "Editor/Data/Managed/UnityEngine/*",
     "Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ext.nunit/*",
@@ -206,6 +224,9 @@ def main() -> int:
         folder = OUT / name
         folder.mkdir()
         sources = own_sources(path, asmdefs)
+        if "UnityEngine.TestRunner" in refs:
+            (folder / "UnityTestAttributeSignature.cs").write_text(UNITY_TEST_ATTRIBUTE_SIGNATURE)
+            sources.append(folder / "UnityTestAttributeSignature.cs")
         if URP_REFS & set(refs):
             (folder / "UrpSignatures.cs").write_text("".join(URP_SIGNATURES[r] for r in sorted(URP_REFS & set(refs))))
             sources.append(folder / "UrpSignatures.cs")

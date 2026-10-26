@@ -15,6 +15,7 @@ namespace Uomd.Core
         private AudioSource _sfxSource;
         private AudioSource _voiceSource;
         private bool _usingSourceA = true;
+        private bool _paused;
 
         public string CurrentBgmCueId { get; private set; } = "";
         public float MasterVolume { get; set; } = 0.85f;
@@ -273,28 +274,35 @@ namespace Uomd.Core
         /// <summary>Plays a voice line from presentation.json "voices"; the previous line stops.</summary>
         public void PlayVoiceLine(string lineId, AudioClip clip = null)
         {
+            int request = ++_voiceRequest;
             _voiceSource.Stop();
+            _voiceSource.clip = null;
             _pendingVoiceLine = lineId;
-            if (Muted || string.IsNullOrEmpty(lineId)) return;
+            if (string.IsNullOrEmpty(lineId)) return;
             if (clip != null)
             {
                 StartVoice(clip);
                 return;
             }
-            if (Media != null && Media.Catalog.TryGetVoice(lineId, out var cue)) _ = LoadAndPlayVoice(lineId, cue);
+            if (Media != null && Media.Catalog.TryGetVoice(lineId, out var cue)) _ = LoadAndPlayVoice(lineId, request, cue);
         }
 
         public void StopVoiceLine()
         {
+            ++_voiceRequest;
             _pendingVoiceLine = null;
-            if (_voiceSource != null) _voiceSource.Stop();
+            if (_voiceSource != null) { _voiceSource.Stop(); _voiceSource.clip = null; }
         }
 
         public bool VoicePlaying => _voiceSource != null && _voiceSource.isPlaying;
+        public bool VoiceReady => _voiceSource != null && _voiceSource.clip != null;
+        public float VoiceTime => VoiceReady ? _voiceSource.time : 0f;
+        public float VoiceDuration => VoiceReady ? _voiceSource.clip.length : 0f;
 
         /// <summary>Freezes music and voice in place (prologue PAUSE); SetPaused(false) continues from the same point.</summary>
         public void SetPaused(bool paused)
         {
+            _paused = paused;
             foreach (var source in new[] { _bgmSourceA, _bgmSourceB, _voiceSource })
             {
                 if (source == null) continue;
@@ -304,6 +312,7 @@ namespace Uomd.Core
         }
 
         private string _pendingVoiceLine;
+        private int _voiceRequest;
 
         private async Awaitable LoadAndPlayBgm(string cueId, MusicTrack track)
         {
@@ -318,10 +327,10 @@ namespace Uomd.Core
             if (clip != null && !Muted) _sfxSource.PlayOneShot(clip, MasterVolume * SfxVolume * cue.Volume);
         }
 
-        private async Awaitable LoadAndPlayVoice(string lineId, SoundCue cue)
+        private async Awaitable LoadAndPlayVoice(string lineId, int request, SoundCue cue)
         {
             var clip = await Media.ClipAsync(cue.File);
-            if (clip != null && _pendingVoiceLine == lineId && !Muted) StartVoice(clip);
+            if (this != null && clip != null && request == _voiceRequest && _pendingVoiceLine == lineId) StartVoice(clip);
         }
 
         private void StartBgm(AudioClip clip, double loopStartSeconds)
@@ -335,6 +344,7 @@ namespace Uomd.Core
             next.time = 0f;
             next.mute = Muted;
             next.Play();
+            if (_paused) next.Pause();
             _loopStartSeconds = loopStartSeconds > 0 && loopStartSeconds < clip.length ? loopStartSeconds : 0.0;
             _lastBgmTime = 0f;
             _fadeSeconds = DefaultFadeSeconds;
@@ -344,12 +354,18 @@ namespace Uomd.Core
         private void StartVoice(AudioClip clip)
         {
             _voiceSource.clip = clip;
+            _voiceSource.time = 0f;
             _voiceSource.volume = MasterVolume * VoiceVolume;
+            _voiceSource.mute = Muted;
             _voiceSource.Play();
+            if (_paused) _voiceSource.Pause();
         }
 
         private void Update()
         {
+            _bgmSourceA.mute = _bgmSourceB.mute = _voiceSource.mute = Muted;
+            _voiceSource.volume = MasterVolume * VoiceVolume;
+            if (_paused) return;
             float target = MasterVolume * BgmVolume;
             var active = ActiveBgm;
             if (_fadeElapsed < _fadeSeconds)

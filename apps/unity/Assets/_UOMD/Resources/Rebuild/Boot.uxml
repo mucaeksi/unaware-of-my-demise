@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Cinematic.uss" />
+  <ui:VisualElement class="cinematic-root boot-root">
+    <ui:Label text="UNAWARE OF MY DEMISE" class="opening-eyebrow" picking-mode="Ignore" />
+    <ui:VisualElement class="studio-rule" picking-mode="Ignore" />
+    <ui:Label name="bootStatus" text="Preparing your journey…" class="opening-status" picking-mode="Ignore" />
+  </ui:VisualElement>
+</ui:UXML>
