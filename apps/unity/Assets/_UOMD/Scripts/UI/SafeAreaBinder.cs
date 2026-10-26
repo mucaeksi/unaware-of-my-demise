@@ -13,11 +13,14 @@ namespace Uomd.UI
     public sealed class SafeAreaBinder : MonoBehaviour
     {
         [SerializeField] private string _safeAreaElementName = "safe-area-root";
+        [SerializeField] private bool _applyPaddingToRoot;
 
         private UIDocument? _document;
         private VisualElement? _safeRoot;
         private Rect _lastSafeArea;
         private Vector2Int _lastScreenSize;
+
+        public Vector4 BandInsets { get; private set; }
 
         private void Awake()
         {
@@ -49,7 +52,31 @@ namespace Uomd.UI
 
             _lastSafeArea = safe;
             _lastScreenSize = screenSize;
-            ApplySafeArea(_safeRoot, _safeRoot.panel, safe, screenSize.x, screenSize.y);
+            BandInsets = ComputeBandInsets(safe, screenSize.x, screenSize.y);
+            if (_applyPaddingToRoot)
+            {
+                ApplySafeArea(_safeRoot, _safeRoot.panel, safe, screenSize.x, screenSize.y);
+            }
+        }
+
+        public static Vector4 ReadBandInsets(float refW = 1920f, float refH = 1080f, float maxInsetX = 220f, float maxInsetY = 120f)
+        {
+            return ComputeBandInsets(Screen.safeArea, Screen.width, Screen.height, refW, refH, maxInsetX, maxInsetY);
+        }
+
+        public static Vector4 ComputeBandInsets(Rect safe, int screenW, int screenH, float refW = 1920f, float refH = 1080f, float maxInsetX = 220f, float maxInsetY = 120f)
+        {
+            if (screenW <= 0 || screenH <= 0) return Vector4.zero;
+            float scale = Mathf.Max(refW / screenW, refH / screenH);
+            float panelW = screenW * scale;
+            float panelH = screenH * scale;
+            float bandX = (panelW - refW) * 0.5f;
+            float bandY = (panelH - refH) * 0.5f;
+            float left = Mathf.Clamp(safe.xMin * scale - bandX, 0f, maxInsetX);
+            float right = Mathf.Clamp((screenW - safe.xMax) * scale - bandX, 0f, maxInsetX);
+            float top = Mathf.Clamp((screenH - safe.yMax) * scale - bandY, 0f, maxInsetY);
+            float bottom = Mathf.Clamp(safe.yMin * scale - bandY, 0f, maxInsetY);
+            return new Vector4(left, top, right, bottom);
         }
 
         public static void ApplySafeArea(VisualElement safeRoot, IPanel panel, Rect safe, int screenW, int screenH)

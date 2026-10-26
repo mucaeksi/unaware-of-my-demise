@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace Uomd.Core
             {
                 if (_session is null || string.IsNullOrEmpty(_session.token) || string.IsNullOrEmpty(_session.expiresAt))
                     return false;
-                return DateTimeOffset.TryParse(_session.expiresAt, out var exp) && exp > DateTimeOffset.UtcNow;
+                return DateTimeOffset.TryParse(_session.expiresAt, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var exp) && exp > DateTimeOffset.UtcNow;
             }
         }
 

@@ -22,6 +22,8 @@ namespace Uomd.EditorTools
         public const string DefaultScreenshotRelativePath = "../../.cache/screenshots/unity_gameview.png";
 
         [MenuItem("UOMD/MCP/Verify StreamingAssets Bundle & Deterministic Math")]
+        private static void MenuVerifyBundleAndParity() => VerifyBundleAndParity();
+
         [Description("Verifies StreamingAssets/uomd_base/release.json presence and runs a deterministic Mulberry32Rng + UomdStatMath sanity check.")]
         public static string VerifyBundleAndParity()
         {
@@ -69,6 +71,8 @@ namespace Uomd.EditorTools
         }
 
         [MenuItem("UOMD/MCP/Inspect Active Scene & URP 2D Status")]
+        private static void MenuInspectActiveSceneJson() => InspectActiveSceneJson();
+
         [Description("Returns a canonical JSON summary of the active Unity scene, root GameObjects, UIDocuments, SpriteRenderers, and URP 2D pipeline status.")]
         public static string InspectActiveSceneJson()
         {
@@ -102,6 +106,8 @@ namespace Uomd.EditorTools
         }
 
         [MenuItem("UOMD/MCP/Capture GameView Screenshot")]
+        private static void MenuCaptureGameViewScreenshot() => CaptureGameViewScreenshot();
+
         [Description("Captures the active GameView to .cache/screenshots/unity_gameview.png for visual regression verification.")]
         public static string CaptureGameViewScreenshot()
         {

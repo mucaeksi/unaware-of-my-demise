@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Video;
 using Uomd.Combat;
 using Uomd.Contracts;
 using Uomd.Core;
@@ -26,6 +28,7 @@ namespace Uomd.Scenes
 
         public async Awaitable OnEnterAsync(VisualElement screenRoot)
         {
+            _router.Session.IsReplayingIntro = false;
             var statusLbl = new Label("Verifying base release rel_0001 & AndroidKeyStore session...");
             statusLbl.AddToClassList("uomd-body");
             screenRoot.Add(statusLbl);
@@ -69,8 +72,8 @@ namespace Uomd.Scenes
 
     /// <summary>
     /// "SovTaym Studios Presents" (port of apps/game/src/scenes/StudioScene.ts): slow fade-in on deep obsidian, the
-    /// studio_mark emblem with a gold hairline ornament, then the Main Theme flows into the title. The engine credit that
-    /// SplashScene showed is Unity's own splash screen now.
+    /// studio_mark emblem framed by the rotating Black-Sun Eclipse Corona, counter-rotating gold/silver chronometer rings,
+    /// swinging sanctuary bell, ornate gold shimmer divider and rising ash motes, then the Main Theme flows into the title.
     /// </summary>
     public sealed class StudioScreenController : IUomdScreenController
     {
@@ -89,18 +92,35 @@ namespace Uomd.Scenes
         public Awaitable OnEnterAsync(VisualElement screenRoot)
         {
             _router.Audio.PlayBgmCue("bgm_main_theme");
+            _router.Audio.PlaySfx("sfx_bell_sanctuary");
             bool calm = _router.Session.ReducedMotion;
             const float cy = UomdScreenKit.RefHeight / 2f;
             const float markY = cy - 156f;
 
             var stage = UomdScreenKit.Layer(screenRoot, new Color(0.020f, 0.012f, 0.039f)); // #05030a
+            UomdGothicVfx.AttachLivingBackdrop(stage, null, "eclipse", calm, 0.72f);
+
+            var corona = UomdGothicVfx.CreateEclipseCorona(stage, 0f, markY, 162f, calm, includeDisc: false);
+            var outerRing = UomdGothicVfx.CreateCelestialRing(stage, 0f, markY, 158f, UomdThemeTokens.Gold, 12, 14f, calm);
+            var innerRing = UomdGothicVfx.CreateCelestialRing(stage, 0f, markY, 128f, UomdThemeTokens.Silver, 8, -14f, calm);
             var mark = UomdScreenKit.Centered(UomdScreenKit.Image(stage, _router.Media, _router.Media.Catalog.Ui("studio_mark"), 248, 248), 0, markY);
-            var ornament = UomdScreenKit.Centered(Ornament(stage), 0, cy + 28f);
-            var name = UomdScreenKit.Centered(UomdScreenKit.Text(stage, StudioName.ToUpperInvariant(), 78, new Color(0.914f, 0.886f, 0.831f), 10f), 0, cy + 92f);
+            if (!calm)
+            {
+                mark.style.scale = new Scale(new Vector3(0.86f, 0.86f, 1f));
+                UomdScreenKit.ScaleTo(mark, 1f, NameIn + 500, 0, false, EasingMode.EaseOutCubic);
+            }
+
+            var bell = UomdGothicVfx.CreateSwingingBell(stage, 0f, markY - 216f, 0.62f, calm);
+            var ornament = UomdScreenKit.Centered(UomdGothicVfx.CreateOrnateDivider(stage, 560f, UomdThemeTokens.GoldHi, withShimmer: true, reducedMotion: calm), 0, cy + 28f);
+
+            var name = UomdScreenKit.Centered(UomdScreenKit.Text(stage, StudioName.ToUpperInvariant(), 78, new Color(0.914f, 0.886f, 0.831f), 10f, bold: true), 0, cy + 92f);
             name.AddToClassList("uomd-display");
+            name.style.unityTextOutlineWidth = 1.2f;
+            name.style.unityTextOutlineColor = new Color(0.07f, 0.04f, 0.09f, 0.95f);
+
             var presents = UomdScreenKit.Centered(UomdScreenKit.Text(stage, Presents, 36, UomdThemeTokens.GoldHi, 18f, italic: true), 0, cy + 168f);
 
-            var parts = new VisualElement[] { mark, ornament, name };
+            var parts = new VisualElement[] { corona, outerRing, innerRing, mark, bell, ornament, name };
             foreach (var part in parts) part.style.opacity = 0f;
             presents.style.opacity = 0f;
 
@@ -117,50 +137,15 @@ namespace Uomd.Scenes
             return UomdAwaitables.Completed();
         }
 
-        /// <summary>Two gold hairlines meeting at a diamond, with a fainter silver pair above (StudioScene.ornament).</summary>
-        private static VisualElement Ornament(VisualElement parent)
-        {
-            var root = new VisualElement { pickingMode = PickingMode.Ignore };
-            root.style.width = 520;
-            root.style.height = 30;
-            parent.Add(root);
-            void Line(float left, float width, float top, float height, Color color)
-            {
-                var line = new VisualElement { pickingMode = PickingMode.Ignore };
-                line.style.position = Position.Absolute;
-                line.style.left = left;
-                line.style.top = top;
-                line.style.width = width;
-                line.style.height = height;
-                line.style.backgroundColor = color;
-                root.Add(line);
-            }
-            var gold = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.82f);
-            var silver = new Color(UomdThemeTokens.Silver.r, UomdThemeTokens.Silver.g, UomdThemeTokens.Silver.b, 0.45f);
-            Line(0, 232, 14, 2, gold);
-            Line(288, 232, 14, 2, gold);
-            Line(80, 144, 9, 1, silver);
-            Line(296, 144, 9, 1, silver);
-            var diamond = new VisualElement { pickingMode = PickingMode.Ignore };
-            diamond.style.position = Position.Absolute;
-            diamond.style.left = 250;
-            diamond.style.top = 5;
-            diamond.style.width = 20;
-            diamond.style.height = 20;
-            diamond.style.rotate = new Rotate(45);
-            diamond.style.backgroundColor = new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.95f);
-            root.Add(diamond);
-            return root;
-        }
-
         public void OnTick(float deltaTime) { }
         public void OnExit() { }
     }
 
     /// <summary>
-    /// The title (port of apps/game/src/scenes/TitleScene.ts, native-app path): title_bg key art, the logo and tagline on
-    /// the left, the server badge, REPLAY INTRO and SETTINGS pills, and TAP TO START. A tap signs in with Google when
-    /// needed, then sends a first-run player into the prologue and a returning player to where they left off.
+    /// The title (port of apps/game/src/scenes/TitleScene.ts, native-app path): animated living backdrop on title_bg,
+    /// rotating Black-Sun Eclipse Corona &amp; astronomical rune ring behind the weathered stone Gothic logo, swinging
+    /// fractured sanctuary bell, server &amp; release status header, icon-equipped utility pills, and TAP TO START with
+    /// Wax-Seal ignition burst.
     /// </summary>
     public sealed class TitleScreenController : IUomdScreenController
     {
@@ -174,6 +159,8 @@ namespace Uomd.Scenes
         private readonly UomdSceneRouter _router;
         private bool _busy;
         private VisualElement _root;
+        private VisualElement _stage;
+        private VisualElement _settingsModal;
         public UomdScreenId ScreenId => UomdScreenId.Title;
 
         public TitleScreenController(UomdSceneRouter router) => _router = router;
@@ -183,137 +170,186 @@ namespace Uomd.Scenes
         public Awaitable OnEnterAsync(VisualElement screenRoot)
         {
             _busy = false;
+            _settingsModal = null;
             _root = screenRoot;
             _router.Audio.PlayBgmCue("bgm_main_theme");
             bool calm = _router.Session.ReducedMotion;
             var catalog = _router.Media.Catalog;
             var stage = UomdScreenKit.Layer(screenRoot, UomdThemeTokens.Void);
+            _stage = stage;
             stage.pickingMode = PickingMode.Position;
-            stage.RegisterCallback<ClickEvent>(_ => FireTap());
+            stage.RegisterCallback<ClickEvent>(evt =>
+            {
+                if (evt.target == stage) FireTap(evt.localPosition.x, evt.localPosition.y);
+            });
 
-            UomdScreenKit.Backdrop(stage, _router.Media, catalog.Ui("title_bg") ?? catalog.Background("forest_whispering_ash"));
+            var bg = UomdScreenKit.Backdrop(stage, _router.Media, catalog.Ui("title_bg") ?? catalog.Background("forest_whispering_ash"));
+            UomdGothicVfx.AttachLivingBackdrop(stage, bg, "eclipse", calm, 1.1f);
+
+            // Soft left-side atmospheric scrim so the Gothic logo and primary CTA buttons stand out clearly
+            var leftScrim = new UomdGradient(true, new (float, Color)[]
+            {
+                (0f, new Color(0.020f, 0.012f, 0.039f, 0.72f)),
+                (0.46f, new Color(0.020f, 0.012f, 0.039f, 0.34f)),
+                (0.72f, new Color(0.020f, 0.012f, 0.039f, 0.04f)),
+                (1f, new Color(0.020f, 0.012f, 0.039f, 0.24f))
+            });
+            stage.Add(leftScrim);
+
             var obsidian = new Color(0.020f, 0.012f, 0.039f);
-            UomdScreenKit.VerticalShade(stage, 0, 110, obsidian, 0.32f, 0f);
-            UomdScreenKit.VerticalShade(stage, 0, 250, obsidian, 0f, 0.82f, fromBottom: true);
+            UomdScreenKit.VerticalShade(stage, 0, 128, obsidian, 0.56f, 0f);
+            UomdScreenKit.VerticalShade(stage, 0, 270, obsidian, 0f, 0.88f, fromBottom: true);
 
-            const float logoX = 500f, logoY = 284f;
-            var logo = UomdScreenKit.AtLeft(UomdScreenKit.Image(stage, _router.Media, catalog.Ui("logo"), 760, 361), logoX, logoY + 12);
+            const float logoX = 480f, logoY = 304f;
+
+            // #1 Approved UI Animation: Rotating Black-Sun Eclipse Corona & Rune Ring aligned with the logo's crimson ring
+            var corona = UomdGothicVfx.CreateEclipseCorona(stage, logoX, logoY - 18f, 148f, calm, includeDisc: false, leftAnchored: true);
+            corona.style.opacity = 0.72f;
+
+            var logo = UomdScreenKit.AtLeft(UomdScreenKit.Image(stage, _router.Media, catalog.Ui("logo"), 740, 352), logoX, logoY + 12);
             logo.style.opacity = 0f;
             UomdScreenKit.Fade(logo, 1f, 1500, 0, calm, EasingMode.EaseOutCubic);
             UomdScreenKit.Move(logo, 0, -12, 1500, 0, calm);
-            var tagline = UomdScreenKit.AtLeft(UomdScreenKit.Text(stage, Tagline, 27, UomdThemeTokens.GoldHi, 5f), logoX, 490);
+
+            if (!calm)
+            {
+                float bobTime = 0f;
+                logo.schedule.Execute(() =>
+                {
+                    if (logo.panel == null) return;
+                    bobTime += 0.033f;
+                    logo.style.marginTop = -12f + Mathf.Sin(bobTime * 1.8f) * 4.5f;
+                }).Every(33).StartingIn(1550);
+            }
+
+            var tagline = UomdScreenKit.AtLeft(UomdScreenKit.Text(stage, Tagline, 26, UomdThemeTokens.GoldHi, 5f, bold: true), logoX, 506f);
             tagline.AddToClassList("uomd-display");
+            tagline.style.unityTextOutlineWidth = 0.9f;
+            tagline.style.unityTextOutlineColor = new Color(0.03f, 0.015f, 0.05f, 0.95f);
+
+            var taglineDivider = UomdGothicVfx.CreateOrnateDivider(stage, 480f, UomdThemeTokens.Gold, withShimmer: true, reducedMotion: calm);
+            UomdScreenKit.AtLeft(taglineDivider, logoX, 542f);
 
             BuildServerBadge(stage);
-            var replay = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(stage, "REPLAY INTRO", null, 210, 62, 19, false, ReplayIntro), 375, 58);
-            var settings = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(stage, "SETTINGS", null, 190, 62, 21, false,
-                () => _ = _router.NavigateToAsync(UomdScreenId.Account)), 145, 58);
+            UomdScreenKit.AtRight(UomdScreenKit.MenuButton(stage, "REPLAY INTRO", null, 258, 66, 18, false, ReplayIntro, "icon_illuminated_chronicle"), 412, 58);
+            UomdScreenKit.AtRight(UomdScreenKit.MenuButton(stage, "SETTINGS", null, 224, 66, 19, false, OpenSettingsModal, "icon_nav_settings_seal"), 156, 58);
 
             bool firstRun = FirstRun;
             BuildTapBanner(stage, firstRun ? 0f : 1220f - UomdScreenKit.RefWidth / 2f, firstRun ? TapSubFirstRun : TapSubReturn, calm);
             if (firstRun)
             {
                 bool signedIn = _router.Api.IsSignedIn;
-                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, signedIn ? "CONTINUE" : "SIGN IN WITH GOOGLE PLAY",
-                    signedIn ? "Resume the road" : "Your journey is saved to your Google Play account", signedIn ? 460 : 480, 98, signedIn ? 30 : 28, true, FireTap), logoX, 640);
+                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage,
+                    signedIn ? "CONTINUE" : "SIGN IN WITH GOOGLE PLAY",
+                    signedIn ? "Resume the road" : "Your journey is saved to your Google Play account",
+                    signedIn ? 490 : 548, 104, signedIn ? 28 : 22, true, () => FireTap(logoX, 652f), "icon_ui_wax_seal"), logoX, 652);
             }
             else
             {
-                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "CONTINUE", "Enter the Road", 460, 98, 32, true, FireTap), logoX, 620);
-                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "CHAPTERS", null, 460, 88, 28, false, () => _ = _router.NavigateToAsync(UomdScreenId.Chapters)), logoX, 740);
-                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "COMPANY", null, 460, 88, 28, false, () => _ = _router.NavigateToAsync(UomdScreenId.Home)), logoX, 850);
+                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "CONTINUE", "Enter the Road", 480, 98, 28, true, () => FireTap(logoX, 632f), "icon_ui_wax_seal"), logoX, 632);
+                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "CHAPTERS", "Campaign World Map", 480, 88, 24, false, () => _ = _router.NavigateToAsync(UomdScreenId.Chapters), "icon_nav_journey"), logoX, 746);
+                UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "COMPANY", "Sanctum & Roster", 480, 88, 24, false, () => _ = _router.NavigateToAsync(UomdScreenId.Home), "icon_nav_sanctuary"), logoX, 854);
             }
             stage.style.opacity = 0f;
-            UomdScreenKit.Fade(stage, 1f, 1200, 0, calm); // sceneFadeIn(this, 1200)
+            UomdScreenKit.Fade(stage, 1f, 1200, 0, calm);
             return UomdAwaitables.Completed();
         }
 
-        /// <summary>Online realm and Google Play Games status (top left).</summary>
+        /// <summary>Online realm, Google Play Games status, and active content release chip (top left).</summary>
         private void BuildServerBadge(VisualElement stage)
         {
             var pill = new VisualElement { pickingMode = PickingMode.Ignore };
             pill.style.position = Position.Absolute;
             pill.style.left = 60;
-            pill.style.top = 34;
-            pill.style.width = 490;
-            pill.style.height = 48;
+            pill.style.top = 24;
+            pill.style.width = 528;
+            pill.style.height = 56;
             pill.style.flexDirection = FlexDirection.Row;
             pill.style.alignItems = Align.Center;
-            pill.style.paddingLeft = 18;
-            pill.style.paddingRight = 20;
-            pill.style.backgroundColor = new Color(0.071f, 0.039f, 0.094f, 0.48f);
-            pill.style.borderTopLeftRadius = pill.style.borderTopRightRadius = pill.style.borderBottomLeftRadius = pill.style.borderBottomRightRadius = 24;
-            var gold = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.52f);
+            pill.style.paddingLeft = 24;
+            pill.style.paddingRight = 24;
+            pill.style.backgroundColor = new Color(0.055f, 0.028f, 0.085f, 0.84f);
+            pill.style.borderTopLeftRadius = pill.style.borderTopRightRadius = pill.style.borderBottomLeftRadius = pill.style.borderBottomRightRadius = 12;
+            var gold = new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.65f);
             pill.style.borderTopColor = pill.style.borderBottomColor = pill.style.borderLeftColor = pill.style.borderRightColor = gold;
             pill.style.borderTopWidth = pill.style.borderBottomWidth = pill.style.borderLeftWidth = pill.style.borderRightWidth = 1.5f;
+
+            var tabTex = UomdGothicVfx.LoadUiTexture("uikit_tab_inactive");
+            if (tabTex != null)
+            {
+                pill.style.backgroundImage = new StyleBackground(tabTex);
+                pill.style.backgroundSize = new BackgroundSize(Length.Percent(100), Length.Percent(100));
+            }
+
             var dot = new VisualElement { pickingMode = PickingMode.Ignore };
             dot.style.width = dot.style.height = 12;
             dot.style.borderTopLeftRadius = dot.style.borderTopRightRadius = dot.style.borderBottomLeftRadius = dot.style.borderBottomRightRadius = 6;
             dot.style.backgroundColor = UomdThemeTokens.HpGood;
             dot.style.marginRight = 14;
             pill.Add(dot);
-            var realm = UomdScreenKit.Text(pill, "SANCTUM-01  ·  ONLINE", 20, UomdThemeTokens.GoldHi, 2f);
+
+            var realm = UomdScreenKit.Text(pill, "SANCTUM-01  ·  ONLINE", 18, UomdThemeTokens.GoldHi, 2f, bold: true);
             realm.AddToClassList("uomd-display");
             realm.style.flexGrow = 1;
             realm.style.unityTextAlign = TextAnchor.MiddleLeft;
+
             bool signedIn = _router.Api.IsSignedIn;
-            var auth = UomdScreenKit.Text(pill, signedIn ? "PLAY GAMES ✓" : "PLAY GAMES", 18, signedIn ? new Color(0.561f, 0.890f, 0.627f) : UomdThemeTokens.TextDim);
+            var auth = UomdScreenKit.Text(pill, signedIn ? "PLAY GAMES ✓" : "PLAY GAMES", 16, signedIn ? new Color(0.561f, 0.890f, 0.627f) : UomdThemeTokens.Silver, bold: true);
             auth.AddToClassList("uomd-display");
             stage.Add(pill);
+
+            string relId = _router.Patch?.ActiveReleaseId ?? "rel_0001";
+            var chip = UomdScreenKit.Text(stage, $"CONTENT {relId}  ·  PRODUCTION  ·  v{Application.version}", 16, UomdThemeTokens.TextDim, 1.5f);
+            chip.style.position = Position.Absolute;
+            chip.style.left = 74;
+            chip.style.top = 86;
+            chip.style.unityTextAlign = TextAnchor.MiddleLeft;
+            chip.style.unityTextOutlineWidth = 0.6f;
+            chip.style.unityTextOutlineColor = new Color(0.02f, 0.01f, 0.04f, 0.9f);
         }
 
-        /// <summary>The blinking gothic prompt with gold rules, diamonds and the crimson wax seal (buildTapToContinueBanner).</summary>
+        /// <summary>The blinking gothic prompt with ornate fade-dividers, 8-frame anim_cta_seal wax seal, and subline (buildTapToContinueBanner).</summary>
         private void BuildTapBanner(VisualElement stage, float offsetX, string subLine, bool calm)
         {
             var banner = new VisualElement { pickingMode = PickingMode.Ignore };
-            banner.style.width = 900;
-            banner.style.height = 200;
-            UomdScreenKit.FromBottom(banner, offsetX, 148 - 40);
+            banner.style.width = 920;
+            banner.style.height = 220;
+            UomdScreenKit.FromBottom(banner, offsetX, 112);
             stage.Add(banner);
-            const float cx = 450f, cy = 70f;
-            void Rule(float x, float y, float w, float h, Color c, float a)
-            {
-                var r = new VisualElement { pickingMode = PickingMode.Ignore };
-                r.style.position = Position.Absolute;
-                r.style.left = x;
-                r.style.top = y - h / 2f;
-                r.style.width = w;
-                r.style.height = h;
-                r.style.backgroundColor = new Color(c.r, c.g, c.b, a);
-                banner.Add(r);
-            }
-            Rule(cx - 370, cy, 120, 2, UomdThemeTokens.GoldHi, 0.85f);
-            Rule(cx + 250, cy, 120, 2, UomdThemeTokens.GoldHi, 0.85f);
-            Rule(cx - 330, cy + 6, 70, 1, UomdThemeTokens.Silver, 0.45f);
-            Rule(cx + 260, cy + 6, 70, 1, UomdThemeTokens.Silver, 0.45f);
-            foreach (float dx in new[] { -236f, 236f })
-            {
-                var d = new VisualElement { pickingMode = PickingMode.Ignore };
-                d.style.position = Position.Absolute;
-                d.style.left = cx + dx - 5;
-                d.style.top = cy - 5;
-                d.style.width = d.style.height = 10;
-                d.style.rotate = new Rotate(45);
-                d.style.backgroundColor = new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.95f);
-                banner.Add(d);
-            }
-            var seal = new VisualElement { pickingMode = PickingMode.Ignore };
-            seal.style.position = Position.Absolute;
-            seal.style.left = cx - 18;
-            seal.style.top = cy - 60;
-            seal.style.width = seal.style.height = 36;
-            seal.style.borderTopLeftRadius = seal.style.borderTopRightRadius = seal.style.borderBottomLeftRadius = seal.style.borderBottomRightRadius = 18;
-            seal.style.backgroundColor = new Color(0.620f, 0.106f, 0.204f, 0.95f);
-            var rim = new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.92f);
-            seal.style.borderTopColor = seal.style.borderBottomColor = seal.style.borderLeftColor = seal.style.borderRightColor = rim;
-            seal.style.borderTopWidth = seal.style.borderBottomWidth = seal.style.borderLeftWidth = seal.style.borderRightWidth = 2;
-            banner.Add(seal);
-            var prompt = PlaceText(banner, TapToStart, 44, new Color(0.945f, 0.925f, 0.894f), 10f, cy, true);
+            const float cx = 460f, cy = 78f;
+
+            // Ornate Sanctuary Bell filigree divider behind the prompt
+            var div = UomdGothicVfx.CreateOrnateDivider(banner, 780f, UomdThemeTokens.GoldHi, withShimmer: true, reducedMotion: calm);
+            div.style.position = Position.Absolute;
+            div.style.left = cx - 390f;
+            div.style.top = cy + 16f;
+
+            // 8-frame Whisk / Imagen Wax-Seal & Hanging Bells CTA animation above TAP TO START
+            var sealGlow = UomdGothicVfx.CreateTintedSprite("vfx_aura_soft", 120f, 90f, new Color(0.83f, 0.20f, 0.36f, 0.48f));
+            sealGlow.style.position = Position.Absolute;
+            sealGlow.style.left = cx - 60f;
+            sealGlow.style.top = cy - 98f;
+            banner.Add(sealGlow);
+
+            var sealLoop = UomdGothicVfx.CreateSpriteSheetLoop(banner, "anim_cta_seal", 8, 170f, 92f, 8f, calm);
+            sealLoop.style.position = Position.Absolute;
+            sealLoop.style.left = cx - 85f;
+            sealLoop.style.top = cy - 96f;
+
+            var prompt = PlaceText(banner, TapToStart, 44, new Color(0.96f, 0.94f, 0.90f), 10f, cy, true);
             prompt.style.unityFontStyleAndWeight = FontStyle.Bold;
+            prompt.style.unityTextOutlineWidth = 1.1f;
+            prompt.style.unityTextOutlineColor = new Color(0.03f, 0.015f, 0.05f, 0.95f);
             UomdScreenKit.Pulse(prompt, 0.35f, 1600, calm);
-            PlaceText(banner, ModeBadge, 21, UomdThemeTokens.GoldHi, 4f, cy + 50, true);
-            var sub = PlaceText(banner, subLine, 26, UomdThemeTokens.TextDim, 0f, cy + 82, false);
+
+            var badge = PlaceText(banner, ModeBadge, 21, UomdThemeTokens.GoldHi, 4f, cy + 54, true);
+            badge.style.unityTextOutlineWidth = 0.7f;
+            badge.style.unityTextOutlineColor = new Color(0.03f, 0.015f, 0.05f, 0.95f);
+
+            var sub = PlaceText(banner, subLine, 26, UomdThemeTokens.Bone, 0f, cy + 88, false);
             sub.style.unityFontStyleAndWeight = FontStyle.Italic;
+            sub.style.unityTextOutlineWidth = 0.7f;
+            sub.style.unityTextOutlineColor = new Color(0.03f, 0.015f, 0.05f, 0.95f);
         }
 
         private static Label PlaceText(VisualElement parent, string text, float size, Color color, float spacing, float y, bool display)
@@ -327,10 +363,12 @@ namespace Uomd.Scenes
             return label;
         }
 
-        private void FireTap()
+        private void FireTap(float x = 960f, float y = 880f)
         {
-            if (_busy) return;
+            if (_busy || _settingsModal != null) return;
+            _router.Audio.PlaySfx("sfx_ui_wax_seal");
             _router.Audio.PlaySfx("sfx_ui_confirm");
+            UomdGothicVfx.TriggerWaxSealBurst(_stage ?? _root, x, y, _router.Session.ReducedMotion);
             _ = OnTapToStartAsync();
         }
 
@@ -358,13 +396,160 @@ namespace Uomd.Scenes
 
         private void ReplayIntro()
         {
-            if (_busy) return;
+            if (_busy || _settingsModal != null) return;
             _busy = true;
+            _router.Session.IsReplayingIntro = true;
             _ = _router.NavigateToAsync(UomdScreenId.Prologue);
         }
 
+        private void OpenSettingsModal()
+        {
+            if (_busy || _root == null || _settingsModal != null) return;
+            _router.Audio.PlaySfx("sfx_ui_tap");
+            var modal = UomdScreenKit.Layer(_root, new Color(0.020f, 0.012f, 0.039f, 0.90f));
+            modal.pickingMode = PickingMode.Position;
+            modal.RegisterCallback<ClickEvent>(e => e.StopPropagation());
+            _settingsModal = modal;
+
+            var audio = _router.Audio;
+            var session = _router.Session;
+            const float cy = UomdScreenKit.RefHeight / 2f;
+
+            var card = new VisualElement { pickingMode = PickingMode.Position };
+            card.style.width = 1600f;
+            card.style.height = 900f;
+            card.Add(new UomdGothicPanel(UomdPanelVariant.Active));
+            UomdGothicVfx.AttachCornerBellChains(card, session.ReducedMotion);
+            modal.Add(card);
+            UomdScreenKit.Centered(card, 0f, cy);
+
+            var sealTop = UomdGothicVfx.CreateTintedSprite("icon_nav_settings_seal", 54f, 54f, Color.white);
+            UomdScreenKit.Centered(sealTop, -310f, cy - 372f);
+            modal.Add(sealTop);
+
+            var sealRight = UomdGothicVfx.CreateTintedSprite("icon_nav_settings_seal", 54f, 54f, Color.white);
+            UomdScreenKit.Centered(sealRight, 310f, cy - 372f);
+            modal.Add(sealRight);
+
+            var heading = UomdScreenKit.Centered(UomdScreenKit.Text(modal, "SETTINGS", 42, UomdThemeTokens.GoldHi, 5f, bold: true), 0f, cy - 372f);
+            heading.AddToClassList("uomd-display");
+            var div = UomdGothicVfx.CreateOrnateDivider(modal, 720f, UomdThemeTokens.Gold, withShimmer: true, reducedMotion: session.ReducedMotion);
+            UomdScreenKit.Centered(div, 0f, cy - 320f);
+
+            string Pct(float v) => $"{Mathf.RoundToInt(v * 100)}%";
+            float Step(float v, float d) => Mathf.Clamp01(Mathf.Round((v + d) * 10f) / 10f);
+            var rows = new (string Label, string Sub, string Icon, Func<string> Get, Func<float> GetRatio, bool IsFocus, Action Dec, Action Inc)[]
+            {
+                ("MUSIC VOLUME", "Orchestral Score", "icon_ui_bell", () => Pct(audio.BgmVolume), () => audio.BgmVolume, true, () => audio.BgmVolume = Step(audio.BgmVolume, -0.1f), () => audio.BgmVolume = Step(audio.BgmVolume, 0.1f)),
+                ("SOUND EFFECTS", "Combat & Gothic UI Cues", "icon_ui_focus", () => Pct(audio.SfxVolume), () => audio.SfxVolume, false, () => { audio.SfxVolume = Step(audio.SfxVolume, -0.1f); audio.PlaySfx("sfx_ui_confirm"); }, () => { audio.SfxVolume = Step(audio.SfxVolume, 0.1f); audio.PlaySfx("sfx_ui_confirm"); }),
+                ("VOICE ACTING", "Japanese Character Dialogue", "icon_ui_wax_seal", () => Pct(audio.VoiceVolume), () => audio.VoiceVolume, true, () => audio.VoiceVolume = Step(audio.VoiceVolume, -0.1f), () => audio.VoiceVolume = Step(audio.VoiceVolume, 0.1f)),
+                ("REDUCED MOTION", "Calm Camera & Particle Motion", "icon_relic_first_eclipse_watch", () => session.ReducedMotion ? "ON" : "OFF", () => session.ReducedMotion ? 1f : 0f, false, () => session.ReducedMotion = !session.ReducedMotion, () => session.ReducedMotion = !session.ReducedMotion)
+            };
+
+            var secPanelTex = UomdGothicVfx.LoadUiTexture("uikit_panel_secondary");
+            for (int i = 0; i < rows.Length; i++)
+            {
+                var row = rows[i];
+                float y = cy - 208f + i * 116f;
+
+                var rowBg = new VisualElement { pickingMode = PickingMode.Ignore };
+                rowBg.style.width = 960f;
+                rowBg.style.height = 98f;
+                rowBg.style.backgroundColor = new Color(0.045f, 0.022f, 0.072f, 0.82f);
+                rowBg.style.borderTopLeftRadius = rowBg.style.borderTopRightRadius = rowBg.style.borderBottomLeftRadius = rowBg.style.borderBottomRightRadius = 10f;
+                var rowRim = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.42f);
+                rowBg.style.borderTopColor = rowBg.style.borderBottomColor = rowBg.style.borderLeftColor = rowBg.style.borderRightColor = rowRim;
+                rowBg.style.borderTopWidth = rowBg.style.borderBottomWidth = rowBg.style.borderLeftWidth = rowBg.style.borderRightWidth = 1.2f;
+                if (secPanelTex != null)
+                {
+                    rowBg.style.backgroundImage = new StyleBackground(secPanelTex);
+                    rowBg.style.unitySliceLeft = rowBg.style.unitySliceRight = rowBg.style.unitySliceTop = rowBg.style.unitySliceBottom = 112;
+                }
+                modal.Add(rowBg);
+                UomdScreenKit.Centered(rowBg, -230f, y);
+
+                var rowIcon = UomdGothicVfx.CreateTintedSprite(row.Icon, 52f, 52f, Color.white);
+                UomdScreenKit.Centered(rowIcon, -656f, y);
+                modal.Add(rowIcon);
+
+                var lbl = UomdScreenKit.Centered(UomdScreenKit.Text(modal, row.Label, 23, UomdThemeTokens.TextPrimary, 1.5f, bold: true), -485f, y - 14f);
+                lbl.AddToClassList("uomd-display");
+                var subLbl = UomdScreenKit.Centered(UomdScreenKit.Text(modal, row.Sub, 17, UomdThemeTokens.TextDim, 0f, italic: true), -485f, y + 16f);
+
+                var gauge = UomdGothicVfx.CreateGothicGaugeBar(modal, 210f, 22f, row.GetRatio(), row.IsFocus, out var gaugeFill);
+                UomdScreenKit.Centered(gauge, -238f, y);
+
+                var val = UomdScreenKit.Centered(UomdScreenKit.Text(modal, row.Get(), 26, UomdThemeTokens.GoldHi, 1.5f, bold: true), 26f, y);
+                val.AddToClassList("uomd-display");
+                UomdScreenKit.Centered(UomdScreenKit.MenuButton(modal, "−", null, 84, 70, 34, false, () =>
+                {
+                    row.Dec();
+                    val.text = row.Get();
+                    gaugeFill.style.width = Length.Percent(Mathf.Clamp01(row.GetRatio()) * 100f);
+                    UomdPrefs.Save(session, audio);
+                }), -72f, y);
+                UomdScreenKit.Centered(UomdScreenKit.MenuButton(modal, "+", null, 84, 70, 34, false, () =>
+                {
+                    row.Inc();
+                    val.text = row.Get();
+                    gaugeFill.style.width = Length.Percent(Mathf.Clamp01(row.GetRatio()) * 100f);
+                    UomdPrefs.Save(session, audio);
+                }), 124f, y);
+            }
+
+            // Right column: Visual & Platform Toggles with bespoke RGBA icons
+            Button flashBtn = null;
+            flashBtn = UomdScreenKit.Centered(UomdScreenKit.MenuButton(modal, $"FLASH: {(session.ReduceFlash ? "REDUCED" : "NORMAL")}", "Screen Impact Flash", 448, 98, 21,
+                session.ReduceFlash ? UomdPanelVariant.Active : UomdPanelVariant.Normal, () =>
+                {
+                    session.ReduceFlash = !session.ReduceFlash;
+                    UomdScreenKit.SetLabel(flashBtn, $"FLASH: {(session.ReduceFlash ? "REDUCED" : "NORMAL")}");
+                    UomdScreenKit.SetVariant(flashBtn, session.ReduceFlash ? UomdPanelVariant.Active : UomdPanelVariant.Normal);
+                    UomdPrefs.Save(session, audio);
+                }, "icon_el_radiant"), 484f, cy - 208f);
+
+            Button muteBtn = null;
+            muteBtn = UomdScreenKit.Centered(UomdScreenKit.MenuButton(modal, $"AUDIO: {(audio.Muted ? "MUTED" : "ACTIVE")}", "Master Sound Output", 448, 98, 21,
+                audio.Muted ? UomdPanelVariant.Danger : UomdPanelVariant.Normal, () =>
+                {
+                    audio.Muted = !audio.Muted;
+                    UomdScreenKit.SetLabel(muteBtn, $"AUDIO: {(audio.Muted ? "MUTED" : "ACTIVE")}");
+                    UomdScreenKit.SetVariant(muteBtn, audio.Muted ? UomdPanelVariant.Danger : UomdPanelVariant.Normal);
+                }, "icon_ui_bell"), 484f, cy - 92f);
+
+            UomdScreenKit.Centered(UomdScreenKit.MenuButton(modal, "PRIVACY OPTIONS", "Ad Consent", 448, 98, 21, UomdPanelVariant.Normal,
+                () => _ = PrivacyOptionsAsync(), "icon_nav_settings_seal"), 484f, cy + 24f);
+
+            UomdScreenKit.Centered(UomdScreenKit.MenuButton(modal, "REPLAY OPENING", "Watch 'Before the Road'", 448, 98, 21, UomdPanelVariant.Normal,
+                () => { CloseSettingsModal(); ReplayIntro(); }, "icon_illuminated_chronicle"), 484f, cy + 140f);
+
+            UomdScreenKit.Centered(UomdScreenKit.MenuButton(modal, "CLOSE", null, 500, 96, 26, true, CloseSettingsModal, "icon_ui_wax_seal"), 0f, cy + 350f);
+        }
+
+        private async Awaitable PrivacyOptionsAsync()
+        {
+            try
+            {
+                await _router.PlatformBridge.ShowPrivacyOptionsFormAsync();
+                if (_root != null) UomdUiKit.ShowToast(_root, "Privacy choice updated");
+            }
+            catch (Exception e)
+            {
+                if (_root != null) UomdUiKit.ShowToast(_root, e.Message);
+            }
+        }
+
+        private void CloseSettingsModal()
+        {
+            _settingsModal?.RemoveFromHierarchy();
+            _settingsModal = null;
+        }
+
         public void OnTick(float deltaTime) { }
-        public void OnExit() { }
+        public void OnExit()
+        {
+            CloseSettingsModal();
+        }
     }
 
     /// <summary>
@@ -389,6 +574,7 @@ namespace Uomd.Scenes
         private VisualElement _root;
         private VisualElement _plates;
         private VisualElement _currentPlate;
+        private VisualElement _shade;
         private VisualElement _textBlock;
         private Label _caption;
         private VisualElement _progressFill;
@@ -399,12 +585,18 @@ namespace Uomd.Scenes
         private PrologueSceneDto[] _scenes = Array.Empty<PrologueSceneDto>();
         private string _fullText = "";
         private float _revealed;
+        private int _lastRevealCount = -1;
         private float _holdElapsed;
         private float _holdSeconds;
         private bool _textFaded;
         private int _index;
         private bool _paused;
         private bool _done;
+        private bool _usingUnifiedVideo;
+        private VisualElement _videoView;
+        private VideoPlayer _videoPlayer;
+        private AudioSource _videoAudio;
+        private RenderTexture _videoRenderTexture;
 
         public UomdScreenId ScreenId => UomdScreenId.Prologue;
 
@@ -417,6 +609,8 @@ namespace Uomd.Scenes
             _root = screenRoot;
             _done = false;
             _paused = false;
+            _usingUnifiedVideo = false;
+            CleanupVideoPlayer();
             _scenes = _router.Session.PrologueConfig?.scenes ?? Array.Empty<PrologueSceneDto>();
             var stage = UomdScreenKit.Layer(screenRoot, Color.black);
             _plates = UomdScreenKit.Layer(stage);
@@ -427,6 +621,10 @@ namespace Uomd.Scenes
                 Unavailable();
                 return UomdAwaitables.Completed();
             }
+            if (!Application.isBatchMode && TryStartUnifiedVideo())
+            {
+                return UomdAwaitables.Completed();
+            }
             int saved = PlayerPrefs.GetInt(CheckpointKey, 0);
             _index = saved > 0 && saved < _scenes.Length && !_router.Session.CanSkipPrologue ? saved - 1 : -1;
             _router.Audio.PlayBgmCue("bgm_prologue_before_the_road");
@@ -434,12 +632,98 @@ namespace Uomd.Scenes
             return UomdAwaitables.Completed();
         }
 
+        private bool TryStartUnifiedVideo()
+        {
+            string videoPath = _router.Patch?.ResolveContentPath("video/prologue_before_the_road.webm");
+            if (string.IsNullOrEmpty(videoPath) || (!videoPath.Contains("://") && !File.Exists(videoPath)))
+            {
+                string fallback = Path.Combine(Application.streamingAssetsPath, "uomd_base/video/prologue_before_the_road.webm");
+                if (File.Exists(fallback)) videoPath = fallback;
+                else return false;
+            }
+
+            _router.Audio.StopBgm(0.2f);
+            _router.Audio.StopVoiceLine();
+
+            _videoRenderTexture = new RenderTexture(1920, 1080, 0, RenderTextureFormat.ARGB32);
+            _videoRenderTexture.Create();
+
+            _videoAudio = _router.gameObject.AddComponent<AudioSource>();
+            _videoAudio.playOnAwake = false;
+            _videoAudio.loop = false;
+            _videoAudio.mute = _router.Audio.Muted;
+            _videoAudio.volume = Mathf.Clamp01(_router.Audio.MasterVolume);
+
+            _videoPlayer = _router.gameObject.AddComponent<VideoPlayer>();
+            _videoPlayer.playOnAwake = false;
+            _videoPlayer.source = VideoSource.Url;
+            _videoPlayer.url = videoPath.Contains("://") ? videoPath : new Uri(videoPath).AbsoluteUri;
+            _videoPlayer.renderMode = VideoRenderMode.RenderTexture;
+            _videoPlayer.targetTexture = _videoRenderTexture;
+            _videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+            _videoPlayer.EnableAudioTrack(0, true);
+            _videoPlayer.SetTargetAudioSource(0, _videoAudio);
+            _videoPlayer.isLooping = false;
+            _videoPlayer.skipOnDrop = true;
+            _videoPlayer.loopPointReached += OnUnifiedVideoFinished;
+
+            var videoView = UomdScreenKit.Layer(_plates);
+            videoView.style.backgroundImage = Background.FromRenderTexture(_videoRenderTexture);
+            videoView.style.backgroundSize = new BackgroundSize(BackgroundSizeType.Cover);
+            _videoView = videoView;
+
+            if (_textBlock != null)
+            {
+                _textBlock.style.display = DisplayStyle.None;
+            }
+            if (_shade != null)
+            {
+                _shade.style.display = DisplayStyle.None;
+            }
+
+            _usingUnifiedVideo = true;
+            _videoPlayer.Play();
+            return true;
+        }
+
+        private void OnUnifiedVideoFinished(VideoPlayer vp)
+        {
+            if (!_done) Ending();
+        }
+
+        private void CleanupVideoPlayer()
+        {
+            if (_videoPlayer != null)
+            {
+                _videoPlayer.loopPointReached -= OnUnifiedVideoFinished;
+                _videoPlayer.Stop();
+                UnityEngine.Object.Destroy(_videoPlayer);
+                _videoPlayer = null;
+            }
+            if (_videoAudio != null)
+            {
+                _videoAudio.Stop();
+                UnityEngine.Object.Destroy(_videoAudio);
+                _videoAudio = null;
+            }
+            if (_videoRenderTexture != null)
+            {
+                _videoRenderTexture.Release();
+                UnityEngine.Object.Destroy(_videoRenderTexture);
+                _videoRenderTexture = null;
+            }
+            _usingUnifiedVideo = false;
+        }
+
         private void BuildOverlay(VisualElement stage)
         {
+            UomdGothicVfx.AttachLivingBackdrop(stage, null, "eclipse_altar", Calm, 0.75f);
+
             var shade = UomdScreenKit.Layer(stage);
+            _shade = shade;
             UomdScreenKit.VerticalShade(shade, 0, 470, Color.black, 0f, 0.9f, fromBottom: true);
             UomdScreenKit.VerticalShade(shade, 0, 240, Color.black, 0.62f, 0f);
-            var border = UomdScreenKit.Layer(shade);
+            var border = UomdScreenKit.Layer(stage);
             border.style.left = 24;
             border.style.right = 24;
             border.style.top = 20;
@@ -450,42 +734,41 @@ namespace Uomd.Scenes
             shade.style.opacity = 0f;
             UomdScreenKit.Fade(shade, 1f, 1100, 0, Calm);
 
-            // progress bar under the caption
-            var track = Bar(stage, BarWidth, 3, new Color(UomdThemeTokens.PlumHi.r, UomdThemeTokens.PlumHi.g, UomdThemeTokens.PlumHi.b, 0.45f));
-            UomdScreenKit.Centered(track, 0, 128);
-            _progressFill = Bar(track, 0, 3, new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.85f));
+            _textBlock = UomdScreenKit.Layer(stage);
+            _caption = UomdScreenKit.Centered(UomdScreenKit.Text(_textBlock, "", 34, UomdThemeTokens.GoldHi, 9f), 0, 74);
+            _caption.AddToClassList("uomd-display");
+
+            var capDiv = UomdGothicVfx.CreateOrnateDivider(_textBlock, 560f, UomdThemeTokens.Gold, withShimmer: true, reducedMotion: Calm);
+            UomdScreenKit.Centered(capDiv, 0, 112);
+
+            // progress bar under the caption divider
+            var track = Bar(stage, BarWidth, 4, new Color(UomdThemeTokens.PlumHi.r, UomdThemeTokens.PlumHi.g, UomdThemeTokens.PlumHi.b, 0.45f));
+            UomdScreenKit.Centered(track, 0, 144);
+            _progressFill = Bar(track, 0, 4, new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.85f));
             _progressFill.style.position = Position.Absolute;
             _progressFill.style.left = 0;
 
-            _textBlock = UomdScreenKit.Layer(stage);
-            _caption = UomdScreenKit.Centered(UomdScreenKit.Text(_textBlock, "", 34, UomdThemeTokens.GoldHi, 9f), 0, 82);
-            _caption.AddToClassList("uomd-display");
-
             const float plaqueTop = UomdScreenKit.RefHeight - 314f;
             var plaque = new VisualElement { pickingMode = PickingMode.Ignore };
-            plaque.style.width = 1580;
-            plaque.style.height = 210;
-            plaque.style.backgroundColor = new Color(0.043f, 0.024f, 0.078f, 0.48f);
-            var rim = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.28f);
-            plaque.style.borderTopColor = plaque.style.borderBottomColor = plaque.style.borderLeftColor = plaque.style.borderRightColor = rim;
-            plaque.style.borderTopWidth = plaque.style.borderBottomWidth = plaque.style.borderLeftWidth = plaque.style.borderRightWidth = 1;
-            plaque.style.borderTopLeftRadius = plaque.style.borderTopRightRadius = plaque.style.borderBottomLeftRadius = plaque.style.borderBottomRightRadius = 26;
+            plaque.style.width = 1600;
+            plaque.style.height = 220;
+            plaque.Add(new UomdGothicPanel(UomdPanelVariant.Normal));
             _textBlock.Add(plaque);
             UomdScreenKit.Centered(plaque, 0, plaqueTop + 105);
 
-            var waveTrack = Bar(_textBlock, WaveWidth, 2, new Color(UomdThemeTokens.PlumHi.r, UomdThemeTokens.PlumHi.g, UomdThemeTokens.PlumHi.b, 0.35f));
-            UomdScreenKit.Centered(waveTrack, 0, plaqueTop + 198);
-            _waveFill = Bar(waveTrack, 0, 2.5f, new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.88f));
+            var waveTrack = Bar(_textBlock, WaveWidth, 3, new Color(UomdThemeTokens.PlumHi.r, UomdThemeTokens.PlumHi.g, UomdThemeTokens.PlumHi.b, 0.35f));
+            UomdScreenKit.Centered(waveTrack, 0, plaqueTop + 196);
+            _waveFill = Bar(waveTrack, 0, 3, new Color(UomdThemeTokens.GoldHi.r, UomdThemeTokens.GoldHi.g, UomdThemeTokens.GoldHi.b, 0.88f));
             _waveFill.style.position = Position.Absolute;
             _waveFill.style.left = 0;
 
             _body = new Label { pickingMode = PickingMode.Ignore, enableRichText = true };
             _body.style.position = Position.Absolute;
             _body.style.left = new Length(50, LengthUnit.Percent);
-            _body.style.top = plaqueTop + 44;
-            _body.style.width = 1490;
-            _body.style.marginLeft = -745;
-            _body.style.fontSize = 46;
+            _body.style.top = plaqueTop + 42;
+            _body.style.width = 1440;
+            _body.style.marginLeft = -720;
+            _body.style.fontSize = 44;
             _body.style.color = new Color(0.973f, 0.949f, 0.910f);
             _body.style.whiteSpace = WhiteSpace.Normal;
             _body.style.unityTextAlign = TextAnchor.UpperCenter;
@@ -504,12 +787,12 @@ namespace Uomd.Scenes
 
         private void BuildControls(VisualElement stage)
         {
-            _pauseButton = UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "PAUSE", null, 144, 58, 20, false, TogglePause), 108, 56);
-            _muteButton = UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, _router.Audio.Muted ? "UNMUTE" : "MUTE", null, 144, 58, 20, false, ToggleMute), 266, 56);
+            _pauseButton = UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, "PAUSE", null, 172, 60, 19, false, TogglePause, "icon_relic_first_eclipse_watch"), 118, 56);
+            _muteButton = UomdScreenKit.AtLeft(UomdScreenKit.MenuButton(stage, _router.Audio.Muted ? "UNMUTE" : "MUTE", null, 176, 60, 19, false, ToggleMute, "icon_ui_bell"), 302, 56);
             // entry contract: no Skip on a first viewing
             if (_router.Session.CanSkipPrologue)
             {
-                UomdScreenKit.AtRight(UomdScreenKit.MenuButton(stage, "SKIP", null, 144, 58, 20, false, Finish), 108, 56);
+                UomdScreenKit.AtRight(UomdScreenKit.MenuButton(stage, "SKIP", null, 168, 60, 19, false, Finish, "icon_ui_wax_seal"), 118, 56);
             }
         }
 
@@ -523,12 +806,18 @@ namespace Uomd.Scenes
             if (_done) return;
             _paused = !_paused;
             _router.Audio.SetPaused(_paused);
+            if (_videoPlayer != null)
+            {
+                if (_paused) _videoPlayer.Pause();
+                else _videoPlayer.Play();
+            }
             SetLabel(_pauseButton, _paused ? "RESUME" : "PAUSE");
         }
 
         private void ToggleMute()
         {
             _router.Audio.Muted = !_router.Audio.Muted;
+            if (_videoAudio != null) _videoAudio.mute = _router.Audio.Muted;
             SetLabel(_muteButton, _router.Audio.Muted ? "UNMUTE" : "MUTE");
         }
 
@@ -583,6 +872,7 @@ namespace Uomd.Scenes
             _caption.text = (scene.caption_en ?? "").ToUpperInvariant();
             _fullText = scene.text_en ?? "";
             _revealed = 0f;
+            _lastRevealCount = 0;
             _body.text = Reveal(0);
             _waveFill.style.width = 0;
             _textBlock.style.opacity = 1f;
@@ -606,12 +896,28 @@ namespace Uomd.Scenes
 
         public void OnTick(float deltaTime)
         {
-            if (_done || _paused || _scenes.Length == 0 || _index < 0 || _index >= _scenes.Length) return;
+            if (_done || _paused) return;
+            if (_usingUnifiedVideo)
+            {
+                _videoView?.MarkDirtyRepaint();
+                if (_videoPlayer != null && _videoPlayer.length > 0.1)
+                {
+                    float ratio = Mathf.Clamp01((float)(_videoPlayer.time / _videoPlayer.length));
+                    if (_progressFill != null) _progressFill.style.width = BarWidth * ratio;
+                }
+                return;
+            }
+            if (_scenes.Length == 0 || _index < 0 || _index >= _scenes.Length) return;
             _holdElapsed += deltaTime;
             if (_revealed < _fullText.Length)
             {
                 _revealed = Mathf.Min(_fullText.Length, _revealed + deltaTime * RevealCps);
-                _body.text = Reveal(Mathf.FloorToInt(_revealed));
+                int count = Mathf.FloorToInt(_revealed);
+                if (count != _lastRevealCount)
+                {
+                    _lastRevealCount = count;
+                    _body.text = Reveal(count);
+                }
                 _waveFill.style.width = Mathf.Round(WaveWidth * Mathf.Min(1f, _revealed / Mathf.Max(1, _fullText.Length)));
             }
             if (!_textFaded && _holdElapsed >= _holdSeconds - TextFadeMs / 1000f)
@@ -626,6 +932,7 @@ namespace Uomd.Scenes
         {
             if (_done) return;
             _done = true;
+            CleanupVideoPlayer();
             _router.Audio.StopBgm(1.8f);
             var veil = UomdScreenKit.Layer(_root, new Color(0.020f, 0.012f, 0.039f, 0.86f));
             veil.pickingMode = PickingMode.Position;
@@ -641,6 +948,7 @@ namespace Uomd.Scenes
         private void Unavailable()
         {
             _done = true;
+            CleanupVideoPlayer();
             var veil = UomdScreenKit.Layer(_root, new Color(0.020f, 0.012f, 0.039f, 0.9f));
             veil.pickingMode = PickingMode.Position;
             var title = UomdScreenKit.Centered(UomdScreenKit.Text(veil, UnavailableTitle, 46, UomdThemeTokens.GoldHi, 4f), 0, UomdScreenKit.RefHeight / 2f - 170f);
@@ -656,9 +964,16 @@ namespace Uomd.Scenes
         private void Finish()
         {
             _done = true;
+            CleanupVideoPlayer();
             _router.Audio.SetPaused(false);
             _router.Audio.StopVoiceLine();
             PlayerPrefs.DeleteKey(CheckpointKey);
+            if (_router.Session.IsReplayingIntro)
+            {
+                _router.Session.IsReplayingIntro = false;
+                _ = _router.NavigateToAsync(UomdScreenId.Title);
+                return;
+            }
             var progress = _router.Session.Account?.storyProgress;
             if (progress != null) progress.prologueDone = true;
             if (_router.Api.IsSignedIn) _ = RecordPrologueSeen();
@@ -679,6 +994,7 @@ namespace Uomd.Scenes
 
         public void OnExit()
         {
+            CleanupVideoPlayer();
             _router.Audio.SetPaused(false);
             _router.Audio.StopVoiceLine();
         }
@@ -736,6 +1052,8 @@ namespace Uomd.Scenes
         private float _waitLeft = -1f;
         private float _voiceSeconds;
         private float _typingElapsed;
+        private int _generation;
+        private string _lastShownPrefix;
 
         public UomdScreenId ScreenId => UomdScreenId.Story;
 
@@ -745,8 +1063,10 @@ namespace Uomd.Scenes
 
         public async Awaitable OnEnterAsync(VisualElement screenRoot)
         {
+            int generation = ++_generation;
             _root = screenRoot;
             _finished = false;
+            _lastShownPrefix = null;
             _actors.Clear();
             _prevSpeaker = null;
             _line = null;
@@ -755,10 +1075,12 @@ namespace Uomd.Scenes
             try
             {
                 json = _router.Session.ActiveStoryJson ?? await _router.Patch.ReadTextAsync(path);
+                if (generation != _generation) return;
                 _scene = JsonUtility.FromJson<StorySceneDto>(json) ?? throw new InvalidOperationException("empty scene");
             }
             catch (Exception e)
             {
+                if (generation != _generation) return;
                 Debug.LogError($"[Story] '{path}' could not load: {e.Message}");
                 UomdUiKit.ShowToast(screenRoot, "The story could not be loaded.");
                 await _router.EntryFlow.StoryFinishedAsync();
@@ -793,41 +1115,54 @@ namespace Uomd.Scenes
             _actorLayer = UomdScreenKit.Layer(_stage);
             UomdScreenKit.VerticalShade(_stage, 0, UomdScreenKit.RefHeight, UomdThemeTokens.Void, 0.08f, 0.76f);
 
-            // light-novel reader box
+            // light-novel reader box framed with bespoke 9-slice Gothic panel
             var box = new VisualElement { pickingMode = PickingMode.Ignore };
-            box.AddToClassList("uomd-panel");
             box.style.width = 1680;
-            box.style.height = 248;
+            box.style.height = 252;
+            box.Add(new UomdGothicPanel(UomdPanelVariant.Normal));
             _stage.Add(box);
             UomdScreenKit.Centered(box, 0, BoxY);
             var rule = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.32f);
-            AddRect(box, 50, 28, 1580, 1, rule);
-            AddRect(box, 50, 220, 1580, 1, rule);
-            var syncTrack = AddRect(box, 460, 219, 760, 2, new Color(UomdThemeTokens.Silver.r, UomdThemeTokens.Silver.g, UomdThemeTokens.Silver.b, 0.16f));
-            _syncFill = AddRect(syncTrack, 0, 0, 0, 2, UomdThemeTokens.GoldHi);
+            AddRect(box, 64, 30, 1552, 1, rule);
+            AddRect(box, 64, 222, 1552, 1, rule);
+            var syncTrack = AddRect(box, 460, 221, 760, 3, new Color(UomdThemeTokens.Silver.r, UomdThemeTokens.Silver.g, UomdThemeTokens.Silver.b, 0.16f));
+            _syncFill = AddRect(syncTrack, 0, 0, 0, 3, UomdThemeTokens.GoldHi);
             _body = new Label { pickingMode = PickingMode.Ignore, enableRichText = true };
             _body.style.position = Position.Absolute;
-            _body.style.left = 60;
+            _body.style.left = 72;
             _body.style.top = 48;
-            _body.style.width = 1560;
-            _body.style.fontSize = 41;
+            _body.style.width = 1536;
+            _body.style.fontSize = 40;
             _body.style.color = UomdThemeTokens.TextPrimary;
             _body.style.whiteSpace = WhiteSpace.Normal;
             box.Add(_body);
             _caret = UomdScreenKit.Text(box, "▼", 32, UomdThemeTokens.GoldHi);
             _caret.style.position = Position.Absolute;
-            _caret.style.right = 40;
-            _caret.style.bottom = 30;
+            _caret.style.right = 46;
+            _caret.style.bottom = 32;
             _caret.style.visibility = Visibility.Hidden;
             UomdScreenKit.Pulse(_caret, 0.2f, 1200, Calm);
 
             _namePlate = new VisualElement { pickingMode = PickingMode.Ignore };
-            _namePlate.AddToClassList("uomd-panel");
-            _namePlate.style.width = 490;
-            _namePlate.style.height = 68;
+            _namePlate.style.width = 510;
+            _namePlate.style.height = 74;
+            _namePlate.style.flexDirection = FlexDirection.Row;
+            _namePlate.style.alignItems = Align.Center;
             _namePlate.style.justifyContent = Justify.Center;
-            _namePlate.style.backgroundColor = new Color(UomdThemeTokens.Crimson.r, UomdThemeTokens.Crimson.g, UomdThemeTokens.Crimson.b, 0.92f);
-            _nameText = UomdScreenKit.Text(_namePlate, "", 28, UomdThemeTokens.GoldHi, 2f, bold: true);
+            var tabTex = UomdGothicVfx.LoadUiTexture("uikit_tab_active");
+            if (tabTex != null)
+            {
+                _namePlate.style.backgroundImage = new StyleBackground(tabTex);
+                _namePlate.style.backgroundSize = new BackgroundSize(Length.Percent(100), Length.Percent(100));
+            }
+            else
+            {
+                _namePlate.style.backgroundColor = new Color(UomdThemeTokens.Crimson.r, UomdThemeTokens.Crimson.g, UomdThemeTokens.Crimson.b, 0.92f);
+            }
+            var bellIcon = UomdGothicVfx.CreateTintedSprite("icon_ui_bell", 32f, 32f, Color.white);
+            bellIcon.style.marginRight = 10f;
+            _namePlate.Add(bellIcon);
+            _nameText = UomdScreenKit.Text(_namePlate, "", 27, UomdThemeTokens.GoldHi, 2f, bold: true);
             _nameText.AddToClassList("uomd-display");
             _stage.Add(_namePlate);
             _namePlate.style.display = DisplayStyle.None;
@@ -838,10 +1173,11 @@ namespace Uomd.Scenes
             heading.style.left = 60;
             heading.style.top = 38;
 
-            const float btnW = 144f, btnH = 58f, gap = 12f, skipX = 102f;
-            _skipButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "SKIP", null, btnW, btnH, 20, false, ToggleSkip), skipX, 58);
-            _autoButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "AUTO", null, btnW, btnH, 20, _auto, ToggleAuto), skipX + btnW + gap, 58);
-            _voiceButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "VOICE", null, btnW, btnH, 20, false, ReplayVoice), skipX + 2 * (btnW + gap), 58);
+            const float btnW = 162f, btnH = 58f, gap = 12f, skipX = 108f;
+            // SKIP stays visible in cutscenes too (TS StoryScene); only the Prologue hides it on first viewing
+            _skipButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "SKIP", null, btnW, btnH, 19, false, ToggleSkip, "icon_ui_wax_seal"), skipX, 58);
+            _autoButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "AUTO", null, btnW, btnH, 19, _auto, ToggleAuto, "icon_relic_first_eclipse_watch"), skipX + btnW + gap, 58);
+            _voiceButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "VOICE", null, btnW, btnH, 19, false, ReplayVoice, "icon_ui_bell"), skipX + 2 * (btnW + gap), 58);
             _voiceButton.style.display = DisplayStyle.None;
 
             _choiceLayer = UomdScreenKit.Layer(_stage);
@@ -868,8 +1204,7 @@ namespace Uomd.Scenes
             if (path == null) return;
             _background.Clear();
             var bg = UomdScreenKit.Backdrop(_background, _router.Media, path);
-            bg.style.scale = new Scale(new Vector3(1.03f, 1.03f, 1f));
-            if (!Calm) UomdScreenKit.ScaleTo(bg, 1.08f, 24000);
+            UomdGothicVfx.AttachLivingBackdrop(_background, bg, locationId, Calm, 0.85f);
         }
 
         /// <summary>Runs runner events until one needs the player or time (a line, a choice, a wait, the end).</summary>
@@ -887,8 +1222,8 @@ namespace Uomd.Scenes
                 {
                     case "background": SetBackground(e.locationId); break;
                     case "music":
-                        if (e.cueId == "stop") _router.Audio.StopBgm(1.6f);
-                        else _router.Audio.PlayBgmCue(e.cueId);
+                        // TS StoryScene ignores "stop": the previous music carries over until the scene's first real cue
+                        if (!string.IsNullOrEmpty(e.cueId) && e.cueId != "stop") _router.Audio.PlayBgmCue(e.cueId);
                         break;
                     case "fade":
                         UomdScreenKit.Fade(_fadeVeil, e.direction == "out" ? 1f : 0f, Mathf.RoundToInt(Mathf.Max(0.05f, e.seconds) * 1000f), 0, Calm);
@@ -935,11 +1270,17 @@ namespace Uomd.Scenes
             image.style.backgroundPositionY = new BackgroundPosition(BackgroundPositionKeyword.Bottom);
             // portraits face the centre: flip when the art faces the other way
             bool facesRight = stature.NativeFacing == "right";
-            if (facesRight != left) image.style.scale = new Scale(new Vector3(-1f, 1f, 1f));
+            bool flipHorizontal = facesRight != left;
+            if (flipHorizontal) image.style.scale = new Scale(new Vector3(-1f, 1f, 1f));
             image.style.opacity = 0f;
             image.style.translate = new Translate(left ? -90 : 90, 0);
             UomdScreenKit.Fade(image, 0.86f, 950, 0, Calm, EasingMode.EaseOutCubic);
             Slide(image, 0f, 950);
+            // Attach 4.0s Whisk Animate breathing + wind sway loop after entry slide finishes
+            if (!Calm)
+            {
+                UomdScreenKit.After(image, 980, () => UomdGothicVfx.AttachWhiskAnimatePortrait(image, character, !flipHorizontal, Calm));
+            }
             _actors[character] = new Actor { Image = image, Side = left ? "left" : "right", Emotion = emotion, BaseX = baseX };
         }
 
@@ -976,13 +1317,14 @@ namespace Uomd.Scenes
             string next = _router.Media.Catalog.Portrait(character, emotion);
             actor.Emotion = emotion;
             if (next == null || next == current) return;
-            _ = SwapPortrait(actor, next);
+            _ = SwapPortrait(actor, next, _generation);
         }
 
-        private async Awaitable SwapPortrait(Actor actor, string path)
+        private async Awaitable SwapPortrait(Actor actor, string path, int generation)
         {
             var texture = await _router.Media.TextureAsync(path);
-            if (texture != null) actor.Image.style.backgroundImage = new StyleBackground(texture);
+            if (generation == _generation && !_finished && texture != null && actor.Image?.panel != null)
+                actor.Image.style.backgroundImage = new StyleBackground(texture);
         }
 
         /// <summary>Speaker in front at full strength, the others dimmed; narration dims everyone slightly.</summary>
@@ -1044,7 +1386,9 @@ namespace Uomd.Scenes
             float cps = _cutscene ? UomdCutscene.Cps : NormalCps;
             float reveal = Mathf.Max(_line.text.Length / cps, _voiceSeconds > 0 ? _voiceSeconds * 0.92f : 0f);
             _subtitles.BeginLine(_line.text, _skip ? 0.01f : reveal, Calm || _skip);
-            _body.text = Reveal(_subtitles.Tick(0f));
+            string initial = _subtitles.Tick(0f);
+            _lastShownPrefix = initial;
+            _body.text = Reveal(initial);
         }
 
         /// <summary>The shown prefix plus the rest drawn transparent, so wrapping never moves while typing.</summary>
@@ -1183,7 +1527,12 @@ namespace Uomd.Scenes
             if (!_lineDone)
             {
                 _typingElapsed += deltaTime;
-                _body.text = Reveal(_subtitles.Tick(deltaTime));
+                string shown = _subtitles.Tick(deltaTime);
+                if (!ReferenceEquals(shown, _lastShownPrefix))
+                {
+                    _lastShownPrefix = shown;
+                    _body.text = Reveal(shown);
+                }
                 float total = Mathf.Max(0.01f, _subtitles.TotalDuration);
                 _syncFill.style.width = 760f * Mathf.Clamp01(_typingElapsed / total);
                 if (_subtitles.IsComplete) FinishTyping();
@@ -1207,6 +1556,8 @@ namespace Uomd.Scenes
 
         public void OnExit()
         {
+            _generation++;
+            _finished = true;
             _router.Audio.StopVoiceLine();
         }
     }
@@ -1277,50 +1628,53 @@ namespace Uomd.Scenes
             _router.Audio.PlayBgmCue("bgm_main_theme");
             bool calm = _router.Session.ReducedMotion;
             var stage = _stage = UomdScreenKit.Layer(screenRoot, UomdThemeTokens.Void);
-            var bg = UomdScreenKit.Backdrop(stage, _router.Media, _router.Media.Catalog.Background("forest_whispering_ash"));
-            bg.style.opacity = 0.38f;
-            bg.style.scale = new Scale(new Vector3(1.04f, 1.04f, 1f));
+            var patchBgTex = UomdGothicVfx.LoadUiTexture("bg_ui_patch_loading_screen");
+            VisualElement bg;
+            if (patchBgTex != null)
+            {
+                bg = UomdScreenKit.Layer(stage);
+                bg.style.backgroundImage = new StyleBackground(patchBgTex);
+                bg.style.backgroundSize = new BackgroundSize(BackgroundSizeType.Cover);
+                bg.style.opacity = 0.52f;
+            }
+            else
+            {
+                bg = UomdScreenKit.Backdrop(stage, _router.Media, _router.Media.Catalog.Background("forest_whispering_ash"));
+                bg.style.opacity = 0.38f;
+            }
+            UomdGothicVfx.AttachLivingBackdrop(stage, bg, "forest_whispering_ash", calm, 0.85f);
 
             const float cx = 0f;
             var box = new VisualElement { pickingMode = PickingMode.Ignore };
             box.AddToClassList("uomd-panel");
-            box.style.width = 1460;
-            box.style.height = 584;
-            box.style.borderTopColor = box.style.borderBottomColor = box.style.borderLeftColor = box.style.borderRightColor = UomdThemeTokens.GoldHi;
+            box.style.width = 1480;
+            box.style.height = 610;
+            box.Add(new UomdGothicPanel(UomdPanelVariant.Active));
+            UomdGothicVfx.AttachCornerBellChains(box, calm);
             stage.Add(box);
             UomdScreenKit.Centered(box, cx, 488);
-            _head = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 50, UomdThemeTokens.GoldHi, 4f), cx, 265);
+
+            // #4 Approved UI Animation: Cracked Pocket Watch & 8-frame anim_watch spinner
+            UomdGothicVfx.CreateCrackedWatchSpinner(stage, cx, 148f, 0.72f, calm);
+
+            _head = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 48, UomdThemeTokens.GoldHi, 4f), cx, 265);
             _head.AddToClassList("uomd-display");
-            _note = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 32, UomdThemeTokens.TextPrimary), cx, 372);
+            _note = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 30, UomdThemeTokens.TextPrimary), cx, 368);
             _note.style.whiteSpace = WhiteSpace.Normal;
             _note.style.width = 1200;
             _note.style.unityTextAlign = TextAnchor.MiddleCenter;
 
-            _track = new VisualElement { pickingMode = PickingMode.Ignore };
-            _track.style.width = 1080;
-            _track.style.height = 28;
-            _track.style.backgroundColor = new Color(0.035f, 0.020f, 0.055f, 0.95f);
-            stage.Add(_track);
+            _track = UomdGothicVfx.CreateGothicGaugeBar(stage, 1080f, 30f, 0f, true, out _fill);
             UomdScreenKit.Centered(_track, cx, 492);
-            _fill = new VisualElement { pickingMode = PickingMode.Ignore };
-            _fill.style.width = new Length(0, LengthUnit.Percent);
-            _fill.style.height = new Length(100, LengthUnit.Percent);
-            _fill.style.backgroundColor = UomdThemeTokens.GoldHi;
-            _track.Add(_fill);
             _figures = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 28, UomdThemeTokens.TextDim), cx, 550);
 
             _saveLine = UomdScreenKit.Centered(UomdScreenKit.Text(stage, "", 24, UomdThemeTokens.TextDim), cx, 596);
             RenderSave(_router.Api.IsSignedIn ? null : false);
-            _action = UomdScreenKit.Centered(UomdScreenKit.MenuButton(stage, Restart, null, 700, 104, 34, true, () => _ = OnActionAsync()), cx, 704);
+            _action = UomdScreenKit.Centered(UomdScreenKit.MenuButton(stage, Restart, null, 700, 104, 32, true, () => _ = OnActionAsync(), "icon_ui_wax_seal"), cx, 704);
             _action.style.display = DisplayStyle.None;
 
-            var rule = new Color(UomdThemeTokens.Gold.r, UomdThemeTokens.Gold.g, UomdThemeTokens.Gold.b, 0.45f);
-            var left = new VisualElement { pickingMode = PickingMode.Ignore };
-            left.style.width = 402; left.style.height = 1.5f; left.style.backgroundColor = rule;
-            stage.Add(left); UomdScreenKit.Centered(left, -219, 815);
-            var right = new VisualElement { pickingMode = PickingMode.Ignore };
-            right.style.width = 402; right.style.height = 1.5f; right.style.backgroundColor = rule;
-            stage.Add(right); UomdScreenKit.Centered(right, 219, 815);
+            var quoteDiv = UomdGothicVfx.CreateOrnateDivider(stage, 860f, UomdThemeTokens.Gold, withShimmer: true, reducedMotion: calm);
+            UomdScreenKit.Centered(quoteDiv, cx, 815);
 
             _quoteGroup = UomdScreenKit.Layer(stage);
             _quoteIndex = UnityEngine.Random.Range(0, Quotes.Length);

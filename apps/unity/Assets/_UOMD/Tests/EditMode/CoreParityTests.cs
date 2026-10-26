@@ -138,6 +138,57 @@ namespace Uomd.Tests
         }
 
         [Test]
+        public void TurkishLocaleDoesNotCorruptParsingOrSignatures()
+        {
+            CultureInfo prevCulture = CultureInfo.CurrentCulture;
+            CultureInfo prevUi = CultureInfo.CurrentUICulture;
+            try
+            {
+                var tr = CultureInfo.GetCultureInfo("tr-TR");
+                CultureInfo.CurrentCulture = tr;
+                CultureInfo.CurrentUICulture = tr;
+
+                var parsed = UomdJson.ParseObject("{\"damage\":12.5,\"critical\":true,\"id\":\"IRIS\"}");
+                Assert.AreEqual(12.5, Convert.ToDouble(parsed["damage"], CultureInfo.InvariantCulture), 0.0);
+                Assert.AreEqual("{\"critical\":true,\"damage\":12.5,\"id\":\"IRIS\"}", CanonicalJson.Serialize(parsed));
+
+                var sig = Obj(Vectors["signature"]);
+                var keys = new[] { new TrustKeyJwk((string)sig["kid"]!, "EC", "P-256", (string)sig["x"]!, (string)sig["y"]!) };
+                var payload = UomdJson.ParseObject((string)sig["signed_json"]!);
+                var envelope = Obj(payload["signature"]);
+                var es = new Es256SignatureEnvelope((string)envelope["kid"]!, (string)envelope["alg"]!, (string)envelope["value"]!);
+                Assert.IsTrue(Es256SignatureVerifier.VerifyPayload(payload, es, keys));
+
+#if UNITY_6000_0_OR_NEWER
+                var api = new UomdApiClient("https://example.invalid");
+                api.AdoptSession(new Uomd.Contracts.SessionDto
+                {
+                    token = "tok_test_1234567890",
+                    playerId = "plr_1",
+                    expiresAt = "2099-12-31T23:59:59.000Z"
+                });
+                Assert.IsTrue(api.IsSignedIn);
+
+                var session = new GameSessionState();
+                Assert.IsFalse(session.CanSkipPrologue);
+                session.IsReplayingIntro = true;
+                Assert.IsTrue(session.CanSkipPrologue);
+
+                var sync = new Uomd.Narrative.SubtitleSynchronizer();
+                sync.BeginLine("Wait for my shield. Do not let them separate us.", 4.0f, false);
+                string t0 = sync.Tick(0f);
+                string t1 = sync.Tick(0.01f);
+                Assert.IsTrue(ReferenceEquals(t0, t1));
+#endif
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = prevCulture;
+                CultureInfo.CurrentUICulture = prevUi;
+            }
+        }
+
+        [Test]
         public void BaseBundleWasExported()
         {
             string release = Path.Combine(Application.streamingAssetsPath, "uomd_base/release.json");

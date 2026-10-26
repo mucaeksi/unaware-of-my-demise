@@ -46,12 +46,7 @@ namespace Uomd.Core
         /// <summary>After the active content release changed: drop every cached texture and clip and re-read the catalogs.</summary>
         public async Awaitable ReloadAsync()
         {
-            ReleaseTextures();
-            foreach (var clip in _clips.Values)
-            {
-                if (clip != null) UnityEngine.Object.Destroy(clip);
-            }
-            _clips.Clear();
+            ReleaseAll();
             await LoadCatalogAsync();
         }
 
@@ -105,6 +100,16 @@ namespace Uomd.Core
                 if (texture != null) UnityEngine.Object.Destroy(texture);
             }
             _textures.Clear();
+        }
+
+        public void ReleaseAll()
+        {
+            ReleaseTextures();
+            foreach (var clip in _clips.Values)
+            {
+                if (clip != null) UnityEngine.Object.Destroy(clip);
+            }
+            _clips.Clear();
         }
 
         private async Awaitable<string> TryReadTextAsync(string relativePath)

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -95,12 +96,27 @@ namespace Uomd.Scenes
             catch (Exception e)
             {
                 Debug.LogError($"[Battle] encounter {encounterId} could not start: {e}");
-                UomdUiKit.ShowToast(screenRoot, $"The battle could not start: {e.Message}");
+                if (generation == _generation && screenRoot != null) UomdUiKit.ShowToast(screenRoot, $"The battle could not start: {e.Message}");
                 return;
             }
 
+            if (generation != _generation) return;
+            bool isBoss = encounterId.EndsWith("_5", StringComparison.OrdinalIgnoreCase);
+            string bossUnitId = "";
+            foreach (var c in _battle.Combatants)
+            {
+                if (c.Side == "enemy" && c.Def.UnitId.StartsWith("boss_", StringComparison.OrdinalIgnoreCase))
+                {
+                    isBoss = true;
+                    bossUnitId = c.Def.UnitId;
+                    break;
+                }
+            }
+            if (isBoss) _router.Audio.PlayBgmCue(AudioDirector.ResolveBattleMusicCue(encounterId, true, bossUnitId));
+
             BuildStage(raw);
             await LoadVfxAsync();
+            if (generation != _generation) return;
             await LoadUnitArtAsync();
             if (generation != _generation) return;
             SyncViews();
@@ -530,7 +546,8 @@ namespace Uomd.Scenes
                 if (wait > 0f) await Awaitable.WaitForSecondsAsync(Calm ? wait * 0.6f : wait);
             }
             if (generation != _generation) return;
-            await SettleAsync();
+            await SettleAsync(generation);
+            if (generation != _generation) return;
             Refresh();
         }
 
@@ -575,8 +592,12 @@ namespace Uomd.Scenes
                     _router.Audio.PlaySfx(heavy ? "sfx_blade_heavy" : "sfx_blade_slash");
                     if (B(e, "counter")) Float(target, "COUNTER", UomdThemeTokens.GoldHi, 30, -60);
                     if (!string.IsNullOrEmpty(S(e, "redirectedFrom"))) Float(target, "INTERCEPT", UomdThemeTokens.GoldHi, 28, 70);
-                    if (amount > 0) Float(target, crit ? $"-{amount}!" : $"-{amount}", crit ? new Color(1f, 0.847f, 0.420f) : B(e, "counter") ? UomdThemeTokens.GoldHi : Color.white, crit ? 64 : 46);
-                    if (absorbed > 0) Float(target, amount == 0 ? "⛨ BLOCKED" : $"({absorbed} absorbed)", UomdThemeTokens.Shield, 30, amount == 0 ? 0 : 80);
+                    if (amount > 0)
+                    {
+                        string amtText = amount.ToString(CultureInfo.InvariantCulture);
+                        Float(target, crit ? $"-{amtText}!" : $"-{amtText}", crit ? new Color(1f, 0.847f, 0.420f) : B(e, "counter") ? UomdThemeTokens.GoldHi : Color.white, crit ? 64 : 46);
+                    }
+                    if (absorbed > 0) Float(target, amount == 0 ? "⛨ BLOCKED" : $"({absorbed.ToString(CultureInfo.InvariantCulture)} absorbed)", UomdThemeTokens.Shield, 30, amount == 0 ? 0 : 80);
                     var c = _battle.Unit(target.Id);
                     target.SetHp(N(e, "hpAfter"), c.MaxHp);
                     if ((crit || ultimate) && !NoFlash) Shake(200, crit ? 0.008f : 0.006f);
@@ -585,7 +606,7 @@ namespace Uomd.Scenes
                 case "heal":
                 {
                     if (!_views.TryGetValue(S(e, "target"), out var target)) return 0.1f;
-                    Float(target, $"+{N(e, "amount")}", new Color(0.561f, 0.890f, 0.627f), 44);
+                    Float(target, $"+{N(e, "amount").ToString(CultureInfo.InvariantCulture)}", new Color(0.561f, 0.890f, 0.627f), 44);
                     CastSigil(target.X, target.Y - 10, "Gale", 1.0);
                     target.SetHp(N(e, "hpAfter"), _battle.Unit(target.Id).MaxHp);
                     return 0.26f;
@@ -593,7 +614,7 @@ namespace Uomd.Scenes
                 case "shield":
                     if (_views.TryGetValue(S(e, "target"), out var shielded))
                     {
-                        Float(shielded, $"⛨ +{N(e, "amount")} SHIELD", UomdThemeTokens.Shield, 34);
+                        Float(shielded, $"⛨ +{N(e, "amount").ToString(CultureInfo.InvariantCulture)} SHIELD", UomdThemeTokens.Shield, 34);
                         CastSigil(shielded.X, shielded.Y - 10, "Dawn", 1.0);
                     }
                     return 0.2f;
@@ -787,7 +808,7 @@ namespace Uomd.Scenes
         }
 
         /// <summary>Every unit that closed in during this step walks back to its spot (several can, with follow-ups).</summary>
-        private async Awaitable SettleAsync()
+        private async Awaitable SettleAsync(int generation)
         {
             if (_lunged.Count == 0) return;
             var moved = _lunged.ToList();
@@ -798,6 +819,7 @@ namespace Uomd.Scenes
                 unit.MoveTo(unit.X, unit.Y, 220, Calm);
             }
             await Awaitable.WaitForSecondsAsync(0.24f);
+            if (generation != _generation) return;
             foreach (var unit in moved) if (unit.Alive) unit.Play("idle");
         }
 
@@ -842,9 +864,11 @@ namespace Uomd.Scenes
             var title = UomdScreenKit.Centered(UomdScreenKit.Text(veil, won ? "VICTORY" : "DEFEAT", 96, won ? UomdThemeTokens.GoldHi : new Color(1f, 0.478f, 0.588f), 8f), 0, 360);
             title.AddToClassList("uomd-display");
             var stars = UomdScreenKit.Centered(UomdScreenKit.Text(veil, new string('★', result.Stars) + new string('☆', Math.Max(0, 3 - result.Stars)), 72, UomdThemeTokens.GoldHi, 12f), 0, 470);
-            string hash = BattleReplay.LogHash(_battle);
-            UomdScreenKit.Centered(UomdScreenKit.Text(veil, $"{result.Turns} turns  ·  {_actions.Count} actions  ·  logHash {hash.Substring(0, 12)}", 24, UomdThemeTokens.TextDim), 0, 550);
             var flow = _router.EntryFlow;
+            string summary = flow.InEntryBattle
+                ? $"{result.Turns} turns  ·  {_actions.Count} actions"
+                : $"{result.Turns} turns  ·  {_actions.Count} actions  ·  logHash {BattleReplay.LogHash(_battle).Substring(0, 12)}";
+            UomdScreenKit.Centered(UomdScreenKit.Text(veil, summary, 24, UomdThemeTokens.TextDim), 0, 550);
             bool routed = flow.InEntryBattle || flow.InCampaignBattle;
             int earned = result.Stars;
             Action next = routed

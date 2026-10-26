@@ -16,8 +16,12 @@ namespace Uomd.Scenes
         {
             if (Object.FindFirstObjectByType<UomdSceneRouter>() != null) return;
             // The capture player runs under Xvfb with no window manager, so its window never gets focus and a desktop
-            // player pauses its frame loop without this.
+            // player pauses its frame loop without this. Also keep the Editor loop alive when unfocused for MCP automation.
+#if UNITY_EDITOR
+            Application.runInBackground = true;
+#else
             if (UomdCaptureRunner.Requested(out _)) Application.runInBackground = true;
+#endif
 
             var go = new GameObject("UomdBootstrapper");
             go.SetActive(false); // defer Awake until UIDocument has its PanelSettings
@@ -39,8 +43,7 @@ namespace Uomd.Scenes
             }
             settings.scaleMode = PanelScaleMode.ScaleWithScreenSize;
             settings.referenceResolution = new Vector2Int(1920, 1080);
-            settings.screenMatchMode = PanelScreenMatchMode.MatchWidthOrHeight;
-            settings.match = 1f; // landscape: keep vertical layout stable across aspect ratios
+            settings.screenMatchMode = PanelScreenMatchMode.Expand;
             settings.clearColor = false;
             return settings;
         }

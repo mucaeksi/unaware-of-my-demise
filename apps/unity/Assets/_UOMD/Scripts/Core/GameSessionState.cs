@@ -36,7 +36,11 @@ namespace Uomd.Core
         Purchases = 24,
         Operations = 25,
         ContentPanel = 26,
-        PatchBar = 27
+        PatchBar = 27,
+        /// <summary>Design prototype of an editorial Home; reached only by explicit navigation (QA/MCP).</summary>
+        HomePrototype = 28,
+        /// <summary>D-34 phase B1 prototype of the 2.5D battle stage; reached only by explicit navigation (QA/MCP).</summary>
+        BattlePrototype = 29
     }
 
     public sealed class GameSessionState
@@ -73,6 +77,8 @@ namespace Uomd.Core
         public string BattleHudLayout { get; set; } = "afk_faithful"; // "afk_faithful" | "current" | "arena_lite"
         public bool ReducedMotion { get; set; }
         public bool ReduceFlash { get; set; }
+        /// <summary>True while replaying the opening from Title ("REPLAY INTRO"); ends back on Title instead of advancing entry progress.</summary>
+        public bool IsReplayingIntro { get; set; }
 
         /// <summary>
         /// Resolves the deterministic first-install / resume entry screen from server account progress
@@ -104,6 +110,6 @@ namespace Uomd.Core
         /// Per Prologue first-viewing contract (7207dae1), the SKIP button is hidden on first viewing
         /// (!account.storyProgress.prologueDone) and only shown on subsequent replays.
         /// </summary>
-        public bool CanSkipPrologue => Account?.storyProgress != null && Account.storyProgress.prologueDone;
+        public bool CanSkipPrologue => (Account?.storyProgress != null && Account.storyProgress.prologueDone) || IsReplayingIntro;
     }
 }

@@ -56,7 +56,8 @@ namespace Uomd.Scenes
             string location = BackdropFor(Heading);
             var bg = UomdScreenKit.Backdrop(Stage, Router.Media, Router.Media.Catalog.Background(location) ?? Router.Media.Catalog.Background("forest_whispering_ash"));
             bg.style.opacity = 1f;
-            UomdScreenKit.Layer(Stage, new Color(UomdThemeTokens.Void.r, UomdThemeTokens.Void.g, UomdThemeTokens.Void.b, 0.62f));
+            UomdGothicVfx.AttachLivingBackdrop(Stage, bg, location, Calm, 0.78f);
+            UomdScreenKit.Layer(Stage, new Color(UomdThemeTokens.Void.r, UomdThemeTokens.Void.g, UomdThemeTokens.Void.b, 0.56f));
             Band = new VisualElement { pickingMode = PickingMode.Ignore };
             Band.style.position = Position.Absolute;
             Band.style.left = new Length(50, LengthUnit.Percent);
@@ -66,15 +67,37 @@ namespace Uomd.Scenes
             Band.style.height = RefH;
             Stage.Add(Band);
             BeforeFrame();
-            var heading = Place(UomdScreenKit.Text(Band, Heading, 60, UomdThemeTokens.GoldHi, 2f), RefW / 2f, HeadY, 0.5f, 0.5f);
+            var heading = Place(UomdScreenKit.Text(Band, Heading, 56, UomdThemeTokens.GoldHi, 3f), RefW / 2f, HeadY - 6f, 0.5f, 0.5f);
             heading.AddToClassList("uomd-display");
             heading.style.unityTextOutlineWidth = 1f;
             heading.style.unityTextOutlineColor = UomdThemeTokens.Void;
+            var headDiv = UomdGothicVfx.CreateOrnateDivider(Band, 620f, UomdThemeTokens.Gold, withShimmer: true, reducedMotion: Calm);
+            Place(headDiv, RefW / 2f, HeadY + 34f, 0.5f, 0.5f);
+
             Body = UomdScreenKit.Layer(Band);
             Body.pickingMode = PickingMode.Ignore;
-            Place(UomdScreenKit.MenuButton(Band, "BACK", null, 300, 110, 32, UomdPanelVariant.Normal, GoBack), 190f + InsetLeft, RefH - 80f - InsetBottom, 0.5f, 0.5f);
-            Place(UomdScreenKit.MenuButton(Band, "OPTIONS", null, 180, 64, 20, UomdPanelVariant.Normal, () => _ = Router.NavigateToAsync(UomdScreenId.Account)), 150f + InsetLeft, HeadY, 0.5f, 0.5f);
-            _wallet = Place(UomdScreenKit.Text(Band, "", 30, UomdThemeTokens.TextPrimary), RefW - 60f - InsetRight, HeadY, 1f, 0.5f);
+            Place(UomdScreenKit.MenuButton(Band, "BACK", null, 280, 96, 28, UomdPanelVariant.Normal, GoBack, "icon_ui_wax_seal"), 190f + InsetLeft, RefH - 80f - InsetBottom, 0.5f, 0.5f);
+            Place(UomdScreenKit.MenuButton(Band, "OPTIONS", null, 210, 66, 20, UomdPanelVariant.Normal, () => _ = Router.NavigateToAsync(UomdScreenId.Account), "icon_nav_settings_seal"), 160f + InsetLeft, HeadY, 0.5f, 0.5f);
+
+            var walletPill = new VisualElement { pickingMode = PickingMode.Ignore };
+            walletPill.style.flexDirection = FlexDirection.Row;
+            walletPill.style.alignItems = Align.Center;
+            walletPill.style.paddingLeft = 18f;
+            walletPill.style.paddingRight = 22f;
+            walletPill.style.height = 56f;
+            var tabTex = UomdGothicVfx.LoadUiTexture("uikit_tab_inactive");
+            if (tabTex != null)
+            {
+                walletPill.style.backgroundImage = new StyleBackground(tabTex);
+                walletPill.style.backgroundSize = new BackgroundSize(Length.Percent(100), Length.Percent(100));
+            }
+            var currIcon = UomdGothicVfx.CreateTintedSprite("icon_curr_eclipse_token", 36f, 36f, Color.white);
+            currIcon.style.marginRight = 10f;
+            walletPill.Add(currIcon);
+            _wallet = UomdScreenKit.Text(walletPill, "", 26, UomdThemeTokens.GoldHi, 1.5f, bold: true);
+            _wallet.AddToClassList("uomd-display");
+            Band.Add(walletPill);
+            Place(walletPill, RefW - 50f - InsetRight, HeadY, 1f, 0.5f);
             _ = RefreshAsync();
             return UomdAwaitables.Completed();
         }
@@ -87,7 +110,12 @@ namespace Uomd.Scenes
         public virtual void OnExit()
         {
             _generation++;
-            _modal = null;
+            CloseModal();
+            Body = null;
+            Stage = null;
+            Band = null;
+            _wallet = null;
+            _busy = false;
         }
 
         protected virtual void GoBack() => _ = Router.NavigateToAsync(BackTo);
@@ -109,14 +137,11 @@ namespace Uomd.Scenes
         /// <summary>Screen.safeArea in reference units of the band, clamped like platform/safeArea.ts.</summary>
         private void ReadInsets()
         {
-            if (Screen.height <= 0) return;
-            float scale = RefH / Screen.height; // PanelSettings matches height
-            float panelW = Screen.width * scale, band = (panelW - RefW) / 2f;
-            Rect safe = Screen.safeArea;
-            InsetLeft = Mathf.Clamp(safe.xMin * scale - band, 0f, MaxInsetX);
-            InsetRight = Mathf.Clamp((Screen.width - safe.xMax) * scale - band, 0f, MaxInsetX);
-            InsetTop = Mathf.Clamp((Screen.height - safe.yMax) * scale, 0f, MaxInsetY);
-            InsetBottom = Mathf.Clamp(safe.yMin * scale, 0f, MaxInsetY);
+            Vector4 insets = SafeAreaBinder.ReadBandInsets(RefW, RefH, MaxInsetX, MaxInsetY);
+            InsetLeft = insets.x;
+            InsetTop = insets.y;
+            InsetRight = insets.z;
+            InsetBottom = insets.w;
         }
 
         /// <summary>True while the render that started at <paramref name="generation"/> is still the screen's current one.</summary>
@@ -126,6 +151,7 @@ namespace Uomd.Scenes
         /// <summary>Re-renders the body and the wallet strip (account switch, after an action).</summary>
         protected async Awaitable RefreshAsync()
         {
+            if (Body == null) return;
             int generation = ++_generation;
             CloseModal();
             Body.Clear();
@@ -150,7 +176,23 @@ namespace Uomd.Scenes
             }
             catch (Exception e)
             {
-                if (IsCurrent(generation)) Say(ErrText(e));
+                if (!IsCurrent(generation)) return;
+                Say(ErrText(e));
+                if (Body.childCount == 0)
+                {
+                    bool expired = e is UomdApiException apiEx && apiEx.Status == 401;
+                    string msg = expired ? "Your session expired. Sign in again from Account." : ErrText(e);
+                    var label = Text(RefW / 2f, 400f, msg, 38, UomdThemeTokens.TextPrimary, 0.5f, 0.5f, wrapWidth: 1200f);
+                    label.style.unityTextAlign = TextAnchor.MiddleCenter;
+                    if (expired)
+                    {
+                        Button(RefW / 2f, 560f, "ACCOUNT", null, 520, 120, 32, UomdPanelVariant.Normal, () => _ = Router.NavigateToAsync(UomdScreenId.Account));
+                    }
+                    else
+                    {
+                        Button(RefW / 2f, 560f, "RETRY", null, 520, 120, 32, UomdPanelVariant.Normal, () => _ = RefreshAsync());
+                    }
+                }
             }
         }
 
@@ -183,23 +225,28 @@ namespace Uomd.Scenes
             ? api.Code == "feature_disabled" ? "This feature is switched off for now." : $"{api.Message} ({api.Code})"
             : e.Message;
 
-        protected void Say(string message) => UomdUiKit.ShowToast(Stage, message, 3.4f);
+        protected void Say(string message)
+        {
+            if (Stage != null) UomdUiKit.ShowToast(Stage, message, 3.4f);
+        }
 
         private bool _busy;
 
         /// <summary>Runs one server action at a time, then re-renders; a failure becomes a toast (TS `act`).</summary>
         protected async Awaitable ActAsync(Func<Awaitable> action)
         {
-            if (_busy) return;
+            if (_busy || Body == null) return;
+            int generation = _generation;
             _busy = true;
             try
             {
                 await action();
+                if (!IsCurrent(generation)) return;
                 await RefreshAsync();
             }
             catch (Exception e)
             {
-                Say(ErrText(e));
+                if (IsCurrent(generation)) Say(ErrText(e));
             }
             finally
             {
@@ -248,9 +295,27 @@ namespace Uomd.Scenes
             return label;
         }
 
-        /// <summary>A kit button centred on (x, y).</summary>
-        protected Button Button(float x, float y, string label, string sub, float width, float height, float fontSize, UomdPanelVariant variant, Action onClick, VisualElement into = null) =>
-            Place(UomdScreenKit.MenuButton(into ?? Body, label, sub, width, height, fontSize, variant, onClick), x, y, 0.5f, 0.5f);
+        private static string ResolveHubButtonIcon(string label)
+        {
+            if (string.IsNullOrEmpty(label)) return null;
+            string u = label.ToUpperInvariant();
+            if (u.Contains("CHAPTER") || u.Contains("CAMPAIGN") || u.Contains("JOURNEY") || u.Contains("ROAD")) return "icon_nav_journey";
+            if (u.Contains("ROSTER") || u.Contains("COMPANION") || u.Contains("TEAM") || u.Contains("FORMATION")) return "icon_nav_companions";
+            if (u.Contains("SUMMON") || u.Contains("ALTAR") || u.Contains("BANNER")) return "icon_nav_summon";
+            if (u.Contains("OATH") || u.Contains("INVITATION")) return "icon_first_oath_invitation";
+            if (u.Contains("REWARD") || u.Contains("SHOP") || u.Contains("PURCHASE")) return "icon_silver_crowns";
+            if (u.Contains("ARCHIVE") || u.Contains("RECORD") || u.Contains("CHRONICLE") || u.Contains("LEGAL")) return "icon_nav_records";
+            if (u.Contains("DEED") || u.Contains("EVENT") || u.Contains("ERRAND")) return "icon_illuminated_chronicle";
+            if (u.Contains("ACCOUNT") || u.Contains("OPTION") || u.Contains("SETTING") || u.Contains("PRIVACY")) return "icon_nav_settings_seal";
+            if (u.Contains("TRIAL") || u.Contains("FIGHT") || u.Contains("BATTLE") || u.Contains("ARENA") || u.Contains("ARMORY")) return "icon_skill_basic";
+            if (u.Contains("CLAIM") || u.Contains("ENTER") || u.Contains("START") || u.Contains("CONTINUE") || u.Contains("CONFIRM")) return "icon_ui_wax_seal";
+            if (u.Contains("BACK") || u.Contains("CLOSE")) return "icon_ui_bell";
+            return null;
+        }
+
+        /// <summary>A kit button centred on (x, y) with automatic Gothic icon resolution.</summary>
+        protected Button Button(float x, float y, string label, string sub, float width, float height, float fontSize, UomdPanelVariant variant, Action onClick, VisualElement into = null, string iconResource = null) =>
+            Place(UomdScreenKit.MenuButton(into ?? Body, label, sub, width, height, fontSize, variant, onClick, iconResource ?? ResolveHubButtonIcon(label)), x, y, 0.5f, 0.5f);
 
         /// <summary>A gothic card centred on (x, y); children use coordinates inside it.</summary>
         protected VisualElement Card(float x, float y, float width, float height, UomdPanelVariant variant = UomdPanelVariant.Normal, VisualElement into = null, Action onTap = null)
@@ -291,7 +356,26 @@ namespace Uomd.Scenes
             var fill = new VisualElement { pickingMode = PickingMode.Ignore };
             fill.style.height = Length.Percent(100);
             fill.style.borderTopLeftRadius = fill.style.borderTopRightRadius = fill.style.borderBottomLeftRadius = fill.style.borderBottomRightRadius = r;
+            var fillTex = UomdGothicVfx.LoadUiTexture("uikit_bar_focus");
+            if (fillTex != null)
+            {
+                fill.style.backgroundImage = new StyleBackground(fillTex);
+                fill.style.backgroundSize = new BackgroundSize(Length.Percent(100), Length.Percent(100));
+            }
             track.Add(fill);
+            var barFrameTex = UomdGothicVfx.LoadUiTexture("uikit_bar_frame");
+            if (barFrameTex != null && height >= 10f)
+            {
+                var frameOverlay = new VisualElement { pickingMode = PickingMode.Ignore };
+                frameOverlay.style.position = Position.Absolute;
+                frameOverlay.style.left = 0;
+                frameOverlay.style.right = 0;
+                frameOverlay.style.top = 0;
+                frameOverlay.style.bottom = 0;
+                frameOverlay.style.backgroundImage = new StyleBackground(barFrameTex);
+                frameOverlay.style.backgroundSize = new BackgroundSize(Length.Percent(100), Length.Percent(100));
+                track.Add(frameOverlay);
+            }
             (into ?? Body).Add(track);
             Place(track, x, y, 0.5f, 0.5f);
             SetBar(fill, ratio, color);

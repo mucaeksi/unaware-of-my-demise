@@ -8,6 +8,7 @@ graphify-out/
 .playwright/
 test-results/
 .claude/cache/
+.claude/settings.local.json
 __pycache__/
 *.pyc
 .DS_Store
@@ -29,6 +30,8 @@ apps/unity/Assets/Resources.meta
 apps/unity/.utmp/
 apps/unity/CloudflareGatewayDist/
 apps/unity/Assets/StreamingAssets/uomd_base/
+apps/unity/Assets/Screenshots/
+apps/unity/Assets/Screenshots.meta
 
 # .NET headless harness output (apps/unity/Logic)
 apps/unity/Logic/.build/

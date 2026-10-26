@@ -86,6 +86,7 @@ namespace Uomd.EditorTools
             {
                 QualitySettings.SetQualityLevel(i, false);
                 QualitySettings.renderPipeline = pipeline;
+                if (QualitySettings.names[i] == "Ultra") QualitySettings.antiAliasing = 2;
             }
             QualitySettings.SetQualityLevel(current, false);
         }
@@ -109,6 +110,25 @@ namespace Uomd.EditorTools
             PlayerSettings.allowedAutorotateToLandscapeRight = true;
             PlayerSettings.allowedAutorotateToPortrait = false;
             PlayerSettings.allowedAutorotateToPortraitUpsideDown = false;
+            PlayerSettings.runInBackground = true;
+
+            var playerSettingsAssets = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/ProjectSettings.asset");
+            if (playerSettingsAssets != null && playerSettingsAssets.Length > 0)
+            {
+                using var so = new SerializedObject(playerSettingsAssets[0]);
+                var inputProp = so.FindProperty("activeInputHandler");
+                if (inputProp != null) inputProp.intValue = 1; // InputSystemPackage (New) only
+                var cloudIdProp = so.FindProperty("cloudProjectId");
+                if (cloudIdProp != null && string.IsNullOrEmpty(cloudIdProp.stringValue))
+                    cloudIdProp.stringValue = "658f0357-9b07-4348-a9dc-07e65b6f7249";
+                var projNameProp = so.FindProperty("projectName");
+                if (projNameProp != null && string.IsNullOrEmpty(projNameProp.stringValue))
+                    projNameProp.stringValue = "Unaware of My Demise";
+                var orgIdProp = so.FindProperty("organizationId");
+                if (orgIdProp != null && string.IsNullOrEmpty(orgIdProp.stringValue))
+                    orgIdProp.stringValue = "unawareofmydemise";
+                so.ApplyModifiedPropertiesWithoutUndo();
+            }
 
             string versionName = Environment.GetEnvironmentVariable("UOMD_VERSION_NAME");
             if (!string.IsNullOrEmpty(versionName)) PlayerSettings.bundleVersion = versionName;

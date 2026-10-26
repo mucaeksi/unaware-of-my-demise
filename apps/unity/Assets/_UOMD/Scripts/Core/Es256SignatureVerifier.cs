@@ -213,7 +213,7 @@ namespace Uomd.Core
 
         private static BigInteger Hex(string hex)
         {
-            return BigInteger.Parse("0" + hex, System.Globalization.NumberStyles.HexNumber);
+            return BigInteger.Parse("0" + hex, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
         }
 
         private static BigInteger FromBigEndian(byte[] data, int offset, int length)

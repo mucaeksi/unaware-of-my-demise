@@ -89,15 +89,15 @@ namespace Uomd.UI
         }
 
         /// <summary>A menu button with an optional second line (TypeScript DomStage.button label + sub).</summary>
-        public static Button MenuButton(VisualElement parent, string label, string sub, float width, float height, float fontSize, bool hot, System.Action onClick) =>
-            MenuButton(parent, label, sub, width, height, fontSize, hot ? UomdPanelVariant.Hot : UomdPanelVariant.Normal, onClick);
+        public static Button MenuButton(VisualElement parent, string label, string sub, float width, float height, float fontSize, bool hot, System.Action onClick, string iconResource = null) =>
+            MenuButton(parent, label, sub, width, height, fontSize, hot ? UomdPanelVariant.Hot : UomdPanelVariant.Normal, onClick, iconResource);
 
         /// <summary>
         /// The TS kit button (domKit.ts DomButton): a gothic plaque of the given variant with a Cinzel label and an optional
         /// body-face sub line, labels shrunk to fit the plaque, a press squash. Update it with <see cref="SetVariant"/>,
         /// <see cref="SetLabel"/>, <see cref="SetSub"/> and <see cref="SetEnabled"/>.
         /// </summary>
-        public static Button MenuButton(VisualElement parent, string label, string sub, float width, float height, float fontSize, UomdPanelVariant variant, System.Action onClick)
+        public static Button MenuButton(VisualElement parent, string label, string sub, float width, float height, float fontSize, UomdPanelVariant variant, System.Action onClick, string iconResource = null)
         {
             var button = new Button(onClick) { text = "" };
             button.AddToClassList("uomd-kit-btn");
@@ -111,26 +111,47 @@ namespace Uomd.UI
             button.style.paddingLeft = button.style.paddingRight = button.style.paddingTop = button.style.paddingBottom = 0;
             button.style.marginLeft = button.style.marginRight = button.style.marginTop = button.style.marginBottom = 0;
             button.style.overflow = Overflow.Visible;
-            button.Add(new UomdGothicPanel(variant) { name = "plaque" });
+            var plaque = new UomdGothicPanel(variant) { name = "plaque" };
+            button.Add(plaque);
+
+            var topRow = new VisualElement { name = "top-row", pickingMode = PickingMode.Ignore };
+            topRow.style.flexDirection = FlexDirection.Row;
+            topRow.style.alignItems = Align.Center;
+            topRow.style.justifyContent = Justify.Center;
+            button.Add(topRow);
+
+            if (!string.IsNullOrEmpty(iconResource))
+            {
+                bool fullCol = UomdGothicVfx.IsFullColorIcon(iconResource);
+                float iconSz = Mathf.Clamp(Mathf.Round(fontSize * (fullCol ? 1.28f : 0.96f)), 20f, 42f);
+                var icon = UomdGothicVfx.CreateTintedSprite(iconResource, iconSz, iconSz, fullCol ? Color.white : UomdThemeTokens.GoldHi);
+                icon.name = "icon";
+                icon.userData = fullCol ? "full" : "mono";
+                icon.style.marginRight = 10f;
+                topRow.Add(icon);
+            }
+
             var main = new Label(label) { name = "label", pickingMode = PickingMode.Ignore };
             main.AddToClassList("uomd-display");
             main.style.fontSize = fontSize;
             main.style.unityFontStyleAndWeight = FontStyle.Bold;
             main.style.unityTextAlign = TextAnchor.MiddleCenter;
-            main.style.unityTextOutlineWidth = 0.6f;
+            main.style.unityTextOutlineWidth = 0.7f;
             main.style.unityTextOutlineColor = new Color(0.027f, 0.016f, 0.047f);
             main.style.whiteSpace = WhiteSpace.NoWrap;
-            button.Add(main);
+            topRow.Add(main);
+
             var second = new Label(sub ?? "") { name = "sub", pickingMode = PickingMode.Ignore };
             second.AddToClassList("uomd-serif"); // body face; the button's Cinzel is capitals only
-            second.style.fontSize = Mathf.Max(16f, Mathf.Round(fontSize * 0.68f));
+            second.style.fontSize = Mathf.Max(15f, Mathf.Round(fontSize * 0.66f));
             second.style.unityTextAlign = TextAnchor.MiddleCenter;
             second.style.whiteSpace = WhiteSpace.NoWrap;
+            second.style.marginTop = 2f;
             second.style.display = string.IsNullOrEmpty(sub) ? DisplayStyle.None : DisplayStyle.Flex;
             button.Add(second);
             ApplyVariantColors(button, variant);
             // labels never overflow the plaque (domKit fitLabels: max width = plaque width - 48)
-            float maxW = width - 48f;
+            float maxW = width - (string.IsNullOrEmpty(iconResource) ? 48f : 82f);
             void Fit(Label l)
             {
                 float w = l.resolvedStyle.width;
@@ -139,9 +160,11 @@ namespace Uomd.UI
             }
             main.RegisterCallback<GeometryChangedEvent>(_ => Fit(main));
             second.RegisterCallback<GeometryChangedEvent>(_ => Fit(second));
-            button.RegisterCallback<PointerDownEvent>(_ => { if (button.enabledSelf) button.style.scale = new Scale(new Vector3(0.955f, 0.955f, 1f)); }, TrickleDown.TrickleDown);
-            button.RegisterCallback<PointerUpEvent>(_ => button.style.scale = new Scale(Vector3.one), TrickleDown.TrickleDown);
-            button.RegisterCallback<PointerLeaveEvent>(_ => button.style.scale = new Scale(Vector3.one));
+            button.RegisterCallback<ClickEvent>(e => e.StopPropagation());
+            button.RegisterCallback<PointerEnterEvent>(_ => { if (button.enabledSelf) plaque.SetHovered(true); });
+            button.RegisterCallback<PointerDownEvent>(_ => { if (button.enabledSelf) { plaque.SetPressed(true); button.style.scale = new Scale(new Vector3(0.955f, 0.955f, 1f)); } }, TrickleDown.TrickleDown);
+            button.RegisterCallback<PointerUpEvent>(_ => { plaque.SetPressed(false); button.style.scale = new Scale(Vector3.one); }, TrickleDown.TrickleDown);
+            button.RegisterCallback<PointerLeaveEvent>(_ => { plaque.SetHovered(false); plaque.SetPressed(false); button.style.scale = new Scale(Vector3.one); });
             parent.Add(button);
             return button;
         }
@@ -159,6 +182,12 @@ namespace Uomd.UI
             {
                 sub.style.color = variant == UomdPanelVariant.Active ? new Color(1f, 0.851f, 0.541f) : new Color(0.839f, 0.784f, 0.902f);
                 sub.style.opacity = labelAlpha;
+            }
+            if (button.Q<VisualElement>("icon") is VisualElement icon)
+            {
+                bool isFull = (icon.userData as string) == "full";
+                icon.style.unityBackgroundImageTintColor = isFull ? Color.white : (lit ? new Color(1f, 0.953f, 0.769f) : UomdThemeTokens.GoldHi);
+                icon.style.opacity = labelAlpha;
             }
         }
 
@@ -279,7 +308,7 @@ namespace Uomd.UI
         private static async Awaitable Assign(VisualElement image, UomdMediaLoader media, string contentPath)
         {
             var texture = await media.TextureAsync(contentPath);
-            if (texture != null) image.style.backgroundImage = new StyleBackground(texture);
+            if (texture != null && image?.panel != null) image.style.backgroundImage = new StyleBackground(texture);
         }
 
         /// <summary>Animates opacity to <paramref name="to"/> after <paramref name="delayMs"/>.</summary>

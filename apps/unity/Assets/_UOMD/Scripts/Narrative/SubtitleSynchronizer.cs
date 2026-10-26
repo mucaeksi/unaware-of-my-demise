@@ -18,10 +18,13 @@ namespace Uomd.Narrative
     public sealed class SubtitleSynchronizer
     {
         private readonly List<SubtitleWordTiming> _timings = new List<SubtitleWordTiming>();
+        private readonly System.Text.StringBuilder _sb = new System.Text.StringBuilder(256);
         private string _fullText = "";
         private float _totalDuration = 1.5f;
         private float _elapsed;
         private bool _reducedMotion;
+        private int _lastVisibleCount = -1;
+        private string _lastTickText = "";
 
         public string FullText => _fullText;
         public float TotalDuration => _totalDuration;
@@ -32,6 +35,8 @@ namespace Uomd.Narrative
             _fullText = text ?? "";
             _reducedMotion = reducedMotion;
             _elapsed = 0f;
+            _lastVisibleCount = -1;
+            _lastTickText = "";
             _timings.Clear();
 
             if (string.IsNullOrWhiteSpace(_fullText))
@@ -108,19 +113,24 @@ namespace Uomd.Narrative
 
             if (visibleCount <= 0) return "";
             if (visibleCount >= _timings.Count) return _fullText;
+            if (visibleCount == _lastVisibleCount) return _lastTickText;
 
-            var sb = new System.Text.StringBuilder();
+            _sb.Clear();
             for (int i = 0; i < visibleCount; i++)
             {
-                if (i > 0) sb.Append(' ');
-                sb.Append(_timings[i].word);
+                if (i > 0) _sb.Append(' ');
+                _sb.Append(_timings[i].word);
             }
-            return sb.ToString();
+            _lastVisibleCount = visibleCount;
+            _lastTickText = _sb.ToString();
+            return _lastTickText;
         }
 
         public void RevealImmediately()
         {
             _elapsed = _totalDuration;
+            _lastVisibleCount = -1;
+            _lastTickText = _fullText;
         }
     }
 }

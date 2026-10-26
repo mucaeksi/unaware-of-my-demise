@@ -30,6 +30,7 @@ namespace Uomd.Scenes
         private readonly float _depth;
         private UnitArtState _state;
         private string _stateName = "idle";
+        private string _shownFrame;
         private float _frameClock;
         private Action _onStateDone;
 
@@ -132,6 +133,7 @@ namespace Uomd.Scenes
             if (!Alive && state != "defeat") return;
             _stateName = state;
             _state = _art.State(state);
+            _shownFrame = null;
             _frameClock = 0f;
             _onStateDone = onDone;
             ShowFrame(_state.Frames.Length > 0 ? _state.Frames[0] : _state.Frame);
@@ -156,7 +158,9 @@ namespace Uomd.Scenes
 
         private void ShowFrame(string frame)
         {
+            if (frame == _shownFrame) return;
             if (!_art.Frames.TryGetValue(frame, out var rect)) return;
+            _shownFrame = frame;
             if (_sprites.TryGetValue(frame, out var sprite) && sprite != null) _image.style.backgroundImage = new StyleBackground(sprite);
             float scale = _baseScale * (float)_state.Scale;
             float w = rect.W * scale, h = rect.H * scale;

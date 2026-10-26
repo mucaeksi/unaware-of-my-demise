@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -314,7 +315,7 @@ namespace Uomd.Scenes
         /// <summary>D-27 heroes resonate in whole points (@uomd/economy resonancePoints), legacy catalogs in percent.</summary>
         private static string ResonanceText(int tier, double bonusPct, bool attributes)
         {
-            if (!attributes) return $"+{bonusPct}% HP/ATK/DEF";
+            if (!attributes) return $"+{bonusPct.ToString(CultureInfo.InvariantCulture)}% HP/ATK/DEF";
             int t = Math.Max(0, tier);
             return $"+{(t + 1) / 2} VIT, +{t / 2} POWER"; // packages/economy attributes.ts: vit ceil(t/2), power floor(t/2)
         }

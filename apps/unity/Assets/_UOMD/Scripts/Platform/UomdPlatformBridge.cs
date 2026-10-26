@@ -82,24 +82,39 @@ namespace Uomd.Platform
 
         public bool IsNativeAndroid => Application.platform == RuntimePlatform.Android;
 
-        private sealed class JniCallbackProxy : AndroidJavaProxy
+        [Preserve]
+        private sealed class JniCallbackProxy : AndroidJavaProxy, IDisposable
         {
             private readonly TaskCompletionSource<string> _tcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            private readonly CancellationTokenRegistration _ctr;
 
-            public JniCallbackProxy() : base(PackagePrefix + ".UomdUnityCallback") { }
+            public JniCallbackProxy(CancellationToken ct = default) : base(PackagePrefix + ".UomdUnityCallback")
+            {
+                if (ct.CanBeCanceled)
+                {
+                    _ctr = ct.Register(() => _tcs.TrySetCanceled(ct));
+                }
+            }
 
             public Task<string> Task => _tcs.Task;
 
             // Invoked from Java on Binder / UI thread
+            [Preserve]
             public void onSuccess(string jsonPayload)
             {
                 _tcs.TrySetResult(jsonPayload ?? "{}");
             }
 
             // Invoked from Java on Binder / UI thread
+            [Preserve]
             public void onError(string code, string message)
             {
                 _tcs.TrySetException(new UomdApiException(400, code ?? "native_error", message ?? "Native plugin call failed"));
+            }
+
+            public void Dispose()
+            {
+                _ctr.Dispose();
             }
         }
 
@@ -151,7 +166,7 @@ namespace Uomd.Platform
 
         public async Awaitable<string> SignInWithGoogleAsync(string serverClientId = "", CancellationToken ct = default)
         {
-            var proxy = new JniCallbackProxy();
+            using var proxy = new JniCallbackProxy(ct);
             using (var activity = GetCurrentActivity())
             using (var bridge = new AndroidJavaClass(SignInClass))
             {
@@ -170,7 +185,7 @@ namespace Uomd.Platform
 
         public async Awaitable SignOutGoogleAsync(CancellationToken ct = default)
         {
-            var proxy = new JniCallbackProxy();
+            using var proxy = new JniCallbackProxy(ct);
             using (var activity = GetCurrentActivity())
             using (var bridge = new AndroidJavaClass(SignInClass))
             {
@@ -194,7 +209,7 @@ namespace Uomd.Platform
             string? offerToken = null,
             CancellationToken ct = default)
         {
-            var proxy = new JniCallbackProxy();
+            using var proxy = new JniCallbackProxy(ct);
             using (var activity = GetCurrentActivity())
             using (var bridge = new AndroidJavaClass(BillingClass))
             {
@@ -213,7 +228,7 @@ namespace Uomd.Platform
 
         public async Awaitable<PlayPurchaseDto[]> QueryOwnedPurchasesAsync(CancellationToken ct = default)
         {
-            var proxy = new JniCallbackProxy();
+            using var proxy = new JniCallbackProxy(ct);
             using (var activity = GetCurrentActivity())
             using (var bridge = new AndroidJavaClass(BillingClass))
             {
@@ -234,7 +249,7 @@ namespace Uomd.Platform
 
         public async Awaitable<ConsentStateDto> InitAdsConsentAsync(bool underAgeOfConsent = false, CancellationToken ct = default)
         {
-            var proxy = new JniCallbackProxy();
+            using var proxy = new JniCallbackProxy(ct);
             using (var activity = GetCurrentActivity())
             using (var bridge = new AndroidJavaClass(AdsClass))
             {
@@ -248,7 +263,7 @@ namespace Uomd.Platform
 
         public async Awaitable ShowPrivacyOptionsFormAsync(CancellationToken ct = default)
         {
-            var proxy = new JniCallbackProxy();
+            using var proxy = new JniCallbackProxy(ct);
             using (var activity = GetCurrentActivity())
             using (var bridge = new AndroidJavaClass(AdsClass))
             {
@@ -261,7 +276,7 @@ namespace Uomd.Platform
 
         public async Awaitable<string> ShowRewardedAdAsync(string adUnitId, string userId, string customData, CancellationToken ct = default)
         {
-            var proxy = new JniCallbackProxy();
+            using var proxy = new JniCallbackProxy(ct);
             using (var activity = GetCurrentActivity())
             using (var bridge = new AndroidJavaClass(AdsClass))
             {

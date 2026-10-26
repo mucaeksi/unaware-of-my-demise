@@ -147,7 +147,6 @@ namespace Uomd.Scenes
     public sealed class UomdPatchStrip
     {
         private const float BarH = 10f, StripH = 110f;
-        private static readonly UomdScreenId[] Gameplay = { UomdScreenId.Battle, UomdScreenId.Story, UomdScreenId.Prologue };
 
         private readonly UomdSceneRouter _router;
         private readonly VisualElement _strip, _fill;
@@ -203,7 +202,7 @@ namespace Uomd.Scenes
             host.Add(_strip);
         }
 
-        private bool OnGameplay => Gameplay.Contains(_router.ActiveScreenId);
+        private bool OnGameplay => _router.ActiveScreenId is UomdScreenId.Battle or UomdScreenId.Story or UomdScreenId.Prologue;
 
         /// <summary>Called every frame by the router; renders only when the service status changed.</summary>
         public void Tick()
