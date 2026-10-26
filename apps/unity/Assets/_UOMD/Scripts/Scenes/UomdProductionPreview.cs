@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 using Uomd.Contracts;
 using Uomd.Core;
 using Uomd.Platform;
+using Uomd.Narrative;
 
 namespace Uomd.Scenes
 {
@@ -15,6 +16,7 @@ namespace Uomd.Scenes
         public const string RequestKey = "Uomd.ProductionReview.Request";
         public string scenario = "title";
         public int shot;
+        public string lineId = "";
         public bool paused, muted = true, reducedMotion, reduceFlash, subtitles = true, safeArea;
         public RebuildShotSettings presentation = new RebuildShotSettings();
     }
@@ -58,6 +60,11 @@ namespace Uomd.Scenes
                 case "boot": screen = UomdScreenId.Boot; break;
                 case "studio": screen = UomdScreenId.Studio; break;
                 case "title": screen = UomdScreenId.Title; break;
+                case "portrait/fadyme":
+                case "portrait/mahmut":
+                    screen = UomdScreenId.Story;
+                    if (string.IsNullOrEmpty(request.lineId)) request.lineId = request.scenario == "portrait/fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002";
+                    break;
                 default:
                     if (!request.scenario.StartsWith("prologue/", StringComparison.Ordinal)) throw new ArgumentException("This scenario is not rebuilt yet.");
                     var shots = Session.PrologueConfig.scenes;
@@ -77,6 +84,16 @@ namespace Uomd.Scenes
                 Session.ReduceFlash = request.reduceFlash;
                 Audio.SetPaused(false);
                 Audio.Muted = request.muted;
+                if (screen == UomdScreenId.Story)
+                {
+                    Session.ActiveStoryPath = "story/tutorial_t1_before.json";
+                    Session.ActiveStoryJson = await Patch.ReadTextAsync(Session.ActiveStoryPath);
+                    if (this == null) return;
+                    var scene = JsonUtility.FromJson<StorySceneDto>(Session.ActiveStoryJson);
+                    if (Array.FindIndex(scene.commands, c => c.line_id == request.lineId && (c.op == "say" || c.op == "narrate")) < 0)
+                        throw new ArgumentException("Unknown canonical tutorial line.");
+                    Audio.StopBgm(0.01f);
+                }
                 await NavigateToAsync(screen);
                 if (this == null) return;
                 if (screen == UomdScreenId.Title)
@@ -100,6 +117,8 @@ namespace Uomd.Scenes
             Audio.Muted = ProductionPreview.muted;
             Audio.SetPaused(ProductionPreview.paused);
             if (_previewSafeRoot == null) return;
+            var dialogue = _previewSafeRoot.Q("storyDialogue");
+            if (dialogue != null) dialogue.style.display = ProductionPreview.subtitles ? DisplayStyle.Flex : DisplayStyle.None;
             // Representative landscape cutout + gesture inset, in authored panel coordinates; not device evidence.
             _previewSafeRoot.style.marginLeft = _previewSafeRoot.style.marginRight = ProductionPreview.safeArea ? 96 : 0;
             _previewSafeRoot.style.marginTop = ProductionPreview.safeArea ? 28 : 0;

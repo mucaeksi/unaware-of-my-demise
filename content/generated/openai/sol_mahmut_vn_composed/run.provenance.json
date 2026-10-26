@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_mahmut_vn_composed",
+    "aspectRatio": "2:3",
+    "prompt_file": "content/generated/openai/sol_mahmut_vn_composed/prompt.txt",
+    "prompt": "Use case: identity-preserve. Production asset: a newly repainted standalone knee-up light-novel dialogue portrait of Mahmut for Unaware of My Demise.\n\nImage 1 is the existing OpenAI title illustration: use Mahmut's face, repaired armor, oxblood cloth, palette and painterly finish as the edit/style source. Image 2 is a historical canonical identity reference only, not finished artwork: preserve the face, costume construction and eight-point star identity, but do not retain its flat rendering or green background. Repaint the entire character as one coherent new illustration. Remove Fadyme, the bridge, eclipse, lanterns and all scenery.\n\nSubject: one adult human man, age 28, mature tired yet humane face, tousled dark-brown hair, amber-brown eyes, subtle jaw stubble. Repaired dark gunmetal half-plate with mismatched village-smith repairs, worn leather belts, gloves/gauntlets, torn matte oxblood scarf-cloak. Preserve the crimson/silver EIGHT-POINT Crown Guard star on his breastplate and the small round EMPTY BLACK SOCKET directly ABOVE it. No crown in that socket, no new crest, no cross-shaped symbol. Practical sheathed arming sword, plain iron-filled crest socket in its hilt, no drawn blade or combat effect.\n\nComposed expression: steady, level compassionate eyes, relaxed jaw, mouth closed, almost imperceptible warmth under fatigue. Three-quarter pose facing VIEWER-RIGHT for the left dialogue slot; eyes look toward his off-canvas companion at right. Relaxed upright adult stance. Right gauntleted hand rests loosely near his belt with clearly formed separate fingers; left hand lightly steadies the sheathed sword at hip, hands not crossed over the chest star. No salute, clenched fist, threatening grip or exaggerated heroic pose. The star and empty socket remain unobstructed.\n\nComposition: vertical 2:3 canvas, framed from full hair/shoulders to just below knees, with transparent safety margins around the outer head, elbows, cloak and sheath. Keep the entire visible sword hilt, hands and costume inside the canvas. Character occupies about 82% of canvas height. Face around the upper quarter; both hands and chest emblem readable above the lower third so the dialogue overlay does not cover key acting. Native high resolution, preferably 2048x3072 if supported; never artificially upscale a smaller native result.\n\nFinish: exactly the same Gothic light-novel anime finish as the supplied OpenAI title illustration: fine colored linework, softly cel-shaded adult face, painterly matte cloth folds, weathered leather and scuffed dull silver/gunmetal. Charcoal, muted oxblood, bone-ivory highlights, restrained amber-brown eyes. Neutral soft cool ambient light from upper left and one subtle muted warm rim, consistent with the Fadyme portrait set. No glossy 3D, plastic, neon, heavy black outlines or photorealism.\n\nOutput: TRUE TRANSPARENT ALPHA outside the man, including spaces between arms, cloak and sword. No green screen, painted checkerboard, background color, floor, cast shadow, fog, halo, frame, label, letters, UI, watermark, extra character or expression grid. One portrait only. Preserve Mahmut's approved identity, eight-point star and empty socket exactly while producing new finished pixels.\n\r\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_title_key_art_01/source.png",
+      "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+      "role": "openai_edit_style_and_identity_source"
+    },
+    {
+      "path": "content/specs/character_locks/mahmut_canonical_boydan_lock.jpg",
+      "sha256": "60587ba742b337bbf621f291300ccd06401bd6c43d94d4c3c4424fbe62a684bc",
+      "role": "historical_identity_reference_only"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_mahmut_vn_composed/source.png",
+      "sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+      "width": 1024,
+      "height": 1536,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Newly repainted portrait master with native transparent alpha. Native 1024x1536; final 2K/device/owner acceptance remain open. Bottom knee-up cloth crop is intentional. sol_composed is an explicit review variant; authored production emotion mappings remain unchanged until the expression set is ready."
+  }
+}

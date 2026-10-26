@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "asset_id": "sol_mahmut_vn_composed",
+  "class": "portrait",
+  "revision": 1,
+  "targets": {
+    "portraits": {
+      "mahmut": {
+        "emotions": {
+          "sol_composed": "sol_composed"
+        },
+        "images": {
+          "sol_composed": "art/portrait_mahmut_sol_composed.webp"
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+    "mime": "image/png",
+    "width": 1024,
+    "height": 1536,
+    "provenance_file": "content/generated/openai/sol_mahmut_vn_composed/run.provenance.json",
+    "provenance_sha256": "704b068976da0b7f1eafc9ea0447bd9c024e3af99d120e696bb3b4013b58edd1",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "c47619935150222749b41293828b9abf6e388fdeab302b7e420258b0f430c12c",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_title_key_art_01/source.png",
+        "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+        "role": "openai_edit_style_and_identity_source"
+      },
+      {
+        "path": "content/specs/character_locks/mahmut_canonical_boydan_lock.jpg",
+        "sha256": "60587ba742b337bbf621f291300ccd06401bd6c43d94d4c3c4424fbe62a684bc",
+        "role": "historical_identity_reference_only"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_mahmut_vn_composed.ingest.json",
+    "spec_sha256": "a8c6d6258e3c09e6c2ec77b195e841a453e3a0b6de6b783192861bd3e2079252",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "f6fb355dbaf497cdcf5940ebf109684a72159cf5462833052cf953299e3b8dcd"
+  },
+  "outputs": [
+    {
+      "path": "art/portrait_mahmut_sol_composed.webp",
+      "sha256": "d1579b0c9951f8ff60676e6403e7e659a9932a3ce041ea44720048089ae16534",
+      "pixels_sha256": "f660b2d4f62dc3dc4fa274a4c069bb3668047509204035f821293e9ccdabaab8",
+      "bytes": 263010,
+      "width": 768,
+      "height": 1152
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "2 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1024x1536"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "768x1152"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "263010 bytes <= 360000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

@@ -124,6 +124,10 @@ namespace Uomd.Core
             return null;
         }
 
+        /// <summary>An explicit image variant; unlike an emotion lookup, missing images never fall back.</summary>
+        public string? PortraitImage(string speaker, string imageKey) =>
+            _portraitImages.TryGetValue(speaker ?? "", out var images) && images.TryGetValue(imageKey ?? "", out var path) ? path : null;
+
         public IEnumerable<string> MusicIds => _music.Keys;
         public IEnumerable<string> VoiceIds => _voices.Keys;
 

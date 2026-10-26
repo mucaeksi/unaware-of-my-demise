@@ -22,6 +22,10 @@ namespace Uomd.EditorTools
         public ProductionPreviewRequest settings;
         public Rect subtitleBounds, titleBounds, safeAreaBounds;
         public int stageCameras, stageLights, stageParticles;
+        public string[] imagePaths = Array.Empty<string>();
+        public string[] relatedAssetIdentities = Array.Empty<string>();
+        public float bgmVolume, effectsVolume, voiceVolume;
+        public bool actualMuted;
     }
 
     [InitializeOnLoad]
@@ -61,7 +65,8 @@ namespace Uomd.EditorTools
                 await Awaitable.NextFrameAsync(router.destroyCancellationToken);
                 await Awaitable.EndOfFrameAsync(router.destroyCancellationToken);
                 var settings = JsonUtility.FromJson<ProductionPreviewRequest>(JsonUtility.ToJson(router.ProductionPreview));
-                var asset = ProductionReviewCatalog.Load(store.Root).FirstOrDefault(a => a.Scenario == settings.scenario);
+                var catalog = ProductionReviewCatalog.Load(store.Root);
+                var asset = catalog.FirstOrDefault(a => a.Scenario == settings.scenario);
                 if (asset != null) ProductionReviewCatalog.VerifyTarget(store.Root, asset);
                 string id = DateTime.UtcNow.ToString("yyyyMMddTHHmmssfff") + "_" + Guid.NewGuid().ToString("N").Substring(0, 8);
                 string relative = "captures/" + id;
@@ -82,10 +87,19 @@ namespace Uomd.EditorTools
                     shotElapsed = router.ActiveScreenId == UomdScreenId.Prologue ? opening.ShotElapsed : 0,
                     simulatedSafeArea = settings.safeArea, safeAreaDescription = settings.safeArea ? "96 left/right, 28 top, 48 bottom authored panel px; representative only" : "none",
                     safeAreaBounds = root.Q<VisualElement>("screen-host").worldBound,
-                    subtitleBounds = root.Q<Label>("shotBody")?.worldBound ?? Rect.zero,
-                    titleBounds = root.Q<VisualElement>("rebuildTitle")?.worldBound ?? Rect.zero
+                    subtitleBounds = root.Q<Label>("shotBody")?.worldBound ?? root.Q<Label>("storyBody")?.worldBound ?? Rect.zero,
+                    titleBounds = root.Q<VisualElement>("rebuildTitle")?.worldBound ?? Rect.zero,
+                    bgmVolume = router.Audio.BgmVolume, effectsVolume = router.Audio.SfxVolume, voiceVolume = router.Audio.VoiceVolume, actualMuted = router.Audio.Muted
                 };
                 if (metadata.shot >= 0) metadata.lineId = router.Session.PrologueConfig.scenes[metadata.shot].line_id;
+                if (router.ActiveScreenId == UomdScreenId.Story)
+                {
+                    var story = router.Controller<StoryScreenController>();
+                    metadata.lineId = story.CurrentLineId;
+                    metadata.imagePaths = story.ReviewImagePaths;
+                    metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
+                        .Select(a => a.Identity).ToArray();
+                }
                 var stage = GameObject.Find("SolCinematicStage");
                 if (stage != null)
                 {
@@ -95,7 +109,7 @@ namespace Uomd.EditorTools
                 }
                 ProductionReviewStore.AtomicWrite(ProductionReviewCatalog.Resolve(store.Root, "docs/review/" + relative + ".json"), JsonUtility.ToJson(metadata, true) + "\n");
                 var index = store.Read();
-                index.captures.Add(new ProductionReviewCapture { id = id, scenario = settings.scenario, image = relative + ".png", metadata = relative + ".json", sha256 = metadata.imageSha });
+                index.captures.Add(new ProductionReviewCapture { id = id, scenario = settings.scenario, lineId = metadata.lineId, image = relative + ".png", metadata = relative + ".json", sha256 = metadata.imageSha });
                 store.Write(index);
                 LastCapture = imagePath;
                 UnityEngine.Debug.Log("[Production Review] Saved Game view and source-bound metadata: " + relative);

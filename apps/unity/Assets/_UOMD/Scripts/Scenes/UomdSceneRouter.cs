@@ -125,7 +125,8 @@ namespace Uomd.Scenes
         {
 #if UNITY_EDITOR
             if (UomdEditorPreviewIsolation.Active && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
-                && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue) return;
+                && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue
+                && !(targetScreen == UomdScreenId.Story && ProductionPreview?.scenario.StartsWith("portrait/", StringComparison.Ordinal) == true)) return;
 #endif
             if (!_controllers.TryGetValue(targetScreen, out var nextController))
             {

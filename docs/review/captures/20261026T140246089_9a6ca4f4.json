@@ -1,0 +1,80 @@
+{
+    "schema": 1,
+    "id": "20261026T140246089_9a6ca4f4",
+    "capturedAt": "2026-10-26T14:02:46.2284805Z",
+    "sourceCommit": "6167d8743592943bf4d9fc7b6e6d232d487134d0",
+    "workingTreeScope": "M apps/api/seed/assets.sql\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdMediaCatalog.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs\n M apps/unity/Assets/_UOMD/Tests/EditMode/MediaCatalogTests.cs\n M apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs\n M content/base/art/art_manifest.json\n M content/base/release.json\n M content/provenance.json\n M docs/review/PRODUCTION_REVIEW.json\n M docs/review/index.html\n?? codex_watcher.ps1\n?? content/approved_art/art/portrait_fadyme_sol_composed.webp\n?? content/approved_art/art/portrait_mahmut_sol_composed.webp\n?? content/approved_art/entries/sol_fadyme_vn_composed.json\n?? content/approved_art/entries/sol_mahmut_vn_composed.json\n?? content/base/art/portrait_fadyme_sol_composed.webp\n?? content/base/art/portrait_mahmut_sol_composed.webp\n?? content/generated/openai/sol_fadyme_vn_composed/\n?? content/generated/openai/sol_mahmut_vn_composed/\n?? content/specs/image/sol_fadyme_vn_composed.ingest.json\n?? content/specs/image/sol_mahmut_vn_composed.ingest.json\n?? docs/review/captures/20261026T135759007_1dc42fa2.json\n?? docs/review/captures/20261026T135759007_1dc42fa2.png\n?? docs/review/captures/20261026T140245345_e191ee23.json\n?? docs/review/captures/20261026T140245345_e191ee23.png\n?? docs/review/captures/20261026T140246089_9a6ca4f4.png",
+    "contentRelease": "rel_0001",
+    "scenario": "portrait/fadyme",
+    "lineId": "tutorial_t1_before_003",
+    "assetId": "sol_fadyme_vn_composed",
+    "sourceSha": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+    "entrySha": "7f67bccd9e87cab206b7b4a75edbc6e1a516f0b688eccd04df0aa2c1f091f1fc",
+    "assetRevision": 1,
+    "shot": -1,
+    "width": 1600,
+    "height": 1200,
+    "errorsObserved": 0,
+    "shotElapsed": 0.0,
+    "simulatedSafeArea": false,
+    "editorOnly": true,
+    "safeAreaDescription": "none",
+    "imageSha": "c82e30b69b7749aa1606176c3db3f064e7ad381843b1b9b8263cfb7f7bfed13c",
+    "selectedAssetIdentity": "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+    "settings": {
+        "scenario": "portrait/fadyme",
+        "shot": 0,
+        "lineId": "tutorial_t1_before_003",
+        "paused": true,
+        "muted": true,
+        "reducedMotion": false,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": false,
+        "presentation": {
+            "scenario": "portrait/fadyme",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 194.4000244140625,
+        "y": 991.2000732421875,
+        "width": 1536.0001220703125,
+        "height": 55.199951171875
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 180.0,
+        "width": 1920.0,
+        "height": 1080.0
+    },
+    "stageCameras": 0,
+    "stageLights": 0,
+    "stageParticles": 0,
+    "imagePaths": [
+        "art/bg_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+    ],
+    "relatedAssetIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "bg_forest_whispering_ash_ordered@2:1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35"
+    ],
+    "bgmVolume": 0.699999988079071,
+    "effectsVolume": 0.8500000238418579,
+    "voiceVolume": 1.0,
+    "actualMuted": true
+}

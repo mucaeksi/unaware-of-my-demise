@@ -35,8 +35,8 @@ namespace Uomd.Tests
         {
             string root = ProductionReviewCatalog.RepositoryRoot;
             var assets = ProductionReviewCatalog.Load(root);
-            Assert.AreEqual(11, assets.Count(a => a.Candidate));
-            Assert.GreaterOrEqual(assets.Count, 445);
+            Assert.AreEqual(13, assets.Count(a => a.Candidate));
+            Assert.GreaterOrEqual(assets.Count, 447);
             foreach (var asset in assets.Where(a => a.Candidate))
             {
                 ProductionReviewCatalog.VerifyTarget(root, asset);
@@ -55,7 +55,8 @@ namespace Uomd.Tests
             var asset = new ProductionReviewAsset { Id = "fixture", Revision = 2, SourcePath = "source.png", SourceSha = Sha256Hash.ComputeFileHex(source), EntryPath = "entry.json", EntrySha = Sha256Hash.ComputeFileHex(entry) };
             var store = new ProductionReviewStore(_fixture);
             var index = store.Read();
-            index.captures.Add(new ProductionReviewCapture { id = "before", scenario = "prologue/reunion", sha256 = "capture-hash" });
+            index.captures.Add(new ProductionReviewCapture { id = "before", scenario = "prologue/reunion", lineId = "entry_past_008", sha256 = "capture-hash" });
+            index.captures.Add(new ProductionReviewCapture { id = "different-line", scenario = "prologue/reunion", lineId = "other-line", sha256 = "unrelated-hash" });
             store.Write(index);
             store.AddRequest(asset, "prologue/reunion", "entry_past_008", "Pull the camera back; preserve both faces.", "revision_requested", new RebuildShotSettings());
             var saved = new ProductionReviewStore(_fixture).Read().requests.Single();
@@ -64,6 +65,7 @@ namespace Uomd.Tests
             Assert.AreEqual(asset.EntrySha, saved.entrySha);
             Assert.AreEqual("entry_past_008", saved.lineId);
             CollectionAssert.Contains(saved.captures, "before:capture-hash");
+            CollectionAssert.DoesNotContain(saved.captures, "different-line:unrelated-hash");
             Assert.AreEqual(before, File.ReadAllText(entry));
             Assert.Throws<ArgumentException>(() => store.AddRequest(asset, "title", "", "approve", "owner_approved", new RebuildShotSettings()));
             File.WriteAllText(source, "changed");
@@ -87,6 +89,18 @@ namespace Uomd.Tests
             Assert.AreEqual("{\"shots\":[]}", File.ReadAllText(Directory.GetFiles(Path.Combine(_fixture, "docs/review/drafts/history")).Single()));
             settings.framing = float.NaN;
             Assert.Throws<ArgumentException>(() => store.ApplyDraft(settings));
+        }
+
+        [Test]
+        public void ExistingCaptureIndexesRecoverCanonicalLineFromTheirMetadata()
+        {
+            var store = new ProductionReviewStore(_fixture);
+            string path = ProductionReviewCatalog.Resolve(_fixture, "docs/review/captures/prior.json");
+            ProductionReviewStore.AtomicWrite(path, "{\"lineId\":\"entry_past_008\"}");
+            var index = new ProductionReviewIndex();
+            index.captures.Add(new ProductionReviewCapture { id = "prior", scenario = "prologue/reunion", metadata = "captures/prior.json" });
+            store.Write(index);
+            Assert.AreEqual("entry_past_008", new ProductionReviewStore(_fixture).Read().captures.Single().lineId);
         }
 
         [TestCase("../outside.json")]

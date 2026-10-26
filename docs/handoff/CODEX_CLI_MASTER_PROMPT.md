@@ -3,11 +3,7 @@
 **Owner:** Codex/Sol · **Snapshot:** 2026-10-26 · **Implementation baseline:** `51d8d638` on local `main`.
 **Workspace:** `E:\Unity\unaware-of-my-demise` · **Unity project:** `apps/unity/`.
 
-**Rolling checkpoint — 2026-10-26:** Production Review first slice is implemented and LOCAL_TESTED after baseline
-`3d81078b`. Use `Window → UOMD → Production Review`; [usage/limits](../review/README.md),
-[executed evidence](../evidence/sol-production-review-2026-10-26.json). Eleven candidates/full references, real initial
-controllers/shots, drafts, feedback, three viewports and persistent captures work. Story/tutorial/battle/hub adapters
-remain future work. The older snapshot counts below describe their original delivery, not newly rerun acceptance.
+**Rolling checkpoint — 2026-10-26:** Production Review is LOCAL_TESTED (`a034dd5a`); parent `6167d874` separately enables the owner-added Unity CLI Pipeline. A subsequent [portrait pilot](../media/SOL_STORY_PORTRAIT_PILOT.md) adds two new OpenAI alpha masters and real T1 line review, bringing the workbench to thirteen candidates / 447 records. Use `Window → UOMD → Production Review`; [usage/limits](../review/README.md), [portrait evidence](../evidence/sol-portrait-masters-2026-10-26.json), [initial workbench evidence](../evidence/sol-production-review-2026-10-26.json). The explicit `sol_composed` override is Editor review only; remaining expressions, tutorial stages, narrative UI, battle/hub adapters and full entry/device acceptance remain future work. Normal Story now honors authored music stop. Desktop Computer Use still denied Unity access despite owner authorization; MCP/menu/typed controls and actual Editor tests provide scoped evidence. The older snapshot counts below describe their original delivery, not newly rerun acceptance.
 
 This is an executable working brief for a new Codex CLI session. Read it completely, inspect the current checkout, then
 perform the owner's current task. It preserves this conversation's decisions, implementation and outstanding work.

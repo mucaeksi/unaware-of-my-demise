@@ -3,12 +3,12 @@
 First slice, LOCAL_TESTED on 2026-10-26. Open **Window → UOMD → Production Review** in Unity 6000.3.27f1.
 The window is left open after delivery; Play Mode is stopped and `UomdMain` is restored.
 
-1. Pick one of the eleven OpenAI candidates. Disable **OpenAI candidates** to browse all 445 records
-   (269 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
+1. Pick one of the thirteen OpenAI candidates. Disable **OpenAI candidates** to browse all 447 records
+   (271 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
 2. **Asset / provenance** shows stable ID/revision, native source dimensions, decoded alpha, exact source/prompt/reference
    hashes, QC, consumer mappings and existing owner feedback. Zoom/pan the checkerboard preview or compare a retained
    PNG/JPG source by its path and SHA-256. Ingest records and prior sources are never overwritten.
-3. **Real scene / directing** selects Boot, Studio, Title or any canonical opening shot. Choose
+3. **Real scene / directing** selects Boot, Studio, Title, any canonical opening shot or the two new portrait masters. Choose
    **Open isolated preview**, then **Restart / show selected** when changing scenarios. This runs the actual production
    controllers in `ProductionReviewPreview.unity`, with a fresh session and embedded `rel_0001` content.
 4. Pause/restart, audition audio, toggle subtitles/reduced motion/flash and choose 1920×1080, 2400×1080 or 1600×1200.
@@ -50,7 +50,11 @@ draft round-trip, actual fresh-Play camera/subtitle authoring, all nine real sho
 pixel sizes, exact preference/checkpoint/session snapshot preservation, normal startup/replay separately, EditMode 113/113,
 PlayMode audio 3/3, headless logic 101/101 and repository verification. See [executed evidence](../evidence/sol-production-review-2026-10-26.json).
 
-Limits: no story/tutorial/battle/hub preview adapters yet; those follow their rebuilt controllers/assets. Audio seeking,
+Portrait extension: `portrait/fadyme` and `portrait/mahmut` load the real T1 Story controller. Select a canonical line, then restart/show it. The static `sol_composed` master override is explicit: authored emotion mappings remain unchanged. Both new actors and the historical background are identified by consumed paths and source identities in capture metadata. Pause holds line/voice; subtitle visibility controls the dialogue panel. Stage camera/light/particle sliders and applying stage authoring are disabled for portraits. [Sources/prompts and exact scope](../media/SOL_STORY_PORTRAIT_PILOT.md); [latest evidence](../evidence/sol-portrait-masters-2026-10-26.json).
+
+Latest extension checks: EditMode 115/115, PlayMode 3/3, logic 102/102, thirteen source chains, normal T1 music stop and unchanged preference snapshot, three pixel sizes, Editor/player reference compile and repository verification PASS. Two genuine agent QC notes added; no owner acceptance created.
+
+Limits: full story/tutorial/battle/hub authoring adapters remain future work; portrait masters have only the scoped adapter above. Audio seeking,
 layered actors/rigging, generating raster revisions from the window, physical Android validation and final art acceptance
-remain separate work. No new media was generated or paid service called. Desktop pointer automation was denied Unity
+remain separate work. The initial workbench generated no media. The portrait extension generated two OpenAI images through the built-in tool; no Gemini/provider API generation was run and no undisclosed cost is claimed. Desktop pointer automation was denied Unity
 access by the host; Unity MCP/menu/public entry points and Editor tests were used, so manual pointer acceptance is unverified.

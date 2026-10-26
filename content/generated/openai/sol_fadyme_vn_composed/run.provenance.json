@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-26",
+  "spec": {
+    "id": "sol_fadyme_vn_composed",
+    "aspectRatio": "2:3",
+    "prompt_file": "content/generated/openai/sol_fadyme_vn_composed/prompt.txt",
+    "prompt": "Use case: identity-preserve. Production asset: a newly repainted standalone knee-up light-novel dialogue portrait of Fadyme Veyr for Unaware of My Demise.\n\nImage 1 is the existing OpenAI title illustration: use Fadyme's face, hood, palette, painterly material and finish as the edit/style source. Image 2 is a historical canonical identity reference only, not finished artwork: preserve its face, costume construction and bell identity, but do not retain its flat rendering or green background. Repaint the entire character as one coherent new illustration. Remove Mahmut, the bridge, eclipse, lanterns and all scenery.\n\nSubject: one adult woman, age 22, mature refined face, violet eyes, layered pale ASH-BLONDE hair with a natural warm-grey undertone. Raised deep plum-black pilgrim hood, fine silver-lilac thorn/vine embroidery along its rim, tiny silver bell pin beside her face, wrapped PLAIN WHITE CLOTH scarf, dark gloves, dignified high-neck black/plum dress with silver-lilac embroidery, worn leather double belts and restrained silver chains. No tiara on top of the hood, no lace jabot, no wings/elf ears, no exposed cleavage, no white curse streak or new story symbol.\n\nComposed expression: a small quiet closed-mouth half-smile, a trace of fatigue in the eyes, calm agency and warmth without coyness. Three-quarter pose facing VIEWER-LEFT for the right dialogue slot; eyes look toward her off-canvas companion at left. Upright relaxed adult posture. Both hands clearly separated and anatomically correct near her waist: one gloved hand loosely holds the silver chain, with her small silver bell hanging fully visible beside her hip; the other rests naturally near the belt. Keep both hands and the whole bell above the lower third. No spell, glow or combat gesture.\n\nComposition: vertical 2:3 canvas, full hood and shoulders visible, framed from head to just below knees with 6–8% transparent safety margin on all outer edges; no cropped fingers, cloak edge, hood, chain or bell. Character occupies about 82% of canvas height. Keep the face around the upper quarter, and the face/hands/bell readable above the dialogue overlay. Native high resolution, preferably 2048x3072 if supported; never artificially upscale a lower native result.\n\nFinish: the same refined Gothic light-novel anime finish as image 1: fine colored linework, softly cel-shaded adult face, painterly matte cloth folds, worn leather and delicate cold silver. Charcoal-plum, bone ivory, silver-lilac, very restrained muted amber rim; soft cool ambient light from upper left. Neutral stable character lighting appropriate over different scene paintings. No glossy 3D, plastic, neon, heavy black outlines or photorealism.\n\nOutput: TRUE TRANSPARENT ALPHA outside the character, including the empty spaces between arms, chain and cloak. No green screen, checkerboard painted into pixels, background color, floor, cast shadow, smoke, aura, frame, label, letters, UI, watermark or other character. One portrait only, no expression grid. Preserve Fadyme's approved identity and costume exactly while producing new finished pixels.\n\r\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_title_key_art_01/source.png",
+      "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+      "role": "openai_edit_style_and_identity_source"
+    },
+    {
+      "path": "content/specs/character_locks/fadyme_canonical_boydan_lock.jpg",
+      "sha256": "9745863cdb6579e04f9df790018898aefbb85e96d8a76616553a097d0b2e41d4",
+      "role": "historical_identity_reference_only"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+      "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+      "width": 1024,
+      "height": 1536,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "Newly repainted portrait master with native transparent alpha. Native 1024x1536; final 2K/device/owner acceptance remain open. Bottom knee-up cloth crop is intentional. sol_composed is an explicit review variant; authored production emotion mappings remain unchanged until the expression set is ready."
+  }
+}

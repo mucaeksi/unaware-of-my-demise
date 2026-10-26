@@ -44,6 +44,18 @@ namespace Uomd.Tests
         }
 
         [Test]
+        public void PortraitMasterVariantsAreExplicitAndCannotFallBackOrChangeAuthoredEmotions()
+        {
+            var catalog = Load();
+            foreach (string character in new[] { "fadyme", "mahmut" })
+            {
+                Assert.AreEqual("art/portrait_" + character + "_sol_composed.webp", catalog.PortraitImage(character, "sol_composed"));
+                Assert.AreEqual("art/portrait_" + character + "_composed.webp", catalog.Portrait(character, "composed"));
+                Assert.IsNull(catalog.PortraitImage(character, "missing_review_variant"));
+            }
+        }
+
+        [Test]
         public void EveryCatalogFileExistsInTheRelease()
         {
             var catalog = Load();

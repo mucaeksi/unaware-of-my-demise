@@ -25,6 +25,54 @@
                 "light": 1.0,
                 "particles": true
             }
+        },
+        {
+            "id": "c0b9f88801664a159789116e986c187b",
+            "createdAt": "2026-10-26T14:11:11.3495089Z",
+            "kind": "agent_qc_note",
+            "assetId": "sol_fadyme_vn_composed",
+            "sourceSha": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+            "entrySha": "7f67bccd9e87cab206b7b4a75edbc6e1a516f0b688eccd04df0aa2c1f091f1fc",
+            "scenario": "portrait/fadyme",
+            "lineId": "tutorial_t1_before_003",
+            "request": "Agent QC: new OpenAI alpha portrait master rendered by the real T1 Story controller at the canonical line. Faces, hood/scarf, star/socket and bell identity checks performed; 1920x1080, 2400x1080 with simulated insets, and 1600x1200 inspected across the shared two-actor composition. Explicit sol_composed override only; this is a static master review, not authored expression/motion acceptance. Historical background and UI remain reference material. Complete expression set, scene/UI rebuild, owner acceptance and physical-device QC remain pending.",
+            "outcome": "open",
+            "revision": 1,
+            "captures": [
+                "20261026T135759007_1dc42fa2:2ed5d8c448bdc488c0896f5be3034d2948f26d694d38cb3d8b421e36f34fa887",
+                "20261026T140245345_e191ee23:5cededee65f46b441c637f68c979205ca9ff473415ea8a7ab5aa524bda028727",
+                "20261026T140246089_9a6ca4f4:c82e30b69b7749aa1606176c3db3f064e7ad381843b1b9b8263cfb7f7bfed13c"
+            ],
+            "presentation": {
+                "scenario": "portrait/fadyme",
+                "framing": 1.0,
+                "subtitleBottom": 128.0,
+                "light": 1.0,
+                "particles": true
+            }
+        },
+        {
+            "id": "e3909bbafb934b129d8587bf9d054021",
+            "createdAt": "2026-10-26T14:11:11.4215091Z",
+            "kind": "agent_qc_note",
+            "assetId": "sol_mahmut_vn_composed",
+            "sourceSha": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+            "entrySha": "97be9a74db1ee535a237069f4cd77e5e40a933d1a813a426361f8ed4c7990c75",
+            "scenario": "portrait/mahmut",
+            "lineId": "tutorial_t1_before_002",
+            "request": "Agent QC: new OpenAI alpha portrait master rendered by the real T1 Story controller at the canonical line. Faces, hood/scarf, star/socket and bell identity checks performed; 1920x1080, 2400x1080 with simulated insets, and 1600x1200 inspected across the shared two-actor composition. Explicit sol_composed override only; this is a static master review, not authored expression/motion acceptance. Historical background and UI remain reference material. Complete expression set, scene/UI rebuild, owner acceptance and physical-device QC remain pending.",
+            "outcome": "open",
+            "revision": 1,
+            "captures": [
+                "20261026T140246942_cc8bb2bc:70f610ae2af28e598044c2c9dfb7e76932314207938b62a8959523e0a1de9e97"
+            ],
+            "presentation": {
+                "scenario": "portrait/mahmut",
+                "framing": 1.0,
+                "subtitleBottom": 128.0,
+                "light": 1.0,
+                "particles": true
+            }
         }
     ],
     "captures": [
@@ -33,35 +81,72 @@
             "image": "captures/20261026T122519861_444a234e.png",
             "sha256": "3bbfc885d25275681168377381d46d379af70a585dbeef30cb75d793a7c9115a",
             "metadata": "captures/20261026T122519861_444a234e.json",
-            "scenario": "studio"
+            "scenario": "studio",
+            "lineId": ""
         },
         {
             "id": "20261026T122520481_16fec602",
             "image": "captures/20261026T122520481_16fec602.png",
             "sha256": "bb70e13575256f81c7c6e76d9c077a2cb0940417015874af8e6479b3a751dbf7",
             "metadata": "captures/20261026T122520481_16fec602.json",
-            "scenario": "title"
+            "scenario": "title",
+            "lineId": ""
         },
         {
             "id": "20261026T122521399_5e9dddd7",
             "image": "captures/20261026T122521399_5e9dddd7.png",
             "sha256": "18eadfd8d0de188b82669ef06c2caaed452874a10fda4e83a3878f6a413d0f86",
             "metadata": "captures/20261026T122521399_5e9dddd7.json",
-            "scenario": "prologue/reunion"
+            "scenario": "prologue/reunion",
+            "lineId": "entry_past_008"
         },
         {
             "id": "20261026T122522140_7ec60ec4",
             "image": "captures/20261026T122522140_7ec60ec4.png",
             "sha256": "d59c34e862321a35d4483ef84cabeae41752bedad899cdf77e630fb9373e1300",
             "metadata": "captures/20261026T122522140_7ec60ec4.json",
-            "scenario": "prologue/reunion"
+            "scenario": "prologue/reunion",
+            "lineId": "entry_past_008"
         },
         {
             "id": "20261026T122523140_3375df57",
             "image": "captures/20261026T122523140_3375df57.png",
             "sha256": "05c4106f6435f9dc61ffee6f1aa6936e5cd0ec7369c5470b14715fc15b639c84",
             "metadata": "captures/20261026T122523140_3375df57.json",
-            "scenario": "prologue/reunion"
+            "scenario": "prologue/reunion",
+            "lineId": "entry_past_008"
+        },
+        {
+            "id": "20261026T135759007_1dc42fa2",
+            "image": "captures/20261026T135759007_1dc42fa2.png",
+            "sha256": "2ed5d8c448bdc488c0896f5be3034d2948f26d694d38cb3d8b421e36f34fa887",
+            "metadata": "captures/20261026T135759007_1dc42fa2.json",
+            "scenario": "portrait/fadyme",
+            "lineId": "tutorial_t1_before_003"
+        },
+        {
+            "id": "20261026T140245345_e191ee23",
+            "image": "captures/20261026T140245345_e191ee23.png",
+            "sha256": "5cededee65f46b441c637f68c979205ca9ff473415ea8a7ab5aa524bda028727",
+            "metadata": "captures/20261026T140245345_e191ee23.json",
+            "scenario": "portrait/fadyme",
+            "lineId": "tutorial_t1_before_003"
+        },
+        {
+            "id": "20261026T140246089_9a6ca4f4",
+            "image": "captures/20261026T140246089_9a6ca4f4.png",
+            "sha256": "c82e30b69b7749aa1606176c3db3f064e7ad381843b1b9b8263cfb7f7bfed13c",
+            "metadata": "captures/20261026T140246089_9a6ca4f4.json",
+            "scenario": "portrait/fadyme",
+            "lineId": "tutorial_t1_before_003"
+        },
+        {
+            "id": "20261026T140246942_cc8bb2bc",
+            "image": "captures/20261026T140246942_cc8bb2bc.png",
+            "sha256": "70f610ae2af28e598044c2c9dfb7e76932314207938b62a8959523e0a1de9e97",
+            "metadata": "captures/20261026T140246942_cc8bb2bc.json",
+            "scenario": "portrait/mahmut",
+            "lineId": "tutorial_t1_before_002"
         }
     ]
 }

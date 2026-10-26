@@ -24,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "23c280690d1736cc10c8a64ce1b62778a63299f58218bc83abdfd61d97868e67",
-      "bytes": 23142,
+      "sha256": "897afcdfe9257f67ca50735261e75a51b4ead1d20a98646e161ca34e688d8a5d",
+      "bytes": 23352,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -93,6 +93,13 @@
       "kind": "portrait"
     },
     {
+      "path": "art/portrait_fadyme_sol_composed.webp",
+      "sha256": "e6e178c1d546419a5efeb3219446560f7e5359a160176730658471cbb94dda3d",
+      "bytes": 227028,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
       "path": "art/portrait_fadyme_warm.webp",
       "sha256": "f67b7c3fa1baec25c14707bb5d003619ebb57aa4a40fb8c8240e4b846d7c4b08",
       "bytes": 69290,
@@ -124,6 +131,13 @@
       "path": "art/portrait_mahmut_protective_resolve.webp",
       "sha256": "03c92c664aeea26c3fd82c28ca54cae28fb837a3c1a1523de84e4e376c4a28ff",
       "bytes": 80458,
+      "media_type": "image/webp",
+      "kind": "portrait"
+    },
+    {
+      "path": "art/portrait_mahmut_sol_composed.webp",
+      "sha256": "d1579b0c9951f8ff60676e6403e7e659a9932a3ce041ea44720048089ae16534",
+      "bytes": 263010,
       "media_type": "image/webp",
       "kind": "portrait"
     },

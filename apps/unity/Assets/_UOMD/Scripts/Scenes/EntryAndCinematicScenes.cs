@@ -91,6 +91,7 @@ namespace Uomd.Scenes
             public string Side;
             public string Emotion;
             public float BaseX;
+            public string Path;
         }
 
         private readonly UomdSceneRouter _router;
@@ -128,12 +129,37 @@ namespace Uomd.Scenes
         private float _typingElapsed;
         private int _generation;
         private string _lastShownPrefix;
+        private string _backgroundPath;
 
         public UomdScreenId ScreenId => UomdScreenId.Story;
 
         public StoryScreenController(UomdSceneRouter router) => _router = router;
 
-        private bool Calm => _router.Session.ReducedMotion;
+        private bool Calm => _router.Session.ReducedMotion || PortraitReview;
+        private bool PortraitReview
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario.StartsWith("portrait/", StringComparison.Ordinal) == true;
+#else
+                return false;
+#endif
+            }
+        }
+#if UNITY_EDITOR
+        public string CurrentLineId => _line?.lineId ?? "";
+        public string[] ReviewImagePaths
+        {
+            get
+            {
+                var paths = new List<string>();
+                if (_backgroundPath != null) paths.Add(_backgroundPath);
+                foreach (var actor in _actors.Values) paths.Add(actor.Path);
+                return paths.ToArray();
+            }
+        }
+#endif
 
         public async Awaitable OnEnterAsync(VisualElement screenRoot)
         {
@@ -165,6 +191,19 @@ namespace Uomd.Scenes
             _skip = false;
             _runner = new StoryRunner(_scene);
             _lastLineId = LastLineId(_scene);
+#if UNITY_EDITOR
+            if (PortraitReview)
+            {
+                foreach (string character in new[] { "fadyme", "mahmut" })
+                {
+                    var texture = await _router.Media.TextureAsync(PortraitPath(character, "composed"));
+                    if (generation != _generation) return;
+                    if (texture == null) throw new InvalidOperationException("Portrait master failed to load: " + character);
+                }
+                await _router.Media.TextureAsync(_router.Media.Catalog.Background(_scene.location_id));
+                if (generation != _generation) return;
+            }
+#endif
             Build(screenRoot);
             SetBackground(_scene.location_id);
             Pump();
@@ -200,8 +239,10 @@ namespace Uomd.Scenes
             AddRect(box, 64, 30, 1552, 1, rule);
             AddRect(box, 64, 222, 1552, 1, rule);
             var syncTrack = AddRect(box, 460, 221, 760, 3, new Color(UomdThemeTokens.Silver.r, UomdThemeTokens.Silver.g, UomdThemeTokens.Silver.b, 0.16f));
+            box.name = "storyDialogue";
             _syncFill = AddRect(syncTrack, 0, 0, 0, 3, UomdThemeTokens.GoldHi);
             _body = new Label { pickingMode = PickingMode.Ignore, enableRichText = true };
+            _body.name = "storyBody";
             _body.style.position = Position.Absolute;
             _body.style.left = 72;
             _body.style.top = 48;
@@ -253,6 +294,16 @@ namespace Uomd.Scenes
             _autoButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "AUTO", null, btnW, btnH, 19, _auto, ToggleAuto, "icon_relic_first_eclipse_watch"), skipX + btnW + gap, 58);
             _voiceButton = UomdScreenKit.AtRight(UomdScreenKit.MenuButton(_stage, "VOICE", null, btnW, btnH, 19, false, ReplayVoice, "icon_ui_bell"), skipX + 2 * (btnW + gap), 58);
             _voiceButton.style.display = DisplayStyle.None;
+#if UNITY_EDITOR
+            if (PortraitReview)
+            {
+                _skipButton.style.display = DisplayStyle.None;
+                var notice = UomdScreenKit.Text(_stage, "PORTRAIT MASTER REVIEW · sol_composed override · scene/UI art remains reference material", 18, UomdThemeTokens.GoldHi);
+                notice.style.position = Position.Absolute;
+                notice.style.left = 60;
+                notice.style.top = 112;
+            }
+#endif
 
             _choiceLayer = UomdScreenKit.Layer(_stage);
             _fadeVeil = UomdScreenKit.Layer(_stage, Color.black);
@@ -275,10 +326,11 @@ namespace Uomd.Scenes
         private void SetBackground(string locationId)
         {
             string path = _router.Media.Catalog.Background(locationId);
+            _backgroundPath = path;
             if (path == null) return;
             _background.Clear();
             var bg = UomdScreenKit.Backdrop(_background, _router.Media, path);
-            UomdGothicVfx.AttachLivingBackdrop(_background, bg, locationId, Calm, 0.85f);
+            if (!PortraitReview) UomdGothicVfx.AttachLivingBackdrop(_background, bg, locationId, Calm, 0.85f);
         }
 
         /// <summary>Runs runner events until one needs the player or time (a line, a choice, a wait, the end).</summary>
@@ -296,8 +348,8 @@ namespace Uomd.Scenes
                 {
                     case "background": SetBackground(e.locationId); break;
                     case "music":
-                        // TS StoryScene ignores "stop": the previous music carries over until the scene's first real cue
-                        if (!string.IsNullOrEmpty(e.cueId) && e.cueId != "stop") _router.Audio.PlayBgmCue(e.cueId);
+                        if (e.cueId == "stop") _router.Audio.StopBgm();
+                        else if (!string.IsNullOrEmpty(e.cueId)) _router.Audio.PlayBgmCue(e.cueId);
                         break;
                     case "fade":
                         UomdScreenKit.Fade(_fadeVeil, e.direction == "out" ? 1f : 0f, Mathf.RoundToInt(Mathf.Max(0.05f, e.seconds) * 1000f), 0, Calm);
@@ -310,6 +362,9 @@ namespace Uomd.Scenes
                         _waitLeft = Mathf.Max(0f, e.seconds);
                         return;
                     case "line":
+#if UNITY_EDITOR
+                        if (PortraitReview && e.lineId != _router.ProductionPreview.lineId) break;
+#endif
                         ShowLine(e);
                         return;
                     case "choice":
@@ -328,15 +383,17 @@ namespace Uomd.Scenes
 
         private void ShowActor(string character, string side, string emotion)
         {
-            string path = _router.Media.Catalog.Portrait(character, emotion);
+            string path = PortraitPath(character, emotion);
             if (path == null) return;
             HideActor(character, immediate: true);
             var stature = UomdCharacterStature.Get(character);
             bool left = side != "right";
             float baseX = left ? 460f : UomdScreenKit.RefWidth - 460f;
             float height = stature.VnTargetHeight;
+            if (PortraitReview) height *= 0.84f;
             float width = height * 2f / 3f; // portraits are 768×1152
             var image = UomdScreenKit.Image(_actorLayer, _router.Media, path, width, height, ScaleMode.ScaleToFit);
+            image.name = "storyActor_" + character;
             image.style.position = Position.Absolute;
             image.style.left = new Length(left ? 0 : 100, LengthUnit.Percent);
             image.style.marginLeft = (left ? baseX : baseX - UomdScreenKit.RefWidth) - width / 2f;
@@ -355,7 +412,17 @@ namespace Uomd.Scenes
             {
                 UomdScreenKit.After(image, 980, () => UomdGothicVfx.AttachWhiskAnimatePortrait(image, character, !flipHorizontal, Calm));
             }
-            _actors[character] = new Actor { Image = image, Side = left ? "left" : "right", Emotion = emotion, BaseX = baseX };
+            _actors[character] = new Actor { Image = image, Side = left ? "left" : "right", Emotion = emotion, BaseX = baseX, Path = path };
+        }
+
+        private string PortraitPath(string character, string emotion)
+        {
+#if UNITY_EDITOR
+            if (PortraitReview)
+                return _router.Media.Catalog.PortraitImage(character, "sol_composed")
+                    ?? throw new InvalidOperationException("The new portrait master is missing: " + character);
+#endif
+            return _router.Media.Catalog.Portrait(character, emotion);
         }
 
         private void Slide(VisualElement image, float x, int ms)
@@ -387,9 +454,10 @@ namespace Uomd.Scenes
         private void SetEmotion(string character, string emotion)
         {
             if (string.IsNullOrEmpty(emotion) || !_actors.TryGetValue(character, out var actor) || actor.Emotion == emotion) return;
-            string current = _router.Media.Catalog.Portrait(character, actor.Emotion);
-            string next = _router.Media.Catalog.Portrait(character, emotion);
+            string current = PortraitPath(character, actor.Emotion);
+            string next = PortraitPath(character, emotion);
             actor.Emotion = emotion;
+            actor.Path = next;
             if (next == null || next == current) return;
             _ = SwapPortrait(actor, next, _generation);
         }
@@ -512,6 +580,7 @@ namespace Uomd.Scenes
 
         private void Advance()
         {
+            if (PortraitReview) return;
             if (_finished || _choiceLayer.childCount > 0) return;
             _autoLeft = -1f;
             if (!_waiting) return;
@@ -584,6 +653,9 @@ namespace Uomd.Scenes
 
         public void OnTick(float deltaTime)
         {
+#if UNITY_EDITOR
+            if (PortraitReview && (_router.ProductionPreview.paused || _lineDone)) return;
+#endif
             if (_finished || _runner == null) return;
             if (_waitLeft >= 0f)
             {
@@ -623,6 +695,7 @@ namespace Uomd.Scenes
         {
             if (_finished) return;
             _finished = true;
+            if (PortraitReview) return;
             int holdOut = _scene.scene_id == "tutorial_t3_after" ? 2200 : 1200;
             UomdScreenKit.Fade(_fadeVeil, 1f, holdOut, 0, false);
             UomdScreenKit.After(_stage, holdOut, () => _ = _router.EntryFlow.StoryFinishedAsync());

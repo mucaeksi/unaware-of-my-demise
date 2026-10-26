@@ -17,6 +17,8 @@ three viewport sizes, safe-area simulation and persistent Game-view capture/gall
 normal startup/replay was checked separately. [Exact evidence](evidence/sol-production-review-2026-10-26.json) and
 [usage/limits](review/README.md). Story/tutorial/battle adapters, owner acceptance and physical-device gates remain open.
 
+Story portrait pilot is LOCAL_TESTED: two OpenAI alpha masters (native 1024×1536; 768×1152 exports), thirteen review candidates / 447 total records, real T1 canonical-line previews, three pixel sizes, pause and subtitle visibility. Normal T1 preserves authored portrait mappings and now honors music stop. EditMode 115/115, PlayMode 3/3, logic 102/102, Editor/player reference compile and npm verification PASS. No completed expression set, stage/UI rebuild or device acceptance is claimed. [Pilot and provenance](media/SOL_STORY_PORTRAIT_PILOT.md); [executed evidence](evidence/sol-portrait-masters-2026-10-26.json).
+
 ---
 
 # Build state — evidence and current gaps

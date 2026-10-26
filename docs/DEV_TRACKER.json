@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "3d81078b1f0f8c10d772b6f94aaf9ce68455d6f2",
+  "sourceCommit": "6167d8743592943bf4d9fc7b6e6d232d487134d0",
   "reviewedAt": "2026-10-26",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Production Review first slice LOCAL_TESTED; use it for owner revisions. Next: new story portraits, three tutorial stages and their review adapters, durable Continue/restart and real battle presentation.",
+    "nextProposed": "Portrait pilot LOCAL_TESTED: two new masters, real T1 line review and music-stop correction. Next: six remaining expression/body-language variants, three tutorial stages, narrative UI and durable Continue/restart; then real battle presentation.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped."
   },
   "now": [
+    {
+      "title": "D-35: two original portrait masters and real T1 review (2026-10-26)",
+      "detail": "LOCAL_TESTED: thirteen OpenAI candidates / 447 records; Fadyme and Mahmut native 1024x1536 alpha masters with exact references/prompts and 768x1152 exports. Real Story controller, canonical line selection, explicit review-only sol_composed override, three aspect ratios, pause and source-bound capture metadata. Normal T1 keeps authored emotion mappings and honors music stop. EditMode 115/115, PlayMode 3/3, logic 102/102, Editor/player compile and npm verify PASS. No owner approvals, push or device acceptance. Evidence: docs/evidence/sol-portrait-masters-2026-10-26.json. Enclosing delivery commit binds source; sourceCommit records its parent."
+    },
     {
       "title": "D-35: Unity Production Review first slice (2026-10-26)",
       "detail": "LOCAL_TESTED: Window/UOMD/Production Review; 11 OpenAI candidates + complete historical inventory; real isolated Boot/Studio/Title/9-shot preview; drafts, feedback, capture/gallery. EditMode 113/113, PlayMode 3/3, logic 101/101, reference compile Editor/player and npm verify PASS. Preference/session/checkpoint snapshot preserved; normal startup/replay checked separately. Evidence: docs/evidence/sol-production-review-2026-10-26.json. Story/tutorial/battle/hub adapters and owner/device acceptance remain open."

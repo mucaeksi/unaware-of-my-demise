@@ -1,0 +1,421 @@
+{
+  "schema": 1,
+  "status": "LOCAL_TESTED",
+  "verified_at": "2026-10-26T14:29:41.937109+00:00",
+  "parent_commit": "6167d8743592943bf4d9fc7b6e6d232d487134d0",
+  "source_scope": "Parent plus this portrait-pilot tree; enclosing local delivery commit binds final files. No push/deployment.",
+  "source_sha256_normalized_lf": {
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs": "68df7b5981a9b7fc85cc970e97800f86b2a355b6bc3923986e42263500b214f1",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs": "f3a3ad04d6c7f26ddac028bef9314e5389121153d73f4148cd8c29681642681b",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs": "9a350c695c1dd2d58c66cafa8365a4949e27ed59592c0693a79823535790b851",
+    "apps/unity/Assets/_UOMD/Scripts/Core/UomdMediaCatalog.cs": "6943a8bee99651b89ee4ed1247d4a0ea5c812810a0d7c8a9613d7723d7692746",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs": "7243fdd4830d3285af5895a098a4173841a05c35ad05f8bce19b8ece9f5a6448",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs": "3406f308a0ef8d9399d83b66323b40bab93d4004890070950d6f1418bcb1a18f",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs": "99c12793a9e7c25564e3a32caecdfabbf92b9dbd7d73b01e4a4fc7c0d318f841",
+    "apps/unity/Assets/_UOMD/Tests/EditMode/MediaCatalogTests.cs": "dcb6234866e84c3bb6f4bd4827763e62b322efbc98bf9b02e54cef4c29c8b569",
+    "apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs": "9e82f549bb059b7c0fb9b1fcd7dc8e6b1fd75ce6a911beeed4f2ed365e19f191"
+  },
+  "unity": {
+    "version": "6000.3.27f1",
+    "observed_instance": "unity@6259154c",
+    "menu": "Window/UOMD/Production Review"
+  },
+  "generation": {
+    "provider": "OpenAI",
+    "tool": "image_gen.imagegen",
+    "calls": 2,
+    "model": "not_disclosed_by_builtin_tool",
+    "cost_usd": null,
+    "external_gemini_api_generation_calls": 0,
+    "original_tool_artifacts_retained": true
+  },
+  "assets": [
+    {
+      "asset_id": "sol_fadyme_vn_composed",
+      "source": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+      "source_sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+      "native_dimensions": [
+        1024,
+        1536
+      ],
+      "upscaled": false,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "prompt_file": "content/generated/openai/sol_fadyme_vn_composed/prompt.txt",
+      "submitted_prompt_sha256": "2a5956f8a28ed74636e04fd9bbb4c7ce3eccd4af5300e48bf8cf9babc694dfd0",
+      "provenance": "content/generated/openai/sol_fadyme_vn_composed/run.provenance.json",
+      "provenance_sha256": "72b68bf6f9d1d7e20bf292d821ad1c9fadbc3a50ed8b94d314cc0df4267cabdb",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_title_key_art_01/source.png",
+          "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+          "role": "openai_edit_style_and_identity_source"
+        },
+        {
+          "path": "content/specs/character_locks/fadyme_canonical_boydan_lock.jpg",
+          "sha256": "9745863cdb6579e04f9df790018898aefbb85e96d8a76616553a097d0b2e41d4",
+          "role": "historical_identity_reference_only"
+        }
+      ],
+      "ingest_entry": "content/approved_art/entries/sol_fadyme_vn_composed.json",
+      "ingest_entry_sha256": "7f67bccd9e87cab206b7b4a75edbc6e1a516f0b688eccd04df0aa2c1f091f1fc",
+      "output": {
+        "path": "art/portrait_fadyme_sol_composed.webp",
+        "sha256": "e6e178c1d546419a5efeb3219446560f7e5359a160176730658471cbb94dda3d",
+        "pixels_sha256": "c1afb36f88dc8c9aa547f0511a35c6f032f488f86f97a3a7c4bcaca9e050bf76",
+        "bytes": 227028,
+        "width": 768,
+        "height": 1152
+      },
+      "consumer_variant": "sol_composed",
+      "automated_qc": "PASS",
+      "human_qc": "pending"
+    },
+    {
+      "asset_id": "sol_mahmut_vn_composed",
+      "source": "content/generated/openai/sol_mahmut_vn_composed/source.png",
+      "source_sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+      "native_dimensions": [
+        1024,
+        1536
+      ],
+      "upscaled": false,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "prompt_file": "content/generated/openai/sol_mahmut_vn_composed/prompt.txt",
+      "submitted_prompt_sha256": "c47619935150222749b41293828b9abf6e388fdeab302b7e420258b0f430c12c",
+      "provenance": "content/generated/openai/sol_mahmut_vn_composed/run.provenance.json",
+      "provenance_sha256": "704b068976da0b7f1eafc9ea0447bd9c024e3af99d120e696bb3b4013b58edd1",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_title_key_art_01/source.png",
+          "sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+          "role": "openai_edit_style_and_identity_source"
+        },
+        {
+          "path": "content/specs/character_locks/mahmut_canonical_boydan_lock.jpg",
+          "sha256": "60587ba742b337bbf621f291300ccd06401bd6c43d94d4c3c4424fbe62a684bc",
+          "role": "historical_identity_reference_only"
+        }
+      ],
+      "ingest_entry": "content/approved_art/entries/sol_mahmut_vn_composed.json",
+      "ingest_entry_sha256": "97be9a74db1ee535a237069f4cd77e5e40a933d1a813a426361f8ed4c7990c75",
+      "output": {
+        "path": "art/portrait_mahmut_sol_composed.webp",
+        "sha256": "d1579b0c9951f8ff60676e6403e7e659a9932a3ce041ea44720048089ae16534",
+        "pixels_sha256": "f660b2d4f62dc3dc4fa274a4c069bb3668047509204035f821293e9ccdabaab8",
+        "bytes": 263010,
+        "width": 768,
+        "height": 1152
+      },
+      "consumer_variant": "sol_composed",
+      "automated_qc": "PASS",
+      "human_qc": "pending"
+    }
+  ],
+  "captures": [
+    {
+      "image": "docs/review/captures/20261026T140245345_e191ee23.png",
+      "metadata": "docs/review/captures/20261026T140245345_e191ee23.json",
+      "sha256": "5cededee65f46b441c637f68c979205ca9ff473415ea8a7ab5aa524bda028727",
+      "scenario": "portrait/fadyme",
+      "line_id": "tutorial_t1_before_003",
+      "dimensions": [
+        2400,
+        1080
+      ],
+      "simulated_insets": true,
+      "consumed_image_paths": [
+        "art/bg_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "related_source_identities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "bg_forest_whispering_ash_ordered@2:1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35"
+      ],
+      "captured_source_commit": "6167d8743592943bf4d9fc7b6e6d232d487134d0"
+    },
+    {
+      "image": "docs/review/captures/20261026T140246089_9a6ca4f4.png",
+      "metadata": "docs/review/captures/20261026T140246089_9a6ca4f4.json",
+      "sha256": "c82e30b69b7749aa1606176c3db3f064e7ad381843b1b9b8263cfb7f7bfed13c",
+      "scenario": "portrait/fadyme",
+      "line_id": "tutorial_t1_before_003",
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "simulated_insets": false,
+      "consumed_image_paths": [
+        "art/bg_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "related_source_identities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "bg_forest_whispering_ash_ordered@2:1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35"
+      ],
+      "captured_source_commit": "6167d8743592943bf4d9fc7b6e6d232d487134d0"
+    },
+    {
+      "image": "docs/review/captures/20261026T140246942_cc8bb2bc.png",
+      "metadata": "docs/review/captures/20261026T140246942_cc8bb2bc.json",
+      "sha256": "70f610ae2af28e598044c2c9dfb7e76932314207938b62a8959523e0a1de9e97",
+      "scenario": "portrait/mahmut",
+      "line_id": "tutorial_t1_before_002",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "simulated_insets": false,
+      "consumed_image_paths": [
+        "art/bg_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "related_source_identities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "bg_forest_whispering_ash_ordered@2:1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35"
+      ],
+      "captured_source_commit": "6167d8743592943bf4d9fc7b6e6d232d487134d0"
+    },
+    {
+      "image": "docs/review/captures/20261026T135759007_1dc42fa2.png",
+      "metadata": "docs/review/captures/20261026T135759007_1dc42fa2.json",
+      "sha256": "2ed5d8c448bdc488c0896f5be3034d2948f26d694d38cb3d8b421e36f34fa887",
+      "scenario": "portrait/fadyme",
+      "line_id": "tutorial_t1_before_003",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "simulated_insets": false,
+      "consumed_image_paths": [
+        "art/bg_forest_whispering_ash.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "related_source_identities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "bg_forest_whispering_ash_ordered@2:1bfac1ddbf58930adc3b518892d99dfc2d064cff0e8fef21baa858aab1ea5e35"
+      ],
+      "captured_source_commit": "6167d8743592943bf4d9fc7b6e6d232d487134d0"
+    }
+  ],
+  "checks": {
+    "repository_verify": {
+      "command": "npm run verify",
+      "result": "PASS",
+      "workspace_tool_test_executions": 954,
+      "api_tests": 507,
+      "tools_tests": 81,
+      "reproduced_content_files": 218,
+      "note": "Exporter tests also run in tools suite."
+    },
+    "editmode": {
+      "result": "PASS",
+      "passed": 115,
+      "total": 115,
+      "job_id": "1bb46ae5a0ac4f33833e233957756bc2"
+    },
+    "playmode_audio": {
+      "result": "PASS",
+      "passed": 3,
+      "total": 3,
+      "job_id": "9a2bce52b4db486d8c5b9921197083fe"
+    },
+    "headless_logic": {
+      "result": "PASS",
+      "passed": 102,
+      "total": 102
+    },
+    "reference_compile_editor": {
+      "result": "PASS",
+      "assemblies": 12,
+      "errors": 0
+    },
+    "reference_compile_player": {
+      "result": "PASS",
+      "assemblies": 8,
+      "errors": 0
+    },
+    "reference_compile_limit": "Editor modules plus verified URP signatures; not a player artifact or device test.",
+    "skills": {
+      "result": "PASS",
+      "adapters": 66,
+      "canonical_sources": "unchanged"
+    },
+    "console": {
+      "project_errors": 0,
+      "capture_errors": 0,
+      "transport_warning": "MCP suppressed a duplicate resent command; no repeated mutation executed."
+    },
+    "source_chains": {
+      "result": "PASS",
+      "new_sources": 2,
+      "total_openai_candidates": 13,
+      "total_catalog_records": 447
+    },
+    "aspect_pause_probes": [
+      {
+        "bgm": "",
+        "height": 1080,
+        "image_paths": [
+          "art/bg_forest_whispering_ash.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "line": "tutorial_t1_before_003",
+        "pause_voice_delta": 0,
+        "scenario": "portrait/fadyme",
+        "width": 2400
+      },
+      {
+        "bgm": "",
+        "height": 1200,
+        "image_paths": [
+          "art/bg_forest_whispering_ash.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "line": "tutorial_t1_before_003",
+        "pause_voice_delta": 0,
+        "scenario": "portrait/fadyme",
+        "width": 1600
+      },
+      {
+        "bgm": "",
+        "height": 1080,
+        "image_paths": [
+          "art/bg_forest_whispering_ash.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "line": "tutorial_t1_before_002",
+        "pause_voice_delta": 0,
+        "scenario": "portrait/mahmut",
+        "width": 1920
+      }
+    ],
+    "canonical_line_selection": {
+      "result": "PASS",
+      "combinations": 28,
+      "lines_per_scenario": 14,
+      "observed": [
+        "portrait/fadyme:tutorial_t1_before_001",
+        "portrait/fadyme:tutorial_t1_before_002",
+        "portrait/fadyme:tutorial_t1_before_003",
+        "portrait/fadyme:tutorial_t1_before_004",
+        "portrait/fadyme:tutorial_t1_before_005",
+        "portrait/fadyme:tutorial_t1_before_006",
+        "portrait/fadyme:tutorial_t1_before_007",
+        "portrait/fadyme:tutorial_t1_before_008",
+        "portrait/fadyme:tutorial_t1_before_009",
+        "portrait/fadyme:tutorial_t1_before_010",
+        "portrait/fadyme:tutorial_t1_before_011",
+        "portrait/fadyme:tutorial_t1_before_012",
+        "portrait/fadyme:tutorial_t1_before_013",
+        "portrait/fadyme:tutorial_t1_before_014",
+        "portrait/mahmut:tutorial_t1_before_001",
+        "portrait/mahmut:tutorial_t1_before_002",
+        "portrait/mahmut:tutorial_t1_before_003",
+        "portrait/mahmut:tutorial_t1_before_004",
+        "portrait/mahmut:tutorial_t1_before_005",
+        "portrait/mahmut:tutorial_t1_before_006",
+        "portrait/mahmut:tutorial_t1_before_007",
+        "portrait/mahmut:tutorial_t1_before_008",
+        "portrait/mahmut:tutorial_t1_before_009",
+        "portrait/mahmut:tutorial_t1_before_010",
+        "portrait/mahmut:tutorial_t1_before_011",
+        "portrait/mahmut:tutorial_t1_before_012",
+        "portrait/mahmut:tutorial_t1_before_013",
+        "portrait/mahmut:tutorial_t1_before_014"
+      ]
+    },
+    "normal_story": {
+      "status": "PASS_SCOPED",
+      "isolated": false,
+      "screen": "Story",
+      "line": "tutorial_t1_before_001",
+      "bgm_before": "bgm_main_theme",
+      "bgm_after": "",
+      "image_paths": [
+        "art/bg_forest_whispering_ash.webp",
+        "art/portrait_mahmut_composed.webp",
+        "art/portrait_fadyme_composed.webp"
+      ],
+      "phase": "PreStory",
+      "stage": 1,
+      "scope": "Normal Boot/Studio/Title to T1 pre_story; no completion or account action"
+    },
+    "restoration": {
+      "prefs_before": "c3b3e613d23d600a67693d32ffb93edba301ebb92fc8f7c3e811649cf8a902fa",
+      "prefs_after": "c3b3e613d23d600a67693d32ffb93edba301ebb92fc8f7c3e811649cf8a902fa",
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "isolation": false,
+      "playing": false,
+      "playStart": "",
+      "reload_enabled": false,
+      "reload_options": "None",
+      "subtitle_probe": "PASS",
+      "normal_probe": "PASS"
+    },
+    "viewport_restoration": {
+      "restored_index": 9,
+      "expected_index": 9,
+      "restored_gizmos": true,
+      "expected_gizmos": true
+    },
+    "graphify": {
+      "result": "PASS",
+      "nodes": 6570,
+      "edges": 18007,
+      "communities": 263,
+      "code_only": true,
+      "llm_calls": 0
+    },
+    "pointer": {
+      "result": "BLOCKED_BY_HOST",
+      "attempted": "Computer Use access to Unity",
+      "returned": "Computer Use was not approved to use Unity",
+      "owner_authorized": true,
+      "fallback": "Actual Unity MCP/menu/typed controllers and Editor tests",
+      "limit": "No desktop pointer or physical touch acceptance claimed."
+    }
+  },
+  "review": {
+    "new_agent_qc_note_ids": [
+      "c0b9f88801664a159789116e986c187b",
+      "e3909bbafb934b129d8587bf9d054021"
+    ],
+    "owner_approvals_created": 0,
+    "variant_scope": "Static sol_composed master override in Editor only. Authored emotion consumers unchanged.",
+    "human_status": "pending",
+    "background_and_ui": "historical reference material",
+    "observed_layout_limit": "Historical dialogue panel occludes lower body and part of the bell tip; upcoming narrative UI pass."
+  },
+  "remaining": [
+    "Six distinct expression/body-language variants",
+    "Three new tutorial stages",
+    "Narrative/tutorial UI rebuild",
+    "Complete manual tutorial/Finish/Continue/restart acceptance",
+    "Owner art acceptance and physical Android",
+    "Final resolution/device/release gates"
+  ],
+  "pushed": false,
+  "deployed": false,
+  "unrelated_tree_preserved": [
+    "codex_watcher.ps1",
+    "owner Unity CLI Pipeline commit 6167d874"
+  ]
+}

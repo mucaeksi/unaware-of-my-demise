@@ -4,7 +4,7 @@ Active 2026-10-26. The root README is authoritative. Sol/Codex owns the project;
 
 1. Owner review tooling: first slice implemented and LOCAL_TESTED. Open `Window → UOMD → Production Review`; [usage](review/README.md), [evidence](evidence/sol-production-review-2026-10-26.json). Extend the same adapters as story/tutorial/battle screens are rebuilt; owner art/device gates remain separate.
 2. RB-01: rebuilt startup/studio/title and nine newly generated opening plates are implemented; current evidence is in `docs/evidence/sol-opening-2026-10-26.json`. Owner approved the first title image and continuing art direction.
-3. RB-02: produce new story portraits and all three tutorial stages, then rebuild narrative/tutorial interaction and verify durable Continue/restart.
+3. RB-02: two new Fadyme/Mahmut composed masters and a real T1 portrait-review adapter are LOCAL_TESTED ([pilot](media/SOL_STORY_PORTRAIT_PILOT.md)). Next produce the remaining six distinct expression/body-language variants and all three tutorial stages, then rebuild narrative/tutorial UI and verify durable Continue/restart. The neutral master override is review-only; historical backgrounds/UI and canonical emotion consumers remain migration work.
 4. Connect the rebuilt battle presentation to the unchanged deterministic engine; then recover operations, server campaign sessions and native first-binary foundations.
 5. Physical Android/signed-AAB acceptance precedes broad post-launch chapter/roster production.
 

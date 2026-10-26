@@ -67,6 +67,14 @@
       }
     },
     {
+      "output": "content/base/art/portrait_mahmut_sol_composed.webp",
+      "sha256": "d1579b0c9951f8ff60676e6403e7e659a9932a3ce041ea44720048089ae16534",
+      "sources": {
+        "generated:sol_mahmut_vn_composed@rev1": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca",
+        "entry": "f6fb355dbaf497cdcf5940ebf109684a72159cf5462833052cf953299e3b8dcd"
+      }
+    },
+    {
       "output": "content/base/art/portrait_fadyme_composed.webp",
       "sha256": "0fc6590c0c280a4d87f3955cb36d51cf7fc080972133b5d9e7f8a248d20657e7",
       "sources": {
@@ -96,6 +104,14 @@
       "sources": {
         "generated:fadyme_vn_wry@rev4": "17e0bd5cd9fa5c31cef5c6f7db25a81162e1eb9e1aa653f1a2c2f5e2633abb50",
         "entry": "528ca8ba7f07e8319b9dd2541a03f5910018e413ad20e26b13387d8c5925f313"
+      }
+    },
+    {
+      "output": "content/base/art/portrait_fadyme_sol_composed.webp",
+      "sha256": "e6e178c1d546419a5efeb3219446560f7e5359a160176730658471cbb94dda3d",
+      "sources": {
+        "generated:sol_fadyme_vn_composed@rev1": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "entry": "b4723c009753aa53a5f47e4d8d49dddaa1573fbdebaa670c5f56eea951e8a971"
       }
     },
     {
@@ -507,7 +523,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "23c280690d1736cc10c8a64ce1b62778a63299f58218bc83abdfd61d97868e67",
+      "sha256": "897afcdfe9257f67ca50735261e75a51b4ead1d20a98646e161ca34e688d8a5d",
       "sources": {}
     },
     {

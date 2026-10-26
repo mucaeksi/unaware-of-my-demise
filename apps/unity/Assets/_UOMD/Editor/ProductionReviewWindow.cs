@@ -82,6 +82,7 @@ namespace Uomd.EditorTools
             _selectedId = _selected.Id;
             if (_selected.Scenario.Length > 0)
             {
+                if (_request.scenario != _selected.Scenario) _request.lineId = "";
                 _request.scenario = _selected.Scenario;
                 _request.presentation = RebuildPresentationConfig.For(_request.scenario);
             }
@@ -273,7 +274,7 @@ namespace Uomd.EditorTools
         private void SceneInspector()
         {
             EditorGUILayout.LabelField("Real runtime controllers", EditorStyles.boldLabel);
-            var scenarios = new List<string> { "boot", "studio", "title" };
+            var scenarios = new List<string> { "boot", "studio", "title", "portrait/fadyme", "portrait/mahmut" };
             var prologue = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/entry/prologue.json")));
             scenarios.AddRange(JsonRead.Arr(prologue, "scenes").Select(s => "prologue/" + JsonRead.Str(s, "id")));
             int current = Math.Max(0, scenarios.IndexOf(_request.scenario));
@@ -281,11 +282,20 @@ namespace Uomd.EditorTools
             if (next != current)
             {
                 _request.scenario = scenarios[next];
+                _request.lineId = "";
                 _request.presentation = RebuildPresentationConfig.For(_request.scenario);
                 var asset = _assets.FirstOrDefault(a => a.Scenario == _request.scenario);
                 if (asset != null) SelectAsset(asset.Id);
             }
-            EditorGUILayout.HelpBox("Story, tutorial, battle and hub review adapters follow their rebuild. This slice previews Boot, Studio, Title and all nine opening shots.", MessageType.None);
+            EditorGUILayout.HelpBox("Portrait master previews use the real T-1 story controller with an explicit sol_composed override; background/UI remain historical references. Full story, battle and hub adapters follow their rebuild.", MessageType.None);
+            if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal))
+            {
+                var story = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/story/tutorial_t1_before.json")));
+                var lines = JsonRead.Arr(story, "commands").Where(c => JsonRead.Str(c, "op") == "say" || JsonRead.Str(c, "op") == "narrate").Select(c => JsonRead.Str(c, "line_id")).ToArray();
+                string defaultLine = _request.scenario == "portrait/fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002";
+                if (!lines.Contains(_request.lineId)) _request.lineId = defaultLine;
+                _request.lineId = lines[EditorGUILayout.Popup("Canonical line (restart to show)", Array.IndexOf(lines, _request.lineId), lines)];
+            }
             using (new EditorGUILayout.HorizontalScope())
             {
                 using (new EditorGUI.DisabledScope(EditorApplication.isPlayingOrWillChangePlaymode))
@@ -315,10 +325,14 @@ namespace Uomd.EditorTools
             _request.reduceFlash = EditorGUILayout.Toggle("Reduced flash", _request.reduceFlash);
             _request.subtitles = EditorGUILayout.Toggle("Subtitle block visible", _request.subtitles);
             _request.safeArea = EditorGUILayout.Toggle("Simulated cutout / gesture insets", _request.safeArea);
-            _request.presentation.framing = EditorGUILayout.Slider("Camera framing", _request.presentation.framing, 0.8f, 1.2f);
-            _request.presentation.subtitleBottom = EditorGUILayout.Slider("Subtitle bottom (authored px)", _request.presentation.subtitleBottom, 80, 320);
-            _request.presentation.light = EditorGUILayout.Slider("Stage light multiplier", _request.presentation.light, 0.2f, 2);
-            _request.presentation.particles = EditorGUILayout.Toggle("Stage particles", _request.presentation.particles);
+            bool stageAuthoring = _request.scenario == "studio" || _request.scenario.StartsWith("prologue/", StringComparison.Ordinal);
+            using (new EditorGUI.DisabledScope(!stageAuthoring))
+            {
+                _request.presentation.framing = EditorGUILayout.Slider("Camera framing", _request.presentation.framing, 0.8f, 1.2f);
+                _request.presentation.subtitleBottom = EditorGUILayout.Slider("Subtitle bottom (authored px)", _request.presentation.subtitleBottom, 80, 320);
+                _request.presentation.light = EditorGUILayout.Slider("Stage light multiplier", _request.presentation.light, 0.2f, 2);
+                _request.presentation.particles = EditorGUILayout.Toggle("Stage particles", _request.presentation.particles);
+            }
             if (EditorGUI.EndChangeCheck()) Run(() =>
             {
                 var router = ProductionReviewSession.Router;
@@ -334,9 +348,10 @@ namespace Uomd.EditorTools
             {
                 if (GUILayout.Button("Save Draft")) Run(() => { _store.SaveDraft(_request.presentation); _message = "Draft saved; runtime authoring unchanged."; });
                 if (GUILayout.Button("Load Draft")) Run(() => _request.presentation = _store.LoadDraft(_request.scenario));
+                using (new EditorGUI.DisabledScope(!stageAuthoring))
                 if (GUILayout.Button("Apply reviewed presentation")) Run(() =>
                 {
-                    if (_request.scenario == "title" || _request.scenario == "boot") throw new InvalidOperationException("This controller uses UXML/USS; stage authoring applies to Studio / opening shots.");
+                    if (_request.scenario != "studio" && !_request.scenario.StartsWith("prologue/", StringComparison.Ordinal)) throw new InvalidOperationException("Stage authoring applies to Studio / opening shots. Portrait masters are temporary review variants.");
                     _store.ApplyDraft(_request.presentation);
                     AssetDatabase.ImportAsset("Assets/_UOMD/Resources/Rebuild/Presentation.json");
                     _message = "Presentation saved to runtime authoring; prior config retained. Restart preview to verify. Art approval unchanged.";
@@ -396,6 +411,8 @@ namespace Uomd.EditorTools
             var prologue = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/entry/prologue.json")));
             var shot = JsonRead.Arr(prologue, "scenes").FirstOrDefault(s => "prologue/" + JsonRead.Str(s, "id") == _request.scenario);
             if (shot != null) line = JsonRead.Str(shot, "line_id");
+            if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal))
+                line = string.IsNullOrEmpty(_request.lineId) ? (_request.scenario == "portrait/fadyme" ? "tutorial_t1_before_003" : "tutorial_t1_before_002") : _request.lineId;
             _store.AddRequest(_selected, _selected.Scenario.Length > 0 ? _request.scenario : "asset", line, _note, kind, _request.presentation);
             _index = _store.Read();
             _message = "Saved to docs/review/PRODUCTION_REVIEW.json. Ingest approval unchanged.";

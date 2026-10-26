@@ -963,13 +963,15 @@
         "dry_humor": "dry_humor",
         "protective_resolve": "protective_resolve",
         "protective": "protective_resolve",
-        "watchful": "watchful"
+        "watchful": "watchful",
+        "sol_composed": "sol_composed"
       },
       "images": {
         "composed": "art/portrait_mahmut_composed.webp",
         "dry_humor": "art/portrait_mahmut_dry_humor.webp",
         "protective_resolve": "art/portrait_mahmut_protective_resolve.webp",
-        "watchful": "art/portrait_mahmut_watchful.webp"
+        "watchful": "art/portrait_mahmut_watchful.webp",
+        "sol_composed": "art/portrait_mahmut_sol_composed.webp"
       }
     },
     "fadyme": {
@@ -981,13 +983,15 @@
         "warm": "warm",
         "soft_smile": "warm",
         "wry": "wry",
-        "dry_amusement": "wry"
+        "dry_amusement": "wry",
+        "sol_composed": "sol_composed"
       },
       "images": {
         "composed": "art/portrait_fadyme_composed.webp",
         "resolve": "art/portrait_fadyme_resolve.webp",
         "warm": "art/portrait_fadyme_warm.webp",
-        "wry": "art/portrait_fadyme_wry.webp"
+        "wry": "art/portrait_fadyme_wry.webp",
+        "sol_composed": "art/portrait_fadyme_sol_composed.webp"
       }
     }
   },

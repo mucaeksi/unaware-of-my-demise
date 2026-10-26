@@ -82,4 +82,5 @@ The first workbench slice is implemented and locally tested: [usage](../review/R
 [evidence](../evidence/sol-production-review-2026-10-26.json). It browses the current candidates/reference inventory and
 previews real Boot/Studio/Title/opening shots with drafts, feedback and captures. Extend it for new story portraits and
 the three tutorial stages, followed by the real battle presentation.
+The next local delivery adds two new alpha portrait masters and a real T1 canonical-line adapter ([pilot](../media/SOL_STORY_PORTRAIT_PILOT.md), [evidence](../evidence/sol-portrait-masters-2026-10-26.json)). Thirteen candidates are now browsable. The neutral master override is explicit and Editor-only; six expression variants, three tutorial stages and narrative UI remain before consumer migration and complete RB-02 acceptance.
 Do not count old Gemini consumers, placeholder art, Editor captures or a local compile as a finished Android release.
