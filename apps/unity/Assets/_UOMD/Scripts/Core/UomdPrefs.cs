@@ -27,6 +27,9 @@ namespace Uomd.Core
 
         public static void Save(GameSessionState session, AudioDirector audio)
         {
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active) return;
+#endif
             PlayerPrefs.SetInt(Prefix + "reducedMotion", session.ReducedMotion ? 1 : 0);
             PlayerPrefs.SetInt(Prefix + "reduceFlash", session.ReduceFlash ? 1 : 0);
             PlayerPrefs.SetString(Prefix + "battleLayout", session.BattleHudLayout);

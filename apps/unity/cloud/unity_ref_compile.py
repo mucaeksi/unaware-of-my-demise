@@ -189,6 +189,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--fetch", action="store_true")
     parser.add_argument("--editor-data", type=Path)
+    parser.add_argument("--player-only", action="store_true", help="Compile player assemblies without UNITY_EDITOR or test assemblies")
     args = parser.parse_args()
 
     version, changeset = editor_version()
@@ -209,6 +210,9 @@ def main() -> int:
     built, skipped, stubbed = [], {}, []
     for name, path in defs.items():
         spec = json.loads(path.read_text())
+        is_editor = spec.get("includePlatforms") == ["Editor"]
+        if args.player_only and (is_editor or "UNITY_INCLUDE_TESTS" in spec.get("defineConstraints", [])):
+            continue
         refs = spec.get("references", [])
         uomd = [r for r in refs if r in defs]
         test_runner = {"UnityEngine.TestRunner", "UnityEditor.TestRunner"}
@@ -216,11 +220,12 @@ def main() -> int:
         if foreign:
             skipped[name] = "references package assemblies not compiled here: " + ", ".join(foreign)
             continue
-        is_editor = spec.get("includePlatforms") == ["Editor"]
-        dlls = engine + (editor if is_editor else [])
+        # Runtime assemblies also see UNITY_EDITOR while imported in the Editor. Editor tools may depend on those
+        # guarded typed entry points; --player-only separately proves their exclusion from a shipping compilation.
+        dlls = engine + ([] if args.player_only else editor)
         if "nunit.framework.dll" in spec.get("precompiledReferences", []) and nunit:
             dlls.append(nunit)
-        defines = DEFINES + (["UNITY_EDITOR"] if is_editor else []) + spec.get("defineConstraints", [])
+        defines = DEFINES + ([] if args.player_only else ["UNITY_EDITOR"]) + spec.get("defineConstraints", [])
         folder = OUT / name
         folder.mkdir()
         sources = own_sources(path, asmdefs)

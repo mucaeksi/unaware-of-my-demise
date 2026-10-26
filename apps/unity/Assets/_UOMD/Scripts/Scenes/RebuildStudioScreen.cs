@@ -26,6 +26,7 @@ namespace Uomd.Scenes
             _copy = root.Q<VisualElement>("studioCopy");
             _status = root.Q<Label>("studioStatus");
             _stage = new RebuildCinematicStage(root, _router.Media, true, _router.Session.ReducedMotion);
+            _stage.ApplySettings(RebuildPresentationConfig.For("studio"));
             _router.Audio.PlayBgmCue("bgm_main_theme");
             string path = _router.Media.Catalog.Ui("sol_studio_mark");
             var texture = await _router.Media.TextureAsync(path);
@@ -39,6 +40,16 @@ namespace Uomd.Scenes
         public void OnTick(float deltaTime)
         {
             if (!_ready) return;
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active)
+            {
+                var review = _router.ProductionPreview;
+                _stage.ApplySettings(review.presentation);
+                _stage.Tick(review.paused ? 0 : Time.unscaledDeltaTime, 0, _router.Session.ReducedMotion);
+                _copy.style.opacity = 1;
+                return;
+            }
+#endif
             deltaTime = Time.unscaledDeltaTime;
             _elapsed += deltaTime;
             _stage?.Tick(deltaTime, 0, _router.Session.ReducedMotion);

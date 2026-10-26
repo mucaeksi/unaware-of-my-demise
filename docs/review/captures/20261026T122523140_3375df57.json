@@ -1,0 +1,65 @@
+{
+    "schema": 1,
+    "id": "20261026T122523140_3375df57",
+    "capturedAt": "2026-10-26T12:25:23.2974806Z",
+    "sourceCommit": "3d81078b1f0f8c10d772b6f94aaf9ce68455d6f2",
+    "workingTreeScope": "M apps/unity/Assets/_UOMD/Scripts/Core/PatchManager.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdPrefs.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCinematicStage.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPrologueScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStudioScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs\n M apps/unity/ProjectSettings/ProjectSettings.asset\n M apps/unity/cloud/unity_ref_compile.py\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewPreview.unity\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewPreview.unity.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewSession.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewSession.cs.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs.meta\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Presentation.json\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Presentation.json.meta\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEditorPreviewIsolation.cs\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEditorPreviewIsolation.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPresentationConfig.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPresentationConfig.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs.meta\n?? apps/unity/Assets/_UOMD/Tests/Editor.meta\n?? apps/unity/Assets/_UOMD/Tests/Editor/\n?? codex_watcher.ps1\n?? docs/review/",
+    "contentRelease": "rel_0001",
+    "scenario": "prologue/reunion",
+    "lineId": "entry_past_008",
+    "assetId": "sol_prologue_reunion",
+    "sourceSha": "6367b9b4127f140fa3b5f7f4444694fc16cc1e6aa640b129b94635038d8846ae",
+    "entrySha": "91ffb510a3de5e795ec5803b6c1d8404314fba8a54495365fe382b1049d0a7bf",
+    "assetRevision": 1,
+    "shot": 7,
+    "width": 1600,
+    "height": 1200,
+    "errorsObserved": 0,
+    "shotElapsed": 0.09125349298119545,
+    "simulatedSafeArea": false,
+    "editorOnly": true,
+    "safeAreaDescription": "none",
+    "imageSha": "05c4106f6435f9dc61ffee6f1aa6936e5cd0ec7369c5470b14715fc15b639c84",
+    "selectedAssetIdentity": "sol_prologue_reunion@1:6367b9b4127f140fa3b5f7f4444694fc16cc1e6aa640b129b94635038d8846ae",
+    "settings": {
+        "scenario": "prologue/reunion",
+        "shot": 7,
+        "paused": true,
+        "muted": true,
+        "reducedMotion": true,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": false,
+        "presentation": {
+            "scenario": "prologue/reunion",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 211.20001220703126,
+        "y": 1029.5999755859375,
+        "width": 1497.60009765625,
+        "height": 99.60009765625
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 180.0,
+        "width": 1920.0,
+        "height": 1080.0
+    },
+    "stageCameras": 1,
+    "stageLights": 2,
+    "stageParticles": 0
+}

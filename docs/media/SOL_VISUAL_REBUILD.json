@@ -5130,5 +5130,12 @@
       "replacement_status": "pending",
       "replacement_asset_id": null
     }
-  ]
+  ],
+  "review_workbench": {
+    "status": "LOCAL_TESTED_FIRST_SLICE",
+    "menu": "Window/UOMD/Production Review",
+    "guide": "docs/review/README.md",
+    "evidence": "docs/evidence/sol-production-review-2026-10-26.json",
+    "policy": "Read-only ingest projection plus scene feedback/capture links. No additional art or final/device approval."
+  }
 }

@@ -31,6 +31,9 @@ namespace Uomd.Scenes
             _router.Session.IsReplayingIntro = false;
             Resources.Load<VisualTreeAsset>("Rebuild/Boot").CloneTree(screenRoot);
             var statusLbl = screenRoot.Q<Label>("bootStatus");
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active) { statusLbl.text = "Production Review — base content only"; return; }
+#endif
 
             try
             {

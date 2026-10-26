@@ -2,7 +2,7 @@
 
 Active 2026-10-26. The root README is authoritative. Sol/Codex owns the project; local workspace is `E:/Unity/unaware-of-my-demise`, verified local commits on `main`, owner pushes. [Execution plan](handoff/SOL_REBUILD_PLAN.md), [visual obligations](media/SOL_VISUAL_REBUILD.json).
 
-1. Owner review tooling (planned): implement the first Editor-only Production Review workbench slice in [the CLI handoff](handoff/CODEX_CLI_MASTER_PROMPT.md#9-owner-inspection-and-revision-workflow--first-new-implementation-task): browse eleven candidates, preview real opening scenes/shots, record revision requests, capture and restore state safely.
+1. Owner review tooling: first slice implemented and LOCAL_TESTED. Open `Window → UOMD → Production Review`; [usage](review/README.md), [evidence](evidence/sol-production-review-2026-10-26.json). Extend the same adapters as story/tutorial/battle screens are rebuilt; owner art/device gates remain separate.
 2. RB-01: rebuilt startup/studio/title and nine newly generated opening plates are implemented; current evidence is in `docs/evidence/sol-opening-2026-10-26.json`. Owner approved the first title image and continuing art direction.
 3. RB-02: produce new story portraits and all three tutorial stages, then rebuild narrative/tutorial interaction and verify durable Continue/restart.
 4. Connect the rebuilt battle presentation to the unchanged deterministic engine; then recover operations, server campaign sessions and native first-binary foundations.

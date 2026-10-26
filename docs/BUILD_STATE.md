@@ -10,9 +10,12 @@ removed. The owner approved the first title image's visual quality and direction
 [opening evidence](evidence/sol-opening-2026-10-26.json). Tutorials, battle, hub/system screens and device acceptance remain
 in the rebuild queue; this is scoped local evidence.
 
-The owner subsequently requested a reusable CLI context/master prompt and direct art/scene inspection and revision.
-[CODEX_CLI_MASTER_PROMPT](handoff/CODEX_CLI_MASTER_PROMPT.md) documents that context and specifies the next Editor-only
-Production Review workbench. This documentation delivery does not implement the workbench or refresh runtime test results.
+Production Review first slice is now LOCAL_TESTED: `Window → UOMD → Production Review`, eleven OpenAI candidates and
+the complete reference inventory, isolated real opening controllers, playback/directing drafts, source-bound requests,
+three viewport sizes, safe-area simulation and persistent Game-view capture/gallery. Unity EditMode 113/113, PlayMode
+3/3, headless logic 101/101; `npm run verify` PASS. Preview preferences/checkpoints/session hashes match before/after;
+normal startup/replay was checked separately. [Exact evidence](evidence/sol-production-review-2026-10-26.json) and
+[usage/limits](review/README.md). Story/tutorial/battle adapters, owner acceptance and physical-device gates remain open.
 
 ---
 

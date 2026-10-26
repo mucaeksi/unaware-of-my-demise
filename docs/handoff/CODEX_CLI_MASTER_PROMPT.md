@@ -3,6 +3,12 @@
 **Owner:** Codex/Sol · **Snapshot:** 2026-10-26 · **Implementation baseline:** `51d8d638` on local `main`.
 **Workspace:** `E:\Unity\unaware-of-my-demise` · **Unity project:** `apps/unity/`.
 
+**Rolling checkpoint — 2026-10-26:** Production Review first slice is implemented and LOCAL_TESTED after baseline
+`3d81078b`. Use `Window → UOMD → Production Review`; [usage/limits](../review/README.md),
+[executed evidence](../evidence/sol-production-review-2026-10-26.json). Eleven candidates/full references, real initial
+controllers/shots, drafts, feedback, three viewports and persistent captures work. Story/tutorial/battle/hub adapters
+remain future work. The older snapshot counts below describe their original delivery, not newly rerun acceptance.
+
 This is an executable working brief for a new Codex CLI session. Read it completely, inspect the current checkout, then
 perform the owner's current task. It preserves this conversation's decisions, implementation and outstanding work.
 It is a context/production handoff under the root README, which remains the sole engineering master prompt.
@@ -193,7 +199,7 @@ strict final-art acceptance and owner acceptance of the ten newest images. Histo
 | `apps/unity/Assets/_UOMD/Scenes/UomdMain.unity` | Current production bootstrap scene |
 | `apps/unity/Assets/_UOMD/Scripts/` | Runtime C# domain/services/presentation |
 | `apps/unity/Assets/_UOMD/Resources/Rebuild/` | Editable rebuilt Boot/Studio/Title/Prologue UXML/USS, cinematic shader/material |
-| `apps/unity/Assets/_UOMD/Editor/` | Setup/build/MCP inspection/capture helpers; owner review window is still to be built |
+| `apps/unity/Assets/_UOMD/Editor/` | Setup/build/MCP helpers and the implemented Production Review window/catalog/session/capture tools |
 | `apps/unity/Assets/_UOMD/Tests/` | EditMode and PlayMode suites |
 | `apps/unity/Assets/StreamingAssets/uomd_base/` | Exported base content consumed by Unity; generated, not the authoring source |
 | `apps/unity/Assets/StreamingAssets/uomd_metadata/` | Generated slices/animation metadata |
@@ -212,6 +218,7 @@ strict final-art acceptance and owner acceptance of the ten newest images. Histo
 
 The actual current assemblies are `Uomd.Contracts`, `Uomd.Core`, `Uomd.Platform`, `Uomd.UI`, `Uomd.Combat`,
 `Uomd.Narrative`, `Uomd.Battle`, `Uomd.Scenes`, `Uomd.Editor`, `Uomd.Tests.EditMode`, `Uomd.Tests.PlayMode`.
+The review delivery adds Editor-only `Uomd.Tests.Editor` for fixture reviews, isolation and viewport restoration.
 Do not replace these with proposed assembly names copied from an older blueprint without inspecting current dependencies.
 Runtime assemblies must not depend on `UnityEditor`; test/preview tooling must remain outside player builds.
 
@@ -467,9 +474,10 @@ unrelated track to every screen.
 
 ## 9. Owner inspection and revision workflow — first new implementation task
 
-**Status: REQUIRED NEXT WORK, NOT IMPLEMENTED AT THIS SNAPSHOT.** Existing MCP helpers and captures are useful, but
-there is no complete owner-facing production review window yet. Build it before scaling to hundreds of new images.
-The owner must be able to inspect and revise real art and real Unity presentation without reading private C# fields.
+**Status: FIRST SLICE IMPLEMENTED / LOCAL_TESTED (2026-10-26).** [Usage and concrete limits](../review/README.md);
+[evidence](../evidence/sol-production-review-2026-10-26.json). The requirements below remain the complete workflow target;
+story/tutorial/battle/hub adapters follow their rebuild. The owner can inspect current art and real opening presentation
+through the workbench without reading private C# fields. No full-game or device acceptance is claimed.
 
 Implement an **Editor-only Production Review workbench**, for example `Window → UOMD → Production Review`, using the
 existing Editor assembly and native Unity editor UI. Inspect existing Control Center Media Factory/Animations workflows
@@ -564,7 +572,7 @@ Review any needed SDK/licence/dependency changes under the existing rules. Keep 
 
 | Package | Current scope/status | Next completion target |
 | --- | --- | --- |
-| Owner review tooling | Planned in this brief | Implement the first usable workbench slice above |
+| Owner review tooling | First usable slice LOCAL_TESTED; current candidates and real opening controllers | Extend the same review workflow into each rebuilt story/tutorial/battle/system adapter |
 | RB-00/01 startup/title | Locally implemented/tested; final asset/device gates open | Keep real sign-in/Continue/privacy/replay and reviewable native presentation |
 | RB-02 narrative/tutorial | Opening rebuilt; story portraits/tutorial presentation still legacy | New portraits and three tutorial stages; manual complete entry, Finish, interruption/restart/Continue |
 | RB-03 battle | Existing engine/presentation; full visual rebuild pending | New Mahmut/Fadyme/enemy atlases, real event-driven stage/skills/HP/Focus/intent and manual QA |
@@ -665,8 +673,8 @@ reviewable local work first and continue independent work while a genuine extern
 1. Establish current Git/source/skills/tool/Editor state without resetting existing work.
 2. Open the latest title, studio and opening in the actual Editor and inspect the referenced captures/source.
 3. Give the owner a short Turkish status distinguishing implemented/tested/planned/unverified work.
-4. Implement the first owner-review workbench slice from section 9, using current art and real controllers.
-5. Demonstrate its asset selection, real scene/shot preview, revision recording, capture and safe cleanup with evidence.
+4. Open the existing first owner-review workbench slice from section 9, using current art and real controllers.
+5. Revalidate the affected selection/preview/review/capture/cleanup workflow as new adapters are added.
 6. Continue into new story portraits and the three tutorial stages, then the real battle presentation in dependency order.
 
 When the owner requests a specific revision, prioritize that revision, preserve unrelated work, and show the updated

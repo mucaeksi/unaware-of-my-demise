@@ -1,0 +1,65 @@
+{
+    "schema": 1,
+    "id": "20261026T122519861_444a234e",
+    "capturedAt": "2026-10-26T12:25:19.9684816Z",
+    "sourceCommit": "3d81078b1f0f8c10d772b6f94aaf9ce68455d6f2",
+    "workingTreeScope": "M apps/unity/Assets/_UOMD/Scripts/Core/PatchManager.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdPrefs.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCinematicStage.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPrologueScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStudioScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs\n M apps/unity/ProjectSettings/ProjectSettings.asset\n M apps/unity/cloud/unity_ref_compile.py\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewPreview.unity\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewPreview.unity.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewSession.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewSession.cs.meta\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n?? apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs.meta\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Presentation.json\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Presentation.json.meta\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEditorPreviewIsolation.cs\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEditorPreviewIsolation.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPresentationConfig.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPresentationConfig.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs.meta\n?? apps/unity/Assets/_UOMD/Tests/Editor.meta\n?? apps/unity/Assets/_UOMD/Tests/Editor/\n?? codex_watcher.ps1\n?? docs/review/",
+    "contentRelease": "rel_0001",
+    "scenario": "studio",
+    "lineId": "",
+    "assetId": "sol_studio_mark",
+    "sourceSha": "3023caf355159044dc781f62018717d9798314ac408c458ec6a98915daf93800",
+    "entrySha": "0cdb95c73d336d877e80f595b993e8c2ffbec21e7905fab107946f6e98f64da2",
+    "assetRevision": 1,
+    "shot": -1,
+    "width": 1920,
+    "height": 1080,
+    "errorsObserved": 0,
+    "shotElapsed": 0.0,
+    "simulatedSafeArea": false,
+    "editorOnly": true,
+    "safeAreaDescription": "none",
+    "imageSha": "3bbfc885d25275681168377381d46d379af70a585dbeef30cb75d793a7c9115a",
+    "selectedAssetIdentity": "sol_studio_mark@1:3023caf355159044dc781f62018717d9798314ac408c458ec6a98915daf93800",
+    "settings": {
+        "scenario": "studio",
+        "shot": 0,
+        "paused": true,
+        "muted": true,
+        "reducedMotion": false,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": false,
+        "presentation": {
+            "scenario": "studio",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1920.0,
+        "height": 1080.0
+    },
+    "stageCameras": 1,
+    "stageLights": 2,
+    "stageParticles": 24
+}

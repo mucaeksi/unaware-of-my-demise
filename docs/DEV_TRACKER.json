@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "f341b018",
+  "sourceCommit": "3d81078b1f0f8c10d772b6f94aaf9ce68455d6f2",
   "reviewedAt": "2026-10-26",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Owner-review tooling: implement the Editor-only Production Review workbench specified in docs/handoff/CODEX_CLI_MASTER_PROMPT.md; then new story portraits, three tutorial stages, durable Continue/restart and real battle presentation.",
+    "nextProposed": "Production Review first slice LOCAL_TESTED; use it for owner revisions. Next: new story portraits, three tutorial stages and their review adapters, durable Continue/restart and real battle presentation.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped."
   },
   "now": [
+    {
+      "title": "D-35: Unity Production Review first slice (2026-10-26)",
+      "detail": "LOCAL_TESTED: Window/UOMD/Production Review; 11 OpenAI candidates + complete historical inventory; real isolated Boot/Studio/Title/9-shot preview; drafts, feedback, capture/gallery. EditMode 113/113, PlayMode 3/3, logic 101/101, reference compile Editor/player and npm verify PASS. Preference/session/checkpoint snapshot preserved; normal startup/replay checked separately. Evidence: docs/evidence/sol-production-review-2026-10-26.json. Story/tutorial/battle/hub adapters and owner/device acceptance remain open."
+    },
     {
       "title": "D-35: Codex CLI production context and owner review requirements (2026-10-26)",
       "detail": "Documentation handoff under README: docs/handoff/CODEX_CLI_MASTER_PROMPT.md records the 51d8d638 implementation baseline, critical C#/Unity architecture, original-image/provenance workflow, actual evidence, remaining production route and required owner art/scene revision workflow. Root AGENTS links it. The Production Review workbench is planned, not implemented; historical runtime checks are not refreshed by this documentation change. Native package-ID discrepancy is explicitly recorded for release reconciliation."

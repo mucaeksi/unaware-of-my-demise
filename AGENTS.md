@@ -23,9 +23,9 @@ and the pinned skill sources intact. Load relevant `.agents/skills/` adapters an
 
 For a production/rebuild continuation, read [CODEX_CLI_MASTER_PROMPT](docs/handoff/CODEX_CLI_MASTER_PROMPT.md) in full after
 README and this entry point. It records the implemented C# architecture, latest scoped evidence, image pipeline and the
-owner's requirement to inspect/revise real assets and Unity scenes. The next planned production task is an Editor-only
-Production Review workbench; it is not implemented merely because it is specified in that document. Preserve the actual
-current task scope: documentation/review-only requests do not authorize starting that implementation automatically.
+owner's requirement to inspect/revise real assets and Unity scenes. The first Editor-only Production Review slice is now
+implemented; see `docs/review/README.md` and `docs/evidence/sol-production-review-2026-10-26.json` for scope and evidence.
+Preserve the actual current task scope: documentation/review-only requests do not authorize new implementation automatically.
 
 ## Historical host instructions (superseded ownership and paths)
 

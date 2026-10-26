@@ -1,0 +1,67 @@
+{
+    "schema": 1,
+    "requests": [
+        {
+            "id": "e66e9a1e6245447db705a8fefac769aa",
+            "createdAt": "2026-10-26T12:27:33.4674805Z",
+            "kind": "agent_qc_note",
+            "assetId": "sol_prologue_reunion",
+            "sourceSha": "6367b9b4127f140fa3b5f7f4444694fc16cc1e6aa640b129b94635038d8846ae",
+            "entrySha": "91ffb510a3de5e795ec5803b6c1d8404314fba8a54495365fe382b1049d0a7bf",
+            "scenario": "prologue/reunion",
+            "lineId": "entry_past_008",
+            "request": "Codex local QC: all nine opening shots selected through the real controller; pause/plate cleanup, three viewports and source-bound captures checked. This is agent QC only. Owner visual acceptance, final resolution and Android/device gates remain open.",
+            "outcome": "local_qc_complete; no owner art approval",
+            "revision": 1,
+            "captures": [
+                "20261026T122521399_5e9dddd7:18eadfd8d0de188b82669ef06c2caaed452874a10fda4e83a3878f6a413d0f86",
+                "20261026T122522140_7ec60ec4:d59c34e862321a35d4483ef84cabeae41752bedad899cdf77e630fb9373e1300",
+                "20261026T122523140_3375df57:05c4106f6435f9dc61ffee6f1aa6936e5cd0ec7369c5470b14715fc15b639c84"
+            ],
+            "presentation": {
+                "scenario": "prologue/reunion",
+                "framing": 1.0,
+                "subtitleBottom": 128.0,
+                "light": 1.0,
+                "particles": true
+            }
+        }
+    ],
+    "captures": [
+        {
+            "id": "20261026T122519861_444a234e",
+            "image": "captures/20261026T122519861_444a234e.png",
+            "sha256": "3bbfc885d25275681168377381d46d379af70a585dbeef30cb75d793a7c9115a",
+            "metadata": "captures/20261026T122519861_444a234e.json",
+            "scenario": "studio"
+        },
+        {
+            "id": "20261026T122520481_16fec602",
+            "image": "captures/20261026T122520481_16fec602.png",
+            "sha256": "bb70e13575256f81c7c6e76d9c077a2cb0940417015874af8e6479b3a751dbf7",
+            "metadata": "captures/20261026T122520481_16fec602.json",
+            "scenario": "title"
+        },
+        {
+            "id": "20261026T122521399_5e9dddd7",
+            "image": "captures/20261026T122521399_5e9dddd7.png",
+            "sha256": "18eadfd8d0de188b82669ef06c2caaed452874a10fda4e83a3878f6a413d0f86",
+            "metadata": "captures/20261026T122521399_5e9dddd7.json",
+            "scenario": "prologue/reunion"
+        },
+        {
+            "id": "20261026T122522140_7ec60ec4",
+            "image": "captures/20261026T122522140_7ec60ec4.png",
+            "sha256": "d59c34e862321a35d4483ef84cabeae41752bedad899cdf77e630fb9373e1300",
+            "metadata": "captures/20261026T122522140_7ec60ec4.json",
+            "scenario": "prologue/reunion"
+        },
+        {
+            "id": "20261026T122523140_3375df57",
+            "image": "captures/20261026T122523140_3375df57.png",
+            "sha256": "05c4106f6435f9dc61ffee6f1aa6936e5cd0ec7369c5470b14715fc15b639c84",
+            "metadata": "captures/20261026T122523140_3375df57.json",
+            "scenario": "prologue/reunion"
+        }
+    ]
+}

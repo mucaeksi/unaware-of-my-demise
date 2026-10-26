@@ -1,0 +1,464 @@
+{
+  "schema": 1,
+  "status": "LOCAL_TESTED",
+  "verified_at": "2026-10-26T12:40:11.323776+00:00",
+  "base_commit": "3d81078b1f0f8c10d772b6f94aaf9ce68455d6f2",
+  "source_scope": "Base commit plus the Production Review working tree; enclosing delivery commit binds the final files. No push or deployment.",
+  "source_sha256": {
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs": "d0a67449c11dd98cf2a44214cdaa90053d317e92ede8a6d1345710c6e5758649",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs": "2103ba40c9b8d821cc66ed62457d788da2cdba32ee003c5d76034d90b31eaf02",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewSession.cs": "faf8407c3dcdd42fcd077cd981818c73c74fc8359dfa7e0933b96b7fad20622c",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs": "e56d29a57fd95b34937108cdd8ae56eef4e38e9de2fffd9048ac76c4d7796f5f",
+    "apps/unity/Assets/_UOMD/Scripts/Core/PatchManager.cs": "19ea78ca4e765cf103c105009f55eee74f98c4c9f5c3b5d2e8245c36d0ee2c16",
+    "apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs": "605cd7585bf7bd9bb8423b7224cb2a9de11a78fd4ecdc39358512c0792139e18",
+    "apps/unity/Assets/_UOMD/Scripts/Core/UomdEditorPreviewIsolation.cs": "176509401e2865fa2b9d91de21500a398237a612d0286942d193690e31d6498f",
+    "apps/unity/Assets/_UOMD/Scripts/Core/UomdPrefs.cs": "c42392921f929d12f8516d3e209ea7deef90451925481fab00fe0b66b0b5e0d7",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs": "017bba3ac05b4ca26f4224e5da2f350eb131aa1e63993c59636dfb0ef582225a",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCinematicStage.cs": "1d793875e5bcf83afeb0a10f801555e25a61a80ffa56b9e842d21b83782314ed",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPresentationConfig.cs": "229abcc6760b1f558a342383f51e4e39a3a999f0a237e9dca32d7486d4002b44",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPrologueScreen.cs": "26ed5a701e58a47a25f1fe6beb6565de7a02e58803e6d0b12751dbe0ee3b250b",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStudioScreen.cs": "6137e7ffdd9e5c17a8ade33b35e76f11c71d5258307af124b1b6ac49e7abae0b",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildTitleScreen.cs": "7cb42809972f912f81940f0b950b336e6044c245329182d5dd72583e7fe5a8fa",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs": "27184a478a688bd8346d58756a67473d69185a25b5116eba702674070a7dee4e",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs": "08e813d693111ad8c80a34bba7538456965cbb430e792c19280fac74259c26ec",
+    "apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs": "c4c6a12d460049164f32bd33e0e406cf532756e85b270fe86d8a69db477e147e",
+    "apps/unity/cloud/unity_ref_compile.py": "a7a4331288d5d5c34c581560ff5a419293a06be84477073d735d681082cecf2b"
+  },
+  "unity": {
+    "version": "6000.3.27f1",
+    "instance_observed": "unity@6259154c",
+    "menu": "Window/UOMD/Production Review",
+    "initial_scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "preview_scene": "Assets/_UOMD/Editor/ProductionReviewPreview.unity"
+  },
+  "checks": {
+    "repository_verify": {
+      "result": "PASS",
+      "command": "npm run verify",
+      "workspace_tool_test_executions": 954,
+      "api_tests": 507,
+      "tools_tests": 81,
+      "note": "Exporter five tests also run in the tools suite.",
+      "content_files_reproduced_exactly": 216
+    },
+    "editmode": {
+      "result": "PASS",
+      "passed": 113,
+      "total": 113,
+      "job_id": "670aafdfc8254215801d734299ff0463",
+      "workbench_tests": 11,
+      "review_writes": "Fixture stores only; no owner approvals created."
+    },
+    "playmode_audio": {
+      "result": "PASS",
+      "passed": 3,
+      "total": 3,
+      "job_id": "d53c4e212afe4661b4975cc99e1e322a"
+    },
+    "headless_logic": {
+      "result": "PASS",
+      "passed": 101,
+      "total": 101
+    },
+    "reference_compile_editor": {
+      "result": "PASS",
+      "source_assemblies": 12,
+      "errors": 0
+    },
+    "reference_compile_player_only": {
+      "result": "PASS",
+      "source_assemblies": 8,
+      "errors": 0
+    },
+    "reference_compile_limit": "Real Editor module references; verified URP signatures and compile-only UnityTest attribute. Not a rendering/device test.",
+    "skills": {
+      "result": "PASS",
+      "adapters": 66,
+      "canonical_sources": "unchanged"
+    },
+    "console": {
+      "project_errors": 0,
+      "capture_errors": 0,
+      "transport_warning": "One MCP duplicate-command suppression warning; no duplicate mutation executed."
+    },
+    "media_source_chains": {
+      "result": "PASS",
+      "count": 11,
+      "details": [
+        {
+          "asset_id": "sol_prologue_beginning",
+          "revision": 1,
+          "source_sha256": "b8c1e0e16707b4c1c6bec40c0480d6ec957d3d144e9caa2b817ac4acac21d676",
+          "source": "content/generated/openai/sol_prologue_beginning/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_crownfall",
+          "revision": 1,
+          "source_sha256": "eceba378ba23b6002740b09a48b92f45d7ae2f51b65b8bd793c3616fe3167f4e",
+          "source": "content/generated/openai/sol_prologue_crownfall/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_hours",
+          "revision": 1,
+          "source_sha256": "7b298cdb0776a5f6620fc3f31712ae38bba60a57c87dfba897d87639df09483f",
+          "source": "content/generated/openai/sol_prologue_hours/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_names",
+          "revision": 1,
+          "source_sha256": "30ff77e60c6c1b77f56eb786fb8de14bb96e6041f22df737dcc40c294281add1",
+          "source": "content/generated/openai/sol_prologue_names/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_ordinary_days",
+          "revision": 1,
+          "source_sha256": "ed3adb84185689db28ca9a5eb96c2ee4d2abf6db5b9fc4c48c25cb0c145c19c5",
+          "source": "content/generated/openai/sol_prologue_ordinary_days/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_reunion",
+          "revision": 1,
+          "source_sha256": "6367b9b4127f140fa3b5f7f4444694fc16cc1e6aa640b129b94635038d8846ae",
+          "source": "content/generated/openai/sol_prologue_reunion/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_roads",
+          "revision": 1,
+          "source_sha256": "fd263c01d540bc8288363fa6f2ee5a65d52336cb195a1fae00d26c70359e80f3",
+          "source": "content/generated/openai/sol_prologue_roads/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_search",
+          "revision": 1,
+          "source_sha256": "9c0422e414a0a8bd940a2011096e00c248a0aaa8d6db1207d898ce2f9a41ecd7",
+          "source": "content/generated/openai/sol_prologue_search/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_prologue_throne_wars",
+          "revision": 1,
+          "source_sha256": "ee40a66c4d51bb088c0ecbfe3d0f9e548e67432580e86b5d61183e40382800f9",
+          "source": "content/generated/openai/sol_prologue_throne_wars/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_studio_mark",
+          "revision": 1,
+          "source_sha256": "3023caf355159044dc781f62018717d9798314ac408c458ec6a98915daf93800",
+          "source": "content/generated/openai/sol_studio_mark/source.png",
+          "native_dimensions": [
+            1254,
+            1254
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        },
+        {
+          "asset_id": "sol_title_key_art_01",
+          "revision": 1,
+          "source_sha256": "d80a4e209838f438f81ad9da7d5c0a83a2587caf5d5f9453028b7ad5c5bd865a",
+          "source": "content/generated/openai/sol_title_key_art_01/source.png",
+          "native_dimensions": [
+            1672,
+            941
+          ],
+          "verified": [
+            "source",
+            "provenance",
+            "prompt",
+            "exact_references",
+            "ingest_outputs"
+          ]
+        }
+      ]
+    },
+    "scene_probes": [
+      {
+        "lineId": "entry_past_001",
+        "pausedElapsed": 2.121430903673172,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/hours",
+        "shot": 0
+      },
+      {
+        "lineId": "entry_past_002",
+        "pausedElapsed": 0.13793649896979332,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/names",
+        "shot": 1
+      },
+      {
+        "lineId": "entry_past_003",
+        "pausedElapsed": 0.17903640121221542,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/ordinary_days",
+        "shot": 2
+      },
+      {
+        "lineId": "entry_past_004",
+        "pausedElapsed": 0.1944488026201725,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/throne_wars",
+        "shot": 3
+      },
+      {
+        "lineId": "entry_past_005",
+        "pausedElapsed": 0.08080449979752302,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/crownfall",
+        "shot": 4
+      },
+      {
+        "lineId": "entry_past_006",
+        "pausedElapsed": 0.07643199805170298,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/roads",
+        "shot": 5
+      },
+      {
+        "lineId": "entry_past_007",
+        "pausedElapsed": 0.07491559721529484,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/search",
+        "shot": 6
+      },
+      {
+        "lineId": "entry_past_008",
+        "pausedElapsed": 0.07112859934568405,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/reunion",
+        "shot": 7
+      },
+      {
+        "lineId": "entry_past_009",
+        "pausedElapsed": 0.08022229932248592,
+        "plateCount": 1,
+        "ready": true,
+        "scenario": "prologue/beginning",
+        "shot": 8
+      }
+    ],
+    "restoration": {
+      "active": false,
+      "aspect_probe": "PASS all three actual pixel sizes, paused resize and simulated safe area",
+      "authoring_probe": "PASS fresh Play: framing 0.94, camera 5.744681, subtitle bottom 164, light 0.9",
+      "enter_play_options": "None",
+      "enter_play_options_enabled": false,
+      "normal_replay": "PASS real replay first shot loaded",
+      "normal_startup": "PASS normal Boot/Studio/Title; account action enabled; no review isolation",
+      "play_mode_start_scene": "",
+      "preference_hash_after": "c3b3e613d23d600a67693d32ffb93edba301ebb92fc8f7c3e811649cf8a902fa",
+      "preference_hash_before": "c3b3e613d23d600a67693d32ffb93edba301ebb92fc8f7c3e811649cf8a902fa",
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "scene_dirty": false,
+      "shot_probe": "PASS all nine shots and pause/plate bounds"
+    },
+    "saved_authoring_probe": {
+      "result": "PASS",
+      "fresh_play": true,
+      "framing": 0.94,
+      "orthographic_size": 5.744681,
+      "subtitle_bottom_authored_px": 164,
+      "subtitle_body_y_before": 850,
+      "subtitle_body_y_after": 814,
+      "light_multiplier": 0.9,
+      "original_authoring_restored": true,
+      "note": "Temporary QA draft/history removed after validation; no reviewed art/presentation was silently changed."
+    },
+    "normal_player_flow": {
+      "result": "PASS_SCOPED",
+      "scope": "Normal Boot/Studio/Title with enabled start action, then real intro replay; first three shots advanced at normal speed. No full tutorial/Finish/device claim."
+    },
+    "pointer_automation": {
+      "result": "BLOCKED_BY_HOST",
+      "action": "Computer Use access to Unity",
+      "fallback": "Existing Unity MCP, actual menu and typed entry points plus Editor tests.",
+      "limit": "Manual mouse/touch acceptance remains unverified."
+    },
+    "viewport_regression": "Test caught total-index/custom-index confusion when removing the temporary Game-view size. Fixed against UnityCsReference 6000.3 and verified menu size count/selection/gizmos restore.",
+    "late_editor_validation": "Drive/UNC/backslash traversal handling strengthened across Windows/Linux. Final 113 EditMode tests and 12-assembly reference compile pass. The five captures precede this Editor-only boundary change; runtime rendering/progression are unchanged."
+  },
+  "captures": [
+    {
+      "path": "docs/review/captures/20261026T122519861_444a234e.png",
+      "metadata": "docs/review/captures/20261026T122519861_444a234e.json",
+      "scenario": "studio",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "3bbfc885d25275681168377381d46d379af70a585dbeef30cb75d793a7c9115a"
+    },
+    {
+      "path": "docs/review/captures/20261026T122520481_16fec602.png",
+      "metadata": "docs/review/captures/20261026T122520481_16fec602.json",
+      "scenario": "title",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "bb70e13575256f81c7c6e76d9c077a2cb0940417015874af8e6479b3a751dbf7"
+    },
+    {
+      "path": "docs/review/captures/20261026T122521399_5e9dddd7.png",
+      "metadata": "docs/review/captures/20261026T122521399_5e9dddd7.json",
+      "scenario": "prologue/reunion",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "18eadfd8d0de188b82669ef06c2caaed452874a10fda4e83a3878f6a413d0f86"
+    },
+    {
+      "path": "docs/review/captures/20261026T122522140_7ec60ec4.png",
+      "metadata": "docs/review/captures/20261026T122522140_7ec60ec4.json",
+      "scenario": "prologue/reunion",
+      "dimensions": [
+        2400,
+        1080
+      ],
+      "sha256": "d59c34e862321a35d4483ef84cabeae41752bedad899cdf77e630fb9373e1300"
+    },
+    {
+      "path": "docs/review/captures/20261026T122523140_3375df57.png",
+      "metadata": "docs/review/captures/20261026T122523140_3375df57.json",
+      "scenario": "prologue/reunion",
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "sha256": "05c4106f6435f9dc61ffee6f1aa6936e5cd0ec7369c5470b14715fc15b639c84"
+    }
+  ],
+  "review_authority": {
+    "source": "tools/ingest_art.ts + content/approved_art/entries",
+    "local_index": "docs/review/PRODUCTION_REVIEW.json",
+    "genuine_agent_qc_notes": 1,
+    "owner_approvals_created": 0,
+    "asset_revision_requests_tested_in_fixture": true
+  },
+  "not_claimed": [
+    "story/tutorial/battle/hub review adapters",
+    "audio seek or rigged actor/layer authoring",
+    "full rebuilt tutorial/Finish/Continue acceptance",
+    "physical Android/native provider sandbox",
+    "final 2K/device/art acceptance",
+    "Cloudflare deployment or public release"
+  ],
+  "paid_calls": 0,
+  "generated_images": 0,
+  "pushed": false,
+  "unrelated_tree_preserved": [
+    "codex_watcher.ps1"
+  ]
+}

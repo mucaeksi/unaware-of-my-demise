@@ -77,6 +77,9 @@ namespace Uomd.Scenes
             _router.Audio.PlayBgmCue("bgm_prologue_before_the_road");
             int saved = PlayerPrefs.GetInt(CheckpointKey, 0);
             int first = !_router.Session.CanSkipPrologue && saved >= 0 && saved < _scenes.Length ? saved : 0;
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active) first = _router.ProductionPreview.shot;
+#endif
             await LoadShotAsync(first);
         }
 
@@ -101,6 +104,7 @@ namespace Uomd.Scenes
             if (generation != _generation) return;
             if (texture == null) { Unavailable(); return; }
             _stage.Show(texture, path, Calm);
+            ApplyPresentation(RebuildPresentationConfig.For("prologue/" + scene.id));
             _caption.text = scene.caption_en ?? "";
             _fullText = scene.text_en ?? "";
             _lastVisible = null;
@@ -122,6 +126,16 @@ namespace Uomd.Scenes
 
         public void OnTick(float deltaTime)
         {
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active)
+            {
+                _paused = _router.ProductionPreview.paused;
+                _pause.text = _paused ? "RESUME" : "PAUSE";
+                _mute.text = _router.Audio.Muted ? "UNMUTE" : "MUTE";
+                ApplyPresentation(_router.ProductionPreview.presentation);
+                _caption.parent.style.display = _router.ProductionPreview.subtitles ? DisplayStyle.Flex : DisplayStyle.None;
+            }
+#endif
             if (_done || _loading || _paused)
             {
                 // Window/orientation changes still fit the composition while the narrative and motion remain frozen.
@@ -153,12 +167,28 @@ namespace Uomd.Scenes
             }
             _fill.style.width = Length.Percent(100f * (_index + (float)_clock.Progress) / _scenes.Length);
             UpdateNext();
-            if (_clock.Complete && _auto.value) _ = LoadShotAsync(_index + 1);
+            if (_clock.Complete && _auto.value)
+            {
+#if UNITY_EDITOR
+                if (UomdEditorPreviewIsolation.Active) return;
+#endif
+                _ = LoadShotAsync(_index + 1);
+            }
         }
+
+        private void ApplyPresentation(RebuildShotSettings settings)
+        {
+            _stage.ApplySettings(settings);
+            _caption.parent.style.bottom = settings.subtitleBottom;
+        }
+
 
         private static string Escape(string text) => text.Replace("<", "<noparse><</noparse>");
         private void UpdateNext()
         {
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active) { _next.style.display = DisplayStyle.None; return; }
+#endif
             _next.style.display = _auto.value ? DisplayStyle.None : DisplayStyle.Flex;
             _next.SetEnabled(!_loading && !_paused && _clock.Complete);
         }
@@ -166,6 +196,9 @@ namespace Uomd.Scenes
         {
             if (_done || _loading) return;
             _paused = !_paused;
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active) _router.ProductionPreview.paused = _paused;
+#endif
             _router.Audio.SetPaused(_paused);
             _pause.text = _paused ? "RESUME" : "PAUSE";
             _status.text = _paused ? "Paused" : "";
@@ -217,6 +250,9 @@ namespace Uomd.Scenes
         }
         private void Finish()
         {
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active) return;
+#endif
             if (_finishing) return;
             _root.Q<VisualElement>("openingHeader").SetEnabled(false);
             _finishing = _done = true;

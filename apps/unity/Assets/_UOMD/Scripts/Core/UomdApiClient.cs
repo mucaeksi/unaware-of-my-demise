@@ -95,6 +95,10 @@ namespace Uomd.Core
             int? expectedAuthVersion = null,
             CancellationToken ct = default)
         {
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active)
+                throw new UomdApiException(0, "editor_preview", "Network requests are disabled in Production Review.");
+#endif
             if (requireAuth && _signingInVersion != 0)
             {
                 throw new UomdApiException(409, "auth_changed", "Finish selecting your account before requesting its data");

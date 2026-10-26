@@ -20,7 +20,7 @@ namespace Uomd.Scenes
     }
 
     [RequireComponent(typeof(UIDocument))]
-    public sealed class UomdSceneRouter : MonoBehaviour
+    public sealed partial class UomdSceneRouter : MonoBehaviour
     {
         [SerializeField] private string apiBaseUrl = "https://uomd-game-staging.muratcaneksiii.workers.dev";
 
@@ -46,6 +46,14 @@ namespace Uomd.Scenes
         // Start (not Awake): UIDocument builds rootVisualElement in its own OnEnable.
         private async void Start()
         {
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active)
+            {
+                try { await StartProductionPreviewAsync(); }
+                catch (Exception e) { Debug.LogException(e); UnityEditor.EditorApplication.isPlaying = false; }
+                return;
+            }
+#endif
             Application.targetFrameRate = 60;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -115,6 +123,10 @@ namespace Uomd.Scenes
 
         public async Awaitable NavigateToAsync(UomdScreenId targetScreen)
         {
+#if UNITY_EDITOR
+            if (UomdEditorPreviewIsolation.Active && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
+                && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue) return;
+#endif
             if (!_controllers.TryGetValue(targetScreen, out var nextController))
             {
                 Debug.LogWarning($"[UomdSceneRouter] Screen '{targetScreen}' is not registered.");

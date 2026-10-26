@@ -78,6 +78,8 @@ Use Unity features where their visible effect serves the scene and survives the 
 Owner review requirement added 2026-10-26: before scaling asset production, implement a usable Editor-only Production
 Review workbench for asset/revision browsing, actual scene/shot preview, playback/aspect controls, feedback and captures.
 Its concrete scope and isolation/acceptance requirements are in [the CLI context handoff](CODEX_CLI_MASTER_PROMPT.md#9-owner-inspection-and-revision-workflow--first-new-implementation-task).
-This workbench is planned, not implemented by the documentation handoff. Then produce new story portraits and the three
-tutorial stages, followed by the real battle presentation.
+The first workbench slice is implemented and locally tested: [usage](../review/README.md),
+[evidence](../evidence/sol-production-review-2026-10-26.json). It browses the current candidates/reference inventory and
+previews real Boot/Studio/Title/opening shots with drafts, feedback and captures. Extend it for new story portraits and
+the three tutorial stages, followed by the real battle presentation.
 Do not count old Gemini consumers, placeholder art, Editor captures or a local compile as a finished Android release.

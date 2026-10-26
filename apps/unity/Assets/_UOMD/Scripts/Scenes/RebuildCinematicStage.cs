@@ -28,6 +28,10 @@ namespace Uomd.Scenes
         private float _time;
         private bool _disposed;
         private readonly bool _studio;
+        private RebuildShotSettings _settings = new RebuildShotSettings();
+        private readonly Light2D _ambient;
+
+        public void ApplySettings(RebuildShotSettings settings) { settings.Validate(); _settings = settings; }
 
         public RebuildCinematicStage(VisualElement host, UomdMediaLoader media, bool studio, bool calm)
         {
@@ -58,7 +62,7 @@ namespace Uomd.Scenes
             _camera.backgroundColor = new Color(0.018f, 0.014f, 0.028f);
             _camera.nearClipPlane = 0.1f;
             _camera.farClipPlane = 30f;
-            var ambient = Child("CinematicAmbient").AddComponent<Light2D>();
+            var ambient = _ambient = Child("CinematicAmbient").AddComponent<Light2D>();
             ambient.lightType = Light2D.LightType.Global;
             ambient.color = Color.white;
             ambient.intensity = studio ? 0.62f : 1f;
@@ -113,6 +117,10 @@ namespace Uomd.Scenes
             _current.sortingOrder = 10;
             if (_previous != null) _previous.sortingOrder = 0;
             _fade = calm ? 1f : 0f;
+#if UNITY_EDITOR
+            // A directly selected review shot starts settled, including when initially paused.
+            if (UomdEditorPreviewIsolation.Active) _fade = 1f;
+#endif
             Tick(0, 0, calm);
         }
 
@@ -127,15 +135,17 @@ namespace Uomd.Scenes
                 var size = _current.sprite.bounds.size;
                 float fit = _studio ? 5.5f / size.y : Mathf.Min(10.8f / size.y, 10.8f * _camera.aspect / size.x);
                 float zoom = calm || _studio ? 1f : Mathf.Lerp(1f, 1.022f, Mathf.SmoothStep(0, 1, progress));
-                _camera.orthographicSize = 5.4f / zoom;
+                _camera.orthographicSize = 5.4f / (zoom * _settings.framing);
                 _current.transform.localScale = Vector3.one * fit;
                 _current.transform.localPosition = _studio ? new Vector3(0, 1.15f, 0) : Vector3.zero;
                 _current.color = new Color(1, 1, 1, Mathf.SmoothStep(0, 1, _fade));
             }
             if (_previous != null && _fade >= 1f) ReleasePrevious();
             _accent.intensity = _studio ? 0.7f + (calm ? 0 : Mathf.Sin(_time * 0.8f) * 0.035f) : 0.035f;
-            if (!calm && delta > 0) { _dust.Simulate(delta, true, false, false); _dust.Pause(); }
-            if (calm) _dust.Clear();
+            _ambient.intensity = (_studio ? 0.62f : 1f) * _settings.light;
+            _accent.intensity *= _settings.light;
+            if (!calm && _settings.particles && delta > 0) { _dust.Simulate(delta, true, false, false); _dust.Pause(); }
+            if (calm || !_settings.particles) _dust.Clear();
         }
 
         private void ReleasePrevious()

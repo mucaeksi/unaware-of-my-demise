@@ -79,6 +79,10 @@ namespace Uomd.Core
                 return;
             }
             IContentStorage storage;
+#if UNITY_EDITOR
+            // Base-only review: no install ID, persistent cache, download client or staged activation.
+            if (UomdEditorPreviewIsolation.Active) return;
+#endif
             bool persistent = !memoryOnly;
             try
             {
