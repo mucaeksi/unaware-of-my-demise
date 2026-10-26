@@ -32,6 +32,7 @@ namespace Uomd.Scenes
         private IUomdScreenController _activeController;
         private bool _mediaStale;
         private UomdPatchStrip _patchStrip;
+        private int _navGeneration;
 
         public GameSessionState Session { get; private set; }
         public PatchManager Patch { get; private set; }
@@ -67,12 +68,11 @@ namespace Uomd.Scenes
 
 
             _uiDocument = GetComponent<UIDocument>();
+            BuildRootVisualTree();
             if (gameObject.GetComponent<SafeAreaBinder>() == null)
             {
                 gameObject.AddComponent<SafeAreaBinder>();
             }
-
-            BuildRootVisualTree();
             RegisterAll28Screens();
 
             await NavigateToAsync(UomdScreenId.Boot);
@@ -99,6 +99,12 @@ namespace Uomd.Scenes
             _patchStrip?.Tick();
         }
 
+        private void OnDestroy()
+        {
+            if (Api != null) Api.OnAuthChanged -= PersistSession;
+            Media?.ReleaseAll();
+        }
+
         /// <summary>The registered controller of a type (capture pipeline QA).</summary>
         public T Controller<T>() where T : class, IUomdScreenController
         {
@@ -114,6 +120,7 @@ namespace Uomd.Scenes
                 return;
             }
 
+            int navGen = ++_navGeneration;
             _activeController?.OnExit();
             _screenHost.Clear();
             Media?.ReleaseTextures(); // the next screen loads what it shows
@@ -121,6 +128,7 @@ namespace Uomd.Scenes
             {
                 _mediaStale = false;
                 await Media.ReloadAsync();
+                if (navGen != _navGeneration) return;
             }
 
             _activeController = nextController;
@@ -145,11 +153,17 @@ namespace Uomd.Scenes
         {
             var root = _uiDocument.rootVisualElement;
             root.Clear();
+            root.style.backgroundColor = UomdThemeTokens.Void;
 
             _rootContainer = new VisualElement { name = "safe-area-root" };
             _rootContainer.AddToClassList("uomd-root");
             _rootContainer.AddToClassList("uomd-safe-area");
-            _rootContainer.style.flexGrow = 1f;
+            _rootContainer.style.position = Position.Absolute;
+            _rootContainer.style.left = 0;
+            _rootContainer.style.right = 0;
+            _rootContainer.style.top = new Length(50, LengthUnit.Percent);
+            _rootContainer.style.marginTop = -UomdScreenKit.RefHeight / 2f;
+            _rootContainer.style.height = UomdScreenKit.RefHeight;
 
             // every screen draws its own frame (UomdHubScreen for the account-backed ones); there is no shared top bar
             _screenHost = new VisualElement { name = "screen-host" };
@@ -208,6 +222,8 @@ namespace Uomd.Scenes
             Register(new PurchaseHistoryScreen(this));
             Register(new SavedActionsScreen(this));
             Register(new NoticesScreen(this));
+            Register(new HomePrototypeScreen(this)); // design prototype, not in the player flow
+            Register(new BattleStage25DPrototype(this)); // D-34 B1 prototype, not in the player flow
         }
 
         private void Register(IUomdScreenController controller)
