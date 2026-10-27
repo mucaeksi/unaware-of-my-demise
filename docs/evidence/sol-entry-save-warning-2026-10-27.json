@@ -1,0 +1,403 @@
+{
+  "schema": 1,
+  "status": "LOCAL_TESTED",
+  "verified_at": "2026-10-27T04:42:24.268Z",
+  "parent_commit": "0ac241cbb6ed7a93f22d62c6c1bb5e32b4af3e06",
+  "source_scope": "Parent plus native pre-Finish save-warning working tree; enclosing local commit binds artifacts. No push/deploy.",
+  "source_sha256_normalized_lf": {
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs": "d908778ada768cea6ef8fe38b7702d1fb91464ac65fe52f21829034d94ae82b7",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/EntrySaveWarning.cs": "6a6d956003103bd76cf35ab529c3d156561f46b87db00f0db700ff0a392f26df"
+  },
+  "behavior": "Title, Prologue, Story and Battle show a persistent native warning after local checkpoint failure. Retry Save persists the current cursor and retries pending coarse sync. Finish keeps its own recovery UI. The warning is outside the story/battle input subtree.",
+  "unity": {
+    "version": "6000.3.27f1",
+    "pipeline": "0.9.1-exp.1",
+    "transport": "CLI only",
+    "mcp_calls": 0,
+    "editmode": {
+      "total": 148,
+      "passed": 148,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "reference_assemblies": 12,
+    "reference_errors": 0,
+    "skill_adapters": 66,
+    "graph": {
+      "nodes": 6758,
+      "edges": 18597,
+      "communities": 259
+    }
+  },
+  "verification": {
+    "result": "PASS",
+    "captures": [
+      {
+        "label": "story-save-warning",
+        "image": "docs/review/captures/20261027T043935443_802752cc.png",
+        "metadata": "docs/review/captures/20261027T043935443_802752cc.json",
+        "screen": "Story",
+        "phase": "pre_story",
+        "stage": 1,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      },
+      {
+        "label": "story-save-warning-wide-safe",
+        "image": "docs/review/captures/20261027T043938831_a35b4b82.png",
+        "metadata": "docs/review/captures/20261027T043938831_a35b4b82.json",
+        "screen": "Story",
+        "phase": "pre_story",
+        "stage": 1,
+        "width": 2400,
+        "height": 1080,
+        "safe": true
+      },
+      {
+        "label": "story-save-warning-4x3",
+        "image": "docs/review/captures/20261027T043942398_c453f679.png",
+        "metadata": "docs/review/captures/20261027T043942398_c453f679.json",
+        "screen": "Story",
+        "phase": "pre_story",
+        "stage": 1,
+        "width": 1600,
+        "height": 1200,
+        "safe": false
+      },
+      {
+        "label": "story-save-recovered",
+        "image": "docs/review/captures/20261027T043949258_14202963.png",
+        "metadata": "docs/review/captures/20261027T043949258_14202963.json",
+        "screen": "Story",
+        "phase": "pre_story",
+        "stage": 1,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      },
+      {
+        "label": "battle-save-warning",
+        "image": "docs/review/captures/20261027T043957381_6e5413bb.png",
+        "metadata": "docs/review/captures/20261027T043957381_6e5413bb.json",
+        "screen": "Battle",
+        "phase": "battle",
+        "stage": 1,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      }
+    ],
+    "before": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installBefore": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    },
+    "beforeFailure": {
+      "visible": "None",
+      "text": "",
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "button": true,
+      "line": "tutorial_t1_before_001",
+      "saved": true
+    },
+    "failed": {
+      "visible": "Flex",
+      "text": "REVIEW FIXTURE · Your latest place is not saved on this device. Retry before leaving.",
+      "x": 422,
+      "y": 12,
+      "width": 1076,
+      "height": 98,
+      "button": true,
+      "line": "tutorial_t1_before_001",
+      "saved": false
+    },
+    "recovered": {
+      "visible": "None",
+      "text": "REVIEW FIXTURE · Your latest place is not saved on this device. Retry before leaving.",
+      "x": 422.400024,
+      "y": 12,
+      "width": 0,
+      "height": 0,
+      "button": true,
+      "line": "tutorial_t1_before_001",
+      "saved": true
+    },
+    "battleBefore": {
+      "ready": true,
+      "screen": "Battle",
+      "stage": 1,
+      "phase": "Battle",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"battle\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"0e48fec0d386484cbeca29ffcaac4bdd\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":8,\"shot\":0,\"stage\":1,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [
+        "art/atlas_sol_bellbound_dead.webp",
+        "art/atlas_sol_fadyme.webp",
+        "art/atlas_sol_mahmut.webp",
+        "art/bg_sol_forest_whispering_ash.webp"
+      ],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": true,
+      "count": 0,
+      "winner": "",
+      "hash": "29a7b84aa2d5ce9667a11e9ef7af45360b342b867d67abe28b3a624fca3e2934",
+      "actor": "player:1:fadyme",
+      "options": [
+        {
+          "id": "fadyme_basic_veilglass_thorn",
+          "name": "Veilglass Thorn",
+          "type": "basic",
+          "available": true,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ]
+        },
+        {
+          "id": "fadyme_active_borrowed_hour",
+          "name": "Borrowed Hour",
+          "type": "active",
+          "available": true,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ]
+        },
+        {
+          "id": "fadyme_ultimate_the_bell_that_forgets",
+          "name": "The Bell That Forgets",
+          "type": "ultimate",
+          "available": false,
+          "needsTarget": false,
+          "targets": []
+        }
+      ],
+      "saveText": "",
+      "notice": ""
+    },
+    "battleAfter": {
+      "ready": true,
+      "screen": "Battle",
+      "stage": 1,
+      "phase": "Battle",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"battle\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"0e48fec0d386484cbeca29ffcaac4bdd\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":10,\"shot\":0,\"stage\":1,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [
+        "art/atlas_sol_bellbound_dead.webp",
+        "art/atlas_sol_fadyme.webp",
+        "art/atlas_sol_mahmut.webp",
+        "art/bg_sol_forest_whispering_ash.webp"
+      ],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": true,
+      "count": 0,
+      "winner": "",
+      "hash": "29a7b84aa2d5ce9667a11e9ef7af45360b342b867d67abe28b3a624fca3e2934",
+      "actor": "player:1:fadyme",
+      "options": [
+        {
+          "id": "fadyme_basic_veilglass_thorn",
+          "name": "Veilglass Thorn",
+          "type": "basic",
+          "available": true,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ]
+        },
+        {
+          "id": "fadyme_active_borrowed_hour",
+          "name": "Borrowed Hour",
+          "type": "active",
+          "available": true,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ]
+        },
+        {
+          "id": "fadyme_ultimate_the_bell_that_forgets",
+          "name": "The Bell That Forgets",
+          "type": "ultimate",
+          "available": false,
+          "needsTarget": false,
+          "targets": []
+        }
+      ],
+      "saveText": "",
+      "notice": ""
+    },
+    "console": {
+      "entries": [],
+      "cursor": 974775,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 0,
+        "log": 2000
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T04:40:04.1609807Z",
+        "ageMs": 81,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 2,
+        "consoleLogs": 12351,
+        "seeded": true
+      }
+    },
+    "after": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installAfter": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    }
+  },
+  "captures": [
+    {
+      "image": "docs/review/captures/20261027T043145416_3df75b2c.png",
+      "metadata": "docs/review/captures/20261027T043145416_3df75b2c.json",
+      "image_sha256": "fc14cd3e998fd94f6287e322ff1cfb40c84f1309d1917c4e3c04fcc47f11a060",
+      "metadata_sha256": "377a1a4d23c2523071c4c205e3b3d757a090c8846ca838fe85d58e723dde65ba",
+      "final_pass": false,
+      "width": 1920,
+      "height": 1080,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043149062_5e3fe552.png",
+      "metadata": "docs/review/captures/20261027T043149062_5e3fe552.json",
+      "image_sha256": "33f5f82f46e714ff8643be2deff049ce9ae7779126d038f7f0f982d05f8fbea2",
+      "metadata_sha256": "4aa4087293ef2bf91a446670615bb9a8cdf33f2f0e280420f38727948c92560a",
+      "final_pass": false,
+      "width": 2400,
+      "height": 1080,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043152594_b4c9652f.png",
+      "metadata": "docs/review/captures/20261027T043152594_b4c9652f.json",
+      "image_sha256": "385ebd057a00da0d5db30adba6cada96c31d40cdccf75863c18f6b11503e497a",
+      "metadata_sha256": "4b4941e4ff9774607ec06b9486543eac9fadfa453a61cc76c4e26afd389be66e",
+      "final_pass": false,
+      "width": 1600,
+      "height": 1200,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043159427_c78389c7.png",
+      "metadata": "docs/review/captures/20261027T043159427_c78389c7.json",
+      "image_sha256": "c1261f310e50c80547d564e218a094b0b0dcbb4b430924f38c05c802f2801db1",
+      "metadata_sha256": "d1c7137788a4f1ce3afa7c0ed2616baccb622631f7b7526d2052cd682d22c419",
+      "final_pass": false,
+      "width": 1920,
+      "height": 1080,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043935443_802752cc.png",
+      "metadata": "docs/review/captures/20261027T043935443_802752cc.json",
+      "image_sha256": "fc14cd3e998fd94f6287e322ff1cfb40c84f1309d1917c4e3c04fcc47f11a060",
+      "metadata_sha256": "b82fc85cf44bdde8f879fd337c47984058fb8b77ac3132cda34ca28b384b8697",
+      "final_pass": true,
+      "width": 1920,
+      "height": 1080,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043938831_a35b4b82.png",
+      "metadata": "docs/review/captures/20261027T043938831_a35b4b82.json",
+      "image_sha256": "33f5f82f46e714ff8643be2deff049ce9ae7779126d038f7f0f982d05f8fbea2",
+      "metadata_sha256": "4a07e62df7e3b5068d928bf2d91432bb72bfb9c4e4529e1f426e36ca246a62a7",
+      "final_pass": true,
+      "width": 2400,
+      "height": 1080,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043942398_c453f679.png",
+      "metadata": "docs/review/captures/20261027T043942398_c453f679.json",
+      "image_sha256": "385ebd057a00da0d5db30adba6cada96c31d40cdccf75863c18f6b11503e497a",
+      "metadata_sha256": "a42e44ecf24d2bcbb342e5b32c65911a087a2aa1d01c8fcea4b1260406f8f2f1",
+      "final_pass": true,
+      "width": 1600,
+      "height": 1200,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043949258_14202963.png",
+      "metadata": "docs/review/captures/20261027T043949258_14202963.json",
+      "image_sha256": "c1261f310e50c80547d564e218a094b0b0dcbb4b430924f38c05c802f2801db1",
+      "metadata_sha256": "586ae46d0e205b354570058260086c3e18f8cfb670870d923470009fe6975939",
+      "final_pass": true,
+      "width": 1920,
+      "height": 1080,
+      "scenario": "entry"
+    },
+    {
+      "image": "docs/review/captures/20261027T043957381_6e5413bb.png",
+      "metadata": "docs/review/captures/20261027T043957381_6e5413bb.json",
+      "image_sha256": "17ee2912f28c2a01ec569f0616019b94ad9b12dea7ccfa3a46beb5ee0c502a21",
+      "metadata_sha256": "decc8f0754fd263be94e6ae941944e33ab5f69e0eec2c37f958bf85c8e3f7b83",
+      "final_pass": true,
+      "width": 1920,
+      "height": 1080,
+      "scenario": "entry"
+    }
+  ],
+  "limits": [
+    "Live fault injection used a rejected bounded record in the isolated memory store; no real user save file was changed. Actual filesystem failures and process persistence are covered by the previous checkpoint tests/probe.",
+    "UI events and safe-area simulation are Editor evidence, not physical touch/Android acceptance.",
+    "Base delivery npm verification (955 tests), 119 headless tests and process-boundary storage checks remain applicable; no TypeScript, content or storage protocol changed.",
+    "Expected local-save warnings occur during fault injection. No console errors were observed.",
+    "Human art, live providers, Android and release gates remain open."
+  ]
+}

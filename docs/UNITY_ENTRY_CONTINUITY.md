@@ -27,6 +27,11 @@ A corrupt latest record can recover the previous valid copy; saving that recover
 Newer unsupported formats are retained and block overwriting. Storage failures remain visible and prevent Finish reload
 from claiming a saved checkpoint. The checksum detects damage; this local narrative file is not an authority mechanism.
 
+A failed local write also shows a persistent native warning on Title, Prologue, Story and Battle, before Finish is reached.
+Retry Save writes the current checkpoint and retries any pending coarse account confirmation. Its button sits outside the
+story/battle input subtree, so saving cannot advance a line or submit a combat action. Finish retains its own save status
+and recovery controls. [Focused warning evidence](evidence/sol-entry-save-warning-2026-10-27.json).
+
 An unfinished battle resumes as a fresh deterministic encounter. A won tutorial checkpoints the post-story phase before
 the result's Continue button, so an interruption at victory does not require winning it again. A stage is recorded as
 finished only after its post-story. This is entry continuity; pending server-sessioned campaign operations and full

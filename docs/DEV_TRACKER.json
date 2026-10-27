@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "67aa8207",
+  "sourceCommit": "0ac241cb",
   "reviewedAt": "2026-10-27",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
@@ -11,6 +11,10 @@
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped. Unity Editor access is CLI only per the owner; MCP configuration and pinned sources remain intact."
   },
   "now": [
+    {
+      "title": "D-35: save failure visible before Finish (2026-10-27)",
+      "detail": "Native warning on Title/Prologue/Story/Battle, Retry Save without advancing the current narrative line or combat action, three live viewport captures and restored preferences. 148 EditMode, 3 PlayMode, twelve-assembly reference compile and 66 adapters pass. Focused evidence: docs/evidence/sol-entry-save-warning-2026-10-27.json. Fault injection is an explicit isolated fixture, not Android low-storage acceptance. Enclosing commit binds final source; sourceCommit is its parent."
+    },
     {
       "title": "D-35: durable entry, native Finish and isolated owner review (2026-10-27)",
       "detail": "Nine opening plans, 107 canonical tutorial lines and fifty manual battle actions pass in the actual Editor with matching replay hashes. Exact story/shot resume, unfinished battle restart, post-victory continuation, truthful save states, stable lost-response retry ID, stale-account rejection and logical reload/Continue to Home verified. Atomic/checksummed account-scoped device cursor and existing coarse cloud record; detailed cursor is not cloud synced. 148 EditMode, 3 PlayMode, 119 headless, process-boundary storage probe, npm verify, twelve-assembly compile and 66 adapters pass. Production Review entry/finish are independent, explicitly labelled memory fixtures with exact-source feedback. No human art, live provider/patch, OS-relaunch, Android or release approval. Evidence: docs/evidence/sol-entry-continuity-2026-10-27.json. Enclosing commit binds final source; sourceCommit is its parent."

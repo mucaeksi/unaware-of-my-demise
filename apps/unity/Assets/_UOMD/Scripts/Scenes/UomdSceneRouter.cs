@@ -32,6 +32,7 @@ namespace Uomd.Scenes
         private IUomdScreenController _activeController;
         private bool _mediaStale;
         private UomdPatchStrip _patchStrip;
+        private EntrySaveWarning _entrySaveWarning;
         private int _navGeneration;
 
         public GameSessionState Session { get; private set; }
@@ -107,6 +108,8 @@ namespace Uomd.Scenes
                 && (ActiveScreenId == UomdScreenId.Prologue || ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle || ActiveScreenId == UomdScreenId.Finish))
             { _ = NavigateToAsync(UomdScreenId.Title); return; }
             _activeController?.OnTick(Time.deltaTime);
+            _entrySaveWarning?.Refresh(EntryFlow?.Continuity, ActiveScreenId == UomdScreenId.Title || ActiveScreenId == UomdScreenId.Prologue
+                || ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle);
             _patchStrip?.Tick();
         }
 
@@ -222,8 +225,16 @@ namespace Uomd.Scenes
             _rootContainer.Add(_screenHost);
             _rootContainer.Add(_overlayHost);
             _rootContainer.Add(stripHost);
+            _entrySaveWarning = new EntrySaveWarning(RetryEntrySave);
+            _rootContainer.Add(_entrySaveWarning);
             root.Add(_rootContainer);
             _patchStrip = new UomdPatchStrip(this, stripHost);
+        }
+
+        private void RetryEntrySave()
+        {
+            var continuity = EntryFlow?.Continuity;
+            if (continuity != null && continuity.IsCurrent && continuity.Save()) _ = continuity.SyncAsync();
         }
 
         private void RegisterAll28Screens()

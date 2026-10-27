@@ -1454,6 +1454,169 @@
             "sourceIdentities": [
                 "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858"
             ]
+        },
+        {
+            "id": "20261027T043145416_3df75b2c",
+            "image": "captures/20261027T043145416_3df75b2c.png",
+            "sha256": "fc14cd3e998fd94f6287e322ff1cfb40c84f1309d1917c4e3c04fcc47f11a060",
+            "metadata": "captures/20261027T043145416_3df75b2c.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043149062_5e3fe552",
+            "image": "captures/20261027T043149062_5e3fe552.png",
+            "sha256": "33f5f82f46e714ff8643be2deff049ce9ae7779126d038f7f0f982d05f8fbea2",
+            "metadata": "captures/20261027T043149062_5e3fe552.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043152594_b4c9652f",
+            "image": "captures/20261027T043152594_b4c9652f.png",
+            "sha256": "385ebd057a00da0d5db30adba6cada96c31d40cdccf75863c18f6b11503e497a",
+            "metadata": "captures/20261027T043152594_b4c9652f.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043159427_c78389c7",
+            "image": "captures/20261027T043159427_c78389c7.png",
+            "sha256": "c1261f310e50c80547d564e218a094b0b0dcbb4b430924f38c05c802f2801db1",
+            "metadata": "captures/20261027T043159427_c78389c7.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043935443_802752cc",
+            "image": "captures/20261027T043935443_802752cc.png",
+            "sha256": "fc14cd3e998fd94f6287e322ff1cfb40c84f1309d1917c4e3c04fcc47f11a060",
+            "metadata": "captures/20261027T043935443_802752cc.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043938831_a35b4b82",
+            "image": "captures/20261027T043938831_a35b4b82.png",
+            "sha256": "33f5f82f46e714ff8643be2deff049ce9ae7779126d038f7f0f982d05f8fbea2",
+            "metadata": "captures/20261027T043938831_a35b4b82.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043942398_c453f679",
+            "image": "captures/20261027T043942398_c453f679.png",
+            "sha256": "385ebd057a00da0d5db30adba6cada96c31d40cdccf75863c18f6b11503e497a",
+            "metadata": "captures/20261027T043942398_c453f679.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043949258_14202963",
+            "image": "captures/20261027T043949258_14202963.png",
+            "sha256": "c1261f310e50c80547d564e218a094b0b0dcbb4b430924f38c05c802f2801db1",
+            "metadata": "captures/20261027T043949258_14202963.json",
+            "scenario": "entry",
+            "lineId": "tutorial_t1_before_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "pre_story",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+            ]
+        },
+        {
+            "id": "20261027T043957381_6e5413bb",
+            "image": "captures/20261027T043957381_6e5413bb.png",
+            "sha256": "17ee2912f28c2a01ec569f0616019b94ad9b12dea7ccfa3a46beb5ee0c502a21",
+            "metadata": "captures/20261027T043957381_6e5413bb.json",
+            "scenario": "entry",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "battle",
+            "entryStage": 1,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
         }
     ]
 }
