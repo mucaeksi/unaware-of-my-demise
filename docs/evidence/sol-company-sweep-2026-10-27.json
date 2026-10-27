@@ -1,0 +1,1986 @@
+{
+  "schemaVersion": 1,
+  "id": "sol-company-sweep-2026-10-27",
+  "status": "LOCAL_TESTED",
+  "reviewedAt": "2026-10-27T13:05:56.893Z",
+  "sourceCommit": "401645a6ebef5750768feb169e8cf03fa380a2f4",
+  "deliveryBinding": "The enclosing local commit contains the exact source blobs listed below; sourceCommit records its parent.",
+  "scope": [
+    "Native companion details, five Team presets, filtered Armory and Saved Actions using the shared editable Hub frame",
+    "Account/revision/release/selection-bound account reads, stale-control fences and plain-write readback",
+    "Exact durable companion growth/shard and Sweep intent with original cost summary and status-first recovery",
+    "Published paid-stage Sweep eligibility, batch costs and confirmed rewards",
+    "Isolated Editor fixtures, real controller navigation, Game-view captures and restored Editor state"
+  ],
+  "checks": {
+    "unityEditor": "6000.3.27f1",
+    "unityTransport": "CLI only; Pipeline 0.9.1-exp.1",
+    "editMode": {
+      "total": 180,
+      "passed": 180,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "editModeExecution": "Synchronous CLI run after the final Editor-only reference fix; an earlier stale asynchronous collector was canceled before rerunning.",
+    "playMode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "headless": {
+      "passed": 148,
+      "failed": 0
+    },
+    "typescript": {
+      "passed": 955,
+      "failed": 0
+    },
+    "contentReproduction": {
+      "files": 232,
+      "exact": true
+    },
+    "referenceCompile": {
+      "assemblies": 12,
+      "errors": 0,
+      "limitation": "URP editor signatures are verified stubs, not the compiled package"
+    },
+    "playerReferenceCompile": {
+      "assemblies": 8,
+      "errors": 0,
+      "scope": "UNITY_EDITOR disabled; not an Android/IL2CPP build"
+    },
+    "skills": {
+      "adapters": 66,
+      "passed": true
+    },
+    "consoleErrors": 0,
+    "liveChecks": 56
+  },
+  "interaction": {
+    "inputMethod": "NavigationSubmitEvent on real UI Toolkit Buttons; no physical-touch claim",
+    "fixture": "Explicit memory-only account fixtures; review HTTP remains blocked. Character, Team, Gear, Operations, Chapters and canonical T1 pre-story use actual controllers.",
+    "chapterFixture": {
+      "path": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sha256": "4affd87e820aaee0abb6ebe6b490d3fb97dc67824a8418057e9884981401b01b",
+      "scope": "Full campaign layout fixture only; not a claim that this patch is installed/published on the embedded fixture release."
+    },
+    "steps": [
+      "companion level double tap sends and applies exactly one original intent",
+      "confirmed growth updates displayed authoritative level and balance",
+      "unsaved formation navigation requires explicit discard and Cancel remains available",
+      "save then activate preserves exact two-front three-rear provider slots without duplicate saves",
+      "save-and-activate double tap produces one PUT and one POST",
+      "formation picker excludes already selected companions",
+      "cancelled clear preserves the saved preset",
+      "confirmed clear removes only the selected preset and reads it back",
+      "companion weapon route retains its equipment filter and owner",
+      "equipment double tap moves one item and confirms ownership by readback",
+      "remove reads back the authoritative empty owner",
+      "equipment Back returns to the originating companion",
+      "unsupported passive cannot equip while retired equipped gear remains removable",
+      "retired equipped gear can be removed without substituting a definition",
+      "long armory retains every item in a native scroll view",
+      "stats failure is explicit and never rendered as zero combat stats",
+      "status loss before sending retains the original intent without issuing its mutation",
+      "response loss retains pending original growth after one committed fixture mutation",
+      "pending growth blocks a new spend and exposes original-action recovery",
+      "status recovery confirms original committed growth without resubmitting or double spending",
+      "explicit provider rejection is retained, pauses stale planning and never displays success",
+      "a fresh explicit new action checks the declined identity before creating another request",
+      "three-star paid published stage enables Sweep only with authoritative eligibility",
+      "Sweep response loss and double tap preserve a single original count and request",
+      "saved Sweep payload preserves its exact stage and count",
+      "Sweep status recovery uses the original discriminator hash and confirms one 30-Ration spend",
+      "insufficient Ration blocks Sweep",
+      "free tutorials do not expose a Sweep spending control",
+      "empty formation cannot save or activate a fabricated team",
+      "isolated review has exactly one audio listener without changing the production scene",
+      "fadyme cycles all four canonical emotion aliases to distinct rebuilt portrait images",
+      "mahmut cycles all four canonical emotion aliases to distinct rebuilt portrait images",
+      "legacy token-only sessions resolve verified me identity before using a stable account journal",
+      "ascension spends once and reads back the actual new cap and account balance",
+      "skill upgrade persists its original skill path and refreshes the authoritative rank",
+      "attunement confirms the shard spend and updated resonance tier once",
+      "excess-shard exchange keeps the exact original quantity and displays the refreshed remainder",
+      "different-account callback rejects the late confirmation and does not publish prior account data",
+      "returning to the original account recovers its exact saved action without another write",
+      "same-account refreshed-session callback rejects the late confirmation and does not publish prior account data",
+      "a refreshed session explicitly reconciles the original request before publishing success",
+      "sign-out clears balances ownership action receipts and portrait identities",
+      "a disabled server Sweep flag blocks an otherwise eligible paid three-star stage",
+      "a normal Sweep also reaches confirmed and refreshed state with the strict receipt parser",
+      "final 4:3 navigation remains inside the native root with at least 64-reference-pixel targets",
+      "final Armory companion and equipment lists use constrained vertical scrolling",
+      "Sweep count controls cost text and action remain separated with measured wrapped text",
+      "pending spending retains the visible fixture marker and blocks a new battle entry",
+      "Saved Actions keeps fixture labelling and removes horizontal overflow",
+      "confirmed original-action recovery retains the fixture label without another submit",
+      "native Saved Actions retains the confirmed campaign stars receipt alongside companion and Sweep recovery",
+      "saving an existing preset preserves its authoritative custom name and sends only one write",
+      "clear confirmation keeps its original selected preset even if the controller selection changes",
+      "an attached old-account button cannot spend on a newly loaded account before the next UI redraw",
+      "pending Sweep retains its original displayed cost summary",
+      "native stage entry still reaches the canonical T1 pre-story after saved-action recovery"
+    ],
+    "states": {
+      "sourceCommit": "401645a6",
+      "growth": {
+        "ready": true,
+        "screen": "Character",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "busy": false,
+        "blocked": false,
+        "action": "confirmed",
+        "request": "873a6b70094d45caa4fdb5b83380d34e",
+        "payload": "{\"items\":[{\"itemId\":\"fixture_xp\",\"quantity\":1}],\"releaseId\":\"rel_0001\",\"requestId\":\"873a6b70094d45caa4fdb5b83380d34e\"}",
+        "receipt": "{\"ascension\":1,\"balance\":1637,\"character\":\"fadyme\",\"gainedXp\":2000,\"level\":13,\"replayed\":false,\"spent\":{\"fee\":13},\"wastedXp\":0,\"xp\":800}",
+        "refreshed": true,
+        "writes": 1,
+        "applied": 1,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "player": "hub_review",
+        "companions": 2,
+        "balance": 1637,
+        "ration": 114
+      },
+      "formation": {
+        "level": 13,
+        "gear": null,
+        "teams": [
+          {
+            "active": false,
+            "members": [
+              {
+                "characterId": "mahmut",
+                "row": "front",
+                "slot": 0
+              },
+              {
+                "characterId": "fadyme",
+                "row": "rear",
+                "slot": 3
+              }
+            ],
+            "name": "The Company",
+            "slot": 1
+          },
+          {
+            "active": true,
+            "members": [
+              {
+                "characterId": "mahmut",
+                "row": "front",
+                "slot": 0
+              },
+              {
+                "characterId": "fadyme",
+                "row": "rear",
+                "slot": 2
+              }
+            ],
+            "name": "Team 2",
+            "slot": 2
+          }
+        ]
+      },
+      "unsentGrowth": {
+        "ready": true,
+        "screen": "Character",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "Confirmation is pending. Your original action is retained; unknown status does not mean failure. Check / retry when connected.",
+        "busy": false,
+        "blocked": true,
+        "action": "pending",
+        "request": "b46d664bebff4d4099813aa2c7507bf2",
+        "payload": "{\"items\":[{\"itemId\":\"fixture_xp\",\"quantity\":1}],\"releaseId\":\"rel_0001\",\"requestId\":\"b46d664bebff4d4099813aa2c7507bf2\"}",
+        "receipt": "",
+        "refreshed": false,
+        "writes": 7,
+        "applied": 7,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "player": "hub_review",
+        "companions": 2,
+        "balance": 1637,
+        "ration": 114
+      },
+      "pendingGrowth": {
+        "ready": true,
+        "screen": "Character",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "Confirmation is pending. Your original action is retained; unknown status does not mean failure. Check / retry when connected.",
+        "busy": false,
+        "blocked": true,
+        "action": "pending",
+        "request": "b46d664bebff4d4099813aa2c7507bf2",
+        "payload": "{\"items\":[{\"itemId\":\"fixture_xp\",\"quantity\":1}],\"releaseId\":\"rel_0001\",\"requestId\":\"b46d664bebff4d4099813aa2c7507bf2\"}",
+        "receipt": "",
+        "refreshed": false,
+        "writes": 8,
+        "applied": 8,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "player": "hub_review",
+        "companions": 2,
+        "balance": 1637,
+        "ration": 114
+      },
+      "pendingSweep": {
+        "ready": true,
+        "screen": "Chapters",
+        "mode": "campaign",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "Confirmation is pending. Your original action is retained; unknown status does not mean failure. Check / retry when connected.",
+        "busy": false,
+        "blocked": true,
+        "action": "pending",
+        "request": "740beccdb6df4210a69ae959469436d3",
+        "payload": "{\"count\":5,\"nodeId\":\"stage_1_2\",\"releaseId\":\"rel_0001\",\"requestId\":\"740beccdb6df4210a69ae959469436d3\"}",
+        "receipt": "",
+        "refreshed": false,
+        "writes": 11,
+        "applied": 10,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "player": "hub_review",
+        "companions": 2,
+        "balance": 1592,
+        "ration": 114
+      },
+      "sweep": {
+        "ready": true,
+        "screen": "Operations",
+        "mode": "campaign",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "busy": false,
+        "blocked": false,
+        "action": "confirmed",
+        "request": "740beccdb6df4210a69ae959469436d3",
+        "payload": "{\"count\":5,\"nodeId\":\"stage_1_2\",\"releaseId\":\"rel_0001\",\"requestId\":\"740beccdb6df4210a69ae959469436d3\"}",
+        "receipt": "{\"count\":5,\"dailyLimit\":20,\"dailyUsed\":5,\"nodeId\":\"stage_1_2\",\"ration\":{\"cap\":120,\"nextMs\":0,\"spent\":30,\"value\":84},\"replayed\":false,\"requestId\":\"740beccdb6df4210a69ae959469436d3\",\"rewards\":[{\"amount\":10,\"currency\":\"eclipse_token\",\"type\":\"currency\"}]}",
+        "refreshed": true,
+        "writes": 11,
+        "applied": 10,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "player": "hub_review",
+        "companions": 2,
+        "balance": 1602,
+        "ration": 84
+      },
+      "final": {
+        "ready": true,
+        "screen": "Character",
+        "mode": "campaign",
+        "view": "guest",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "",
+        "busy": false,
+        "blocked": false,
+        "action": null,
+        "request": null,
+        "payload": null,
+        "summary": null,
+        "receipt": null,
+        "refreshed": false,
+        "writes": 3,
+        "applied": 3,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "player": "",
+        "companions": 0,
+        "balance": null,
+        "ration": 0
+      },
+      "audioListeners": 1,
+      "expressions": {
+        "fadyme": [
+          "art/portrait_fadyme_sol_composed.webp",
+          "art/portrait_fadyme_sol_wry.webp",
+          "art/portrait_fadyme_sol_warm.webp",
+          "art/portrait_fadyme_sol_resolve.webp"
+        ],
+        "mahmut": [
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_mahmut_sol_protective_resolve.webp",
+          "art/portrait_mahmut_sol_dry_humor.webp"
+        ]
+      },
+      "growthBranches": {
+        "state": {
+          "ready": true,
+          "screen": "Character",
+          "mode": "ascend",
+          "view": "ready",
+          "loading": false,
+          "fresh": true,
+          "notice": "",
+          "actionNotice": "Action confirmed. Account data refreshed.",
+          "busy": false,
+          "blocked": false,
+          "action": "confirmed",
+          "request": "74a7b6da26e74d34a00c64506846e164",
+          "payload": "{\"releaseId\":\"rel_0001\",\"requestId\":\"74a7b6da26e74d34a00c64506846e164\"}",
+          "receipt": "{\"ascension\":2,\"balance\":1585,\"character\":\"mahmut\",\"level\":20,\"replayed\":false,\"resonance\":{\"bonusPct\":1,\"excessItemId\":\"torn_chronicle_page\",\"excessShards\":0,\"maxTier\":6,\"nextShardCost\":20,\"tier\":2},\"spent\":{\"fee\":0},\"spentShards\":10,\"xp\":0}",
+          "refreshed": true,
+          "writes": 3,
+          "applied": 3,
+          "paths": [
+            "art/bg_sol_hub_shelter.webp",
+            "art/portrait_mahmut_sol_composed.webp"
+          ],
+          "player": "hub_review_growth",
+          "companions": 2,
+          "balance": 1585,
+          "ration": 114
+        },
+        "character": {
+          "ascension": 2,
+          "cap": 30,
+          "copies": 1,
+          "id": "mahmut",
+          "level": 20,
+          "nextAscension": null,
+          "resonance": {
+            "bonusPct": 1,
+            "excessItemId": "torn_chronicle_page",
+            "excessShards": 0,
+            "maxTier": 6,
+            "nextShardCost": 20,
+            "tier": 2
+          },
+          "shards": 30,
+          "skills": [
+            {
+              "maxRank": 5,
+              "name": "Fixture skill",
+              "next": null,
+              "rank": 2,
+              "skillId": "fixture_strike",
+              "type": "active"
+            }
+          ],
+          "xp": 0,
+          "xpToNext": 1200
+        }
+      },
+      "conversion": {
+        "ready": true,
+        "screen": "Character",
+        "mode": "excess",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "busy": false,
+        "blocked": false,
+        "action": "confirmed",
+        "request": "65671f93a0c149178463dbc1fe1704b3",
+        "payload": "{\"releaseId\":\"rel_0001\",\"requestId\":\"65671f93a0c149178463dbc1fe1704b3\",\"shards\":20}",
+        "receipt": "{\"ascension\":1,\"balance\":1650,\"character\":\"mahmut\",\"convertedShards\":20,\"level\":12,\"replayed\":false,\"shardsRemaining\":130,\"spent\":{\"fee\":0},\"xp\":0}",
+        "refreshed": true,
+        "writes": 4,
+        "applied": 4,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp",
+          "art/portrait_mahmut_sol_composed.webp"
+        ],
+        "player": "hub_review_excess",
+        "companions": 2,
+        "balance": 1650,
+        "ration": 114
+      },
+      "accountRace": {
+        "held": {
+          "ready": true,
+          "screen": "Character",
+          "mode": "ready",
+          "view": "ready",
+          "loading": false,
+          "fresh": true,
+          "notice": "",
+          "actionNotice": "Sending the original saved action…",
+          "busy": true,
+          "blocked": true,
+          "action": "pending",
+          "request": "cd95de60763140e38103eb81040a2b6c",
+          "payload": "{\"items\":[{\"itemId\":\"fixture_xp\",\"quantity\":1}],\"releaseId\":\"rel_0001\",\"requestId\":\"cd95de60763140e38103eb81040a2b6c\"}",
+          "receipt": "",
+          "refreshed": false,
+          "writes": 5,
+          "applied": 4,
+          "paths": [
+            "art/bg_sol_hub_shelter.webp",
+            "art/portrait_fadyme_sol_composed.webp"
+          ],
+          "player": "hub_review_race",
+          "companions": 2,
+          "balance": 1650,
+          "ration": 114
+        },
+        "after": {
+          "ready": true,
+          "screen": "Character",
+          "mode": "ready",
+          "view": "ready",
+          "loading": false,
+          "fresh": true,
+          "notice": "",
+          "actionNotice": "",
+          "busy": false,
+          "blocked": false,
+          "action": null,
+          "request": null,
+          "payload": null,
+          "receipt": null,
+          "refreshed": false,
+          "writes": 5,
+          "applied": 5,
+          "paths": [
+            "art/bg_sol_hub_shelter.webp",
+            "art/portrait_fadyme_sol_composed.webp"
+          ],
+          "player": "hub_review_b",
+          "companions": 2,
+          "balance": 730,
+          "ration": 114
+        }
+      },
+      "sameAccountRace": {
+        "held": {
+          "ready": true,
+          "screen": "Character",
+          "mode": "ready",
+          "view": "ready",
+          "loading": false,
+          "fresh": true,
+          "notice": "",
+          "actionNotice": "Sending the original saved action…",
+          "busy": true,
+          "blocked": true,
+          "action": "pending",
+          "request": "e0d7b841043442f38de9d452219da27c",
+          "payload": "{\"items\":[{\"itemId\":\"fixture_xp\",\"quantity\":1}],\"releaseId\":\"rel_0001\",\"requestId\":\"e0d7b841043442f38de9d452219da27c\"}",
+          "receipt": "",
+          "refreshed": false,
+          "writes": 6,
+          "applied": 5,
+          "paths": [
+            "art/bg_sol_hub_shelter.webp",
+            "art/portrait_fadyme_sol_composed.webp"
+          ],
+          "player": "hub_review_same",
+          "companions": 2,
+          "balance": 1650,
+          "ration": 114
+        },
+        "after": {
+          "ready": true,
+          "screen": "Character",
+          "mode": "ready",
+          "view": "ready",
+          "loading": false,
+          "fresh": true,
+          "notice": "",
+          "actionNotice": "An original action is saved. Check / retry it before spending again.",
+          "busy": false,
+          "blocked": true,
+          "action": "pending",
+          "request": "e0d7b841043442f38de9d452219da27c",
+          "payload": "{\"items\":[{\"itemId\":\"fixture_xp\",\"quantity\":1}],\"releaseId\":\"rel_0001\",\"requestId\":\"e0d7b841043442f38de9d452219da27c\"}",
+          "receipt": "",
+          "refreshed": false,
+          "writes": 6,
+          "applied": 6,
+          "paths": [
+            "art/bg_sol_hub_shelter.webp",
+            "art/portrait_fadyme_sol_composed.webp"
+          ],
+          "player": "hub_review_same",
+          "companions": 2,
+          "balance": 1650,
+          "ration": 114
+        }
+      },
+      "bounds": [
+        {
+          "id": "hubHome",
+          "inside": true,
+          "height": 69.59999
+        },
+        {
+          "id": "hubCompany",
+          "inside": true,
+          "height": 69.59999
+        },
+        {
+          "id": "hubChapters",
+          "inside": true,
+          "height": 69.59999
+        },
+        {
+          "id": "hubAccount",
+          "inside": true,
+          "height": 69.6000061
+        },
+        {
+          "id": "hubBack",
+          "inside": true,
+          "height": 69.5999756
+        },
+        {
+          "id": "hubRefresh",
+          "inside": true,
+          "height": 69.5999756
+        },
+        {
+          "id": "hubMore",
+          "inside": true,
+          "height": 69.5999756
+        }
+      ],
+      "sweepLayout": {
+        "separated": true,
+        "countsHeight": 70,
+        "costHeight": 29,
+        "needed": 29
+      },
+      "battleReceiptFixture": "Explicit memory-only validated battle model injected into the real controller for receipt rendering; no claim that a battle was replayed in this view probe.",
+      "staleUi": {
+        "balance": 730,
+        "newAccountFresh": true,
+        "oldButtonAttached": true,
+        "scopeChanged": true,
+        "writesAfter": 2,
+        "writesBefore": 2
+      },
+      "quotedRecovery": {
+        "summary": "No Bell in the Trees · Sweep ×5 · 30 Ration",
+        "payload": "{\"count\":5,\"nodeId\":\"stage_1_2\",\"releaseId\":\"rel_0001\",\"requestId\":\"0db92cbea46b48bd97c473ee876b8cc3\"}",
+        "receipt": "{\"count\":5,\"dailyLimit\":20,\"dailyUsed\":5,\"nodeId\":\"stage_1_2\",\"ration\":{\"cap\":120,\"nextMs\":0,\"spent\":30,\"value\":84},\"replayed\":false,\"requestId\":\"0db92cbea46b48bd97c473ee876b8cc3\",\"rewards\":[{\"amount\":10,\"currency\":\"eclipse_token\",\"type\":\"currency\"}]}"
+      },
+      "entered": {
+        "screen": "Story",
+        "phase": "PreStory",
+        "line": "tutorial_t1_before_001"
+      },
+      "finalGuardSmoke": {
+        "ready": true,
+        "screen": "Character",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "actionNotice": "",
+        "busy": false,
+        "blocked": false,
+        "action": null,
+        "request": null,
+        "payload": null,
+        "summary": null,
+        "receipt": null,
+        "refreshed": false,
+        "writes": 0,
+        "applied": 0,
+        "paths": [
+          "art/bg_sol_hub_shelter.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "player": "hub_review",
+        "companions": 2,
+        "balance": 1650,
+        "ration": 114
+      }
+    }
+  },
+  "art": {
+    "newBitmaps": 0,
+    "reusedBackground": "sol_hub_shelter_01",
+    "sourceProvenance": {
+      "kind": "generated",
+      "sha256": "358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+      "mime": "image/png",
+      "width": 1672,
+      "height": 941,
+      "provenance_file": "content/generated/openai/sol_hub_shelter_01/run.provenance.json",
+      "provenance_sha256": "b0ae1276a863dd0645d4b192615e2877ecf99dd86670f6c2474e3b4ac43844b6",
+      "model": "not_disclosed_by_builtin_tool",
+      "prompt_sha256": "5d3afbb8ce4cb9b631b1f860448156ef38f3591b21660b415668fd972c391571",
+      "references": []
+    },
+    "portraitPolicy": "Only existing rebuilt OpenAI lead candidates; no historical Gemini bitmap substitution. Other companions remain data with unavailable portraits.",
+    "humanApproval": "pending",
+    "native2kTarget": "open"
+  },
+  "finalCapturePaths": [
+    {
+      "label": "final-companion-ready",
+      "image": "docs/review/captures/20261027T124252372_10674553.png",
+      "metadata": "docs/review/captures/20261027T124252372_10674553.json",
+      "screen": "Character",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-team-wide-safe",
+      "image": "docs/review/captures/20261027T124258381_8239368d.png",
+      "metadata": "docs/review/captures/20261027T124258381_8239368d.json",
+      "screen": "Team",
+      "phase": "ready",
+      "stage": 0,
+      "width": 2400,
+      "height": 1080,
+      "safe": true
+    },
+    {
+      "label": "final-armory-long-4x3",
+      "image": "docs/review/captures/20261027T124307522_6db6eeed.png",
+      "metadata": "docs/review/captures/20261027T124307522_6db6eeed.json",
+      "screen": "Gear",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1600,
+      "height": 1200,
+      "safe": false
+    },
+    {
+      "label": "final-chapters-sweep-ready",
+      "image": "docs/review/captures/20261027T124321353_a2ba7d41.png",
+      "metadata": "docs/review/captures/20261027T124321353_a2ba7d41.json",
+      "screen": "Chapters",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-sweep-pending-wide-safe",
+      "image": "docs/review/captures/20261027T124332040_da562d0e.png",
+      "metadata": "docs/review/captures/20261027T124332040_da562d0e.json",
+      "screen": "Chapters",
+      "phase": "ready",
+      "stage": 0,
+      "width": 2400,
+      "height": 1080,
+      "safe": true
+    },
+    {
+      "label": "final-saved-action-pending",
+      "image": "docs/review/captures/20261027T124340745_e8794b16.png",
+      "metadata": "docs/review/captures/20261027T124340745_e8794b16.json",
+      "screen": "Operations",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-saved-action-confirmed",
+      "image": "docs/review/captures/20261027T124352037_f9d5ae3e.png",
+      "metadata": "docs/review/captures/20261027T124352037_f9d5ae3e.json",
+      "screen": "Operations",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-saved-battle-receipt",
+      "image": "docs/review/captures/20261027T124357612_e37d54b6.png",
+      "metadata": "docs/review/captures/20261027T124357612_e37d54b6.json",
+      "screen": "Operations",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-companion-guest-4x3",
+      "image": "docs/review/captures/20261027T124405387_7d9194d3.png",
+      "metadata": "docs/review/captures/20261027T124405387_7d9194d3.json",
+      "screen": "Character",
+      "phase": "guest",
+      "stage": 0,
+      "width": 1600,
+      "height": 1200,
+      "safe": false
+    },
+    {
+      "label": "final-companion-player-guard-smoke",
+      "image": "docs/review/captures/20261027T130351297_ffbd6301.png",
+      "metadata": "docs/review/captures/20261027T130351297_ffbd6301.json",
+      "screen": "Character",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    }
+  ],
+  "captures": [
+    {
+      "metadata": "docs/review/captures/20261027T104555221_f6282a90.json",
+      "image": "docs/review/captures/20261027T104555221_f6282a90.png",
+      "imageSha256": "15c65c0db277be507b024a563d0dea00a4066a5cc0580d9b9efa7a4c15c5dc74",
+      "gitMetadataSha256": "2c4adda975739a0891b46c3e95175453493fe8d64a5a1647f4f2de85622d5a89",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T105947906_6afd5484.json",
+      "image": "docs/review/captures/20261027T105947906_6afd5484.png",
+      "imageSha256": "a91854fab0715f8d6f255157f1c0ac51efa5a00c8e70f20926d156522ef05c5b",
+      "gitMetadataSha256": "119e47fd7868a793ac39f05ed6714e8a8464bba0eea8bb64f6a49b9a46b26342",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T105957454_88e50789.json",
+      "image": "docs/review/captures/20261027T105957454_88e50789.png",
+      "imageSha256": "58777baca97ec5eb358c85a9cf755829f8e6d2dfeddecae97fd74c7311c941b0",
+      "gitMetadataSha256": "b2169b3dddd45af215123e1b1a457560f08d211363010a5c41df2228a95a1666",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110006213_a83ebbb2.json",
+      "image": "docs/review/captures/20261027T110006213_a83ebbb2.png",
+      "imageSha256": "ef771f5034277327889948b15d321a67f977de82798e06bd77bcccdff369ce7f",
+      "gitMetadataSha256": "8a53581a75cb2607ecf179c54977cdf1ba3ae3552854dba49b13a1fd6e59115d",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110025884_22fd3411.json",
+      "image": "docs/review/captures/20261027T110025884_22fd3411.png",
+      "imageSha256": "6676b93010dc041cc935a1c9144d0701c1bdc64060c7e3fcf10900c45e8e9055",
+      "gitMetadataSha256": "e0a035301732c92109142fb0a8facdbb8ddc1f0429eab81bf70efe7e533223af",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110056430_e8bf370e.json",
+      "image": "docs/review/captures/20261027T110056430_e8bf370e.png",
+      "imageSha256": "9a2d9fcf004c47bc22f425909e3436b3f6136196a5d76ff996c17eb5a47dedb1",
+      "gitMetadataSha256": "54965548704dd45203cfd30e4896b99409109c094e429fb9de83d0e54157ff10",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Gear",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110116984_95a8994b.json",
+      "image": "docs/review/captures/20261027T110116984_95a8994b.png",
+      "imageSha256": "00d4e5c7e604dbd35cc0fe7af14f0bf4af1c425562cf115e61fe167cf6b633ad",
+      "gitMetadataSha256": "612a3f7c043f3b4ef013341cbcb787df80004b0be529ceb8c1f9de92a1210ac7",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Gear",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110123827_f1f887cb.json",
+      "image": "docs/review/captures/20261027T110123827_f1f887cb.png",
+      "imageSha256": "096c8962ebb7e1c03a7f2e77bc484988fa790e57c88ec20a7561a186bd85f104",
+      "gitMetadataSha256": "e17ea526630f913118ed66155924b8b0a91e6fa4c003a172fe1b3bc80403ff9d",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Gear",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110135576_bc3dea41.json",
+      "image": "docs/review/captures/20261027T110135576_bc3dea41.png",
+      "imageSha256": "7335f91fb11d39b1a82740244f06468f50ea30ac32680ad0f74ae4b6a989ae62",
+      "gitMetadataSha256": "c095553bf150f08969e4a5f8a70ac7ea4eb114e6da81ec26c61731d850395e3b",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "stats_error",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110338235_ee56e740.json",
+      "image": "docs/review/captures/20261027T110338235_ee56e740.png",
+      "imageSha256": "61136f927be69c17c656a113013b885a39afb16b4d153d4fa94124e3300b3327",
+      "gitMetadataSha256": "80423f0ff724a4d336d704aa53082d6d5606dac20a8e2193f3da4dcb6e219e71",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110346593_df82e92f.json",
+      "image": "docs/review/captures/20261027T110346593_df82e92f.png",
+      "imageSha256": "9b23f611cc404027f970c3a89383e1c2fd2f33f884951c91bca7213939936003",
+      "gitMetadataSha256": "0298c621b19b6daf843b30a6c09f514821f580520619f6c7a8d5c6ee798d66d5",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110354604_ec6fa3ea.json",
+      "image": "docs/review/captures/20261027T110354604_ec6fa3ea.png",
+      "imageSha256": "3e656e1a4cd505e487f91c054f9968bfb7e5551e57ff2a816c08bc6704209a73",
+      "gitMetadataSha256": "32b18e19d47676c86d0c51f32c87dcac3b73ac9fe53d3bc0ca250462472c2aa3",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110732572_fd4a3f36.json",
+      "image": "docs/review/captures/20261027T110732572_fd4a3f36.png",
+      "imageSha256": "54a607f20a15c66772b8d5d3724bab2f257e063c6c0b787296e40909e93818ad",
+      "gitMetadataSha256": "1b998fbd269ce132e4db20d11918ad30fe335b6dc36d98dd6f408b6ed3264a07",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110745666_31d27e1a.json",
+      "image": "docs/review/captures/20261027T110745666_31d27e1a.png",
+      "imageSha256": "100a19818ee2986a79b059ed740db1ed959f58e5c718e618dc33a16baba3897e",
+      "gitMetadataSha256": "17c2965563495badff033d68c177e20e5e6e9ec31da08ff60419b3aa0cfbfe7e",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110809346_c84a6ba4.json",
+      "image": "docs/review/captures/20261027T110809346_c84a6ba4.png",
+      "imageSha256": "b3b7bd471fcd2d41464dbb203dd3e3d4aadda83d8e115f023b60f000e5fbd6b0",
+      "gitMetadataSha256": "63fae09058153170e3180419437af359767aceb2a7cf1024c3805f9f84cbe23c",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110815471_30694e0d.json",
+      "image": "docs/review/captures/20261027T110815471_30694e0d.png",
+      "imageSha256": "72049b48c548c0a07a70f365b3ccaf01401ef4f650cb8f85384494916e8c00d9",
+      "gitMetadataSha256": "1a2e8d11644059fea6e7ed7a6dd93968a0e62b43b73609b585746388a987750a",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110822239_e4f256cf.json",
+      "image": "docs/review/captures/20261027T110822239_e4f256cf.png",
+      "imageSha256": "ee53b44c7d58b5ba8603747bd857da65d6c09ee5b1a99bb63d5ab8a3f66e2fe0",
+      "gitMetadataSha256": "bdfa67bbeff6a5f7deb3082f782db672d10e6b4563f7fc619a9d2f87b523396d",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "empty",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T110832635_4bd37180.json",
+      "image": "docs/review/captures/20261027T110832635_4bd37180.png",
+      "imageSha256": "136674740f3e1574a298046f28a5ad34a1a67433e45ac813883ac5c9cea3d8b1",
+      "gitMetadataSha256": "82cc677f0fdb910595f9253de9adabb8ceec8da6ad739e90be4a72e6b71effdc",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113606266_bfc22058.json",
+      "image": "docs/review/captures/20261027T113606266_bfc22058.png",
+      "imageSha256": "21c2449cf2e9c391a9d94a88b95c2c7eb7aaf82c972d5505c03066f4527baad1",
+      "gitMetadataSha256": "f8a6219d591a45e637ae4399fae9380b701f22d6357baf9224ac442c3d41cf59",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113705853_52469488.json",
+      "image": "docs/review/captures/20261027T113705853_52469488.png",
+      "imageSha256": "60eb62267f2925a7ba46060a08e51c5bb9d8fd59309a198dde1d1c9217f7a360",
+      "gitMetadataSha256": "21fee5f5417e97de11cd994b7a4a4e88767f95a7e54e31cbc2ae7cc9387f6e5a",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113736820_e48f44e0.json",
+      "image": "docs/review/captures/20261027T113736820_e48f44e0.png",
+      "imageSha256": "2ba26287c25993c7ce56912618ed7b8d3e3d25d5b93f3450950d25eb34995f4b",
+      "gitMetadataSha256": "974198c01eaeccbee0b85614c5d230f80be0b9534524dc157bd657509a1b51f1",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "guest",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113744864_b4f67a6c.json",
+      "image": "docs/review/captures/20261027T113744864_b4f67a6c.png",
+      "imageSha256": "40e011597bdcb5b8b6efb8cf4502550a9ad1df54dae80817fc3d086ec54a7cc0",
+      "gitMetadataSha256": "2df811f28699e488a9d6a8511d2f184b5d9536e2b227919eda502cc501beeefa",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113753740_a093e231.json",
+      "image": "docs/review/captures/20261027T113753740_a093e231.png",
+      "imageSha256": "f8d3519a213eba8c8e9f12dd8d04e2e2bef467edf5df48a2e8a93ad9d19b84d0",
+      "gitMetadataSha256": "ff76cd405b26a4d395698f84291b1016d4add77b42b66577cc4eb8f628e16a63",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Gear",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113805065_db71774a.json",
+      "image": "docs/review/captures/20261027T113805065_db71774a.png",
+      "imageSha256": "9b9e4505e30409d37337007453939bd21dc4be5acb6a0d4a554cf9d990a16942",
+      "gitMetadataSha256": "f4732a398388a5633a08ab99810aebde12c3360460de657dcbe9d7db310390b6",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113817554_6c4b2a15.json",
+      "image": "docs/review/captures/20261027T113817554_6c4b2a15.png",
+      "imageSha256": "608043e4d257d5638335c0fb6d6c04dc3dcd286c6399d084877148488d2cd2ed",
+      "gitMetadataSha256": "e0eaf923b0ddecf6aba45f5ba46fc88554848cace4105ed37440116c481ab224",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T113827815_a9fc1222.json",
+      "image": "docs/review/captures/20261027T113827815_a9fc1222.png",
+      "imageSha256": "974accb3f36a9fd5349828671be918cf86b7f7230093815f4a9117dc16328506",
+      "gitMetadataSha256": "a730c8b12c7615ba4b95a52dc0bc2166ac942ce632480af092e219096d101005",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115813307_05e877ac.json",
+      "image": "docs/review/captures/20261027T115813307_05e877ac.png",
+      "imageSha256": "82d5b60da3af2e62471c6989f6e48ca9293caac540c712b664e4bad48622b602",
+      "gitMetadataSha256": "89543f58b209ff5a5f2c1fd0afce42502854374f75e5678f70a6b4d09bcd7edd",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115820046_e1791162.json",
+      "image": "docs/review/captures/20261027T115820046_e1791162.png",
+      "imageSha256": "60139ec79454bcee58233138b9435f40f77b54a8a280bdc5d8dde5cd4c1e1592",
+      "gitMetadataSha256": "6b2bee8efe8a50646af2ef31a7ddd9d3e25f8c1dc771d92444c85bb32782fd0b",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115830236_0db94cac.json",
+      "image": "docs/review/captures/20261027T115830236_0db94cac.png",
+      "imageSha256": "41d8731cc3160a5db97a374bbd2d582ea1d622907e1a3f7e0208f7d56e32d1d0",
+      "gitMetadataSha256": "477fd89d18801eda60836cfbde96b1d05fd89c2fad542b24f2bb85c88f995e2c",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Gear",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115844524_b8727fd0.json",
+      "image": "docs/review/captures/20261027T115844524_b8727fd0.png",
+      "imageSha256": "8280a51ea18af1a019864f0bfd72dbaa6148d9065f66ad7d125dee546585a966",
+      "gitMetadataSha256": "87e843c64916f4313a59c818abea14069c89436c1b6739f4c0fdc52ec2a7a41a",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115853540_6999733f.json",
+      "image": "docs/review/captures/20261027T115853540_6999733f.png",
+      "imageSha256": "155d788183853346342da13bdb091223d4f7a3e284859b8adfcd9fc072bb5c35",
+      "gitMetadataSha256": "dcbfe7fcc8431f7cb5d8a46068781cc369dacd0992182efb117b6134a5b97d8f",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115901603_a69f6cfb.json",
+      "image": "docs/review/captures/20261027T115901603_a69f6cfb.png",
+      "imageSha256": "d323d860c2f5a26f4ed4f0de8ca6a402c7e47f8d42ad158eb4b7c081ce58a169",
+      "gitMetadataSha256": "07604cbde5b9b1adba0c5338ba890c5588497b667f7bde626019ca08169b50ba",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115913285_8b2e8650.json",
+      "image": "docs/review/captures/20261027T115913285_8b2e8650.png",
+      "imageSha256": "2c751f71315d509916cbaf5faf376bd5602f81ee59b68219506b3fd215833509",
+      "gitMetadataSha256": "d438afea764e91bdc0d3224a70d6bfd12e0b4b3cbbac647b952af82948d8f7b7",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115919540_c690283b.json",
+      "image": "docs/review/captures/20261027T115919540_c690283b.png",
+      "imageSha256": "59afcad28bf9ef172a79fb2e58e5be536d50ac3a2c276e3dd6adc44331209e16",
+      "gitMetadataSha256": "91955e420a5aaf83746219dcc5792aaffc636e4653f8ee80ae869380579dc7c4",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T115927898_849e460e.json",
+      "image": "docs/review/captures/20261027T115927898_849e460e.png",
+      "imageSha256": "ae97f348cd80fd34b043017c050aaebd1fbd3dfa66ffd3879f813c302d426ee0",
+      "gitMetadataSha256": "92eca488d4bf60482999994a95833604551ef84ecf67f009ca05a6c9c48df1d0",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "guest",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121839880_f7bb17ec.json",
+      "image": "docs/review/captures/20261027T121839880_f7bb17ec.png",
+      "imageSha256": "21122c28af8eb14d446efafadd44a6d2dc48e08cbb75ab039289e49cf0264251",
+      "gitMetadataSha256": "13947c2e5e030bc878029078b21e568ebf791943a2495f9cb2e402776f890b51",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121845817_3e123f4d.json",
+      "image": "docs/review/captures/20261027T121845817_3e123f4d.png",
+      "imageSha256": "6e1164ba1c2255ab615178d856707b977f53e85f29b459f225723be0235667da",
+      "gitMetadataSha256": "d4843e8beb45740fa53cd4de873153d23f3a3404547e4def616d1af6c42abf94",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121855460_29d36b97.json",
+      "image": "docs/review/captures/20261027T121855460_29d36b97.png",
+      "imageSha256": "7ac0f7314db07aa166674d280cd7c7b13c4b915f9146cade6d4b795513153ef3",
+      "gitMetadataSha256": "f10ebab7302122445f1a81cc4f778578a6d3c43e4ab47143fb6ba9d54bf96302",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Gear",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121909711_93950bb5.json",
+      "image": "docs/review/captures/20261027T121909711_93950bb5.png",
+      "imageSha256": "43f0f1cadc13abb431b278bafacb30da5e7b117e500817b6af2e053abdaeadb7",
+      "gitMetadataSha256": "aa38318c6142c21871dc4392a6f60c980ad8f1fd62f5c48e12560e51dbacf641",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121917998_dfc6e4eb.json",
+      "image": "docs/review/captures/20261027T121917998_dfc6e4eb.png",
+      "imageSha256": "a10cb60ee14b9dfe257521587b5d04b3e3cee28b4537bbf80acd5f649a6d67a9",
+      "gitMetadataSha256": "7510f43cf7f964041b9ff85a533af2f12cc7df0f555355ccc1a0bc0895f6a07f",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121926236_391e0780.json",
+      "image": "docs/review/captures/20261027T121926236_391e0780.png",
+      "imageSha256": "f40803c24510f713bf8f12fca9912d2369d4eff78c683d4ba5ba560f10e2c556",
+      "gitMetadataSha256": "5cd66da0c210f545614d044df8da72c366fe7e550434d24988b15845e9897bcb",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121938116_00f81ad2.json",
+      "image": "docs/review/captures/20261027T121938116_00f81ad2.png",
+      "imageSha256": "2c751f71315d509916cbaf5faf376bd5602f81ee59b68219506b3fd215833509",
+      "gitMetadataSha256": "63fc26f3e396002101b1a074ed6ff9e58ca9c8d66ddbc2637f0bef0b89ce7ea4",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121944173_f2bdeccc.json",
+      "image": "docs/review/captures/20261027T121944173_f2bdeccc.png",
+      "imageSha256": "c7d2ed03c76affdc6cc18620b03a15f4f580186a49256cf7ad7c0f94dfbdcad9",
+      "gitMetadataSha256": "7b3739da94d18c3f09ce20cc7266d689cfaf3be042c079a32abd02c2c710e13d",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T121952056_1d8eae67.json",
+      "image": "docs/review/captures/20261027T121952056_1d8eae67.png",
+      "imageSha256": "0f2d93fd445b6fdf9648cbcce7e231914cf6ec28819a3e46ca7eaac019c1b87e",
+      "gitMetadataSha256": "8cf976eae60783e931a0e600ec4ea0a0d303571fa2e34414d9b018c6b5dfc418",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "guest",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124252372_10674553.json",
+      "image": "docs/review/captures/20261027T124252372_10674553.png",
+      "imageSha256": "f2dfb94884fee3c503cc447da4cd16ef84ae1d724428fed054d781681fbd0364",
+      "gitMetadataSha256": "7e06076f3a460483592ea61ab945ff7f8d3679ca9cb0c491aa80bb7c3a185f73",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124258381_8239368d.json",
+      "image": "docs/review/captures/20261027T124258381_8239368d.png",
+      "imageSha256": "cb0b8ef7586bdee16ea5ec4f4932f24cf329de47e1ad267e2c6f8fb7fb2d1812",
+      "gitMetadataSha256": "86826145b3737d4d20d9c9bdbe36218342a0f1658e80a5b46cb577b080e9591d",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Team",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124307522_6db6eeed.json",
+      "image": "docs/review/captures/20261027T124307522_6db6eeed.png",
+      "imageSha256": "a5b94f83a72e94485dcfb2af3e671c78bdb90214dcbc6ab20e42924695270e2a",
+      "gitMetadataSha256": "4b2a61b1bef7a5934fb1e7cd9712f19a7659667cf10ecac14440747611897956",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Gear",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124321353_a2ba7d41.json",
+      "image": "docs/review/captures/20261027T124321353_a2ba7d41.png",
+      "imageSha256": "3eb619260d5892284298b26454ac71e0e925e5ecede4e6fbb2a4317b70821825",
+      "gitMetadataSha256": "8e9fdb51a8c0bc6e5112350085f3d6f12f179b64c8ad90e6df46a0f50f369c90",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124332040_da562d0e.json",
+      "image": "docs/review/captures/20261027T124332040_da562d0e.png",
+      "imageSha256": "3971c771404db5bc67cb9bb37ea28136027aa67fae2f8833769ca8e2709cfb27",
+      "gitMetadataSha256": "40f43b6d3e0ed575c4ed66c4ae90d2fa0f30aadd20829e00840470972fb1e018",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124340745_e8794b16.json",
+      "image": "docs/review/captures/20261027T124340745_e8794b16.png",
+      "imageSha256": "da9231414928669d9970a142b4f01747f4378fb448bc79821bd5580bc94d604f",
+      "gitMetadataSha256": "7b89d646a5de97b930a6bf76a5240cf0ebf4edd24f8926911a4fe01b0298426a",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124352037_f9d5ae3e.json",
+      "image": "docs/review/captures/20261027T124352037_f9d5ae3e.png",
+      "imageSha256": "dd0bb6329ebcb3000cf1f98784edf6c143b58a22f3bcbee9431ab42b93e6dbf0",
+      "gitMetadataSha256": "ccf651c88058a5ca8985dfd080700a450cbe927c48c6afd1fa2eb1e6f837c050",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124357612_e37d54b6.json",
+      "image": "docs/review/captures/20261027T124357612_e37d54b6.png",
+      "imageSha256": "3a3323f964a1cfe802a628a0876e2dc45ea071ca75e56226eb023fc1924d8099",
+      "gitMetadataSha256": "a65ee1fe2287dd69614039b98e0ec91b24866279dff3252af43e75ccbd574803",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Operations",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T124405387_7d9194d3.json",
+      "image": "docs/review/captures/20261027T124405387_7d9194d3.png",
+      "imageSha256": "9374aa026d7e1265ba6f3180de22cbfc5384d4eec9f086b2640f4595365f13bb",
+      "gitMetadataSha256": "ef94d27d527d4f0f6672290fb9f18dc4bd69c7b4023ac7539c38ef430a8e7dee",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "guest",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T130351297_ffbd6301.json",
+      "image": "docs/review/captures/20261027T130351297_ffbd6301.png",
+      "imageSha256": "cc098e610c47b0c223a78c8c8d8603c9de6dc874fcaf836f6a2257f2a4f63af6",
+      "gitMetadataSha256": "faeae05a824359d908cce22203981614e981f9aec10e32b73433f6bad91d2db2",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/companion",
+      "screen": "Character",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    }
+  ],
+  "referenceInputs": [
+    {
+      "path": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sha256": "4affd87e820aaee0abb6ebe6b490d3fb97dc67824a8418057e9884981401b01b"
+    },
+    {
+      "path": "apps/api/src/player/operations.ts",
+      "sha256": "622505f0963d51636aaaaf57914a9367c1fecc8e0d9ab618b8dee12c97efe08d"
+    },
+    {
+      "path": "apps/api/src/progress/service.ts",
+      "sha256": "9dea0db7e76cbc8aaa7bc75f52150a50a7bf47f0205a6f5b9841872a243f3d7d"
+    },
+    {
+      "path": "apps/api/src/progression/characters.ts",
+      "sha256": "61a68a2367c8bb8b545eaf554b30c8a7ef3ea8e2f69a8cf4b67a4431b5b67067"
+    },
+    {
+      "path": "apps/api/src/teams/service.ts",
+      "sha256": "5666d39da3211846662e38c8bb03f7f13e74d4ae1789675863e20a18d27002e2"
+    },
+    {
+      "path": "apps/api/src/gear/service.ts",
+      "sha256": "8c4b1b35ff08c190d849abde8e6244c70cc79775e8c7dcdd89e319e802f8d612"
+    }
+  ],
+  "restoration": {
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "dirty": false,
+    "playing": false,
+    "paused": false,
+    "review": false,
+    "index": 9,
+    "gizmos": true,
+    "equal": true,
+    "baseline": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "current": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "viewport": {
+      "expectedIndex": 9,
+      "expectedGizmos": true
+    },
+    "consoleErrors": 0,
+    "compilationFailed": false
+  },
+  "boundaries": [
+    "All mutation/status results are synthetic Editor fixtures, not live provider or balance acceptance.",
+    "Campaign stars receipt rendering uses a validated injected memory model; it does not claim a replayed battle in this slice.",
+    "The ten final captures supersede earlier in-session layout drafts, retained as review history. Capture scenario is the review startup scenario; screen records the actual navigated controller.",
+    "Plain formation/equipment writes have readback and no automatic retry, not a durable request journal.",
+    "The journal stores one unresolved/current action per stable account, not an unbounded transaction history.",
+    "Android process death/storage, real identity/provider, signed patch cutover, physical touch, human art and release acceptance remain open.",
+    "Account reads form one validated publication group, not a provider database transaction.",
+    "Broader gear growth, remaining mode/system screens and final native-resolution art remain subsequent slices.",
+    "The final player-reference compile found an unguarded Editor-only isolation reference. It was corrected with UNITY_EDITOR; the passing Editor/player compiles and final EditMode rerun include that fix. Editor-only runtime behavior is unchanged; a final real-controller smoke capture also follows this fix.",
+    "No new credentials, hooks, paid generation call, push or deployment. Owner file codex_watcher.ps1 was not read, executed or staged."
+  ],
+  "sourceFiles": [
+    {
+      "path": "README.md",
+      "gitBlobSha256": "c9ec3c05a92883c03e3dc234f8d79945b96e224a9ec8f47a05d9ad37f2ee2a61",
+      "editorFileSha256": "c9ec3c05a92883c03e3dc234f8d79945b96e224a9ec8f47a05d9ad37f2ee2a61"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs",
+      "gitBlobSha256": "7deecf7a822aecaba4f63e82b360665831ff3934beec00b12510b9c085515635",
+      "editorFileSha256": "c03beaeb4cc010beece08d28e23776baaacac97a9ff0f45abae6fd0103604ee4"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs",
+      "gitBlobSha256": "56df5220e923f0e4055221f436b234472312ee08044a9ebee051e2bd5ab67436",
+      "editorFileSha256": "56df5220e923f0e4055221f436b234472312ee08044a9ebee051e2bd5ab67436"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Hub.uss",
+      "gitBlobSha256": "2b35fe3847edc41fbd44e70ea05f3974b3b0ff79a7916b7ab7db985296932bed",
+      "editorFileSha256": "68a04ac2d7eded4ce066fc70a84876a6f4d64d8582de2da32203b6b32c5a6d45"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Hub.uxml",
+      "gitBlobSha256": "fcd7b40765ca7d643089b914aa7e36ed01eadebc34816031449236e61405bb9b",
+      "editorFileSha256": "fcd7b40765ca7d643089b914aa7e36ed01eadebc34816031449236e61405bb9b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs",
+      "gitBlobSha256": "12f1b94cfa0f47be8c0702cd5499870a850de6d8c54773fc6c4351f0d6ebc87b",
+      "editorFileSha256": "7a18e381bdc714b86cc596ca2c584c590e3f1f7cb46ab733d91511b623389cd6"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdHubSnapshot.cs",
+      "gitBlobSha256": "6987dc886b5606a6e705c214b90987becd50cc8ac3f8b084d8a9c32033f72924",
+      "editorFileSha256": "c5eaeb3eb44ec8916e0abcec4fd9ac88aae471d6258a41cae638e3045da33cd8"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/ProgressScreens.cs",
+      "gitBlobSha256": "efe2889176aafe0c49d6e6f90b683c4d2abf121462166a4f95941ea97712720d",
+      "editorFileSha256": "efe2889176aafe0c49d6e6f90b683c4d2abf121462166a4f95941ea97712720d"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildHubScreen.cs",
+      "gitBlobSha256": "9d36f70324f1391963203378826270c7040cc555e448419655eb5d38d8ed2146",
+      "editorFileSha256": "58f7758544be88a86ec6bd552d94f6c00c4896680d3d34c0f326950313716700"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RosterAndCompanionScreens.cs",
+      "gitBlobSha256": "7d0c1774a103437f2b955d4a00eeb1031a573a7f39951f096727a500b9c82bf0",
+      "editorFileSha256": "7d0c1774a103437f2b955d4a00eeb1031a573a7f39951f096727a500b9c82bf0"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/TeamAndArmoryScreens.cs",
+      "gitBlobSha256": "af6d87c458d90568fc1e899ad64589dab2230dcab4a5bbb5def318ed09a74cf5",
+      "editorFileSha256": "af6d87c458d90568fc1e899ad64589dab2230dcab4a5bbb5def318ed09a74cf5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubReview.cs",
+      "gitBlobSha256": "18985e96294986d7db3b3ed592a998daa488fb9f360fab3a24c04dd0237739ff",
+      "editorFileSha256": "0a332a9c6a9fb4f4cad2b2ac0fef17bb8fdbb37eebc6f2c7e9d8ee4ff9f65fa5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubState.cs",
+      "gitBlobSha256": "478a1ac4573ef51aac35a3ff80c64da7d547459eac315df58347ad3c933e25cb",
+      "editorFileSha256": "4842aae0bbedadc2f1ec97f6b8f4397bcff444cc1b17220399a2cbc9dfab6a6a"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs",
+      "gitBlobSha256": "7cebf297ef2c9ffde9e3b6bb9d5ce1e200dbb4f420095a3526ce88c83ed59dea",
+      "editorFileSha256": "82dff353fec7188ef0d7c5bc560e6ea74d49df59fdcd8d90ff3959fdbf888597"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/HubSnapshotTests.cs",
+      "gitBlobSha256": "9534b94d1c3bb6e4b28bd15e205cb602665ca4768121443ca0ee500dbef0f50b",
+      "editorFileSha256": "67f5ee557269e2b266a1d98a45440bd321a3106bf04e137843b6f05c4cc9dc79"
+    },
+    {
+      "path": "apps/unity/Logic/Uomd.Core/Uomd.Core.csproj",
+      "gitBlobSha256": "5e472f4bc46e31b3fb5ab71bcf299db48e3c47e1d7b6900334ebee3d5530248e",
+      "editorFileSha256": "5e472f4bc46e31b3fb5ab71bcf299db48e3c47e1d7b6900334ebee3d5530248e"
+    },
+    {
+      "path": "docs/BUILD_STATE.md",
+      "gitBlobSha256": "2afbf06255e318d84fae4528183643d0d77caa9649074198b0b1e9bda4094dcd",
+      "editorFileSha256": "2afbf06255e318d84fae4528183643d0d77caa9649074198b0b1e9bda4094dcd"
+    },
+    {
+      "path": "docs/DEV_TRACKER.json",
+      "gitBlobSha256": "4e6145d77632112d1c274cbd378d41320697cf31d29856991b4f9c03dde37038",
+      "editorFileSha256": "4e6145d77632112d1c274cbd378d41320697cf31d29856991b4f9c03dde37038"
+    },
+    {
+      "path": "docs/INFRA_ROADMAP.md",
+      "gitBlobSha256": "eb3130ce413df23a32c118fbfa8439ed3e209fbadc423873d8683e683ab42c15",
+      "editorFileSha256": "eb3130ce413df23a32c118fbfa8439ed3e209fbadc423873d8683e683ab42c15"
+    },
+    {
+      "path": "docs/NEXT_STEPS.md",
+      "gitBlobSha256": "31b4c8e59bc5fc87218ce2b693307195126074ec9b534a5ef6690830e89f1c0a",
+      "editorFileSha256": "31b4c8e59bc5fc87218ce2b693307195126074ec9b534a5ef6690830e89f1c0a"
+    },
+    {
+      "path": "docs/UNITY_CAMPAIGN_OPERATIONS.md",
+      "gitBlobSha256": "b4b55cc0903f7a97abde173d5ba19b17b9b12a178d4fea0f5bfba37269c8b634",
+      "editorFileSha256": "b4b55cc0903f7a97abde173d5ba19b17b9b12a178d4fea0f5bfba37269c8b634"
+    },
+    {
+      "path": "docs/handoff/CODEX_CLI_MASTER_PROMPT.md",
+      "gitBlobSha256": "f90d7a5754b4188c4336a012ff13e0d6d39e24ad59d5785904534bc7d1489f53",
+      "editorFileSha256": "f90d7a5754b4188c4336a012ff13e0d6d39e24ad59d5785904534bc7d1489f53"
+    },
+    {
+      "path": "docs/handoff/SOL_CONTINUATION_PLAN.md",
+      "gitBlobSha256": "c1ee8859e40948833d2c341e636a715790319ec3ae537f8e12be44e046f22ddb",
+      "editorFileSha256": "c1ee8859e40948833d2c341e636a715790319ec3ae537f8e12be44e046f22ddb"
+    },
+    {
+      "path": "docs/handoff/SOL_REBUILD_PLAN.md",
+      "gitBlobSha256": "39ee572dd15269fb24e2c71354634e7f335f9b28e87781adee57f9a4a34fafbe",
+      "editorFileSha256": "39ee572dd15269fb24e2c71354634e7f335f9b28e87781adee57f9a4a34fafbe"
+    },
+    {
+      "path": "docs/media/SOL_NATIVE_HUB.md",
+      "gitBlobSha256": "e364f702154871ada5da8450868996281f1fb76386c93abc5c2f53561ca497cc",
+      "editorFileSha256": "e364f702154871ada5da8450868996281f1fb76386c93abc5c2f53561ca497cc"
+    },
+    {
+      "path": "docs/review/PRODUCTION_REVIEW.json",
+      "gitBlobSha256": "e4320f8772a46738b9a4288994176eb339b8cfed694b9da68a1437562e355548",
+      "editorFileSha256": "e4320f8772a46738b9a4288994176eb339b8cfed694b9da68a1437562e355548"
+    },
+    {
+      "path": "docs/review/README.md",
+      "gitBlobSha256": "98a64a82d9f8b378db0ec019cbe106fc37831f7f7faacd98e526b7b1555d47ba",
+      "editorFileSha256": "98a64a82d9f8b378db0ec019cbe106fc37831f7f7faacd98e526b7b1555d47ba"
+    },
+    {
+      "path": "docs/review/index.html",
+      "gitBlobSha256": "a9b576f08296cebd373498b7a42ee79c752a036dc015956fff0f53533b41c98e",
+      "editorFileSha256": "a9b576f08296cebd373498b7a42ee79c752a036dc015956fff0f53533b41c98e"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdActionJournal.cs",
+      "gitBlobSha256": "1c4c2349c8f62d76814b6cb927c8752e32ab0127d1dd145827585ff8a83190a5",
+      "editorFileSha256": "1c4c2349c8f62d76814b6cb927c8752e32ab0127d1dd145827585ff8a83190a5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdActionJournal.cs.meta",
+      "gitBlobSha256": "9e2f6882ec302af41847170b43dde709fe3c63bc888a35e70c08d80bd9b8390b",
+      "editorFileSha256": "9e2f6882ec302af41847170b43dde709fe3c63bc888a35e70c08d80bd9b8390b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCompanyScreen.cs",
+      "gitBlobSha256": "d17d5c6d17c0b41408d846b584f8df49102d0d64ae4c115f771cabb90f8e3498",
+      "editorFileSha256": "d17d5c6d17c0b41408d846b584f8df49102d0d64ae4c115f771cabb90f8e3498"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCompanyScreen.cs.meta",
+      "gitBlobSha256": "288f15aca7bad09a61d72b9424b85a84bb60a28781f83da59a12fdc3eba49c74",
+      "editorFileSha256": "288f15aca7bad09a61d72b9424b85a84bb60a28781f83da59a12fdc3eba49c74"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildSavedActionsScreen.cs",
+      "gitBlobSha256": "4b5a6cc1ba7ed1f5b69dbe88eea3a8425f067997652477e1bea9c638d86159c4",
+      "editorFileSha256": "4b5a6cc1ba7ed1f5b69dbe88eea3a8425f067997652477e1bea9c638d86159c4"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildSavedActionsScreen.cs.meta",
+      "gitBlobSha256": "03405983b57baac7aada7a6dd51d9303dcf7dc4fc42bb69690b24625a5dedcf4",
+      "editorFileSha256": "03405983b57baac7aada7a6dd51d9303dcf7dc4fc42bb69690b24625a5dedcf4"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdAccountActions.cs",
+      "gitBlobSha256": "cbc707733f1e87e32b59cc59353923dfaecc662c45cab6a2c74e591723a28e8f",
+      "editorFileSha256": "cbc707733f1e87e32b59cc59353923dfaecc662c45cab6a2c74e591723a28e8f"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdAccountActions.cs.meta",
+      "gitBlobSha256": "abee9e521e3a3fc7ae4f74dfcb49f673014ea3d70a0a3dd7646b4ef0fd04aeeb",
+      "editorFileSha256": "abee9e521e3a3fc7ae4f74dfcb49f673014ea3d70a0a3dd7646b4ef0fd04aeeb"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdCompanyReview.cs",
+      "gitBlobSha256": "5e3d384f93397ce077e1ae98ad68fced0b111fc09022f9de72edf11c4f2704fc",
+      "editorFileSha256": "5e3d384f93397ce077e1ae98ad68fced0b111fc09022f9de72edf11c4f2704fc"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdCompanyReview.cs.meta",
+      "gitBlobSha256": "de4014a21d4488edac28b8fbe47763e4b7b80798e285bbad036441669b2f3db3",
+      "editorFileSha256": "de4014a21d4488edac28b8fbe47763e4b7b80798e285bbad036441669b2f3db3"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/ActionJournalTests.cs",
+      "gitBlobSha256": "0c61c28ed7e26d5fe136828d427b1199c25d62a7100db3d13b67fb573f78018e",
+      "editorFileSha256": "0c61c28ed7e26d5fe136828d427b1199c25d62a7100db3d13b67fb573f78018e"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/ActionJournalTests.cs.meta",
+      "gitBlobSha256": "577a0f52549f01303aefd1a47cf5cc5b93e163e2e0e29437464e674516cbabdc",
+      "editorFileSha256": "577a0f52549f01303aefd1a47cf5cc5b93e163e2e0e29437464e674516cbabdc"
+    },
+    {
+      "path": "docs/media/SOL_COMPANY_AND_SWEEP.md",
+      "gitBlobSha256": "74be8f037d7fbbc0eb16ce9ab713fd7dd481e35f927d5cfa22d91fe5f8a33176",
+      "editorFileSha256": "74be8f037d7fbbc0eb16ce9ab713fd7dd481e35f927d5cfa22d91fe5f8a33176"
+    }
+  ]
+}

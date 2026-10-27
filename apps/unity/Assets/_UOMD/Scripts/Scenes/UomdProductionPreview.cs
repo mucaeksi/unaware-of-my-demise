@@ -40,6 +40,9 @@ namespace Uomd.Scenes
 
         private async Awaitable StartProductionPreviewAsync()
         {
+            // The isolated review camera needs a listener for auditioning and to avoid per-frame engine warnings.
+            var camera = Camera.main;
+            if (camera != null && camera.GetComponent<AudioListener>() == null) camera.gameObject.AddComponent<AudioListener>();
             Session = new GameSessionState { IsReplayingIntro = true };
             Patch = new PatchManager();
             await Patch.InitializeAsync("http://127.0.0.1:1", memoryOnly: true);
@@ -77,6 +80,10 @@ namespace Uomd.Scenes
                 case "hub/home": screen = UomdScreenId.Home; break;
                 case "hub/company": screen = UomdScreenId.Roster; break;
                 case "hub/chapters": screen = UomdScreenId.Chapters; break;
+                case "hub/companion": screen = UomdScreenId.Character; break;
+                case "hub/team": screen = UomdScreenId.Team; break;
+                case "hub/armory": screen = UomdScreenId.Gear; break;
+                case "hub/actions": screen = UomdScreenId.Operations; break;
                 default:
                     if (request.scenario.StartsWith("battle/", StringComparison.Ordinal))
                     {
@@ -127,7 +134,7 @@ namespace Uomd.Scenes
             {
                 if (ProductionPreview?.scenario.StartsWith("hub/", StringComparison.Ordinal) == true && !request.scenario.StartsWith("hub/", StringComparison.Ordinal))
                 {
-                    _hubState?.Dispose(); _hubState = null; HubReview = null; Api.AdoptSession(null);
+                    _hubState?.Dispose(); _hubState = null; _accountActions = null; HubReview = null; Api.AdoptSession(null);
                 }
                 if ((request.scenario == "entry" || request.scenario == "finish") && request.scenario != ProductionPreview?.scenario)
                     EntryFlow = new UomdEntryFlow(this); // Dedicated memory fixtures must not become another rehearsal's progress.

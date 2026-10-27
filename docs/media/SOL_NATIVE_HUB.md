@@ -1,5 +1,7 @@
 # Native Home, Company and Chapters foundation
 
+**Continuation — 2026-10-27:** native companion/Team/Armory and Saved Actions presentation, plus durable companion/Sweep actions, are now implemented at local scope. [Current guide](SOL_COMPANY_AND_SWEEP.md). Earlier presentation limits in this document describe its original delivery. Live account, Android, human art and release acceptance remain open.
+
 2026-10-27, D-35. `HomeScreen`, `RosterScreen` (the Company view) and `ChaptersScreen` retain their existing route IDs and
 use the editable native `Resources/Rebuild/Hub.uxml` / `Hub.uss` frame. The normal first-install Finish/Continue path opens
 this Home. Existing character details, Team, Armory, Invitations, Summon, Archive, Errands, Deeds, Trials, Mail, Shop,

@@ -17,7 +17,8 @@ namespace Uomd.Scenes
         private readonly UomdSceneRouter _router;
         private CancellationTokenSource _cancel;
         private int _generation, _revision;
-        private string _release;
+        private string _release, _detailCharacter;
+        private UomdScreenId _detailScreen;
         private bool _signedIn;
         public UomdHubSnapshot Snapshot { get; private set; }
         public bool Loading { get; private set; }
@@ -26,13 +27,16 @@ namespace Uomd.Scenes
         public DateTimeOffset LoadedAtUtc { get; private set; }
         public string SelectedChapter = "", SelectedNode = "";
         public bool Hard;
-        public bool ContextCurrent => _router != null && _revision == _router.Api.AuthRevision && _signedIn == _router.Api.IsSignedIn && _release == _router.Patch.ActiveReleaseId;
+        private UomdScreenId DetailScreen => _router.ActiveScreenId == UomdScreenId.Character || _router.ActiveScreenId == UomdScreenId.Gear ? _router.ActiveScreenId : UomdScreenId.Home;
+        public bool ContextCurrent => _router != null && _revision == _router.Api.AuthRevision && _signedIn == _router.Api.IsSignedIn && _release == _router.Patch.ActiveReleaseId && _detailScreen == DetailScreen && (_detailScreen != UomdScreenId.Character || _detailCharacter == _router.Session.SelectedUnitId);
         public bool Fresh => ContextCurrent && Snapshot != null && !Loading && Notice.Length == 0;
 #if UNITY_EDITOR
         public Func<string, Awaitable<Dictionary<string, object>>> ReviewRead;
         public Func<Awaitable<string>> ReviewIndex;
 #endif
         public UomdHubState(UomdSceneRouter router) { _router = router; }
+        public void Touch() { ++Version; }
+        public void Invalidate() { Notice = "Refresh account data before changing it again."; ++Version; }
         public void Cancel()
         {
             ++_generation; _cancel?.Cancel(); _cancel?.Dispose(); _cancel = null; Loading = false; ++Version;
@@ -42,8 +46,10 @@ namespace Uomd.Scenes
         {
             Cancel(); int generation = _generation;
             bool same = ContextCurrent;
-            _revision = _router.Api.AuthRevision; _signedIn = _router.Api.IsSignedIn; _release = _router.Patch.ActiveReleaseId;
-            if (!same) { Snapshot = null; SelectedChapter = SelectedNode = ""; Hard = false; }
+            bool sameAccount = _revision == _router.Api.AuthRevision && _signedIn == _router.Api.IsSignedIn && _release == _router.Patch.ActiveReleaseId;
+            _revision = _router.Api.AuthRevision; _signedIn = _router.Api.IsSignedIn; _release = _router.Patch.ActiveReleaseId; _detailScreen = DetailScreen; _detailCharacter = _router.Session.SelectedUnitId;
+            if (!same) Snapshot = null;
+            if (!sameAccount) { SelectedChapter = SelectedNode = ""; Hard = false; }
             _cancel = CancellationTokenSource.CreateLinkedTokenSource(_router.destroyCancellationToken);
             CancellationToken token = _cancel.Token;
             Loading = true; Notice = ""; ++Version;
@@ -71,6 +77,14 @@ namespace Uomd.Scenes
                     var me = await Read("/api/v1/me");
                     string expected = _router.Api.GetCurrentSessionSnapshot()?.playerId;
                     if (!string.IsNullOrEmpty(expected) && JsonRead.Str(me, "id") != expected) throw new InvalidOperationException("Account identity mismatch.");
+                    if (string.IsNullOrEmpty(expected))
+                    {
+                        var session = _router.Api.GetCurrentSessionSnapshot();
+                        string player = UomdBattleWire.RequiredString(me, "id");
+                        if (session == null || player.Length == 0) throw new InvalidOperationException("Account identity is unavailable.");
+                        _router.Api.AdoptSession(new Uomd.Contracts.SessionDto { token = session.token, expiresAt = session.expiresAt, playerId = player });
+                        throw new OperationCanceledException("Stable account identity resolved; refresh under its new auth revision.");
+                    }
                     var wallet = await Read("/api/v1/wallet");
                     var mine = await Read("/api/v1/characters/mine?releaseId=" + Uri.EscapeDataString(_release));
                     var roster = await Read("/api/v1/characters?releaseId=" + Uri.EscapeDataString(_release));
@@ -78,6 +92,19 @@ namespace Uomd.Scenes
                     var progress = await Read("/api/v1/progress");
                     var flags = await Read("/api/v1/flags");
                     next.Account(me, wallet, mine, roster, teams, progress, flags);
+                    if (_detailScreen == UomdScreenId.Character || _detailScreen == UomdScreenId.Gear)
+                    {
+                        var catalog = await Read("/api/v1/catalog?releaseId=" + Uri.EscapeDataString(_release));
+                        var stacks = await Read("/api/v1/stacks");
+                        var gear = await Read("/api/v1/gear?releaseId=" + Uri.EscapeDataString(_release));
+                        Dictionary<string, object> stats = null;
+                        if (_detailScreen == UomdScreenId.Character && next.Companions.Exists(c => c.Id == _detailCharacter && c.Available))
+                        {
+                            try { stats = await Read("/api/v1/characters/" + Uri.EscapeDataString(_router.Session.SelectedUnitId) + "/stats?releaseId=" + Uri.EscapeDataString(_release)); }
+                            catch (UomdApiException) { Check(); } // Stats unavailable is displayed explicitly; no fabricated zero stats.
+                        }
+                        next.Details(catalog, stacks, gear, stats);
+                    }
                 }
                 Check(); Snapshot = next; LoadedAtUtc = DateTimeOffset.UtcNow;
             }

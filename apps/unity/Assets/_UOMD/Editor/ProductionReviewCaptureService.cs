@@ -27,6 +27,8 @@ namespace Uomd.EditorTools
         public string campaignState, campaignRequestId, campaignInputHash, campaignNotice;
         public bool campaignMemoryOnly, campaignRefreshed;
         public string hubState, hubNotice, hubRelease, hubFixtureMode, hubIndexSource;
+        public string accountActionState, accountActionPath, accountActionRequestId, accountActionInputHash;
+        public bool accountActionRefreshed;
         public bool hubFixture;
         public bool awaitingPlayerAction;
         public string entryPhase, entryScreen;
@@ -173,6 +175,10 @@ namespace Uomd.EditorTools
                     if (router.ActiveScreenId == UomdScreenId.Home) hub = router.Controller<HomeScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Roster) hub = router.Controller<RosterScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Chapters) hub = router.Controller<ChaptersScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Character) hub = router.Controller<CompanionScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Team) hub = router.Controller<TeamScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Gear) hub = router.Controller<ArmoryScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Operations) hub = router.Controller<SavedActionsScreen>();
                     if (hub != null)
                     {
                         metadata.imagePaths = hub.ReviewImagePaths; metadata.hubState = hub.ReviewState;
@@ -187,6 +193,12 @@ namespace Uomd.EditorTools
                     metadata.entryScreen = router.ActiveScreenId.ToString(); metadata.hubNotice = router.HubState.Notice;
                     metadata.hubRelease = router.HubState.Snapshot?.Release; metadata.hubFixture = true;
                     metadata.hubFixtureMode = router.HubReview?.Mode;
+                    if (router.AccountActions.Current && router.AccountActions.Action != null)
+                    {
+                        metadata.accountActionState = router.AccountActions.Action.State; metadata.accountActionPath = router.AccountActions.Action.Path;
+                        metadata.accountActionRequestId = router.AccountActions.Action.RequestId; metadata.accountActionInputHash = router.AccountActions.Action.InputHash;
+                        metadata.accountActionRefreshed = router.AccountActions.Refreshed;
+                    }
                     metadata.hubIndexSource = metadata.hubFixtureMode == "campaign" || metadata.hubFixtureMode == "long" || metadata.hubFixtureMode == "low_ration"
                         ? "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json" : "embedded:chapters/chapter_index.json";
                 }

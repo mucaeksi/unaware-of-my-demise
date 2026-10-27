@@ -2456,6 +2456,880 @@
             "sourceIdentities": [
                 "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
             ]
+        },
+        {
+            "id": "20261027T104555221_f6282a90",
+            "image": "captures/20261027T104555221_f6282a90.png",
+            "sha256": "15c65c0db277be507b024a563d0dea00a4066a5cc0580d9b9efa7a4c15c5dc74",
+            "metadata": "captures/20261027T104555221_f6282a90.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T105947906_6afd5484",
+            "image": "captures/20261027T105947906_6afd5484.png",
+            "sha256": "a91854fab0715f8d6f255157f1c0ac51efa5a00c8e70f20926d156522ef05c5b",
+            "metadata": "captures/20261027T105947906_6afd5484.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T105957454_88e50789",
+            "image": "captures/20261027T105957454_88e50789.png",
+            "sha256": "58777baca97ec5eb358c85a9cf755829f8e6d2dfeddecae97fd74c7311c941b0",
+            "metadata": "captures/20261027T105957454_88e50789.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110006213_a83ebbb2",
+            "image": "captures/20261027T110006213_a83ebbb2.png",
+            "sha256": "ef771f5034277327889948b15d321a67f977de82798e06bd77bcccdff369ce7f",
+            "metadata": "captures/20261027T110006213_a83ebbb2.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110025884_22fd3411",
+            "image": "captures/20261027T110025884_22fd3411.png",
+            "sha256": "6676b93010dc041cc935a1c9144d0701c1bdc64060c7e3fcf10900c45e8e9055",
+            "metadata": "captures/20261027T110025884_22fd3411.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110056430_e8bf370e",
+            "image": "captures/20261027T110056430_e8bf370e.png",
+            "sha256": "9a2d9fcf004c47bc22f425909e3436b3f6136196a5d76ff996c17eb5a47dedb1",
+            "metadata": "captures/20261027T110056430_e8bf370e.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110116984_95a8994b",
+            "image": "captures/20261027T110116984_95a8994b.png",
+            "sha256": "00d4e5c7e604dbd35cc0fe7af14f0bf4af1c425562cf115e61fe167cf6b633ad",
+            "metadata": "captures/20261027T110116984_95a8994b.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110123827_f1f887cb",
+            "image": "captures/20261027T110123827_f1f887cb.png",
+            "sha256": "096c8962ebb7e1c03a7f2e77bc484988fa790e57c88ec20a7561a186bd85f104",
+            "metadata": "captures/20261027T110123827_f1f887cb.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110135576_bc3dea41",
+            "image": "captures/20261027T110135576_bc3dea41.png",
+            "sha256": "7335f91fb11d39b1a82740244f06468f50ea30ac32680ad0f74ae4b6a989ae62",
+            "metadata": "captures/20261027T110135576_bc3dea41.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110338235_ee56e740",
+            "image": "captures/20261027T110338235_ee56e740.png",
+            "sha256": "61136f927be69c17c656a113013b885a39afb16b4d153d4fa94124e3300b3327",
+            "metadata": "captures/20261027T110338235_ee56e740.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110346593_df82e92f",
+            "image": "captures/20261027T110346593_df82e92f.png",
+            "sha256": "9b23f611cc404027f970c3a89383e1c2fd2f33f884951c91bca7213939936003",
+            "metadata": "captures/20261027T110346593_df82e92f.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110354604_ec6fa3ea",
+            "image": "captures/20261027T110354604_ec6fa3ea.png",
+            "sha256": "3e656e1a4cd505e487f91c054f9968bfb7e5551e57ff2a816c08bc6704209a73",
+            "metadata": "captures/20261027T110354604_ec6fa3ea.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110732572_fd4a3f36",
+            "image": "captures/20261027T110732572_fd4a3f36.png",
+            "sha256": "54a607f20a15c66772b8d5d3724bab2f257e063c6c0b787296e40909e93818ad",
+            "metadata": "captures/20261027T110732572_fd4a3f36.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110745666_31d27e1a",
+            "image": "captures/20261027T110745666_31d27e1a.png",
+            "sha256": "100a19818ee2986a79b059ed740db1ed959f58e5c718e618dc33a16baba3897e",
+            "metadata": "captures/20261027T110745666_31d27e1a.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110809346_c84a6ba4",
+            "image": "captures/20261027T110809346_c84a6ba4.png",
+            "sha256": "b3b7bd471fcd2d41464dbb203dd3e3d4aadda83d8e115f023b60f000e5fbd6b0",
+            "metadata": "captures/20261027T110809346_c84a6ba4.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110815471_30694e0d",
+            "image": "captures/20261027T110815471_30694e0d.png",
+            "sha256": "72049b48c548c0a07a70f365b3ccaf01401ef4f650cb8f85384494916e8c00d9",
+            "metadata": "captures/20261027T110815471_30694e0d.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110822239_e4f256cf",
+            "image": "captures/20261027T110822239_e4f256cf.png",
+            "sha256": "ee53b44c7d58b5ba8603747bd857da65d6c09ee5b1a99bb63d5ab8a3f66e2fe0",
+            "metadata": "captures/20261027T110822239_e4f256cf.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T110832635_4bd37180",
+            "image": "captures/20261027T110832635_4bd37180.png",
+            "sha256": "136674740f3e1574a298046f28a5ad34a1a67433e45ac813883ac5c9cea3d8b1",
+            "metadata": "captures/20261027T110832635_4bd37180.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113606266_bfc22058",
+            "image": "captures/20261027T113606266_bfc22058.png",
+            "sha256": "21c2449cf2e9c391a9d94a88b95c2c7eb7aaf82c972d5505c03066f4527baad1",
+            "metadata": "captures/20261027T113606266_bfc22058.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113705853_52469488",
+            "image": "captures/20261027T113705853_52469488.png",
+            "sha256": "60eb62267f2925a7ba46060a08e51c5bb9d8fd59309a198dde1d1c9217f7a360",
+            "metadata": "captures/20261027T113705853_52469488.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113736820_e48f44e0",
+            "image": "captures/20261027T113736820_e48f44e0.png",
+            "sha256": "2ba26287c25993c7ce56912618ed7b8d3e3d25d5b93f3450950d25eb34995f4b",
+            "metadata": "captures/20261027T113736820_e48f44e0.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "guest",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113744864_b4f67a6c",
+            "image": "captures/20261027T113744864_b4f67a6c.png",
+            "sha256": "40e011597bdcb5b8b6efb8cf4502550a9ad1df54dae80817fc3d086ec54a7cc0",
+            "metadata": "captures/20261027T113744864_b4f67a6c.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113753740_a093e231",
+            "image": "captures/20261027T113753740_a093e231.png",
+            "sha256": "f8d3519a213eba8c8e9f12dd8d04e2e2bef467edf5df48a2e8a93ad9d19b84d0",
+            "metadata": "captures/20261027T113753740_a093e231.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113805065_db71774a",
+            "image": "captures/20261027T113805065_db71774a.png",
+            "sha256": "9b9e4505e30409d37337007453939bd21dc4be5acb6a0d4a554cf9d990a16942",
+            "metadata": "captures/20261027T113805065_db71774a.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113817554_6c4b2a15",
+            "image": "captures/20261027T113817554_6c4b2a15.png",
+            "sha256": "608043e4d257d5638335c0fb6d6c04dc3dcd286c6399d084877148488d2cd2ed",
+            "metadata": "captures/20261027T113817554_6c4b2a15.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T113827815_a9fc1222",
+            "image": "captures/20261027T113827815_a9fc1222.png",
+            "sha256": "974accb3f36a9fd5349828671be918cf86b7f7230093815f4a9117dc16328506",
+            "metadata": "captures/20261027T113827815_a9fc1222.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115813307_05e877ac",
+            "image": "captures/20261027T115813307_05e877ac.png",
+            "sha256": "82d5b60da3af2e62471c6989f6e48ca9293caac540c712b664e4bad48622b602",
+            "metadata": "captures/20261027T115813307_05e877ac.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115820046_e1791162",
+            "image": "captures/20261027T115820046_e1791162.png",
+            "sha256": "60139ec79454bcee58233138b9435f40f77b54a8a280bdc5d8dde5cd4c1e1592",
+            "metadata": "captures/20261027T115820046_e1791162.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115830236_0db94cac",
+            "image": "captures/20261027T115830236_0db94cac.png",
+            "sha256": "41d8731cc3160a5db97a374bbd2d582ea1d622907e1a3f7e0208f7d56e32d1d0",
+            "metadata": "captures/20261027T115830236_0db94cac.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115844524_b8727fd0",
+            "image": "captures/20261027T115844524_b8727fd0.png",
+            "sha256": "8280a51ea18af1a019864f0bfd72dbaa6148d9065f66ad7d125dee546585a966",
+            "metadata": "captures/20261027T115844524_b8727fd0.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115853540_6999733f",
+            "image": "captures/20261027T115853540_6999733f.png",
+            "sha256": "155d788183853346342da13bdb091223d4f7a3e284859b8adfcd9fc072bb5c35",
+            "metadata": "captures/20261027T115853540_6999733f.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115901603_a69f6cfb",
+            "image": "captures/20261027T115901603_a69f6cfb.png",
+            "sha256": "d323d860c2f5a26f4ed4f0de8ca6a402c7e47f8d42ad158eb4b7c081ce58a169",
+            "metadata": "captures/20261027T115901603_a69f6cfb.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115913285_8b2e8650",
+            "image": "captures/20261027T115913285_8b2e8650.png",
+            "sha256": "2c751f71315d509916cbaf5faf376bd5602f81ee59b68219506b3fd215833509",
+            "metadata": "captures/20261027T115913285_8b2e8650.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115919540_c690283b",
+            "image": "captures/20261027T115919540_c690283b.png",
+            "sha256": "59afcad28bf9ef172a79fb2e58e5be536d50ac3a2c276e3dd6adc44331209e16",
+            "metadata": "captures/20261027T115919540_c690283b.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T115927898_849e460e",
+            "image": "captures/20261027T115927898_849e460e.png",
+            "sha256": "ae97f348cd80fd34b043017c050aaebd1fbd3dfa66ffd3879f813c302d426ee0",
+            "metadata": "captures/20261027T115927898_849e460e.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "guest",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121839880_f7bb17ec",
+            "image": "captures/20261027T121839880_f7bb17ec.png",
+            "sha256": "21122c28af8eb14d446efafadd44a6d2dc48e08cbb75ab039289e49cf0264251",
+            "metadata": "captures/20261027T121839880_f7bb17ec.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121845817_3e123f4d",
+            "image": "captures/20261027T121845817_3e123f4d.png",
+            "sha256": "6e1164ba1c2255ab615178d856707b977f53e85f29b459f225723be0235667da",
+            "metadata": "captures/20261027T121845817_3e123f4d.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121855460_29d36b97",
+            "image": "captures/20261027T121855460_29d36b97.png",
+            "sha256": "7ac0f7314db07aa166674d280cd7c7b13c4b915f9146cade6d4b795513153ef3",
+            "metadata": "captures/20261027T121855460_29d36b97.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121909711_93950bb5",
+            "image": "captures/20261027T121909711_93950bb5.png",
+            "sha256": "43f0f1cadc13abb431b278bafacb30da5e7b117e500817b6af2e053abdaeadb7",
+            "metadata": "captures/20261027T121909711_93950bb5.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121917998_dfc6e4eb",
+            "image": "captures/20261027T121917998_dfc6e4eb.png",
+            "sha256": "a10cb60ee14b9dfe257521587b5d04b3e3cee28b4537bbf80acd5f649a6d67a9",
+            "metadata": "captures/20261027T121917998_dfc6e4eb.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121926236_391e0780",
+            "image": "captures/20261027T121926236_391e0780.png",
+            "sha256": "f40803c24510f713bf8f12fca9912d2369d4eff78c683d4ba5ba560f10e2c556",
+            "metadata": "captures/20261027T121926236_391e0780.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121938116_00f81ad2",
+            "image": "captures/20261027T121938116_00f81ad2.png",
+            "sha256": "2c751f71315d509916cbaf5faf376bd5602f81ee59b68219506b3fd215833509",
+            "metadata": "captures/20261027T121938116_00f81ad2.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121944173_f2bdeccc",
+            "image": "captures/20261027T121944173_f2bdeccc.png",
+            "sha256": "c7d2ed03c76affdc6cc18620b03a15f4f580186a49256cf7ad7c0f94dfbdcad9",
+            "metadata": "captures/20261027T121944173_f2bdeccc.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T121952056_1d8eae67",
+            "image": "captures/20261027T121952056_1d8eae67.png",
+            "sha256": "0f2d93fd445b6fdf9648cbcce7e231914cf6ec28819a3e46ca7eaac019c1b87e",
+            "metadata": "captures/20261027T121952056_1d8eae67.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "guest",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124252372_10674553",
+            "image": "captures/20261027T124252372_10674553.png",
+            "sha256": "f2dfb94884fee3c503cc447da4cd16ef84ae1d724428fed054d781681fbd0364",
+            "metadata": "captures/20261027T124252372_10674553.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124258381_8239368d",
+            "image": "captures/20261027T124258381_8239368d.png",
+            "sha256": "cb0b8ef7586bdee16ea5ec4f4932f24cf329de47e1ad267e2c6f8fb7fb2d1812",
+            "metadata": "captures/20261027T124258381_8239368d.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Team",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124307522_6db6eeed",
+            "image": "captures/20261027T124307522_6db6eeed.png",
+            "sha256": "a5b94f83a72e94485dcfb2af3e671c78bdb90214dcbc6ab20e42924695270e2a",
+            "metadata": "captures/20261027T124307522_6db6eeed.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124321353_a2ba7d41",
+            "image": "captures/20261027T124321353_a2ba7d41.png",
+            "sha256": "3eb619260d5892284298b26454ac71e0e925e5ecede4e6fbb2a4317b70821825",
+            "metadata": "captures/20261027T124321353_a2ba7d41.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124332040_da562d0e",
+            "image": "captures/20261027T124332040_da562d0e.png",
+            "sha256": "3971c771404db5bc67cb9bb37ea28136027aa67fae2f8833769ca8e2709cfb27",
+            "metadata": "captures/20261027T124332040_da562d0e.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Chapters",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124340745_e8794b16",
+            "image": "captures/20261027T124340745_e8794b16.png",
+            "sha256": "da9231414928669d9970a142b4f01747f4378fb448bc79821bd5580bc94d604f",
+            "metadata": "captures/20261027T124340745_e8794b16.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124352037_f9d5ae3e",
+            "image": "captures/20261027T124352037_f9d5ae3e.png",
+            "sha256": "dd0bb6329ebcb3000cf1f98784edf6c143b58a22f3bcbee9431ab42b93e6dbf0",
+            "metadata": "captures/20261027T124352037_f9d5ae3e.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124357612_e37d54b6",
+            "image": "captures/20261027T124357612_e37d54b6.png",
+            "sha256": "3a3323f964a1cfe802a628a0876e2dc45ea071ca75e56226eb023fc1924d8099",
+            "metadata": "captures/20261027T124357612_e37d54b6.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T124405387_7d9194d3",
+            "image": "captures/20261027T124405387_7d9194d3.png",
+            "sha256": "9374aa026d7e1265ba6f3180de22cbfc5384d4eec9f086b2640f4595365f13bb",
+            "metadata": "captures/20261027T124405387_7d9194d3.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "guest",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T130351297_ffbd6301",
+            "image": "captures/20261027T130351297_ffbd6301.png",
+            "sha256": "cc098e610c47b0c223a78c8c8d8603c9de6dc874fcaf836f6a2257f2a4f63af6",
+            "metadata": "captures/20261027T130351297_ffbd6301.json",
+            "scenario": "hub/companion",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Character",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
         }
     ]
 }

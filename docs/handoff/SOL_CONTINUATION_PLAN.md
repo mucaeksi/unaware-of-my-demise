@@ -1,5 +1,7 @@
 # Sol continuous continuation plan
 
+**Native company and Sweep — 2026-10-27:** Companion details, five Team presets, Armory equip/remove and Saved Actions now use the native hub frame. Companion growth and Sweep save exact original account/release-bound intent before sending and recover confirmed status without duplicate spending. Plain team/equipment changes require matching authoritative readback. Sweep uses published eligibility, limits and Ration. [Guide](../media/SOL_COMPANY_AND_SWEEP.md), [scoped evidence](../evidence/sol-company-sweep-2026-10-27.json). Next: remaining Archive/story, recruitment/errands and account/privacy screens, broader gear/mode actions, then approved live account/content and Android acceptance. CLI-only Unity, local main commits and owner-held pushes remain; human art/device/release gates are open.
+
 **Current checkpoint — 2026-10-27:** campaign recovery and the native Home/Company/Chapters foundation are locally implemented. See [hub scope and limits](../media/SOL_NATIVE_HUB.md). Next: companion details, Team and Armory, then complete stage actions/Sweep recovery and the remaining system screens. Live/provider/device/art/release gates remain separate.
 
 Owner continuation request: 2026-10-27, after the completed overnight run. Work sequentially on local `main` in

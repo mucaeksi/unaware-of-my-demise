@@ -10,7 +10,7 @@
     </ui:VisualElement>
     <ui:VisualElement class="hub-tabs"><ui:Button name="hubHome" text="HOME" class="hub-button hub-tab" /><ui:Button name="hubCompany" text="COMPANY" class="hub-button hub-tab" /><ui:Button name="hubChapters" text="CHAPTERS" class="hub-button hub-tab" /></ui:VisualElement>
     <ui:VisualElement name="hubBody" class="hub-body" />
-    <ui:VisualElement class="hub-footer"><ui:Button name="hubBack" text="BACK" class="hub-button hub-quiet" /><ui:Label name="hubStatus" class="hub-status" /><ui:Button name="hubRefresh" text="REFRESH" class="hub-button hub-quiet" /><ui:Button name="hubMore" text="MORE" class="hub-button hub-quiet" /></ui:VisualElement>
+    <ui:VisualElement class="hub-footer"><ui:Button name="hubBack" text="BACK" class="hub-button hub-quiet" /><ui:Label name="hubStatus" class="hub-status" /><ui:Button name="hubRecoverAction" text="RETRY SAVED ACTION" class="hub-button" /><ui:Button name="hubRefresh" text="REFRESH" class="hub-button hub-quiet" /><ui:Button name="hubMore" text="MORE" class="hub-button hub-quiet" /></ui:VisualElement>
     <ui:Label name="hubArtNotice" class="hub-art-notice" />
     <ui:VisualElement name="hubOverlay" class="hub-full hub-overlay is-hidden"><ui:VisualElement class="hub-sheet"><ui:Label text="THE COMPANY" class="hub-heading" /><ui:ScrollView name="hubRoutes" class="hub-routes" /><ui:Button name="hubClose" text="CLOSE" class="hub-button hub-primary" /></ui:VisualElement></ui:VisualElement>
   </ui:VisualElement>

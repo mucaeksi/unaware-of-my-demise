@@ -1,5 +1,7 @@
 # Campaign battle sessions and durable recovery
 
+**Continuation — 2026-10-27:** native companion/Team/Armory and Saved Actions presentation, plus durable companion/Sweep actions, are now implemented at local scope. [Current guide](media/SOL_COMPANY_AND_SWEEP.md). Earlier presentation limits in this document describe its original delivery. Live account, Android, human art and release acceptance remain open.
+
 Local implementation, 2026-10-27. Unity access is CLI only. No deployment, live-account acceptance, device acceptance or
 art approval follows from these checks. Entry tutorials retain their fixed-party/narrative checkpoint path.
 

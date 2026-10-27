@@ -11,6 +11,12 @@ namespace Uomd.Core
     {
         public string Release = "", PlayerId = "", DisplayName = "", TeamName = "";
         public bool SignedIn, Maintenance;
+        public bool SweepEnabled;
+        public int SweepDailyLimit, SweepMaxBatch;
+        public string SweepPeriod = "";
+        public readonly Dictionary<string, int> SweepUsage = new Dictionary<string, int>(StringComparer.Ordinal);
+        public Dictionary<string, object?> Mine = null!, Roster = null!, Teams = null!, Catalog = null!, Stacks = null!, Gear = null!;
+        public Dictionary<string, object?>? Stats;
         public long? Balance;
         public int AccountLevel, Ration, RationCap;
         public readonly List<HubCompanion> Companions = new List<HubCompanion>();
@@ -28,6 +34,8 @@ namespace Uomd.Core
         }
         public int Stars(HubNode node) => Progress.TryGetValue(node.Id, out var p) ? p.Stars : 0;
         public bool CanStart(HubNode node) => SignedIn && !Maintenance && Unlocked(node) && node.Cost >= 0 && Ration >= node.Cost;
+        public int SweepRemaining(HubNode node) => Math.Max(0, SweepDailyLimit - (SweepUsage.TryGetValue(node.Id, out int used) ? used : 0));
+        public bool CanSweep(HubNode node, int count) => CanStart(node) && SweepEnabled && node.Kind == "battle" && node.Cost > 0 && Stars(node) == 3 && count >= 1 && count <= SweepMaxBatch && count <= SweepRemaining(node) && (long)node.Cost * count <= Ration;
         public static UomdHubSnapshot Published(string release, object index)
         {
             var snapshot = new UomdHubSnapshot { Release = release };
@@ -42,7 +50,7 @@ namespace Uomd.Core
                     string ration = JsonRead.Str(n, "ration_class");
                     int cost = ration == "" || ration == "tutorial" ? 0 : ration == "campaign" ? 6 : ration == "material_hunt" ? 8 : ration == "gear_dungeon" || ration == "special_boss" ? 10 : -1;
                     chapter.Nodes.Add(new HubNode { Id = Required(n, "node_id"), Title = Required(n, "title_en"), Kind = kind, Requires = JsonRead.Str(n, "requires"),
-                        Story = JsonRead.Str(n, "story"), Encounter = JsonRead.Str(n, "encounter"), Hard = JsonRead.Str(n, "difficulty") == "hard", Cost = kind == "story" ? 0 : cost });
+                        Story = JsonRead.Str(n, "story"), Encounter = JsonRead.Str(n, "encounter"), Hard = JsonRead.Str(n, "difficulty") == "hard", Cost = kind == "story" ? 0 : cost, Definition = n });
                 }
                 snapshot.Chapters.Add(chapter);
             }
@@ -51,6 +59,7 @@ namespace Uomd.Core
         }
         public void Account(object me, object wallet, object mine, object roster, object teams, object progress, object flags)
         {
+            Mine = (Dictionary<string, object?>)mine; Roster = (Dictionary<string, object?>)roster; Teams = (Dictionary<string, object?>)teams;
             PlayerId = Required(me, "id"); DisplayName = JsonRead.Str(me, "displayName");
             // An absent wallet row means zero; an absent wallet envelope means a broken reply.
             if (!(JsonRead.Get(wallet, "wallets") is Dictionary<string, object?> wallets)) throw new InvalidDataException("Wallet is unavailable.");
@@ -79,7 +88,26 @@ namespace Uomd.Core
             var ration = JsonRead.Get(progress, "ration")!; Ration = (int)Number(ration, "value", 0, int.MaxValue); RationCap = (int)Number(ration, "cap", 1, int.MaxValue);
             if (!(JsonRead.Get(flags, "flags") is Dictionary<string, object?>)) throw new InvalidDataException("Server status is unavailable.");
             Maintenance = JsonRead.Bool(JsonRead.Get(JsonRead.Obj(flags, "flags"), "maintenance.read_only"), "enabled");
+            SweepEnabled = JsonRead.Bool(JsonRead.Get(JsonRead.Obj(flags, "flags"), "sweep.enabled"), "enabled");
+            if (JsonRead.Get(progress, "sweep") is Dictionary<string, object?> sweep)
+            {
+                SweepDailyLimit = (int)Number(sweep, "dailyLimit", 1, int.MaxValue); SweepMaxBatch = (int)Number(sweep, "maxBatch", 1, 10); SweepPeriod = Required(sweep, "periodKey");
+                if (!(JsonRead.Get(sweep, "usageByNode") is Dictionary<string, object?> usage)) throw new InvalidDataException("Sweep usage is unavailable.");
+                foreach (string key in usage.Keys) SweepUsage[key] = (int)Number(usage, key, 0, int.MaxValue);
+            }
             SignedIn = true;
+        }
+        public void Details(Dictionary<string, object?> catalog, Dictionary<string, object?> stacks, Dictionary<string, object?> gear, Dictionary<string, object?>? stats)
+        {
+            RequireArray(catalog, "items"); RequireArray(catalog, "gear"); RequireArray(stacks, "stacks"); RequireArray(gear, "gear");
+            if (!(JsonRead.Get(JsonRead.Obj(JsonRead.Obj(catalog, "config"), "progression"), "character") is Dictionary<string, object?>)) throw new InvalidDataException("Growth rules are unavailable.");
+            if (stats != null)
+            {
+                var values = JsonRead.Get(stats, "stats");
+                foreach (string key in new[] { "hp", "atk", "def", "spd" })
+                { object? value = JsonRead.Get(values, key); if (!(value is long) && !(value is double d && !double.IsNaN(d) && !double.IsInfinity(d))) throw new InvalidDataException("Stats are unavailable."); }
+            }
+            Catalog = catalog; Stacks = stacks; Gear = gear; Stats = stats;
         }
         private static IEnumerable<Dictionary<string, object?>> Objects(object d, string key)
         {
@@ -100,6 +128,7 @@ namespace Uomd.Core
     public sealed class HubChapter { public string Id = "", Title = ""; public readonly List<HubNode> Nodes = new List<HubNode>(); }
     public sealed class HubNode
     {
+        public Dictionary<string, object?> Definition = new Dictionary<string, object?>();
         public string Id = "", Title = "", Kind = "", Requires = "", Story = "", Encounter = "";
         public int Cost;
         public bool Hard;

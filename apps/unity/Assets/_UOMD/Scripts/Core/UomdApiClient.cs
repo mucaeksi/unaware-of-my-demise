@@ -252,7 +252,8 @@ namespace Uomd.Core
         /// A write bound to the current account. <paramref name="idempotent"/> adds a fresh requestId (the server's
         /// idempotency key; api.ts `mutate`); plain writes (api.ts `call`: teams, equip) send the body as is, because their
         /// server schemas are strict. A DELETE sends no body. The TS client also journaled pending idempotent actions across
-        /// restarts (net/operations.ts); campaign battles use a separate durable journal. Other mutations remain one-shot.
+        /// restarts (net/operations.ts); campaign battles and rebuilt companion/Sweep actions use their durable services.
+        /// Legacy mutation callers still use this one-shot transport directly.
         /// </summary>
         public async Awaitable<Dictionary<string, object?>> SendJsonAsync(string method, string path, Dictionary<string, object?>? body = null, bool requireAuth = true, bool idempotent = true, CancellationToken ct = default)
         {

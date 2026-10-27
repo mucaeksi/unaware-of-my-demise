@@ -10,6 +10,16 @@ namespace Uomd.Tests
 {
     public sealed class HubSnapshotTests
     {
+        [Test] public void SweepRequiresPublishedEligibilityExplicitFlagUsageAndEnoughRation()
+        {
+            var s = Published(); Account(s); var node = s.Nodes.Single(n => n.Kind == "battle");
+            s.Progress[node.Id] = (3,1); Assert.False(s.CanSweep(node,1));
+            s.SweepEnabled = true; s.SweepDailyLimit = 20; s.SweepMaxBatch = 10;
+            Assert.True(s.CanSweep(node,10)); s.SweepUsage[node.Id] = 19; Assert.False(s.CanSweep(node,5)); Assert.True(s.CanSweep(node,1));
+            s.Ration = 0; Assert.False(s.CanSweep(node,1)); s.Ration = 114;
+            s.Progress[node.Id] = (2,1); Assert.False(s.CanSweep(node,1));
+            s.Progress[node.Id] = (3,1); node.Cost = 0; Assert.False(s.CanSweep(node,1));
+        }
         private const string Index = "{\"chapters\":[{\"chapter_id\":\"chapter_one\",\"title_en\":\"Before the Road\",\"nodes\":[{\"node_id\":\"story_one\",\"title_en\":\"Story\",\"kind\":\"story\",\"story\":\"story/one.json\"},{\"node_id\":\"battle_one\",\"title_en\":\"Battle\",\"kind\":\"battle\",\"encounter\":\"encounters/one.json\",\"requires\":\"story_one\",\"ration_class\":\"campaign\"},{\"node_id\":\"story_two\",\"title_en\":\"After\",\"kind\":\"story\",\"story\":\"story/two.json\",\"requires\":\"battle_one\"}]}]}";
         private static Dictionary<string, object?> Parse(string json) => UomdJson.ParseObject(json);
         private static UomdHubSnapshot Published() => UomdHubSnapshot.Published("rel_0001", Parse(Index));
