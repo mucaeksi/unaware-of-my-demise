@@ -1,0 +1,2393 @@
+{
+  "schemaVersion": 1,
+  "id": "sol-archive-reader-2026-10-27",
+  "status": "LOCAL_TESTED",
+  "reviewedAt": "2026-10-27T14:25:47.371Z",
+  "sourceCommit": "ec5e42e572bf28a222ad428230a0616e1de08d80",
+  "deliveryBinding": "The enclosing local commit contains the exact source blobs listed below; sourceCommit records its parent.",
+  "scope": [
+    "Native Archive shelves using only the authenticated server listing and a matching detail response",
+    "Canonical ordered Archive scenes through StoryRunner and the editable native Story reader",
+    "Original non-reward completion with strict status/receipt binding, explicit retry and completed-card replay without another write",
+    "Account/auth/release/scene fences, pending reading guards for chapter entry/Continue and isolated review pause",
+    "Real native controller input/captures and restored Editor scene/preferences/viewport"
+  ],
+  "checks": {
+    "unityEditor": "6000.3.27f1",
+    "unityTransport": "CLI only; Pipeline 0.9.1-exp.1",
+    "editMode": {
+      "total": 192,
+      "passed": 192,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "editModeExecution": "Synchronous CLI",
+    "playMode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "headless": {
+      "passed": 160,
+      "failed": 0
+    },
+    "typescript": {
+      "passed": 955,
+      "failed": 0
+    },
+    "contentReproduction": {
+      "files": 232,
+      "exact": true
+    },
+    "referenceCompile": {
+      "assemblies": 12,
+      "errors": 0,
+      "limitation": "URP editor signatures are verified stubs, not the compiled package"
+    },
+    "playerReferenceCompile": {
+      "assemblies": 8,
+      "errors": 0,
+      "scope": "UNITY_EDITOR disabled; not an Android/IL2CPP build"
+    },
+    "skills": {
+      "adapters": 66,
+      "passed": true
+    },
+    "consoleErrors": 0,
+    "liveChecks": 38,
+    "canonicalDataCheck": {
+      "entries": 92,
+      "scenes": 100,
+      "lines": 445
+    }
+  },
+  "interaction": {
+    "inputMethod": "NavigationSubmitEvent on real UI Toolkit Buttons, plus explicit synthetic account/fault and stale-callback injection; no physical-touch claim",
+    "fixture": "Explicit memory-only account gates, event availability and completion/status. Review HTTP remains blocked. Library and Story use their actual controllers.",
+    "canonicalText": {
+      "path": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sha256": "c583254c1068971593a9147215adf8ec5a80d9a702c2f07a199996204f52af4b",
+      "scope": "Canonical local patch text/data check; not proof that this patch is installed/published on the embedded fixture release."
+    },
+    "steps": [
+      "Archive lists only server-unlocked premise entries without hidden titles",
+      "locked companion shelf exposes an empty state rather than local patch readings",
+      "canonical codex opens in the native reader with its existing rebuilt forest and no early completion",
+      "canceling Archive exit keeps the same line and does not mark the reading read",
+      "first read confirms one exact non-reward story completion and preserves entry continuity",
+      "server-confirmed completed card opens as a replay",
+      "replay returns to Archive without a new completion or entry/campaign progress write",
+      "response loss remains visibly pending after exactly one fixture completion",
+      "pending overlay has a visible Archive return and fixture label",
+      "pending original completion remains recoverable on Archive and blocks replacing its reading",
+      "status-first recovery confirms the exact original reading without another POST",
+      "failed refresh labels retained Archive cards stale and disables opening",
+      "mismatched library release cannot publish a fresh Archive snapshot",
+      "malformed server cards cannot publish a fresh Archive snapshot",
+      "an authoritative empty listing stays empty without local fallback",
+      "companion later parts remain hidden until their earlier part is confirmed read",
+      "unrebuilt companion illustrations offer explicit recovery with a visible fixture marker and no completion",
+      "art retry preserves the original reading and never records it early",
+      "text-only reading does not substitute historical portraits or stage images",
+      "confirming exit leaves the unfinished reading unread and grants no progress",
+      "an explicitly abandoned reading restarts at its canonical first line",
+      "confirmed companion completion refreshes the server shelf and exposes the eligible next part",
+      "open event fixture exposes only its server-listed reading",
+      "a stale completion callback from the previous scene cannot advance the next event scene",
+      "three canonical event scenes run in order and record exactly one completion after all fourteen lines",
+      "closed event fixture retains the completed reading while hiding unopened event entries",
+      "a late entry reply cannot open the previous account reading on a newly loaded account",
+      "a committed late result stays with its original account and cannot publish completion or a receipt on another account",
+      "returning to the original account reads its committed completion from the authoritative shelf",
+      "same-account auth refresh rejects the old callback and a new read independently reports the original server completion",
+      "maintenance data disables a new reading even when its card is unlocked",
+      "sign-out clears Archive cards reading title request and account data",
+      "native Home shortcut reaches the actual Archive controller without changing entry continuity",
+      "final 4:3 Archive controls remain inside the native frame with at least 64-reference-pixel targets",
+      "Production Review pause holds the actual Archive reader against Auto and manual advance",
+      "chapter entry routes back to the exact pending Archive completion before replacing its flow",
+      "Continue preserves the exact pending reading instead of starting another entry flow",
+      "final-source pending recovery confirms once after pause chapter and Continue guards"
+    ],
+    "states": {
+      "sourceCommit": "ec5e42e5",
+      "model": {
+        "entries": 92,
+        "scenes": 100,
+        "lines": 445
+      },
+      "gated": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "gated",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 0,
+        "applied": 0,
+        "payload": "",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "firstReading": {
+        "ready": true,
+        "screen": "Story",
+        "view": "ready",
+        "fresh": false,
+        "loading": false,
+        "notice": "",
+        "mode": "gated",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": true,
+        "current": true,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "a1eeb9a8e7de46d398f7d30cfc0590c1",
+        "hash": "7ac2d2845498ade5ce9d52bd69e963e48f74ba521888072a7f19b093cd66c63c",
+        "scope": "a1eeb9a8e7de46d398f7d30cfc0590c1:0",
+        "title": "The Law of Hours",
+        "writes": 0,
+        "applied": 0,
+        "payload": "",
+        "line": "codex_law_of_hours_text",
+        "presentation": "reading",
+        "images": [
+          "art/bg_sol_forest_whispering_ash.webp"
+        ],
+        "entry": null,
+        "phase": "PostStory",
+        "stage": 0
+      },
+      "readLines": [
+        [
+          "codex_law_of_hours_text"
+        ],
+        [
+          "codex_law_of_hours_text"
+        ],
+        [
+          "codex_names_text"
+        ],
+        [
+          "cs_mahmut_1_001",
+          "cs_mahmut_1_002",
+          "cs_mahmut_1_003",
+          "cs_mahmut_1_004",
+          "cs_mahmut_1_005",
+          "cs_mahmut_1_006",
+          "cs_mahmut_1_007",
+          "cs_mahmut_1_008"
+        ],
+        [
+          "event_harvest_inn_meal_2_001",
+          "event_harvest_inn_meal_2_002",
+          "event_harvest_inn_meal_2_003",
+          "event_harvest_inn_meal_2_004",
+          "event_harvest_inn_meal_2_005",
+          "event_harvest_inn_meal_3_001",
+          "event_harvest_inn_meal_3_002",
+          "event_harvest_inn_meal_3_003"
+        ],
+        [
+          "codex_crownfall_text"
+        ],
+        [
+          "codex_hollows_text"
+        ],
+        [
+          "codex_crownfall_text"
+        ]
+      ],
+      "completed": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "gated",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 1,
+        "applied": 1,
+        "payload": "{\"nodeId\":\"codex_law_of_hours\",\"releaseId\":\"rel_0001\",\"requestId\":\"a1eeb9a8e7de46d398f7d30cfc0590c1\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "pending": {
+        "ready": true,
+        "screen": "Story",
+        "view": "ready",
+        "fresh": false,
+        "loading": false,
+        "notice": "",
+        "mode": "gated",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": true,
+        "current": true,
+        "atEnd": true,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "Reading completion is not confirmed yet. Check / retry the original reading when connected. No rewards are granted by reading.",
+        "request": "0db7271956b04bae8c0989e47af051ec",
+        "hash": "062098d7db8a02b8c83e7dd8300212c73d1ac45ae54f8488c9e33ce657faf188",
+        "scope": "0db7271956b04bae8c0989e47af051ec:0",
+        "title": "Names as Witnesses",
+        "writes": 2,
+        "applied": 2,
+        "payload": "{\"nodeId\":\"codex_names\",\"releaseId\":\"rel_0001\",\"requestId\":\"0db7271956b04bae8c0989e47af051ec\"}",
+        "line": "codex_names_text",
+        "presentation": "reading_completion_pending",
+        "images": [
+          "art/bg_sol_forest_whispering_ash.webp"
+        ],
+        "entry": null,
+        "phase": "PostStory",
+        "stage": 0
+      },
+      "recovered": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "gated",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 2,
+        "applied": 2,
+        "payload": "{\"nodeId\":\"codex_names\",\"releaseId\":\"rel_0001\",\"requestId\":\"0db7271956b04bae8c0989e47af051ec\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "missingArt": {
+        "ready": true,
+        "screen": "Story",
+        "view": "ready",
+        "fresh": false,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": true,
+        "current": true,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "dd83079e156e4ce8a120b49aaeb370d9",
+        "hash": "206c7c6919776eb26a20a966b315f400013d16601b3f118f5cf80a2963415486",
+        "scope": "dd83079e156e4ce8a120b49aaeb370d9:0",
+        "title": "The Crest and the Hammer",
+        "writes": 2,
+        "applied": 2,
+        "payload": "{\"nodeId\":\"codex_names\",\"releaseId\":\"rel_0001\",\"requestId\":\"0db7271956b04bae8c0989e47af051ec\"}",
+        "line": "",
+        "presentation": "error",
+        "images": [],
+        "entry": null,
+        "phase": "PostStory",
+        "stage": 0
+      },
+      "companion": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "cs_mahmut_2",
+            "kind": "companion",
+            "part": 2,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 3,
+        "applied": 3,
+        "payload": "{\"nodeId\":\"cs_mahmut_1\",\"releaseId\":\"rel_0001\",\"requestId\":\"36615c3b7d734c5c87a4167d989b636f\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "eventFirstScene": [
+        "event_harvest_inn_meal_1_001",
+        "event_harvest_inn_meal_1_002",
+        "event_harvest_inn_meal_1_003",
+        "event_harvest_inn_meal_1_004",
+        "event_harvest_inn_meal_1_005",
+        "event_harvest_inn_meal_1_006"
+      ],
+      "event": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "cs_mahmut_2",
+            "kind": "companion",
+            "part": 2,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "event_harvest_inn_meal",
+            "kind": "event",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "event_sun_eclipse_day",
+            "kind": "event",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "event_guild_salt_fever",
+            "kind": "event",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "event_council_herald",
+            "kind": "event",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 4,
+        "applied": 4,
+        "payload": "{\"nodeId\":\"event_harvest_inn_meal\",\"releaseId\":\"rel_0001\",\"requestId\":\"002f76fb1bc74ed3bcacc3e51135a371\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "readRace": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review_b",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 4,
+        "applied": 4,
+        "payload": "{\"nodeId\":\"event_harvest_inn_meal\",\"releaseId\":\"rel_0001\",\"requestId\":\"002f76fb1bc74ed3bcacc3e51135a371\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "writeRace": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review_b",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 5,
+        "applied": 5,
+        "payload": "{\"nodeId\":\"codex_crownfall\",\"releaseId\":\"rel_0001\",\"requestId\":\"23a8a890bbe945f8a411ab68619f4b62\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "sameAccountRace": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "cs_mahmut_2",
+            "kind": "companion",
+            "part": 2,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "event_harvest_inn_meal",
+            "kind": "event",
+            "part": 1,
+            "completed": true
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 6,
+        "applied": 6,
+        "payload": "{\"nodeId\":\"codex_hollows\",\"releaseId\":\"rel_0001\",\"requestId\":\"1ee71f3ad39f4d4bb7a899889390bb4f\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "guest": {
+        "ready": true,
+        "screen": "Library",
+        "view": "guest",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "",
+        "cards": null,
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 6,
+        "applied": 6,
+        "payload": "{\"nodeId\":\"codex_hollows\",\"releaseId\":\"rel_0001\",\"requestId\":\"1ee71f3ad39f4d4bb7a899889390bb4f\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "final": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "cs_mahmut_2",
+            "kind": "companion",
+            "part": 2,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "event_harvest_inn_meal",
+            "kind": "event",
+            "part": 1,
+            "completed": true
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 6,
+        "applied": 6,
+        "payload": "{\"nodeId\":\"codex_hollows\",\"releaseId\":\"rel_0001\",\"requestId\":\"1ee71f3ad39f4d4bb7a899889390bb4f\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "finalFrame": [
+        {
+          "id": "hubHome",
+          "enabled": true,
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubCompany",
+          "enabled": true,
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubChapters",
+          "enabled": true,
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubAccount",
+          "enabled": true,
+          "height": 69.6000061,
+          "inside": true
+        },
+        {
+          "id": "hubBack",
+          "enabled": true,
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "hubRefresh",
+          "enabled": true,
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "hubMore",
+          "enabled": true,
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "archiveRead",
+          "enabled": true,
+          "height": 69.6001,
+          "inside": true
+        }
+      ],
+      "beforeFinalGuards": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "unlocked",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "cs_mahmut_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "cs_mahmut_2",
+            "kind": "companion",
+            "part": 2,
+            "completed": false
+          },
+          {
+            "id": "cs_fadyme_1",
+            "kind": "companion",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_seven_bells",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_hollows",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          },
+          {
+            "id": "codex_vale",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_inquisition",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_red_vial",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_saint_luthos",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_first_eclipse",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_council",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_clockless",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "event_harvest_inn_meal",
+            "kind": "event",
+            "part": 1,
+            "completed": true
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 6,
+        "applied": 6,
+        "payload": "{\"nodeId\":\"codex_hollows\",\"releaseId\":\"rel_0001\",\"requestId\":\"1ee71f3ad39f4d4bb7a899889390bb4f\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      },
+      "finalPending": {
+        "ready": true,
+        "screen": "Story",
+        "view": "ready",
+        "fresh": false,
+        "loading": false,
+        "notice": "",
+        "mode": "gated",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          }
+        ],
+        "reading": true,
+        "current": true,
+        "atEnd": true,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "Reading completion is not confirmed yet. Check / retry the original reading when connected. No rewards are granted by reading.",
+        "request": "849cdd9157b64816bfe6abbf93d7d215",
+        "hash": "22531818d152e290acb29c0c75e14a58e5ebe98e2088e05797013d113d80dfa5",
+        "scope": "849cdd9157b64816bfe6abbf93d7d215:0",
+        "title": "Crownfall",
+        "writes": 1,
+        "applied": 1,
+        "payload": "{\"nodeId\":\"codex_crownfall\",\"releaseId\":\"rel_0001\",\"requestId\":\"849cdd9157b64816bfe6abbf93d7d215\"}",
+        "line": "codex_crownfall_text",
+        "presentation": "reading_completion_pending",
+        "images": [
+          "art/bg_sol_forest_whispering_ash.webp"
+        ],
+        "entry": null,
+        "phase": "PostStory",
+        "stage": 0
+      },
+      "finalGuardSmoke": {
+        "ready": true,
+        "screen": "Library",
+        "view": "ready",
+        "fresh": true,
+        "loading": false,
+        "notice": "",
+        "mode": "gated",
+        "player": "hub_review",
+        "cards": [
+          {
+            "id": "codex_law_of_hours",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_names",
+            "kind": "codex",
+            "part": 1,
+            "completed": false
+          },
+          {
+            "id": "codex_crownfall",
+            "kind": "codex",
+            "part": 1,
+            "completed": true
+          }
+        ],
+        "reading": false,
+        "current": false,
+        "atEnd": false,
+        "replay": false,
+        "busy": false,
+        "readingNotice": "",
+        "request": "",
+        "hash": "",
+        "scope": null,
+        "title": "",
+        "writes": 1,
+        "applied": 1,
+        "payload": "{\"nodeId\":\"codex_crownfall\",\"releaseId\":\"rel_0001\",\"requestId\":\"849cdd9157b64816bfe6abbf93d7d215\"}",
+        "line": "",
+        "presentation": "",
+        "images": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "entry": null,
+        "phase": "None",
+        "stage": 0
+      }
+    }
+  },
+  "art": {
+    "newBitmaps": 0,
+    "policy": "Existing rebuilt OpenAI shelter/forest candidates only. Missing rebuilt actors/stages offer explicit text-only reading without historical Gemini image substitution.",
+    "usedSourceIdentities": [
+      "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+      "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+    ],
+    "humanApproval": "pending",
+    "native2kTarget": "open"
+  },
+  "finalCapturePaths": [
+    {
+      "label": "final-archive-gated",
+      "image": "docs/review/captures/20261027T135100769_86fd43e3.png",
+      "metadata": "docs/review/captures/20261027T135100769_86fd43e3.json",
+      "screen": "Library",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "archive-native-text-reader",
+      "image": "docs/review/captures/20261027T135117286_04702965.png",
+      "metadata": "docs/review/captures/20261027T135117286_04702965.json",
+      "screen": "Story",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-archive-completion-pending",
+      "image": "docs/review/captures/20261027T135209306_6da75c3c.png",
+      "metadata": "docs/review/captures/20261027T135209306_6da75c3c.json",
+      "screen": "Story",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "archive-pending-on-shelf",
+      "image": "docs/review/captures/20261027T135220460_e3669522.png",
+      "metadata": "docs/review/captures/20261027T135220460_e3669522.json",
+      "screen": "Library",
+      "phase": "ready",
+      "stage": 0,
+      "width": 2400,
+      "height": 1080,
+      "safe": true
+    },
+    {
+      "label": "final-archive-stale",
+      "image": "docs/review/captures/20261027T135340455_3f96501b.png",
+      "metadata": "docs/review/captures/20261027T135340455_3f96501b.json",
+      "screen": "Library",
+      "phase": "stale",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-archive-companions-wide",
+      "image": "docs/review/captures/20261027T135411634_3e4ec9f1.png",
+      "metadata": "docs/review/captures/20261027T135411634_3e4ec9f1.json",
+      "screen": "Library",
+      "phase": "ready",
+      "stage": 0,
+      "width": 2400,
+      "height": 1080,
+      "safe": true
+    },
+    {
+      "label": "final-archive-missing-art",
+      "image": "docs/review/captures/20261027T135424370_0b0c4083.png",
+      "metadata": "docs/review/captures/20261027T135424370_0b0c4083.json",
+      "screen": "Story",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 1600,
+      "height": 1200,
+      "safe": false
+    },
+    {
+      "label": "final-archive-text-only-4x3",
+      "image": "docs/review/captures/20261027T135437424_01b6702e.png",
+      "metadata": "docs/review/captures/20261027T135437424_01b6702e.json",
+      "screen": "Story",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-archive-leave-confirmation",
+      "image": "docs/review/captures/20261027T135447430_dab6ba99.png",
+      "metadata": "docs/review/captures/20261027T135447430_dab6ba99.json",
+      "screen": "Story",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-archive-guest-4x3",
+      "image": "docs/review/captures/20261027T140036636_38e33ca4.png",
+      "metadata": "docs/review/captures/20261027T140036636_38e33ca4.json",
+      "screen": "Library",
+      "phase": "guest",
+      "stage": 0,
+      "width": 1600,
+      "height": 1200,
+      "safe": false
+    },
+    {
+      "label": "final-archive-confirmed",
+      "image": "docs/review/captures/20261027T140056208_c8c63316.png",
+      "metadata": "docs/review/captures/20261027T140056208_c8c63316.json",
+      "screen": "Library",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-pending-wide-safe",
+      "image": "docs/review/captures/20261027T141744669_bc70a6b8.png",
+      "metadata": "docs/review/captures/20261027T141744669_bc70a6b8.json",
+      "screen": "Story",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 2400,
+      "height": 1080,
+      "safe": true
+    },
+    {
+      "label": "final-archive-after-recovery",
+      "image": "docs/review/captures/20261027T142147039_3d86bd58.png",
+      "metadata": "docs/review/captures/20261027T142147039_3d86bd58.json",
+      "screen": "Library",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    }
+  ],
+  "captures": [
+    {
+      "metadata": "docs/review/captures/20261027T133808309_af334d28.json",
+      "image": "docs/review/captures/20261027T133808309_af334d28.png",
+      "imageSha256": "e257fa86e5f757c7068e3dd6f0e6b8e6b829749103f75534f39794a2258d18b8",
+      "gitMetadataSha256": "b4c3f29ebc9164695779acb0690e20834ce666702dc37a820e639d464f5be31b",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": false,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T133814206_50bcc321.json",
+      "image": "docs/review/captures/20261027T133814206_50bcc321.png",
+      "imageSha256": "c67f8d4a0ed8dd2f02c998a302a21e3a158c985c6614f3735168fe31b573c321",
+      "gitMetadataSha256": "7f88ac5587463fe84a85d27a45ec8bd9115a20878d7f96a776904fd3a28bbbbd",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": false,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T134137573_b61f7ff5.json",
+      "image": "docs/review/captures/20261027T134137573_b61f7ff5.png",
+      "imageSha256": "578e917362957a1feab5772510a42ed36cf7366cac8251f079a720479a1a6283",
+      "gitMetadataSha256": "7f80e798b1250bebd238651658a0047549123dbc654800fb406fdd9bb274b347",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "reading",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      ],
+      "selectedLayoutPass": false,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T134228364_e6c1abb8.json",
+      "image": "docs/review/captures/20261027T134228364_e6c1abb8.png",
+      "imageSha256": "938e1ec9195d0fc114277786f87195ca93f1fc668a6812691246b60f08db3c5d",
+      "gitMetadataSha256": "7a0c046aae0478f6dba33f2a4c489be9ea3c80fda8f93b141b56c78514ee601a",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "reading_completion_pending",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      ],
+      "selectedLayoutPass": false,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T134240249_f36ed75f.json",
+      "image": "docs/review/captures/20261027T134240249_f36ed75f.png",
+      "imageSha256": "c2dab832992d0ff6cbeb508eea5e205642a047357ca56fb45f479c77cc70bd61",
+      "gitMetadataSha256": "2aa10df89d8d08f40baf9d81e34f9ff4862dd6d062bc72aca9a2453932648aec",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": false,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135100769_86fd43e3.json",
+      "image": "docs/review/captures/20261027T135100769_86fd43e3.png",
+      "imageSha256": "c4508c006f5318ca5faff366081f739ab6a5b2f752fab89e8663fae490f16482",
+      "gitMetadataSha256": "4b1af8021935dbe35c49ad2bd64902f5365e404c5546c19d7c12bd68b798498b",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135117286_04702965.json",
+      "image": "docs/review/captures/20261027T135117286_04702965.png",
+      "imageSha256": "79c16f94b65745fed732df506348bfad33738085b709381be476eaf4d59f3a81",
+      "gitMetadataSha256": "2e5abc803c81e0ca974eb35e4fe68607b77f721b165ed1908cda2b8359c32284",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "reading",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135209306_6da75c3c.json",
+      "image": "docs/review/captures/20261027T135209306_6da75c3c.png",
+      "imageSha256": "b0fc505a13acb3522905ab4ee9d7e8febf3e13866fbdb04227f217148b24163d",
+      "gitMetadataSha256": "0456ed34ed5a6fecec3eb8e9bd0fb21dbdc726240b9d6c4a7344523cf35c96bd",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "reading_completion_pending",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135220460_e3669522.json",
+      "image": "docs/review/captures/20261027T135220460_e3669522.png",
+      "imageSha256": "93b2c638f382aa50260d84219c60c4f83e159cdce011b7933f7a9addebf8312e",
+      "gitMetadataSha256": "7266838bcb1257f463e727d307652c4124dba5eded102729642122c42f781258",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135340455_3f96501b.json",
+      "image": "docs/review/captures/20261027T135340455_3f96501b.png",
+      "imageSha256": "e98149f195aa29d093a1e51f2c0e8dd98e40b2c58cf1dbf18ff6b1bbe6e0d042",
+      "gitMetadataSha256": "781ac43f0a70a1779374154f588a7f297aae9cfcf143ac02ecc4b7cdaa0f5db8",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "stale",
+      "readingState": "",
+      "fixtureMode": "offline",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135411634_3e4ec9f1.json",
+      "image": "docs/review/captures/20261027T135411634_3e4ec9f1.png",
+      "imageSha256": "3ac7734fe50b5745c6f97230666cacb1af5a423afc9c219215288e279b9aed10",
+      "gitMetadataSha256": "aae151d71d8776e29da781b495b85941f9f878bdb4755797781258063502f140",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "unlocked",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135424370_0b0c4083.json",
+      "image": "docs/review/captures/20261027T135424370_0b0c4083.png",
+      "imageSha256": "16e1c11b3ffb60e4fab945e3ddc0f281462e12021bffe28a1330b7823b0f08da",
+      "gitMetadataSha256": "accc64ec98d05ae70af806d941e0c0cfea9899513d4f71f3afc0b6231580cf4d",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "error",
+      "fixtureMode": "unlocked",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135437424_01b6702e.json",
+      "image": "docs/review/captures/20261027T135437424_01b6702e.png",
+      "imageSha256": "d04c01e6596b5408bc5fa996aef82df59406b686fb0b80df3c8d4c8ccbb09828",
+      "gitMetadataSha256": "3865f1e709e56a9ecf009a4ceb86cbf4805f1fb9bafbca0b3356ebe6f66528bb",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "reading_without_images",
+      "fixtureMode": "unlocked",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T135447430_dab6ba99.json",
+      "image": "docs/review/captures/20261027T135447430_dab6ba99.png",
+      "imageSha256": "c99fbeb6384e3888b67fbbacc8a294ac32f2424b11edfd8b4ca2e65dd5410b29",
+      "gitMetadataSha256": "9cd6466310b1058a8053d776e59e7e8eb46497088bea6f0ecdb49e6531bf4d30",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "leave_confirmation",
+      "fixtureMode": "unlocked",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T140036636_38e33ca4.json",
+      "image": "docs/review/captures/20261027T140036636_38e33ca4.png",
+      "imageSha256": "e0dfe1143514c7034eb35cd066cbf765eaeb652db83669dbc85e48d64882710d",
+      "gitMetadataSha256": "9e74037b47ff02dbccd4eafe2065679b894800f3e38f01c4b32560a9214aef08",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "guest",
+      "readingState": "",
+      "fixtureMode": "unlocked",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T140056208_c8c63316.json",
+      "image": "docs/review/captures/20261027T140056208_c8c63316.png",
+      "imageSha256": "a8135d5d536c6209ee3120ea92fd66fbcb96590f7cd8389f4b085322a7535e46",
+      "gitMetadataSha256": "aa211315c9cbc6cda8c8d2c302e5ffe8d27704534dab288a4a1ea9914e0a11b1",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "unlocked",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T141744669_bc70a6b8.json",
+      "image": "docs/review/captures/20261027T141744669_bc70a6b8.png",
+      "imageSha256": "37a0952f375c12e1967cbabdbed74d4e0395dd08dab7ddf01d8d6e2a6bf51516",
+      "gitMetadataSha256": "47540d600ed7d51b857c8f04e68463e603275bce3a8328300ced55b92be03088",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Story",
+      "state": "",
+      "readingState": "reading_completion_pending",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T142147039_3d86bd58.json",
+      "image": "docs/review/captures/20261027T142147039_3d86bd58.png",
+      "imageSha256": "bc7c9b646c6d30606cc6d0aae4fb3309e90f6285756581974ebc9ffcf4cbacbb",
+      "gitMetadataSha256": "b55dead105dcc4539039d0b9e26cb54921632839f879209cb5ce43fa55510d16",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/archive",
+      "screen": "Library",
+      "state": "ready",
+      "readingState": "",
+      "fixtureMode": "gated",
+      "indexSource": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "selectedLayoutPass": true,
+      "finalSourceGuard": true
+    }
+  ],
+  "referenceInputs": [
+    {
+      "path": "content/patches/rel_0003_part1_campaign/library/library_index.json",
+      "sha256": "c583254c1068971593a9147215adf8ec5a80d9a702c2f07a199996204f52af4b"
+    },
+    {
+      "path": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sha256": "4affd87e820aaee0abb6ebe6b490d3fb97dc67824a8418057e9884981401b01b"
+    },
+    {
+      "path": "content/base/art/art_manifest.json",
+      "sha256": "cb47f6342a92eb606b382abd84ec8a110e341234559c51e2258a9e44faf466fd"
+    },
+    {
+      "path": "apps/api/src/library/service.ts",
+      "sha256": "37934547857e79ab25916de03f25d4b94c3f3ff55341945f3f8d639d67ed2218"
+    },
+    {
+      "path": "apps/api/src/progress/story.ts",
+      "sha256": "b5efca73bd885ed3c85deb57fa10640a5116eda7e9b01efc69ff7672aa45616f"
+    },
+    {
+      "path": "apps/api/src/player/operations.ts",
+      "sha256": "622505f0963d51636aaaaf57914a9367c1fecc8e0d9ab618b8dee12c97efe08d"
+    },
+    {
+      "path": "packages/content-schema/src/library.ts",
+      "sha256": "60148b6b66347bd561f21098729e4688e1cdd696eb6f3b70ad995433ad481ae2"
+    },
+    {
+      "path": "narrative/00_Canon/SPOILER_UNLOCK_POLICY.md",
+      "sha256": "14c09c1795a3a3373ada44e25b1e1f49015abba72b030323733c2e9abbafa7c8"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Narrative/StoryRunner.cs",
+      "sha256": "caca14de5d345e7b9c68093a7c2594906b697408e1316d2aae20bd480341ed76"
+    }
+  ],
+  "restoration": {
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "dirty": false,
+    "playing": false,
+    "paused": false,
+    "review": false,
+    "index": 9,
+    "gizmos": true,
+    "equal": true,
+    "baseline": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "current": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "viewport": {
+      "expectedIndex": 9,
+      "expectedGizmos": true
+    },
+    "consoleErrors": 0,
+    "compilationFailed": false
+  },
+  "boundaries": [
+    "Fixture gates, completed flags and event windows are synthetic, not live provider, schedule, economy or signed-patch evidence.",
+    "The 92 entries / 100 scenes / 445 lines are a complete canonical data-model check, not a rendered read-through of every scene. Actual UI checks include Codex first/replay, eight companion lines and fourteen ordered event lines.",
+    "Selected layout captures follow the visible return/fixture-label fix. Two final-source guard captures also follow the pause and chapter/Continue guard changes; those changes retain the same layout. Earlier panel drafts remain review history.",
+    "Archive cursor and pending completion are memory-only. Leaving an unfinished reading restarts it; this is not a durable Archive journal or Android process-death test.",
+    "Replay suppression applies to cards already marked completed by the authenticated server listing. First reading completion remains authoritative on the provider and grants no rewards.",
+    "Non-Archive campaign narrative/visual migration, recruitment/errands, account/privacy and broader gear/mode work remain subsequent slices.",
+    "Live identities/provider/event clocks, signed content cutover, physical input/device storage, final native-resolution art, human art and release acceptance remain open.",
+    "No new credentials, hooks, paid generation call, push or deployment. Owner file codex_watcher.ps1 was not read, executed or staged."
+  ],
+  "sourceFiles": [
+    {
+      "path": "README.md",
+      "gitBlobSha256": "92f94e90ebcf26a33a63c14252de6973a320cbef0428a111c758ba4151c37911",
+      "editorFileSha256": "92f94e90ebcf26a33a63c14252de6973a320cbef0428a111c758ba4151c37911"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs",
+      "gitBlobSha256": "d0eb1edfb62e73672011bca8da4ffd6ba11d0813853731c449599ea508df06a2",
+      "editorFileSha256": "2aa1ffbb30d1ecde54db1769874b6c2ac85587f8900b67cc4ea90ffaceb65712"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs",
+      "gitBlobSha256": "9c887b722aa4635924ea642b8a61a9be7833efba0ae0abc69153bbd1bd84ed7d",
+      "editorFileSha256": "9c887b722aa4635924ea642b8a61a9be7833efba0ae0abc69153bbd1bd84ed7d"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uss",
+      "gitBlobSha256": "dbae9b30e8db6d15a82cd3b74c509253e2e6686fde16c020f9681105fa6fc7dc",
+      "editorFileSha256": "dbae9b30e8db6d15a82cd3b74c509253e2e6686fde16c020f9681105fa6fc7dc"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Story.uxml",
+      "gitBlobSha256": "12d531bdb0a1bafa4857768807d66a125b4ea59b71d6b8a297ba46ee40213246",
+      "editorFileSha256": "12d531bdb0a1bafa4857768807d66a125b4ea59b71d6b8a297ba46ee40213246"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdHubSnapshot.cs",
+      "gitBlobSha256": "d84c7a1fd77c21580c9cc2df73c5a056db34cd58230a842af922ed738fa32ef6",
+      "editorFileSha256": "49f72ded62e35c367a3faccf40b63dce51d2cfb1b5ed0164cf02a71b7fd80ebc"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/ArchiveAndTrialsScreens.cs",
+      "gitBlobSha256": "d4f277cadd52f4a9b268cfc0ee6f794424ffb49a0bc4268e68167b2d64e9cccd",
+      "editorFileSha256": "d4f277cadd52f4a9b268cfc0ee6f794424ffb49a0bc4268e68167b2d64e9cccd"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs",
+      "gitBlobSha256": "84859b6bb84714065f810b8d9d19eaa854ce2a056f85de0a894eb2f1f92717dd",
+      "editorFileSha256": "1f1fb47ef77b00cf21231dd5e3442477a9d211faa216e003aee061b5f0477686"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildHubScreen.cs",
+      "gitBlobSha256": "72c281c3a258e5e588064e37b3de22f5cbd851e69ad34cc2d76563ea01306509",
+      "editorFileSha256": "bef7726ac8b7cf6e985bc72faf8fafc921e2e14fbea3d47138fb98590adb1e86"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStoryPresentation.cs",
+      "gitBlobSha256": "009263d994a81f33a2977c3958416d2831a45d1c7aa806825026afb4d2852c63",
+      "editorFileSha256": "009263d994a81f33a2977c3958416d2831a45d1c7aa806825026afb4d2852c63"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryFlow.cs",
+      "gitBlobSha256": "3403f28d8b1c366077786304c83bfe42af3786ae84677103a0ed011713c790d9",
+      "editorFileSha256": "3403f28d8b1c366077786304c83bfe42af3786ae84677103a0ed011713c790d9"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubReview.cs",
+      "gitBlobSha256": "c2ba8fb8193be374f7f516693b2889a252343c71e2094181221384c424e78234",
+      "editorFileSha256": "fb1f086c0bf05451fff99466b30b12d580b33991cd1753718c9bfc01d11e1a18"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubState.cs",
+      "gitBlobSha256": "c097687f860d1e42df25dd0b948a838e23c2bda0c349638b176bf5d23d3282ae",
+      "editorFileSha256": "103cdb8ed45551c6c0fdfde9b334b53718c64ced117b6e62eb1cbda98117f143"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs",
+      "gitBlobSha256": "8a9069924b24d009ebeec27c45f32f1c02bc88d05cd1fdf9b4545b04ba4083ac",
+      "editorFileSha256": "ebbbc300731f3dca67763d437523ade3ca66438c70455d385d14f9f662464ea1"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs",
+      "gitBlobSha256": "e48f33c19e1a7e6acbf4fa6a06a15a8d16c574b0cf9dd97d3c23c471c756dcef",
+      "editorFileSha256": "c9c34e7057dc21dabec4e2f05e33fedf83689a170fa24c63720d802eebbdb3ab"
+    },
+    {
+      "path": "apps/unity/Logic/Uomd.Core/Uomd.Core.csproj",
+      "gitBlobSha256": "f786e7fc1e594e4d3393c6c7229733ae8d8befa51241207786eca026c5c8bb44",
+      "editorFileSha256": "f786e7fc1e594e4d3393c6c7229733ae8d8befa51241207786eca026c5c8bb44"
+    },
+    {
+      "path": "docs/BUILD_STATE.md",
+      "gitBlobSha256": "9d26712beaf7d49376eb928a30f4bf06028f13f27f03ce4ca3c8a38bc6aa8399",
+      "editorFileSha256": "9d26712beaf7d49376eb928a30f4bf06028f13f27f03ce4ca3c8a38bc6aa8399"
+    },
+    {
+      "path": "docs/DEV_TRACKER.json",
+      "gitBlobSha256": "fbcc7a3885cdaf45a6833a9dc8d388c03b7e7e2e565591f2a52ad91fa4f482b1",
+      "editorFileSha256": "fbcc7a3885cdaf45a6833a9dc8d388c03b7e7e2e565591f2a52ad91fa4f482b1"
+    },
+    {
+      "path": "docs/INFRA_ROADMAP.md",
+      "gitBlobSha256": "b3b71fba745b68729c935643f5a8bdf9421860e1222c94e8e4ce64494ad431a4",
+      "editorFileSha256": "b3b71fba745b68729c935643f5a8bdf9421860e1222c94e8e4ce64494ad431a4"
+    },
+    {
+      "path": "docs/NEXT_STEPS.md",
+      "gitBlobSha256": "85a96131a55260c261d86e0d3f1c2a2b0418ca5f9ca510edf35d29ded358530d",
+      "editorFileSha256": "85a96131a55260c261d86e0d3f1c2a2b0418ca5f9ca510edf35d29ded358530d"
+    },
+    {
+      "path": "docs/handoff/CODEX_CLI_MASTER_PROMPT.md",
+      "gitBlobSha256": "5d69dfd6235b96404cb71f5e8c03184421f2b26396708fcff043fe755eb279e7",
+      "editorFileSha256": "5d69dfd6235b96404cb71f5e8c03184421f2b26396708fcff043fe755eb279e7"
+    },
+    {
+      "path": "docs/handoff/SOL_CONTINUATION_PLAN.md",
+      "gitBlobSha256": "8cdc68b2a571680438319b6083c6238aaa74c51cfd243000f3d21dc927621ad1",
+      "editorFileSha256": "8cdc68b2a571680438319b6083c6238aaa74c51cfd243000f3d21dc927621ad1"
+    },
+    {
+      "path": "docs/handoff/SOL_REBUILD_PLAN.md",
+      "gitBlobSha256": "efdb754f691727a23617c14a9149ea8fb9303b4a1c9b9606517ab39458df6584",
+      "editorFileSha256": "efdb754f691727a23617c14a9149ea8fb9303b4a1c9b9606517ab39458df6584"
+    },
+    {
+      "path": "docs/review/PRODUCTION_REVIEW.json",
+      "gitBlobSha256": "fc4120c8e5b87c794b5c80e80d3802ce2f4042465f5b030e1120b4aed37bafd1",
+      "editorFileSha256": "fc4120c8e5b87c794b5c80e80d3802ce2f4042465f5b030e1120b4aed37bafd1"
+    },
+    {
+      "path": "docs/review/README.md",
+      "gitBlobSha256": "b4e1ffe06a5845b7d6feeb7f73200ad6dc1443accbe05e4932d4b84886835cff",
+      "editorFileSha256": "b4e1ffe06a5845b7d6feeb7f73200ad6dc1443accbe05e4932d4b84886835cff"
+    },
+    {
+      "path": "docs/review/index.html",
+      "gitBlobSha256": "f9f4acf7ebdeee3144a13bc5e6e1929c4ae40e97d03419621fe8ca8381174383",
+      "editorFileSha256": "f9f4acf7ebdeee3144a13bc5e6e1929c4ae40e97d03419621fe8ca8381174383"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdLibrary.cs",
+      "gitBlobSha256": "d6b6ad902eb3a9e4b16b75cb2525e2738f062ddca817b636eb9b76a04b6ad66c",
+      "editorFileSha256": "d6b6ad902eb3a9e4b16b75cb2525e2738f062ddca817b636eb9b76a04b6ad66c"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdLibrary.cs.meta",
+      "gitBlobSha256": "5eca92dbd9cb73080241c56feafdd5d1db40553db776e49b491062e5c5840d3b",
+      "editorFileSha256": "5eca92dbd9cb73080241c56feafdd5d1db40553db776e49b491062e5c5840d3b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildArchiveScreen.cs",
+      "gitBlobSha256": "cd247ab724fcc01235691fd599bda7ff4ff1caaf82988ac325c1578275e12db2",
+      "editorFileSha256": "cd247ab724fcc01235691fd599bda7ff4ff1caaf82988ac325c1578275e12db2"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildArchiveScreen.cs.meta",
+      "gitBlobSha256": "5266037079cee36316ad56f9d3f366e1816076e579abf97fcc4dfe054aa4fa99",
+      "editorFileSha256": "5266037079cee36316ad56f9d3f366e1816076e579abf97fcc4dfe054aa4fa99"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdArchiveReading.cs",
+      "gitBlobSha256": "8785c59c66a58e9abc653e5b1c49f23a090883c9521b320df8d94f326c95a6fe",
+      "editorFileSha256": "8785c59c66a58e9abc653e5b1c49f23a090883c9521b320df8d94f326c95a6fe"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdArchiveReading.cs.meta",
+      "gitBlobSha256": "cdaa1554a9b492f4ea5250ae31933e2af37da77739eddda9b1f63a2a627918e6",
+      "editorFileSha256": "cdaa1554a9b492f4ea5250ae31933e2af37da77739eddda9b1f63a2a627918e6"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdArchiveReview.cs",
+      "gitBlobSha256": "fd3eecdc038987a8f673695037b6384619b7fefca4c6a85211b5b95968e6df66",
+      "editorFileSha256": "fd3eecdc038987a8f673695037b6384619b7fefca4c6a85211b5b95968e6df66"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdArchiveReview.cs.meta",
+      "gitBlobSha256": "a693bdfcf411d0601ed69a6a6d9f0ad02212e2de085b8f962c640601aee746a8",
+      "editorFileSha256": "a693bdfcf411d0601ed69a6a6d9f0ad02212e2de085b8f962c640601aee746a8"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/LibraryTests.cs",
+      "gitBlobSha256": "cf118bc1b5109d9e7552c53ff0d5c07ac4c280d120788dac2641ab1e320744f5",
+      "editorFileSha256": "cf118bc1b5109d9e7552c53ff0d5c07ac4c280d120788dac2641ab1e320744f5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/LibraryTests.cs.meta",
+      "gitBlobSha256": "71adf83c54983dd1d7c64392e32ce8fbd79db5bcbf465d8f8975a42600604dd1",
+      "editorFileSha256": "71adf83c54983dd1d7c64392e32ce8fbd79db5bcbf465d8f8975a42600604dd1"
+    },
+    {
+      "path": "docs/media/SOL_ARCHIVE_READER.md",
+      "gitBlobSha256": "3eab22c9582c14528b70ae102e7dc4c6ecb27a12196cb29b9db391704a466e28",
+      "editorFileSha256": "3eab22c9582c14528b70ae102e7dc4c6ecb27a12196cb29b9db391704a466e28"
+    }
+  ]
+}

@@ -3330,6 +3330,288 @@
                 "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
                 "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
             ]
+        },
+        {
+            "id": "20261027T133808309_af334d28",
+            "image": "captures/20261027T133808309_af334d28.png",
+            "sha256": "e257fa86e5f757c7068e3dd6f0e6b8e6b829749103f75534f39794a2258d18b8",
+            "metadata": "captures/20261027T133808309_af334d28.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T133814206_50bcc321",
+            "image": "captures/20261027T133814206_50bcc321.png",
+            "sha256": "c67f8d4a0ed8dd2f02c998a302a21e3a158c985c6614f3735168fe31b573c321",
+            "metadata": "captures/20261027T133814206_50bcc321.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T134137573_b61f7ff5",
+            "image": "captures/20261027T134137573_b61f7ff5.png",
+            "sha256": "578e917362957a1feab5772510a42ed36cf7366cac8251f079a720479a1a6283",
+            "metadata": "captures/20261027T134137573_b61f7ff5.json",
+            "scenario": "hub/archive",
+            "lineId": "codex_law_of_hours_text",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+            ]
+        },
+        {
+            "id": "20261027T134228364_e6c1abb8",
+            "image": "captures/20261027T134228364_e6c1abb8.png",
+            "sha256": "938e1ec9195d0fc114277786f87195ca93f1fc668a6812691246b60f08db3c5d",
+            "metadata": "captures/20261027T134228364_e6c1abb8.json",
+            "scenario": "hub/archive",
+            "lineId": "codex_names_text",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+            ]
+        },
+        {
+            "id": "20261027T134240249_f36ed75f",
+            "image": "captures/20261027T134240249_f36ed75f.png",
+            "sha256": "c2dab832992d0ff6cbeb508eea5e205642a047357ca56fb45f479c77cc70bd61",
+            "metadata": "captures/20261027T134240249_f36ed75f.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T135100769_86fd43e3",
+            "image": "captures/20261027T135100769_86fd43e3.png",
+            "sha256": "c4508c006f5318ca5faff366081f739ab6a5b2f752fab89e8663fae490f16482",
+            "metadata": "captures/20261027T135100769_86fd43e3.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T135117286_04702965",
+            "image": "captures/20261027T135117286_04702965.png",
+            "sha256": "79c16f94b65745fed732df506348bfad33738085b709381be476eaf4d59f3a81",
+            "metadata": "captures/20261027T135117286_04702965.json",
+            "scenario": "hub/archive",
+            "lineId": "codex_law_of_hours_text",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+            ]
+        },
+        {
+            "id": "20261027T135209306_6da75c3c",
+            "image": "captures/20261027T135209306_6da75c3c.png",
+            "sha256": "b0fc505a13acb3522905ab4ee9d7e8febf3e13866fbdb04227f217148b24163d",
+            "metadata": "captures/20261027T135209306_6da75c3c.json",
+            "scenario": "hub/archive",
+            "lineId": "codex_names_text",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+            ]
+        },
+        {
+            "id": "20261027T135220460_e3669522",
+            "image": "captures/20261027T135220460_e3669522.png",
+            "sha256": "93b2c638f382aa50260d84219c60c4f83e159cdce011b7933f7a9addebf8312e",
+            "metadata": "captures/20261027T135220460_e3669522.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T135340455_3f96501b",
+            "image": "captures/20261027T135340455_3f96501b.png",
+            "sha256": "e98149f195aa29d093a1e51f2c0e8dd98e40b2c58cf1dbf18ff6b1bbe6e0d042",
+            "metadata": "captures/20261027T135340455_3f96501b.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "stale",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T135411634_3e4ec9f1",
+            "image": "captures/20261027T135411634_3e4ec9f1.png",
+            "sha256": "3ac7734fe50b5745c6f97230666cacb1af5a423afc9c219215288e279b9aed10",
+            "metadata": "captures/20261027T135411634_3e4ec9f1.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T135424370_0b0c4083",
+            "image": "captures/20261027T135424370_0b0c4083.png",
+            "sha256": "16e1c11b3ffb60e4fab945e3ddc0f281462e12021bffe28a1330b7823b0f08da",
+            "metadata": "captures/20261027T135424370_0b0c4083.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T135437424_01b6702e",
+            "image": "captures/20261027T135437424_01b6702e.png",
+            "sha256": "d04c01e6596b5408bc5fa996aef82df59406b686fb0b80df3c8d4c8ccbb09828",
+            "metadata": "captures/20261027T135437424_01b6702e.json",
+            "scenario": "hub/archive",
+            "lineId": "cs_mahmut_1_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T135447430_dab6ba99",
+            "image": "captures/20261027T135447430_dab6ba99.png",
+            "sha256": "c99fbeb6384e3888b67fbbacc8a294ac32f2424b11edfd8b4ca2e65dd5410b29",
+            "metadata": "captures/20261027T135447430_dab6ba99.json",
+            "scenario": "hub/archive",
+            "lineId": "cs_mahmut_1_001",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T140036636_38e33ca4",
+            "image": "captures/20261027T140036636_38e33ca4.png",
+            "sha256": "e0dfe1143514c7034eb35cd066cbf765eaeb652db83669dbc85e48d64882710d",
+            "metadata": "captures/20261027T140036636_38e33ca4.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "guest",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T140056208_c8c63316",
+            "image": "captures/20261027T140056208_c8c63316.png",
+            "sha256": "a8135d5d536c6209ee3120ea92fd66fbcb96590f7cd8389f4b085322a7535e46",
+            "metadata": "captures/20261027T140056208_c8c63316.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T141744669_bc70a6b8",
+            "image": "captures/20261027T141744669_bc70a6b8.png",
+            "sha256": "37a0952f375c12e1967cbabdbed74d4e0395dd08dab7ddf01d8d6e2a6bf51516",
+            "metadata": "captures/20261027T141744669_bc70a6b8.json",
+            "scenario": "hub/archive",
+            "lineId": "codex_crownfall_text",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Story",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+            ]
+        },
+        {
+            "id": "20261027T142147039_3d86bd58",
+            "image": "captures/20261027T142147039_3d86bd58.png",
+            "sha256": "bc7c9b646c6d30606cc6d0aae4fb3309e90f6285756581974ebc9ffcf4cbacbb",
+            "metadata": "captures/20261027T142147039_3d86bd58.json",
+            "scenario": "hub/archive",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Library",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
         }
     ]
 }

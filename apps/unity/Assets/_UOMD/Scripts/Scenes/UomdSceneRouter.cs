@@ -107,10 +107,12 @@ namespace Uomd.Scenes
 #if UNITY_EDITOR
             if (_previewNavigation && _activeController is RebuildHubScreen) return;
 #endif
+            if (EntryFlow?.InReading == true && !EntryFlow.ReadingIsCurrent)
+            { _ = EntryFlow.AbortReadingAsync(); return; }
             if (EntryFlow?.InCampaign == true && !EntryFlow.CampaignIsCurrent &&
                 (ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle))
             { _ = EntryFlow.AbandonNodeAsync(); return; }
-            if (EntryFlow?.Continuity.State != null && !EntryFlow.Continuity.IsCurrent && Session?.IsReplayingIntro == false
+            if (EntryFlow?.InReading != true && EntryFlow?.Continuity.State != null && !EntryFlow.Continuity.IsCurrent && Session?.IsReplayingIntro == false
                 && (ActiveScreenId == UomdScreenId.Prologue || ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle || ActiveScreenId == UomdScreenId.Finish))
             { _ = NavigateToAsync(UomdScreenId.Title); return; }
             _activeController?.OnTick(Time.deltaTime);
@@ -163,7 +165,7 @@ namespace Uomd.Scenes
             int navGen = ++_navGeneration;
             _activeController?.OnExit();
             _screenHost.Clear();
-            bool nativeStory = targetScreen == UomdScreenId.Story && StoryScreenController.IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(Session.ActiveStoryPath));
+            bool nativeStory = targetScreen == UomdScreenId.Story && (EntryFlow?.InReading == true || StoryScreenController.IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(Session.ActiveStoryPath)));
             nativeStory |= targetScreen == UomdScreenId.Battle && nextController is BattleScreenController && BattleScreenController.IsRebuiltTutorialEncounter(Session.ActiveBattleEncounterId);
             nativeStory |= targetScreen == UomdScreenId.Finish || nextController is RebuildHubScreen;
             _rootContainer.style.top = nativeStory ? new Length(0) : new Length(50, LengthUnit.Percent);

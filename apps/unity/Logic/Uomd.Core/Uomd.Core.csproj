@@ -15,6 +15,7 @@
     <Compile Include="$(UomdScripts)Core/UomdEntryCheckpoint.cs" />
     <Compile Include="$(UomdScripts)Core/UomdBattleWire.cs" />
     <Compile Include="$(UomdScripts)Core/UomdHubSnapshot.cs" />
+    <Compile Include="$(UomdScripts)Core/UomdLibrary.cs" />
     <Compile Include="$(UomdScripts)Core/UomdBattleJournal.cs" />
     <Compile Include="$(UomdScripts)Core/UomdActionJournal.cs" />
     <Compile Include="$(UomdScripts)Core/UomdJson.cs" />

@@ -17,6 +17,7 @@ namespace Uomd.Core
         public readonly Dictionary<string, int> SweepUsage = new Dictionary<string, int>(StringComparer.Ordinal);
         public Dictionary<string, object?> Mine = null!, Roster = null!, Teams = null!, Catalog = null!, Stacks = null!, Gear = null!;
         public Dictionary<string, object?>? Stats;
+        public UomdLibrary? Library;
         public long? Balance;
         public int AccountLevel, Ration, RationCap;
         public readonly List<HubCompanion> Companions = new List<HubCompanion>();

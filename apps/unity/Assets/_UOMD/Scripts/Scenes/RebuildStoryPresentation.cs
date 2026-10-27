@@ -15,6 +15,9 @@ namespace Uomd.Scenes
         private VisualElement _storyView, _loadPanel;
         private Label _storyHint;
         private Button _nextButton, _retryButton, _textOnlyButton;
+        private Button _archiveButton, _archiveReturnButton, _leaveButton, _cancelLeaveButton;
+        private bool _leavingReading, _readingPanelBusy;
+        private string _readingPanelNotice;
         private string _presentationState = "inactive";
         private readonly Dictionary<string, Texture2D> _rebuildTextures = new Dictionary<string, Texture2D>(StringComparer.Ordinal);
 
@@ -37,8 +40,10 @@ namespace Uomd.Scenes
         {
             get
             {
+                if (_leavingReading) return true;
 #if UNITY_EDITOR
-                return (PortraitReview || StoryReview || Uomd.Core.UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario == "entry") && _router.ProductionPreview.paused;
+                return (PortraitReview || StoryReview || Uomd.Core.UomdEditorPreviewIsolation.Active && (_router.ProductionPreview?.scenario == "entry"
+                    || _router.EntryFlow.InReading && _router.ProductionPreview?.scenario.StartsWith("hub/", StringComparison.Ordinal) == true)) && _router.ProductionPreview.paused;
 #else
                 return false;
 #endif
@@ -51,6 +56,7 @@ namespace Uomd.Scenes
 
         private void BuildRebuilt(VisualElement root)
         {
+            _leavingReading = false; _readingPanelNotice = null;
             _assetsReady = _imagesDisabled = false;
             _rebuildTextures.Clear();
             _presentationState = "loading";
@@ -74,6 +80,32 @@ namespace Uomd.Scenes
             _loadPanel = _storyView.Q("storyLoadPanel");
             _retryButton = _storyView.Q<Button>("storyRetry");
             _textOnlyButton = _storyView.Q<Button>("storyTextOnly");
+            _archiveButton = _storyView.Q<Button>("storyArchive");
+            _archiveReturnButton = _storyView.Q<Button>("storyArchiveReturn");
+            _leaveButton = _storyView.Q<Button>("storyLeave");
+            _cancelLeaveButton = _storyView.Q<Button>("storyCancelLeave");
+            bool archive = _router.EntryFlow.InReading;
+            _storyView.EnableInClassList("story-archive", archive);
+            _archiveButton.style.display = archive ? DisplayStyle.Flex : DisplayStyle.None;
+            _archiveReturnButton.style.display = archive ? DisplayStyle.Flex : DisplayStyle.None;
+            _archiveButton.clicked += AskLeaveReading;
+            _archiveReturnButton.clicked += AskLeaveReading;
+            _leaveButton.clicked += LeaveReading;
+            _cancelLeaveButton.clicked += CancelLeaveReading;
+            _leaveButton.style.display = _cancelLeaveButton.style.display = DisplayStyle.None;
+            if (archive)
+            {
+                _storyView.Q<Label>("storyEyebrow").text = "THE ARCHIVE";
+#if UNITY_EDITOR
+                if (Uomd.Core.UomdEditorPreviewIsolation.Active) _storyView.Q<Label>("storyEyebrow").text = "REVIEW FIXTURE · THE ARCHIVE";
+#endif
+                var parent = _body.parent; int index = parent.IndexOf(_body); _body.RemoveFromHierarchy();
+                var scroll = new ScrollView(ScrollViewMode.Vertical) { name = "storyReadingScroll", horizontalScrollerVisibility = ScrollerVisibility.Hidden };
+                scroll.AddToClassList("story-reading-scroll"); scroll.contentContainer.style.width = Length.Percent(100); scroll.Add(_body); parent.Insert(index, scroll);
+            }
+            var context = _storyView.Q<Label>("storyLoadContext");
+            context.style.display = archive ? DisplayStyle.Flex : DisplayStyle.None;
+            context.text = _storyView.Q<Label>("storyEyebrow").text;
             _storyView.Q<Label>("storyTitle").text = _scene?.title_en ?? "The road to shelter";
             _autoButton.text = _auto ? "AUTO · ON" : "AUTO · OFF";
             SetActive(_autoButton, _auto);
@@ -96,13 +128,13 @@ namespace Uomd.Scenes
             {
                 var paths = new HashSet<string>(StringComparer.Ordinal);
                 string background = _router.Media.Catalog.Background("sol_" + _scene.location_id);
-                if (background == null) throw new InvalidOperationException("Rebuilt tutorial background is missing.");
+                if (background == null) throw new InvalidOperationException("Rebuilt story background is missing.");
                 paths.Add(background);
                 foreach (var command in _scene.commands)
                 {
-                    string character = command.op == "show" ? command.character : command.speaker;
-                    if (character != "fadyme" && character != "mahmut") continue;
-                    paths.Add(PortraitPath(character, command.op == "show" ? "composed" : command.emotion));
+                    if (command.op == "background") paths.Add(_router.Media.Catalog.Background("sol_" + command.location_id) ?? throw new InvalidOperationException("Rebuilt story background is missing."));
+                    if (command.op == "show" || command.op == "say")
+                        paths.Add(PortraitPath(command.op == "show" ? command.character : command.speaker, command.op == "show" ? "composed" : command.emotion));
                 }
                 foreach (string path in paths)
                 {
@@ -124,18 +156,23 @@ namespace Uomd.Scenes
 
         private void ShowLoadFailure(bool canRead)
         {
+            _loadPanel.style.display = DisplayStyle.Flex;
             _presentationState = "error";
-            _storyView.Q<Label>("storyLoadTitle").text = "THE ROAD COULD NOT BE LOADED";
+            _storyView.Q<Label>("storyLoadTitle").text = _router.EntryFlow.InReading ? "THE READING COULD NOT BE LOADED" : "THE ROAD COULD NOT BE LOADED";
             _storyView.Q<Label>("storyLoadMessage").text = canRead
                 ? "The illustrations are unavailable. Try again, or read this scene without images. Your place has not changed."
                 : "The story text is unavailable. Try again to return to this scene. Your place has not changed.";
             _retryButton.style.display = DisplayStyle.Flex;
+            _retryButton.text = "TRY AGAIN"; _retryButton.SetEnabled(true);
+            _leaveButton.style.display = _cancelLeaveButton.style.display = DisplayStyle.None;
+            _archiveReturnButton.style.display = _router.EntryFlow.InReading ? DisplayStyle.Flex : DisplayStyle.None;
             _textOnlyButton.style.display = canRead ? DisplayStyle.Flex : DisplayStyle.None;
             _retryButton.Focus();
         }
 
         private void RetryRebuilt()
         {
+            if (_router.EntryFlow.InReading && _router.EntryFlow.ReadingAtEnd) { _ = _router.EntryFlow.RetryReadingCompletionAsync(); return; }
             UnbindRebuilt();
             _root.Clear();
             _ = OnEnterAsync(_root);
@@ -210,6 +247,7 @@ namespace Uomd.Scenes
 
         private void OnStoryKey(KeyDownEvent evt)
         {
+            if (evt.keyCode == KeyCode.Escape && _router.EntryFlow.InReading) { AskLeaveReading(); evt.StopPropagation(); return; }
             if (HasButtonAncestor(evt.target as VisualElement)) return;
             if (evt.keyCode != KeyCode.Space && evt.keyCode != KeyCode.Return && evt.keyCode != KeyCode.KeypadEnter) return;
             Advance();
@@ -249,6 +287,12 @@ namespace Uomd.Scenes
 
         private void UnbindRebuilt()
         {
+            if (_leavingReading) _router.Audio.SetPaused(false);
+            _leavingReading = false;
+            _archiveButton.clicked -= AskLeaveReading;
+            _archiveReturnButton.clicked -= AskLeaveReading;
+            _leaveButton.clicked -= LeaveReading;
+            _cancelLeaveButton.clicked -= CancelLeaveReading;
             _storyView.UnregisterCallback<ClickEvent>(OnStoryClick);
             _storyView.UnregisterCallback<KeyDownEvent>(OnStoryKey);
             _storyView.UnregisterCallback<GeometryChangedEvent>(OnStoryGeometry);
@@ -259,6 +303,46 @@ namespace Uomd.Scenes
             _textOnlyButton.clicked -= ContinueWithoutImages;
             _presentationState = "inactive";
             _rebuildTextures.Clear();
+        }
+
+        private void AskLeaveReading()
+        {
+            var flow = _router.EntryFlow;
+            if (!flow.InReading || !flow.ReadingIsCurrent || flow.ReadingBusy) return;
+            if (flow.ReadingAtEnd) { _ = flow.LeaveReadingAsync(); return; }
+            _leavingReading = true; _router.Audio.SetPaused(true); _presentationState = "leave_confirmation";
+            _loadPanel.style.display = DisplayStyle.Flex;
+            _storyView.Q<Label>("storyLoadTitle").text = "LEAVE THIS READING?";
+            _storyView.Q<Label>("storyLoadMessage").text = "This unfinished reading will restart when opened again. It will not be marked read.";
+            _retryButton.style.display = _textOnlyButton.style.display = DisplayStyle.None;
+            _archiveReturnButton.style.display = DisplayStyle.None;
+            _leaveButton.style.display = _cancelLeaveButton.style.display = DisplayStyle.Flex;
+            _cancelLeaveButton.Focus();
+        }
+        private void LeaveReading()
+        { if (_leavingReading && _router.EntryFlow.ReadingIsCurrent) { _leavingReading = false; _router.Audio.SetPaused(false); _ = _router.EntryFlow.LeaveReadingAsync(); } }
+        private void CancelLeaveReading()
+        {
+            if (!_leavingReading) return;
+            _leavingReading = false; _router.Audio.SetPaused(false);
+            if (!_assetsReady) { ShowLoadFailure(_scene != null); return; }
+            _loadPanel.style.display = DisplayStyle.None;
+            _presentationState = _imagesDisabled ? "reading_without_images" : "reading";
+        }
+        private void UpdateReadingCompletion()
+        {
+            var flow = _router.EntryFlow;
+            if (!flow.InReading || !flow.ReadingAtEnd || !flow.ReadingIsCurrent) return;
+            if (_readingPanelNotice == flow.ReadingNotice && _readingPanelBusy == flow.ReadingBusy) return;
+            _readingPanelNotice = flow.ReadingNotice; _readingPanelBusy = flow.ReadingBusy;
+            _presentationState = flow.ReadingBusy ? "recording_reading" : "reading_completion_pending";
+            _loadPanel.style.display = DisplayStyle.Flex;
+            _storyView.Q<Label>("storyLoadTitle").text = "READING COMPLETION";
+            _storyView.Q<Label>("storyLoadMessage").text = flow.ReadingNotice;
+            _retryButton.text = "CHECK / RETRY ORIGINAL READING"; _retryButton.style.display = DisplayStyle.Flex; _retryButton.SetEnabled(!flow.ReadingBusy);
+            _archiveButton.SetEnabled(!flow.ReadingBusy);
+            _archiveReturnButton.style.display = DisplayStyle.Flex; _archiveReturnButton.SetEnabled(!flow.ReadingBusy);
+            _textOnlyButton.style.display = _leaveButton.style.display = _cancelLeaveButton.style.display = DisplayStyle.None;
         }
     }
 }

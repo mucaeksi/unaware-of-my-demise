@@ -46,3 +46,8 @@
 .story-compact .story-dialogue { left: 32px; right: 32px; height: 336px; }
 .story-compact .story-header { padding-left: 32px; padding-right: 32px; }
 .story-compact .story-hint { font-size: 22px; }
+.story-archive .story-dialogue { top: 180px; bottom: 32px; height: auto; }
+.story-reading-scroll { flex-grow: 1; min-height: 0; }
+.story-reading-scroll .story-body { flex-grow: 0; font-size: 38px; }
+.story-archive .story-header .story-button { min-width: 150px; padding-left: 18px; padding-right: 18px; }
+.story-load-context { white-space: normal; }

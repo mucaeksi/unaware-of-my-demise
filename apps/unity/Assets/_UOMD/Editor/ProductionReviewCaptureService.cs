@@ -30,6 +30,8 @@ namespace Uomd.EditorTools
         public string accountActionState, accountActionPath, accountActionRequestId, accountActionInputHash;
         public bool accountActionRefreshed;
         public bool hubFixture;
+        public string archiveTitle, archiveRequestId, archiveInputHash, archiveNotice, archiveFixtureMode, archiveIndexSource;
+        public bool archiveReading, archiveReplay, archiveAtEnd, archiveBusy;
         public bool awaitingPlayerAction;
         public string entryPhase, entryScreen;
         public int entryStage, entryTutorials;
@@ -179,6 +181,7 @@ namespace Uomd.EditorTools
                     else if (router.ActiveScreenId == UomdScreenId.Team) hub = router.Controller<TeamScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Gear) hub = router.Controller<ArmoryScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Operations) hub = router.Controller<SavedActionsScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Library) hub = router.Controller<ArchiveScreen>();
                     if (hub != null)
                     {
                         metadata.imagePaths = hub.ReviewImagePaths; metadata.hubState = hub.ReviewState;
@@ -193,6 +196,11 @@ namespace Uomd.EditorTools
                     metadata.entryScreen = router.ActiveScreenId.ToString(); metadata.hubNotice = router.HubState.Notice;
                     metadata.hubRelease = router.HubState.Snapshot?.Release; metadata.hubFixture = true;
                     metadata.hubFixtureMode = router.HubReview?.Mode;
+                    metadata.archiveFixtureMode = router.HubReview?.LibraryMode; metadata.archiveIndexSource = UomdHubReview.LibrarySource;
+                    metadata.archiveReading = router.EntryFlow.InReading; metadata.archiveTitle = router.EntryFlow.ReadingTitle;
+                    metadata.archiveReplay = router.EntryFlow.ReadingIsReplay; metadata.archiveAtEnd = router.EntryFlow.ReadingAtEnd;
+                    metadata.archiveRequestId = router.EntryFlow.ReadingRequest; metadata.archiveInputHash = router.EntryFlow.ReadingInputHash;
+                    metadata.archiveBusy = router.EntryFlow.ReadingBusy; metadata.archiveNotice = router.EntryFlow.ReadingNotice;
                     if (router.AccountActions.Current && router.AccountActions.Action != null)
                     {
                         metadata.accountActionState = router.AccountActions.Action.State; metadata.accountActionPath = router.AccountActions.Action.Path;

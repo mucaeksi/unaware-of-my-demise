@@ -27,7 +27,7 @@ namespace Uomd.Scenes
         public DateTimeOffset LoadedAtUtc { get; private set; }
         public string SelectedChapter = "", SelectedNode = "";
         public bool Hard;
-        private UomdScreenId DetailScreen => _router.ActiveScreenId == UomdScreenId.Character || _router.ActiveScreenId == UomdScreenId.Gear ? _router.ActiveScreenId : UomdScreenId.Home;
+        private UomdScreenId DetailScreen => _router.ActiveScreenId == UomdScreenId.Character || _router.ActiveScreenId == UomdScreenId.Gear || _router.ActiveScreenId == UomdScreenId.Library ? _router.ActiveScreenId : UomdScreenId.Home;
         public bool ContextCurrent => _router != null && _revision == _router.Api.AuthRevision && _signedIn == _router.Api.IsSignedIn && _release == _router.Patch.ActiveReleaseId && _detailScreen == DetailScreen && (_detailScreen != UomdScreenId.Character || _detailCharacter == _router.Session.SelectedUnitId);
         public bool Fresh => ContextCurrent && Snapshot != null && !Loading && Notice.Length == 0;
 #if UNITY_EDITOR
@@ -92,6 +92,8 @@ namespace Uomd.Scenes
                     var progress = await Read("/api/v1/progress");
                     var flags = await Read("/api/v1/flags");
                     next.Account(me, wallet, mine, roster, teams, progress, flags);
+                    if (_detailScreen == UomdScreenId.Library)
+                        next.Library = UomdLibrary.Parse(await Read("/api/v1/library?releaseId=" + Uri.EscapeDataString(_release)), _release);
                     if (_detailScreen == UomdScreenId.Character || _detailScreen == UomdScreenId.Gear)
                     {
                         var catalog = await Read("/api/v1/catalog?releaseId=" + Uri.EscapeDataString(_release));

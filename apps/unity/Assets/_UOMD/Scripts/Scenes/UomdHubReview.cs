@@ -40,6 +40,7 @@ namespace Uomd.Scenes
                     ["element"] = JsonRead.Str(u, "element", "Dawn"), ["role"] = JsonRead.Str(u, "role", "guard") }).ToList();
             _router.HubState.ReviewRead = Read; _router.HubState.ReviewIndex = Index;
             _router.AccountActions.ReviewSend = Send; _router.AccountActions.ReviewRead = Status;
+            await InitializeLibraryAsync();
         }
         private async Awaitable<string> Index()
         {
@@ -53,6 +54,7 @@ namespace Uomd.Scenes
             ++Reads; string mode = Mode, player = _router.Api.GetCurrentSessionSnapshot()?.playerId ?? "hub_review";
             var gate = Gate; Gate = null; if (gate != null) await gate.Awaitable; else await Awaitable.NextFrameAsync();
             if (mode == "offline") throw new UomdApiException(0, "fixture_offline", "Isolated fixture.");
+            if (path.StartsWith("/api/v1/library", StringComparison.Ordinal)) return await ReadLibraryAsync(path);
             if (path == "/api/v1/stacks" || path.StartsWith("/api/v1/catalog?", StringComparison.Ordinal) || path.StartsWith("/api/v1/gear?", StringComparison.Ordinal) || path.Contains("/stats?")) return SystemRead(path, player, mode);
             var roster = new List<object>(_roster); var members = new List<object>();
             if (mode != "empty")

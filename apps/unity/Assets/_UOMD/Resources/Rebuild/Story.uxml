@@ -6,11 +6,12 @@
     <ui:VisualElement name="storyActors" class="story-art" picking-mode="Ignore" />
     <ui:VisualElement class="story-header">
       <ui:VisualElement class="story-heading" picking-mode="Ignore">
-        <ui:Label text="THE ROAD TO SHELTER" class="story-eyebrow" />
+        <ui:Label name="storyEyebrow" text="THE ROAD TO SHELTER" class="story-eyebrow" />
         <ui:Label name="storyTitle" class="story-title" />
       </ui:VisualElement>
       <ui:Button name="storyVoice" text="VOICE" class="story-button" tooltip="Replay this line's Japanese voice" />
       <ui:Button name="storyAuto" text="AUTO · OFF" class="story-button" tooltip="Advance at normal reading speed" />
+      <ui:Button name="storyArchive" text="ARCHIVE" class="story-button" />
     </ui:VisualElement>
     <ui:VisualElement name="storyDialogue" class="story-dialogue">
       <ui:VisualElement name="storySpeaker" class="story-speaker" picking-mode="Ignore">
@@ -28,10 +29,14 @@
     <ui:VisualElement name="storyFade" class="story-art story-fade" picking-mode="Ignore" />
     <ui:VisualElement name="storyLoadPanel" class="story-load-panel">
       <ui:VisualElement class="story-load-card">
+        <ui:Label name="storyLoadContext" class="story-eyebrow story-load-context" />
         <ui:Label name="storyLoadTitle" text="THE ROAD IS TAKING SHAPE" class="story-title" />
         <ui:Label name="storyLoadMessage" text="Loading the scene illustrations…" class="story-load-message" />
         <ui:Button name="storyRetry" text="TRY AGAIN" class="story-button" />
         <ui:Button name="storyTextOnly" text="CONTINUE WITHOUT IMAGES" class="story-button" />
+        <ui:Button name="storyLeave" text="LEAVE READING" class="story-button" />
+        <ui:Button name="storyCancelLeave" text="KEEP READING" class="story-button" />
+        <ui:Button name="storyArchiveReturn" text="BACK TO ARCHIVE" class="story-button" />
       </ui:VisualElement>
     </ui:VisualElement>
   </ui:VisualElement>

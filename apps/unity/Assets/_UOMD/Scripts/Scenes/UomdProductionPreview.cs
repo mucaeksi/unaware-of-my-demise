@@ -84,6 +84,7 @@ namespace Uomd.Scenes
                 case "hub/team": screen = UomdScreenId.Team; break;
                 case "hub/armory": screen = UomdScreenId.Gear; break;
                 case "hub/actions": screen = UomdScreenId.Operations; break;
+                case "hub/archive": screen = UomdScreenId.Library; break;
                 default:
                     if (request.scenario.StartsWith("battle/", StringComparison.Ordinal))
                     {

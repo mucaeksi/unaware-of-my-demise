@@ -35,8 +35,10 @@ namespace Uomd.Scenes
         public string ReviewState => Data.Loading ? "loading" : Data.Notice.Length > 0 ? Data.Snapshot == null ? "error" : "stale" : Data.Snapshot?.SignedIn == true ? "ready" : "guest";
 #endif
         protected RebuildHubScreen(UomdSceneRouter router) { Router = router; }
+        protected virtual void Entered() { }
         public async Awaitable OnEnterAsync(VisualElement host)
         {
+            Entered();
             int generation = ++_generation; _version = -1; _actionBusy = false; _images.Clear(); _portraitTargets.Clear(); _loadingPortraits.Clear(); _artLoaded = false; _artPath = null;
             Resources.Load<VisualTreeAsset>("Rebuild/Hub").CloneTree(host);
             _root = host.Q("rebuildHub"); _body = _root.Q("hubBody"); _overlay = _root.Q("hubOverlay"); _art = _root.Q("hubArt");
@@ -66,7 +68,7 @@ namespace Uomd.Scenes
             if (UomdEditorPreviewIsolation.Active && Router.ProductionPreview?.scenario.StartsWith("hub/", StringComparison.Ordinal) == true)
             {
                 Router.HubReview.LastRoute = target.ToString();
-                if (target != UomdScreenId.Home && target != UomdScreenId.Roster && target != UomdScreenId.Chapters && target != UomdScreenId.Title && target != UomdScreenId.Character && target != UomdScreenId.Team && target != UomdScreenId.Gear && target != UomdScreenId.Operations)
+                if (target != UomdScreenId.Home && target != UomdScreenId.Roster && target != UomdScreenId.Chapters && target != UomdScreenId.Title && target != UomdScreenId.Character && target != UomdScreenId.Team && target != UomdScreenId.Gear && target != UomdScreenId.Operations && target != UomdScreenId.Library)
                 { CloseRoutes(); _status.text = "REVIEW FIXTURE · " + target + " route selected. Account actions remain isolated."; return; }
             }
 #endif

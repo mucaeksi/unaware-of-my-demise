@@ -176,7 +176,7 @@ namespace Uomd.Scenes
             _runner = null;
             _waitLeft = -1f;
             _reviewSeekComplete = false;
-            _rebuilt = IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(_router.Session.ActiveStoryPath));
+            _rebuilt = _router.EntryFlow?.InReading == true || IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(_router.Session.ActiveStoryPath));
             string path = _router.Session.ActiveStoryPath;
             string json;
             try
@@ -193,7 +193,7 @@ namespace Uomd.Scenes
                     _scene = null;
                     BuildRebuilt(screenRoot);
                     ShowLoadFailure(false);
-                    Debug.LogWarning("[Story] Tutorial data unavailable: " + e.Message);
+                    Debug.LogWarning("[Story] Story data unavailable: " + e.Message);
                     return;
                 }
                 Debug.LogError($"[Story] '{path}' could not load: {e.Message}");
@@ -655,6 +655,7 @@ namespace Uomd.Scenes
 
         private void Advance()
         {
+            if (_router.EntryFlow.InReading && !_router.EntryFlow.ReadingIsCurrent) return;
             if (PortraitReview || PreviewPaused || (_rebuilt && !_assetsReady)) return;
             if (_finished || _choiceLayer.childCount > 0) return;
             _autoLeft = -1f;
@@ -676,7 +677,8 @@ namespace Uomd.Scenes
             _choiceLayer.pickingMode = PickingMode.Position;
             var column = new VisualElement();
             column.style.alignItems = Align.Center;
-            UomdScreenKit.Centered(column, 0, 420);
+            if (_rebuilt) { column.style.position = Position.Absolute; column.style.left = Length.Percent(10); column.style.right = Length.Percent(10); column.style.top = Length.Percent(24); }
+            else UomdScreenKit.Centered(column, 0, 420);
             _choiceLayer.Add(column);
             if (!string.IsNullOrEmpty(e.prompt))
             {
@@ -686,13 +688,18 @@ namespace Uomd.Scenes
             foreach (var option in e.options)
             {
                 string id = option.id;
-                var button = UomdScreenKit.MenuButton(column, option.text, null, 900, 88, 30, true, () =>
+                int generation = _generation;
+                Action choose = () =>
                 {
+                    if (generation != _generation || _router.EntryFlow.InReading && (!_router.EntryFlow.ReadingIsCurrent || _entryScope != _router.EntryFlow.ReadingScope)) return;
                     _choiceLayer.Clear();
                     _choiceLayer.pickingMode = PickingMode.Ignore;
                     _runner.Choose(id);
                     Pump();
-                });
+                };
+                Button button;
+                if (_rebuilt) { button = new Button(choose) { text = option.text }; button.AddToClassList("story-button"); button.style.width = Length.Percent(100); button.style.whiteSpace = WhiteSpace.Normal; column.Add(button); }
+                else button = UomdScreenKit.MenuButton(column, option.text, null, 900, 88, 30, true, choose);
                 button.style.marginBottom = 14;
                 button.style.position = Position.Relative;
             }
@@ -737,6 +744,7 @@ namespace Uomd.Scenes
 
         public void OnTick(float deltaTime)
         {
+            if (_rebuilt) UpdateReadingCompletion();
             if (PreviewPaused || (_rebuilt && !_assetsReady)) return;
 #if UNITY_EDITOR
             if (PortraitReview && (_router.ProductionPreview.paused || _lineDone)) return;
@@ -782,6 +790,12 @@ namespace Uomd.Scenes
         {
             if (_finished) return;
             _finished = true;
+            if (_router.EntryFlow.InReading)
+            {
+                _router.Audio.StopVoiceLine(); _nextButton.SetEnabled(false);
+                _ = _router.EntryFlow.StoryFinishedAsync(_entryScope);
+                return;
+            }
             if (PortraitReview || StoryReview)
             {
                 if (_rebuilt) { _nextButton.SetEnabled(false); _storyHint.text = "End of this isolated scene preview"; }
