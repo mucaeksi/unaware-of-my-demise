@@ -18,6 +18,8 @@ namespace Uomd.Core
         public Dictionary<string, object?> Mine = null!, Roster = null!, Teams = null!, Catalog = null!, Stacks = null!, Gear = null!;
         public Dictionary<string, object?>? Stats;
         public UomdLibrary? Library;
+        public List<UomdInvitation>? Invitations;
+        public UomdErrandsSnapshot? Errands;
         public long? Balance;
         public int AccountLevel, Ration, RationCap;
         public readonly List<HubCompanion> Companions = new List<HubCompanion>();

@@ -90,6 +90,7 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
       daily: null,
       weekly: [],
       supplies: {
+        periodBound: true,
         periodKey: supply.key,
         amount: DAILY_SUPPLIES_AMOUNT,
         claimed: supplyRow?.claimed === 1,
@@ -130,6 +131,7 @@ export async function listTasks(db: D1Database, playerId: string, nowMs = Date.n
     windowHours: cfg.windowHours,
     weekStartMs: weekStart(nowMs),
     supplies: {
+      periodBound: true,
       periodKey: supply.key,
       amount: DAILY_SUPPLIES_AMOUNT,
       claimed: supplyRow?.claimed === 1,
@@ -220,17 +222,20 @@ async function claimBatch(db: D1Database, playerId: string, t: { periodKey: stri
 export async function claimDailySupplies(
   db: D1Database,
   playerId: string,
-  input: { requestId?: string; releaseId?: string } = {},
+  input: { requestId?: string; releaseId?: string; periodKey?: string } = {},
   nowMs = Date.now(),
   scope?: ReleaseScope
 ): Promise<Record<string, unknown>> {
   const supply = utcSupplyPeriod(nowMs);
-  const kind = `task_claim:${supply.key}:${DAILY_SUPPLIES_TASK_ID}`;
+  const approvedPeriod = input.periodKey ?? supply.key;
+  const kind = `task_claim:${approvedPeriod}:${DAILY_SUPPLIES_TASK_ID}`;
   const operation = input.requestId ? { ...input, requestId: input.requestId } : null;
   if (operation) {
     const recorded = await recordedOperation(db, playerId, kind, operation);
     if (recorded) return recorded;
   }
+  // A new journaled retry must never turn yesterday's intent into today's grant.
+  if (approvedPeriod !== supply.key) throw new HttpError(409, 'period_closed', 'that daily supply period has ended; refresh before choosing a new day');
   if (input.releaseId !== scope?.releaseId) {
     throw new HttpError(400, 'release_context_mismatch', 'task release context differs');
   }

@@ -17,20 +17,28 @@ namespace Uomd.Scenes
             var main = Panel(Body, "hub-main"); var list = Scroll(main);
             if (!snapshot.SignedIn) { Text(list, "Sign in to recover this account's saved actions.", "hub-copy"); return; }
             var action = Actions.Current ? Actions.Action : null;
-            Text(list, "COMPANION GROWTH & SWEEP", "hub-card-title");
-            Text(list, action == null ? "No saved companion or Sweep action." : action.State == "confirmed" ? "CONFIRMED" : action.State == "rejected" ? "DECLINED" : "CONFIRMATION PENDING", "hub-copy");
+            Text(list, "ACCOUNT ACTIONS", "hub-card-title");
+            Text(list, action == null ? "No saved account action." : action.State == "confirmed" ? "CONFIRMED" : action.State == "rejected" ? "DECLINED" : "CONFIRMATION PENDING", "hub-copy");
             if (action != null)
             {
                 var body = action.Body;
                 string character = action.Path.Split('/')[4];
                 string companion = snapshot.Companions.FirstOrDefault(c => c.Id == character)?.Name ?? "Saved companion";
                 string stage = snapshot.Nodes.FirstOrDefault(n => n.Id == JsonRead.Str(body, "nodeId"))?.Title ?? "Saved stage";
-                Text(list, action.Path == UomdSavedAction.SweepPath ? stage + " · Sweep ×" + JsonRead.Int(body, "count") : companion + " · " + action.Path.Split('/').Last().Replace('-', ' '), "hub-copy");
+                string label = action.Path == UomdSavedAction.SweepPath ? stage + " · Sweep ×" + JsonRead.Int(body, "count") : UomdSavedAction.InvitationPath(action.Path) ? "Invitation selection" : action.Path == UomdSavedAction.TaskPath ? "Errand reward" : action.Path == UomdSavedAction.SuppliesPath ? "Daily supplies" : action.Path == UomdSavedAction.PatrolPath ? "AFK Patrol" : companion + " · " + action.Path.Split('/').Last().Replace('-', ' ');
+                Text(list, label, "hub-copy");
                 if (action.Release != snapshot.Release) Text(list, "This saved action uses earlier content. Recovery checks its original result.", "hub-small");
                 Text(list, Actions.Notice, "hub-small");
                 Text(list, action.Summary.Length > 0 ? "Original plan: " + action.Summary : "Original cost details are unavailable. Only the saved result can be checked safely.", "hub-copy");
                 if (action.State == "confirmed" && action.Path == UomdSavedAction.SweepPath)
                     Text(list, "Confirmed rewards: " + string.Join(" · ", JsonRead.Arr(UomdJson.ParseObject(action.Receipt), "rewards").Select(RewardText)), "hub-copy");
+                if (action.State == "confirmed" && UomdSavedAction.InvitationPath(action.Path))
+                {
+                    var result = UomdJson.ParseObject(action.Receipt); long shards = JsonRead.Int(JsonRead.Obj(result, "grant"), "shardsAdded");
+                    Text(list, JsonRead.Str(result, "characterName") + (shards > 0 ? " · +" + shards + " Memory Shards" : " joined your company."), "hub-copy");
+                }
+                if (action.State == "confirmed" && (action.Path == UomdSavedAction.TaskPath || action.Path == UomdSavedAction.SuppliesPath || action.Path == UomdSavedAction.PatrolPath))
+                    Text(list, "Recorded reward plan (inventory caps apply): " + RebuildErrandsScreen.RewardPlan(JsonRead.Arr(UomdJson.ParseObject(action.Receipt), "rewards"), null), "hub-copy");
                 var retry = Button(list, action.State != "confirmed" && action.Summary.Length > 0 ? "CHECK / RETRY ORIGINAL ACTION" : "CHECK ORIGINAL ACTION & REFRESH", "savedActionRetry", () => _ = Actions.RecoverAsync(), "hub-primary"); retry.SetEnabled(!Actions.Busy);
             }
             var campaign = Router.EntryFlow.Campaign;

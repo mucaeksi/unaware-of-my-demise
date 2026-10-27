@@ -2,10 +2,10 @@ import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { playAuto } from '@uomd/combat';
 import { Encounter, UnitPack } from '@uomd/content-schema';
-import { sha256Hex } from '@uomd/shared';
+import { canonicalJson, sha256Hex } from '@uomd/shared';
 import { baseFiles, type TestFile } from './fixtures';
 import { applyLedger } from '../src/db/ledger';
-import { claimTask } from '../src/tasks/service';
+import { claimDailySupplies, claimTask, utcSupplyPeriod } from '../src/tasks/service';
 import { admin, entries, game, post, resetContent, seedCanonCatalog, signIn, upload } from './helpers';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
@@ -61,6 +61,29 @@ const claim = (auth: Record<string, string>, periodKey: string, taskId: string) 
 const wallet = async (auth: Record<string, string>) => ((await (await game('/api/v1/wallet', { headers: auth })).json()) as { wallets: Record<string, number> }).wallets.eclipse_token ?? 0;
 
 describe('task engine', () => {
+  it('binds new supplies to the original UTC day and recovers the same result after midnight', async () => {
+    const { auth, playerId } = await signIn(`bound-supplies-${rid()}`); const now = Date.now();
+    const input = { periodKey: utcSupplyPeriod(now).key, requestId: rid() };
+    const first = await claimDailySupplies(db(), playerId, input, now);
+    expect(first).toMatchObject({ ...input, amount: 80, replayed: false });
+    expect(await claimDailySupplies(db(), playerId, input, now + 86_400_000)).toEqual({ ...first, replayed: true });
+    await expect(claimDailySupplies(db(), playerId, { ...input, requestId: rid() }, now + 86_400_000)).rejects.toMatchObject({ code: 'period_closed' });
+    expect(await wallet(auth)).toBe(80);
+    const status = await game(`/api/v1/operations/${input.requestId}?path=${encodeURIComponent('/api/v1/tasks/supplies')}`, { headers: auth });
+    expect(await status.json()).toMatchObject({ state: 'confirmed', binding: 'exact', inputHash: await sha256Hex(canonicalJson(input)), result: { ...input, amount: 80 } });
+    expect((await game(`/api/v1/operations/${input.requestId}?path=${encodeURIComponent('/api/v1/tasks/claim')}`, { headers: auth })).status).toBe(409);
+  });
+
+  it('accepts the optional bound supplies body, advertises support and rejects malformed or stale new intent', async () => {
+    const { auth } = await signIn(`supply-schema-${rid()}`);
+    const view = await (await game('/api/v1/tasks', { headers: auth })).json() as { supplies: { periodKey: string; periodBound: boolean } };
+    expect(view.supplies.periodBound).toBe(true);
+    expect((await game('/api/v1/tasks/supplies', post({ requestId: rid(), periodKey: 'not_a_day' }, auth))).status).toBe(400);
+    expect((await game('/api/v1/tasks/supplies', post({ requestId: rid(), periodKey: 'supply:2000-01-01' }, auth))).status).toBe(409);
+    expect((await game('/api/v1/tasks/supplies', post({ requestId: rid(), periodKey: view.supplies.periodKey }, auth))).status).toBe(200);
+    expect(await wallet(auth)).toBe(80);
+  });
+
   it('durable result recovery survives an expired window and changed reward catalog', async () => {
     const { auth, playerId } = await signIn(`sub-task-operation-${rid()}`);
     const periodKey = (await tasks(auth)).daily.periodKey; const requestId = rid();

@@ -1,0 +1,1766 @@
+{
+  "schemaVersion": 1,
+  "id": "sol-invitations-errands-2026-10-27",
+  "status": "LOCAL_TESTED",
+  "reviewedAt": "2026-10-27T16:50:07.873Z",
+  "sourceCommit": "058a00696c0b6bdd79f7eb88cbd78cc3b6e2b10c",
+  "deliveryBinding": "The enclosing local commit contains the exact source blobs listed below; sourceCommit records its parent.",
+  "scope": [
+    "Native provider-listed Invitations with separate choice review, one-use confirmation and transaction-time duplicate receipts",
+    "Native Supplies, window/weekly Errands and optional AFK Patrol, explicit empty/guest/stale/error/expiry states",
+    "Durable exact account/release/choice/task/period/day intent; pre-send persistence and strict status/receipt recovery",
+    "UTC-bound supplies capability and original-day provider replay/rejection; legacy request compatibility; no deployment",
+    "Real UI Toolkit input and Game-view captures through CLI, final tests and restored Editor state"
+  ],
+  "checks": {
+    "unityEditor": "6000.3.27f1",
+    "unityTransport": "CLI only; Pipeline 0.9.1-exp.1",
+    "editMode": {
+      "total": 204,
+      "passed": 204,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playMode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "headless": {
+      "passed": 172,
+      "failed": 0
+    },
+    "typescript": {
+      "passed": 957,
+      "failed": 0
+    },
+    "contentReproduction": {
+      "files": 232,
+      "exact": true
+    },
+    "exportTests": {
+      "passed": 5,
+      "failed": 0,
+      "includedInRepositoryTotal": true
+    },
+    "referenceCompile": {
+      "assemblies": 12,
+      "errors": 0,
+      "limitation": "URP signatures are verified stubs, not the compiled package"
+    },
+    "playerReferenceCompile": {
+      "assemblies": 8,
+      "errors": 0,
+      "scope": "UNITY_EDITOR disabled; not Android/IL2CPP acceptance"
+    },
+    "skills": {
+      "adapters": 66,
+      "passed": true
+    },
+    "consoleErrors": 0,
+    "liveChecks": 38
+  },
+  "interaction": {
+    "inputMethod": "NavigationSubmitEvent on actual UI Toolkit Buttons, native scroll and explicit memory-only account/clock/fault/response gates; HTTP remains blocked",
+    "steps": [
+      "native invitations show exactly the seven server-listed canonical choices without an early spend",
+      "choosing a companion opens an explicit review before spending",
+      "changing the reviewed invitation choice consumes nothing",
+      "confirmation double tap persists and applies one exact selected companion",
+      "invitation Back returns to the originating company with authoritative ownership",
+      "an already owned invitation choice is disclosed before confirming",
+      "response loss retains the one original invitation choice and blocks replacement spending",
+      "a different displayed choice cannot replace the unresolved original invitation",
+      "status recovery preserves the transaction-time duplicate grant without another invitation spend",
+      "a service without period binding cannot create unsafe daily supply intent",
+      "daily supplies persist the approved UTC day before the first send",
+      "UTC rollover cannot replace a pending supply claim with the next day",
+      "after midnight status recovers only the original day while the new day remains unclaimed",
+      "a ready window task claims once with its exact original period",
+      "an incomplete objective cannot claim its reward",
+      "window completion uses the provider special identity and one confirmed receipt",
+      "a listed weekly grace reward keeps its earlier period identity",
+      "optional patrol read failure remains explicit while other errands stay fresh",
+      "locked patrol cannot collect invented accrual",
+      "patrol settles one capped server interval and reads back an empty checkpoint",
+      "malformed invitation data cannot enable new account spending",
+      "wrong_release invitation data cannot enable new account spending",
+      "offline invitation data cannot enable new account spending",
+      "wrong_release errand data cannot enable new account spending",
+      "offline errand data cannot enable new account spending",
+      "empty errands show no invented objectives",
+      "a server-clock minute does not replace or reset the native long errands scroll",
+      "an expired window disables its otherwise completed task",
+      "an offline supply send retains its original intent without a fabricated grant",
+      "an unknown old supply day is rejected after midnight without claiming the new day",
+      "only a fresh explicit approval can claim the next supply day",
+      "a late invitation response cannot populate the new account receipt, ownership or balance",
+      "returning to the original account recovers the held invitation without another write",
+      "same-account authorization rotation recovers the original task without resubmitting it",
+      "sign-out clears reward listings, receipt and account balance",
+      "native Home shortcut opens the actual Errands controller",
+      "Invitations opened from Chapters return to Chapters through Back",
+      "final 4:3 reward controls stay inside the frame with at least 64-reference-pixel targets"
+    ],
+    "states": {
+      "sourceCommit": "058a0069",
+      "initial": {
+        "ready": true,
+        "screen": "Recruit",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review",
+        "balance": 1650,
+        "mode": "ready",
+        "clock": 1793131200000,
+        "serverNow": 0,
+        "invites": [
+          {
+            "id": "first_oath_invitation",
+            "title": "First Oath Invitation",
+            "quantity": 1,
+            "choices": [
+              {
+                "id": "tilda_fen",
+                "copies": 0,
+                "name": "Tilda Fen"
+              },
+              {
+                "id": "rikka_ember",
+                "copies": 0,
+                "name": "Rikka Ember"
+              },
+              {
+                "id": "odelia_pike",
+                "copies": 0,
+                "name": "Odelia Pike"
+              },
+              {
+                "id": "pippa_bell",
+                "copies": 0,
+                "name": "Pippa Bell"
+              },
+              {
+                "id": "thistle_roe",
+                "copies": 0,
+                "name": "Thistle Roe"
+              },
+              {
+                "id": "iona_mist",
+                "copies": 0,
+                "name": "Iona Mist"
+              },
+              {
+                "id": "marek_vane",
+                "copies": 0,
+                "name": "Marek Vane"
+              }
+            ]
+          }
+        ],
+        "supplies": null,
+        "tasks": null,
+        "patrol": null,
+        "action": null,
+        "path": null,
+        "request": null,
+        "payload": null,
+        "summary": null,
+        "receipt": null,
+        "refreshed": false,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "",
+        "writes": 0,
+        "applied": 0,
+        "lastInput": "",
+        "lastPath": ""
+      },
+      "invited": {
+        "ready": true,
+        "screen": "Recruit",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review",
+        "balance": 1650,
+        "mode": "ready",
+        "clock": 1793131200000,
+        "serverNow": 0,
+        "invites": [],
+        "supplies": null,
+        "tasks": null,
+        "patrol": null,
+        "action": "confirmed",
+        "path": "/api/v1/recruitment/first_oath_invitation",
+        "request": "4c817519ae7744ae96b5f6c23e1bea27",
+        "payload": "{\"characterId\":\"marek_vane\",\"releaseId\":\"rel_0001\",\"requestId\":\"4c817519ae7744ae96b5f6c23e1bea27\"}",
+        "summary": "First Oath Invitation · Marek Vane · uses 1 invitation · duplicate: 5 Memory Shards",
+        "receipt": "{\"characterId\":\"marek_vane\",\"characterName\":\"Marek Vane\",\"consumed\":1,\"grant\":{\"copiesAdded\":1,\"copiesAfter\":1,\"shardsAdded\":0,\"shardsAfter\":0},\"itemId\":\"first_oath_invitation\",\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"4c817519ae7744ae96b5f6c23e1bea27\"}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 1,
+        "applied": 1,
+        "lastInput": "{\"characterId\":\"marek_vane\",\"releaseId\":\"rel_0001\",\"requestId\":\"4c817519ae7744ae96b5f6c23e1bea27\"}",
+        "lastPath": "/api/v1/recruitment/first_oath_invitation"
+      },
+      "pendingInvitation": {
+        "ready": true,
+        "screen": "Recruit",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_b",
+        "balance": 730,
+        "mode": "duplicate",
+        "clock": 1793131200000,
+        "serverNow": 0,
+        "invites": [
+          {
+            "id": "first_oath_invitation",
+            "title": "First Oath Invitation",
+            "quantity": 1,
+            "choices": [
+              {
+                "id": "tilda_fen",
+                "copies": 1,
+                "name": "Tilda Fen"
+              },
+              {
+                "id": "rikka_ember",
+                "copies": 0,
+                "name": "Rikka Ember"
+              },
+              {
+                "id": "odelia_pike",
+                "copies": 0,
+                "name": "Odelia Pike"
+              },
+              {
+                "id": "pippa_bell",
+                "copies": 0,
+                "name": "Pippa Bell"
+              },
+              {
+                "id": "thistle_roe",
+                "copies": 0,
+                "name": "Thistle Roe"
+              },
+              {
+                "id": "iona_mist",
+                "copies": 0,
+                "name": "Iona Mist"
+              },
+              {
+                "id": "marek_vane",
+                "copies": 0,
+                "name": "Marek Vane"
+              }
+            ]
+          }
+        ],
+        "supplies": null,
+        "tasks": null,
+        "patrol": null,
+        "action": "pending",
+        "path": "/api/v1/recruitment/first_oath_invitation",
+        "request": "e42a8224286c4374bf694257625d12ea",
+        "payload": "{\"characterId\":\"tilda_fen\",\"releaseId\":\"rel_0001\",\"requestId\":\"e42a8224286c4374bf694257625d12ea\"}",
+        "summary": "First Oath Invitation · Tilda Fen · uses 1 invitation · duplicate: 5 Memory Shards",
+        "receipt": "",
+        "refreshed": false,
+        "busy": false,
+        "blocked": true,
+        "actionNotice": "Confirmation is pending. Your original action is retained; unknown status does not mean failure. Check / retry when connected.",
+        "writes": 2,
+        "applied": 2,
+        "lastInput": "{\"characterId\":\"tilda_fen\",\"releaseId\":\"rel_0001\",\"requestId\":\"e42a8224286c4374bf694257625d12ea\"}",
+        "lastPath": "/api/v1/recruitment/first_oath_invitation"
+      },
+      "duplicate": {
+        "ready": true,
+        "screen": "Operations",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_b",
+        "balance": 730,
+        "mode": "duplicate",
+        "clock": 1793131200000,
+        "serverNow": 0,
+        "invites": null,
+        "supplies": null,
+        "tasks": null,
+        "patrol": null,
+        "action": "confirmed",
+        "path": "/api/v1/recruitment/first_oath_invitation",
+        "request": "e42a8224286c4374bf694257625d12ea",
+        "payload": "{\"characterId\":\"tilda_fen\",\"releaseId\":\"rel_0001\",\"requestId\":\"e42a8224286c4374bf694257625d12ea\"}",
+        "summary": "First Oath Invitation · Tilda Fen · uses 1 invitation · duplicate: 5 Memory Shards",
+        "receipt": "{\"characterId\":\"tilda_fen\",\"characterName\":\"Tilda Fen\",\"consumed\":1,\"grant\":{\"copiesAdded\":1,\"copiesAfter\":2,\"shardsAdded\":5,\"shardsAfter\":5},\"itemId\":\"first_oath_invitation\",\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"e42a8224286c4374bf694257625d12ea\"}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 2,
+        "applied": 2,
+        "lastInput": "{\"characterId\":\"tilda_fen\",\"releaseId\":\"rel_0001\",\"requestId\":\"e42a8224286c4374bf694257625d12ea\"}",
+        "lastPath": "/api/v1/recruitment/first_oath_invitation"
+      },
+      "pendingSupplies": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_b",
+        "balance": 730,
+        "mode": "ready",
+        "clock": 1793131200000,
+        "serverNow": 1793131207229.4558,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-27",
+          "claimed": false,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-27T12",
+            "done": true,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793145600000,
+            "key": "win_two_a80bbc5e"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-27T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793145600000,
+            "key": "improve_a80bbc5e"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-27T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793145600000,
+            "key": "_window_complete_a80bbc5e"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793217600000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793044800000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": true,
+          "Elapsed": 3600,
+          "Cap": 43200,
+          "Rewards": [
+            {
+              "amount": 300,
+              "type": "account_xp"
+            },
+            {
+              "itemId": "torn_chronicle_page",
+              "quantity": 8,
+              "type": "item"
+            }
+          ]
+        },
+        "action": "pending",
+        "path": "/api/v1/tasks/supplies",
+        "request": "baac5c6e550648209abc717458f1ef91",
+        "payload": "{\"periodKey\":\"supply:2026-10-27\",\"releaseId\":\"rel_0001\",\"requestId\":\"baac5c6e550648209abc717458f1ef91\"}",
+        "summary": "Daily supplies · 80 Bell's Remains · 2026-10-27 UTC",
+        "receipt": "",
+        "refreshed": false,
+        "busy": false,
+        "blocked": true,
+        "actionNotice": "Confirmation is pending. Your original action is retained; unknown status does not mean failure. Check / retry when connected.",
+        "writes": 3,
+        "applied": 3,
+        "lastInput": "{\"periodKey\":\"supply:2026-10-27\",\"releaseId\":\"rel_0001\",\"requestId\":\"baac5c6e550648209abc717458f1ef91\"}",
+        "lastPath": "/api/v1/tasks/supplies"
+      },
+      "supplies": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_b",
+        "balance": 810,
+        "mode": "ready",
+        "clock": 1793217600000,
+        "serverNow": 1793217601830.61,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-28",
+          "claimed": false,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "win_two_cba40405"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "improve_cba40405"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "_window_complete_cba40405"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793304000000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793131200000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": true,
+          "Elapsed": 43200,
+          "Cap": 43200,
+          "Rewards": [
+            {
+              "amount": 3600,
+              "type": "account_xp"
+            },
+            {
+              "itemId": "torn_chronicle_page",
+              "quantity": 96,
+              "type": "item"
+            }
+          ]
+        },
+        "action": "confirmed",
+        "path": "/api/v1/tasks/supplies",
+        "request": "baac5c6e550648209abc717458f1ef91",
+        "payload": "{\"periodKey\":\"supply:2026-10-27\",\"releaseId\":\"rel_0001\",\"requestId\":\"baac5c6e550648209abc717458f1ef91\"}",
+        "summary": "Daily supplies · 80 Bell's Remains · 2026-10-27 UTC",
+        "receipt": "{\"amount\":80,\"endsAtMs\":1793145600000,\"periodKey\":\"supply:2026-10-27\",\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"baac5c6e550648209abc717458f1ef91\",\"rewards\":[{\"amount\":80,\"currency\":\"eclipse_token\",\"type\":\"currency\"}],\"taskId\":\"_daily_supplies\"}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 3,
+        "applied": 3,
+        "lastInput": "{\"periodKey\":\"supply:2026-10-27\",\"releaseId\":\"rel_0001\",\"requestId\":\"baac5c6e550648209abc717458f1ef91\"}",
+        "lastPath": "/api/v1/tasks/supplies"
+      },
+      "daily": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_b",
+        "balance": 820,
+        "mode": "ready",
+        "clock": 1793217600000,
+        "serverNow": 1793217601800.3062,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-28",
+          "claimed": false,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": true,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "win_two_cba40405"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "improve_cba40405"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "_window_complete_cba40405"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793304000000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793131200000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": true,
+          "Elapsed": 43200,
+          "Cap": 43200,
+          "Rewards": [
+            {
+              "amount": 3600,
+              "type": "account_xp"
+            },
+            {
+              "itemId": "torn_chronicle_page",
+              "quantity": 96,
+              "type": "item"
+            }
+          ]
+        },
+        "action": "confirmed",
+        "path": "/api/v1/tasks/claim",
+        "request": "568a7e36d63c4188846c0a5db154a90a",
+        "payload": "{\"periodKey\":\"d:2026-10-28T12\",\"releaseId\":\"rel_0001\",\"requestId\":\"568a7e36d63c4188846c0a5db154a90a\",\"taskId\":\"win_two\"}",
+        "summary": "Win two eligible battles · window · 2026-10-29 00:00 UTC · 10 Bell's Remains",
+        "receipt": "{\"periodKey\":\"d:2026-10-28T12\",\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"568a7e36d63c4188846c0a5db154a90a\",\"rewards\":[{\"amount\":10,\"currency\":\"eclipse_token\",\"type\":\"currency\"}],\"taskId\":\"win_two\",\"taskRulesSha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 4,
+        "applied": 4,
+        "lastInput": "{\"periodKey\":\"d:2026-10-28T12\",\"releaseId\":\"rel_0001\",\"requestId\":\"568a7e36d63c4188846c0a5db154a90a\",\"taskId\":\"win_two\"}",
+        "lastPath": "/api/v1/tasks/claim"
+      },
+      "weekly": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_b",
+        "balance": 830,
+        "mode": "complete",
+        "clock": 1793217600000,
+        "serverNow": 1793217601853.9824,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-28",
+          "claimed": false,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": true,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "win_two_cba40405"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "improve_cba40405"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": true,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "_window_complete_cba40405"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793304000000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": true,
+            "weekly": true,
+            "end": 1793131200000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": true,
+          "Elapsed": 43200,
+          "Cap": 43200,
+          "Rewards": [
+            {
+              "amount": 3600,
+              "type": "account_xp"
+            },
+            {
+              "itemId": "torn_chronicle_page",
+              "quantity": 96,
+              "type": "item"
+            }
+          ]
+        },
+        "action": "confirmed",
+        "path": "/api/v1/tasks/claim",
+        "request": "f37dc1b42e0045c28bb691b5a6a3fbb8",
+        "payload": "{\"periodKey\":\"w:2026-10-19:past_week\",\"releaseId\":\"rel_0001\",\"requestId\":\"f37dc1b42e0045c28bb691b5a6a3fbb8\",\"taskId\":\"past_week\"}",
+        "summary": "Earlier weekly reward terms · weekly · 2026-10-27 20:00 UTC · 10 Bell's Remains",
+        "receipt": "{\"periodKey\":\"w:2026-10-19:past_week\",\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"f37dc1b42e0045c28bb691b5a6a3fbb8\",\"rewards\":[{\"amount\":10,\"currency\":\"eclipse_token\",\"type\":\"currency\"}],\"taskId\":\"past_week\",\"taskRulesSha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 6,
+        "applied": 6,
+        "lastInput": "{\"periodKey\":\"w:2026-10-19:past_week\",\"releaseId\":\"rel_0001\",\"requestId\":\"f37dc1b42e0045c28bb691b5a6a3fbb8\",\"taskId\":\"past_week\"}",
+        "lastPath": "/api/v1/tasks/claim"
+      },
+      "patrol": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_b",
+        "balance": 830,
+        "mode": "ready",
+        "clock": 1793217600000,
+        "serverNow": 1793217601818.826,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-28",
+          "claimed": false,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": true,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "win_two_cba40405"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "improve_cba40405"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": true,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "_window_complete_cba40405"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793304000000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": true,
+            "weekly": true,
+            "end": 1793131200000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": false,
+          "Elapsed": 0,
+          "Cap": 43200,
+          "Rewards": []
+        },
+        "action": "confirmed",
+        "path": "/api/v1/afk/claim",
+        "request": "5deff56735bf4651aabb31c769a928ac",
+        "payload": "{\"releaseId\":\"rel_0001\",\"requestId\":\"5deff56735bf4651aabb31c769a928ac\"}",
+        "summary": "Collect accrued AFK Patrol · preview 720m; actual settlement uses server time",
+        "receipt": "{\"capped\":true,\"checkpointMs\":1793217600000,\"elapsedSeconds\":43200,\"minutesAccrued\":720,\"previousCheckpointMs\":1793127600000,\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"5deff56735bf4651aabb31c769a928ac\",\"rewards\":[{\"amount\":3600,\"type\":\"account_xp\"},{\"itemId\":\"torn_chronicle_page\",\"quantity\":96,\"type\":\"item\"}]}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 7,
+        "applied": 7,
+        "lastInput": "{\"releaseId\":\"rel_0001\",\"requestId\":\"5deff56735bf4651aabb31c769a928ac\"}",
+        "lastPath": "/api/v1/afk/claim"
+      },
+      "beforeFinalGuard": {
+        "checks": 20,
+        "captures": 9
+      },
+      "unknownRollover": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review",
+        "balance": 1730,
+        "mode": "ready",
+        "clock": 1793217600000,
+        "serverNow": 1793217601884.2263,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-28",
+          "claimed": true,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "win_two_cba40405"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "improve_cba40405"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "_window_complete_cba40405"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793304000000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793131200000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": true,
+          "Elapsed": 43200,
+          "Cap": 43200,
+          "Rewards": [
+            {
+              "amount": 3600,
+              "type": "account_xp"
+            },
+            {
+              "itemId": "torn_chronicle_page",
+              "quantity": 96,
+              "type": "item"
+            }
+          ]
+        },
+        "action": "confirmed",
+        "path": "/api/v1/tasks/supplies",
+        "request": "aee41fff46fb40c984950b8950f35a6e",
+        "payload": "{\"periodKey\":\"supply:2026-10-28\",\"releaseId\":\"rel_0001\",\"requestId\":\"aee41fff46fb40c984950b8950f35a6e\"}",
+        "summary": "Daily supplies · 80 Bell's Remains · 2026-10-28 UTC",
+        "receipt": "{\"amount\":80,\"endsAtMs\":1793232000000,\"periodKey\":\"supply:2026-10-28\",\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"aee41fff46fb40c984950b8950f35a6e\",\"rewards\":[{\"amount\":80,\"currency\":\"eclipse_token\",\"type\":\"currency\"}],\"taskId\":\"_daily_supplies\"}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 2,
+        "applied": 1,
+        "lastInput": "{\"periodKey\":\"supply:2026-10-28\",\"releaseId\":\"rel_0001\",\"requestId\":\"aee41fff46fb40c984950b8950f35a6e\"}",
+        "lastPath": "/api/v1/tasks/supplies"
+      },
+      "authorization": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_e",
+        "balance": 1660,
+        "mode": "ready",
+        "clock": 1793217600000,
+        "serverNow": 1793217601784.152,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-28",
+          "claimed": false,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": true,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "win_two_cba40405"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "improve_cba40405"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "_window_complete_cba40405"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793304000000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793131200000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": true,
+          "Elapsed": 43200,
+          "Cap": 43200,
+          "Rewards": [
+            {
+              "amount": 3600,
+              "type": "account_xp"
+            },
+            {
+              "itemId": "torn_chronicle_page",
+              "quantity": 96,
+              "type": "item"
+            }
+          ]
+        },
+        "action": "confirmed",
+        "path": "/api/v1/tasks/claim",
+        "request": "e1763b6deeb54e0f97ff78c480c8a270",
+        "payload": "{\"periodKey\":\"d:2026-10-28T12\",\"releaseId\":\"rel_0001\",\"requestId\":\"e1763b6deeb54e0f97ff78c480c8a270\",\"taskId\":\"win_two\"}",
+        "summary": "Win two eligible battles · window · 2026-10-29 00:00 UTC · 10 Bell's Remains",
+        "receipt": "{\"periodKey\":\"d:2026-10-28T12\",\"releaseId\":\"rel_0001\",\"replayed\":false,\"requestId\":\"e1763b6deeb54e0f97ff78c480c8a270\",\"rewards\":[{\"amount\":10,\"currency\":\"eclipse_token\",\"type\":\"currency\"}],\"taskId\":\"win_two\",\"taskRulesSha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+        "refreshed": true,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "Action confirmed. Account data refreshed.",
+        "writes": 4,
+        "applied": 3,
+        "lastInput": "{\"periodKey\":\"d:2026-10-28T12\",\"releaseId\":\"rel_0001\",\"requestId\":\"e1763b6deeb54e0f97ff78c480c8a270\",\"taskId\":\"win_two\"}",
+        "lastPath": "/api/v1/tasks/claim"
+      },
+      "finalFrame": [
+        {
+          "id": "hubHome",
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubCompany",
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubChapters",
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubAccount",
+          "height": 69.6000061,
+          "inside": true
+        },
+        {
+          "id": "hubBack",
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "hubRefresh",
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "hubMore",
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "errandsPatrol",
+          "height": 70.80005,
+          "inside": true
+        }
+      ],
+      "final": {
+        "ready": true,
+        "screen": "Tasks",
+        "loading": false,
+        "fresh": true,
+        "notice": "",
+        "player": "hub_review_final",
+        "balance": 1650,
+        "mode": "ready",
+        "clock": 1793217600000,
+        "serverNow": 1793217613147.3796,
+        "invites": null,
+        "supplies": {
+          "period": "supply:2026-10-28",
+          "claimed": false,
+          "capable": true
+        },
+        "tasks": [
+          {
+            "id": "win_two",
+            "period": "d:2026-10-28T12",
+            "done": true,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "win_two_cba40405"
+          },
+          {
+            "id": "improve",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "improve_cba40405"
+          },
+          {
+            "id": "_window_complete",
+            "period": "d:2026-10-28T12",
+            "done": false,
+            "claimed": false,
+            "weekly": false,
+            "end": 1793232000000,
+            "key": "_window_complete_cba40405"
+          },
+          {
+            "id": "all_week",
+            "period": "w:2026-10-26:all_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793304000000,
+            "key": "all_week_5c56b181"
+          },
+          {
+            "id": "past_week",
+            "period": "w:2026-10-19:past_week",
+            "done": true,
+            "claimed": false,
+            "weekly": true,
+            "end": 1793131200000,
+            "key": "past_week_424079aa"
+          }
+        ],
+        "patrol": {
+          "Unlocked": true,
+          "Claimable": true,
+          "Elapsed": 43200,
+          "Cap": 43200,
+          "Rewards": [
+            {
+              "amount": 3600,
+              "type": "account_xp"
+            },
+            {
+              "itemId": "torn_chronicle_page",
+              "quantity": 96,
+              "type": "item"
+            }
+          ]
+        },
+        "action": null,
+        "path": null,
+        "request": null,
+        "payload": null,
+        "summary": null,
+        "receipt": null,
+        "refreshed": false,
+        "busy": false,
+        "blocked": false,
+        "actionNotice": "",
+        "writes": 4,
+        "applied": 3,
+        "lastInput": "{\"periodKey\":\"d:2026-10-28T12\",\"releaseId\":\"rel_0001\",\"requestId\":\"e1763b6deeb54e0f97ff78c480c8a270\",\"taskId\":\"win_two\"}",
+        "lastPath": "/api/v1/tasks/claim"
+      }
+    }
+  },
+  "art": {
+    "newBitmaps": 0,
+    "policy": "Existing rebuilt OpenAI shelter only. Invitation candidates are data rows without historical Gemini portrait substitution.",
+    "usedSourceIdentities": [
+      "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+    ],
+    "humanApproval": "pending",
+    "native2kTarget": "open"
+  },
+  "api": {
+    "deployed": false,
+    "newBindings": 0,
+    "migrations": 0,
+    "capability": "supplies.periodBound",
+    "requestField": "optional periodKey for backward compatibility; required by the new journaled client",
+    "legacyClient": "Existing omitted-period requests retain current-day behavior; the new client disables supplies without capability.",
+    "focusedReview": {
+      "officialGuidance": "https://developers.cloudflare.com/workers/best-practices/workers-best-practices/",
+      "installedWorkersTypes": "5.20261010.1",
+      "latestTypesInspected": "5.20261027.1",
+      "result": "D1.batch signature unchanged. Existing atomic grants/ledger retained. Focused safety change, not a complete Worker audit."
+    }
+  },
+  "captures": [
+    {
+      "label": "invitations-ready",
+      "image": "docs/review/captures/20261027T162309949_0347d11a.png",
+      "metadata": "docs/review/captures/20261027T162309949_0347d11a.json",
+      "imageSha256": "f6cde76d93764c9dce90dbc75abc5bef105c562f2a8010a156a30669b0ffd843",
+      "testedMetadataSha256": "84da99d38f934fa3dec1b0a5019df9ff058bf3808893080931f665bb7c8bcd5a",
+      "scenario": "hub/invitations",
+      "screen": "Recruit",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793131200000,
+      "actionState": "",
+      "path": "",
+      "request": "",
+      "inputHash": "",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "84da99d38f934fa3dec1b0a5019df9ff058bf3808893080931f665bb7c8bcd5a"
+    },
+    {
+      "label": "invitation-review-wide-safe",
+      "image": "docs/review/captures/20261027T162322733_c129818f.png",
+      "metadata": "docs/review/captures/20261027T162322733_c129818f.json",
+      "imageSha256": "96a854651dbcefcaf836cd411d17cccf31ce5ff38fd991e94ac9a3774ab4ce72",
+      "testedMetadataSha256": "eb72da64e9667fc8d66ae588a761bf250587e9dd08012e62873e5a6af1161b4c",
+      "scenario": "hub/invitations",
+      "screen": "Recruit",
+      "width": 2400,
+      "height": 1080,
+      "safeArea": true,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793131200000,
+      "actionState": "",
+      "path": "",
+      "request": "",
+      "inputHash": "",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "eb72da64e9667fc8d66ae588a761bf250587e9dd08012e62873e5a6af1161b4c"
+    },
+    {
+      "label": "invitation-confirmed-4x3",
+      "image": "docs/review/captures/20261027T162340753_a836e2c2.png",
+      "metadata": "docs/review/captures/20261027T162340753_a836e2c2.json",
+      "imageSha256": "1e840b5a463cfe0d3bcf208f3c35160806f2bf54ed42490e12fd9b433fb69e18",
+      "testedMetadataSha256": "bf3c6f795982057b105df6a8f2f0056da75787cd656b0eaab016df51181cc5a8",
+      "scenario": "hub/invitations",
+      "screen": "Recruit",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793131200000,
+      "actionState": "confirmed",
+      "path": "/api/v1/recruitment/first_oath_invitation",
+      "request": "4c817519ae7744ae96b5f6c23e1bea27",
+      "inputHash": "48c74f9eea34d56b66ddc2feeb59306e1def58105a627a57b1e845c46f6f5ce2",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "bf3c6f795982057b105df6a8f2f0056da75787cd656b0eaab016df51181cc5a8"
+    },
+    {
+      "label": "saved-invitation-pending",
+      "image": "docs/review/captures/20261027T162417702_ab4e55ab.png",
+      "metadata": "docs/review/captures/20261027T162417702_ab4e55ab.json",
+      "imageSha256": "23cbede2c00f8ed8eb572684d4099f576c40568dfc23ad9b5157b58a91350238",
+      "testedMetadataSha256": "f4e8052b18bee19ee2afc2a703a497278d46e31f435ff314cab6b2b493b3aa97",
+      "scenario": "hub/invitations",
+      "screen": "Operations",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "duplicate",
+      "fixtureTimeMs": 1793131200000,
+      "actionState": "pending",
+      "path": "/api/v1/recruitment/first_oath_invitation",
+      "request": "e42a8224286c4374bf694257625d12ea",
+      "inputHash": "559336fb725e7cdb6a4b0f8eccabef3bb55bf37b920440c4870a07b63151358a",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "f4e8052b18bee19ee2afc2a703a497278d46e31f435ff314cab6b2b493b3aa97"
+    },
+    {
+      "label": "saved-invitation-confirmed",
+      "image": "docs/review/captures/20261027T162428644_cfafaa80.png",
+      "metadata": "docs/review/captures/20261027T162428644_cfafaa80.json",
+      "imageSha256": "75bde9686902ea2d343576e662a4899e657726d977ca7eb534aeb2d31fc6a988",
+      "testedMetadataSha256": "672e5a4ff2bf6217990ab589fbbfc305f347cfe55fe04048ad3a4fb329d06dd7",
+      "scenario": "hub/invitations",
+      "screen": "Operations",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "duplicate",
+      "fixtureTimeMs": 1793131200000,
+      "actionState": "confirmed",
+      "path": "/api/v1/recruitment/first_oath_invitation",
+      "request": "e42a8224286c4374bf694257625d12ea",
+      "inputHash": "559336fb725e7cdb6a4b0f8eccabef3bb55bf37b920440c4870a07b63151358a",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "672e5a4ff2bf6217990ab589fbbfc305f347cfe55fe04048ad3a4fb329d06dd7"
+    },
+    {
+      "label": "supplies-rollover-pending-wide",
+      "image": "docs/review/captures/20261027T162510871_66758606.png",
+      "metadata": "docs/review/captures/20261027T162510871_66758606.json",
+      "imageSha256": "10d0830171feed681b3d663747fccc84464ce5e21f254270d9ed451a6cf48f3b",
+      "testedMetadataSha256": "7bb65b74f62f6b706e2a85952d416bf71abd00c8c4e1f85491c6f5a49ee99aa9",
+      "scenario": "hub/invitations",
+      "screen": "Tasks",
+      "width": 2400,
+      "height": 1080,
+      "safeArea": true,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "pending",
+      "path": "/api/v1/tasks/supplies",
+      "request": "baac5c6e550648209abc717458f1ef91",
+      "inputHash": "fd2e99552d3ce1072b23440b3de996775ce60c43abad25d529d6e020096c3608",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "7bb65b74f62f6b706e2a85952d416bf71abd00c8c4e1f85491c6f5a49ee99aa9"
+    },
+    {
+      "label": "errands-window-4x3",
+      "image": "docs/review/captures/20261027T162531113_88bd52c4.png",
+      "metadata": "docs/review/captures/20261027T162531113_88bd52c4.json",
+      "imageSha256": "463aa313934489b5ebee9821a653533dfec1ad3d631031ad31c0442149c7306e",
+      "testedMetadataSha256": "923aa0b2c40694ce5c26556a517a26a091f9ffdcf6ee43089db3a6eb275419bb",
+      "scenario": "hub/invitations",
+      "screen": "Tasks",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "confirmed",
+      "path": "/api/v1/tasks/claim",
+      "request": "568a7e36d63c4188846c0a5db154a90a",
+      "inputHash": "96bbcb984a291b3b9fbd35ef04820418b85b707cc6f174157246cff9a4ef8155",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "923aa0b2c40694ce5c26556a517a26a091f9ffdcf6ee43089db3a6eb275419bb"
+    },
+    {
+      "label": "errands-weekly-grace",
+      "image": "docs/review/captures/20261027T162555703_699710b1.png",
+      "metadata": "docs/review/captures/20261027T162555703_699710b1.json",
+      "imageSha256": "930cd7b0c013c33cdcf4174f6afba84bb92f25157c3749329142be25662fec6d",
+      "testedMetadataSha256": "5f5da8dbf8a9f36f2b86cd9c43beee9ae69f45d9575badaba0d251b81f1661d9",
+      "scenario": "hub/invitations",
+      "screen": "Tasks",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "complete",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "confirmed",
+      "path": "/api/v1/tasks/claim",
+      "request": "f37dc1b42e0045c28bb691b5a6a3fbb8",
+      "inputHash": "f3a3201fe5e1e15fcf3a20aca9a0e58b7582968b627a694eae242754d61da919",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "5f5da8dbf8a9f36f2b86cd9c43beee9ae69f45d9575badaba0d251b81f1661d9"
+    },
+    {
+      "label": "saved-patrol-confirmed",
+      "image": "docs/review/captures/20261027T162636742_4b416630.png",
+      "metadata": "docs/review/captures/20261027T162636742_4b416630.json",
+      "imageSha256": "19f05d23f485798b479b88cb14c8eb7c42794ba49e5c8f7b530c577e8b5234e9",
+      "testedMetadataSha256": "2af6dcfffcba94d278ed870f6d104a3e75a95c08e63dca2e44262f593f6a822b",
+      "scenario": "hub/invitations",
+      "screen": "Operations",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "confirmed",
+      "path": "/api/v1/afk/claim",
+      "request": "5deff56735bf4651aabb31c769a928ac",
+      "inputHash": "23a90c03dd0188dfcec73a7fb784c0f1b820d1475cb8ad61a2dc55babe288ad1",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": false,
+      "gitMetadataSha256": "2af6dcfffcba94d278ed870f6d104a3e75a95c08e63dca2e44262f593f6a822b"
+    },
+    {
+      "label": "final-long-window-4x3",
+      "image": "docs/review/captures/20261027T163906204_00c82855.png",
+      "metadata": "docs/review/captures/20261027T163906204_00c82855.json",
+      "imageSha256": "f45a2ede7ed26dadb49c5cf4e8f09a5ed0044edb58240102bdfb2ede03561b06",
+      "testedMetadataSha256": "a64dea587d71fbd80b71484bcd05cebf6ae12d293a12df29a0dcb92866de477a",
+      "scenario": "hub/errands",
+      "screen": "Tasks",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "long",
+      "fixtureTimeMs": 1793131200000,
+      "actionState": "",
+      "path": "",
+      "request": "",
+      "inputHash": "",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": true,
+      "gitMetadataSha256": "a64dea587d71fbd80b71484bcd05cebf6ae12d293a12df29a0dcb92866de477a"
+    },
+    {
+      "label": "final-supplies-wide-safe",
+      "image": "docs/review/captures/20261027T163931047_1a6298dd.png",
+      "metadata": "docs/review/captures/20261027T163931047_1a6298dd.json",
+      "imageSha256": "88251f32dc9bd46d5ad89abe131f023954b74c7ebae9ef042ade8d3a064b66c7",
+      "testedMetadataSha256": "5a1df3fe6077fd1052713e032880b2d210c69b8096ac5e10bbbf7479334243fd",
+      "scenario": "hub/errands",
+      "screen": "Tasks",
+      "width": 2400,
+      "height": 1080,
+      "safeArea": true,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793131200000,
+      "actionState": "",
+      "path": "",
+      "request": "",
+      "inputHash": "",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": true,
+      "gitMetadataSha256": "5a1df3fe6077fd1052713e032880b2d210c69b8096ac5e10bbbf7479334243fd"
+    },
+    {
+      "label": "final-window-after-auth",
+      "image": "docs/review/captures/20261027T164105332_6178e838.png",
+      "metadata": "docs/review/captures/20261027T164105332_6178e838.json",
+      "imageSha256": "9b627dfa3841c4d7988c848e2b4bed3eb74ce1ea1ac1b8a2152d0b7fdfe55602",
+      "testedMetadataSha256": "2e8ab37210f7475f549e6b700515de860b4e8618335481ef67956175718a698c",
+      "scenario": "hub/errands",
+      "screen": "Tasks",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "confirmed",
+      "path": "/api/v1/tasks/claim",
+      "request": "e1763b6deeb54e0f97ff78c480c8a270",
+      "inputHash": "2fa0cbc15b83dfe3bd0ea3d14c609c7340ab33092d7e8b97eab09f4cdfc6cdc9",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": true,
+      "gitMetadataSha256": "2e8ab37210f7475f549e6b700515de860b4e8618335481ef67956175718a698c"
+    },
+    {
+      "label": "final-guest-4x3",
+      "image": "docs/review/captures/20261027T164234427_ff680ef7.png",
+      "metadata": "docs/review/captures/20261027T164234427_ff680ef7.json",
+      "imageSha256": "a5a543056ddef1258ead94389b392882e42f8292191ff249c0a61a8ffe1044cb",
+      "testedMetadataSha256": "974f098564c9697b2627f08dd653f73fa8f378b7b7df53b2b0a3af876b2eaaed",
+      "scenario": "hub/errands",
+      "screen": "Tasks",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "",
+      "path": "",
+      "request": "",
+      "inputHash": "",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": true,
+      "gitMetadataSha256": "974f098564c9697b2627f08dd653f73fa8f378b7b7df53b2b0a3af876b2eaaed"
+    },
+    {
+      "label": "final-invitations",
+      "image": "docs/review/captures/20261027T164303426_8a4bb190.png",
+      "metadata": "docs/review/captures/20261027T164303426_8a4bb190.json",
+      "imageSha256": "320c3543c5fe4f56e85bde0834cc7fecba2a9596f10166bab553d088b961b051",
+      "testedMetadataSha256": "3c11f93906f3b5d088c1c4ff2fce8039ee89d6e4209504ac779654ff7bdd6342",
+      "scenario": "hub/errands",
+      "screen": "Recruit",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "",
+      "path": "",
+      "request": "",
+      "inputHash": "",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": true,
+      "gitMetadataSha256": "3c11f93906f3b5d088c1c4ff2fce8039ee89d6e4209504ac779654ff7bdd6342"
+    },
+    {
+      "label": "final-patrol-4x3",
+      "image": "docs/review/captures/20261027T164319896_c53a9c35.png",
+      "metadata": "docs/review/captures/20261027T164319896_c53a9c35.json",
+      "imageSha256": "00e743c9ac5057069f056538cdde9180829c796fefc2d01a545680f8573cbe42",
+      "testedMetadataSha256": "546d05e0b184a9584160925b4c21f3ce99070675b20a6edd479f053d9d4eb05c",
+      "scenario": "hub/errands",
+      "screen": "Tasks",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "fixtureTimeMs": 1793217600000,
+      "actionState": "",
+      "path": "",
+      "request": "",
+      "inputHash": "",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalSourceGuard": true,
+      "gitMetadataSha256": "546d05e0b184a9584160925b4c21f3ce99070675b20a6edd479f053d9d4eb05c"
+    }
+  ],
+  "referenceInputs": [
+    {
+      "path": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sha256": "4affd87e820aaee0abb6ebe6b490d3fb97dc67824a8418057e9884981401b01b"
+    },
+    {
+      "path": "narrative/09_VN_Scripts/Runtime_Snapshot/game/data/content/characters_part1.json",
+      "sha256": "8b91be1f502e9980e150da4c29b9ea1f819533b9297092b66fa991621287e3fc"
+    },
+    {
+      "path": "apps/api/src/recruitment/service.ts",
+      "sha256": "6e9867f195106003b8c349ab56ea5a6c56718b669d79b50ab32f57d901efd39c"
+    },
+    {
+      "path": "apps/api/src/modes/service.ts",
+      "sha256": "ee5ef31b6ed60501b8fbec40abf0c1a6efed464e8f8a12f6935cc8cff6a8d0a8"
+    },
+    {
+      "path": "packages/economy/src/afk.ts",
+      "sha256": "27ee624a233730fd742dbd7183f024cea32a06e9f905d4ff228017c68da17d25"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdAccountActions.cs",
+      "sha256": "cbc707733f1e87e32b59cc59353923dfaecc662c45cab6a2c74e591723a28e8f"
+    },
+    {
+      "path": "apps/api/wrangler.game.jsonc",
+      "sha256": "82f294bd7aee2f7ffacac014f14620744bd0b1234085c3c19d6a9bcbee4b496e"
+    }
+  ],
+  "restoration": {
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "dirty": false,
+    "playing": false,
+    "paused": false,
+    "review": false,
+    "index": 9,
+    "gizmos": true,
+    "equal": true,
+    "baseline": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "current": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "viewport": {
+      "expectedIndex": 9,
+      "expectedGizmos": true
+    },
+    "consoleErrors": 0,
+    "compilationFailed": false
+  },
+  "boundaries": [
+    "All account, balance, progress, task/reward schedules, clocks and mutation/status outcomes in UI review are explicit synthetic fixtures. Canonical selector/name inputs do not prove a published or installed patch.",
+    "The capability and matching API changes are local, not deployed. Live provider/account/signed-content integration requires the normal owner push and existing gates.",
+    "Reward receipts describe recorded plans; inventory caps still apply. Invitation grant classification is frozen at transaction time. Fixture accounting is not live economy evidence.",
+    "The first nine captures precede the UTC-label/native-scroll correction. Final-source guard captures follow it; initial invitation and Saved Actions layouts are unchanged.",
+    "Headless disk reload, Editor event input and reference compilation do not establish Android process-death, IL2CPP, physical touch or device acceptance.",
+    "No new image, credentials, hooks, paid generation, push or deployment. Prior art/feedback and owner codex_watcher.ps1 remain intact.",
+    "Human art/native-2K and release gates remain open. Next: account/privacy, broader gear/mode actions and campaign narrative/visual migration."
+  ],
+  "sourceFiles": [
+    {
+      "path": "README.md",
+      "gitBlobSha256": "cecc733d8f046dc517111c38d021c28857ba6579f76447ad2781e1a36ef320e8",
+      "editorFileSha256": "cecc733d8f046dc517111c38d021c28857ba6579f76447ad2781e1a36ef320e8"
+    },
+    {
+      "path": "apps/api/src/player/operations.ts",
+      "gitBlobSha256": "1face8b16bec142d5abc960f647c3acccc8aa4b6ebdb9671fccbd101784f694b",
+      "editorFileSha256": "1face8b16bec142d5abc960f647c3acccc8aa4b6ebdb9671fccbd101784f694b"
+    },
+    {
+      "path": "apps/api/src/player/routes.ts",
+      "gitBlobSha256": "f19051efac17f5d9182186e68bb551a0748cfbef32f97de6a8b7c2b650b8c47e",
+      "editorFileSha256": "7b47eb83d60f27b51ba9b5f78b8e314170786f165782cddd4f2e99873817434e"
+    },
+    {
+      "path": "apps/api/src/tasks/service.ts",
+      "gitBlobSha256": "a72dbff53eea4c4ea540b5f112c4e445cbc0b65bb68e447c2fa9cf153a09af87",
+      "editorFileSha256": "a72dbff53eea4c4ea540b5f112c4e445cbc0b65bb68e447c2fa9cf153a09af87"
+    },
+    {
+      "path": "apps/api/test/tasks.test.ts",
+      "gitBlobSha256": "9030505d065fe1160cf680b9b05d6581ebd35be26c392adc200187106bfe0ac4",
+      "editorFileSha256": "9030505d065fe1160cf680b9b05d6581ebd35be26c392adc200187106bfe0ac4"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs",
+      "gitBlobSha256": "3173a0f73d5ef45810ed15b1c9b389f06316ad612e6d84f373efca970f65ef14",
+      "editorFileSha256": "3304fe8b9a81d3d97953e13cc2e88aae48c2dd4c9d7d9c301fca35d85bdc2b6f"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs",
+      "gitBlobSha256": "4166c2f7bd043d37568a3ea9c70b5fcbf29003cbaf81b99498e2ecf4080f435e",
+      "editorFileSha256": "4166c2f7bd043d37568a3ea9c70b5fcbf29003cbaf81b99498e2ecf4080f435e"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdActionJournal.cs",
+      "gitBlobSha256": "f815b204290834de07a8f29475e2fc0800df0a0a0a8a465cba7f3b6223adcde8",
+      "editorFileSha256": "f815b204290834de07a8f29475e2fc0800df0a0a0a8a465cba7f3b6223adcde8"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdHubSnapshot.cs",
+      "gitBlobSha256": "746a455e2d3726040d812fff52dce532e9088e7bd2fc3e62bbd0a4e422c01222",
+      "editorFileSha256": "8899f4eca7344a1a383370d66297d5d0e235de06766d185a7c2b4050bceac1ae"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/ProgressScreens.cs",
+      "gitBlobSha256": "2b4a5e39b63f5f9fdad4c9960645dcfdce3e7708af424d5782c9ea43de19068f",
+      "editorFileSha256": "2b4a5e39b63f5f9fdad4c9960645dcfdce3e7708af424d5782c9ea43de19068f"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildHubScreen.cs",
+      "gitBlobSha256": "6542cd36a890b137aa5ed9989e7a1ec964eb540872538892dae8865c1ae574b7",
+      "editorFileSha256": "6b4828f570034dc2c53a81a49ea3ba615e4948eae5f2740881289ee9391ae31f"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildSavedActionsScreen.cs",
+      "gitBlobSha256": "75f6e1010ded14d92304f5817e198c55947811d4b59ff353065c203828d35b29",
+      "editorFileSha256": "75f6e1010ded14d92304f5817e198c55947811d4b59ff353065c203828d35b29"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/StoreScreens.cs",
+      "gitBlobSha256": "cd3ad39fc7e3243273d11656696f35d6d23e6780093a840f5952ff685d1abcf5",
+      "editorFileSha256": "cd3ad39fc7e3243273d11656696f35d6d23e6780093a840f5952ff685d1abcf5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdCompanyReview.cs",
+      "gitBlobSha256": "6f20733c2e29db6572408568ee480a4e149c3a39645ed9e4401fc5f17173da3c",
+      "editorFileSha256": "6f20733c2e29db6572408568ee480a4e149c3a39645ed9e4401fc5f17173da3c"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubReview.cs",
+      "gitBlobSha256": "88d5f7fc79bb3fe75d0e3bfea46abe8126d0c8de60a7b1e2450e6075a368b5ec",
+      "editorFileSha256": "753c8c239028ae9da1884cd76817cf5a68908a314908a5f1467bdd3616b0577d"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubState.cs",
+      "gitBlobSha256": "a3cf140a471526ac8fe0df11c8a0de05204cd42619f5ee99755cb3042d6f96f6",
+      "editorFileSha256": "5b21fb46b30d74d2222a3b542affa72984b6effa2515e25ff570071620b34ea5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs",
+      "gitBlobSha256": "132ae8c699396868f015e9d86d8b9c0ced6feeccde3769a103530fc19c304623",
+      "editorFileSha256": "20c129e41c5aba1c957995308de55d4c50075542fdbeba90aac443d612af981c"
+    },
+    {
+      "path": "apps/unity/Logic/Uomd.Core/Uomd.Core.csproj",
+      "gitBlobSha256": "e72dc717c4ded7d2e078f31861bb80c0bd1dfa35e1b0a3048535d194374dc373",
+      "editorFileSha256": "e72dc717c4ded7d2e078f31861bb80c0bd1dfa35e1b0a3048535d194374dc373"
+    },
+    {
+      "path": "docs/BUILD_STATE.md",
+      "gitBlobSha256": "11250d52fde5715b1c0c36d3cc68521a4b876c2d2a5d638ac5d414249e6f55aa",
+      "editorFileSha256": "11250d52fde5715b1c0c36d3cc68521a4b876c2d2a5d638ac5d414249e6f55aa"
+    },
+    {
+      "path": "docs/DEV_TRACKER.json",
+      "gitBlobSha256": "1c8939f6ec5340cbd2d770db140871944174303612df045c0e4c8ef272e4e3f5",
+      "editorFileSha256": "1c8939f6ec5340cbd2d770db140871944174303612df045c0e4c8ef272e4e3f5"
+    },
+    {
+      "path": "docs/INFRA_ROADMAP.md",
+      "gitBlobSha256": "9632d589ad29fe27abf4fc51c65a43830e10895b8a91edaa323d4b6c21abcfdd",
+      "editorFileSha256": "9632d589ad29fe27abf4fc51c65a43830e10895b8a91edaa323d4b6c21abcfdd"
+    },
+    {
+      "path": "docs/NEXT_STEPS.md",
+      "gitBlobSha256": "71d464af3560b34a10fd2c91c394cc176db492a947e4f9cfe9c44348a5ad96e0",
+      "editorFileSha256": "71d464af3560b34a10fd2c91c394cc176db492a947e4f9cfe9c44348a5ad96e0"
+    },
+    {
+      "path": "docs/handoff/CODEX_CLI_MASTER_PROMPT.md",
+      "gitBlobSha256": "140cc8244a487b7b4a39824b34bc5bd6cc5992827ebac573c4293c692ac314a7",
+      "editorFileSha256": "140cc8244a487b7b4a39824b34bc5bd6cc5992827ebac573c4293c692ac314a7"
+    },
+    {
+      "path": "docs/handoff/SOL_CONTINUATION_PLAN.md",
+      "gitBlobSha256": "35ee504257c21315c7409d08d99554e0ad6f8e52aaf583270c82de1c75830219",
+      "editorFileSha256": "35ee504257c21315c7409d08d99554e0ad6f8e52aaf583270c82de1c75830219"
+    },
+    {
+      "path": "docs/handoff/SOL_REBUILD_PLAN.md",
+      "gitBlobSha256": "756a7962a7f9d149d5482fed0b726ba67ddbdfeeee6790fc8c5adfba879f81ad",
+      "editorFileSha256": "756a7962a7f9d149d5482fed0b726ba67ddbdfeeee6790fc8c5adfba879f81ad"
+    },
+    {
+      "path": "docs/review/PRODUCTION_REVIEW.json",
+      "gitBlobSha256": "a7ddaededb932a0956e482dc2980b4721a79a2aeb7fc7720d9a559e3467db555",
+      "editorFileSha256": "a7ddaededb932a0956e482dc2980b4721a79a2aeb7fc7720d9a559e3467db555"
+    },
+    {
+      "path": "docs/review/README.md",
+      "gitBlobSha256": "58fbbdaaad9fa197642ae246232324fc991c6331a8185804e46dba1bef863dff",
+      "editorFileSha256": "58fbbdaaad9fa197642ae246232324fc991c6331a8185804e46dba1bef863dff"
+    },
+    {
+      "path": "docs/review/index.html",
+      "gitBlobSha256": "9b72078aa1a4e622d766cdf7b01309b90bc212ce6b536d6bf10837f47dcb33bc",
+      "editorFileSha256": "9b72078aa1a4e622d766cdf7b01309b90bc212ce6b536d6bf10837f47dcb33bc"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdErrandsSnapshot.cs",
+      "gitBlobSha256": "2238425bd100f01c75da0eded4c0651c4a3dbb4446073a83f3bb794e0a3625af",
+      "editorFileSha256": "2238425bd100f01c75da0eded4c0651c4a3dbb4446073a83f3bb794e0a3625af"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdErrandsSnapshot.cs.meta",
+      "gitBlobSha256": "fc7226e494c99246c42a909918be0198ab868e3d4cae277919f471bb651409ae",
+      "editorFileSha256": "fc7226e494c99246c42a909918be0198ab868e3d4cae277919f471bb651409ae"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildRewardsScreens.cs",
+      "gitBlobSha256": "33e135916990fa336e31a1bfa7554755eefefce8738bd477857c52bd758ede44",
+      "editorFileSha256": "33e135916990fa336e31a1bfa7554755eefefce8738bd477857c52bd758ede44"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildRewardsScreens.cs.meta",
+      "gitBlobSha256": "12f8e9f15e6e340416c97a691f9b80b1be39684ff57a82965bd9a2efb668c8c6",
+      "editorFileSha256": "12f8e9f15e6e340416c97a691f9b80b1be39684ff57a82965bd9a2efb668c8c6"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdRewardsReview.cs",
+      "gitBlobSha256": "ade93e45f857072cef07ac85c662b1dc62c255cba6180eeb4bd461eafa063bfa",
+      "editorFileSha256": "ade93e45f857072cef07ac85c662b1dc62c255cba6180eeb4bd461eafa063bfa"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdRewardsReview.cs.meta",
+      "gitBlobSha256": "21b8e5c8a7abaf532ba55fabc0fef4fd45de8ef6780471fd0af19c284e0b3579",
+      "editorFileSha256": "21b8e5c8a7abaf532ba55fabc0fef4fd45de8ef6780471fd0af19c284e0b3579"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/RewardActionsTests.cs",
+      "gitBlobSha256": "28f1f4569e1168dedfe54c62857dc413dff082d90b0cf684d05d767513884aff",
+      "editorFileSha256": "28f1f4569e1168dedfe54c62857dc413dff082d90b0cf684d05d767513884aff"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/RewardActionsTests.cs.meta",
+      "gitBlobSha256": "942caf1b1d176a2a5965665bff04022704168b440e5d7e593655990837b4b24d",
+      "editorFileSha256": "942caf1b1d176a2a5965665bff04022704168b440e5d7e593655990837b4b24d"
+    },
+    {
+      "path": "docs/media/SOL_INVITATIONS_AND_ERRANDS.md",
+      "gitBlobSha256": "c62bf5d19027b5b56c3aba931bce0400d849d1eca3816db19aab8e8e22e004b3",
+      "editorFileSha256": "c62bf5d19027b5b56c3aba931bce0400d849d1eca3816db19aab8e8e22e004b3"
+    }
+  ]
+}

@@ -3612,6 +3612,246 @@
             "sourceIdentities": [
                 "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
             ]
+        },
+        {
+            "id": "20261027T162309949_0347d11a",
+            "image": "captures/20261027T162309949_0347d11a.png",
+            "sha256": "f6cde76d93764c9dce90dbc75abc5bef105c562f2a8010a156a30669b0ffd843",
+            "metadata": "captures/20261027T162309949_0347d11a.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Recruit",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162322733_c129818f",
+            "image": "captures/20261027T162322733_c129818f.png",
+            "sha256": "96a854651dbcefcaf836cd411d17cccf31ce5ff38fd991e94ac9a3774ab4ce72",
+            "metadata": "captures/20261027T162322733_c129818f.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Recruit",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162340753_a836e2c2",
+            "image": "captures/20261027T162340753_a836e2c2.png",
+            "sha256": "1e840b5a463cfe0d3bcf208f3c35160806f2bf54ed42490e12fd9b433fb69e18",
+            "metadata": "captures/20261027T162340753_a836e2c2.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Recruit",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162417702_ab4e55ab",
+            "image": "captures/20261027T162417702_ab4e55ab.png",
+            "sha256": "23cbede2c00f8ed8eb572684d4099f576c40568dfc23ad9b5157b58a91350238",
+            "metadata": "captures/20261027T162417702_ab4e55ab.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162428644_cfafaa80",
+            "image": "captures/20261027T162428644_cfafaa80.png",
+            "sha256": "75bde9686902ea2d343576e662a4899e657726d977ca7eb534aeb2d31fc6a988",
+            "metadata": "captures/20261027T162428644_cfafaa80.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162510871_66758606",
+            "image": "captures/20261027T162510871_66758606.png",
+            "sha256": "10d0830171feed681b3d663747fccc84464ce5e21f254270d9ed451a6cf48f3b",
+            "metadata": "captures/20261027T162510871_66758606.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162531113_88bd52c4",
+            "image": "captures/20261027T162531113_88bd52c4.png",
+            "sha256": "463aa313934489b5ebee9821a653533dfec1ad3d631031ad31c0442149c7306e",
+            "metadata": "captures/20261027T162531113_88bd52c4.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162555703_699710b1",
+            "image": "captures/20261027T162555703_699710b1.png",
+            "sha256": "930cd7b0c013c33cdcf4174f6afba84bb92f25157c3749329142be25662fec6d",
+            "metadata": "captures/20261027T162555703_699710b1.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T162636742_4b416630",
+            "image": "captures/20261027T162636742_4b416630.png",
+            "sha256": "19f05d23f485798b479b88cb14c8eb7c42794ba49e5c8f7b530c577e8b5234e9",
+            "metadata": "captures/20261027T162636742_4b416630.json",
+            "scenario": "hub/invitations",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T163906204_00c82855",
+            "image": "captures/20261027T163906204_00c82855.png",
+            "sha256": "f45a2ede7ed26dadb49c5cf4e8f09a5ed0044edb58240102bdfb2ede03561b06",
+            "metadata": "captures/20261027T163906204_00c82855.json",
+            "scenario": "hub/errands",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T163931047_1a6298dd",
+            "image": "captures/20261027T163931047_1a6298dd.png",
+            "sha256": "88251f32dc9bd46d5ad89abe131f023954b74c7ebae9ef042ade8d3a064b66c7",
+            "metadata": "captures/20261027T163931047_1a6298dd.json",
+            "scenario": "hub/errands",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T164105332_6178e838",
+            "image": "captures/20261027T164105332_6178e838.png",
+            "sha256": "9b627dfa3841c4d7988c848e2b4bed3eb74ce1ea1ac1b8a2152d0b7fdfe55602",
+            "metadata": "captures/20261027T164105332_6178e838.json",
+            "scenario": "hub/errands",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T164234427_ff680ef7",
+            "image": "captures/20261027T164234427_ff680ef7.png",
+            "sha256": "a5a543056ddef1258ead94389b392882e42f8292191ff249c0a61a8ffe1044cb",
+            "metadata": "captures/20261027T164234427_ff680ef7.json",
+            "scenario": "hub/errands",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "guest",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T164303426_8a4bb190",
+            "image": "captures/20261027T164303426_8a4bb190.png",
+            "sha256": "320c3543c5fe4f56e85bde0834cc7fecba2a9596f10166bab553d088b961b051",
+            "metadata": "captures/20261027T164303426_8a4bb190.json",
+            "scenario": "hub/errands",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Recruit",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T164319896_c53a9c35",
+            "image": "captures/20261027T164319896_c53a9c35.png",
+            "sha256": "00e743c9ac5057069f056538cdde9180829c796fefc2d01a545680f8573cbe42",
+            "metadata": "captures/20261027T164319896_c53a9c35.json",
+            "scenario": "hub/errands",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Tasks",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
         }
     ]
 }

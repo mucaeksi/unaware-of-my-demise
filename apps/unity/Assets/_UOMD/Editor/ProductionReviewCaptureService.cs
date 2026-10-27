@@ -32,6 +32,9 @@ namespace Uomd.EditorTools
         public bool hubFixture;
         public string archiveTitle, archiveRequestId, archiveInputHash, archiveNotice, archiveFixtureMode, archiveIndexSource;
         public bool archiveReading, archiveReplay, archiveAtEnd, archiveBusy;
+        public string rewardsFixtureMode, rewardsIndexSource;
+        public long rewardsFixtureTimeMs;
+        public int invitationCount, errandCount;
         public bool awaitingPlayerAction;
         public string entryPhase, entryScreen;
         public int entryStage, entryTutorials;
@@ -182,6 +185,8 @@ namespace Uomd.EditorTools
                     else if (router.ActiveScreenId == UomdScreenId.Gear) hub = router.Controller<ArmoryScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Operations) hub = router.Controller<SavedActionsScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Library) hub = router.Controller<ArchiveScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Recruit) hub = router.Controller<InvitationsScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Tasks) hub = router.Controller<ErrandsScreen>();
                     if (hub != null)
                     {
                         metadata.imagePaths = hub.ReviewImagePaths; metadata.hubState = hub.ReviewState;
@@ -197,6 +202,9 @@ namespace Uomd.EditorTools
                     metadata.hubRelease = router.HubState.Snapshot?.Release; metadata.hubFixture = true;
                     metadata.hubFixtureMode = router.HubReview?.Mode;
                     metadata.archiveFixtureMode = router.HubReview?.LibraryMode; metadata.archiveIndexSource = UomdHubReview.LibrarySource;
+                    metadata.rewardsFixtureMode = router.HubReview?.RewardsMode; metadata.rewardsIndexSource = UomdHubReview.RewardsSource;
+                    metadata.rewardsFixtureTimeMs = router.HubReview?.RewardsTime ?? 0;
+                    metadata.invitationCount = router.HubState.Snapshot?.Invitations?.Count ?? 0; metadata.errandCount = router.HubState.Snapshot?.Errands?.Rows.Count ?? 0;
                     metadata.archiveReading = router.EntryFlow.InReading; metadata.archiveTitle = router.EntryFlow.ReadingTitle;
                     metadata.archiveReplay = router.EntryFlow.ReadingIsReplay; metadata.archiveAtEnd = router.EntryFlow.ReadingAtEnd;
                     metadata.archiveRequestId = router.EntryFlow.ReadingRequest; metadata.archiveInputHash = router.EntryFlow.ReadingInputHash;

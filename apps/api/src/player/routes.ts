@@ -525,7 +525,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     return c.json(await claimTask(c.env.DB, c.get('playerId'), input, Date.now(), releaseScope(c.env, input.releaseId)));
   });
   app.post('/api/v1/tasks/supplies', async (c) => {
-    const input = await body(c, RequestOnly, undefined, true);
+    const input = await body(c, RequestOnly.extend({ periodKey: z.string().regex(/^supply:\d{4}-\d{2}-\d{2}$/).optional() }), undefined, true);
     return c.json(await claimDailySupplies(c.env.DB, c.get('playerId'), input, Date.now(), releaseScope(c.env, input.releaseId)));
   });
   app.get('/api/v1/gear', async (c) => {

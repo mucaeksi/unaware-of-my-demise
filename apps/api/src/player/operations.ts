@@ -32,6 +32,7 @@ export async function operationStatus(db: D1Database, playerId: string, requestI
     const gear = /^\/api\/v1\/gear\/([1-9]\d{0,15})\/(level-up|ascend|reroll|dismantle)$/.exec(path);
     const mail = /^\/api\/v1\/mail\/([1-9]\d{0,15})\/claim$/.exec(path);
     const task = path === '/api/v1/tasks/claim';
+    const supplies = path === '/api/v1/tasks/supplies';
     const selector = /^\/api\/v1\/recruitment\/([a-z][a-z0-9_]{1,79})$/.exec(path);
     const eventClaim = /^\/api\/v1\/events\/([a-z][a-z0-9_]{1,63})\/claim$/.exec(path);
     const prefixKind =
@@ -64,7 +65,7 @@ export async function operationStatus(db: D1Database, playerId: string, requestI
                   : path === '/api/v1/endless/start'
                     ? 'endless_start'
                     : null;
-    if (!character && !selector && !task && !prefixKind && !checkpoint && (!gear || !Number.isSafeInteger(Number(gear[1]))) && (!mail || !Number.isSafeInteger(Number(mail[1]))))
+    if (!character && !selector && !task && !supplies && !prefixKind && !checkpoint && (!gear || !Number.isSafeInteger(Number(gear[1]))) && (!mail || !Number.isSafeInteger(Number(mail[1]))))
       throw new HttpError(400, 'bad_request', 'unsupported operation path');
     const kind = character
       ? `${
@@ -86,7 +87,8 @@ export async function operationStatus(db: D1Database, playerId: string, requestI
             ? `recruit_selector:${selector[1]}`
             : checkpoint;
     row = await db.prepare('SELECT kind, input_json, result_json FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<StoredOperation>();
-    if (row && (task ? !row.kind?.startsWith('task_claim:') : prefixKind ? !row.kind?.startsWith(prefixKind) : row.kind !== kind)) {
+    const supplyKind = row && /^task_claim:supply:\d{4}-\d{2}-\d{2}:_daily_supplies$/.test(row.kind ?? '');
+    if (row && (supplies ? !supplyKind : task ? !row.kind?.startsWith('task_claim:') || supplyKind : prefixKind ? !row.kind?.startsWith(prefixKind) : row.kind !== kind)) {
       throw new HttpError(409, 'request_id_reused', 'this identity belongs to another operation');
     }
   }

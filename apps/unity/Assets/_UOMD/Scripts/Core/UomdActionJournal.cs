@@ -7,10 +7,12 @@ using System.Text.RegularExpressions;
 
 namespace Uomd.Core
 {
-    /// <summary>Exact original intent for companion growth and Sweep. Never contains credentials.</summary>
+    /// <summary>Exact original intent for supported account actions. Never contains credentials.</summary>
     public sealed class UomdSavedAction
     {
         public const string SweepPath = "/api/v1/progress/sweep";
+        public const string TaskPath = "/api/v1/tasks/claim", SuppliesPath = "/api/v1/tasks/supplies", PatrolPath = "/api/v1/afk/claim";
+        public static bool InvitationPath(string path) => Regex.IsMatch(path, "^/api/v1/recruitment/[a-z][a-z0-9_]{1,79}$");
         public string Scope = "", Path = "", Payload = "", State = "pending", Receipt = "", RejectionCode = "", Summary = "";
         public Dictionary<string, object?> Body => UomdJson.ParseObject(Payload);
         public string RequestId => JsonRead.Str(Body, "requestId");
@@ -34,6 +36,15 @@ namespace Uomd.Core
                 if (!UomdBattleWire.Id(JsonRead.Str(body, "nodeId"), 80)) throw new InvalidDataException("Invalid Sweep stage.");
                 UomdBattleWire.RequiredInt(body, "count", 1, 10);
             }
+            else if (InvitationPath(Path)) { fields.Add("characterId"); if (!UomdBattleWire.Id(JsonRead.Str(body, "characterId"), 80)) throw new InvalidDataException("Invalid invitation choice."); }
+            else if (Path == TaskPath)
+            {
+                fields.Add("periodKey"); fields.Add("taskId");
+                UomdErrandsSnapshot.TaskPeriod(JsonRead.Str(body, "periodKey"));
+                if (!Regex.IsMatch(JsonRead.Str(body, "taskId"), "^_?[a-z][a-z0-9_]{1,79}$")) throw new InvalidDataException("Invalid original task identity.");
+            }
+            else if (Path == SuppliesPath) { fields.Add("periodKey"); UomdErrandsSnapshot.SupplyEnd(JsonRead.Str(body, "periodKey")); }
+            else if (Path == PatrolPath) { }
             else if (!match.Success) throw new InvalidDataException("Unsupported saved action.");
             else if (match.Groups[2].Value == "level-up")
             {
@@ -50,9 +61,39 @@ namespace Uomd.Core
             else if (Receipt.Length > 0) throw new InvalidDataException("Pending action cannot have a receipt.");
         }
         public static bool DefinitiveRejection(string code) => Rejections.Contains(code);
-        private static readonly HashSet<string> Rejections = new HashSet<string> { "insufficient_funds", "insufficient_items", "insufficient_shards", "not_owned", "no_such_skill", "not_xp_item", "xp_overflow", "account_level_too_low", "at_cap", "level_too_low", "max_ascension", "max_rank", "max_resonance", "no_excess_shards", "not_at_cap", "story_gate", "not_enough_ration", "sweep_requires_three_stars", "sweep_limit_reached", "sweep_not_repeatable", "node_locked", "unknown_node", "unknown_release", "release_not_economic" };
+        private static readonly HashSet<string> Rejections = new HashSet<string> { "insufficient_funds", "insufficient_items", "insufficient_shards", "not_owned", "no_such_skill", "not_xp_item", "xp_overflow", "account_level_too_low", "at_cap", "level_too_low", "max_ascension", "max_rank", "max_resonance", "no_excess_shards", "not_at_cap", "story_gate", "not_enough_ration", "sweep_requires_three_stars", "sweep_limit_reached", "sweep_not_repeatable", "node_locked", "unknown_node", "unknown_release", "release_not_economic", "invalid_choice", "unknown_selector", "selector_state_changed", "period_closed", "not_done", "already_claimed", "mode_locked", "afk_nothing_to_claim" };
         public void ValidateReceipt(Dictionary<string, object?> result)
         {
+            if (InvitationPath(Path) || Path == TaskPath || Path == SuppliesPath || Path == PatrolPath)
+            {
+                if (JsonRead.Str(result, "requestId") != RequestId || JsonRead.Str(result, "releaseId") != Release || !(JsonRead.Get(result, "replayed") is bool)) throw new InvalidDataException("Account result identity mismatch.");
+                if (InvitationPath(Path))
+                {
+                    if (JsonRead.Str(result, "itemId") != Path.Split('/')[4] || JsonRead.Str(result, "characterId") != JsonRead.Str(Body, "characterId") || JsonRead.Str(result, "characterName").Length == 0) throw new InvalidDataException("Invitation result identity mismatch.");
+                    UomdBattleWire.RequiredInt(result, "consumed", 1, 1);
+                    var grant = JsonRead.Obj(result, "grant"); UomdBattleWire.RequiredInt(grant, "copiesAdded", 1, 1);
+                    int copies = UomdBattleWire.RequiredInt(grant, "copiesAfter", 1, int.MaxValue), added = UomdBattleWire.RequiredInt(grant, "shardsAdded", 0, int.MaxValue), total = UomdBattleWire.RequiredInt(grant, "shardsAfter", 0, int.MaxValue);
+                    if (total < added || copies == 1 && added != 0 || copies > 1 && added == 0) throw new InvalidDataException("Invalid original invitation grant.");
+                }
+                else
+                {
+                    var rewards = UomdErrandsSnapshot.Rewards(result);
+                    if (Path == TaskPath || Path == SuppliesPath)
+                    {
+                        string task = Path == SuppliesPath ? "_daily_supplies" : JsonRead.Str(Body, "taskId");
+                        if (JsonRead.Str(result, "taskId") != task || JsonRead.Str(result, "periodKey") != JsonRead.Str(Body, "periodKey")) throw new InvalidDataException("Task result belongs to another period.");
+                        if (Path == TaskPath && !UomdEntryCheckpoint.IsHash(JsonRead.Str(result, "taskRulesSha256"))) throw new InvalidDataException("Missing frozen task terms.");
+                        if (Path == SuppliesPath && (UomdErrandsSnapshot.Timestamp(result, "endsAtMs") != UomdErrandsSnapshot.SupplyEnd(JsonRead.Str(Body, "periodKey")) || rewards.Count != 1 || JsonRead.Str(rewards[0], "type") != "currency" || UomdBattleWire.RequiredInt(result, "amount", 1, int.MaxValue) != JsonRead.Int(rewards[0], "amount"))) throw new InvalidDataException("Invalid original daily supplies.");
+                    }
+                    else
+                    {
+                        long previous = UomdErrandsSnapshot.Timestamp(result, "previousCheckpointMs"), next = UomdErrandsSnapshot.Timestamp(result, "checkpointMs");
+                        int elapsed = UomdBattleWire.RequiredInt(result, "elapsedSeconds", 60, int.MaxValue), minutes = UomdBattleWire.RequiredInt(result, "minutesAccrued", 1, int.MaxValue);
+                        if (next <= previous || (long)minutes * 60 > elapsed || !(JsonRead.Get(result, "capped") is bool) || rewards.Count == 0) throw new InvalidDataException("Invalid patrol settlement.");
+                    }
+                }
+                return;
+            }
             if (Path == SweepPath)
             {
                 if (JsonRead.Str(result, "requestId") != RequestId || JsonRead.Str(result, "nodeId") != JsonRead.Str(Body, "nodeId") || JsonRead.Int(result, "count") != JsonRead.Int(Body, "count")) throw new InvalidDataException("Sweep result identity mismatch.");

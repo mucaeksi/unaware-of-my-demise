@@ -41,6 +41,7 @@ namespace Uomd.Scenes
             _router.HubState.ReviewRead = Read; _router.HubState.ReviewIndex = Index;
             _router.AccountActions.ReviewSend = Send; _router.AccountActions.ReviewRead = Status;
             await InitializeLibraryAsync();
+            InitializeRewards();
         }
         private async Awaitable<string> Index()
         {
@@ -55,6 +56,7 @@ namespace Uomd.Scenes
             var gate = Gate; Gate = null; if (gate != null) await gate.Awaitable; else await Awaitable.NextFrameAsync();
             if (mode == "offline") throw new UomdApiException(0, "fixture_offline", "Isolated fixture.");
             if (path.StartsWith("/api/v1/library", StringComparison.Ordinal)) return await ReadLibraryAsync(path);
+            if (path.StartsWith("/api/v1/recruitment/", StringComparison.Ordinal) || path.StartsWith("/api/v1/tasks?", StringComparison.Ordinal) || path.StartsWith("/api/v1/afk?", StringComparison.Ordinal)) return RewardsRead(path, player);
             if (path == "/api/v1/stacks" || path.StartsWith("/api/v1/catalog?", StringComparison.Ordinal) || path.StartsWith("/api/v1/gear?", StringComparison.Ordinal) || path.Contains("/stats?")) return SystemRead(path, player, mode);
             var roster = new List<object>(_roster); var members = new List<object>();
             if (mode != "empty")
@@ -66,7 +68,13 @@ namespace Uomd.Scenes
                     roster.Add(new Dictionary<string, object> { ["id"] = id, ["name_en"] = "Long companion display name for layout verification " + i, ["rarity"] = 4, ["element"] = "Dawn", ["role"] = "support" });
                     members.Add(new Dictionary<string, object> { ["id"] = id, ["level"] = 20, ["copies"] = 2, ["shards"] = 45 });
                 }
-            foreach (var member in members) EnrichCharacter((Dictionary<string, object>)member, player, mode);
+            AddRewardMembers(roster, members, player);
+            foreach (var member in members)
+            {
+                EnrichCharacter((Dictionary<string, object>)member, player, mode);
+                string id = JsonRead.Str(member, "id"), key = player + ":" + id;
+                if (_recruitCopies.TryGetValue(key, out int copies)) { ((Dictionary<string, object>)member)["copies"] = copies; ((Dictionary<string, object>)member)["shards"] = _recruitShards[key]; }
+            }
             var teams = mode == "empty" ? new object[0] : new object[] { new Dictionary<string, object> { ["slot"] = 1, ["name"] = "The Company", ["active"] = true,
                 ["members"] = new object[] { new Dictionary<string, object> { ["characterId"] = "mahmut", ["slot"] = 0, ["row"] = "front" }, new Dictionary<string, object> { ["characterId"] = "fadyme", ["slot"] = 3, ["row"] = "rear" } } } };
             var progress = mode == "empty" ? new object[0] : new object[] { new Dictionary<string, object> { ["node_id"] = "t1", ["stars"] = 3, ["clears"] = 1 } };

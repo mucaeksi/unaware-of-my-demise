@@ -112,6 +112,7 @@ namespace Uomd.Scenes
                 string usage=player+":"+node;_sweepUsed[usage]=(_sweepUsed.TryGetValue(usage,out int used)?used:0)+count;
                 result=Graph(new{requestId=request,nodeId=node,count,dailyUsed=_sweepUsed[usage],dailyLimit=20,rewards=new[]{new{type="currency",currency="eclipse_token",amount=count*2}},ration=new{spent=cost,value=114-_spentRation[player],cap=120,nextMs=0},replayed=false});
             }
+            else if (RewardsPath(path)) result = RewardsApply(path, input, player);
             else
             {
                 string id=path.Split('/')[4]; string characterKey=player+":"+id;
@@ -139,6 +140,7 @@ namespace Uomd.Scenes
             }
             ++Applied;
             if(request.Length>0){_receipts[key]=CanonicalJson.Serialize(result);_inputs[key]=json;_paths[key]=path;}
+            if (RewardsLoseResponse && RewardsPath(path)) { RewardsLoseResponse = false; StatusOffline = true; throw new UomdApiException(0, "fixture_response_lost", "Applied reward response lost."); }
             if(LoseNextResponse){LoseNextResponse=false;throw new UomdApiException(0,"fixture_response_lost","Applied fixture response lost.");}
             return result;
         }

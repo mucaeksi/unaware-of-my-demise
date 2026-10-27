@@ -68,7 +68,7 @@ namespace Uomd.Scenes
             if (UomdEditorPreviewIsolation.Active && Router.ProductionPreview?.scenario.StartsWith("hub/", StringComparison.Ordinal) == true)
             {
                 Router.HubReview.LastRoute = target.ToString();
-                if (target != UomdScreenId.Home && target != UomdScreenId.Roster && target != UomdScreenId.Chapters && target != UomdScreenId.Title && target != UomdScreenId.Character && target != UomdScreenId.Team && target != UomdScreenId.Gear && target != UomdScreenId.Operations && target != UomdScreenId.Library)
+                if (target != UomdScreenId.Home && target != UomdScreenId.Roster && target != UomdScreenId.Chapters && target != UomdScreenId.Title && target != UomdScreenId.Character && target != UomdScreenId.Team && target != UomdScreenId.Gear && target != UomdScreenId.Operations && target != UomdScreenId.Library && target != UomdScreenId.Recruit && target != UomdScreenId.Tasks)
                 { CloseRoutes(); _status.text = "REVIEW FIXTURE · " + target + " route selected. Account actions remain isolated."; return; }
             }
 #endif
@@ -115,7 +115,7 @@ namespace Uomd.Scenes
         protected VisualElement OpenPicker()
         { var list = _root.Q<ScrollView>("hubRoutes"); list.Clear(); _overlay.RemoveFromClassList("is-hidden"); _root.Q<Button>("hubClose").Focus(); return list; }
         protected bool OverlayOpen => !_overlay.ClassListContains("is-hidden");
-        public void OnTick(float dt)
+        public virtual void OnTick(float dt)
         {
             if (!Data.ContextCurrent) _ = Data.RefreshAsync();
             if (_version != Data.Version) Draw();
