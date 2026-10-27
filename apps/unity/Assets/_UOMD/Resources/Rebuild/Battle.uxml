@@ -1,0 +1,54 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Battle.uss" />
+  <ui:VisualElement name="rebuildBattle" class="rebuild-battle" focusable="true">
+    <ui:VisualElement name="battleBackground" class="battle-full battle-background" picking-mode="Ignore" />
+    <ui:VisualElement class="battle-full battle-dim" picking-mode="Ignore" />
+    <ui:VisualElement name="battleWorld" class="battle-world" picking-mode="Ignore">
+      <ui:VisualElement name="battleGroundFx" class="battle-full" picking-mode="Ignore" />
+      <ui:VisualElement name="battleUnits" class="battle-full" picking-mode="Ignore" />
+      <ui:VisualElement name="battlePlates" class="battle-full" picking-mode="Ignore" />
+      <ui:VisualElement name="battleFrontFx" class="battle-full" picking-mode="Ignore" />
+      <ui:VisualElement name="battleNumbers" class="battle-full" picking-mode="Ignore" />
+    </ui:VisualElement>
+    <ui:VisualElement class="battle-header">
+      <ui:VisualElement class="battle-heading" picking-mode="Ignore">
+        <ui:Label text="THE ROAD TO SHELTER" class="battle-eyebrow" />
+        <ui:Label name="battleTitle" class="battle-title" />
+      </ui:VisualElement>
+      <ui:Button name="battlePause" text="PAUSE" class="battle-button" />
+    </ui:VisualElement>
+    <ui:VisualElement name="battleTurns" class="battle-turns" picking-mode="Ignore" />
+    <ui:VisualElement name="battleDock" class="battle-dock">
+      <ui:Label name="battleHint" text="Preparing the encounter…" class="battle-hint" picking-mode="Ignore" />
+      <ui:Label name="battleDescription" class="battle-description" picking-mode="Ignore" />
+      <ui:VisualElement class="battle-target-row">
+        <ui:VisualElement name="battleTargets" class="battle-targets" />
+        <ui:Button name="battleCast" text="CONFIRM" class="battle-button battle-cast" />
+      </ui:VisualElement>
+      <ui:VisualElement name="battleSkills" class="battle-skills" />
+    </ui:VisualElement>
+    <ui:VisualElement name="battleOverlayFx" class="battle-full" picking-mode="Ignore" />
+    <ui:VisualElement name="battleLoad" class="battle-full battle-modal">
+      <ui:VisualElement class="battle-card">
+        <ui:Label name="battleLoadTitle" text="THE ROAD IS TAKING SHAPE" class="battle-modal-title" />
+        <ui:Label name="battleLoadText" text="Preparing the encounter and illustrations…" class="battle-modal-copy" />
+        <ui:Button name="battleRetry" text="TRY AGAIN" class="battle-button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="battlePaused" class="battle-full battle-modal is-hidden">
+      <ui:VisualElement class="battle-card">
+        <ui:Label text="PAUSED" class="battle-modal-title" />
+        <ui:Label text="Take your time. The battle will wait." class="battle-modal-copy" />
+        <ui:Button name="battleResume" text="RESUME" class="battle-button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="battleResult" class="battle-full battle-modal is-hidden">
+      <ui:VisualElement class="battle-card">
+        <ui:Label name="battleOutcome" class="battle-modal-title" />
+        <ui:Label name="battleStars" class="battle-stars" />
+        <ui:Label name="battleSummary" class="battle-modal-copy" />
+        <ui:Button name="battleContinue" text="CONTINUE" class="battle-button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

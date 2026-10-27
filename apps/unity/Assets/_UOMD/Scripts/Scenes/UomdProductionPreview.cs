@@ -71,6 +71,15 @@ namespace Uomd.Scenes
                 case "studio": screen = UomdScreenId.Studio; break;
                 case "title": screen = UomdScreenId.Title; break;
                 default:
+                    if (request.scenario.StartsWith("battle/", StringComparison.Ordinal))
+                    {
+                        string encounter = request.scenario.Substring(7);
+                        if (!BattleScreenController.IsRebuiltTutorialEncounter(encounter)) throw new ArgumentException("Unknown rebuilt tutorial battle.");
+                        Session.ActiveBattleEncounterId = encounter;
+                        Register(new BattleScreenController(this));
+                        screen = UomdScreenId.Battle;
+                        break;
+                    }
                     if (request.scenario.StartsWith("unit/", StringComparison.Ordinal))
                     {
                         string unit = request.scenario.Substring(5);
@@ -150,6 +159,8 @@ namespace Uomd.Scenes
             Session.ReduceFlash = ProductionPreview.reduceFlash;
             Audio.Muted = ProductionPreview.muted;
             Audio.SetPaused(ProductionPreview.paused);
+            if (ActiveScreenId == UomdScreenId.Battle && ProductionPreview.scenario.StartsWith("battle/", StringComparison.Ordinal))
+                Audio.SetPaused(Controller<BattleScreenController>().ReviewPaused);
             if (ActiveScreenId == UomdScreenId.Battle && ProductionPreview.scenario.StartsWith("unit/", StringComparison.Ordinal))
                 Controller<RebuildUnitReviewScreen>()?.ApplyRequest();
             if (_previewSafeRoot == null) return;

@@ -1,0 +1,1422 @@
+{
+  "schema": 1,
+  "status": "LOCAL_TESTED",
+  "verified_at": "2026-10-27T01:51:45.996Z",
+  "verified_local_date": "2026-10-27",
+  "timezone": "Europe/Bucharest",
+  "parent_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+  "source_scope": "Parent plus this native manual battle working tree. The enclosing local commit binds final source, captures and documentation; no push/deploy.",
+  "source_sha256_normalized_lf": {
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs": "aca76d73609e4e9c2c98f77108f54243c5e55964d657627174cdb55405a567a6",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs": "545a7ac2b664bd12ef524ce0217d1a123d47e2290c2fca4616790f9c61344c46",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/BattleScreenController.cs": "d189c608b1fc02e7f5aa8b8e22c8fcdf6c9bdc5d6b737eb77dc65ef1130eb950",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/BattleUnitView.cs": "cafe201c122d2da8cfa2220c49c89bdc7400b0e46dbd38dd41f1bdf6d778de00",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs": "e50c04d465583edfa3eb846cf2a8c17a727bd817040414d015d98f931f4d9125",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs": "68e359a66c9a555e0845139161e1dab2d3f67207a2d2e9b67574a84ab0c25a93",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildBattlePresentation.cs": "fbed3e59a30198bbf28f4460cd4670e938be956daecd05827cca75071527e56e",
+    "apps/unity/Assets/_UOMD/Resources/Rebuild/Battle.uxml": "e2fe355fa4102cbced0ef6f74e50a49dbc14aaa8beb6445918d899cfe89b4380",
+    "apps/unity/Assets/_UOMD/Resources/Rebuild/Battle.uss": "8f0425ebe38d41d35d8a2d42a4d97f7faa59d8a71fc9590e2228dc4bcc398481",
+    "apps/unity/Assets/_UOMD/Tests/Editor/NativeBattlePresentationTests.cs": "8a50a472801b62a7a87ac3c085c32e1204b33ecb152b3b310931a9b0a30d5116"
+  },
+  "unity": {
+    "version": "6000.3.27f1",
+    "pipeline": "0.9.1-exp.1",
+    "transport": "Unity CLI only",
+    "mcp_calls": 0,
+    "editor_tests": {
+      "total": 137,
+      "passed": 137,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode_tests": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "reference_assemblies": 12,
+    "reference_errors": 0
+  },
+  "checks": {
+    "repository_verification": "PASS",
+    "typescript_tests": 955,
+    "headless_logic_tests": 111,
+    "content_files_reproduced": 231,
+    "skills_adapters": 66,
+    "graph": {
+      "nodes": 6676,
+      "edges": 18323,
+      "communities": 258
+    },
+    "final_healthy_preview_console": {
+      "sampledUtc": "2026-10-27T01:49:28.2185096Z",
+      "ageMs": 193,
+      "compilationFailed": false,
+      "compiling": false,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "consoleLogs": 662,
+      "seeded": true
+    }
+  },
+  "manual_ui": {
+    "input_method": "NavigationSubmitEvent on live native skill, target and Confirm Buttons; not physical pointer/touch evidence",
+    "auto": false,
+    "actions": 50,
+    "battles": [
+      {
+        "id": "tutorial_t1",
+        "steps": [
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:0:bellbound_dead",
+            "count": 1
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 2
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:0:bellbound_dead",
+            "count": 3
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_basic_oathless_cut",
+            "type": "basic",
+            "target": "enemy:0:bellbound_dead",
+            "count": 4
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:0:bellbound_dead",
+            "count": 5
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:0:bellbound_dead",
+            "count": 6
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 7
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "type": "ultimate",
+            "target": null,
+            "count": 8
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "type": "ultimate",
+            "target": null,
+            "count": 9
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:1:bellbound_dead",
+            "count": 10
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:1:bellbound_dead",
+            "count": 11
+          }
+        ],
+        "disabledReasons": [
+          "focus",
+          "cooldown"
+        ],
+        "final": {
+          "ready": true,
+          "phase": "result",
+          "pending": false,
+          "paused": false,
+          "hash": "afd0a4858b7cace3aecf12e92950a1bd22de653fe91a7020b7b48677cf632f36",
+          "count": 11,
+          "winner": "player",
+          "actor": "",
+          "paths": [
+            "art/atlas_sol_bellbound_dead.webp",
+            "art/atlas_sol_fadyme.webp",
+            "art/atlas_sol_mahmut.webp",
+            "art/bg_sol_forest_whispering_ash.webp"
+          ],
+          "options": null,
+          "auto": false
+        },
+        "replay": {
+          "valid": true,
+          "complete": true,
+          "hash": "afd0a4858b7cace3aecf12e92950a1bd22de653fe91a7020b7b48677cf632f36",
+          "eventCount": 136,
+          "winner": "player",
+          "stars": 3
+        }
+      },
+      {
+        "id": "tutorial_t2",
+        "steps": [
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:0:hollow_pilgrim",
+            "count": 1
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 2
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:0:hollow_pilgrim",
+            "count": 3
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_basic_oathless_cut",
+            "type": "basic",
+            "target": "enemy:0:hollow_pilgrim",
+            "count": 4
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:0:hollow_pilgrim",
+            "count": 5
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:0:hollow_pilgrim",
+            "count": 6
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 7
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "type": "ultimate",
+            "target": null,
+            "count": 8
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "type": "ultimate",
+            "target": null,
+            "count": 9
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:0:hollow_pilgrim",
+            "count": 10
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:1:bellbound_dead",
+            "count": 11
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 12
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:1:bellbound_dead",
+            "count": 13
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_basic_oathless_cut",
+            "type": "basic",
+            "target": "enemy:1:bellbound_dead",
+            "count": 14
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:2:bellbound_dead",
+            "count": 15
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:2:bellbound_dead",
+            "count": 16
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 17
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "type": "ultimate",
+            "target": null,
+            "count": 18
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "type": "ultimate",
+            "target": null,
+            "count": 19
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:2:bellbound_dead",
+            "count": 20
+          }
+        ],
+        "disabledReasons": [
+          "focus",
+          "cooldown"
+        ],
+        "final": {
+          "ready": true,
+          "phase": "result",
+          "pending": false,
+          "paused": false,
+          "hash": "e4d24f047ab2373b1096f6950bea17f9e1e536d859f1e41cccbd262f2f48575f",
+          "count": 20,
+          "winner": "player",
+          "actor": "",
+          "paths": [
+            "art/atlas_sol_bellbound_dead.webp",
+            "art/atlas_sol_fadyme.webp",
+            "art/atlas_sol_hollow_pilgrim.webp",
+            "art/atlas_sol_mahmut.webp",
+            "art/bg_sol_forgotten_stone_crossing.webp"
+          ],
+          "options": null,
+          "auto": false
+        },
+        "replay": {
+          "valid": true,
+          "complete": true,
+          "hash": "e4d24f047ab2373b1096f6950bea17f9e1e536d859f1e41cccbd262f2f48575f",
+          "eventCount": 243,
+          "winner": "player",
+          "stars": 3
+        }
+      },
+      {
+        "id": "tutorial_t3",
+        "steps": [
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:0:bellbound_dead",
+            "count": 1
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 2
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:0:bellbound_dead",
+            "count": 3
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_basic_oathless_cut",
+            "type": "basic",
+            "target": "enemy:0:bellbound_dead",
+            "count": 4
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:0:bellbound_dead",
+            "count": 5
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:0:bellbound_dead",
+            "count": 6
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 7
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "type": "ultimate",
+            "target": null,
+            "count": 8
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "type": "ultimate",
+            "target": null,
+            "count": 9
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:1:bellbound_dead",
+            "count": 10
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:1:bellbound_dead",
+            "count": 11
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 12
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:1:bellbound_dead",
+            "count": 13
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_basic_oathless_cut",
+            "type": "basic",
+            "target": "enemy:2:hollow_pilgrim",
+            "count": 14
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_basic_veilglass_thorn",
+            "type": "basic",
+            "target": "enemy:2:hollow_pilgrim",
+            "count": 15
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "type": "ultimate",
+            "target": null,
+            "count": 16
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_active_broken_crest_guard",
+            "type": "active",
+            "target": null,
+            "count": 17
+          },
+          {
+            "actor": "player:1:fadyme",
+            "skill": "fadyme_active_borrowed_hour",
+            "type": "active",
+            "target": "enemy:2:hollow_pilgrim",
+            "count": 18
+          },
+          {
+            "actor": "player:0:mahmut",
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "type": "ultimate",
+            "target": null,
+            "count": 19
+          }
+        ],
+        "disabledReasons": [
+          "focus",
+          "cooldown"
+        ],
+        "final": {
+          "ready": true,
+          "phase": "result",
+          "pending": false,
+          "paused": false,
+          "hash": "122f89cd330b69ee6d8dcebd28dc35112a570afceadc65fccf2f5af0e2b0995a",
+          "count": 19,
+          "winner": "player",
+          "actor": "",
+          "paths": [
+            "art/atlas_sol_bellbound_dead.webp",
+            "art/atlas_sol_fadyme.webp",
+            "art/atlas_sol_hollow_pilgrim.webp",
+            "art/atlas_sol_mahmut.webp",
+            "art/bg_sol_shelter_courtyard_dusk.webp"
+          ],
+          "options": null,
+          "auto": false
+        },
+        "replay": {
+          "valid": true,
+          "complete": true,
+          "hash": "122f89cd330b69ee6d8dcebd28dc35112a570afceadc65fccf2f5af0e2b0995a",
+          "eventCount": 214,
+          "winner": "player",
+          "stars": 3
+        }
+      }
+    ],
+    "skill_and_target_selection_do_not_submit": true,
+    "one_confirmation_one_action": true,
+    "disabled_availability_matches_engine": true
+  },
+  "pause": {
+    "before": {
+      "ready": true,
+      "phase": "awaiting_action",
+      "pending": true,
+      "paused": false,
+      "hash": "29a7b84aa2d5ce9667a11e9ef7af45360b342b867d67abe28b3a624fca3e2934",
+      "count": 0,
+      "winner": "",
+      "actor": "player:1:fadyme",
+      "paths": [
+        "art/atlas_sol_bellbound_dead.webp",
+        "art/atlas_sol_fadyme.webp",
+        "art/atlas_sol_mahmut.webp",
+        "art/bg_sol_forest_whispering_ash.webp"
+      ],
+      "options": [
+        {
+          "id": "fadyme_basic_veilglass_thorn",
+          "name": "Veilglass Thorn",
+          "type": "basic",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_active_borrowed_hour",
+          "name": "Borrowed Hour",
+          "type": "active",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_ultimate_the_bell_that_forgets",
+          "name": "The Bell That Forgets",
+          "type": "ultimate",
+          "available": false,
+          "reason": "focus",
+          "needsTarget": false,
+          "targets": [],
+          "enabled": false
+        }
+      ],
+      "auto": false
+    },
+    "paused": {
+      "ready": true,
+      "phase": "awaiting_action",
+      "pending": true,
+      "paused": true,
+      "hash": "29a7b84aa2d5ce9667a11e9ef7af45360b342b867d67abe28b3a624fca3e2934",
+      "count": 0,
+      "winner": "",
+      "actor": "player:1:fadyme",
+      "paths": [
+        "art/atlas_sol_bellbound_dead.webp",
+        "art/atlas_sol_fadyme.webp",
+        "art/atlas_sol_mahmut.webp",
+        "art/bg_sol_forest_whispering_ash.webp"
+      ],
+      "options": [
+        {
+          "id": "fadyme_basic_veilglass_thorn",
+          "name": "Veilglass Thorn",
+          "type": "basic",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_active_borrowed_hour",
+          "name": "Borrowed Hour",
+          "type": "active",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_ultimate_the_bell_that_forgets",
+          "name": "The Bell That Forgets",
+          "type": "ultimate",
+          "available": false,
+          "reason": "focus",
+          "needsTarget": false,
+          "targets": [],
+          "enabled": false
+        }
+      ],
+      "auto": false
+    },
+    "pinned": [
+      {
+        "id": "player:0:mahmut",
+        "frame": "idle",
+        "x": 650,
+        "y": 585
+      },
+      {
+        "id": "player:1:fadyme",
+        "frame": "idle",
+        "x": 350,
+        "y": 490
+      },
+      {
+        "id": "enemy:0:bellbound_dead",
+        "frame": "idle",
+        "x": 1270,
+        "y": 585
+      },
+      {
+        "id": "enemy:1:bellbound_dead",
+        "frame": "idle",
+        "x": 1570,
+        "y": 490
+      }
+    ],
+    "held": [
+      {
+        "id": "player:0:mahmut",
+        "frame": "idle",
+        "x": 650,
+        "y": 585
+      },
+      {
+        "id": "player:1:fadyme",
+        "frame": "idle",
+        "x": 350,
+        "y": 490
+      },
+      {
+        "id": "enemy:0:bellbound_dead",
+        "frame": "idle",
+        "x": 1270,
+        "y": 585
+      },
+      {
+        "id": "enemy:1:bellbound_dead",
+        "frame": "idle",
+        "x": 1570,
+        "y": 490
+      }
+    ]
+  },
+  "recovery": {
+    "review_result_restart": {
+      "ready": true,
+      "phase": "awaiting_action",
+      "pending": true,
+      "paused": false,
+      "hash": "6dfb636f3127a624f5ba6023c8580f89f01ee11a2f9c3d533236ca81cbf8030e",
+      "count": 0,
+      "winner": "",
+      "actor": "player:1:fadyme",
+      "paths": [
+        "art/atlas_sol_bellbound_dead.webp",
+        "art/atlas_sol_fadyme.webp",
+        "art/atlas_sol_hollow_pilgrim.webp",
+        "art/atlas_sol_mahmut.webp",
+        "art/bg_sol_shelter_courtyard_dusk.webp"
+      ],
+      "options": [
+        {
+          "id": "fadyme_basic_veilglass_thorn",
+          "name": "Veilglass Thorn",
+          "type": "basic",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead",
+            "enemy:2:hollow_pilgrim"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_active_borrowed_hour",
+          "name": "Borrowed Hour",
+          "type": "active",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead",
+            "enemy:2:hollow_pilgrim"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_ultimate_the_bell_that_forgets",
+          "name": "The Bell That Forgets",
+          "type": "ultimate",
+          "available": false,
+          "reason": "focus",
+          "needsTarget": false,
+          "targets": [],
+          "enabled": false
+        }
+      ],
+      "auto": false
+    },
+    "missing_rebuilt_mapping": {
+      "ready": true,
+      "phase": "error",
+      "pending": false,
+      "paused": false,
+      "hash": "ebc9a848a1a6a3a1910c6d45726bdf54d9598df62babf34b4e93ac3a594f6ff4",
+      "count": 0,
+      "winner": "",
+      "actor": "",
+      "paths": [
+        "art/bg_sol_forest_whispering_ash.webp"
+      ],
+      "options": null,
+      "auto": false
+    },
+    "retry_after_mapping_restored": {
+      "ready": true,
+      "phase": "awaiting_action",
+      "pending": true,
+      "paused": false,
+      "hash": "29a7b84aa2d5ce9667a11e9ef7af45360b342b867d67abe28b3a624fca3e2934",
+      "count": 0,
+      "winner": "",
+      "actor": "player:1:fadyme",
+      "paths": [
+        "art/atlas_sol_bellbound_dead.webp",
+        "art/atlas_sol_fadyme.webp",
+        "art/atlas_sol_mahmut.webp",
+        "art/bg_sol_forest_whispering_ash.webp"
+      ],
+      "options": [
+        {
+          "id": "fadyme_basic_veilglass_thorn",
+          "name": "Veilglass Thorn",
+          "type": "basic",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_active_borrowed_hour",
+          "name": "Borrowed Hour",
+          "type": "active",
+          "available": true,
+          "reason": null,
+          "needsTarget": true,
+          "targets": [
+            "enemy:0:bellbound_dead",
+            "enemy:1:bellbound_dead"
+          ],
+          "enabled": true
+        },
+        {
+          "id": "fadyme_ultimate_the_bell_that_forgets",
+          "name": "The Bell That Forgets",
+          "type": "ultimate",
+          "available": false,
+          "reason": "focus",
+          "needsTarget": false,
+          "targets": [],
+          "enabled": false
+        }
+      ],
+      "auto": false
+    },
+    "note": "Fault injection removed only the in-memory sol_mahmut catalog mapping. No source/content/account writes. One expected warning was emitted; recovery returned to a zero-action manual prompt."
+  },
+  "layout": {
+    "final_result": "PASS",
+    "bounds": [
+      {
+        "w": 1920,
+        "h": 1080,
+        "safe": false,
+        "units": [
+          {
+            "id": "player:0:mahmut",
+            "side": "player",
+            "body": {
+              "xMin": 557,
+              "xMax": 736,
+              "yMin": 369,
+              "yMax": 585,
+              "width": 179,
+              "height": 216
+            },
+            "plate": {
+              "xMin": 540,
+              "xMax": 760,
+              "yMin": 597,
+              "yMax": 689,
+              "width": 220,
+              "height": 92
+            }
+          },
+          {
+            "id": "player:1:fadyme",
+            "side": "player",
+            "body": {
+              "xMin": 286,
+              "xMax": 418,
+              "yMin": 286,
+              "yMax": 490,
+              "width": 132,
+              "height": 204
+            },
+            "plate": {
+              "xMin": 240,
+              "xMax": 460,
+              "yMin": 502,
+              "yMax": 594,
+              "width": 220,
+              "height": 92
+            }
+          },
+          {
+            "id": "enemy:2:hollow_pilgrim",
+            "side": "enemy",
+            "body": {
+              "xMin": 1160,
+              "xMax": 1374,
+              "yMin": 349,
+              "yMax": 585,
+              "width": 214,
+              "height": 236
+            },
+            "plate": {
+              "xMin": 1160,
+              "xMax": 1380,
+              "yMin": 597,
+              "yMax": 665,
+              "width": 220,
+              "height": 68
+            }
+          },
+          {
+            "id": "enemy:0:bellbound_dead",
+            "side": "enemy",
+            "body": {
+              "xMin": 1707,
+              "xMax": 1832,
+              "yMin": 259,
+              "yMax": 455,
+              "width": 125,
+              "height": 196
+            },
+            "plate": {
+              "xMin": 1670,
+              "xMax": 1890,
+              "yMin": 467,
+              "yMax": 535,
+              "width": 220,
+              "height": 68
+            }
+          },
+          {
+            "id": "enemy:1:bellbound_dead",
+            "side": "enemy",
+            "body": {
+              "xMin": 1437,
+              "xMax": 1562,
+              "yMin": 259,
+              "yMax": 455,
+              "width": 125,
+              "height": 196
+            },
+            "plate": {
+              "xMin": 1400,
+              "xMax": 1620,
+              "yMin": 467,
+              "yMax": 535,
+              "width": 220,
+              "height": 68
+            }
+          }
+        ]
+      },
+      {
+        "w": 2400,
+        "h": 1080,
+        "safe": true,
+        "units": [
+          {
+            "id": "player:0:mahmut",
+            "side": "player",
+            "body": {
+              "xMin": 797,
+              "xMax": 976,
+              "yMin": 397,
+              "yMax": 613,
+              "width": 179,
+              "height": 216
+            },
+            "plate": {
+              "xMin": 780,
+              "xMax": 1000,
+              "yMin": 625,
+              "yMax": 717,
+              "width": 220,
+              "height": 92
+            }
+          },
+          {
+            "id": "player:1:fadyme",
+            "side": "player",
+            "body": {
+              "xMin": 526,
+              "xMax": 658,
+              "yMin": 314,
+              "yMax": 518,
+              "width": 132,
+              "height": 204
+            },
+            "plate": {
+              "xMin": 480,
+              "xMax": 700,
+              "yMin": 530,
+              "yMax": 622,
+              "width": 220,
+              "height": 92
+            }
+          },
+          {
+            "id": "enemy:2:hollow_pilgrim",
+            "side": "enemy",
+            "body": {
+              "xMin": 1400,
+              "xMax": 1614,
+              "yMin": 377,
+              "yMax": 613,
+              "width": 214,
+              "height": 236
+            },
+            "plate": {
+              "xMin": 1400,
+              "xMax": 1620,
+              "yMin": 625,
+              "yMax": 693,
+              "width": 220,
+              "height": 68
+            }
+          },
+          {
+            "id": "enemy:0:bellbound_dead",
+            "side": "enemy",
+            "body": {
+              "xMin": 1947,
+              "xMax": 2072,
+              "yMin": 287,
+              "yMax": 483,
+              "width": 125,
+              "height": 196
+            },
+            "plate": {
+              "xMin": 1910,
+              "xMax": 2130,
+              "yMin": 495,
+              "yMax": 563,
+              "width": 220,
+              "height": 68
+            }
+          },
+          {
+            "id": "enemy:1:bellbound_dead",
+            "side": "enemy",
+            "body": {
+              "xMin": 1677,
+              "xMax": 1802,
+              "yMin": 287,
+              "yMax": 483,
+              "width": 125,
+              "height": 196
+            },
+            "plate": {
+              "xMin": 1640,
+              "xMax": 1860,
+              "yMin": 495,
+              "yMax": 563,
+              "width": 220,
+              "height": 68
+            }
+          }
+        ]
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "safe": false,
+        "units": [
+          {
+            "id": "player:0:mahmut",
+            "side": "player",
+            "body": {
+              "xMin": 557.6,
+              "xMax": 735.199951,
+              "yMin": 513,
+              "yMax": 729,
+              "width": 177.599976,
+              "height": 216
+            },
+            "plate": {
+              "xMin": 540,
+              "xMax": 759.600037,
+              "yMin": 741.600037,
+              "yMax": 832.8,
+              "width": 219.600037,
+              "height": 91.19995
+            }
+          },
+          {
+            "id": "player:1:fadyme",
+            "side": "player",
+            "body": {
+              "xMin": 286.4,
+              "xMax": 418.4,
+              "yMin": 430,
+              "yMax": 634,
+              "width": 132,
+              "height": 204
+            },
+            "plate": {
+              "xMin": 240,
+              "xMax": 459.6,
+              "yMin": 645.6,
+              "yMax": 738,
+              "width": 219.6,
+              "height": 92.4000244
+            }
+          },
+          {
+            "id": "enemy:2:hollow_pilgrim",
+            "side": "enemy",
+            "body": {
+              "xMin": 1159.6,
+              "xMax": 1374.4,
+              "yMin": 492.599976,
+              "yMax": 729,
+              "width": 214.800049,
+              "height": 236.400024
+            },
+            "plate": {
+              "xMin": 1160.4,
+              "xMax": 1380,
+              "yMin": 741.600037,
+              "yMax": 808.8,
+              "width": 219.599976,
+              "height": 67.19995
+            }
+          },
+          {
+            "id": "enemy:0:bellbound_dead",
+            "side": "enemy",
+            "body": {
+              "xMin": 1706.8,
+              "xMax": 1831.6001,
+              "yMin": 403.4,
+              "yMax": 599,
+              "width": 124.800049,
+              "height": 195.6
+            },
+            "plate": {
+              "xMin": 1670.4,
+              "xMax": 1890,
+              "yMin": 610.800049,
+              "yMax": 679.2001,
+              "width": 219.599976,
+              "height": 68.4000244
+            }
+          },
+          {
+            "id": "enemy:1:bellbound_dead",
+            "side": "enemy",
+            "body": {
+              "xMin": 1436.8,
+              "xMax": 1561.6001,
+              "yMin": 403.4,
+              "yMax": 599,
+              "width": 124.800049,
+              "height": 195.6
+            },
+            "plate": {
+              "xMin": 1400.4,
+              "xMax": 1620,
+              "yMin": 610.800049,
+              "yMax": 679.2001,
+              "width": 219.599976,
+              "height": 68.4000244
+            }
+          }
+        ]
+      }
+    ],
+    "initial_probe": "Rect array serialization returned a string to the CLI probe. The probe was corrected to return primitive bounds; no product error was inferred. Original Editor/preferences restored after both runs.",
+    "t3_correction": "Two rear enemies originally overlapped. Final source spreads rear bodies, plates and wrapped intents into separate columns. All three final sizes checked for overlapping body/plate rectangles."
+  },
+  "restoration": {
+    "manual": {
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      }
+    },
+    "layout": {
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      }
+    },
+    "keys": 8,
+    "api": "Production Review API blocked; memory-only content state; no live calls"
+  },
+  "captures": [
+    {
+      "image": "docs/review/captures/20261027T010745502_b86eb27f.png",
+      "image_sha256": "f031eb611db97c36f339401f750eb0c055c71f99bd447525a0e284120f8b382a",
+      "metadata": "docs/review/captures/20261027T010745502_b86eb27f.json",
+      "metadata_sha256": "f7afae5bae706ac1345e461234c7236f48f7bab0532247792e66dcea7e9fd063",
+      "scenario": "battle/tutorial_t1",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013225853_49d7ebb9.png",
+      "image_sha256": "27261414135df6cbec1cef784b2392c344a37cccb649ab27fe0ffdeb03eea0f4",
+      "metadata": "docs/review/captures/20261027T013225853_49d7ebb9.json",
+      "metadata_sha256": "e52ed51c90529bd87e60ad7175244f38c2c25bed498693e5f1258227383bc977",
+      "scenario": "battle/tutorial_t1",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013239280_84b2270c.png",
+      "image_sha256": "4bcbfe4f224d360982929f3111c07b581fa5476429241f8eb1a39b9343a2bc86",
+      "metadata": "docs/review/captures/20261027T013239280_84b2270c.json",
+      "metadata_sha256": "70066024f366a3c921781b5adb4fc1c3ee0e5cd59ee82e206b34328658772a8e",
+      "scenario": "battle/tutorial_t1",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013244038_50baa92f.png",
+      "image_sha256": "dc69ea288780152014fe7c4602b8c0fd4706da67a1df08838d6fccc6cf03ca5a",
+      "metadata": "docs/review/captures/20261027T013244038_50baa92f.json",
+      "metadata_sha256": "eecf173da8ae7a966f1281b19e56aad77d27b32bc2b5b9b68f61aacb9d5b108e",
+      "scenario": "battle/tutorial_t1",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 2400,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013248642_a41354d4.png",
+      "image_sha256": "e11b28f12f7a653140690ca68ce920b705bbf9f87883acef3909072cb8f27535",
+      "metadata": "docs/review/captures/20261027T013248642_a41354d4.json",
+      "metadata_sha256": "c9d2fbf536512ce0827f35060874a20530be3edf883d40c9fa74b92561bd0d64",
+      "scenario": "battle/tutorial_t1",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 1600,
+      "height": 1200,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013417289_1bb29d36.png",
+      "image_sha256": "4c5d4141679062d131e9e87a576c9361f3fa41f6ede5c0b1e8e8cefb42b817dc",
+      "metadata": "docs/review/captures/20261027T013417289_1bb29d36.json",
+      "metadata_sha256": "befbfbe185784b936be441a6178c2709bd2863a6dcbda435afc6803752123c28",
+      "scenario": "battle/tutorial_t1",
+      "state": "result",
+      "actions": 11,
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013425324_ec98f617.png",
+      "image_sha256": "6c6f8ee647a5fe0549b880c7ee58aed7f13bb2c4e28ccda0906b08dc3cc5bab1",
+      "metadata": "docs/review/captures/20261027T013425324_ec98f617.json",
+      "metadata_sha256": "aa9f137baa44e1aafbb65b35c629de67af02d0882af468afe0a3cfb1524480a4",
+      "scenario": "battle/tutorial_t2",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_forgotten_stone_crossing",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013727381_f0404f61.png",
+      "image_sha256": "2f58664e4549bfa56885e3fb060cf5f5c6aaf0ea7d5b914d6d1f66cf6748cdfc",
+      "metadata": "docs/review/captures/20261027T013727381_f0404f61.json",
+      "metadata_sha256": "ce0cc6a95ad9d655856b4915b3e68acb5a10f2132052de8e1be0d8c90030f759",
+      "scenario": "battle/tutorial_t2",
+      "state": "result",
+      "actions": 20,
+      "source_asset": "sol_bg_forgotten_stone_crossing",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T013734313_bb78b1dc.png",
+      "image_sha256": "5794fb0bb339f07a28aa863080862752bda829f04938349b9114306b9fb0dacf",
+      "metadata": "docs/review/captures/20261027T013734313_bb78b1dc.json",
+      "metadata_sha256": "502391c10e5a43436fab3144166d268d06d0d815b46d2bc9caf945bc1e736f43",
+      "scenario": "battle/tutorial_t3",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": true
+    },
+    {
+      "image": "docs/review/captures/20261027T014001042_de0e06fe.png",
+      "image_sha256": "4188a1217ad29dc5791ef92beafd1d24b493631edc1b29b1ff3e75e311dd32f9",
+      "metadata": "docs/review/captures/20261027T014001042_de0e06fe.json",
+      "metadata_sha256": "e3840a49364836c78e4bec4ddd87f077eefac521f3c35503a925528757ad621a",
+      "scenario": "battle/tutorial_t3",
+      "state": "result",
+      "actions": 19,
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": true
+    },
+    {
+      "image": "docs/review/captures/20261027T014038169_3dbfc212.png",
+      "image_sha256": "baffa488cdeb298474846189b62afc3a64d7c63545c9b13bec9ffa820bef01c3",
+      "metadata": "docs/review/captures/20261027T014038169_3dbfc212.json",
+      "metadata_sha256": "0447d011daa1abf243429016aa50f068a57c49ed7a4c8b971b751aae706531f9",
+      "scenario": "battle/tutorial_t1",
+      "state": "error",
+      "actions": 0,
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T014727927_afa12e40.png",
+      "image_sha256": "2910ffaf8b77c41989fb3e19f4c10d8ba411dc72cc1c053634cc8994144bdd27",
+      "metadata": "docs/review/captures/20261027T014727927_afa12e40.json",
+      "metadata_sha256": "acf43b2c379ce27ea4f51ce928e7718cd6451dbb41e9ece9f76b7eeaaa4f4cb6",
+      "scenario": "battle/tutorial_t3",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": true
+    },
+    {
+      "image": "docs/review/captures/20261027T014915272_45d15df5.png",
+      "image_sha256": "2910ffaf8b77c41989fb3e19f4c10d8ba411dc72cc1c053634cc8994144bdd27",
+      "metadata": "docs/review/captures/20261027T014915272_45d15df5.json",
+      "metadata_sha256": "a2fc03c8034140319d52f9bd72c97290e01a836ee56cfa3ba5c064252988d9eb",
+      "scenario": "battle/tutorial_t3",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T014920426_22539bb2.png",
+      "image_sha256": "5ec7a9b2a5dc5d29ad858284dd217e8c1cac8aecf838f8408032741ccb49e88f",
+      "metadata": "docs/review/captures/20261027T014920426_22539bb2.json",
+      "metadata_sha256": "43634a853c6160600c6806bb25eb8ddcd6e7197215f562bb735b59ec1a7366dd",
+      "scenario": "battle/tutorial_t3",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 2400,
+      "height": 1080,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    },
+    {
+      "image": "docs/review/captures/20261027T014925051_2f1fd40d.png",
+      "image_sha256": "45610542fc84f5b3a6e37a2c01d48f31be8f827773b62d6ec294324e14dba1d2",
+      "metadata": "docs/review/captures/20261027T014925051_2f1fd40d.json",
+      "metadata_sha256": "97ac83463d718ea6b8e872f915a23678f278f1fc0d8ed5025a595caca6ce1924",
+      "scenario": "battle/tutorial_t3",
+      "state": "awaiting_action",
+      "actions": 0,
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1600,
+      "height": 1200,
+      "source_commit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+      "superseded_layout": false
+    }
+  ],
+  "media": {
+    "new_generations": 0,
+    "candidates": 26,
+    "records": 460,
+    "human_approvals": 0,
+    "consumers": "Normal tutorial T1/T2/T3 now explicitly use rebuilt stage/unit keys; other battles retain their prior presentation."
+  },
+  "limits": [
+    "Full signed-in first entry/Finish/durable Continue/restart is the next slice.",
+    "Typed Editor UI events and safe-area simulations are not physical touch or Android evidence.",
+    "Short cosmetic UI/VFX transitions are not certified as a complete mid-action pause freeze.",
+    "Battle atlases remain short sequences from sixteen source poses, not rigs or sixteen unique frames per state.",
+    "Human art acceptance, native-resolution and release gates remain open.",
+    "PlayMode audio tests pass; their existing empty-clip time warnings are not treated as new battle failures."
+  ]
+}

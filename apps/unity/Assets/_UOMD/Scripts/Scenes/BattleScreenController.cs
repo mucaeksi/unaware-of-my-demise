@@ -24,7 +24,7 @@ namespace Uomd.Scenes
     /// (strikes, floating numbers, heals, shields, defeats, waves) and the result. The recorded actions replay to the same
     /// logHash the server re-simulates.
     /// </summary>
-    public sealed class BattleScreenController : IUomdScreenController
+    public sealed partial class BattleScreenController : IUomdScreenController
     {
         private const float CardWidth = 286f, CardHeight = 88f, CardGap = 36f;
 
@@ -82,6 +82,12 @@ namespace Uomd.Scenes
             _auto = false;
             _pending = null;
             string encounterId = _router.Session.ActiveBattleEncounterId;
+            _battle = null;
+            _autoButton = null;
+            _native = IsRebuiltTutorialEncounter(encounterId);
+            _nativeReady = _nativePaused = false;
+            _nativePaths.Clear();
+            if (_native) BuildNativeRoot();
             _router.Audio.PlayBgmCue(AudioDirector.ResolveBattleMusicCue(encounterId, false));
 
             Dictionary<string, object> raw;
@@ -95,6 +101,12 @@ namespace Uomd.Scenes
             }
             catch (Exception e)
             {
+                if (_native && generation == _generation)
+                {
+                    ShowNativeFailure("The encounter data could not be loaded. Try again.");
+                    Debug.LogWarning("[Battle] Tutorial data unavailable: " + e.Message);
+                    return;
+                }
                 Debug.LogError($"[Battle] encounter {encounterId} could not start: {e}");
                 if (generation == _generation && screenRoot != null) UomdUiKit.ShowToast(screenRoot, $"The battle could not start: {e.Message}");
                 return;
@@ -115,12 +127,25 @@ namespace Uomd.Scenes
             if (isBoss) _router.Audio.PlayBgmCue(AudioDirector.ResolveBattleMusicCue(encounterId, true, bossUnitId));
 
             BuildStage(raw);
-            await LoadVfxAsync();
-            if (generation != _generation) return;
-            await LoadUnitArtAsync();
-            if (generation != _generation) return;
-            SyncViews();
-            _ = RunAsync(generation);
+            try
+            {
+                if (_native) await LoadNativeBackgroundAsync(raw, generation);
+                if (generation != _generation) return;
+                await LoadVfxAsync();
+                if (generation != _generation) return;
+                await LoadUnitArtAsync(generation);
+                if (generation != _generation) return;
+                SyncViews();
+                if (_native) NativeAssetsReady();
+                _ = RunAsync(generation);
+            }
+            catch (Exception e)
+            {
+                if (generation != _generation) return;
+                if (!_native) throw;
+                ShowNativeFailure("The battle illustrations could not be loaded. Try again.");
+                Debug.LogWarning("[Battle] Tutorial visuals unavailable: " + e.Message);
+            }
         }
 
         /// <summary>Combat VFX presets (content vfx/vfx_presets.json); a missing or invalid pack only skips the effects.</summary>
@@ -173,6 +198,7 @@ namespace Uomd.Scenes
 
         private void BuildStage(Dictionary<string, object> raw)
         {
+            if (_native) { ConfigureNativeStage(raw); return; }
             var stage = UomdScreenKit.Layer(_root, UomdThemeTokens.Void);
             stage.pickingMode = PickingMode.Position;
             var bg = UomdScreenKit.Backdrop(stage, _router.Media, _router.Media.Catalog.Background(Str(raw, "location_id")));
@@ -243,14 +269,21 @@ namespace Uomd.Scenes
             _hitStopLeft = _shakeLeft = 0f;
         }
 
-        private async Awaitable LoadUnitArtAsync()
+        private async Awaitable LoadUnitArtAsync(int generation)
         {
-            var catalog = _router.Media.Catalog;
             foreach (var c in _battle.Combatants)
             {
                 string unitId = c.Def.UnitId;
-                if (_sprites.ContainsKey(unitId) || !catalog.TryGetUnitArt(unitId, out var art)) continue;
+                if (_sprites.ContainsKey(unitId)) continue;
+                if (!TryUnitArt(unitId, out var art))
+                {
+                    if (_native) throw new InvalidOperationException("Rebuilt unit art missing: " + unitId);
+                    continue;
+                }
                 var texture = await _router.Media.TextureAsync(art.AtlasPath);
+                if (generation != _generation) return;
+                if (_native && texture == null) throw new InvalidOperationException("Rebuilt atlas unavailable: " + unitId);
+                if (_native) _nativePaths.Add(art.AtlasPath);
                 var frames = new Dictionary<string, Sprite>(StringComparer.Ordinal);
                 if (texture != null)
                 {
@@ -272,10 +305,10 @@ namespace Uomd.Scenes
             {
                 foreach (var (c, row, index, count) in VisualFormation(side))
                 {
-                    if (_views.ContainsKey(c.Id) || !_router.Media.Catalog.TryGetUnitArt(c.Def.UnitId, out var art)) continue;
-                    var spot = UomdBattleFormation.SpotFor(side, row, index, count, _router.Session.BattleHudLayout);
+                    if (_views.ContainsKey(c.Id) || !TryUnitArt(c.Def.UnitId, out var art)) continue;
+                    var spot = _native ? NativeSpot(side, row, index, count) : UomdBattleFormation.SpotFor(side, row, index, count, _router.Session.BattleHudLayout);
                     var view = new BattleUnitView(_unitLayer, _plateLayer, c.Id, c.Def.NameEn, side, art,
-                        _sprites.TryGetValue(c.Def.UnitId, out var frames) ? frames : new Dictionary<string, Sprite>(), spot, OnUnitTapped);
+                        _sprites.TryGetValue(c.Def.UnitId, out var frames) ? frames : new Dictionary<string, Sprite>(), spot, OnUnitTapped, _native);
                     _views[c.Id] = view;
                 }
             }
@@ -341,6 +374,7 @@ namespace Uomd.Scenes
         /// <summary>The next eight turns as medallions under the stage title (BattleScene.refreshHud).</summary>
         private void RefreshTurnBar()
         {
+            if (_native) { RefreshNativeTurnBar(); return; }
             _turnBar.Clear();
             var order = _battle.Result == null ? _battle.PreviewOrder(8) : new List<string>();
             if (order.Count == 0)
@@ -392,36 +426,40 @@ namespace Uomd.Scenes
 
         private async Awaitable RunAsync(int generation)
         {
-            var step = _battle.Advance();
-            await PlayEventsAsync(step.Events, generation);
-            while (generation == _generation && _battle.Result == null)
+            try
             {
-                PlayerAction action;
-                if (_auto)
-                {
-                    await Awaitable.WaitForSecondsAsync(0.38f);
-                    if (generation != _generation) return;
-                    action = _battle.AutoAction();
-                }
-                else
-                {
-                    action = await AwaitPlayerActionAsync(_battle.Prompt());
-                    if (generation != _generation) return;
-                }
-                _actions.Add(action);
-                try
-                {
-                    step = _battle.Act(action);
-                }
-                catch (IllegalActionException e)
-                {
-                    _actions.RemoveAt(_actions.Count - 1);
-                    UomdUiKit.ShowToast(_root, e.Message);
-                    continue;
-                }
+                var step = _battle.Advance();
                 await PlayEventsAsync(step.Events, generation);
+                while (generation == _generation && _battle.Result == null)
+                {
+                    PlayerAction action;
+                    if (_auto)
+                    {
+                        await WaitForBattleAsync(0.38f);
+                        if (generation != _generation) return;
+                        action = _battle.AutoAction();
+                    }
+                    else
+                    {
+                        action = await AwaitPlayerActionAsync(_battle.Prompt());
+                        if (generation != _generation) return;
+                    }
+                    _actions.Add(action);
+                    try
+                    {
+                        step = _battle.Act(action);
+                    }
+                    catch (IllegalActionException e)
+                    {
+                        _actions.RemoveAt(_actions.Count - 1);
+                        UomdUiKit.ShowToast(_root, e.Message);
+                        continue;
+                    }
+                    await PlayEventsAsync(step.Events, generation);
+                }
+                if (generation == _generation && _battle.Result != null) ShowResult(_battle.Result);
             }
-            if (generation == _generation && _battle.Result != null) ShowResult(_battle.Result);
+            catch (OperationCanceledException) when (generation != _generation) { }
         }
 
         private Awaitable<PlayerAction> AwaitPlayerActionAsync(TurnPrompt prompt)
@@ -434,6 +472,7 @@ namespace Uomd.Scenes
 
         private void Submit(PlayerAction action)
         {
+            if (_native && BattlePaused) return;
             var pending = _pending;
             if (pending == null) return;
             _pending = null;
@@ -444,6 +483,7 @@ namespace Uomd.Scenes
 
         private void BuildSkillDock(TurnPrompt prompt)
         {
+            if (_native) { BuildNativeSkillDock(prompt); return; }
             ClearSkillDock();
             var actor = _battle.Unit(prompt.Actor);
             if (_views.TryGetValue(prompt.Actor, out var view)) view.SetActive(true);
@@ -470,6 +510,7 @@ namespace Uomd.Scenes
 
         private void ClearSkillDock()
         {
+            if (_native) { ClearNativeDock(); return; }
             _dock.Clear();
             _selected = null;
             _hint.text = "";
@@ -483,6 +524,7 @@ namespace Uomd.Scenes
 
         private void OnSkillTapped(SkillOption o)
         {
+            if (_native) { SelectNativeSkill(o); return; }
             if (!o.Available || _pending == null) return;
             if (_selected != null && _selected.SkillId == o.SkillId)
             {
@@ -515,6 +557,7 @@ namespace Uomd.Scenes
 
         private void OnUnitTapped(BattleUnitView view)
         {
+            if (_native) { SelectNativeTarget(view.Id); return; }
             var o = _selected;
             if (o == null || !o.NeedsTarget || !o.LegalTargets.Contains(view.Id)) return;
             Submit(new PlayerAction(o.SkillId, view.Id));
@@ -542,12 +585,22 @@ namespace Uomd.Scenes
             foreach (var e in events)
             {
                 if (generation != _generation) return;
+                while (_native && BattlePaused)
+                {
+                    await Awaitable.NextFrameAsync();
+                    if (generation != _generation) return;
+                }
                 float wait = await PresentAsync(e);
-                if (wait > 0f) await Awaitable.WaitForSecondsAsync(Calm ? wait * 0.6f : wait);
+                if (wait > 0f) await WaitForBattleAsync(Calm ? wait * 0.6f : wait);
             }
             if (generation != _generation) return;
             await SettleAsync(generation);
             if (generation != _generation) return;
+            while (_native && BattlePaused)
+            {
+                await Awaitable.NextFrameAsync();
+                if (generation != _generation) return;
+            }
             Refresh();
         }
 
@@ -757,7 +810,7 @@ namespace Uomd.Scenes
             actor.Play("walk");
             actor.MoveTo(target.X + (actor.Side == "player" ? -135f : 135f), target.Y, 250, Calm);
             if (!_lunged.Contains(actor)) _lunged.Add(actor);
-            await Awaitable.WaitForSecondsAsync(0.25f);
+            await WaitForBattleAsync(0.25f);
             actor.Play(state);
         }
 
@@ -803,7 +856,9 @@ namespace Uomd.Scenes
 
         private async Awaitable AddWaveAsync()
         {
-            await LoadUnitArtAsync();
+            int generation = _generation;
+            await LoadUnitArtAsync(generation);
+            if (generation != _generation) return;
             SyncViews();
         }
 
@@ -818,7 +873,7 @@ namespace Uomd.Scenes
                 if (unit.Alive) unit.Play("walk");
                 unit.MoveTo(unit.X, unit.Y, 220, Calm);
             }
-            await Awaitable.WaitForSecondsAsync(0.24f);
+            await WaitForBattleAsync(0.24f);
             if (generation != _generation) return;
             foreach (var unit in moved) if (unit.Alive) unit.Play("idle");
         }
@@ -855,6 +910,7 @@ namespace Uomd.Scenes
 
         private void ShowResult(BattleResult result)
         {
+            if (_native) { ShowNativeResult(result); return; }
             ClearSkillDock();
             bool won = result.Winner == "player";
             foreach (var v in _views.Values) if (v.Alive && v.Side == (won ? "player" : "enemy")) v.Play("victory");
@@ -890,6 +946,7 @@ namespace Uomd.Scenes
 
         public void OnTick(float deltaTime)
         {
+            if (_native && (!_nativeReady || BattlePaused)) return;
             // hit-stop slows the battle's own clock (unit frames and effects) for a few real-time frames (BattleVfx.hitStop)
             float scaled = deltaTime;
             if (_hitStopLeft > 0f)
@@ -897,7 +954,7 @@ namespace Uomd.Scenes
                 _hitStopLeft -= deltaTime;
                 scaled = deltaTime * HitStopScale;
             }
-            foreach (var v in _views.Values) v.Tick(scaled);
+            foreach (var v in _views.Values) if (!_native || !Calm || !v.LoopingAnimation) v.Tick(scaled);
             _vfx?.Tick(scaled);
             if (_world == null) return;
             if (_shakeLeft > 0f)
@@ -911,7 +968,10 @@ namespace Uomd.Scenes
         public void OnExit()
         {
             _generation++;
+            var pending = _pending;
             _pending = null;
+            pending?.SetCanceled();
+            if (_native) UnbindNative();
             _vfx?.Clear();
             foreach (var frames in _sprites.Values)
             {

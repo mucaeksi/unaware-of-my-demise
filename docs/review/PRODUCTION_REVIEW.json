@@ -607,6 +607,156 @@
             "lineId": "",
             "unitState": "basic",
             "unitFrame": "basic_2"
+        },
+        {
+            "id": "20261027T010745502_b86eb27f",
+            "image": "captures/20261027T010745502_b86eb27f.png",
+            "sha256": "f031eb611db97c36f339401f750eb0c055c71f99bd447525a0e284120f8b382a",
+            "metadata": "captures/20261027T010745502_b86eb27f.json",
+            "scenario": "battle/tutorial_t1",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013225853_49d7ebb9",
+            "image": "captures/20261027T013225853_49d7ebb9.png",
+            "sha256": "27261414135df6cbec1cef784b2392c344a37cccb649ab27fe0ffdeb03eea0f4",
+            "metadata": "captures/20261027T013225853_49d7ebb9.json",
+            "scenario": "battle/tutorial_t1",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013239280_84b2270c",
+            "image": "captures/20261027T013239280_84b2270c.png",
+            "sha256": "4bcbfe4f224d360982929f3111c07b581fa5476429241f8eb1a39b9343a2bc86",
+            "metadata": "captures/20261027T013239280_84b2270c.json",
+            "scenario": "battle/tutorial_t1",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013244038_50baa92f",
+            "image": "captures/20261027T013244038_50baa92f.png",
+            "sha256": "dc69ea288780152014fe7c4602b8c0fd4706da67a1df08838d6fccc6cf03ca5a",
+            "metadata": "captures/20261027T013244038_50baa92f.json",
+            "scenario": "battle/tutorial_t1",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013248642_a41354d4",
+            "image": "captures/20261027T013248642_a41354d4.png",
+            "sha256": "e11b28f12f7a653140690ca68ce920b705bbf9f87883acef3909072cb8f27535",
+            "metadata": "captures/20261027T013248642_a41354d4.json",
+            "scenario": "battle/tutorial_t1",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013417289_1bb29d36",
+            "image": "captures/20261027T013417289_1bb29d36.png",
+            "sha256": "4c5d4141679062d131e9e87a576c9361f3fa41f6ede5c0b1e8e8cefb42b817dc",
+            "metadata": "captures/20261027T013417289_1bb29d36.json",
+            "scenario": "battle/tutorial_t1",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013425324_ec98f617",
+            "image": "captures/20261027T013425324_ec98f617.png",
+            "sha256": "6c6f8ee647a5fe0549b880c7ee58aed7f13bb2c4e28ccda0906b08dc3cc5bab1",
+            "metadata": "captures/20261027T013425324_ec98f617.json",
+            "scenario": "battle/tutorial_t2",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013727381_f0404f61",
+            "image": "captures/20261027T013727381_f0404f61.png",
+            "sha256": "2f58664e4549bfa56885e3fb060cf5f5c6aaf0ea7d5b914d6d1f66cf6748cdfc",
+            "metadata": "captures/20261027T013727381_f0404f61.json",
+            "scenario": "battle/tutorial_t2",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T013734313_bb78b1dc",
+            "image": "captures/20261027T013734313_bb78b1dc.png",
+            "sha256": "5794fb0bb339f07a28aa863080862752bda829f04938349b9114306b9fb0dacf",
+            "metadata": "captures/20261027T013734313_bb78b1dc.json",
+            "scenario": "battle/tutorial_t3",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T014001042_de0e06fe",
+            "image": "captures/20261027T014001042_de0e06fe.png",
+            "sha256": "4188a1217ad29dc5791ef92beafd1d24b493631edc1b29b1ff3e75e311dd32f9",
+            "metadata": "captures/20261027T014001042_de0e06fe.json",
+            "scenario": "battle/tutorial_t3",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T014038169_3dbfc212",
+            "image": "captures/20261027T014038169_3dbfc212.png",
+            "sha256": "baffa488cdeb298474846189b62afc3a64d7c63545c9b13bec9ffa820bef01c3",
+            "metadata": "captures/20261027T014038169_3dbfc212.json",
+            "scenario": "battle/tutorial_t1",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T014727927_afa12e40",
+            "image": "captures/20261027T014727927_afa12e40.png",
+            "sha256": "2910ffaf8b77c41989fb3e19f4c10d8ba411dc72cc1c053634cc8994144bdd27",
+            "metadata": "captures/20261027T014727927_afa12e40.json",
+            "scenario": "battle/tutorial_t3",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T014915272_45d15df5",
+            "image": "captures/20261027T014915272_45d15df5.png",
+            "sha256": "2910ffaf8b77c41989fb3e19f4c10d8ba411dc72cc1c053634cc8994144bdd27",
+            "metadata": "captures/20261027T014915272_45d15df5.json",
+            "scenario": "battle/tutorial_t3",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T014920426_22539bb2",
+            "image": "captures/20261027T014920426_22539bb2.png",
+            "sha256": "5ec7a9b2a5dc5d29ad858284dd217e8c1cac8aecf838f8408032741ccb49e88f",
+            "metadata": "captures/20261027T014920426_22539bb2.json",
+            "scenario": "battle/tutorial_t3",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261027T014925051_2f1fd40d",
+            "image": "captures/20261027T014925051_2f1fd40d.png",
+            "sha256": "45610542fc84f5b3a6e37a2c01d48f31be8f827773b62d6ec294324e14dba1d2",
+            "metadata": "captures/20261027T014925051_2f1fd40d.json",
+            "scenario": "battle/tutorial_t3",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
         }
     ]
 }

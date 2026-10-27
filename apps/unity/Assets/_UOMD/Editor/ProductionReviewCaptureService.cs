@@ -22,6 +22,9 @@ namespace Uomd.EditorTools
         public string unitState, unitFrame;
         public Rect unitBounds;
         public float unitFootY;
+        public string battleLogHash;
+        public int battleActionCount;
+        public bool awaitingPlayerAction;
         public ProductionPreviewRequest settings;
         public Rect subtitleBounds, titleBounds, safeAreaBounds;
         public int stageCameras, stageLights, stageParticles;
@@ -70,6 +73,11 @@ namespace Uomd.EditorTools
                 var settings = JsonUtility.FromJson<ProductionPreviewRequest>(JsonUtility.ToJson(router.ProductionPreview));
                 var catalog = ProductionReviewCatalog.Load(store.Root);
                 var asset = catalog.FirstOrDefault(a => a.Scenario == settings.scenario);
+                if (settings.scenario.StartsWith("battle/", StringComparison.Ordinal))
+                {
+                    var paths = router.Controller<BattleScreenController>().ReviewImagePaths;
+                    asset = catalog.FirstOrDefault(a => a.Class == "background" && JsonRead.Arr(a.Entry, "outputs").Any(o => paths.Contains(JsonRead.Str(o, "path"))));
+                }
                 if (asset != null) ProductionReviewCatalog.VerifyTarget(store.Root, asset);
                 string id = DateTime.UtcNow.ToString("yyyyMMddTHHmmssfff") + "_" + Guid.NewGuid().ToString("N").Substring(0, 8);
                 string relative = "captures/" + id;
@@ -113,6 +121,17 @@ namespace Uomd.EditorTools
                     metadata.unitFootY = review.FootScreenY;
                     metadata.imagePaths = review.ImagePaths;
                     metadata.presentationState = review.Ready ? "unit_review" : "loading";
+                    metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
+                        .Select(a => a.Identity).ToArray();
+                }
+                if (settings.scenario.StartsWith("battle/", StringComparison.Ordinal))
+                {
+                    var battle = router.Controller<BattleScreenController>();
+                    metadata.battleLogHash = battle.ReviewLogHash;
+                    metadata.battleActionCount = battle.ReviewActions.Length;
+                    metadata.awaitingPlayerAction = battle.AwaitingPlayer;
+                    metadata.presentationState = battle.ReviewPresentationState;
+                    metadata.imagePaths = battle.ReviewImagePaths;
                     metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
                         .Select(a => a.Identity).ToArray();
                 }

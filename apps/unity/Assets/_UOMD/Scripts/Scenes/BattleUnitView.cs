@@ -25,6 +25,7 @@ namespace Uomd.Scenes
         private readonly Label _intent;
         private readonly VisualElement _hpFill;
         private readonly VisualElement _focusFill;
+        private readonly Label _hpNumbers, _focusNumbers;
         private readonly bool _flip;
         private readonly float _baseScale;
         private readonly float _depth;
@@ -33,13 +34,16 @@ namespace Uomd.Scenes
         private string _shownFrame;
         private float _frameClock;
         private Action _onStateDone;
+        private readonly bool _manualMotion;
+        private float _positionX, _positionY, _moveFromX, _moveFromY, _moveToX, _moveToY, _moveClock, _moveDuration;
 
         public BattleUnitView(VisualElement unitLayer, VisualElement plateLayer, string id, string name, string side, UnitArt art,
-            Dictionary<string, Sprite> sprites, BattleSpot spot, Action<BattleUnitView> onTap)
+            Dictionary<string, Sprite> sprites, BattleSpot spot, Action<BattleUnitView> onTap, bool nativePresentation = false)
         {
             Id = id;
             Side = side;
             _art = art;
+            _manualMotion = nativePresentation;
             _sprites = sprites;
             X = (float)spot.X;
             Y = (float)spot.Y;
@@ -55,7 +59,7 @@ namespace Uomd.Scenes
             Root.style.left = 0;
             Root.style.top = 0;
             unitLayer.Add(Root);
-            Root.RegisterCallback<ClickEvent>(e =>
+            if (!nativePresentation) Root.RegisterCallback<ClickEvent>(e =>
             {
                 onTap(this);
                 e.StopPropagation();
@@ -72,6 +76,17 @@ namespace Uomd.Scenes
             _image.style.backgroundSize = new BackgroundSize(Length.Percent(100), Length.Percent(100));
             if (_flip) _image.style.scale = new Scale(new Vector3(-1f, 1f, 1f));
             Root.Add(_image);
+            if (nativePresentation)
+            {
+                var hit = new Button(() => onTap(this)) { name = "battleUnitTap_" + id, tooltip = name, focusable = false };
+                hit.style.position = Position.Absolute;
+                hit.style.left = -110; hit.style.top = -(float)art.HeightPx * depth;
+                hit.style.width = 220; hit.style.height = (float)art.HeightPx * depth;
+                hit.style.backgroundColor = Color.clear;
+                hit.style.borderTopWidth = hit.style.borderBottomWidth = hit.style.borderLeftWidth = hit.style.borderRightWidth = 0;
+                hit.style.marginLeft = hit.style.marginRight = hit.style.marginTop = hit.style.marginBottom = 0;
+                Root.Add(hit);
+            }
 
             _marker = UomdScreenKit.Text(Root, "▼", 34, UomdThemeTokens.GoldHi);
             _marker.style.position = Position.Absolute;
@@ -83,12 +98,14 @@ namespace Uomd.Scenes
             // the plate lives on its own layer above every unit so a front unit never hides a rear unit's bars
             bool player = side == "player";
             float plateW = player ? PlateWidthPlayer : PlateWidthEnemy, plateH = player ? 50f : 52f;
+            if (nativePresentation) { plateW = 220; plateH = player ? 92 : 68; }
             Plate = new VisualElement { pickingMode = PickingMode.Ignore };
+            Plate.name = "battlePlate_" + id;
             Plate.style.position = Position.Absolute;
             Plate.style.width = plateW;
             Plate.style.height = plateH;
             Plate.style.left = X - plateW / 2f;
-            Plate.style.top = Y + 18f - plateH / 2f + (player ? 0 : 1);
+            Plate.style.top = nativePresentation ? Y + 12f : Y + 18f - plateH / 2f + (player ? 0 : 1);
             Plate.style.backgroundColor = new Color(0.039f, 0.024f, 0.063f, player ? 0.54f : 0.68f);
             Round(Plate, plateH / 2f);
             var rim = player ? UomdThemeTokens.PlayerSide : UomdThemeTokens.EnemySide;
@@ -99,15 +116,39 @@ namespace Uomd.Scenes
             var nameLabel = UomdScreenKit.Text(Plate, name.ToUpperInvariant(), 16, player ? new Color(0.812f, 0.878f, 1f) : new Color(1f, 0.702f, 0.769f));
             nameLabel.AddToClassList("uomd-display");
             nameLabel.style.height = 18;
+            if (nativePresentation)
+            {
+                nameLabel.style.fontSize = 18;
+                nameLabel.style.height = 22;
+                _hpNumbers = UomdScreenKit.Text(Plate, "", 18, UomdThemeTokens.TextPrimary);
+                _hpNumbers.name = "battleHp_" + id;
+                _hpNumbers.style.height = 20;
+            }
             _hpFill = Bar(Plate, 154, 10, UomdThemeTokens.HpGood);
             // enemy intent under the plate (BattleScene.refreshHud: the skill an enemy will use, ⚠ when announced)
             _intent = UomdScreenKit.Text(plateLayer, "", 13, new Color(1f, 0.702f, 0.769f), 1f);
             _intent.AddToClassList("uomd-display");
+            _intent.name = "battleIntent_" + id;
             _intent.style.position = Position.Absolute;
             _intent.style.left = X - 150f;
             _intent.style.width = 300f;
             _intent.style.top = Y + 18f + (player ? 40f : 30f);
             _intent.style.display = DisplayStyle.None;
+            if (nativePresentation)
+            {
+                _intent.style.fontSize = 18;
+                _intent.style.whiteSpace = WhiteSpace.Normal;
+                _intent.style.left = X - 125;
+                _intent.style.width = 250;
+                _intent.style.top = Y + 12f + plateH + 6;
+                _intent.style.height = 44;
+                if (player)
+                {
+                    _focusNumbers = UomdScreenKit.Text(Plate, "", 16, UomdThemeTokens.TextDim);
+                    _focusNumbers.name = "battleFocus_" + id;
+                    _focusNumbers.style.height = 18;
+                }
+            }
             _focusFill = player ? Bar(Plate, 154, 6, UomdThemeTokens.Focus) : null;
             if (_focusFill != null) _focusFill.style.width = Length.Percent(0);
 
@@ -122,6 +163,7 @@ namespace Uomd.Scenes
         public float X { get; private set; }
         public float Y { get; private set; }
         public bool Alive { get; private set; } = true;
+        public bool LoopingAnimation => _state?.Loop ?? false;
         /// <summary>Top of the chibi in reference units (floating numbers start here).</summary>
         public float HeadY => Y - (float)_art.HeightPx * _depth;
         /// <summary>Where strikes and impact effects land: half the unit's height above the feet (UnitView.hitPoint).</summary>
@@ -146,6 +188,16 @@ namespace Uomd.Scenes
 
         public void Tick(float deltaTime)
         {
+            if (_manualMotion && _moveDuration > 0)
+            {
+                _moveClock += deltaTime;
+                float t = Mathf.Clamp01(_moveClock / _moveDuration);
+                t = t * t * (3f - 2f * t);
+                _positionX = Mathf.Lerp(_moveFromX, _moveToX, t);
+                _positionY = Mathf.Lerp(_moveFromY, _moveToY, t);
+                Root.style.translate = new Translate(_positionX, _positionY);
+                if (_moveClock >= _moveDuration) _moveDuration = 0;
+            }
             if (_state == null || _state.Frames.Length == 0) return;
             _frameClock += deltaTime;
             float duration = _state.Frames.Length / (float)Math.Max(1.0, _state.Fps);
@@ -179,6 +231,7 @@ namespace Uomd.Scenes
 
         public void SetHp(double hp, double maxHp)
         {
+            if (_hpNumbers != null) _hpNumbers.text = "HP " + hp.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) + "/" + maxHp.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture);
             float ratio = maxHp > 0 ? Mathf.Clamp01((float)(hp / maxHp)) : 0f;
             _hpFill.style.width = Length.Percent(ratio * 100f);
             _hpFill.style.backgroundColor = UomdThemeTokens.HpBarColor(ratio);
@@ -186,6 +239,7 @@ namespace Uomd.Scenes
 
         public void SetFocus(double focus, double max)
         {
+            if (_focusNumbers != null) _focusNumbers.text = "FOCUS " + focus.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture) + "/" + max.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture);
             if (_focusFill == null) return;
             _focusFill.style.width = Length.Percent(max > 0 ? Mathf.Clamp01((float)(focus / max)) * 100f : 0f);
         }
@@ -216,13 +270,25 @@ namespace Uomd.Scenes
         /// <summary>Moves the unit (feet) towards a point, for the lunge before a melee strike.</summary>
         public void MoveTo(float x, float y, int durationMs, bool reducedMotion)
         {
+            if (_manualMotion)
+            {
+                _moveFromX = _positionX; _moveFromY = _positionY;
+                _moveToX = x; _moveToY = y; _moveClock = 0;
+                _moveDuration = reducedMotion ? 0 : durationMs / 1000f;
+                if (_moveDuration <= 0) { _positionX = x; _positionY = y; Root.style.translate = new Translate(x, y); }
+                return;
+            }
             Root.style.transitionProperty = new List<StylePropertyName> { new StylePropertyName("translate") };
             Root.style.transitionDuration = new List<TimeValue> { new TimeValue(reducedMotion ? 0 : durationMs, TimeUnit.Millisecond) };
             Root.style.transitionTimingFunction = new List<EasingFunction> { new EasingFunction(EasingMode.EaseInOut) };
             Root.style.translate = new Translate(x, y);
         }
 
-        public void PlaceAtSpot() => Root.style.translate = new Translate(X, Y);
+        public void PlaceAtSpot()
+        {
+            _positionX = X; _positionY = Y; _moveDuration = 0;
+            Root.style.translate = new Translate(X, Y);
+        }
 
         private void SetRingColor(Color color)
         {

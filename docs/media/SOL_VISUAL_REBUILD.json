@@ -350,7 +350,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_bellbound_dead_chibi_sheet",
-      "consumer_scope": "Explicit sol_bellbound_dead unit-art variant and Editor unit/bellbound_dead motion review using the real battle sprite presenter. Normal battle migration follows the native manual tutorial/battle UI. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
+      "consumer_scope": "Explicit sol_bellbound_dead unit-art variant and Editor unit/bellbound_dead motion review using the real battle sprite presenter. Normal tutorial T1/T2/T3 battle consumers now use this variant through native manual Battle UI; other battles remain migration work. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
     },
     {
       "id": "bg_altar_east_passage",
@@ -681,7 +681,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_bg_forest_whispering_ash",
-      "consumer_scope": "Native tutorial Story before/after scenes only, via explicit sol_<location> keys. Legacy battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes and normal T1/T2/T3 manual battles use explicit sol_<location> keys. Other battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
     },
     {
       "id": "bg_forgotten_stone_crossing",
@@ -697,7 +697,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_bg_forgotten_stone_crossing",
-      "consumer_scope": "Native tutorial Story before/after scenes only, via explicit sol_<location> keys. Legacy battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes and normal T1/T2/T3 manual battles use explicit sol_<location> keys. Other battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
     },
     {
       "id": "bg_highland_ridge",
@@ -923,7 +923,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_bg_shelter_courtyard_dusk",
-      "consumer_scope": "Native tutorial Story before/after scenes only, via explicit sol_<location> keys. Legacy battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes and normal T1/T2/T3 manual battles use explicit sol_<location> keys. Other battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
     },
     {
       "id": "bg_undercity_antidote_archive",
@@ -1749,7 +1749,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_fadyme_chibi_sheet",
-      "consumer_scope": "Explicit sol_fadyme unit-art variant and Editor unit/fadyme motion review using the real battle sprite presenter. Normal battle migration follows the native manual tutorial/battle UI. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
+      "consumer_scope": "Explicit sol_fadyme unit-art variant and Editor unit/fadyme motion review using the real battle sprite presenter. Normal tutorial T1/T2/T3 battle consumers now use this variant through native manual Battle UI; other battles remain migration work. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
     },
     {
       "id": "fadyme_vn_composed",
@@ -2009,7 +2009,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_hollow_pilgrim_chibi_sheet",
-      "consumer_scope": "Explicit sol_hollow_pilgrim unit-art variant and Editor unit/hollow_pilgrim motion review using the real battle sprite presenter. Normal battle migration follows the native manual tutorial/battle UI. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
+      "consumer_scope": "Explicit sol_hollow_pilgrim unit-art variant and Editor unit/hollow_pilgrim motion review using the real battle sprite presenter. Normal tutorial T1/T2/T3 battle consumers now use this variant through native manual Battle UI; other battles remain migration work. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
     },
     {
       "id": "ill_roadside_rest",
@@ -2430,7 +2430,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_mahmut_chibi_sheet",
-      "consumer_scope": "Explicit sol_mahmut unit-art variant and Editor unit/mahmut motion review using the real battle sprite presenter. Normal battle migration follows the native manual tutorial/battle UI. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
+      "consumer_scope": "Explicit sol_mahmut unit-art variant and Editor unit/mahmut motion review using the real battle sprite presenter. Normal tutorial T1/T2/T3 battle consumers now use this variant through native manual Battle UI; other battles remain migration work. Sixteen source poses with eight short explicit animation sequences; not a rig or sixteen unique frames per state. Human, native-resolution and device gates remain open."
     },
     {
       "id": "mahmut_vn_composed",

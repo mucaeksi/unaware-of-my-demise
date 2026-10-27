@@ -1,0 +1,100 @@
+{
+    "schema": 1,
+    "id": "20261027T014915272_45d15df5",
+    "capturedAt": "2026-10-27T01:49:15.4579803Z",
+    "sourceCommit": "33386d685e03ec7f840882209278b28f7a52f4ad",
+    "workingTreeScope": "M README.md\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/BattleScreenController.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/BattleUnitView.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs\n M docs/BUILD_STATE.md\n M docs/DEV_TRACKER.json\n M docs/INFRA_ROADMAP.md\n M docs/NEXT_STEPS.md\n M docs/handoff/CODEX_CLI_MASTER_PROMPT.md\n M docs/handoff/SOL_REBUILD_PLAN.md\n M docs/media/SOL_VISUAL_REBUILD.json\n M docs/review/PRODUCTION_REVIEW.json\n M docs/review/README.md\n M docs/review/index.html\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Battle.uss\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Battle.uss.meta\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Battle.uxml\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Battle.uxml.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildBattlePresentation.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildBattlePresentation.cs.meta\n?? apps/unity/Assets/_UOMD/Tests/Editor/NativeBattlePresentationTests.cs\n?? apps/unity/Assets/_UOMD/Tests/Editor/NativeBattlePresentationTests.cs.meta\n?? codex_watcher.ps1\n?? docs/media/SOL_MANUAL_BATTLES.md\n?? docs/review/captures/20261027T010745502_b86eb27f.json\n?? docs/review/captures/20261027T010745502_b86eb27f.png\n?? docs/review/captures/20261027T013225853_49d7ebb9.json\n?? docs/review/captures/20261027T013225853_49d7ebb9.png\n?? docs/review/captures/20261027T013239280_84b2270c.json\n?? docs/review/captures/20261027T013239280_84b2270c.png\n?? docs/review/captures/20261027T013244038_50baa92f.json\n?? docs/review/captures/20261027T013244038_50baa92f.png\n?? docs/review/captures/20261027T013248642_a41354d4.json\n?? docs/review/captures/20261027T013248642_a41354d4.png\n?? docs/review/captures/20261027T013417289_1bb29d36.json\n?? docs/review/captures/20261027T013417289_1bb29d36.png\n?? docs/review/captures/20261027T013425324_ec98f617.json\n?? docs/review/captures/20261027T013425324_ec98f617.png\n?? docs/review/captures/20261027T013727381_f0404f61.json\n?? docs/review/captures/20261027T013727381_f0404f61.png\n?? docs/review/captures/20261027T013734313_bb78b1dc.json\n?? docs/review/captures/20261027T013734313_bb78b1dc.png\n?? docs/review/captures/20261027T014001042_de0e06fe.json\n?? docs/review/captures/20261027T014001042_de0e06fe.png\n?? docs/review/captures/20261027T014038169_3dbfc212.json\n?? docs/review/captures/20261027T014038169_3dbfc212.png\n?? docs/review/captures/20261027T014727927_afa12e40.json\n?? docs/review/captures/20261027T014727927_afa12e40.png\n?? docs/review/captures/20261027T014915272_45d15df5.png",
+    "contentRelease": "rel_0001",
+    "scenario": "battle/tutorial_t3",
+    "lineId": "",
+    "assetId": "sol_bg_shelter_courtyard_dusk",
+    "sourceSha": "c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+    "entrySha": "41bdfc3a1f46246ae34d2a5e386301bbc04d40dcbbb7a31fab0dac8132924ee1",
+    "assetRevision": 1,
+    "shot": -1,
+    "width": 1920,
+    "height": 1080,
+    "errorsObserved": 0,
+    "shotElapsed": 0.0,
+    "simulatedSafeArea": false,
+    "editorOnly": true,
+    "safeAreaDescription": "none",
+    "imageSha": "2910ffaf8b77c41989fb3e19f4c10d8ba411dc72cc1c053634cc8994144bdd27",
+    "selectedAssetIdentity": "",
+    "presentationState": "awaiting_action",
+    "unitState": "",
+    "unitFrame": "",
+    "unitBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "unitFootY": 0.0,
+    "battleLogHash": "6dfb636f3127a624f5ba6023c8580f89f01ee11a2f9c3d533236ca81cbf8030e",
+    "battleActionCount": 0,
+    "awaitingPlayerAction": true,
+    "settings": {
+        "scenario": "battle/tutorial_t3",
+        "shot": 0,
+        "lineId": "",
+        "unitState": "idle",
+        "unitFrame": 0,
+        "paused": true,
+        "muted": true,
+        "reducedMotion": true,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": false,
+        "presentation": {
+            "scenario": "title",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1920.0,
+        "height": 1080.0
+    },
+    "stageCameras": 0,
+    "stageLights": 0,
+    "stageParticles": 0,
+    "imagePaths": [
+        "art/atlas_sol_bellbound_dead.webp",
+        "art/atlas_sol_fadyme.webp",
+        "art/atlas_sol_hollow_pilgrim.webp",
+        "art/atlas_sol_mahmut.webp",
+        "art/bg_sol_shelter_courtyard_dusk.webp"
+    ],
+    "relatedAssetIdentities": [
+        "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+        "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+        "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+        "sol_hollow_pilgrim_chibi_sheet@1:fa644b80e4bf36ead64a07f69292ee73e7c973e1588f05b57035f0531e29a25c",
+        "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+    ],
+    "bgmVolume": 0.699999988079071,
+    "effectsVolume": 0.8500000238418579,
+    "voiceVolume": 1.0,
+    "actualMuted": true
+}

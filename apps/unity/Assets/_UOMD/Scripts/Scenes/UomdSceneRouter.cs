@@ -126,7 +126,8 @@ namespace Uomd.Scenes
 #if UNITY_EDITOR
             if (UomdEditorPreviewIsolation.Active && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
                 && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue
-                && !(targetScreen == UomdScreenId.Battle && ProductionPreview?.scenario.StartsWith("unit/", StringComparison.Ordinal) == true)
+                && !(targetScreen == UomdScreenId.Battle && (ProductionPreview?.scenario.StartsWith("unit/", StringComparison.Ordinal) == true
+                    || ProductionPreview?.scenario.StartsWith("battle/", StringComparison.Ordinal) == true))
                 && !(targetScreen == UomdScreenId.Story && (ProductionPreview?.scenario.StartsWith("portrait/", StringComparison.Ordinal) == true
                     || ProductionPreview?.scenario.StartsWith("story/", StringComparison.Ordinal) == true))) return;
 #endif
@@ -140,6 +141,7 @@ namespace Uomd.Scenes
             _activeController?.OnExit();
             _screenHost.Clear();
             bool nativeStory = targetScreen == UomdScreenId.Story && StoryScreenController.IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(Session.ActiveStoryPath));
+            nativeStory |= targetScreen == UomdScreenId.Battle && nextController is BattleScreenController && BattleScreenController.IsRebuiltTutorialEncounter(Session.ActiveBattleEncounterId);
             _rootContainer.style.top = nativeStory ? new Length(0) : new Length(50, LengthUnit.Percent);
             _rootContainer.style.bottom = nativeStory ? new StyleLength(0f) : new StyleLength(StyleKeyword.Auto);
             _rootContainer.style.height = nativeStory ? new StyleLength(StyleKeyword.Auto) : new StyleLength(UomdScreenKit.RefHeight);

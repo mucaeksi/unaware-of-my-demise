@@ -1,0 +1,38 @@
+.rebuild-battle { flex-grow: 1; background-color: #100c16; color: #eee4dc; -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/CormorantGaramond-Medium.ttf"); -unity-font-definition: initial; }
+.battle-full { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.battle-background { background-size: cover; background-position-x: center; background-position-y: center; }
+.battle-dim { background-color: rgba(16,12,22,0.16); }
+.battle-world { position: absolute; left: 50%; margin-left: -960px; top: 0; width: 1920px; height: 1080px; }
+.battle-header { flex-direction: row; align-items: center; padding: 28px 48px 20px; background-color: rgba(16,12,22,0.78); }
+.battle-heading { flex-grow: 1; }
+.battle-eyebrow, .battle-button, .battle-hint, .battle-chip, .battle-skill-kind { -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/Cinzel-SemiBold.ttf"); -unity-font-definition: initial; -unity-font-style: normal; }
+.battle-eyebrow { font-size: 17px; letter-spacing: 3px; color: #b9a9c7; margin-bottom: 4px; }
+.battle-title { font-size: 34px; color: #eee4dc; }
+.battle-button { min-height: 68px; min-width: 150px; margin: 0; padding: 12px 22px; font-size: 20px; color: #eee4dc; background-color: #211627; border-width: 1px; border-color: #897384; border-radius: 0; -unity-text-align: middle-center; }
+.battle-button:hover, .battle-button:focus { background-color: #40263e; border-color: #ecd2a0; }
+.battle-button:active { background-color: #281427; }
+.battle-button:disabled { opacity: 0.45; }
+.battle-button.is-selected { background-color: #42243a; border-color: #d5b87e; color: #f1dfbb; }
+.battle-turns { flex-direction: row; margin: 12px 48px; min-height: 54px; }
+.battle-chip { font-size: 17px; padding: 12px 14px; margin-right: 8px; color: #cbbbd5; background-color: rgba(24,15,31,0.9); border-bottom-width: 2px; border-bottom-color: #665772; }
+.battle-chip.is-current { color: #f1dfbb; border-bottom-color: #d5b87e; }
+.battle-dock { position: absolute; left: 40px; right: 40px; bottom: 24px; height: 300px; padding: 16px 22px; background-color: rgba(20,12,26,0.97); border-width: 1px; border-color: #786278; }
+.battle-hint { font-size: 22px; color: #e7cf9e; margin-bottom: 4px; }
+.battle-description { font-size: 25px; white-space: normal; flex-grow: 1; min-height: 44px; color: #d9ccdf; }
+.battle-target-row { flex-direction: row; align-items: center; margin: 6px 0 10px; min-height: 64px; }
+.battle-targets { flex-direction: row; flex-grow: 1; align-items: center; }
+.battle-target { min-height: 64px; min-width: 180px; max-width: 260px; font-size: 18px; margin-right: 10px; white-space: normal; }
+.battle-cast { min-width: 238px; color: #f1dfbb; border-color: #b89b68; }
+.battle-skills { flex-direction: row; height: 86px; flex-shrink: 0; }
+.battle-skill { flex-grow: 1; flex-basis: 0; flex-direction: column; margin-right: 12px; padding: 8px 16px; align-items: center; justify-content: center; min-height: 86px; white-space: normal; }
+.battle-skill-name { width: 100%; flex-shrink: 0; font-size: 24px; white-space: normal; -unity-text-align: middle-center; }
+.battle-skill-kind { width: 100%; flex-shrink: 0; font-size: 16px; color: #bbaaC5; margin-top: 4px; -unity-text-align: middle-center; }
+.battle-modal { background-color: rgba(14,9,20,0.92); align-items: center; justify-content: center; }
+.battle-card { width: 820px; max-width: 88%; padding: 40px 48px; border-width: 1px; border-color: #897384; background-color: #1b1122; }
+.battle-modal-title { font-size: 58px; color: #e7cf9e; -unity-text-align: middle-center; white-space: normal; }
+.battle-modal-copy { font-size: 32px; white-space: normal; margin: 20px 0 28px; -unity-text-align: middle-center; }
+.battle-stars { font-size: 50px; color: #d5b87e; -unity-text-align: middle-center; margin-top: 12px; }
+.battle-compact .battle-dock { left: 24px; right: 24px; }
+.battle-compact .battle-target { min-width: 150px; font-size: 17px; padding-left: 12px; padding-right: 12px; }
+.battle-compact .battle-chip { font-size: 15px; padding: 12px 8px; }
+.is-hidden { display: none; }

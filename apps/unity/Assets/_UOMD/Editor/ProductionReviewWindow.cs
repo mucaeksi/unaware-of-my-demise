@@ -278,6 +278,7 @@ namespace Uomd.EditorTools
             scenarios.AddRange(_assets.Select(a => a.Scenario).Where(s => s.StartsWith("portrait/", StringComparison.Ordinal) && !scenarios.Contains(s)).Distinct());
             scenarios.AddRange(new[] { "portrait/fadyme/authored", "portrait/mahmut/authored" });
             scenarios.AddRange(RebuildUnitReviewScreen.Units.Select(u => "unit/" + u));
+            scenarios.AddRange(new[] { "battle/tutorial_t1", "battle/tutorial_t2", "battle/tutorial_t3" });
             for (int tutorial = 1; tutorial <= 3; tutorial++)
                 scenarios.AddRange(new[] { "story/tutorial_t" + tutorial + "_before", "story/tutorial_t" + tutorial + "_after" });
             var prologue = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/entry/prologue.json")));

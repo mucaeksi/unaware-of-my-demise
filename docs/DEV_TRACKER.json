@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "14498b57",
-  "reviewedAt": "2026-10-26",
+  "sourceCommit": "33386d68",
+  "reviewedAt": "2026-10-27",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Four new battle atlas candidates and real sprite/frame review are integrated. Next: native manual tutorial/battle UI, rebuilt stage/units and real deterministic action/target/turn flow, then entry/Finish/durable Continue/restart. Continue sequentially until 07:00 Europe/Bucharest on 2026-10-27 under the owner-authorized same-thread heartbeat; pause at the deadline.",
+    "nextProposed": "Native manual tutorial battles and rebuilt consumers are locally verified. Next: full entry/Finish/durable Continue/restart, account/content isolation and truthful save states. Continue sequentially until 07:00 Europe/Bucharest on 2026-10-27; pause the existing heartbeat at the deadline.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped. Unity Editor access is CLI only per the owner; MCP configuration and pinned sources remain intact."
   },
   "now": [
+    {
+      "title": "D-35: native manual tutorial battles and rebuilt consumers (2026-10-27)",
+      "detail": "All three tutorial battles use native UXML/USS and rebuilt Sol stage/unit art. Fifty manual UI actions produce exact replay hashes; pause, missing-art Retry, three viewport sizes and safe-area simulation checked. 137 EditMode, 3 PlayMode, 111 headless, npm verification and twelve-assembly reference compile pass. Typed UI events are not physical touch evidence. Scoped source/capture hashes: docs/evidence/sol-manual-battles-2026-10-27.json. Full entry/Finish/durable Continue/restart follows; no human art, Android or release approval. Enclosing commit binds final source; sourceCommit is its parent."
+    },
     {
       "title": "D-35: four SD battle atlas candidates and real motion review (2026-10-27)",
       "detail": "New original OpenAI art, sixteen source poses per unit, eight short explicit state sequences, separate sol_ keys and actual BattleUnitView review with both facings, frame/pivot capture metadata and pause. 26 candidates / 460 records; human QC/native-2K/device acceptance remains open. Fadyme uses two native pages assembled without resizing. No normal battle migration yet. Scoped checks: docs/evidence/sol-battle-atlases-2026-10-27.json. Enclosing commit binds source; sourceCommit is its parent."
