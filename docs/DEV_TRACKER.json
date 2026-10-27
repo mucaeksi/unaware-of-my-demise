@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "058a0069",
-  "reviewedAt": "2026-10-27",
+  "sourceCommit": "8e553481",
+  "reviewedAt": "2026-10-28",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Native Invitations and Errands are locally implemented with durable original selection/period/day/Patrol recovery and a capability-gated supply API fix. Next: account/privacy, broader gear/mode and campaign narrative/visual work, then approved live account/content and Android acceptance. CLI-only Unity, local main commits and owner-held pushes remain.",
+    "nextProposed": "Native Account/Privacy/Settings and guarded cloud/export/sign-out/deletion flows are locally implemented. Continue remaining gear/mode actions and campaign narrative/visual migration sequentially until 2026-10-28 07:00 Europe/Bucharest under the current overnight authorization. Live identity/provider and Android/art/release gates remain separate. CLI-only Unity; local main commits, owner pushes.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped. Unity Editor access is CLI only per the owner; MCP configuration and pinned sources remain intact."
   },
   "now": [
+    {
+      "title": "D-35: native Account, Privacy and Settings (2026-10-28)",
+      "detail": "Actual native Account controller with strict cloud parsing/CAS/readback, best-star merge and preserved foreign fields, account-scoped export sink, separate destructive confirmation and screen/auth/account/release callback fences. Immediate local sign-out cannot erase a newly adopted identity through a late reply. Explicit HTTP/native/storage isolated fixtures, Game-view evidence and restored Editor state: docs/evidence/sol-account-privacy-2026-10-28.json. Guide: docs/media/SOL_ACCOUNT_PRIVACY.md. No real deletion, provider acceptance, Android file/secure storage/lifecycle, human art or release approval. Enclosing local commit binds source; sourceCommit records its parent."
+    },
     {
       "title": "D-35: native Invitations and durable Errands (2026-10-27)",
       "detail": "Actual native controllers use server-only selectors, separate invitation confirmation, transaction-time duplicate receipts and exact journal/status/receipt binding. Daily supplies retain their approved UTC day across rollover; unknown expired days reject without a grant. Window/weekly grace and optional Patrol reads remain provider-driven. The matching API capability is local, not deployed. Explicit isolated account/clock/status fixtures, real Game-view evidence and restored Editor state: docs/evidence/sol-invitations-errands-2026-10-27.json. Guide: docs/media/SOL_INVITATIONS_AND_ERRANDS.md. No new art; live provider, Android, human art and release gates remain open. Enclosing local commit binds source; sourceCommit records its parent."

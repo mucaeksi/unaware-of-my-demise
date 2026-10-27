@@ -35,6 +35,9 @@ namespace Uomd.EditorTools
         public string rewardsFixtureMode, rewardsIndexSource;
         public long rewardsFixtureTimeMs;
         public int invitationCount, errandCount;
+        public string accountFixtureMode, accountScreenOperation, accountScreenNotice;
+        public bool accountScreenBusy;
+        public long cloudCopyVersion;
         public bool awaitingPlayerAction;
         public string entryPhase, entryScreen;
         public int entryStage, entryTutorials;
@@ -187,6 +190,7 @@ namespace Uomd.EditorTools
                     else if (router.ActiveScreenId == UomdScreenId.Library) hub = router.Controller<ArchiveScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Recruit) hub = router.Controller<InvitationsScreen>();
                     else if (router.ActiveScreenId == UomdScreenId.Tasks) hub = router.Controller<ErrandsScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Account) hub = router.Controller<AccountScreen>();
                     if (hub != null)
                     {
                         metadata.imagePaths = hub.ReviewImagePaths; metadata.hubState = hub.ReviewState;
@@ -201,6 +205,13 @@ namespace Uomd.EditorTools
                     metadata.entryScreen = router.ActiveScreenId.ToString(); metadata.hubNotice = router.HubState.Notice;
                     metadata.hubRelease = router.HubState.Snapshot?.Release; metadata.hubFixture = true;
                     metadata.hubFixtureMode = router.HubReview?.Mode;
+                    metadata.accountFixtureMode = router.HubReview?.AccountMode;
+                    metadata.cloudCopyVersion = router.HubState.Snapshot?.Cloud?.Version ?? -1;
+                    if (router.ActiveScreenId == UomdScreenId.Account)
+                    {
+                        var account = router.Controller<AccountScreen>(); metadata.accountScreenOperation = account.ReviewOperation;
+                        metadata.accountScreenNotice = account.ReviewNotice; metadata.accountScreenBusy = account.ReviewBusy;
+                    }
                     metadata.archiveFixtureMode = router.HubReview?.LibraryMode; metadata.archiveIndexSource = UomdHubReview.LibrarySource;
                     metadata.rewardsFixtureMode = router.HubReview?.RewardsMode; metadata.rewardsIndexSource = UomdHubReview.RewardsSource;
                     metadata.rewardsFixtureTimeMs = router.HubReview?.RewardsTime ?? 0;

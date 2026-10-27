@@ -20,6 +20,7 @@ namespace Uomd.Core
         public UomdLibrary? Library;
         public List<UomdInvitation>? Invitations;
         public UomdErrandsSnapshot? Errands;
+        public UomdCloudCopy? Cloud;
         public long? Balance;
         public int AccountLevel, Ration, RationCap;
         public readonly List<HubCompanion> Companions = new List<HubCompanion>();

@@ -3852,6 +3852,182 @@
             "sourceIdentities": [
                 "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
             ]
+        },
+        {
+            "id": "20261027T215141764_27686271",
+            "image": "captures/20261027T215141764_27686271.png",
+            "sha256": "f7950305dca41437feab0f67b2ba2310427fec2098a9dce3984f51ae36fcf514",
+            "metadata": "captures/20261027T215141764_27686271.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T215354173_8acda248",
+            "image": "captures/20261027T215354173_8acda248.png",
+            "sha256": "8f6977e30faf93f334df26bb416ec8874ae6d9276380f46d6940f2972150ec4a",
+            "metadata": "captures/20261027T215354173_8acda248.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "stale",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T215458462_41d325b5",
+            "image": "captures/20261027T215458462_41d325b5.png",
+            "sha256": "8a5345656e5047947e217115560af463810b0182a721609122a3dcaf72c6886a",
+            "metadata": "captures/20261027T215458462_41d325b5.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T215530680_615573f4",
+            "image": "captures/20261027T215530680_615573f4.png",
+            "sha256": "4d3363e4358a01a6a6fcc33f709b5c0644c1a35fb396cf121c8d26c46d8c5121",
+            "metadata": "captures/20261027T215530680_615573f4.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T215551665_9c63c602",
+            "image": "captures/20261027T215551665_9c63c602.png",
+            "sha256": "fc9ac06969d8e1d2f2d2545d889f32d08a8199b8bfdd8fd066d3df12b83bbfaa",
+            "metadata": "captures/20261027T215551665_9c63c602.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T220830640_06a1319e",
+            "image": "captures/20261027T220830640_06a1319e.png",
+            "sha256": "05e892e3fa2bc701980c3f704faea43dc3495e966c8d17c7c70dd2f278431a7d",
+            "metadata": "captures/20261027T220830640_06a1319e.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T220938513_a5353f5c",
+            "image": "captures/20261027T220938513_a5353f5c.png",
+            "sha256": "59ba2babd9fab760f9750615c7216cc7838e04dd9da83dc013f665d2ab537c4f",
+            "metadata": "captures/20261027T220938513_a5353f5c.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T221027836_2afef585",
+            "image": "captures/20261027T221027836_2afef585.png",
+            "sha256": "4f2bc54a4061181123fbba010808bb54285c0076c75cee261322e6f81b4dc5e7",
+            "metadata": "captures/20261027T221027836_2afef585.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "stale",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T221045913_ad0f7b36",
+            "image": "captures/20261027T221045913_ad0f7b36.png",
+            "sha256": "ce74d67c780fc9d51258bd31f5de0de1bc8c1072bf3b5fdeed2b900206551abc",
+            "metadata": "captures/20261027T221045913_ad0f7b36.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "guest",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T221210699_6031a755",
+            "image": "captures/20261027T221210699_6031a755.png",
+            "sha256": "6becc24ad8f06f8991da87280d522f682b5febc70ab2d806f1c59b0da1a28a1c",
+            "metadata": "captures/20261027T221210699_6031a755.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T221220041_86f96a96",
+            "image": "captures/20261027T221220041_86f96a96.png",
+            "sha256": "084345aab81c9ca955f3dda2976b523a469122ab2a37eab594ddc1ffa42e0040",
+            "metadata": "captures/20261027T221220041_86f96a96.json",
+            "scenario": "hub/account",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Account",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
         }
     ]
 }

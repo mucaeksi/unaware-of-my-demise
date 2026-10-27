@@ -36,6 +36,7 @@ namespace Uomd.Scenes
 #endif
         protected RebuildHubScreen(UomdSceneRouter router) { Router = router; }
         protected virtual void Entered() { }
+        protected virtual void Leaving() { }
         public async Awaitable OnEnterAsync(VisualElement host)
         {
             Entered();
@@ -53,7 +54,7 @@ namespace Uomd.Scenes
             _root.Q<Button>("hubRecoverAction").clicked += () => { if (_version == Data.Version && _renderAccount == Router.Api.AccountKey && _renderRevision == Router.Api.AuthRevision && _renderRelease == Router.Patch.ActiveReleaseId) _ = Actions.RecoverAsync(); };
             _root.RegisterCallback<GeometryChangedEvent>(Geometry);
             _root.RegisterCallback<KeyDownEvent>(Key);
-            _root.Q<Button>(ScreenId == UomdScreenId.Home ? "hubHome" : ScreenId == UomdScreenId.Chapters ? "hubChapters" : "hubCompany").AddToClassList("hub-selected");
+            _root.Q<Button>(ScreenId == UomdScreenId.Home ? "hubHome" : ScreenId == UomdScreenId.Chapters ? "hubChapters" : ScreenId == UomdScreenId.Account ? "hubAccount" : "hubCompany").AddToClassList("hub-selected");
             Router.Audio.PlayBgmCue("bgm_main_theme");
             _ = Data.RefreshAsync(); Draw();
             await LoadArtAsync(generation);
@@ -68,7 +69,7 @@ namespace Uomd.Scenes
             if (UomdEditorPreviewIsolation.Active && Router.ProductionPreview?.scenario.StartsWith("hub/", StringComparison.Ordinal) == true)
             {
                 Router.HubReview.LastRoute = target.ToString();
-                if (target != UomdScreenId.Home && target != UomdScreenId.Roster && target != UomdScreenId.Chapters && target != UomdScreenId.Title && target != UomdScreenId.Character && target != UomdScreenId.Team && target != UomdScreenId.Gear && target != UomdScreenId.Operations && target != UomdScreenId.Library && target != UomdScreenId.Recruit && target != UomdScreenId.Tasks)
+                if (target != UomdScreenId.Home && target != UomdScreenId.Roster && target != UomdScreenId.Chapters && target != UomdScreenId.Title && target != UomdScreenId.Character && target != UomdScreenId.Team && target != UomdScreenId.Gear && target != UomdScreenId.Operations && target != UomdScreenId.Library && target != UomdScreenId.Recruit && target != UomdScreenId.Tasks && target != UomdScreenId.Account)
                 { CloseRoutes(); _status.text = "REVIEW FIXTURE · " + target + " route selected. Account actions remain isolated."; return; }
             }
 #endif
@@ -145,13 +146,17 @@ namespace Uomd.Scenes
 #endif
             if (snapshot == null)
             {
-                var panel = Panel(_body, "hub-main"); Text(panel, Data.Loading ? "THE ROAD IS WAITING" : "ACCOUNT DATA UNAVAILABLE", "hub-card-title");
-                Text(panel, Data.Loading ? "Your account is being loaded." : "Connect and refresh to load your company, balance and chapter progress.", "hub-copy"); return;
+                DrawUnavailable(); return;
             }
             DrawContent(snapshot);
         }
         protected virtual void DrawContent(UomdHubSnapshot snapshot)
         { if (ScreenId == UomdScreenId.Home) Home(snapshot); else if (ScreenId == UomdScreenId.Roster) Company(snapshot); else Chapters(snapshot); }
+        protected virtual void DrawUnavailable()
+        {
+            var panel = Panel(_body, "hub-main"); Text(panel, Data.Loading ? "THE ROAD IS WAITING" : "ACCOUNT DATA UNAVAILABLE", "hub-card-title");
+            Text(panel, Data.Loading ? "Your account is being loaded." : "Connect and refresh to load your company, balance and chapter progress.", "hub-copy");
+        }
         private void Home(UomdHubSnapshot snapshot)
         {
             var aside = Panel(_body, "hub-aside"); Text(aside, "CHAPTERS", "hub-small");
@@ -301,6 +306,7 @@ namespace Uomd.Scenes
         }
         public void OnExit()
         {
+            Leaving();
             ++_generation; Data.Cancel();
             if (_root != null) { _root.UnregisterCallback<GeometryChangedEvent>(Geometry); _root.UnregisterCallback<KeyDownEvent>(Key); }
             _root = _body = _overlay = _art = null;

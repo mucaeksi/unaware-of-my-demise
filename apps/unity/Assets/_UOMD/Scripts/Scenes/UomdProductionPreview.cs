@@ -87,6 +87,7 @@ namespace Uomd.Scenes
                 case "hub/archive": screen = UomdScreenId.Library; break;
                 case "hub/invitations": screen = UomdScreenId.Recruit; break;
                 case "hub/errands": screen = UomdScreenId.Tasks; break;
+                case "hub/account": screen = UomdScreenId.Account; break;
                 default:
                     if (request.scenario.StartsWith("battle/", StringComparison.Ordinal))
                     {

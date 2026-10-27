@@ -1,6 +1,6 @@
 # Unity Production Review
 
-The **hub/home**, **hub/company**, **hub/chapters**, **hub/companion**, **hub/team**, **hub/armory**, **hub/actions** **hub/archive**, **hub/invitations** and **hub/errands** scenarios run the real native hub/system controllers with explicit isolated account and mutation/status fixtures. [Invitations/Errands guide](../media/SOL_INVITATIONS_AND_ERRANDS.md). [Archive reader guide](../media/SOL_ARCHIVE_READER.md). [Company/Sweep guide](../media/SOL_COMPANY_AND_SWEEP.md). The new shelter plate is an OpenAI candidate with human/native-2K acceptance open. [Hub guide, prompt and limits](../media/SOL_NATIVE_HUB.md).
+The **hub/home**, **hub/company**, **hub/chapters**, **hub/companion**, **hub/team**, **hub/armory**, **hub/actions** **hub/archive**, **hub/invitations** **hub/errands** and **hub/account** scenarios run the real native hub/system controllers with explicit isolated account and mutation/status fixtures. [Account/Privacy guide](../media/SOL_ACCOUNT_PRIVACY.md). [Invitations/Errands guide](../media/SOL_INVITATIONS_AND_ERRANDS.md). [Archive reader guide](../media/SOL_ARCHIVE_READER.md). [Company/Sweep guide](../media/SOL_COMPANY_AND_SWEEP.md). The new shelter plate is an OpenAI candidate with human/native-2K acceptance open. [Hub guide, prompt and limits](../media/SOL_NATIVE_HUB.md).
 
 First slice, LOCAL_TESTED on 2026-10-26. Open **Window → UOMD → Production Review** in Unity 6000.3.27f1.
 The window is left open after delivery; Play Mode is stopped and `UomdMain` is restored.

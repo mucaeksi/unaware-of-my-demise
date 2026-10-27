@@ -1,0 +1,1177 @@
+{
+  "schemaVersion": 1,
+  "id": "sol-account-privacy-2026-10-28",
+  "status": "LOCAL_TESTED",
+  "reviewedAt": "2026-10-27T22:24:12.305Z",
+  "localDeliveryDate": "2026-10-28 Europe/Bucharest",
+  "sourceCommit": "8e5534810eedeed1810c94d2da2e48f38f90b8ea",
+  "deliveryBinding": "The enclosing local commit contains the exact source blobs listed below; sourceCommit records its parent.",
+  "scope": [
+    "Native editable Account, Privacy and Settings over authenticated identity/cloud reads",
+    "Preserved cloud fields and best-star merge, strict compare-and-set upload and exact readback without automatic replacement writes",
+    "Account-scoped atomic export storage, selected-player validation, canceled promotion and old-file preservation",
+    "Immediate local sign-out and explicit deletion review with exact provider receipt before clearing the approved identity",
+    "Screen lifetime, auth revision, account and release guards across native sign-in, API exchange, read, export and destructive replies",
+    "Explicit isolated provider/storage/native fixtures, real UI Toolkit events/Game-view pixels and restored Editor state"
+  ],
+  "checks": {
+    "unityEditor": "6000.3.27f1",
+    "unityTransport": "CLI only; Pipeline 0.9.1-exp.1",
+    "editMode": {
+      "total": 219,
+      "passed": 219,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "editModeExecution": "Synchronous CLI; engine-free async file checks use the existing Task.Run harness pattern",
+    "playMode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "headless": {
+      "passed": 187,
+      "failed": 0
+    },
+    "typescript": {
+      "passed": 957,
+      "failed": 0
+    },
+    "contentReproduction": {
+      "files": 232,
+      "exact": true
+    },
+    "exportTests": {
+      "passed": 5,
+      "failed": 0,
+      "includedInRepositoryTotal": true
+    },
+    "referenceCompile": {
+      "assemblies": 12,
+      "errors": 0,
+      "limitation": "URP signatures are verified stubs, not the compiled package"
+    },
+    "playerReferenceCompile": {
+      "assemblies": 8,
+      "errors": 0,
+      "scope": "UNITY_EDITOR disabled; not Android/IL2CPP acceptance"
+    },
+    "skills": {
+      "adapters": 66,
+      "passed": true
+    },
+    "consoleErrors": 0,
+    "liveChecks": 40
+  },
+  "interaction": {
+    "inputMethod": "NavigationSubmitEvent on actual native UI Toolkit Buttons, explicit synthetic account/auth/native/read/write gates and retained preference controls; no physical-touch claim",
+    "steps": [
+      "the actual native Account controller loads the authenticated cloud copy without a write",
+      "upload double tap sends one strict compare-and-set body and confirms its exact readback",
+      "upload preserves unrelated cloud keys and merges the higher cloud/device star value",
+      "download reads the current cloud copy and only raises device stars without a provider mutation",
+      "a committed upload with a lost response is verified by readback without a second send",
+      "a cloud version conflict blocks another upload until an explicit fresh review",
+      "refresh after a conflict reads the provider copy before another approval",
+      "an export for a different player cannot reach the file sink",
+      "export storage failure never reports a saved file",
+      "successful review export reaches only the memory sink and rapid taps produce one export",
+      "the privacy button uses the configured API origin and review intercepts the external open",
+      "the web deletion button retains the existing public deletion route",
+      "privacy completion reports form closure without claiming a changed consent choice",
+      "native privacy failure remains visible and makes no consent claim",
+      "native volume controls clamp correctly at both ends",
+      "all supported native preference toggles and the battle layout apply to the running session",
+      "delete review is separate from the destructive provider write",
+      "keeping the account cancels deletion without a write",
+      "refresh invalidates the old deletion approval and requires a new review",
+      "malformed cloud data disables writes while local sign-out remains available",
+      "privacy options remain reachable during a failed account data refresh",
+      "an empty cloud copy is explicit and cannot be downloaded as invented progress",
+      "the first cloud copy uses compare-and-set version zero and exact readback",
+      "a late cloud download cannot merge the previous account stars into this device",
+      "an old account export cannot reach storage after adopting another account",
+      "same-account authorization rotation fences an old cloud reply before any device merge",
+      "the visible final deletion review can be canceled without any provider write",
+      "switching accounts invalidates the earlier destructive approval",
+      "a committed old deletion receipt cannot clear the new identity or run Google sign-out for it",
+      "lost deletion response stays unconfirmed and never retries or clears a session on assumption",
+      "only the matching deletion receipt clears the approved session and reports confirmation",
+      "sign-out ends local authority before the server revocation response arrives",
+      "an old logout completion cannot erase or forget the newly adopted identity",
+      "local sign-out succeeds during network loss without claiming server revocation",
+      "leaving the sign-in screen cancels a delayed Google result before adopting it",
+      "failed native sign-in does not invent an authenticated account",
+      "a failed API token exchange remains visible after its own auth revision advances",
+      "a late API token exchange cannot adopt its old identity over a newer session",
+      "successful isolated sign-in adopts one identity and finishes with truthful refreshed status",
+      "final 4:3 account navigation remains within the frame with at least 64-reference-pixel targets"
+    ],
+    "states": {
+      "sourceCommit": "8e553481",
+      "initial": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review",
+        "revision": 1,
+        "busy": false,
+        "notice": "",
+        "operation": "",
+        "version": 3,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 0,
+        "applied": 0,
+        "lastPath": "",
+        "lastBody": "",
+        "local": {
+          "t1": 1,
+          "t3": 3
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 0,
+        "url": "",
+        "deleted": []
+      },
+      "upload": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review",
+        "revision": 1,
+        "busy": false,
+        "notice": "Cloud copy verified after upload.",
+        "operation": "upload",
+        "version": 4,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            },
+            "t3": {
+              "stars": 3
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 1,
+        "applied": 1,
+        "lastPath": "/api/v1/save",
+        "lastBody": "{\"data\":{\"continuityFixture\":\"preserve\",\"prefs\":{\"language\":\"en\"},\"progress\":{\"t1\":{\"stars\":3},\"t2\":{\"stars\":2},\"t3\":{\"stars\":3}}},\"expectedVersion\":3}",
+        "local": {
+          "t1": 1,
+          "t3": 3
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 0,
+        "url": "",
+        "deleted": []
+      },
+      "lostUpload": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review",
+        "revision": 1,
+        "busy": false,
+        "notice": "Cloud copy verified after upload.",
+        "operation": "upload",
+        "version": 5,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            },
+            "t3": {
+              "stars": 3
+            }
+          }
+        },
+        "mode": "lose_upload",
+        "writes": 2,
+        "applied": 2,
+        "lastPath": "/api/v1/save",
+        "lastBody": "{\"data\":{\"continuityFixture\":\"preserve\",\"prefs\":{\"language\":\"en\"},\"progress\":{\"t1\":{\"stars\":3},\"t2\":{\"stars\":2},\"t3\":{\"stars\":3}}},\"expectedVersion\":4}",
+        "local": {
+          "t1": 3,
+          "t3": 3,
+          "t2": 2
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 0,
+        "url": "",
+        "deleted": []
+      },
+      "conflict": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": false,
+        "signed": true,
+        "player": "hub_review",
+        "revision": 1,
+        "busy": false,
+        "notice": "Cloud copy changed. Refresh and review it before uploading again.",
+        "operation": "upload",
+        "version": 5,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            },
+            "t3": {
+              "stars": 3
+            }
+          }
+        },
+        "mode": "save_conflict",
+        "writes": 3,
+        "applied": 2,
+        "lastPath": "/api/v1/save",
+        "lastBody": "{\"data\":{\"continuityFixture\":\"preserve\",\"prefs\":{\"language\":\"en\"},\"progress\":{\"t1\":{\"stars\":3},\"t2\":{\"stars\":2},\"t3\":{\"stars\":3}}},\"expectedVersion\":5}",
+        "local": {
+          "t1": 3,
+          "t3": 3,
+          "t2": 2
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 0,
+        "url": "",
+        "deleted": []
+      },
+      "export": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review",
+        "revision": 1,
+        "busy": false,
+        "notice": "REVIEW FIXTURE · Export captured in memory; no device file written.",
+        "operation": "export",
+        "version": 5,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            },
+            "t3": {
+              "stars": 3
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 3,
+        "applied": 2,
+        "lastPath": "/api/v1/save",
+        "lastBody": "{\"data\":{\"continuityFixture\":\"preserve\",\"prefs\":{\"language\":\"en\"},\"progress\":{\"t1\":{\"stars\":3},\"t2\":{\"stars\":2},\"t3\":{\"stars\":3}}},\"expectedVersion\":5}",
+        "local": {
+          "t1": 3,
+          "t3": 3,
+          "t2": 2
+        },
+        "exports": 1,
+        "exportHash": "a47950226db3d0f055c2b4f525efb247af18a6a4cb07d66ac98790fef4895933",
+        "native": 0,
+        "url": "",
+        "deleted": []
+      },
+      "phase1": {
+        "checks": 21,
+        "captures": 5
+      },
+      "downloadRace": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review_d",
+        "revision": 4,
+        "busy": false,
+        "notice": "",
+        "operation": "download",
+        "version": 3,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 1,
+        "applied": 1,
+        "lastPath": "/api/v1/save",
+        "lastBody": "{\"data\":{\"progress\":{\"t1\":{\"stars\":1},\"t3\":{\"stars\":3}}},\"expectedVersion\":0}",
+        "local": {
+          "t9": 1
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 0,
+        "url": "",
+        "deleted": []
+      },
+      "deleteRace": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review_delete_b",
+        "revision": 8,
+        "busy": false,
+        "notice": "",
+        "operation": "delete",
+        "version": 3,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 2,
+        "applied": 2,
+        "lastPath": "/api/v1/account/delete",
+        "lastBody": "{\"confirm\":\"DELETE\"}",
+        "local": {
+          "t9": 1
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 0,
+        "url": "",
+        "deleted": [
+          "hub_review_delete_a"
+        ]
+      },
+      "deleteUnknown": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": false,
+        "signed": true,
+        "player": "hub_review_delete_b",
+        "revision": 8,
+        "busy": false,
+        "notice": "Deletion is not confirmed. Sign in or use the web deletion page to check.",
+        "operation": "delete",
+        "version": 3,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            }
+          }
+        },
+        "mode": "lose_delete",
+        "writes": 3,
+        "applied": 3,
+        "lastPath": "/api/v1/account/delete",
+        "lastBody": "{\"confirm\":\"DELETE\"}",
+        "local": {
+          "t9": 1
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 0,
+        "url": "",
+        "deleted": [
+          "hub_review_delete_a",
+          "hub_review_delete_b"
+        ]
+      },
+      "deleted": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": false,
+        "player": null,
+        "revision": 10,
+        "busy": false,
+        "notice": "Your account deletion was confirmed.",
+        "operation": "delete",
+        "version": null,
+        "cloud": null,
+        "mode": "ready",
+        "writes": 4,
+        "applied": 4,
+        "lastPath": "/api/v1/account/delete",
+        "lastBody": "{\"confirm\":\"DELETE\"}",
+        "local": {
+          "t9": 1
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 1,
+        "url": "",
+        "deleted": [
+          "hub_review_delete_a",
+          "hub_review_delete_b",
+          "hub_review_delete_confirmed"
+        ]
+      },
+      "logoutRace": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review_logout_b",
+        "revision": 13,
+        "busy": false,
+        "notice": "",
+        "operation": "sign_out",
+        "version": 3,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 5,
+        "applied": 5,
+        "lastPath": "/api/v1/auth/logout",
+        "lastBody": "{}",
+        "local": {
+          "t9": 1
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 1,
+        "url": "",
+        "deleted": [
+          "hub_review_delete_a",
+          "hub_review_delete_b",
+          "hub_review_delete_confirmed"
+        ]
+      },
+      "signIn": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review_signin",
+        "revision": 20,
+        "busy": false,
+        "notice": "Signed in. Account data refreshed.",
+        "operation": "sign_in",
+        "version": 3,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 6,
+        "applied": 5,
+        "lastPath": "/api/v1/auth/logout",
+        "lastBody": "{}",
+        "local": {
+          "t9": 1
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 7,
+        "url": "",
+        "deleted": [
+          "hub_review_delete_a",
+          "hub_review_delete_b",
+          "hub_review_delete_confirmed"
+        ]
+      },
+      "finalFrame": [
+        {
+          "id": "hubHome",
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubCompany",
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubChapters",
+          "height": 69.59999,
+          "inside": true
+        },
+        {
+          "id": "hubAccount",
+          "height": 69.6000061,
+          "inside": true
+        },
+        {
+          "id": "hubBack",
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "hubRefresh",
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "hubMore",
+          "height": 69.5999756,
+          "inside": true
+        },
+        {
+          "id": "accountView_account",
+          "height": 70.79999,
+          "inside": true
+        },
+        {
+          "id": "accountView_privacy",
+          "height": 69.60004,
+          "inside": true
+        },
+        {
+          "id": "accountView_settings",
+          "height": 69.5999756,
+          "inside": true
+        }
+      ],
+      "final": {
+        "ready": true,
+        "screen": "Account",
+        "loading": false,
+        "fresh": true,
+        "signed": true,
+        "player": "hub_review_signin",
+        "revision": 20,
+        "busy": false,
+        "notice": "Preferences applied on this device.",
+        "operation": "sign_in",
+        "version": 3,
+        "cloud": {
+          "continuityFixture": "preserve",
+          "prefs": {
+            "language": "en"
+          },
+          "progress": {
+            "t1": {
+              "stars": 3
+            },
+            "t2": {
+              "stars": 2
+            }
+          }
+        },
+        "mode": "ready",
+        "writes": 6,
+        "applied": 5,
+        "lastPath": "/api/v1/auth/logout",
+        "lastBody": "{}",
+        "local": {
+          "t9": 1
+        },
+        "exports": 0,
+        "exportHash": "",
+        "native": 7,
+        "url": "",
+        "deleted": [
+          "hub_review_delete_a",
+          "hub_review_delete_b",
+          "hub_review_delete_confirmed"
+        ]
+      }
+    }
+  },
+  "storage": {
+    "editorUi": "Memory-only fake export sink; no real account file, preference, secure session or local progress write",
+    "headlessAndEditMode": "Owned temporary desktop files prove canceled-write cleanup, account guard before promotion and preservation/replacement of an existing export; not Android private-file access or process-death proof"
+  },
+  "art": {
+    "newBitmaps": 0,
+    "policy": "Existing rebuilt OpenAI shelter only; no historical Gemini substitution",
+    "usedSourceIdentities": [
+      "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+    ],
+    "humanApproval": "pending",
+    "native2kTarget": "open"
+  },
+  "overnightAuthorization": {
+    "requestedUntil": "2026-10-28T07:00:00+02:00",
+    "timezone": "Europe/Bucharest",
+    "deadlineUtc": "2026-10-28T05:00:00Z",
+    "scheduler": "Existing same-chat heartbeat updated and reactivated through the app tool; stop new work at the deadline and pause on the first wake at/after it",
+    "next": "Remaining gear/mode actions and campaign narrative/visual migration in dependency order"
+  },
+  "captures": [
+    {
+      "label": "account-ready-wide-safe",
+      "image": "docs/review/captures/20261027T215141764_27686271.png",
+      "metadata": "docs/review/captures/20261027T215141764_27686271.json",
+      "imageSha256": "f7950305dca41437feab0f67b2ba2310427fec2098a9dce3984f51ae36fcf514",
+      "testedMetadataSha256": "50d9db3443280d7afba29ac70d98f0661a7ed4e305f5fd2ce3c8a374b25d21df",
+      "screen": "Account",
+      "width": 2400,
+      "height": 1080,
+      "safeArea": true,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": 3,
+      "operation": "",
+      "notice": "",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": false,
+      "gitMetadataSha256": "50d9db3443280d7afba29ac70d98f0661a7ed4e305f5fd2ce3c8a374b25d21df"
+    },
+    {
+      "label": "cloud-conflict-4x3",
+      "image": "docs/review/captures/20261027T215354173_8acda248.png",
+      "metadata": "docs/review/captures/20261027T215354173_8acda248.json",
+      "imageSha256": "8f6977e30faf93f334df26bb416ec8874ae6d9276380f46d6940f2972150ec4a",
+      "testedMetadataSha256": "da45527778df9ee9eeb8d4f59e997bc4bfb8bec137c476387d77682edc289bf9",
+      "screen": "Account",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "save_conflict",
+      "cloudCopyVersion": 5,
+      "operation": "upload",
+      "notice": "Cloud copy changed. Refresh and review it before uploading again.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": false,
+      "gitMetadataSha256": "da45527778df9ee9eeb8d4f59e997bc4bfb8bec137c476387d77682edc289bf9"
+    },
+    {
+      "label": "privacy-native-error",
+      "image": "docs/review/captures/20261027T215458462_41d325b5.png",
+      "metadata": "docs/review/captures/20261027T215458462_41d325b5.json",
+      "imageSha256": "8a5345656e5047947e217115560af463810b0182a721609122a3dcaf72c6886a",
+      "testedMetadataSha256": "676af460acd784ea5feaf33f2e546d3cad4d1443b73e4999cfb710a691bb5eea",
+      "screen": "Account",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "native_error",
+      "cloudCopyVersion": 5,
+      "operation": "privacy_options",
+      "notice": "Privacy options could not be opened. Try again in the Android app.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": false,
+      "gitMetadataSha256": "676af460acd784ea5feaf33f2e546d3cad4d1443b73e4999cfb710a691bb5eea"
+    },
+    {
+      "label": "account-settings-4x3",
+      "image": "docs/review/captures/20261027T215530680_615573f4.png",
+      "metadata": "docs/review/captures/20261027T215530680_615573f4.json",
+      "imageSha256": "4d3363e4358a01a6a6fcc33f709b5c0644c1a35fb396cf121c8d26c46d8c5121",
+      "testedMetadataSha256": "2184d9009d874613c1367d1b1392722df8dd7d122de53708565d43e2e4e661f8",
+      "screen": "Account",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": 5,
+      "operation": "privacy_options",
+      "notice": "Preferences applied on this device.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": false,
+      "gitMetadataSha256": "2184d9009d874613c1367d1b1392722df8dd7d122de53708565d43e2e4e661f8"
+    },
+    {
+      "label": "delete-explicit-review",
+      "image": "docs/review/captures/20261027T215551665_9c63c602.png",
+      "metadata": "docs/review/captures/20261027T215551665_9c63c602.json",
+      "imageSha256": "fc9ac06969d8e1d2f2d2545d889f32d08a8199b8bfdd8fd066d3df12b83bbfaa",
+      "testedMetadataSha256": "ca5c8c04f74169394b2a8aa26c407598845f9fd5d1e5d417ee1827e6a1a4211c",
+      "screen": "Account",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": 5,
+      "operation": "privacy_options",
+      "notice": "Preferences applied on this device.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": false,
+      "gitMetadataSha256": "ca5c8c04f74169394b2a8aa26c407598845f9fd5d1e5d417ee1827e6a1a4211c"
+    },
+    {
+      "label": "final-account-wide-safe",
+      "image": "docs/review/captures/20261027T220830640_06a1319e.png",
+      "metadata": "docs/review/captures/20261027T220830640_06a1319e.json",
+      "imageSha256": "05e892e3fa2bc701980c3f704faea43dc3495e966c8d17c7c70dd2f278431a7d",
+      "testedMetadataSha256": "53e4ae1654ee0804da3a78e8d25d462a1e4bc83e48ae0cf45dc2d2ce9feed3d7",
+      "screen": "Account",
+      "width": 2400,
+      "height": 1080,
+      "safeArea": true,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": 3,
+      "operation": "",
+      "notice": "",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": true,
+      "gitMetadataSha256": "53e4ae1654ee0804da3a78e8d25d462a1e4bc83e48ae0cf45dc2d2ce9feed3d7"
+    },
+    {
+      "label": "final-delete-review-4x3",
+      "image": "docs/review/captures/20261027T220938513_a5353f5c.png",
+      "metadata": "docs/review/captures/20261027T220938513_a5353f5c.json",
+      "imageSha256": "59ba2babd9fab760f9750615c7216cc7838e04dd9da83dc013f665d2ab537c4f",
+      "testedMetadataSha256": "f852a1286d750b507d51be411606b431088080538679f18e807dc0c926a6a833",
+      "screen": "Account",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": 3,
+      "operation": "download",
+      "notice": "",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": true,
+      "gitMetadataSha256": "f852a1286d750b507d51be411606b431088080538679f18e807dc0c926a6a833"
+    },
+    {
+      "label": "final-deletion-unconfirmed",
+      "image": "docs/review/captures/20261027T221027836_2afef585.png",
+      "metadata": "docs/review/captures/20261027T221027836_2afef585.json",
+      "imageSha256": "4f2bc54a4061181123fbba010808bb54285c0076c75cee261322e6f81b4dc5e7",
+      "testedMetadataSha256": "b2327ae7e8cf3157dd9567b8564ca33661c351e5ac8005f4b840982b117b3691",
+      "screen": "Account",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "lose_delete",
+      "cloudCopyVersion": 3,
+      "operation": "delete",
+      "notice": "Deletion is not confirmed. Sign in or use the web deletion page to check.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": true,
+      "gitMetadataSha256": "b2327ae7e8cf3157dd9567b8564ca33661c351e5ac8005f4b840982b117b3691"
+    },
+    {
+      "label": "final-deleted-guest-4x3",
+      "image": "docs/review/captures/20261027T221045913_ad0f7b36.png",
+      "metadata": "docs/review/captures/20261027T221045913_ad0f7b36.json",
+      "imageSha256": "ce74d67c780fc9d51258bd31f5de0de1bc8c1072bf3b5fdeed2b900206551abc",
+      "testedMetadataSha256": "12d6d2d5d9f2e1ce461826b80e58738b1d476b28d87765b8d21e3ceadfde8c25",
+      "screen": "Account",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": -1,
+      "operation": "delete",
+      "notice": "Your account deletion was confirmed.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": true,
+      "gitMetadataSha256": "12d6d2d5d9f2e1ce461826b80e58738b1d476b28d87765b8d21e3ceadfde8c25"
+    },
+    {
+      "label": "final-privacy",
+      "image": "docs/review/captures/20261027T221210699_6031a755.png",
+      "metadata": "docs/review/captures/20261027T221210699_6031a755.json",
+      "imageSha256": "6becc24ad8f06f8991da87280d522f682b5febc70ab2d806f1c59b0da1a28a1c",
+      "testedMetadataSha256": "101e8ca09fa7266cc80c8b7e100d4d20fb88f2d067615cf485941dd5d1a3dff2",
+      "screen": "Account",
+      "width": 1920,
+      "height": 1080,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": 3,
+      "operation": "sign_in",
+      "notice": "Signed in. Account data refreshed.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": true,
+      "gitMetadataSha256": "101e8ca09fa7266cc80c8b7e100d4d20fb88f2d067615cf485941dd5d1a3dff2"
+    },
+    {
+      "label": "final-settings-4x3",
+      "image": "docs/review/captures/20261027T221220041_86f96a96.png",
+      "metadata": "docs/review/captures/20261027T221220041_86f96a96.json",
+      "imageSha256": "084345aab81c9ca955f3dda2976b523a469122ab2a37eab594ddc1ffa42e0040",
+      "testedMetadataSha256": "1a9e3dff27cf57d17e570595fcd943eec2e9b13bf91f07f573da929e5ea0b2dd",
+      "screen": "Account",
+      "width": 1600,
+      "height": 1200,
+      "safeArea": false,
+      "fixtureMode": "ready",
+      "cloudCopyVersion": 3,
+      "operation": "sign_in",
+      "notice": "Preferences applied on this device.",
+      "busy": false,
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalRuntimeGuard": true,
+      "gitMetadataSha256": "1a9e3dff27cf57d17e570595fcd943eec2e9b13bf91f07f573da929e5ea0b2dd"
+    }
+  ],
+  "referenceInputs": [
+    {
+      "path": "apps/api/src/player/routes.ts",
+      "sha256": "7b47eb83d60f27b51ba9b5f78b8e314170786f165782cddd4f2e99873817434e"
+    },
+    {
+      "path": "apps/api/src/progress/service.ts",
+      "sha256": "9dea0db7e76cbc8aaa7bc75f52150a50a7bf47f0205a6f5b9841872a243f3d7d"
+    },
+    {
+      "path": "apps/api/src/account/service.ts",
+      "sha256": "8fcfa3a100dfa93ac2655e385252567e0bfab8e70d1eb9a56b251486dfbf9cea"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs",
+      "sha256": "7a18e381bdc714b86cc596ca2c584c590e3f1f7cb46ab733d91511b623389cd6"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdPrefs.cs",
+      "sha256": "c42392921f929d12f8516d3e209ea7deef90451925481fab00fe0b66b0b5e0d7"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdLocalProgress.cs",
+      "sha256": "a800a6aad147caa0f2d3bce6f84558dca53b5c98dac613b846f0b616acb85dfc"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Platform/UomdPlatformBridge.cs",
+      "sha256": "73dde806bab71e89cbe8da4c356d21d302738f579e968349fc1e1af2d2716740"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdAccountActions.cs",
+      "sha256": "cbc707733f1e87e32b59cc59353923dfaecc662c45cab6a2c74e591723a28e8f"
+    }
+  ],
+  "restoration": {
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "dirty": false,
+    "playing": false,
+    "paused": false,
+    "review": false,
+    "index": 9,
+    "gizmos": true,
+    "equal": true,
+    "baseline": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "current": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "viewport": {
+      "expectedIndex": 9,
+      "expectedGizmos": true
+    },
+    "consoleErrors": 0,
+    "compilationFailed": false
+  },
+  "boundaries": [
+    "All account/cloud/deletion/auth/native/export/storage outcomes in UI review are explicit synthetic fixtures; HTTP, actual Google/UMP dialogs, external page opens and device persistence remain isolated. No real account is deleted.",
+    "The first five captures precede the visible deletion-review relocation and Account navigation highlight fix. The six final-runtime captures follow the final runtime and auth-exchange error correction; final tests also include the synchronous file-test harness adjustment. Earlier drafts remain history.",
+    "Cloud copies are continuity data. Device stars do not become server-authoritative account clears, inventory, currency or rewards. Plain cloud upload is not a new economic journal or process-death recovery guarantee.",
+    "The sign-in API advances auth revision before exchange; only its exact failed attempt may rebind its own error notice. An unrelated auth change is still fenced. Actual Google/UMP integration and Android secure-session persistence remain unverified.",
+    "Desktop file IO and Editor event input do not establish Android sharing/private-file accessibility, storage/lifecycle/process death, IL2CPP or physical touch acceptance.",
+    "No new art, API/schema/config/migration, credentials, hooks, paid external provider call, push or deployment. Prior art/feedback and owner codex_watcher.ps1 remain intact.",
+    "Human art/native-2K and release gates remain open. Scheduled continuation requires the local computer/app and CLI Editor to remain available."
+  ],
+  "sourceFiles": [
+    {
+      "path": "README.md",
+      "gitBlobSha256": "ee1e09b24228f506652fa08ad57f52251fc849c376fb4099f88893cf25499e84",
+      "editorFileSha256": "ee1e09b24228f506652fa08ad57f52251fc849c376fb4099f88893cf25499e84"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs",
+      "gitBlobSha256": "4a4d9846580b19eb79702bd7a17490975b687655bb5a02e47299708c09a6a325",
+      "editorFileSha256": "769e3d83879754f4564960de88745d78f0f68cf6db930f0984f21d00c0cdd3db"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs",
+      "gitBlobSha256": "515c225e780b7af4453b3158c39fc62fc0f335583df75a0d4c07297116628857",
+      "editorFileSha256": "515c225e780b7af4453b3158c39fc62fc0f335583df75a0d4c07297116628857"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Hub.uss",
+      "gitBlobSha256": "9f75a8a2a5ff821914c966354f8eba3e6064f3a0f3688150b920d46cedb1b18d",
+      "editorFileSha256": "c59eff4cd4cf87b77052dc38125f16be621df23578b9bd0b2fd318805e75991c"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdHubSnapshot.cs",
+      "gitBlobSha256": "1c6d59f187df5233ffd01acc010e6481e0c6aebe4dce659dad4de93dc302f80a",
+      "editorFileSha256": "514800983c8a1ac26c2d24aa2175b30d1cd20f26a28903f1fe426c9e5c8f306f"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/AccountScreen.cs",
+      "gitBlobSha256": "4192603f734b88d4dbdaa73846187b3e4422027140173f53154eecf5ec3b89cd",
+      "editorFileSha256": "4192603f734b88d4dbdaa73846187b3e4422027140173f53154eecf5ec3b89cd"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildHubScreen.cs",
+      "gitBlobSha256": "591a2452e2f20ce7881c8fae7d886b0c01e512f2f1711e0564fb08204e55bf2b",
+      "editorFileSha256": "0b012d34ba513d9d9dc29ab87ed5d7ceea4256aff098a0ccb0795f73fe32d0cf"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubReview.cs",
+      "gitBlobSha256": "3a02c9884bcf1b0e8fd3be06ade3d63bf91de27f5476b31ca5f11281487f2f9c",
+      "editorFileSha256": "e40442bb4c46d6080c619091690293325270b73bacb8ecd966188f526e56466b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubState.cs",
+      "gitBlobSha256": "a886850cb7e3674aea4e397228d6e99aa1edcc83dad8501140b9a4c4f46edc01",
+      "editorFileSha256": "026ab921cb49f27e5ff85c82d0ed669bb120b31223a7affb8615b3abfa64edd5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs",
+      "gitBlobSha256": "36ea8e8b4bf5d9af4ba6cc4d5005c919d26afe0f7e24fc98aa5f640fee0a7488",
+      "editorFileSha256": "998e5c14fbf08d738e5db5923319446369ed68f77afc2c1d093cb22436ed1a3b"
+    },
+    {
+      "path": "apps/unity/Logic/Uomd.Core/Uomd.Core.csproj",
+      "gitBlobSha256": "663b0739d9ba92556bf7696a56dc6471eb2c5520e1a4972e9607807095f6a0ea",
+      "editorFileSha256": "663b0739d9ba92556bf7696a56dc6471eb2c5520e1a4972e9607807095f6a0ea"
+    },
+    {
+      "path": "docs/BUILD_STATE.md",
+      "gitBlobSha256": "53bd7619db80fd32af5dd1e686a012af53df24f2936a0487004d6b51b7c57e56",
+      "editorFileSha256": "53bd7619db80fd32af5dd1e686a012af53df24f2936a0487004d6b51b7c57e56"
+    },
+    {
+      "path": "docs/DEV_TRACKER.json",
+      "gitBlobSha256": "4f5aba87684dd0e7e5a8531f2629695e2dfd22afb98a37f05d342187b7f59d00",
+      "editorFileSha256": "4f5aba87684dd0e7e5a8531f2629695e2dfd22afb98a37f05d342187b7f59d00"
+    },
+    {
+      "path": "docs/INFRA_ROADMAP.md",
+      "gitBlobSha256": "ce37036427d73bfafa39a1405ac73c341c79157a47b842ded06ebb81db89596b",
+      "editorFileSha256": "ce37036427d73bfafa39a1405ac73c341c79157a47b842ded06ebb81db89596b"
+    },
+    {
+      "path": "docs/NEXT_STEPS.md",
+      "gitBlobSha256": "c3e8bd6844adde7f298ac9feceeb3771fb5e02bb2fbca05f519be748ca84e604",
+      "editorFileSha256": "c3e8bd6844adde7f298ac9feceeb3771fb5e02bb2fbca05f519be748ca84e604"
+    },
+    {
+      "path": "docs/handoff/CODEX_CLI_MASTER_PROMPT.md",
+      "gitBlobSha256": "c693038316d3234b47e511d1f70303e92be093ec6c18622620eba2a80c3a1c78",
+      "editorFileSha256": "c693038316d3234b47e511d1f70303e92be093ec6c18622620eba2a80c3a1c78"
+    },
+    {
+      "path": "docs/handoff/SOL_CONTINUATION_PLAN.md",
+      "gitBlobSha256": "5f7cdcce8ef95b2c9f5c098687c7b76ee9566c93703e94f5060f68227fa07e8e",
+      "editorFileSha256": "5f7cdcce8ef95b2c9f5c098687c7b76ee9566c93703e94f5060f68227fa07e8e"
+    },
+    {
+      "path": "docs/handoff/SOL_REBUILD_PLAN.md",
+      "gitBlobSha256": "8c9c834fd635ff432b31ecb25f5bc13c599e5ebcfd7c48e8c6caeb54001d2e02",
+      "editorFileSha256": "8c9c834fd635ff432b31ecb25f5bc13c599e5ebcfd7c48e8c6caeb54001d2e02"
+    },
+    {
+      "path": "docs/review/PRODUCTION_REVIEW.json",
+      "gitBlobSha256": "d2190853d90df4c0f62430ceb6d3a3848080803c4929a760ffeea2be46fb9b87",
+      "editorFileSha256": "d2190853d90df4c0f62430ceb6d3a3848080803c4929a760ffeea2be46fb9b87"
+    },
+    {
+      "path": "docs/review/README.md",
+      "gitBlobSha256": "d0e24a83ab56d831fbced2385069712b66dc72b2dca88994df6ec8001a8780a7",
+      "editorFileSha256": "d0e24a83ab56d831fbced2385069712b66dc72b2dca88994df6ec8001a8780a7"
+    },
+    {
+      "path": "docs/review/index.html",
+      "gitBlobSha256": "8e00c0d7da680e6020c0311f307bbb0091ae69acd2944f3cb8e827c61979bffb",
+      "editorFileSha256": "8e00c0d7da680e6020c0311f307bbb0091ae69acd2944f3cb8e827c61979bffb"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdCloudCopy.cs",
+      "gitBlobSha256": "c9fe9b4781e867bb1d886f674126c368a47fb9a513f3e0c1a81712966d768277",
+      "editorFileSha256": "c9fe9b4781e867bb1d886f674126c368a47fb9a513f3e0c1a81712966d768277"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdCloudCopy.cs.meta",
+      "gitBlobSha256": "8e5cd3237c1b94002b73620900ebc7020e22a7047ac3b00b651f0c81482ec057",
+      "editorFileSha256": "7b3336d77229dbedc34fc70d304ad95f04bd43a288d0f54a9359bcc76280a715"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildAccountScreen.cs",
+      "gitBlobSha256": "baf00535885d14035d4740ff9d5faaf906ac62ece87645ac22b4f602443cb8e2",
+      "editorFileSha256": "baf00535885d14035d4740ff9d5faaf906ac62ece87645ac22b4f602443cb8e2"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildAccountScreen.cs.meta",
+      "gitBlobSha256": "0ef5c1f9b731fdfb6023019389db5919f65db3ab5b79254b75f37b1e65262c73",
+      "editorFileSha256": "d367832ffe5dac080a05986b7df034c41c8571e4a1b5fe5cca61bcd02cb195bf"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdAccountReview.cs",
+      "gitBlobSha256": "967380c4f7a8c01d7ccbb8810fb09e8c257cfb7f5b698dfa2e1456e2bdb390a8",
+      "editorFileSha256": "967380c4f7a8c01d7ccbb8810fb09e8c257cfb7f5b698dfa2e1456e2bdb390a8"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdAccountReview.cs.meta",
+      "gitBlobSha256": "712cd31e50ace0bcd8bde9c1a33719f3daba33a35362f0cd78593ae908ad76a4",
+      "editorFileSha256": "d1ebfe0b1637a413b3db55b406efd29ae4bd8bbfa2866207892986e5e997b9b2"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/CloudCopyTests.cs",
+      "gitBlobSha256": "4c2db4a86fe82033fcdf7e0bbe64e78dfdf8b98097c2a9a2abb1de05eff3dcc6",
+      "editorFileSha256": "4c2db4a86fe82033fcdf7e0bbe64e78dfdf8b98097c2a9a2abb1de05eff3dcc6"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/CloudCopyTests.cs.meta",
+      "gitBlobSha256": "2eb211913ae98ba0215694edd7bdf50aaf394b104227224b23bf4069f47c5b24",
+      "editorFileSha256": "65f415e9404ffb13f0f81458206d9992a7e008a373c594feefc7968cbb9de831"
+    },
+    {
+      "path": "docs/media/SOL_ACCOUNT_PRIVACY.md",
+      "gitBlobSha256": "3370eff7cc27c9c157dc86bf6fd1031b6c71e6c2b0855f38b39a02b67b7feabc",
+      "editorFileSha256": "3370eff7cc27c9c157dc86bf6fd1031b6c71e6c2b0855f38b39a02b67b7feabc"
+    }
+  ]
+}

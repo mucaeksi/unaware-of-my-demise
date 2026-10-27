@@ -74,3 +74,4 @@
 .hub-list > .hub-copy, .hub-list > .hub-card-title, .hub-list > .hub-small { width: 100%; }
 .hub-sweep-counts { flex-shrink: 0; min-height: 70px; margin: 8px 0 14px; }
 #hubSweepCost { font-size: 21px; margin-top: 0; }
+.account-danger { background-color: #5b182f; border-color: #e3c37d; }
