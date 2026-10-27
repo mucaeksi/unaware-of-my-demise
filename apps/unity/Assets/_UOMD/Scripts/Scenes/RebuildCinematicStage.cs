@@ -165,8 +165,11 @@ namespace Uomd.Scenes
             ReleasePrevious();
             if (_current != null) UnityEngine.Object.Destroy(_current.sprite);
             _media.ReleaseTexture(_currentPath);
-            _root.SetActive(false);
-            UnityEngine.Object.Destroy(_root);
+            if (_root != null)
+            {
+                _root.SetActive(false);
+                UnityEngine.Object.Destroy(_root);
+            }
             UnityEngine.Object.Destroy(_dustMaterial);
             if (_previousCamera != null) _previousCamera.enabled = _previousCameraEnabled;
             foreach (var item in _previousLights) if (item.Light != null) item.Light.enabled = item.Enabled;

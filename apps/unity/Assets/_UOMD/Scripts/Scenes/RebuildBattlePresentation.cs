@@ -37,7 +37,7 @@ namespace Uomd.Scenes
             get
             {
 #if UNITY_EDITOR
-                if (BattleReview && _router.ProductionPreview.paused) return true;
+                if ((BattleReview || UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario == "entry") && _router.ProductionPreview.paused) return true;
 #endif
                 return _nativePaused;
             }
@@ -278,6 +278,7 @@ namespace Uomd.Scenes
         {
             ClearNativeDock(); _nativeState = "result";
             bool won = result.Winner == "player";
+            if (won && !BattleReview) _router.EntryFlow?.BattleWon(_entryScope);
             foreach (var view in _views.Values) if (view.Alive && view.Side == (won ? "player" : "enemy")) view.Play("victory");
             _router.Audio.PlaySfx(won ? "sfx_bell_sanctuary" : "sfx_bell_silver");
             _nativeRoot.Q<Label>("battleOutcome").text = won ? "VICTORY" : "DEFEAT";
@@ -296,7 +297,7 @@ namespace Uomd.Scenes
             var result = _battle.Result;
             var flow = _router.EntryFlow;
             _nativeContinue.SetEnabled(false);
-            if (flow.InEntryBattle || flow.InCampaignBattle) _ = flow.BattleFinishedAsync(result.Winner == "player", result.Stars);
+            if (flow.InEntryBattle || flow.InCampaignBattle) _ = flow.BattleFinishedAsync(result.Winner == "player", result.Stars, _entryScope);
             else if (result.Winner != "player") RestartNativeBattle();
             else _ = _router.NavigateToAsync(UomdScreenId.Home);
         }

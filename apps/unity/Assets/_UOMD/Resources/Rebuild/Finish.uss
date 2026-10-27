@@ -1,0 +1,21 @@
+.rebuild-finish { flex-grow: 1; align-items: center; justify-content: center; background-color: #100c16; color: #eee4dc; -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/CormorantGaramond-Medium.ttf"); -unity-font-definition: initial; }
+.finish-full { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.finish-background { background-size: cover; background-position-x: center; background-position-y: center; }
+.finish-dim { background-color: rgba(12,8,19,0.65); }
+.finish-card { width: 1360px; max-width: 89%; max-height: 94%; padding: 36px 52px; background-color: rgba(22,13,29,0.96); border-width: 1px; border-color: #8a7388; }
+.finish-eyebrow, .finish-button, .finish-progress, .finish-credit { -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/Cinzel-SemiBold.ttf"); -unity-font-definition: initial; -unity-font-style: normal; }
+.finish-eyebrow { font-size: 18px; letter-spacing: 3px; color: #bca9cc; -unity-text-align: middle-center; margin-bottom: 14px; }
+.finish-title { font-size: 54px; white-space: normal; color: #e7cf9e; -unity-text-align: middle-center; }
+.finish-body { font-size: 30px; white-space: normal; margin-top: 20px; -unity-text-align: middle-center; }
+.finish-track { height: 12px; background-color: #3a2a43; margin-top: 30px; }
+.finish-fill { height: 100%; width: 0; background-color: #c6aa78; }
+.finish-progress { font-size: 18px; white-space: normal; margin-top: 12px; -unity-text-align: middle-center; }
+.finish-save { font-size: 25px; white-space: normal; margin-top: 24px; -unity-text-align: middle-center; }
+.finish-notice { font-size: 24px; white-space: normal; color: #e7bac9; margin-top: 10px; -unity-text-align: middle-center; }
+.finish-actions { flex-direction: row; justify-content: center; margin-top: 24px; }
+.finish-button { min-height: 72px; min-width: 240px; padding: 16px 30px; margin: 0 8px; font-size: 21px; color: #eee4dc; background-color: #24192e; border-width: 1px; border-color: #8a7388; border-radius: 0; }
+.finish-primary { color: #f0ddb7; border-color: #c6aa78; }
+.finish-button:hover, .finish-button:focus { background-color: #442940; border-color: #efd7a6; }
+.finish-button:disabled { opacity: 0.45; }
+.finish-quote { font-size: 29px; white-space: normal; -unity-text-align: middle-center; margin-top: 30px; color: #d8c9df; }
+.finish-credit { font-size: 16px; -unity-text-align: middle-center; margin-top: 8px; color: #bca9cc; }

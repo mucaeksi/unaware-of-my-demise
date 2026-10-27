@@ -1,0 +1,100 @@
+{
+    "schema": 1,
+    "id": "20261027T031155358_3d0e0860",
+    "capturedAt": "2026-10-27T03:11:55.5574812Z",
+    "sourceCommit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7",
+    "workingTreeScope": "M apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs\n M apps/unity/Assets/_UOMD/Scripts/Narrative/StoryRunner.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/BattleScreenController.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildBattlePresentation.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCinematicStage.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPrologueScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStoryPresentation.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStudioScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildTitleScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryFlow.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs\n M apps/unity/Logic/Uomd.Core/Uomd.Core.csproj\n M docs/review/PRODUCTION_REVIEW.json\n M docs/review/index.html\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uss\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uss.meta\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uxml\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uxml.meta\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEntryCheckpoint.cs\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEntryCheckpoint.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildFinishScreen.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildFinishScreen.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryContinuity.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryContinuity.cs.meta\n?? apps/unity/Assets/_UOMD/Tests/EditMode/EntryCheckpointTests.cs\n?? apps/unity/Assets/_UOMD/Tests/EditMode/EntryCheckpointTests.cs.meta\n?? codex_watcher.ps1\n?? docs/UNITY_ENTRY_CONTINUITY.md\n?? docs/review/captures/20261027T023552247_dceb0513.json\n?? docs/review/captures/20261027T023552247_dceb0513.png\n?? docs/review/captures/20261027T023558156_be2643b4.json\n?? docs/review/captures/20261027T023558156_be2643b4.png\n?? docs/review/captures/20261027T025018779_1eb9bf5c.json\n?? docs/review/captures/20261027T025018779_1eb9bf5c.png\n?? docs/review/captures/20261027T025025746_9bf75d0a.json\n?? docs/review/captures/20261027T025025746_9bf75d0a.png\n?? docs/review/captures/20261027T025958706_834958ef.json\n?? docs/review/captures/20261027T025958706_834958ef.png\n?? docs/review/captures/20261027T030005622_e958a3c8.json\n?? docs/review/captures/20261027T030005622_e958a3c8.png\n?? docs/review/captures/20261027T030226873_99560fe5.json\n?? docs/review/captures/20261027T030226873_99560fe5.png\n?? docs/review/captures/20261027T031148235_0d1afab7.json\n?? docs/review/captures/20261027T031148235_0d1afab7.png\n?? docs/review/captures/20261027T031155358_3d0e0860.png",
+    "contentRelease": "rel_0001",
+    "scenario": "entry",
+    "lineId": "entry_past_001",
+    "assetId": "sol_prologue_hours",
+    "sourceSha": "7b298cdb0776a5f6620fc3f31712ae38bba60a57c87dfba897d87639df09483f",
+    "entrySha": "045b26d75428125bbf1692ca07f74f0ee5036c8852838fb66f82e85473d4da59",
+    "assetRevision": 1,
+    "shot": 0,
+    "width": 1920,
+    "height": 1080,
+    "errorsObserved": 0,
+    "shotElapsed": 4.249441197142005,
+    "simulatedSafeArea": false,
+    "editorOnly": true,
+    "safeAreaDescription": "none",
+    "imageSha": "d5f22abe7e04dcf970c13b2151301197bc5d920632e3f4a4f3cf03eac798e09f",
+    "selectedAssetIdentity": "",
+    "presentationState": "",
+    "unitState": "",
+    "unitFrame": "",
+    "unitBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "unitFootY": 0.0,
+    "battleLogHash": "",
+    "battleActionCount": 0,
+    "awaitingPlayerAction": false,
+    "entryPhase": "prologue",
+    "entryScreen": "Prologue",
+    "entryStage": 0,
+    "entryTutorials": 0,
+    "entrySequence": 3,
+    "entryLocalSaved": true,
+    "entryCloudConfirmed": true,
+    "entryPaused": true,
+    "settings": {
+        "scenario": "entry",
+        "shot": 0,
+        "lineId": "",
+        "unitState": "idle",
+        "unitFrame": 0,
+        "paused": true,
+        "muted": true,
+        "reducedMotion": true,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": false,
+        "presentation": {
+            "scenario": "title",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 210.0,
+        "y": 850.0,
+        "width": 1498.0,
+        "height": 100.0
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1920.0,
+        "height": 1080.0
+    },
+    "stageCameras": 1,
+    "stageLights": 2,
+    "stageParticles": 0,
+    "imagePaths": [
+        "art/still_sol_prologue_hours.webp"
+    ],
+    "relatedAssetIdentities": [
+        "sol_prologue_hours@1:7b298cdb0776a5f6620fc3f31712ae38bba60a57c87dfba897d87639df09483f"
+    ],
+    "bgmVolume": 0.699999988079071,
+    "effectsVolume": 0.8500000238418579,
+    "voiceVolume": 1.0,
+    "actualMuted": true
+}

@@ -198,6 +198,38 @@ namespace Uomd.Tests
             Assert.AreEqual("entry_past_008", new ProductionReviewStore(_fixture).Read().captures.Single().lineId);
         }
 
+        [Test]
+        public void EntryCaptureBackfillsItsScreenStageAndConsumedSourcesEvenWhenTheLineWasAlreadyIndexed()
+        {
+            var store = new ProductionReviewStore(_fixture);
+            ProductionReviewStore.AtomicWrite(ProductionReviewCatalog.Resolve(_fixture, "docs/review/captures/entry.json"),
+                "{\"lineId\":\"tutorial_t2_before_003\",\"entryScreen\":\"Story\",\"entryPhase\":\"pre_story\",\"entryStage\":2,\"relatedAssetIdentities\":[\"exact-revision\"]}");
+            var index = new ProductionReviewIndex();
+            index.captures.Add(new ProductionReviewCapture { id = "entry", scenario = "entry", lineId = "tutorial_t2_before_003", metadata = "captures/entry.json" });
+            store.Write(index);
+            var restored = store.Read().captures.Single();
+            Assert.AreEqual("Story", restored.entryScreen); Assert.AreEqual(2, restored.entryStage);
+            CollectionAssert.AreEqual(new[] { "exact-revision" }, restored.sourceIdentities);
+            StringAssert.Contains("Story · pre_story · T2", restored.Label);
+        }
+
+        [TestCase("entry")]
+        [TestCase("finish")]
+        public void EntryRevisionRequestCannotAttachAnotherAssetOrAnotherRevisionFromTheSamePlaythrough(string scenario)
+        {
+            File.WriteAllText(Path.Combine(_fixture, "source.png"), "entry source fixture");
+            File.WriteAllText(Path.Combine(_fixture, "entry.json"), "{}");
+            var asset = new ProductionReviewAsset { Id = "fixture", Revision = 1, SourcePath = "source.png", SourceSha = Sha256Hash.ComputeFileHex(Path.Combine(_fixture, "source.png")), EntryPath = "entry.json", EntrySha = Sha256Hash.ComputeFileHex(Path.Combine(_fixture, "entry.json")) };
+            var store = new ProductionReviewStore(_fixture); var index = store.Read();
+            index.captures.Add(new ProductionReviewCapture { id = "exact", scenario = scenario, lineId = "line", sha256 = "right", sourceIdentities = new[] { asset.Identity } });
+            index.captures.Add(new ProductionReviewCapture { id = "other", scenario = scenario, lineId = "line", sha256 = "wrong", sourceIdentities = new[] { "another-asset" } });
+            index.captures.Add(new ProductionReviewCapture { id = "stale", scenario = scenario, lineId = "line", sha256 = "stale", sourceIdentities = new[] { asset.Identity + "-stale" } });
+            store.Write(index);
+            var record = store.AddRequest(asset, scenario, "line", "Preserve this pose; adjust only its staging.", "agent_qc_note", new RebuildShotSettings());
+            CollectionAssert.AreEqual(new[] { "exact:right" }, record.captures);
+            Assert.AreEqual("{}", File.ReadAllText(Path.Combine(_fixture, "entry.json")), "Scene feedback cannot grant ingest approval.");
+        }
+
         [TestCase("../outside.json")]
         [TestCase("..\\outside.json")]
         [TestCase("C:/outside.json")]

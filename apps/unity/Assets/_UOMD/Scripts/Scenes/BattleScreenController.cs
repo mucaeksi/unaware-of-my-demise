@@ -61,6 +61,7 @@ namespace Uomd.Scenes
         private readonly List<BattleUnitView> _lunged = new List<BattleUnitView>();
         private bool _auto;
         private int _generation;
+        private string _entryScope;
 
         public UomdScreenId ScreenId => UomdScreenId.Battle;
         /// <summary>Presets currently playing (capture QA).</summary>
@@ -82,6 +83,7 @@ namespace Uomd.Scenes
             _auto = false;
             _pending = null;
             string encounterId = _router.Session.ActiveBattleEncounterId;
+            _entryScope = _router.EntryFlow != null && _router.EntryFlow.StageIndex > 0 ? _router.EntryFlow.Continuity.State?.Scope : null;
             _battle = null;
             _autoButton = null;
             _native = IsRebuiltTutorialEncounter(encounterId);
@@ -94,7 +96,9 @@ namespace Uomd.Scenes
             try
             {
                 string packJson = await _router.Patch.ReadTextAsync("units/unit_pack.json");
+                if (generation != _generation) return;
                 string encounterJson = await _router.Patch.ReadTextAsync($"encounters/{encounterId}.json");
+                if (generation != _generation) return;
                 raw = UomdJson.ParseObject(encounterJson);
                 ReadSkillText(packJson);
                 _battle = Uomd.Combat.Battle.Create(UnitPackDef.FromJson(packJson), EncounterDef.FromJson(encounterJson));
@@ -131,7 +135,7 @@ namespace Uomd.Scenes
             {
                 if (_native) await LoadNativeBackgroundAsync(raw, generation);
                 if (generation != _generation) return;
-                await LoadVfxAsync();
+                await LoadVfxAsync(generation);
                 if (generation != _generation) return;
                 await LoadUnitArtAsync(generation);
                 if (generation != _generation) return;
@@ -149,14 +153,17 @@ namespace Uomd.Scenes
         }
 
         /// <summary>Combat VFX presets (content vfx/vfx_presets.json); a missing or invalid pack only skips the effects.</summary>
-        private async Awaitable LoadVfxAsync()
+        private async Awaitable LoadVfxAsync(int generation)
         {
             try
             {
-                _vfx.Pack = VfxPack.Parse(await _router.Patch.ReadTextAsync(VfxPack.Path));
+                string json = await _router.Patch.ReadTextAsync(VfxPack.Path);
+                if (generation != _generation) return;
+                _vfx.Pack = VfxPack.Parse(json);
             }
             catch (Exception e)
             {
+                if (generation != _generation) return;
                 Debug.LogWarning($"[Battle] VFX presets unavailable; effects are skipped: {e.Message}");
                 _vfx.Pack = null;
             }

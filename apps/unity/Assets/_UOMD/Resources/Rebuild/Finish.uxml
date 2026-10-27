@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Finish.uss" />
+  <ui:VisualElement name="rebuildFinish" class="rebuild-finish">
+    <ui:VisualElement name="finishBackground" class="finish-full finish-background" picking-mode="Ignore" />
+    <ui:VisualElement class="finish-full finish-dim" picking-mode="Ignore" />
+    <ui:VisualElement class="finish-card">
+      <ui:Label text="THE ROAD TO SHELTER" class="finish-eyebrow" />
+      <ui:Label name="finishTitle" text="A MOMENT BEFORE THE ROAD" class="finish-title" />
+      <ui:Label name="finishBody" class="finish-body" />
+      <ui:VisualElement name="finishTrack" class="finish-track" picking-mode="Ignore">
+        <ui:VisualElement name="finishFill" class="finish-fill" />
+      </ui:VisualElement>
+      <ui:Label name="finishProgress" class="finish-progress" />
+      <ui:Label name="finishSaveStatus" class="finish-save" />
+      <ui:Label name="finishNotice" class="finish-notice" />
+      <ui:VisualElement class="finish-actions">
+        <ui:Button name="finishSave" text="RETRY SAVE" class="finish-button" />
+        <ui:Button name="finishAction" text="TRY AGAIN" class="finish-button finish-primary" />
+      </ui:VisualElement>
+      <ui:Label text="“Stay a little while. Before you stand watch.” — “I am here.”" class="finish-quote" />
+      <ui:Label text="FADYME &amp; MAHMUT" class="finish-credit" />
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

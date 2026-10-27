@@ -12,6 +12,7 @@
     <Compile Include="$(UomdScripts)Core/CanonicalJson.cs" />
     <Compile Include="$(UomdScripts)Core/Es256SignatureVerifier.cs" />
     <Compile Include="$(UomdScripts)Core/GameSessionState.cs" />
+    <Compile Include="$(UomdScripts)Core/UomdEntryCheckpoint.cs" />
     <Compile Include="$(UomdScripts)Core/UomdJson.cs" />
     <Compile Include="$(UomdScripts)Core/JsonRead.cs" />
     <Compile Include="$(UomdScripts)Core/UomdMediaCatalog.cs" />

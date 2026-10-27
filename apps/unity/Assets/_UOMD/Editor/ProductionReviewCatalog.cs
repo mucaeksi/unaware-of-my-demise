@@ -136,6 +136,11 @@ namespace Uomd.EditorTools
     {
         public string id, image, sha256, metadata, scenario, lineId;
         public string unitState, unitFrame;
+        public string entryScreen, entryPhase;
+        public int entryStage;
+        public string[] sourceIdentities = Array.Empty<string>();
+        public string Label => scenario + (string.IsNullOrEmpty(entryScreen) ? "" : " · " + entryScreen + " · " + entryPhase + (entryStage > 0 ? " · T" + entryStage : ""))
+            + (string.IsNullOrEmpty(lineId) ? "" : " · " + lineId) + (string.IsNullOrEmpty(unitState) ? "" : " · " + unitState + "/" + unitFrame);
     }
 
     /// <summary>Scene feedback and capture links only. Human art acceptance stays in ingest_art.</summary>
@@ -149,15 +154,21 @@ namespace Uomd.EditorTools
             var index = File.Exists(IndexPath) ? JsonUtility.FromJson<ProductionReviewIndex>(File.ReadAllText(IndexPath)) : new ProductionReviewIndex();
             foreach (var capture in index.captures)
             {
-                if (string.IsNullOrEmpty(capture.metadata) || (!string.IsNullOrEmpty(capture.lineId) && capture.scenario?.StartsWith("unit/", StringComparison.Ordinal) != true)
-                    || !string.IsNullOrEmpty(capture.unitFrame)) continue;
+                if (string.IsNullOrEmpty(capture.metadata) || capture.scenario != "entry" && capture.scenario != "finish" && ((!string.IsNullOrEmpty(capture.lineId) && capture.scenario?.StartsWith("unit/", StringComparison.Ordinal) != true)
+                    || !string.IsNullOrEmpty(capture.unitFrame))) continue;
                 string path = ProductionReviewCatalog.Resolve(Root, "docs/review/" + capture.metadata);
                 if (File.Exists(path))
                 {
                     var metadata = UomdJson.ParseObject(File.ReadAllText(path));
-                    capture.lineId = JsonRead.Str(metadata, "lineId");
+                    if (string.IsNullOrEmpty(capture.lineId)) capture.lineId = JsonRead.Str(metadata, "lineId");
                     capture.unitState = JsonRead.Str(metadata, "unitState");
                     capture.unitFrame = JsonRead.Str(metadata, "unitFrame");
+                    if (capture.scenario == "entry" || capture.scenario == "finish")
+                    {
+                        capture.entryScreen = JsonRead.Str(metadata, "entryScreen"); capture.entryPhase = JsonRead.Str(metadata, "entryPhase");
+                        capture.entryStage = (int)JsonRead.Int(metadata, "entryStage");
+                        capture.sourceIdentities = JsonRead.Strings(metadata, "relatedAssetIdentities").ToArray();
+                    }
                 }
             }
             return index;
@@ -167,7 +178,7 @@ namespace Uomd.EditorTools
             AtomicWrite(IndexPath, JsonUtility.ToJson(index, true) + "\n");
             var html = new StringBuilder("<!doctype html><meta charset=\"utf-8\"><title>UOMD Production Review</title><style>body{background:#18131f;color:#eee2ce;font:16px system-ui;max-width:1200px;margin:40px auto}img{max-width:100%}article{margin-bottom:48px}a{color:#c9b2e0}</style><h1>Production Review</h1><p>Local Editor evidence. No device, release or art approval is implied.</p>");
             foreach (var capture in index.captures)
-                html.Append("<article><h2>").Append(System.Net.WebUtility.HtmlEncode(capture.scenario + (string.IsNullOrEmpty(capture.unitState) ? "" : " · " + capture.unitState + "/" + capture.unitFrame))).Append("</h2><a href=\"").Append(capture.metadata).Append("\">Metadata</a><p><img src=\"").Append(capture.image).Append("\"></p><code>").Append(capture.sha256).Append("</code></article>");
+                html.Append("<article><h2>").Append(System.Net.WebUtility.HtmlEncode(capture.Label)).Append("</h2><a href=\"").Append(capture.metadata).Append("\">Metadata</a><p><img src=\"").Append(capture.image).Append("\"></p><code>").Append(capture.sha256).Append("</code></article>");
             AtomicWrite(ProductionReviewCatalog.Resolve(Root, "docs/review/index.html"), html.ToString());
         }
 
@@ -183,6 +194,7 @@ namespace Uomd.EditorTools
                 unitState = unitState, unitFrame = unitFrame,
                 presentation = JsonUtility.FromJson<RebuildShotSettings>(JsonUtility.ToJson(settings)),
                 captures = index.captures.Where(c => c.scenario == scenario && (string.IsNullOrEmpty(lineId) || c.lineId == lineId))
+                    .Where(c => c.scenario != "entry" && c.scenario != "finish" || (c.sourceIdentities ?? Array.Empty<string>()).Contains(asset.Identity))
                     .Where(c => string.IsNullOrEmpty(unitState) || (c.unitState == unitState && c.unitFrame == unitFrame))
                     .Select(c => c.id + ":" + c.sha256).ToArray() };
             index.requests.Add(record);

@@ -24,8 +24,24 @@ namespace Uomd.Scenes
         private string _readingEntry = "";
         private System.Collections.Generic.List<string> _readingScenes = new System.Collections.Generic.List<string>();
         private int _readingIndex;
+        private int _generation;
+        internal void ResetForIdentity()
+        {
+            ++_generation; StageIndex = 0; Current = Phase.None; _preStory = _postStory = _campaignNode = _readingEntry = "";
+            _readingScenes = new System.Collections.Generic.List<string>(); _readingIndex = 0;
+        }
+        private bool Owns(string scope) => string.IsNullOrEmpty(scope) || Continuity.IsCurrent && Continuity.State.Scope == scope;
 
-        public UomdEntryFlow(UomdSceneRouter router) => _router = router;
+        public UomdEntryContinuity Continuity { get; }
+        public UomdEntryFlow(UomdSceneRouter router)
+        {
+            _router = router;
+            bool isolated = UomdCaptureRunner.Requested(out _);
+#if UNITY_EDITOR
+            isolated |= UomdEditorPreviewIsolation.Active;
+#endif
+            Continuity = new UomdEntryContinuity(router, isolated);
+        }
 
         /// <summary>Tutorial stage being played (1..3), 0 outside the entry flow.</summary>
         public int StageIndex { get; private set; }
@@ -34,20 +50,64 @@ namespace Uomd.Scenes
         /// <summary>Goes to the first unfinished entry step (TitleScene tap, Continue).</summary>
         public async Awaitable ContinueAsync()
         {
-            var account = _router.Session.Account;
-            if (account?.storyProgress == null || !account.storyProgress.prologueDone)
+            await Continuity.PrepareAsync();
+            await ResumePreparedAsync();
+        }
+
+        private async Awaitable ResumePreparedAsync()
+        {
+            if (!Continuity.IsCurrent) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
+            var saved = Continuity.State;
+            if (!saved.PrologueDone)
             {
                 await _router.NavigateToAsync(UomdScreenId.Prologue);
                 return;
             }
-            int done = Math.Max(0, account.tutorialStep);
+            int done = saved.Tutorials;
             if (done < 3)
             {
+                if (saved.Stage == done + 1 && (saved.Phase == "battle" || saved.Phase == "post_story"))
+                {
+                    int stage = saved.Stage; string phase = saved.Phase;
+                    await LoadStageAsync(stage);
+                    if (phase == "post_story" && !string.IsNullOrEmpty(_postStory)) await PlayStoryAsync(Phase.PostStory, _postStory);
+                    else await StartBattleAsync();
+                    return;
+                }
                 await StartStageAsync(done + 1);
                 return;
             }
-            _router.Patch.EntryCompleted = true;
+            StageIndex = 0; Current = Phase.None;
+            if (!saved.Completed || saved.Phase == "finish" || !Continuity.MemoryOnly && !_router.Patch.EntryCompleted)
+            { await _router.NavigateToAsync(UomdScreenId.Finish); return; }
             await _router.NavigateToAsync(UomdScreenId.Home);
+        }
+
+        public async Awaitable PrologueFinishedAsync(string expectedScope = null)
+        {
+            if (!Owns(expectedScope)) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
+            Continuity.PrologueFinished();
+            _ = Continuity.SyncAsync();
+            await ResumePreparedAsync();
+        }
+
+        public void BattleWon(string expectedScope = null)
+        {
+            if (!Owns(expectedScope)) return;
+            if (InEntryBattle && !string.IsNullOrEmpty(_postStory)) Continuity.Phase("post_story", StageIndex, _postStory);
+        }
+
+        private async Awaitable LoadStageAsync(int index)
+        {
+            int generation = _generation;
+            var entry = UomdJson.ParseObject(await _router.Patch.ReadTextAsync("entry/entry_index.json"));
+            if (generation != _generation || !Continuity.IsCurrent) throw new OperationCanceledException("Account changed.");
+            var stages = entry.TryGetValue("tutorial", out object list) ? list as System.Collections.Generic.List<object> : null;
+            if (stages == null || index < 1 || index > stages.Count) throw new InvalidDataException($"entry index has no tutorial stage {index}");
+            var stage = (System.Collections.Generic.Dictionary<string, object>)stages[index - 1];
+            await LoadEncounterAsync((string)stage["encounter"], generation);
+            if (generation != _generation || !Continuity.IsCurrent) throw new OperationCanceledException("Account changed.");
+            StageIndex = index;
         }
 
         /// <summary>Starts tutorial stage <paramref name="index"/> (1-based) at its pre_story.</summary>
@@ -56,13 +116,10 @@ namespace Uomd.Scenes
             _campaignNode = "";
             try
             {
-                var entry = UomdJson.ParseObject(await _router.Patch.ReadTextAsync("entry/entry_index.json"));
-                var stages = entry.TryGetValue("tutorial", out object list) ? list as System.Collections.Generic.List<object> : null;
-                if (stages == null || index < 1 || index > stages.Count) throw new InvalidDataException($"entry index has no tutorial stage {index}");
-                var stage = (System.Collections.Generic.Dictionary<string, object>)stages[index - 1];
-                await LoadEncounterAsync((string)stage["encounter"]);
-                StageIndex = index;
+                if (!Continuity.IsCurrent) await Continuity.PrepareAsync();
+                await LoadStageAsync(index);
             }
+            catch (OperationCanceledException) { return; }
             catch (Exception e)
             {
                 Debug.LogError($"[EntryFlow] tutorial {index} could not start: {e.Message}");
@@ -109,9 +166,10 @@ namespace Uomd.Scenes
             return true;
         }
 
-        private async Awaitable LoadEncounterAsync(string encounterPath)
+        private async Awaitable LoadEncounterAsync(string encounterPath, int generation = -1)
         {
             var encounter = UomdJson.ParseObject(await _router.Patch.ReadTextAsync(encounterPath));
+            if (generation >= 0 && (generation != _generation || !Continuity.IsCurrent)) throw new OperationCanceledException("Account changed.");
             _preStory = encounter.TryGetValue("pre_story", out object pre) ? pre as string ?? "" : "";
             _postStory = encounter.TryGetValue("post_story", out object post) ? post as string ?? "" : "";
             _router.Session.ActiveBattleEncounterId = Path.GetFileNameWithoutExtension(encounterPath);
@@ -168,8 +226,10 @@ namespace Uomd.Scenes
         }
 
         /// <summary>The story screen calls this when its scene completes.</summary>
-        public async Awaitable StoryFinishedAsync()
+        public async Awaitable StoryFinishedAsync(string expectedScope = null)
         {
+            if (!Owns(expectedScope)) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
+            if (StageIndex > 0 && !Continuity.IsCurrent) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
             if (InReading) await FinishReadingAsync();
             else if (Current == Phase.PreStory) await StartBattleAsync();
             else if (Current == Phase.PostStory) await CompleteStageAsync();
@@ -177,9 +237,11 @@ namespace Uomd.Scenes
         }
 
         /// <summary>The battle screen calls this after the result. A lost tutorial replays from its pre_story, a lost campaign battle restarts.</summary>
-        public async Awaitable BattleFinishedAsync(bool won, int stars = 0)
+        public async Awaitable BattleFinishedAsync(bool won, int stars = 0, string expectedScope = null)
         {
+            if (!Owns(expectedScope)) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
             if (Current != Phase.Battle) return;
+            if (StageIndex > 0 && !Continuity.IsCurrent) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
             if (!won)
             {
                 if (InCampaignBattle) await StartBattleAsync();
@@ -206,6 +268,7 @@ namespace Uomd.Scenes
         private async Awaitable PlayStoryAsync(Phase phase, string path)
         {
             Current = phase;
+            if (StageIndex > 0) Continuity.Phase(phase == Phase.PreStory ? "pre_story" : "post_story", StageIndex, path);
             _readingEntry = "";
             _router.Session.ActiveStoryJson = null;
             _router.Session.ActiveStoryPath = path;
@@ -215,6 +278,7 @@ namespace Uomd.Scenes
         private async Awaitable StartBattleAsync()
         {
             Current = Phase.Battle;
+            if (StageIndex > 0) Continuity.Phase("battle", StageIndex);
             await _router.NavigateToAsync(UomdScreenId.Battle);
         }
 
@@ -230,9 +294,8 @@ namespace Uomd.Scenes
                 return;
             }
             int index = StageIndex;
-            var account = _router.Session.Account;
-            if (account != null) account.tutorialStep = Math.Max(account.tutorialStep, index);
-            if (_router.Api.IsSignedIn) _ = RecordAsync(index);
+            Continuity.TutorialFinished(index);
+            _ = Continuity.SyncAsync();
             if (index < 3)
             {
                 await StartStageAsync(index + 1);
@@ -243,16 +306,5 @@ namespace Uomd.Scenes
             await _router.NavigateToAsync(UomdScreenId.Finish);
         }
 
-        private async Awaitable RecordAsync(int tutorials)
-        {
-            try
-            {
-                await _router.Api.PutEntryAsync(true, tutorials, tutorials >= 3);
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"[EntryFlow] entry checkpoint not saved: {e.Message}");
-            }
-        }
     }
 }

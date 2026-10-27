@@ -37,7 +37,8 @@ namespace Uomd.Scenes
             _settingsButton = _root.Q<Button>("settingsButton");
             _replay = _root.Q<Button>("replayButton");
             _status = _root.Q<Label>("statusText");
-            _primary.text = _router.Api.IsSignedIn ? "CONTINUE" : _router.PlatformBridge.IsNativeAndroid ? "SIGN IN WITH GOOGLE" : "TAP TO START";
+            _primary.text = _router.Api.IsSignedIn ? "CONTINUE" : _router.PlatformBridge.IsNativeAndroid ? "SIGN IN WITH GOOGLE"
+                : _router.EntryFlow.Continuity.HasDeviceCheckpoint ? "CONTINUE" : "TAP TO START";
             _root.Q<Label>("versionText").text = "v" + Application.version;
             _primary.clicked += Start;
             _settingsButton.clicked += OpenSettings;
@@ -120,7 +121,8 @@ namespace Uomd.Scenes
             {
                 if (generation != _generation) return;
                 Debug.LogWarning($"[RebuildTitle] entry unavailable: {e.GetType().Name}");
-                _status.text = signingIn ? "Sign-in did not complete. Nothing was changed." : "The story could not be loaded. Try again.";
+                _status.text = signingIn ? "Sign-in did not complete. Nothing was changed." : _router.EntryFlow.Continuity.Notice.Length > 0
+                    ? _router.EntryFlow.Continuity.Notice : "The story could not be loaded. Try again.";
             }
             finally
             {

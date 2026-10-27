@@ -418,6 +418,13 @@ namespace Uomd.Narrative
                     case "hide":
                         Restored.actors.Remove(cmd.character);
                         break;
+                    case "say":
+                        Restored.prevSpeaker = cmd.speaker;
+                        if (Restored.actors.TryGetValue(cmd.speaker, out var actor) && !string.IsNullOrEmpty(cmd.emotion)) actor.emotion = cmd.emotion;
+                        break;
+                    case "narrate":
+                        Restored.prevSpeaker = "narration";
+                        break;
                 }
             }
         }

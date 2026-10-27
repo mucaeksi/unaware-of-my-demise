@@ -48,6 +48,7 @@ namespace Uomd.Scenes
             PlatformBridge = UomdPlatformBridgeFactory.Create();
             Audio = gameObject.AddComponent<AudioDirector>();
             Media = new UomdMediaLoader(Patch);
+            EntryFlow = new UomdEntryFlow(this);
             await Media.LoadCatalogAsync();
             if (this == null) return;
             Audio.Media = Media;
@@ -70,6 +71,8 @@ namespace Uomd.Scenes
                 case "boot": screen = UomdScreenId.Boot; break;
                 case "studio": screen = UomdScreenId.Studio; break;
                 case "title": screen = UomdScreenId.Title; break;
+                case "entry": screen = UomdScreenId.Title; break;
+                case "finish": screen = UomdScreenId.Finish; break;
                 default:
                     if (request.scenario.StartsWith("battle/", StringComparison.Ordinal))
                     {
@@ -118,12 +121,19 @@ namespace Uomd.Scenes
             _previewNavigation = true;
             try
             {
+                if ((request.scenario == "entry" || request.scenario == "finish") && request.scenario != ProductionPreview?.scenario)
+                    EntryFlow = new UomdEntryFlow(this); // Dedicated memory fixtures must not become another rehearsal's progress.
                 ProductionPreview = request;
-                Session.IsReplayingIntro = true;
+                Session.IsReplayingIntro = request.scenario != "entry";
                 Session.ReducedMotion = request.reducedMotion;
                 Session.ReduceFlash = request.reduceFlash;
                 Audio.SetPaused(false);
                 Audio.Muted = request.muted;
+                if (screen == UomdScreenId.Finish)
+                {
+                    await EntryFlow.Continuity.PrepareAsync();
+                    EntryFlow.Continuity.PrologueFinished(); EntryFlow.Continuity.TutorialFinished(3);
+                }
                 if (screen == UomdScreenId.Story)
                 {
                     Session.ActiveStoryPath = request.scenario.StartsWith("story/", StringComparison.Ordinal)
@@ -139,7 +149,7 @@ namespace Uomd.Scenes
                 }
                 await NavigateToAsync(screen);
                 if (this == null) return;
-                if (screen == UomdScreenId.Title)
+                if (screen == UomdScreenId.Title && request.scenario != "entry")
                 {
                     _screenHost.Q<Button>("startButton").SetEnabled(false);
                     _screenHost.Q<Button>("replayButton").SetEnabled(false);
@@ -159,7 +169,7 @@ namespace Uomd.Scenes
             Session.ReduceFlash = ProductionPreview.reduceFlash;
             Audio.Muted = ProductionPreview.muted;
             Audio.SetPaused(ProductionPreview.paused);
-            if (ActiveScreenId == UomdScreenId.Battle && ProductionPreview.scenario.StartsWith("battle/", StringComparison.Ordinal))
+            if (ActiveScreenId == UomdScreenId.Battle && (ProductionPreview.scenario.StartsWith("battle/", StringComparison.Ordinal) || ProductionPreview.scenario == "entry"))
                 Audio.SetPaused(Controller<BattleScreenController>().ReviewPaused);
             if (ActiveScreenId == UomdScreenId.Battle && ProductionPreview.scenario.StartsWith("unit/", StringComparison.Ordinal))
                 Controller<RebuildUnitReviewScreen>()?.ApplyRequest();

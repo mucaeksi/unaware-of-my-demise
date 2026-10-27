@@ -1,0 +1,2334 @@
+{
+  "schema": 1,
+  "status": "LOCAL_TESTED",
+  "verified_at": "2026-10-27T04:22:26.448Z",
+  "verified_local_date": "2026-10-27",
+  "timezone": "Europe/Bucharest",
+  "parent_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7",
+  "source_scope": "Parent plus the entry continuity/Finish working tree. The enclosing local commit binds final source and artifacts. Full guest course ran before final scoped lifecycle/cache guards; focused navigation, account, identity and compile/tests verify those final guards. No push/deploy.",
+  "source_sha256_normalized_lf": {
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs": "e57d53a7707e6893a0c39d5e8a153c28ef9ef726f3e86fac6998b17155ef067b",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs": "eb2ce99fa53c343b51808d6d8716c9b49b056e92c779d21783e38842cd3cf555",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs": "d2562c5260cd91eb8459a16c6b75ab64dacd0d70befe289bf9d93b7381c0ee46",
+    "apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs": "cf0bbe273ff47853fa5debe74c0191e74e73202c899b358c5d229bdd3a3a000e",
+    "apps/unity/Assets/_UOMD/Scripts/Narrative/StoryRunner.cs": "caca14de5d345e7b9c68093a7c2594906b697408e1316d2aae20bd480341ed76",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/BattleScreenController.cs": "8cc7d498ece13a20d06c3eb926a0b2f98a657e7008260bb9418e22627bdfd843",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs": "0da4db63636ec1920bbf929fef7f9c846fcdbfb86e685997a99dcf6fd32eb63d",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildBattlePresentation.cs": "455a790be365feceaa523482241d6b75cdd5a3d0ea174a0ddd5572cdacc8dbfb",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCinematicStage.cs": "e00163e93c7183d194c3b59081b78d0f8a3317343b8d736aed30b9050de3f5a2",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPrologueScreen.cs": "abf8fd52d5096541f1ec3754ab962725a6ff63d58c54732435c1c2dfd6516d80",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStoryPresentation.cs": "05232e6aae727db671124f04d90ff07d07b5b3552617e3eebe710bbf68bfc25b",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStudioScreen.cs": "558378ffe9852b2e53a4295e34bc836177069efed63aa6c5189ac26d61b5466a",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildTitleScreen.cs": "4fbe7e2a123ec40602dada7a689a28c13b52b6c3890f28a0340cac52b10ed82d",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryFlow.cs": "68b9435d9e47a21470e73d7e08c4c0991c13681013d118f0e45edc6c2509915d",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs": "90614e0a2140050397579d5f425251afd7201ed9a9f97924f878cf1f28d5a931",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs": "1c41cfb799e70bce55ed4a6dece113cf5aa4dcdbf6346fd780a67aacaedc2b33",
+    "apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs": "2bf0397a85098d3a6f69a3bbbb1450fb37609cf6bedb64b2ab0818ff2f7e319b",
+    "apps/unity/Logic/Uomd.Core/Uomd.Core.csproj": "fabc3a00dc1e38813fec8914f9b4e2e4a09c4f84153359e5f7ead3f35441c74f",
+    "apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uss": "1dbaaa8e65c97b72a31f3cc9eeed56457a6518436aac63efc401c57f5436d7c9",
+    "apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uxml": "7b71af7ea3bd0ebcedec694606d9d6f466984187ffc2b785c45cf1c6d49d9f1b",
+    "apps/unity/Assets/_UOMD/Scripts/Core/UomdEntryCheckpoint.cs": "15a87f4831ef3b15308d98fe95ca267f31dcd77bd08cbaf910faec2998d926c8",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildFinishScreen.cs": "4e6760cf37a643df0c7b9306216fcc2c7ec7fcb8a3551681a56ff6128dbb4fe7",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryContinuity.cs": "d49a465f7dda8abe0a2ce05e27053b893fff068f55a206971aab99f88130c9ae",
+    "apps/unity/Assets/_UOMD/Tests/EditMode/EntryCheckpointTests.cs": "7a1548927bc514bb66583bc10a8efa5353f443e23165350753cedea6ba8d9c90",
+    "tools/tests/test_unity_entry_checkpoint_process.py": "c6748c078d96db2ee5819b481cbfe43169a175f38ad896fab7e9f5660d16ccae"
+  },
+  "unity": {
+    "version": "6000.3.27f1",
+    "pipeline": "0.9.1-exp.1",
+    "transport": "Unity CLI only",
+    "mcp_calls": 0,
+    "editor_tests": {
+      "total": 148,
+      "passed": 148,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode_tests": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "reference_assemblies": 12,
+    "reference_errors": 0,
+    "reference_limit": "Reference compile uses verified URP 17.3 signatures; actual installed Editor compilation and tests also pass."
+  },
+  "checks": {
+    "repository_verification": "PASS",
+    "typescript_tests": 955,
+    "content_files_reproduced": 231,
+    "headless_logic_tests": 119,
+    "separate_process_storage_probe": "python -m unittest tools.tests.test_unity_entry_checkpoint_process -v: PASS; actual Core, separate write/read/abrupt-before-promotion/backup/account processes",
+    "skill_adapters": 66,
+    "graph": {
+      "nodes": 6752,
+      "edges": 18578,
+      "communities": 261
+    },
+    "identity_cache": {
+      "cached": true,
+      "refreshStable": true,
+      "accountChange": true
+    }
+  },
+  "scope": {
+    "local": "Account/content/scene-bound device cursor, choices/flags/Auto, shot and entry phase; unfinished battles restart; victory checkpoints post-story.",
+    "cloud": "Existing coarse prologue/tutorial/completed endpoint only; stable persisted request IDs, account guards. Detailed scene cursor is not cloud-synced.",
+    "review": "entry and finish are independent memory-only API-blocked fixtures. Final Finish captures explicitly label REVIEW FIXTURE and mark memory-only metadata.",
+    "authority": "No wallet, rewards, campaign authority, native/provider acceptance or human art approval transferred to local state."
+  },
+  "full_course": {
+    "shots": [
+      {
+        "index": 0,
+        "firstElapsed": 0.7975560023915023,
+        "seenAt": "2026-10-27T03:11:52.734Z"
+      },
+      {
+        "index": 1,
+        "firstElapsed": 1.274817397817969,
+        "seenAt": "2026-10-27T03:12:05.160Z"
+      },
+      {
+        "index": 2,
+        "firstElapsed": 1.0362570032011718,
+        "seenAt": "2026-10-27T03:12:19.009Z"
+      },
+      {
+        "index": 3,
+        "firstElapsed": 1.0259346009697763,
+        "seenAt": "2026-10-27T03:12:30.999Z"
+      },
+      {
+        "index": 4,
+        "firstElapsed": 0.8372864020057023,
+        "seenAt": "2026-10-27T03:12:42.843Z"
+      },
+      {
+        "index": 5,
+        "firstElapsed": 0.8148620994761585,
+        "seenAt": "2026-10-27T03:12:58.740Z"
+      },
+      {
+        "index": 6,
+        "firstElapsed": 0.7103369985707104,
+        "seenAt": "2026-10-27T03:13:14.639Z"
+      },
+      {
+        "index": 7,
+        "firstElapsed": 0.28406980307772756,
+        "seenAt": "2026-10-27T03:13:28.213Z"
+      },
+      {
+        "index": 8,
+        "firstElapsed": 0.1724950058851391,
+        "seenAt": "2026-10-27T03:13:40.162Z"
+      }
+    ],
+    "first_skip": "None",
+    "canonical_lines_expected": 107,
+    "canonical_lines_seen": 107,
+    "actions": 50,
+    "battles": [
+      {
+        "stage": 1,
+        "actions": [
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_basic_oathless_cut",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "target": null
+          },
+          {
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "target": null
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:1:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:1:bellbound_dead"
+          }
+        ],
+        "final": {
+          "ready": true,
+          "screen": "Battle",
+          "stage": 1,
+          "phase": "Battle",
+          "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"post_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"b972b69f09854aa2bdb55b8e5c877ca9\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":33,\"shot\":8,\"stage\":1,\"storyIndex\":0,\"storyPath\":\"story/tutorial_t1_after.json\",\"tutorials\":0,\"version\":1}",
+          "localSaved": true,
+          "line": "",
+          "storyState": "",
+          "paths": [
+            "art/atlas_sol_bellbound_dead.webp",
+            "art/atlas_sol_fadyme.webp",
+            "art/atlas_sol_mahmut.webp",
+            "art/bg_sol_forest_whispering_ash.webp"
+          ],
+          "next": false,
+          "auto": "",
+          "shot": -1,
+          "elapsed": 0,
+          "finished": false,
+          "pending": false,
+          "count": 11,
+          "winner": "player",
+          "hash": "afd0a4858b7cace3aecf12e92950a1bd22de653fe91a7020b7b48677cf632f36",
+          "actor": "",
+          "options": null,
+          "saveText": "",
+          "notice": ""
+        },
+        "replay": {
+          "valid": true,
+          "complete": true,
+          "hash": "afd0a4858b7cace3aecf12e92950a1bd22de653fe91a7020b7b48677cf632f36",
+          "eventCount": 136
+        }
+      },
+      {
+        "stage": 2,
+        "actions": [
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:0:hollow_pilgrim"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:0:hollow_pilgrim"
+          },
+          {
+            "skill": "mahmut_basic_oathless_cut",
+            "target": "enemy:0:hollow_pilgrim"
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:0:hollow_pilgrim"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:0:hollow_pilgrim"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "target": null
+          },
+          {
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "target": null
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:0:hollow_pilgrim"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:1:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:1:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_basic_oathless_cut",
+            "target": "enemy:1:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:2:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:2:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "target": null
+          },
+          {
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "target": null
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:2:bellbound_dead"
+          }
+        ],
+        "final": {
+          "ready": true,
+          "screen": "Battle",
+          "stage": 2,
+          "phase": "Battle",
+          "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"post_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"159d22901cd64de285a7328138855e0e\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":69,\"shot\":8,\"stage\":2,\"storyIndex\":0,\"storyPath\":\"story/tutorial_t2_after.json\",\"tutorials\":1,\"version\":1}",
+          "localSaved": true,
+          "line": "",
+          "storyState": "",
+          "paths": [
+            "art/atlas_sol_bellbound_dead.webp",
+            "art/atlas_sol_fadyme.webp",
+            "art/atlas_sol_hollow_pilgrim.webp",
+            "art/atlas_sol_mahmut.webp",
+            "art/bg_sol_forgotten_stone_crossing.webp"
+          ],
+          "next": false,
+          "auto": "",
+          "shot": -1,
+          "elapsed": 0,
+          "finished": false,
+          "pending": false,
+          "count": 20,
+          "winner": "player",
+          "hash": "e4d24f047ab2373b1096f6950bea17f9e1e536d859f1e41cccbd262f2f48575f",
+          "actor": "",
+          "options": null,
+          "saveText": "",
+          "notice": ""
+        },
+        "replay": {
+          "valid": true,
+          "complete": true,
+          "hash": "e4d24f047ab2373b1096f6950bea17f9e1e536d859f1e41cccbd262f2f48575f",
+          "eventCount": 243
+        }
+      },
+      {
+        "stage": 3,
+        "actions": [
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_basic_oathless_cut",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:0:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "target": null
+          },
+          {
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "target": null
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:1:bellbound_dead"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:1:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:1:bellbound_dead"
+          },
+          {
+            "skill": "mahmut_basic_oathless_cut",
+            "target": "enemy:2:hollow_pilgrim"
+          },
+          {
+            "skill": "fadyme_basic_veilglass_thorn",
+            "target": "enemy:2:hollow_pilgrim"
+          },
+          {
+            "skill": "fadyme_ultimate_the_bell_that_forgets",
+            "target": null
+          },
+          {
+            "skill": "mahmut_active_broken_crest_guard",
+            "target": null
+          },
+          {
+            "skill": "fadyme_active_borrowed_hour",
+            "target": "enemy:2:hollow_pilgrim"
+          },
+          {
+            "skill": "mahmut_ultimate_last_wall_at_dusk",
+            "target": null
+          }
+        ],
+        "final": {
+          "ready": true,
+          "screen": "Battle",
+          "stage": 3,
+          "phase": "Battle",
+          "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"post_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"e5ec37890e1547bb99bbbbb0380d886c\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":108,\"shot\":8,\"stage\":3,\"storyIndex\":0,\"storyPath\":\"story/tutorial_t3_after.json\",\"tutorials\":2,\"version\":1}",
+          "localSaved": true,
+          "line": "",
+          "storyState": "",
+          "paths": [
+            "art/atlas_sol_bellbound_dead.webp",
+            "art/atlas_sol_fadyme.webp",
+            "art/atlas_sol_hollow_pilgrim.webp",
+            "art/atlas_sol_mahmut.webp",
+            "art/bg_sol_shelter_courtyard_dusk.webp"
+          ],
+          "next": false,
+          "auto": "",
+          "shot": -1,
+          "elapsed": 0,
+          "finished": false,
+          "pending": false,
+          "count": 19,
+          "winner": "player",
+          "hash": "122f89cd330b69ee6d8dcebd28dc35112a570afceadc65fccf2f5af0e2b0995a",
+          "actor": "",
+          "options": null,
+          "saveText": "",
+          "notice": ""
+        },
+        "replay": {
+          "valid": true,
+          "complete": true,
+          "hash": "122f89cd330b69ee6d8dcebd28dc35112a570afceadc65fccf2f5af0e2b0995a",
+          "eventCount": 214
+        }
+      }
+    ],
+    "pre_story_resume": {
+      "before": {
+        "ready": true,
+        "screen": "Story",
+        "stage": 1,
+        "phase": "PreStory",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"08831080a11732f51b1f2333388b7747582d412fd7f9283d93eb7e8e7978ad3d\",\"flags\":{},\"phase\":\"pre_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"b972b69f09854aa2bdb55b8e5c877ca9\",\"sceneId\":\"tutorial_t1_before\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":20,\"shot\":8,\"stage\":1,\"storyIndex\":10,\"storyPath\":\"story/tutorial_t1_before.json\",\"tutorials\":0,\"version\":1}",
+        "localSaved": true,
+        "line": "tutorial_t1_before_006",
+        "storyState": "reading",
+        "paths": [
+          "art/bg_sol_forest_whispering_ash.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_fadyme_sol_warm.webp"
+        ],
+        "next": true,
+        "auto": "AUTO · OFF",
+        "shot": -1,
+        "elapsed": 0,
+        "finished": false,
+        "pending": false,
+        "count": 0,
+        "winner": "",
+        "hash": "",
+        "actor": "",
+        "options": null,
+        "saveText": "",
+        "notice": ""
+      },
+      "restored": {
+        "ready": true,
+        "screen": "Story",
+        "stage": 1,
+        "phase": "PreStory",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"08831080a11732f51b1f2333388b7747582d412fd7f9283d93eb7e8e7978ad3d\",\"flags\":{},\"phase\":\"pre_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"b972b69f09854aa2bdb55b8e5c877ca9\",\"sceneId\":\"tutorial_t1_before\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":23,\"shot\":8,\"stage\":1,\"storyIndex\":10,\"storyPath\":\"story/tutorial_t1_before.json\",\"tutorials\":0,\"version\":1}",
+        "localSaved": true,
+        "line": "tutorial_t1_before_006",
+        "storyState": "reading",
+        "paths": [
+          "art/bg_sol_forest_whispering_ash.webp",
+          "art/portrait_mahmut_sol_watchful.webp",
+          "art/portrait_fadyme_sol_warm.webp"
+        ],
+        "next": true,
+        "auto": "AUTO · OFF",
+        "shot": -1,
+        "elapsed": 0,
+        "finished": false,
+        "pending": false,
+        "count": 0,
+        "winner": "",
+        "hash": "",
+        "actor": "",
+        "options": null,
+        "saveText": "",
+        "notice": ""
+      }
+    },
+    "unfinished_battle_resume": {
+      "before": {
+        "ready": true,
+        "screen": "Battle",
+        "stage": 2,
+        "phase": "Battle",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"battle\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"159d22901cd64de285a7328138855e0e\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":66,\"shot\":8,\"stage\":2,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":1,\"version\":1}",
+        "localSaved": true,
+        "line": "",
+        "storyState": "",
+        "paths": [
+          "art/atlas_sol_bellbound_dead.webp",
+          "art/atlas_sol_fadyme.webp",
+          "art/atlas_sol_hollow_pilgrim.webp",
+          "art/atlas_sol_mahmut.webp",
+          "art/bg_sol_forgotten_stone_crossing.webp"
+        ],
+        "next": false,
+        "auto": "",
+        "shot": -1,
+        "elapsed": 0,
+        "finished": false,
+        "pending": true,
+        "count": 0,
+        "winner": "",
+        "hash": "392209336e9e669edcd98d52105f335d40bb6f53b371488b96daf7917961b9c7",
+        "actor": "player:1:fadyme",
+        "options": [
+          {
+            "id": "fadyme_basic_veilglass_thorn",
+            "name": "Veilglass Thorn",
+            "type": "basic",
+            "available": true,
+            "needsTarget": true,
+            "targets": [
+              "enemy:0:hollow_pilgrim"
+            ]
+          },
+          {
+            "id": "fadyme_active_borrowed_hour",
+            "name": "Borrowed Hour",
+            "type": "active",
+            "available": true,
+            "needsTarget": true,
+            "targets": [
+              "enemy:0:hollow_pilgrim"
+            ]
+          },
+          {
+            "id": "fadyme_ultimate_the_bell_that_forgets",
+            "name": "The Bell That Forgets",
+            "type": "ultimate",
+            "available": false,
+            "needsTarget": false,
+            "targets": []
+          }
+        ],
+        "saveText": "",
+        "notice": ""
+      },
+      "restored": {
+        "ready": true,
+        "screen": "Battle",
+        "stage": 2,
+        "phase": "Battle",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"battle\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"159d22901cd64de285a7328138855e0e\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":68,\"shot\":8,\"stage\":2,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":1,\"version\":1}",
+        "localSaved": true,
+        "line": "",
+        "storyState": "",
+        "paths": [
+          "art/atlas_sol_bellbound_dead.webp",
+          "art/atlas_sol_fadyme.webp",
+          "art/atlas_sol_hollow_pilgrim.webp",
+          "art/atlas_sol_mahmut.webp",
+          "art/bg_sol_forgotten_stone_crossing.webp"
+        ],
+        "next": false,
+        "auto": "",
+        "shot": -1,
+        "elapsed": 0,
+        "finished": false,
+        "pending": true,
+        "count": 0,
+        "winner": "",
+        "hash": "392209336e9e669edcd98d52105f335d40bb6f53b371488b96daf7917961b9c7",
+        "actor": "player:1:fadyme",
+        "options": [
+          {
+            "id": "fadyme_basic_veilglass_thorn",
+            "name": "Veilglass Thorn",
+            "type": "basic",
+            "available": true,
+            "needsTarget": true,
+            "targets": [
+              "enemy:0:hollow_pilgrim"
+            ]
+          },
+          {
+            "id": "fadyme_active_borrowed_hour",
+            "name": "Borrowed Hour",
+            "type": "active",
+            "available": true,
+            "needsTarget": true,
+            "targets": [
+              "enemy:0:hollow_pilgrim"
+            ]
+          },
+          {
+            "id": "fadyme_ultimate_the_bell_that_forgets",
+            "name": "The Bell That Forgets",
+            "type": "ultimate",
+            "available": false,
+            "needsTarget": false,
+            "targets": []
+          }
+        ],
+        "saveText": "",
+        "notice": ""
+      }
+    },
+    "post_victory_resume": {
+      "before": {
+        "ready": true,
+        "screen": "Battle",
+        "stage": 3,
+        "phase": "Battle",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"post_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"e5ec37890e1547bb99bbbbb0380d886c\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":108,\"shot\":8,\"stage\":3,\"storyIndex\":0,\"storyPath\":\"story/tutorial_t3_after.json\",\"tutorials\":2,\"version\":1}",
+        "localSaved": true,
+        "line": "",
+        "storyState": "",
+        "paths": [
+          "art/atlas_sol_bellbound_dead.webp",
+          "art/atlas_sol_fadyme.webp",
+          "art/atlas_sol_hollow_pilgrim.webp",
+          "art/atlas_sol_mahmut.webp",
+          "art/bg_sol_shelter_courtyard_dusk.webp"
+        ],
+        "next": false,
+        "auto": "",
+        "shot": -1,
+        "elapsed": 0,
+        "finished": false,
+        "pending": false,
+        "count": 19,
+        "winner": "player",
+        "hash": "122f89cd330b69ee6d8dcebd28dc35112a570afceadc65fccf2f5af0e2b0995a",
+        "actor": "",
+        "options": null,
+        "saveText": "",
+        "notice": ""
+      },
+      "restored": {
+        "ready": true,
+        "screen": "Story",
+        "stage": 3,
+        "phase": "PostStory",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"a848b9db0d05914b98436946eb76aaa38175acad88a4375549793ef0280607d1\",\"flags\":{},\"phase\":\"post_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"e5ec37890e1547bb99bbbbb0380d886c\",\"sceneId\":\"tutorial_t3_after\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":112,\"shot\":8,\"stage\":3,\"storyIndex\":5,\"storyPath\":\"story/tutorial_t3_after.json\",\"tutorials\":2,\"version\":1}",
+        "localSaved": true,
+        "line": "tutorial_t3_after_001",
+        "storyState": "reading",
+        "paths": [
+          "art/bg_sol_shelter_courtyard_dusk.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "next": true,
+        "auto": "AUTO · OFF",
+        "shot": -1,
+        "elapsed": 0,
+        "finished": false,
+        "pending": false,
+        "count": 0,
+        "winner": "",
+        "hash": "",
+        "actor": "",
+        "options": null,
+        "saveText": "",
+        "notice": ""
+      }
+    },
+    "finish": {
+      "ready": true,
+      "screen": "Finish",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"finish\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"2af2304f9224408a87b8fc28598aa87a\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":146,\"shot\":8,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "Progress saved on this device. Sign in to save future progress to your account.",
+      "notice": "Local review uses embedded content. Remote download and installation are unverified."
+    },
+    "activation_rejection": {
+      "ready": true,
+      "screen": "Finish",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":true,\"contentHash\":\"\",\"flags\":{},\"phase\":\"finish\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"bdfc3f9de2f9425e92209b80cb0b17a2\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":147,\"shot\":8,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "Progress saved on this device. Sign in to save future progress to your account.",
+      "notice": "The verified update could not be activated. Your checkpoint is saved. Retry reloading."
+    },
+    "reloaded": {
+      "ready": true,
+      "screen": "Title",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":true,\"contentHash\":\"\",\"flags\":{},\"phase\":\"complete\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"bdfc3f9de2f9425e92209b80cb0b17a2\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":149,\"shot\":8,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "continued": {
+      "ready": true,
+      "screen": "Home",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":true,\"contentHash\":\"\",\"flags\":{},\"phase\":\"complete\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"bdfc3f9de2f9425e92209b80cb0b17a2\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":150,\"shot\":8,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    }
+  },
+  "account_and_failure_fixtures": {
+    "result": "PASS",
+    "captures": [
+      {
+        "label": "device-save-failure",
+        "image": "docs/review/captures/20261027T033026820_aeb8f3f3.png",
+        "metadata": "docs/review/captures/20261027T033026820_aeb8f3f3.json",
+        "screen": "Finish",
+        "phase": "finish",
+        "stage": 0,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      },
+      {
+        "label": "account-confirmation-pending",
+        "image": "docs/review/captures/20261027T033039804_12508933.png",
+        "metadata": "docs/review/captures/20261027T033039804_12508933.json",
+        "screen": "Finish",
+        "phase": "finish",
+        "stage": 0,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      },
+      {
+        "label": "confirmed-account-activation-retry",
+        "image": "docs/review/captures/20261027T033050220_7dd986f1.png",
+        "metadata": "docs/review/captures/20261027T033050220_7dd986f1.json",
+        "screen": "Finish",
+        "phase": "finish",
+        "stage": 0,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      }
+    ],
+    "before": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installBefore": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    },
+    "serverRestore": {
+      "autoRead": false,
+      "choices": [],
+      "cloudCompleted": false,
+      "cloudPrologue": true,
+      "cloudTutorials": 2,
+      "completed": false,
+      "contentHash": "",
+      "flags": {},
+      "phase": "pre_story",
+      "prologue": true,
+      "release": "rel_0001",
+      "requestId": "",
+      "sceneId": "",
+      "scope": "d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956",
+      "sequence": 1,
+      "shot": 0,
+      "stage": 3,
+      "storyIndex": 0,
+      "storyPath": "",
+      "tutorials": 2,
+      "version": 1
+    },
+    "releaseReset": {
+      "ready": true,
+      "screen": "Story",
+      "stage": 3,
+      "phase": "PreStory",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":true,\"cloudTutorials\":2,\"completed\":false,\"contentHash\":\"c2c938ab984987f847795c5a344fc7df1c16ff902b8171bba93c3e42597f8189\",\"flags\":{},\"phase\":\"pre_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"tutorial_t3_before\",\"scope\":\"d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956\",\"sequence\":10,\"shot\":0,\"stage\":3,\"storyIndex\":5,\"storyPath\":\"story/tutorial_t3_before.json\",\"tutorials\":2,\"version\":1}",
+      "localSaved": true,
+      "line": "tutorial_t3_before_001",
+      "storyState": "reading",
+      "paths": [
+        "art/bg_sol_shelter_courtyard_dusk.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "next": true,
+      "auto": "AUTO · OFF",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "sceneReset": {
+      "ready": true,
+      "screen": "Story",
+      "stage": 3,
+      "phase": "PreStory",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":true,\"cloudTutorials\":2,\"completed\":false,\"contentHash\":\"c2c938ab984987f847795c5a344fc7df1c16ff902b8171bba93c3e42597f8189\",\"flags\":{},\"phase\":\"pre_story\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"tutorial_t3_before\",\"scope\":\"d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956\",\"sequence\":15,\"shot\":0,\"stage\":3,\"storyIndex\":5,\"storyPath\":\"story/tutorial_t3_before.json\",\"tutorials\":2,\"version\":1}",
+      "localSaved": true,
+      "line": "tutorial_t3_before_001",
+      "storyState": "reading",
+      "paths": [
+        "art/bg_sol_shelter_courtyard_dusk.webp",
+        "art/portrait_mahmut_sol_composed.webp",
+        "art/portrait_fadyme_sol_composed.webp"
+      ],
+      "next": true,
+      "auto": "AUTO · OFF",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "localFailure": {
+      "ready": true,
+      "screen": "Finish",
+      "stage": 3,
+      "phase": "PreStory",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":true,\"cloudTutorials\":3,\"completed\":false,\"contentHash\":\"\",\"flags\":{\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\":true},\"phase\":\"finish\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"1b6c23ec79e343c78734bee3c2b1e92d\",\"sceneId\":\"\",\"scope\":\"d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956\",\"sequence\":18,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": false,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "This device could not save your place. Try saving again before leaving.",
+      "notice": "Local review uses embedded content. Remote download and installation are unverified."
+    },
+    "localRecovered": {
+      "ready": true,
+      "screen": "Finish",
+      "stage": 3,
+      "phase": "PreStory",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":true,\"cloudTutorials\":3,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"finish\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"1b6c23ec79e343c78734bee3c2b1e92d\",\"sceneId\":\"\",\"scope\":\"d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956\",\"sequence\":19,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "Progress saved on this device and confirmed by your account.",
+      "notice": "Local review uses embedded content. Remote download and installation are unverified."
+    },
+    "held": {
+      "writes": 1,
+      "activations": 0,
+      "requestId": "b5b3253970784680b3530fe0c7b6ce7a",
+      "enabled": false
+    },
+    "lostResponse": {
+      "ready": true,
+      "screen": "Finish",
+      "stage": 3,
+      "phase": "PreStory",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":true,\"cloudTutorials\":3,\"completed\":true,\"contentHash\":\"\",\"flags\":{},\"phase\":\"finish\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"b5b3253970784680b3530fe0c7b6ce7a\",\"sceneId\":\"\",\"scope\":\"d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956\",\"sequence\":20,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "Progress saved on this device. Account confirmation is pending; retry when connected.",
+      "notice": "Account confirmation is pending. Your local checkpoint is retained; retry save and reload when connected."
+    },
+    "confirmedThenRejected": {
+      "ready": true,
+      "screen": "Finish",
+      "stage": 3,
+      "phase": "PreStory",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":true,\"cloudPrologue\":true,\"cloudTutorials\":3,\"completed\":true,\"contentHash\":\"\",\"flags\":{},\"phase\":\"finish\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"b5b3253970784680b3530fe0c7b6ce7a\",\"sceneId\":\"\",\"scope\":\"d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956\",\"sequence\":22,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "Progress saved on this device and confirmed by your account.",
+      "notice": "The verified update could not be activated. Your checkpoint is saved. Retry reloading."
+    },
+    "retryIds": {
+      "first": "b5b3253970784680b3530fe0c7b6ce7a",
+      "second": "b5b3253970784680b3530fe0c7b6ce7a",
+      "writes": 2,
+      "activations": 1
+    },
+    "accountA": {
+      "autoRead": false,
+      "choices": [],
+      "cloudCompleted": false,
+      "cloudPrologue": true,
+      "cloudTutorials": 3,
+      "completed": true,
+      "contentHash": "",
+      "flags": {},
+      "phase": "finish",
+      "prologue": true,
+      "release": "rel_0001",
+      "requestId": "b8abe1cc3c8f4cfd9be5508c35ec8280",
+      "sceneId": "",
+      "scope": "d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956",
+      "sequence": 23,
+      "shot": 0,
+      "stage": 0,
+      "storyIndex": 0,
+      "storyPath": "",
+      "tutorials": 3,
+      "version": 1
+    },
+    "accountBBefore": {
+      "autoRead": false,
+      "choices": [],
+      "cloudCompleted": false,
+      "cloudPrologue": false,
+      "cloudTutorials": 0,
+      "completed": false,
+      "contentHash": "",
+      "flags": {},
+      "phase": "prologue",
+      "prologue": false,
+      "release": "rel_0001",
+      "requestId": "",
+      "sceneId": "",
+      "scope": "b71b0a74905c15fc7c046cec5a8e95cf2bb83667010b9df5fa89315b150b4d55",
+      "sequence": 1,
+      "shot": 0,
+      "stage": 0,
+      "storyIndex": 0,
+      "storyPath": "",
+      "tutorials": 0,
+      "version": 1
+    },
+    "accountBScreen": "Title",
+    "accountBAfter": {
+      "autoRead": false,
+      "choices": [],
+      "cloudCompleted": false,
+      "cloudPrologue": false,
+      "cloudTutorials": 0,
+      "completed": false,
+      "contentHash": "",
+      "flags": {},
+      "phase": "prologue",
+      "prologue": false,
+      "release": "rel_0001",
+      "requestId": "",
+      "sceneId": "",
+      "scope": "b71b0a74905c15fc7c046cec5a8e95cf2bb83667010b9df5fa89315b150b4d55",
+      "sequence": 1,
+      "shot": 0,
+      "stage": 0,
+      "storyIndex": 0,
+      "storyPath": "",
+      "tutorials": 0,
+      "version": 1
+    },
+    "staleCallbacks": {
+      "autoRead": false,
+      "choices": [],
+      "cloudCompleted": false,
+      "cloudPrologue": false,
+      "cloudTutorials": 0,
+      "completed": false,
+      "contentHash": "",
+      "flags": {},
+      "phase": "prologue",
+      "prologue": false,
+      "release": "rel_0001",
+      "requestId": "",
+      "sceneId": "",
+      "scope": "b71b0a74905c15fc7c046cec5a8e95cf2bb83667010b9df5fa89315b150b4d55",
+      "sequence": 1,
+      "shot": 0,
+      "stage": 0,
+      "storyIndex": 0,
+      "storyPath": "",
+      "tutorials": 0,
+      "version": 1
+    },
+    "accountARestored": {
+      "autoRead": false,
+      "choices": [],
+      "cloudCompleted": true,
+      "cloudPrologue": true,
+      "cloudTutorials": 3,
+      "completed": true,
+      "contentHash": "",
+      "flags": {},
+      "phase": "finish",
+      "prologue": true,
+      "release": "rel_0001",
+      "requestId": "b8abe1cc3c8f4cfd9be5508c35ec8280",
+      "sceneId": "",
+      "scope": "d087290d98e714de6a46dd3d443f8683f4e54f6b03c211bdec05d6b0ec044956",
+      "sequence": 24,
+      "shot": 0,
+      "stage": 0,
+      "storyIndex": 0,
+      "storyPath": "",
+      "tutorials": 3,
+      "version": 1
+    },
+    "console": {
+      "entries": [],
+      "cursor": 925253,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 0,
+        "log": 2000
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T03:31:09.8530158Z",
+        "ageMs": 196,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 1,
+        "consoleLogs": 33521,
+        "seeded": true
+      }
+    },
+    "after": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installAfter": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    }
+  },
+  "mandatory_opening_and_cleanup": {
+    "result": "PASS",
+    "captures": [
+      {
+        "label": "mandatory-opening-retry",
+        "image": "docs/review/captures/20261027T033315148_7d431d3d.png",
+        "metadata": "docs/review/captures/20261027T033315148_7d431d3d.json",
+        "screen": "Prologue",
+        "phase": "prologue",
+        "stage": 0,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      },
+      {
+        "label": "restored-paused-opening",
+        "image": "docs/review/captures/20261027T033343394_a4376e18.png",
+        "metadata": "docs/review/captures/20261027T033343394_a4376e18.json",
+        "screen": "Prologue",
+        "phase": "prologue",
+        "stage": 0,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      }
+    ],
+    "before": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installBefore": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    },
+    "missing": {
+      "ready": true,
+      "screen": "Prologue",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":2,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": 0,
+      "elapsed": 0,
+      "finished": true,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "recoveryUi": {
+      "continuation": "None",
+      "retry": true,
+      "skip": "None"
+    },
+    "forcedContinue": {
+      "ready": true,
+      "screen": "Prologue",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":2,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": 0,
+      "elapsed": 0,
+      "finished": true,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "recovered": {
+      "ready": true,
+      "screen": "Prologue",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":3,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": 0,
+      "elapsed": 1.1258091961499304,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "shotBefore": {
+      "ready": true,
+      "screen": "Prologue",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":4,\"shot\":1,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": 1,
+      "elapsed": 0.5161908008158207,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "shotAfter": {
+      "ready": true,
+      "screen": "Prologue",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":7,\"shot\":1,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": 1,
+      "elapsed": 2.166303194593638,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "pause": {
+      "held": {
+        "ready": true,
+        "screen": "Prologue",
+        "stage": 0,
+        "phase": "None",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":7,\"shot\":1,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+        "localSaved": true,
+        "line": "",
+        "storyState": "",
+        "paths": [],
+        "next": false,
+        "auto": "",
+        "shot": 1,
+        "elapsed": 3.2645006005186588,
+        "finished": false,
+        "pending": false,
+        "count": 0,
+        "winner": "",
+        "hash": "",
+        "actor": "",
+        "options": null,
+        "saveText": "",
+        "notice": ""
+      },
+      "still": {
+        "ready": true,
+        "screen": "Prologue",
+        "stage": 0,
+        "phase": "None",
+        "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":7,\"shot\":1,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+        "localSaved": true,
+        "line": "",
+        "storyState": "",
+        "paths": [],
+        "next": false,
+        "auto": "",
+        "shot": 1,
+        "elapsed": 3.2645006005186588,
+        "finished": false,
+        "pending": false,
+        "count": 0,
+        "winner": "",
+        "hash": "",
+        "actor": "",
+        "options": null,
+        "saveText": "",
+        "notice": ""
+      }
+    },
+    "consoleBefore": {
+      "entries": [],
+      "cursor": 940503,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 0,
+        "log": 2000
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T03:33:45.5124813Z",
+        "ageMs": 57,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 14711,
+        "seeded": true
+      }
+    },
+    "consoleAfter": {
+      "entries": [],
+      "cursor": 940503,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 0,
+        "log": 2000
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T03:33:49.656009Z",
+        "ageMs": 119,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 14711,
+        "seeded": true
+      }
+    },
+    "stopErrors": [],
+    "after": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installAfter": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    }
+  },
+  "quick_finish_and_fresh_entry_isolation": {
+    "result": "PASS",
+    "captures": [
+      {
+        "label": "quick-finish-recovery",
+        "image": "docs/review/captures/20261027T035603418_ca44de30.png",
+        "metadata": "docs/review/captures/20261027T035603418_ca44de30.json",
+        "screen": "Finish",
+        "phase": "finish",
+        "stage": 0,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      },
+      {
+        "label": "quick-finish-ready",
+        "image": "docs/review/captures/20261027T035607949_92a67243.png",
+        "metadata": "docs/review/captures/20261027T035607949_92a67243.json",
+        "screen": "Finish",
+        "phase": "finish",
+        "stage": 0,
+        "width": 1920,
+        "height": 1080,
+        "safe": false
+      },
+      {
+        "label": "quick-finish-wide-safe",
+        "image": "docs/review/captures/20261027T035611338_88cc10bd.png",
+        "metadata": "docs/review/captures/20261027T035611338_88cc10bd.json",
+        "screen": "Finish",
+        "phase": "finish",
+        "stage": 0,
+        "width": 2400,
+        "height": 1080,
+        "safe": true
+      },
+      {
+        "label": "quick-finish-4x3",
+        "image": "docs/review/captures/20261027T035614662_e37afcb1.png",
+        "metadata": "docs/review/captures/20261027T035614662_e37afcb1.json",
+        "screen": "Finish",
+        "phase": "finish",
+        "stage": 0,
+        "width": 1600,
+        "height": 1200,
+        "safe": false
+      }
+    ],
+    "before": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installBefore": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    },
+    "direct": {
+      "ready": true,
+      "screen": "Finish",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"\",\"flags\":{},\"phase\":\"finish\",\"prologue\":true,\"release\":\"rel_0001\",\"requestId\":\"4304f45965504072b6c014ae3ce3c74f\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":3,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":3,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": -1,
+      "elapsed": 0,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "REVIEW FIXTURE · Progress saved on this device. Sign in to save future progress to your account.",
+      "notice": "Local review uses embedded content. Remote download and installation are unverified."
+    },
+    "fresh": {
+      "ready": true,
+      "screen": "Prologue",
+      "stage": 0,
+      "phase": "None",
+      "checkpoint": "{\"autoRead\":false,\"choices\":[],\"cloudCompleted\":false,\"cloudPrologue\":false,\"cloudTutorials\":0,\"completed\":false,\"contentHash\":\"52f1479440e155f8a0bb4c1d11db7f3e5271953b034c8f9119d2f34349f0413d\",\"flags\":{},\"phase\":\"prologue\",\"prologue\":false,\"release\":\"rel_0001\",\"requestId\":\"\",\"sceneId\":\"\",\"scope\":\"a4790819b6da4d41ded7747cf7033c79d90c3763e821101cc51a684fdf310c53\",\"sequence\":3,\"shot\":0,\"stage\":0,\"storyIndex\":0,\"storyPath\":\"\",\"tutorials\":0,\"version\":1}",
+      "localSaved": true,
+      "line": "",
+      "storyState": "",
+      "paths": [],
+      "next": false,
+      "auto": "",
+      "shot": 0,
+      "elapsed": 0.7247563002165407,
+      "finished": false,
+      "pending": false,
+      "count": 0,
+      "winner": "",
+      "hash": "",
+      "actor": "",
+      "options": null,
+      "saveText": "",
+      "notice": ""
+    },
+    "console": {
+      "entries": [],
+      "cursor": 942520,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 4,
+        "log": 1996
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T03:56:21.1199801Z",
+        "ageMs": 100,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 1775,
+        "seeded": true
+      }
+    },
+    "consoleAfter": {
+      "entries": [],
+      "cursor": 943005,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 0,
+        "log": 2000
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T03:56:25.3329802Z",
+        "ageMs": 37,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 2304,
+        "seeded": true
+      }
+    },
+    "stopErrors": [],
+    "after": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installAfter": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    }
+  },
+  "late_navigation": {
+    "result": "PASS",
+    "cycles": [
+      {
+        "screen": "Prologue",
+        "final": "Title",
+        "roots": {
+          "stages": 0,
+          "playing": true
+        }
+      },
+      {
+        "screen": "Battle",
+        "final": "Title",
+        "roots": {
+          "stages": 0,
+          "playing": true
+        }
+      },
+      {
+        "screen": "Prologue",
+        "final": "Title",
+        "roots": {
+          "stages": 0,
+          "playing": true
+        }
+      },
+      {
+        "screen": "Battle",
+        "final": "Title",
+        "roots": {
+          "stages": 0,
+          "playing": true
+        }
+      },
+      {
+        "screen": "Prologue",
+        "final": "Title",
+        "roots": {
+          "stages": 0,
+          "playing": true
+        }
+      },
+      {
+        "screen": "Battle",
+        "final": "Title",
+        "roots": {
+          "stages": 0,
+          "playing": true
+        }
+      }
+    ],
+    "before": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installBefore": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    },
+    "console": {
+      "entries": [],
+      "cursor": 953866,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 0,
+        "log": 2000
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T04:13:37.11248Z",
+        "ageMs": 82,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 10631,
+        "seeded": true
+      }
+    },
+    "after": {
+      "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+      "dirty": false,
+      "enterOptions": "None",
+      "enterEnabled": false,
+      "startScene": "",
+      "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+    },
+    "installAfter": {
+      "entryHas": false,
+      "entryValue": -1,
+      "installHas": true,
+      "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+    }
+  },
+  "source_bound_feedback": {
+    "id": "d6f6ec21be6c4fbeb188088dfbe5f740",
+    "asset": "sol_bg_shelter_courtyard_dusk",
+    "source": "c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+    "entry": "41bdfc3a1f46246ae34d2a5e386301bbc04d40dcbbb7a31fab0dac8132924ee1",
+    "captures": [
+      "20261027T032222807_a9aa994e:2c198c7387620ae59b2776fac9729e5302b51ebad7ad222d6e0ce82e107702da",
+      "20261027T032351579_45dffbf3:8e147ded52fc9947f09c9335a67c549e3198d199ffc6e3a7206481639520952a",
+      "20261027T032355241_e70528eb:ae5f0310866bfcb4c57caa9cbc9b5c21050ba607a8002553b172db18d59f703e",
+      "20261027T032358783_69db24db:f1f59a80b44ea3b1d8421a6dc628ef8b3f139cebb9097eb8851f0754d37d55c7",
+      "20261027T032403595_b7022b63:8737bb53480901fc1a3f1c78921ac3d4787d95683aa81940a22b8d46b63c721b",
+      "20261027T032411222_418f4b64:d061aaa4808d3461bc84ff12fc0bbcaa2374cdab4933c462fb9c9c745a20ecf7",
+      "20261027T033026820_aeb8f3f3:7716622b13fc76f06132a3bdf83b151cf0c0a3c441bf8d5d2f4e18ae57894c1f",
+      "20261027T033039804_12508933:be40af9e3ef8fe23b69949c328355b0eaf0def491a6ed5bc163724fd169a9c04",
+      "20261027T033050220_7dd986f1:5a4c53682905b93c65e4664c2cbc068e83dd275eeffbdda4ef13b68f23f03622"
+    ],
+    "ingestUnchanged": true,
+    "labelledEntries": 25,
+    "console": {
+      "entries": [],
+      "cursor": 943186,
+      "session": "b1a653bae6ee4f21a827bc4574710fd2",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 0,
+        "warn": 4,
+        "log": 1996
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T04:02:45.5225091Z",
+        "ageMs": 199,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 4,
+        "consoleLogs": 176,
+        "seeded": true
+      }
+    },
+    "result": "PASS"
+  },
+  "restoration": {
+    "sol-entry-qa": {
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "installBefore": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      },
+      "installAfter": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "sol-entry-cloud-qa": {
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "installBefore": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      },
+      "installAfter": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "sol-entry-prologue-fault-qa": {
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "installBefore": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      },
+      "installAfter": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "sol-finish-review-qa": {
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "installBefore": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      },
+      "installAfter": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "sol-entry-navigation-qa": {
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "installBefore": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      },
+      "installAfter": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    }
+  },
+  "captures": [
+    {
+      "image": "docs/review/captures/20261027T023552247_dceb0513.png",
+      "image_sha256": "09fdc00a8ea14f34e2840475d2c604ee8f5df2c060ecdecdc1c7a37a6da806e4",
+      "metadata": "docs/review/captures/20261027T023552247_dceb0513.json",
+      "metadata_sha256": "362593006788029b3ec0fd85d5ab788c9ca9fdc67ff55b6ee4fce1f8cd33624d",
+      "scenario": "entry",
+      "screen": "Title",
+      "phase": "unstarted",
+      "source_asset": "sol_title_key_art_01",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T023558156_be2643b4.png",
+      "image_sha256": "1ce1be0a158f869d7f06cccbeed5881c001e714566d8b25bb0515cec3a1de351",
+      "metadata": "docs/review/captures/20261027T023558156_be2643b4.json",
+      "metadata_sha256": "66ea560b10763fdcab9e603923c95343a9e73f8c263a6d3958674f5699ea77f0",
+      "scenario": "entry",
+      "screen": "Prologue",
+      "phase": "prologue",
+      "source_asset": "sol_prologue_hours",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T025018779_1eb9bf5c.png",
+      "image_sha256": "09fdc00a8ea14f34e2840475d2c604ee8f5df2c060ecdecdc1c7a37a6da806e4",
+      "metadata": "docs/review/captures/20261027T025018779_1eb9bf5c.json",
+      "metadata_sha256": "1f4305c8567013fe468b7f118b90b626fd6ec0558c3a1ff7cd411e33ac64ba9f",
+      "scenario": "entry",
+      "screen": "Title",
+      "phase": "unstarted",
+      "source_asset": "sol_title_key_art_01",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T025025746_9bf75d0a.png",
+      "image_sha256": "86e71c562e0fcf46c7fb9fc5e2d38135809f6cb3a0e82bd9e79081e98fb29274",
+      "metadata": "docs/review/captures/20261027T025025746_9bf75d0a.json",
+      "metadata_sha256": "7d71729f6dd76433c7c94097b7477e328b262363bb2bf7225f16b73d5a8b7c5e",
+      "scenario": "entry",
+      "screen": "Prologue",
+      "phase": "prologue",
+      "source_asset": "sol_prologue_hours",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T025958706_834958ef.png",
+      "image_sha256": "09fdc00a8ea14f34e2840475d2c604ee8f5df2c060ecdecdc1c7a37a6da806e4",
+      "metadata": "docs/review/captures/20261027T025958706_834958ef.json",
+      "metadata_sha256": "7f105178b16958ee41bfdfbcf726aaf4d602ae91a40c1d97f729d2797430e836",
+      "scenario": "entry",
+      "screen": "Title",
+      "phase": "unstarted",
+      "source_asset": "sol_title_key_art_01",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T030005622_e958a3c8.png",
+      "image_sha256": "86e71c562e0fcf46c7fb9fc5e2d38135809f6cb3a0e82bd9e79081e98fb29274",
+      "metadata": "docs/review/captures/20261027T030005622_e958a3c8.json",
+      "metadata_sha256": "3a2b467b95ebbb4789b516d95dc55ac49caecf2c4f088c0e9913b5c4bfc55ab8",
+      "scenario": "entry",
+      "screen": "Prologue",
+      "phase": "prologue",
+      "source_asset": "sol_prologue_hours",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T030226873_99560fe5.png",
+      "image_sha256": "bccae569b2fdf2dcc92b80894e9686909c585e5b2b502266f4c92ae79e7c8f4d",
+      "metadata": "docs/review/captures/20261027T030226873_99560fe5.json",
+      "metadata_sha256": "3660ab972ad908587d5eb0342b3d1c1f3c0be6aa27184d99d0d6b5ea48199747",
+      "scenario": "entry",
+      "screen": "Story",
+      "phase": "pre_story",
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T031148235_0d1afab7.png",
+      "image_sha256": "09fdc00a8ea14f34e2840475d2c604ee8f5df2c060ecdecdc1c7a37a6da806e4",
+      "metadata": "docs/review/captures/20261027T031148235_0d1afab7.json",
+      "metadata_sha256": "8eabd7eecb2795a620e6aa95ff90b9a3cfc6d5aa4430df488302b851d31ab6f1",
+      "scenario": "entry",
+      "screen": "Title",
+      "phase": "unstarted",
+      "source_asset": "sol_title_key_art_01",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T031155358_3d0e0860.png",
+      "image_sha256": "d5f22abe7e04dcf970c13b2151301197bc5d920632e3f4a4f3cf03eac798e09f",
+      "metadata": "docs/review/captures/20261027T031155358_3d0e0860.json",
+      "metadata_sha256": "f5ac61e53dc1b51fced4ba44b173ff31420677b1063bc260c5d61890f6f7e047",
+      "scenario": "entry",
+      "screen": "Prologue",
+      "phase": "prologue",
+      "source_asset": "sol_prologue_hours",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T031416128_0023aa1c.png",
+      "image_sha256": "d5d925418c53e2638359f2054d32b7a4963be41bdee91c9ef3a99e22025ca8d2",
+      "metadata": "docs/review/captures/20261027T031416128_0023aa1c.json",
+      "metadata_sha256": "22dd08eb0b70a153a7b7fcdfc89ec65edd4571d0357b77edb7fa98d0fb08e0ad",
+      "scenario": "entry",
+      "screen": "Story",
+      "phase": "pre_story",
+      "source_asset": "sol_bg_forest_whispering_ash",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T032222807_a9aa994e.png",
+      "image_sha256": "2c198c7387620ae59b2776fac9729e5302b51ebad7ad222d6e0ce82e107702da",
+      "metadata": "docs/review/captures/20261027T032222807_a9aa994e.json",
+      "metadata_sha256": "27395e6bb2c0bee12db866dbd87a35219fcfa1589e55805106d7db68d8e43767",
+      "scenario": "entry",
+      "screen": "Story",
+      "phase": "post_story",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T032351579_45dffbf3.png",
+      "image_sha256": "8e147ded52fc9947f09c9335a67c549e3198d199ffc6e3a7206481639520952a",
+      "metadata": "docs/review/captures/20261027T032351579_45dffbf3.json",
+      "metadata_sha256": "e65b71b86b7a79101dd247766653bf6b765a10e5771964e78073b3a46de72412",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T032355241_e70528eb.png",
+      "image_sha256": "ae5f0310866bfcb4c57caa9cbc9b5c21050ba607a8002553b172db18d59f703e",
+      "metadata": "docs/review/captures/20261027T032355241_e70528eb.json",
+      "metadata_sha256": "d52223aa3e1aa9b58ed87fae3d64c9d5adcb1b66e32be2c3d833417bb4e4d3f5",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 2400,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T032358783_69db24db.png",
+      "image_sha256": "f1f59a80b44ea3b1d8421a6dc628ef8b3f139cebb9097eb8851f0754d37d55c7",
+      "metadata": "docs/review/captures/20261027T032358783_69db24db.json",
+      "metadata_sha256": "7b5e1abac1d38ac7e844fc94462f23820898ad275983137d22a64208a0a1c37a",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1600,
+      "height": 1200,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T032403595_b7022b63.png",
+      "image_sha256": "8737bb53480901fc1a3f1c78921ac3d4787d95683aa81940a22b8d46b63c721b",
+      "metadata": "docs/review/captures/20261027T032403595_b7022b63.json",
+      "metadata_sha256": "9068150f5d4a42ffa59050aac5e69f9fa6acff33a46146a353413e8b5d91b673",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T032411222_418f4b64.png",
+      "image_sha256": "d061aaa4808d3461bc84ff12fc0bbcaa2374cdab4933c462fb9c9c745a20ecf7",
+      "metadata": "docs/review/captures/20261027T032411222_418f4b64.json",
+      "metadata_sha256": "d5576fde0767e3c1332692712dd83b4ff7b22fdcd91299697090dc6851eb3ccc",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T033026820_aeb8f3f3.png",
+      "image_sha256": "7716622b13fc76f06132a3bdf83b151cf0c0a3c441bf8d5d2f4e18ae57894c1f",
+      "metadata": "docs/review/captures/20261027T033026820_aeb8f3f3.json",
+      "metadata_sha256": "48416ba1d97cc6282cace7b253fa2abdd488c252c64994f069e57559299838ca",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T033039804_12508933.png",
+      "image_sha256": "be40af9e3ef8fe23b69949c328355b0eaf0def491a6ed5bc163724fd169a9c04",
+      "metadata": "docs/review/captures/20261027T033039804_12508933.json",
+      "metadata_sha256": "e52275f66bb278b35871dce47b34bde0083af0acbc8d1530d5de49e2f412acc4",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T033050220_7dd986f1.png",
+      "image_sha256": "5a4c53682905b93c65e4664c2cbc068e83dd275eeffbdda4ef13b68f23f03622",
+      "metadata": "docs/review/captures/20261027T033050220_7dd986f1.json",
+      "metadata_sha256": "6887694ecbd9f601f1f893950b8c5db1bb56d43a3fcc62ef64953b221e4b96d0",
+      "scenario": "entry",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T033315148_7d431d3d.png",
+      "image_sha256": "84ffe549a5a5dd62a9ec968203561a04459028f15c123edd34662b5f6db3f666",
+      "metadata": "docs/review/captures/20261027T033315148_7d431d3d.json",
+      "metadata_sha256": "fddc93837fe1f237445a1a0a475191638d23711b7db7bc1a4e3521e2f32cdc23",
+      "scenario": "entry",
+      "screen": "Prologue",
+      "phase": "prologue",
+      "source_asset": "",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T033343394_a4376e18.png",
+      "image_sha256": "9434c45d835c603446f89cc993f58d14dad3e6737825aa7b0724bb4b6986a2ab",
+      "metadata": "docs/review/captures/20261027T033343394_a4376e18.json",
+      "metadata_sha256": "56b127ce9705296e555822e73a3e0f4e3f61dd0519591f01798c5b7a778bdceb",
+      "scenario": "entry",
+      "screen": "Prologue",
+      "phase": "prologue",
+      "source_asset": "sol_prologue_names",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": false,
+      "memory_only": "older metadata; isolated memory review confirmed by its run",
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T035603418_ca44de30.png",
+      "image_sha256": "0d016a3b5216ceb03ed35ed33504126bc0195e8334b327383bc1844b2a1807fa",
+      "metadata": "docs/review/captures/20261027T035603418_ca44de30.json",
+      "metadata_sha256": "0c1d154bee6498c5abff0179acdcbaa0c4f346a4e03325f3f2b2560162d9651b",
+      "scenario": "finish",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": true,
+      "memory_only": true,
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T035607949_92a67243.png",
+      "image_sha256": "dd3a70479d8b8e55cce4f50707041c7c4e810cb5ab343a556c9e7a5b999737c6",
+      "metadata": "docs/review/captures/20261027T035607949_92a67243.json",
+      "metadata_sha256": "470922bea41580e2148ea864fbb05fbf3a409c2502470029de68f3c1f4bdb8b9",
+      "scenario": "finish",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1920,
+      "height": 1080,
+      "final_fixture_label": true,
+      "memory_only": true,
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T035611338_88cc10bd.png",
+      "image_sha256": "6c3c781c7983965dc843e513fe471ff58c6a9cabb254c499e97a9ae9e116c963",
+      "metadata": "docs/review/captures/20261027T035611338_88cc10bd.json",
+      "metadata_sha256": "280c088091d19b8d0e4bd9c5135efbde8d4e8e95a30b334fe43d651de6504e8a",
+      "scenario": "finish",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 2400,
+      "height": 1080,
+      "final_fixture_label": true,
+      "memory_only": true,
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    },
+    {
+      "image": "docs/review/captures/20261027T035614662_e37afcb1.png",
+      "image_sha256": "ffe01061fc546e38b637e919703f301a117bcdea99cfcac87a0701f53f8b3718",
+      "metadata": "docs/review/captures/20261027T035614662_e37afcb1.json",
+      "metadata_sha256": "f00b614c5660744259b8788d0eb0816195d4e926112e3a540a4363b8c9c9f881",
+      "scenario": "finish",
+      "screen": "Finish",
+      "phase": "finish",
+      "source_asset": "sol_bg_shelter_courtyard_dusk",
+      "width": 1600,
+      "height": 1200,
+      "final_fixture_label": true,
+      "memory_only": true,
+      "source_commit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7"
+    }
+  ],
+  "probe_history": [
+    "An initial single-shot preview held auto progression; it was stopped and Editor/preferences restored. Full entry was separated from single-shot preview gates.",
+    "A probe counted the prologue end sentinel as a tenth shot; CurrentShot now stays on the last real plate at completion.",
+    "Story Auto originally re-enabled on return through Title; Auto choice is now checkpointed and first entry reading starts manual. Successful coverage includes all 107 lines.",
+    "Stopping an early prologue exposed an already-destroyed cinematic root in Dispose; the null guard is verified by clean paused/prologue exits.",
+    "An early setup probe failed before establishing its baseline; it is not counted as a pass. Later runs independently established/restored their own snapshots.",
+    "A feedback note saved successfully before a window-reload reflection lookup failed; its persisted ID was inspected and reused. No duplicate note was created."
+  ],
+  "limits": [
+    "All UI input proof uses typed Editor events, not physical pointer/touch.",
+    "Cloud read/write, response loss and activation rejection were explicit memory fixtures; no real backend/provider requests were sent.",
+    "Successful final activation was the embedded/up-to-date logical runtime reload; signed remote staging, Android OS relaunch/process-death and live account acceptance remain open.",
+    "Earlier capture runs predate the explicit REVIEW FIXTURE prefix/memory-only metadata field; final four Finish captures carry both.",
+    "PlayMode audio tests pass; their existing empty-clip time warnings are not new entry failures.",
+    "Normal Home/system presentation and server-sessioned campaign operation/recovery remain rebuild work.",
+    "Human art/native-resolution/device/release gates remain open."
+  ],
+  "media": {
+    "new_images": 0,
+    "candidates": 26,
+    "review_records": 460,
+    "human_approvals": 0
+  }
+}

@@ -25,6 +25,10 @@ namespace Uomd.EditorTools
         public string battleLogHash;
         public int battleActionCount;
         public bool awaitingPlayerAction;
+        public string entryPhase, entryScreen;
+        public int entryStage, entryTutorials;
+        public long entrySequence;
+        public bool entryLocalSaved, entryCloudConfirmed, entryPaused, entryMemoryOnly;
         public ProductionPreviewRequest settings;
         public Rect subtitleBounds, titleBounds, safeAreaBounds;
         public int stageCameras, stageLights, stageParticles;
@@ -78,6 +82,9 @@ namespace Uomd.EditorTools
                     var paths = router.Controller<BattleScreenController>().ReviewImagePaths;
                     asset = catalog.FirstOrDefault(a => a.Class == "background" && JsonRead.Arr(a.Entry, "outputs").Any(o => paths.Contains(JsonRead.Str(o, "path"))));
                 }
+                var entryPaths = settings.scenario == "entry" || settings.scenario == "finish" ? EntryPaths(router) : Array.Empty<string>();
+                if (entryPaths.Length > 0)
+                    asset = catalog.OrderBy(a => a.Class == "background" ? 0 : 1).FirstOrDefault(a => JsonRead.Arr(a.Entry, "outputs").Any(o => entryPaths.Contains(JsonRead.Str(o, "path"))));
                 if (asset != null) ProductionReviewCatalog.VerifyTarget(store.Root, asset);
                 string id = DateTime.UtcNow.ToString("yyyyMMddTHHmmssfff") + "_" + Guid.NewGuid().ToString("N").Substring(0, 8);
                 string relative = "captures/" + id;
@@ -102,7 +109,7 @@ namespace Uomd.EditorTools
                     titleBounds = root.Q<VisualElement>("rebuildTitle")?.worldBound ?? Rect.zero,
                     bgmVolume = router.Audio.BgmVolume, effectsVolume = router.Audio.SfxVolume, voiceVolume = router.Audio.VoiceVolume, actualMuted = router.Audio.Muted
                 };
-                if (metadata.shot >= 0) metadata.lineId = router.Session.PrologueConfig.scenes[metadata.shot].line_id;
+                if (metadata.shot >= 0 && metadata.shot < router.Session.PrologueConfig.scenes.Length) metadata.lineId = router.Session.PrologueConfig.scenes[metadata.shot].line_id;
                 if (router.ActiveScreenId == UomdScreenId.Story)
                 {
                     var story = router.Controller<StoryScreenController>();
@@ -124,7 +131,7 @@ namespace Uomd.EditorTools
                     metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
                         .Select(a => a.Identity).ToArray();
                 }
-                if (settings.scenario.StartsWith("battle/", StringComparison.Ordinal))
+                if (settings.scenario.StartsWith("battle/", StringComparison.Ordinal) || settings.scenario == "entry" && router.ActiveScreenId == UomdScreenId.Battle)
                 {
                     var battle = router.Controller<BattleScreenController>();
                     metadata.battleLogHash = battle.ReviewLogHash;
@@ -135,6 +142,19 @@ namespace Uomd.EditorTools
                     metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
                         .Select(a => a.Identity).ToArray();
                 }
+                if (settings.scenario == "entry" || settings.scenario == "finish")
+                {
+                    var continuity = router.EntryFlow.Continuity; var checkpoint = continuity.State;
+                    metadata.entryScreen = router.ActiveScreenId.ToString(); metadata.entryPhase = checkpoint?.Phase ?? "unstarted";
+                    metadata.entryStage = checkpoint?.Stage ?? 0; metadata.entryTutorials = checkpoint?.Tutorials ?? 0;
+                    metadata.entrySequence = checkpoint?.Sequence ?? 0; metadata.entryLocalSaved = continuity.LocalSaved;
+                    metadata.entryMemoryOnly = continuity.MemoryOnly;
+                    metadata.entryCloudConfirmed = checkpoint?.CloudConfirmed ?? false;
+                    metadata.entryPaused = router.ActiveScreenId == UomdScreenId.Prologue ? opening.Paused || settings.paused
+                        : router.ActiveScreenId == UomdScreenId.Battle && router.Controller<BattleScreenController>().ReviewPaused;
+                    metadata.imagePaths = entryPaths;
+                    metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => entryPaths.Contains(JsonRead.Str(o, "path")))).Select(a => a.Identity).ToArray();
+                }
                 var stage = GameObject.Find("SolCinematicStage");
                 if (stage != null)
                 {
@@ -144,7 +164,9 @@ namespace Uomd.EditorTools
                 }
                 ProductionReviewStore.AtomicWrite(ProductionReviewCatalog.Resolve(store.Root, "docs/review/" + relative + ".json"), JsonUtility.ToJson(metadata, true) + "\n");
                 var index = store.Read();
-                index.captures.Add(new ProductionReviewCapture { id = id, scenario = settings.scenario, lineId = metadata.lineId, unitState = metadata.unitState, unitFrame = metadata.unitFrame, image = relative + ".png", metadata = relative + ".json", sha256 = metadata.imageSha });
+                index.captures.Add(new ProductionReviewCapture { id = id, scenario = settings.scenario, lineId = metadata.lineId, unitState = metadata.unitState, unitFrame = metadata.unitFrame,
+                    entryScreen = metadata.entryScreen, entryPhase = metadata.entryPhase, entryStage = metadata.entryStage, sourceIdentities = metadata.relatedAssetIdentities,
+                    image = relative + ".png", metadata = relative + ".json", sha256 = metadata.imageSha });
                 store.Write(index);
                 LastCapture = imagePath;
                 UnityEngine.Debug.Log("[Production Review] Saved Game view and source-bound metadata: " + relative);
@@ -156,6 +178,22 @@ namespace Uomd.EditorTools
                 if (image != null) UnityEngine.Object.DestroyImmediate(image);
                 if (router != null && router.ProductionPreview != null) { router.ProductionPreview.paused = paused; router.ApplyPreviewControls(); }
                 Busy = false;
+            }
+        }
+
+        private static string[] EntryPaths(UomdSceneRouter router)
+        {
+            switch (router.ActiveScreenId)
+            {
+                case UomdScreenId.Story: return router.Controller<StoryScreenController>().ReviewImagePaths;
+                case UomdScreenId.Battle: return router.Controller<BattleScreenController>().ReviewImagePaths;
+                case UomdScreenId.Finish: return router.Controller<FinishScreenController>().ReviewImagePaths;
+                case UomdScreenId.Title: return new[] { router.Media.Catalog.Ui("sol_title_bg") };
+                case UomdScreenId.Prologue:
+                    int shot = router.Controller<RebuildPrologueScreen>().CurrentShot;
+                    var scenes = router.Session.PrologueConfig.scenes;
+                    return shot >= 0 && shot < scenes.Length ? new[] { router.Media.Catalog.Still("sol_prologue_" + scenes[shot].id) } : Array.Empty<string>();
+                default: return Array.Empty<string>();
             }
         }
 

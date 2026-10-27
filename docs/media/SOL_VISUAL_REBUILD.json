@@ -923,7 +923,7 @@
       ],
       "replacement_status": "integration_candidate",
       "replacement_asset_id": "sol_bg_shelter_courtyard_dusk",
-      "consumer_scope": "Native tutorial Story before/after scenes and normal T1/T2/T3 manual battles use explicit sol_<location> keys. Other battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open."
+      "consumer_scope": "Native tutorial Story before/after scenes and normal T1/T2/T3 manual battles use explicit sol_<location> keys. Other battle/hub consumers retain their original keys until rebuilt. Human QC, native-2K and device acceptance remain open. Native Finish also consumes this rebuilt shelter painting; owner art/device gates remain open."
     },
     {
       "id": "bg_undercity_antidote_archive",

@@ -103,6 +103,9 @@ namespace Uomd.Scenes
 
         private void Update()
         {
+            if (EntryFlow?.Continuity.State != null && !EntryFlow.Continuity.IsCurrent && Session?.IsReplayingIntro == false
+                && (ActiveScreenId == UomdScreenId.Prologue || ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle || ActiveScreenId == UomdScreenId.Finish))
+            { _ = NavigateToAsync(UomdScreenId.Title); return; }
             _activeController?.OnTick(Time.deltaTime);
             _patchStrip?.Tick();
         }
@@ -112,6 +115,15 @@ namespace Uomd.Scenes
             _activeController?.OnExit();
             if (Api != null) Api.OnAuthChanged -= PersistSession;
             Media?.ReleaseAll();
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused && Session?.IsReplayingIntro == false) EntryFlow?.Continuity.Save();
+        }
+        private void OnApplicationQuit()
+        {
+            if (Session?.IsReplayingIntro == false) EntryFlow?.Continuity.Save();
         }
 
         /// <summary>The registered controller of a type (capture pipeline QA).</summary>
@@ -124,8 +136,9 @@ namespace Uomd.Scenes
         public async Awaitable NavigateToAsync(UomdScreenId targetScreen)
         {
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
+            if (UomdEditorPreviewIsolation.Active && ProductionPreview?.scenario != "entry" && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
                 && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue
+                && !(targetScreen == UomdScreenId.Finish && ProductionPreview?.scenario == "finish")
                 && !(targetScreen == UomdScreenId.Battle && (ProductionPreview?.scenario.StartsWith("unit/", StringComparison.Ordinal) == true
                     || ProductionPreview?.scenario.StartsWith("battle/", StringComparison.Ordinal) == true))
                 && !(targetScreen == UomdScreenId.Story && (ProductionPreview?.scenario.StartsWith("portrait/", StringComparison.Ordinal) == true
@@ -142,6 +155,7 @@ namespace Uomd.Scenes
             _screenHost.Clear();
             bool nativeStory = targetScreen == UomdScreenId.Story && StoryScreenController.IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(Session.ActiveStoryPath));
             nativeStory |= targetScreen == UomdScreenId.Battle && nextController is BattleScreenController && BattleScreenController.IsRebuiltTutorialEncounter(Session.ActiveBattleEncounterId);
+            nativeStory |= targetScreen == UomdScreenId.Finish;
             _rootContainer.style.top = nativeStory ? new Length(0) : new Length(50, LengthUnit.Percent);
             _rootContainer.style.bottom = nativeStory ? new StyleLength(0f) : new StyleLength(StyleKeyword.Auto);
             _rootContainer.style.height = nativeStory ? new StyleLength(StyleKeyword.Auto) : new StyleLength(UomdScreenKit.RefHeight);

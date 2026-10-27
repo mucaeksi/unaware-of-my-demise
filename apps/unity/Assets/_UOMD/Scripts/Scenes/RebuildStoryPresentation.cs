@@ -38,7 +38,7 @@ namespace Uomd.Scenes
             get
             {
 #if UNITY_EDITOR
-                return (PortraitReview || StoryReview) && _router.ProductionPreview.paused;
+                return (PortraitReview || StoryReview || Uomd.Core.UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario == "entry") && _router.ProductionPreview.paused;
 #else
                 return false;
 #endif
@@ -156,6 +156,11 @@ namespace Uomd.Scenes
             _nextButton.SetEnabled(!PortraitReview);
             if (_imagesDisabled) _storyHint.text = "Illustrations unavailable · tap to read";
             SetRebuiltBackground(_scene.location_id);
+            foreach (var actor in _runner.Restored.actors) ShowActor(actor.Key, actor.Value.side, actor.Value.emotion);
+            _prevSpeaker = _runner.Restored.prevSpeaker;
+            string restoredMusic = _runner.Restored.musicCueId;
+            if (restoredMusic == "stop") _router.Audio.StopBgm();
+            else if (!string.IsNullOrEmpty(restoredMusic)) _router.Audio.PlayBgmCue(restoredMusic);
             Pump();
             _storyView.Focus();
         }

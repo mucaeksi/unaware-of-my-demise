@@ -41,7 +41,7 @@ namespace Uomd.Scenes
         {
             if (!_ready) return;
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active)
+            if (UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario != "entry")
             {
                 var review = _router.ProductionPreview;
                 _stage.ApplySettings(review.presentation);

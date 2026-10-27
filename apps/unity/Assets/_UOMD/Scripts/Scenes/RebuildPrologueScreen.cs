@@ -11,7 +11,6 @@ namespace Uomd.Scenes
     /// <summary>D-35 opening: individually authored plates, native URP stage, audio-clock captions and durable entry flow.</summary>
     public sealed class RebuildPrologueScreen : IUomdScreenController
     {
-        private const string CheckpointKey = "uomd.prologue.checkpoint";
         private readonly UomdSceneRouter _router;
         private readonly CinematicShotClock _clock = new CinematicShotClock();
         private readonly SubtitleSynchronizer _subtitles = new SubtitleSynchronizer();
@@ -22,9 +21,10 @@ namespace Uomd.Scenes
         private Button _pause, _mute, _next, _retry, _continue;
         private Toggle _auto;
         private int _generation, _index;
-        private bool _paused, _loading, _done, _finishing, _voiceSeen;
+        private bool _paused, _loading, _done, _finishing, _voiceSeen, _canFinish;
         private float _subtitleElapsed;
         private string _fullText, _lastVisible;
+        private string _entryScope;
         public UomdScreenId ScreenId => UomdScreenId.Prologue;
         public int CurrentShot => _index;
         public double ShotElapsed => _clock.Elapsed;
@@ -36,8 +36,8 @@ namespace Uomd.Scenes
 
         public async Awaitable OnEnterAsync(VisualElement host)
         {
-            ++_generation;
-            _paused = _done = _finishing = false;
+            int generation = ++_generation;
+            _paused = _done = _finishing = _canFinish = false;
             _loading = true;
             _scenes = _router.Session.PrologueConfig?.scenes ?? Array.Empty<PrologueSceneDto>();
             Resources.Load<VisualTreeAsset>("Rebuild/Prologue").CloneTree(host);
@@ -75,11 +75,23 @@ namespace Uomd.Scenes
             _stage = new RebuildCinematicStage(host, _router.Media, false, Calm);
             _router.Audio.SetPaused(false);
             _router.Audio.PlayBgmCue("bgm_prologue_before_the_road");
-            int saved = PlayerPrefs.GetInt(CheckpointKey, 0);
+            int saved = 0;
+            _entryScope = null;
+            if (!_router.Session.IsReplayingIntro)
+            {
+                var continuity = _router.EntryFlow.Continuity;
+                if (!continuity.IsCurrent) await continuity.PrepareAsync();
+                if (generation != _generation) return;
+                string source = await _router.Patch.ReadTextAsync("entry/prologue.json");
+                if (generation != _generation) return;
+                saved = continuity.PrologueShot(source);
+                _entryScope = continuity.State.Scope;
+            }
             int first = !_router.Session.CanSkipPrologue && saved >= 0 && saved < _scenes.Length ? saved : 0;
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active) first = _router.ProductionPreview.shot;
+            if (UomdEditorPreviewIsolation.Active && _router.ProductionPreview.scenario != "entry") first = _router.ProductionPreview.shot;
 #endif
+            if (generation != _generation) return;
             await LoadShotAsync(first);
         }
 
@@ -87,7 +99,7 @@ namespace Uomd.Scenes
         {
             if (_finishing) return;
             int generation = ++_generation;
-            _index = index;
+            _index = Mathf.Clamp(index, 0, Mathf.Max(0, _scenes.Length - 1));
             _loading = true;
             _router.Audio.StopVoiceLine();
             if (_scenes.Length == 0) { Unavailable(); return; }
@@ -116,7 +128,7 @@ namespace Uomd.Scenes
             _subtitles.BeginLine(_fullText, Mathf.Min(scene.duration_seconds - 1, 9f), Calm);
             _router.Audio.PlayVoiceLine(scene.line_id);
             // A replay never writes over an unfinished first-viewing checkpoint.
-            if (!_router.Session.IsReplayingIntro) { PlayerPrefs.SetInt(CheckpointKey, index); PlayerPrefs.Save(); }
+            if (!_router.Session.IsReplayingIntro) _router.EntryFlow.Continuity.SaveShot(index);
             _loading = false;
             _status.text = "";
             _pause.SetEnabled(true);
@@ -127,7 +139,7 @@ namespace Uomd.Scenes
         public void OnTick(float deltaTime)
         {
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active)
+            if (UomdEditorPreviewIsolation.Active && _router.ProductionPreview.scenario != "entry")
             {
                 _paused = _router.ProductionPreview.paused;
                 _pause.text = _paused ? "RESUME" : "PAUSE";
@@ -136,7 +148,11 @@ namespace Uomd.Scenes
                 _caption.parent.style.display = _router.ProductionPreview.subtitles ? DisplayStyle.Flex : DisplayStyle.None;
             }
 #endif
-            if (_done || _loading || _paused)
+            bool captureHold = false;
+#if UNITY_EDITOR
+            captureHold = UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario == "entry" && _router.ProductionPreview.paused;
+#endif
+            if (_done || _loading || _paused || captureHold)
             {
                 // Window/orientation changes still fit the composition while the narrative and motion remain frozen.
                 _stage?.Tick(0, (float)_clock.Progress, Calm);
@@ -170,7 +186,7 @@ namespace Uomd.Scenes
             if (_clock.Complete && _auto.value)
             {
 #if UNITY_EDITOR
-                if (UomdEditorPreviewIsolation.Active) return;
+                if (UomdEditorPreviewIsolation.Active && _router.ProductionPreview.scenario != "entry") return;
 #endif
                 _ = LoadShotAsync(_index + 1);
             }
@@ -187,7 +203,7 @@ namespace Uomd.Scenes
         private void UpdateNext()
         {
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active) { _next.style.display = DisplayStyle.None; return; }
+            if (UomdEditorPreviewIsolation.Active && _router.ProductionPreview.scenario != "entry") { _next.style.display = DisplayStyle.None; return; }
 #endif
             _next.style.display = _auto.value ? DisplayStyle.None : DisplayStyle.Flex;
             _next.SetEnabled(!_loading && !_paused && _clock.Complete);
@@ -220,11 +236,13 @@ namespace Uomd.Scenes
         {
             _root.Q<VisualElement>("openingHeader").SetEnabled(false);
             _done = true;
+            _canFinish = true;
             _loading = false;
             _end.style.display = DisplayStyle.Flex;
             _endTitle.text = "Before the Road";
             _endBody.text = "";
             _continue.text = _router.Session.IsReplayingIntro ? "RETURN TO TITLE" : "CONTINUE";
+            _continue.style.display = DisplayStyle.Flex;
             _retry.style.display = DisplayStyle.None;
             _status.text = "";
             _pause.SetEnabled(false);
@@ -236,11 +254,13 @@ namespace Uomd.Scenes
         {
             _root.Q<VisualElement>("openingHeader").SetEnabled(false);
             _done = true;
+            _canFinish = false;
             _loading = false;
             _end.style.display = DisplayStyle.Flex;
             _endTitle.text = "This scene could not be loaded";
-            _endBody.text = "You can retry, or replay the opening later from the title screen.";
-            _continue.text = "CONTINUE WITHOUT IT";
+            _endBody.text = "The opening has not finished. Retry to continue from this scene. Your place is retained.";
+            _continue.text = "RETURN TO TITLE";
+            _continue.style.display = _router.Session.IsReplayingIntro ? DisplayStyle.Flex : DisplayStyle.None;
             _retry.style.display = DisplayStyle.Flex;
             _status.text = "";
             _pause.SetEnabled(false);
@@ -251,9 +271,10 @@ namespace Uomd.Scenes
         private void Finish()
         {
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active) return;
+            if (UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario != "entry") return;
 #endif
             if (_finishing) return;
+            if (!_canFinish && !_router.Session.IsReplayingIntro && !_router.Session.CanSkipPrologue) return;
             _root.Q<VisualElement>("openingHeader").SetEnabled(false);
             _finishing = _done = true;
             _continue.SetEnabled(false);
@@ -265,22 +286,13 @@ namespace Uomd.Scenes
                 _ = _router.NavigateToAsync(UomdScreenId.Title);
                 return;
             }
-            PlayerPrefs.DeleteKey(CheckpointKey);
-            PlayerPrefs.Save();
-            var progress = _router.Session.Account?.storyProgress;
-            if (progress != null) progress.prologueDone = true;
             _ = FinishEntryAsync();
         }
         private async Awaitable FinishEntryAsync()
         {
             int generation = _generation;
-            if (_router.Api.IsSignedIn)
-            {
-                try { await _router.Api.PutEntryAsync(true, _router.Session.Account?.tutorialStep ?? 0); }
-                catch (Exception e) { Debug.LogWarning("[RebuildPrologue] checkpoint unavailable: " + e.GetType().Name); }
-            }
             if (generation != _generation) return;
-            try { await _router.EntryFlow.ContinueAsync(); }
+            try { await _router.EntryFlow.PrologueFinishedAsync(_entryScope); }
             catch (Exception e)
             {
                 if (generation != _generation) return;
@@ -296,6 +308,8 @@ namespace Uomd.Scenes
         }
         public void OnExit()
         {
+            if (_continue != null) _continue.clicked -= Finish;
+            if (_root != null) _root.Q<Button>("skipOpening").clicked -= Finish;
             ++_generation;
             _loading = false;
             _done = true;

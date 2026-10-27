@@ -35,6 +35,7 @@ namespace Uomd.Core
 
         private readonly string _baseUrl;
         private SessionDto? _session;
+        private string? _cachedPlayerId, _cachedPlayerKey;
         private int _authVersion;
         private int _signingInVersion;
 
@@ -64,7 +65,11 @@ namespace Uomd.Core
             get
             {
                 if (!IsSignedIn || _session is null) return "guest";
-                if (!string.IsNullOrEmpty(_session.playerId)) return $"player:{_session.playerId}";
+                if (!string.IsNullOrEmpty(_session.playerId))
+                {
+                    if (_cachedPlayerId != _session.playerId) { _cachedPlayerId = _session.playerId; _cachedPlayerKey = "player:" + _session.playerId; }
+                    return _cachedPlayerKey!;
+                }
                 int len = Math.Min(24, _session.token.Length);
                 return $"token:{_session.token.Substring(0, len)}";
             }
@@ -76,6 +81,7 @@ namespace Uomd.Core
         {
             _authVersion++;
             _session = session;
+            _cachedPlayerId = _cachedPlayerKey = null;
             _signingInVersion = 0;
             OnAuthChanged?.Invoke();
         }
@@ -279,8 +285,11 @@ namespace Uomd.Core
                 completed = completed,
                 requestId = NewRequestId()
             };
-            return CallAsync<EntryCheckpointDto>("PUT", "/api/v1/entry", JsonUtility.ToJson(payload), ct: ct);
+            return PutEntryAsync(payload, ct);
         }
+
+        public Awaitable<EntryCheckpointDto> PutEntryAsync(EntryUpdateRequestDto payload, CancellationToken ct = default) =>
+            CallAsync<EntryCheckpointDto>("PUT", "/api/v1/entry", JsonUtility.ToJson(payload), ct: ct);
 
         public async Awaitable<BannerInfoDto[]> GetBannersAsync(string? releaseId = null, CancellationToken ct = default)
         {

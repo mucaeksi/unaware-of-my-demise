@@ -1,0 +1,100 @@
+{
+    "schema": 1,
+    "id": "20261027T032355241_e70528eb",
+    "capturedAt": "2026-10-27T03:23:55.4299807Z",
+    "sourceCommit": "67aa8207749bcb7d4993e75b12d6d9b9687355a7",
+    "workingTreeScope": "M apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs\n M apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs\n M apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs\n M apps/unity/Assets/_UOMD/Scripts/Narrative/StoryRunner.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/BattleScreenController.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildBattlePresentation.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildCinematicStage.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildPrologueScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStoryPresentation.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildStudioScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildTitleScreen.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryFlow.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs\n M apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs\n M apps/unity/Logic/Uomd.Core/Uomd.Core.csproj\n M docs/review/PRODUCTION_REVIEW.json\n M docs/review/index.html\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uss\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uss.meta\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uxml\n?? apps/unity/Assets/_UOMD/Resources/Rebuild/Finish.uxml.meta\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEntryCheckpoint.cs\n?? apps/unity/Assets/_UOMD/Scripts/Core/UomdEntryCheckpoint.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildFinishScreen.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildFinishScreen.cs.meta\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryContinuity.cs\n?? apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryContinuity.cs.meta\n?? apps/unity/Assets/_UOMD/Tests/EditMode/EntryCheckpointTests.cs\n?? apps/unity/Assets/_UOMD/Tests/EditMode/EntryCheckpointTests.cs.meta\n?? codex_watcher.ps1\n?? docs/UNITY_ENTRY_CONTINUITY.md\n?? docs/review/captures/20261027T023552247_dceb0513.json\n?? docs/review/captures/20261027T023552247_dceb0513.png\n?? docs/review/captures/20261027T023558156_be2643b4.json\n?? docs/review/captures/20261027T023558156_be2643b4.png\n?? docs/review/captures/20261027T025018779_1eb9bf5c.json\n?? docs/review/captures/20261027T025018779_1eb9bf5c.png\n?? docs/review/captures/20261027T025025746_9bf75d0a.json\n?? docs/review/captures/20261027T025025746_9bf75d0a.png\n?? docs/review/captures/20261027T025958706_834958ef.json\n?? docs/review/captures/20261027T025958706_834958ef.png\n?? docs/review/captures/20261027T030005622_e958a3c8.json\n?? docs/review/captures/20261027T030005622_e958a3c8.png\n?? docs/review/captures/20261027T030226873_99560fe5.json\n?? docs/review/captures/20261027T030226873_99560fe5.png\n?? docs/review/captures/20261027T031148235_0d1afab7.json\n?? docs/review/captures/20261027T031148235_0d1afab7.png\n?? docs/review/captures/20261027T031155358_3d0e0860.json\n?? docs/review/captures/20261027T031155358_3d0e0860.png\n?? docs/review/captures/20261027T031416128_0023aa1c.json\n?? docs/review/captures/20261027T031416128_0023aa1c.png\n?? docs/review/captures/20261027T032222807_a9aa994e.json\n?? docs/review/captures/20261027T032222807_a9aa994e.png\n?? docs/review/captures/20261027T032351579_45dffbf3.json\n?? docs/review/captures/20261027T032351579_45dffbf3.png\n?? docs/review/captures/20261027T032355241_e70528eb.png\n?? tools/tests/test_unity_entry_checkpoint_process.py",
+    "contentRelease": "rel_0001",
+    "scenario": "entry",
+    "lineId": "",
+    "assetId": "sol_bg_shelter_courtyard_dusk",
+    "sourceSha": "c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858",
+    "entrySha": "41bdfc3a1f46246ae34d2a5e386301bbc04d40dcbbb7a31fab0dac8132924ee1",
+    "assetRevision": 1,
+    "shot": -1,
+    "width": 2400,
+    "height": 1080,
+    "errorsObserved": 0,
+    "shotElapsed": 0.0,
+    "simulatedSafeArea": true,
+    "editorOnly": true,
+    "safeAreaDescription": "96 left/right, 28 top, 48 bottom authored panel px; representative only",
+    "imageSha": "ae5f0310866bfcb4c57caa9cbc9b5c21050ba607a8002553b172db18d59f703e",
+    "selectedAssetIdentity": "",
+    "presentationState": "",
+    "unitState": "",
+    "unitFrame": "",
+    "unitBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "unitFootY": 0.0,
+    "battleLogHash": "",
+    "battleActionCount": 0,
+    "awaitingPlayerAction": false,
+    "entryPhase": "finish",
+    "entryScreen": "Finish",
+    "entryStage": 0,
+    "entryTutorials": 3,
+    "entrySequence": 146,
+    "entryLocalSaved": true,
+    "entryCloudConfirmed": false,
+    "entryPaused": false,
+    "settings": {
+        "scenario": "entry",
+        "shot": 0,
+        "lineId": "",
+        "unitState": "idle",
+        "unitFrame": 0,
+        "paused": true,
+        "muted": true,
+        "reducedMotion": true,
+        "reduceFlash": false,
+        "subtitles": true,
+        "safeArea": true,
+        "presentation": {
+            "scenario": "title",
+            "framing": 1.0,
+            "subtitleBottom": 128.0,
+            "light": 1.0,
+            "particles": true
+        }
+    },
+    "subtitleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "titleBounds": {
+        "serializedVersion": "2",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 0.0,
+        "height": 0.0
+    },
+    "safeAreaBounds": {
+        "serializedVersion": "2",
+        "x": 96.0,
+        "y": 28.0,
+        "width": 2208.0,
+        "height": 1004.0
+    },
+    "stageCameras": 0,
+    "stageLights": 0,
+    "stageParticles": 0,
+    "imagePaths": [
+        "art/bg_sol_shelter_courtyard_dusk.webp"
+    ],
+    "relatedAssetIdentities": [
+        "sol_bg_shelter_courtyard_dusk@1:c444e51c34f578d4a3bc43adac277b874d00523ee7fa1971953c26147837d858"
+    ],
+    "bgmVolume": 0.699999988079071,
+    "effectsVolume": 0.8500000238418579,
+    "voiceVolume": 1.0,
+    "actualMuted": true
+}
