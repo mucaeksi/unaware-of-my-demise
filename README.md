@@ -1,5 +1,7 @@
 # Unaware of My Demise — Unified Development Master Prompt
 
+**Campaign recovery checkpoint — 2026-10-27:** server-sessioned campaign battles now use the frozen party and an account-scoped durable submit journal. Victory waits for server confirmation and authoritative progress/wallet refresh; Saved Actions recovers the exact original request after interruption. [Runtime guide](docs/UNITY_CAMPAIGN_OPERATIONS.md), [scoped evidence](docs/evidence/sol-campaign-operations-2026-10-27.json), [continuous execution order](docs/handoff/SOL_CONTINUATION_PLAN.md). Next: native Home/Company/Chapters and system screens. CLI-only Unity access and owner-held pushes remain; live account/device/art/release acceptance is separate. Earlier checkpoint counts and the overnight deadline below remain dated history.
+
 **Gothic anime gacha RPG · Android / Google Play first · Unity 6.3 LTS · GPT Sol rebuild (D-35) · updated 2026-10-26**
 
 Read this entire README before substantial work. It remains the sole engineering master prompt; `narrative/` is the fiction/canon source. Current owner/session instructions take precedence.

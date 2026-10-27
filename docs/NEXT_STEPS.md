@@ -1,5 +1,7 @@
 # Sol Unity rebuild — current execution queue (D-35)
 
+**Current continuation — 2026-10-27:** campaign sessions and durable battle recovery are locally verified ([guide](UNITY_CAMPAIGN_OPERATIONS.md), [evidence](evidence/sol-campaign-operations-2026-10-27.json)). Follow the [continuous execution plan](handoff/SOL_CONTINUATION_PLAN.md): native hub first, then system screens, then approved live account/content and Android acceptance. The earlier overnight 07:00 deadline and paused heartbeat below belong to the completed overnight run. No scheduled job was restarted.
+
 Active 2026-10-26. The root README is authoritative. Sol/Codex owns the project; local workspace is `E:/Unity/unaware-of-my-demise`, verified local commits on `main`, owner pushes. [Execution plan](handoff/SOL_REBUILD_PLAN.md), [visual obligations](media/SOL_VISUAL_REBUILD.json).
 
 1. Owner review tooling: first slice implemented and LOCAL_TESTED. Open `Window → UOMD → Production Review`; [usage](review/README.md), [evidence](evidence/sol-production-review-2026-10-26.json). Extend the same adapters as story/tutorial/battle screens are rebuilt; owner art/device gates remain separate.

@@ -1,3 +1,4 @@
+import { BattleStartRequest } from '../progress/battle-contract';
 import type { Hono, MiddlewareHandler } from 'hono';
 import { z } from 'zod';
 import type { JWTVerifyGetKey } from 'jose';
@@ -343,7 +344,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   // step 1 of an owned-hero battle: the server freezes the party (team, gear, ranks, story loans) the client must fight with
   app.post('/api/v1/progress/battle/start', async (c) => {
     await perMinute(c.env, `battlestart:${c.get('playerId')}`, 30);
-    const input = await body(c, z.object({ releaseId: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/), nodeId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/) }).strict(), 4 * 1024);
+    const input = await body(c, BattleStartRequest, 4 * 1024);
     return c.json(await startBattle(c.env, c.get('playerId'), input));
   });
 

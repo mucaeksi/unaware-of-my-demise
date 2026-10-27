@@ -366,30 +366,62 @@ namespace Uomd.Scenes
         }
     }
 
-    /// <summary>
-    /// Saved actions (OperationsScene.ts layout). The TS client journaled every idempotent action so a lost response could
-    /// be retried with its original request; the Unity client sends each action once and has no journal yet, so nothing
-    /// waits here.
-    /// </summary>
+    /// <summary>The current account's durable campaign battle and its last confirmed result.</summary>
     public sealed class SavedActionsScreen : UomdHubScreen
     {
-        private bool _history;
-
+        private string _account;
+        private int _revision;
+        public override void OnTick(float deltaTime)
+        {
+            if (_account == Router.Api.AccountKey && _revision == Router.Api.AuthRevision) return;
+            _account = Router.Api.AccountKey; _revision = Router.Api.AuthRevision; _ = RefreshAsync();
+        }
         public SavedActionsScreen(UomdSceneRouter router) : base(router) { }
-
         public override UomdScreenId ScreenId => UomdScreenId.Operations;
         protected override string Heading => "SAVED ACTIONS";
         protected override bool UsesWallet => false;
-
-        protected override Awaitable BuildAsync(int generation)
+        protected override async Awaitable BuildAsync(int generation)
         {
-            var intro = Text(RefW / 2f, 175f, "Pending actions keep your original choices. History shows the last known result.", 30, UomdThemeTokens.TextDim, 0.5f, 0.5f, wrapWidth: 1600f);
-            intro.style.unityTextAlign = TextAnchor.MiddleCenter;
-            Button(RefW / 2f - 310f, 270f, "PENDING (0)", null, 560, 100, 32, _history ? UomdPanelVariant.Normal : UomdPanelVariant.Hot, () => { _history = false; _ = RefreshAsync(); });
-            Button(RefW / 2f + 310f, 270f, "HISTORY", null, 560, 100, 32, _history ? UomdPanelVariant.Hot : UomdPanelVariant.Normal, () => { _history = true; _ = RefreshAsync(); });
-            Text(RefW / 2f, 520f, _history ? "No saved results yet." : "No actions are waiting for confirmation.", 38, UomdThemeTokens.TextDim, 0.5f, 0.5f);
-            Button(RefW - 260f, 980f, "REFRESH", null, 340, 100, 32, UomdPanelVariant.Normal, () => _ = RefreshAsync());
-            return UomdAwaitables.Completed();
+            _account = Router.Api.AccountKey; _revision = Router.Api.AuthRevision;
+            var campaign = Router.EntryFlow.Campaign;
+            await campaign.BindAsync();
+            if (!IsCurrent(generation) || !campaign.IsCurrent) return;
+            var operation = campaign.Operation;
+            string heading = operation == null ? "No saved campaign battles."
+                : operation.Pending ? "BATTLE CONFIRMATION PENDING"
+                : operation.State == "confirmed" ? "LAST CONFIRMED BATTLE" : operation.State == "rejected" ? "BATTLE NOT ACCEPTED" : "INTERRUPTED BATTLE";
+            Text(RefW / 2f, 275f, heading, 40, UomdThemeTokens.Gold, 0.5f, 0.5f, display: true);
+            string detail = operation == null ? string.IsNullOrEmpty(campaign.Notice) ? "Campaign results are saved before submission." : campaign.Notice
+                : operation.Node + " · " + operation.Release + "\n" + campaign.Notice;
+            if (campaign.MemoryOnly) detail = "REVIEW FIXTURE · " + detail;
+            if (operation?.State == "confirmed") detail += "\n" + BattleReceipt.Parse(operation.ReceiptJson).Stars + " stars confirmed. Your rewards and progress are saved to your account.";
+            var text = Text(RefW / 2f, 440f, detail, 30, UomdThemeTokens.TextPrimary, 0.5f, 0.5f, wrapWidth: 1300f);
+            text.name = "saved-battle-status"; text.style.unityTextAlign = TextAnchor.MiddleCenter;
+            if (operation != null && operation.State != "fighting")
+            {
+                UnityEngine.UIElements.Button retry = null;
+                retry = Button(RefW / 2f, 640f, operation.Pending ? "CHECK / RETRY ORIGINAL RESULT" : "REFRESH ACCOUNT", null, 790, 106, 29, UomdPanelVariant.Hot, () => _ = Recover());
+                retry.name = "saved-battle-retry"; retry.SetEnabled(!campaign.Busy);
+                async Awaitable Recover()
+                {
+                    if (campaign.Busy || !campaign.IsCurrent) return;
+                    retry.SetEnabled(false); text.text = "Checking your saved battle…";
+                    await campaign.RecoverAsync();
+                    if (IsCurrent(generation) && campaign.IsCurrent) await RefreshAsync();
+                }
+            }
+            if (operation?.Pending != true)
+            {
+                bool resume = Router.EntryFlow.CanResumeCampaignStory;
+                UnityEngine.UIElements.Button next = null;
+                next = Button(RefW / 2f, 790f, resume ? "CONTINUE STORY" : "CHAPTERS", null, 500, 90, 28, UomdPanelVariant.Normal, () =>
+                {
+                    next.SetEnabled(false);
+                    if (resume) _ = Router.EntryFlow.ResumeCampaignStoryAsync();
+                    else _ = Router.NavigateToAsync(UomdScreenId.Chapters);
+                });
+                next.name = resume ? "saved-battle-story" : "saved-battle-chapters";
+            }
         }
     }
 }

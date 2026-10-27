@@ -1,5 +1,7 @@
 # UOMD — Codex CLI production master prompt and context handoff
 
+**Latest continuation — 2026-10-27:** campaign start/frozen-party engine construction, atomic account journal, server-confirmed results and Saved Actions recovery are locally implemented. 159 EditMode, 3 PlayMode, 128 headless tests, a separate-process journal probe, twelve-assembly reference compile and repository checks pass. See [guide](../UNITY_CAMPAIGN_OPERATIONS.md), [evidence](../evidence/sol-campaign-operations-2026-10-27.json) and [continuous plan](SOL_CONTINUATION_PLAN.md). Next: native hub/system rebuild. Earlier 07:00 instructions describe the completed overnight run; its heartbeat remains paused. Live account/device/art/release gates remain open.
+
 **Owner:** Codex/Sol · **Snapshot:** 2026-10-26 · **Implementation baseline:** `51d8d638` on local `main`.
 **Workspace:** `E:\Unity\unaware-of-my-demise` · **Unity project:** `apps/unity/`.
 

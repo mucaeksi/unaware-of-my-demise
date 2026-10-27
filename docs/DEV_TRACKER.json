@@ -1,16 +1,20 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "0ac241cb",
+  "sourceCommit": "05dbbfbe",
   "reviewedAt": "2026-10-27",
   "authority": "README.md",
   "evidenceContract": "docs/BUILD_STATE.md#evidence-contract",
   "currentAssignment": {
     "id": "D-35 (GPT Sol Unity rebuild and original visual production)",
     "status": "IN_PROGRESS",
-    "nextProposed": "Local entry/Finish/durable Continue and manual battle consumers are verified. Next: server-sessioned campaign operations/recovery and native hub/system rebuild, followed by live signed-in/patch and Android acceptance. Keep the 07:00 Europe/Bucharest deadline and pause the existing heartbeat then.",
+    "nextProposed": "Campaign sessions, frozen-party battles and durable recovery are locally verified. Continue with the native Home/Company/Chapters hub, then system screens and approved live account/content/Android acceptance. Follow docs/handoff/SOL_CONTINUATION_PLAN.md; the prior overnight 07:00 deadline and paused heartbeat are historical.",
     "workflow": "README and narrative remain authoritative. E:/Unity/unaware-of-my-demise, local main commits, owner pushes. New OpenAI visuals; Gemini visuals reference-only. Existing Gemini voice/music budget and release gates remain. D-34 design stopped. Unity Editor access is CLI only per the owner; MCP configuration and pinned sources remain intact."
   },
   "now": [
+    {
+      "title": "D-35: campaign battle sessions and durable operation recovery (2026-10-27)",
+      "detail": "Typed provider-derived contracts, account-scoped atomic journal, frozen-party engine construction, confirmation-gated victory and Saved Actions recovery. Exact payload/hash, response loss, repeated taps, restart, release/expiry and stale-account callbacks verified locally. 159 EditMode, 3 PlayMode, 128 headless, separate-process journal probe, twelve-assembly compile and repository verification. Actual Game-view evidence: docs/evidence/sol-campaign-operations-2026-10-27.json. Local fixtures do not establish live account/provider, device, release or art acceptance; no push/deploy. Enclosing commit binds final source; sourceCommit records its parent."
+    },
     {
       "title": "D-35: save failure visible before Finish (2026-10-27)",
       "detail": "Native warning on Title/Prologue/Story/Battle, Retry Save without advancing the current narrative line or combat action, three live viewport captures and restored preferences. 148 EditMode, 3 PlayMode, twelve-assembly reference compile and 66 adapters pass. Focused evidence: docs/evidence/sol-entry-save-warning-2026-10-27.json. Fault injection is an explicit isolated fixture, not Android low-storage acceptance. Enclosing commit binds final source; sourceCommit is its parent."

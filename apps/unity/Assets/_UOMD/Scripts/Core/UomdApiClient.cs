@@ -252,7 +252,7 @@ namespace Uomd.Core
         /// A write bound to the current account. <paramref name="idempotent"/> adds a fresh requestId (the server's
         /// idempotency key; api.ts `mutate`); plain writes (api.ts `call`: teams, equip) send the body as is, because their
         /// server schemas are strict. A DELETE sends no body. The TS client also journaled pending idempotent actions across
-        /// restarts (net/operations.ts); that journal is not ported yet.
+        /// restarts (net/operations.ts); campaign battles use a separate durable journal. Other mutations remain one-shot.
         /// </summary>
         public async Awaitable<Dictionary<string, object?>> SendJsonAsync(string method, string path, Dictionary<string, object?>? body = null, bool requireAuth = true, bool idempotent = true, CancellationToken ct = default)
         {
@@ -339,22 +339,13 @@ namespace Uomd.Core
             return CallAsync<StoryProgressResponseDto>("POST", "/api/v1/progress/story", JsonUtility.ToJson(req), ct: ct);
         }
 
-        public Awaitable<BattleSubmitResponseDto> SubmitBattleAsync(
-            string releaseId,
-            string nodeId,
-            BattleActionInputDto[] actions,
-            string? sessionId = null,
-            CancellationToken ct = default)
-        {
-            var req = new BattleSubmitRequestDto
-            {
-                releaseId = releaseId,
-                nodeId = nodeId,
-                actions = actions,
-                sessionId = sessionId,
-                requestId = NewRequestId()
-            };
-            return CallAsync<BattleSubmitResponseDto>("POST", "/api/v1/progress/battle", JsonUtility.ToJson(req), ct: ct);
-        }
+        public async Awaitable<BattleStartReceipt> StartBattleAsync(string releaseId, string nodeId, int authRevision, CancellationToken ct = default) =>
+            BattleStartReceipt.Parse(await CallAsync<string>("POST", UomdBattleWire.Path + "/start", UomdBattleWire.Start(releaseId, nodeId), expectedAuthVersion: authRevision, ct: ct));
+
+        public async Awaitable<BattleReceipt> SubmitBattleAsync(string canonicalPayload, int authRevision, CancellationToken ct = default) =>
+            BattleReceipt.Parse(await CallAsync<string>("POST", UomdBattleWire.Path, canonicalPayload, expectedAuthVersion: authRevision, ct: ct));
+
+        public async Awaitable<BattleOperationStatus> BattleStatusAsync(string requestId, string inputHash, int authRevision, CancellationToken ct = default) =>
+            BattleOperationStatus.Parse(await CallAsync<string>("GET", "/api/v1/operations/" + Uri.EscapeDataString(requestId) + "?path=" + Uri.EscapeDataString(UomdBattleWire.Path), expectedAuthVersion: authRevision, ct: ct), requestId, inputHash);
     }
 }

@@ -21,18 +21,22 @@ namespace Uomd.Scenes
         private string _preStory = "";
         private string _postStory = "";
         private string _campaignNode = "";
+        private string _campaignScope = "";
         private string _readingEntry = "";
         private System.Collections.Generic.List<string> _readingScenes = new System.Collections.Generic.List<string>();
         private int _readingIndex;
         private int _generation;
         internal void ResetForIdentity()
         {
-            ++_generation; StageIndex = 0; Current = Phase.None; _preStory = _postStory = _campaignNode = _readingEntry = "";
+            ++_generation; StageIndex = 0; Current = Phase.None; _preStory = _postStory = _campaignNode = _campaignScope = _readingEntry = "";
             _readingScenes = new System.Collections.Generic.List<string>(); _readingIndex = 0;
         }
-        private bool Owns(string scope) => string.IsNullOrEmpty(scope) || Continuity.IsCurrent && Continuity.State.Scope == scope;
+        public bool CampaignIsCurrent => Campaign.IsCurrent && _campaignScope == Campaign.CallbackScope;
+        public string CallbackScope => InCampaign ? _campaignScope : StageIndex > 0 ? Continuity.State?.Scope : null;
+        private bool Owns(string scope) => string.IsNullOrEmpty(scope) || (InCampaign ? CampaignIsCurrent && _campaignScope == scope : Continuity.IsCurrent && Continuity.State.Scope == scope);
 
         public UomdEntryContinuity Continuity { get; }
+        public UomdCampaignBattle Campaign { get; }
         public UomdEntryFlow(UomdSceneRouter router)
         {
             _router = router;
@@ -41,6 +45,7 @@ namespace Uomd.Scenes
             isolated |= UomdEditorPreviewIsolation.Active;
 #endif
             Continuity = new UomdEntryContinuity(router, isolated);
+            Campaign = new UomdCampaignBattle(router, isolated);
         }
 
         /// <summary>Tutorial stage being played (1..3), 0 outside the entry flow.</summary>
@@ -135,11 +140,26 @@ namespace Uomd.Scenes
         /// <summary>
         /// Plays a chapter node (flow.ts playNode): a story node shows its scene, a battle node its pre_story → battle →
         /// post_story; both return to Chapters. Server-sessioned campaign battles (POST /progress/battle/start + submit) arrive
-        /// with the first chapter patch; the base tutorial chapter is a fixed-party replay with one-time rewards already claimed.
+        /// through the durable campaign coordinator; entry tutorials retain their local fixed-party path.
         /// </summary>
         /// <returns>False when the node's content could not be loaded (the caller stays and tells the player).</returns>
+        private bool _startingNode;
         public async Awaitable<bool> PlayNodeAsync(string nodeId, string kind, string storyPath, string encounterPath)
         {
+            if (_startingNode) return false;
+            _startingNode = true;
+            try
+            {
+                await Campaign.BindAsync();
+                if (Campaign.Operation?.Pending == true) { await _router.NavigateToAsync(UomdScreenId.Operations); return true; }
+                return await PlayNodeCoreAsync(nodeId, kind, storyPath, encounterPath);
+            }
+            catch (Exception e) { Debug.LogWarning("[Campaign] Stage unavailable: " + e.Message); return false; }
+            finally { _startingNode = false; }
+        }
+        private async Awaitable<bool> PlayNodeCoreAsync(string nodeId, string kind, string storyPath, string encounterPath)
+        {
+            string scope = Campaign.CallbackScope; _campaignScope = scope;
             StageIndex = 0;
             _campaignNode = nodeId;
             if (kind == "story" && !string.IsNullOrEmpty(storyPath))
@@ -153,6 +173,7 @@ namespace Uomd.Scenes
             {
                 if (string.IsNullOrEmpty(encounterPath)) throw new InvalidDataException("the node has no encounter");
                 await LoadEncounterAsync(encounterPath);
+                if (!Owns(scope)) return false;
             }
             catch (Exception e)
             {
@@ -230,6 +251,7 @@ namespace Uomd.Scenes
         {
             if (!Owns(expectedScope)) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
             if (StageIndex > 0 && !Continuity.IsCurrent) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
+            if (InCampaign && !CampaignIsCurrent) return;
             if (InReading) await FinishReadingAsync();
             else if (Current == Phase.PreStory) await StartBattleAsync();
             else if (Current == Phase.PostStory) await CompleteStageAsync();
@@ -240,7 +262,7 @@ namespace Uomd.Scenes
         public async Awaitable BattleFinishedAsync(bool won, int stars = 0, string expectedScope = null)
         {
             if (!Owns(expectedScope)) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
-            if (Current != Phase.Battle) return;
+            if (Current != Phase.Battle || InCampaign && !CampaignIsCurrent) return;
             if (StageIndex > 0 && !Continuity.IsCurrent) { await _router.NavigateToAsync(UomdScreenId.Title); return; }
             if (!won)
             {
@@ -248,7 +270,7 @@ namespace Uomd.Scenes
                 else await StartStageAsync(StageIndex);
                 return;
             }
-            if (InCampaign) UomdLocalProgress.Complete(_campaignNode, stars);
+            if (InCampaign && (!Campaign.Confirmed || !Campaign.Refreshed)) return;
             if (!string.IsNullOrEmpty(_postStory)) await PlayStoryAsync(Phase.PostStory, _postStory);
             else await CompleteStageAsync();
         }
@@ -264,6 +286,14 @@ namespace Uomd.Scenes
         public bool InEntryBattle => Current == Phase.Battle && StageIndex > 0;
         public bool InCampaign => _campaignNode.Length > 0;
         public bool InCampaignBattle => Current == Phase.Battle && InCampaign;
+        public bool CanResumeCampaignStory => InCampaign && CampaignIsCurrent && Campaign.Confirmed && Campaign.Refreshed
+            && (Current == Phase.Battle || Current == Phase.PostStory && !string.IsNullOrEmpty(_postStory));
+        public async Awaitable ResumeCampaignStoryAsync()
+        {
+            if (!CanResumeCampaignStory) return;
+            if (Current == Phase.Battle) await BattleFinishedAsync(true, expectedScope: CallbackScope);
+            else await PlayStoryAsync(Phase.PostStory, _postStory);
+        }
 
         private async Awaitable PlayStoryAsync(Phase phase, string path)
         {
@@ -277,6 +307,13 @@ namespace Uomd.Scenes
 
         private async Awaitable StartBattleAsync()
         {
+            if (InCampaign)
+            {
+                if (!CampaignIsCurrent) return;
+                if (!await Campaign.StartAsync(_campaignNode, _router.Session.ActiveBattleEncounterId))
+                { Current = Phase.None; await _router.NavigateToAsync(UomdScreenId.Operations); return; }
+                _campaignScope = Campaign.CallbackScope;
+            }
             Current = Phase.Battle;
             if (StageIndex > 0) Continuity.Phase("battle", StageIndex);
             await _router.NavigateToAsync(UomdScreenId.Battle);
@@ -286,10 +323,24 @@ namespace Uomd.Scenes
         {
             if (InCampaign)
             {
+                if (!CampaignIsCurrent) return;
                 string node = _campaignNode;
-                _campaignNode = "";
-                Current = Phase.None;
-                if (!UomdLocalProgress.IsCleared(node)) UomdLocalProgress.Complete(node, 0); // a story node
+                // Battle claims are confirmed before post-story; story-only nodes use their server endpoint.
+                if (Campaign.Operation?.Node != node || !Campaign.Confirmed)
+                {
+                    try { await _router.Api.CompleteStoryNodeAsync(_router.Patch.ActiveReleaseId, node, _router.destroyCancellationToken); }
+                    catch (Exception)
+                    {
+                        if (!CampaignIsCurrent) return;
+                        _campaignNode = ""; Current = Phase.None;
+                        await _router.NavigateToAsync(UomdScreenId.Chapters);
+                        Uomd.UI.UomdUiKit.ShowToast(_router.GetComponent<UnityEngine.UIElements.UIDocument>().rootVisualElement,
+                            "Story confirmation is unavailable. Reopen this stage to try again when connected.");
+                        return;
+                    }
+                }
+                if (!CampaignIsCurrent) return;
+                _campaignNode = ""; Current = Phase.None;
                 await _router.NavigateToAsync(UomdScreenId.Chapters);
                 return;
             }

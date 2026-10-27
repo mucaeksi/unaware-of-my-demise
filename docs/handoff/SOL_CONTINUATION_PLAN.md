@@ -1,0 +1,25 @@
+# Sol continuous continuation plan
+
+Owner continuation request: 2026-10-27, after the completed overnight run. Work sequentially on local `main` in
+`E:/Unity/unaware-of-my-demise`; use Unity CLI, preserve current work and commit verified slices locally. The previous
+07:00 limit and paused overnight heartbeat describe that earlier run. This plan does not restart a scheduled automation.
+
+1. **Campaign sessions and battle recovery.** Finish the contract/journal/frozen-party/result UI slice and its recovery
+   matrix, capture the real Editor states, restore the Editor and record a scoped verified commit. See
+   [implementation boundary](SOL_CAMPAIGN_OPERATION_SLICE.md) and [runtime guide](../UNITY_CAMPAIGN_OPERATIONS.md).
+2. **Native hub foundation.** Rebuild Home, Company and Chapters around authoritative account, roster/team and progress
+   data. Generate required original visuals with the built-in OpenAI image tool, retain provenance and ingest QC, then
+   inspect the real screens at the established landscape sizes. Preserve deterministic combat and the single currency.
+3. **System screens in dependency order.** Team/roster and gear; campaign map and progression; archive/story; quests,
+   recruitment and account/privacy flows. Finish each complete click path and its error/recovery state before expanding.
+   Extend durable operations to a mutation only with that provider's exact identity/contract and meaningful recovery tests.
+4. **Content and signed-in integration.** Verify approved published content, release cutover/rollback and identity with
+   actual account/provider evidence when the existing access gates permit. Local fixtures remain explicitly identified.
+5. **Android and release acceptance.** Build and verify the signed target, physical lifecycle/input, Billing, ads/consent,
+   privacy and signed data patches. Device interaction and owner-held release approvals remain explicit acceptance gates.
+
+For every slice: inspect current source/live Editor; implement the smallest complete change; test the real failure paths;
+compile and inspect console; run relevant EditMode/PlayMode and repository checks; capture actual Game view; restore scene,
+preferences and viewport; update current evidence; commit locally. Continue authorized local implementation without routine
+permission interruptions. Credentials, external publication, paid production budgets, device participation and human art
+approval retain their existing requirements. Never treat a missing acceptance gate as passed.

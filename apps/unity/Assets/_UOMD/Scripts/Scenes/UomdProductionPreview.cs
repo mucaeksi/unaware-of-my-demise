@@ -73,6 +73,7 @@ namespace Uomd.Scenes
                 case "title": screen = UomdScreenId.Title; break;
                 case "entry": screen = UomdScreenId.Title; break;
                 case "finish": screen = UomdScreenId.Finish; break;
+                case "campaign": screen = UomdScreenId.Battle; break;
                 default:
                     if (request.scenario.StartsWith("battle/", StringComparison.Ordinal))
                     {
@@ -147,7 +148,8 @@ namespace Uomd.Scenes
                         throw new ArgumentException("Unknown canonical tutorial line.");
                     Audio.StopBgm(0.01f);
                 }
-                await NavigateToAsync(screen);
+                if (request.scenario == "campaign") await OpenCampaignReviewAsync();
+                else await NavigateToAsync(screen);
                 if (this == null) return;
                 if (screen == UomdScreenId.Title && request.scenario != "entry")
                 {
@@ -169,7 +171,7 @@ namespace Uomd.Scenes
             Session.ReduceFlash = ProductionPreview.reduceFlash;
             Audio.Muted = ProductionPreview.muted;
             Audio.SetPaused(ProductionPreview.paused);
-            if (ActiveScreenId == UomdScreenId.Battle && (ProductionPreview.scenario.StartsWith("battle/", StringComparison.Ordinal) || ProductionPreview.scenario == "entry"))
+            if (ActiveScreenId == UomdScreenId.Battle && (ProductionPreview.scenario.StartsWith("battle/", StringComparison.Ordinal) || ProductionPreview.scenario == "entry" || ProductionPreview.scenario == "campaign"))
                 Audio.SetPaused(Controller<BattleScreenController>().ReviewPaused);
             if (ActiveScreenId == UomdScreenId.Battle && ProductionPreview.scenario.StartsWith("unit/", StringComparison.Ordinal))
                 Controller<RebuildUnitReviewScreen>()?.ApplyRequest();

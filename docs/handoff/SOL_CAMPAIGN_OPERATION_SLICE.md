@@ -1,7 +1,17 @@
 # Next slice: campaign battle sessions and operation recovery
 
+**Delivery checkpoint — 2026-10-27:** this slice is now implemented and locally verified. See [runtime contract and limits](../UNITY_CAMPAIGN_OPERATIONS.md), [scoped evidence](../evidence/sol-campaign-operations-2026-10-27.json) and [next execution order](SOL_CONTINUATION_PLAN.md). The source-review text below records the pre-implementation boundary.
+
 Source review: 2026-10-27, local `5b7fec3e`. This document records the next implementation boundary; it changes no runtime,
 backend state, permissions, releases or account data. CLI-only Unity access, local main commits and owner-held pushes remain.
+
+## Continuous continuation plan (owner request, 2026-10-27)
+
+Proceed in order: provider-derived wire contracts and fixtures; account-scoped atomic battle journal; server-frozen-party
+campaign routing and pending-result UI; restart, response-loss, expiry, release and identity-race checks; live CLI Editor
+compilation, tests and Game-view evidence; scoped documentation and verified local commits. This authorizes local
+implementation and validation. Live account acceptance, device acceptance, art approval, spending and publishing retain
+their existing gates. Continue through the slice without routine approval interruptions; preserve the owner's working files.
 
 ## Current gap
 

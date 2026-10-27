@@ -166,7 +166,7 @@ namespace Uomd.Scenes
         {
             int generation = ++_generation;
             _root = screenRoot;
-            _entryScope = _router.EntryFlow != null && _router.EntryFlow.StageIndex > 0 ? _router.EntryFlow.Continuity.State?.Scope : null;
+            _entryScope = _router.EntryFlow?.CallbackScope;
             _finished = false;
             _lastShownPrefix = null;
             _actors.Clear();

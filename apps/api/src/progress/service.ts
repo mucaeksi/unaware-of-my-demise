@@ -41,17 +41,8 @@ export interface SweepResponse extends SweepOutcome {
   replayed: boolean;
 }
 
-export const BattleSubmission = z
-  .object({
-    releaseId: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/),
-    nodeId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/),
-    requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/),
-    /** owned-hero stages: the session returned by /progress/battle/start (the party is frozen in it) */
-    sessionId: z.string().regex(/^[a-f0-9]{32}$/).optional(),
-    actions: z.array(z.object({ skillId: z.string().max(80), targetId: z.string().max(80).optional() }).strict()).max(600)
-  })
-  .strict();
-export type BattleSubmission = z.infer<typeof BattleSubmission>;
+export { BattleSubmission } from './battle-contract';
+import type { BattleSubmission } from './battle-contract';
 
 export interface BattleOutcome {
   /** Absent for catalog-free legacy claims. Stored with the original outcome. */

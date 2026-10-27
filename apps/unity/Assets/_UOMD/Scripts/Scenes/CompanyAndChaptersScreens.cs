@@ -130,6 +130,7 @@ namespace Uomd.Scenes
         protected override async Awaitable BuildAsync(int generation)
         {
             var api = Router.Api;
+            string account = api.AccountKey;
             var index = UomdJson.ParseObject(await Router.Patch.ReadTextAsync("chapters/chapter_index.json"));
             var baseNodes = new HashSet<string>(StringComparer.Ordinal);
             try
@@ -160,7 +161,7 @@ namespace Uomd.Scenes
                     return;
                 }
             }
-            if (!IsCurrent(generation)) return;
+            if (!IsCurrent(generation) || account != api.AccountKey) return;
             string active = Router.Patch.ActiveReleaseId;
             var chapters = JsonRead.Objects(index, "chapters").ToList();
             bool hasHard = chapters.Any(ch => JsonRead.Objects(ch, "nodes").Any(n => JsonRead.Str(n, "difficulty") == "hard"));

@@ -37,7 +37,7 @@ namespace Uomd.Scenes
             get
             {
 #if UNITY_EDITOR
-                if ((BattleReview || UomdEditorPreviewIsolation.Active && _router.ProductionPreview?.scenario == "entry") && _router.ProductionPreview.paused) return true;
+                if ((BattleReview || UomdEditorPreviewIsolation.Active && (_router.ProductionPreview?.scenario == "entry" || _router.ProductionPreview?.scenario == "campaign")) && _router.ProductionPreview.paused) return true;
 #endif
                 return _nativePaused;
             }

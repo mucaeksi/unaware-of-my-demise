@@ -154,7 +154,7 @@ namespace Uomd.EditorTools
             var index = File.Exists(IndexPath) ? JsonUtility.FromJson<ProductionReviewIndex>(File.ReadAllText(IndexPath)) : new ProductionReviewIndex();
             foreach (var capture in index.captures)
             {
-                if (string.IsNullOrEmpty(capture.metadata) || capture.scenario != "entry" && capture.scenario != "finish" && ((!string.IsNullOrEmpty(capture.lineId) && capture.scenario?.StartsWith("unit/", StringComparison.Ordinal) != true)
+                if (string.IsNullOrEmpty(capture.metadata) || capture.scenario != "entry" && capture.scenario != "finish" && capture.scenario != "campaign" && ((!string.IsNullOrEmpty(capture.lineId) && capture.scenario?.StartsWith("unit/", StringComparison.Ordinal) != true)
                     || !string.IsNullOrEmpty(capture.unitFrame))) continue;
                 string path = ProductionReviewCatalog.Resolve(Root, "docs/review/" + capture.metadata);
                 if (File.Exists(path))
@@ -163,7 +163,7 @@ namespace Uomd.EditorTools
                     if (string.IsNullOrEmpty(capture.lineId)) capture.lineId = JsonRead.Str(metadata, "lineId");
                     capture.unitState = JsonRead.Str(metadata, "unitState");
                     capture.unitFrame = JsonRead.Str(metadata, "unitFrame");
-                    if (capture.scenario == "entry" || capture.scenario == "finish")
+                    if (capture.scenario == "entry" || capture.scenario == "finish" || capture.scenario == "campaign")
                     {
                         capture.entryScreen = JsonRead.Str(metadata, "entryScreen"); capture.entryPhase = JsonRead.Str(metadata, "entryPhase");
                         capture.entryStage = (int)JsonRead.Int(metadata, "entryStage");
@@ -194,7 +194,7 @@ namespace Uomd.EditorTools
                 unitState = unitState, unitFrame = unitFrame,
                 presentation = JsonUtility.FromJson<RebuildShotSettings>(JsonUtility.ToJson(settings)),
                 captures = index.captures.Where(c => c.scenario == scenario && (string.IsNullOrEmpty(lineId) || c.lineId == lineId))
-                    .Where(c => c.scenario != "entry" && c.scenario != "finish" || (c.sourceIdentities ?? Array.Empty<string>()).Contains(asset.Identity))
+                    .Where(c => c.scenario != "entry" && c.scenario != "finish" && c.scenario != "campaign" || (c.sourceIdentities ?? Array.Empty<string>()).Contains(asset.Identity))
                     .Where(c => string.IsNullOrEmpty(unitState) || (c.unitState == unitState && c.unitFrame == unitFrame))
                     .Select(c => c.id + ":" + c.sha256).ToArray() };
             index.requests.Add(record);

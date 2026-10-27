@@ -104,6 +104,9 @@ namespace Uomd.Scenes
 
         private void Update()
         {
+            if (EntryFlow?.InCampaign == true && !EntryFlow.CampaignIsCurrent &&
+                (ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle))
+            { _ = EntryFlow.AbandonNodeAsync(); return; }
             if (EntryFlow?.Continuity.State != null && !EntryFlow.Continuity.IsCurrent && Session?.IsReplayingIntro == false
                 && (ActiveScreenId == UomdScreenId.Prologue || ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle || ActiveScreenId == UomdScreenId.Finish))
             { _ = NavigateToAsync(UomdScreenId.Title); return; }
@@ -139,7 +142,7 @@ namespace Uomd.Scenes
         public async Awaitable NavigateToAsync(UomdScreenId targetScreen)
         {
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active && ProductionPreview?.scenario != "entry" && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
+            if (UomdEditorPreviewIsolation.Active && ProductionPreview?.scenario != "entry" && ProductionPreview?.scenario != "campaign" && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
                 && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue
                 && !(targetScreen == UomdScreenId.Finish && ProductionPreview?.scenario == "finish")
                 && !(targetScreen == UomdScreenId.Battle && (ProductionPreview?.scenario.StartsWith("unit/", StringComparison.Ordinal) == true

@@ -1,0 +1,904 @@
+{
+  "schemaVersion": 1,
+  "id": "sol-campaign-operations-2026-10-27",
+  "status": "LOCAL_TESTED",
+  "reviewedAt": "2026-10-27T06:27:02.570Z",
+  "sourceCommit": "05dbbfbe2d5133951674e072447566eb440e2213",
+  "deliveryBinding": "The enclosing local commit contains the exact source blobs listed below; sourceCommit records its parent.",
+  "scope": [
+    "Provider-owned strict battle wire schemas and deterministic Unity contract fixtures",
+    "Account-scoped bounded atomic battle journal separate from narrative checkpoints",
+    "Server-frozen party, exact request identity and confirmation-gated campaign victory",
+    "Saved Actions recovery, account refresh and same-flow post-story continuation",
+    "Account/revision/request fences, expiry and release recovery"
+  ],
+  "checks": {
+    "unityEditor": "6000.3.27f1",
+    "unityTransport": "CLI only; Pipeline 0.9.1-exp.1",
+    "editMode": {
+      "total": 159,
+      "passed": 159,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playMode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "headless": {
+      "passed": 128,
+      "failed": 0
+    },
+    "typescript": {
+      "passed": 955,
+      "failed": 0
+    },
+    "providerFocused": {
+      "passed": 18,
+      "failed": 0
+    },
+    "contentReproduction": {
+      "files": 231,
+      "exact": true
+    },
+    "referenceCompile": {
+      "assemblies": 12,
+      "errors": 0,
+      "limitation": "URP editor signatures are verified stubs, not the compiled package"
+    },
+    "skills": {
+      "adapters": 66,
+      "passed": true
+    },
+    "separateProcessJournal": {
+      "passed": true,
+      "abruptExitBeforePromotion": 17,
+      "checks": [
+        "same original request/actions after fresh process",
+        "unpromoted temp ignored",
+        "account separation"
+      ]
+    },
+    "consoleErrors": 0
+  },
+  "manualBattle": {
+    "actions": 16,
+    "winner": "player",
+    "logHash": "40e13a2899eed89af2af88cb13dba6d7068bb01aadf34465e54878b5980f3d33",
+    "pureReplay": {
+      "changedContentRejected": true,
+      "complete": true,
+      "hash": "40e13a2899eed89af2af88cb13dba6d7068bb01aadf34465e54878b5980f3d33",
+      "localExpiryRejected": true,
+      "valid": true,
+      "winner": "player"
+    },
+    "inputMethod": "NavigationSubmitEvent on real UI Toolkit Buttons; no physical-touch claim",
+    "fixture": "Explicit memory-only owned-party T1 preview. No HTTP, live account, reward grant or device journal write."
+  },
+  "recovery": {
+    "steps": [
+      "confirmed claim still holds Continue when account refresh fails",
+      "account refresh retry never resubmits a confirmed claim",
+      "confirmed Continue enters the canonical post-story once",
+      "Saved Actions returns the original confirmed battle to its canonical post-story",
+      "unresolved result blocks a new start",
+      "double retry preserves exact payload after commit response loss",
+      "confirmed status refreshes account without submitting the claim again",
+      "late status callback cannot send or settle another account",
+      "original account retains the unresolved journal",
+      "release cutover preserves the original result for rollback retry",
+      "release rollback retries the same original proof",
+      "explicit expiry after unknown status retains rejected proof",
+      "new battle starts only after checking the definitively refused session again"
+    ],
+    "offline": {
+      "ready": true,
+      "screen": "Battle",
+      "current": true,
+      "busy": false,
+      "state": "pending",
+      "request": "8b30554889c245c7af38bdff903c648e",
+      "hash": "2993694bc0b05f013c99d54502b76c8048632c798bd723b4532ed332b757e707",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"8b30554889c245c7af38bdff903c648e\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": false,
+      "notice": "Battle confirmation is unavailable. Retry when connected. Your original saved result is retained. Unknown status does not mean the battle failed.",
+      "mode": "offline",
+      "starts": 1,
+      "submits": 1,
+      "statusCalls": 2,
+      "refreshCalls": 0,
+      "uniquePayloads": 1,
+      "next": false,
+      "retry": true,
+      "text": "REVIEW FIXTURE · Battle confirmation is unavailable. Retry when connected. Your original saved result is retained. Unknown status does not mean the battle failed."
+    },
+    "refreshPending": {
+      "ready": true,
+      "screen": "Battle",
+      "current": true,
+      "busy": false,
+      "state": "confirmed",
+      "request": "8b30554889c245c7af38bdff903c648e",
+      "hash": "2993694bc0b05f013c99d54502b76c8048632c798bd723b4532ed332b757e707",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"8b30554889c245c7af38bdff903c648e\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": false,
+      "notice": "Battle confirmed. Account refresh is pending; retry when connected.",
+      "mode": "success",
+      "starts": 1,
+      "submits": 2,
+      "statusCalls": 3,
+      "refreshCalls": 0,
+      "uniquePayloads": 1,
+      "next": false,
+      "retry": true,
+      "text": "REVIEW FIXTURE · Battle confirmed. Account refresh is pending; retry when connected."
+    },
+    "resultConfirmed": {
+      "ready": true,
+      "screen": "Battle",
+      "current": true,
+      "busy": false,
+      "state": "confirmed",
+      "request": "8b30554889c245c7af38bdff903c648e",
+      "hash": "2993694bc0b05f013c99d54502b76c8048632c798bd723b4532ed332b757e707",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"8b30554889c245c7af38bdff903c648e\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": true,
+      "notice": "Battle confirmed. Account progress and wallet refreshed.",
+      "mode": "success",
+      "starts": 1,
+      "submits": 2,
+      "statusCalls": 3,
+      "refreshCalls": 1,
+      "uniquePayloads": 1,
+      "next": true,
+      "retry": false,
+      "text": "REVIEW FIXTURE · Battle confirmed. Account progress and wallet refreshed.\n3 stars confirmed by your account."
+    },
+    "lost": {
+      "ready": true,
+      "screen": "Operations",
+      "current": true,
+      "busy": false,
+      "state": "pending",
+      "request": "6758416739024965aa4e37c57cf68f0c",
+      "hash": "1197707ab9641ad061b9ba570391cd34ed2fe4ff0a20bedebdde51cc0a4e687b",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"6758416739024965aa4e37c57cf68f0c\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": false,
+      "notice": "Battle confirmation is unavailable. Retry when connected. Your original saved result is retained. Unknown status does not mean the battle failed.",
+      "mode": "lost",
+      "starts": 2,
+      "submits": 4,
+      "statusCalls": 7,
+      "refreshCalls": 1,
+      "uniquePayloads": 2,
+      "next": false,
+      "retry": false,
+      "text": "REVIEW FIXTURE · t1 · rel_0001\nBattle confirmation is unavailable. Retry when connected. Your original saved result is retained. Unknown status does not mean the battle failed."
+    },
+    "confirmed": {
+      "ready": true,
+      "screen": "Operations",
+      "current": true,
+      "busy": false,
+      "state": "confirmed",
+      "request": "6758416739024965aa4e37c57cf68f0c",
+      "hash": "1197707ab9641ad061b9ba570391cd34ed2fe4ff0a20bedebdde51cc0a4e687b",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"6758416739024965aa4e37c57cf68f0c\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": true,
+      "notice": "Battle confirmed. Account progress and wallet refreshed.",
+      "mode": "success",
+      "starts": 2,
+      "submits": 4,
+      "statusCalls": 8,
+      "refreshCalls": 2,
+      "uniquePayloads": 2,
+      "next": false,
+      "retry": false,
+      "text": "REVIEW FIXTURE · t1 · rel_0001\nBattle confirmed. Account progress and wallet refreshed.\n3 stars confirmed. Your rewards and progress are saved to your account."
+    },
+    "accountRace": {
+      "ready": true,
+      "screen": "Operations",
+      "current": true,
+      "busy": false,
+      "state": "pending",
+      "request": "13b58377d5a34118a4c06b3c233baed9",
+      "hash": "8c90a75f920476744a5799548c5fda43f22171c273dd0e2c77afc7c8964ce16d",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"13b58377d5a34118a4c06b3c233baed9\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": false,
+      "notice": "Your battle result is saved. Account confirmation is pending.",
+      "mode": "offline",
+      "starts": 3,
+      "submits": 5,
+      "statusCalls": 11,
+      "refreshCalls": 2,
+      "uniquePayloads": 3,
+      "next": false,
+      "retry": false,
+      "text": "REVIEW FIXTURE · t1 · rel_0001\nYour battle result is saved. Account confirmation is pending."
+    },
+    "cutover": {
+      "ready": true,
+      "screen": "Operations",
+      "current": true,
+      "busy": false,
+      "state": "pending",
+      "request": "13b58377d5a34118a4c06b3c233baed9",
+      "hash": "8c90a75f920476744a5799548c5fda43f22171c273dd0e2c77afc7c8964ce16d",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"13b58377d5a34118a4c06b3c233baed9\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": false,
+      "notice": "This content release is currently unavailable. Retry the saved result after the release is restored. Your original saved result is retained. Unknown status does not mean the battle failed.",
+      "mode": "release",
+      "starts": 3,
+      "submits": 6,
+      "statusCalls": 13,
+      "refreshCalls": 2,
+      "uniquePayloads": 3,
+      "next": false,
+      "retry": false,
+      "text": "REVIEW FIXTURE · t1 · rel_0001\nYour battle result is saved. Account confirmation is pending."
+    },
+    "restored": {
+      "ready": true,
+      "screen": "Operations",
+      "current": true,
+      "busy": false,
+      "state": "confirmed",
+      "request": "13b58377d5a34118a4c06b3c233baed9",
+      "hash": "8c90a75f920476744a5799548c5fda43f22171c273dd0e2c77afc7c8964ce16d",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"13b58377d5a34118a4c06b3c233baed9\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": true,
+      "notice": "Battle confirmed. Account progress and wallet refreshed.",
+      "mode": "success",
+      "starts": 3,
+      "submits": 7,
+      "statusCalls": 14,
+      "refreshCalls": 3,
+      "uniquePayloads": 3,
+      "next": false,
+      "retry": false,
+      "text": "REVIEW FIXTURE · t1 · rel_0001\nYour battle result is saved. Account confirmation is pending."
+    },
+    "expired": {
+      "ready": true,
+      "screen": "Operations",
+      "current": true,
+      "busy": false,
+      "state": "rejected",
+      "request": "d7fbf8b7eaa4405ca2ea9bb93340d955",
+      "hash": "424e1971e6e9343d98babe135044778d8216e0c093641d4d4eaf927999a2911c",
+      "payload": "{\"actions\":[{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:0:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"mahmut_basic_oathless_cut\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"},{\"skillId\":\"fadyme_basic_veilglass_thorn\",\"targetId\":\"enemy:1:bellbound_dead\"}],\"nodeId\":\"t1\",\"releaseId\":\"rel_0001\",\"requestId\":\"d7fbf8b7eaa4405ca2ea9bb93340d955\",\"sessionId\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}",
+      "refreshed": false,
+      "notice": "The battle session cannot currently be accepted. Check the saved result again before starting over. Your original saved result is retained. Unknown status does not mean the battle failed.",
+      "mode": "expired",
+      "starts": 4,
+      "submits": 8,
+      "statusCalls": 16,
+      "refreshCalls": 3,
+      "uniquePayloads": 4,
+      "next": false,
+      "retry": false,
+      "text": "REVIEW FIXTURE · t1 · rel_0001\nYour battle result is saved. Account confirmation is pending."
+    },
+    "localGuards": {
+      "expiredSessionRejected": true,
+      "changedContentRejected": true
+    }
+  },
+  "finalCapturePaths": [
+    {
+      "label": "campaign-frozen-party-prompt",
+      "image": "docs/review/captures/20261027T061905566_1f95708f.png",
+      "metadata": "docs/review/captures/20261027T061905566_1f95708f.json",
+      "screen": "Battle",
+      "phase": "Battle",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "campaign-offline-pending",
+      "image": "docs/review/captures/20261027T062025887_d9c546d7.png",
+      "metadata": "docs/review/captures/20261027T062025887_d9c546d7.json",
+      "screen": "Battle",
+      "phase": "Battle",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "campaign-account-refresh-pending",
+      "image": "docs/review/captures/20261027T062139891_51689b4d.png",
+      "metadata": "docs/review/captures/20261027T062139891_51689b4d.json",
+      "screen": "Battle",
+      "phase": "Battle",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "campaign-confirmed-result",
+      "image": "docs/review/captures/20261027T062147176_7929dfd1.png",
+      "metadata": "docs/review/captures/20261027T062147176_7929dfd1.json",
+      "screen": "Battle",
+      "phase": "Battle",
+      "stage": 0,
+      "width": 1600,
+      "height": 1200,
+      "safe": false
+    },
+    {
+      "label": "campaign-saved-actions-story-resume",
+      "image": "docs/review/captures/20261027T062155201_3b19fe76.png",
+      "metadata": "docs/review/captures/20261027T062155201_3b19fe76.json",
+      "screen": "Operations",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "campaign-saved-actions-pending",
+      "image": "docs/review/captures/20261027T062213689_ddf82852.png",
+      "metadata": "docs/review/captures/20261027T062213689_ddf82852.json",
+      "screen": "Operations",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 2400,
+      "height": 1080,
+      "safe": true
+    },
+    {
+      "label": "campaign-saved-actions-confirmed",
+      "image": "docs/review/captures/20261027T062220587_432e1750.png",
+      "metadata": "docs/review/captures/20261027T062220587_432e1750.json",
+      "screen": "Operations",
+      "phase": "PostStory",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    }
+  ],
+  "captures": [
+    {
+      "metadata": "docs/review/captures/20261027T054746978_e0911830.json",
+      "image": "docs/review/captures/20261027T054746978_e0911830.png",
+      "imageSha256": "190b33616b3e898e5e0a1b33e6ab95e79caa3f8e0e4bbf9c97b5391fe9d2cbea",
+      "metadataSha256": "b200ebb3ddb3e086d3c37bfb5ee3f3a0893bc6bb9ef6ed87f2862f6240195d36",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "fighting",
+      "requestId": "3458f5f4bd064c63ba7eed7f761b07d0",
+      "inputHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T054908951_62f44ce5.json",
+      "image": "docs/review/captures/20261027T054908951_62f44ce5.png",
+      "imageSha256": "3ea2cf9a87b3e7bce09dc94000bfd459e6566074a0e58535d82a2ed46d38890d",
+      "metadataSha256": "4bd0f2891507b06c24664312747c1cd0cfe911c3716d2f2357593359b309d2b7",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "pending",
+      "requestId": "3458f5f4bd064c63ba7eed7f761b07d0",
+      "inputHash": "9267c7e942abf6e946ad587764fe2b90395c6618f6b1a45f808804d82560b9fc",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T055034987_fc3f932e.json",
+      "image": "docs/review/captures/20261027T055034987_fc3f932e.png",
+      "imageSha256": "d6796906d293f50a447b394ef403db1546d16395af26f6571c01cd1e0336e5b6",
+      "metadataSha256": "addb1b49c167b19778fe0dee68fd2e5a4f727edd92aa0ae1ee297d518c0d21a3",
+      "width": 2400,
+      "height": 1080,
+      "screen": "Operations",
+      "state": "pending",
+      "requestId": "3458f5f4bd064c63ba7eed7f761b07d0",
+      "inputHash": "9267c7e942abf6e946ad587764fe2b90395c6618f6b1a45f808804d82560b9fc",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T055042020_0d081c0c.json",
+      "image": "docs/review/captures/20261027T055042020_0d081c0c.png",
+      "imageSha256": "9a6119421824bd48f5dbcd38441a583035b53d7c55f73c07b5f2d39869e53a7f",
+      "metadataSha256": "72a561a356e7df41d75f9ad69fdfd163955c743e71f245e4b425a79bb92c57d1",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Operations",
+      "state": "confirmed",
+      "requestId": "3458f5f4bd064c63ba7eed7f761b07d0",
+      "inputHash": "9267c7e942abf6e946ad587764fe2b90395c6618f6b1a45f808804d82560b9fc",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T060838376_90238bdf.json",
+      "image": "docs/review/captures/20261027T060838376_90238bdf.png",
+      "imageSha256": "190b33616b3e898e5e0a1b33e6ab95e79caa3f8e0e4bbf9c97b5391fe9d2cbea",
+      "metadataSha256": "347de1520d6cc9d030c67f04071817781450fbdfa7d8d3596293b6f9071d069a",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "fighting",
+      "requestId": "837ab18c01f94d47a2346695ed682cda",
+      "inputHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T060957244_bd3f5bc2.json",
+      "image": "docs/review/captures/20261027T060957244_bd3f5bc2.png",
+      "imageSha256": "3ea2cf9a87b3e7bce09dc94000bfd459e6566074a0e58535d82a2ed46d38890d",
+      "metadataSha256": "b845b351c56027c7ee7304d3118acbc74fbee6b515beae0cbf5456a0d5c14745",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "pending",
+      "requestId": "837ab18c01f94d47a2346695ed682cda",
+      "inputHash": "ea0af31c9719c4751604bd385b176bef99f581bec451e4ffb1972fb4613a2bd3",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T061103662_03a1cca5.json",
+      "image": "docs/review/captures/20261027T061103662_03a1cca5.png",
+      "imageSha256": "8e20ed106897e54febbe2a32596cff6c3008625651a9fdbdd3cfbed5149a2dcc",
+      "metadataSha256": "210c3da4d0b4ef8efd2df4a66d4cd7e70b987a872a22b7b54a513bb66e1b4985",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "confirmed",
+      "requestId": "837ab18c01f94d47a2346695ed682cda",
+      "inputHash": "ea0af31c9719c4751604bd385b176bef99f581bec451e4ffb1972fb4613a2bd3",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T061111802_f3f28130.json",
+      "image": "docs/review/captures/20261027T061111802_f3f28130.png",
+      "imageSha256": "6f3727ed99e84490c5820a5cdab157f090f52856ccfea8fcb4d9e9bcff2bb8b1",
+      "metadataSha256": "606886ea460ca38b35984997bc1137467a4e9d437efe5d7fde4549231b64f1ed",
+      "width": 1600,
+      "height": 1200,
+      "screen": "Battle",
+      "state": "confirmed",
+      "requestId": "837ab18c01f94d47a2346695ed682cda",
+      "inputHash": "ea0af31c9719c4751604bd385b176bef99f581bec451e4ffb1972fb4613a2bd3",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T061129914_9465f0e6.json",
+      "image": "docs/review/captures/20261027T061129914_9465f0e6.png",
+      "imageSha256": "d6796906d293f50a447b394ef403db1546d16395af26f6571c01cd1e0336e5b6",
+      "metadataSha256": "5dc14d7319c521d5617cd9f4a9d83e535afd66b19c8062e6444966b618217d72",
+      "width": 2400,
+      "height": 1080,
+      "screen": "Operations",
+      "state": "pending",
+      "requestId": "f48a944c39f24472babc36e662515337",
+      "inputHash": "372f260c9bf8ed2d4f4253da684d70012bbfd4841120fec33affee2dd29b1dc5",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T061137592_2bfd78c3.json",
+      "image": "docs/review/captures/20261027T061137592_2bfd78c3.png",
+      "imageSha256": "9a6119421824bd48f5dbcd38441a583035b53d7c55f73c07b5f2d39869e53a7f",
+      "metadataSha256": "1e90eefd63cfee473e8be2fd78419f9292f52f7a56bbaf7d12ecffaf241596e2",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Operations",
+      "state": "confirmed",
+      "requestId": "f48a944c39f24472babc36e662515337",
+      "inputHash": "372f260c9bf8ed2d4f4253da684d70012bbfd4841120fec33affee2dd29b1dc5",
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T061905566_1f95708f.json",
+      "image": "docs/review/captures/20261027T061905566_1f95708f.png",
+      "imageSha256": "190b33616b3e898e5e0a1b33e6ab95e79caa3f8e0e4bbf9c97b5391fe9d2cbea",
+      "metadataSha256": "e37c68b5693e320064892d1751937be70327cccdd0fc4bccee1f507cdd0c89d0",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "fighting",
+      "requestId": "8b30554889c245c7af38bdff903c648e",
+      "inputHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T062025887_d9c546d7.json",
+      "image": "docs/review/captures/20261027T062025887_d9c546d7.png",
+      "imageSha256": "3ea2cf9a87b3e7bce09dc94000bfd459e6566074a0e58535d82a2ed46d38890d",
+      "metadataSha256": "f1c1d2cfe37a67024a38e419b4651ed08da8161e657461dbb5879b97324712be",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "pending",
+      "requestId": "8b30554889c245c7af38bdff903c648e",
+      "inputHash": "2993694bc0b05f013c99d54502b76c8048632c798bd723b4532ed332b757e707",
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T062139891_51689b4d.json",
+      "image": "docs/review/captures/20261027T062139891_51689b4d.png",
+      "imageSha256": "8e20ed106897e54febbe2a32596cff6c3008625651a9fdbdd3cfbed5149a2dcc",
+      "metadataSha256": "01b000c8f3fa755a3fea6abacf8812faa4034c8df76ec51cd01b938f13dee2dc",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Battle",
+      "state": "confirmed",
+      "requestId": "8b30554889c245c7af38bdff903c648e",
+      "inputHash": "2993694bc0b05f013c99d54502b76c8048632c798bd723b4532ed332b757e707",
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T062147176_7929dfd1.json",
+      "image": "docs/review/captures/20261027T062147176_7929dfd1.png",
+      "imageSha256": "6f3727ed99e84490c5820a5cdab157f090f52856ccfea8fcb4d9e9bcff2bb8b1",
+      "metadataSha256": "47d112c1e5e805083c9e87faf5c5c8a06cb4abbfcc848cb5765945135ebf2607",
+      "width": 1600,
+      "height": 1200,
+      "screen": "Battle",
+      "state": "confirmed",
+      "requestId": "8b30554889c245c7af38bdff903c648e",
+      "inputHash": "2993694bc0b05f013c99d54502b76c8048632c798bd723b4532ed332b757e707",
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T062155201_3b19fe76.json",
+      "image": "docs/review/captures/20261027T062155201_3b19fe76.png",
+      "imageSha256": "e5053e649bb7a64eddb1fe6de1e5ce8a3fdfad159a878f89bb0030120563e6a0",
+      "metadataSha256": "1ecdd2e343d0de61e85e647831ea8f9cf78b94cbf5a318998cb1199c02c0da92",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Operations",
+      "state": "confirmed",
+      "requestId": "8b30554889c245c7af38bdff903c648e",
+      "inputHash": "2993694bc0b05f013c99d54502b76c8048632c798bd723b4532ed332b757e707",
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T062213689_ddf82852.json",
+      "image": "docs/review/captures/20261027T062213689_ddf82852.png",
+      "imageSha256": "d6796906d293f50a447b394ef403db1546d16395af26f6571c01cd1e0336e5b6",
+      "metadataSha256": "5c895a0cd6bfabbcd4757b3e5c0096d5ea08dcc43b4f3a268fa79e1953a2f174",
+      "width": 2400,
+      "height": 1080,
+      "screen": "Operations",
+      "state": "pending",
+      "requestId": "6758416739024965aa4e37c57cf68f0c",
+      "inputHash": "1197707ab9641ad061b9ba570391cd34ed2fe4ff0a20bedebdde51cc0a4e687b",
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T062220587_432e1750.json",
+      "image": "docs/review/captures/20261027T062220587_432e1750.png",
+      "imageSha256": "ed4a507d1282e2c9b3dac09484d37dbf3ac5144a84c837d2b56c49c329341b48",
+      "metadataSha256": "9aa2f4d58d1f9d30e7994fd00d171a8ca5758a783c9f823bfb6fa1ffd369ce7f",
+      "width": 1920,
+      "height": 1080,
+      "screen": "Operations",
+      "state": "confirmed",
+      "requestId": "6758416739024965aa4e37c57cf68f0c",
+      "inputHash": "1197707ab9641ad061b9ba570391cd34ed2fe4ff0a20bedebdde51cc0a4e687b",
+      "finalPass": true
+    }
+  ],
+  "restoration": {
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "dirty": false,
+    "playing": false,
+    "paused": false,
+    "review": false,
+    "index": 9,
+    "gizmos": true,
+    "equal": true,
+    "baseline": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "current": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "viewport": {
+      "expectedIndex": 9,
+      "expectedGizmos": true
+    },
+    "consoleErrors": 0,
+    "compilationFailed": false
+  },
+  "boundaries": [
+    "Local Worker/Editor fixtures are not live signed-in, Android OS lifecycle, provider or release acceptance.",
+    "One current battle per account; previous unsent/settled entries are replaced by explicit new starts.",
+    "Corrupt/newer journals fail closed; backups never silently erase possibly sent claims.",
+    "Other mutation types and detailed campaign narrative restart positions are outside this journal.",
+    "Saved Actions retains the existing hub presentation; broader original hub/roster art rebuild and human approval remain open.",
+    "No new asset generation, paid API call, credentials, hooks, push or deployment.",
+    "Owner file codex_watcher.ps1 was not read, executed or staged."
+  ],
+  "sourceFiles": [
+    {
+      "path": "README.md",
+      "gitBlobSha256": "9022b258c51e340208373c284c87fd38bf6c62536fd7437f81d1b0cf25167734",
+      "editorFileSha256": "28a77cd68ed774470af6beaafed5044f6a21723da898db8bf18a8dd438689fac"
+    },
+    {
+      "path": "apps/api/src/player/routes.ts",
+      "gitBlobSha256": "1b3a298aab8c21a1809eace6bb8b199a5711271d8233cee16879ba9d7d920a5b",
+      "editorFileSha256": "cb0a10c559ef8f186b98504ca79392320b69340801c24120e5e43d30cc820fa0"
+    },
+    {
+      "path": "apps/api/src/progress/service.ts",
+      "gitBlobSha256": "cb2115eebc062ff4e629174b65d883b9dc469e8ad28e619f2e19d054349ef42a",
+      "editorFileSha256": "9dea0db7e76cbc8aaa7bc75f52150a50a7bf47f0205a6f5b9841872a243f3d7d"
+    },
+    {
+      "path": "apps/api/test/owned-battle.test.ts",
+      "gitBlobSha256": "6e8ba3dacb8ce30aaf3527a5786135868839710e1d92594660f6b3808543ad41",
+      "editorFileSha256": "552c1242e0525d28b8f45c0d11dd3da1d73b5ca4fd16af30102ff51fb2fdccb3"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs",
+      "gitBlobSha256": "b207032ccb310619a10ee2fec8bde00c75c94cf723ca46cc92f6a8887e3509a0",
+      "editorFileSha256": "7a5808de3a309306f44842c5ec3e2abfcd813e492104e677f2a59563e89bf663"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs",
+      "gitBlobSha256": "a8676b8eddc79696388b7f0fcd3a9b9b97983bc9dba8b9b834373cad84d38fc5",
+      "editorFileSha256": "508a590195248e9dfad22ae72b4fe8fddfd28f34317cb998e2d1e28ae912675b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs",
+      "gitBlobSha256": "eda13dbbde4cfb9fac6def550cb0338402659a8d157b069f30f0fd2bba53111f",
+      "editorFileSha256": "2d0f0eddd3420ae1b8511a18f7d5fe0d5690a2d1e40b4ee79ba8a4ecd81ab911"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdApiClient.cs",
+      "gitBlobSha256": "87dd52118fa98d145de6787f2d4ea69a8297a99d4e7c04bc41ecbfd3418c1c2b",
+      "editorFileSha256": "8f97d809fe5d77c1e9552ba51328e73a57ce91051f5018eca0bd8f7d0533962c"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/BattleScreenController.cs",
+      "gitBlobSha256": "fdb9f354548485088cd52ac821721f3e1fabf44c84a973821bb03c4af705021e",
+      "editorFileSha256": "003f787ccc4a9615d9c18f5da61a022cb4840d1efc76d97555fe33b725a9f349"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/CompanyAndChaptersScreens.cs",
+      "gitBlobSha256": "529f3ad10b4cdbe6bb78bff9b1a5cd04ec85e77ea8c06c14d3421d89ae939233",
+      "editorFileSha256": "ba74d78b7c240f66291203781ef3bd5b01e2f84159a579e1c505442caac2bcd0"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/EntryAndCinematicScenes.cs",
+      "gitBlobSha256": "367de8fa148031f6558b14f9498f27595d0f28bda8d9162669026629f7f47c9d",
+      "editorFileSha256": "4117c4c0cb59ef4de9aa33cfe0a215efd0dc0fa3ca76ca57ecc9f2336001b7c1"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/ProgressScreens.cs",
+      "gitBlobSha256": "c0f4fce1f175d7997ddfd61a44ac0a0fe8c1199a8302d30b0f6bc377784e8f10",
+      "editorFileSha256": "cb1909a3fb43a7247aeb8aa76b07d920c27a23a4dbbb65849258e1f3735c5ee5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildBattlePresentation.cs",
+      "gitBlobSha256": "a2eb0c5c5a82e693e379932d468d2b4e8ba9d44a208122d24048769aa54bb2b2",
+      "editorFileSha256": "e5133d0c1246fbcfcf492bae24d03af9136f974e672c359cdca23fd746f8d0d1"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdEntryFlow.cs",
+      "gitBlobSha256": "4f6266c93a04a41bc46e03d1f75066f51169744670242bdc686753b525fbd81c",
+      "editorFileSha256": "70b9e3620c9919af468d1fad567eac59dcac0b6a77532a05d1ff212bf2c04605"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs",
+      "gitBlobSha256": "ce0fe9f2dc4a646a6b03e8f067397e7f7b9a2bc261fbd8ca10068963097103fe",
+      "editorFileSha256": "756a6c8c4e5164b6110638750634413726811bd51122a5d08c7d83e1bdcaca28"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs",
+      "gitBlobSha256": "74f050cb774f1d5bd0af3fa7b4d68ade013934455562902f0be46a9e72760f5f",
+      "editorFileSha256": "9635173c93ddd24ea771e8f40dfc781ebc4d982d9826ec945ba8dc3f0d5aa64d"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/Editor/Uomd.Tests.Editor.asmdef",
+      "gitBlobSha256": "796b7404a2711620d5bd493794dec84b7eb384b9ffcb325b8ad9d26d434f4b65",
+      "editorFileSha256": "7169831814423b2f4f09e53bb70ac7a106503af793e91f6e59d03439c2d16611"
+    },
+    {
+      "path": "apps/unity/Logic/Uomd.Core/Uomd.Core.csproj",
+      "gitBlobSha256": "b6e6f4d1a587e6ffa086010140a811be0f1704933e74a9e6b7f2c259409a16f4",
+      "editorFileSha256": "b6e6f4d1a587e6ffa086010140a811be0f1704933e74a9e6b7f2c259409a16f4"
+    },
+    {
+      "path": "docs/BUILD_STATE.md",
+      "gitBlobSha256": "b14d5c7dc0a30169666c5baac1bc5064f220fb50a8d2a8e9fdf26e135c83f071",
+      "editorFileSha256": "0ba4a96c88ed8cceaaa0bbf8aaf5afc4694857aa54792ae8ba379e70fa720e3e"
+    },
+    {
+      "path": "docs/DEV_TRACKER.json",
+      "gitBlobSha256": "9214484b379e75ad119f6df0a1bf4da38b3684f1e596531adb124e616a786ec2",
+      "editorFileSha256": "27883805b7af4d2c68d00c1d1504dd3f20e59524018f1c820f19df9c3be5fa29"
+    },
+    {
+      "path": "docs/INFRA_ROADMAP.md",
+      "gitBlobSha256": "86bd1a77f111ebb32f06ec57142a588ca1fe56289cf49a8f578bbbf8ad20f717",
+      "editorFileSha256": "7e68266ba1e765f1cbafb88c38c2c212f3a3f99a6dd2511aa7733cf231a43d0b"
+    },
+    {
+      "path": "docs/NEXT_STEPS.md",
+      "gitBlobSha256": "c23d90fcec78624365ef818d9961d4dcb838bf7beac739f4f560fd9ec4b2d2ee",
+      "editorFileSha256": "c2bcafd2e0507b94273c4603479e89380b0a565f0297eab09dcc6682ce246d26"
+    },
+    {
+      "path": "docs/handoff/CODEX_CLI_MASTER_PROMPT.md",
+      "gitBlobSha256": "6e339591a1a85483201172f06272a145882a017d7da2771243d88c6b6bacb69c",
+      "editorFileSha256": "42cb8a132cb22703fa3e51f9489a511f429fca23c822632cc33a61d40404e94b"
+    },
+    {
+      "path": "docs/handoff/SOL_CAMPAIGN_OPERATION_SLICE.md",
+      "gitBlobSha256": "53dffa79ae939435138fb3a4d91f0b95fad5be31ba584391f2a93d21fabe6955",
+      "editorFileSha256": "969acf36055ec7b21f02c096065b3c85b8a03a182333605de0ecc3665a34ba3d"
+    },
+    {
+      "path": "docs/handoff/SOL_REBUILD_PLAN.md",
+      "gitBlobSha256": "795ab9c5945977f74917ea4d33f4df9e32e14b6d213f79a1d3dbff8145cf9cab",
+      "editorFileSha256": "5c1cfe531515828c3d040fcda156904746d6fd7058e7361958a4e44b926e6d54"
+    },
+    {
+      "path": "docs/review/PRODUCTION_REVIEW.json",
+      "gitBlobSha256": "cf9ee00829e578f19e264f4ba68126fb33b061ea749628e09bce9d2324bd2cfd",
+      "editorFileSha256": "cf9ee00829e578f19e264f4ba68126fb33b061ea749628e09bce9d2324bd2cfd"
+    },
+    {
+      "path": "docs/review/README.md",
+      "gitBlobSha256": "d8c7752172a0ee142aad869ff6807bdbf3e47ab34ad276cb798efc73080c7411",
+      "editorFileSha256": "d8c7752172a0ee142aad869ff6807bdbf3e47ab34ad276cb798efc73080c7411"
+    },
+    {
+      "path": "docs/review/index.html",
+      "gitBlobSha256": "d75e70514b93a918be6a5fa2baba1955535efdb4fad9229120e682ccf80c751a",
+      "editorFileSha256": "d75e70514b93a918be6a5fa2baba1955535efdb4fad9229120e682ccf80c751a"
+    },
+    {
+      "path": "apps/api/src/progress/battle-contract.ts",
+      "gitBlobSha256": "6ef405d3e63f19ee57f993c877d92c0a5bdaba8b886b96fba26daff5b6e28ded",
+      "editorFileSha256": "6ef405d3e63f19ee57f993c877d92c0a5bdaba8b886b96fba26daff5b6e28ded"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdBattleJournal.cs",
+      "gitBlobSha256": "8ab7b61becf66414f905363a162c61fb0352e4253bac19114ef7771a4a04e447",
+      "editorFileSha256": "916166eb3cfc12bbb559c32d2affdf32c9c46be40cd0b3c382334a781d449e22"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdBattleJournal.cs.meta",
+      "gitBlobSha256": "06bdea80f138e4ed84eb2e639cf792025622bc5c763bf6810390f809e0923b63",
+      "editorFileSha256": "06bdea80f138e4ed84eb2e639cf792025622bc5c763bf6810390f809e0923b63"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdBattleWire.cs",
+      "gitBlobSha256": "afe4650635a78440b078cd6ba092c23815cd48c882f9c1b234233577ff5130e2",
+      "editorFileSha256": "6f884c4c6f7da9b23d305f7f5d19aa2f6f900f8b77afc83d39fd824b38269a09"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdBattleWire.cs.meta",
+      "gitBlobSha256": "0d05fac1b18666335895d86e161539e2c89a7ab19c0afa63d854805fc445ee3e",
+      "editorFileSha256": "0d05fac1b18666335895d86e161539e2c89a7ab19c0afa63d854805fc445ee3e"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/CampaignBattleResult.cs",
+      "gitBlobSha256": "c199bf5f2e3af82e641c63b3a65edd5d8623cd61b6d2232c0fe10fe3455acef2",
+      "editorFileSha256": "1314c7c334b9b9a55c5fd67b4399f2056de47a47fa89e08478a46bb098a091e4"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/CampaignBattleResult.cs.meta",
+      "gitBlobSha256": "be79c60f4d48c81b43bf46592a4088d9afb184b62cff14219d19d176c50bcab5",
+      "editorFileSha256": "be79c60f4d48c81b43bf46592a4088d9afb184b62cff14219d19d176c50bcab5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdCampaignBattle.cs",
+      "gitBlobSha256": "139da193e5fb9f4602108330e69e11e86fe17b018d4c96f491967f3e04b840e9",
+      "editorFileSha256": "0dda431ad00053b040eb8496b6a79aa8b453da8fdcf1e3682f0378207103cae5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdCampaignBattle.cs.meta",
+      "gitBlobSha256": "c13a598e597fbc61c1627bd38847f35c9de983fa5030d9c32247c213fbc4f0e5",
+      "editorFileSha256": "c13a598e597fbc61c1627bd38847f35c9de983fa5030d9c32247c213fbc4f0e5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdCampaignReview.cs",
+      "gitBlobSha256": "93fa77b94abe0f331975adb905e8acf79a991da3b1074235f3b40d822cad9063",
+      "editorFileSha256": "93fa77b94abe0f331975adb905e8acf79a991da3b1074235f3b40d822cad9063"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdCampaignReview.cs.meta",
+      "gitBlobSha256": "f590db86a46162d0e603432fcbc8267597257a20f83bc768db1cd6351f67cb52",
+      "editorFileSha256": "f590db86a46162d0e603432fcbc8267597257a20f83bc768db1cd6351f67cb52"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/BattleOperationTests.cs",
+      "gitBlobSha256": "4c4d5b1b988e90c6773b79590717216e382bcd6c0f452a402ca7fa8e52985c41",
+      "editorFileSha256": "aecff49c8dcc856c88859ae2fff6837b034d41d79db0d2cc09a79dc09b67e09d"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/BattleOperationTests.cs.meta",
+      "gitBlobSha256": "512ed42002aea03d6aa09bd415298530c5df6dcc8dd14ae60684e97e20f05731",
+      "editorFileSha256": "512ed42002aea03d6aa09bd415298530c5df6dcc8dd14ae60684e97e20f05731"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/battle_contract_vectors.json",
+      "gitBlobSha256": "19658bfbd6b09c55a67972cdfc02c925fca7b18cc4d9cc3cb45a6e55921367aa",
+      "editorFileSha256": "19658bfbd6b09c55a67972cdfc02c925fca7b18cc4d9cc3cb45a6e55921367aa"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/battle_contract_vectors.json.meta",
+      "gitBlobSha256": "c9064f6ff1795c6f3597eaed6b4a86e483dfe8f4204aee06c494114333ec0c04",
+      "editorFileSha256": "c9064f6ff1795c6f3597eaed6b4a86e483dfe8f4204aee06c494114333ec0c04"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/Editor/CampaignSceneScopeTests.cs",
+      "gitBlobSha256": "4c7e9ceac2b329c5136d5c59afec2552caddaddc22db2973fff857eb36c677d2",
+      "editorFileSha256": "4c7e9ceac2b329c5136d5c59afec2552caddaddc22db2973fff857eb36c677d2"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/Editor/CampaignSceneScopeTests.cs.meta",
+      "gitBlobSha256": "6fe3fe6b34356f30b393be75ba06bc460e6f400524a9025b6f3e6d8b51acfeb3",
+      "editorFileSha256": "6fe3fe6b34356f30b393be75ba06bc460e6f400524a9025b6f3e6d8b51acfeb3"
+    },
+    {
+      "path": "docs/UNITY_CAMPAIGN_OPERATIONS.md",
+      "gitBlobSha256": "548ed7ec6d60364da6c342f40cf23745062baa698ecc18ba1b8cdbcb0f1e4480",
+      "editorFileSha256": "548ed7ec6d60364da6c342f40cf23745062baa698ecc18ba1b8cdbcb0f1e4480"
+    },
+    {
+      "path": "docs/handoff/SOL_CONTINUATION_PLAN.md",
+      "gitBlobSha256": "42e1f12df50337596b14536ee79aee3c238352ea1ad3eeb5019158177c5f93b0",
+      "editorFileSha256": "42e1f12df50337596b14536ee79aee3c238352ea1ad3eeb5019158177c5f93b0"
+    },
+    {
+      "path": "tools/export_unity_battle_contract.test.ts",
+      "gitBlobSha256": "779235f2537d4bcd3cf270c09271f247819c84f40c5dd9f2795286ba157a3b63",
+      "editorFileSha256": "779235f2537d4bcd3cf270c09271f247819c84f40c5dd9f2795286ba157a3b63"
+    },
+    {
+      "path": "tools/export_unity_battle_contract.ts",
+      "gitBlobSha256": "49de7190c9e127adcd88baa56f71be42af407e1aaf7a22d8945f7b44ae75232d",
+      "editorFileSha256": "0a4ab253782fc87f3a3e3a5b3df89dfa5966af7f71a93919869b05a170891597"
+    },
+    {
+      "path": "tools/tests/test_unity_battle_journal_process.py",
+      "gitBlobSha256": "1579812435c207b2c1c6d48227a2ed11cb520994122a053b317e3c488b39dc19",
+      "editorFileSha256": "1579812435c207b2c1c6d48227a2ed11cb520994122a053b317e3c488b39dc19"
+    }
+  ]
+}

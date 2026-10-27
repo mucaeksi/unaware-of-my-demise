@@ -83,7 +83,7 @@ namespace Uomd.Scenes
             _auto = false;
             _pending = null;
             string encounterId = _router.Session.ActiveBattleEncounterId;
-            _entryScope = _router.EntryFlow != null && _router.EntryFlow.StageIndex > 0 ? _router.EntryFlow.Continuity.State?.Scope : null;
+            _entryScope = _router.EntryFlow?.CallbackScope;
             _battle = null;
             _autoButton = null;
             _native = IsRebuiltTutorialEncounter(encounterId);
@@ -95,16 +95,22 @@ namespace Uomd.Scenes
             Dictionary<string, object> raw;
             try
             {
-                string packJson = await _router.Patch.ReadTextAsync("units/unit_pack.json");
+                string packJson = _router.EntryFlow.InCampaignBattle ? await _router.EntryFlow.Campaign.ReadContentAsync("units/unit_pack.json") : await _router.Patch.ReadTextAsync("units/unit_pack.json");
                 if (generation != _generation) return;
-                string encounterJson = await _router.Patch.ReadTextAsync($"encounters/{encounterId}.json");
+                string encounterJson = _router.EntryFlow.InCampaignBattle ? await _router.EntryFlow.Campaign.ReadContentAsync($"encounters/{encounterId}.json") : await _router.Patch.ReadTextAsync($"encounters/{encounterId}.json");
                 if (generation != _generation) return;
                 raw = UomdJson.ParseObject(encounterJson);
                 ReadSkillText(packJson);
-                _battle = Uomd.Combat.Battle.Create(UnitPackDef.FromJson(packJson), EncounterDef.FromJson(encounterJson));
+                var party = _router.EntryFlow.InCampaignBattle ? _router.EntryFlow.Campaign.PartyFor(packJson, encounterJson) : null;
+                _battle = Uomd.Combat.Battle.Create(UnitPackDef.FromJson(packJson), EncounterDef.FromJson(encounterJson), party);
             }
             catch (Exception e)
             {
+                if (_router.EntryFlow.InCampaignBattle && generation == _generation)
+                {
+                    UomdScreenKit.Centered(UomdScreenKit.MenuButton(screenRoot, "CHAPTERS", null, 440, 104, 34, true, () => _ = _router.EntryFlow.AbandonNodeAsync()), 0, 680);
+                    UomdUiKit.ShowToast(screenRoot, e.Message); return;
+                }
                 if (_native && generation == _generation)
                 {
                     ShowNativeFailure("The encounter data could not be loaded. Try again.");
@@ -917,6 +923,7 @@ namespace Uomd.Scenes
 
         private void ShowResult(BattleResult result)
         {
+            if (_router.EntryFlow.InCampaignBattle && result.Winner == "player") { ShowCampaignResult(); return; }
             if (_native) { ShowNativeResult(result); return; }
             ClearSkillDock();
             bool won = result.Winner == "player";

@@ -1,5 +1,7 @@
 # Sol Unity rebuild — execution and acceptance
 
+**Latest local continuation — 2026-10-27:** the campaign session/recovery boundary is implemented and locally verified; [guide](../UNITY_CAMPAIGN_OPERATIONS.md), [evidence](../evidence/sol-campaign-operations-2026-10-27.json). Follow [continuous order](SOL_CONTINUATION_PLAN.md) for the native hub and remaining systems. RB-04 remains in progress; local fixtures do not close live provider/device/release gates.
+
 Decision D-35, owner instruction 2026-10-26. This is an implementation plan under the root README, not a second master prompt.
 Starting revision: `f341b018`. Working directory: `E:/Unity/unaware-of-my-demise`.
 

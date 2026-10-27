@@ -24,6 +24,8 @@ namespace Uomd.EditorTools
         public float unitFootY;
         public string battleLogHash;
         public int battleActionCount;
+        public string campaignState, campaignRequestId, campaignInputHash, campaignNotice;
+        public bool campaignMemoryOnly, campaignRefreshed;
         public bool awaitingPlayerAction;
         public string entryPhase, entryScreen;
         public int entryStage, entryTutorials;
@@ -131,7 +133,7 @@ namespace Uomd.EditorTools
                     metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
                         .Select(a => a.Identity).ToArray();
                 }
-                if (settings.scenario.StartsWith("battle/", StringComparison.Ordinal) || settings.scenario == "entry" && router.ActiveScreenId == UomdScreenId.Battle)
+                if (settings.scenario.StartsWith("battle/", StringComparison.Ordinal) || (settings.scenario == "entry" || settings.scenario == "campaign") && router.ActiveScreenId == UomdScreenId.Battle)
                 {
                     var battle = router.Controller<BattleScreenController>();
                     metadata.battleLogHash = battle.ReviewLogHash;
@@ -154,6 +156,14 @@ namespace Uomd.EditorTools
                         : router.ActiveScreenId == UomdScreenId.Battle && router.Controller<BattleScreenController>().ReviewPaused;
                     metadata.imagePaths = entryPaths;
                     metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => entryPaths.Contains(JsonRead.Str(o, "path")))).Select(a => a.Identity).ToArray();
+                }
+                if (settings.scenario == "campaign")
+                {
+                    var campaign = router.EntryFlow.Campaign;
+                    metadata.entryScreen = router.ActiveScreenId.ToString(); metadata.entryPhase = router.EntryFlow.Current.ToString();
+                    metadata.campaignState = campaign.Operation?.State; metadata.campaignRequestId = campaign.Operation?.RequestId;
+                    metadata.campaignInputHash = campaign.Operation?.InputHash; metadata.campaignNotice = campaign.Notice;
+                    metadata.campaignMemoryOnly = campaign.MemoryOnly; metadata.campaignRefreshed = campaign.Refreshed;
                 }
                 var stage = GameObject.Find("SolCinematicStage");
                 if (stage != null)

@@ -1617,6 +1617,294 @@
                 "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
                 "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
             ]
+        },
+        {
+            "id": "20261027T054746978_e0911830",
+            "image": "captures/20261027T054746978_e0911830.png",
+            "sha256": "190b33616b3e898e5e0a1b33e6ab95e79caa3f8e0e4bbf9c97b5391fe9d2cbea",
+            "metadata": "captures/20261027T054746978_e0911830.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T054908951_62f44ce5",
+            "image": "captures/20261027T054908951_62f44ce5.png",
+            "sha256": "3ea2cf9a87b3e7bce09dc94000bfd459e6566074a0e58535d82a2ed46d38890d",
+            "metadata": "captures/20261027T054908951_62f44ce5.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T055034987_fc3f932e",
+            "image": "captures/20261027T055034987_fc3f932e.png",
+            "sha256": "d6796906d293f50a447b394ef403db1546d16395af26f6571c01cd1e0336e5b6",
+            "metadata": "captures/20261027T055034987_fc3f932e.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T055042020_0d081c0c",
+            "image": "captures/20261027T055042020_0d081c0c.png",
+            "sha256": "9a6119421824bd48f5dbcd38441a583035b53d7c55f73c07b5f2d39869e53a7f",
+            "metadata": "captures/20261027T055042020_0d081c0c.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T060838376_90238bdf",
+            "image": "captures/20261027T060838376_90238bdf.png",
+            "sha256": "190b33616b3e898e5e0a1b33e6ab95e79caa3f8e0e4bbf9c97b5391fe9d2cbea",
+            "metadata": "captures/20261027T060838376_90238bdf.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T060957244_bd3f5bc2",
+            "image": "captures/20261027T060957244_bd3f5bc2.png",
+            "sha256": "3ea2cf9a87b3e7bce09dc94000bfd459e6566074a0e58535d82a2ed46d38890d",
+            "metadata": "captures/20261027T060957244_bd3f5bc2.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T061103662_03a1cca5",
+            "image": "captures/20261027T061103662_03a1cca5.png",
+            "sha256": "8e20ed106897e54febbe2a32596cff6c3008625651a9fdbdd3cfbed5149a2dcc",
+            "metadata": "captures/20261027T061103662_03a1cca5.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T061111802_f3f28130",
+            "image": "captures/20261027T061111802_f3f28130.png",
+            "sha256": "6f3727ed99e84490c5820a5cdab157f090f52856ccfea8fcb4d9e9bcff2bb8b1",
+            "metadata": "captures/20261027T061111802_f3f28130.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T061129914_9465f0e6",
+            "image": "captures/20261027T061129914_9465f0e6.png",
+            "sha256": "d6796906d293f50a447b394ef403db1546d16395af26f6571c01cd1e0336e5b6",
+            "metadata": "captures/20261027T061129914_9465f0e6.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T061137592_2bfd78c3",
+            "image": "captures/20261027T061137592_2bfd78c3.png",
+            "sha256": "9a6119421824bd48f5dbcd38441a583035b53d7c55f73c07b5f2d39869e53a7f",
+            "metadata": "captures/20261027T061137592_2bfd78c3.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T061905566_1f95708f",
+            "image": "captures/20261027T061905566_1f95708f.png",
+            "sha256": "190b33616b3e898e5e0a1b33e6ab95e79caa3f8e0e4bbf9c97b5391fe9d2cbea",
+            "metadata": "captures/20261027T061905566_1f95708f.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T062025887_d9c546d7",
+            "image": "captures/20261027T062025887_d9c546d7.png",
+            "sha256": "3ea2cf9a87b3e7bce09dc94000bfd459e6566074a0e58535d82a2ed46d38890d",
+            "metadata": "captures/20261027T062025887_d9c546d7.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T062139891_51689b4d",
+            "image": "captures/20261027T062139891_51689b4d.png",
+            "sha256": "8e20ed106897e54febbe2a32596cff6c3008625651a9fdbdd3cfbed5149a2dcc",
+            "metadata": "captures/20261027T062139891_51689b4d.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T062147176_7929dfd1",
+            "image": "captures/20261027T062147176_7929dfd1.png",
+            "sha256": "6f3727ed99e84490c5820a5cdab157f090f52856ccfea8fcb4d9e9bcff2bb8b1",
+            "metadata": "captures/20261027T062147176_7929dfd1.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Battle",
+            "entryPhase": "Battle",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+                "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+                "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+                "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            ]
+        },
+        {
+            "id": "20261027T062155201_3b19fe76",
+            "image": "captures/20261027T062155201_3b19fe76.png",
+            "sha256": "e5053e649bb7a64eddb1fe6de1e5ce8a3fdfad159a878f89bb0030120563e6a0",
+            "metadata": "captures/20261027T062155201_3b19fe76.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T062213689_ddf82852",
+            "image": "captures/20261027T062213689_ddf82852.png",
+            "sha256": "d6796906d293f50a447b394ef403db1546d16395af26f6571c01cd1e0336e5b6",
+            "metadata": "captures/20261027T062213689_ddf82852.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
+        },
+        {
+            "id": "20261027T062220587_432e1750",
+            "image": "captures/20261027T062220587_432e1750.png",
+            "sha256": "ed4a507d1282e2c9b3dac09484d37dbf3ac5144a84c837d2b56c49c329341b48",
+            "metadata": "captures/20261027T062220587_432e1750.json",
+            "scenario": "campaign",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Operations",
+            "entryPhase": "PostStory",
+            "entryStage": 0,
+            "sourceIdentities": []
         }
     ]
 }

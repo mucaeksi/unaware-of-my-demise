@@ -1,9 +1,23 @@
 {
   "name": "Uomd.Tests.Editor",
-  "references": ["Uomd.Editor", "Uomd.Core", "Uomd.Scenes", "Uomd.UI", "UnityEngine.TestRunner", "UnityEditor.TestRunner"],
-  "includePlatforms": ["Editor"],
+  "references": [
+    "Uomd.Editor",
+    "Uomd.Core",
+    "Uomd.Scenes",
+    "Uomd.UI",
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner",
+    "Uomd.Contracts"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
   "overrideReferences": true,
-  "precompiledReferences": ["nunit.framework.dll"],
+  "precompiledReferences": [
+    "nunit.framework.dll"
+  ],
   "autoReferenced": false,
-  "defineConstraints": ["UNITY_INCLUDE_TESTS"]
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ]
 }

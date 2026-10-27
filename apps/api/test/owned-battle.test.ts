@@ -1,3 +1,4 @@
+import { BattleStartResult, BattleResult, BattleOperationStatus } from '../src/progress/battle-contract';
 import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { playAuto, replayBattle } from '@uomd/combat';
@@ -51,8 +52,8 @@ async function begin(sub: string): Promise<{ auth: Record<string, string>; playe
   const { auth, playerId } = await signIn(sub);
   const r = await start(auth);
   expect(r.status).toBe(200);
-  const j = (await r.json()) as { sessionId: string; party: unknown };
-  return { auth, playerId, sessionId: j.sessionId, party: BattleParty.parse(j.party) };
+  const j = BattleStartResult.parse(await r.json());
+  return { auth, playerId, sessionId: j.sessionId!, party: BattleParty.parse(j.party) };
 }
 
 /** a weapon whose passive has no approved battle effect (every seeded signature passive is supported now) */
@@ -78,6 +79,10 @@ describe('owned-hero battles are fought with a server-frozen party', () => {
     expect(played.battle.result?.winner).toBe('player');
     const ok = await submit(auth, { sessionId, actions: played.actions });
     expect(ok.status).toBe(200);
+    const receipt = BattleResult.parse(await ok.json());
+    const recovered = await game(`/api/v1/operations/${receipt.requestId}?path=${encodeURIComponent('/api/v1/progress/battle')}`, { headers: auth });
+    const status = BattleOperationStatus.parse(await recovered.json());
+    expect(status).toMatchObject({ state: 'confirmed', binding: 'exact', result: { requestId: receipt.requestId, stars: receipt.stars } });
     const again = await submit(auth, { sessionId, actions: played.actions });
     expect(again.status).toBe(409);
     expect(((await again.json()) as { error: string }).error).toBe('session_used');
