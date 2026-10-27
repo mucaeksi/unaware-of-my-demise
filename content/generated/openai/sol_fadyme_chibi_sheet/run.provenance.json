@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-27",
+  "spec": {
+    "id": "sol_fadyme_chibi_sheet",
+    "prompt_file": "content/generated/openai/sol_fadyme_chibi_sheet/prompt.txt",
+    "prompt": "Use case: stylized-concept. Fadyme battle animation atlas PAGE A of a two-page atlas. New original SD chibi sprite art.\nImage 1 supplies ONLY adult identity/costume: Fadyme, 22, ash-blonde hair, violet eyes, pointed plum hood and layered modest plum travelling robe with fine silver embroidery, white neck scarf, dark gloves and belt. Image 2 supplies ONLY Gothic-anime chibi contour/cel-shading style; do not copy Mahmut, weapons, shield or sixteen-cell layout.\nCreate a native LANDSCAPE 3:2 PNG with TRUE TRANSPARENT alpha. Exactly FOUR COLUMNS AND TWO ROWS, ONLY EIGHT chibis total. Use the extra cell height for generous empty transparent gaps. Each identical cell is 25% image width and 50% image height. Every complete chibi with all hands, cloth and bell fits within central 65% cell width and central 65% cell height. No overlap/touching between figures or rows, no near touching. A broad transparent band divides the two rows. Native resolution 1536x1024 or larger without upscaling.\nEach chibi is TWO HEADS tall, large head ~half total height, slim petite adult body, facing RIGHT in the same three-quarter side view. Same head scale, costume, light and camera in all eight cells. Exactly ONE small bronze handbell held on a short chain by her gloved hand, always attached and always above boots. Her belt carries NO bell or metal pendant; front hanging panels are visibly fabric, not bell shapes. No staff, weapon, wings, extra limbs or new objects.\nEight cells, left to right:\ntop row: (1) idle composed, bell near waist, (2) idle inhale with tiny shoulder lift, (3) idle exhale with robe settling, (4) a small walking step.\nbottom row: (5) basic anticipation, bell hand drawn slightly back, (6) basic impact, compact forward bell-hand gesture, (7) basic recovery returning bell close to waist, (8) active anticipation with both hands together holding the single bell near chest.\nAll standing boot soles share the same ground level inside each row. Keep exactly two arms/hands and two feet, no detached bell duplicates. No ground, shadow, particles, glow, trail, VFX, color background, labels, numbers, grid or checkerboard. Clean dark-plum contour, refined cel shading and subtle painted fabric detail. A sparse, roomy eight-cell production sheet; do not add any additional row or figures.\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+      "role": "openai_identity_costume",
+      "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc"
+    },
+    {
+      "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+      "role": "openai_chibi_style_and_layout",
+      "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+    },
+    {
+      "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+      "role": "openai_native_page_a",
+      "sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba"
+    },
+    {
+      "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.png",
+      "role": "openai_native_page_b",
+      "sha256": "703d1c19ddaa3c0c776b69c6124778c9be572a2e74beab2a2576b7450ae553d2"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_fadyme_chibi_sheet/source.png",
+      "sha256": "c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+      "width": 1536,
+      "height": 2048,
+      "native": false,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "original_tool_artifact": null,
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "New SD battle atlas, sixteen separated poses, eight named states with short explicit frame sequences. Not a rig or sixteen unique frames per state. Human art/native-2K/device gates remain open."
+  },
+  "generation_runs": [
+    {
+      "page": "a",
+      "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-76f4a0f5-b54e-4198-868b-d0c900829579.png",
+      "source": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+      "source_sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba",
+      "native_dimensions": [
+        1536,
+        1024
+      ],
+      "prompt_file": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.prompt.txt",
+      "prompt": "Use case: stylized-concept. Fadyme battle animation atlas PAGE A of a two-page atlas. New original SD chibi sprite art.\nImage 1 supplies ONLY adult identity/costume: Fadyme, 22, ash-blonde hair, violet eyes, pointed plum hood and layered modest plum travelling robe with fine silver embroidery, white neck scarf, dark gloves and belt. Image 2 supplies ONLY Gothic-anime chibi contour/cel-shading style; do not copy Mahmut, weapons, shield or sixteen-cell layout.\nCreate a native LANDSCAPE 3:2 PNG with TRUE TRANSPARENT alpha. Exactly FOUR COLUMNS AND TWO ROWS, ONLY EIGHT chibis total. Use the extra cell height for generous empty transparent gaps. Each identical cell is 25% image width and 50% image height. Every complete chibi with all hands, cloth and bell fits within central 65% cell width and central 65% cell height. No overlap/touching between figures or rows, no near touching. A broad transparent band divides the two rows. Native resolution 1536x1024 or larger without upscaling.\nEach chibi is TWO HEADS tall, large head ~half total height, slim petite adult body, facing RIGHT in the same three-quarter side view. Same head scale, costume, light and camera in all eight cells. Exactly ONE small bronze handbell held on a short chain by her gloved hand, always attached and always above boots. Her belt carries NO bell or metal pendant; front hanging panels are visibly fabric, not bell shapes. No staff, weapon, wings, extra limbs or new objects.\nEight cells, left to right:\ntop row: (1) idle composed, bell near waist, (2) idle inhale with tiny shoulder lift, (3) idle exhale with robe settling, (4) a small walking step.\nbottom row: (5) basic anticipation, bell hand drawn slightly back, (6) basic impact, compact forward bell-hand gesture, (7) basic recovery returning bell close to waist, (8) active anticipation with both hands together holding the single bell near chest.\nAll standing boot soles share the same ground level inside each row. Keep exactly two arms/hands and two feet, no detached bell duplicates. No ground, shadow, particles, glow, trail, VFX, color background, labels, numbers, grid or checkerboard. Clean dark-plum contour, refined cel shading and subtle painted fabric detail. A sparse, roomy eight-cell production sheet; do not add any additional row or figures.\n",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+          "role": "openai_identity_costume",
+          "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc"
+        },
+        {
+          "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+          "role": "openai_chibi_style_and_layout",
+          "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+        }
+      ]
+    },
+    {
+      "page": "b",
+      "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-4a1f477a-f4d6-4dd8-82fe-979d767d37b8.png",
+      "source": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.png",
+      "source_sha256": "703d1c19ddaa3c0c776b69c6124778c9be572a2e74beab2a2576b7450ae553d2",
+      "native_dimensions": [
+        1536,
+        1024
+      ],
+      "prompt_file": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.prompt.txt",
+      "prompt": "Use case: identity-preserve. Create Fadyme battle animation atlas PAGE B, a NEW eight-pose continuation of Image 1.\nImage 1 is the exact OPENAI character/style/scale/packing reference (PAGE A). Preserve her adult identity, ash-blonde hair, violet eyes, plum embroidered hood/robe, white scarf, boots and gloves, the same palette and two-head SD silhouette, lighting, head size and body scale. Do not copy Page A's existing poses. Exactly ONE bronze bell attached to a short chain held by her hand; no additional belt bell or metal pendant, no staff/weapon/new objects.\n\nUse the SAME native LANDSCAPE 3:2 dimensions and layout as Image 1: FOUR COLUMNS and TWO ROWS, exactly EIGHT separate complete chibis facing RIGHT. Keep broad true-alpha transparent padding between figures/rows and on the canvas edge. Every whole figure including the raised bell, hands, robe and boots stays inside its own cell, central 65% width and 70% height. Same standing boot baseline and head scale as Page A. Transparent gaps must be large enough for independent sprite extraction; no touching silhouettes.\n\nEight NEW poses read left-to-right:\ntop row: (1) active impact, bell raised toward shoulder, (2) active recovery lowering the bell, (3) ultimate anticipation, poised grounded stance with bell held at chest, (4) ultimate impact, resolute bell raised just beside the head, compact robe movement.\nbottom row: (5) ultimate recovery lowering bell toward waist, (6) mild hit recoil with narrowed eyes and intact body, (7) defeat on one knee, head lowered, intact complete figure and bell, (8) small warm composed victory with bell held at waist.\nNo extra figures, labels, grid, text, color background, checkerboard, ground, shadows, particles, light trails, magic effects or gore. True alpha outside silhouettes. This is a sprite animation continuation, not a fashion redesign or a scene. Native original rendering, no upscaling.\n",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+          "role": "openai_native_page_a",
+          "sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba"
+        }
+      ]
+    }
+  ],
+  "assembly": {
+    "kind": "lossless_raw_rgba_vertical_concatenation",
+    "inputs": [
+      {
+        "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+        "role": "openai_native_page_a",
+        "sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba"
+      },
+      {
+        "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.png",
+        "role": "openai_native_page_b",
+        "sha256": "703d1c19ddaa3c0c776b69c6124778c9be572a2e74beab2a2576b7450ae553d2"
+      }
+    ],
+    "resampling": false,
+    "decoded_output_equals_concatenated_input_rgba": true,
+    "native_generated_pages": 2,
+    "derived_source_native": false
+  },
+  "retained_rejected_attempts": [
+    {
+      "file": "content/generated/openai/sol_fadyme_chibi_sheet/rejected-touching-01.png",
+      "sha256": "5a5564049a0d91b1c8834a8d712e007c9f9dcab19d31f36abf7a3938126ef25b",
+      "prompt_file": "content/generated/openai/sol_fadyme_chibi_sheet/rejected-touching-01.prompt.txt",
+      "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-aeb6c7fb-a187-4240-bf83-418556400b56.png",
+      "reason": "Fifteen components rather than sixteen; row3/4 touching silhouettes."
+    }
+  ]
+}

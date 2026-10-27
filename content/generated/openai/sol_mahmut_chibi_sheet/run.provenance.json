@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-27",
+  "spec": {
+    "id": "sol_mahmut_chibi_sheet",
+    "prompt_file": "content/generated/openai/sol_mahmut_chibi_sheet/prompt.txt",
+    "prompt": "Use case: stylized-concept. NEW production animation atlas for Unaware of My Demise. Image 1 supplies Mahmut's adult identity/costume, not the output proportions. Image 2 supplies only the chibi drawing style and pose vocabulary; its crowded portrait packing is REJECTED and must NOT be copied.\n\nCreate a WIDE LANDSCAPE 3:2 transparent PNG (native 1536x1024 or larger). Exactly 4 columns by 4 rows: sixteen well-separated TWO-HEAD-TALL adult-male SD chibis facing RIGHT. This wide format gives every cell more width than height so sword and shield NEVER touch the next figure. Each cell is 25% of image width and 25% image height; keep every complete figure, all equipment and cape inside the CENTRAL 65% of its own cell's width and height. Leave broad TRANSPARENT gutters between every pair of figures. Standing boots at 86% of cell height. The image edge also has empty alpha padding. NO background, painted checkerboard, shadow, ground, text, grid or VFX.\n\nMahmut: age 28 adult, messy brown hair, brown eyes, small stubble; burgundy scarf/short ragged cape, charcoal worn plate armor with small broken red crest, dark round empty medallion. One plain steel longsword in right hand, one dark heater shield on left forearm, two arms/two legs. Same head size, costume, lighting, camera and adult identity in all cells. Premium crisp Gothic-anime sprite art, dark-plum outlines, controlled cel shading and restrained painted detail; large head is approximately half of total standing height. Compact diagonal weapon poses, never long horizontal blades.\n\nSixteen cells left-to-right top-to-bottom:\nrow1 idle guard / idle inhale / idle exhale / walking step.\nrow2 basic anticipation with compact raised sword / basic diagonal impact / basic recovery with sword lowered close to body / shield-guard anticipation.\nrow3 shield-guard impact / shield-guard recovery / ultimate protective brace / ultimate compact shield drive.\nrow4 ultimate recovery / mild hit recoil / defeated on one knee with intact body and gear / restrained victory.\nAll sword tips, cape corners and shield rims must stay within the own cell's central 65% area. The visible figures may be small: do NOT enlarge them to fill the sheet. Empty transparent space is a required production feature. No gore, particles, glowing runes or extra props.\n"
+  },
+  "references": [
+    {
+      "path": "content/generated/openai/sol_mahmut_vn_composed/source.png",
+      "role": "openai_identity_costume",
+      "sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+    },
+    {
+      "path": "content/generated/openai/sol_mahmut_chibi_sheet/corrected-packing-02.png",
+      "role": "openai_style_only_rejected_packing",
+      "sha256": "4d6eee1a5e0c3a9db52f95650dcfb900dbb0793366d0b37ab08f34ae75c2a186"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+      "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76",
+      "width": 1536,
+      "height": 1024,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-f28d6abf-ad6a-4f48-9356-9356998ad1f0.png",
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "New SD battle atlas, sixteen separated poses, eight named states with short explicit frame sequences. Not a rig or sixteen unique frames per state. Human art/native-2K/device gates remain open."
+  },
+  "retained_rejected_attempts": [
+    {
+      "file": "content/generated/openai/sol_mahmut_chibi_sheet/rejected-packing-01.png",
+      "sha256": "faa627f087ec24daf514aec8c6a6988598c8a08f1bfa1c4cc6ef9c22f46791d6",
+      "prompt_file": "content/generated/openai/sol_mahmut_chibi_sheet/rejected-packing-01.prompt.txt",
+      "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-17c507ba-3deb-499d-b7d0-fb4cb7a9f696.png",
+      "reason": "Crowded portrait packing, touching/overlapping figure boxes."
+    },
+    {
+      "file": "content/generated/openai/sol_mahmut_chibi_sheet/corrected-packing-02.png",
+      "sha256": "4d6eee1a5e0c3a9db52f95650dcfb900dbb0793366d0b37ab08f34ae75c2a186",
+      "prompt_file": "content/generated/openai/sol_mahmut_chibi_sheet/correction.prompt.txt",
+      "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-27b812ae-c42a-4484-b685-9c8577189b35.png",
+      "reason": "Packing correction still touched; retained as style-only reference for the new wide rendering."
+    }
+  ]
+}

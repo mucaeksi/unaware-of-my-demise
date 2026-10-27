@@ -24,6 +24,10 @@ namespace Uomd.EditorTools
             : Id == "sol_bg_forest_whispering_ash" ? "story/tutorial_t1_before"
             : Id == "sol_bg_forgotten_stone_crossing" ? "story/tutorial_t2_before"
             : Id == "sol_bg_shelter_courtyard_dusk" ? "story/tutorial_t3_before"
+            : Id == "sol_mahmut_chibi_sheet" ? "unit/mahmut"
+            : Id == "sol_fadyme_chibi_sheet" ? "unit/fadyme"
+            : Id == "sol_bellbound_dead_chibi_sheet" ? "unit/bellbound_dead"
+            : Id == "sol_hollow_pilgrim_chibi_sheet" ? "unit/hollow_pilgrim"
             : Id.StartsWith("sol_prologue_", StringComparison.Ordinal) ? "prologue/" + Id.Substring(13) : "";
     }
 
@@ -77,9 +81,10 @@ namespace Uomd.EditorTools
                     a.PreviewPath = a.OutputPreviewPath;
                 }
                 var mapped = obligations.Where(o => JsonRead.Str(o, "id") == a.Id || JsonRead.Str(o, "replacement_asset_id") == a.Id).ToArray();
+                string sourceKind = JsonRead.Get(provenance, "assembly") != null ? "Derived source assembly" : "Native source";
                 a.Details = (a.Candidate ? "OPENAI INTEGRATION CANDIDATE — final resolution/device gates open" : "HISTORICAL REFERENCE ONLY — rebuild replacement pending")
                     + "\n\nStable identity: " + a.Identity + "\nEntry: " + a.EntryPath + "\nEntry SHA-256: " + a.EntrySha
-                    + "\nProvider: " + a.Provider + "\nNative source: " + a.Width + " × " + a.Height + "\nSource: " + a.SourcePath
+                    + "\nProvider: " + a.Provider + "\n" + sourceKind + ": " + a.Width + " × " + a.Height + "\nSource: " + a.SourcePath
                     + "\nProvenance: " + a.ProvenancePath + "\nPrompt: " + a.PromptPath
                     + "\n\nQC (ingest authority):\n" + CanonicalJson.Serialize(JsonRead.Get(entry, "qc"))
                     + "\n\nExact references:\n" + CanonicalJson.Serialize(JsonRead.Get(source, "references"))
@@ -112,6 +117,7 @@ namespace Uomd.EditorTools
     public sealed class ProductionReviewRecord
     {
         public string id, createdAt, kind, assetId, sourceSha, entrySha, scenario, lineId, request, outcome;
+        public string unitState, unitFrame;
         public int revision;
         public string[] captures = Array.Empty<string>();
         public RebuildShotSettings presentation;
@@ -129,6 +135,7 @@ namespace Uomd.EditorTools
     public sealed class ProductionReviewCapture
     {
         public string id, image, sha256, metadata, scenario, lineId;
+        public string unitState, unitFrame;
     }
 
     /// <summary>Scene feedback and capture links only. Human art acceptance stays in ingest_art.</summary>
@@ -142,9 +149,16 @@ namespace Uomd.EditorTools
             var index = File.Exists(IndexPath) ? JsonUtility.FromJson<ProductionReviewIndex>(File.ReadAllText(IndexPath)) : new ProductionReviewIndex();
             foreach (var capture in index.captures)
             {
-                if (!string.IsNullOrEmpty(capture.lineId) || string.IsNullOrEmpty(capture.metadata)) continue;
+                if (string.IsNullOrEmpty(capture.metadata) || (!string.IsNullOrEmpty(capture.lineId) && capture.scenario?.StartsWith("unit/", StringComparison.Ordinal) != true)
+                    || !string.IsNullOrEmpty(capture.unitFrame)) continue;
                 string path = ProductionReviewCatalog.Resolve(Root, "docs/review/" + capture.metadata);
-                if (File.Exists(path)) capture.lineId = JsonRead.Str(UomdJson.ParseObject(File.ReadAllText(path)), "lineId");
+                if (File.Exists(path))
+                {
+                    var metadata = UomdJson.ParseObject(File.ReadAllText(path));
+                    capture.lineId = JsonRead.Str(metadata, "lineId");
+                    capture.unitState = JsonRead.Str(metadata, "unitState");
+                    capture.unitFrame = JsonRead.Str(metadata, "unitFrame");
+                }
             }
             return index;
         }
@@ -153,11 +167,11 @@ namespace Uomd.EditorTools
             AtomicWrite(IndexPath, JsonUtility.ToJson(index, true) + "\n");
             var html = new StringBuilder("<!doctype html><meta charset=\"utf-8\"><title>UOMD Production Review</title><style>body{background:#18131f;color:#eee2ce;font:16px system-ui;max-width:1200px;margin:40px auto}img{max-width:100%}article{margin-bottom:48px}a{color:#c9b2e0}</style><h1>Production Review</h1><p>Local Editor evidence. No device, release or art approval is implied.</p>");
             foreach (var capture in index.captures)
-                html.Append("<article><h2>").Append(System.Net.WebUtility.HtmlEncode(capture.scenario)).Append("</h2><a href=\"").Append(capture.metadata).Append("\">Metadata</a><p><img src=\"").Append(capture.image).Append("\"></p><code>").Append(capture.sha256).Append("</code></article>");
+                html.Append("<article><h2>").Append(System.Net.WebUtility.HtmlEncode(capture.scenario + (string.IsNullOrEmpty(capture.unitState) ? "" : " · " + capture.unitState + "/" + capture.unitFrame))).Append("</h2><a href=\"").Append(capture.metadata).Append("\">Metadata</a><p><img src=\"").Append(capture.image).Append("\"></p><code>").Append(capture.sha256).Append("</code></article>");
             AtomicWrite(ProductionReviewCatalog.Resolve(Root, "docs/review/index.html"), html.ToString());
         }
 
-        public ProductionReviewRecord AddRequest(ProductionReviewAsset asset, string scenario, string lineId, string text, string kind, RebuildShotSettings settings)
+        public ProductionReviewRecord AddRequest(ProductionReviewAsset asset, string scenario, string lineId, string text, string kind, RebuildShotSettings settings, string unitState = "", string unitFrame = "")
         {
             if (string.IsNullOrWhiteSpace(text)) throw new ArgumentException("Write a precise request first.");
             if (kind != "revision_requested" && kind != "agent_qc_note") throw new ArgumentException("This index cannot grant art approvals.");
@@ -166,8 +180,10 @@ namespace Uomd.EditorTools
             var record = new ProductionReviewRecord { id = Guid.NewGuid().ToString("N"), createdAt = DateTime.UtcNow.ToString("o"), kind = kind,
                 assetId = asset.Id, revision = asset.Revision, sourceSha = Sha256Hash.ComputeFileHex(ProductionReviewCatalog.Resolve(Root, asset.SourcePath)),
                 entrySha = asset.EntrySha, scenario = scenario, lineId = lineId, request = text, outcome = "open",
+                unitState = unitState, unitFrame = unitFrame,
                 presentation = JsonUtility.FromJson<RebuildShotSettings>(JsonUtility.ToJson(settings)),
                 captures = index.captures.Where(c => c.scenario == scenario && (string.IsNullOrEmpty(lineId) || c.lineId == lineId))
+                    .Where(c => string.IsNullOrEmpty(unitState) || (c.unitState == unitState && c.unitFrame == unitFrame))
                     .Select(c => c.id + ":" + c.sha256).ToArray() };
             index.requests.Add(record);
             Write(index);

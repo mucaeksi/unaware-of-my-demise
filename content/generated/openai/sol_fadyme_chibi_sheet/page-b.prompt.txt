@@ -1,0 +1,9 @@
+Use case: identity-preserve. Create Fadyme battle animation atlas PAGE B, a NEW eight-pose continuation of Image 1.
+Image 1 is the exact OPENAI character/style/scale/packing reference (PAGE A). Preserve her adult identity, ash-blonde hair, violet eyes, plum embroidered hood/robe, white scarf, boots and gloves, the same palette and two-head SD silhouette, lighting, head size and body scale. Do not copy Page A's existing poses. Exactly ONE bronze bell attached to a short chain held by her hand; no additional belt bell or metal pendant, no staff/weapon/new objects.
+
+Use the SAME native LANDSCAPE 3:2 dimensions and layout as Image 1: FOUR COLUMNS and TWO ROWS, exactly EIGHT separate complete chibis facing RIGHT. Keep broad true-alpha transparent padding between figures/rows and on the canvas edge. Every whole figure including the raised bell, hands, robe and boots stays inside its own cell, central 65% width and 70% height. Same standing boot baseline and head scale as Page A. Transparent gaps must be large enough for independent sprite extraction; no touching silhouettes.
+
+Eight NEW poses read left-to-right:
+top row: (1) active impact, bell raised toward shoulder, (2) active recovery lowering the bell, (3) ultimate anticipation, poised grounded stance with bell held at chest, (4) ultimate impact, resolute bell raised just beside the head, compact robe movement.
+bottom row: (5) ultimate recovery lowering bell toward waist, (6) mild hit recoil with narrowed eyes and intact body, (7) defeat on one knee, head lowered, intact complete figure and bell, (8) small warm composed victory with bell held at waist.
+No extra figures, labels, grid, text, color background, checkerboard, ground, shadows, particles, light trails, magic effects or gore. True alpha outside silhouettes. This is a sprite animation continuation, not a fashion redesign or a scene. Native original rendering, no upscaling.

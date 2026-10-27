@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-27",
+  "spec": {
+    "id": "sol_bellbound_dead_chibi_sheet",
+    "prompt_file": "content/generated/openai/sol_bellbound_dead_chibi_sheet/prompt.txt",
+    "prompt": "Use case: stylized-concept. New Gothic-anime SD chibi animation sprite atlas for Unaware of My Demise.\nImage 1 is a HISTORICAL DESIGN REFERENCE ONLY for the Bellbound Dead: a thin slumped Hollow with long arms, dirty-bone skull and limbs, torn charcoal cloth, ONE cold-brass chest bell, its own chains linking the chest to both wrists. Do not copy the reference's text, layout, human proportions or background. Image 2 is the new Mahmut SD atlas: match only crisp Gothic-anime contour/cel shading and wide sheet registration, not his identity, armor, weapon or pose equipment.\n\nCreate ONE WIDE LANDSCAPE 3:2 transparent PNG, native 1536x1024 or larger. Exactly FOUR COLUMNS by FOUR ROWS, sixteen small TWO-HEAD-TALL skeletal SD enemies, all facing LEFT. Large skull head ~half total height; body remains thin, narrow, slumped and visibly unlike an armored knight. Ivory-bone/charcoal cloth/dull brass palette, faint plum shading. No red glow, blood, gore, skinless horror detail, knight armor, weapon, backpack or extra bells.\n\nEach complete figure, chest bell, both wrist chains, hands and feet must fit within the CENTRAL 60% WIDTH AND CENTRAL 60% HEIGHT of its own cell. Leave conspicuously broad, fully transparent gutters horizontally AND vertically; no overlap or near-touching even between rows. Same skull size, body scale, equipment and camera in every standing pose. Feet are the lowest opaque pixels; chain ends stay above the feet. There must be transparent empty bands at every quarter-width/quarter-height division. Small figures and lots of empty space are deliberate.\n\nRead left-to-right top-to-bottom:\nrow1 idle slump / idle slight bell sway / idle settle / dragging walking step.\nrow2 basic anticipation, long arm draws back / basic compact reaching strike left / basic recovery / chained grab anticipation, wrists drawn to chest.\nrow3 chained grab impact, short chain pulled taut and chest bell tilted / chained grab recovery / stronger attack brace / stronger compact reach with bell tilted.\nrow4 stronger attack recovery / hit recoil, intact skeleton / defeat crumpled on both knees with whole skull, body and bell visible / idle-like settled post-battle stance.\nThese are animation poses, not new magical abilities. Two arms/two legs, physically connected wrist chains and one chest bell in every pose. No detached objects, swing trails, aura, ground, cast shadow, particles, VFX, text, labels, borders, grid or painted checkerboard. Real transparent alpha outside each silhouette. Keep all rows short and widely separated; never crowd the figures to fill the canvas.\n"
+  },
+  "references": [
+    {
+      "path": "narrative/15_Art_Workbench/enemies/units/bellbound_dead/design_v001/sheet/bellbound_dead_sheet_v001.jpg",
+      "role": "historical_identity_reference_only",
+      "sha256": "faf07e4380653641b85c154d650d9d40a89fc800d6e4d50222208b8b706ce424"
+    },
+    {
+      "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+      "role": "openai_chibi_style_and_layout",
+      "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_bellbound_dead_chibi_sheet/source.png",
+      "sha256": "a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+      "width": 1536,
+      "height": 1024,
+      "native": true,
+      "upscaled": false,
+      "alpha": true
+    }
+  ],
+  "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-f76c8785-1155-4926-81b5-b8acec09945a.png",
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "New SD battle atlas, sixteen separated poses, eight named states with short explicit frame sequences. Not a rig or sixteen unique frames per state. Human art/native-2K/device gates remain open."
+  }
+}

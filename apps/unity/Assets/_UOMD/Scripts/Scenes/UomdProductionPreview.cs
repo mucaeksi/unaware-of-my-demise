@@ -17,6 +17,8 @@ namespace Uomd.Scenes
         public string scenario = "title";
         public int shot;
         public string lineId = "";
+        public string unitState = "idle";
+        public int unitFrame;
         public bool paused, muted = true, reducedMotion, reduceFlash, subtitles = true, safeArea;
         public RebuildShotSettings presentation = new RebuildShotSettings();
 
@@ -69,6 +71,17 @@ namespace Uomd.Scenes
                 case "studio": screen = UomdScreenId.Studio; break;
                 case "title": screen = UomdScreenId.Title; break;
                 default:
+                    if (request.scenario.StartsWith("unit/", StringComparison.Ordinal))
+                    {
+                        string unit = request.scenario.Substring(5);
+                        if (Array.IndexOf(RebuildUnitReviewScreen.Units, unit) < 0 || !Media.Catalog.TryGetUnitArt("sol_" + unit, out _))
+                            throw new ArgumentException("Unknown rebuilt unit.");
+                        if (Array.IndexOf(RebuildUnitReviewScreen.States, request.unitState) < 0)
+                            throw new ArgumentException("Unknown unit animation state.");
+                        Register(new RebuildUnitReviewScreen(this));
+                        screen = UomdScreenId.Battle;
+                        break;
+                    }
                     if (request.scenario.StartsWith("story/", StringComparison.Ordinal))
                     {
                         if (!StoryScreenController.IsRebuiltStory(request.scenario.Substring(6))) throw new ArgumentException("Unknown rebuilt tutorial scene.");
@@ -137,6 +150,8 @@ namespace Uomd.Scenes
             Session.ReduceFlash = ProductionPreview.reduceFlash;
             Audio.Muted = ProductionPreview.muted;
             Audio.SetPaused(ProductionPreview.paused);
+            if (ActiveScreenId == UomdScreenId.Battle && ProductionPreview.scenario.StartsWith("unit/", StringComparison.Ordinal))
+                Controller<RebuildUnitReviewScreen>()?.ApplyRequest();
             if (_previewSafeRoot == null) return;
             var dialogue = _previewSafeRoot.Q("storyDialogue");
             if (dialogue != null) dialogue.style.display = ProductionPreview.subtitles ? DisplayStyle.Flex : DisplayStyle.None;

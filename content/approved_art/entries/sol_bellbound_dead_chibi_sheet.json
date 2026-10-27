@@ -1,0 +1,332 @@
+{
+  "schema": 1,
+  "asset_id": "sol_bellbound_dead_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_sol_bellbound_dead": {
+        "image": "art/atlas_sol_bellbound_dead.webp",
+        "width": 1888,
+        "height": 388,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            127,
+            200
+          ],
+          "idle_2": [
+            135,
+            4,
+            127,
+            200
+          ],
+          "idle_3": [
+            266,
+            4,
+            127,
+            200
+          ],
+          "walk": [
+            397,
+            4,
+            157,
+            190
+          ],
+          "defeat": [
+            558,
+            4,
+            238,
+            183
+          ],
+          "hit": [
+            800,
+            4,
+            238,
+            183
+          ],
+          "basic": [
+            1042,
+            4,
+            278,
+            178
+          ],
+          "basic_2": [
+            1324,
+            4,
+            278,
+            178
+          ],
+          "basic_3": [
+            1606,
+            4,
+            278,
+            178
+          ],
+          "active": [
+            4,
+            208,
+            266,
+            176
+          ],
+          "active_2": [
+            274,
+            208,
+            266,
+            176
+          ],
+          "active_3": [
+            544,
+            208,
+            266,
+            176
+          ],
+          "ultimate": [
+            814,
+            208,
+            293,
+            169
+          ],
+          "ultimate_2": [
+            1111,
+            208,
+            293,
+            169
+          ],
+          "ultimate_3": [
+            1408,
+            208,
+            293,
+            169
+          ],
+          "victory": [
+            1705,
+            208,
+            150,
+            168
+          ]
+        }
+      }
+    },
+    "units": {
+      "sol_bellbound_dead": {
+        "atlas": "atlas_sol_bellbound_dead",
+        "facing": "left",
+        "height_px": 196,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.585,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.516,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "idle_3"
+              ],
+              "fps": 8,
+              "loop": true
+            }
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.567,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.723,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.612,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.524,
+            "animation": {
+              "frames": [
+                "hit"
+              ],
+              "fps": 8,
+              "loop": false
+            }
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.524,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 0.995,
+            "pivot_x": 0.526,
+            "animation": {
+              "frames": [
+                "victory"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+    "mime": "image/png",
+    "width": 1536,
+    "height": 1024,
+    "provenance_file": "content/generated/openai/sol_bellbound_dead_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "5634fe3fb69d53f0396c74b238291a6c1065a59274e9c8d0b83e576e4a00b184",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "aed706acb8048d114ceb664f11c93e8511d655d7b5889d54be36fea6162c2fe0",
+    "references": [
+      {
+        "path": "narrative/15_Art_Workbench/enemies/units/bellbound_dead/design_v001/sheet/bellbound_dead_sheet_v001.jpg",
+        "role": "historical_identity_reference_only",
+        "sha256": "faf07e4380653641b85c154d650d9d40a89fc800d6e4d50222208b8b706ce424"
+      },
+      {
+        "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+        "role": "openai_chibi_style_and_layout",
+        "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_bellbound_dead_chibi_sheet.ingest.json",
+    "spec_sha256": "e0c82574a6b119e9f0881c8eed152dcb2fe8cff73bd41de921d56254b6723c04",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "5aec586d0e0f62327372738d9d4e5701dd01727892b6bb792d809829c2b5f48d"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_sol_bellbound_dead.webp",
+      "sha256": "083ff18e06b50656c83b47be550a2482ca52ef158a5d98fe0f4573fbc9184ae0",
+      "pixels_sha256": "20a5a51ed5fa9e6ec8a925a3b15a4a7078b745dca367acda9b6551dace6c6fb6",
+      "bytes": 277306,
+      "width": 1888,
+      "height": 388
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "2 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1536x1024"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.866"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1888x388"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "277306 bytes <= 665600"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

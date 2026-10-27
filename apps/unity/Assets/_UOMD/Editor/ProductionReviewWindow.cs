@@ -277,6 +277,7 @@ namespace Uomd.EditorTools
             var scenarios = new List<string> { "boot", "studio", "title", "portrait/fadyme", "portrait/mahmut" };
             scenarios.AddRange(_assets.Select(a => a.Scenario).Where(s => s.StartsWith("portrait/", StringComparison.Ordinal) && !scenarios.Contains(s)).Distinct());
             scenarios.AddRange(new[] { "portrait/fadyme/authored", "portrait/mahmut/authored" });
+            scenarios.AddRange(RebuildUnitReviewScreen.Units.Select(u => "unit/" + u));
             for (int tutorial = 1; tutorial <= 3; tutorial++)
                 scenarios.AddRange(new[] { "story/tutorial_t" + tutorial + "_before", "story/tutorial_t" + tutorial + "_after" });
             var prologue = UomdJson.ParseObject(File.ReadAllText(ProductionReviewCatalog.Resolve(_store.Root, "content/base/entry/prologue.json")));
@@ -292,6 +293,18 @@ namespace Uomd.EditorTools
                 if (asset != null) SelectAsset(asset.Id);
             }
             EditorGUILayout.HelpBox("Tutorial previews use the native story view and rebuilt stage/portrait candidates. Portrait variants isolate one pose; /authored follows canonical emotions. Story previews can read through locally without saving progress.", MessageType.None);
+            if (_request.scenario.StartsWith("unit/", StringComparison.Ordinal))
+            {
+                int state = Math.Max(0, Array.IndexOf(RebuildUnitReviewScreen.States, _request.unitState));
+                string selectedState = RebuildUnitReviewScreen.States[EditorGUILayout.Popup("Animation state (restart to apply)", state, RebuildUnitReviewScreen.States)];
+                if (selectedState != _request.unitState) { _request.unitState = selectedState; _request.unitFrame = 0; }
+                var asset = _assets.FirstOrDefault(a => a.Scenario == _request.scenario);
+                var unit = JsonRead.Obj(JsonRead.Get(asset?.Entry, "targets"), "units").Values.FirstOrDefault();
+                var animation = JsonRead.Get(JsonRead.Get(JsonRead.Get(unit, "states"), _request.unitState), "animation");
+                int count = Math.Max(1, JsonRead.Arr(animation, "frames").Count);
+                _request.unitFrame = EditorGUILayout.IntSlider("Sequence frame (restart to apply)", _request.unitFrame, 0, count - 1);
+                EditorGUILayout.HelpBox("Open/restart shows the selected state/frame using the real battle presenter. Pause pins it; unpause auditions once or loops as authored. Both authored and mirrored facing are shown at native runtime scale. Combat and rewards are disabled.", MessageType.Info);
+            }
             if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal) || _request.scenario.StartsWith("story/", StringComparison.Ordinal))
             {
                 string storyPath = _request.scenario.StartsWith("story/", StringComparison.Ordinal) ? _request.scenario : "story/tutorial_t1_before";
@@ -394,6 +407,7 @@ namespace Uomd.EditorTools
                 {
                     EditorGUILayout.LabelField(record.kind + " · r" + record.revision + " · " + record.createdAt, EditorStyles.miniLabel);
                     EditorGUILayout.LabelField(record.scenario + " · " + record.lineId, EditorStyles.miniLabel);
+                    if (!string.IsNullOrEmpty(record.unitState)) EditorGUILayout.LabelField(record.unitState + " / " + record.unitFrame, EditorStyles.miniLabel);
                     EditorGUILayout.LabelField(record.request, EditorStyles.wordWrappedLabel);
                     EditorGUILayout.SelectableLabel("Source SHA-256 " + record.sourceSha, EditorStyles.miniLabel, GUILayout.Height(30));
                     record.outcome = EditorGUILayout.TextField("Outcome / follow-up", record.outcome);
@@ -419,7 +433,23 @@ namespace Uomd.EditorTools
             if (shot != null) line = JsonRead.Str(shot, "line_id");
             if (_request.scenario.StartsWith("portrait/", StringComparison.Ordinal) || _request.scenario.StartsWith("story/", StringComparison.Ordinal))
                 line = _request.lineId;
-            _store.AddRequest(_selected, _selected.Scenario.Length > 0 ? _request.scenario : "asset", line, _note, kind, _request.presentation);
+            string state = "", frame = "";
+            if (_request.scenario.StartsWith("unit/", StringComparison.Ordinal) && _selected.Scenario == _request.scenario)
+            {
+                state = _request.unitState;
+                var unit = JsonRead.Obj(JsonRead.Get(_selected.Entry, "targets"), "units").Values.FirstOrDefault();
+                var animation = JsonRead.Get(JsonRead.Get(JsonRead.Get(unit, "states"), state), "animation");
+                var frames = JsonRead.Arr(animation, "frames");
+                if (frames.Count > 0) frame = frames[Mathf.Clamp(_request.unitFrame, 0, frames.Count - 1)] as string ?? "";
+                var router = ProductionReviewSession.Router;
+                if (router != null && router.ProductionPreviewReady && router.ProductionPreview.scenario == _request.scenario)
+                {
+                    var review = router.Controller<RebuildUnitReviewScreen>();
+                    state = review.CurrentState;
+                    frame = review.CurrentFrame;
+                }
+            }
+            _store.AddRequest(_selected, _selected.Scenario.Length > 0 ? _request.scenario : "asset", line, _note, kind, _request.presentation, state, frame);
             _index = _store.Read();
             _message = "Saved to docs/review/PRODUCTION_REVIEW.json. Ingest approval unchanged.";
         }

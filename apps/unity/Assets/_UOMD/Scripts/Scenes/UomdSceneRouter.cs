@@ -126,6 +126,7 @@ namespace Uomd.Scenes
 #if UNITY_EDITOR
             if (UomdEditorPreviewIsolation.Active && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
                 && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue
+                && !(targetScreen == UomdScreenId.Battle && ProductionPreview?.scenario.StartsWith("unit/", StringComparison.Ordinal) == true)
                 && !(targetScreen == UomdScreenId.Story && (ProductionPreview?.scenario.StartsWith("portrait/", StringComparison.Ordinal) == true
                     || ProductionPreview?.scenario.StartsWith("story/", StringComparison.Ordinal) == true))) return;
 #endif

@@ -19,6 +19,9 @@ namespace Uomd.EditorTools
         public double shotElapsed;
         public bool simulatedSafeArea, editorOnly = true;
         public string safeAreaDescription, imageSha, selectedAssetIdentity, presentationState;
+        public string unitState, unitFrame;
+        public Rect unitBounds;
+        public float unitFootY;
         public ProductionPreviewRequest settings;
         public Rect subtitleBounds, titleBounds, safeAreaBounds;
         public int stageCameras, stageLights, stageParticles;
@@ -101,6 +104,18 @@ namespace Uomd.EditorTools
                     metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
                         .Select(a => a.Identity).ToArray();
                 }
+                if (settings.scenario.StartsWith("unit/", StringComparison.Ordinal))
+                {
+                    var review = router.Controller<RebuildUnitReviewScreen>();
+                    metadata.unitState = review.CurrentState;
+                    metadata.unitFrame = review.CurrentFrame;
+                    metadata.unitBounds = review.FrameBounds;
+                    metadata.unitFootY = review.FootScreenY;
+                    metadata.imagePaths = review.ImagePaths;
+                    metadata.presentationState = review.Ready ? "unit_review" : "loading";
+                    metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path"))))
+                        .Select(a => a.Identity).ToArray();
+                }
                 var stage = GameObject.Find("SolCinematicStage");
                 if (stage != null)
                 {
@@ -110,7 +125,7 @@ namespace Uomd.EditorTools
                 }
                 ProductionReviewStore.AtomicWrite(ProductionReviewCatalog.Resolve(store.Root, "docs/review/" + relative + ".json"), JsonUtility.ToJson(metadata, true) + "\n");
                 var index = store.Read();
-                index.captures.Add(new ProductionReviewCapture { id = id, scenario = settings.scenario, lineId = metadata.lineId, image = relative + ".png", metadata = relative + ".json", sha256 = metadata.imageSha });
+                index.captures.Add(new ProductionReviewCapture { id = id, scenario = settings.scenario, lineId = metadata.lineId, unitState = metadata.unitState, unitFrame = metadata.unitFrame, image = relative + ".png", metadata = relative + ".json", sha256 = metadata.imageSha });
                 store.Write(index);
                 LastCapture = imagePath;
                 UnityEngine.Debug.Log("[Production Review] Saved Game view and source-bound metadata: " + relative);

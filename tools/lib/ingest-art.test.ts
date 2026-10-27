@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
@@ -289,6 +289,18 @@ describe('ingest_art pipeline, provenance, and A31 reference hygiene (R14-B)', (
     const checkLegacyHash = checkReferenceHygiene(repo, [{ path: allowedRef, sha256: sha }]);
     expect(checkLegacyHash.passed).toBe(false);
     expect(checkLegacyHash.reason).toContain('matches a legacy git-derived asset hash');
+  });
+
+  it('admits only the exact two tutorial enemy design sources without opening neighboring workbench files', () => {
+    const repo = makeRepo();
+    for (const unit of ['bellbound_dead', 'hollow_pilgrim']) {
+      const path = `narrative/15_Art_Workbench/enemies/units/${unit}/design_v001/sheet/${unit}_sheet_v001.jpg`;
+      const bytes = readFileSync(join(import.meta.dirname, '../..', path));
+      const sha = createHash('sha256').update(bytes).digest('hex');
+      expect(checkReferenceHygiene(repo, [{ path, sha256: sha }]).passed).toBe(true);
+      expect(checkReferenceHygiene(repo, [{ path, sha256: '0'.repeat(64) }]).passed).toBe(false);
+      expect(checkReferenceHygiene(repo, [{ path: path.replace('_v001.jpg', '_v002.jpg'), sha256: sha }]).passed).toBe(false);
+    }
   });
 
   it('initializes and ingests a banner class spec into targets.ui (§4.4)', async () => {

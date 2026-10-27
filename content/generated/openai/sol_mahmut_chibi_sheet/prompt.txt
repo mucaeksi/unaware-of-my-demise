@@ -1,0 +1,12 @@
+Use case: stylized-concept. NEW production animation atlas for Unaware of My Demise. Image 1 supplies Mahmut's adult identity/costume, not the output proportions. Image 2 supplies only the chibi drawing style and pose vocabulary; its crowded portrait packing is REJECTED and must NOT be copied.
+
+Create a WIDE LANDSCAPE 3:2 transparent PNG (native 1536x1024 or larger). Exactly 4 columns by 4 rows: sixteen well-separated TWO-HEAD-TALL adult-male SD chibis facing RIGHT. This wide format gives every cell more width than height so sword and shield NEVER touch the next figure. Each cell is 25% of image width and 25% image height; keep every complete figure, all equipment and cape inside the CENTRAL 65% of its own cell's width and height. Leave broad TRANSPARENT gutters between every pair of figures. Standing boots at 86% of cell height. The image edge also has empty alpha padding. NO background, painted checkerboard, shadow, ground, text, grid or VFX.
+
+Mahmut: age 28 adult, messy brown hair, brown eyes, small stubble; burgundy scarf/short ragged cape, charcoal worn plate armor with small broken red crest, dark round empty medallion. One plain steel longsword in right hand, one dark heater shield on left forearm, two arms/two legs. Same head size, costume, lighting, camera and adult identity in all cells. Premium crisp Gothic-anime sprite art, dark-plum outlines, controlled cel shading and restrained painted detail; large head is approximately half of total standing height. Compact diagonal weapon poses, never long horizontal blades.
+
+Sixteen cells left-to-right top-to-bottom:
+row1 idle guard / idle inhale / idle exhale / walking step.
+row2 basic anticipation with compact raised sword / basic diagonal impact / basic recovery with sword lowered close to body / shield-guard anticipation.
+row3 shield-guard impact / shield-guard recovery / ultimate protective brace / ultimate compact shield drive.
+row4 ultimate recovery / mild hit recoil / defeated on one knee with intact body and gear / restrained victory.
+All sword tips, cape corners and shield rims must stay within the own cell's central 65% area. The visible figures may be small: do NOT enlarge them to fill the sheet. Empty transparent space is a required production feature. No gore, particles, glowing runes or extra props.

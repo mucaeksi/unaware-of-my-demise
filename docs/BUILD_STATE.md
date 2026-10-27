@@ -1,5 +1,7 @@
 # Build state — D-35 rebuild and evidence
 
+Battle atlas checkpoint (2026-10-27): four new OpenAI SD unit candidates supply 16 source poses each and eight short explicit state sequences. The workbench exposes unit motion/frame auditions through the real BattleUnitView, with mirrored facing and foot baseline. There are 26 candidates / 460 records; normal battle consumers await the native manual tutorial/battle UI. [Guide](media/SOL_BATTLE_ATLASES.md), [scoped evidence](evidence/sol-battle-atlases-2026-10-27.json). Owner art, native-2K and Android acceptance remain open.
+
 Tutorial narrative delivery (2026-10-26): three OpenAI stage candidates and native Story UI migrate all six tutorial before/after scenes to rebuilt backgrounds and emotion portraits. The workbench exposes six story routes and 22 candidates / 456 records. [Scoped evidence](evidence/sol-tutorial-narrative-2026-10-26.json). Battle presentation, full entry/Finish/Continue, owner art acceptance and Android/release gates remain open.
 
 Current mandate: GPT Sol/Codex rebuilds the Unity client and replaces visual assets with newly generated OpenAI images. Starting source `f341b018`, workspace `E:/Unity/unaware-of-my-demise`. RB-00/RB-01 is in progress; first title art is a native 1672x941 integration candidate, not final 2K/store acceptance. Existing Gemini visuals remain references during migration. See [execution plan](handoff/SOL_REBUILD_PLAN.md) and [executed evidence](evidence/sol-rebuild-2026-10-26.json).

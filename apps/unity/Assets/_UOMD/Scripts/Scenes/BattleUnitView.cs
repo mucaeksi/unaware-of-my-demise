@@ -126,6 +126,11 @@ namespace Uomd.Scenes
         public float HeadY => Y - (float)_art.HeightPx * _depth;
         /// <summary>Where strikes and impact effects land: half the unit's height above the feet (UnitView.hitPoint).</summary>
         public float HitY => Y - (float)_art.HeightPx * _depth * 0.5f;
+#if UNITY_EDITOR
+        public string CurrentFrame => _shownFrame;
+        public string CurrentAnimationState => _stateName;
+        public Rect RenderedFrameBounds => _image.worldBound;
+#endif
 
         /// <summary>Plays a state (idle, walk, basic, active, ultimate, hit, defeat, victory); a non-looping state returns to idle.</summary>
         public void Play(string state, Action onDone = null)
@@ -149,6 +154,7 @@ namespace Uomd.Scenes
                 var done = _onStateDone;
                 _onStateDone = null;
                 if (_stateName != "defeat" && Alive) Play("idle");
+                else ShowFrame(_state.Frames[_state.Frames.Length - 1]);
                 done?.Invoke();
                 return;
             }

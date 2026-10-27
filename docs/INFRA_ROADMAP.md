@@ -1,5 +1,7 @@
 # Infrastructure status — first-AAB foundations
 
+Battle atlas checkpoint (2026-10-27): four new OpenAI SD unit candidates supply 16 source poses each and eight short explicit state sequences. The workbench exposes unit motion/frame auditions through the real BattleUnitView, with mirrored facing and foot baseline. There are 26 candidates / 460 records; normal battle consumers await the native manual tutorial/battle UI. [Guide](media/SOL_BATTLE_ATLASES.md), [scoped evidence](evidence/sol-battle-atlases-2026-10-27.json). Owner art, native-2K and Android acceptance remain open.
+
 Tutorial narrative delivery (2026-10-26): three OpenAI stage candidates and native Story UI migrate all six tutorial before/after scenes to rebuilt backgrounds and emotion portraits. The workbench exposes six story routes and 22 candidates / 456 records. [Scoped evidence](evidence/sol-tutorial-narrative-2026-10-26.json). Battle presentation, full entry/Finish/Continue, owner art acceptance and Android/release gates remain open.
 
 D-35 local checkpoint 2026-10-26: Production Review and the two-master T1 portrait pilot are locally tested; [current evidence](evidence/sol-portrait-masters-2026-10-26.json). This adds no infrastructure deployment or native-release acceptance. Current owner/provider precedence is in the root README.

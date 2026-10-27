@@ -202,6 +202,15 @@ const ALLOWED_REF_PREFIXES = [
   'content/approved_art/art/',
 ];
 
+// D-35 tutorial enemy identity references. These exact historical design bytes may guide NEW art;
+// this does not approve the drawings or open the rest of the Art Workbench as a source directory.
+const PINNED_TUTORIAL_ENEMY_REFS: Record<string, string> = {
+  'narrative/15_Art_Workbench/enemies/units/bellbound_dead/design_v001/sheet/bellbound_dead_sheet_v001.jpg':
+    'faf07e4380653641b85c154d650d9d40a89fc800d6e4d50222208b8b706ce424',
+  'narrative/15_Art_Workbench/enemies/units/hollow_pilgrim/design_v001/sheet/hollow_pilgrim_sheet_v001.jpg':
+    '49cd19a5c1e576d4068060a7be37b1a5dd7b422d8b7082de861f94437d74e4e0',
+};
+
 export function checkReferenceHygiene(
   rootDir: string,
   references: { path: string; sha256: string }[],
@@ -209,7 +218,9 @@ export function checkReferenceHygiene(
   const legacyHashes = collectLegacyGitHashes(rootDir);
   for (const ref of references) {
     const norm = ref.path.replace(/\\/g, '/').replace(/^\.\//, '');
-    if (norm.includes('..') || !ALLOWED_REF_PREFIXES.some((prefix) => norm.startsWith(prefix))) {
+    const pinnedEnemy = PINNED_TUTORIAL_ENEMY_REFS[norm];
+    if (pinnedEnemy && ref.sha256 !== pinnedEnemy) return { passed: false, reason: `A31: pinned enemy reference hash changed: ${ref.path}` };
+    if (norm.includes('..') || (!pinnedEnemy && !ALLOWED_REF_PREFIXES.some((prefix) => norm.startsWith(prefix)))) {
       return {
         passed: false,
         reason: `A31: reference path "${ref.path}" is outside allowed reference directories (${ALLOWED_REF_PREFIXES.join(', ')})`,

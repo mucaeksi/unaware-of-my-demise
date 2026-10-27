@@ -3,12 +3,12 @@
 First slice, LOCAL_TESTED on 2026-10-26. Open **Window → UOMD → Production Review** in Unity 6000.3.27f1.
 The window is left open after delivery; Play Mode is stopped and `UomdMain` is restored.
 
-1. Pick one of the 22 OpenAI candidates. Disable **OpenAI candidates** to browse all 456 records
-   (280 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
+1. Pick one of the 26 OpenAI candidates. Disable **OpenAI candidates** to browse all 460 records
+   (284 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
 2. **Asset / provenance** shows stable ID/revision, native source dimensions, decoded alpha, exact source/prompt/reference
    hashes, QC, consumer mappings and existing owner feedback. Zoom/pan the checkerboard preview or compare a retained
    PNG/JPG source by its path and SHA-256. Ingest records and prior sources are never overwritten.
-3. **Real scene / directing** selects Boot, Studio, Title, any canonical opening shot the eight rebuilt portrait poses or any of the six tutorial story scenes. Choose
+3. **Real scene / directing** selects Boot, Studio, Title, any canonical opening shot the eight rebuilt portrait poses any of the six tutorial story scenes or the four rebuilt battle units. Choose
    **Open isolated preview**, then **Restart / show selected** when changing scenarios. This runs the actual production
    controllers in `ProductionReviewPreview.unity`, with a fresh session and embedded `rel_0001` content.
 4. Pause/restart, audition audio, toggle subtitles/reduced motion/flash and choose 1920×1080, 2400×1080 or 1600×1200.
@@ -63,3 +63,5 @@ layered actors/rigging, generating raster revisions from the window, physical An
 remain separate work. The initial workbench generated no media; the earlier portrait pilot generated two OpenAI masters. The current expression delivery used seven built-in calls for six selected variants, retaining one rejected attempt. No Gemini/provider API generation or undisclosed cost is claimed. Desktop pointer automation was denied Unity access during the earlier pilot, which used MCP/menu/public entry points and Editor tests. The current delivery uses CLI only; native pointer acceptance remains unverified.
 
 Tutorial narrative extension: choose `story/tutorial_t1_before` / `_after`, T2 or T3, select a canonical line and restart/show. Pause holds the line and voice. Turn pause off to use Next (reveal, then advance), normal-speed Auto or voice replay; Space/Return on the stage also advances. Toolbar events do not advance the story. First-view tutorial Skip is absent. Review reaches a local end state without persisting entry progress or navigating to battle/Finish. Missing illustrations offer Try Again or explicit reading without images; failed story text offers retry only. [Production guide and native sizes](../media/SOL_TUTORIAL_NARRATIVE.md); [executed evidence](../evidence/sol-tutorial-narrative-2026-10-26.json).
+
+Unit motion extension (2026-10-27): select `unit/mahmut`, `unit/fadyme`, `unit/bellbound_dead` or `unit/hollow_pilgrim`. Choose the animation state and sequence frame, then open/restart. Pause pins the selected pose; unpause auditions the authored sequence. Both original and mirrored facing use the real BattleUnitView at authored runtime scale, against a foot baseline. Non-looping actions return to idle; defeat clamps its last frame. These are read-only asset auditions, with combat/rewards/progress disabled. Capture metadata records actual state/frame, bounds, foot line, image paths and related ingest identities. Fadyme's 1536×2048 source is a derived assembly of two native 1536×1024 pages, never a claimed native tall generation. [Guide](../media/SOL_BATTLE_ATLASES.md); [evidence](../evidence/sol-battle-atlases-2026-10-27.json).

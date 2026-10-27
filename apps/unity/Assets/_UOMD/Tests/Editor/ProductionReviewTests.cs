@@ -35,8 +35,8 @@ namespace Uomd.Tests
         {
             string root = ProductionReviewCatalog.RepositoryRoot;
             var assets = ProductionReviewCatalog.Load(root);
-            Assert.AreEqual(22, assets.Count(a => a.Candidate));
-            Assert.GreaterOrEqual(assets.Count, 456);
+            Assert.AreEqual(26, assets.Count(a => a.Candidate));
+            Assert.GreaterOrEqual(assets.Count, 460);
             foreach (var asset in assets.Where(a => a.Candidate))
             {
                 ProductionReviewCatalog.VerifyTarget(root, asset);
@@ -88,6 +88,27 @@ namespace Uomd.Tests
                 string companion = request.PortraitCharacter == "fadyme" ? "mahmut" : "fadyme";
                 Assert.AreEqual(catalog.PortraitImage(companion, "sol_composed"), request.PortraitPath(catalog, companion, "watchful"));
             }
+        }
+
+        [Test]
+        public void UnitRevisionRequestsBindTheActualPoseAndOnlyMatchingPoseCaptureHashes()
+        {
+            File.WriteAllText(Path.Combine(_fixture, "source.png"), "unit fixture");
+            File.WriteAllText(Path.Combine(_fixture, "entry.json"), "{}");
+            var asset = new ProductionReviewAsset { Id = "sol_fixture", Revision = 1, SourcePath = "source.png", SourceSha = Sha256Hash.ComputeFileHex(Path.Combine(_fixture, "source.png")), EntryPath = "entry.json", EntrySha = Sha256Hash.ComputeFileHex(Path.Combine(_fixture, "entry.json")) };
+            var store = new ProductionReviewStore(_fixture);
+            var index = store.Read();
+            index.captures.Add(new ProductionReviewCapture { id = "matching", scenario = "unit/mahmut", unitState = "basic", unitFrame = "basic_2", sha256 = "match" });
+            index.captures.Add(new ProductionReviewCapture { id = "other-frame", scenario = "unit/mahmut", unitState = "basic", unitFrame = "basic_3", sha256 = "different" });
+            index.captures.Add(new ProductionReviewCapture { id = "other-state", scenario = "unit/mahmut", unitState = "active", unitFrame = "basic_2", sha256 = "different-state" });
+            store.Write(index);
+            store.AddRequest(asset, "unit/mahmut", "", "Check the shield rim in this impact pose.", "revision_requested", new RebuildShotSettings(), "basic", "basic_2");
+            var saved = new ProductionReviewStore(_fixture).Read().requests.Single();
+            Assert.AreEqual("basic", saved.unitState);
+            Assert.AreEqual("basic_2", saved.unitFrame);
+            CollectionAssert.AreEqual(new[] { "matching:match" }, saved.captures);
+            Assert.AreEqual(asset.SourceSha, saved.sourceSha);
+            Assert.AreEqual("{}", File.ReadAllText(Path.Combine(_fixture, "entry.json")));
         }
 
         [Test]

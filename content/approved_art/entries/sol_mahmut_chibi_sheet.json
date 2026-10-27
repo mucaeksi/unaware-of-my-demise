@@ -1,0 +1,332 @@
+{
+  "schema": 1,
+  "asset_id": "sol_mahmut_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_sol_mahmut": {
+        "image": "art/atlas_sol_mahmut.webp",
+        "width": 1967,
+        "height": 411,
+        "frames": {
+          "victory": [
+            4,
+            4,
+            162,
+            206
+          ],
+          "idle": [
+            170,
+            4,
+            165,
+            200
+          ],
+          "idle_2": [
+            339,
+            4,
+            165,
+            200
+          ],
+          "idle_3": [
+            508,
+            4,
+            165,
+            200
+          ],
+          "walk": [
+            677,
+            4,
+            169,
+            200
+          ],
+          "defeat": [
+            850,
+            4,
+            214,
+            198
+          ],
+          "hit": [
+            1068,
+            4,
+            214,
+            198
+          ],
+          "ultimate": [
+            1286,
+            4,
+            223,
+            194
+          ],
+          "ultimate_2": [
+            1513,
+            4,
+            223,
+            194
+          ],
+          "ultimate_3": [
+            1740,
+            4,
+            223,
+            194
+          ],
+          "basic": [
+            4,
+            214,
+            206,
+            193
+          ],
+          "basic_2": [
+            214,
+            214,
+            206,
+            193
+          ],
+          "basic_3": [
+            424,
+            214,
+            206,
+            193
+          ],
+          "active": [
+            634,
+            214,
+            195,
+            190
+          ],
+          "active_2": [
+            833,
+            214,
+            195,
+            190
+          ],
+          "active_3": [
+            1032,
+            214,
+            195,
+            190
+          ]
+        }
+      }
+    },
+    "units": {
+      "sol_mahmut": {
+        "atlas": "atlas_sol_mahmut",
+        "facing": "right",
+        "height_px": 216,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.52,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 0.996,
+            "pivot_x": 0.527,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "idle_3"
+              ],
+              "fps": 8,
+              "loop": true
+            }
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.49,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.519,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.447,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.53,
+            "animation": {
+              "frames": [
+                "hit"
+              ],
+              "fps": 8,
+              "loop": false
+            }
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.53,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 0.996,
+            "pivot_x": 0.525,
+            "animation": {
+              "frames": [
+                "victory"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76",
+    "mime": "image/png",
+    "width": 1536,
+    "height": 1024,
+    "provenance_file": "content/generated/openai/sol_mahmut_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "f14691c6b3e59da14be4fef17af68148b7156206180f8214582a45d8c133731c",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "74ec0ba40b057c5d8fce9cd9c8d234cab330dec29311bba4a33e9b33996b5594",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_mahmut_vn_composed/source.png",
+        "role": "openai_identity_costume",
+        "sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      },
+      {
+        "path": "content/generated/openai/sol_mahmut_chibi_sheet/corrected-packing-02.png",
+        "role": "openai_style_only_rejected_packing",
+        "sha256": "4d6eee1a5e0c3a9db52f95650dcfb900dbb0793366d0b37ab08f34ae75c2a186"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_mahmut_chibi_sheet.ingest.json",
+    "spec_sha256": "e58eb46a0be4f3697bc438791ab3089729f313971ac2959316055d600a19c77d",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "7cb53f900267c572be2574715975066103cf1ea664f942960245d5f7dd4aa92b"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_sol_mahmut.webp",
+      "sha256": "8a2745ef36049af9c8b9c449840c46fd0092cf1acc2af3c2e85d90d82b0dec29",
+      "pixels_sha256": "0884c6eaf57c3a55698060031380fc1acae50b90d2f22e9fd797c00004b045cf",
+      "bytes": 303220,
+      "width": 1967,
+      "height": 411
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "2 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1536x1024"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.810"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1967x411"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "303220 bytes <= 665600"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

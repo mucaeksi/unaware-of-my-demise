@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "asset_id": "sol_fadyme_chibi_sheet",
+  "class": "unit_sheet",
+  "source": {
+    "kind": "generated",
+    "pick": "c45d4fa092a7",
+    "provenance": "content/generated/openai/sol_fadyme_chibi_sheet/run.provenance.json"
+  },
+  "layout": {
+    "mode": "grid",
+    "cols": 4,
+    "rows": 4,
+    "cells": [
+      "idle",
+      "idle_2",
+      "idle_3",
+      "walk",
+      "basic",
+      "basic_2",
+      "basic_3",
+      "active",
+      "active_2",
+      "active_3",
+      "ultimate",
+      "ultimate_2",
+      "ultimate_3",
+      "hit",
+      "defeat",
+      "victory"
+    ],
+    "merge_gap_px": 2,
+    "min_gutter_pct": 4
+  },
+  "frames": {
+    "idle": "idle",
+    "idle_frame_px": 260,
+    "ground": "lowest",
+    "pivot": "lower_body_centroid",
+    "animations": {
+      "idle": {
+        "frames": [
+          "idle",
+          "idle_2",
+          "idle_3",
+          "idle_2"
+        ],
+        "fps": 6,
+        "loop": true
+      },
+      "walk": {
+        "frames": [
+          "walk",
+          "idle_2",
+          "walk",
+          "idle_3"
+        ],
+        "fps": 8,
+        "loop": true
+      },
+      "basic": {
+        "frames": [
+          "basic",
+          "basic_2",
+          "basic_3"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "active": {
+        "frames": [
+          "active",
+          "active_2",
+          "active_3"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "ultimate": {
+        "frames": [
+          "ultimate",
+          "ultimate_2",
+          "ultimate_3"
+        ],
+        "fps": 9,
+        "loop": false
+      },
+      "hit": {
+        "frames": [
+          "hit"
+        ],
+        "fps": 8,
+        "loop": false
+      },
+      "defeat": {
+        "frames": [
+          "hit",
+          "defeat"
+        ],
+        "fps": 6,
+        "loop": false
+      },
+      "victory": {
+        "frames": [
+          "victory"
+        ],
+        "fps": 6,
+        "loop": true
+      }
+    }
+  },
+  "export": {
+    "fit": "trim",
+    "max_atlas": 2048,
+    "pad": 4,
+    "webp": {
+      "mode": "lossy",
+      "quality": 88,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 665600
+  },
+  "manifest": {
+    "atlas": "atlas_sol_fadyme",
+    "unit": "sol_fadyme",
+    "facing": "right",
+    "height_px": 204
+  },
+  "qc": {
+    "profile": "chibi_r2"
+  }
+}

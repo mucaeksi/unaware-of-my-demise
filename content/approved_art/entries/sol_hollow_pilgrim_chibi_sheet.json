@@ -1,0 +1,332 @@
+{
+  "schema": 1,
+  "asset_id": "sol_hollow_pilgrim_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_sol_hollow_pilgrim": {
+        "image": "art/atlas_sol_hollow_pilgrim.webp",
+        "width": 1936,
+        "height": 420,
+        "frames": {
+          "basic": [
+            4,
+            4,
+            257,
+            208
+          ],
+          "basic_2": [
+            265,
+            4,
+            257,
+            208
+          ],
+          "basic_3": [
+            526,
+            4,
+            257,
+            208
+          ],
+          "ultimate": [
+            787,
+            4,
+            259,
+            207
+          ],
+          "ultimate_2": [
+            1050,
+            4,
+            259,
+            207
+          ],
+          "ultimate_3": [
+            1313,
+            4,
+            259,
+            207
+          ],
+          "victory": [
+            1576,
+            4,
+            170,
+            201
+          ],
+          "idle": [
+            1750,
+            4,
+            182,
+            200
+          ],
+          "idle_2": [
+            4,
+            216,
+            182,
+            200
+          ],
+          "idle_3": [
+            190,
+            216,
+            182,
+            200
+          ],
+          "walk": [
+            376,
+            216,
+            205,
+            199
+          ],
+          "active": [
+            585,
+            216,
+            208,
+            194
+          ],
+          "active_2": [
+            797,
+            216,
+            208,
+            194
+          ],
+          "active_3": [
+            1009,
+            216,
+            208,
+            194
+          ],
+          "defeat": [
+            1221,
+            216,
+            238,
+            190
+          ],
+          "hit": [
+            1463,
+            216,
+            238,
+            190
+          ]
+        }
+      }
+    },
+    "units": {
+      "sol_hollow_pilgrim": {
+        "atlas": "atlas_sol_hollow_pilgrim",
+        "facing": "left",
+        "height_px": 236,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.514,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.543,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "idle_3"
+              ],
+              "fps": 8,
+              "loop": true
+            }
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.565,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.521,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.552,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.474,
+            "animation": {
+              "frames": [
+                "hit"
+              ],
+              "fps": 8,
+              "loop": false
+            }
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.474,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 0.996,
+            "pivot_x": 0.522,
+            "animation": {
+              "frames": [
+                "victory"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "fa644b80e4bf36ead64a07f69292ee73e7c973e1588f05b57035f0531e29a25c",
+    "mime": "image/png",
+    "width": 1536,
+    "height": 1024,
+    "provenance_file": "content/generated/openai/sol_hollow_pilgrim_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "b7dca9455591a517fe215e4d4d395b57d6f54a071850a90e008ff2139f767be5",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "b2a1a3c0caa0b5b04c46c6f5951d7fdd7c878a154e5b5ebf68846636ef96314a",
+    "references": [
+      {
+        "path": "narrative/15_Art_Workbench/enemies/units/hollow_pilgrim/design_v001/sheet/hollow_pilgrim_sheet_v001.jpg",
+        "role": "historical_identity_reference_only",
+        "sha256": "49cd19a5c1e576d4068060a7be37b1a5dd7b422d8b7082de861f94437d74e4e0"
+      },
+      {
+        "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+        "role": "openai_chibi_style_and_layout",
+        "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_hollow_pilgrim_chibi_sheet.ingest.json",
+    "spec_sha256": "b50392caaefdf7712dff8ee5312c0fbf689ac138baf0f85012bf7492e94a7b39",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "391b2ab3248045019bc71c1c6b64e7c04863cf5b8e4cd3ba15aabb7144f9cfc2"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_sol_hollow_pilgrim.webp",
+      "sha256": "f7d913f91e5c0b34d5eabe4e55fed54d20378d3dec9602f1068eca88374f5e8a",
+      "pixels_sha256": "ef786a80c4a0158e2f38b858956cd264fa4dcc5475bff799aad6dd45a50e8b61",
+      "bytes": 307348,
+      "width": 1936,
+      "height": 420
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "2 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1536x1024"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.873"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1936x420"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "307348 bytes <= 665600"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

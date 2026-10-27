@@ -12,6 +12,8 @@
             "lineId": "entry_past_008",
             "request": "Codex local QC: all nine opening shots selected through the real controller; pause/plate cleanup, three viewports and source-bound captures checked. This is agent QC only. Owner visual acceptance, final resolution and Android/device gates remain open.",
             "outcome": "local_qc_complete; no owner art approval",
+            "unitState": "",
+            "unitFrame": "",
             "revision": 1,
             "captures": [
                 "20261026T122521399_5e9dddd7:18eadfd8d0de188b82669ef06c2caaed452874a10fda4e83a3878f6a413d0f86",
@@ -37,6 +39,8 @@
             "lineId": "tutorial_t1_before_003",
             "request": "Agent QC: new OpenAI alpha portrait master rendered by the real T1 Story controller at the canonical line. Faces, hood/scarf, star/socket and bell identity checks performed; 1920x1080, 2400x1080 with simulated insets, and 1600x1200 inspected across the shared two-actor composition. Explicit sol_composed override only; this is a static master review, not authored expression/motion acceptance. Historical background and UI remain reference material. Complete expression set, scene/UI rebuild, owner acceptance and physical-device QC remain pending.",
             "outcome": "open",
+            "unitState": "",
+            "unitFrame": "",
             "revision": 1,
             "captures": [
                 "20261026T135759007_1dc42fa2:2ed5d8c448bdc488c0896f5be3034d2948f26d694d38cb3d8b421e36f34fa887",
@@ -62,12 +66,40 @@
             "lineId": "tutorial_t1_before_002",
             "request": "Agent QC: new OpenAI alpha portrait master rendered by the real T1 Story controller at the canonical line. Faces, hood/scarf, star/socket and bell identity checks performed; 1920x1080, 2400x1080 with simulated insets, and 1600x1200 inspected across the shared two-actor composition. Explicit sol_composed override only; this is a static master review, not authored expression/motion acceptance. Historical background and UI remain reference material. Complete expression set, scene/UI rebuild, owner acceptance and physical-device QC remain pending.",
             "outcome": "open",
+            "unitState": "",
+            "unitFrame": "",
             "revision": 1,
             "captures": [
                 "20261026T140246942_cc8bb2bc:70f610ae2af28e598044c2c9dfb7e76932314207938b62a8959523e0a1de9e97"
             ],
             "presentation": {
                 "scenario": "portrait/mahmut",
+                "framing": 1.0,
+                "subtitleBottom": 128.0,
+                "light": 1.0,
+                "particles": true
+            }
+        },
+        {
+            "id": "8940802cbe18478e9505d45ebfd63c52",
+            "createdAt": "2026-10-27T00:20:04.7664799Z",
+            "kind": "agent_qc_note",
+            "assetId": "sol_mahmut_chibi_sheet",
+            "sourceSha": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76",
+            "entrySha": "cac7cb876019df4693446a5a38dadebdcee425c43015eb40849b108765bb4f62",
+            "scenario": "unit/mahmut",
+            "lineId": "",
+            "request": "Agent QC: basic_2 impact pose checked at authored runtime scale in both facings against the foot baseline. Early short-loop candidate; human art, final resolution and Android gates remain open.",
+            "outcome": "open",
+            "unitState": "basic",
+            "unitFrame": "basic_2",
+            "revision": 1,
+            "captures": [
+                "20261026T234947962_952b8604:2043abac89b261d9401e072a0edac22b6af320bafbf99a6b300abe16637ae631",
+                "20261027T002002464_93e9ac1e:e68406a1c36b92dcfefade8c461308545335ae884ff1d17875c7110c7511f22f"
+            ],
+            "presentation": {
+                "scenario": "title",
                 "framing": 1.0,
                 "subtitleBottom": 128.0,
                 "light": 1.0,
@@ -82,7 +114,9 @@
             "sha256": "3bbfc885d25275681168377381d46d379af70a585dbeef30cb75d793a7c9115a",
             "metadata": "captures/20261026T122519861_444a234e.json",
             "scenario": "studio",
-            "lineId": ""
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T122520481_16fec602",
@@ -90,7 +124,9 @@
             "sha256": "bb70e13575256f81c7c6e76d9c077a2cb0940417015874af8e6479b3a751dbf7",
             "metadata": "captures/20261026T122520481_16fec602.json",
             "scenario": "title",
-            "lineId": ""
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T122521399_5e9dddd7",
@@ -98,7 +134,9 @@
             "sha256": "18eadfd8d0de188b82669ef06c2caaed452874a10fda4e83a3878f6a413d0f86",
             "metadata": "captures/20261026T122521399_5e9dddd7.json",
             "scenario": "prologue/reunion",
-            "lineId": "entry_past_008"
+            "lineId": "entry_past_008",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T122522140_7ec60ec4",
@@ -106,7 +144,9 @@
             "sha256": "d59c34e862321a35d4483ef84cabeae41752bedad899cdf77e630fb9373e1300",
             "metadata": "captures/20261026T122522140_7ec60ec4.json",
             "scenario": "prologue/reunion",
-            "lineId": "entry_past_008"
+            "lineId": "entry_past_008",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T122523140_3375df57",
@@ -114,7 +154,9 @@
             "sha256": "05c4106f6435f9dc61ffee6f1aa6936e5cd0ec7369c5470b14715fc15b639c84",
             "metadata": "captures/20261026T122523140_3375df57.json",
             "scenario": "prologue/reunion",
-            "lineId": "entry_past_008"
+            "lineId": "entry_past_008",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T135759007_1dc42fa2",
@@ -122,7 +164,9 @@
             "sha256": "2ed5d8c448bdc488c0896f5be3034d2948f26d694d38cb3d8b421e36f34fa887",
             "metadata": "captures/20261026T135759007_1dc42fa2.json",
             "scenario": "portrait/fadyme",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T140245345_e191ee23",
@@ -130,7 +174,9 @@
             "sha256": "5cededee65f46b441c637f68c979205ca9ff473415ea8a7ab5aa524bda028727",
             "metadata": "captures/20261026T140245345_e191ee23.json",
             "scenario": "portrait/fadyme",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T140246089_9a6ca4f4",
@@ -138,7 +184,9 @@
             "sha256": "c82e30b69b7749aa1606176c3db3f064e7ad381843b1b9b8263cfb7f7bfed13c",
             "metadata": "captures/20261026T140246089_9a6ca4f4.json",
             "scenario": "portrait/fadyme",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T140246942_cc8bb2bc",
@@ -146,7 +194,9 @@
             "sha256": "70f610ae2af28e598044c2c9dfb7e76932314207938b62a8959523e0a1de9e97",
             "metadata": "captures/20261026T140246942_cc8bb2bc.json",
             "scenario": "portrait/mahmut",
-            "lineId": "tutorial_t1_before_002"
+            "lineId": "tutorial_t1_before_002",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165414548_71b37ce2",
@@ -154,7 +204,9 @@
             "sha256": "0a97b17f7f5247e6409a6decc5af8ffab4ded9bb8f5c497ad38c7e3cd541262a",
             "metadata": "captures/20261026T165414548_71b37ce2.json",
             "scenario": "portrait/fadyme/resolve",
-            "lineId": "tutorial_t1_before_014"
+            "lineId": "tutorial_t1_before_014",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165419618_50b9610c",
@@ -162,7 +214,9 @@
             "sha256": "e7522548ed1e2b5df553f2798d69617d7a34651584a39c428305c1c34583742e",
             "metadata": "captures/20261026T165419618_50b9610c.json",
             "scenario": "portrait/fadyme/warm",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165424471_5b7c2be8",
@@ -170,7 +224,9 @@
             "sha256": "83b6581c71ba529f00470df17534b67d5edb152f66433c89a6cb91c78831c949",
             "metadata": "captures/20261026T165424471_5b7c2be8.json",
             "scenario": "portrait/fadyme/wry",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165429627_e32d6c2a",
@@ -178,7 +234,9 @@
             "sha256": "199bb685c7f3b9e01234b13c426a7d3153ac5f69ed0d5f840dad78ef8a692b05",
             "metadata": "captures/20261026T165429627_e32d6c2a.json",
             "scenario": "portrait/mahmut/dry_humor",
-            "lineId": "tutorial_t1_before_004"
+            "lineId": "tutorial_t1_before_004",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165434670_55b20df2",
@@ -186,7 +244,9 @@
             "sha256": "5251080a555d15a200620ca56f7ca33dd05ffc99b91f76b2fdfefdaa8fe9b0d8",
             "metadata": "captures/20261026T165434670_55b20df2.json",
             "scenario": "portrait/mahmut/protective_resolve",
-            "lineId": "tutorial_t1_before_013"
+            "lineId": "tutorial_t1_before_013",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165440363_8cdf6bbf",
@@ -194,7 +254,9 @@
             "sha256": "33e78636e174c2db0f5a020d851f67840a0e4f5f0ea2a8de20892c723758af71",
             "metadata": "captures/20261026T165440363_8cdf6bbf.json",
             "scenario": "portrait/mahmut/watchful",
-            "lineId": "tutorial_t1_before_002"
+            "lineId": "tutorial_t1_before_002",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165523998_d3c23858",
@@ -202,7 +264,9 @@
             "sha256": "4876431be1e7419defe407ac18b2e46a5941b7c4b6c321a66b8604aebb22b7e9",
             "metadata": "captures/20261026T165523998_d3c23858.json",
             "scenario": "portrait/fadyme/authored",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165526449_b4945087",
@@ -210,7 +274,9 @@
             "sha256": "b45ccd69e8984665e8e6d81fd676582da9e907ded37725c3e811b62bc2d4763f",
             "metadata": "captures/20261026T165526449_b4945087.json",
             "scenario": "portrait/fadyme/authored",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T165529175_8431daf3",
@@ -218,7 +284,9 @@
             "sha256": "d7e99cfbaa82c0a029ec6d77e0c867394b5ed821a18a5ce162c4c42def410bfc",
             "metadata": "captures/20261026T165529175_8431daf3.json",
             "scenario": "portrait/fadyme/authored",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T213708919_6ea49667",
@@ -226,7 +294,9 @@
             "sha256": "a43ff023ece3b9934be87beab9822837c272a12212d8b528c4266d10fa27514d",
             "metadata": "captures/20261026T213708919_6ea49667.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214012708_423efb69",
@@ -234,7 +304,9 @@
             "sha256": "b6c920a7b889da2ccc2044c634406f9c80d92295afbca6fdcbda44b034606a6f",
             "metadata": "captures/20261026T214012708_423efb69.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214025242_60d596fd",
@@ -242,7 +314,9 @@
             "sha256": "3058a3c61b43d12f4332d11f2abfe888fa566b0d9f7b4763fead582d12e498d7",
             "metadata": "captures/20261026T214025242_60d596fd.json",
             "scenario": "story/tutorial_t1_after",
-            "lineId": "tutorial_t1_after_003"
+            "lineId": "tutorial_t1_after_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214036166_1b8ae752",
@@ -250,7 +324,9 @@
             "sha256": "efabf773cc97530197fe999c7d3f759d8cd08607379417109c7808c6a97be9bb",
             "metadata": "captures/20261026T214036166_1b8ae752.json",
             "scenario": "story/tutorial_t2_before",
-            "lineId": "tutorial_t2_before_003"
+            "lineId": "tutorial_t2_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214049969_2cd509cf",
@@ -258,7 +334,9 @@
             "sha256": "d22bf3d782b4fe85a6673b2ab21a44ce5338da981c3ab96e12ff62aae2dc3815",
             "metadata": "captures/20261026T214049969_2cd509cf.json",
             "scenario": "story/tutorial_t2_after",
-            "lineId": "tutorial_t2_after_002"
+            "lineId": "tutorial_t2_after_002",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214100731_a9cc4d8c",
@@ -266,7 +344,9 @@
             "sha256": "d3df7d5e3af97ab76ae46662de5d62e36774d71917a55334ca611e049583ee6b",
             "metadata": "captures/20261026T214100731_a9cc4d8c.json",
             "scenario": "story/tutorial_t3_before",
-            "lineId": "tutorial_t3_before_003"
+            "lineId": "tutorial_t3_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214113331_6de1d906",
@@ -274,7 +354,9 @@
             "sha256": "01d759cfaf861f9452a533cfa611341bf09b8e1ad0bc807b3e726c3258343d7e",
             "metadata": "captures/20261026T214113331_6de1d906.json",
             "scenario": "story/tutorial_t3_after",
-            "lineId": "tutorial_t3_after_003"
+            "lineId": "tutorial_t3_after_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214124511_46a16104",
@@ -282,7 +364,9 @@
             "sha256": "827fe2dce4cd91b36e726372ca86afd94459ac4faa1b0751be033813a2e99076",
             "metadata": "captures/20261026T214124511_46a16104.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214128091_2ec2ee62",
@@ -290,7 +374,9 @@
             "sha256": "9a7c44a39dd1c12d3bad70fd3d2fa3bd59a105373ee1fac436fbf96ebc5888a2",
             "metadata": "captures/20261026T214128091_2ec2ee62.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T214202469_67ec129b",
@@ -298,7 +384,9 @@
             "sha256": "e93280870585e12f3c8d23e7341e236df5b4b784c2cc6811f689222957de6035",
             "metadata": "captures/20261026T214202469_67ec129b.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215148289_e510fa81",
@@ -306,7 +394,9 @@
             "sha256": "b6c920a7b889da2ccc2044c634406f9c80d92295afbca6fdcbda44b034606a6f",
             "metadata": "captures/20261026T215148289_e510fa81.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215159934_56cbe63e",
@@ -314,7 +404,9 @@
             "sha256": "3058a3c61b43d12f4332d11f2abfe888fa566b0d9f7b4763fead582d12e498d7",
             "metadata": "captures/20261026T215159934_56cbe63e.json",
             "scenario": "story/tutorial_t1_after",
-            "lineId": "tutorial_t1_after_003"
+            "lineId": "tutorial_t1_after_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215210632_c115798c",
@@ -322,7 +414,9 @@
             "sha256": "efabf773cc97530197fe999c7d3f759d8cd08607379417109c7808c6a97be9bb",
             "metadata": "captures/20261026T215210632_c115798c.json",
             "scenario": "story/tutorial_t2_before",
-            "lineId": "tutorial_t2_before_003"
+            "lineId": "tutorial_t2_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215221173_0bdfaa81",
@@ -330,7 +424,9 @@
             "sha256": "d22bf3d782b4fe85a6673b2ab21a44ce5338da981c3ab96e12ff62aae2dc3815",
             "metadata": "captures/20261026T215221173_0bdfaa81.json",
             "scenario": "story/tutorial_t2_after",
-            "lineId": "tutorial_t2_after_002"
+            "lineId": "tutorial_t2_after_002",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215231984_daae09f9",
@@ -338,7 +434,9 @@
             "sha256": "d3df7d5e3af97ab76ae46662de5d62e36774d71917a55334ca611e049583ee6b",
             "metadata": "captures/20261026T215231984_daae09f9.json",
             "scenario": "story/tutorial_t3_before",
-            "lineId": "tutorial_t3_before_003"
+            "lineId": "tutorial_t3_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215242693_69ce52e3",
@@ -346,7 +444,9 @@
             "sha256": "01d759cfaf861f9452a533cfa611341bf09b8e1ad0bc807b3e726c3258343d7e",
             "metadata": "captures/20261026T215242693_69ce52e3.json",
             "scenario": "story/tutorial_t3_after",
-            "lineId": "tutorial_t3_after_003"
+            "lineId": "tutorial_t3_after_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215254646_c11a0a89",
@@ -354,7 +454,9 @@
             "sha256": "827fe2dce4cd91b36e726372ca86afd94459ac4faa1b0751be033813a2e99076",
             "metadata": "captures/20261026T215254646_c11a0a89.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215258316_4b1adf96",
@@ -362,7 +464,9 @@
             "sha256": "c2fb81a02ad43780d317393d08051bef39c0e1baf78b438bd044675523daaa78",
             "metadata": "captures/20261026T215258316_4b1adf96.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_005"
+            "lineId": "tutorial_t1_before_005",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215331357_e5b7f8c0",
@@ -370,7 +474,9 @@
             "sha256": "e93280870585e12f3c8d23e7341e236df5b4b784c2cc6811f689222957de6035",
             "metadata": "captures/20261026T215331357_e5b7f8c0.json",
             "scenario": "story/tutorial_t1_before",
-            "lineId": "tutorial_t1_before_003"
+            "lineId": "tutorial_t1_before_003",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T215725315_b36c2820",
@@ -378,7 +484,9 @@
             "sha256": "0410264855224c968fdc0db13daafe71bb6b9f5c9963229d4eaf2396761c84a3",
             "metadata": "captures/20261026T215725315_b36c2820.json",
             "scenario": "story/tutorial_t3_after",
-            "lineId": "tutorial_t3_after_001"
+            "lineId": "tutorial_t3_after_001",
+            "unitState": "",
+            "unitFrame": ""
         },
         {
             "id": "20261026T220433297_fbf0d441",
@@ -386,7 +494,119 @@
             "sha256": "0410264855224c968fdc0db13daafe71bb6b9f5c9963229d4eaf2396761c84a3",
             "metadata": "captures/20261026T220433297_fbf0d441.json",
             "scenario": "story/tutorial_t3_after",
-            "lineId": "tutorial_t3_after_001"
+            "lineId": "tutorial_t3_after_001",
+            "unitState": "",
+            "unitFrame": ""
+        },
+        {
+            "id": "20261026T234947962_952b8604",
+            "image": "captures/20261026T234947962_952b8604.png",
+            "sha256": "2043abac89b261d9401e072a0edac22b6af320bafbf99a6b300abe16637ae631",
+            "metadata": "captures/20261026T234947962_952b8604.json",
+            "scenario": "unit/mahmut",
+            "lineId": "",
+            "unitState": "basic",
+            "unitFrame": "basic_2"
+        },
+        {
+            "id": "20261026T234954857_461d88ae",
+            "image": "captures/20261026T234954857_461d88ae.png",
+            "sha256": "beef472a4618e06b81443135250de420aac7d31103a622d1d871a2f20b368959",
+            "metadata": "captures/20261026T234954857_461d88ae.json",
+            "scenario": "unit/mahmut",
+            "lineId": "",
+            "unitState": "defeat",
+            "unitFrame": "defeat"
+        },
+        {
+            "id": "20261026T235051679_67e7d9ad",
+            "image": "captures/20261026T235051679_67e7d9ad.png",
+            "sha256": "f262f91e9e58eb7789d7bd639704ed8a0bdf92ccd733fbe37c7fd8b313d20886",
+            "metadata": "captures/20261026T235051679_67e7d9ad.json",
+            "scenario": "unit/fadyme",
+            "lineId": "",
+            "unitState": "basic",
+            "unitFrame": "basic_2"
+        },
+        {
+            "id": "20261026T235059039_b32ddbc5",
+            "image": "captures/20261026T235059039_b32ddbc5.png",
+            "sha256": "fda94861026a0821921c8b15bf33156ce4ddbfb0119eb4c5de64bb3bf7b15f3c",
+            "metadata": "captures/20261026T235059039_b32ddbc5.json",
+            "scenario": "unit/fadyme",
+            "lineId": "",
+            "unitState": "defeat",
+            "unitFrame": "defeat"
+        },
+        {
+            "id": "20261026T235200730_a14c7d50",
+            "image": "captures/20261026T235200730_a14c7d50.png",
+            "sha256": "3cd355912e1e1a63390d79d4d5c8cfc871d3cfb6683a317f5bbd4896cbff5147",
+            "metadata": "captures/20261026T235200730_a14c7d50.json",
+            "scenario": "unit/bellbound_dead",
+            "lineId": "",
+            "unitState": "basic",
+            "unitFrame": "basic_2"
+        },
+        {
+            "id": "20261026T235206582_a2c550fe",
+            "image": "captures/20261026T235206582_a2c550fe.png",
+            "sha256": "dbf76d5fd7e7890d55503cac861182298f89f9c3b9401906b753d1d67b40a276",
+            "metadata": "captures/20261026T235206582_a2c550fe.json",
+            "scenario": "unit/bellbound_dead",
+            "lineId": "",
+            "unitState": "defeat",
+            "unitFrame": "defeat"
+        },
+        {
+            "id": "20261026T235311980_fa8ed290",
+            "image": "captures/20261026T235311980_fa8ed290.png",
+            "sha256": "aba0483cf347f7fd504bde08a204240c0112293e6ff5c7b5e5199aed8a9dd767",
+            "metadata": "captures/20261026T235311980_fa8ed290.json",
+            "scenario": "unit/hollow_pilgrim",
+            "lineId": "",
+            "unitState": "basic",
+            "unitFrame": "basic_2"
+        },
+        {
+            "id": "20261026T235318499_c4dc3def",
+            "image": "captures/20261026T235318499_c4dc3def.png",
+            "sha256": "edaf2d4b35bda0e7c4de8059118aa8a275c19db55cd1d5e019662da07ec7607d",
+            "metadata": "captures/20261026T235318499_c4dc3def.json",
+            "scenario": "unit/hollow_pilgrim",
+            "lineId": "",
+            "unitState": "defeat",
+            "unitFrame": "defeat"
+        },
+        {
+            "id": "20261026T235325891_0a2b3125",
+            "image": "captures/20261026T235325891_0a2b3125.png",
+            "sha256": "2fc2cf1903a184b558ae0c198547c251ff06b58f1d4731fbfaac5b8454dd3f5b",
+            "metadata": "captures/20261026T235325891_0a2b3125.json",
+            "scenario": "unit/fadyme",
+            "lineId": "",
+            "unitState": "active",
+            "unitFrame": "active_2"
+        },
+        {
+            "id": "20261026T235330501_f3fa42e7",
+            "image": "captures/20261026T235330501_f3fa42e7.png",
+            "sha256": "450332588973d6f598662253f5a7ef1e76c454ed4f361fbd7ea9bf35edb9791f",
+            "metadata": "captures/20261026T235330501_f3fa42e7.json",
+            "scenario": "unit/fadyme",
+            "lineId": "",
+            "unitState": "active",
+            "unitFrame": "active_2"
+        },
+        {
+            "id": "20261027T002002464_93e9ac1e",
+            "image": "captures/20261027T002002464_93e9ac1e.png",
+            "sha256": "e68406a1c36b92dcfefade8c461308545335ae884ff1d17875c7110c7511f22f",
+            "metadata": "captures/20261027T002002464_93e9ac1e.json",
+            "scenario": "unit/mahmut",
+            "lineId": "",
+            "unitState": "basic",
+            "unitFrame": "basic_2"
         }
     ]
 }

@@ -35,6 +35,38 @@
       }
     },
     {
+      "output": "content/base/art/atlas_sol_fadyme.webp",
+      "sha256": "57e608fa73d0fbab8c12bf2d8eef19360e3a139ea73f8c50083d0639d83d3a09",
+      "sources": {
+        "generated:sol_fadyme_chibi_sheet@rev1": "c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+        "entry": "729b3f4674d3d72b86498808e68c1f61866e02cdc7d01e8d12cf2008b816040f"
+      }
+    },
+    {
+      "output": "content/base/art/atlas_sol_mahmut.webp",
+      "sha256": "8a2745ef36049af9c8b9c449840c46fd0092cf1acc2af3c2e85d90d82b0dec29",
+      "sources": {
+        "generated:sol_mahmut_chibi_sheet@rev1": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76",
+        "entry": "7cb53f900267c572be2574715975066103cf1ea664f942960245d5f7dd4aa92b"
+      }
+    },
+    {
+      "output": "content/base/art/atlas_sol_bellbound_dead.webp",
+      "sha256": "083ff18e06b50656c83b47be550a2482ca52ef158a5d98fe0f4573fbc9184ae0",
+      "sources": {
+        "generated:sol_bellbound_dead_chibi_sheet@rev1": "a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+        "entry": "5aec586d0e0f62327372738d9d4e5701dd01727892b6bb792d809829c2b5f48d"
+      }
+    },
+    {
+      "output": "content/base/art/atlas_sol_hollow_pilgrim.webp",
+      "sha256": "f7d913f91e5c0b34d5eabe4e55fed54d20378d3dec9602f1068eca88374f5e8a",
+      "sources": {
+        "generated:sol_hollow_pilgrim_chibi_sheet@rev1": "fa644b80e4bf36ead64a07f69292ee73e7c973e1588f05b57035f0531e29a25c",
+        "entry": "391b2ab3248045019bc71c1c6b64e7c04863cf5b8e4cd3ba15aabb7144f9cfc2"
+      }
+    },
+    {
       "output": "content/base/art/portrait_mahmut_composed.webp",
       "sha256": "13d0080a2b5b02f3c7249f03de6f2e3ff87e220b7f344319b84e57278ff0e63e",
       "sources": {
@@ -595,7 +627,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "3aa7f7222340fe2ebc8f0e92084cb2a3d7522a392ebb3bb1fde3fb75f9be4b7d",
+      "sha256": "88a17430d441371fdccd1e8609117e9f0ee09b16344d450a25354842bfaeda0f",
       "sources": {}
     },
     {

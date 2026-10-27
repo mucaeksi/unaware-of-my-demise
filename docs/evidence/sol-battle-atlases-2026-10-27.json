@@ -1,0 +1,3694 @@
+{
+  "schema": 1,
+  "status": "LOCAL_TESTED",
+  "verified_at": "2026-10-27T00:30:31.694Z",
+  "verified_local_date": "2026-10-27",
+  "timezone": "Europe/Bucharest",
+  "parent_commit": "14498b57e480b2cfb44b5c355d37860f806f2b31",
+  "source_scope": "Parent plus this battle atlas/review working tree; the enclosing local commit binds final source/art/docs. No push or deploy.",
+  "source_sha256_normalized_lf": {
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs": "69063586ec4f82e4fb006d72158e8b20f531687014eb1acabcb8d055e6a81271",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs": "8dccda65433a4431776f9ac20644132dceabe1be970b7876929c34e3ef743261",
+    "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs": "d2942b4258e3d094fd0bef4b4fb11a70191f4c84a0d3696170960107569df13f",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/BattleUnitView.cs": "641c750f087881d999e5f7b014365c8b993d97c6b42a628caf2f18883287d3b5",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs": "0841b746ec246bfa6123a0d00f1425e0dc8133957c7760e211fb82e7e71861e6",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs": "e9626f8505949fcebad10332bdca6c2c3ca72a54e5e443ca4965edb2c624b362",
+    "apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs": "a21c00d705b9eec811f87f939187b137e4f457f5e63abca4959050c32db79f73",
+    "tools/build_content.ts": "4a7ddfb32117cb2a5092515978e19a19c12f0fd6507de45a2cf6817909b6bcb9",
+    "tools/ingest_art.ts": "68bbbf46058ff66ac4453832c9e6ab0d76b6d0169fa794616bc68b9161a2447d",
+    "tools/lib/ingest-art.test.ts": "819a6841a40dd2d19a96594173995076f1079474b9fbf4a40200e5fb12f04e2a",
+    "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildUnitReviewScreen.cs": "fdb17ac82f955aae42274be715691c6e83da9f52a0e8f0a257d7b17f9483b07a",
+    "apps/unity/Assets/_UOMD/Tests/Editor/UnitAtlasReviewTests.cs": "002c049a9c76d299b68d69c432ae3c3130c301ef89b4d95047ab7dc76e834f61"
+  },
+  "unity": {
+    "version": "6000.3.27f1",
+    "pipeline": "0.9.1-exp.1",
+    "transport": "Unity CLI only",
+    "mcp_calls_for_this_delivery": 0,
+    "mcp_configuration": "unchanged"
+  },
+  "generation": {
+    "provider": "OpenAI",
+    "tool": "image_gen.imagegen",
+    "calls": 8,
+    "selected_native_pages": 5,
+    "derived_source_assemblies": 1,
+    "retained_rejected_attempts": 3,
+    "model": "not_disclosed_by_builtin_tool",
+    "cost_usd": null,
+    "external_provider_api_generation_calls": 0
+  },
+  "assets": [
+    {
+      "asset_id": "sol_mahmut_chibi_sheet",
+      "unit_key": "sol_mahmut",
+      "source": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+      "source_sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76",
+      "source_dimensions": [
+        1536,
+        1024
+      ],
+      "source_is_native_generation": true,
+      "source_resized_or_upscaled": false,
+      "prompt": "content/generated/openai/sol_mahmut_chibi_sheet/prompt.txt",
+      "prompt_sha256": "74ec0ba40b057c5d8fce9cd9c8d234cab330dec29311bba4a33e9b33996b5594",
+      "provenance": "content/generated/openai/sol_mahmut_chibi_sheet/run.provenance.json",
+      "provenance_sha256": "f14691c6b3e59da14be4fef17af68148b7156206180f8214582a45d8c133731c",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_mahmut_vn_composed/source.png",
+          "role": "openai_identity_costume",
+          "sha256": "184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+        },
+        {
+          "path": "content/generated/openai/sol_mahmut_chibi_sheet/corrected-packing-02.png",
+          "role": "openai_style_only_rejected_packing",
+          "sha256": "4d6eee1a5e0c3a9db52f95650dcfb900dbb0793366d0b37ab08f34ae75c2a186"
+        }
+      ],
+      "generation_runs": [],
+      "assembly": null,
+      "retained_rejected_attempts": [
+        {
+          "file": "content/generated/openai/sol_mahmut_chibi_sheet/rejected-packing-01.png",
+          "sha256": "faa627f087ec24daf514aec8c6a6988598c8a08f1bfa1c4cc6ef9c22f46791d6",
+          "prompt_file": "content/generated/openai/sol_mahmut_chibi_sheet/rejected-packing-01.prompt.txt",
+          "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-17c507ba-3deb-499d-b7d0-fb4cb7a9f696.png",
+          "reason": "Crowded portrait packing, touching/overlapping figure boxes."
+        },
+        {
+          "file": "content/generated/openai/sol_mahmut_chibi_sheet/corrected-packing-02.png",
+          "sha256": "4d6eee1a5e0c3a9db52f95650dcfb900dbb0793366d0b37ab08f34ae75c2a186",
+          "prompt_file": "content/generated/openai/sol_mahmut_chibi_sheet/correction.prompt.txt",
+          "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-27b812ae-c42a-4484-b685-9c8577189b35.png",
+          "reason": "Packing correction still touched; retained as style-only reference for the new wide rendering."
+        }
+      ],
+      "ingest_entry": "content/approved_art/entries/sol_mahmut_chibi_sheet.json",
+      "ingest_entry_sha256": "cac7cb876019df4693446a5a38dadebdcee425c43015eb40849b108765bb4f62",
+      "outputs": [
+        {
+          "path": "art/atlas_sol_mahmut.webp",
+          "sha256": "8a2745ef36049af9c8b9c449840c46fd0092cf1acc2af3c2e85d90d82b0dec29",
+          "pixels_sha256": "0884c6eaf57c3a55698060031380fc1acae50b90d2f22e9fd797c00004b045cf",
+          "bytes": 303220,
+          "width": 1967,
+          "height": 411
+        }
+      ],
+      "targets": {
+        "atlases": {
+          "atlas_sol_mahmut": {
+            "image": "art/atlas_sol_mahmut.webp",
+            "width": 1967,
+            "height": 411,
+            "frames": {
+              "victory": [
+                4,
+                4,
+                162,
+                206
+              ],
+              "idle": [
+                170,
+                4,
+                165,
+                200
+              ],
+              "idle_2": [
+                339,
+                4,
+                165,
+                200
+              ],
+              "idle_3": [
+                508,
+                4,
+                165,
+                200
+              ],
+              "walk": [
+                677,
+                4,
+                169,
+                200
+              ],
+              "defeat": [
+                850,
+                4,
+                214,
+                198
+              ],
+              "hit": [
+                1068,
+                4,
+                214,
+                198
+              ],
+              "ultimate": [
+                1286,
+                4,
+                223,
+                194
+              ],
+              "ultimate_2": [
+                1513,
+                4,
+                223,
+                194
+              ],
+              "ultimate_3": [
+                1740,
+                4,
+                223,
+                194
+              ],
+              "basic": [
+                4,
+                214,
+                206,
+                193
+              ],
+              "basic_2": [
+                214,
+                214,
+                206,
+                193
+              ],
+              "basic_3": [
+                424,
+                214,
+                206,
+                193
+              ],
+              "active": [
+                634,
+                214,
+                195,
+                190
+              ],
+              "active_2": [
+                833,
+                214,
+                195,
+                190
+              ],
+              "active_3": [
+                1032,
+                214,
+                195,
+                190
+              ]
+            }
+          }
+        },
+        "units": {
+          "sol_mahmut": {
+            "atlas": "atlas_sol_mahmut",
+            "facing": "right",
+            "height_px": 216,
+            "states": {
+              "idle": {
+                "frame": "idle",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.52,
+                "animation": {
+                  "frames": [
+                    "idle",
+                    "idle_2",
+                    "idle_3",
+                    "idle_2"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              },
+              "walk": {
+                "frame": "walk",
+                "scale": 1,
+                "foot_y": 0.996,
+                "pivot_x": 0.527,
+                "animation": {
+                  "frames": [
+                    "walk",
+                    "idle_2",
+                    "walk",
+                    "idle_3"
+                  ],
+                  "fps": 8,
+                  "loop": true
+                }
+              },
+              "basic": {
+                "frame": "basic",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.49,
+                "animation": {
+                  "frames": [
+                    "basic",
+                    "basic_2",
+                    "basic_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "active": {
+                "frame": "active",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.519,
+                "animation": {
+                  "frames": [
+                    "active",
+                    "active_2",
+                    "active_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "ultimate": {
+                "frame": "ultimate",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.447,
+                "animation": {
+                  "frames": [
+                    "ultimate",
+                    "ultimate_2",
+                    "ultimate_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "hit": {
+                "frame": "hit",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.53,
+                "animation": {
+                  "frames": [
+                    "hit"
+                  ],
+                  "fps": 8,
+                  "loop": false
+                }
+              },
+              "defeat": {
+                "frame": "defeat",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.53,
+                "animation": {
+                  "frames": [
+                    "hit",
+                    "defeat"
+                  ],
+                  "fps": 6,
+                  "loop": false
+                }
+              },
+              "victory": {
+                "frame": "victory",
+                "scale": 1,
+                "foot_y": 0.996,
+                "pivot_x": 0.525,
+                "animation": {
+                  "frames": [
+                    "victory"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "qc": {
+        "automated": {
+          "passed": true,
+          "gates": {
+            "A31": {
+              "status": "pass",
+              "detail": "2 references verified"
+            },
+            "A01": {
+              "status": "pass"
+            },
+            "A02": {
+              "status": "pass",
+              "detail": "image/png 1536x1024"
+            },
+            "A21": {
+              "status": "pass"
+            },
+            "A14": {
+              "status": "pass",
+              "detail": "16 cells"
+            },
+            "A15": {
+              "status": "pass"
+            },
+            "A03": {
+              "status": "pass",
+              "detail": "k=0.810"
+            },
+            "A18": {
+              "status": "pass",
+              "detail": "1967x411"
+            },
+            "A19": {
+              "status": "pass",
+              "detail": "303220 bytes <= 665600"
+            }
+          },
+          "warnings": []
+        },
+        "human": {
+          "status": "pending",
+          "by": null,
+          "at": null,
+          "note": ""
+        }
+      }
+    },
+    {
+      "asset_id": "sol_fadyme_chibi_sheet",
+      "unit_key": "sol_fadyme",
+      "source": "content/generated/openai/sol_fadyme_chibi_sheet/source.png",
+      "source_sha256": "c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+      "source_dimensions": [
+        1536,
+        2048
+      ],
+      "source_is_native_generation": false,
+      "source_resized_or_upscaled": false,
+      "prompt": "content/generated/openai/sol_fadyme_chibi_sheet/prompt.txt",
+      "prompt_sha256": "49abfe02c56ed6d0b6d7ba1f60228ccb7f2f6a7d0247e8c13dfc49d4b53bbd87",
+      "provenance": "content/generated/openai/sol_fadyme_chibi_sheet/run.provenance.json",
+      "provenance_sha256": "c1be2010e8b9c9ca1e3d4623eb937fb0ca9d77c1f60236cd98a60d9cf3b02023",
+      "references": [
+        {
+          "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+          "role": "openai_identity_costume",
+          "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc"
+        },
+        {
+          "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+          "role": "openai_chibi_style_and_layout",
+          "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+        },
+        {
+          "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+          "role": "openai_native_page_a",
+          "sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba"
+        },
+        {
+          "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.png",
+          "role": "openai_native_page_b",
+          "sha256": "703d1c19ddaa3c0c776b69c6124778c9be572a2e74beab2a2576b7450ae553d2"
+        }
+      ],
+      "generation_runs": [
+        {
+          "page": "a",
+          "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-76f4a0f5-b54e-4198-868b-d0c900829579.png",
+          "source": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+          "source_sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba",
+          "native_dimensions": [
+            1536,
+            1024
+          ],
+          "prompt_file": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.prompt.txt",
+          "prompt": "Use case: stylized-concept. Fadyme battle animation atlas PAGE A of a two-page atlas. New original SD chibi sprite art.\nImage 1 supplies ONLY adult identity/costume: Fadyme, 22, ash-blonde hair, violet eyes, pointed plum hood and layered modest plum travelling robe with fine silver embroidery, white neck scarf, dark gloves and belt. Image 2 supplies ONLY Gothic-anime chibi contour/cel-shading style; do not copy Mahmut, weapons, shield or sixteen-cell layout.\nCreate a native LANDSCAPE 3:2 PNG with TRUE TRANSPARENT alpha. Exactly FOUR COLUMNS AND TWO ROWS, ONLY EIGHT chibis total. Use the extra cell height for generous empty transparent gaps. Each identical cell is 25% image width and 50% image height. Every complete chibi with all hands, cloth and bell fits within central 65% cell width and central 65% cell height. No overlap/touching between figures or rows, no near touching. A broad transparent band divides the two rows. Native resolution 1536x1024 or larger without upscaling.\nEach chibi is TWO HEADS tall, large head ~half total height, slim petite adult body, facing RIGHT in the same three-quarter side view. Same head scale, costume, light and camera in all eight cells. Exactly ONE small bronze handbell held on a short chain by her gloved hand, always attached and always above boots. Her belt carries NO bell or metal pendant; front hanging panels are visibly fabric, not bell shapes. No staff, weapon, wings, extra limbs or new objects.\nEight cells, left to right:\ntop row: (1) idle composed, bell near waist, (2) idle inhale with tiny shoulder lift, (3) idle exhale with robe settling, (4) a small walking step.\nbottom row: (5) basic anticipation, bell hand drawn slightly back, (6) basic impact, compact forward bell-hand gesture, (7) basic recovery returning bell close to waist, (8) active anticipation with both hands together holding the single bell near chest.\nAll standing boot soles share the same ground level inside each row. Keep exactly two arms/hands and two feet, no detached bell duplicates. No ground, shadow, particles, glow, trail, VFX, color background, labels, numbers, grid or checkerboard. Clean dark-plum contour, refined cel shading and subtle painted fabric detail. A sparse, roomy eight-cell production sheet; do not add any additional row or figures.\n",
+          "references": [
+            {
+              "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+              "role": "openai_identity_costume",
+              "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc"
+            },
+            {
+              "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+              "role": "openai_chibi_style_and_layout",
+              "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+            }
+          ]
+        },
+        {
+          "page": "b",
+          "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-4a1f477a-f4d6-4dd8-82fe-979d767d37b8.png",
+          "source": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.png",
+          "source_sha256": "703d1c19ddaa3c0c776b69c6124778c9be572a2e74beab2a2576b7450ae553d2",
+          "native_dimensions": [
+            1536,
+            1024
+          ],
+          "prompt_file": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.prompt.txt",
+          "prompt": "Use case: identity-preserve. Create Fadyme battle animation atlas PAGE B, a NEW eight-pose continuation of Image 1.\nImage 1 is the exact OPENAI character/style/scale/packing reference (PAGE A). Preserve her adult identity, ash-blonde hair, violet eyes, plum embroidered hood/robe, white scarf, boots and gloves, the same palette and two-head SD silhouette, lighting, head size and body scale. Do not copy Page A's existing poses. Exactly ONE bronze bell attached to a short chain held by her hand; no additional belt bell or metal pendant, no staff/weapon/new objects.\n\nUse the SAME native LANDSCAPE 3:2 dimensions and layout as Image 1: FOUR COLUMNS and TWO ROWS, exactly EIGHT separate complete chibis facing RIGHT. Keep broad true-alpha transparent padding between figures/rows and on the canvas edge. Every whole figure including the raised bell, hands, robe and boots stays inside its own cell, central 65% width and 70% height. Same standing boot baseline and head scale as Page A. Transparent gaps must be large enough for independent sprite extraction; no touching silhouettes.\n\nEight NEW poses read left-to-right:\ntop row: (1) active impact, bell raised toward shoulder, (2) active recovery lowering the bell, (3) ultimate anticipation, poised grounded stance with bell held at chest, (4) ultimate impact, resolute bell raised just beside the head, compact robe movement.\nbottom row: (5) ultimate recovery lowering bell toward waist, (6) mild hit recoil with narrowed eyes and intact body, (7) defeat on one knee, head lowered, intact complete figure and bell, (8) small warm composed victory with bell held at waist.\nNo extra figures, labels, grid, text, color background, checkerboard, ground, shadows, particles, light trails, magic effects or gore. True alpha outside silhouettes. This is a sprite animation continuation, not a fashion redesign or a scene. Native original rendering, no upscaling.\n",
+          "references": [
+            {
+              "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+              "role": "openai_native_page_a",
+              "sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba"
+            }
+          ]
+        }
+      ],
+      "assembly": {
+        "kind": "lossless_raw_rgba_vertical_concatenation",
+        "inputs": [
+          {
+            "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+            "role": "openai_native_page_a",
+            "sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba"
+          },
+          {
+            "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.png",
+            "role": "openai_native_page_b",
+            "sha256": "703d1c19ddaa3c0c776b69c6124778c9be572a2e74beab2a2576b7450ae553d2"
+          }
+        ],
+        "resampling": false,
+        "decoded_output_equals_concatenated_input_rgba": true,
+        "native_generated_pages": 2,
+        "derived_source_native": false
+      },
+      "retained_rejected_attempts": [
+        {
+          "file": "content/generated/openai/sol_fadyme_chibi_sheet/rejected-touching-01.png",
+          "sha256": "5a5564049a0d91b1c8834a8d712e007c9f9dcab19d31f36abf7a3938126ef25b",
+          "prompt_file": "content/generated/openai/sol_fadyme_chibi_sheet/rejected-touching-01.prompt.txt",
+          "original_tool_artifact": "C:\\Users\\PC\\.codex\\generated_images\\01a1786e-46ee-7082-b2e1-6df0133942a6\\exec-aeb6c7fb-a187-4240-bf83-418556400b56.png",
+          "reason": "Fifteen components rather than sixteen; row3/4 touching silhouettes."
+        }
+      ],
+      "ingest_entry": "content/approved_art/entries/sol_fadyme_chibi_sheet.json",
+      "ingest_entry_sha256": "b818c21c817ef0fd30207e7efbb74238ae031a01438eaadb188d98372e9fbefc",
+      "outputs": [
+        {
+          "path": "art/atlas_sol_fadyme.webp",
+          "sha256": "57e608fa73d0fbab8c12bf2d8eef19360e3a139ea73f8c50083d0639d83d3a09",
+          "pixels_sha256": "64cb8342a1937d7f3926ab2eb5fdee0356f982f632a5fed64a4b4d6f45aa47c7",
+          "bytes": 379812,
+          "width": 1944,
+          "height": 535
+        }
+      ],
+      "targets": {
+        "atlases": {
+          "atlas_sol_fadyme": {
+            "image": "art/atlas_sol_fadyme.webp",
+            "width": 1944,
+            "height": 535,
+            "frames": {
+              "idle": [
+                4,
+                4,
+                174,
+                269
+              ],
+              "idle_2": [
+                182,
+                4,
+                174,
+                269
+              ],
+              "idle_3": [
+                360,
+                4,
+                174,
+                269
+              ],
+              "ultimate": [
+                538,
+                4,
+                204,
+                261
+              ],
+              "ultimate_2": [
+                746,
+                4,
+                204,
+                261
+              ],
+              "ultimate_3": [
+                954,
+                4,
+                204,
+                261
+              ],
+              "victory": [
+                1162,
+                4,
+                159,
+                260
+              ],
+              "walk": [
+                1325,
+                4,
+                179,
+                259
+              ],
+              "active": [
+                1508,
+                4,
+                214,
+                254
+              ],
+              "active_2": [
+                1726,
+                4,
+                214,
+                254
+              ],
+              "active_3": [
+                4,
+                277,
+                214,
+                254
+              ],
+              "basic": [
+                222,
+                277,
+                229,
+                248
+              ],
+              "basic_2": [
+                455,
+                277,
+                229,
+                248
+              ],
+              "basic_3": [
+                688,
+                277,
+                229,
+                248
+              ],
+              "defeat": [
+                921,
+                277,
+                212,
+                243
+              ],
+              "hit": [
+                1137,
+                277,
+                212,
+                243
+              ]
+            }
+          }
+        },
+        "units": {
+          "sol_fadyme": {
+            "atlas": "atlas_sol_fadyme",
+            "facing": "right",
+            "height_px": 204,
+            "states": {
+              "idle": {
+                "frame": "idle",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.482,
+                "animation": {
+                  "frames": [
+                    "idle",
+                    "idle_2",
+                    "idle_3",
+                    "idle_2"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              },
+              "walk": {
+                "frame": "walk",
+                "scale": 1,
+                "foot_y": 0.998,
+                "pivot_x": 0.496,
+                "animation": {
+                  "frames": [
+                    "walk",
+                    "idle_2",
+                    "walk",
+                    "idle_3"
+                  ],
+                  "fps": 8,
+                  "loop": true
+                }
+              },
+              "basic": {
+                "frame": "basic",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.457,
+                "animation": {
+                  "frames": [
+                    "basic",
+                    "basic_2",
+                    "basic_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "active": {
+                "frame": "active",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.495,
+                "animation": {
+                  "frames": [
+                    "active",
+                    "active_2",
+                    "active_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "ultimate": {
+                "frame": "ultimate",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.494,
+                "animation": {
+                  "frames": [
+                    "ultimate",
+                    "ultimate_2",
+                    "ultimate_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "hit": {
+                "frame": "hit",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.462,
+                "animation": {
+                  "frames": [
+                    "hit"
+                  ],
+                  "fps": 8,
+                  "loop": false
+                }
+              },
+              "defeat": {
+                "frame": "defeat",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.462,
+                "animation": {
+                  "frames": [
+                    "hit",
+                    "defeat"
+                  ],
+                  "fps": 6,
+                  "loop": false
+                }
+              },
+              "victory": {
+                "frame": "victory",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.523,
+                "animation": {
+                  "frames": [
+                    "victory"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "qc": {
+        "automated": {
+          "passed": true,
+          "gates": {
+            "A31": {
+              "status": "pass",
+              "detail": "4 references verified"
+            },
+            "A01": {
+              "status": "pass"
+            },
+            "A02": {
+              "status": "pass",
+              "detail": "image/png 1536x2048"
+            },
+            "A21": {
+              "status": "pass"
+            },
+            "A14": {
+              "status": "pass",
+              "detail": "16 cells"
+            },
+            "A15": {
+              "status": "pass"
+            },
+            "A03": {
+              "status": "pass",
+              "detail": "k=0.582"
+            },
+            "A18": {
+              "status": "pass",
+              "detail": "1944x535"
+            },
+            "A19": {
+              "status": "pass",
+              "detail": "379812 bytes <= 665600"
+            }
+          },
+          "warnings": []
+        },
+        "human": {
+          "status": "pending",
+          "by": null,
+          "at": null,
+          "note": ""
+        }
+      }
+    },
+    {
+      "asset_id": "sol_bellbound_dead_chibi_sheet",
+      "unit_key": "sol_bellbound_dead",
+      "source": "content/generated/openai/sol_bellbound_dead_chibi_sheet/source.png",
+      "source_sha256": "a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+      "source_dimensions": [
+        1536,
+        1024
+      ],
+      "source_is_native_generation": true,
+      "source_resized_or_upscaled": false,
+      "prompt": "content/generated/openai/sol_bellbound_dead_chibi_sheet/prompt.txt",
+      "prompt_sha256": "aed706acb8048d114ceb664f11c93e8511d655d7b5889d54be36fea6162c2fe0",
+      "provenance": "content/generated/openai/sol_bellbound_dead_chibi_sheet/run.provenance.json",
+      "provenance_sha256": "5634fe3fb69d53f0396c74b238291a6c1065a59274e9c8d0b83e576e4a00b184",
+      "references": [
+        {
+          "path": "narrative/15_Art_Workbench/enemies/units/bellbound_dead/design_v001/sheet/bellbound_dead_sheet_v001.jpg",
+          "role": "historical_identity_reference_only",
+          "sha256": "faf07e4380653641b85c154d650d9d40a89fc800d6e4d50222208b8b706ce424"
+        },
+        {
+          "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+          "role": "openai_chibi_style_and_layout",
+          "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+        }
+      ],
+      "generation_runs": [],
+      "assembly": null,
+      "retained_rejected_attempts": [],
+      "ingest_entry": "content/approved_art/entries/sol_bellbound_dead_chibi_sheet.json",
+      "ingest_entry_sha256": "8bcda882cc90482951ae3fc5dec930a430e15dc0544d313bc79d26ec1aac4f99",
+      "outputs": [
+        {
+          "path": "art/atlas_sol_bellbound_dead.webp",
+          "sha256": "083ff18e06b50656c83b47be550a2482ca52ef158a5d98fe0f4573fbc9184ae0",
+          "pixels_sha256": "20a5a51ed5fa9e6ec8a925a3b15a4a7078b745dca367acda9b6551dace6c6fb6",
+          "bytes": 277306,
+          "width": 1888,
+          "height": 388
+        }
+      ],
+      "targets": {
+        "atlases": {
+          "atlas_sol_bellbound_dead": {
+            "image": "art/atlas_sol_bellbound_dead.webp",
+            "width": 1888,
+            "height": 388,
+            "frames": {
+              "idle": [
+                4,
+                4,
+                127,
+                200
+              ],
+              "idle_2": [
+                135,
+                4,
+                127,
+                200
+              ],
+              "idle_3": [
+                266,
+                4,
+                127,
+                200
+              ],
+              "walk": [
+                397,
+                4,
+                157,
+                190
+              ],
+              "defeat": [
+                558,
+                4,
+                238,
+                183
+              ],
+              "hit": [
+                800,
+                4,
+                238,
+                183
+              ],
+              "basic": [
+                1042,
+                4,
+                278,
+                178
+              ],
+              "basic_2": [
+                1324,
+                4,
+                278,
+                178
+              ],
+              "basic_3": [
+                1606,
+                4,
+                278,
+                178
+              ],
+              "active": [
+                4,
+                208,
+                266,
+                176
+              ],
+              "active_2": [
+                274,
+                208,
+                266,
+                176
+              ],
+              "active_3": [
+                544,
+                208,
+                266,
+                176
+              ],
+              "ultimate": [
+                814,
+                208,
+                293,
+                169
+              ],
+              "ultimate_2": [
+                1111,
+                208,
+                293,
+                169
+              ],
+              "ultimate_3": [
+                1408,
+                208,
+                293,
+                169
+              ],
+              "victory": [
+                1705,
+                208,
+                150,
+                168
+              ]
+            }
+          }
+        },
+        "units": {
+          "sol_bellbound_dead": {
+            "atlas": "atlas_sol_bellbound_dead",
+            "facing": "left",
+            "height_px": 196,
+            "states": {
+              "idle": {
+                "frame": "idle",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.585,
+                "animation": {
+                  "frames": [
+                    "idle",
+                    "idle_2",
+                    "idle_3",
+                    "idle_2"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              },
+              "walk": {
+                "frame": "walk",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.516,
+                "animation": {
+                  "frames": [
+                    "walk",
+                    "idle_2",
+                    "walk",
+                    "idle_3"
+                  ],
+                  "fps": 8,
+                  "loop": true
+                }
+              },
+              "basic": {
+                "frame": "basic",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.567,
+                "animation": {
+                  "frames": [
+                    "basic",
+                    "basic_2",
+                    "basic_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "active": {
+                "frame": "active",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.723,
+                "animation": {
+                  "frames": [
+                    "active",
+                    "active_2",
+                    "active_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "ultimate": {
+                "frame": "ultimate",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.612,
+                "animation": {
+                  "frames": [
+                    "ultimate",
+                    "ultimate_2",
+                    "ultimate_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "hit": {
+                "frame": "hit",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.524,
+                "animation": {
+                  "frames": [
+                    "hit"
+                  ],
+                  "fps": 8,
+                  "loop": false
+                }
+              },
+              "defeat": {
+                "frame": "defeat",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.524,
+                "animation": {
+                  "frames": [
+                    "hit",
+                    "defeat"
+                  ],
+                  "fps": 6,
+                  "loop": false
+                }
+              },
+              "victory": {
+                "frame": "victory",
+                "scale": 1,
+                "foot_y": 0.995,
+                "pivot_x": 0.526,
+                "animation": {
+                  "frames": [
+                    "victory"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "qc": {
+        "automated": {
+          "passed": true,
+          "gates": {
+            "A31": {
+              "status": "pass",
+              "detail": "2 references verified"
+            },
+            "A01": {
+              "status": "pass"
+            },
+            "A02": {
+              "status": "pass",
+              "detail": "image/png 1536x1024"
+            },
+            "A21": {
+              "status": "pass"
+            },
+            "A14": {
+              "status": "pass",
+              "detail": "16 cells"
+            },
+            "A15": {
+              "status": "pass"
+            },
+            "A03": {
+              "status": "pass",
+              "detail": "k=0.866"
+            },
+            "A18": {
+              "status": "pass",
+              "detail": "1888x388"
+            },
+            "A19": {
+              "status": "pass",
+              "detail": "277306 bytes <= 665600"
+            }
+          },
+          "warnings": []
+        },
+        "human": {
+          "status": "pending",
+          "by": null,
+          "at": null,
+          "note": ""
+        }
+      }
+    },
+    {
+      "asset_id": "sol_hollow_pilgrim_chibi_sheet",
+      "unit_key": "sol_hollow_pilgrim",
+      "source": "content/generated/openai/sol_hollow_pilgrim_chibi_sheet/source.png",
+      "source_sha256": "fa644b80e4bf36ead64a07f69292ee73e7c973e1588f05b57035f0531e29a25c",
+      "source_dimensions": [
+        1536,
+        1024
+      ],
+      "source_is_native_generation": true,
+      "source_resized_or_upscaled": false,
+      "prompt": "content/generated/openai/sol_hollow_pilgrim_chibi_sheet/prompt.txt",
+      "prompt_sha256": "b2a1a3c0caa0b5b04c46c6f5951d7fdd7c878a154e5b5ebf68846636ef96314a",
+      "provenance": "content/generated/openai/sol_hollow_pilgrim_chibi_sheet/run.provenance.json",
+      "provenance_sha256": "b7dca9455591a517fe215e4d4d395b57d6f54a071850a90e008ff2139f767be5",
+      "references": [
+        {
+          "path": "narrative/15_Art_Workbench/enemies/units/hollow_pilgrim/design_v001/sheet/hollow_pilgrim_sheet_v001.jpg",
+          "role": "historical_identity_reference_only",
+          "sha256": "49cd19a5c1e576d4068060a7be37b1a5dd7b422d8b7082de861f94437d74e4e0"
+        },
+        {
+          "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+          "role": "openai_chibi_style_and_layout",
+          "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+        }
+      ],
+      "generation_runs": [],
+      "assembly": null,
+      "retained_rejected_attempts": [],
+      "ingest_entry": "content/approved_art/entries/sol_hollow_pilgrim_chibi_sheet.json",
+      "ingest_entry_sha256": "1dfc54646fbbf778b14e4d5c1c19090ec2489899e5df9098dcefc4e588f4563a",
+      "outputs": [
+        {
+          "path": "art/atlas_sol_hollow_pilgrim.webp",
+          "sha256": "f7d913f91e5c0b34d5eabe4e55fed54d20378d3dec9602f1068eca88374f5e8a",
+          "pixels_sha256": "ef786a80c4a0158e2f38b858956cd264fa4dcc5475bff799aad6dd45a50e8b61",
+          "bytes": 307348,
+          "width": 1936,
+          "height": 420
+        }
+      ],
+      "targets": {
+        "atlases": {
+          "atlas_sol_hollow_pilgrim": {
+            "image": "art/atlas_sol_hollow_pilgrim.webp",
+            "width": 1936,
+            "height": 420,
+            "frames": {
+              "basic": [
+                4,
+                4,
+                257,
+                208
+              ],
+              "basic_2": [
+                265,
+                4,
+                257,
+                208
+              ],
+              "basic_3": [
+                526,
+                4,
+                257,
+                208
+              ],
+              "ultimate": [
+                787,
+                4,
+                259,
+                207
+              ],
+              "ultimate_2": [
+                1050,
+                4,
+                259,
+                207
+              ],
+              "ultimate_3": [
+                1313,
+                4,
+                259,
+                207
+              ],
+              "victory": [
+                1576,
+                4,
+                170,
+                201
+              ],
+              "idle": [
+                1750,
+                4,
+                182,
+                200
+              ],
+              "idle_2": [
+                4,
+                216,
+                182,
+                200
+              ],
+              "idle_3": [
+                190,
+                216,
+                182,
+                200
+              ],
+              "walk": [
+                376,
+                216,
+                205,
+                199
+              ],
+              "active": [
+                585,
+                216,
+                208,
+                194
+              ],
+              "active_2": [
+                797,
+                216,
+                208,
+                194
+              ],
+              "active_3": [
+                1009,
+                216,
+                208,
+                194
+              ],
+              "defeat": [
+                1221,
+                216,
+                238,
+                190
+              ],
+              "hit": [
+                1463,
+                216,
+                238,
+                190
+              ]
+            }
+          }
+        },
+        "units": {
+          "sol_hollow_pilgrim": {
+            "atlas": "atlas_sol_hollow_pilgrim",
+            "facing": "left",
+            "height_px": 236,
+            "states": {
+              "idle": {
+                "frame": "idle",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.514,
+                "animation": {
+                  "frames": [
+                    "idle",
+                    "idle_2",
+                    "idle_3",
+                    "idle_2"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              },
+              "walk": {
+                "frame": "walk",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.543,
+                "animation": {
+                  "frames": [
+                    "walk",
+                    "idle_2",
+                    "walk",
+                    "idle_3"
+                  ],
+                  "fps": 8,
+                  "loop": true
+                }
+              },
+              "basic": {
+                "frame": "basic",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.565,
+                "animation": {
+                  "frames": [
+                    "basic",
+                    "basic_2",
+                    "basic_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "active": {
+                "frame": "active",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.521,
+                "animation": {
+                  "frames": [
+                    "active",
+                    "active_2",
+                    "active_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "ultimate": {
+                "frame": "ultimate",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.552,
+                "animation": {
+                  "frames": [
+                    "ultimate",
+                    "ultimate_2",
+                    "ultimate_3"
+                  ],
+                  "fps": 9,
+                  "loop": false
+                }
+              },
+              "hit": {
+                "frame": "hit",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.474,
+                "animation": {
+                  "frames": [
+                    "hit"
+                  ],
+                  "fps": 8,
+                  "loop": false
+                }
+              },
+              "defeat": {
+                "frame": "defeat",
+                "scale": 1,
+                "foot_y": 1,
+                "pivot_x": 0.474,
+                "animation": {
+                  "frames": [
+                    "hit",
+                    "defeat"
+                  ],
+                  "fps": 6,
+                  "loop": false
+                }
+              },
+              "victory": {
+                "frame": "victory",
+                "scale": 1,
+                "foot_y": 0.996,
+                "pivot_x": 0.522,
+                "animation": {
+                  "frames": [
+                    "victory"
+                  ],
+                  "fps": 6,
+                  "loop": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "qc": {
+        "automated": {
+          "passed": true,
+          "gates": {
+            "A31": {
+              "status": "pass",
+              "detail": "2 references verified"
+            },
+            "A01": {
+              "status": "pass"
+            },
+            "A02": {
+              "status": "pass",
+              "detail": "image/png 1536x1024"
+            },
+            "A21": {
+              "status": "pass"
+            },
+            "A14": {
+              "status": "pass",
+              "detail": "16 cells"
+            },
+            "A15": {
+              "status": "pass"
+            },
+            "A03": {
+              "status": "pass",
+              "detail": "k=0.873"
+            },
+            "A18": {
+              "status": "pass",
+              "detail": "1936x420"
+            },
+            "A19": {
+              "status": "pass",
+              "detail": "307348 bytes <= 665600"
+            }
+          },
+          "warnings": []
+        },
+        "human": {
+          "status": "pending",
+          "by": null,
+          "at": null,
+          "note": ""
+        }
+      }
+    }
+  ],
+  "assembly_verification": {
+    "decoded_fadyme_source_equals_page_a_rgba_followed_by_page_b_rgba": true,
+    "resize": false,
+    "resampling": false,
+    "native_page_dimensions": [
+      1536,
+      1024
+    ],
+    "derived_source_dimensions": [
+      1536,
+      2048
+    ],
+    "derived_source_claimed_native": false
+  },
+  "consumers": {
+    "normal_play": "Canonical legacy unit-art keys remain separate. Native manual tutorial/battle UI and normal battle consumer migration are the next slice.",
+    "review": "Four Editor-only unit/<unit> routes render the new sol_<unit> variants through real BattleUnitView and Sprite.Create rect/pivot conversion. No combat, account, reward or entry write is instantiated.",
+    "frame_scope": "Sixteen source poses per unit; eight short explicit sequences, not rigs or sixteen distinct frames per state.",
+    "catalog": {
+      "candidates": 26,
+      "records": 460,
+      "ingest_entries": 284,
+      "reference_records": 176,
+      "final_accepted_replacements": 0
+    },
+    "export": {
+      "base_files": 228,
+      "base_atlases": 8,
+      "base_units": 8,
+      "decodable_siblings": 72
+    }
+  },
+  "validation": {
+    "npm_verify": {
+      "result": "PASS",
+      "workspace_and_tool_test_executions": 955,
+      "counts": {
+        "api": 507,
+        "unity_exporter": 5,
+        "combat": 100,
+        "schema": 132,
+        "economy": 53,
+        "patch": 41,
+        "shared": 26,
+        "story": 9,
+        "tools": 82
+      },
+      "reproduced_files": 231,
+      "log_sha256": "270fe39919f1fff418736a2536a12dc5e712f23bece6f08db3784c8149dc254f"
+    },
+    "editmode": {
+      "total": 133,
+      "passed": 133,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "editmode_duration": 8.98,
+    "playmode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playmode_duration": 2.84,
+    "headless_logic": {
+      "passed": 111,
+      "failed": 0
+    },
+    "reference_compile": {
+      "assemblies": 12,
+      "errors": 0,
+      "note": "Editor/player source; reference harness uses verified URP 17.3.0 signatures where compiled package assemblies are unavailable. Actual live Editor compilation also passed."
+    },
+    "skills": {
+      "adapters": 66,
+      "result": "PASS"
+    },
+    "graph": {
+      "nodes": 6631,
+      "edges": 18192,
+      "communities": 262,
+      "mode": "code-only; no paid extraction"
+    },
+    "console": {
+      "sampledUtc": "2026-10-27T00:25:49.5660077Z",
+      "ageMs": 90,
+      "compilationFailed": false,
+      "compiling": false,
+      "consoleErrors": 0,
+      "consoleWarnings": 4,
+      "consoleLogs": 168,
+      "seeded": true
+    },
+    "console_warning_note": "Four AudioDirectorTests get_time warnings on empty/non-clip audio resources at test lines 68/70. Tests passed; no errors. These are not asserted as zero-warning device evidence."
+  },
+  "ui_checks": {
+    "frame_selection_and_grounding": {
+      "checks": 84,
+      "max_foot_error_px": 0.40800000000001546,
+      "cases": [
+        {
+          "unit": "mahmut",
+          "state": "idle",
+          "index": 0,
+          "expected": "idle",
+          "actual": "idle",
+          "footError": 0,
+          "bounds": {
+            "x": 557,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "idle",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 557,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "idle",
+          "index": 2,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0,
+          "bounds": {
+            "x": 557,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "idle",
+          "index": 3,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 557,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 504,
+            "w": 179,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "walk",
+          "index": 0,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0.13599999999996726,
+          "bounds": {
+            "x": 554,
+            "y": 505,
+            "w": 182,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 505,
+            "w": 182,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "walk",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0.13599999999996726,
+          "bounds": {
+            "x": 556,
+            "y": 505,
+            "w": 178,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1186,
+            "y": 505,
+            "w": 178,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "walk",
+          "index": 2,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0.13599999999996726,
+          "bounds": {
+            "x": 554,
+            "y": 505,
+            "w": 182,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 505,
+            "w": 182,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "walk",
+          "index": 3,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0.13599999999996726,
+          "bounds": {
+            "x": 556,
+            "y": 505,
+            "w": 178,
+            "h": 216
+          },
+          "mirroredBounds": {
+            "x": 1186,
+            "y": 505,
+            "w": 178,
+            "h": 216
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "basic",
+          "index": 0,
+          "expected": "basic",
+          "actual": "basic",
+          "footError": 0,
+          "bounds": {
+            "x": 541,
+            "y": 512,
+            "w": 222,
+            "h": 208
+          },
+          "mirroredBounds": {
+            "x": 1157,
+            "y": 512,
+            "w": 222,
+            "h": 208
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "basic",
+          "index": 1,
+          "expected": "basic_2",
+          "actual": "basic_2",
+          "footError": 0,
+          "bounds": {
+            "x": 541,
+            "y": 512,
+            "w": 222,
+            "h": 208
+          },
+          "mirroredBounds": {
+            "x": 1157,
+            "y": 512,
+            "w": 222,
+            "h": 208
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "basic",
+          "index": 2,
+          "expected": "basic_3",
+          "actual": "basic_3",
+          "footError": 0,
+          "bounds": {
+            "x": 541,
+            "y": 512,
+            "w": 222,
+            "h": 208
+          },
+          "mirroredBounds": {
+            "x": 1157,
+            "y": 512,
+            "w": 222,
+            "h": 208
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "active",
+          "index": 0,
+          "expected": "active",
+          "actual": "active",
+          "footError": 0,
+          "bounds": {
+            "x": 541,
+            "y": 515,
+            "w": 210,
+            "h": 205
+          },
+          "mirroredBounds": {
+            "x": 1169,
+            "y": 515,
+            "w": 210,
+            "h": 205
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "active",
+          "index": 1,
+          "expected": "active_2",
+          "actual": "active_2",
+          "footError": 0,
+          "bounds": {
+            "x": 541,
+            "y": 515,
+            "w": 210,
+            "h": 205
+          },
+          "mirroredBounds": {
+            "x": 1169,
+            "y": 515,
+            "w": 210,
+            "h": 205
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "active",
+          "index": 2,
+          "expected": "active_3",
+          "actual": "active_3",
+          "footError": 0,
+          "bounds": {
+            "x": 541,
+            "y": 515,
+            "w": 210,
+            "h": 205
+          },
+          "mirroredBounds": {
+            "x": 1169,
+            "y": 515,
+            "w": 210,
+            "h": 205
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "ultimate",
+          "index": 0,
+          "expected": "ultimate",
+          "actual": "ultimate",
+          "footError": 0,
+          "bounds": {
+            "x": 542,
+            "y": 510,
+            "w": 241,
+            "h": 210
+          },
+          "mirroredBounds": {
+            "x": 1137,
+            "y": 510,
+            "w": 241,
+            "h": 210
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "ultimate",
+          "index": 1,
+          "expected": "ultimate_2",
+          "actual": "ultimate_2",
+          "footError": 0,
+          "bounds": {
+            "x": 542,
+            "y": 510,
+            "w": 241,
+            "h": 210
+          },
+          "mirroredBounds": {
+            "x": 1137,
+            "y": 510,
+            "w": 241,
+            "h": 210
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "ultimate",
+          "index": 2,
+          "expected": "ultimate_3",
+          "actual": "ultimate_3",
+          "footError": 0,
+          "bounds": {
+            "x": 542,
+            "y": 510,
+            "w": 241,
+            "h": 210
+          },
+          "mirroredBounds": {
+            "x": 1137,
+            "y": 510,
+            "w": 241,
+            "h": 210
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "hit",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 528,
+            "y": 506,
+            "w": 231,
+            "h": 214
+          },
+          "mirroredBounds": {
+            "x": 1161,
+            "y": 506,
+            "w": 231,
+            "h": 214
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "defeat",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 528,
+            "y": 506,
+            "w": 231,
+            "h": 214
+          },
+          "mirroredBounds": {
+            "x": 1161,
+            "y": 506,
+            "w": 231,
+            "h": 214
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "defeat",
+          "index": 1,
+          "expected": "defeat",
+          "actual": "defeat",
+          "footError": 0,
+          "bounds": {
+            "x": 528,
+            "y": 506,
+            "w": 231,
+            "h": 214
+          },
+          "mirroredBounds": {
+            "x": 1161,
+            "y": 506,
+            "w": 231,
+            "h": 214
+          }
+        },
+        {
+          "unit": "mahmut",
+          "state": "victory",
+          "index": 0,
+          "expected": "victory",
+          "actual": "victory",
+          "footError": 0.10799999999994725,
+          "bounds": {
+            "x": 558,
+            "y": 498,
+            "w": 175,
+            "h": 223
+          },
+          "mirroredBounds": {
+            "x": 1187,
+            "y": 498,
+            "w": 175,
+            "h": 223
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "idle",
+          "index": 0,
+          "expected": "idle",
+          "actual": "idle",
+          "footError": 0,
+          "bounds": {
+            "x": 586,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          },
+          "mirroredBounds": {
+            "x": 1202,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "idle",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 586,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          },
+          "mirroredBounds": {
+            "x": 1202,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "idle",
+          "index": 2,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0,
+          "bounds": {
+            "x": 586,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          },
+          "mirroredBounds": {
+            "x": 1202,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "idle",
+          "index": 3,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 586,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          },
+          "mirroredBounds": {
+            "x": 1202,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "walk",
+          "index": 0,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0.39200000000005275,
+          "bounds": {
+            "x": 583,
+            "y": 524,
+            "w": 135,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1202,
+            "y": 524,
+            "w": 135,
+            "h": 196
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "walk",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0.40800000000001546,
+          "bounds": {
+            "x": 585,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          },
+          "mirroredBounds": {
+            "x": 1203,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "walk",
+          "index": 2,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0.39200000000005275,
+          "bounds": {
+            "x": 583,
+            "y": 524,
+            "w": 135,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1202,
+            "y": 524,
+            "w": 135,
+            "h": 196
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "walk",
+          "index": 3,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0.40800000000001546,
+          "bounds": {
+            "x": 585,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          },
+          "mirroredBounds": {
+            "x": 1203,
+            "y": 516,
+            "w": 132,
+            "h": 204
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "basic",
+          "index": 0,
+          "expected": "basic",
+          "actual": "basic",
+          "footError": 0,
+          "bounds": {
+            "x": 571,
+            "y": 532,
+            "w": 173,
+            "h": 188
+          },
+          "mirroredBounds": {
+            "x": 1176,
+            "y": 532,
+            "w": 173,
+            "h": 188
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "basic",
+          "index": 1,
+          "expected": "basic_2",
+          "actual": "basic_2",
+          "footError": 0,
+          "bounds": {
+            "x": 571,
+            "y": 532,
+            "w": 173,
+            "h": 188
+          },
+          "mirroredBounds": {
+            "x": 1176,
+            "y": 532,
+            "w": 173,
+            "h": 188
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "basic",
+          "index": 2,
+          "expected": "basic_3",
+          "actual": "basic_3",
+          "footError": 0,
+          "bounds": {
+            "x": 571,
+            "y": 532,
+            "w": 173,
+            "h": 188
+          },
+          "mirroredBounds": {
+            "x": 1176,
+            "y": 532,
+            "w": 173,
+            "h": 188
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "active",
+          "index": 0,
+          "expected": "active",
+          "actual": "active",
+          "footError": 0,
+          "bounds": {
+            "x": 570,
+            "y": 527,
+            "w": 162,
+            "h": 193
+          },
+          "mirroredBounds": {
+            "x": 1188,
+            "y": 527,
+            "w": 162,
+            "h": 193
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "active",
+          "index": 1,
+          "expected": "active_2",
+          "actual": "active_2",
+          "footError": 0,
+          "bounds": {
+            "x": 570,
+            "y": 527,
+            "w": 162,
+            "h": 193
+          },
+          "mirroredBounds": {
+            "x": 1188,
+            "y": 527,
+            "w": 162,
+            "h": 193
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "active",
+          "index": 2,
+          "expected": "active_3",
+          "actual": "active_3",
+          "footError": 0,
+          "bounds": {
+            "x": 570,
+            "y": 527,
+            "w": 162,
+            "h": 193
+          },
+          "mirroredBounds": {
+            "x": 1188,
+            "y": 527,
+            "w": 162,
+            "h": 193
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "ultimate",
+          "index": 0,
+          "expected": "ultimate",
+          "actual": "ultimate",
+          "footError": 0,
+          "bounds": {
+            "x": 574,
+            "y": 522,
+            "w": 154,
+            "h": 198
+          },
+          "mirroredBounds": {
+            "x": 1192,
+            "y": 522,
+            "w": 154,
+            "h": 198
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "ultimate",
+          "index": 1,
+          "expected": "ultimate_2",
+          "actual": "ultimate_2",
+          "footError": 0,
+          "bounds": {
+            "x": 574,
+            "y": 522,
+            "w": 154,
+            "h": 198
+          },
+          "mirroredBounds": {
+            "x": 1192,
+            "y": 522,
+            "w": 154,
+            "h": 198
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "ultimate",
+          "index": 2,
+          "expected": "ultimate_3",
+          "actual": "ultimate_3",
+          "footError": 0,
+          "bounds": {
+            "x": 574,
+            "y": 522,
+            "w": 154,
+            "h": 198
+          },
+          "mirroredBounds": {
+            "x": 1192,
+            "y": 522,
+            "w": 154,
+            "h": 198
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "hit",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 576,
+            "y": 536,
+            "w": 160,
+            "h": 184
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 536,
+            "w": 160,
+            "h": 184
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "defeat",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 576,
+            "y": 536,
+            "w": 160,
+            "h": 184
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 536,
+            "w": 160,
+            "h": 184
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "defeat",
+          "index": 1,
+          "expected": "defeat",
+          "actual": "defeat",
+          "footError": 0,
+          "bounds": {
+            "x": 576,
+            "y": 536,
+            "w": 160,
+            "h": 184
+          },
+          "mirroredBounds": {
+            "x": 1184,
+            "y": 536,
+            "w": 160,
+            "h": 184
+          }
+        },
+        {
+          "unit": "fadyme",
+          "state": "victory",
+          "index": 0,
+          "expected": "victory",
+          "actual": "victory",
+          "footError": 0,
+          "bounds": {
+            "x": 587,
+            "y": 523,
+            "w": 121,
+            "h": 197
+          },
+          "mirroredBounds": {
+            "x": 1212,
+            "y": 523,
+            "w": 121,
+            "h": 197
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "idle",
+          "index": 0,
+          "expected": "idle",
+          "actual": "idle",
+          "footError": 0,
+          "bounds": {
+            "x": 577,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1218,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "idle",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 577,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1218,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "idle",
+          "index": 2,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0,
+          "bounds": {
+            "x": 577,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1218,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "idle",
+          "index": 3,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 577,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1218,
+            "y": 524,
+            "w": 125,
+            "h": 196
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "walk",
+          "index": 0,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0,
+          "bounds": {
+            "x": 571,
+            "y": 534,
+            "w": 153,
+            "h": 186
+          },
+          "mirroredBounds": {
+            "x": 1196,
+            "y": 534,
+            "w": 153,
+            "h": 186
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "walk",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 586,
+            "y": 524,
+            "w": 124,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1210,
+            "y": 524,
+            "w": 124,
+            "h": 196
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "walk",
+          "index": 2,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0,
+          "bounds": {
+            "x": 571,
+            "y": 534,
+            "w": 153,
+            "h": 186
+          },
+          "mirroredBounds": {
+            "x": 1196,
+            "y": 534,
+            "w": 153,
+            "h": 186
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "walk",
+          "index": 3,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0,
+          "bounds": {
+            "x": 586,
+            "y": 524,
+            "w": 124,
+            "h": 196
+          },
+          "mirroredBounds": {
+            "x": 1210,
+            "y": 524,
+            "w": 124,
+            "h": 196
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "basic",
+          "index": 0,
+          "expected": "basic",
+          "actual": "basic",
+          "footError": 0,
+          "bounds": {
+            "x": 496,
+            "y": 546,
+            "w": 272,
+            "h": 174
+          },
+          "mirroredBounds": {
+            "x": 1152,
+            "y": 546,
+            "w": 272,
+            "h": 174
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "basic",
+          "index": 1,
+          "expected": "basic_2",
+          "actual": "basic_2",
+          "footError": 0,
+          "bounds": {
+            "x": 496,
+            "y": 546,
+            "w": 272,
+            "h": 174
+          },
+          "mirroredBounds": {
+            "x": 1152,
+            "y": 546,
+            "w": 272,
+            "h": 174
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "basic",
+          "index": 2,
+          "expected": "basic_3",
+          "actual": "basic_3",
+          "footError": 0,
+          "bounds": {
+            "x": 496,
+            "y": 546,
+            "w": 272,
+            "h": 174
+          },
+          "mirroredBounds": {
+            "x": 1152,
+            "y": 546,
+            "w": 272,
+            "h": 174
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "active",
+          "index": 0,
+          "expected": "active",
+          "actual": "active",
+          "footError": 0,
+          "bounds": {
+            "x": 462,
+            "y": 548,
+            "w": 260,
+            "h": 172
+          },
+          "mirroredBounds": {
+            "x": 1198,
+            "y": 548,
+            "w": 260,
+            "h": 172
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "active",
+          "index": 1,
+          "expected": "active_2",
+          "actual": "active_2",
+          "footError": 0,
+          "bounds": {
+            "x": 462,
+            "y": 548,
+            "w": 260,
+            "h": 172
+          },
+          "mirroredBounds": {
+            "x": 1198,
+            "y": 548,
+            "w": 260,
+            "h": 172
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "active",
+          "index": 2,
+          "expected": "active_3",
+          "actual": "active_3",
+          "footError": 0,
+          "bounds": {
+            "x": 462,
+            "y": 548,
+            "w": 260,
+            "h": 172
+          },
+          "mirroredBounds": {
+            "x": 1198,
+            "y": 548,
+            "w": 260,
+            "h": 172
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "ultimate",
+          "index": 0,
+          "expected": "ultimate",
+          "actual": "ultimate",
+          "footError": 0,
+          "bounds": {
+            "x": 474,
+            "y": 554,
+            "w": 287,
+            "h": 166
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 554,
+            "w": 287,
+            "h": 166
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "ultimate",
+          "index": 1,
+          "expected": "ultimate_2",
+          "actual": "ultimate_2",
+          "footError": 0,
+          "bounds": {
+            "x": 474,
+            "y": 554,
+            "w": 287,
+            "h": 166
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 554,
+            "w": 287,
+            "h": 166
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "ultimate",
+          "index": 2,
+          "expected": "ultimate_3",
+          "actual": "ultimate_3",
+          "footError": 0,
+          "bounds": {
+            "x": 474,
+            "y": 554,
+            "w": 287,
+            "h": 166
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 554,
+            "w": 287,
+            "h": 166
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "hit",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 528,
+            "y": 541,
+            "w": 233,
+            "h": 179
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 541,
+            "w": 233,
+            "h": 179
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "defeat",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 528,
+            "y": 541,
+            "w": 233,
+            "h": 179
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 541,
+            "w": 233,
+            "h": 179
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "defeat",
+          "index": 1,
+          "expected": "defeat",
+          "actual": "defeat",
+          "footError": 0,
+          "bounds": {
+            "x": 528,
+            "y": 541,
+            "w": 233,
+            "h": 179
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 541,
+            "w": 233,
+            "h": 179
+          }
+        },
+        {
+          "unit": "bellbound_dead",
+          "state": "victory",
+          "index": 0,
+          "expected": "victory",
+          "actual": "victory",
+          "footError": 0.17499999999995453,
+          "bounds": {
+            "x": 573,
+            "y": 556,
+            "w": 147,
+            "h": 165
+          },
+          "mirroredBounds": {
+            "x": 1200,
+            "y": 556,
+            "w": 147,
+            "h": 165
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "idle",
+          "index": 0,
+          "expected": "idle",
+          "actual": "idle",
+          "footError": 0,
+          "bounds": {
+            "x": 540,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          },
+          "mirroredBounds": {
+            "x": 1166,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "idle",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 540,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          },
+          "mirroredBounds": {
+            "x": 1166,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "idle",
+          "index": 2,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0,
+          "bounds": {
+            "x": 540,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          },
+          "mirroredBounds": {
+            "x": 1166,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "idle",
+          "index": 3,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 540,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          },
+          "mirroredBounds": {
+            "x": 1166,
+            "y": 484,
+            "w": 214,
+            "h": 236
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "walk",
+          "index": 0,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0,
+          "bounds": {
+            "x": 519,
+            "y": 485,
+            "w": 242,
+            "h": 235
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 485,
+            "w": 242,
+            "h": 235
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "walk",
+          "index": 1,
+          "expected": "idle_2",
+          "actual": "idle_2",
+          "footError": 0,
+          "bounds": {
+            "x": 533,
+            "y": 484,
+            "w": 215,
+            "h": 236
+          },
+          "mirroredBounds": {
+            "x": 1172,
+            "y": 484,
+            "w": 215,
+            "h": 236
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "walk",
+          "index": 2,
+          "expected": "walk",
+          "actual": "walk",
+          "footError": 0,
+          "bounds": {
+            "x": 519,
+            "y": 485,
+            "w": 242,
+            "h": 235
+          },
+          "mirroredBounds": {
+            "x": 1159,
+            "y": 485,
+            "w": 242,
+            "h": 235
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "walk",
+          "index": 3,
+          "expected": "idle_3",
+          "actual": "idle_3",
+          "footError": 0,
+          "bounds": {
+            "x": 533,
+            "y": 484,
+            "w": 215,
+            "h": 236
+          },
+          "mirroredBounds": {
+            "x": 1172,
+            "y": 484,
+            "w": 215,
+            "h": 236
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "basic",
+          "index": 0,
+          "expected": "basic",
+          "actual": "basic",
+          "footError": 0,
+          "bounds": {
+            "x": 479,
+            "y": 475,
+            "w": 303,
+            "h": 245
+          },
+          "mirroredBounds": {
+            "x": 1138,
+            "y": 475,
+            "w": 303,
+            "h": 245
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "basic",
+          "index": 1,
+          "expected": "basic_2",
+          "actual": "basic_2",
+          "footError": 0,
+          "bounds": {
+            "x": 479,
+            "y": 475,
+            "w": 303,
+            "h": 245
+          },
+          "mirroredBounds": {
+            "x": 1138,
+            "y": 475,
+            "w": 303,
+            "h": 245
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "basic",
+          "index": 2,
+          "expected": "basic_3",
+          "actual": "basic_3",
+          "footError": 0,
+          "bounds": {
+            "x": 479,
+            "y": 475,
+            "w": 303,
+            "h": 245
+          },
+          "mirroredBounds": {
+            "x": 1138,
+            "y": 475,
+            "w": 303,
+            "h": 245
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "active",
+          "index": 0,
+          "expected": "active",
+          "actual": "active",
+          "footError": 0,
+          "bounds": {
+            "x": 522,
+            "y": 491,
+            "w": 246,
+            "h": 229
+          },
+          "mirroredBounds": {
+            "x": 1152,
+            "y": 491,
+            "w": 246,
+            "h": 229
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "active",
+          "index": 1,
+          "expected": "active_2",
+          "actual": "active_2",
+          "footError": 0,
+          "bounds": {
+            "x": 522,
+            "y": 491,
+            "w": 246,
+            "h": 229
+          },
+          "mirroredBounds": {
+            "x": 1152,
+            "y": 491,
+            "w": 246,
+            "h": 229
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "active",
+          "index": 2,
+          "expected": "active_3",
+          "actual": "active_3",
+          "footError": 0,
+          "bounds": {
+            "x": 522,
+            "y": 491,
+            "w": 246,
+            "h": 229
+          },
+          "mirroredBounds": {
+            "x": 1152,
+            "y": 491,
+            "w": 246,
+            "h": 229
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "ultimate",
+          "index": 0,
+          "expected": "ultimate",
+          "actual": "ultimate",
+          "footError": 0,
+          "bounds": {
+            "x": 481,
+            "y": 476,
+            "w": 306,
+            "h": 244
+          },
+          "mirroredBounds": {
+            "x": 1133,
+            "y": 476,
+            "w": 306,
+            "h": 244
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "ultimate",
+          "index": 1,
+          "expected": "ultimate_2",
+          "actual": "ultimate_2",
+          "footError": 0,
+          "bounds": {
+            "x": 481,
+            "y": 476,
+            "w": 306,
+            "h": 244
+          },
+          "mirroredBounds": {
+            "x": 1133,
+            "y": 476,
+            "w": 306,
+            "h": 244
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "ultimate",
+          "index": 2,
+          "expected": "ultimate_3",
+          "actual": "ultimate_3",
+          "footError": 0,
+          "bounds": {
+            "x": 481,
+            "y": 476,
+            "w": 306,
+            "h": 244
+          },
+          "mirroredBounds": {
+            "x": 1133,
+            "y": 476,
+            "w": 306,
+            "h": 244
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "hit",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 517,
+            "y": 496,
+            "w": 281,
+            "h": 224
+          },
+          "mirroredBounds": {
+            "x": 1122,
+            "y": 496,
+            "w": 281,
+            "h": 224
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "defeat",
+          "index": 0,
+          "expected": "hit",
+          "actual": "hit",
+          "footError": 0,
+          "bounds": {
+            "x": 517,
+            "y": 496,
+            "w": 281,
+            "h": 224
+          },
+          "mirroredBounds": {
+            "x": 1122,
+            "y": 496,
+            "w": 281,
+            "h": 224
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "defeat",
+          "index": 1,
+          "expected": "defeat",
+          "actual": "defeat",
+          "footError": 0,
+          "bounds": {
+            "x": 517,
+            "y": 496,
+            "w": 281,
+            "h": 224
+          },
+          "mirroredBounds": {
+            "x": 1122,
+            "y": 496,
+            "w": 281,
+            "h": 224
+          }
+        },
+        {
+          "unit": "hollow_pilgrim",
+          "state": "victory",
+          "index": 0,
+          "expected": "victory",
+          "actual": "victory",
+          "footError": 0.05200000000002092,
+          "bounds": {
+            "x": 545,
+            "y": 484,
+            "w": 201,
+            "h": 237
+          },
+          "mirroredBounds": {
+            "x": 1174,
+            "y": 484,
+            "w": 201,
+            "h": 237
+          }
+        }
+      ],
+      "paused_resize": {
+        "before": {
+          "ready": true,
+          "scenario": "unit/fadyme",
+          "state": "active",
+          "frame": "active_2",
+          "x": 570,
+          "y": 527,
+          "w": 162,
+          "h": 193,
+          "mx": 1188,
+          "my": 527,
+          "mw": 162,
+          "mh": 193,
+          "foot": 720,
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/atlas_sol_fadyme.webp"
+          ],
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T235318499_c4dc3def.png",
+          "error": "",
+          "errors": 0
+        },
+        "after": {
+          "ready": true,
+          "scenario": "unit/fadyme",
+          "state": "active",
+          "frame": "active_2",
+          "x": 569.6,
+          "y": 706.8,
+          "w": 162,
+          "h": 193.200012,
+          "mx": 1188.4,
+          "my": 706.8,
+          "mw": 162,
+          "mh": 193.200012,
+          "foot": 900,
+          "paths": [
+            "art/bg_sol_forest_whispering_ash.webp",
+            "art/atlas_sol_fadyme.webp"
+          ],
+          "busy": false,
+          "capture": "E:\\Unity\\unaware-of-my-demise\\docs\\review\\captures\\20261026T235330501_f3fa42e7.png",
+          "error": "",
+          "errors": 0
+        }
+      },
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "original_run_status": "RESTORED_AFTER_FAILED_PROBE",
+      "note": "All 84 selected-frame checks and ten captures passed. The original sparse live playback samples aliased to one idle phase; that final assertion failed and the owned preview was restored. Live playback and pause were then completed in the separate frame-by-frame probe below."
+    },
+    "playback_and_pause": {
+      "result": "PASS",
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "sample1": {
+        "frame": "idle_2",
+        "frameCount": 1367,
+        "editorPause": false,
+        "paused": false,
+        "reduced": false,
+        "clock": 3.26996851
+      },
+      "frames": "idle|idle_3|idle_2",
+      "sample2": {
+        "frame": "idle_2",
+        "frameCount": 3484
+      },
+      "pausedFrames": "idle_2",
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      }
+    },
+    "pose_feedback": {
+      "result": "PASS",
+      "before": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "capture": "docs/review/captures/20261027T002002464_93e9ac1e.png",
+      "record": {
+        "id": "8940802cbe18478e9505d45ebfd63c52",
+        "state": "basic",
+        "frame": "basic_2",
+        "source": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76",
+        "captures": [
+          "20261026T234947962_952b8604:2043abac89b261d9401e072a0edac22b6af320bafbf99a6b300abe16637ae631",
+          "20261027T002002464_93e9ac1e:e68406a1c36b92dcfefade8c461308545335ae884ff1d17875c7110c7511f22f"
+        ]
+      },
+      "after": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      }
+    }
+  },
+  "final_captures": [
+    {
+      "image": "docs/review/captures/20261026T234947962_952b8604.png",
+      "metadata": "docs/review/captures/20261026T234947962_952b8604.json",
+      "image_sha256": "2043abac89b261d9401e072a0edac22b6af320bafbf99a6b300abe16637ae631",
+      "metadata_sha256": "c6e75942eb0338eddb09a25b56abc861ec60ec03d8c6163eb104cdbbe55eb0eb",
+      "scenario": "unit/mahmut",
+      "state": "basic",
+      "frame": "basic_2",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 541,
+        "y": 512,
+        "width": 222,
+        "height": 208
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_mahmut.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T234954857_461d88ae.png",
+      "metadata": "docs/review/captures/20261026T234954857_461d88ae.json",
+      "image_sha256": "beef472a4618e06b81443135250de420aac7d31103a622d1d871a2f20b368959",
+      "metadata_sha256": "55743b0521bd68cc8692baffb3249d861808bdbd460d0b08f44f6ae9dcd3a00e",
+      "scenario": "unit/mahmut",
+      "state": "defeat",
+      "frame": "defeat",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 528,
+        "y": 506,
+        "width": 231,
+        "height": 214
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_mahmut.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235051679_67e7d9ad.png",
+      "metadata": "docs/review/captures/20261026T235051679_67e7d9ad.json",
+      "image_sha256": "f262f91e9e58eb7789d7bd639704ed8a0bdf92ccd733fbe37c7fd8b313d20886",
+      "metadata_sha256": "20886279bb8d4676bba06117c324075119134ab2d2989daa62baeb76beec8cb0",
+      "scenario": "unit/fadyme",
+      "state": "basic",
+      "frame": "basic_2",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 571,
+        "y": 532,
+        "width": 173,
+        "height": 188
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_fadyme.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235059039_b32ddbc5.png",
+      "metadata": "docs/review/captures/20261026T235059039_b32ddbc5.json",
+      "image_sha256": "fda94861026a0821921c8b15bf33156ce4ddbfb0119eb4c5de64bb3bf7b15f3c",
+      "metadata_sha256": "4612b089c376464bbe54998e5f2b21a04288e1a8135880a1feec87474bb8df69",
+      "scenario": "unit/fadyme",
+      "state": "defeat",
+      "frame": "defeat",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 576,
+        "y": 536,
+        "width": 160,
+        "height": 184
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_fadyme.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235200730_a14c7d50.png",
+      "metadata": "docs/review/captures/20261026T235200730_a14c7d50.json",
+      "image_sha256": "3cd355912e1e1a63390d79d4d5c8cfc871d3cfb6683a317f5bbd4896cbff5147",
+      "metadata_sha256": "ce8f33ce4eed7d06873371c3de7ee7f3c4d4ec2a3ce215ef95fb3a69dcdc10e5",
+      "scenario": "unit/bellbound_dead",
+      "state": "basic",
+      "frame": "basic_2",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 496,
+        "y": 546,
+        "width": 272,
+        "height": 174
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_bellbound_dead.webp"
+      ],
+      "related_identities": [
+        "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235206582_a2c550fe.png",
+      "metadata": "docs/review/captures/20261026T235206582_a2c550fe.json",
+      "image_sha256": "dbf76d5fd7e7890d55503cac861182298f89f9c3b9401906b753d1d67b40a276",
+      "metadata_sha256": "70ce742eb3eb47c98c5a848cffd52cf61c5fe8e0f68a86496b30e4942a74d9a1",
+      "scenario": "unit/bellbound_dead",
+      "state": "defeat",
+      "frame": "defeat",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 528,
+        "y": 541,
+        "width": 233,
+        "height": 179
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_bellbound_dead.webp"
+      ],
+      "related_identities": [
+        "sol_bellbound_dead_chibi_sheet@1:a2393ef0304777712248d5fd87e4f03e8ab374c5ac232bae894ccadd37cf76ed",
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235311980_fa8ed290.png",
+      "metadata": "docs/review/captures/20261026T235311980_fa8ed290.json",
+      "image_sha256": "aba0483cf347f7fd504bde08a204240c0112293e6ff5c7b5e5199aed8a9dd767",
+      "metadata_sha256": "2632cafc6519ef700e51f4a564a439482f51f4580899115803dd0d6af74cf481",
+      "scenario": "unit/hollow_pilgrim",
+      "state": "basic",
+      "frame": "basic_2",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 479,
+        "y": 475,
+        "width": 303,
+        "height": 245
+      },
+      "image_paths": [
+        "art/bg_sol_forgotten_stone_crossing.webp",
+        "art/atlas_sol_hollow_pilgrim.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forgotten_stone_crossing@1:cd45df1af7b9ff1f33d6d159e7b2c4d9aa91b8daeb9e4cd7f839596960a92d57",
+        "sol_hollow_pilgrim_chibi_sheet@1:fa644b80e4bf36ead64a07f69292ee73e7c973e1588f05b57035f0531e29a25c"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235318499_c4dc3def.png",
+      "metadata": "docs/review/captures/20261026T235318499_c4dc3def.json",
+      "image_sha256": "edaf2d4b35bda0e7c4de8059118aa8a275c19db55cd1d5e019662da07ec7607d",
+      "metadata_sha256": "691fb7a450a00d4da15a5ba9ffe821c6de01e5fb9ccfcfd222216c336e24418f",
+      "scenario": "unit/hollow_pilgrim",
+      "state": "defeat",
+      "frame": "defeat",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 517,
+        "y": 496,
+        "width": 281,
+        "height": 224
+      },
+      "image_paths": [
+        "art/bg_sol_forgotten_stone_crossing.webp",
+        "art/atlas_sol_hollow_pilgrim.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forgotten_stone_crossing@1:cd45df1af7b9ff1f33d6d159e7b2c4d9aa91b8daeb9e4cd7f839596960a92d57",
+        "sol_hollow_pilgrim_chibi_sheet@1:fa644b80e4bf36ead64a07f69292ee73e7c973e1588f05b57035f0531e29a25c"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235325891_0a2b3125.png",
+      "metadata": "docs/review/captures/20261026T235325891_0a2b3125.json",
+      "image_sha256": "2fc2cf1903a184b558ae0c198547c251ff06b58f1d4731fbfaac5b8454dd3f5b",
+      "metadata_sha256": "34a09fbb0b171f4477837006f3c8489518911488f91f3e560fd933abe57caf9e",
+      "scenario": "unit/fadyme",
+      "state": "active",
+      "frame": "active_2",
+      "pixels": [
+        2400,
+        1080
+      ],
+      "simulated_safe_area": true,
+      "foot_y": 748,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 810,
+        "y": 555,
+        "width": 162,
+        "height": 193
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_fadyme.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261026T235330501_f3fa42e7.png",
+      "metadata": "docs/review/captures/20261026T235330501_f3fa42e7.json",
+      "image_sha256": "450332588973d6f598662253f5a7ef1e76c454ed4f361fbd7ea9bf35edb9791f",
+      "metadata_sha256": "79974cbea3de37246d7a2f7c50bb1d9cdcb82107e3f061ca7c4a43e2920fe692",
+      "scenario": "unit/fadyme",
+      "state": "active",
+      "frame": "active_2",
+      "pixels": [
+        1600,
+        1200
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 900,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 569.5999755859375,
+        "y": 706.7999877929688,
+        "width": 162,
+        "height": 193.20001220703125
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_fadyme.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_fadyme_chibi_sheet@1:c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df"
+      ]
+    },
+    {
+      "image": "docs/review/captures/20261027T002002464_93e9ac1e.png",
+      "metadata": "docs/review/captures/20261027T002002464_93e9ac1e.json",
+      "image_sha256": "e68406a1c36b92dcfefade8c461308545335ae884ff1d17875c7110c7511f22f",
+      "metadata_sha256": "21f2fb03a77400dd56b0d033f010eb9a8bb6c11ba6a28ba6e08149b6bf6b3f0e",
+      "scenario": "unit/mahmut",
+      "state": "basic",
+      "frame": "basic_2",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "simulated_safe_area": false,
+      "foot_y": 720,
+      "bounds": {
+        "serializedVersion": "2",
+        "x": 541,
+        "y": 512,
+        "width": 222,
+        "height": 208
+      },
+      "image_paths": [
+        "art/bg_sol_forest_whispering_ash.webp",
+        "art/atlas_sol_mahmut.webp"
+      ],
+      "related_identities": [
+        "sol_bg_forest_whispering_ash@1:8a9fbe55fadae7e43bae40e9993f6f50170a5bb12cb0e77293a280c2e48e514f",
+        "sol_mahmut_chibi_sheet@1:164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+      ]
+    }
+  ],
+  "corrected_observations": [
+    "Two crowded Mahmut portrait packings and one touching Fadyme single-page sheet were retained/rejected. New wide Mahmut and two Fadyme pages passed component/gutter QC.",
+    "A31 now admits only the exact two hash-pinned historical enemy identity designs. Neighboring files, modified hashes and legacy git-derived hashes remain rejected; no design approval was created.",
+    "BattleUnitView now clamps the last defeat pose when a large tick crosses the entire animation, with a persistent regression test; action completion still returns to idle.",
+    "Sparse CLI snapshots could repeatedly sample the same phase of a short idle loop. A bounded 90-Editor-frame observer verified all three idle frames while playing and one fixed frame while paused.",
+    "The Editor-only audition metadata and feedback bind actual state/frame, source revision and matching pose capture hashes. Fadyme is explicitly labeled a derived assembly in the catalog."
+  ],
+  "overnight": {
+    "owner_authorized_until": "2026-10-27T07:00:00+02:00",
+    "heartbeat_id": "uomd-sabaha-kadar-retim",
+    "next": "Native manual tutorial/battle UI and new stage/unit consumer migration, then entry/Finish/durable Continue/restart."
+  },
+  "limits": [
+    "Human QC/final art and native-2K gates remain open. Do not infer full animation production from short frame loops.",
+    "Normal battle art migration, new manual tutorial/battle UI and full entry/Finish/durable Continue/restart remain open.",
+    "Centered reference-band unit auditions and simulated insets are Editor evidence, not physical touch, Android performance or final safe-area proof.",
+    "No signed native build, Billing/ads/provider acceptance, paid external generation, cloud deploy or GitHub push."
+  ]
+}

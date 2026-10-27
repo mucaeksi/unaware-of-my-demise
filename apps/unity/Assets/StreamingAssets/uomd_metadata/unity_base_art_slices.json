@@ -1253,6 +1253,1254 @@
           }
         }
       ]
+    },
+    "atlas_sol_fadyme": {
+      "atlasId": "atlas_sol_fadyme",
+      "imagePath": "art/atlas_sol_fadyme.webp",
+      "width": 1944,
+      "height": 535,
+      "slices": [
+        {
+          "name": "idle",
+          "rect": {
+            "x": 4,
+            "y": 262,
+            "width": 174,
+            "height": 269
+          },
+          "topLeftRect": [
+            4,
+            4,
+            174,
+            269
+          ],
+          "pivot": {
+            "x": 0.482,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_2",
+          "rect": {
+            "x": 182,
+            "y": 262,
+            "width": 174,
+            "height": 269
+          },
+          "topLeftRect": [
+            182,
+            4,
+            174,
+            269
+          ],
+          "pivot": {
+            "x": 0.482,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_3",
+          "rect": {
+            "x": 360,
+            "y": 262,
+            "width": 174,
+            "height": 269
+          },
+          "topLeftRect": [
+            360,
+            4,
+            174,
+            269
+          ],
+          "pivot": {
+            "x": 0.482,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate",
+          "rect": {
+            "x": 538,
+            "y": 270,
+            "width": 204,
+            "height": 261
+          },
+          "topLeftRect": [
+            538,
+            4,
+            204,
+            261
+          ],
+          "pivot": {
+            "x": 0.494,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_2",
+          "rect": {
+            "x": 746,
+            "y": 270,
+            "width": 204,
+            "height": 261
+          },
+          "topLeftRect": [
+            746,
+            4,
+            204,
+            261
+          ],
+          "pivot": {
+            "x": 0.494,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_3",
+          "rect": {
+            "x": 954,
+            "y": 270,
+            "width": 204,
+            "height": 261
+          },
+          "topLeftRect": [
+            954,
+            4,
+            204,
+            261
+          ],
+          "pivot": {
+            "x": 0.494,
+            "y": 0
+          }
+        },
+        {
+          "name": "victory",
+          "rect": {
+            "x": 1162,
+            "y": 271,
+            "width": 159,
+            "height": 260
+          },
+          "topLeftRect": [
+            1162,
+            4,
+            159,
+            260
+          ],
+          "pivot": {
+            "x": 0.523,
+            "y": 0
+          }
+        },
+        {
+          "name": "walk",
+          "rect": {
+            "x": 1325,
+            "y": 272,
+            "width": 179,
+            "height": 259
+          },
+          "topLeftRect": [
+            1325,
+            4,
+            179,
+            259
+          ],
+          "pivot": {
+            "x": 0.496,
+            "y": 0.002
+          }
+        },
+        {
+          "name": "active",
+          "rect": {
+            "x": 1508,
+            "y": 277,
+            "width": 214,
+            "height": 254
+          },
+          "topLeftRect": [
+            1508,
+            4,
+            214,
+            254
+          ],
+          "pivot": {
+            "x": 0.495,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_2",
+          "rect": {
+            "x": 1726,
+            "y": 277,
+            "width": 214,
+            "height": 254
+          },
+          "topLeftRect": [
+            1726,
+            4,
+            214,
+            254
+          ],
+          "pivot": {
+            "x": 0.495,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_3",
+          "rect": {
+            "x": 4,
+            "y": 4,
+            "width": 214,
+            "height": 254
+          },
+          "topLeftRect": [
+            4,
+            277,
+            214,
+            254
+          ],
+          "pivot": {
+            "x": 0.495,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic",
+          "rect": {
+            "x": 222,
+            "y": 10,
+            "width": 229,
+            "height": 248
+          },
+          "topLeftRect": [
+            222,
+            277,
+            229,
+            248
+          ],
+          "pivot": {
+            "x": 0.457,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_2",
+          "rect": {
+            "x": 455,
+            "y": 10,
+            "width": 229,
+            "height": 248
+          },
+          "topLeftRect": [
+            455,
+            277,
+            229,
+            248
+          ],
+          "pivot": {
+            "x": 0.457,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_3",
+          "rect": {
+            "x": 688,
+            "y": 10,
+            "width": 229,
+            "height": 248
+          },
+          "topLeftRect": [
+            688,
+            277,
+            229,
+            248
+          ],
+          "pivot": {
+            "x": 0.457,
+            "y": 0
+          }
+        },
+        {
+          "name": "defeat",
+          "rect": {
+            "x": 921,
+            "y": 15,
+            "width": 212,
+            "height": 243
+          },
+          "topLeftRect": [
+            921,
+            277,
+            212,
+            243
+          ],
+          "pivot": {
+            "x": 0.462,
+            "y": 0
+          }
+        },
+        {
+          "name": "hit",
+          "rect": {
+            "x": 1137,
+            "y": 15,
+            "width": 212,
+            "height": 243
+          },
+          "topLeftRect": [
+            1137,
+            277,
+            212,
+            243
+          ],
+          "pivot": {
+            "x": 0.462,
+            "y": 0
+          }
+        }
+      ]
+    },
+    "atlas_sol_mahmut": {
+      "atlasId": "atlas_sol_mahmut",
+      "imagePath": "art/atlas_sol_mahmut.webp",
+      "width": 1967,
+      "height": 411,
+      "slices": [
+        {
+          "name": "victory",
+          "rect": {
+            "x": 4,
+            "y": 201,
+            "width": 162,
+            "height": 206
+          },
+          "topLeftRect": [
+            4,
+            4,
+            162,
+            206
+          ],
+          "pivot": {
+            "x": 0.525,
+            "y": 0.004
+          }
+        },
+        {
+          "name": "idle",
+          "rect": {
+            "x": 170,
+            "y": 207,
+            "width": 165,
+            "height": 200
+          },
+          "topLeftRect": [
+            170,
+            4,
+            165,
+            200
+          ],
+          "pivot": {
+            "x": 0.52,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_2",
+          "rect": {
+            "x": 339,
+            "y": 207,
+            "width": 165,
+            "height": 200
+          },
+          "topLeftRect": [
+            339,
+            4,
+            165,
+            200
+          ],
+          "pivot": {
+            "x": 0.52,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_3",
+          "rect": {
+            "x": 508,
+            "y": 207,
+            "width": 165,
+            "height": 200
+          },
+          "topLeftRect": [
+            508,
+            4,
+            165,
+            200
+          ],
+          "pivot": {
+            "x": 0.52,
+            "y": 0
+          }
+        },
+        {
+          "name": "walk",
+          "rect": {
+            "x": 677,
+            "y": 207,
+            "width": 169,
+            "height": 200
+          },
+          "topLeftRect": [
+            677,
+            4,
+            169,
+            200
+          ],
+          "pivot": {
+            "x": 0.527,
+            "y": 0.004
+          }
+        },
+        {
+          "name": "defeat",
+          "rect": {
+            "x": 850,
+            "y": 209,
+            "width": 214,
+            "height": 198
+          },
+          "topLeftRect": [
+            850,
+            4,
+            214,
+            198
+          ],
+          "pivot": {
+            "x": 0.53,
+            "y": 0
+          }
+        },
+        {
+          "name": "hit",
+          "rect": {
+            "x": 1068,
+            "y": 209,
+            "width": 214,
+            "height": 198
+          },
+          "topLeftRect": [
+            1068,
+            4,
+            214,
+            198
+          ],
+          "pivot": {
+            "x": 0.53,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate",
+          "rect": {
+            "x": 1286,
+            "y": 213,
+            "width": 223,
+            "height": 194
+          },
+          "topLeftRect": [
+            1286,
+            4,
+            223,
+            194
+          ],
+          "pivot": {
+            "x": 0.447,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_2",
+          "rect": {
+            "x": 1513,
+            "y": 213,
+            "width": 223,
+            "height": 194
+          },
+          "topLeftRect": [
+            1513,
+            4,
+            223,
+            194
+          ],
+          "pivot": {
+            "x": 0.447,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_3",
+          "rect": {
+            "x": 1740,
+            "y": 213,
+            "width": 223,
+            "height": 194
+          },
+          "topLeftRect": [
+            1740,
+            4,
+            223,
+            194
+          ],
+          "pivot": {
+            "x": 0.447,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic",
+          "rect": {
+            "x": 4,
+            "y": 4,
+            "width": 206,
+            "height": 193
+          },
+          "topLeftRect": [
+            4,
+            214,
+            206,
+            193
+          ],
+          "pivot": {
+            "x": 0.49,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_2",
+          "rect": {
+            "x": 214,
+            "y": 4,
+            "width": 206,
+            "height": 193
+          },
+          "topLeftRect": [
+            214,
+            214,
+            206,
+            193
+          ],
+          "pivot": {
+            "x": 0.49,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_3",
+          "rect": {
+            "x": 424,
+            "y": 4,
+            "width": 206,
+            "height": 193
+          },
+          "topLeftRect": [
+            424,
+            214,
+            206,
+            193
+          ],
+          "pivot": {
+            "x": 0.49,
+            "y": 0
+          }
+        },
+        {
+          "name": "active",
+          "rect": {
+            "x": 634,
+            "y": 7,
+            "width": 195,
+            "height": 190
+          },
+          "topLeftRect": [
+            634,
+            214,
+            195,
+            190
+          ],
+          "pivot": {
+            "x": 0.519,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_2",
+          "rect": {
+            "x": 833,
+            "y": 7,
+            "width": 195,
+            "height": 190
+          },
+          "topLeftRect": [
+            833,
+            214,
+            195,
+            190
+          ],
+          "pivot": {
+            "x": 0.519,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_3",
+          "rect": {
+            "x": 1032,
+            "y": 7,
+            "width": 195,
+            "height": 190
+          },
+          "topLeftRect": [
+            1032,
+            214,
+            195,
+            190
+          ],
+          "pivot": {
+            "x": 0.519,
+            "y": 0
+          }
+        }
+      ]
+    },
+    "atlas_sol_bellbound_dead": {
+      "atlasId": "atlas_sol_bellbound_dead",
+      "imagePath": "art/atlas_sol_bellbound_dead.webp",
+      "width": 1888,
+      "height": 388,
+      "slices": [
+        {
+          "name": "idle",
+          "rect": {
+            "x": 4,
+            "y": 184,
+            "width": 127,
+            "height": 200
+          },
+          "topLeftRect": [
+            4,
+            4,
+            127,
+            200
+          ],
+          "pivot": {
+            "x": 0.585,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_2",
+          "rect": {
+            "x": 135,
+            "y": 184,
+            "width": 127,
+            "height": 200
+          },
+          "topLeftRect": [
+            135,
+            4,
+            127,
+            200
+          ],
+          "pivot": {
+            "x": 0.585,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_3",
+          "rect": {
+            "x": 266,
+            "y": 184,
+            "width": 127,
+            "height": 200
+          },
+          "topLeftRect": [
+            266,
+            4,
+            127,
+            200
+          ],
+          "pivot": {
+            "x": 0.585,
+            "y": 0
+          }
+        },
+        {
+          "name": "walk",
+          "rect": {
+            "x": 397,
+            "y": 194,
+            "width": 157,
+            "height": 190
+          },
+          "topLeftRect": [
+            397,
+            4,
+            157,
+            190
+          ],
+          "pivot": {
+            "x": 0.516,
+            "y": 0
+          }
+        },
+        {
+          "name": "defeat",
+          "rect": {
+            "x": 558,
+            "y": 201,
+            "width": 238,
+            "height": 183
+          },
+          "topLeftRect": [
+            558,
+            4,
+            238,
+            183
+          ],
+          "pivot": {
+            "x": 0.524,
+            "y": 0
+          }
+        },
+        {
+          "name": "hit",
+          "rect": {
+            "x": 800,
+            "y": 201,
+            "width": 238,
+            "height": 183
+          },
+          "topLeftRect": [
+            800,
+            4,
+            238,
+            183
+          ],
+          "pivot": {
+            "x": 0.524,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic",
+          "rect": {
+            "x": 1042,
+            "y": 206,
+            "width": 278,
+            "height": 178
+          },
+          "topLeftRect": [
+            1042,
+            4,
+            278,
+            178
+          ],
+          "pivot": {
+            "x": 0.567,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_2",
+          "rect": {
+            "x": 1324,
+            "y": 206,
+            "width": 278,
+            "height": 178
+          },
+          "topLeftRect": [
+            1324,
+            4,
+            278,
+            178
+          ],
+          "pivot": {
+            "x": 0.567,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_3",
+          "rect": {
+            "x": 1606,
+            "y": 206,
+            "width": 278,
+            "height": 178
+          },
+          "topLeftRect": [
+            1606,
+            4,
+            278,
+            178
+          ],
+          "pivot": {
+            "x": 0.567,
+            "y": 0
+          }
+        },
+        {
+          "name": "active",
+          "rect": {
+            "x": 4,
+            "y": 4,
+            "width": 266,
+            "height": 176
+          },
+          "topLeftRect": [
+            4,
+            208,
+            266,
+            176
+          ],
+          "pivot": {
+            "x": 0.723,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_2",
+          "rect": {
+            "x": 274,
+            "y": 4,
+            "width": 266,
+            "height": 176
+          },
+          "topLeftRect": [
+            274,
+            208,
+            266,
+            176
+          ],
+          "pivot": {
+            "x": 0.723,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_3",
+          "rect": {
+            "x": 544,
+            "y": 4,
+            "width": 266,
+            "height": 176
+          },
+          "topLeftRect": [
+            544,
+            208,
+            266,
+            176
+          ],
+          "pivot": {
+            "x": 0.723,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate",
+          "rect": {
+            "x": 814,
+            "y": 11,
+            "width": 293,
+            "height": 169
+          },
+          "topLeftRect": [
+            814,
+            208,
+            293,
+            169
+          ],
+          "pivot": {
+            "x": 0.612,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_2",
+          "rect": {
+            "x": 1111,
+            "y": 11,
+            "width": 293,
+            "height": 169
+          },
+          "topLeftRect": [
+            1111,
+            208,
+            293,
+            169
+          ],
+          "pivot": {
+            "x": 0.612,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_3",
+          "rect": {
+            "x": 1408,
+            "y": 11,
+            "width": 293,
+            "height": 169
+          },
+          "topLeftRect": [
+            1408,
+            208,
+            293,
+            169
+          ],
+          "pivot": {
+            "x": 0.612,
+            "y": 0
+          }
+        },
+        {
+          "name": "victory",
+          "rect": {
+            "x": 1705,
+            "y": 12,
+            "width": 150,
+            "height": 168
+          },
+          "topLeftRect": [
+            1705,
+            208,
+            150,
+            168
+          ],
+          "pivot": {
+            "x": 0.526,
+            "y": 0.005
+          }
+        }
+      ]
+    },
+    "atlas_sol_hollow_pilgrim": {
+      "atlasId": "atlas_sol_hollow_pilgrim",
+      "imagePath": "art/atlas_sol_hollow_pilgrim.webp",
+      "width": 1936,
+      "height": 420,
+      "slices": [
+        {
+          "name": "basic",
+          "rect": {
+            "x": 4,
+            "y": 208,
+            "width": 257,
+            "height": 208
+          },
+          "topLeftRect": [
+            4,
+            4,
+            257,
+            208
+          ],
+          "pivot": {
+            "x": 0.565,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_2",
+          "rect": {
+            "x": 265,
+            "y": 208,
+            "width": 257,
+            "height": 208
+          },
+          "topLeftRect": [
+            265,
+            4,
+            257,
+            208
+          ],
+          "pivot": {
+            "x": 0.565,
+            "y": 0
+          }
+        },
+        {
+          "name": "basic_3",
+          "rect": {
+            "x": 526,
+            "y": 208,
+            "width": 257,
+            "height": 208
+          },
+          "topLeftRect": [
+            526,
+            4,
+            257,
+            208
+          ],
+          "pivot": {
+            "x": 0.565,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate",
+          "rect": {
+            "x": 787,
+            "y": 209,
+            "width": 259,
+            "height": 207
+          },
+          "topLeftRect": [
+            787,
+            4,
+            259,
+            207
+          ],
+          "pivot": {
+            "x": 0.552,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_2",
+          "rect": {
+            "x": 1050,
+            "y": 209,
+            "width": 259,
+            "height": 207
+          },
+          "topLeftRect": [
+            1050,
+            4,
+            259,
+            207
+          ],
+          "pivot": {
+            "x": 0.552,
+            "y": 0
+          }
+        },
+        {
+          "name": "ultimate_3",
+          "rect": {
+            "x": 1313,
+            "y": 209,
+            "width": 259,
+            "height": 207
+          },
+          "topLeftRect": [
+            1313,
+            4,
+            259,
+            207
+          ],
+          "pivot": {
+            "x": 0.552,
+            "y": 0
+          }
+        },
+        {
+          "name": "victory",
+          "rect": {
+            "x": 1576,
+            "y": 215,
+            "width": 170,
+            "height": 201
+          },
+          "topLeftRect": [
+            1576,
+            4,
+            170,
+            201
+          ],
+          "pivot": {
+            "x": 0.522,
+            "y": 0.004
+          }
+        },
+        {
+          "name": "idle",
+          "rect": {
+            "x": 1750,
+            "y": 216,
+            "width": 182,
+            "height": 200
+          },
+          "topLeftRect": [
+            1750,
+            4,
+            182,
+            200
+          ],
+          "pivot": {
+            "x": 0.514,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_2",
+          "rect": {
+            "x": 4,
+            "y": 4,
+            "width": 182,
+            "height": 200
+          },
+          "topLeftRect": [
+            4,
+            216,
+            182,
+            200
+          ],
+          "pivot": {
+            "x": 0.514,
+            "y": 0
+          }
+        },
+        {
+          "name": "idle_3",
+          "rect": {
+            "x": 190,
+            "y": 4,
+            "width": 182,
+            "height": 200
+          },
+          "topLeftRect": [
+            190,
+            216,
+            182,
+            200
+          ],
+          "pivot": {
+            "x": 0.514,
+            "y": 0
+          }
+        },
+        {
+          "name": "walk",
+          "rect": {
+            "x": 376,
+            "y": 5,
+            "width": 205,
+            "height": 199
+          },
+          "topLeftRect": [
+            376,
+            216,
+            205,
+            199
+          ],
+          "pivot": {
+            "x": 0.543,
+            "y": 0
+          }
+        },
+        {
+          "name": "active",
+          "rect": {
+            "x": 585,
+            "y": 10,
+            "width": 208,
+            "height": 194
+          },
+          "topLeftRect": [
+            585,
+            216,
+            208,
+            194
+          ],
+          "pivot": {
+            "x": 0.521,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_2",
+          "rect": {
+            "x": 797,
+            "y": 10,
+            "width": 208,
+            "height": 194
+          },
+          "topLeftRect": [
+            797,
+            216,
+            208,
+            194
+          ],
+          "pivot": {
+            "x": 0.521,
+            "y": 0
+          }
+        },
+        {
+          "name": "active_3",
+          "rect": {
+            "x": 1009,
+            "y": 10,
+            "width": 208,
+            "height": 194
+          },
+          "topLeftRect": [
+            1009,
+            216,
+            208,
+            194
+          ],
+          "pivot": {
+            "x": 0.521,
+            "y": 0
+          }
+        },
+        {
+          "name": "defeat",
+          "rect": {
+            "x": 1221,
+            "y": 14,
+            "width": 238,
+            "height": 190
+          },
+          "topLeftRect": [
+            1221,
+            216,
+            238,
+            190
+          ],
+          "pivot": {
+            "x": 0.474,
+            "y": 0
+          }
+        },
+        {
+          "name": "hit",
+          "rect": {
+            "x": 1463,
+            "y": 14,
+            "width": 238,
+            "height": 190
+          },
+          "topLeftRect": [
+            1463,
+            216,
+            238,
+            190
+          ],
+          "pivot": {
+            "x": 0.474,
+            "y": 0
+          }
+        }
+      ]
     }
   },
   "units": {
@@ -1796,6 +3044,506 @@
             "ultimate_2",
             "victory",
             "idle_3"
+          ]
+        }
+      ]
+    },
+    "sol_fadyme": {
+      "unitArtKey": "sol_fadyme",
+      "atlasId": "atlas_sol_fadyme",
+      "facing": "right",
+      "heightPx": 204,
+      "clips": [
+        {
+          "state": "idle",
+          "stillFrame": "idle",
+          "scale": 1,
+          "pivotX": 0.482,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "idle",
+            "idle_2",
+            "idle_3",
+            "idle_2"
+          ]
+        },
+        {
+          "state": "walk",
+          "stillFrame": "walk",
+          "scale": 1,
+          "pivotX": 0.496,
+          "footY": 0.998,
+          "unityPivotY": 0.002,
+          "fps": 8,
+          "loop": true,
+          "frames": [
+            "walk",
+            "idle_2",
+            "walk",
+            "idle_3"
+          ]
+        },
+        {
+          "state": "basic",
+          "stillFrame": "basic",
+          "scale": 1,
+          "pivotX": 0.457,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "basic",
+            "basic_2",
+            "basic_3"
+          ]
+        },
+        {
+          "state": "active",
+          "stillFrame": "active",
+          "scale": 1,
+          "pivotX": 0.495,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "active",
+            "active_2",
+            "active_3"
+          ]
+        },
+        {
+          "state": "ultimate",
+          "stillFrame": "ultimate",
+          "scale": 1,
+          "pivotX": 0.494,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "ultimate",
+            "ultimate_2",
+            "ultimate_3"
+          ]
+        },
+        {
+          "state": "hit",
+          "stillFrame": "hit",
+          "scale": 1,
+          "pivotX": 0.462,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            "hit"
+          ]
+        },
+        {
+          "state": "defeat",
+          "stillFrame": "defeat",
+          "scale": 1,
+          "pivotX": 0.462,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": false,
+          "frames": [
+            "hit",
+            "defeat"
+          ]
+        },
+        {
+          "state": "victory",
+          "stillFrame": "victory",
+          "scale": 1,
+          "pivotX": 0.523,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "victory"
+          ]
+        }
+      ]
+    },
+    "sol_mahmut": {
+      "unitArtKey": "sol_mahmut",
+      "atlasId": "atlas_sol_mahmut",
+      "facing": "right",
+      "heightPx": 216,
+      "clips": [
+        {
+          "state": "idle",
+          "stillFrame": "idle",
+          "scale": 1,
+          "pivotX": 0.52,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "idle",
+            "idle_2",
+            "idle_3",
+            "idle_2"
+          ]
+        },
+        {
+          "state": "walk",
+          "stillFrame": "walk",
+          "scale": 1,
+          "pivotX": 0.527,
+          "footY": 0.996,
+          "unityPivotY": 0.004,
+          "fps": 8,
+          "loop": true,
+          "frames": [
+            "walk",
+            "idle_2",
+            "walk",
+            "idle_3"
+          ]
+        },
+        {
+          "state": "basic",
+          "stillFrame": "basic",
+          "scale": 1,
+          "pivotX": 0.49,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "basic",
+            "basic_2",
+            "basic_3"
+          ]
+        },
+        {
+          "state": "active",
+          "stillFrame": "active",
+          "scale": 1,
+          "pivotX": 0.519,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "active",
+            "active_2",
+            "active_3"
+          ]
+        },
+        {
+          "state": "ultimate",
+          "stillFrame": "ultimate",
+          "scale": 1,
+          "pivotX": 0.447,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "ultimate",
+            "ultimate_2",
+            "ultimate_3"
+          ]
+        },
+        {
+          "state": "hit",
+          "stillFrame": "hit",
+          "scale": 1,
+          "pivotX": 0.53,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            "hit"
+          ]
+        },
+        {
+          "state": "defeat",
+          "stillFrame": "defeat",
+          "scale": 1,
+          "pivotX": 0.53,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": false,
+          "frames": [
+            "hit",
+            "defeat"
+          ]
+        },
+        {
+          "state": "victory",
+          "stillFrame": "victory",
+          "scale": 1,
+          "pivotX": 0.525,
+          "footY": 0.996,
+          "unityPivotY": 0.004,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "victory"
+          ]
+        }
+      ]
+    },
+    "sol_bellbound_dead": {
+      "unitArtKey": "sol_bellbound_dead",
+      "atlasId": "atlas_sol_bellbound_dead",
+      "facing": "left",
+      "heightPx": 196,
+      "clips": [
+        {
+          "state": "idle",
+          "stillFrame": "idle",
+          "scale": 1,
+          "pivotX": 0.585,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "idle",
+            "idle_2",
+            "idle_3",
+            "idle_2"
+          ]
+        },
+        {
+          "state": "walk",
+          "stillFrame": "walk",
+          "scale": 1,
+          "pivotX": 0.516,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 8,
+          "loop": true,
+          "frames": [
+            "walk",
+            "idle_2",
+            "walk",
+            "idle_3"
+          ]
+        },
+        {
+          "state": "basic",
+          "stillFrame": "basic",
+          "scale": 1,
+          "pivotX": 0.567,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "basic",
+            "basic_2",
+            "basic_3"
+          ]
+        },
+        {
+          "state": "active",
+          "stillFrame": "active",
+          "scale": 1,
+          "pivotX": 0.723,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "active",
+            "active_2",
+            "active_3"
+          ]
+        },
+        {
+          "state": "ultimate",
+          "stillFrame": "ultimate",
+          "scale": 1,
+          "pivotX": 0.612,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "ultimate",
+            "ultimate_2",
+            "ultimate_3"
+          ]
+        },
+        {
+          "state": "hit",
+          "stillFrame": "hit",
+          "scale": 1,
+          "pivotX": 0.524,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            "hit"
+          ]
+        },
+        {
+          "state": "defeat",
+          "stillFrame": "defeat",
+          "scale": 1,
+          "pivotX": 0.524,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": false,
+          "frames": [
+            "hit",
+            "defeat"
+          ]
+        },
+        {
+          "state": "victory",
+          "stillFrame": "victory",
+          "scale": 1,
+          "pivotX": 0.526,
+          "footY": 0.995,
+          "unityPivotY": 0.005,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "victory"
+          ]
+        }
+      ]
+    },
+    "sol_hollow_pilgrim": {
+      "unitArtKey": "sol_hollow_pilgrim",
+      "atlasId": "atlas_sol_hollow_pilgrim",
+      "facing": "left",
+      "heightPx": 236,
+      "clips": [
+        {
+          "state": "idle",
+          "stillFrame": "idle",
+          "scale": 1,
+          "pivotX": 0.514,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "idle",
+            "idle_2",
+            "idle_3",
+            "idle_2"
+          ]
+        },
+        {
+          "state": "walk",
+          "stillFrame": "walk",
+          "scale": 1,
+          "pivotX": 0.543,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 8,
+          "loop": true,
+          "frames": [
+            "walk",
+            "idle_2",
+            "walk",
+            "idle_3"
+          ]
+        },
+        {
+          "state": "basic",
+          "stillFrame": "basic",
+          "scale": 1,
+          "pivotX": 0.565,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "basic",
+            "basic_2",
+            "basic_3"
+          ]
+        },
+        {
+          "state": "active",
+          "stillFrame": "active",
+          "scale": 1,
+          "pivotX": 0.521,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "active",
+            "active_2",
+            "active_3"
+          ]
+        },
+        {
+          "state": "ultimate",
+          "stillFrame": "ultimate",
+          "scale": 1,
+          "pivotX": 0.552,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 9,
+          "loop": false,
+          "frames": [
+            "ultimate",
+            "ultimate_2",
+            "ultimate_3"
+          ]
+        },
+        {
+          "state": "hit",
+          "stillFrame": "hit",
+          "scale": 1,
+          "pivotX": 0.474,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            "hit"
+          ]
+        },
+        {
+          "state": "defeat",
+          "stillFrame": "defeat",
+          "scale": 1,
+          "pivotX": 0.474,
+          "footY": 1,
+          "unityPivotY": 0,
+          "fps": 6,
+          "loop": false,
+          "frames": [
+            "hit",
+            "defeat"
+          ]
+        },
+        {
+          "state": "victory",
+          "stillFrame": "victory",
+          "scale": 1,
+          "pivotX": 0.522,
+          "footY": 0.996,
+          "unityPivotY": 0.004,
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            "victory"
           ]
         }
       ]

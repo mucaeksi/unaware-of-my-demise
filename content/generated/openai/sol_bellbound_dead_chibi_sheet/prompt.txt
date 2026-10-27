@@ -1,0 +1,13 @@
+Use case: stylized-concept. New Gothic-anime SD chibi animation sprite atlas for Unaware of My Demise.
+Image 1 is a HISTORICAL DESIGN REFERENCE ONLY for the Bellbound Dead: a thin slumped Hollow with long arms, dirty-bone skull and limbs, torn charcoal cloth, ONE cold-brass chest bell, its own chains linking the chest to both wrists. Do not copy the reference's text, layout, human proportions or background. Image 2 is the new Mahmut SD atlas: match only crisp Gothic-anime contour/cel shading and wide sheet registration, not his identity, armor, weapon or pose equipment.
+
+Create ONE WIDE LANDSCAPE 3:2 transparent PNG, native 1536x1024 or larger. Exactly FOUR COLUMNS by FOUR ROWS, sixteen small TWO-HEAD-TALL skeletal SD enemies, all facing LEFT. Large skull head ~half total height; body remains thin, narrow, slumped and visibly unlike an armored knight. Ivory-bone/charcoal cloth/dull brass palette, faint plum shading. No red glow, blood, gore, skinless horror detail, knight armor, weapon, backpack or extra bells.
+
+Each complete figure, chest bell, both wrist chains, hands and feet must fit within the CENTRAL 60% WIDTH AND CENTRAL 60% HEIGHT of its own cell. Leave conspicuously broad, fully transparent gutters horizontally AND vertically; no overlap or near-touching even between rows. Same skull size, body scale, equipment and camera in every standing pose. Feet are the lowest opaque pixels; chain ends stay above the feet. There must be transparent empty bands at every quarter-width/quarter-height division. Small figures and lots of empty space are deliberate.
+
+Read left-to-right top-to-bottom:
+row1 idle slump / idle slight bell sway / idle settle / dragging walking step.
+row2 basic anticipation, long arm draws back / basic compact reaching strike left / basic recovery / chained grab anticipation, wrists drawn to chest.
+row3 chained grab impact, short chain pulled taut and chest bell tilted / chained grab recovery / stronger attack brace / stronger compact reach with bell tilted.
+row4 stronger attack recovery / hit recoil, intact skeleton / defeat crumpled on both knees with whole skull, body and bell visible / idle-like settled post-battle stance.
+These are animation poses, not new magical abilities. Two arms/two legs, physically connected wrist chains and one chest bell in every pose. No detached objects, swing trails, aura, ground, cast shadow, particles, VFX, text, labels, borders, grid or painted checkerboard. Real transparent alpha outside each silhouette. Keep all rows short and widely separated; never crowd the figures to fill the canvas.

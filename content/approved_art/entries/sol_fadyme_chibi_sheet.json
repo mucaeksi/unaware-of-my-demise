@@ -1,0 +1,342 @@
+{
+  "schema": 1,
+  "asset_id": "sol_fadyme_chibi_sheet",
+  "class": "unit_sheet",
+  "revision": 1,
+  "targets": {
+    "atlases": {
+      "atlas_sol_fadyme": {
+        "image": "art/atlas_sol_fadyme.webp",
+        "width": 1944,
+        "height": 535,
+        "frames": {
+          "idle": [
+            4,
+            4,
+            174,
+            269
+          ],
+          "idle_2": [
+            182,
+            4,
+            174,
+            269
+          ],
+          "idle_3": [
+            360,
+            4,
+            174,
+            269
+          ],
+          "ultimate": [
+            538,
+            4,
+            204,
+            261
+          ],
+          "ultimate_2": [
+            746,
+            4,
+            204,
+            261
+          ],
+          "ultimate_3": [
+            954,
+            4,
+            204,
+            261
+          ],
+          "victory": [
+            1162,
+            4,
+            159,
+            260
+          ],
+          "walk": [
+            1325,
+            4,
+            179,
+            259
+          ],
+          "active": [
+            1508,
+            4,
+            214,
+            254
+          ],
+          "active_2": [
+            1726,
+            4,
+            214,
+            254
+          ],
+          "active_3": [
+            4,
+            277,
+            214,
+            254
+          ],
+          "basic": [
+            222,
+            277,
+            229,
+            248
+          ],
+          "basic_2": [
+            455,
+            277,
+            229,
+            248
+          ],
+          "basic_3": [
+            688,
+            277,
+            229,
+            248
+          ],
+          "defeat": [
+            921,
+            277,
+            212,
+            243
+          ],
+          "hit": [
+            1137,
+            277,
+            212,
+            243
+          ]
+        }
+      }
+    },
+    "units": {
+      "sol_fadyme": {
+        "atlas": "atlas_sol_fadyme",
+        "facing": "right",
+        "height_px": 204,
+        "states": {
+          "idle": {
+            "frame": "idle",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.482,
+            "animation": {
+              "frames": [
+                "idle",
+                "idle_2",
+                "idle_3",
+                "idle_2"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          },
+          "walk": {
+            "frame": "walk",
+            "scale": 1,
+            "foot_y": 0.998,
+            "pivot_x": 0.496,
+            "animation": {
+              "frames": [
+                "walk",
+                "idle_2",
+                "walk",
+                "idle_3"
+              ],
+              "fps": 8,
+              "loop": true
+            }
+          },
+          "basic": {
+            "frame": "basic",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.457,
+            "animation": {
+              "frames": [
+                "basic",
+                "basic_2",
+                "basic_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "active": {
+            "frame": "active",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.495,
+            "animation": {
+              "frames": [
+                "active",
+                "active_2",
+                "active_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "ultimate": {
+            "frame": "ultimate",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.494,
+            "animation": {
+              "frames": [
+                "ultimate",
+                "ultimate_2",
+                "ultimate_3"
+              ],
+              "fps": 9,
+              "loop": false
+            }
+          },
+          "hit": {
+            "frame": "hit",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.462,
+            "animation": {
+              "frames": [
+                "hit"
+              ],
+              "fps": 8,
+              "loop": false
+            }
+          },
+          "defeat": {
+            "frame": "defeat",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.462,
+            "animation": {
+              "frames": [
+                "hit",
+                "defeat"
+              ],
+              "fps": 6,
+              "loop": false
+            }
+          },
+          "victory": {
+            "frame": "victory",
+            "scale": 1,
+            "foot_y": 1,
+            "pivot_x": 0.523,
+            "animation": {
+              "frames": [
+                "victory"
+              ],
+              "fps": 6,
+              "loop": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "c45d4fa092a72486cc4232df8c246662fcbe6cc8be149accc0037e8e0e36f1df",
+    "mime": "image/png",
+    "width": 1536,
+    "height": 2048,
+    "provenance_file": "content/generated/openai/sol_fadyme_chibi_sheet/run.provenance.json",
+    "provenance_sha256": "c1be2010e8b9c9ca1e3d4623eb937fb0ca9d77c1f60236cd98a60d9cf3b02023",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "49abfe02c56ed6d0b6d7ba1f60228ccb7f2f6a7d0247e8c13dfc49d4b53bbd87",
+    "references": [
+      {
+        "path": "content/generated/openai/sol_fadyme_vn_composed/source.png",
+        "role": "openai_identity_costume",
+        "sha256": "d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc"
+      },
+      {
+        "path": "content/generated/openai/sol_mahmut_chibi_sheet/source.png",
+        "role": "openai_chibi_style_and_layout",
+        "sha256": "164f5cf0b176daf59880ccabc3e03e602d1fc07339f4bd85ac9432be62f10c76"
+      },
+      {
+        "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-a.png",
+        "role": "openai_native_page_a",
+        "sha256": "4fddbbb2a949034c96965237c5d34f1a68d05a9df1118c119f26d5f55aa3dbba"
+      },
+      {
+        "path": "content/generated/openai/sol_fadyme_chibi_sheet/page-b.png",
+        "role": "openai_native_page_b",
+        "sha256": "703d1c19ddaa3c0c776b69c6124778c9be572a2e74beab2a2576b7450ae553d2"
+      }
+    ]
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_fadyme_chibi_sheet.ingest.json",
+    "spec_sha256": "bad32ac12331c3fbc429e8825c809ab81457b7c2944668f364976c500e3fb736",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "729b3f4674d3d72b86498808e68c1f61866e02cdc7d01e8d12cf2008b816040f"
+  },
+  "outputs": [
+    {
+      "path": "art/atlas_sol_fadyme.webp",
+      "sha256": "57e608fa73d0fbab8c12bf2d8eef19360e3a139ea73f8c50083d0639d83d3a09",
+      "pixels_sha256": "64cb8342a1937d7f3926ab2eb5fdee0356f982f632a5fed64a4b4d6f45aa47c7",
+      "bytes": 379812,
+      "width": 1944,
+      "height": 535
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "4 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1536x2048"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A14": {
+          "status": "pass",
+          "detail": "16 cells"
+        },
+        "A15": {
+          "status": "pass"
+        },
+        "A03": {
+          "status": "pass",
+          "detail": "k=0.582"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1944x535"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "379812 bytes <= 665600"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

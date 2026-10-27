@@ -320,6 +320,15 @@ async function main(): Promise<void> {
       copyApprovedEntryOutputs(extra, outDir);
       Object.assign(atlases, extra.targets.atlases ?? {});
     }
+    // Explicit rebuilt variants are available for review; canonical unit keys keep their migration scope.
+    for (const key of unitKeys) {
+      const rebuiltKey = `sol_${key}`;
+      const entry = approvedUnits.get(rebuiltKey);
+      if (!entry?.targets.units?.[rebuiltKey]) continue;
+      copyApprovedEntryOutputs(entry, outDir);
+      Object.assign(atlases, entry.targets.atlases ?? {});
+      units[rebuiltKey] = entry.targets.units[rebuiltKey];
+    }
     const portraits: ArtManifest['portraits'] = {};
     for (const [char, tags] of emotionsUsed(scenesUsed)) {
       const appCharEntries = approvedPortraits.get(char) ?? [];
