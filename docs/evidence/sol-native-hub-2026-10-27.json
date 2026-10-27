@@ -1,0 +1,2198 @@
+{
+  "schemaVersion": 1,
+  "id": "sol-native-hub-2026-10-27",
+  "status": "LOCAL_TESTED",
+  "reviewedAt": "2026-10-27T09:03:35.649Z",
+  "sourceCommit": "ec7112841b2ed3f032ea8c197228d6364fcc707e",
+  "deliveryBinding": "The enclosing local commit contains the exact source blobs listed below; sourceCommit records its parent.",
+  "scope": [
+    "Native editable Home, Company and Chapters frame with existing routes",
+    "Authoritative account/release read group with freshness and late-response guards",
+    "Published node progress, prerequisites, Hard variants and Ration entry gating",
+    "Built-in OpenAI shelter background with exact prompt, source and ingest provenance",
+    "Editor-only isolated fixtures, navigation/scroll/layout review and restored Editor state"
+  ],
+  "checks": {
+    "unityEditor": "6000.3.27f1",
+    "unityTransport": "CLI only; Pipeline 0.9.1-exp.1",
+    "editMode": {
+      "total": 166,
+      "passed": 166,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "playMode": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "headless": {
+      "passed": 134,
+      "failed": 0
+    },
+    "typescript": {
+      "passed": 955,
+      "failed": 0
+    },
+    "contentReproduction": {
+      "files": 232,
+      "exact": true
+    },
+    "contentExport": {
+      "baseFiles": 229,
+      "seedAssets": 443,
+      "decodableSiblings": 73
+    },
+    "referenceCompile": {
+      "assemblies": 12,
+      "errors": 0,
+      "limitation": "URP editor signatures are verified stubs, not the compiled package"
+    },
+    "skills": {
+      "adapters": 66,
+      "passed": true
+    },
+    "consoleErrors": 0,
+    "liveChecks": 42
+  },
+  "interaction": {
+    "inputMethod": "NavigationSubmitEvent on real UI Toolkit Buttons; no physical-touch claim",
+    "fixture": "Explicit memory-only account fixtures; review HTTP remains blocked. Non-rebuilt detail routes are probes; the hub screens and canonical T1 pre-story use their actual controllers.",
+    "chapterFixture": {
+      "path": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sha256": "4affd87e820aaee0abb6ebe6b490d3fb97dc67824a8418057e9884981401b01b",
+      "scope": "Full campaign layout fixture only; not a claim that this patch is installed/published on the fixture embedded release."
+    },
+    "steps": [
+      "uncleared predecessor keeps T3 entry disabled",
+      "confirmed T1 progress unlocks T2",
+      "offline refresh retains explicitly stale data and blocks entry",
+      "maintenance disables free and paid stage entry",
+      "wide safe-area header/footer targets stay inside the native root",
+      "companion click preserves the existing Character route and selected ID",
+      "team route remains reachable",
+      "armory route remains reachable",
+      "invitation route retains its Company return target",
+      "empty company removes prior account portraits and never invents companions",
+      "long roster includes all companions",
+      "4:3 long account header keeps all navigation targets reachable",
+      "the final companion remains reachable through the native scroll view",
+      "late prior-account response cannot republish its name or balance",
+      "a refreshed session also rejects its older same-account read",
+      "sign-out clears account values, ownership and portrait identities",
+      "failed first account load displays no fabricated balance",
+      "published paid stage is gated by the actual Ration balance",
+      "the same published stage enables only with sufficient Ration",
+      "Hard toggle selects published Hard node identities",
+      "More sheet Close remains inside the viewport",
+      "Back closes the route sheet before navigating",
+      "More route Summon remains bound",
+      "More route Team remains bound",
+      "More route Gear remains bound",
+      "More route Recruit remains bound",
+      "More route Tasks remains bound",
+      "More route Deeds remains bound",
+      "More route Trials remains bound",
+      "More route Mail remains bound",
+      "More route Shop remains bound",
+      "More route Profile remains bound",
+      "More route Library remains bound",
+      "More route Operations remains bound",
+      "More route ContentPanel remains bound",
+      "More route Account remains bound",
+      "stage entry follows the actual campaign story flow after repeated taps",
+      "4:3 tabs and every companion label stay separated and inside their cards",
+      "failed account header is unavailable rather than indefinitely loading",
+      "loading state shows no cached account values before the read group completes",
+      "leaving hub review clears its fake identity and callbacks before entry review",
+      "returning to hub review builds a fresh isolated account fixture"
+    ],
+    "states": {
+      "home": {
+        "ready": true,
+        "screen": "Home",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": 1650,
+        "signed": true,
+        "companions": 2,
+        "team": 2,
+        "nodes": 3,
+        "selected": "",
+        "start": false,
+        "startLabel": "",
+        "status": "REVIEW FIXTURE · Loaded 10:16 · Refresh to update.",
+        "wallet": "Bell's Remains  1,650",
+        "player": "Traveler fixture · Level 12",
+        "lastRoute": "",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp",
+          "art/portrait_mahmut_sol_composed.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1080
+      },
+      "company": {
+        "ready": true,
+        "screen": "Roster",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": 1650,
+        "signed": true,
+        "companions": 2,
+        "team": 2,
+        "nodes": 3,
+        "selected": "",
+        "start": false,
+        "startLabel": "",
+        "status": "REVIEW FIXTURE · Loaded 10:18 · Refresh to update.",
+        "wallet": "Bell's Remains  1,650",
+        "player": "Traveler fixture · Level 12",
+        "lastRoute": "Roster",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1080
+      },
+      "chapters": {
+        "ready": true,
+        "screen": "Chapters",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": 1650,
+        "signed": true,
+        "companions": 2,
+        "team": 2,
+        "nodes": 3,
+        "selected": "t2",
+        "start": true,
+        "startLabel": "START BATTLE",
+        "status": "REVIEW FIXTURE · Loaded 10:18 · Refresh to update.",
+        "wallet": "Bell's Remains  1,650",
+        "player": "Traveler fixture · Level 12",
+        "lastRoute": "Chapters",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1080
+      },
+      "stale": {
+        "ready": true,
+        "screen": "Chapters",
+        "mode": "offline",
+        "view": "stale",
+        "loading": false,
+        "fresh": false,
+        "current": true,
+        "balance": 1650,
+        "signed": true,
+        "companions": 2,
+        "team": 2,
+        "nodes": 3,
+        "selected": "t2",
+        "start": false,
+        "startLabel": "START BATTLE",
+        "status": "REVIEW FIXTURE · Refresh failed. Previously loaded account data is shown; stage entry is paused until refresh succeeds.",
+        "wallet": "Bell's Remains  1,650",
+        "player": "Traveler fixture · Level 12",
+        "lastRoute": "Character",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1440
+      },
+      "maintenance": {
+        "ready": true,
+        "screen": "Chapters",
+        "mode": "maintenance",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": 1650,
+        "signed": true,
+        "companions": 2,
+        "team": 2,
+        "nodes": 3,
+        "selected": "t1",
+        "start": false,
+        "startLabel": "START BATTLE",
+        "status": "REVIEW FIXTURE · Server maintenance: stage entry is paused.",
+        "wallet": "Bell's Remains  1,650",
+        "player": "Traveler fixture · Level 12",
+        "lastRoute": "Character",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1080
+      },
+      "empty": {
+        "ready": true,
+        "screen": "Roster",
+        "mode": "empty",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": 1650,
+        "signed": true,
+        "companions": 0,
+        "team": 0,
+        "nodes": 3,
+        "selected": "t1",
+        "start": false,
+        "startLabel": "",
+        "status": "REVIEW FIXTURE · Loaded 10:33 · Refresh to update.",
+        "wallet": "Bell's Remains  1,650",
+        "player": "Traveler fixture · Level 12",
+        "lastRoute": "Recruit",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "overlay": false,
+        "width": 2208,
+        "height": 1004
+      },
+      "accountRace": {
+        "ready": true,
+        "screen": "Roster",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": 730,
+        "signed": true,
+        "companions": 2,
+        "team": 2,
+        "nodes": 3,
+        "selected": "",
+        "start": false,
+        "startLabel": "",
+        "status": "REVIEW FIXTURE · Loaded 10:34 · Refresh to update.",
+        "wallet": "Bell's Remains  730",
+        "player": "Second account fixture · Level 12",
+        "lastRoute": "Character",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1440
+      },
+      "sameAccountRace": {
+        "ready": true,
+        "screen": "Roster",
+        "mode": "ready",
+        "view": "ready",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": 730,
+        "signed": true,
+        "companions": 2,
+        "team": 2,
+        "nodes": 3,
+        "selected": "",
+        "start": false,
+        "startLabel": "",
+        "status": "REVIEW FIXTURE · Loaded 10:34 · Refresh to update.",
+        "wallet": "Bell's Remains  730",
+        "player": "Second account fixture · Level 12",
+        "lastRoute": "Character",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp",
+          "art/portrait_mahmut_sol_composed.webp",
+          "art/portrait_fadyme_sol_composed.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1440
+      },
+      "guest": {
+        "ready": true,
+        "screen": "Roster",
+        "mode": "ready",
+        "view": "guest",
+        "loading": false,
+        "fresh": true,
+        "current": true,
+        "balance": null,
+        "signed": false,
+        "companions": 0,
+        "team": 0,
+        "nodes": 3,
+        "selected": "",
+        "start": false,
+        "startLabel": "",
+        "status": "REVIEW FIXTURE · Sign in to load your company and account progress.",
+        "wallet": "Bell's Remains  —",
+        "player": "Guest",
+        "lastRoute": "Character",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1440
+      },
+      "error": {
+        "ready": true,
+        "screen": "Roster",
+        "mode": "offline",
+        "view": "error",
+        "loading": false,
+        "fresh": false,
+        "current": true,
+        "balance": null,
+        "signed": false,
+        "companions": 0,
+        "team": 0,
+        "nodes": 0,
+        "selected": "",
+        "start": false,
+        "startLabel": "",
+        "status": "REVIEW FIXTURE · Account data could not be loaded. Retry when connected.",
+        "wallet": "Bell's Remains  —",
+        "player": "Loading account…",
+        "lastRoute": "Character",
+        "paths": [
+          "art/bg_sol_hub_shelter.webp"
+        ],
+        "overlay": false,
+        "width": 1920,
+        "height": 1080
+      },
+      "paid": {
+        "node": "stage_1_2",
+        "chapter": "ch01_whispering_ash_forest",
+        "cost": 6
+      },
+      "entered": {
+        "screen": "Story",
+        "path": "story/tutorial_t1_before.json",
+        "phase": "PreStory",
+        "line": "tutorial_t1_before_001"
+      },
+      "layout": {
+        "tabsClear": true,
+        "labelsOrdered": true,
+        "labelsInsideCards": true
+      },
+      "isolation": {
+        "scenario": "entry",
+        "ready": true,
+        "guest": true,
+        "hubCleared": true
+      },
+      "textMeasurement": {
+        "allFit": true,
+        "labels": [
+          {
+            "text": "Fadyme",
+            "width": 287,
+            "height": 37,
+            "needed": 37
+          },
+          {
+            "text": "Level 12",
+            "width": 287,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★★",
+            "width": 287,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Veil · support dps",
+            "width": 287,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 1 · shards 4",
+            "width": 287,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Mahmut",
+            "width": 287,
+            "height": 37,
+            "needed": 37
+          },
+          {
+            "text": "Level 12",
+            "width": 287,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★★",
+            "width": 287,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Stone · tank bruiser",
+            "width": 287,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 1 · shards 4",
+            "width": 287,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 0",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 1",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 10",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 11",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 12",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 13",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 14",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 15",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 16",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 17",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 18",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 19",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 2",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 20",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 21",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 22",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 23",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 3",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 4",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 5",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 6",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 7",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 8",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Long companion display name for layout verification 9",
+            "width": 466,
+            "height": 73,
+            "needed": 73
+          },
+          {
+            "text": "Level 20",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "★★★★",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          },
+          {
+            "text": "Dawn · support",
+            "width": 466,
+            "height": 33,
+            "needed": 33
+          },
+          {
+            "text": "copies 2 · shards 45",
+            "width": 466,
+            "height": 23,
+            "needed": 23
+          }
+        ],
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "scope": "Live label content size check at the default review viewport; the final 4:3 screenshot was additionally inspected visually."
+      }
+    }
+  },
+  "art": {
+    "provider": "openai",
+    "generator": "image_gen.imagegen",
+    "source": {
+      "file": "content/generated/openai/sol_hub_shelter_01/source.png",
+      "sha256": "358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false
+    },
+    "promptPath": "content/generated/openai/sol_hub_shelter_01/prompt.txt",
+    "provenancePath": "content/generated/openai/sol_hub_shelter_01/run.provenance.json",
+    "ingestPath": "content/specs/image/sol_hub_shelter_01.ingest.json",
+    "output": {
+      "path": "art/bg_sol_hub_shelter.webp",
+      "sha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0",
+      "pixels_sha256": "21d37fd4ebd6b4faf3faaf78d901e2e1eebf9226ba91936d5258e1aeac22fd56",
+      "bytes": 358268,
+      "width": 1672,
+      "height": 941
+    },
+    "automaticQc": true,
+    "billing": {
+      "mode": "builtin_tool",
+      "api_spend_usd": null
+    },
+    "humanApproval": "pending",
+    "native2kTarget": "open"
+  },
+  "finalCapturePaths": [
+    {
+      "label": "final-home-ready",
+      "image": "docs/review/captures/20261027T085951746_a86f3296.png",
+      "metadata": "docs/review/captures/20261027T085951746_a86f3296.json",
+      "screen": "Home",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-company-ready",
+      "image": "docs/review/captures/20261027T085957725_8b3d10f6.png",
+      "metadata": "docs/review/captures/20261027T085957725_8b3d10f6.json",
+      "screen": "Roster",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-company-long-4x3",
+      "image": "docs/review/captures/20261027T090006730_5cc4aa9f.png",
+      "metadata": "docs/review/captures/20261027T090006730_5cc4aa9f.json",
+      "screen": "Roster",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1600,
+      "height": 1200,
+      "safe": false
+    },
+    {
+      "label": "final-home-wide-safe",
+      "image": "docs/review/captures/20261027T090017624_71d40ad6.png",
+      "metadata": "docs/review/captures/20261027T090017624_71d40ad6.json",
+      "screen": "Home",
+      "phase": "ready",
+      "stage": 0,
+      "width": 2400,
+      "height": 1080,
+      "safe": true
+    },
+    {
+      "label": "final-chapters-ready",
+      "image": "docs/review/captures/20261027T090023481_0da61ecc.png",
+      "metadata": "docs/review/captures/20261027T090023481_0da61ecc.json",
+      "screen": "Chapters",
+      "phase": "ready",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-account-error",
+      "image": "docs/review/captures/20261027T090029216_b5a72459.png",
+      "metadata": "docs/review/captures/20261027T090029216_b5a72459.json",
+      "screen": "Chapters",
+      "phase": "error",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    },
+    {
+      "label": "final-account-loading",
+      "image": "docs/review/captures/20261027T090036052_9afc5bed.png",
+      "metadata": "docs/review/captures/20261027T090036052_9afc5bed.json",
+      "screen": "Chapters",
+      "phase": "loading",
+      "stage": 0,
+      "width": 1920,
+      "height": 1080,
+      "safe": false
+    }
+  ],
+  "captures": [
+    {
+      "metadata": "docs/review/captures/20261027T074353413_b57efb5d.json",
+      "image": "docs/review/captures/20261027T074353413_b57efb5d.png",
+      "imageSha256": "7ec56b45888270ffa87c7aa9fc8d4c514d746b45d35b4feb1376b89b861ba48d",
+      "gitMetadataSha256": "4cf5d36ee6f3081de3ed1564039e523da36b3ed15aac17cf0b44d31da1f28a80",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T074359404_a60472db.json",
+      "image": "docs/review/captures/20261027T074359404_a60472db.png",
+      "imageSha256": "bab1630f27da0d38000f75000f82a085344d5d3157c8b035346c07eccca730fd",
+      "gitMetadataSha256": "ff1872380d4355f2204716ebc6cdcb0c49a2c31d31022773332541c4e12e9761",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T074405171_699a0443.json",
+      "image": "docs/review/captures/20261027T074405171_699a0443.png",
+      "imageSha256": "eb0f9157614fbdc52f475d154dbaa2f4c76984057fb555ac36e8c10ec0ef610d",
+      "gitMetadataSha256": "c262c6b5e2809b2c25ff50dd54282b908ab5d158b89a273149e8ba73008bab3c",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "ready",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T081843696_80ad0f3f.json",
+      "image": "docs/review/captures/20261027T081843696_80ad0f3f.png",
+      "imageSha256": "42db967c5c023e871dc5254bef04323d73fe9e141e56d43668dbe4e4fdfb308f",
+      "gitMetadataSha256": "2da6648f8945e783caa6ce33a4d8eeaa57ad1c147d0bab923c8f44424c2c2c6a",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T081849671_bf5f4298.json",
+      "image": "docs/review/captures/20261027T081849671_bf5f4298.png",
+      "imageSha256": "fef9aa88cdcd4668dd908a2bc66bc4a5328662b8dfc701bd8ed5617e62de6c17",
+      "gitMetadataSha256": "23b9111ba23fca8f8ff718cad8509f8748ba647e004cf2bddfe6b36b0c64374c",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T081856945_1196d24a.json",
+      "image": "docs/review/captures/20261027T081856945_1196d24a.png",
+      "imageSha256": "3919dcbb8de2487202a57b6135a2218dd1266057ce03965be1bf51bd096d4256",
+      "gitMetadataSha256": "647589c6a87f0dc0bf4ef3c4cc02cb7daacc77fd846d5454a5a7fff10468ab44",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T082137567_3e18acf1.json",
+      "image": "docs/review/captures/20261027T082137567_3e18acf1.png",
+      "imageSha256": "f31ceda6c4a4ad1f59792f54edb5c02d10cca7e359c9d1f4deab04b743852212",
+      "gitMetadataSha256": "30f9011ebfd6f82adea295ad7b885907408a3a1376ebd301cc5a723a0095e7bc",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "stale",
+      "fixtureMode": "offline",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T082152840_6ed6c8ed.json",
+      "image": "docs/review/captures/20261027T082152840_6ed6c8ed.png",
+      "imageSha256": "dad22b5f6049d0df987489ad70fc4d0aa61233af879cd3786b6f58431fe90990",
+      "gitMetadataSha256": "b259fd9c3b80828d1ce3418878005a9c85ccf3cceb4feaf09df067c5ad618dd6",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T082217200_cb2e3755.json",
+      "image": "docs/review/captures/20261027T082217200_cb2e3755.png",
+      "imageSha256": "afcd1f63fe7bc88b701661dfcc842d4cfd72a92f8779bb42b34d47c2f31cbf2f",
+      "gitMetadataSha256": "6569ef1c80aede0846483cf3c2475514633370e68e4f194461657c6273719828",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "empty",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T082225462_449db53b.json",
+      "image": "docs/review/captures/20261027T082225462_449db53b.png",
+      "imageSha256": "cde75d13462972684f125d1a38e611e7da597880313607d7edf7a188b05da3ca",
+      "gitMetadataSha256": "548fb0c07d7aff5ec3de9e71bf8f42927f257c55e7e471d57aed2e72c8ebe273",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083314392_77ed1e63.json",
+      "image": "docs/review/captures/20261027T083314392_77ed1e63.png",
+      "imageSha256": "f31ceda6c4a4ad1f59792f54edb5c02d10cca7e359c9d1f4deab04b743852212",
+      "gitMetadataSha256": "f1a0cf9f5b4bd8cc45106d217361ec2ce302ce3cb3214966b7eb0d0ffc03501a",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "stale",
+      "fixtureMode": "offline",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083333323_947ed583.json",
+      "image": "docs/review/captures/20261027T083333323_947ed583.png",
+      "imageSha256": "04d77c3c279dbaf121fa0d09b11a22446d4bd3a57996d539342b7a0db17f023e",
+      "gitMetadataSha256": "9b3ed6ffe542f04da6f4c24a32e13013d8580c9bc498e2a383c8efb4fa9ddd08",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083358658_03c5d923.json",
+      "image": "docs/review/captures/20261027T083358658_03c5d923.png",
+      "imageSha256": "04462177193c0fe9a2243a4afdc269c394f5e4aab9b449bb1a480d7cde63557a",
+      "gitMetadataSha256": "c73f88769bd41883985ed0e3a02562c3c9e32c6b3e6f1ccc5c1347e8065cefb3",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "empty",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083406675_a1fc91e6.json",
+      "image": "docs/review/captures/20261027T083406675_a1fc91e6.png",
+      "imageSha256": "37e54b83281d7e23e96d4fc7c406f6baa097888cab86e0bb2454146353963995",
+      "gitMetadataSha256": "6ab867bf4652e6b020b4a819f0c43626c46ba64fb2b08a8ab852e6a926c2094e",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083429682_d17f0871.json",
+      "image": "docs/review/captures/20261027T083429682_d17f0871.png",
+      "imageSha256": "941f9e83f84fbbb98aa1a84df3d678ff57ee587260d008986f70b3cd19cd33df",
+      "gitMetadataSha256": "83f5a2ff208b80f5eaf4ad6f0ff68c0ea20d0ee0927f02868732f0bd54a97214",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "guest",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083435805_b89db2d1.json",
+      "image": "docs/review/captures/20261027T083435805_b89db2d1.png",
+      "imageSha256": "d167b121d948d4717d3a4e274b8d9b60c729b9c4c39e2c28e0153f9039b9ecc7",
+      "gitMetadataSha256": "316914ab1d8acb3f53ad83713c7eadbaff8e9e8ad41039007c67abd183557578",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "error",
+      "fixtureMode": "offline",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083458010_9b545b4f.json",
+      "image": "docs/review/captures/20261027T083458010_9b545b4f.png",
+      "imageSha256": "cc9c4a4d3d7050cd14d111ca9efae9c715dde49ea4b51c1db4a56dddb84d983e",
+      "gitMetadataSha256": "3154edcccf0d9487bbc1ea19a27503bf106c35f2990a8dbaf3defa39bb2e2281",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083503810_b9189a20.json",
+      "image": "docs/review/captures/20261027T083503810_b9189a20.png",
+      "imageSha256": "3233b94fb3c562815b13eef422d4d40ebc97dcf3bf931164811826a6c61aed27",
+      "gitMetadataSha256": "7c0c0e4812dc92fa9147be0ed6820c04e80bf67526ae595a2814b9a8c3dc7dd4",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T083509451_caed897d.json",
+      "image": "docs/review/captures/20261027T083509451_caed897d.png",
+      "imageSha256": "1ae562683fb8932e6f75593f38e0e87dfea99c973c3ec2d9de93313b5c2d0b02",
+      "gitMetadataSha256": "cc883f34572b776dca74f0a47a1f6ce8e055599cf98dbf25fb1ca8d758d8e92e",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "campaign",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085021229_1a535ade.json",
+      "image": "docs/review/captures/20261027T085021229_1a535ade.png",
+      "imageSha256": "cee883d442d75d7ca6274b24c528673583d5b25da1ad6547d93d53938d961438",
+      "gitMetadataSha256": "d178e5efe89bb2e113725b00b7d08ebb4b211912f69956316a2c34cd82fbdbc1",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085027233_5539c503.json",
+      "image": "docs/review/captures/20261027T085027233_5539c503.png",
+      "imageSha256": "04a71fd83b4d57f48f348c34b6d0d7cb20ac5cd18f08459883cd330dc32e9444",
+      "gitMetadataSha256": "2c0756f28f623bc21bd1323028a48ef13021998d2edcbb9d22258d85942b7fe6",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085034247_bb9f1165.json",
+      "image": "docs/review/captures/20261027T085034247_bb9f1165.png",
+      "imageSha256": "a005d9618ce8bf059aeca72f4a348f769c6229276fb4a68d51f55acac3604d69",
+      "gitMetadataSha256": "40299e59e20b92546d602f665634adfb814032f6c6df76def10177801d5f6a01",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085046830_95cfb41e.json",
+      "image": "docs/review/captures/20261027T085046830_95cfb41e.png",
+      "imageSha256": "ca4dbc067649add209ce170e0938b6b17989f5e8bb779437fa275f9e40f9486d",
+      "gitMetadataSha256": "126f70726a93d314c8d36090873f03c71dd17ee565d1c293e1f4d340c7b2430a",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085052320_ae278db6.json",
+      "image": "docs/review/captures/20261027T085052320_ae278db6.png",
+      "imageSha256": "877cdbd087965447239273f197dd77a468ce213010fff43b1afd6726f53ffd02",
+      "gitMetadataSha256": "9828f61d8cbc016d4562fc0fe79f75dde0ddce4a8309739a38d8b4f12770cb9b",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085058005_816b7802.json",
+      "image": "docs/review/captures/20261027T085058005_816b7802.png",
+      "imageSha256": "d841eae605e88ee04fd32fe8c968b4e25c11484b392d2e67b45488a638e18fe1",
+      "gitMetadataSha256": "db7f0ee8a34bb538a17a9111dbd2423399f9b46e66895dd12f084ab8adbee314",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "error",
+      "fixtureMode": "offline",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085104730_e2e66b98.json",
+      "image": "docs/review/captures/20261027T085104730_e2e66b98.png",
+      "imageSha256": "a888cd9ab3bb1ca8f1f32556f93a072831f9eac8c9459b92f96bf6def19535ae",
+      "gitMetadataSha256": "058d3a62ab89c10e5d2eabcc8a3ba558fd0d08ccff44d1bcb799d0ced90f1685",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "loading",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": false
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085951746_a86f3296.json",
+      "image": "docs/review/captures/20261027T085951746_a86f3296.png",
+      "imageSha256": "17846a0d727ac457a13515c8a992f2603e81b07a95e468fca1c2e25787ba6e3d",
+      "gitMetadataSha256": "6b64b7dad4cda9c42d6a679df51b86c837a9d098e7b269f3f1e4583c9e07d8db",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T085957725_8b3d10f6.json",
+      "image": "docs/review/captures/20261027T085957725_8b3d10f6.png",
+      "imageSha256": "4bffa35ce74df45e6230f6de9e1a1e06ede5d2cbbea53ec6aad36ce8e607419e",
+      "gitMetadataSha256": "da57e1a8eb988187d1233c0ffe4a0a653e8dc5be25a58e5efac5b7935e9c0fe1",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T090006730_5cc4aa9f.json",
+      "image": "docs/review/captures/20261027T090006730_5cc4aa9f.png",
+      "imageSha256": "d5960f85c06de00ee5855941b735cc2c74e84cddb9dfc60f584f073843fc9b22",
+      "gitMetadataSha256": "b67591697479cded5ebbf96a19f4e95ab38b2daf0b377b9a2a99d1131725fac3",
+      "width": 1600,
+      "height": 1200,
+      "scenario": "hub/home",
+      "screen": "Roster",
+      "state": "ready",
+      "fixtureMode": "long",
+      "indexSource": "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_fadyme_vn_composed@1:d0421c0cc814cd0b891e021e3bb67a12a296afb10d27de5df1a01912346455dc",
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T090017624_71d40ad6.json",
+      "image": "docs/review/captures/20261027T090017624_71d40ad6.png",
+      "imageSha256": "1a9a0e670f8f765c12a9089bb90dc7fac4ef22809c0e02fff1c7693d8ffc42cd",
+      "gitMetadataSha256": "9416913c6375a42e5fdd68465ea644c72e978526e53913889dc97ec4ffee1b98",
+      "width": 2400,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Home",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "sol_mahmut_vn_composed@1:184275152beb1b2a34b4664d4b60ae6d780dc66eb9ed3058dfaf8a7f363ba4ca"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T090023481_0da61ecc.json",
+      "image": "docs/review/captures/20261027T090023481_0da61ecc.png",
+      "imageSha256": "221aeea1e4911e81f6bfa36d537e5a140a1cab6322c6211d81ae21d431b49239",
+      "gitMetadataSha256": "ecd49243108a464292eb3dcf977304bd98eec93c7b86c3d2aae1c39186cae251",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "ready",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T090029216_b5a72459.json",
+      "image": "docs/review/captures/20261027T090029216_b5a72459.png",
+      "imageSha256": "d841eae605e88ee04fd32fe8c968b4e25c11484b392d2e67b45488a638e18fe1",
+      "gitMetadataSha256": "e6e681f4323e6c415d4742980f7be2cd6b8f39b0ae6cab1061e385359218d436",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "error",
+      "fixtureMode": "offline",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    },
+    {
+      "metadata": "docs/review/captures/20261027T090036052_9afc5bed.json",
+      "image": "docs/review/captures/20261027T090036052_9afc5bed.png",
+      "imageSha256": "a888cd9ab3bb1ca8f1f32556f93a072831f9eac8c9459b92f96bf6def19535ae",
+      "gitMetadataSha256": "81abd3b3d152af7db422dff7c82c404d08d41fc2dc2ef6d922c47a21a9111165",
+      "width": 1920,
+      "height": 1080,
+      "scenario": "hub/home",
+      "screen": "Chapters",
+      "state": "loading",
+      "fixtureMode": "ready",
+      "indexSource": "embedded:chapters/chapter_index.json",
+      "sourceIdentities": [
+        "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+      ],
+      "finalPass": true
+    }
+  ],
+  "restoration": {
+    "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+    "dirty": false,
+    "playing": false,
+    "paused": false,
+    "review": false,
+    "index": 9,
+    "gizmos": true,
+    "equal": true,
+    "baseline": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "current": {
+      "prefs": {
+        "scene": "Assets/_UOMD/Scenes/UomdMain.unity",
+        "dirty": false,
+        "enterOptions": "None",
+        "enterEnabled": false,
+        "startScene": "",
+        "preferences": "a4055f6dda2338d5b530b488ebaba7ad2f91103eb68c40becce6bc24546bec2d"
+      },
+      "install": {
+        "entryHas": false,
+        "entryValue": -1,
+        "installHas": true,
+        "installHash": "bc0101bcff1df77674a2c1179b7710791f593f490f1b0fac1c1cfc24666573fa"
+      }
+    },
+    "viewport": {
+      "expectedIndex": 9,
+      "expectedGizmos": true
+    },
+    "consoleErrors": 0,
+    "compilationFailed": false
+  },
+  "boundaries": [
+    "Local Editor fixtures are not live signed-in, Android, provider, human art or release acceptance.",
+    "The seven final captures supersede earlier in-session layout captures, retained as review history.",
+    "Non-rebuilt detail screens, formation/Armory rebuilding and complete stage actions including durable Sweep recovery remain subsequent slices.",
+    "Account reads form one validated publication group, not a provider database transaction.",
+    "Native shelter art is 1672x941 without upscaling; the final native-2K target remains open.",
+    "No new credentials, hooks, external paid generation call, push or deployment. Built-in image tool billing amount is not reported.",
+    "Owner file codex_watcher.ps1 was not read, executed or staged."
+  ],
+  "sourceFiles": [
+    {
+      "path": "README.md",
+      "gitBlobSha256": "88815dc4b4cad7b46f80ff7ef56d7dbb3346ad5f79b2f1510b4567c398f372e1",
+      "editorFileSha256": "456a695a25db11fc604b9e103918fc4ebd8d2efec392965b7a99989b42937eb4"
+    },
+    {
+      "path": "apps/api/seed/assets.sql",
+      "gitBlobSha256": "9084330e4f028a139ab215e488b7ea988124fa4db042d24763826b2a481e554b",
+      "editorFileSha256": "9084330e4f028a139ab215e488b7ea988124fa4db042d24763826b2a481e554b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCaptureService.cs",
+      "gitBlobSha256": "1829e610d18e04f76c609540096e0b4ac4574223f2eff3e652c8895d94418eb8",
+      "editorFileSha256": "d64ed8d27063d7b8296fa6e63401e6291bb340e9093919e6b4e5383695f4ba1a"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewCatalog.cs",
+      "gitBlobSha256": "c5a1dc9dd54322901cd6ccc90de51691290363470e9152c3f3e27e02ac8d228c",
+      "editorFileSha256": "84bc6630cbe6bc50c7f3ade6aa956e1436dbc0b1fcd57c26903a359a0c8e0029"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Editor/ProductionReviewWindow.cs",
+      "gitBlobSha256": "1d072cff100345de3745b1be841c4dd4365fe2fab354219a9f876a79cb64202e",
+      "editorFileSha256": "5ba243b93e42ba980329a951e00d3fcb0ee505382e2d00bd353c7c9c9c609d36"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/CompanyAndChaptersScreens.cs",
+      "gitBlobSha256": "b0bde62e921075d269c28c0af91c575ca9e917c3cab0929ccc0516efa3e8859c",
+      "editorFileSha256": "adaeb52cdecee082eeeef7ca235271f79d1af036a31a28220d8194e139c3b640"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RosterAndCompanionScreens.cs",
+      "gitBlobSha256": "bd848ea177a478882a66e84f7b4ad0c03508997721b9dc4e8057386e6890d9ea",
+      "editorFileSha256": "38ec24067ee5786cec5fd151a53a8280c275d214934f2c2b99c63d2f43ddbbdb"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdProductionPreview.cs",
+      "gitBlobSha256": "c5124c41adf51ab7aa243f24159b517518d1b5853854fc45aa0f45dca6d42ade",
+      "editorFileSha256": "0bf95d18395759f67a30d60a029ac86f3108a0c13b0f37fc15e75a446c578d3f"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdSceneRouter.cs",
+      "gitBlobSha256": "93231fa1d53008ab835b2cc88fa237737f2b3b6464d72613409f57e0c5267dcb",
+      "editorFileSha256": "b63f829fb6b8d0ec62112bd877296436af1cf5a741358379cb5a954b6c2c25d8"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/Editor/ProductionReviewTests.cs",
+      "gitBlobSha256": "e9378aaebfba4213d3ca1eadec442585581f8edb374cd99eb1c1dc913bed0486",
+      "editorFileSha256": "5d7603b1be6cf4b94f764aa74394243e6a34518fe44494aa9b366c9b50440514"
+    },
+    {
+      "path": "apps/unity/Logic/Uomd.Core/Uomd.Core.csproj",
+      "gitBlobSha256": "7eaf10c651e1f2357f4140bf5cb6f34a74bcb74119eaf31a65b4a5419958ef85",
+      "editorFileSha256": "7eaf10c651e1f2357f4140bf5cb6f34a74bcb74119eaf31a65b4a5419958ef85"
+    },
+    {
+      "path": "content/base/art/art_manifest.json",
+      "gitBlobSha256": "cb47f6342a92eb606b382abd84ec8a110e341234559c51e2258a9e44faf466fd",
+      "editorFileSha256": "cb47f6342a92eb606b382abd84ec8a110e341234559c51e2258a9e44faf466fd"
+    },
+    {
+      "path": "content/base/release.json",
+      "gitBlobSha256": "66f5312f8d2cbb006e905239cbea6c6160da5ca6bd6d2ae0faf9695ca64c3ecd",
+      "editorFileSha256": "66f5312f8d2cbb006e905239cbea6c6160da5ca6bd6d2ae0faf9695ca64c3ecd"
+    },
+    {
+      "path": "content/provenance.json",
+      "gitBlobSha256": "543420a989de7943948fbb6a35f1fcdca93986e70f282db29dccdf32d9fe1670",
+      "editorFileSha256": "543420a989de7943948fbb6a35f1fcdca93986e70f282db29dccdf32d9fe1670"
+    },
+    {
+      "path": "docs/BUILD_STATE.md",
+      "gitBlobSha256": "d4c93f33a885b1673a5748c9d7bc626323039a60c8856d0035863eaba7092820",
+      "editorFileSha256": "5e2f4c19254c565356a99e980073f8a29a4de97c6d718221a55cc3c8aecbdcc1"
+    },
+    {
+      "path": "docs/DEV_TRACKER.json",
+      "gitBlobSha256": "a8f3576ce6848844646f7dee73f24c755c50fd89f38e0b9c0e4c8c7599917fe3",
+      "editorFileSha256": "6eb531cc500a1fe3a999511c410b6a01412287a5e3dd2ec05ddac25f0a19c949"
+    },
+    {
+      "path": "docs/INFRA_ROADMAP.md",
+      "gitBlobSha256": "f39a9d90d4a1dcb3a13f320f532a34547c5aec08b385c43de355a618ff9366b7",
+      "editorFileSha256": "0a48e022bf0d9482712ad264dfc66921185f284aca632cbf04fc4cf440e93b5f"
+    },
+    {
+      "path": "docs/NEXT_STEPS.md",
+      "gitBlobSha256": "8eb73f8e2f007239dae271230d95b93bc2c9821ba7c1591713127a341c2f2d0e",
+      "editorFileSha256": "68b182476366e2fc92d2158fc6fe1cb6ce99cb3205eb0d60f7073c5c87cf80c7"
+    },
+    {
+      "path": "docs/handoff/CODEX_CLI_MASTER_PROMPT.md",
+      "gitBlobSha256": "13a22e379be65d25d83dc8bedcf09729b15ce76250424945488b793c47dd13c9",
+      "editorFileSha256": "c1a0872b393464a59956497b4b4a4dccfbeaf5ba990c9ac90da47c1c833b070e"
+    },
+    {
+      "path": "docs/handoff/SOL_CONTINUATION_PLAN.md",
+      "gitBlobSha256": "d29f5b92cb2c209e5e406811a7c393ea7137608b9317622d6d526baa8c589edb",
+      "editorFileSha256": "a14acc570e33926d0705cdf0d07b18714395d072069043f90de20211ee8d9a99"
+    },
+    {
+      "path": "docs/handoff/SOL_REBUILD_PLAN.md",
+      "gitBlobSha256": "ab48f5412d61a4272ea1890fc7aa16d82fa8c3a47ee810ab32110600b59bf8e8",
+      "editorFileSha256": "a1aa7f48db4d8472e828aaabcccf73c8e918c4aed6d1996d68a071461e3d831f"
+    },
+    {
+      "path": "docs/review/PRODUCTION_REVIEW.json",
+      "gitBlobSha256": "ff2ac295fec3dc066c6295812380bc9824bc1f2f8259416e57083b82be6f71f0",
+      "editorFileSha256": "ff2ac295fec3dc066c6295812380bc9824bc1f2f8259416e57083b82be6f71f0"
+    },
+    {
+      "path": "docs/review/README.md",
+      "gitBlobSha256": "701760af9eebdceb654c11a2149a90975fefbb6200a87ba2a34e26734f908180",
+      "editorFileSha256": "3ae7301ca009aea96592724beae4e09f0fec35cf4221d6d4f6144032b532f9c1"
+    },
+    {
+      "path": "docs/review/index.html",
+      "gitBlobSha256": "5668d57b807290684690ca4d85872f00981797125e3adcad448683712ce63f56",
+      "editorFileSha256": "5668d57b807290684690ca4d85872f00981797125e3adcad448683712ce63f56"
+    },
+    {
+      "path": "tools/build_content.ts",
+      "gitBlobSha256": "39c13d91718279497dd8ac70d5d6e0ba2d75d323f413d339eaf54d4c92cb3707",
+      "editorFileSha256": "9c32b5fde3d54210f40a58c2b8a12d6ff49009a70cbacf93fff62c6aca2dd00f"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Hub.uss",
+      "gitBlobSha256": "4feaf75c7f0708d0f85dca2b2b65aef54f3eb3c3191da63c6023a88adf5e8fd4",
+      "editorFileSha256": "96b3a7d000e397a356c396eb4b969205872cce248ca630abb026324dfce37d77"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Hub.uss.meta",
+      "gitBlobSha256": "8981afbeacf14cebc071fa2cdf104b7e054178f012e3f85f8d820d85898bf4ad",
+      "editorFileSha256": "8981afbeacf14cebc071fa2cdf104b7e054178f012e3f85f8d820d85898bf4ad"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Hub.uxml",
+      "gitBlobSha256": "aa1f87743a7501321779a027955b0ec152b039166636717b48e96ffd0e147155",
+      "editorFileSha256": "aa1f87743a7501321779a027955b0ec152b039166636717b48e96ffd0e147155"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Resources/Rebuild/Hub.uxml.meta",
+      "gitBlobSha256": "3f300d06d434a37a67345ed1e795f241176b066775f093057df770fcb53a4dd4",
+      "editorFileSha256": "3f300d06d434a37a67345ed1e795f241176b066775f093057df770fcb53a4dd4"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdHubSnapshot.cs",
+      "gitBlobSha256": "a7e15b0ef2c060e003f35efaf6fcf272e1aeb993ba6f33774349648690a03fde",
+      "editorFileSha256": "34caa6c0913ec5d4e585095158adf8a4cb44d779badb8fccdee9737e5b3b28cc"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Core/UomdHubSnapshot.cs.meta",
+      "gitBlobSha256": "7186c2d050fde211a7515751e765b46cba32950a06199c1f1bb2872c6072258e",
+      "editorFileSha256": "7186c2d050fde211a7515751e765b46cba32950a06199c1f1bb2872c6072258e"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildHubScreen.cs",
+      "gitBlobSha256": "baa74656442e133f9ebc40953d7bdb35efb86ef3ec5c75d9a2d0ebfadef6e032",
+      "editorFileSha256": "e677ce3a5c1355459537ed615b545dd729174b886e55ae5934d855d8fa00dd4b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/RebuildHubScreen.cs.meta",
+      "gitBlobSha256": "063629df1762c45b472dfa700dad2f861227b4574a4a1475c2d8f3293c04d03b",
+      "editorFileSha256": "063629df1762c45b472dfa700dad2f861227b4574a4a1475c2d8f3293c04d03b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubReview.cs",
+      "gitBlobSha256": "df7acd8c1a30763c0300956b4602faf2038381cf9a749e6ac289bc0c19cece15",
+      "editorFileSha256": "2f8ba0dde9e55aea9a52a704e71cc9b5377e303e195e1e28d7c3736bbdf97ea2"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubReview.cs.meta",
+      "gitBlobSha256": "9b4fff559a5bb1e22dcc224b6e3505785dd4cc76058546968ddc1dbb1a37c3c5",
+      "editorFileSha256": "9b4fff559a5bb1e22dcc224b6e3505785dd4cc76058546968ddc1dbb1a37c3c5"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubState.cs",
+      "gitBlobSha256": "767820dddfe287491a3406c73bd0aabab1c0ddd826b1c480dfda91b645863b45",
+      "editorFileSha256": "c140b7d034349fb989496ca8908c00f02db3da8bb9b8e9caac7d00d9b7daa138"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Scripts/Scenes/UomdHubState.cs.meta",
+      "gitBlobSha256": "ee89e36048c42e1eee75c6ba52bb774773dc7994cdba66fc643225a1de65797b",
+      "editorFileSha256": "ee89e36048c42e1eee75c6ba52bb774773dc7994cdba66fc643225a1de65797b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/HubSnapshotTests.cs",
+      "gitBlobSha256": "fda6afa393a540fd686b70c2cb8f303d303fee0118647202514a12d713a6d0e1",
+      "editorFileSha256": "2ed7eeada74ace3f75462f04143d740ecdd47c329da3a02ab8ad56ae140aa223"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/EditMode/HubSnapshotTests.cs.meta",
+      "gitBlobSha256": "9c134a6439451bc6340245449801c7abedba09368f8b6a4903c40f04b313eae2",
+      "editorFileSha256": "9c134a6439451bc6340245449801c7abedba09368f8b6a4903c40f04b313eae2"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/Editor/NativeHubPresentationTests.cs",
+      "gitBlobSha256": "6db6aea0814cb04a33be360112229d8289284ae85619207201e68361822a37da",
+      "editorFileSha256": "fa7044f308fabade1aa93ea411a6e76696c10f48632aa2df5a15f1569afa663b"
+    },
+    {
+      "path": "apps/unity/Assets/_UOMD/Tests/Editor/NativeHubPresentationTests.cs.meta",
+      "gitBlobSha256": "c0048dd5cabddc315dc4190c50c3434611073c5b63c849552a954c3219d46fb7",
+      "editorFileSha256": "c0048dd5cabddc315dc4190c50c3434611073c5b63c849552a954c3219d46fb7"
+    },
+    {
+      "path": "content/approved_art/art/bg_sol_hub_shelter.webp",
+      "gitBlobSha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0",
+      "editorFileSha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0"
+    },
+    {
+      "path": "content/approved_art/entries/sol_hub_shelter_01.json",
+      "gitBlobSha256": "e9a132d722bac6a91f69de5d69f792f75d0fec9fa2ded3cd0add8e3d1429e62b",
+      "editorFileSha256": "e9a132d722bac6a91f69de5d69f792f75d0fec9fa2ded3cd0add8e3d1429e62b"
+    },
+    {
+      "path": "content/base/art/bg_sol_hub_shelter.webp",
+      "gitBlobSha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0",
+      "editorFileSha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0"
+    },
+    {
+      "path": "content/generated/openai/sol_hub_shelter_01/prompt.txt",
+      "gitBlobSha256": "753cb382c72bcc461c21ad1db5fdf6858e7c628b3686a8fa82f93227ffb08cc9",
+      "editorFileSha256": "753cb382c72bcc461c21ad1db5fdf6858e7c628b3686a8fa82f93227ffb08cc9"
+    },
+    {
+      "path": "content/generated/openai/sol_hub_shelter_01/run.provenance.json",
+      "gitBlobSha256": "b0ae1276a863dd0645d4b192615e2877ecf99dd86670f6c2474e3b4ac43844b6",
+      "editorFileSha256": "b0ae1276a863dd0645d4b192615e2877ecf99dd86670f6c2474e3b4ac43844b6"
+    },
+    {
+      "path": "content/generated/openai/sol_hub_shelter_01/source.png",
+      "gitBlobSha256": "358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+      "editorFileSha256": "358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+    },
+    {
+      "path": "content/specs/image/sol_hub_shelter_01.ingest.json",
+      "gitBlobSha256": "b3dc22cd0ce63f02e99c52d2229884d336d0f214a3e40005971c7f084f93d151",
+      "editorFileSha256": "b3dc22cd0ce63f02e99c52d2229884d336d0f214a3e40005971c7f084f93d151"
+    },
+    {
+      "path": "docs/media/SOL_NATIVE_HUB.md",
+      "gitBlobSha256": "ca6d5f3477f8a15d0ff09757fabb9610bc9295833632f27fc3a4f6959868ab03",
+      "editorFileSha256": "ca6d5f3477f8a15d0ff09757fabb9610bc9295833632f27fc3a4f6959868ab03"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Unity Production Review
 
+The **hub/home**, **hub/company** and **hub/chapters** scenarios run the native hub controllers with explicit isolated account fixtures. The new shelter plate is an OpenAI candidate with human/native-2K acceptance open. [Hub guide, prompt and limits](../media/SOL_NATIVE_HUB.md).
+
 First slice, LOCAL_TESTED on 2026-10-26. Open **Window → UOMD → Production Review** in Unity 6000.3.27f1.
 The window is left open after delivery; Play Mode is stopped and `UomdMain` is restored.
 
@@ -7,8 +9,8 @@ The **campaign** scenario adds an explicit memory-only server fixture for the ac
 Saved Actions screens. It defaults to offline confirmation; captures show REVIEW FIXTURE and the bound request/hash/state.
 No HTTP or device journal writes occur. See [campaign recovery guide](../UNITY_CAMPAIGN_OPERATIONS.md).
 
-1. Pick one of the 26 OpenAI candidates. Disable **OpenAI candidates** to browse all 460 records
-   (284 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
+1. Pick one of the 27 OpenAI candidates. Disable **OpenAI candidates** to browse all 461 records
+   (285 ingest entries plus 176 runtime/store references). Historical art is explicitly reference-only.
 2. **Asset / provenance** shows stable ID/revision, native source dimensions, decoded alpha, exact source/prompt/reference
    hashes, QC, consumer mappings and existing owner feedback. Zoom/pan the checkerboard preview or compare a retained
    PNG/JPG source by its path and SHA-256. Ingest records and prior sources are never overwritten.

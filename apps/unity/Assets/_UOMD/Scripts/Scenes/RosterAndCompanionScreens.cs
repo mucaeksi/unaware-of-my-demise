@@ -66,81 +66,10 @@ namespace Uomd.Scenes
         public static string Stars(long n) => new string('★', (int)Math.Max(0, n));
     }
 
-    /// <summary>The owned companions, 12 per page (port of RosterScene.ts).</summary>
-    public sealed class RosterScreen : UomdHubScreen
+    public sealed class RosterScreen : RebuildHubScreen
     {
-        private const int PerPage = 12;
-        private static int _lastPage;
-        private readonly List<(string Id, string Name, int Rarity, string Element, string Role, int Copies, int Shards)> _list =
-            new List<(string, string, int, string, string, int, int)>();
-        private int _total;
-
         public RosterScreen(UomdSceneRouter router) : base(router) { }
-
         public override UomdScreenId ScreenId => UomdScreenId.Roster;
-        protected override string Heading => "ROSTER";
-
-        protected override async Awaitable BuildAsync(int generation)
-        {
-            var inventory = await Router.Api.GetJsonAsync("/api/v1/inventory");
-            var roster = await HubData.RosterAsync(Router);
-            if (!IsCurrent(generation)) return;
-            _list.Clear();
-            foreach (var item in JsonRead.Objects(inventory, "items"))
-            {
-                if (JsonRead.Str(item, "item_type") != "character") continue;
-                string id = JsonRead.Str(item, "item_id");
-                roster.TryGetValue(id, out var meta);
-                _list.Add((id, meta != null ? JsonRead.Str(meta, "name_en", id) : id, (int)JsonRead.Int(meta, "rarity"), JsonRead.Str(meta, "element"),
-                    JsonRead.Str(meta, "role"), (int)JsonRead.Int(item, "copies"), (int)JsonRead.Int(item, "shards")));
-            }
-            _list.Sort((a, b) => b.Rarity != a.Rarity ? b.Rarity.CompareTo(a.Rarity) : string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
-            _total = roster.Count;
-            Draw();
-        }
-
-        private void Draw()
-        {
-            Body.Clear();
-            Button(RefW - 300f, 170f, "INVITATIONS", null, 420, 90, 30, UomdPanelVariant.Normal, () =>
-            {
-                Router.Session.RecruitReturnTo = UomdScreenId.Roster;
-                _ = Router.NavigateToAsync(UomdScreenId.Recruit);
-            });
-            Text(RefW / 2f, 160f, $"{_list.Count} of {_total} companions", 36, UomdThemeTokens.TextDim, 0.5f, 0.5f);
-            int pages = Math.Max(1, (int)Math.Ceiling(_list.Count / (double)PerPage));
-            _lastPage = Math.Min(_lastPage, pages - 1);
-            if (_list.Count == 0)
-            {
-                Text(RefW / 2f, 480f, "No companions yet. Invitations and the altar bring them to the company.", 34, UomdThemeTokens.TextDim, 0.5f, 0.5f, wrapWidth: 1200f).style.unityTextAlign = TextAnchor.MiddleCenter;
-                return;
-            }
-            var slice = _list.Skip(_lastPage * PerPage).Take(PerPage).ToList();
-            for (int i = 0; i < slice.Count; i++)
-            {
-                var c = slice[i];
-                float x = 340f + (i % 4) * 415f, y = 330f + (i / 4) * 215f;
-                var attach = UomdCompanionAttachment.Describe(c.Id, c.Element, c.Role);
-                string id = c.Id;
-                Card(x, y, 390f, 190f, c.Rarity == 5 ? UomdPanelVariant.Hot : UomdPanelVariant.Normal, onTap: () =>
-                {
-                    Router.Session.SelectedUnitId = id;
-                    _ = Router.NavigateToAsync(UomdScreenId.Character);
-                });
-                var gold = new Color(1f, 0.847f, 0.420f);
-                Fit(Text(x, y - 56f, c.Name, 32, c.Rarity == 5 ? gold : UomdThemeTokens.TextPrimary, 0.5f, 0.5f, display: true), 350f);
-                Text(x, y - 16f, HubData.Stars(c.Rarity), 30, gold, 0.5f, 0.5f);
-                Fit(Text(x, y + 18f, c.Rarity > 0 ? $"{c.Element} · {c.Role.Replace('_', ' ')} ({attach.FormationSlot})" : "Unavailable in this version", 21, UomdThemeTokens.TextDim, 0.5f, 0.5f), 360f);
-                Fit(Text(x, y + 48f, attach.BondTitle, 18, UomdThemeTokens.Gold, 0.5f, 0.5f), 360f);
-                Text(x, y + 74f, c.Copies > 1 || c.Shards > 0 ? $"copies {c.Copies} · shards {c.Shards}" : "tap for details", 20, UomdThemeTokens.TextDim, 0.5f, 0.5f);
-            }
-            if (pages > 1)
-            {
-                Button(RefW / 2f - 220f, 960f, "‹", null, 160, 100, 56, UomdPanelVariant.Normal, () => { _lastPage = (_lastPage + pages - 1) % pages; Draw(); });
-                Text(RefW / 2f, 960f, $"{_lastPage + 1} / {pages}", 36, UomdThemeTokens.TextPrimary, 0.5f, 0.5f);
-                Button(RefW / 2f + 220f, 960f, "›", null, 160, 100, 56, UomdPanelVariant.Normal, () => { _lastPage = (_lastPage + 1) % pages; Draw(); });
-            }
-        }
     }
 
     /// <summary>

@@ -1,0 +1,70 @@
+.rebuild-hub { flex-grow: 1; background-color: #0a0610; color: #efe8f5; -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/CormorantGaramond-Medium.ttf"); -unity-font-definition: initial; padding: 34px 54px 24px; }
+.hub-full { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.hub-art { background-size: cover; background-position-x: center; background-position-y: center; }
+.hub-veil { background-color: rgba(10,6,16,0.40); }
+.hub-header { flex-direction: row; align-items: center; min-height: 100px; }
+.hub-brand { flex-grow: 1; }
+.hub-eyebrow, .hub-button, .hub-heading, .hub-card-title, .hub-wallet, .hub-small { -unity-font: url("project://database/Assets/_UOMD/UI/Fonts/Cinzel-SemiBold.ttf"); -unity-font-definition: initial; -unity-font-style: normal; }
+.hub-eyebrow { font-size: 16px; letter-spacing: 3px; color: #c9b6e4; }
+.hub-heading { font-size: 48px; color: #e3c37d; white-space: normal; }
+.hub-account { align-items: flex-end; margin-right: 24px; max-width: 520px; }
+.hub-player { font-size: 26px; white-space: normal; }
+.hub-wallet { font-size: 20px; color: #e3c37d; }
+.hub-tabs { flex-direction: row; margin-top: 18px; margin-bottom: 28px; }
+.hub-button { min-height: 70px; padding: 14px 25px; margin: 0; background-color: rgba(18,10,24,0.94); border-width: 1px; border-color: #80634e; border-radius: 0; color: #e9e2d4; font-size: 21px; white-space: normal; -unity-text-align: middle-center; }
+.hub-button:hover, .hub-button:focus { background-color: #412038; border-color: #e3c37d; }
+.hub-button:disabled { opacity: 0.46; }
+.hub-quiet { min-width: 172px; }
+.hub-tab { min-width: 250px; margin-right: 12px; }
+.hub-selected { background-color: #4a2548; border-color: #e3c37d; }
+.hub-primary { background-color: #5b182f; border-color: #b8975a; }
+.hub-body { flex-grow: 1; flex-shrink: 1; min-height: 0; flex-direction: row; }
+.hub-panel { background-color: rgba(18,10,24,0.76); border-width: 1px; border-color: #65515e; padding: 28px; }
+.hub-aside { width: 34%; min-width: 360px; max-width: 680px; margin-right: 24px; }
+.hub-main { flex-grow: 1; min-width: 0; }
+.hub-card-title { font-size: 32px; color: #e3c37d; white-space: normal; margin-bottom: 16px; }
+.hub-copy { font-size: 28px; color: #efe8f5; white-space: normal; margin-bottom: 18px; }
+.hub-muted { color: #c4b4d2; font-size: 25px; }
+.hub-small { font-size: 17px; color: #c9b6e4; white-space: normal; margin-top: 8px; }
+.hub-spacer { flex-grow: 1; }
+.hub-nav { min-height: 98px; margin-bottom: 12px; -unity-text-align: middle-left; font-size: 25px; }
+.hub-grid { flex-direction: row; flex-wrap: wrap; }
+.hub-companion { width: 47%; min-width: 270px; min-height: 188px; margin: 0 2% 18px 0; -unity-text-align: upper-left; padding: 20px; }
+.hub-companion .hub-card-title { font-size: 27px; margin-bottom: 8px; }
+.hub-companion .hub-copy { font-size: 24px; margin-bottom: 4px; }
+.hub-row { margin-bottom: 12px; min-height: 116px; -unity-text-align: middle-left; padding: 17px 22px; }
+.hub-row .hub-card-title { font-size: 25px; margin-bottom: 6px; }
+.hub-row .hub-copy { font-size: 23px; margin-bottom: 0; }
+.hub-portrait { flex-grow: 1; min-height: 170px; background-size: contain; background-repeat: no-repeat; background-position-x: center; background-position-y: bottom; }
+.hub-list { flex-grow: 1; min-height: 0; }
+.hub-footer { flex-direction: row; align-items: center; margin-top: 24px; min-height: 72px; }
+.hub-footer .hub-button { margin-left: 12px; }
+.hub-footer #hubBack { margin-left: 0; }
+.hub-status { flex-grow: 1; flex-shrink: 1; font-size: 23px; white-space: normal; margin: 0 24px; color: #d2c3dc; }
+.hub-art-notice { position: absolute; top: 8px; right: 54px; font-size: 18px; color: #e7bac9; }
+.hub-overlay { background-color: rgba(10,6,16,0.95); align-items: center; justify-content: center; }
+.hub-sheet { width: 1060px; max-width: 88%; max-height: 90%; padding: 36px; background-color: #120a18; border-width: 1px; border-color: #b8975a; }
+.hub-routes { flex-grow: 1; min-height: 0; margin: 20px 0; }
+.hub-routes .hub-button { margin-bottom: 10px; }
+.hub-compact { padding-left: 30px; padding-right: 30px; }
+.hub-compact .hub-heading { font-size: 40px; }
+.hub-compact .hub-aside { min-width: 300px; padding: 22px; }
+.hub-compact .hub-companion { width: 96%; min-height: 150px; }
+.hub-compact .hub-tab { min-width: 210px; }
+.is-hidden { display: none; }
+
+.hub-shortcut { width: 47%; margin-right: 2%; margin-bottom: 14px; min-height: 116px; font-size: 25px; }
+
+.hub-card-portrait { position: absolute; width: 38%; right: 8px; top: 10px; bottom: 0; background-size: contain; background-repeat: no-repeat; background-position-x: center; background-position-y: bottom; }
+.hub-has-portrait .hub-copy, .hub-has-portrait .hub-card-title, .hub-has-portrait .hub-small { width: 61%; }
+.rebuild-hub .unity-scroller--vertical { width: 14px; }
+.rebuild-hub .unity-scroller__low-button, .rebuild-hub .unity-scroller__high-button { display: none; }
+.rebuild-hub .unity-base-slider__tracker { background-color: #2a1530; border-color: #65515e; }
+.rebuild-hub .unity-base-slider__dragger { background-color: #80634e; border-color: #b8975a; border-radius: 0; }
+
+.hub-header, .hub-tabs, .hub-footer { flex-shrink: 0; }
+.hub-tabs { min-height: 70px; }
+.hub-panel { min-height: 0; }
+.hub-list, .hub-routes { flex-shrink: 1; }
+.hub-card-title, .hub-copy, .hub-small { flex-shrink: 0; }
+.hub-companion, .hub-compact .hub-companion { min-height: 260px; }

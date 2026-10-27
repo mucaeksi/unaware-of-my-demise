@@ -17,7 +17,7 @@ namespace Uomd.EditorTools
         public string HumanState, Details, PreviewPath, OutputPreviewPath;
         public object Entry;
         public string Identity => Id + "@" + Revision + ":" + SourceSha;
-        public string Scenario => Id == "sol_title_key_art_01" ? "title" : Id == "sol_studio_mark" ? "studio"
+        public string Scenario => Id == "sol_hub_shelter_01" ? "hub/home" : Id == "sol_title_key_art_01" ? "title" : Id == "sol_studio_mark" ? "studio"
             : Id == "sol_fadyme_vn_composed" ? "portrait/fadyme" : Id == "sol_mahmut_vn_composed" ? "portrait/mahmut"
             : Id.StartsWith("sol_fadyme_vn_", StringComparison.Ordinal) ? "portrait/fadyme/" + Id.Substring("sol_fadyme_vn_".Length)
             : Id.StartsWith("sol_mahmut_vn_", StringComparison.Ordinal) ? "portrait/mahmut/" + Id.Substring("sol_mahmut_vn_".Length)
@@ -134,6 +134,7 @@ namespace Uomd.EditorTools
     [Serializable]
     public sealed class ProductionReviewCapture
     {
+        public static bool MultipleSources(string scenario) => scenario == "entry" || scenario == "finish" || scenario == "campaign" || scenario?.StartsWith("hub/", StringComparison.Ordinal) == true;
         public string id, image, sha256, metadata, scenario, lineId;
         public string unitState, unitFrame;
         public string entryScreen, entryPhase;
@@ -154,7 +155,7 @@ namespace Uomd.EditorTools
             var index = File.Exists(IndexPath) ? JsonUtility.FromJson<ProductionReviewIndex>(File.ReadAllText(IndexPath)) : new ProductionReviewIndex();
             foreach (var capture in index.captures)
             {
-                if (string.IsNullOrEmpty(capture.metadata) || capture.scenario != "entry" && capture.scenario != "finish" && capture.scenario != "campaign" && ((!string.IsNullOrEmpty(capture.lineId) && capture.scenario?.StartsWith("unit/", StringComparison.Ordinal) != true)
+                if (string.IsNullOrEmpty(capture.metadata) || !ProductionReviewCapture.MultipleSources(capture.scenario) && ((!string.IsNullOrEmpty(capture.lineId) && capture.scenario?.StartsWith("unit/", StringComparison.Ordinal) != true)
                     || !string.IsNullOrEmpty(capture.unitFrame))) continue;
                 string path = ProductionReviewCatalog.Resolve(Root, "docs/review/" + capture.metadata);
                 if (File.Exists(path))
@@ -163,7 +164,7 @@ namespace Uomd.EditorTools
                     if (string.IsNullOrEmpty(capture.lineId)) capture.lineId = JsonRead.Str(metadata, "lineId");
                     capture.unitState = JsonRead.Str(metadata, "unitState");
                     capture.unitFrame = JsonRead.Str(metadata, "unitFrame");
-                    if (capture.scenario == "entry" || capture.scenario == "finish" || capture.scenario == "campaign")
+                    if (ProductionReviewCapture.MultipleSources(capture.scenario))
                     {
                         capture.entryScreen = JsonRead.Str(metadata, "entryScreen"); capture.entryPhase = JsonRead.Str(metadata, "entryPhase");
                         capture.entryStage = (int)JsonRead.Int(metadata, "entryStage");
@@ -194,7 +195,7 @@ namespace Uomd.EditorTools
                 unitState = unitState, unitFrame = unitFrame,
                 presentation = JsonUtility.FromJson<RebuildShotSettings>(JsonUtility.ToJson(settings)),
                 captures = index.captures.Where(c => c.scenario == scenario && (string.IsNullOrEmpty(lineId) || c.lineId == lineId))
-                    .Where(c => c.scenario != "entry" && c.scenario != "finish" && c.scenario != "campaign" || (c.sourceIdentities ?? Array.Empty<string>()).Contains(asset.Identity))
+                    .Where(c => !ProductionReviewCapture.MultipleSources(c.scenario) || (c.sourceIdentities ?? Array.Empty<string>()).Contains(asset.Identity))
                     .Where(c => string.IsNullOrEmpty(unitState) || (c.unitState == unitState && c.unitFrame == unitFrame))
                     .Select(c => c.id + ":" + c.sha256).ToArray() };
             index.requests.Add(record);

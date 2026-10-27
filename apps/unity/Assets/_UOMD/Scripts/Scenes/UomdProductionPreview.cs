@@ -74,6 +74,9 @@ namespace Uomd.Scenes
                 case "entry": screen = UomdScreenId.Title; break;
                 case "finish": screen = UomdScreenId.Finish; break;
                 case "campaign": screen = UomdScreenId.Battle; break;
+                case "hub/home": screen = UomdScreenId.Home; break;
+                case "hub/company": screen = UomdScreenId.Roster; break;
+                case "hub/chapters": screen = UomdScreenId.Chapters; break;
                 default:
                     if (request.scenario.StartsWith("battle/", StringComparison.Ordinal))
                     {
@@ -122,6 +125,10 @@ namespace Uomd.Scenes
             _previewNavigation = true;
             try
             {
+                if (ProductionPreview?.scenario.StartsWith("hub/", StringComparison.Ordinal) == true && !request.scenario.StartsWith("hub/", StringComparison.Ordinal))
+                {
+                    _hubState?.Dispose(); _hubState = null; HubReview = null; Api.AdoptSession(null);
+                }
                 if ((request.scenario == "entry" || request.scenario == "finish") && request.scenario != ProductionPreview?.scenario)
                     EntryFlow = new UomdEntryFlow(this); // Dedicated memory fixtures must not become another rehearsal's progress.
                 ProductionPreview = request;
@@ -148,7 +155,9 @@ namespace Uomd.Scenes
                         throw new ArgumentException("Unknown canonical tutorial line.");
                     Audio.StopBgm(0.01f);
                 }
-                if (request.scenario == "campaign") await OpenCampaignReviewAsync();
+                if (request.scenario.StartsWith("hub/", StringComparison.Ordinal))
+                { await OpenHubReviewAsync(); await NavigateToAsync(screen); }
+                else if (request.scenario == "campaign") await OpenCampaignReviewAsync();
                 else await NavigateToAsync(screen);
                 if (this == null) return;
                 if (screen == UomdScreenId.Title && request.scenario != "entry")

@@ -1,5 +1,7 @@
 # Sol Unity rebuild — current execution queue (D-35)
 
+**Native hub foundation — 2026-10-27:** Home, Company (Roster route) and Chapters now use the editable native hub frame, a new original OpenAI shelter plate and account/release-scoped read snapshots. Missing/stale data is explicit; stage entry follows authoritative gates and the existing battle journal. [Guide](media/SOL_NATIVE_HUB.md), [evidence](evidence/sol-native-hub-2026-10-27.json). Next: native companion details/Team/Armory and complete stage actions, including durable Sweep recovery. Live account, Android, human art and release acceptance remain open.
+
 **Current continuation — 2026-10-27:** campaign sessions and durable battle recovery are locally verified ([guide](UNITY_CAMPAIGN_OPERATIONS.md), [evidence](evidence/sol-campaign-operations-2026-10-27.json)). Follow the [continuous execution plan](handoff/SOL_CONTINUATION_PLAN.md): native hub first, then system screens, then approved live account/content and Android acceptance. The earlier overnight 07:00 deadline and paused heartbeat below belong to the completed overnight run. No scheduled job was restarted.
 
 Active 2026-10-26. The root README is authoritative. Sol/Codex owns the project; local workspace is `E:/Unity/unaware-of-my-demise`, verified local commits on `main`, owner pushes. [Execution plan](handoff/SOL_REBUILD_PLAN.md), [visual obligations](media/SOL_VISUAL_REBUILD.json).

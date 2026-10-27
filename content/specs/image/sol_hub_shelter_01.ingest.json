@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "asset_id": "sol_hub_shelter_01",
+  "class": "background",
+  "source": {
+    "kind": "generated",
+    "pick": "358af1ef9b33",
+    "provenance": "content/generated/openai/sol_hub_shelter_01/run.provenance.json"
+  },
+  "layout": {
+    "mode": "single"
+  },
+  "export": {
+    "fit": "exact",
+    "width": 1672,
+    "height": 941,
+    "webp": {
+      "mode": "lossy",
+      "quality": 88,
+      "alpha_quality": 100,
+      "effort": 6
+    },
+    "max_bytes": 600000
+  },
+  "manifest": {
+    "background": "sol_hub_shelter"
+  },
+  "qc": {
+    "profile": "plate"
+  }
+}

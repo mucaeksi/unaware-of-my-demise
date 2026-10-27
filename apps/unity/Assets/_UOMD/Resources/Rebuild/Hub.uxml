@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="Hub.uss" />
+  <ui:VisualElement name="rebuildHub" class="rebuild-hub">
+    <ui:VisualElement name="hubArt" class="hub-full hub-art" picking-mode="Ignore" />
+    <ui:VisualElement class="hub-full hub-veil" picking-mode="Ignore" />
+    <ui:VisualElement class="hub-header">
+      <ui:VisualElement class="hub-brand"><ui:Label text="UNAWARE OF MY DEMISE" class="hub-eyebrow" /><ui:Label name="hubHeading" class="hub-heading" /></ui:VisualElement>
+      <ui:VisualElement class="hub-account"><ui:Label name="hubPlayer" class="hub-player" /><ui:Label name="hubWallet" class="hub-wallet" /></ui:VisualElement>
+      <ui:Button name="hubAccount" text="ACCOUNT" class="hub-button hub-quiet" />
+    </ui:VisualElement>
+    <ui:VisualElement class="hub-tabs"><ui:Button name="hubHome" text="HOME" class="hub-button hub-tab" /><ui:Button name="hubCompany" text="COMPANY" class="hub-button hub-tab" /><ui:Button name="hubChapters" text="CHAPTERS" class="hub-button hub-tab" /></ui:VisualElement>
+    <ui:VisualElement name="hubBody" class="hub-body" />
+    <ui:VisualElement class="hub-footer"><ui:Button name="hubBack" text="BACK" class="hub-button hub-quiet" /><ui:Label name="hubStatus" class="hub-status" /><ui:Button name="hubRefresh" text="REFRESH" class="hub-button hub-quiet" /><ui:Button name="hubMore" text="MORE" class="hub-button hub-quiet" /></ui:VisualElement>
+    <ui:Label name="hubArtNotice" class="hub-art-notice" />
+    <ui:VisualElement name="hubOverlay" class="hub-full hub-overlay is-hidden"><ui:VisualElement class="hub-sheet"><ui:Label text="THE COMPANY" class="hub-heading" /><ui:ScrollView name="hubRoutes" class="hub-routes" /><ui:Button name="hubClose" text="CLOSE" class="hub-button hub-primary" /></ui:VisualElement></ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

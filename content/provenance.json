@@ -243,6 +243,14 @@
       }
     },
     {
+      "output": "content/base/art/bg_sol_hub_shelter.webp",
+      "sha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0",
+      "sources": {
+        "generated:sol_hub_shelter_01@rev1": "358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+        "entry": "e52d5bc8528f161f30fd12bc1228b88a14514d476ee574db9e40015799784e59"
+      }
+    },
+    {
       "output": "content/base/audio/bgm_ch1_ash_forest_calm.ogg",
       "sha256": "2c92582719d99f3b95d2159d45c3891530de9976a675686ab801179c000be582",
       "sources": {
@@ -627,7 +635,7 @@
     },
     {
       "output": "content/base/art/art_manifest.json",
-      "sha256": "88a17430d441371fdccd1e8609117e9f0ee09b16344d450a25354842bfaeda0f",
+      "sha256": "cb47f6342a92eb606b382abd84ec8a110e341234559c51e2258a9e44faf466fd",
       "sources": {}
     },
     {

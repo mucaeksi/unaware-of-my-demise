@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "asset_id": "sol_hub_shelter_01",
+  "class": "background",
+  "revision": 1,
+  "targets": {
+    "backgrounds": {
+      "sol_hub_shelter": "art/bg_sol_hub_shelter.webp"
+    }
+  },
+  "source": {
+    "kind": "generated",
+    "sha256": "358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+    "mime": "image/png",
+    "width": 1672,
+    "height": 941,
+    "provenance_file": "content/generated/openai/sol_hub_shelter_01/run.provenance.json",
+    "provenance_sha256": "b0ae1276a863dd0645d4b192615e2877ecf99dd86670f6c2474e3b4ac43844b6",
+    "model": "not_disclosed_by_builtin_tool",
+    "prompt_sha256": "5d3afbb8ce4cb9b631b1f860448156ef38f3591b21660b415668fd972c391571",
+    "references": []
+  },
+  "ingest": {
+    "spec_path": "content/specs/image/sol_hub_shelter_01.ingest.json",
+    "spec_sha256": "b3dc22cd0ce63f02e99c52d2229884d336d0f214a3e40005971c7f084f93d151",
+    "tool": "ingest_art@1",
+    "sharp": "0.35.5",
+    "fingerprint": "e52d5bc8528f161f30fd12bc1228b88a14514d476ee574db9e40015799784e59"
+  },
+  "outputs": [
+    {
+      "path": "art/bg_sol_hub_shelter.webp",
+      "sha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0",
+      "pixels_sha256": "21d37fd4ebd6b4faf3faaf78d901e2e1eebf9226ba91936d5258e1aeac22fd56",
+      "bytes": 358268,
+      "width": 1672,
+      "height": 941
+    }
+  ],
+  "qc": {
+    "automated": {
+      "passed": true,
+      "gates": {
+        "A31": {
+          "status": "pass",
+          "detail": "0 references verified"
+        },
+        "A01": {
+          "status": "pass"
+        },
+        "A02": {
+          "status": "pass",
+          "detail": "image/png 1672x941"
+        },
+        "A21": {
+          "status": "pass"
+        },
+        "A18": {
+          "status": "pass",
+          "detail": "1672x941"
+        },
+        "A19": {
+          "status": "pass",
+          "detail": "358268 bytes <= 600000"
+        }
+      },
+      "warnings": []
+    },
+    "human": {
+      "status": "pending",
+      "by": null,
+      "at": null,
+      "note": ""
+    }
+  },
+  "license": {
+    "origin": "openai_generated_output",
+    "terms_checked_on": null,
+    "note": "provenance verified by tools/ingest_art.ts"
+  },
+  "history": []
+}

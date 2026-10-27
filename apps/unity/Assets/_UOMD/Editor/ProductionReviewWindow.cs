@@ -274,7 +274,7 @@ namespace Uomd.EditorTools
         private void SceneInspector()
         {
             EditorGUILayout.LabelField("Real runtime controllers", EditorStyles.boldLabel);
-            var scenarios = new List<string> { "boot", "studio", "title", "entry", "finish", "campaign", "portrait/fadyme", "portrait/mahmut" };
+            var scenarios = new List<string> { "boot", "studio", "title", "entry", "finish", "campaign", "hub/home", "hub/company", "hub/chapters", "portrait/fadyme", "portrait/mahmut" };
             scenarios.AddRange(_assets.Select(a => a.Scenario).Where(s => s.StartsWith("portrait/", StringComparison.Ordinal) && !scenarios.Contains(s)).Distinct());
             scenarios.AddRange(new[] { "portrait/fadyme/authored", "portrait/mahmut/authored" });
             scenarios.AddRange(RebuildUnitReviewScreen.Units.Select(u => "unit/" + u));

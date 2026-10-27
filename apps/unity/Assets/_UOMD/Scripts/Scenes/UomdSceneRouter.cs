@@ -104,6 +104,9 @@ namespace Uomd.Scenes
 
         private void Update()
         {
+#if UNITY_EDITOR
+            if (_previewNavigation && _activeController is RebuildHubScreen) return;
+#endif
             if (EntryFlow?.InCampaign == true && !EntryFlow.CampaignIsCurrent &&
                 (ActiveScreenId == UomdScreenId.Story || ActiveScreenId == UomdScreenId.Battle))
             { _ = EntryFlow.AbandonNodeAsync(); return; }
@@ -120,6 +123,7 @@ namespace Uomd.Scenes
         {
             _activeController?.OnExit();
             if (Api != null) Api.OnAuthChanged -= PersistSession;
+            _hubState?.Dispose();
             Media?.ReleaseAll();
         }
 
@@ -142,7 +146,7 @@ namespace Uomd.Scenes
         public async Awaitable NavigateToAsync(UomdScreenId targetScreen)
         {
 #if UNITY_EDITOR
-            if (UomdEditorPreviewIsolation.Active && ProductionPreview?.scenario != "entry" && ProductionPreview?.scenario != "campaign" && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
+            if (UomdEditorPreviewIsolation.Active && ProductionPreview?.scenario != "entry" && ProductionPreview?.scenario != "campaign" && ProductionPreview?.scenario.StartsWith("hub/", StringComparison.Ordinal) != true && targetScreen != UomdScreenId.Boot && targetScreen != UomdScreenId.Studio
                 && targetScreen != UomdScreenId.Title && targetScreen != UomdScreenId.Prologue
                 && !(targetScreen == UomdScreenId.Finish && ProductionPreview?.scenario == "finish")
                 && !(targetScreen == UomdScreenId.Battle && (ProductionPreview?.scenario.StartsWith("unit/", StringComparison.Ordinal) == true
@@ -161,7 +165,7 @@ namespace Uomd.Scenes
             _screenHost.Clear();
             bool nativeStory = targetScreen == UomdScreenId.Story && StoryScreenController.IsRebuiltStory(System.IO.Path.GetFileNameWithoutExtension(Session.ActiveStoryPath));
             nativeStory |= targetScreen == UomdScreenId.Battle && nextController is BattleScreenController && BattleScreenController.IsRebuiltTutorialEncounter(Session.ActiveBattleEncounterId);
-            nativeStory |= targetScreen == UomdScreenId.Finish;
+            nativeStory |= targetScreen == UomdScreenId.Finish || nextController is RebuildHubScreen;
             _rootContainer.style.top = nativeStory ? new Length(0) : new Length(50, LengthUnit.Percent);
             _rootContainer.style.bottom = nativeStory ? new StyleLength(0f) : new StyleLength(StyleKeyword.Auto);
             _rootContainer.style.height = nativeStory ? new StyleLength(StyleKeyword.Auto) : new StyleLength(UomdScreenKit.RefHeight);

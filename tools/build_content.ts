@@ -384,6 +384,7 @@ async function main(): Promise<void> {
       backgrounds[loc] = rel;
     }
     const baseLocations = new Set([
+      'sol_hub_shelter',
       ...Object.keys(BG_FILES),
       ...scenesUsed.flatMap((s) => [s.location_id, ...s.commands.flatMap((c) => (c.op === 'background' ? [c.location_id] : []))]),
       enc1.location_id,

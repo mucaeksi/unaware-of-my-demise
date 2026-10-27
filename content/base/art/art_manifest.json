@@ -1921,7 +1921,8 @@
     "shelter_courtyard_dusk": "art/bg_shelter_courtyard_dusk.webp",
     "sol_forest_whispering_ash": "art/bg_sol_forest_whispering_ash.webp",
     "sol_forgotten_stone_crossing": "art/bg_sol_forgotten_stone_crossing.webp",
-    "sol_shelter_courtyard_dusk": "art/bg_sol_shelter_courtyard_dusk.webp"
+    "sol_shelter_courtyard_dusk": "art/bg_sol_shelter_courtyard_dusk.webp",
+    "sol_hub_shelter": "art/bg_sol_hub_shelter.webp"
   },
   "music": {
     "bgm_main_theme": {

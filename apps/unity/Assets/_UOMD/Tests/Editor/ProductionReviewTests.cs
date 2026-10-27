@@ -35,8 +35,11 @@ namespace Uomd.Tests
         {
             string root = ProductionReviewCatalog.RepositoryRoot;
             var assets = ProductionReviewCatalog.Load(root);
-            Assert.AreEqual(26, assets.Count(a => a.Candidate));
-            Assert.GreaterOrEqual(assets.Count, 460);
+            Assert.AreEqual(27, assets.Count(a => a.Candidate));
+            Assert.GreaterOrEqual(assets.Count, 461);
+            Assert.AreEqual("hub/home", assets.Single(a => a.Id == "sol_hub_shelter_01").Scenario);
+            var manifest = UomdMediaCatalog.Parse(File.ReadAllText(Path.Combine(root, "content/base/art/art_manifest.json")), null);
+            Assert.AreEqual("art/bg_sol_hub_shelter.webp", manifest.Background("sol_hub_shelter"));
             foreach (var asset in assets.Where(a => a.Candidate))
             {
                 ProductionReviewCatalog.VerifyTarget(root, asset);

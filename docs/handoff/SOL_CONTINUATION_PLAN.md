@@ -1,5 +1,7 @@
 # Sol continuous continuation plan
 
+**Current checkpoint — 2026-10-27:** campaign recovery and the native Home/Company/Chapters foundation are locally implemented. See [hub scope and limits](../media/SOL_NATIVE_HUB.md). Next: companion details, Team and Armory, then complete stage actions/Sweep recovery and the remaining system screens. Live/provider/device/art/release gates remain separate.
+
 Owner continuation request: 2026-10-27, after the completed overnight run. Work sequentially on local `main` in
 `E:/Unity/unaware-of-my-demise`; use Unity CLI, preserve current work and commit verified slices locally. The previous
 07:00 limit and paused overnight heartbeat describe that earlier run. This plan does not restart a scheduled automation.

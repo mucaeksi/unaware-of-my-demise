@@ -24,8 +24,8 @@
   "files": [
     {
       "path": "art/art_manifest.json",
-      "sha256": "88a17430d441371fdccd1e8609117e9f0ee09b16344d450a25354842bfaeda0f",
-      "bytes": 41315,
+      "sha256": "cb47f6342a92eb606b382abd84ec8a110e341234559c51e2258a9e44faf466fd",
+      "bytes": 41369,
       "media_type": "application/json",
       "kind": "art_manifest"
     },
@@ -117,6 +117,13 @@
       "path": "art/bg_sol_forgotten_stone_crossing.webp",
       "sha256": "3e6ca24a8f8485ccbf68479f4ab89a853098dc0a2253306e20e77c8e8b82d319",
       "bytes": 310250,
+      "media_type": "image/webp",
+      "kind": "background"
+    },
+    {
+      "path": "art/bg_sol_hub_shelter.webp",
+      "sha256": "2eee870341227cbbac59aedcae31e169041bc398160ee12adcdf6517116b16d0",
+      "bytes": 358268,
       "media_type": "image/webp",
       "kind": "background"
     },

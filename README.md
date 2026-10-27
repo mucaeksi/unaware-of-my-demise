@@ -1,5 +1,7 @@
 # Unaware of My Demise — Unified Development Master Prompt
 
+**Native hub foundation — 2026-10-27:** Home, Company (Roster route) and Chapters now use the editable native hub frame, a new original OpenAI shelter plate and account/release-scoped read snapshots. Missing/stale data is explicit; stage entry follows authoritative gates and the existing battle journal. [Guide](docs/media/SOL_NATIVE_HUB.md), [evidence](docs/evidence/sol-native-hub-2026-10-27.json). Next: native companion details/Team/Armory and complete stage actions, including durable Sweep recovery. Live account, Android, human art and release acceptance remain open.
+
 **Campaign recovery checkpoint — 2026-10-27:** server-sessioned campaign battles now use the frozen party and an account-scoped durable submit journal. Victory waits for server confirmation and authoritative progress/wallet refresh; Saved Actions recovers the exact original request after interruption. [Runtime guide](docs/UNITY_CAMPAIGN_OPERATIONS.md), [scoped evidence](docs/evidence/sol-campaign-operations-2026-10-27.json), [continuous execution order](docs/handoff/SOL_CONTINUATION_PLAN.md). Next: native Home/Company/Chapters and system screens. CLI-only Unity access and owner-held pushes remain; live account/device/art/release acceptance is separate. Earlier checkpoint counts and the overnight deadline below remain dated history.
 
 **Gothic anime gacha RPG · Android / Google Play first · Unity 6.3 LTS · GPT Sol rebuild (D-35) · updated 2026-10-26**

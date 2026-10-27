@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "provider": "openai",
+  "generator": "image_gen.imagegen",
+  "model": "not_disclosed_by_builtin_tool",
+  "created_on": "2026-10-27",
+  "spec": {
+    "id": "sol_hub_shelter_01",
+    "aspectRatio": "16:9",
+    "prompt_file": "content/generated/openai/sol_hub_shelter_01/prompt.txt",
+    "prompt": "Use case: stylized-concept. Asset type: original painted background plate for the native Home/Company/Chapters screens of Unaware of My Demise, a Gothic anime tactical RPG.\n\nGenerate one entirely new landscape 16:9 illustration, preferably native 2560x1440 or larger. This is finished environment art behind real Unity interface elements, NOT a screenshot, mockup, menu design or collage. No lettering, numerals, logos, watermark, frames, buttons, panels, symbols, map markers or interface baked into the image. No people, faces, character silhouettes, weapons, monsters or religious crosses.\n\nCanon location: the modest abandoned roadside stone shelter at the edge of Whispering Ash Forest, after the first three tutorial battles. The roof is partly broken, but one dry corner remains. A quiet ash road continues beyond it; a very distant narrow Saint Luthos bell-tower spire can barely be seen through mist. Interpret only this known place; do not add a village, palace, new monument, magical portal or new lore.\n\nScene: blue-grey dusk beneath a soft pale ash-tree canopy. On the RIGHT 45% of the frame, a low weathered stone shelter with mossy walls, a partly fallen dark slate-and-timber roof and a dark open doorway; one worn stone bench under the intact roof. A small warm amber lantern at the doorway provides a single restrained practical glow. The muted ash road and grey-green woodland dissolve into silver-lilac mist behind it. The broken roof remains modest, beautiful and believable rather than a grand cathedral. Quiet companionship is suggested by the welcoming dry corner, with no characters shown.\n\nComposition for a mobile landscape interface: the LEFT 55% and the central lower foreground are calm, low-detail charcoal/plum shadow and layered soft mist, with gentle painterly ground texture. Keep the shelter's roof and doorway focal point around x=75%, y=38%, safely inside the outer crop. A slight diagonal road connects the dark foreground to the shelter without bright stripes or a central vanishing-point spotlight. Top 12%, bottom 18% and outer 8% stay low-contrast so live navigation/text remains readable. Do not paint a flat black rectangle: negative space must belong naturally to the environment.\n\nStyle: mature melancholic light-novel anime environment painting, sophisticated fine colored lines, matte brush texture, rich but restrained material detail, softly painted foliage and atmospheric depth. Deep charcoal #0a0610 and muted plum #2a1530 shadows, cool grey-green stone/trees, bone-ivory mist, restrained silver-lilac, a small amber-gold lantern. Preserve midtone detail; avoid crushed blacks, glossy 3D rendering, neon purple, bright eclipse rings, oversaturated red, heavy filigree and excessive drifting particles."
+  },
+  "references": [],
+  "canon_sources": [
+    {
+      "path": "art_specs/p0/bg_forest_shelter_dusk.json",
+      "sha256": "68fc575d61a708c550286dc9503e04827015c51f845e63f74885ac08fe762a01",
+      "role": "textual_location_and_art_direction_only"
+    },
+    {
+      "path": "docs/media/ART_BIBLE.md",
+      "sha256": "8a716d34437325dd7c35f6003c5551bead2abdfc452e0f00ffe19abb866d0b75",
+      "role": "textual_location_and_art_direction_only"
+    },
+    {
+      "path": "narrative/00_Canon/NARRATIVE_BASELINE_PART1.md",
+      "sha256": "77d51d4e91676d7e501bcd09b6d8d1e5c77a513a83388c7699f502c5c70988d9",
+      "role": "textual_location_and_art_direction_only"
+    }
+  ],
+  "identity_locks": [],
+  "outputs": [
+    {
+      "file": "content/generated/openai/sol_hub_shelter_01/source.png",
+      "sha256": "358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5",
+      "width": 1672,
+      "height": 941,
+      "native": true,
+      "upscaled": false
+    }
+  ],
+  "billing": {
+    "mode": "builtin_tool",
+    "api_spend_usd": null
+  },
+  "review": {
+    "status": "integration_candidate",
+    "by": "codex:art-director",
+    "note": "New empty shelter environment; no identity subjects, text or baked interface. Native 1672x941 is below the final 2K target. No upscaling; owner/device/art acceptance remains open."
+  }
+}

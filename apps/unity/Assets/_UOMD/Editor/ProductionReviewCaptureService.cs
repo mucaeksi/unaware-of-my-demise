@@ -26,6 +26,8 @@ namespace Uomd.EditorTools
         public int battleActionCount;
         public string campaignState, campaignRequestId, campaignInputHash, campaignNotice;
         public bool campaignMemoryOnly, campaignRefreshed;
+        public string hubState, hubNotice, hubRelease, hubFixtureMode, hubIndexSource;
+        public bool hubFixture;
         public bool awaitingPlayerAction;
         public string entryPhase, entryScreen;
         public int entryStage, entryTutorials;
@@ -164,6 +166,29 @@ namespace Uomd.EditorTools
                     metadata.campaignState = campaign.Operation?.State; metadata.campaignRequestId = campaign.Operation?.RequestId;
                     metadata.campaignInputHash = campaign.Operation?.InputHash; metadata.campaignNotice = campaign.Notice;
                     metadata.campaignMemoryOnly = campaign.MemoryOnly; metadata.campaignRefreshed = campaign.Refreshed;
+                }
+                if (settings.scenario.StartsWith("hub/", StringComparison.Ordinal))
+                {
+                    RebuildHubScreen hub = null;
+                    if (router.ActiveScreenId == UomdScreenId.Home) hub = router.Controller<HomeScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Roster) hub = router.Controller<RosterScreen>();
+                    else if (router.ActiveScreenId == UomdScreenId.Chapters) hub = router.Controller<ChaptersScreen>();
+                    if (hub != null)
+                    {
+                        metadata.imagePaths = hub.ReviewImagePaths; metadata.hubState = hub.ReviewState;
+                        metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path")))).Select(a => a.Identity).ToArray();
+                    }
+                    if (hub == null)
+                    {
+                        metadata.imagePaths = EntryPaths(router);
+                        metadata.relatedAssetIdentities = catalog.Where(a => JsonRead.Arr(a.Entry, "outputs").Any(o => metadata.imagePaths.Contains(JsonRead.Str(o, "path")))).Select(a => a.Identity).ToArray();
+                    }
+                    metadata.entryPhase = hub == null ? router.EntryFlow.Current.ToString() : metadata.hubState;
+                    metadata.entryScreen = router.ActiveScreenId.ToString(); metadata.hubNotice = router.HubState.Notice;
+                    metadata.hubRelease = router.HubState.Snapshot?.Release; metadata.hubFixture = true;
+                    metadata.hubFixtureMode = router.HubReview?.Mode;
+                    metadata.hubIndexSource = metadata.hubFixtureMode == "campaign" || metadata.hubFixtureMode == "long" || metadata.hubFixtureMode == "low_ration"
+                        ? "content/patches/rel_0003_part1_campaign/chapters/chapter_index.json" : "embedded:chapters/chapter_index.json";
                 }
                 var stage = GameObject.Find("SolCinematicStage");
                 if (stage != null)
