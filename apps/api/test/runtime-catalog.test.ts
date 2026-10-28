@@ -2,7 +2,7 @@ import { afterEach, beforeAll, beforeEach, expect, it } from 'vitest';
 import { CATALOG_PATH, EconomyCatalog, Encounter, UnitPack } from '@uomd/content-schema';
 import { playAuto } from '@uomd/combat';
 import { sha256Hex } from '@uomd/shared';
-import { admin, baseEnv, entries, post, resetContent, signIn, upload } from './helpers';
+import { admin, baseEnv, entries, game, post, resetContent, signIn, upload } from './helpers';
 import { campaignFiles, type TestFile } from './fixtures';
 import { ContentStore } from '../src/content/store';
 import { exportCatalog } from '../src/content/catalog';
@@ -69,6 +69,32 @@ async function admitFixture() {
 }
 async function player() { return signIn(`runtime-${crypto.randomUUID()}`); }
 const begin = (playerId: string) => startBattle(baseEnv, playerId, { releaseId, nodeId: 'catalog_probe' });
+
+it.each([false, true])('exposes the approved dismantle preview in the public catalog (snapshot=%s)', async (snapshot) => {
+  if (snapshot) await admitFixture();
+  const definition = catalog.gear.find((g) => g.dismantle_allowed && g.dismantle_xp > 0)!;
+  const original = await db.prepare('SELECT dismantle_allowed, dismantle_xp, dismantle_json FROM gear_defs WHERE gear_id = ?1').bind(definition.gear_id).first<{ dismantle_allowed: number; dismantle_xp: number; dismantle_json: string }>();
+  try {
+    if (snapshot) await db.prepare("UPDATE gear_defs SET dismantle_allowed = 0, dismantle_xp = 0, dismantle_json = '[]' WHERE gear_id = ?1").bind(definition.gear_id).run();
+    const response = await game('/api/v1/catalog' + (snapshot ? `?releaseId=${releaseId}` : ''));
+    expect(response.status).toBe(200);
+    const body = await response.json<{ releaseId?: string; catalogSha256?: string; gear: { gear_id: string; dismantle_allowed: number; dismantle_xp: number; dismantle_json: string }[] }>();
+    const gear = body.gear.find((g) => g.gear_id === definition.gear_id)!;
+    expect(gear).toMatchObject({ dismantle_allowed: 1, dismantle_xp: definition.dismantle_xp });
+    expect(JSON.parse(gear.dismantle_json)).toEqual(definition.dismantle);
+    if (snapshot) expect(body).toMatchObject({ releaseId, catalogSha256: sha256 });
+    else expect(body.releaseId).toBeUndefined();
+    const { auth } = await player();
+    const inventory = await game('/api/v1/gear' + (snapshot ? `?releaseId=${releaseId}` : ''), { headers: auth });
+    expect(inventory.status).toBe(200);
+    const owned = await inventory.json<{ versionBound: boolean; releaseId?: string; catalogSha256?: string; gear: unknown[] }>();
+    expect(owned).toMatchObject({ versionBound: true, gear: [] });
+    if (snapshot) expect(owned).toMatchObject({ releaseId, catalogSha256: body.catalogSha256 });
+    else expect(owned.releaseId).toBeUndefined();
+  } finally {
+    await db.prepare('UPDATE gear_defs SET dismantle_allowed = ?2, dismantle_xp = ?3, dismantle_json = ?4 WHERE gear_id = ?1').bind(definition.gear_id, original!.dismantle_allowed, original!.dismantle_xp, original!.dismantle_json).run();
+  }
+});
 
 it('does not treat a draft or another channel as runtime authority', async () => {
   await expect(loadReleaseCatalog(baseEnv, releaseId)).rejects.toMatchObject({ code: 'unknown_release' });

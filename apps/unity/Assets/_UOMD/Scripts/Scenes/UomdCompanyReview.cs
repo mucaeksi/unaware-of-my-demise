@@ -42,6 +42,7 @@ namespace Uomd.Scenes
         }
         private Dictionary<string, object> SystemRead(string path, string player, string mode)
         {
+            if (_router.ActiveScreenId == UomdScreenId.Gear) return GearRead(path, player);
             if (path == "/api/v1/stacks") return Graph(new { stacks = new[] { new { item_id = "fixture_xp", qty = 20 }, new { item_id = "fixture_ascension", qty = 10 }, new { item_id = "fixture_manual", qty = 10 } } });
             if (path.StartsWith("/api/v1/catalog?", StringComparison.Ordinal)) return Graph(new Dictionary<string, object> {
                 ["items"] = new object[] { new {item_id="fixture_xp",name_en="XP material fixture",kind="character_xp",xp_value=2000}, new {item_id="fixture_ascension",name_en="Ascension fixture",kind="material",xp_value=0}, new {item_id="fixture_manual",name_en="Skill manual fixture",kind="material",xp_value=0} },
@@ -101,8 +102,11 @@ namespace Uomd.Scenes
             }
             else if(path.StartsWith("/api/v1/gear/",StringComparison.Ordinal))
             {
+                if (_router.ActiveScreenId == UomdScreenId.Gear || UomdGearProgression.ActionPath(path)) result = GearApply(path, input, player);
+                else {
                 if(input.ContainsKey("requestId"))throw new InvalidOperationException("Plain gear write must not add requestId.");
                 string id=path.Split('/')[4];_equipped[player+":"+id]=path.EndsWith("/unequip",StringComparison.Ordinal)?"":JsonRead.Str(input,"characterId");result=Graph(new{ok=true});
+                }
             }
             else if(path==UomdSavedAction.SweepPath)
             {
@@ -140,6 +144,7 @@ namespace Uomd.Scenes
             }
             ++Applied;
             if(request.Length>0){_receipts[key]=CanonicalJson.Serialize(result);_inputs[key]=json;_paths[key]=path;}
+            if (GearLoseResponse && UomdGearProgression.ActionPath(path)) { GearLoseResponse = false; StatusOffline = true; throw new UomdApiException(0, "fixture_response_lost", "Applied gear response lost."); }
             if (RewardsLoseResponse && RewardsPath(path)) { RewardsLoseResponse = false; StatusOffline = true; throw new UomdApiException(0, "fixture_response_lost", "Applied reward response lost."); }
             if(LoseNextResponse){LoseNextResponse=false;throw new UomdApiException(0,"fixture_response_lost","Applied fixture response lost.");}
             return result;

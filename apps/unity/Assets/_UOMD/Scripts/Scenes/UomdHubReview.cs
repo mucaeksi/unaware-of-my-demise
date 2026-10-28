@@ -87,7 +87,7 @@ namespace Uomd.Scenes
             }
             object result;
             if (path == "/api/v1/me") result = new Dictionary<string, object> { ["id"] = player, ["displayName"] = player.EndsWith("_b", StringComparison.Ordinal) ? "Second account fixture" : mode == "long" ? "A deliberately long display name for the native hub account header" : "Traveler fixture" };
-            else if (path == "/api/v1/wallet") result = new Dictionary<string, object> { ["wallets"] = new Dictionary<string, object> { ["eclipse_token"] = (player.EndsWith("_b", StringComparison.Ordinal) ? 730 : 1650) + (_walletDelta.TryGetValue(player,out int delta) ? delta : 0) } };
+            else if (path == "/api/v1/wallet") result = new Dictionary<string, object> { ["wallets"] = new Dictionary<string, object> { ["eclipse_token"] = _router.ActiveScreenId == UomdScreenId.Gear && GearMode == "low_funds" ? 0 : (player.EndsWith("_b", StringComparison.Ordinal) ? 730 : 1650) + (_walletDelta.TryGetValue(player,out int delta) ? delta : 0) } };
             else if (path.StartsWith("/api/v1/characters/mine", StringComparison.Ordinal)) result = new Dictionary<string, object> { ["account"] = new Dictionary<string, object> { ["level"] = mode == "ascend" ? 30 : 12 }, ["characters"] = members, ["unavailable"] = new object[0] };
             else if (path.StartsWith("/api/v1/characters?", StringComparison.Ordinal)) result = new Dictionary<string, object> { ["characters"] = roster };
             else if (path == "/api/v1/teams") result = new Dictionary<string, object> { ["teams"] = _savedTeams.TryGetValue(player, out var savedTeams) ? UomdJson.Parse(savedTeams) : teams };

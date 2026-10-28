@@ -7,6 +7,7 @@ import { claimMail } from '../src/mail/service';
 import { game, post, seedCanonCatalog, signIn } from './helpers';
 import { EventHook } from '@uomd/content-schema';
 import { GEAR_PASSIVE_HOOKS, gearPassive, gearPassiveHook, requireNoGearPassive, requireSupportedGearPassive } from '../src/gear/effects';
+import { levelGear } from '../src/gear/service';
 
 const db = (): D1Database => (env as unknown as { DB: D1Database }).DB;
 let n = 0;
@@ -114,6 +115,67 @@ describe('gear: grants and equipping', () => {
 });
 
 describe('gear: leveling, rivets, dismantling, rerolling', () => {
+  it('binds reviewed costs to the item version before spending or recording a request', async () => {
+    const { auth, playerId } = await player({ stacks: { weapon_tempering_xp: 100 }, funds: 100 });
+    const [id] = await give(playerId, ['weapon_arming_sword_3_01']);
+    const view = await (await game('/api/v1/gear', { headers: auth })).json() as { versionBound: boolean; gear: { id: number; version: number }[] };
+    expect(view.versionBound).toBe(true);
+    const expectedVersion = view.gear.find((g) => g.id === id)!.version;
+    expect((await call(auth, `/gear/${id}/lock`, { locked: true })).status).toBe(200);
+    const before = await db().prepare('SELECT * FROM player_gear WHERE id = ?1').bind(id).first();
+    const wallet = await (await game('/api/v1/wallet', { headers: auth })).json();
+    const requestId = rid();
+    const response = await call(auth, `/gear/${id}/level-up`, { requestId, xp: 50, expectedVersion });
+    expect(response.status).toBe(409);
+    expect(await response.json()).toMatchObject({ error: 'gear_changed' });
+    expect(await db().prepare('SELECT * FROM player_gear WHERE id = ?1').bind(id).first()).toEqual(before);
+    expect((await db().prepare("SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = 'weapon_tempering_xp'").bind(playerId).first<{ qty: number }>())?.qty).toBe(100);
+    expect((await db().prepare('SELECT COUNT(*) AS n FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<{ n: number }>())?.n).toBe(0);
+    expect(await (await game('/api/v1/wallet', { headers: auth })).json()).toEqual(wallet);
+  });
+
+  it('rejects a version change between cost planning and the atomic batch without spending on retry', async () => {
+    const { auth, playerId } = await player({ stacks: { weapon_tempering_xp: 100 }, funds: 100 });
+    const [id] = await give(playerId, ['weapon_arming_sword_3_01']); const original = db();
+    const expectedVersion = (await original.prepare('SELECT version FROM player_gear WHERE id = ?1').bind(id).first<{ version: number }>())!.version;
+    let raced = false;
+    const competing = new Proxy(original, { get(target, prop) {
+      if (prop === 'batch') return async (statements: D1PreparedStatement[]) => {
+        if (!raced) { raced = true; await original.prepare('UPDATE player_gear SET locked = 1, version = version + 1 WHERE id = ?1').bind(id).run(); }
+        return original.batch(statements);
+      };
+      const value = Reflect.get(target, prop); return typeof value === 'function' ? value.bind(target) : value;
+    } });
+    const wallet = await (await game('/api/v1/wallet', { headers: auth })).json();
+    const requestId = rid();
+    await expect(levelGear(competing, playerId, id!, { requestId, xp: 50, expectedVersion })).rejects.toMatchObject({ status: 409, code: 'gear_changed' });
+    expect(raced).toBe(true);
+    expect(await original.prepare('SELECT level, xp, locked, version FROM player_gear WHERE id = ?1').bind(id).first()).toEqual({ level: 1, xp: 0, locked: 1, version: expectedVersion + 1 });
+    expect((await original.prepare("SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = 'weapon_tempering_xp'").bind(playerId).first<{ qty: number }>())?.qty).toBe(100);
+    expect((await original.prepare('SELECT COUNT(*) AS n FROM progression_requests WHERE player_id = ?1 AND request_id = ?2').bind(playerId, requestId).first<{ n: number }>())?.n).toBe(0);
+    expect(await (await game('/api/v1/wallet', { headers: auth })).json()).toEqual(wallet);
+  });
+
+  it('replays the original version-bound receipt after later equipment changes', async () => {
+    const { auth, playerId } = await player({ stacks: { weapon_tempering_xp: 100 }, funds: 100 });
+    const [id] = await give(playerId, ['weapon_arming_sword_3_01']);
+    const expectedVersion = (await db().prepare('SELECT version FROM player_gear WHERE id = ?1').bind(id).first<{ version: number }>())!.version;
+    const input = { requestId: rid(), xp: 50, expectedVersion };
+    const first = await call(auth, `/gear/${id}/level-up`, input);
+    expect(first.status).toBe(200);
+    const receipt = await first.json() as Record<string, unknown>;
+    expect(receipt.expectedVersion).toBe(expectedVersion);
+    expect((await call(auth, `/gear/${id}/lock`, { locked: true })).status).toBe(200);
+    const before = await db().prepare('SELECT * FROM player_gear WHERE id = ?1').bind(id).first();
+    const replay = await call(auth, `/gear/${id}/level-up`, input);
+    expect(replay.status).toBe(200);
+    const repeated = await replay.json() as Record<string, unknown>;
+    const { balance: _balance, replayed: _replayed, ...stored } = receipt;
+    expect(repeated).toEqual({ ...stored, replayed: true });
+    expect(await db().prepare('SELECT * FROM player_gear WHERE id = ?1').bind(id).first()).toEqual(before);
+    expect((await db().prepare("SELECT qty FROM player_stacks WHERE player_id = ?1 AND item_id = 'weapon_tempering_xp'").bind(playerId).first<{ qty: number }>())?.qty).toBe(50);
+  });
+
   it('levels with tempering XP up to level 5, then needs a Blacksmith Rivet; fee in the main currency; no XP wasted', async () => {
     const { auth, playerId } = await player({ stacks: { weapon_tempering_xp: 2000, blacksmith_rivet: 1 }, funds: 200 });
     const [w] = await give(playerId, ['weapon_arming_sword_3_01']);

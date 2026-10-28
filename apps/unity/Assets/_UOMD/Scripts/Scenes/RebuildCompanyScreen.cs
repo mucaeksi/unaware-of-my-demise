@@ -9,7 +9,7 @@ using Uomd.Core.Growth;
 
 namespace Uomd.Scenes
 {
-    /// <summary>Native companion, formation and equipment screens over the existing provider contracts.</summary>
+    /// <summary>Native companion and formation screens over the existing provider contracts.</summary>
     public abstract class RebuildCompanyScreen : RebuildHubScreen
     {
         private readonly string[] _cells = new string[5];
@@ -28,12 +28,6 @@ namespace Uomd.Scenes
         {
             if (Actions.Busy) return;
             if (OverlayOpen) { base.Back(); return; }
-            if (ScreenId == UomdScreenId.Gear)
-            {
-                bool companion = !string.IsNullOrEmpty(Router.Session.GearCharacterId);
-                Router.Session.GearCharacterId = Router.Session.GearSlot = "";
-                Navigate(companion ? UomdScreenId.Character : UomdScreenId.Roster); return;
-            }
             if (_dirty) { ConfirmDiscard(() => { _dirty = false; Navigate(UomdScreenId.Roster); }); return; }
             Navigate(UomdScreenId.Roster);
         }
@@ -42,7 +36,6 @@ namespace Uomd.Scenes
             if (!snapshot.SignedIn) { Text(Panel(Body, "hub-main"), "Sign in to load your company.", "hub-copy"); return; }
             if (ScreenId == UomdScreenId.Character) Companion(snapshot);
             else if (ScreenId == UomdScreenId.Team) Team(snapshot);
-            else Armory(snapshot);
         }
         private VisualElement Card(VisualElement parent, string heading)
         { var card = new VisualElement(); card.AddToClassList("system-card"); parent.Add(card); Text(card, heading, "hub-card-title"); return card; }
@@ -193,35 +186,6 @@ namespace Uomd.Scenes
             if (!CanWrite) return;
             bool saved = await Actions.PlainAsync("DELETE", "/api/v1/teams/" + preset + "?releaseId=" + Uri.EscapeDataString(Data.Snapshot.Release), null);
             if (saved) { if (_preset == preset) _dirty = false; if (Data.ContextCurrent) Draw(); }
-        }
-        private void Armory(UomdHubSnapshot snapshot)
-        {
-            string character = Router.Session.GearCharacterId ?? "", slot = Router.Session.GearSlot ?? "";
-            var aside = Panel(Body, "hub-aside"); Text(aside, slot.Length > 0 ? slot.ToUpperInvariant() : "ALL EQUIPMENT", "hub-card-title");
-            Text(aside, character.Length > 0 ? snapshot.Companions.FirstOrDefault(c => c.Id == character)?.Name ?? "Unavailable companion" : "Choose a companion to change their equipment.", "hub-copy");
-            if (character.Length == 0)
-            {
-                var choices = Scroll(aside);
-                foreach (var c in snapshot.Companions.Where(c => c.Available))
-                { string id = c.Id; Button(choices, c.Name, "gearSelect_" + id, () => { Router.Session.GearCharacterId = id; Draw(); }); }
-            }
-            else Button(aside, "ALL COMPANIONS", "gearAllCompanions", () => { Router.Session.GearCharacterId = Router.Session.GearSlot = ""; Draw(); });
-            var main = Panel(Body, "hub-main"); var list = Scroll(main);
-            var equipment = JsonRead.Objects(snapshot.Gear, "gear").Where(g => slot.Length == 0 || JsonRead.Str(g, "slot") == slot).ToList();
-            Text(list, equipment.Count + " ITEMS", "hub-card-title"); if (equipment.Count == 0) Text(list, "No gear yet. Stages, errands and the shop bring weapons and relics.", "hub-copy");
-            foreach (var gear in equipment)
-            {
-                long id = JsonRead.Int(gear, "id"); string equipped = JsonRead.Str(gear, "equippedBy"), unavailable = JsonRead.Str(gear, "unavailableReason");
-                bool mine = character.Length > 0 && equipped == character, supported = !(JsonRead.Get(JsonRead.Get(gear, "passive"), "supported") is bool s && !s);
-                var card = Card(list, JsonRead.Str(gear, "name", "Unavailable equipment"));
-                Text(card, JsonRead.Str(gear, "slot") + " · Level " + JsonRead.Int(gear, "level") + "/" + JsonRead.Int(gear, "levelCap") + (equipped.Length > 0 ? " · on " + equipped : ""), "hub-copy");
-                if (JsonRead.Get(gear, "stats") is Dictionary<string, object> stats)
-                    Text(card, string.Join(" · ", new[] { JsonRead.Obj(stats, "main") }.Concat(JsonRead.Objects(stats, "subs")).Select(s => ArmoryScreen.GearStat(JsonRead.Str(s, "stat"), JsonRead.Num(s, "value")))), "hub-small");
-                Text(card, unavailable.Length > 0 ? unavailable : !supported ? "Passive not available yet" : JsonRead.Str(JsonRead.Get(gear, "passive"), "name"), "hub-small");
-                if (character.Length == 0) continue;
-                var b = Button(card, mine ? "REMOVE" : equipped.Length > 0 ? "MOVE & EQUIP" : "EQUIP", "gearAction_" + id, () => _ = Actions.PlainAsync("POST", "/api/v1/gear/" + id + (mine ? "/unequip" : "/equip"), mine ? new Dictionary<string, object> { ["releaseId"] = snapshot.Release } : new Dictionary<string, object> { ["releaseId"] = snapshot.Release, ["characterId"] = character }));
-                b.SetEnabled(CanWrite && (mine || unavailable.Length == 0 && supported && snapshot.Companions.Any(c => c.Id == character && c.Available)));
-            }
         }
     }
 }

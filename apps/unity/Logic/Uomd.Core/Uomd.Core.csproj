@@ -18,6 +18,7 @@
     <Compile Include="$(UomdScripts)Core/UomdLibrary.cs" />
     <Compile Include="$(UomdScripts)Core/UomdErrandsSnapshot.cs" />
     <Compile Include="$(UomdScripts)Core/UomdCloudCopy.cs" />
+    <Compile Include="$(UomdScripts)Core/UomdGearProgression.cs" />
     <Compile Include="$(UomdScripts)Core/UomdBattleJournal.cs" />
     <Compile Include="$(UomdScripts)Core/UomdActionJournal.cs" />
     <Compile Include="$(UomdScripts)Core/UomdJson.cs" />

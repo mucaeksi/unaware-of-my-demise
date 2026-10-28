@@ -4028,6 +4028,166 @@
             "sourceIdentities": [
                 "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
             ]
+        },
+        {
+            "id": "20261027T232325060_cec681b9",
+            "image": "captures/20261027T232325060_cec681b9.png",
+            "sha256": "e708e25935ebdf15f57bc2a3c2699e0b5a458c45fd189e799c2941d21bc1ba45",
+            "metadata": "captures/20261027T232325060_cec681b9.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T232446615_3a1c6d3f",
+            "image": "captures/20261027T232446615_3a1c6d3f.png",
+            "sha256": "dba7f132633e505c872fb9d8c493a86e374b516971ff99ca6bfc5e73485ba933",
+            "metadata": "captures/20261027T232446615_3a1c6d3f.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T232506264_1e1125e5",
+            "image": "captures/20261027T232506264_1e1125e5.png",
+            "sha256": "5563e96952d9fd3b3ea88c1127ad6d340127b4606bbfd8c30c3b0d305bda71f9",
+            "metadata": "captures/20261027T232506264_1e1125e5.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T232547441_54992f65",
+            "image": "captures/20261027T232547441_54992f65.png",
+            "sha256": "13f5a46e5a304c2575ac7495736f14f0662966681f7a4f9635ba4f6b710b5ab3",
+            "metadata": "captures/20261027T232547441_54992f65.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T232608766_42321bc0",
+            "image": "captures/20261027T232608766_42321bc0.png",
+            "sha256": "45d442c73edd01ed6620892e9d505ff47826f440a0a63e7dc7bdf8a488b6d0ce",
+            "metadata": "captures/20261027T232608766_42321bc0.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T233252651_0520ca7e",
+            "image": "captures/20261027T233252651_0520ca7e.png",
+            "sha256": "28f7b7688e19c834b0ccd4c58ebee18f5a03cd9901eabfbe72847fba352bfc52",
+            "metadata": "captures/20261027T233252651_0520ca7e.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T233428466_a314b7f5",
+            "image": "captures/20261027T233428466_a314b7f5.png",
+            "sha256": "875eb81008364034be8c1628001f3b4135ff48d6104f736e5a5f79cc2b8e9d46",
+            "metadata": "captures/20261027T233428466_a314b7f5.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T233446870_e3748da8",
+            "image": "captures/20261027T233446870_e3748da8.png",
+            "sha256": "5563e96952d9fd3b3ea88c1127ad6d340127b4606bbfd8c30c3b0d305bda71f9",
+            "metadata": "captures/20261027T233446870_e3748da8.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T233526406_f231db7f",
+            "image": "captures/20261027T233526406_f231db7f.png",
+            "sha256": "14f36a5a4da3af5700e3ba959b0fdccf23dc7c76d49c8e4c21ea4c2bf4db363e",
+            "metadata": "captures/20261027T233526406_f231db7f.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
+        },
+        {
+            "id": "20261027T233546344_4802945c",
+            "image": "captures/20261027T233546344_4802945c.png",
+            "sha256": "45d442c73edd01ed6620892e9d505ff47826f440a0a63e7dc7bdf8a488b6d0ce",
+            "metadata": "captures/20261027T233546344_4802945c.json",
+            "scenario": "hub/armory",
+            "lineId": "",
+            "unitState": "",
+            "unitFrame": "",
+            "entryScreen": "Gear",
+            "entryPhase": "ready",
+            "entryStage": 0,
+            "sourceIdentities": [
+                "sol_hub_shelter_01@1:358af1ef9b332cd239c55e3814cb19d5dd5849e5f6475fe45d18253b90665fc5"
+            ]
         }
     ]
 }

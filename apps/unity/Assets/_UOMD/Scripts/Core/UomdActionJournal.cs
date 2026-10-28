@@ -45,6 +45,12 @@ namespace Uomd.Core
             }
             else if (Path == SuppliesPath) { fields.Add("periodKey"); UomdErrandsSnapshot.SupplyEnd(JsonRead.Str(body, "periodKey")); }
             else if (Path == PatrolPath) { }
+            else if (UomdGearProgression.ActionPath(Path))
+            {
+                UomdGearProgression.InstanceId(Path.Split('/')[4]); fields.Add("expectedVersion");
+                UomdGearProgression.Integer(body, "expectedVersion", 0, UomdGearProgression.SafeMax - 1);
+                if (Path.EndsWith("/level-up", StringComparison.Ordinal)) { fields.Add("xp"); UomdBattleWire.RequiredInt(body, "xp", 1, 1000000); }
+            }
             else if (!match.Success) throw new InvalidDataException("Unsupported saved action.");
             else if (match.Groups[2].Value == "level-up")
             {
@@ -60,10 +66,12 @@ namespace Uomd.Core
             if (State == "confirmed") ValidateReceipt(UomdJson.ParseObject(Receipt));
             else if (Receipt.Length > 0) throw new InvalidDataException("Pending action cannot have a receipt.");
         }
-        public static bool DefinitiveRejection(string code) => Rejections.Contains(code);
+        public static bool DefinitiveRejection(string code) => Rejections.Contains(code) || GearRejections.Contains(code);
+        private static readonly HashSet<string> GearRejections = new HashSet<string> { "gear_changed", "no_such_gear", "not_levelable", "not_dismantlable", "equipped", "locked", "not_accessory", "not_rerollable" };
         private static readonly HashSet<string> Rejections = new HashSet<string> { "insufficient_funds", "insufficient_items", "insufficient_shards", "not_owned", "no_such_skill", "not_xp_item", "xp_overflow", "account_level_too_low", "at_cap", "level_too_low", "max_ascension", "max_rank", "max_resonance", "no_excess_shards", "not_at_cap", "story_gate", "not_enough_ration", "sweep_requires_three_stars", "sweep_limit_reached", "sweep_not_repeatable", "node_locked", "unknown_node", "unknown_release", "release_not_economic", "invalid_choice", "unknown_selector", "selector_state_changed", "period_closed", "not_done", "already_claimed", "mode_locked", "afk_nothing_to_claim" };
         public void ValidateReceipt(Dictionary<string, object?> result)
         {
+            if (UomdGearProgression.ActionPath(Path)) { GearReceipt(result); return; }
             if (InvitationPath(Path) || Path == TaskPath || Path == SuppliesPath || Path == PatrolPath)
             {
                 if (JsonRead.Str(result, "requestId") != RequestId || JsonRead.Str(result, "releaseId") != Release || !(JsonRead.Get(result, "replayed") is bool)) throw new InvalidDataException("Account result identity mismatch.");
@@ -115,6 +123,25 @@ namespace Uomd.Core
                 else if (Path.EndsWith("/convert", StringComparison.Ordinal))
                 { if (JsonRead.Int(result, "convertedShards") != JsonRead.Int(Body, "shards")) throw new InvalidDataException("Shard conversion amount mismatch."); UomdBattleWire.RequiredInt(result, "shardsRemaining", 0, int.MaxValue); }
             }
+        }
+        private void GearReceipt(Dictionary<string, object?> result)
+        {
+            if (UomdGearProgression.Integer(result, "id", 1) != UomdGearProgression.InstanceId(Path.Split('/')[4]) || JsonRead.Str(result, "releaseId") != Release || UomdGearProgression.Integer(result, "expectedVersion", 0, UomdGearProgression.SafeMax - 1) != UomdGearProgression.Integer(Body, "expectedVersion")) throw new InvalidDataException("Gear result identity mismatch.");
+            if (JsonRead.Get(result, "catalogSha256") != null && !UomdEntryCheckpoint.IsHash(JsonRead.Str(result, "catalogSha256")) || JsonRead.Get(result, "replayed") != null && !(JsonRead.Get(result, "replayed") is bool)) throw new InvalidDataException("Invalid gear receipt metadata.");
+            // Stored provider receipts omit requestId, replayed and balance. Status binds the exact original body separately.
+            if (Path.EndsWith("/level-up", StringComparison.Ordinal))
+            {
+                int level = UomdBattleWire.RequiredInt(result, "level", 1, 20), cap = UomdBattleWire.RequiredInt(result, "cap", 1, 20);
+                UomdGearProgression.Integer(result, "xp"); UomdGearProgression.Integer(result, "fee");
+                UomdGearProgression.Integer(result, "spentXp", 1, UomdBattleWire.RequiredInt(Body, "xp", 1, 1000000));
+                if (level > cap || level == cap && JsonRead.Int(result, "xp") != 0) throw new InvalidDataException("Invalid tempering result.");
+            }
+            else if (Path.EndsWith("/ascend", StringComparison.Ordinal))
+            { UomdBattleWire.RequiredInt(result, "ascension", 1, 6); UomdBattleWire.RequiredInt(result, "newCap", 1, 20); UomdGearProgression.Integer(result, "spentRivets", 1); }
+            else if (Path.EndsWith("/reroll", StringComparison.Ordinal))
+            { UomdGearProgression.ValidateStats(JsonRead.Obj(result, "stats")); var spent = JsonRead.Obj(result, "spent"); UomdErrandsSnapshot.Id(spent, "itemId"); UomdGearProgression.Integer(spent, "quantity", 1); }
+            else foreach (var gain in UomdErrandsSnapshot.Array(result, "gained", 9))
+            { UomdErrandsSnapshot.Id(gain!, "itemId"); UomdGearProgression.Integer(gain!, "quantity", 1); }
         }
         public Dictionary<string, object?>? ConfirmedStatus(Dictionary<string, object?> status)
         {

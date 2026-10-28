@@ -21,6 +21,7 @@ namespace Uomd.Core
         public List<UomdInvitation>? Invitations;
         public UomdErrandsSnapshot? Errands;
         public UomdCloudCopy? Cloud;
+        public UomdGearProgression? Equipment;
         public long? Balance;
         public int AccountLevel, Ration, RationCap;
         public readonly List<HubCompanion> Companions = new List<HubCompanion>();

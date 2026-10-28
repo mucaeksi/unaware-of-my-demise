@@ -119,6 +119,7 @@ namespace Uomd.Scenes
                             catch (UomdApiException) { Check(); } // Stats unavailable is displayed explicitly; no fabricated zero stats.
                         }
                         next.Details(catalog, stacks, gear, stats);
+                        if (_detailScreen == UomdScreenId.Gear) next.Equipment = UomdGearProgression.Parse(catalog, stacks, gear, _release);
                     }
                 }
                 Check(); Snapshot = next; LoadedAtUtc = DateTimeOffset.UtcNow;

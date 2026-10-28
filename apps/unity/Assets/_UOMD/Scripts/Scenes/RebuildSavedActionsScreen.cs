@@ -25,13 +25,19 @@ namespace Uomd.Scenes
                 string character = action.Path.Split('/')[4];
                 string companion = snapshot.Companions.FirstOrDefault(c => c.Id == character)?.Name ?? "Saved companion";
                 string stage = snapshot.Nodes.FirstOrDefault(n => n.Id == JsonRead.Str(body, "nodeId"))?.Title ?? "Saved stage";
-                string label = action.Path == UomdSavedAction.SweepPath ? stage + " · Sweep ×" + JsonRead.Int(body, "count") : UomdSavedAction.InvitationPath(action.Path) ? "Invitation selection" : action.Path == UomdSavedAction.TaskPath ? "Errand reward" : action.Path == UomdSavedAction.SuppliesPath ? "Daily supplies" : action.Path == UomdSavedAction.PatrolPath ? "AFK Patrol" : companion + " · " + action.Path.Split('/').Last().Replace('-', ' ');
+                string label = action.Path == UomdSavedAction.SweepPath ? stage + " · Sweep ×" + JsonRead.Int(body, "count") : UomdGearProgression.ActionPath(action.Path) ? "Equipment #" + character + " · " + action.Path.Split('/').Last().Replace('-', ' ') : UomdSavedAction.InvitationPath(action.Path) ? "Invitation selection" : action.Path == UomdSavedAction.TaskPath ? "Errand reward" : action.Path == UomdSavedAction.SuppliesPath ? "Daily supplies" : action.Path == UomdSavedAction.PatrolPath ? "AFK Patrol" : companion + " · " + action.Path.Split('/').Last().Replace('-', ' ');
                 Text(list, label, "hub-copy");
                 if (action.Release != snapshot.Release) Text(list, "This saved action uses earlier content. Recovery checks its original result.", "hub-small");
                 Text(list, Actions.Notice, "hub-small");
                 Text(list, action.Summary.Length > 0 ? "Original plan: " + action.Summary : "Original cost details are unavailable. Only the saved result can be checked safely.", "hub-copy");
                 if (action.State == "confirmed" && action.Path == UomdSavedAction.SweepPath)
                     Text(list, "Confirmed rewards: " + string.Join(" · ", JsonRead.Arr(UomdJson.ParseObject(action.Receipt), "rewards").Select(RewardText)), "hub-copy");
+                if (action.State == "confirmed" && UomdGearProgression.ActionPath(action.Path))
+                {
+                    var result = UomdJson.ParseObject(action.Receipt);
+                    string confirmed = action.Path.EndsWith("/level-up", StringComparison.Ordinal) ? "Level " + JsonRead.Int(result, "level") + " · Stored XP " + JsonRead.Int(result, "xp") + " · Tempering XP spent " + JsonRead.Int(result, "spentXp") + " · " + JsonRead.Int(result, "fee") + " Bell's Remains" : action.Path.EndsWith("/ascend", StringComparison.Ordinal) ? "Ascension " + JsonRead.Int(result, "ascension") + " · Level cap " + JsonRead.Int(result, "newCap") + " · Rivets spent " + JsonRead.Int(result, "spentRivets") : action.Path.EndsWith("/reroll", StringComparison.Ordinal) ? "Sub stats re-rolled · " + string.Join(" · ", JsonRead.Objects(JsonRead.Obj(result, "stats"), "subs").Select(s => ArmoryScreen.GearStat(JsonRead.Str(s, "stat"), JsonRead.Num(s, "value")))) : "Item dismantled. Recorded returns before inventory caps: " + string.Join(" · ", JsonRead.Objects(result, "gained").Select(g => JsonRead.Str(g, "itemId") + " ×" + JsonRead.Int(g, "quantity")));
+                    Text(list, confirmed, "hub-copy");
+                }
                 if (action.State == "confirmed" && UomdSavedAction.InvitationPath(action.Path))
                 {
                     var result = UomdJson.ParseObject(action.Receipt); long shards = JsonRead.Int(JsonRead.Obj(result, "grant"), "shardsAdded");

@@ -114,11 +114,11 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
     const catalog = await displayCatalog(c.env, selectedRelease(c.req.query('releaseId')));
     if (catalog) return c.json({ releaseId: catalog.releaseId, catalogSha256: catalog.sha256,
       items: catalog.data.items.filter((item) => item.status !== 'retired').map((item) => ({ item_id: item.item_id, name_en: item.name_en, kind: item.kind, rarity: item.rarity, xp_value: item.xp_value, consumable: item.consumable ? 1 : 0 })),
-      gear: catalog.data.gear.filter((g) => g.status !== 'retired').map((g) => { const row = gearDefinition(g); return { gear_id: row.gear_id, slot: row.slot, name_en: row.name_en, rarity: row.rarity, family: row.family, tier: row.tier, set_id: row.set_id, owner_character_id: row.owner_character_id, level_cap: row.level_cap, base_json: row.base_json, growth_json: row.growth_json }; }),
+      gear: catalog.data.gear.filter((g) => g.status !== 'retired').map((g) => { const row = gearDefinition(g); return { gear_id: row.gear_id, slot: row.slot, name_en: row.name_en, rarity: row.rarity, family: row.family, tier: row.tier, set_id: row.set_id, owner_character_id: row.owner_character_id, level_cap: row.level_cap, base_json: row.base_json, growth_json: row.growth_json, dismantle_allowed: row.dismantle_allowed, dismantle_xp: row.dismantle_xp, dismantle_json: row.dismantle_json }; }),
       config: catalog.data.config }, 200, { 'Cache-Control': 'public, max-age=60' });
     const [items, gear, cfg] = await Promise.all([
       db.prepare("SELECT item_id, name_en, kind, rarity, xp_value, consumable FROM item_defs WHERE status <> 'retired' ORDER BY kind, item_id").all(),
-      db.prepare("SELECT gear_id, slot, name_en, rarity, family, tier, set_id, owner_character_id, level_cap, base_json, growth_json FROM gear_defs WHERE status <> 'retired' ORDER BY slot, rarity DESC, gear_id").all(),
+      db.prepare("SELECT gear_id, slot, name_en, rarity, family, tier, set_id, owner_character_id, level_cap, base_json, growth_json, dismantle_allowed, dismantle_xp, dismantle_json FROM gear_defs WHERE status <> 'retired' ORDER BY slot, rarity DESC, gear_id").all(),
       db.prepare('SELECT key, value_json FROM game_config').all<{ key: string; value_json: string }>()
     ]);
     return c.json({ items: items.results, gear: gear.results, config: Object.fromEntries(cfg.results.map((r) => [r.key, JSON.parse(r.value_json)])) }, 200, { 'Cache-Control': 'public, max-age=60' });
@@ -530,7 +530,7 @@ export function registerPlayerRoutes(app: App, opts: { getGoogleKey?: JWTVerifyG
   });
   app.get('/api/v1/gear', async (c) => {
     const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));
-    return c.json({ gear: await listGear(c.env.DB, c.get('playerId'), catalog) });
+    return c.json({ gear: await listGear(c.env.DB, c.get('playerId'), catalog), versionBound: true, ...(catalog ? { releaseId: catalog.releaseId, catalogSha256: catalog.sha256 } : {}) });
   });
   app.get('/api/v1/characters/:id/stats', async (c) => {
     const catalog = await operationCatalog(c.env.DB, c.get('playerId'), releaseScope(c.env, selectedRelease(c.req.query('releaseId'))));

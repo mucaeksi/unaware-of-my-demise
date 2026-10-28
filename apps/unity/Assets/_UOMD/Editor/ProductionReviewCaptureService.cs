@@ -38,6 +38,9 @@ namespace Uomd.EditorTools
         public string accountFixtureMode, accountScreenOperation, accountScreenNotice;
         public bool accountScreenBusy;
         public long cloudCopyVersion;
+        public string gearFixtureMode, gearCatalogSha256;
+        public long gearSelectedInstance;
+        public bool gearVersionBound;
         public bool awaitingPlayerAction;
         public string entryPhase, entryScreen;
         public int entryStage, entryTutorials;
@@ -206,6 +209,13 @@ namespace Uomd.EditorTools
                     metadata.hubRelease = router.HubState.Snapshot?.Release; metadata.hubFixture = true;
                     metadata.hubFixtureMode = router.HubReview?.Mode;
                     metadata.accountFixtureMode = router.HubReview?.AccountMode;
+                    metadata.gearFixtureMode = router.HubReview?.GearMode;
+                    if (router.ActiveScreenId == UomdScreenId.Gear)
+                    {
+                        metadata.gearSelectedInstance = router.Controller<ArmoryScreen>().ReviewSelectedId;
+                        metadata.gearCatalogSha256 = router.HubState.Snapshot?.Equipment?.CatalogHash;
+                        metadata.gearVersionBound = router.HubState.Snapshot?.Equipment?.Bound ?? false;
+                    }
                     metadata.cloudCopyVersion = router.HubState.Snapshot?.Cloud?.Version ?? -1;
                     if (router.ActiveScreenId == UomdScreenId.Account)
                     {

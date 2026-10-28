@@ -15,9 +15,10 @@ import { economicStatement, requireEconomic } from '../content/authority';
 import { identityStatement } from '../db/identities';
 
 export const GearContext = z.object({ releaseId: z.string().regex(/^[a-z][a-z0-9_]{1,47}$/).optional() }).strict();
-export const GearRequest = GearContext.extend({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/) }).strict();
+const ExpectedVersion = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER - 1).optional();
+export const GearRequest = GearContext.extend({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/), expectedVersion: ExpectedVersion }).strict();
 export const EquipBody = GearContext.extend({ characterId: z.string().regex(/^[a-z][a-z0-9_]{1,79}$/) }).strict();
-export const GearLevelBody = GearContext.extend({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/), xp: z.number().int().min(1).max(1_000_000) }).strict();
+export const GearLevelBody = GearContext.extend({ requestId: z.string().regex(/^[A-Za-z0-9_-]{8,64}$/), xp: z.number().int().min(1).max(1_000_000), expectedVersion: ExpectedVersion }).strict();
 export const LockBody = GearContext.extend({ locked: z.boolean() }).strict();
 
 export interface GearRow {
@@ -63,6 +64,7 @@ async function getGear(db: D1Database, playerId: string, id: number, catalog?: R
 
 export interface GearView {
   id: number;
+  version: number;
   gearId: string;
   slot: string;
   name: string;
@@ -96,6 +98,7 @@ export async function listGear(db: D1Database, playerId: string, catalog?: Runti
     const cap = Math.min(g.level_cap, gearLevelCap(cfg, g.ascension));
     return {
       id: g.id,
+      version: g.version,
       gearId: g.gear_id,
       slot: g.slot,
       name: g.name_en,
@@ -114,7 +117,7 @@ export async function listGear(db: D1Database, playerId: string, catalog?: Runti
       canDismantle: g.dismantle_allowed === 1 && g.equipped_by === null && g.locked === 0
     };
   });
-  if (catalog) for (const g of instances.filter((row) => !available(row))) views.push({ id: g.id, gearId: g.gear_id, slot: g.slot, name: g.gear_id, rarity: 0, family: '', setId: null, level: g.level, levelCap: g.level, xp: g.xp, xpToNext: null, ascension: g.ascension, equippedBy: g.equipped_by, locked: g.locked === 1, stats: null, passive: null, canDismantle: false, unavailableReason: 'Unavailable in this content version' });
+  if (catalog) for (const g of instances.filter((row) => !available(row))) views.push({ id: g.id, version: g.version, gearId: g.gear_id, slot: g.slot, name: g.gear_id, rarity: 0, family: '', setId: null, level: g.level, levelCap: g.level, xp: g.xp, xpToNext: null, ascension: g.ascension, equippedBy: g.equipped_by, locked: g.locked === 1, stats: null, passive: null, canDismantle: false, unavailableReason: 'Unavailable in this content version' });
   return views;
 }
 
@@ -139,9 +142,10 @@ async function gearOp(db: D1Database, playerId: string, id: number, input: { req
       if (seen) return seen;
     }
     const g = await getGear(db, playerId, id, catalog);
+    if (input.expectedVersion !== undefined && input.expectedVersion !== g.version) throw new HttpError(409, 'gear_changed', 'this item changed; refresh and review it before choosing again');
     const built = await build(g, cfg, catalog);
     const statements = built.statements;
-    const response = { ...built.response, ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}), ...(catalog ? { catalogSha256: catalog.sha256 } : {}) };
+    const response = { ...built.response, ...(input.expectedVersion !== undefined ? { expectedVersion: input.expectedVersion } : {}), ...(scope?.releaseId ? { releaseId: scope.releaseId } : {}), ...(catalog ? { catalogSha256: catalog.sha256 } : {}) };
     const batch = [
       ...admission(db, playerId, scope),
       // optimistic concurrency on the instance: version must still match, or somebody changed it meanwhile

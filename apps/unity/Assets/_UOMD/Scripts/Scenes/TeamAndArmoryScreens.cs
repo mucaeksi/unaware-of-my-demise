@@ -10,7 +10,7 @@ namespace Uomd.Scenes
         public TeamScreen(UomdSceneRouter router) : base(router) { }
         public override UomdScreenId ScreenId => UomdScreenId.Team;
     }
-    public sealed class ArmoryScreen : RebuildCompanyScreen
+    public sealed class ArmoryScreen : RebuildArmoryScreen
     {
         public ArmoryScreen(UomdSceneRouter router) : base(router) { }
         public override UomdScreenId ScreenId => UomdScreenId.Gear;

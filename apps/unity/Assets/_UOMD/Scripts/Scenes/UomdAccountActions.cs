@@ -146,8 +146,10 @@ namespace Uomd.Scenes
                 Bind(); string account = _account, release = _router.Patch.ActiveReleaseId; int revision = _revision;
                 Check(account, revision);
                 bool teamPath = System.Text.RegularExpressions.Regex.IsMatch(path, "^/api/v1/teams/[1-5](/activate|\\?releaseId=[a-z][a-z0-9_]{1,47})?$");
-                bool equipment = System.Text.RegularExpressions.Regex.IsMatch(path, "^/api/v1/gear/[1-9][0-9]{0,15}/(equip|unequip)$");
+                bool equipment = System.Text.RegularExpressions.Regex.IsMatch(path, "^/api/v1/gear/[1-9][0-9]{0,15}/(equip|unequip|lock)$");
                 if ((!teamPath && !equipment) || (body != null && body.ContainsKey("requestId"))) throw new InvalidOperationException("Unsupported plain write.");
+                if (equipment) UomdGearProgression.InstanceId(path.Split('/')[4]);
+                if (path.EndsWith("/lock", StringComparison.Ordinal) && (body == null || body.Count != 2 || JsonRead.Str(body, "releaseId") != release || !(JsonRead.Get(body, "locked") is bool))) throw new InvalidOperationException("Invalid gear lock.");
                 if (!_router.HubState.Fresh || _router.HubState.Snapshot.Maintenance || Action?.State == "pending" || Action?.State == "confirmed" && !Refreshed) return false;
                 Notice = "Saving account changes…"; Changed();
                 await Send(method, path, body); Check(account, revision);
@@ -167,7 +169,7 @@ namespace Uomd.Scenes
                 else if (path.StartsWith("/api/v1/gear/", StringComparison.Ordinal))
                 {
                     string id = path.Split('/')[4]; var gear = System.Linq.Enumerable.FirstOrDefault(JsonRead.Objects(snapshot.Gear, "gear"), g => JsonRead.Int(g, "id").ToString(System.Globalization.CultureInfo.InvariantCulture) == id);
-                    if (gear == null || JsonRead.Str(gear, "equippedBy") != (path.EndsWith("/unequip", StringComparison.Ordinal) ? "" : JsonRead.Str(body, "characterId"))) throw new IOException();
+                    if (gear == null || (path.EndsWith("/lock", StringComparison.Ordinal) ? JsonRead.Get(gear, "locked") == null || JsonRead.Bool(gear, "locked") != JsonRead.Bool(body, "locked") : JsonRead.Str(gear, "equippedBy") != (path.EndsWith("/unequip", StringComparison.Ordinal) ? "" : JsonRead.Str(body, "characterId")))) throw new IOException();
                 }
                 Notice = "Changes saved. Account data refreshed."; return true;
             }
